@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(AverageAggregationConverter))]
-	public partial class AverageAggregation : Aggregations.FormatMetricAggregationBase
+	public partial class AverageAggregation : FormatMetricAggregationBase
 	{
 		public AverageAggregation(string name, Field field) : base(name) => Field = field;
 		public AverageAggregation(string name) : base(name)

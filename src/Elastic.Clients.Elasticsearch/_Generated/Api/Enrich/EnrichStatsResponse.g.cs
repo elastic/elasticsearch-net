@@ -26,14 +26,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 	{
 		[JsonInclude]
 		[JsonPropertyName("cache_stats")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.Stats.CacheStats>? CacheStats { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CacheStats>? CacheStats { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("coordinator_stats")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.Stats.CoordinatorStats> CoordinatorStats { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats> CoordinatorStats { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("executing_policies")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.Stats.ExecutingPolicy> ExecutingPolicies { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.ExecutingPolicy> ExecutingPolicies { get; init; }
 	}
 }

@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(DerivativeAggregationConverter))]
-	public partial class DerivativeAggregation : Aggregations.PipelineAggregationBase
+	public partial class DerivativeAggregation : PipelineAggregationBase
 	{
 		public DerivativeAggregation(string name) : base(name)
 		{

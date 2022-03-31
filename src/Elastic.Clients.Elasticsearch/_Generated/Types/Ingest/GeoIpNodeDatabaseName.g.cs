@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ingest.GeoIpStats
+namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class GeoIpNodeDatabaseName
 	{

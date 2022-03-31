@@ -22,17 +22,17 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoSettingsCluster
 	{
 		[JsonInclude]
 		[JsonPropertyName("deprecation_indexing")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.DeprecationIndexing? DeprecationIndexing { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.DeprecationIndexing? DeprecationIndexing { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("election")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsClusterElection Election { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsClusterElection Election { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("initial_master_nodes")]

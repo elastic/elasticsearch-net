@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public abstract partial class RangePropertyBase : Mapping.DocValuesPropertyBase
+	public abstract partial class RangePropertyBase : DocValuesPropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]

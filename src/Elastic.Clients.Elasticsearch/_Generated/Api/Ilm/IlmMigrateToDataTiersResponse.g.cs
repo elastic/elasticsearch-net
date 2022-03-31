@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 		[JsonInclude]
 		[JsonPropertyName("migrated_indices")]
-		public Elastic.Clients.Elasticsearch.Indices MigratedIndices { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName> MigratedIndices { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("migrated_legacy_templates")]

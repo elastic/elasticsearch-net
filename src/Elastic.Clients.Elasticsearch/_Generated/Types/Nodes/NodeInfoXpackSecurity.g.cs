@@ -22,13 +22,13 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoXpackSecurity
 	{
 		[JsonInclude]
 		[JsonPropertyName("authc")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthc? Authc { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthc? Authc { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
@@ -36,10 +36,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("http")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecuritySsl Http { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecuritySsl Http { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("transport")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecuritySsl? Transport { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecuritySsl? Transport { get; init; }
 	}
 }

@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoSettingsHttp
 	{
@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsHttpType Type { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttpType Type { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("type.default")]

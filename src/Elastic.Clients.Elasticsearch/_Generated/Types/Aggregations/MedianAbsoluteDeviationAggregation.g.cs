@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(MedianAbsoluteDeviationAggregationConverter))]
-	public partial class MedianAbsoluteDeviationAggregation : Aggregations.FormatMetricAggregationBase
+	public partial class MedianAbsoluteDeviationAggregation : FormatMetricAggregationBase
 	{
 		public MedianAbsoluteDeviationAggregation(string name, Field field) : base(name) => Field = field;
 		public MedianAbsoluteDeviationAggregation(string name) : base(name)

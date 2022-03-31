@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(MaxAggregationConverter))]
-	public partial class MaxAggregation : Aggregations.FormatMetricAggregationBase
+	public partial class MaxAggregation : FormatMetricAggregationBase
 	{
 		public MaxAggregation(string name, Field field) : base(name) => Field = field;
 		public MaxAggregation(string name) : base(name)

@@ -353,41 +353,55 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 	}
 
-	[JsonConverter(typeof(StringFielddataFormatConverter))]
-	public enum StringFielddataFormat
+	[JsonConverter(typeof(ShardRoutingStateConverter))]
+	public enum ShardRoutingState
 	{
-		[EnumMember(Value = "paged_bytes")]
-		PagedBytes,
-		[EnumMember(Value = "disabled")]
-		Disabled
+		[EnumMember(Value = "UNASSIGNED")]
+		Unassigned,
+		[EnumMember(Value = "STARTED")]
+		Started,
+		[EnumMember(Value = "RELOCATING")]
+		Relocating,
+		[EnumMember(Value = "INITIALIZING")]
+		Initializing
 	}
 
-	internal sealed class StringFielddataFormatConverter : JsonConverter<StringFielddataFormat>
+	internal sealed class ShardRoutingStateConverter : JsonConverter<ShardRoutingState>
 	{
-		public override StringFielddataFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override ShardRoutingState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			var enumString = reader.GetString();
 			switch (enumString)
 			{
-				case "paged_bytes":
-					return StringFielddataFormat.PagedBytes;
-				case "disabled":
-					return StringFielddataFormat.Disabled;
+				case "UNASSIGNED":
+					return ShardRoutingState.Unassigned;
+				case "STARTED":
+					return ShardRoutingState.Started;
+				case "RELOCATING":
+					return ShardRoutingState.Relocating;
+				case "INITIALIZING":
+					return ShardRoutingState.Initializing;
 			}
 
 			ThrowHelper.ThrowJsonException();
 			return default;
 		}
 
-		public override void Write(Utf8JsonWriter writer, StringFielddataFormat value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, ShardRoutingState value, JsonSerializerOptions options)
 		{
 			switch (value)
 			{
-				case StringFielddataFormat.PagedBytes:
-					writer.WriteStringValue("paged_bytes");
+				case ShardRoutingState.Unassigned:
+					writer.WriteStringValue("UNASSIGNED");
 					return;
-				case StringFielddataFormat.Disabled:
-					writer.WriteStringValue("disabled");
+				case ShardRoutingState.Started:
+					writer.WriteStringValue("STARTED");
+					return;
+				case ShardRoutingState.Relocating:
+					writer.WriteStringValue("RELOCATING");
+					return;
+				case ShardRoutingState.Initializing:
+					writer.WriteStringValue("INITIALIZING");
 					return;
 			}
 

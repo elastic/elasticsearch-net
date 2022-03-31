@@ -62,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexRoutingDescriptor Allocation(IndexManagement.IndexRoutingAllocationDescriptor descriptor)
+		public IndexRoutingDescriptor Allocation(IndexRoutingAllocationDescriptor descriptor)
 		{
 			AllocationValue = null;
 			AllocationDescriptorAction = null;
@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexRoutingDescriptor Allocation(Action<IndexManagement.IndexRoutingAllocationDescriptor> configure)
+		public IndexRoutingDescriptor Allocation(Action<IndexRoutingAllocationDescriptor> configure)
 		{
 			AllocationValue = null;
 			AllocationDescriptorAction = null;
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexRoutingDescriptor Rebalance(IndexManagement.IndexRoutingRebalanceDescriptor descriptor)
+		public IndexRoutingDescriptor Rebalance(IndexRoutingRebalanceDescriptor descriptor)
 		{
 			RebalanceValue = null;
 			RebalanceDescriptorAction = null;
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexRoutingDescriptor Rebalance(Action<IndexManagement.IndexRoutingRebalanceDescriptor> configure)
+		public IndexRoutingDescriptor Rebalance(Action<IndexRoutingRebalanceDescriptor> configure)
 		{
 			RebalanceValue = null;
 			RebalanceDescriptorAction = null;
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (AllocationDescriptorAction is not null)
 			{
 				writer.WritePropertyName("allocation");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexRoutingAllocationDescriptor(AllocationDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexRoutingAllocationDescriptor(AllocationDescriptorAction), options);
 			}
 			else if (AllocationValue is not null)
 			{
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (RebalanceDescriptorAction is not null)
 			{
 				writer.WritePropertyName("rebalance");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexRoutingRebalanceDescriptor(RebalanceDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexRoutingRebalanceDescriptor(RebalanceDescriptorAction), options);
 			}
 			else if (RebalanceValue is not null)
 			{

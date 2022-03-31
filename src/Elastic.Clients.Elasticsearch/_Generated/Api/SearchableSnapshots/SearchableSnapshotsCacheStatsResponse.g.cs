@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 	{
 		[JsonInclude]
 		[JsonPropertyName("nodes")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStats.Node> Nodes { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.SearchableSnapshots.Node> Nodes { get; init; }
 	}
 }

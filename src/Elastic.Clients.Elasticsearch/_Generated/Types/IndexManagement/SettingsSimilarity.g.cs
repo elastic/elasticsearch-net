@@ -112,7 +112,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Bm25(IndexManagement.SettingsSimilarityBm25Descriptor descriptor)
+		public SettingsSimilarityDescriptor Bm25(SettingsSimilarityBm25Descriptor descriptor)
 		{
 			Bm25Value = null;
 			Bm25DescriptorAction = null;
@@ -120,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Bm25(Action<IndexManagement.SettingsSimilarityBm25Descriptor> configure)
+		public SettingsSimilarityDescriptor Bm25(Action<SettingsSimilarityBm25Descriptor> configure)
 		{
 			Bm25Value = null;
 			Bm25DescriptorAction = null;
@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Dfi(IndexManagement.SettingsSimilarityDfiDescriptor descriptor)
+		public SettingsSimilarityDescriptor Dfi(SettingsSimilarityDfiDescriptor descriptor)
 		{
 			DfiValue = null;
 			DfiDescriptorAction = null;
@@ -144,7 +144,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Dfi(Action<IndexManagement.SettingsSimilarityDfiDescriptor> configure)
+		public SettingsSimilarityDescriptor Dfi(Action<SettingsSimilarityDfiDescriptor> configure)
 		{
 			DfiValue = null;
 			DfiDescriptorAction = null;
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Dfr(IndexManagement.SettingsSimilarityDfrDescriptor descriptor)
+		public SettingsSimilarityDescriptor Dfr(SettingsSimilarityDfrDescriptor descriptor)
 		{
 			DfrValue = null;
 			DfrDescriptorAction = null;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Dfr(Action<IndexManagement.SettingsSimilarityDfrDescriptor> configure)
+		public SettingsSimilarityDescriptor Dfr(Action<SettingsSimilarityDfrDescriptor> configure)
 		{
 			DfrValue = null;
 			DfrDescriptorAction = null;
@@ -184,7 +184,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Ib(IndexManagement.SettingsSimilarityIbDescriptor descriptor)
+		public SettingsSimilarityDescriptor Ib(SettingsSimilarityIbDescriptor descriptor)
 		{
 			IbValue = null;
 			IbDescriptorAction = null;
@@ -192,7 +192,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Ib(Action<IndexManagement.SettingsSimilarityIbDescriptor> configure)
+		public SettingsSimilarityDescriptor Ib(Action<SettingsSimilarityIbDescriptor> configure)
 		{
 			IbValue = null;
 			IbDescriptorAction = null;
@@ -208,7 +208,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Lmd(IndexManagement.SettingsSimilarityLmdDescriptor descriptor)
+		public SettingsSimilarityDescriptor Lmd(SettingsSimilarityLmdDescriptor descriptor)
 		{
 			LmdValue = null;
 			LmdDescriptorAction = null;
@@ -216,7 +216,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Lmd(Action<IndexManagement.SettingsSimilarityLmdDescriptor> configure)
+		public SettingsSimilarityDescriptor Lmd(Action<SettingsSimilarityLmdDescriptor> configure)
 		{
 			LmdValue = null;
 			LmdDescriptorAction = null;
@@ -232,7 +232,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Lmj(IndexManagement.SettingsSimilarityLmjDescriptor descriptor)
+		public SettingsSimilarityDescriptor Lmj(SettingsSimilarityLmjDescriptor descriptor)
 		{
 			LmjValue = null;
 			LmjDescriptorAction = null;
@@ -240,7 +240,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor Lmj(Action<IndexManagement.SettingsSimilarityLmjDescriptor> configure)
+		public SettingsSimilarityDescriptor Lmj(Action<SettingsSimilarityLmjDescriptor> configure)
 		{
 			LmjValue = null;
 			LmjDescriptorAction = null;
@@ -256,7 +256,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor ScriptedTfidf(IndexManagement.SettingsSimilarityScriptedTfidfDescriptor descriptor)
+		public SettingsSimilarityDescriptor ScriptedTfidf(SettingsSimilarityScriptedTfidfDescriptor descriptor)
 		{
 			ScriptedTfidfValue = null;
 			ScriptedTfidfDescriptorAction = null;
@@ -264,7 +264,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSimilarityDescriptor ScriptedTfidf(Action<IndexManagement.SettingsSimilarityScriptedTfidfDescriptor> configure)
+		public SettingsSimilarityDescriptor ScriptedTfidf(Action<SettingsSimilarityScriptedTfidfDescriptor> configure)
 		{
 			ScriptedTfidfValue = null;
 			ScriptedTfidfDescriptorAction = null;
@@ -283,7 +283,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (Bm25DescriptorAction is not null)
 			{
 				writer.WritePropertyName("bm25");
-				JsonSerializer.Serialize(writer, new IndexManagement.SettingsSimilarityBm25Descriptor(Bm25DescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SettingsSimilarityBm25Descriptor(Bm25DescriptorAction), options);
 			}
 			else if (Bm25Value is not null)
 			{
@@ -299,7 +299,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (DfiDescriptorAction is not null)
 			{
 				writer.WritePropertyName("dfi");
-				JsonSerializer.Serialize(writer, new IndexManagement.SettingsSimilarityDfiDescriptor(DfiDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SettingsSimilarityDfiDescriptor(DfiDescriptorAction), options);
 			}
 			else if (DfiValue is not null)
 			{
@@ -315,7 +315,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (DfrDescriptorAction is not null)
 			{
 				writer.WritePropertyName("dfr");
-				JsonSerializer.Serialize(writer, new IndexManagement.SettingsSimilarityDfrDescriptor(DfrDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SettingsSimilarityDfrDescriptor(DfrDescriptorAction), options);
 			}
 			else if (DfrValue is not null)
 			{
@@ -331,7 +331,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (IbDescriptorAction is not null)
 			{
 				writer.WritePropertyName("ib");
-				JsonSerializer.Serialize(writer, new IndexManagement.SettingsSimilarityIbDescriptor(IbDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SettingsSimilarityIbDescriptor(IbDescriptorAction), options);
 			}
 			else if (IbValue is not null)
 			{
@@ -347,7 +347,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (LmdDescriptorAction is not null)
 			{
 				writer.WritePropertyName("lmd");
-				JsonSerializer.Serialize(writer, new IndexManagement.SettingsSimilarityLmdDescriptor(LmdDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SettingsSimilarityLmdDescriptor(LmdDescriptorAction), options);
 			}
 			else if (LmdValue is not null)
 			{
@@ -363,7 +363,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (LmjDescriptorAction is not null)
 			{
 				writer.WritePropertyName("lmj");
-				JsonSerializer.Serialize(writer, new IndexManagement.SettingsSimilarityLmjDescriptor(LmjDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SettingsSimilarityLmjDescriptor(LmjDescriptorAction), options);
 			}
 			else if (LmjValue is not null)
 			{
@@ -379,7 +379,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (ScriptedTfidfDescriptorAction is not null)
 			{
 				writer.WritePropertyName("scripted_tfidf");
-				JsonSerializer.Serialize(writer, new IndexManagement.SettingsSimilarityScriptedTfidfDescriptor(ScriptedTfidfDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SettingsSimilarityScriptedTfidfDescriptor(ScriptedTfidfDescriptorAction), options);
 			}
 			else if (ScriptedTfidfValue is not null)
 			{

@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class ConstantScoreQuery : QueryDsl.QueryBase, IQueryContainerVariant
+	public partial class ConstantScoreQuery : QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "constant_score";
+		string IQueryContainerVariant.QueryContainerVariantName => "constant_score";
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Filter { get; set; }
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ConstantScoreQueryDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		public ConstantScoreQueryDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ConstantScoreQueryDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		public ConstantScoreQueryDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
 			}
 			else
 			{
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ConstantScoreQueryDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+		public ConstantScoreQueryDescriptor Filter(QueryContainerDescriptor descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ConstantScoreQueryDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+		public ConstantScoreQueryDescriptor Filter(Action<QueryContainerDescriptor> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -185,7 +185,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
 			}
 			else
 			{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class RankFeaturesProperty : Mapping.PropertyBase, IProperty
+	public partial class RankFeaturesProperty : PropertyBase, IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]

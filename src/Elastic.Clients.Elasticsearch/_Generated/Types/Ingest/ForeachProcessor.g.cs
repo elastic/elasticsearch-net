@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class ForeachProcessor : Ingest.ProcessorBase, IProcessorContainerVariant
+	public partial class ForeachProcessor : ProcessorBase, IProcessorContainerVariant
 	{
 		[JsonIgnore]
-		string Ingest.IProcessorContainerVariant.ProcessorContainerVariantName => "foreach";
+		string IProcessorContainerVariant.ProcessorContainerVariantName => "foreach";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
@@ -80,7 +80,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public ForeachProcessorDescriptor<TDocument> Processor(Ingest.ProcessorContainerDescriptor<TDocument> descriptor)
+		public ForeachProcessorDescriptor<TDocument> Processor(ProcessorContainerDescriptor<TDocument> descriptor)
 		{
 			ProcessorValue = null;
 			ProcessorDescriptorAction = null;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public ForeachProcessorDescriptor<TDocument> Processor(Action<Ingest.ProcessorContainerDescriptor<TDocument>> configure)
+		public ForeachProcessorDescriptor<TDocument> Processor(Action<ProcessorContainerDescriptor<TDocument>> configure)
 		{
 			ProcessorValue = null;
 			ProcessorDescriptorAction = null;
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			else if (ProcessorDescriptorAction is not null)
 			{
 				writer.WritePropertyName("processor");
-				JsonSerializer.Serialize(writer, new Ingest.ProcessorContainerDescriptor<TDocument>(ProcessorDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(ProcessorDescriptorAction), options);
 			}
 			else
 			{
@@ -226,7 +226,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public ForeachProcessorDescriptor Processor(Ingest.ProcessorContainerDescriptor descriptor)
+		public ForeachProcessorDescriptor Processor(ProcessorContainerDescriptor descriptor)
 		{
 			ProcessorValue = null;
 			ProcessorDescriptorAction = null;
@@ -234,7 +234,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public ForeachProcessorDescriptor Processor(Action<Ingest.ProcessorContainerDescriptor> configure)
+		public ForeachProcessorDescriptor Processor(Action<ProcessorContainerDescriptor> configure)
 		{
 			ProcessorValue = null;
 			ProcessorDescriptorAction = null;
@@ -301,7 +301,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			else if (ProcessorDescriptorAction is not null)
 			{
 				writer.WritePropertyName("processor");
-				JsonSerializer.Serialize(writer, new Ingest.ProcessorContainerDescriptor(ProcessorDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(ProcessorDescriptorAction), options);
 			}
 			else
 			{

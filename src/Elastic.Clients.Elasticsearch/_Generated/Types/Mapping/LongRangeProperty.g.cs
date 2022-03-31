@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class LongRangeProperty : Mapping.RangePropertyBase, IProperty
+	public partial class LongRangeProperty : RangePropertyBase, IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]

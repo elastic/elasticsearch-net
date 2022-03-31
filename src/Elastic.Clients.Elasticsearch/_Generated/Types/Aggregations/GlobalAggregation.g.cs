@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(GlobalAggregationConverter))]
-	public partial class GlobalAggregation : Aggregations.BucketAggregationBase
+	public partial class GlobalAggregation : BucketAggregationBase
 	{
 		public GlobalAggregation(string name) : base(name)
 		{
