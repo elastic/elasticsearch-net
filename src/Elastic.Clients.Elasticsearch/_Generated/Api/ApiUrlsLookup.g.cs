@@ -81,6 +81,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IndexManagementDelete = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementExistsAlias = new ApiUrls(new[] { "/_alias/{name}", "/{index}/_alias/{name}" });
 		internal static ApiUrls IndexManagementExists = new ApiUrls(new[] { "/{index}" });
+		internal static ApiUrls IndexManagementGetMapping = new ApiUrls(new[] { "/_mapping", "/{index}/_mapping" });
 		internal static ApiUrls IndexManagementMigrateToDataStream = new ApiUrls(new[] { "/_data_stream/_migrate/{name}" });
 		internal static ApiUrls IndexManagementOpen = new ApiUrls(new[] { "/{index}/_open" });
 		internal static ApiUrls IndexManagementPromoteDataStream = new ApiUrls(new[] { "/_data_stream/_promote/{name}" });
