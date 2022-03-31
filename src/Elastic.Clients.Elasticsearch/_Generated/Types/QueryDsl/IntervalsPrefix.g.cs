@@ -27,9 +27,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class IntervalsPrefix : IIntervalsContainerVariant, IIntervalsQueryVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IIntervalsContainerVariant.IntervalsContainerVariantName => "prefix";
+		string IIntervalsContainerVariant.IntervalsContainerVariantName => "prefix";
 		[JsonIgnore]
-		string QueryDsl.IIntervalsQueryVariant.IntervalsQueryVariantName => "prefix";
+		string IIntervalsQueryVariant.IntervalsQueryVariantName => "prefix";
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }

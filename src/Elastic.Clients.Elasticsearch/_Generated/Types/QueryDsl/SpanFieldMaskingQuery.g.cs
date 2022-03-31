@@ -24,12 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SpanFieldMaskingQuery : QueryDsl.QueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public partial class SpanFieldMaskingQuery : QueryBase, IQueryContainerVariant, ISpanQueryVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "field_masking_span";
+		string IQueryContainerVariant.QueryContainerVariantName => "field_masking_span";
 		[JsonIgnore]
-		string QueryDsl.ISpanQueryVariant.SpanQueryVariantName => "field_masking_span";
+		string ISpanQueryVariant.SpanQueryVariantName => "field_masking_span";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanFieldMaskingQueryDescriptor<TDocument> Query(QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+		public SpanFieldMaskingQueryDescriptor<TDocument> Query(SpanQueryDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanFieldMaskingQueryDescriptor<TDocument> Query(Action<QueryDsl.SpanQueryDescriptor<TDocument>> configure)
+		public SpanFieldMaskingQueryDescriptor<TDocument> Query(Action<SpanQueryDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -117,7 +117,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<TDocument>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<TDocument>(QueryDescriptorAction), options);
 			}
 			else
 			{
@@ -170,7 +170,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanFieldMaskingQueryDescriptor Query(QueryDsl.SpanQueryDescriptor descriptor)
+		public SpanFieldMaskingQueryDescriptor Query(SpanQueryDescriptor descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -178,7 +178,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanFieldMaskingQueryDescriptor Query(Action<QueryDsl.SpanQueryDescriptor> configure)
+		public SpanFieldMaskingQueryDescriptor Query(Action<SpanQueryDescriptor> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -227,7 +227,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(QueryDescriptorAction), options);
 			}
 			else
 			{

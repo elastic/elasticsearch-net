@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(AdjacencyMatrixAggregationConverter))]
-	public partial class AdjacencyMatrixAggregation : Aggregations.BucketAggregationBase
+	public partial class AdjacencyMatrixAggregation : BucketAggregationBase
 	{
 		public AdjacencyMatrixAggregation(string name) : base(name)
 		{

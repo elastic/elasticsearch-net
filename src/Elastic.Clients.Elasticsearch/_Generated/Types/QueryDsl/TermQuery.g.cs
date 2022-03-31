@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class TermQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "term";
+		string IQueryContainerVariant.QueryContainerVariantName => "term";
 		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }

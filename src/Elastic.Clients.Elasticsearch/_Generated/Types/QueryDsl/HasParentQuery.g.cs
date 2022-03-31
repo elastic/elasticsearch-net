@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class HasParentQuery : QueryDsl.QueryBase, IQueryContainerVariant
+	public partial class HasParentQuery : QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "has_parent";
+		string IQueryContainerVariant.QueryContainerVariantName => "has_parent";
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public HasParentQueryDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		public HasParentQueryDescriptor<TDocument> Query(QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public HasParentQueryDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		public HasParentQueryDescriptor<TDocument> Query(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -183,7 +183,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
 			}
 			else
 			{
@@ -282,7 +282,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public HasParentQueryDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
+		public HasParentQueryDescriptor Query(QueryContainerDescriptor descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -290,7 +290,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public HasParentQueryDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
+		public HasParentQueryDescriptor Query(Action<QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -355,7 +355,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(QueryDescriptorAction), options);
 			}
 			else
 			{

@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class BoolQuery : QueryDsl.QueryBase, IQueryContainerVariant
+	public partial class BoolQuery : QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "bool";
+		string IQueryContainerVariant.QueryContainerVariantName => "bool";
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filter { get; set; }

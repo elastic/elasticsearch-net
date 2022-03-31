@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class KuromojiStemmerTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinition
+	public partial class KuromojiStemmerTokenFilter : TokenFilterBase, ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("minimum_length")]

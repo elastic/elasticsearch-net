@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(MultiTermsAggregationConverter))]
-	public partial class MultiTermsAggregation : Aggregations.BucketAggregationBase
+	public partial class MultiTermsAggregation : BucketAggregationBase
 	{
 		public MultiTermsAggregation(string name) : base(name)
 		{

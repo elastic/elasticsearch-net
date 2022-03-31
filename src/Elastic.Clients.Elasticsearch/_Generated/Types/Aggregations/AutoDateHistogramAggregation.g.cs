@@ -249,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(AutoDateHistogramAggregationConverter))]
-	public partial class AutoDateHistogramAggregation : Aggregations.BucketAggregationBase
+	public partial class AutoDateHistogramAggregation : BucketAggregationBase
 	{
 		public AutoDateHistogramAggregation(string name) : base(name)
 		{

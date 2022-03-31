@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class IcuCollationTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinition
+	public partial class IcuCollationTokenFilter : TokenFilterBase, ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("alternate")]

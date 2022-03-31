@@ -30,13 +30,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(PinnedQueryConverter))]
-	public partial class PinnedQuery : QueryDsl.QueryBase, IContainer, IQueryContainerVariant
+	public partial class PinnedQuery : QueryBase, IContainer, IQueryContainerVariant
 	{
 		public PinnedQuery(IPinnedQueryVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IPinnedQueryVariant Variant { get; }
 
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "pinned";
+		string IQueryContainerVariant.QueryContainerVariantName => "pinned";
 		[JsonInclude]
 		[JsonPropertyName("organic")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Organic { get; set; }

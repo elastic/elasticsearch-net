@@ -198,7 +198,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(ScriptedMetricAggregationConverter))]
-	public partial class ScriptedMetricAggregation : Aggregations.MetricAggregationBase
+	public partial class ScriptedMetricAggregation : MetricAggregationBase
 	{
 		public ScriptedMetricAggregation(string name, Field field) : base(name) => Field = field;
 		public ScriptedMetricAggregation(string name) : base(name)

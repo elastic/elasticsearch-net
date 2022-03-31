@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Close.CloseIndexResult> Indices { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult> Indices { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shards_acknowledged")]

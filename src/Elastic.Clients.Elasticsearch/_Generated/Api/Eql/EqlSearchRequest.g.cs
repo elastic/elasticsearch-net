@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		[JsonInclude]
 		[JsonPropertyName("result_position")]
-		public Elastic.Clients.Elasticsearch.Eql.Search.ResultPosition? ResultPosition { get; set; }
+		public Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPosition { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private string QueryValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Eql.Search.ResultPosition? ResultPositionValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
 
 		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
 
@@ -217,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor<TDocument> ResultPosition(Elastic.Clients.Elasticsearch.Eql.Search.ResultPosition? resultPosition)
+		public EqlSearchRequestDescriptor<TDocument> ResultPosition(Elastic.Clients.Elasticsearch.Eql.ResultPosition? resultPosition)
 		{
 			ResultPositionValue = resultPosition;
 			return Self;
@@ -391,7 +391,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private string QueryValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Eql.Search.ResultPosition? ResultPositionValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
 
 		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
 
@@ -463,7 +463,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor ResultPosition(Elastic.Clients.Elasticsearch.Eql.Search.ResultPosition? resultPosition)
+		public EqlSearchRequestDescriptor ResultPosition(Elastic.Clients.Elasticsearch.Eql.ResultPosition? resultPosition)
 		{
 			ResultPositionValue = resultPosition;
 			return Self;

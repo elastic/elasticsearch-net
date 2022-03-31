@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class RankFeatureProperty : Mapping.PropertyBase, IProperty
+	public partial class RankFeatureProperty : PropertyBase, IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("positive_score_impact")]

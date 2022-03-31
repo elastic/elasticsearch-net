@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public abstract partial class DocValuesPropertyBase : Mapping.CorePropertyBase
+	public abstract partial class DocValuesPropertyBase : CorePropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_values")]

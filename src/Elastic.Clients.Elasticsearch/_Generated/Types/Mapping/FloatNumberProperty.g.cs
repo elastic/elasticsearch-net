@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class FloatNumberProperty : Mapping.StandardNumberProperty, IProperty
+	public partial class FloatNumberProperty : StandardNumberProperty, IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("null_value")]

@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public QueriesDescriptor Cache(IndexManagement.CacheQueriesDescriptor descriptor)
+		public QueriesDescriptor Cache(CacheQueriesDescriptor descriptor)
 		{
 			CacheValue = null;
 			CacheDescriptorAction = null;
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public QueriesDescriptor Cache(Action<IndexManagement.CacheQueriesDescriptor> configure)
+		public QueriesDescriptor Cache(Action<CacheQueriesDescriptor> configure)
 		{
 			CacheValue = null;
 			CacheDescriptorAction = null;
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (CacheDescriptorAction is not null)
 			{
 				writer.WritePropertyName("cache");
-				JsonSerializer.Serialize(writer, new IndexManagement.CacheQueriesDescriptor(CacheDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new CacheQueriesDescriptor(CacheDescriptorAction), options);
 			}
 			else if (CacheValue is not null)
 			{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class ShapeProperty : Mapping.DocValuesPropertyBase, IProperty
+	public partial class ShapeProperty : DocValuesPropertyBase, IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("coerce")]

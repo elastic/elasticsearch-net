@@ -22,12 +22,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoSearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("remote")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSearchRemote Remote { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSearchRemote Remote { get; init; }
 	}
 }

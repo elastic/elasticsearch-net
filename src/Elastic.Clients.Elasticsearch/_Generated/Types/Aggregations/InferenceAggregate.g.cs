@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class InferenceAggregate : Aggregations.AggregateBase
+	public partial class InferenceAggregate : AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("feature_importance")]
