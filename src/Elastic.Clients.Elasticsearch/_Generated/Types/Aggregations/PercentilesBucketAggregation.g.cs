@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(PercentilesBucketAggregationConverter))]
-	public partial class PercentilesBucketAggregation : Aggregations.PipelineAggregationBase
+	public partial class PercentilesBucketAggregation : PipelineAggregationBase
 	{
 		public PercentilesBucketAggregation(string name) : base(name)
 		{

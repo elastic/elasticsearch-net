@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class StringTermsBucket : Aggregations.TermsBucketBase
+	public partial class StringTermsBucket : TermsBucketBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("key")]

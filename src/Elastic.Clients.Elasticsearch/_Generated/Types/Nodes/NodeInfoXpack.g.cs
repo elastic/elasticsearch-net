@@ -22,13 +22,13 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoXpack
 	{
 		[JsonInclude]
 		[JsonPropertyName("license")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackLicense? License { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackLicense? License { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("notification")]
@@ -36,6 +36,6 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("security")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurity Security { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurity Security { get; init; }
 	}
 }

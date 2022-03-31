@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class IcuNormalizationCharFilter : Analysis.CharFilterBase, ICharFilterDefinition
+	public partial class IcuNormalizationCharFilter : CharFilterBase, ICharFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("mode")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class ExtendedMemoryStats : Nodes.MemoryStats
+	public partial class ExtendedMemoryStats : MemoryStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("free_percent")]

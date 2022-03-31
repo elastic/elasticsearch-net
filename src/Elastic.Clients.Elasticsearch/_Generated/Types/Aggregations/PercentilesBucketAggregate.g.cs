@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class PercentilesBucketAggregate : Aggregations.PercentilesAggregateBase
+	public partial class PercentilesBucketAggregate : PercentilesAggregateBase
 	{
 	}
 }

@@ -40,11 +40,11 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		protected override bool SupportsBody => true;
 		[JsonInclude]
 		[JsonPropertyName("current_step")]
-		public Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? CurrentStep { get; set; }
+		public Elastic.Clients.Elasticsearch.Ilm.StepKey? CurrentStep { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("next_step")]
-		public Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? NextStep { get; set; }
+		public Elastic.Clients.Elasticsearch.Ilm.StepKey? NextStep { get; set; }
 	}
 
 	public sealed partial class IlmMoveToStepRequestDescriptor<TDocument> : RequestDescriptorBase<IlmMoveToStepRequestDescriptor<TDocument>, IlmMoveToStepRequestParameters>
@@ -71,19 +71,19 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		private Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? CurrentStepValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Ilm.StepKey? CurrentStepValue { get; set; }
 
-		private Ilm.MoveToStep.StepKeyDescriptor CurrentStepDescriptor { get; set; }
+		private StepKeyDescriptor CurrentStepDescriptor { get; set; }
 
-		private Action<Ilm.MoveToStep.StepKeyDescriptor> CurrentStepDescriptorAction { get; set; }
+		private Action<StepKeyDescriptor> CurrentStepDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? NextStepValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Ilm.StepKey? NextStepValue { get; set; }
 
-		private Ilm.MoveToStep.StepKeyDescriptor NextStepDescriptor { get; set; }
+		private StepKeyDescriptor NextStepDescriptor { get; set; }
 
-		private Action<Ilm.MoveToStep.StepKeyDescriptor> NextStepDescriptorAction { get; set; }
+		private Action<StepKeyDescriptor> NextStepDescriptorAction { get; set; }
 
-		public IlmMoveToStepRequestDescriptor<TDocument> CurrentStep(Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? currentStep)
+		public IlmMoveToStepRequestDescriptor<TDocument> CurrentStep(Elastic.Clients.Elasticsearch.Ilm.StepKey? currentStep)
 		{
 			CurrentStepDescriptor = null;
 			CurrentStepDescriptorAction = null;
@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		public IlmMoveToStepRequestDescriptor<TDocument> CurrentStep(Ilm.MoveToStep.StepKeyDescriptor descriptor)
+		public IlmMoveToStepRequestDescriptor<TDocument> CurrentStep(StepKeyDescriptor descriptor)
 		{
 			CurrentStepValue = null;
 			CurrentStepDescriptorAction = null;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		public IlmMoveToStepRequestDescriptor<TDocument> CurrentStep(Action<Ilm.MoveToStep.StepKeyDescriptor> configure)
+		public IlmMoveToStepRequestDescriptor<TDocument> CurrentStep(Action<StepKeyDescriptor> configure)
 		{
 			CurrentStepValue = null;
 			CurrentStepDescriptorAction = null;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		public IlmMoveToStepRequestDescriptor<TDocument> NextStep(Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? nextStep)
+		public IlmMoveToStepRequestDescriptor<TDocument> NextStep(Elastic.Clients.Elasticsearch.Ilm.StepKey? nextStep)
 		{
 			NextStepDescriptor = null;
 			NextStepDescriptorAction = null;
@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		public IlmMoveToStepRequestDescriptor<TDocument> NextStep(Ilm.MoveToStep.StepKeyDescriptor descriptor)
+		public IlmMoveToStepRequestDescriptor<TDocument> NextStep(StepKeyDescriptor descriptor)
 		{
 			NextStepValue = null;
 			NextStepDescriptorAction = null;
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		public IlmMoveToStepRequestDescriptor<TDocument> NextStep(Action<Ilm.MoveToStep.StepKeyDescriptor> configure)
+		public IlmMoveToStepRequestDescriptor<TDocument> NextStep(Action<StepKeyDescriptor> configure)
 		{
 			NextStepValue = null;
 			NextStepDescriptorAction = null;
@@ -142,7 +142,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			else if (CurrentStepDescriptorAction is not null)
 			{
 				writer.WritePropertyName("current_step");
-				JsonSerializer.Serialize(writer, new Ilm.MoveToStep.StepKeyDescriptor(CurrentStepDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new StepKeyDescriptor(CurrentStepDescriptorAction), options);
 			}
 			else if (CurrentStepValue is not null)
 			{
@@ -158,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			else if (NextStepDescriptorAction is not null)
 			{
 				writer.WritePropertyName("next_step");
-				JsonSerializer.Serialize(writer, new Ilm.MoveToStep.StepKeyDescriptor(NextStepDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new StepKeyDescriptor(NextStepDescriptorAction), options);
 			}
 			else if (NextStepValue is not null)
 			{
@@ -190,19 +190,19 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		private Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? CurrentStepValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Ilm.StepKey? CurrentStepValue { get; set; }
 
-		private Ilm.MoveToStep.StepKeyDescriptor CurrentStepDescriptor { get; set; }
+		private StepKeyDescriptor CurrentStepDescriptor { get; set; }
 
-		private Action<Ilm.MoveToStep.StepKeyDescriptor> CurrentStepDescriptorAction { get; set; }
+		private Action<StepKeyDescriptor> CurrentStepDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? NextStepValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Ilm.StepKey? NextStepValue { get; set; }
 
-		private Ilm.MoveToStep.StepKeyDescriptor NextStepDescriptor { get; set; }
+		private StepKeyDescriptor NextStepDescriptor { get; set; }
 
-		private Action<Ilm.MoveToStep.StepKeyDescriptor> NextStepDescriptorAction { get; set; }
+		private Action<StepKeyDescriptor> NextStepDescriptorAction { get; set; }
 
-		public IlmMoveToStepRequestDescriptor CurrentStep(Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? currentStep)
+		public IlmMoveToStepRequestDescriptor CurrentStep(Elastic.Clients.Elasticsearch.Ilm.StepKey? currentStep)
 		{
 			CurrentStepDescriptor = null;
 			CurrentStepDescriptorAction = null;
@@ -210,7 +210,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		public IlmMoveToStepRequestDescriptor CurrentStep(Ilm.MoveToStep.StepKeyDescriptor descriptor)
+		public IlmMoveToStepRequestDescriptor CurrentStep(StepKeyDescriptor descriptor)
 		{
 			CurrentStepValue = null;
 			CurrentStepDescriptorAction = null;
@@ -218,7 +218,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		public IlmMoveToStepRequestDescriptor CurrentStep(Action<Ilm.MoveToStep.StepKeyDescriptor> configure)
+		public IlmMoveToStepRequestDescriptor CurrentStep(Action<StepKeyDescriptor> configure)
 		{
 			CurrentStepValue = null;
 			CurrentStepDescriptorAction = null;
@@ -226,7 +226,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		public IlmMoveToStepRequestDescriptor NextStep(Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? nextStep)
+		public IlmMoveToStepRequestDescriptor NextStep(Elastic.Clients.Elasticsearch.Ilm.StepKey? nextStep)
 		{
 			NextStepDescriptor = null;
 			NextStepDescriptorAction = null;
@@ -234,7 +234,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		public IlmMoveToStepRequestDescriptor NextStep(Ilm.MoveToStep.StepKeyDescriptor descriptor)
+		public IlmMoveToStepRequestDescriptor NextStep(StepKeyDescriptor descriptor)
 		{
 			NextStepValue = null;
 			NextStepDescriptorAction = null;
@@ -242,7 +242,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return Self;
 		}
 
-		public IlmMoveToStepRequestDescriptor NextStep(Action<Ilm.MoveToStep.StepKeyDescriptor> configure)
+		public IlmMoveToStepRequestDescriptor NextStep(Action<StepKeyDescriptor> configure)
 		{
 			NextStepValue = null;
 			NextStepDescriptorAction = null;
@@ -261,7 +261,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			else if (CurrentStepDescriptorAction is not null)
 			{
 				writer.WritePropertyName("current_step");
-				JsonSerializer.Serialize(writer, new Ilm.MoveToStep.StepKeyDescriptor(CurrentStepDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new StepKeyDescriptor(CurrentStepDescriptorAction), options);
 			}
 			else if (CurrentStepValue is not null)
 			{
@@ -277,7 +277,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			else if (NextStepDescriptorAction is not null)
 			{
 				writer.WritePropertyName("next_step");
-				JsonSerializer.Serialize(writer, new Ilm.MoveToStep.StepKeyDescriptor(NextStepDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new StepKeyDescriptor(NextStepDescriptorAction), options);
 			}
 			else if (NextStepValue is not null)
 			{

@@ -27,9 +27,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class IntervalsFuzzy : IIntervalsContainerVariant, IIntervalsQueryVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IIntervalsContainerVariant.IntervalsContainerVariantName => "fuzzy";
+		string IIntervalsContainerVariant.IntervalsContainerVariantName => "fuzzy";
 		[JsonIgnore]
-		string QueryDsl.IIntervalsQueryVariant.IntervalsQueryVariantName => "fuzzy";
+		string IIntervalsQueryVariant.IntervalsQueryVariantName => "fuzzy";
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }

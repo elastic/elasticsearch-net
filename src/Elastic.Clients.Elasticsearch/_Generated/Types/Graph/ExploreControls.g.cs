@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public ExploreControlsDescriptor<TDocument> SampleDiversity(Graph.SampleDiversityDescriptor<TDocument> descriptor)
+		public ExploreControlsDescriptor<TDocument> SampleDiversity(SampleDiversityDescriptor<TDocument> descriptor)
 		{
 			SampleDiversityValue = null;
 			SampleDiversityDescriptorAction = null;
@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public ExploreControlsDescriptor<TDocument> SampleDiversity(Action<Graph.SampleDiversityDescriptor<TDocument>> configure)
+		public ExploreControlsDescriptor<TDocument> SampleDiversity(Action<SampleDiversityDescriptor<TDocument>> configure)
 		{
 			SampleDiversityValue = null;
 			SampleDiversityDescriptorAction = null;
@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			else if (SampleDiversityDescriptorAction is not null)
 			{
 				writer.WritePropertyName("sample_diversity");
-				JsonSerializer.Serialize(writer, new Graph.SampleDiversityDescriptor<TDocument>(SampleDiversityDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SampleDiversityDescriptor<TDocument>(SampleDiversityDescriptorAction), options);
 			}
 			else if (SampleDiversityValue is not null)
 			{
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public ExploreControlsDescriptor SampleDiversity(Graph.SampleDiversityDescriptor descriptor)
+		public ExploreControlsDescriptor SampleDiversity(SampleDiversityDescriptor descriptor)
 		{
 			SampleDiversityValue = null;
 			SampleDiversityDescriptorAction = null;
@@ -176,7 +176,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public ExploreControlsDescriptor SampleDiversity(Action<Graph.SampleDiversityDescriptor> configure)
+		public ExploreControlsDescriptor SampleDiversity(Action<SampleDiversityDescriptor> configure)
 		{
 			SampleDiversityValue = null;
 			SampleDiversityDescriptorAction = null;
@@ -213,7 +213,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			else if (SampleDiversityDescriptorAction is not null)
 			{
 				writer.WritePropertyName("sample_diversity");
-				JsonSerializer.Serialize(writer, new Graph.SampleDiversityDescriptor(SampleDiversityDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SampleDiversityDescriptor(SampleDiversityDescriptorAction), options);
 			}
 			else if (SampleDiversityValue is not null)
 			{

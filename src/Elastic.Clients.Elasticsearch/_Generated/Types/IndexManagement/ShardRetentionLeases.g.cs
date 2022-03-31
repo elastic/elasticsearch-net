@@ -22,13 +22,13 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public partial class ShardRetentionLeases
 	{
 		[JsonInclude]
 		[JsonPropertyName("leases")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardLease> Leases { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardLease> Leases { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("primary_term")]

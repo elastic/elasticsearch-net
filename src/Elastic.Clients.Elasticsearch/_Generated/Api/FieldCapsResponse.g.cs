@@ -30,6 +30,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public Elastic.Clients.Elasticsearch.Indices Indices { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName> Indices { get; init; }
 	}
 }

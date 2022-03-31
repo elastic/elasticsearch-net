@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeOperatingSystemInfo
 	{
@@ -40,11 +40,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("cpu")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoOSCPU? Cpu { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU? Cpu { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("mem")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoMemory? Mem { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory? Mem { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("name")]
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("swap")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoMemory? Swap { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory? Swap { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]

@@ -24,12 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SpanMultiTermQuery : QueryDsl.QueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public partial class SpanMultiTermQuery : QueryBase, IQueryContainerVariant, ISpanQueryVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "span_multi";
+		string IQueryContainerVariant.QueryContainerVariantName => "span_multi";
 		[JsonIgnore]
-		string QueryDsl.ISpanQueryVariant.SpanQueryVariantName => "span_multi";
+		string ISpanQueryVariant.SpanQueryVariantName => "span_multi";
 		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Match { get; set; }
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanMultiTermQueryDescriptor<TDocument> Match(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		public SpanMultiTermQueryDescriptor<TDocument> Match(QueryContainerDescriptor<TDocument> descriptor)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanMultiTermQueryDescriptor<TDocument> Match(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		public SpanMultiTermQueryDescriptor<TDocument> Match(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (MatchDescriptorAction is not null)
 			{
 				writer.WritePropertyName("match");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(MatchDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(MatchDescriptorAction), options);
 			}
 			else
 			{
@@ -148,7 +148,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanMultiTermQueryDescriptor Match(QueryDsl.QueryContainerDescriptor descriptor)
+		public SpanMultiTermQueryDescriptor Match(QueryContainerDescriptor descriptor)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
@@ -156,7 +156,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanMultiTermQueryDescriptor Match(Action<QueryDsl.QueryContainerDescriptor> configure)
+		public SpanMultiTermQueryDescriptor Match(Action<QueryContainerDescriptor> configure)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (MatchDescriptorAction is not null)
 			{
 				writer.WritePropertyName("match");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(MatchDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(MatchDescriptorAction), options);
 			}
 			else
 			{

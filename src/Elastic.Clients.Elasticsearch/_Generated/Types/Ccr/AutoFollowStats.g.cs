@@ -22,13 +22,13 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ccr.Stats
+namespace Elastic.Clients.Elasticsearch.Ccr
 {
 	public partial class AutoFollowStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("auto_followed_clusters")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.Stats.AutoFollowedCluster> AutoFollowedClusters { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.AutoFollowedCluster> AutoFollowedClusters { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("number_of_failed_follow_indices")]

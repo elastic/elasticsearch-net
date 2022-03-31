@@ -8,7 +8,7 @@ using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 using Elastic.Clients.Elasticsearch.Cluster;
-using Elastic.Clients.Elasticsearch.Cluster.AllocationExplain;
+//using Elastic.Clients.Elasticsearch.Cluster.AllocationExplain;
 
 namespace Tests.Cluster.ClusterAllocationExplain;
 

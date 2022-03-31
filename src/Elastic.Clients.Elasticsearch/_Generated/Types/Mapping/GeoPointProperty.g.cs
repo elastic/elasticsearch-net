@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class GeoPointProperty : Mapping.DocValuesPropertyBase, IProperty
+	public partial class GeoPointProperty : DocValuesPropertyBase, IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]

@@ -22,16 +22,16 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoXpackSecurityAuthc
 	{
 		[JsonInclude]
 		[JsonPropertyName("realms")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthcRealms Realms { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealms Realms { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("token")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthcToken Token { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcToken Token { get; init; }
 	}
 }

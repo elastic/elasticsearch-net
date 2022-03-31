@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(MatrixStatsAggregationConverter))]
-	public partial class MatrixStatsAggregation : Aggregations.MatrixAggregationBase
+	public partial class MatrixStatsAggregation : MatrixAggregationBase
 	{
 		public MatrixStatsAggregation(string name) : base(name)
 		{

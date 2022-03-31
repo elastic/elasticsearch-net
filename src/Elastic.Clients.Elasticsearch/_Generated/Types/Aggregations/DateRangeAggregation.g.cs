@@ -164,7 +164,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(DateRangeAggregationConverter))]
-	public partial class DateRangeAggregation : Aggregations.BucketAggregationBase
+	public partial class DateRangeAggregation : BucketAggregationBase
 	{
 		public DateRangeAggregation(string name) : base(name)
 		{

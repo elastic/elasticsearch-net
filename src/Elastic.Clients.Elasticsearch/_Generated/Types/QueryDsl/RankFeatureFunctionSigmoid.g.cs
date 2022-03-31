@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class RankFeatureFunctionSigmoid : QueryDsl.RankFeatureFunction
+	public partial class RankFeatureFunctionSigmoid : RankFeatureFunction
 	{
 		[JsonInclude]
 		[JsonPropertyName("exponent")]

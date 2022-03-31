@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class SumAggregate : Aggregations.SingleMetricAggregateBase
+	public partial class SumAggregate : SingleMetricAggregateBase
 	{
 	}
 }

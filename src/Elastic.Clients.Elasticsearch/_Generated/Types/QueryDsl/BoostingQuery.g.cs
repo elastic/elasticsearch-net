@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class BoostingQuery : QueryDsl.QueryBase, IQueryContainerVariant
+	public partial class BoostingQuery : QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "boosting";
+		string IQueryContainerVariant.QueryContainerVariantName => "boosting";
 		[JsonInclude]
 		[JsonPropertyName("negative")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Negative { get; set; }
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public BoostingQueryDescriptor<TDocument> Negative(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		public BoostingQueryDescriptor<TDocument> Negative(QueryContainerDescriptor<TDocument> descriptor)
 		{
 			NegativeValue = null;
 			NegativeDescriptorAction = null;
@@ -82,7 +82,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public BoostingQueryDescriptor<TDocument> Negative(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		public BoostingQueryDescriptor<TDocument> Negative(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			NegativeValue = null;
 			NegativeDescriptorAction = null;
@@ -98,7 +98,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public BoostingQueryDescriptor<TDocument> Positive(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		public BoostingQueryDescriptor<TDocument> Positive(QueryContainerDescriptor<TDocument> descriptor)
 		{
 			PositiveValue = null;
 			PositiveDescriptorAction = null;
@@ -106,7 +106,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public BoostingQueryDescriptor<TDocument> Positive(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		public BoostingQueryDescriptor<TDocument> Positive(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			PositiveValue = null;
 			PositiveDescriptorAction = null;
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (NegativeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("negative");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(NegativeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(NegativeDescriptorAction), options);
 			}
 			else
 			{
@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (PositiveDescriptorAction is not null)
 			{
 				writer.WritePropertyName("positive");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(PositiveDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(PositiveDescriptorAction), options);
 			}
 			else
 			{
@@ -218,7 +218,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public BoostingQueryDescriptor Negative(QueryDsl.QueryContainerDescriptor descriptor)
+		public BoostingQueryDescriptor Negative(QueryContainerDescriptor descriptor)
 		{
 			NegativeValue = null;
 			NegativeDescriptorAction = null;
@@ -226,7 +226,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public BoostingQueryDescriptor Negative(Action<QueryDsl.QueryContainerDescriptor> configure)
+		public BoostingQueryDescriptor Negative(Action<QueryContainerDescriptor> configure)
 		{
 			NegativeValue = null;
 			NegativeDescriptorAction = null;
@@ -242,7 +242,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public BoostingQueryDescriptor Positive(QueryDsl.QueryContainerDescriptor descriptor)
+		public BoostingQueryDescriptor Positive(QueryContainerDescriptor descriptor)
 		{
 			PositiveValue = null;
 			PositiveDescriptorAction = null;
@@ -250,7 +250,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public BoostingQueryDescriptor Positive(Action<QueryDsl.QueryContainerDescriptor> configure)
+		public BoostingQueryDescriptor Positive(Action<QueryContainerDescriptor> configure)
 		{
 			PositiveValue = null;
 			PositiveDescriptorAction = null;
@@ -287,7 +287,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (NegativeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("negative");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(NegativeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(NegativeDescriptorAction), options);
 			}
 			else
 			{
@@ -303,7 +303,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (PositiveDescriptorAction is not null)
 			{
 				writer.WritePropertyName("positive");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(PositiveDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(PositiveDescriptorAction), options);
 			}
 			else
 			{

@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(StringStatsAggregationConverter))]
-	public partial class StringStatsAggregation : Aggregations.MetricAggregationBase
+	public partial class StringStatsAggregation : MetricAggregationBase
 	{
 		public StringStatsAggregation(string name, Field field) : base(name) => Field = field;
 		public StringStatsAggregation(string name) : base(name)

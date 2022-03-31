@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public interface IActionVariant
 	{
@@ -50,19 +50,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 			var propertyName = readerCopy.GetString();
 			if (propertyName == "add")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.AddAction?>(ref reader, options);
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.AddAction?>(ref reader, options);
 				return new Action(variant);
 			}
 
 			if (propertyName == "remove")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.RemoveAction?>(ref reader, options);
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction?>(ref reader, options);
 				return new Action(variant);
 			}
 
 			if (propertyName == "remove_index")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.RemoveIndexAction?>(ref reader, options);
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction?>(ref reader, options);
 				return new Action(variant);
 			}
 
@@ -75,13 +75,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 			writer.WritePropertyName(value.Variant.ActionVariantName);
 			switch (value.Variant)
 			{
-				case Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.AddAction variant:
+				case Elastic.Clients.Elasticsearch.IndexManagement.AddAction variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.RemoveAction variant:
+				case Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.RemoveIndexAction variant:
+				case Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
 			}

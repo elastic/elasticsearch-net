@@ -22,12 +22,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoIngest
 	{
 		[JsonInclude]
 		[JsonPropertyName("processors")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestProcessor> Processors { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestProcessor> Processors { get; init; }
 	}
 }

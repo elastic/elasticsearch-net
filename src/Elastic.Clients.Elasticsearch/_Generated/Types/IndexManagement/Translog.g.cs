@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public TranslogDescriptor Retention(IndexManagement.TranslogRetentionDescriptor descriptor)
+		public TranslogDescriptor Retention(TranslogRetentionDescriptor descriptor)
 		{
 			RetentionValue = null;
 			RetentionDescriptorAction = null;
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public TranslogDescriptor Retention(Action<IndexManagement.TranslogRetentionDescriptor> configure)
+		public TranslogDescriptor Retention(Action<TranslogRetentionDescriptor> configure)
 		{
 			RetentionValue = null;
 			RetentionDescriptorAction = null;
@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (RetentionDescriptorAction is not null)
 			{
 				writer.WritePropertyName("retention");
-				JsonSerializer.Serialize(writer, new IndexManagement.TranslogRetentionDescriptor(RetentionDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new TranslogRetentionDescriptor(RetentionDescriptorAction), options);
 			}
 			else if (RetentionValue is not null)
 			{

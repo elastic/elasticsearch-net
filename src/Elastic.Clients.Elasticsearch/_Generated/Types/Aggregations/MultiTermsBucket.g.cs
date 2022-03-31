@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class MultiTermsBucket : Aggregations.MultiBucketBase
+	public partial class MultiTermsBucket : MultiBucketBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count_error_upper_bound")]

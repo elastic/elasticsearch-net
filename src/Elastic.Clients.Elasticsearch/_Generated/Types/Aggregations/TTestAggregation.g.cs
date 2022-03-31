@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(TTestAggregationConverter))]
-	public partial class TTestAggregation : Aggregations.AggregationBase
+	public partial class TTestAggregation : AggregationBase
 	{
 		public TTestAggregation(string name) : base(name)
 		{
@@ -180,7 +180,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TTestAggregationDescriptor<TDocument> a(Aggregations.TestPopulationDescriptor<TDocument> descriptor)
+		public TTestAggregationDescriptor<TDocument> a(TestPopulationDescriptor<TDocument> descriptor)
 		{
 			aValue = null;
 			aDescriptorAction = null;
@@ -188,7 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TTestAggregationDescriptor<TDocument> a(Action<Aggregations.TestPopulationDescriptor<TDocument>> configure)
+		public TTestAggregationDescriptor<TDocument> a(Action<TestPopulationDescriptor<TDocument>> configure)
 		{
 			aValue = null;
 			aDescriptorAction = null;
@@ -204,7 +204,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TTestAggregationDescriptor<TDocument> b(Aggregations.TestPopulationDescriptor<TDocument> descriptor)
+		public TTestAggregationDescriptor<TDocument> b(TestPopulationDescriptor<TDocument> descriptor)
 		{
 			bValue = null;
 			bDescriptorAction = null;
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TTestAggregationDescriptor<TDocument> b(Action<Aggregations.TestPopulationDescriptor<TDocument>> configure)
+		public TTestAggregationDescriptor<TDocument> b(Action<TestPopulationDescriptor<TDocument>> configure)
 		{
 			bValue = null;
 			bDescriptorAction = null;
@@ -245,7 +245,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (aDescriptorAction is not null)
 			{
 				writer.WritePropertyName("a");
-				JsonSerializer.Serialize(writer, new Aggregations.TestPopulationDescriptor<TDocument>(aDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new TestPopulationDescriptor<TDocument>(aDescriptorAction), options);
 			}
 			else if (aValue is not null)
 			{
@@ -261,7 +261,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (bDescriptorAction is not null)
 			{
 				writer.WritePropertyName("b");
-				JsonSerializer.Serialize(writer, new Aggregations.TestPopulationDescriptor<TDocument>(bDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new TestPopulationDescriptor<TDocument>(bDescriptorAction), options);
 			}
 			else if (bValue is not null)
 			{
@@ -317,7 +317,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TTestAggregationDescriptor a(Aggregations.TestPopulationDescriptor descriptor)
+		public TTestAggregationDescriptor a(TestPopulationDescriptor descriptor)
 		{
 			aValue = null;
 			aDescriptorAction = null;
@@ -325,7 +325,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TTestAggregationDescriptor a(Action<Aggregations.TestPopulationDescriptor> configure)
+		public TTestAggregationDescriptor a(Action<TestPopulationDescriptor> configure)
 		{
 			aValue = null;
 			aDescriptorAction = null;
@@ -341,7 +341,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TTestAggregationDescriptor b(Aggregations.TestPopulationDescriptor descriptor)
+		public TTestAggregationDescriptor b(TestPopulationDescriptor descriptor)
 		{
 			bValue = null;
 			bDescriptorAction = null;
@@ -349,7 +349,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TTestAggregationDescriptor b(Action<Aggregations.TestPopulationDescriptor> configure)
+		public TTestAggregationDescriptor b(Action<TestPopulationDescriptor> configure)
 		{
 			bValue = null;
 			bDescriptorAction = null;
@@ -382,7 +382,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (aDescriptorAction is not null)
 			{
 				writer.WritePropertyName("a");
-				JsonSerializer.Serialize(writer, new Aggregations.TestPopulationDescriptor(aDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new TestPopulationDescriptor(aDescriptorAction), options);
 			}
 			else if (aValue is not null)
 			{
@@ -398,7 +398,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (bDescriptorAction is not null)
 			{
 				writer.WritePropertyName("b");
-				JsonSerializer.Serialize(writer, new Aggregations.TestPopulationDescriptor(bDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new TestPopulationDescriptor(bDescriptorAction), options);
 			}
 			else if (bValue is not null)
 			{

@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public InferenceConfigDescriptor Regression(Ingest.InferenceConfigRegressionDescriptor descriptor)
+		public InferenceConfigDescriptor Regression(InferenceConfigRegressionDescriptor descriptor)
 		{
 			RegressionValue = null;
 			RegressionDescriptorAction = null;
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public InferenceConfigDescriptor Regression(Action<Ingest.InferenceConfigRegressionDescriptor> configure)
+		public InferenceConfigDescriptor Regression(Action<InferenceConfigRegressionDescriptor> configure)
 		{
 			RegressionValue = null;
 			RegressionDescriptorAction = null;
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			else if (RegressionDescriptorAction is not null)
 			{
 				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, new Ingest.InferenceConfigRegressionDescriptor(RegressionDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new InferenceConfigRegressionDescriptor(RegressionDescriptorAction), options);
 			}
 			else if (RegressionValue is not null)
 			{

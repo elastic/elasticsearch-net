@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(VariableWidthHistogramAggregationConverter))]
-	public partial class VariableWidthHistogramAggregation : Aggregations.AggregationBase
+	public partial class VariableWidthHistogramAggregation : AggregationBase
 	{
 		public VariableWidthHistogramAggregation(string name) : base(name)
 		{

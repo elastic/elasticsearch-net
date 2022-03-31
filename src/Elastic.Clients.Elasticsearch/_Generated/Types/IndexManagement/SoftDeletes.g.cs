@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SoftDeletesDescriptor RetentionLease(IndexManagement.RetentionLeaseDescriptor descriptor)
+		public SoftDeletesDescriptor RetentionLease(RetentionLeaseDescriptor descriptor)
 		{
 			RetentionLeaseValue = null;
 			RetentionLeaseDescriptorAction = null;
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SoftDeletesDescriptor RetentionLease(Action<IndexManagement.RetentionLeaseDescriptor> configure)
+		public SoftDeletesDescriptor RetentionLease(Action<RetentionLeaseDescriptor> configure)
 		{
 			RetentionLeaseValue = null;
 			RetentionLeaseDescriptorAction = null;
@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (RetentionLeaseDescriptorAction is not null)
 			{
 				writer.WritePropertyName("retention_lease");
-				JsonSerializer.Serialize(writer, new IndexManagement.RetentionLeaseDescriptor(RetentionLeaseDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new RetentionLeaseDescriptor(RetentionLeaseDescriptorAction), options);
 			}
 			else if (RetentionLeaseValue is not null)
 			{

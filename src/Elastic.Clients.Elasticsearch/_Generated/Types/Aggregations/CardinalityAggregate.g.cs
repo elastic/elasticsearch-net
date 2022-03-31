@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class CardinalityAggregate : Aggregations.AggregateBase
+	public partial class CardinalityAggregate : AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("value")]

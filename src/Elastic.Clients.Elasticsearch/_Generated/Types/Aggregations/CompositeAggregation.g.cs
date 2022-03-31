@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(CompositeAggregationConverter))]
-	public partial class CompositeAggregation : Aggregations.BucketAggregationBase
+	public partial class CompositeAggregation : BucketAggregationBase
 	{
 		public CompositeAggregation(string name) : base(name)
 		{

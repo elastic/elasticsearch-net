@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class SynonymGraphTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinition
+	public partial class SynonymGraphTokenFilter : TokenFilterBase, ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("expand")]

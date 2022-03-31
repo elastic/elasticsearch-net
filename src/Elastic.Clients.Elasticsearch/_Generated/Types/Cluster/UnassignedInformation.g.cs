@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
+namespace Elastic.Clients.Elasticsearch.Cluster
 {
 	public partial class UnassignedInformation
 	{
@@ -52,6 +52,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("reason")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.UnassignedInformationReason Reason { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason Reason { get; init; }
 	}
 }
