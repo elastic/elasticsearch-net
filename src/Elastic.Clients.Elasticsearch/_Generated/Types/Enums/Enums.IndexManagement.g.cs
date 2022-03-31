@@ -185,6 +185,48 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 	}
 
+	[JsonConverter(typeof(NumericFielddataFormatConverter))]
+	public enum NumericFielddataFormat
+	{
+		[EnumMember(Value = "disabled")]
+		Disabled,
+		[EnumMember(Value = "array")]
+		Array
+	}
+
+	internal sealed class NumericFielddataFormatConverter : JsonConverter<NumericFielddataFormat>
+	{
+		public override NumericFielddataFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "disabled":
+					return NumericFielddataFormat.Disabled;
+				case "array":
+					return NumericFielddataFormat.Array;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, NumericFielddataFormat value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case NumericFielddataFormat.Disabled:
+					writer.WriteStringValue("disabled");
+					return;
+				case NumericFielddataFormat.Array:
+					writer.WriteStringValue("array");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(SegmentSortMissingConverter))]
 	public enum SegmentSortMissing
 	{
@@ -304,6 +346,48 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 					return;
 				case SegmentSortOrder.Asc:
 					writer.WriteStringValue("asc");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(StringFielddataFormatConverter))]
+	public enum StringFielddataFormat
+	{
+		[EnumMember(Value = "paged_bytes")]
+		PagedBytes,
+		[EnumMember(Value = "disabled")]
+		Disabled
+	}
+
+	internal sealed class StringFielddataFormatConverter : JsonConverter<StringFielddataFormat>
+	{
+		public override StringFielddataFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "paged_bytes":
+					return StringFielddataFormat.PagedBytes;
+				case "disabled":
+					return StringFielddataFormat.Disabled;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, StringFielddataFormat value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case StringFielddataFormat.PagedBytes:
+					writer.WriteStringValue("paged_bytes");
+					return;
+				case StringFielddataFormat.Disabled:
+					writer.WriteStringValue("disabled");
 					return;
 			}
 

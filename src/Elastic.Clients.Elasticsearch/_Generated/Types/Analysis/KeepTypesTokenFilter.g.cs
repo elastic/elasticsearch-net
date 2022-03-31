@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class KeepTypesTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
+	public partial class KeepTypesTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("mode")]
