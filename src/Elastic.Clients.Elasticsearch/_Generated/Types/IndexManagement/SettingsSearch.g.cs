@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSearchDescriptor Idle(IndexManagement.SearchIdleDescriptor descriptor)
+		public SettingsSearchDescriptor Idle(SearchIdleDescriptor descriptor)
 		{
 			IdleValue = null;
 			IdleDescriptorAction = null;
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SettingsSearchDescriptor Idle(Action<IndexManagement.SearchIdleDescriptor> configure)
+		public SettingsSearchDescriptor Idle(Action<SearchIdleDescriptor> configure)
 		{
 			IdleValue = null;
 			IdleDescriptorAction = null;
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (IdleDescriptorAction is not null)
 			{
 				writer.WritePropertyName("idle");
-				JsonSerializer.Serialize(writer, new IndexManagement.SearchIdleDescriptor(IdleDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SearchIdleDescriptor(IdleDescriptorAction), options);
 			}
 			else
 			{

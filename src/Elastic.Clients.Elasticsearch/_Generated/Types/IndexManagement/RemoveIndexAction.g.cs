@@ -22,12 +22,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public partial class RemoveIndexAction : IActionVariant
 	{
 		[JsonIgnore]
-		string IndexManagement.UpdateAliases.IActionVariant.ActionVariantName => "remove_index";
+		string IActionVariant.ActionVariantName => "remove_index";
 		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }

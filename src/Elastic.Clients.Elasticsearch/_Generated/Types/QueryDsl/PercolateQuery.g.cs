@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class PercolateQuery : QueryDsl.QueryBase, IQueryContainerVariant
+	public partial class PercolateQuery : QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "percolate";
+		string IQueryContainerVariant.QueryContainerVariantName => "percolate";
 		[JsonInclude]
 		[JsonPropertyName("document")]
 		public object? Document { get; set; }

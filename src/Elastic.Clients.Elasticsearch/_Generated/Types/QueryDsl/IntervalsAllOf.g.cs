@@ -27,9 +27,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class IntervalsAllOf : IIntervalsContainerVariant, IIntervalsQueryVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IIntervalsContainerVariant.IntervalsContainerVariantName => "all_of";
+		string IIntervalsContainerVariant.IntervalsContainerVariantName => "all_of";
 		[JsonIgnore]
-		string QueryDsl.IIntervalsQueryVariant.IntervalsQueryVariantName => "all_of";
+		string IIntervalsQueryVariant.IntervalsQueryVariantName => "all_of";
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public IntervalsAllOfDescriptor Filter(QueryDsl.IntervalsFilterDescriptor descriptor)
+		public IntervalsAllOfDescriptor Filter(IntervalsFilterDescriptor descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -82,7 +82,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public IntervalsAllOfDescriptor Filter(Action<QueryDsl.IntervalsFilterDescriptor> configure)
+		public IntervalsAllOfDescriptor Filter(Action<IntervalsFilterDescriptor> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.IntervalsFilterDescriptor(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

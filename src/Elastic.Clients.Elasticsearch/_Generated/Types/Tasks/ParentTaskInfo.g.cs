@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Tasks
 {
-	public partial class ParentTaskInfo : Tasks.TaskInfo
+	public partial class ParentTaskInfo : TaskInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("children")]

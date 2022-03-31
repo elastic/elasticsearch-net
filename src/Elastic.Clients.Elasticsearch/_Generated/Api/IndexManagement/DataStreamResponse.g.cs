@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("data_streams")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream.IndicesGetDataStreamItem> DataStreams { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndicesGetDataStreamItem> DataStreams { get; init; }
 	}
 }

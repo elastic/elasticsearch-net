@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	{
 		[JsonInclude]
 		[JsonPropertyName("tasks")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.PendingTasks.PendingTask> Tasks { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.PendingTask> Tasks { get; init; }
 	}
 }

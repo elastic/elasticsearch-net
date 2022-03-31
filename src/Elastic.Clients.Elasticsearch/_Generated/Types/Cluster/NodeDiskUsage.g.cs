@@ -22,17 +22,17 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
+namespace Elastic.Clients.Elasticsearch.Cluster
 {
 	public partial class NodeDiskUsage
 	{
 		[JsonInclude]
 		[JsonPropertyName("least_available")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.DiskUsage LeastAvailable { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.DiskUsage LeastAvailable { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("most_available")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.DiskUsage MostAvailable { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.DiskUsage MostAvailable { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("node_name")]

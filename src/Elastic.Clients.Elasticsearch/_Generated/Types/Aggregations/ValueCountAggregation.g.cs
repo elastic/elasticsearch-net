@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(ValueCountAggregationConverter))]
-	public partial class ValueCountAggregation : Aggregations.FormattableMetricAggregationBase
+	public partial class ValueCountAggregation : FormattableMetricAggregationBase
 	{
 		public ValueCountAggregation(string name, Field field) : base(name) => Field = field;
 		public ValueCountAggregation(string name) : base(name)

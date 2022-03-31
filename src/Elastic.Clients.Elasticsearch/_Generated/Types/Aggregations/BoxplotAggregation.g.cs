@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(BoxplotAggregationConverter))]
-	public partial class BoxplotAggregation : Aggregations.MetricAggregationBase
+	public partial class BoxplotAggregation : MetricAggregationBase
 	{
 		public BoxplotAggregation(string name, Field field) : base(name) => Field = field;
 		public BoxplotAggregation(string name) : base(name)

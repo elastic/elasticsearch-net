@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public abstract partial class PipelineAggregationBase : Aggregations.BucketPathAggregationBase
+	public abstract partial class PipelineAggregationBase : BucketPathAggregationBase
 	{
 		protected PipelineAggregationBase(string name) : base(name)
 		{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class DelimitedPayloadTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinition
+	public partial class DelimitedPayloadTokenFilter : TokenFilterBase, ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("delimiter")]

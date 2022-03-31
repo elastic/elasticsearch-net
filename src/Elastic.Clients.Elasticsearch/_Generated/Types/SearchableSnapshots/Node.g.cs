@@ -22,12 +22,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStats
+namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 {
 	public partial class Node
 	{
 		[JsonInclude]
 		[JsonPropertyName("shared_cache")]
-		public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStats.Shared SharedCache { get; init; }
+		public Elastic.Clients.Elasticsearch.SearchableSnapshots.Shared SharedCache { get; init; }
 	}
 }

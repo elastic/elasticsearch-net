@@ -22,17 +22,17 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
+namespace Elastic.Clients.Elasticsearch.Cluster
 {
 	public partial class ClusterInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("nodes")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.NodeDiskUsage> Nodes { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage> Nodes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("reserved_sizes")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.ReservedSize> ReservedSizes { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ReservedSize> ReservedSizes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_data_set_sizes")]

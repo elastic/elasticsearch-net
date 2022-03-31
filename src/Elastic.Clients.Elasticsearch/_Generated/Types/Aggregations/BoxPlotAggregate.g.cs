@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class BoxPlotAggregate : Aggregations.AggregateBase
+	public partial class BoxPlotAggregate : AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("lower")]

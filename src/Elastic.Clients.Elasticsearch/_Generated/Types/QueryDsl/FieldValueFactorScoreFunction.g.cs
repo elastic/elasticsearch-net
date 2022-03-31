@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class FieldValueFactorScoreFunction : QueryDsl.ScoreFunctionBase, IFunctionScoreContainerVariant
+	public partial class FieldValueFactorScoreFunction : ScoreFunctionBase, IFunctionScoreContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IFunctionScoreContainerVariant.FunctionScoreContainerVariantName => "field_value_factor";
+		string IFunctionScoreContainerVariant.FunctionScoreContainerVariantName => "field_value_factor";
 		[JsonInclude]
 		[JsonPropertyName("factor")]
 		public double? Factor { get; set; }
@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		public FieldValueFactorScoreFunctionDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		public FieldValueFactorScoreFunctionDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -139,7 +139,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{
@@ -208,7 +208,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+		public FieldValueFactorScoreFunctionDescriptor Filter(QueryContainerDescriptor descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -216,7 +216,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+		public FieldValueFactorScoreFunctionDescriptor Filter(Action<QueryContainerDescriptor> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -277,7 +277,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

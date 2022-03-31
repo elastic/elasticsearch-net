@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class ScriptScoreFunction : QueryDsl.ScoreFunctionBase, IFunctionScoreContainerVariant
+	public partial class ScriptScoreFunction : ScoreFunctionBase, IFunctionScoreContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IFunctionScoreContainerVariant.FunctionScoreContainerVariantName => "script_score";
+		string IFunctionScoreContainerVariant.FunctionScoreContainerVariantName => "script_score";
 		[JsonInclude]
 		[JsonPropertyName("script")]
 		public ScriptBase Script { get; set; }
@@ -62,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScriptScoreFunctionDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		public ScriptScoreFunctionDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScriptScoreFunctionDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		public ScriptScoreFunctionDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{
@@ -182,7 +182,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScriptScoreFunctionDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+		public ScriptScoreFunctionDescriptor Filter(QueryContainerDescriptor descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScriptScoreFunctionDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+		public ScriptScoreFunctionDescriptor Filter(Action<QueryContainerDescriptor> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -239,7 +239,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

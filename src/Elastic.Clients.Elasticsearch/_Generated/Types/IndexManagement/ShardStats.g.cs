@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public partial class ShardStats
 	{
@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("commit")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardCommit? Commit { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardCommit? Commit { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("completion")]
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndicesStats? Indices { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats? Indices { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("merges")]
@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("query_cache")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardQueryCache? QueryCache { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardQueryCache? QueryCache { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("recovery")]
@@ -84,11 +84,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("retention_leases")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardRetentionLeases? RetentionLeases { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardRetentionLeases? RetentionLeases { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("routing")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardRouting? Routing { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardRouting? Routing { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("search")]
@@ -100,19 +100,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("seq_no")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardSequenceNumber? SeqNo { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardSequenceNumber? SeqNo { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_path")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardPath? ShardPath { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardPath? ShardPath { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_stats")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardsTotalStats? ShardStatsTemp { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? ShardStatsTemp { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shards")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardsTotalStats? Shards { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? Shards { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("store")]

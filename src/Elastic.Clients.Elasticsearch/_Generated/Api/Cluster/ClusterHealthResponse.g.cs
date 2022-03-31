@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public Elastic.Clients.Elasticsearch.ReadOnlyIndexNameDictionary<Elastic.Clients.Elasticsearch.Cluster.Health.IndexHealthStats>? Indices { get; init; }
+		public Elastic.Clients.Elasticsearch.ReadOnlyIndexNameDictionary<Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>? Indices { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("initializing_shards")]

@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("docs")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? Docs { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? Docs { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("pipeline")]
@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? DocsValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? DocsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ingest.Pipeline? PipelineValue { get; set; }
 
@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		private Action<PipelineDescriptor> PipelineDescriptorAction { get; set; }
 
-		public IngestSimulateRequestDescriptor<TDocument> Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? docs)
+		public IngestSimulateRequestDescriptor<TDocument> Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? docs)
 		{
 			DocsValue = docs;
 			return Self;
@@ -95,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public IngestSimulateRequestDescriptor<TDocument> Pipeline(Ingest.PipelineDescriptor descriptor)
+		public IngestSimulateRequestDescriptor<TDocument> Pipeline(PipelineDescriptor descriptor)
 		{
 			PipelineValue = null;
 			PipelineDescriptorAction = null;
@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public IngestSimulateRequestDescriptor<TDocument> Pipeline(Action<Ingest.PipelineDescriptor> configure)
+		public IngestSimulateRequestDescriptor<TDocument> Pipeline(Action<PipelineDescriptor> configure)
 		{
 			PipelineValue = null;
 			PipelineDescriptorAction = null;
@@ -128,7 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			else if (PipelineDescriptorAction is not null)
 			{
 				writer.WritePropertyName("pipeline");
-				JsonSerializer.Serialize(writer, new Ingest.PipelineDescriptor(PipelineDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new PipelineDescriptor(PipelineDescriptorAction), options);
 			}
 			else if (PipelineValue is not null)
 			{
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? DocsValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? DocsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ingest.Pipeline? PipelineValue { get; set; }
 
@@ -165,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		private Action<PipelineDescriptor> PipelineDescriptorAction { get; set; }
 
-		public IngestSimulateRequestDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? docs)
+		public IngestSimulateRequestDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? docs)
 		{
 			DocsValue = docs;
 			return Self;
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public IngestSimulateRequestDescriptor Pipeline(Ingest.PipelineDescriptor descriptor)
+		public IngestSimulateRequestDescriptor Pipeline(PipelineDescriptor descriptor)
 		{
 			PipelineValue = null;
 			PipelineDescriptorAction = null;
@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public IngestSimulateRequestDescriptor Pipeline(Action<Ingest.PipelineDescriptor> configure)
+		public IngestSimulateRequestDescriptor Pipeline(Action<PipelineDescriptor> configure)
 		{
 			PipelineValue = null;
 			PipelineDescriptorAction = null;
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			else if (PipelineDescriptorAction is not null)
 			{
 				writer.WritePropertyName("pipeline");
-				JsonSerializer.Serialize(writer, new Ingest.PipelineDescriptor(PipelineDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new PipelineDescriptor(PipelineDescriptorAction), options);
 			}
 			else if (PipelineValue is not null)
 			{

@@ -22,12 +22,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Enrich.ExecutePolicy
+namespace Elastic.Clients.Elasticsearch.Enrich
 {
 	public partial class ExecuteEnrichPolicyStatus
 	{
 		[JsonInclude]
 		[JsonPropertyName("phase")]
-		public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicy.EnrichPolicyPhase Phase { get; init; }
+		public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase Phase { get; init; }
 	}
 }
