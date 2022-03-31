@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class GeoIpProcessor : Ingest.ProcessorBase, IProcessorContainerVariant
+	public partial class GeoIpProcessor : ProcessorBase, IProcessorContainerVariant
 	{
 		[JsonIgnore]
-		string Ingest.IProcessorContainerVariant.ProcessorContainerVariantName => "geoip";
+		string IProcessorContainerVariant.ProcessorContainerVariantName => "geoip";
 		[JsonInclude]
 		[JsonPropertyName("database_file")]
 		public string DatabaseFile { get; set; }

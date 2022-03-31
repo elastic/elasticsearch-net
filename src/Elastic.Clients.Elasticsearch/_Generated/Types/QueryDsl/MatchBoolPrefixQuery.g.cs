@@ -181,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class MatchBoolPrefixQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "match_bool_prefix";
+		string IQueryContainerVariant.QueryContainerVariantName => "match_bool_prefix";
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }

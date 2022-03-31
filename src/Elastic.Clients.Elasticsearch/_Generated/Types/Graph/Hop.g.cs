@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public HopDescriptor<TDocument> Connections(Graph.HopDescriptor<TDocument> descriptor)
+		public HopDescriptor<TDocument> Connections(HopDescriptor<TDocument> descriptor)
 		{
 			ConnectionsValue = null;
 			ConnectionsDescriptorAction = null;
@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public HopDescriptor<TDocument> Connections(Action<Graph.HopDescriptor<TDocument>> configure)
+		public HopDescriptor<TDocument> Connections(Action<HopDescriptor<TDocument>> configure)
 		{
 			ConnectionsValue = null;
 			ConnectionsDescriptorAction = null;
@@ -125,7 +125,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			else if (ConnectionsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("connections");
-				JsonSerializer.Serialize(writer, new Graph.HopDescriptor<TDocument>(ConnectionsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new HopDescriptor<TDocument>(ConnectionsDescriptorAction), options);
 			}
 			else if (ConnectionsValue is not null)
 			{
@@ -184,7 +184,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public HopDescriptor Connections(Graph.HopDescriptor descriptor)
+		public HopDescriptor Connections(HopDescriptor descriptor)
 		{
 			ConnectionsValue = null;
 			ConnectionsDescriptorAction = null;
@@ -192,7 +192,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public HopDescriptor Connections(Action<Graph.HopDescriptor> configure)
+		public HopDescriptor Connections(Action<HopDescriptor> configure)
 		{
 			ConnectionsValue = null;
 			ConnectionsDescriptorAction = null;
@@ -241,7 +241,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			else if (ConnectionsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("connections");
-				JsonSerializer.Serialize(writer, new Graph.HopDescriptor(ConnectionsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new HopDescriptor(ConnectionsDescriptorAction), options);
 			}
 			else if (ConnectionsValue is not null)
 			{

@@ -56,10 +56,10 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("state")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardRoutingState State { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("unassigned_info")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.UnassignedInformation? UnassignedInfo { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation? UnassignedInfo { get; init; }
 	}
 }

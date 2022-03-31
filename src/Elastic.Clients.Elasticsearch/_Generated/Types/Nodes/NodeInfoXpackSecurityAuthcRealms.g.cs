@@ -22,20 +22,20 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoXpackSecurityAuthcRealms
 	{
 		[JsonInclude]
 		[JsonPropertyName("file")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthcRealmsStatus>? File { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? File { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("native")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthcRealmsStatus>? Native { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? Native { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("pki")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthcRealmsStatus>? Pki { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus>? Pki { get; init; }
 	}
 }

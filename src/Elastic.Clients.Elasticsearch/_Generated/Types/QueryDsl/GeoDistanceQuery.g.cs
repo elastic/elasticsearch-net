@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class GeoDistanceQuery : QueryDsl.QueryBase, IQueryContainerVariant
+	public partial class GeoDistanceQuery : QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "geo_distance";
+		string IQueryContainerVariant.QueryContainerVariantName => "geo_distance";
 		[JsonInclude]
 		[JsonPropertyName("distance")]
 		public string? Distance { get; set; }

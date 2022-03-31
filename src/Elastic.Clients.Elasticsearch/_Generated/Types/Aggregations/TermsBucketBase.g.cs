@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public abstract partial class TermsBucketBase : Aggregations.MultiBucketBase
+	public abstract partial class TermsBucketBase : MultiBucketBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count_error")]

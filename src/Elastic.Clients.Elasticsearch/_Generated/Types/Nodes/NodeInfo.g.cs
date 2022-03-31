@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfo
 	{
@@ -48,11 +48,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("http")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoHttp? Http { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp? Http { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("ingest")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngest? Ingest { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngest? Ingest { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("ip")]
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("jvm")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeJvmInfo? Jvm { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo? Jvm { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("modules")]
@@ -72,11 +72,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("network")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoNetwork? Network { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetwork? Network { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("os")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeOperatingSystemInfo? Os { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo? Os { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("plugins")]
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("process")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeProcessInfo? Process { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo? Process { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("roles")]
@@ -92,11 +92,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettings? Settings { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings? Settings { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("thread_pool")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeThreadPoolInfo>? ThreadPool { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo>? ThreadPool { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_indexing_buffer")]
@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("transport")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoTransport? Transport { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoTransport? Transport { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("transport_address")]

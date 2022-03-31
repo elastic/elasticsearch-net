@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class UniqueTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinition
+	public partial class UniqueTokenFilter : TokenFilterBase, ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("only_on_same_position")]

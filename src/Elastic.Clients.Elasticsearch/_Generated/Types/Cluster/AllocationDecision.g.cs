@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
+namespace Elastic.Clients.Elasticsearch.Cluster
 {
 	public partial class AllocationDecision
 	{
@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("decision")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationExplainDecision Decision { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision Decision { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("explanation")]

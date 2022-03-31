@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 	{
 		[JsonInclude]
 		[JsonPropertyName("patterns")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern.AutoFollowPattern> Patterns { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.AutoFollowPattern> Patterns { get; init; }
 	}
 }

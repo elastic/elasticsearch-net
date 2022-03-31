@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(MinAggregationConverter))]
-	public partial class MinAggregation : Aggregations.FormatMetricAggregationBase
+	public partial class MinAggregation : FormatMetricAggregationBase
 	{
 		public MinAggregation(string name, Field field) : base(name) => Field = field;
 		public MinAggregation(string name) : base(name)

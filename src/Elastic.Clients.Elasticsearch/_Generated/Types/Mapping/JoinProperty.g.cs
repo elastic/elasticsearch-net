@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class JoinProperty : Mapping.PropertyBase, IProperty
+	public partial class JoinProperty : PropertyBase, IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("relations")]

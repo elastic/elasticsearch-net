@@ -22,13 +22,13 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
+namespace Elastic.Clients.Elasticsearch.Cluster
 {
 	public partial class NodeAllocationExplanation
 	{
 		[JsonInclude]
 		[JsonPropertyName("deciders")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationDecision> Deciders { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision> Deciders { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("node_attributes")]
@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("node_decision")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision NodeDecision { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.Decision NodeDecision { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("node_id")]
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("store")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationStore? Store { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.AllocationStore? Store { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("transport_address")]

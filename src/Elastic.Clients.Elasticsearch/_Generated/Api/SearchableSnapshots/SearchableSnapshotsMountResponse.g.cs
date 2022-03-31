@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 	{
 		[JsonInclude]
 		[JsonPropertyName("snapshot")]
-		public Elastic.Clients.Elasticsearch.SearchableSnapshots.Mount.MountedSnapshot Snapshot { get; init; }
+		public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountedSnapshot Snapshot { get; init; }
 	}
 }

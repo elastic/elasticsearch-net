@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public abstract partial class CorePropertyBase : Mapping.PropertyBase
+	public abstract partial class CorePropertyBase : PropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("copy_to")]

@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
+namespace Elastic.Clients.Elasticsearch.Ilm
 {
 	public partial class LifecycleExplainManaged : ILifecycleExplain
 	{
@@ -71,7 +71,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 
 		[JsonInclude]
 		[JsonPropertyName("phase_execution")]
-		public Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainPhaseExecution PhaseExecution { get; init; }
+		public Elastic.Clients.Elasticsearch.Ilm.LifecycleExplainPhaseExecution PhaseExecution { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("phase_time_millis")]

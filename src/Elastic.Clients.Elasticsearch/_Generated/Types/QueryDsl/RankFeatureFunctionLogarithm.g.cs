@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class RankFeatureFunctionLogarithm : QueryDsl.RankFeatureFunction
+	public partial class RankFeatureFunctionLogarithm : RankFeatureFunction
 	{
 		[JsonInclude]
 		[JsonPropertyName("scaling_factor")]

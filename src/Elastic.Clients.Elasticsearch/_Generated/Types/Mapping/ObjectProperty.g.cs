@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class ObjectProperty : Mapping.CorePropertyBase, IProperty
+	public partial class ObjectProperty : CorePropertyBase, IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]

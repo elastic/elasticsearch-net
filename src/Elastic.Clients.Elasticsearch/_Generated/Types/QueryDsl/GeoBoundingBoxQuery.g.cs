@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class GeoBoundingBoxQuery : QueryDsl.QueryBase, IQueryContainerVariant
+	public partial class GeoBoundingBoxQuery : QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "geo_bounding_box";
+		string IQueryContainerVariant.QueryContainerVariantName => "geo_bounding_box";
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }

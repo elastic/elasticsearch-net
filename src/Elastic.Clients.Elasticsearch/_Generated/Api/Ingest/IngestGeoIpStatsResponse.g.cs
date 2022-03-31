@@ -26,10 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	{
 		[JsonInclude]
 		[JsonPropertyName("nodes")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Ingest.GeoIpStats.GeoIpNodeDatabases> Nodes { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases> Nodes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("stats")]
-		public Elastic.Clients.Elasticsearch.Ingest.GeoIpStats.GeoIpDownloadStatistics Stats { get; init; }
+		public Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics Stats { get; init; }
 	}
 }

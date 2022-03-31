@@ -38,35 +38,35 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("can_allocate")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanAllocate { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.Decision? CanAllocate { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("can_move_to_other_node")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanMoveToOtherNode { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.Decision? CanMoveToOtherNode { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("can_rebalance_cluster")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanRebalanceCluster { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.Decision? CanRebalanceCluster { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("can_rebalance_cluster_decisions")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationDecision>? CanRebalanceClusterDecisions { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? CanRebalanceClusterDecisions { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("can_rebalance_to_other_node")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanRebalanceToOtherNode { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.Decision? CanRebalanceToOtherNode { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("can_remain_decisions")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationDecision>? CanRemainDecisions { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? CanRemainDecisions { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("can_remain_on_current_node")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanRemainOnCurrentNode { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.Decision? CanRemainOnCurrentNode { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("cluster_info")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.ClusterInfo? ClusterInfo { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.ClusterInfo? ClusterInfo { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("configured_delay")]
@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("current_node")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.CurrentNode? CurrentNode { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.CurrentNode? CurrentNode { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("current_state")]
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("node_allocation_decisions")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.NodeAllocationExplanation>? NodeAllocationDecisions { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation>? NodeAllocationDecisions { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("note")]
@@ -122,6 +122,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("unassigned_info")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.UnassignedInformation? UnassignedInfo { get; init; }
+		public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation? UnassignedInfo { get; init; }
 	}
 }

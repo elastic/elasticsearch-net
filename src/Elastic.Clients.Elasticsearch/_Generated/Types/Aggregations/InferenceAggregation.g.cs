@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(InferenceAggregationConverter))]
-	public partial class InferenceAggregation : Aggregations.PipelineAggregationBase
+	public partial class InferenceAggregation : PipelineAggregationBase
 	{
 		public InferenceAggregation(string name) : base(name)
 		{
@@ -206,7 +206,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceAggregationDescriptor<TDocument> InferenceConfig(Aggregations.InferenceConfigContainerDescriptor<TDocument> descriptor)
+		public InferenceAggregationDescriptor<TDocument> InferenceConfig(InferenceConfigContainerDescriptor<TDocument> descriptor)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -214,7 +214,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceAggregationDescriptor<TDocument> InferenceConfig(Action<Aggregations.InferenceConfigContainerDescriptor<TDocument>> configure)
+		public InferenceAggregationDescriptor<TDocument> InferenceConfig(Action<InferenceConfigContainerDescriptor<TDocument>> configure)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -265,7 +265,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (InferenceConfigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new Aggregations.InferenceConfigContainerDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new InferenceConfigContainerDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
 			}
 			else if (InferenceConfigValue is not null)
 			{
@@ -335,7 +335,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceAggregationDescriptor InferenceConfig(Aggregations.InferenceConfigContainerDescriptor descriptor)
+		public InferenceAggregationDescriptor InferenceConfig(InferenceConfigContainerDescriptor descriptor)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -343,7 +343,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceAggregationDescriptor InferenceConfig(Action<Aggregations.InferenceConfigContainerDescriptor> configure)
+		public InferenceAggregationDescriptor InferenceConfig(Action<InferenceConfigContainerDescriptor> configure)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -394,7 +394,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (InferenceConfigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new Aggregations.InferenceConfigContainerDescriptor(InferenceConfigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new InferenceConfigContainerDescriptor(InferenceConfigDescriptorAction), options);
 			}
 			else if (InferenceConfigValue is not null)
 			{

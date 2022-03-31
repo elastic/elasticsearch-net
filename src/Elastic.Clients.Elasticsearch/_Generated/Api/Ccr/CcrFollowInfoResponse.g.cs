@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 	{
 		[JsonInclude]
 		[JsonPropertyName("follower_indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.FollowInfo.FollowerIndex> FollowerIndices { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.FollowerIndex> FollowerIndices { get; init; }
 	}
 }

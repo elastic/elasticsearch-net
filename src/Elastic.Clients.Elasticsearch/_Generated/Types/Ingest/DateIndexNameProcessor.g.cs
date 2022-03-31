@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class DateIndexNameProcessor : Ingest.ProcessorBase, IProcessorContainerVariant
+	public partial class DateIndexNameProcessor : ProcessorBase, IProcessorContainerVariant
 	{
 		[JsonIgnore]
-		string Ingest.IProcessorContainerVariant.ProcessorContainerVariantName => "date_index_name";
+		string IProcessorContainerVariant.ProcessorContainerVariantName => "date_index_name";
 		[JsonInclude]
 		[JsonPropertyName("date_formats")]
 		public IEnumerable<string> DateFormats { get; set; }

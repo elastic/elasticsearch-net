@@ -22,12 +22,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoXpackLicense
 	{
 		[JsonInclude]
 		[JsonPropertyName("self_generated")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackLicenseType SelfGenerated { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackLicenseType SelfGenerated { get; init; }
 	}
 }

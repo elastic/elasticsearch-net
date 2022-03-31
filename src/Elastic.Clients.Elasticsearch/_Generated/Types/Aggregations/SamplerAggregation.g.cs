@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(SamplerAggregationConverter))]
-	public partial class SamplerAggregation : Aggregations.BucketAggregationBase
+	public partial class SamplerAggregation : BucketAggregationBase
 	{
 		public SamplerAggregation(string name) : base(name)
 		{
