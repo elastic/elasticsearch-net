@@ -22,9 +22,9 @@ using System.Threading.Tasks;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public class IndexManagementNamespace : NamespacedClientProxy
+	public class IndicesNamespace : NamespacedClientProxy
 	{
-		internal IndexManagementNamespace(ElasticsearchClient client) : base(client)
+		internal IndicesNamespace(ElasticsearchClient client) : base(client)
 		{
 		}
 
