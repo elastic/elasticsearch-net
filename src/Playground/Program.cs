@@ -9,17 +9,39 @@ using Elastic.Clients.Elasticsearch.Mapping;
 
 var client = new ElasticsearchClient();
 
-var putMappingRequest = new PutMappingRequest("test-index")
+var putTemplateRequest = new PutIndexTemplateRequest("my-template")
 {
-	Properties = new Properties
+	Template = new IndexTemplateMapping
 	{
-		{ "field1", new TextProperty { Boost = 2.0, Store = false } }
+		Mappings = new TypeMapping
+		{
+			Properties = new Properties
+			{
+				{ "field1", new TextProperty { Boost = 2.0, Store = false } }
+			}
+		},
+		Settings = new IndexSettings
+		{
+			Index = new IndexSettings
+			{
+				NumberOfReplicas = 1,
+				Priority = 2,
+			}
+		}
 	}
 };
 
+//var putMappingRequest = new PutMappingRequest("test-index")
+//{
+//	Properties = new Properties
+//	{
+//		{ "field1", new TextProperty { Boost = 2.0, Store = false } }
+//	}
+//};
+
 var stream = new MemoryStream();
 
-client.RequestResponseSerializer.Serialize(putMappingRequest, stream);
+client.RequestResponseSerializer.Serialize(putTemplateRequest, stream);
 
 stream.Position = 0;
 
@@ -31,16 +53,16 @@ Console.WriteLine(json);
 
 Console.ReadKey();
 
-const string propertiesJson = @"{""field1"":{""boost"":2,""type"":""text"",""store"":false},""field2"":{""type"":""ip""},""name"":{""properties"":{""first"":{""type"":""text"",""fields"":{""keyword"":{""type"":""keyword"",""ignore_above"":256}}},""last"":{""type"":""text"",""fields"":{""keyword"":{""type"":""keyword"",""ignore_above"":256}}}}}}";
+//const string propertiesJson = @"{""field1"":{""boost"":2,""type"":""text"",""store"":false},""field2"":{""type"":""ip""},""name"":{""properties"":{""first"":{""type"":""text"",""fields"":{""keyword"":{""type"":""keyword"",""ignore_above"":256}}},""last"":{""type"":""text"",""fields"":{""keyword"":{""type"":""keyword"",""ignore_above"":256}}}}}}";
 
-stream = new MemoryStream(Encoding.UTF8.GetBytes(propertiesJson));
+//stream = new MemoryStream(Encoding.UTF8.GetBytes(propertiesJson));
 
-var properties = client.RequestResponseSerializer.Deserialize<Properties>(stream);
+//var properties = client.RequestResponseSerializer.Deserialize<Properties>(stream);
 
-if (properties.TryGetProperty<TextProperty>("field1", out var textProperty))
-{
-	Console.WriteLine($"Found field1 with boost: {textProperty.Boost}");
-}
+//if (properties.TryGetProperty<TextProperty>("field1", out var textProperty))
+//{
+//	Console.WriteLine($"Found field1 with boost: {textProperty.Boost}");
+//}
 
 Console.WriteLine("DONE");
 
