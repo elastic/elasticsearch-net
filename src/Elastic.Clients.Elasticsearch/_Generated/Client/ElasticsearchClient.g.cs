@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public IlmNamespace Ilm { get; private set; }
 
-		public IndexManagementNamespace IndexManagement { get; private set; }
+		public IndicesNamespace Indices { get; private set; }
 
 		public IngestNamespace Ingest { get; private set; }
 
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch
 			Eql = new EqlNamespace(this);
 			Graph = new GraphNamespace(this);
 			Ilm = new IlmNamespace(this);
-			IndexManagement = new IndexManagementNamespace(this);
+			Indices = new IndicesNamespace(this);
 			Ingest = new IngestNamespace(this);
 			Nodes = new NodesNamespace(this);
 			SearchableSnapshots = new SearchableSnapshotsNamespace(this);
