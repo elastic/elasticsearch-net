@@ -196,6 +196,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<DeleteDataStreamRequestDescriptor, DeleteDataStreamResponse>(descriptor);
 		}
 
+		public DeleteIndexTemplateResponse DeleteIndexTemplate(DeleteIndexTemplateRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<DeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(request);
+		}
+
+		public Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(DeleteIndexTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<DeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(request, cancellationToken);
+		}
+
+		public DeleteIndexTemplateResponse DeleteIndexTemplate(Elastic.Clients.Elasticsearch.Names name, Action<DeleteIndexTemplateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new DeleteIndexTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateResponse>(descriptor);
+		}
+
+		public Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<DeleteIndexTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new DeleteIndexTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateResponse>(descriptor);
+		}
+
 		public DeleteResponse Delete(DeleteRequest request)
 		{
 			request.BeforeRequest();
@@ -252,6 +280,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<ExistsAliasRequestDescriptor, ExistsAliasResponse>(descriptor);
 		}
 
+		public ExistsIndexTemplateResponse ExistsIndexTemplate(ExistsIndexTemplateRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<ExistsIndexTemplateRequest, ExistsIndexTemplateResponse>(request);
+		}
+
+		public Task<ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(ExistsIndexTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<ExistsIndexTemplateRequest, ExistsIndexTemplateResponse>(request, cancellationToken);
+		}
+
+		public ExistsIndexTemplateResponse ExistsIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<ExistsIndexTemplateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ExistsIndexTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateResponse>(descriptor);
+		}
+
+		public Task<ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<ExistsIndexTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ExistsIndexTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateResponse>(descriptor);
+		}
+
 		public ExistsResponse Exists(ExistsRequest request)
 		{
 			request.BeforeRequest();
@@ -278,6 +334,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse>(descriptor);
+		}
+
+		public IndexTemplateResponse GetIndexTemplate(IndexTemplateRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<IndexTemplateRequest, IndexTemplateResponse>(request);
+		}
+
+		public Task<IndexTemplateResponse> GetIndexTemplateAsync(IndexTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<IndexTemplateRequest, IndexTemplateResponse>(request, cancellationToken);
+		}
+
+		public IndexTemplateResponse GetIndexTemplate(Action<IndexTemplateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexTemplateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<IndexTemplateRequestDescriptor, IndexTemplateResponse>(descriptor);
+		}
+
+		public Task<IndexTemplateResponse> GetIndexTemplateAsync(Action<IndexTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexTemplateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IndexTemplateRequestDescriptor, IndexTemplateResponse>(descriptor);
 		}
 
 		public MappingResponse GetMapping(MappingRequest request)
@@ -418,6 +502,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<PutAliasRequestDescriptor, PutAliasResponse>(descriptor);
+		}
+
+		public PutIndexTemplateResponse PutIndexTemplate(PutIndexTemplateRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<PutIndexTemplateRequest, PutIndexTemplateResponse>(request);
+		}
+
+		public Task<PutIndexTemplateResponse> PutIndexTemplateAsync(PutIndexTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<PutIndexTemplateRequest, PutIndexTemplateResponse>(request, cancellationToken);
+		}
+
+		public PutIndexTemplateResponse PutIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new PutIndexTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse>(descriptor);
+		}
+
+		public Task<PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new PutIndexTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse>(descriptor);
 		}
 
 		public PutMappingResponse PutMapping(PutMappingRequest request)
