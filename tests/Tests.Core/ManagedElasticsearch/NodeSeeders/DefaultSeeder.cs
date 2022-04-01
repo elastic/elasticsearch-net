@@ -154,9 +154,9 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		{
 			var tasks = new List<Task>
 			{
-				Client.IndexManagement.DeleteAsync(typeof(Project)),
-				Client.IndexManagement.DeleteAsync(typeof(Developer)),
-				Client.IndexManagement.DeleteAsync(typeof(ProjectPercolation))
+				Client.Indices.DeleteAsync(typeof(Project)),
+				Client.Indices.DeleteAsync(typeof(Developer)),
+				Client.Indices.DeleteAsync(typeof(ProjectPercolation))
 			};
 
 			if (alreadySeeded)
@@ -422,7 +422,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 			await Task.WhenAll(tasks).ConfigureAwait(false);
 
-			await Client.IndexManagement.RefreshAsync(new RefreshRequest(Indices.Index(typeof(Project)))).ConfigureAwait(false);
+			await Client.Indices.RefreshAsync(new RefreshRequest(Indices.Index(typeof(Project)))).ConfigureAwait(false);
 		}
 
 		//		private Task<PutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.Indices.PutTemplateAsync(

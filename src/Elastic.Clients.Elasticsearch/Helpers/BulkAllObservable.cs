@@ -103,7 +103,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		if (rc is not null)
 			request.RequestConfiguration = new RequestConfiguration { RequestMetaData = rc };
 
-		var refresh = _client.IndexManagement.Refresh(request);
+		var refresh = _client.Indices.Refresh(request);
 
 		if (!refresh.IsValid)
 			throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
