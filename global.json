@@ -4,7 +4,7 @@
     "rollForward": "latestPatch",
     "allowPrerelease": false
   },
-  "version": "8.0.0-alpha.4",
+  "version": "8.0.0-alpha.5",
   "doc_current": "main",
   "doc_branch": "main"
 }
