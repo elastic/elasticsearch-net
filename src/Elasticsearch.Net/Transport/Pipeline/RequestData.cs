@@ -23,9 +23,11 @@ namespace Elasticsearch.Net
 		private static readonly string MimeType = "application/vnd.elasticsearch+json; compatible-with="
 			+ ClientVersionInfo.LowLevelClientVersionInfo.Version.Major;
 
+		private static readonly string TrimmedMimeType = "application/vnd.elasticsearch+json;compatible-with="
+			+ ClientVersionInfo.LowLevelClientVersionInfo.Version.Major;
+
 		public static readonly string DefaultJsonMimeType =
 			ClientVersionInfo.LowLevelClientVersionInfo.Version.Major >= 8 ? MimeType : MimeTypeOld;
-
 
 		private readonly string _path;
 		private Node _node;
@@ -209,13 +211,16 @@ namespace Elasticsearch.Net
 
 			//vendored check
 			if (acceptMimeType == MimeType)
+			{
 				// we check both vendored and nonvendored since on 7.x the response does not return a
-				// vendored Content-Type header on the response
+				// vendored Content-Type header on the response.
 				return
-					responseMimeType == MimeType
-					|| responseMimeType == MimeTypeOld
+					responseMimeType.Equals(MimeType, StringComparison.Ordinal)
+					|| responseMimeType.Equals(TrimmedMimeType, StringComparison.Ordinal) // Required for .NET FX as the whitespace in the response Content-Type header is stripped
+					|| responseMimeType.Equals(MimeTypeOld, StringComparison.Ordinal)
 					|| responseMimeType.StartsWith(MimeTypeOld, StringComparison.OrdinalIgnoreCase)
 					|| responseMimeType.StartsWith(MimeType, StringComparison.OrdinalIgnoreCase);
+			}
 
 			return responseMimeType.StartsWith(acceptMimeType, StringComparison.OrdinalIgnoreCase);
 		}
