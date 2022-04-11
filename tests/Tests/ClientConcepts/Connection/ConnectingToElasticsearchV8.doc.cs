@@ -14,7 +14,7 @@ namespace Tests.ClientConcepts.Connection
 		/**[[connecting-to-elasticsearch-v8]]
 		 * === Connecting to Elasticsearch v8.x using the v7.17.x client
 		 *
-		 * We recommend using the latest client with a corresponding major version when connecting to Elasticsearch. Until the v7 .NET client is 
+		 * We recommend using the latest client with a corresponding major version when connecting to Elasticsearch. Until the v8 .NET client is 
 		 * generally available, you may use the v7.17.x client to communicate with a 8.x Elasticsearch cluster. There are several important considerations 
 		 * regarding configuration. Failure to correctly configure the client to connect using the security features enabled on the server will result in 
 		 * an exception being thrown during the initial client communication that will prevent further use of the client.
@@ -68,10 +68,11 @@ namespace Tests.ClientConcepts.Connection
 		}
 		
 		/**
+		 * [[enabling-compatibility-mode]]
 		 * ==== Enabling Compatibility Mode
 		 *
 		 * The Elasticsearch server version 8.0 is introducing a new compatibility mode that allows you a smoother upgrade 
-		 * experience from 7 to 8. In a nutshell, you can use the latest 7.x Elasticsearch client with an 8.x Elasticsearch 
+		 * experience from v7 to v8. In a nutshell, you can use the latest 7.x Elasticsearch client with an 8.x Elasticsearch 
 		 * server, giving more room to coordinate the upgrade of your codebase to the next major version. 
 
 		 * If you want to leverage this functionality, please make sure that you are using the latest 7.x client and set 
@@ -79,7 +80,6 @@ namespace Tests.ClientConcepts.Connection
 		 *
 		 * Compatibility mode may also be enabled directly on `ConnectionSettings` by calling `EnableApiVersioningHeader`.
 		 */
-
 		[U] public void CompatibilityMode()
 		{
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
