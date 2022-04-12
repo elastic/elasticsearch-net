@@ -51,7 +51,7 @@ NOTE: By default, NuGet does not include pre-release versions when working with 
 but you can change this behavior by checking the "Include prerelease" option in the 
 Package Manager UI.
 
-// To learn how to connect the {es} client, refer to the Connecting section.
+To learn how to connect the {es} client, refer to the <<connecting,Connecting>> section.
 
 [discrete]
 [[compatibility]]
