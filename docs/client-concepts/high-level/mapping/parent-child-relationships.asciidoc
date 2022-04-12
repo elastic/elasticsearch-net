@@ -19,7 +19,7 @@ Prior to Elasticsearch 6.x you could have multiple types in a single index. Thro
 one could create 1 to N relationships of parent => children documents. This worked because when indexing children, you passed a
 `_parent` id which acted as the routing key, ensuring a parent, its children and any ancestors all lived on the same shard.
 
-Starting with 6.x indices, multiple types are no longer suppported in a single index. One reason for this is that if for instance
+Starting with 6.x indices, multiple types are no longer supported in a single index. One reason for this is that if for instance
 two types have the same `name` property, this property needed to be mapped exactly the same for both types, but all the APIs act as if you can map
 them individually, often causing confusion. Essentially, `_type` always acted as a discriminating field within an index but was often explained
 as being more special than this.
