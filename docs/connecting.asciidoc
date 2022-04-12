@@ -23,24 +23,24 @@ singleton lifetime.
 
 https://www.elastic.co/guide/en/cloud/current/ec-getting-started.html[Elastic Cloud] 
 is the easiest way to get started with {es}. When connecting to Elastic Cloud 
-with the .NET {es} client you should always use the `cloud_id` 
-parameter to connect. You can find this value within the "Manage Deployment" 
-page after you've created a cluster (look in the top-left if you're in Kibana).
+with the .NET {es} client you should always use the Cloud ID. You can find this 
+value within the "Manage Deployment" page after you've created a cluster 
+(look in the top-left if you're in Kibana).
 
 We recommend using a Cloud ID whenever possible because your client will be 
-automatically configured for optimal use with Elastic Cloud including HTTPS and 
+automatically configured for optimal use with Elastic Cloud, including HTTPS and 
 HTTP compression.
 
 Connecting to an Elasticsearch Service deployment is achieved by providing the 
 unique Cloud ID for your deployment when configuring the `ElasticsearchClient` 
-instance. You also require suitable credentials that your application uses to 
-authenticate with your deployment.
+instance. You also require suitable credentials, either a username and password or
+an API key that your application uses to authenticate with your deployment.
 
 As a security best practice, it is recommended to create a dedicated API key per 
 application, with permissions limited to only those required for any API calls 
 the application is authorized to make.
 
-The following snippet shows you how to create a client instance that connects to 
+The following snippet demonstrates how to create a client instance that connects to 
 an {es} deployment in the cloud.
 
 [source,csharp]
