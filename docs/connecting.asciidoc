@@ -4,7 +4,7 @@
 This page contains the information you need to create an instance of the .NET 
 Client for {es} that connects to your {es} cluster.
 
-It’s possible to connect to your {es} cluster via a single node, or by 
+It's possible to connect to your {es} cluster via a single node, or by 
 specifying multiple nodes using a node pool. Using a node pool has a few 
 advantages over a single node, such as load balancing and cluster failover 
 support. The client provides convenient configuration options to connect to an 
