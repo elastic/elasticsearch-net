@@ -22,7 +22,30 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql
 {
-	public partial class GetEqlResponse<TEvent> : Eql.EqlSearchResponseBase<TEvent>
+	public partial class GetEqlResponse<TEvent> : ElasticsearchResponseBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("hits")]
+		public Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> Hits { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("id")]
+		public string? Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("is_partial")]
+		public bool? IsPartial { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("is_running")]
+		public bool? IsRunning { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("timed_out")]
+		public bool? TimedOut { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("took")]
+		public int? Took { get; init; }
 	}
 }
