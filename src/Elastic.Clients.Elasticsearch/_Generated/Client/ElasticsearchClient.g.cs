@@ -27,6 +27,7 @@ using Elastic.Clients.Elasticsearch.Ingest;
 using Elastic.Clients.Elasticsearch.Nodes;
 using Elastic.Clients.Elasticsearch.SearchableSnapshots;
 using Elastic.Clients.Elasticsearch.Slm;
+using Elastic.Clients.Elasticsearch.Snapshot;
 using Elastic.Clients.Elasticsearch.Sql;
 using Elastic.Clients.Elasticsearch.Tasks;
 using System;
@@ -62,6 +63,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public SlmNamespace Slm { get; private set; }
 
+		public SnapshotNamespace Snapshot { get; private set; }
+
 		public SqlNamespace Sql { get; private set; }
 
 		public TasksNamespace Tasks { get; private set; }
@@ -80,6 +83,7 @@ namespace Elastic.Clients.Elasticsearch
 			Nodes = new NodesNamespace(this);
 			SearchableSnapshots = new SearchableSnapshotsNamespace(this);
 			Slm = new SlmNamespace(this);
+			Snapshot = new SnapshotNamespace(this);
 			Sql = new SqlNamespace(this);
 			Tasks = new TasksNamespace(this);
 		}
