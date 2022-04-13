@@ -39,8 +39,12 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls CrossClusterReplicationUnfollow = new ApiUrls(new[] { "/{index}/_ccr/unfollow" });
 		internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[] { "/_pit" });
 		internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[] { "/_cluster/allocation/explain" });
+		internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[] { "/_component_template/{name}" });
+		internal static ApiUrls ClusterExistsComponentTemplate = new ApiUrls(new[] { "/_component_template/{name}" });
+		internal static ApiUrls ClusterGetComponentTemplate = new ApiUrls(new[] { "/_component_template", "/_component_template/{name}" });
 		internal static ApiUrls ClusterHealth = new ApiUrls(new[] { "/_cluster/health", "/_cluster/health/{index}" });
 		internal static ApiUrls ClusterPendingTasks = new ApiUrls(new[] { "/_cluster/pending_tasks" });
+		internal static ApiUrls ClusterPutComponentTemplate = new ApiUrls(new[] { "/_component_template/{name}" });
 		internal static ApiUrls ClusterState = new ApiUrls(new[] { "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}" });
 		internal static ApiUrls NoNamespaceCount = new ApiUrls(new[] { "/_count", "/{index}/_count" });
 		internal static ApiUrls NoNamespaceCreate = new ApiUrls(new[] { "/{index}/_create/{id}" });
