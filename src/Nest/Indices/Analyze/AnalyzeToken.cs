@@ -11,7 +11,7 @@ namespace Nest
 		[JsonProperty("position")]
 		public long Position { get; internal set; }
 
-		[JsonProperty("position_length")]
+		[JsonProperty("positionLength")]
 		public long? PositionLength { get; internal set; }
 
 		[JsonProperty("start_offset")]
