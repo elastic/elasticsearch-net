@@ -22,7 +22,7 @@ public partial class AsyncSearch<TDocument>
 	public long Total => HitsMetadata?.Total?.Value ?? -1;
 }
 
-public abstract partial class AsyncSearchResponseBase
+public partial class GetAsyncSearchResponse<TDocument>
 {
 	[JsonIgnore]
 	public DateTimeOffset StartTime => StartTimeInMillis.DateTimeOffset;
