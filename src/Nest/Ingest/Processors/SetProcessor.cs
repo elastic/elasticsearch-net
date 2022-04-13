@@ -46,6 +46,12 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "ignore_empty_value")]
 		bool? IgnoreEmptyValue { get; set; }
+
+		/// <summary>
+		/// The origin field which will be copied to field, cannot set value simultaneously.
+		/// </summary>
+		[DataMember(Name = "copy_from")]
+		Field CopyFrom { get; set; }
 	}
 
 	/// <inheritdoc cref="ISetProcessor" />
@@ -59,6 +65,9 @@ namespace Nest
 		public bool? Override { get; set; }
 		/// <inheritdoc />
 		public bool? IgnoreEmptyValue { get; set; }
+		/// <inheritdoc />
+		public Field CopyFrom { get; set; }
+
 		protected override string Name => "set";
 	}
 
@@ -71,6 +80,7 @@ namespace Nest
 		object ISetProcessor.Value { get; set; }
 		bool? ISetProcessor.Override { get; set; }
 		bool? ISetProcessor.IgnoreEmptyValue { get; set; }
+		Field ISetProcessor.CopyFrom { get; set; }
 
 		/// <inheritdoc cref="ISetProcessor.Field"/>
 		public SetProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
@@ -88,5 +98,12 @@ namespace Nest
 		/// <inheritdoc cref="ISetProcessor.IgnoreEmptyValue"/>
 		public SetProcessorDescriptor<T> IgnoreEmptyValue(bool? ignoreEmptyValue = true) =>
 			Assign(ignoreEmptyValue, (a, v) => a.IgnoreEmptyValue = v);
+
+		/// <inheritdoc cref="ISetProcessor.CopyFrom"/>
+		public SetProcessorDescriptor<T> CopyFrom(Field field) => Assign(field, (a, v) => a.CopyFrom = v);
+
+		/// <inheritdoc cref="ISetProcessor.CopyFrom"/>
+		public SetProcessorDescriptor<T> CopyFrom<TValue>(Expression<Func<T, TValue>> objectPath) =>
+			Assign(objectPath, (a, v) => a.CopyFrom = v);
 	}
 }
