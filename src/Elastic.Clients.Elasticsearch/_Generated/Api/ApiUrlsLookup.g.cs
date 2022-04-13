@@ -75,6 +75,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IndexManagementGetAlias = new ApiUrls(new[] { "/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias" });
 		internal static ApiUrls IndexManagementClose = new ApiUrls(new[] { "/{index}/_close" });
 		internal static ApiUrls IndexManagementCreateDataStream = new ApiUrls(new[] { "/_data_stream/{name}" });
+		internal static ApiUrls IndexManagementCreate = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementGetDataStream = new ApiUrls(new[] { "/_data_stream", "/_data_stream/{name}" });
 		internal static ApiUrls IndexManagementDeleteAlias = new ApiUrls(new[] { "/{index}/_alias/{name}" });
 		internal static ApiUrls IndexManagementDeleteDataStream = new ApiUrls(new[] { "/_data_stream/{name}" });
@@ -83,6 +84,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IndexManagementExistsAlias = new ApiUrls(new[] { "/_alias/{name}", "/{index}/_alias/{name}" });
 		internal static ApiUrls IndexManagementExistsIndexTemplate = new ApiUrls(new[] { "/_index_template/{name}" });
 		internal static ApiUrls IndexManagementExists = new ApiUrls(new[] { "/{index}" });
+		internal static ApiUrls IndexManagementGet = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementGetIndexTemplate = new ApiUrls(new[] { "/_index_template", "/_index_template/{name}" });
 		internal static ApiUrls IndexManagementGetMapping = new ApiUrls(new[] { "/_mapping", "/{index}/_mapping" });
 		internal static ApiUrls IndexManagementMigrateToDataStream = new ApiUrls(new[] { "/_data_stream/_migrate/{name}" });
