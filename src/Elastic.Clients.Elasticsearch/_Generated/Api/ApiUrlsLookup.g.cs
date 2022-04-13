@@ -162,5 +162,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[] { "/{index}/_update_by_query" });
 		internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[] { "/_update_by_query/{task_id}/_rethrottle" });
 		internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "/{index}/_update/{id}" });
+		internal static ApiUrls XpackInfo = new ApiUrls(new[] { "/_xpack" });
+		internal static ApiUrls XpackUsage = new ApiUrls(new[] { "/_xpack/usage" });
 	}
 }
