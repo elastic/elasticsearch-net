@@ -112,6 +112,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<CreateDataStreamRequestDescriptor, CreateDataStreamResponse>(descriptor);
 		}
 
+		public CreateResponse Create(CreateRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<CreateRequest, CreateResponse>(request);
+		}
+
+		public Task<CreateResponse> CreateAsync(CreateRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<CreateRequest, CreateResponse>(request, cancellationToken);
+		}
+
+		public CreateResponse Create(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new CreateRequestDescriptor(index);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<CreateRequestDescriptor, CreateResponse>(descriptor);
+		}
+
+		public Task<CreateResponse> CreateAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CreateRequestDescriptor(index);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CreateRequestDescriptor, CreateResponse>(descriptor);
+		}
+
 		public DataStreamResponse GetDataStream(DataStreamRequest request)
 		{
 			request.BeforeRequest();
@@ -334,6 +362,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse>(descriptor);
+		}
+
+		public GetResponse Get(GetRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<GetRequest, GetResponse>(request);
+		}
+
+		public Task<GetResponse> GetAsync(GetRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<GetRequest, GetResponse>(request, cancellationToken);
+		}
+
+		public GetResponse Get(Elastic.Clients.Elasticsearch.Indices indices, Action<GetRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new GetRequestDescriptor(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<GetRequestDescriptor, GetResponse>(descriptor);
+		}
+
+		public Task<GetResponse> GetAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<GetRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new GetRequestDescriptor(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<GetRequestDescriptor, GetResponse>(descriptor);
 		}
 
 		public IndexTemplateResponse GetIndexTemplate(IndexTemplateRequest request)
