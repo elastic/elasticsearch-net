@@ -138,6 +138,17 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls SnapshotLifecycleManagementPutLifecycle = new ApiUrls(new[] { "/_slm/policy/{policy_id}" });
 		internal static ApiUrls SnapshotLifecycleManagementStart = new ApiUrls(new[] { "/_slm/start" });
 		internal static ApiUrls SnapshotLifecycleManagementStop = new ApiUrls(new[] { "/_slm/stop" });
+		internal static ApiUrls SnapshotCreate = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}" });
+		internal static ApiUrls SnapshotDelete = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}" });
+		internal static ApiUrls SnapshotGet = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}" });
+		internal static ApiUrls SnapshotCleanupRepository = new ApiUrls(new[] { "/_snapshot/{repository}/_cleanup" });
+		internal static ApiUrls SnapshotClone = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}/_clone/{target_snapshot}" });
+		internal static ApiUrls SnapshotCreateRepository = new ApiUrls(new[] { "/_snapshot/{repository}" });
+		internal static ApiUrls SnapshotDeleteRepository = new ApiUrls(new[] { "/_snapshot/{repository}" });
+		internal static ApiUrls SnapshotGetRepository = new ApiUrls(new[] { "/_snapshot", "/_snapshot/{repository}" });
+		internal static ApiUrls SnapshotRestore = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}/_restore" });
+		internal static ApiUrls SnapshotStatus = new ApiUrls(new[] { "/_snapshot/_status", "/_snapshot/{repository}/_status", "/_snapshot/{repository}/{snapshot}/_status" });
+		internal static ApiUrls SnapshotVerifyRepository = new ApiUrls(new[] { "/_snapshot/{repository}/_verify" });
 		internal static ApiUrls NoNamespaceGetSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
 		internal static ApiUrls SqlClearCursor = new ApiUrls(new[] { "/_sql/close" });
 		internal static ApiUrls SqlDeleteAsync = new ApiUrls(new[] { "/_sql/async/delete/{id}" });
