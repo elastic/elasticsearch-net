@@ -37,6 +37,9 @@ namespace Nest
 		/// <inheritdoc cref="IRolloverLifecycleAction"/>
 		public void Add(IRolloverLifecycleAction action) => BackingDictionary.Add("rollover", action);
 
+		/// <inheritdoc cref="ISearchableSnapshotAction"/>
+		public void Add(ISearchableSnapshotAction action) => BackingDictionary.Add("searchable_snapshot", action);
+
 		/// <inheritdoc cref="ISetPriorityLifecycleAction"/>
 		public void Add(ISetPriorityLifecycleAction action) => BackingDictionary.Add("set_priority", action);
 
@@ -64,6 +67,7 @@ namespace Nest
 			{ "shrink", 7 },
 			{ "unfollow", 8 },
 			{ "wait_for_snapshot", 9 },
+			{ "searchable_snapshot", 10 },
 		};
 
 		public ILifecycleActions Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -125,6 +129,10 @@ namespace Nest
 							lifecycleAction = formatterResolver.GetFormatter<WaitForSnapshotLifecycleAction>()
 								.Deserialize(ref reader, formatterResolver);
 							break;
+						case 10:
+							lifecycleAction = formatterResolver.GetFormatter<SearchableSnapshotAction>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
 					}
 
 					lifecycles.Add(type.Utf8String(), lifecycleAction);
@@ -172,6 +180,9 @@ namespace Nest
 						break;
 					case "rollover":
 						Serialize<IRolloverLifecycleAction>(ref writer, action.Value, formatterResolver);
+						break;
+					case "searchable_snapshot":
+						Serialize<ISearchableSnapshotAction>(ref writer, action.Value, formatterResolver);
 						break;
 					case "set_priority":
 						Serialize<ISetPriorityLifecycleAction>(ref writer, action.Value, formatterResolver);
@@ -228,6 +239,10 @@ namespace Nest
 		/// <inheritdoc cref="IRolloverLifecycleAction"/>
 		public LifecycleActionsDescriptor Rollover(Func<RolloverLifecycleActionDescriptor, IRolloverLifecycleAction> selector) =>
 			Assign("rollover", selector.InvokeOrDefault(new RolloverLifecycleActionDescriptor()));
+
+		/// <inheritdoc cref="ISearchableSnapshotAction"/>
+		public LifecycleActionsDescriptor SearchableSnapshot(Func<SearchableSnapshotAction, ISearchableSnapshotAction> selector) =>
+			Assign("searchable_snapshot", selector.InvokeOrDefault(new SearchableSnapshotAction()));
 
 		/// <inheritdoc cref="ISetPriorityLifecycleAction"/>
 		public LifecycleActionsDescriptor SetPriority(Func<SetPriorityLifecycleActionDescriptor, ISetPriorityLifecycleAction> selector) =>
