@@ -408,4 +408,109 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			writer.WriteNullValue();
 		}
 	}
+
+	[JsonConverter(typeof(ShardStoreAllocationConverter))]
+	public enum ShardStoreAllocation
+	{
+		[EnumMember(Value = "unused")]
+		Unused,
+		[EnumMember(Value = "replica")]
+		Replica,
+		[EnumMember(Value = "primary")]
+		Primary
+	}
+
+	internal sealed class ShardStoreAllocationConverter : JsonConverter<ShardStoreAllocation>
+	{
+		public override ShardStoreAllocation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "unused":
+					return ShardStoreAllocation.Unused;
+				case "replica":
+					return ShardStoreAllocation.Replica;
+				case "primary":
+					return ShardStoreAllocation.Primary;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, ShardStoreAllocation value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case ShardStoreAllocation.Unused:
+					writer.WriteStringValue("unused");
+					return;
+				case ShardStoreAllocation.Replica:
+					writer.WriteStringValue("replica");
+					return;
+				case ShardStoreAllocation.Primary:
+					writer.WriteStringValue("primary");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(ShardStoreStatusConverter))]
+	public enum ShardStoreStatus
+	{
+		[EnumMember(Value = "yellow")]
+		Yellow,
+		[EnumMember(Value = "red")]
+		Red,
+		[EnumMember(Value = "green")]
+		Green,
+		[EnumMember(Value = "all")]
+		All
+	}
+
+	internal sealed class ShardStoreStatusConverter : JsonConverter<ShardStoreStatus>
+	{
+		public override ShardStoreStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "yellow":
+					return ShardStoreStatus.Yellow;
+				case "red":
+					return ShardStoreStatus.Red;
+				case "green":
+					return ShardStoreStatus.Green;
+				case "all":
+					return ShardStoreStatus.All;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, ShardStoreStatus value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case ShardStoreStatus.Yellow:
+					writer.WriteStringValue("yellow");
+					return;
+				case ShardStoreStatus.Red:
+					writer.WriteStringValue("red");
+					return;
+				case ShardStoreStatus.Green:
+					writer.WriteStringValue("green");
+					return;
+				case ShardStoreStatus.All:
+					writer.WriteStringValue("all");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
 }
