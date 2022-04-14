@@ -19,6 +19,7 @@ using Elastic.Clients.Elasticsearch.AsyncSearch;
 using Elastic.Clients.Elasticsearch.Autoscaling;
 using Elastic.Clients.Elasticsearch.Ccr;
 using Elastic.Clients.Elasticsearch.Cluster;
+using Elastic.Clients.Elasticsearch.DanglingIndices;
 using Elastic.Clients.Elasticsearch.Enrich;
 using Elastic.Clients.Elasticsearch.Eql;
 using Elastic.Clients.Elasticsearch.Graph;
@@ -48,6 +49,8 @@ namespace Elastic.Clients.Elasticsearch
 		public CcrNamespace Ccr { get; private set; }
 
 		public ClusterNamespace Cluster { get; private set; }
+
+		public DanglingIndicesNamespace DanglingIndices { get; private set; }
 
 		public EnrichNamespace Enrich { get; private set; }
 
@@ -81,6 +84,7 @@ namespace Elastic.Clients.Elasticsearch
 			Autoscaling = new AutoscalingNamespace(this);
 			Ccr = new CcrNamespace(this);
 			Cluster = new ClusterNamespace(this);
+			DanglingIndices = new DanglingIndicesNamespace(this);
 			Enrich = new EnrichNamespace(this);
 			Eql = new EqlNamespace(this);
 			Graph = new GraphNamespace(this);
