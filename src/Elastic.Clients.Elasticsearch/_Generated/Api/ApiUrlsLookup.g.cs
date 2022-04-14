@@ -117,7 +117,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IndexManagementGetIndexTemplate = new ApiUrls(new[] { "/_index_template", "/_index_template/{name}" });
 		internal static ApiUrls IndexManagementGetMapping = new ApiUrls(new[] { "/_mapping", "/{index}/_mapping" });
 		internal static ApiUrls IndexManagementMigrateToDataStream = new ApiUrls(new[] { "/_data_stream/_migrate/{name}" });
-		internal static ApiUrls IndexManagementModifyDataStream = new ApiUrls(new[] { "/_data_stream/_modify" });
 		internal static ApiUrls IndexManagementOpen = new ApiUrls(new[] { "/{index}/_open" });
 		internal static ApiUrls IndexManagementPromoteDataStream = new ApiUrls(new[] { "/_data_stream/_promote/{name}" });
 		internal static ApiUrls IndexManagementPutAlias = new ApiUrls(new[] { "/{index}/_alias/{name}" });
@@ -139,7 +138,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IndexManagementSplit = new ApiUrls(new[] { "/{index}/_split/{target}" });
 		internal static ApiUrls IndexManagementStats = new ApiUrls(new[] { "/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}" });
 		internal static ApiUrls IndexManagementGetTemplate = new ApiUrls(new[] { "/_template", "/_template/{name}" });
-		internal static ApiUrls IndexManagementUpdateAliases = new ApiUrls(new[] { "/_aliases" });
 		internal static ApiUrls IndexManagementValidateQuery = new ApiUrls(new[] { "/_validate/query", "/{index}/_validate/query" });
 		internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[] { "/{index}/_doc/{id}", "/{index}/_doc" });
 		internal static ApiUrls NoNamespaceInfo = new ApiUrls(new[] { "/" });
@@ -157,6 +155,9 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls LicensePost = new ApiUrls(new[] { "/_license" });
 		internal static ApiUrls LicensePostStartBasic = new ApiUrls(new[] { "/_license/start_basic" });
 		internal static ApiUrls LicensePostStartTrial = new ApiUrls(new[] { "/_license/start_trial" });
+		internal static ApiUrls LogstashDeletePipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
+		internal static ApiUrls LogstashPutPipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
+		internal static ApiUrls MigrationDeprecations = new ApiUrls(new[] { "/_migration/deprecations", "/{index}/_migration/deprecations" });
 		internal static ApiUrls NodesHotThreads = new ApiUrls(new[] { "/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads" });
 		internal static ApiUrls NodesInfo = new ApiUrls(new[] { "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}" });
 		internal static ApiUrls NodesReloadSecureSettings = new ApiUrls(new[] { "/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings" });
@@ -202,6 +203,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls SqlGetAsync = new ApiUrls(new[] { "/_sql/async/{id}" });
 		internal static ApiUrls SqlGetAsyncStatus = new ApiUrls(new[] { "/_sql/async/status/{id}" });
 		internal static ApiUrls SqlQuery = new ApiUrls(new[] { "/_sql" });
+		internal static ApiUrls SecurityCertificates = new ApiUrls(new[] { "/_ssl/certificates" });
 		internal static ApiUrls TasksGet = new ApiUrls(new[] { "/_tasks/{task_id}" });
 		internal static ApiUrls TasksCancel = new ApiUrls(new[] { "/_tasks/_cancel", "/_tasks/{task_id}/_cancel" });
 		internal static ApiUrls TasksList = new ApiUrls(new[] { "/_tasks" });
