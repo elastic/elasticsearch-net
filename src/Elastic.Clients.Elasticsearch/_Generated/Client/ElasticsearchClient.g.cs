@@ -22,6 +22,7 @@ using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.DanglingIndices;
 using Elastic.Clients.Elasticsearch.Enrich;
 using Elastic.Clients.Elasticsearch.Eql;
+using Elastic.Clients.Elasticsearch.Features;
 using Elastic.Clients.Elasticsearch.Graph;
 using Elastic.Clients.Elasticsearch.Ilm;
 using Elastic.Clients.Elasticsearch.IndexManagement;
@@ -56,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public EqlNamespace Eql { get; private set; }
 
+		public FeaturesNamespace Features { get; private set; }
+
 		public GraphNamespace Graph { get; private set; }
 
 		public IlmNamespace Ilm { get; private set; }
@@ -87,6 +90,7 @@ namespace Elastic.Clients.Elasticsearch
 			DanglingIndices = new DanglingIndicesNamespace(this);
 			Enrich = new EnrichNamespace(this);
 			Eql = new EqlNamespace(this);
+			Features = new FeaturesNamespace(this);
 			Graph = new GraphNamespace(this);
 			Ilm = new IlmNamespace(this);
 			Indices = new IndicesNamespace(this);
