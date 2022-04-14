@@ -23,6 +23,10 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls AsyncSearchSubmit = new ApiUrls(new[] { "/_async_search", "/{index}/_async_search" });
 		internal static ApiUrls AsyncSearchDelete = new ApiUrls(new[] { "/_async_search/{id}" });
 		internal static ApiUrls AsyncSearchGet = new ApiUrls(new[] { "/_async_search/{id}" });
+		internal static ApiUrls AutoscalingDeleteAutoscalingPolicy = new ApiUrls(new[] { "/_autoscaling/policy/{name}" });
+		internal static ApiUrls AutoscalingGetAutoscalingCapacity = new ApiUrls(new[] { "/_autoscaling/capacity" });
+		internal static ApiUrls AutoscalingGetAutoscalingPolicy = new ApiUrls(new[] { "/_autoscaling/policy/{name}" });
+		internal static ApiUrls AutoscalingPutAutoscalingPolicy = new ApiUrls(new[] { "/_autoscaling/policy/{name}" });
 		internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[] { "/_bulk", "/{index}/_bulk" });
 		internal static ApiUrls CrossClusterReplicationDeleteAutoFollowPattern = new ApiUrls(new[] { "/_ccr/auto_follow/{name}" });
 		internal static ApiUrls CrossClusterReplicationFollowInfo = new ApiUrls(new[] { "/{index}/_ccr/info" });
