@@ -74,6 +74,8 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls EqlGet = new ApiUrls(new[] { "/_eql/search/{id}" });
 		internal static ApiUrls NoNamespaceExists = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceExistsSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
+		internal static ApiUrls FeaturesGetFeatures = new ApiUrls(new[] { "/_features" });
+		internal static ApiUrls FeaturesResetFeatures = new ApiUrls(new[] { "/_features/_reset" });
 		internal static ApiUrls NoNamespaceFieldCaps = new ApiUrls(new[] { "/_field_caps", "/{index}/_field_caps" });
 		internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls GraphExplore = new ApiUrls(new[] { "/{index}/_graph/explore" });
