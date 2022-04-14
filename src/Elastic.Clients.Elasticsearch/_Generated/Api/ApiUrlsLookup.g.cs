@@ -150,6 +150,13 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IngestPutPipeline = new ApiUrls(new[] { "/_ingest/pipeline/{id}" });
 		internal static ApiUrls IngestSimulate = new ApiUrls(new[] { "/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate" });
 		internal static ApiUrls NoNamespaceKnnSearch = new ApiUrls(new[] { "/{index}/_knn_search" });
+		internal static ApiUrls LicenseDelete = new ApiUrls(new[] { "/_license" });
+		internal static ApiUrls LicenseGet = new ApiUrls(new[] { "/_license" });
+		internal static ApiUrls LicenseGetBasicStatus = new ApiUrls(new[] { "/_license/basic_status" });
+		internal static ApiUrls LicenseGetTrialStatus = new ApiUrls(new[] { "/_license/trial_status" });
+		internal static ApiUrls LicensePost = new ApiUrls(new[] { "/_license" });
+		internal static ApiUrls LicensePostStartBasic = new ApiUrls(new[] { "/_license/start_basic" });
+		internal static ApiUrls LicensePostStartTrial = new ApiUrls(new[] { "/_license/start_trial" });
 		internal static ApiUrls NodesHotThreads = new ApiUrls(new[] { "/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads" });
 		internal static ApiUrls NodesInfo = new ApiUrls(new[] { "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}" });
 		internal static ApiUrls NodesReloadSecureSettings = new ApiUrls(new[] { "/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings" });
