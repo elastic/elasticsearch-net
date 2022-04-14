@@ -784,34 +784,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamResponse>(descriptor);
 		}
 
-		public ModifyDataStreamResponse ModifyDataStream(ModifyDataStreamRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ModifyDataStreamRequest, ModifyDataStreamResponse>(request);
-		}
-
-		public Task<ModifyDataStreamResponse> ModifyDataStreamAsync(ModifyDataStreamRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ModifyDataStreamRequest, ModifyDataStreamResponse>(request, cancellationToken);
-		}
-
-		public ModifyDataStreamResponse ModifyDataStream(Action<ModifyDataStreamRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new ModifyDataStreamRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ModifyDataStreamRequestDescriptor, ModifyDataStreamResponse>(descriptor);
-		}
-
-		public Task<ModifyDataStreamResponse> ModifyDataStreamAsync(Action<ModifyDataStreamRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ModifyDataStreamRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ModifyDataStreamRequestDescriptor, ModifyDataStreamResponse>(descriptor);
-		}
-
 		public OpenResponse Open(OpenRequest request)
 		{
 			request.BeforeRequest();
@@ -1398,34 +1370,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<TemplateRequestDescriptor, TemplateResponse>(descriptor);
-		}
-
-		public UpdateAliasesResponse UpdateAliases(UpdateAliasesRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<UpdateAliasesRequest, UpdateAliasesResponse>(request);
-		}
-
-		public Task<UpdateAliasesResponse> UpdateAliasesAsync(UpdateAliasesRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<UpdateAliasesRequest, UpdateAliasesResponse>(request, cancellationToken);
-		}
-
-		public UpdateAliasesResponse UpdateAliases(Action<UpdateAliasesRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new UpdateAliasesRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<UpdateAliasesRequestDescriptor, UpdateAliasesResponse>(descriptor);
-		}
-
-		public Task<UpdateAliasesResponse> UpdateAliasesAsync(Action<UpdateAliasesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new UpdateAliasesRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<UpdateAliasesRequestDescriptor, UpdateAliasesResponse>(descriptor);
 		}
 
 		public ValidateQueryResponse ValidateQuery(ValidateQueryRequest request)

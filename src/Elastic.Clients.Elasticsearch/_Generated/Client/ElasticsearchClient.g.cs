@@ -28,11 +28,14 @@ using Elastic.Clients.Elasticsearch.Ilm;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Ingest;
 using Elastic.Clients.Elasticsearch.License;
+using Elastic.Clients.Elasticsearch.Logstash;
+using Elastic.Clients.Elasticsearch.Migration;
 using Elastic.Clients.Elasticsearch.Nodes;
 using Elastic.Clients.Elasticsearch.SearchableSnapshots;
 using Elastic.Clients.Elasticsearch.Slm;
 using Elastic.Clients.Elasticsearch.Snapshot;
 using Elastic.Clients.Elasticsearch.Sql;
+using Elastic.Clients.Elasticsearch.Ssl;
 using Elastic.Clients.Elasticsearch.Tasks;
 using Elastic.Clients.Elasticsearch.Xpack;
 using System;
@@ -70,6 +73,10 @@ namespace Elastic.Clients.Elasticsearch
 
 		public LicenseNamespace License { get; private set; }
 
+		public LogstashNamespace Logstash { get; private set; }
+
+		public MigrationNamespace Migration { get; private set; }
+
 		public NodesNamespace Nodes { get; private set; }
 
 		public SearchableSnapshotsNamespace SearchableSnapshots { get; private set; }
@@ -79,6 +86,8 @@ namespace Elastic.Clients.Elasticsearch
 		public SnapshotNamespace Snapshot { get; private set; }
 
 		public SqlNamespace Sql { get; private set; }
+
+		public SslNamespace Ssl { get; private set; }
 
 		public TasksNamespace Tasks { get; private set; }
 
@@ -99,11 +108,14 @@ namespace Elastic.Clients.Elasticsearch
 			Indices = new IndicesNamespace(this);
 			Ingest = new IngestNamespace(this);
 			License = new LicenseNamespace(this);
+			Logstash = new LogstashNamespace(this);
+			Migration = new MigrationNamespace(this);
 			Nodes = new NodesNamespace(this);
 			SearchableSnapshots = new SearchableSnapshotsNamespace(this);
 			Slm = new SlmNamespace(this);
 			Snapshot = new SnapshotNamespace(this);
 			Sql = new SqlNamespace(this);
+			Ssl = new SslNamespace(this);
 			Tasks = new TasksNamespace(this);
 			Xpack = new XpackNamespace(this);
 		}
