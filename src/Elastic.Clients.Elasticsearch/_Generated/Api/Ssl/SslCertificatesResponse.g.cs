@@ -20,12 +20,9 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.Ssl
 {
-	public partial class ModifyDataStreamResponse : ElasticsearchResponseBase
+	public partial class SslCertificatesResponse : ElasticsearchResponseBase
 	{
-		[JsonInclude]
-		[JsonPropertyName("acknowledged")]
-		public bool Acknowledged { get; init; }
 	}
 }
