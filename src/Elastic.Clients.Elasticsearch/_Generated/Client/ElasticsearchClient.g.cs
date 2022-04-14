@@ -27,6 +27,7 @@ using Elastic.Clients.Elasticsearch.Graph;
 using Elastic.Clients.Elasticsearch.Ilm;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Ingest;
+using Elastic.Clients.Elasticsearch.License;
 using Elastic.Clients.Elasticsearch.Nodes;
 using Elastic.Clients.Elasticsearch.SearchableSnapshots;
 using Elastic.Clients.Elasticsearch.Slm;
@@ -67,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public IngestNamespace Ingest { get; private set; }
 
+		public LicenseNamespace License { get; private set; }
+
 		public NodesNamespace Nodes { get; private set; }
 
 		public SearchableSnapshotsNamespace SearchableSnapshots { get; private set; }
@@ -95,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch
 			Ilm = new IlmNamespace(this);
 			Indices = new IndicesNamespace(this);
 			Ingest = new IngestNamespace(this);
+			License = new LicenseNamespace(this);
 			Nodes = new NodesNamespace(this);
 			SearchableSnapshots = new SearchableSnapshotsNamespace(this);
 			Slm = new SlmNamespace(this);
