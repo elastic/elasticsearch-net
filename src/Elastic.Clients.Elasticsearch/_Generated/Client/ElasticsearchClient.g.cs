@@ -30,6 +30,7 @@ using Elastic.Clients.Elasticsearch.Slm;
 using Elastic.Clients.Elasticsearch.Snapshot;
 using Elastic.Clients.Elasticsearch.Sql;
 using Elastic.Clients.Elasticsearch.Tasks;
+using Elastic.Clients.Elasticsearch.Xpack;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -69,6 +70,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public TasksNamespace Tasks { get; private set; }
 
+		public XpackNamespace Xpack { get; private set; }
+
 		private partial void SetupNamespaces()
 		{
 			AsyncSearch = new AsyncSearchNamespace(this);
@@ -86,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch
 			Snapshot = new SnapshotNamespace(this);
 			Sql = new SqlNamespace(this);
 			Tasks = new TasksNamespace(this);
+			Xpack = new XpackNamespace(this);
 		}
 
 		public BulkResponse Bulk(BulkRequest request)
