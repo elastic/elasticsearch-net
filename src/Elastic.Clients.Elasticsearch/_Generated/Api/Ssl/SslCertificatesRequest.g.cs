@@ -15,17 +15,39 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport.Products.Elasticsearch;
+using Elastic.Transport;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.Ssl
 {
-	public partial class UpdateAliasesResponse : ElasticsearchResponseBase
+	public class SslCertificatesRequestParameters : RequestParameters<SslCertificatesRequestParameters>
 	{
-		[JsonInclude]
-		[JsonPropertyName("acknowledged")]
-		public bool Acknowledged { get; init; }
+	}
+
+	public partial class SslCertificatesRequest : PlainRequestBase<SslCertificatesRequestParameters>
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityCertificates;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+	}
+
+	public sealed partial class SslCertificatesRequestDescriptor : RequestDescriptorBase<SslCertificatesRequestDescriptor, SslCertificatesRequestParameters>
+	{
+		internal SslCertificatesRequestDescriptor(Action<SslCertificatesRequestDescriptor> configure) => configure.Invoke(this);
+		public SslCertificatesRequestDescriptor()
+		{
+		}
+
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityCertificates;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
 	}
 }
