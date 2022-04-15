@@ -156,6 +156,34 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<BulkRequestDescriptor, BulkResponse>(descriptor);
 		}
 
+		public ClearScrollResponse ClearScroll(ClearScrollRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<ClearScrollRequest, ClearScrollResponse>(request);
+		}
+
+		public Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<ClearScrollRequest, ClearScrollResponse>(request, cancellationToken);
+		}
+
+		public ClearScrollResponse ClearScroll(Action<ClearScrollRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClearScrollRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ClearScrollRequestDescriptor, ClearScrollResponse>(descriptor);
+		}
+
+		public Task<ClearScrollResponse> ClearScrollAsync(Action<ClearScrollRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClearScrollRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ClearScrollRequestDescriptor, ClearScrollResponse>(descriptor);
+		}
+
 		public ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request)
 		{
 			request.BeforeRequest();
@@ -758,6 +786,34 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
+		}
+
+		public ScrollResponse<TDocument> Scroll<TDocument>(ScrollRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<ScrollRequest, ScrollResponse<TDocument>>(request);
+		}
+
+		public Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(ScrollRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<ScrollRequest, ScrollResponse<TDocument>>(request, cancellationToken);
+		}
+
+		public ScrollResponse<TDocument> Scroll<TDocument>(Action<ScrollRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ScrollRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ScrollRequestDescriptor, ScrollResponse<TDocument>>(descriptor);
+		}
+
+		public Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(Action<ScrollRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ScrollRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ScrollRequestDescriptor, ScrollResponse<TDocument>>(descriptor);
 		}
 
 		public SearchResponse<TDocument> Search<TDocument>(SearchRequest request)
