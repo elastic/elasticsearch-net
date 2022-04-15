@@ -352,6 +352,34 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse>(descriptor);
 		}
 
+		public DeleteScriptResponse DeleteScript(DeleteScriptRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<DeleteScriptRequest, DeleteScriptResponse>(request);
+		}
+
+		public Task<DeleteScriptResponse> DeleteScriptAsync(DeleteScriptRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<DeleteScriptRequest, DeleteScriptResponse>(request, cancellationToken);
+		}
+
+		public DeleteScriptResponse DeleteScript(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new DeleteScriptRequestDescriptor(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<DeleteScriptRequestDescriptor, DeleteScriptResponse>(descriptor);
+		}
+
+		public Task<DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new DeleteScriptRequestDescriptor(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<DeleteScriptRequestDescriptor, DeleteScriptResponse>(descriptor);
+		}
+
 		public ExistsResponse Exists(ExistsRequest request)
 		{
 			request.BeforeRequest();
@@ -406,6 +434,34 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<ExistsSourceRequestDescriptor, ExistsSourceResponse>(descriptor);
+		}
+
+		public ExplainResponse<TDocument> Explain<TDocument>(ExplainRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<ExplainRequest, ExplainResponse<TDocument>>(request);
+		}
+
+		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(ExplainRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<ExplainRequest, ExplainResponse<TDocument>>(request, cancellationToken);
+		}
+
+		public ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new ExplainRequestDescriptor<TDocument>(index, id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
+		}
+
+		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ExplainRequestDescriptor<TDocument>(index, id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
 		}
 
 		public FieldCapsResponse FieldCaps(FieldCapsRequest request)
@@ -786,6 +842,62 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
+		}
+
+		public ScriptResponse GetScript(ScriptRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<ScriptRequest, ScriptResponse>(request);
+		}
+
+		public Task<ScriptResponse> GetScriptAsync(ScriptRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<ScriptRequest, ScriptResponse>(request, cancellationToken);
+		}
+
+		public ScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ScriptRequestDescriptor(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ScriptRequestDescriptor, ScriptResponse>(descriptor);
+		}
+
+		public Task<ScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ScriptRequestDescriptor(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ScriptRequestDescriptor, ScriptResponse>(descriptor);
+		}
+
+		public ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TResult>(ScriptsPainlessExecuteRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<ScriptsPainlessExecuteRequest, ScriptsPainlessExecuteResponse<TResult>>(request);
+		}
+
+		public Task<ScriptsPainlessExecuteResponse<TResult>> ScriptsPainlessExecuteAsync<TResult>(ScriptsPainlessExecuteRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<ScriptsPainlessExecuteRequest, ScriptsPainlessExecuteResponse<TResult>>(request, cancellationToken);
+		}
+
+		public ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TResult>(Action<ScriptsPainlessExecuteRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ScriptsPainlessExecuteRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ScriptsPainlessExecuteRequestDescriptor, ScriptsPainlessExecuteResponse<TResult>>(descriptor);
+		}
+
+		public Task<ScriptsPainlessExecuteResponse<TResult>> ScriptsPainlessExecuteAsync<TResult>(Action<ScriptsPainlessExecuteRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ScriptsPainlessExecuteRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ScriptsPainlessExecuteRequestDescriptor, ScriptsPainlessExecuteResponse<TResult>>(descriptor);
 		}
 
 		public ScrollResponse<TDocument> Scroll<TDocument>(ScrollRequest request)
