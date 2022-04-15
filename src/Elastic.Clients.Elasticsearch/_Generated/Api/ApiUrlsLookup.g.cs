@@ -64,6 +64,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceDeleteByQuery = new ApiUrls(new[] { "/{index}/_delete_by_query" });
 		internal static ApiUrls NoNamespaceDeleteByQueryRethrottle = new ApiUrls(new[] { "/_delete_by_query/{task_id}/_rethrottle" });
 		internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[] { "/{index}/_doc/{id}" });
+		internal static ApiUrls NoNamespaceDeleteScript = new ApiUrls(new[] { "/_scripts/{id}" });
 		internal static ApiUrls EnrichDeletePolicy = new ApiUrls(new[] { "/_enrich/policy/{name}" });
 		internal static ApiUrls EnrichExecutePolicy = new ApiUrls(new[] { "/_enrich/policy/{name}/_execute" });
 		internal static ApiUrls EnrichGetPolicy = new ApiUrls(new[] { "/_enrich/policy/{name}", "/_enrich/policy" });
@@ -75,6 +76,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls EqlGet = new ApiUrls(new[] { "/_eql/search/{id}" });
 		internal static ApiUrls NoNamespaceExists = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceExistsSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
+		internal static ApiUrls NoNamespaceExplain = new ApiUrls(new[] { "/{index}/_explain/{id}" });
 		internal static ApiUrls FeaturesGetFeatures = new ApiUrls(new[] { "/_features" });
 		internal static ApiUrls FeaturesResetFeatures = new ApiUrls(new[] { "/_features/_reset" });
 		internal static ApiUrls NoNamespaceFieldCaps = new ApiUrls(new[] { "/_field_caps", "/{index}/_field_caps" });
@@ -232,6 +234,8 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceReindexRethrottle = new ApiUrls(new[] { "/_reindex/{task_id}/_rethrottle" });
 		internal static ApiUrls NoNamespaceGetScriptContext = new ApiUrls(new[] { "/_script_context" });
 		internal static ApiUrls NoNamespaceGetScriptLanguages = new ApiUrls(new[] { "/_script_language" });
+		internal static ApiUrls NoNamespaceGetScript = new ApiUrls(new[] { "/_scripts/{id}" });
+		internal static ApiUrls NoNamespaceScriptsPainlessExecute = new ApiUrls(new[] { "/_scripts/painless/_execute" });
 		internal static ApiUrls NoNamespaceScroll = new ApiUrls(new[] { "/_search/scroll" });
 		internal static ApiUrls SearchableSnapshotsCacheStats = new ApiUrls(new[] { "/_searchable_snapshots/cache/stats", "/_searchable_snapshots/{node_id}/cache/stats" });
 		internal static ApiUrls SearchableSnapshotsClearCache = new ApiUrls(new[] { "/_searchable_snapshots/cache/clear", "/{index}/_searchable_snapshots/cache/clear" });
