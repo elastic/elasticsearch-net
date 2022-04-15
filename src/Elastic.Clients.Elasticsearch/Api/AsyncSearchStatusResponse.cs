@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
-public partial class GetAsyncSearchResponse<TDocument>
+public partial class AsyncSearchStatusResponse
 {
 	[JsonIgnore]
 	public DateTimeOffset StartTime => StartTimeInMillis.DateTimeOffset;
