@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls CrossClusterReplicationResumeFollow = new ApiUrls(new[] { "/{index}/_ccr/resume_follow" });
 		internal static ApiUrls CrossClusterReplicationStats = new ApiUrls(new[] { "/_ccr/stats" });
 		internal static ApiUrls CrossClusterReplicationUnfollow = new ApiUrls(new[] { "/{index}/_ccr/unfollow" });
+		internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[] { "/_search/scroll" });
 		internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[] { "/_pit" });
 		internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[] { "/_cluster/allocation/explain" });
 		internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[] { "/_component_template/{name}" });
@@ -231,6 +232,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceReindexRethrottle = new ApiUrls(new[] { "/_reindex/{task_id}/_rethrottle" });
 		internal static ApiUrls NoNamespaceGetScriptContext = new ApiUrls(new[] { "/_script_context" });
 		internal static ApiUrls NoNamespaceGetScriptLanguages = new ApiUrls(new[] { "/_script_language" });
+		internal static ApiUrls NoNamespaceScroll = new ApiUrls(new[] { "/_search/scroll" });
 		internal static ApiUrls SearchableSnapshotsCacheStats = new ApiUrls(new[] { "/_searchable_snapshots/cache/stats", "/_searchable_snapshots/{node_id}/cache/stats" });
 		internal static ApiUrls SearchableSnapshotsClearCache = new ApiUrls(new[] { "/_searchable_snapshots/cache/clear", "/{index}/_searchable_snapshots/cache/clear" });
 		internal static ApiUrls SearchableSnapshotsMount = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}/_mount" });
