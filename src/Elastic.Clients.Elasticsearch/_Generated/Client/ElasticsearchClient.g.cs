@@ -30,6 +30,7 @@ using Elastic.Clients.Elasticsearch.Ingest;
 using Elastic.Clients.Elasticsearch.License;
 using Elastic.Clients.Elasticsearch.Logstash;
 using Elastic.Clients.Elasticsearch.Migration;
+using Elastic.Clients.Elasticsearch.Ml;
 using Elastic.Clients.Elasticsearch.Nodes;
 using Elastic.Clients.Elasticsearch.SearchableSnapshots;
 using Elastic.Clients.Elasticsearch.Slm;
@@ -78,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public MigrationNamespace Migration { get; private set; }
 
+		public MlNamespace Ml { get; private set; }
+
 		public NodesNamespace Nodes { get; private set; }
 
 		public SearchableSnapshotsNamespace SearchableSnapshots { get; private set; }
@@ -113,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch
 			License = new LicenseNamespace(this);
 			Logstash = new LogstashNamespace(this);
 			Migration = new MigrationNamespace(this);
+			Ml = new MlNamespace(this);
 			Nodes = new NodesNamespace(this);
 			SearchableSnapshots = new SearchableSnapshotsNamespace(this);
 			Slm = new SlmNamespace(this);
