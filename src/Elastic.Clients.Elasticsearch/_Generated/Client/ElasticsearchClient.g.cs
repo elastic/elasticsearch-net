@@ -37,6 +37,7 @@ using Elastic.Clients.Elasticsearch.Snapshot;
 using Elastic.Clients.Elasticsearch.Sql;
 using Elastic.Clients.Elasticsearch.Ssl;
 using Elastic.Clients.Elasticsearch.Tasks;
+using Elastic.Clients.Elasticsearch.TransformManagement;
 using Elastic.Clients.Elasticsearch.Xpack;
 using System;
 using System.Threading;
@@ -91,6 +92,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public TasksNamespace Tasks { get; private set; }
 
+		public TransformManagementNamespace TransformManagement { get; private set; }
+
 		public XpackNamespace Xpack { get; private set; }
 
 		private partial void SetupNamespaces()
@@ -117,6 +120,7 @@ namespace Elastic.Clients.Elasticsearch
 			Sql = new SqlNamespace(this);
 			Ssl = new SslNamespace(this);
 			Tasks = new TasksNamespace(this);
+			TransformManagement = new TransformManagementNamespace(this);
 			Xpack = new XpackNamespace(this);
 		}
 
