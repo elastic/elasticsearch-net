@@ -208,6 +208,15 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls TasksCancel = new ApiUrls(new[] { "/_tasks/_cancel", "/_tasks/{task_id}/_cancel" });
 		internal static ApiUrls TasksList = new ApiUrls(new[] { "/_tasks" });
 		internal static ApiUrls NoNamespaceTermsEnum = new ApiUrls(new[] { "/{index}/_terms_enum" });
+		internal static ApiUrls TransformManagementDeleteTransform = new ApiUrls(new[] { "/_transform/{transform_id}" });
+		internal static ApiUrls TransformManagementGetTransform = new ApiUrls(new[] { "/_transform/{transform_id}", "/_transform" });
+		internal static ApiUrls TransformManagementGetTransformStats = new ApiUrls(new[] { "/_transform/{transform_id}/_stats" });
+		internal static ApiUrls TransformManagementPreviewTransform = new ApiUrls(new[] { "/_transform/{transform_id}/_preview", "/_transform/_preview" });
+		internal static ApiUrls TransformManagementPutTransform = new ApiUrls(new[] { "/_transform/{transform_id}" });
+		internal static ApiUrls TransformManagementStartTransform = new ApiUrls(new[] { "/_transform/{transform_id}/_start" });
+		internal static ApiUrls TransformManagementStopTransform = new ApiUrls(new[] { "/_transform/{transform_id}/_stop" });
+		internal static ApiUrls TransformManagementUpdateTransform = new ApiUrls(new[] { "/_transform/{transform_id}/_update" });
+		internal static ApiUrls TransformManagementUpgradeTransforms = new ApiUrls(new[] { "/_transform/_upgrade" });
 		internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[] { "/{index}/_update_by_query" });
 		internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[] { "/_update_by_query/{task_id}/_rethrottle" });
 		internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "/{index}/_update/{id}" });
