@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.101'
+          dotnet-version: '6.0.202'
       - uses: actions/cache@v2
         with:
           path: ~/.nuget/packages
