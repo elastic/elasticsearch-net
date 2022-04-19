@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("username")]
-		public string Username { get; set; }
+		public Elastic.Clients.Elasticsearch.Username Username { get; set; }
 	}
 
 	public sealed partial class RemoteSourceDescriptor : DescriptorBase<RemoteSourceDescriptor>
@@ -62,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.Time SocketTimeoutValue { get; set; }
 
-		private string UsernameValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Username UsernameValue { get; set; }
 
 		public RemoteSourceDescriptor ConnectTimeout(Elastic.Clients.Elasticsearch.Time connectTimeout)
 		{
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public RemoteSourceDescriptor Username(string username)
+		public RemoteSourceDescriptor Username(Elastic.Clients.Elasticsearch.Username username)
 		{
 			UsernameValue = username;
 			return Self;
