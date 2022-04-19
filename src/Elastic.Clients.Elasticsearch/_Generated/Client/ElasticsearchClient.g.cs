@@ -33,6 +33,7 @@ using Elastic.Clients.Elasticsearch.Migration;
 using Elastic.Clients.Elasticsearch.Ml;
 using Elastic.Clients.Elasticsearch.Nodes;
 using Elastic.Clients.Elasticsearch.SearchableSnapshots;
+using Elastic.Clients.Elasticsearch.Security;
 using Elastic.Clients.Elasticsearch.Slm;
 using Elastic.Clients.Elasticsearch.Snapshot;
 using Elastic.Clients.Elasticsearch.Sql;
@@ -85,6 +86,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public SearchableSnapshotsNamespace SearchableSnapshots { get; private set; }
 
+		public SecurityNamespace Security { get; private set; }
+
 		public SlmNamespace Slm { get; private set; }
 
 		public SnapshotNamespace Snapshot { get; private set; }
@@ -119,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch
 			Ml = new MlNamespace(this);
 			Nodes = new NodesNamespace(this);
 			SearchableSnapshots = new SearchableSnapshotsNamespace(this);
+			Security = new SecurityNamespace(this);
 			Slm = new SlmNamespace(this);
 			Snapshot = new SnapshotNamespace(this);
 			Sql = new SqlNamespace(this);
