@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Name? RealmName { get => Q<Elastic.Clients.Elasticsearch.Name?>("realm_name"); set => Q("realm_name", value); }
 
 		[JsonIgnore]
-		public string? Username { get => Q<string?>("username"); set => Q("username", value); }
+		public Elastic.Clients.Elasticsearch.Username? Username { get => Q<Elastic.Clients.Elasticsearch.Username?>("username"); set => Q("username", value); }
 	}
 
 	public partial class SecurityGetApiKeyRequest : PlainRequestBase<SecurityGetApiKeyRequestParameters>
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Name? RealmName { get => Q<Elastic.Clients.Elasticsearch.Name?>("realm_name"); set => Q("realm_name", value); }
 
 		[JsonIgnore]
-		public string? Username { get => Q<string?>("username"); set => Q("username", value); }
+		public Elastic.Clients.Elasticsearch.Username? Username { get => Q<Elastic.Clients.Elasticsearch.Username?>("username"); set => Q("username", value); }
 	}
 
 	public sealed partial class SecurityGetApiKeyRequestDescriptor : RequestDescriptorBase<SecurityGetApiKeyRequestDescriptor, SecurityGetApiKeyRequestParameters>
@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public SecurityGetApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name) => Qs("name", name);
 		public SecurityGetApiKeyRequestDescriptor Owner(bool? owner = true) => Qs("owner", owner);
 		public SecurityGetApiKeyRequestDescriptor RealmName(Elastic.Clients.Elasticsearch.Name? realmName) => Qs("realm_name", realmName);
-		public SecurityGetApiKeyRequestDescriptor Username(string? username) => Qs("username", username);
+		public SecurityGetApiKeyRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username) => Qs("username", username);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}
