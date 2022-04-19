@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.101'
+          dotnet-version: '6.0.202'
             
       - run: "./.ci/make.sh assemble ${{ matrix.stack_version }}"
         name: Assemble ${{ matrix.stack_version }}
