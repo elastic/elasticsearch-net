@@ -43,9 +43,5 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		[JsonInclude]
 		[JsonPropertyName("is_running")]
 		public bool? IsRunning { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("rows")]
-		public IReadOnlyCollection<IReadOnlyCollection<object>> Rows { get; init; }
 	}
 }

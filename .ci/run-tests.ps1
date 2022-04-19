@@ -8,7 +8,7 @@ param (
     $TEST_SUITE = "free",
 
     [string]
-    $DOTNET_VERSION = "6.0.101"
+    $DOTNET_VERSION = "6.0.202"
 )
 
 $ESC = [char]27

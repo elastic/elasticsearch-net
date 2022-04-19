@@ -756,34 +756,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequestAsync<MlGetRecordsRequestDescriptor, MlGetRecordsResponse>(descriptor);
 		}
 
-		public MlGetTrainedModelsResponse GetTrainedModels(MlGetTrainedModelsRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<MlGetTrainedModelsRequest, MlGetTrainedModelsResponse>(request);
-		}
-
-		public Task<MlGetTrainedModelsResponse> GetTrainedModelsAsync(MlGetTrainedModelsRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<MlGetTrainedModelsRequest, MlGetTrainedModelsResponse>(request, cancellationToken);
-		}
-
-		public MlGetTrainedModelsResponse GetTrainedModels(Action<MlGetTrainedModelsRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new MlGetTrainedModelsRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<MlGetTrainedModelsRequestDescriptor, MlGetTrainedModelsResponse>(descriptor);
-		}
-
-		public Task<MlGetTrainedModelsResponse> GetTrainedModelsAsync(Action<MlGetTrainedModelsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new MlGetTrainedModelsRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<MlGetTrainedModelsRequestDescriptor, MlGetTrainedModelsResponse>(descriptor);
-		}
-
 		public MlGetTrainedModelsStatsResponse GetTrainedModelsStats(MlGetTrainedModelsStatsRequest request)
 		{
 			request.BeforeRequest();
