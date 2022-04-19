@@ -37,6 +37,12 @@
           "Microsoft.SourceLink.Common": "1.0.0"
         }
       },
+      "Microsoft.VisualStudio.Threading.Analyzers": {
+        "type": "Direct",
+        "requested": "[17.1.46, )",
+        "resolved": "17.1.46",
+        "contentHash": "7pImoMcQaWZYAwu1aDBB8yBkvgad13yjrRHQ65pwHMX757vZ49OrNaEuRSLDu2PjZGonsTkQAJK8JK4W/wW4bw=="
+      },
       "Microsoft.Build.Tasks.Git": {
         "type": "Transitive",
         "resolved": "1.0.0",
@@ -128,6 +134,12 @@
           "Microsoft.Build.Tasks.Git": "1.0.0",
           "Microsoft.SourceLink.Common": "1.0.0"
         }
+      },
+      "Microsoft.VisualStudio.Threading.Analyzers": {
+        "type": "Direct",
+        "requested": "[17.1.46, )",
+        "resolved": "17.1.46",
+        "contentHash": "7pImoMcQaWZYAwu1aDBB8yBkvgad13yjrRHQ65pwHMX757vZ49OrNaEuRSLDu2PjZGonsTkQAJK8JK4W/wW4bw=="
       },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
@@ -265,6 +277,12 @@
           "Microsoft.Build.Tasks.Git": "1.0.0",
           "Microsoft.SourceLink.Common": "1.0.0"
         }
+      },
+      "Microsoft.VisualStudio.Threading.Analyzers": {
+        "type": "Direct",
+        "requested": "[17.1.46, )",
+        "resolved": "17.1.46",
+        "contentHash": "7pImoMcQaWZYAwu1aDBB8yBkvgad13yjrRHQ65pwHMX757vZ49OrNaEuRSLDu2PjZGonsTkQAJK8JK4W/wW4bw=="
       },
       "NETStandard.Library": {
         "type": "Direct",
@@ -509,6 +527,12 @@
           "Microsoft.SourceLink.Common": "1.0.0"
         }
       },
+      "Microsoft.VisualStudio.Threading.Analyzers": {
+        "type": "Direct",
+        "requested": "[17.1.46, )",
+        "resolved": "17.1.46",
+        "contentHash": "7pImoMcQaWZYAwu1aDBB8yBkvgad13yjrRHQ65pwHMX757vZ49OrNaEuRSLDu2PjZGonsTkQAJK8JK4W/wW4bw=="
+      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
         "resolved": "6.0.0",
@@ -631,6 +655,12 @@
           "Microsoft.SourceLink.Common": "1.0.0"
         }
       },
+      "Microsoft.VisualStudio.Threading.Analyzers": {
+        "type": "Direct",
+        "requested": "[17.1.46, )",
+        "resolved": "17.1.46",
+        "contentHash": "7pImoMcQaWZYAwu1aDBB8yBkvgad13yjrRHQ65pwHMX757vZ49OrNaEuRSLDu2PjZGonsTkQAJK8JK4W/wW4bw=="
+      },
       "Microsoft.Build.Tasks.Git": {
         "type": "Transitive",
         "resolved": "1.0.0",
@@ -713,6 +743,12 @@
           "Microsoft.Build.Tasks.Git": "1.0.0",
           "Microsoft.SourceLink.Common": "1.0.0"
         }
+      },
+      "Microsoft.VisualStudio.Threading.Analyzers": {
+        "type": "Direct",
+        "requested": "[17.1.46, )",
+        "resolved": "17.1.46",
+        "contentHash": "7pImoMcQaWZYAwu1aDBB8yBkvgad13yjrRHQ65pwHMX757vZ49OrNaEuRSLDu2PjZGonsTkQAJK8JK4W/wW4bw=="
       },
       "Microsoft.Build.Tasks.Git": {
         "type": "Transitive",
