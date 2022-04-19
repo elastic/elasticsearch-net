@@ -437,62 +437,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	[JsonConverter(typeof(IncludeConverter))]
-	public enum Include
-	{
-		[EnumMember(Value = "total_feature_importance")]
-		TotalFeatureImportance,
-		[EnumMember(Value = "hyperparameters")]
-		Hyperparameters,
-		[EnumMember(Value = "feature_importance_baseline")]
-		FeatureImportanceBaseline,
-		[EnumMember(Value = "definition")]
-		Definition
-	}
-
-	internal sealed class IncludeConverter : JsonConverter<Include>
-	{
-		public override Include Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "total_feature_importance":
-					return Include.TotalFeatureImportance;
-				case "hyperparameters":
-					return Include.Hyperparameters;
-				case "feature_importance_baseline":
-					return Include.FeatureImportanceBaseline;
-				case "definition":
-					return Include.Definition;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, Include value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case Include.TotalFeatureImportance:
-					writer.WriteStringValue("total_feature_importance");
-					return;
-				case Include.Hyperparameters:
-					writer.WriteStringValue("hyperparameters");
-					return;
-				case Include.FeatureImportanceBaseline:
-					writer.WriteStringValue("feature_importance_baseline");
-					return;
-				case Include.Definition:
-					writer.WriteStringValue("definition");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(JobStateConverter))]
 	public enum JobState
 	{
