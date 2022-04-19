@@ -2,72 +2,70 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using Elastic.Transport;
+
 namespace Elastic.Clients.Elasticsearch
 {
-	//public partial class Ids
-	//{
-	//	// This is temporary
-	//	public Ids(IEnumerable<Id> ids) => _idList.AddRange(ids);
+	[DebuggerDisplay("{DebugDisplay,nq}")]
+	public partial class Ids : IUrlParameter, IEquatable<Ids>
+	{
+		private readonly List<string> _ids;
 
-	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	//}
+		public Ids(IEnumerable<string> value) => _ids = value?.ToList();
 
-	//[DebuggerDisplay("{DebugDisplay,nq}")]
-	//public partial class Ids : IUrlParameter, IEquatable<Ids>
-	//{
-	//	private readonly List<string> _ids;
+		public Ids(string value)
+		{
+			if (!value.IsNullOrEmptyCommaSeparatedList(out var arr))
+				_ids = arr.ToList();
+		}
 
-	//	public Ids(IEnumerable<string> value) => _ids = value?.ToList();
+		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
-	//	public Ids(string value)
-	//	{
-	//		if (!value.IsNullOrEmptyCommaSeparatedList(out var arr))
-	//			_ids = arr.ToList();
-	//	}
+		public bool Equals(Ids other)
+		{
+			if (other == null)
+				return false;
+			if (_ids == null && other._ids == null)
+				return true;
+			if (_ids == null || other._ids == null)
+				return false;
 
-	//	private string DebugDisplay => ((IUrlParameter)this).GetString(null);
+			return _ids.Count == other._ids.Count &&
+				   _ids.OrderBy(id => id).SequenceEqual(other._ids.OrderBy(id => id));
+		}
 
-	//	public bool Equals(Ids other)
-	//	{
-	//		if (other == null)
-	//			return false;
-	//		if (_ids == null && other._ids == null)
-	//			return true;
-	//		if (_ids == null || other._ids == null)
-	//			return false;
+		string IUrlParameter.GetString(ITransportConfiguration settings) =>
+			string.Join(",", _ids ?? Enumerable.Empty<string>());
 
-	//		return _ids.Count == other._ids.Count &&
-	//		       _ids.OrderBy(id => id).SequenceEqual(other._ids.OrderBy(id => id));
-	//	}
+		public override string ToString() => DebugDisplay;
 
-	//	string IUrlParameter.GetString(ITransportConfiguration settings) =>
-	//		string.Join(",", _ids ?? Enumerable.Empty<string>());
+		public static implicit operator Ids(string value) =>
+			value.IsNullOrEmptyCommaSeparatedList(out var arr) ? null : new Ids(arr);
 
-	//	public override string ToString() => DebugDisplay;
+		public static implicit operator Ids(string[] value) =>
+			value.IsEmpty() ? null : new Ids(value);
 
-	//	public static implicit operator Ids(string value) =>
-	//		value.IsNullOrEmptyCommaSeparatedList(out var arr) ? null : new Ids(arr);
+		public override bool Equals(object obj) => obj is Ids other && Equals(other);
 
-	//	public static implicit operator Ids(string[] value) =>
-	//		value.IsEmpty() ? null : new Ids(value);
+		public override int GetHashCode()
+		{
+			if (_ids == null)
+				return 0;
+			unchecked
+			{
+				var hc = 0;
+				foreach (var id in _ids.OrderBy(id => id))
+					hc = hc * 17 + id.GetHashCode();
+				return hc;
+			}
+		}
 
-	//	public override bool Equals(object obj) => obj is Ids other && Equals(other);
+		public static bool operator ==(Ids left, Ids right) => Equals(left, right);
 
-	//	public override int GetHashCode()
-	//	{
-	//		if (_ids == null)
-	//			return 0;
-	//		unchecked
-	//		{
-	//			var hc = 0;
-	//			foreach (var id in _ids.OrderBy(id => id))
-	//				hc = hc * 17 + id.GetHashCode();
-	//			return hc;
-	//		}
-	//	}
-
-	//	public static bool operator ==(Ids left, Ids right) => Equals(left, right);
-
-	//	public static bool operator !=(Ids left, Ids right) => !Equals(left, right);
-	//}
+		public static bool operator !=(Ids left, Ids right) => !Equals(left, right);
+	}
 }
