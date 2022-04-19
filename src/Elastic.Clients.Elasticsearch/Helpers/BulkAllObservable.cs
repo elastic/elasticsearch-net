@@ -56,6 +56,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		var documents = _partitionedBulkRequest.Documents;
 		var partitioned = new PartitionHelper<T>(documents, _bulkSize);
 #pragma warning disable 4014
+#pragma warning disable VSTHRD110 // Observe result of async calls
 		partitioned.ForEachAsync(
 #pragma warning restore 4014
 				(buffer, page) => BulkAsync(buffer, page, 0),
@@ -63,6 +64,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 			ex => OnCompleted(ex, observer),
 			_maxDegreeOfParallelism
 		);
+#pragma warning restore VSTHRD110 // Observe result of async calls
 	}
 
 	private void OnCompleted(Exception exception, IObserver<BulkAllResponse> observer)
@@ -152,7 +154,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		_bulkResponseCallback?.Invoke(response);
 
 		if (!response.ApiCall.Success)
-			return await HandleBulkRequest(buffer, page, backOffRetries, response).ConfigureAwait(false);
+			return await HandleBulkRequestAsync(buffer, page, backOffRetries, response).ConfigureAwait(false);
 
 		var retryableDocuments = new List<T>();
 		var droppedDocuments = new List<Tuple<BulkResponseItemBase, T>>();
@@ -171,7 +173,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		HandleDroppedDocuments(droppedDocuments, response);
 
 		if (retryableDocuments.Count > 0 && backOffRetries < _backOffRetries)
-			return await RetryDocuments(page, ++backOffRetries, retryableDocuments).ConfigureAwait(false);
+			return await RetryDocumentsAsync(page, ++backOffRetries, retryableDocuments).ConfigureAwait(false);
 
 		if (retryableDocuments.Count > 0)
 			throw ThrowOnBadBulk(response, $"Bulk indexing failed and after retrying {backOffRetries} times");
@@ -193,7 +195,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 			throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after receiving failures that can not be retried from _bulk");
 	}
 
-	private async Task<BulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, BulkResponse response)
+	private async Task<BulkAllResponse> HandleBulkRequestAsync(IList<T> buffer, long page, int backOffRetries, BulkResponse response)
 	{
 		var clientException = response.ApiCall.OriginalException as TransportException;
 		var failureReason = clientException?.FailureReason;
@@ -205,7 +207,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 					throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after attempted bulk failed over all the active nodes");
 
 				ThrowOnExhaustedRetries();
-				return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
+				return await RetryDocumentsAsync(page, ++backOffRetries, buffer).ConfigureAwait(false);
 			case PipelineFailure.CouldNotStartSniffOnStartup:
 			case PipelineFailure.BadAuthentication:
 			case PipelineFailure.NoNodesAttempted:
@@ -218,7 +220,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 			case PipelineFailure.BadRequest:
 			default:
 				ThrowOnExhaustedRetries();
-				return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
+				return await RetryDocumentsAsync(page, ++backOffRetries, buffer).ConfigureAwait(false);
 		}
 
 		void ThrowOnExhaustedRetries()
@@ -231,7 +233,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		}
 	}
 
-	private async Task<BulkAllResponse> RetryDocuments(long page, int backOffRetries, IList<T> retryDocuments)
+	private async Task<BulkAllResponse> RetryDocumentsAsync(long page, int backOffRetries, IList<T> retryDocuments)
 	{
 		_incrementRetries();
 		await Task.Delay(_backOffTime, _compositeCancelToken).ConfigureAwait(false);
