@@ -24,6 +24,62 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
+	[JsonConverter(typeof(AccessTokenGrantTypeConverter))]
+	public enum AccessTokenGrantType
+	{
+		[EnumMember(Value = "refresh_token")]
+		RefreshToken,
+		[EnumMember(Value = "password")]
+		Password,
+		[EnumMember(Value = "client_credentials")]
+		ClientCredentials,
+		[EnumMember(Value = "_kerberos")]
+		Kerberos
+	}
+
+	internal sealed class AccessTokenGrantTypeConverter : JsonConverter<AccessTokenGrantType>
+	{
+		public override AccessTokenGrantType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "refresh_token":
+					return AccessTokenGrantType.RefreshToken;
+				case "password":
+					return AccessTokenGrantType.Password;
+				case "client_credentials":
+					return AccessTokenGrantType.ClientCredentials;
+				case "_kerberos":
+					return AccessTokenGrantType.Kerberos;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, AccessTokenGrantType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case AccessTokenGrantType.RefreshToken:
+					writer.WriteStringValue("refresh_token");
+					return;
+				case AccessTokenGrantType.Password:
+					writer.WriteStringValue("password");
+					return;
+				case AccessTokenGrantType.ClientCredentials:
+					writer.WriteStringValue("client_credentials");
+					return;
+				case AccessTokenGrantType.Kerberos:
+					writer.WriteStringValue("_kerberos");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(ApiKeyGrantTypeConverter))]
 	public enum ApiKeyGrantType
 	{
@@ -59,6 +115,279 @@ namespace Elastic.Clients.Elasticsearch.Security
 					return;
 				case ApiKeyGrantType.AccessToken:
 					writer.WriteStringValue("access_token");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(ClusterPrivilegeConverter))]
+	public enum ClusterPrivilege
+	{
+		[EnumMember(Value = "transport_client")]
+		TransportClient,
+		[EnumMember(Value = "read_slm")]
+		ReadSlm,
+		[EnumMember(Value = "read_pipeline")]
+		ReadPipeline,
+		[EnumMember(Value = "read_ilm")]
+		ReadIlm,
+		[EnumMember(Value = "read_ccr")]
+		ReadCcr,
+		[EnumMember(Value = "monitor_watcher")]
+		MonitorWatcher,
+		[EnumMember(Value = "monitor_transform")]
+		MonitorTransform,
+		[EnumMember(Value = "monitor_text_structure")]
+		MonitorTextStructure,
+		[EnumMember(Value = "monitor_snapshot")]
+		MonitorSnapshot,
+		[EnumMember(Value = "monitor_rollup")]
+		MonitorRollup,
+		[EnumMember(Value = "monitor_ml")]
+		MonitorMl,
+		[EnumMember(Value = "monitor")]
+		Monitor,
+		[EnumMember(Value = "manage_watcher")]
+		ManageWatcher,
+		[EnumMember(Value = "manage_transform")]
+		ManageTransform,
+		[EnumMember(Value = "manage_token")]
+		ManageToken,
+		[EnumMember(Value = "manage_slm")]
+		ManageSlm,
+		[EnumMember(Value = "manage_service_account")]
+		ManageServiceAccount,
+		[EnumMember(Value = "manage_security")]
+		ManageSecurity,
+		[EnumMember(Value = "manage_saml")]
+		ManageSaml,
+		[EnumMember(Value = "manage_rollup")]
+		ManageRollup,
+		[EnumMember(Value = "manage_pipeline")]
+		ManagePipeline,
+		[EnumMember(Value = "manage_own_api_key")]
+		ManageOwnApiKey,
+		[EnumMember(Value = "manage_oidc")]
+		ManageOidc,
+		[EnumMember(Value = "manage_ml")]
+		ManageMl,
+		[EnumMember(Value = "manage_logstash_pipelines")]
+		ManageLogstashPipelines,
+		[EnumMember(Value = "manage_ingest_pipelines")]
+		ManageIngestPipelines,
+		[EnumMember(Value = "manage_index_templates")]
+		ManageIndexTemplates,
+		[EnumMember(Value = "manage_ilm")]
+		ManageIlm,
+		[EnumMember(Value = "manage_ccr")]
+		ManageCcr,
+		[EnumMember(Value = "manage_api_key")]
+		ManageApiKey,
+		[EnumMember(Value = "manage")]
+		Manage,
+		[EnumMember(Value = "grant_api_key")]
+		GrantApiKey,
+		[EnumMember(Value = "create_snapshot")]
+		CreateSnapshot,
+		[EnumMember(Value = "cancel_task")]
+		CancelTask,
+		[EnumMember(Value = "all")]
+		All
+	}
+
+	internal sealed class ClusterPrivilegeConverter : JsonConverter<ClusterPrivilege>
+	{
+		public override ClusterPrivilege Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "transport_client":
+					return ClusterPrivilege.TransportClient;
+				case "read_slm":
+					return ClusterPrivilege.ReadSlm;
+				case "read_pipeline":
+					return ClusterPrivilege.ReadPipeline;
+				case "read_ilm":
+					return ClusterPrivilege.ReadIlm;
+				case "read_ccr":
+					return ClusterPrivilege.ReadCcr;
+				case "monitor_watcher":
+					return ClusterPrivilege.MonitorWatcher;
+				case "monitor_transform":
+					return ClusterPrivilege.MonitorTransform;
+				case "monitor_text_structure":
+					return ClusterPrivilege.MonitorTextStructure;
+				case "monitor_snapshot":
+					return ClusterPrivilege.MonitorSnapshot;
+				case "monitor_rollup":
+					return ClusterPrivilege.MonitorRollup;
+				case "monitor_ml":
+					return ClusterPrivilege.MonitorMl;
+				case "monitor":
+					return ClusterPrivilege.Monitor;
+				case "manage_watcher":
+					return ClusterPrivilege.ManageWatcher;
+				case "manage_transform":
+					return ClusterPrivilege.ManageTransform;
+				case "manage_token":
+					return ClusterPrivilege.ManageToken;
+				case "manage_slm":
+					return ClusterPrivilege.ManageSlm;
+				case "manage_service_account":
+					return ClusterPrivilege.ManageServiceAccount;
+				case "manage_security":
+					return ClusterPrivilege.ManageSecurity;
+				case "manage_saml":
+					return ClusterPrivilege.ManageSaml;
+				case "manage_rollup":
+					return ClusterPrivilege.ManageRollup;
+				case "manage_pipeline":
+					return ClusterPrivilege.ManagePipeline;
+				case "manage_own_api_key":
+					return ClusterPrivilege.ManageOwnApiKey;
+				case "manage_oidc":
+					return ClusterPrivilege.ManageOidc;
+				case "manage_ml":
+					return ClusterPrivilege.ManageMl;
+				case "manage_logstash_pipelines":
+					return ClusterPrivilege.ManageLogstashPipelines;
+				case "manage_ingest_pipelines":
+					return ClusterPrivilege.ManageIngestPipelines;
+				case "manage_index_templates":
+					return ClusterPrivilege.ManageIndexTemplates;
+				case "manage_ilm":
+					return ClusterPrivilege.ManageIlm;
+				case "manage_ccr":
+					return ClusterPrivilege.ManageCcr;
+				case "manage_api_key":
+					return ClusterPrivilege.ManageApiKey;
+				case "manage":
+					return ClusterPrivilege.Manage;
+				case "grant_api_key":
+					return ClusterPrivilege.GrantApiKey;
+				case "create_snapshot":
+					return ClusterPrivilege.CreateSnapshot;
+				case "cancel_task":
+					return ClusterPrivilege.CancelTask;
+				case "all":
+					return ClusterPrivilege.All;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, ClusterPrivilege value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case ClusterPrivilege.TransportClient:
+					writer.WriteStringValue("transport_client");
+					return;
+				case ClusterPrivilege.ReadSlm:
+					writer.WriteStringValue("read_slm");
+					return;
+				case ClusterPrivilege.ReadPipeline:
+					writer.WriteStringValue("read_pipeline");
+					return;
+				case ClusterPrivilege.ReadIlm:
+					writer.WriteStringValue("read_ilm");
+					return;
+				case ClusterPrivilege.ReadCcr:
+					writer.WriteStringValue("read_ccr");
+					return;
+				case ClusterPrivilege.MonitorWatcher:
+					writer.WriteStringValue("monitor_watcher");
+					return;
+				case ClusterPrivilege.MonitorTransform:
+					writer.WriteStringValue("monitor_transform");
+					return;
+				case ClusterPrivilege.MonitorTextStructure:
+					writer.WriteStringValue("monitor_text_structure");
+					return;
+				case ClusterPrivilege.MonitorSnapshot:
+					writer.WriteStringValue("monitor_snapshot");
+					return;
+				case ClusterPrivilege.MonitorRollup:
+					writer.WriteStringValue("monitor_rollup");
+					return;
+				case ClusterPrivilege.MonitorMl:
+					writer.WriteStringValue("monitor_ml");
+					return;
+				case ClusterPrivilege.Monitor:
+					writer.WriteStringValue("monitor");
+					return;
+				case ClusterPrivilege.ManageWatcher:
+					writer.WriteStringValue("manage_watcher");
+					return;
+				case ClusterPrivilege.ManageTransform:
+					writer.WriteStringValue("manage_transform");
+					return;
+				case ClusterPrivilege.ManageToken:
+					writer.WriteStringValue("manage_token");
+					return;
+				case ClusterPrivilege.ManageSlm:
+					writer.WriteStringValue("manage_slm");
+					return;
+				case ClusterPrivilege.ManageServiceAccount:
+					writer.WriteStringValue("manage_service_account");
+					return;
+				case ClusterPrivilege.ManageSecurity:
+					writer.WriteStringValue("manage_security");
+					return;
+				case ClusterPrivilege.ManageSaml:
+					writer.WriteStringValue("manage_saml");
+					return;
+				case ClusterPrivilege.ManageRollup:
+					writer.WriteStringValue("manage_rollup");
+					return;
+				case ClusterPrivilege.ManagePipeline:
+					writer.WriteStringValue("manage_pipeline");
+					return;
+				case ClusterPrivilege.ManageOwnApiKey:
+					writer.WriteStringValue("manage_own_api_key");
+					return;
+				case ClusterPrivilege.ManageOidc:
+					writer.WriteStringValue("manage_oidc");
+					return;
+				case ClusterPrivilege.ManageMl:
+					writer.WriteStringValue("manage_ml");
+					return;
+				case ClusterPrivilege.ManageLogstashPipelines:
+					writer.WriteStringValue("manage_logstash_pipelines");
+					return;
+				case ClusterPrivilege.ManageIngestPipelines:
+					writer.WriteStringValue("manage_ingest_pipelines");
+					return;
+				case ClusterPrivilege.ManageIndexTemplates:
+					writer.WriteStringValue("manage_index_templates");
+					return;
+				case ClusterPrivilege.ManageIlm:
+					writer.WriteStringValue("manage_ilm");
+					return;
+				case ClusterPrivilege.ManageCcr:
+					writer.WriteStringValue("manage_ccr");
+					return;
+				case ClusterPrivilege.ManageApiKey:
+					writer.WriteStringValue("manage_api_key");
+					return;
+				case ClusterPrivilege.Manage:
+					writer.WriteStringValue("manage");
+					return;
+				case ClusterPrivilege.GrantApiKey:
+					writer.WriteStringValue("grant_api_key");
+					return;
+				case ClusterPrivilege.CreateSnapshot:
+					writer.WriteStringValue("create_snapshot");
+					return;
+				case ClusterPrivilege.CancelTask:
+					writer.WriteStringValue("cancel_task");
+					return;
+				case ClusterPrivilege.All:
+					writer.WriteStringValue("all");
 					return;
 			}
 
