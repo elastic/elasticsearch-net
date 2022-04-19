@@ -187,7 +187,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls MachineLearningGetModelSnapshots = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_ml/anomaly_detectors/{job_id}/model_snapshots" });
 		internal static ApiUrls MachineLearningGetOverallBuckets = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/results/overall_buckets" });
 		internal static ApiUrls MachineLearningGetRecords = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/results/records" });
-		internal static ApiUrls MachineLearningGetTrainedModels = new ApiUrls(new[] { "/_ml/trained_models/{model_id}", "/_ml/trained_models" });
 		internal static ApiUrls MachineLearningGetTrainedModelsStats = new ApiUrls(new[] { "/_ml/trained_models/{model_id}/_stats", "/_ml/trained_models/_stats" });
 		internal static ApiUrls MachineLearningInferTrainedModelDeployment = new ApiUrls(new[] { "/_ml/trained_models/{model_id}/deployment/_infer" });
 		internal static ApiUrls MachineLearningInfo = new ApiUrls(new[] { "/_ml/info" });
