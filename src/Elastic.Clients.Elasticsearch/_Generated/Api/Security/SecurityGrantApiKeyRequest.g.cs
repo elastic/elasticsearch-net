@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		[JsonInclude]
 		[JsonPropertyName("username")]
-		public string? Username { get; set; }
+		public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("password")]
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		private string? PasswordValue { get; set; }
 
-		private string? UsernameValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
 
 		public SecurityGrantApiKeyRequestDescriptor AccessToken(string? accessToken)
 		{
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return Self;
 		}
 
-		public SecurityGrantApiKeyRequestDescriptor Username(string? username)
+		public SecurityGrantApiKeyRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
 		{
 			UsernameValue = username;
 			return Self;

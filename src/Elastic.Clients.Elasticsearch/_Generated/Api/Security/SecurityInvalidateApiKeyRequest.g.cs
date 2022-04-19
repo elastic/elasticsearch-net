@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		[JsonInclude]
 		[JsonPropertyName("username")]
-		public string? Username { get; set; }
+		public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 	}
 
 	public sealed partial class SecurityInvalidateApiKeyRequestDescriptor : RequestDescriptorBase<SecurityInvalidateApiKeyRequestDescriptor, SecurityInvalidateApiKeyRequestParameters>
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		private string? RealmNameValue { get; set; }
 
-		private string? UsernameValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
 
 		public SecurityInvalidateApiKeyRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 		{
@@ -111,7 +111,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return Self;
 		}
 
-		public SecurityInvalidateApiKeyRequestDescriptor Username(string? username)
+		public SecurityInvalidateApiKeyRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
 		{
 			UsernameValue = username;
 			return Self;
