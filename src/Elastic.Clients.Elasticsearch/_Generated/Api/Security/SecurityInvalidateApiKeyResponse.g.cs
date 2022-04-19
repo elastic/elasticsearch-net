@@ -15,17 +15,29 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport;
-using System;
+using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class Ids
+	public partial class SecurityInvalidateApiKeyResponse : ElasticsearchResponseBase
 	{
-		private readonly List<Id> _idList = new();
+		[JsonInclude]
+		[JsonPropertyName("error_count")]
+		public int ErrorCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("error_details")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? ErrorDetails { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("invalidated_api_keys")]
+		public IReadOnlyCollection<string> InvalidatedApiKeys { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("previously_invalidated_api_keys")]
+		public IReadOnlyCollection<string> PreviouslyInvalidatedApiKeys { get; init; }
 	}
 }
