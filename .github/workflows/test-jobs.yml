@@ -75,7 +75,7 @@ jobs:
           
       # Github packages requires authentication, this is likely going away in the future so for now we publish to feedz.io
       # Only runs on builds on heads
-      - run: dotnet nuget push 'build/output/*.nupkg' -k ${{secrets.FEEDZ_IO_API_KEY}} -s https://f.feedz.io/elastic/all/nuget/index.json --skip-duplicate --no-symbols true
+      - run: dotnet nuget push 'build/output/*.nupkg' -k ${{secrets.FEEDZ_IO_API_KEY}} -s https://f.feedz.io/elastic/all/nuget/index.json --skip-duplicate --no-symbols
         name: publish canary packages to feedz.io
         if: github.event_name == 'push' && startswith(github.ref, 'refs/heads')
 
