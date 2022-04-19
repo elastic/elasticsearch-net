@@ -66,6 +66,10 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool? IncludeGlobalState { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("index_settings")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.PutSettingsRequest? IndexSettings { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
@@ -118,6 +122,8 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 		private bool? IncludeGlobalStateValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.IndexManagement.PutSettingsRequest? IndexSettingsValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
 
 		private bool? PartialValue { get; set; }
@@ -147,6 +153,12 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public SnapshotRestoreRequestDescriptor IncludeGlobalState(bool? includeGlobalState = true)
 		{
 			IncludeGlobalStateValue = includeGlobalState;
+			return Self;
+		}
+
+		public SnapshotRestoreRequestDescriptor IndexSettings(Elastic.Clients.Elasticsearch.IndexManagement.PutSettingsRequest? indexSettings)
+		{
+			IndexSettingsValue = indexSettings;
 			return Self;
 		}
 
@@ -199,6 +211,12 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 			{
 				writer.WritePropertyName("include_global_state");
 				writer.WriteBooleanValue(IncludeGlobalStateValue.Value);
+			}
+
+			if (IndexSettingsValue is not null)
+			{
+				writer.WritePropertyName("index_settings");
+				JsonSerializer.Serialize(writer, IndexSettingsValue, options);
 			}
 
 			if (IndicesValue is not null)
