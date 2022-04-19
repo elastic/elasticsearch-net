@@ -242,6 +242,12 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls SearchableSnapshotsStats = new ApiUrls(new[] { "/_searchable_snapshots/stats", "/{index}/_searchable_snapshots/stats" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
 		internal static ApiUrls NoNamespaceSearchShards = new ApiUrls(new[] { "/_search_shards", "/{index}/_search_shards" });
+		internal static ApiUrls SecurityClearApiKeyCache = new ApiUrls(new[] { "/_security/api_key/{ids}/_clear_cache" });
+		internal static ApiUrls SecurityCreateApiKey = new ApiUrls(new[] { "/_security/api_key" });
+		internal static ApiUrls SecurityGetApiKey = new ApiUrls(new[] { "/_security/api_key" });
+		internal static ApiUrls SecurityGrantApiKey = new ApiUrls(new[] { "/_security/api_key/grant" });
+		internal static ApiUrls SecurityInvalidateApiKey = new ApiUrls(new[] { "/_security/api_key" });
+		internal static ApiUrls SecurityQueryApiKeys = new ApiUrls(new[] { "/_security/_query/api_key" });
 		internal static ApiUrls SnapshotLifecycleManagementDeleteLifecycle = new ApiUrls(new[] { "/_slm/policy/{policy_id}" });
 		internal static ApiUrls SnapshotLifecycleManagementExecuteLifecycle = new ApiUrls(new[] { "/_slm/policy/{policy_id}/_execute" });
 		internal static ApiUrls SnapshotLifecycleManagementExecuteRetention = new ApiUrls(new[] { "/_slm/_execute_retention" });
