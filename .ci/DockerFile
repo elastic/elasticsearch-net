@@ -1,4 +1,4 @@
-ARG DOTNET_VERSION=6.0.101
+ARG DOTNET_VERSION=6.0.202
 FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION} AS elasticsearch-net-build
 
 ARG USER_ID
