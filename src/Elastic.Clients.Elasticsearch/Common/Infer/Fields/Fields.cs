@@ -125,7 +125,7 @@ public partial class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fiel
 
 	public bool Equals(Fields other) => EqualsAllFields(ListOfFields, other?.ListOfFields);
 
-	string IUrlParameter.GetString(ITransportConfiguration settings)
+	string IUrlParameter.GetString(ITransportConfiguration? settings)
 	{
 		if (settings is not IElasticsearchClientSettings elasticsearchClientSettings)
 		{

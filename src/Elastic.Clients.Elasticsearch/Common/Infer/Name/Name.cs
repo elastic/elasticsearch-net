@@ -23,7 +23,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public bool Equals(Name other) => EqualsString(other?.Value);
 
-		string IUrlParameter.GetString(ITransportConfiguration settings) => Value;
+		string IUrlParameter.GetString(ITransportConfiguration? settings) => Value;
 
 		public override string ToString() => DebugDisplay;
 
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public bool Equals(Username other) => EqualsString(other?.Value);
 
-		string IUrlParameter.GetString(ITransportConfiguration settings) => Value;
+		string IUrlParameter.GetString(ITransportConfiguration? settings) => Value;
 
 		public override string ToString() => DebugDisplay;
 
