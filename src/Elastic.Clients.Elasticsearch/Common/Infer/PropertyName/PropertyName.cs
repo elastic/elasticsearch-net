@@ -59,7 +59,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public bool Equals(PropertyName other) => EqualsMarker(other);
 
-		string IUrlParameter.GetString(ITransportConfiguration settings)
+		string IUrlParameter.GetString(ITransportConfiguration? settings)
 		{
 			if (settings is not IElasticsearchClientSettings elasticsearchSettings)
 			{
