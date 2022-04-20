@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch
 			? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
 			: other != null && _comparisonValue.Equals(other._comparisonValue);
 
-		string IUrlParameter.GetString(ITransportConfiguration settings)
+		string IUrlParameter.GetString(ITransportConfiguration? settings)
 		{
 			if (!(settings is IElasticsearchClientSettings ElasticsearchSettings))
 			{
