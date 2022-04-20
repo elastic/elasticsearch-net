@@ -353,7 +353,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public bool Equals(RelationName other) => EqualsMarker(other);
 
-		string IUrlParameter.GetString(ITransportConfiguration settings)
+		string IUrlParameter.GetString(ITransportConfiguration? settings)
 		{
 			if (settings is not IElasticsearchClientSettings nestSettings)
 				throw new ArgumentNullException(nameof(settings),
