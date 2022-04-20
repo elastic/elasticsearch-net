@@ -784,34 +784,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequestAsync<MlGetTrainedModelsStatsRequestDescriptor, MlGetTrainedModelsStatsResponse>(descriptor);
 		}
 
-		public MlInferTrainedModelDeploymentResponse InferTrainedModelDeployment(MlInferTrainedModelDeploymentRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<MlInferTrainedModelDeploymentRequest, MlInferTrainedModelDeploymentResponse>(request);
-		}
-
-		public Task<MlInferTrainedModelDeploymentResponse> InferTrainedModelDeploymentAsync(MlInferTrainedModelDeploymentRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<MlInferTrainedModelDeploymentRequest, MlInferTrainedModelDeploymentResponse>(request, cancellationToken);
-		}
-
-		public MlInferTrainedModelDeploymentResponse InferTrainedModelDeployment(Elastic.Clients.Elasticsearch.Id model_id, Action<MlInferTrainedModelDeploymentRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new MlInferTrainedModelDeploymentRequestDescriptor(model_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<MlInferTrainedModelDeploymentRequestDescriptor, MlInferTrainedModelDeploymentResponse>(descriptor);
-		}
-
-		public Task<MlInferTrainedModelDeploymentResponse> InferTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.Id model_id, Action<MlInferTrainedModelDeploymentRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new MlInferTrainedModelDeploymentRequestDescriptor(model_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<MlInferTrainedModelDeploymentRequestDescriptor, MlInferTrainedModelDeploymentResponse>(descriptor);
-		}
-
 		public MlInfoResponse Info(MlInfoRequest request)
 		{
 			request.BeforeRequest();
@@ -1176,34 +1148,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequestAsync<MlPutTrainedModelRequestDescriptor, MlPutTrainedModelResponse>(descriptor);
 		}
 
-		public MlPutTrainedModelVocabularyResponse PutTrainedModelVocabulary(MlPutTrainedModelVocabularyRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<MlPutTrainedModelVocabularyRequest, MlPutTrainedModelVocabularyResponse>(request);
-		}
-
-		public Task<MlPutTrainedModelVocabularyResponse> PutTrainedModelVocabularyAsync(MlPutTrainedModelVocabularyRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<MlPutTrainedModelVocabularyRequest, MlPutTrainedModelVocabularyResponse>(request, cancellationToken);
-		}
-
-		public MlPutTrainedModelVocabularyResponse PutTrainedModelVocabulary(Elastic.Clients.Elasticsearch.Id model_id, Action<MlPutTrainedModelVocabularyRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new MlPutTrainedModelVocabularyRequestDescriptor(model_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<MlPutTrainedModelVocabularyRequestDescriptor, MlPutTrainedModelVocabularyResponse>(descriptor);
-		}
-
-		public Task<MlPutTrainedModelVocabularyResponse> PutTrainedModelVocabularyAsync(Elastic.Clients.Elasticsearch.Id model_id, Action<MlPutTrainedModelVocabularyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new MlPutTrainedModelVocabularyRequestDescriptor(model_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<MlPutTrainedModelVocabularyRequestDescriptor, MlPutTrainedModelVocabularyResponse>(descriptor);
-		}
-
 		public MlResetJobResponse ResetJob(MlResetJobRequest request)
 		{
 			request.BeforeRequest();
@@ -1344,34 +1288,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequestAsync<MlStartDataFrameAnalyticsRequestDescriptor, MlStartDataFrameAnalyticsResponse>(descriptor);
 		}
 
-		public MlStartTrainedModelDeploymentResponse StartTrainedModelDeployment(MlStartTrainedModelDeploymentRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<MlStartTrainedModelDeploymentRequest, MlStartTrainedModelDeploymentResponse>(request);
-		}
-
-		public Task<MlStartTrainedModelDeploymentResponse> StartTrainedModelDeploymentAsync(MlStartTrainedModelDeploymentRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<MlStartTrainedModelDeploymentRequest, MlStartTrainedModelDeploymentResponse>(request, cancellationToken);
-		}
-
-		public MlStartTrainedModelDeploymentResponse StartTrainedModelDeployment(Elastic.Clients.Elasticsearch.Id model_id, Action<MlStartTrainedModelDeploymentRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new MlStartTrainedModelDeploymentRequestDescriptor(model_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<MlStartTrainedModelDeploymentRequestDescriptor, MlStartTrainedModelDeploymentResponse>(descriptor);
-		}
-
-		public Task<MlStartTrainedModelDeploymentResponse> StartTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.Id model_id, Action<MlStartTrainedModelDeploymentRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new MlStartTrainedModelDeploymentRequestDescriptor(model_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<MlStartTrainedModelDeploymentRequestDescriptor, MlStartTrainedModelDeploymentResponse>(descriptor);
-		}
-
 		public MlStopDatafeedResponse StopDatafeed(MlStopDatafeedRequest request)
 		{
 			request.BeforeRequest();
@@ -1426,34 +1342,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MlStopDataFrameAnalyticsRequestDescriptor, MlStopDataFrameAnalyticsResponse>(descriptor);
-		}
-
-		public MlStopTrainedModelDeploymentResponse StopTrainedModelDeployment(MlStopTrainedModelDeploymentRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<MlStopTrainedModelDeploymentRequest, MlStopTrainedModelDeploymentResponse>(request);
-		}
-
-		public Task<MlStopTrainedModelDeploymentResponse> StopTrainedModelDeploymentAsync(MlStopTrainedModelDeploymentRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<MlStopTrainedModelDeploymentRequest, MlStopTrainedModelDeploymentResponse>(request, cancellationToken);
-		}
-
-		public MlStopTrainedModelDeploymentResponse StopTrainedModelDeployment(Elastic.Clients.Elasticsearch.Id model_id, Action<MlStopTrainedModelDeploymentRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new MlStopTrainedModelDeploymentRequestDescriptor(model_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<MlStopTrainedModelDeploymentRequestDescriptor, MlStopTrainedModelDeploymentResponse>(descriptor);
-		}
-
-		public Task<MlStopTrainedModelDeploymentResponse> StopTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.Id model_id, Action<MlStopTrainedModelDeploymentRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new MlStopTrainedModelDeploymentRequestDescriptor(model_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<MlStopTrainedModelDeploymentRequestDescriptor, MlStopTrainedModelDeploymentResponse>(descriptor);
 		}
 
 		public MlUpdateDatafeedResponse UpdateDatafeed(MlUpdateDatafeedRequest request)
