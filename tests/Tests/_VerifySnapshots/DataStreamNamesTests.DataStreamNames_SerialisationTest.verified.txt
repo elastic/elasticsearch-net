@@ -1,0 +1,6 @@
+{
+  dataStreamName: [
+    test-datastream-1,
+    test-datastream-2
+  ]
+}

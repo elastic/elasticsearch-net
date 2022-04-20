@@ -1980,7 +1980,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	//	public static implicit operator Indices(string names) => Parse(names);
 
-	//	string IUrlParameter.GetString(ITransportConfiguration settings)
+	//	string IUrlParameter.GetString(ITransportConfiguration? settings)
 	//	{
 	//		if (settings is not IElasticsearchClientSettings elasticsearchClientSettings)
 	//			throw new Exception(
@@ -2026,7 +2026,7 @@ namespace Elastic.Clients.Elasticsearch
 	//	public static implicit operator IndicesList(string names) => Parse(names);
 	//}
 
-	//public partial struct IndicesList { string IUrlParameter.GetString(ITransportConfiguration settings) => ""; }
+	//public partial struct IndicesList { string IUrlParameter.GetString(ITransportConfiguration? settings) => ""; }
 
 
 	public abstract partial class PlainRequestBase<TParameters>
