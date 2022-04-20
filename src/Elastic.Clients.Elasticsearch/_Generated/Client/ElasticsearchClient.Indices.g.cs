@@ -420,34 +420,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<DeleteTemplateRequestDescriptor, DeleteTemplateResponse>(descriptor);
 		}
 
-		public DiskUsageResponse DiskUsage(DiskUsageRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<DiskUsageRequest, DiskUsageResponse>(request);
-		}
-
-		public Task<DiskUsageResponse> DiskUsageAsync(DiskUsageRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<DiskUsageRequest, DiskUsageResponse>(request, cancellationToken);
-		}
-
-		public DiskUsageResponse DiskUsage(Elastic.Clients.Elasticsearch.IndexName index, Action<DiskUsageRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new DiskUsageRequestDescriptor(index);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<DiskUsageRequestDescriptor, DiskUsageResponse>(descriptor);
-		}
-
-		public Task<DiskUsageResponse> DiskUsageAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<DiskUsageRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DiskUsageRequestDescriptor(index);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DiskUsageRequestDescriptor, DiskUsageResponse>(descriptor);
-		}
-
 		public ExistsAliasResponse ExistsAlias(ExistsAliasRequest request)
 		{
 			request.BeforeRequest();
@@ -586,34 +558,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<FieldMappingRequestDescriptor, FieldMappingResponse>(descriptor);
-		}
-
-		public FieldUsageStatsResponse FieldUsageStats(FieldUsageStatsRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<FieldUsageStatsRequest, FieldUsageStatsResponse>(request);
-		}
-
-		public Task<FieldUsageStatsResponse> FieldUsageStatsAsync(FieldUsageStatsRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<FieldUsageStatsRequest, FieldUsageStatsResponse>(request, cancellationToken);
-		}
-
-		public FieldUsageStatsResponse FieldUsageStats(Elastic.Clients.Elasticsearch.Indices indices, Action<FieldUsageStatsRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new FieldUsageStatsRequestDescriptor(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<FieldUsageStatsRequestDescriptor, FieldUsageStatsResponse>(descriptor);
-		}
-
-		public Task<FieldUsageStatsResponse> FieldUsageStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<FieldUsageStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new FieldUsageStatsRequestDescriptor(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<FieldUsageStatsRequestDescriptor, FieldUsageStatsResponse>(descriptor);
 		}
 
 		public FlushResponse Flush(FlushRequest request)
