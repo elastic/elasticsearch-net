@@ -55,33 +55,5 @@ namespace Elastic.Clients.Elasticsearch.Features
 			descriptor.BeforeRequest();
 			return DoRequestAsync<FeaturesGetFeaturesRequestDescriptor, FeaturesGetFeaturesResponse>(descriptor);
 		}
-
-		public FeaturesResetFeaturesResponse ResetFeatures(FeaturesResetFeaturesRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<FeaturesResetFeaturesRequest, FeaturesResetFeaturesResponse>(request);
-		}
-
-		public Task<FeaturesResetFeaturesResponse> ResetFeaturesAsync(FeaturesResetFeaturesRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<FeaturesResetFeaturesRequest, FeaturesResetFeaturesResponse>(request, cancellationToken);
-		}
-
-		public FeaturesResetFeaturesResponse ResetFeatures(Action<FeaturesResetFeaturesRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new FeaturesResetFeaturesRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<FeaturesResetFeaturesRequestDescriptor, FeaturesResetFeaturesResponse>(descriptor);
-		}
-
-		public Task<FeaturesResetFeaturesResponse> ResetFeaturesAsync(Action<FeaturesResetFeaturesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new FeaturesResetFeaturesRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<FeaturesResetFeaturesRequestDescriptor, FeaturesResetFeaturesResponse>(descriptor);
-		}
 	}
 }

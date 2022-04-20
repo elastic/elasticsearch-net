@@ -38,7 +38,6 @@ using Elastic.Clients.Elasticsearch.Slm;
 using Elastic.Clients.Elasticsearch.Snapshot;
 using Elastic.Clients.Elasticsearch.Sql;
 using Elastic.Clients.Elasticsearch.Ssl;
-using Elastic.Clients.Elasticsearch.Tasks;
 using Elastic.Clients.Elasticsearch.TransformManagement;
 using Elastic.Clients.Elasticsearch.Xpack;
 using System;
@@ -96,8 +95,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		public SslNamespace Ssl { get; private set; }
 
-		public TasksNamespace Tasks { get; private set; }
-
 		public TransformManagementNamespace TransformManagement { get; private set; }
 
 		public XpackNamespace Xpack { get; private set; }
@@ -127,7 +124,6 @@ namespace Elastic.Clients.Elasticsearch
 			Snapshot = new SnapshotNamespace(this);
 			Sql = new SqlNamespace(this);
 			Ssl = new SslNamespace(this);
-			Tasks = new TasksNamespace(this);
 			TransformManagement = new TransformManagementNamespace(this);
 			Xpack = new XpackNamespace(this);
 		}
@@ -580,34 +576,6 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<InfoRequestDescriptor, InfoResponse>(descriptor);
 		}
 
-		public KnnSearchResponse<TDocument> KnnSearch<TDocument>(KnnSearchRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<KnnSearchRequest, KnnSearchResponse<TDocument>>(request);
-		}
-
-		public Task<KnnSearchResponse<TDocument>> KnnSearchAsync<TDocument>(KnnSearchRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<KnnSearchRequest, KnnSearchResponse<TDocument>>(request, cancellationToken);
-		}
-
-		public KnnSearchResponse<TDocument> KnnSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<KnnSearchRequestDescriptor<TDocument>> configureRequest = null)
-		{
-			var descriptor = new KnnSearchRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<KnnSearchRequestDescriptor<TDocument>, KnnSearchResponse<TDocument>>(descriptor);
-		}
-
-		public Task<KnnSearchResponse<TDocument>> KnnSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<KnnSearchRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new KnnSearchRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<KnnSearchRequestDescriptor<TDocument>, KnnSearchResponse<TDocument>>(descriptor);
-		}
-
 		public OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
 		{
 			request.BeforeRequest();
@@ -874,34 +842,6 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<ScriptRequestDescriptor, ScriptResponse>(descriptor);
-		}
-
-		public ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TResult>(ScriptsPainlessExecuteRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ScriptsPainlessExecuteRequest, ScriptsPainlessExecuteResponse<TResult>>(request);
-		}
-
-		public Task<ScriptsPainlessExecuteResponse<TResult>> ScriptsPainlessExecuteAsync<TResult>(ScriptsPainlessExecuteRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ScriptsPainlessExecuteRequest, ScriptsPainlessExecuteResponse<TResult>>(request, cancellationToken);
-		}
-
-		public ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TResult>(Action<ScriptsPainlessExecuteRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new ScriptsPainlessExecuteRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ScriptsPainlessExecuteRequestDescriptor, ScriptsPainlessExecuteResponse<TResult>>(descriptor);
-		}
-
-		public Task<ScriptsPainlessExecuteResponse<TResult>> ScriptsPainlessExecuteAsync<TResult>(Action<ScriptsPainlessExecuteRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ScriptsPainlessExecuteRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ScriptsPainlessExecuteRequestDescriptor, ScriptsPainlessExecuteResponse<TResult>>(descriptor);
 		}
 
 		public ScrollResponse<TDocument> Scroll<TDocument>(ScrollRequest request)
