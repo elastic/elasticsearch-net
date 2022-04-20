@@ -37,7 +37,7 @@ public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUr
 
 	public override string ToString() => DebugDisplay;
 
-	string IUrlParameter.GetString(ITransportConfiguration settings) => Match(
+	string IUrlParameter.GetString(ITransportConfiguration? settings) => Match(
 		all => "_all",
 		many =>
 		{

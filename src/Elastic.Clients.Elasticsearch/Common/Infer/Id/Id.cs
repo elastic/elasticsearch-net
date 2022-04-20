@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch
 			};
 		}
 
-		string IUrlParameter.GetString(ITransportConfiguration settings)
+		string IUrlParameter.GetString(ITransportConfiguration? settings)
 		{
 			var elasticClientSettings = (IElasticsearchClientSettings)settings;
 			return GetString(elasticClientSettings);

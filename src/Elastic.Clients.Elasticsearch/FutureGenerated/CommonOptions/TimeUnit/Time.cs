@@ -206,7 +206,7 @@ namespace Elastic.Clients.Elasticsearch
 	//		return Interval.HasValue ? factor + Interval.Value.GetStringValue() : factor;
 	//	}
 
-	//	string IUrlParameter.GetString(ITransportConfiguration settings)
+	//	string IUrlParameter.GetString(ITransportConfiguration? settings)
 	//	{
 	//		if (this == MinusOne)
 	//			return "-1";

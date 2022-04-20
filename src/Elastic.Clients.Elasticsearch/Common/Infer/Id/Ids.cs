@@ -38,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch
 				   _ids.OrderBy(id => id).SequenceEqual(other._ids.OrderBy(id => id));
 		}
 
-		string IUrlParameter.GetString(ITransportConfiguration settings) =>
+		string IUrlParameter.GetString(ITransportConfiguration? settings) =>
 			string.Join(",", _ids ?? Enumerable.Empty<string>());
 
 		public override string ToString() => DebugDisplay;
