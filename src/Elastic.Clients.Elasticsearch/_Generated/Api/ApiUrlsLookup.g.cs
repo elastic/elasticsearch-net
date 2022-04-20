@@ -78,7 +78,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceExistsSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
 		internal static ApiUrls NoNamespaceExplain = new ApiUrls(new[] { "/{index}/_explain/{id}" });
 		internal static ApiUrls FeaturesGetFeatures = new ApiUrls(new[] { "/_features" });
-		internal static ApiUrls FeaturesResetFeatures = new ApiUrls(new[] { "/_features/_reset" });
 		internal static ApiUrls NoNamespaceFieldCaps = new ApiUrls(new[] { "/_field_caps", "/{index}/_field_caps" });
 		internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls GraphExplore = new ApiUrls(new[] { "/{index}/_graph/explore" });
@@ -107,13 +106,11 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IndexManagementDeleteIndexTemplate = new ApiUrls(new[] { "/_index_template/{name}" });
 		internal static ApiUrls IndexManagementDelete = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementDeleteTemplate = new ApiUrls(new[] { "/_template/{name}" });
-		internal static ApiUrls IndexManagementDiskUsage = new ApiUrls(new[] { "/{index}/_disk_usage" });
 		internal static ApiUrls IndexManagementExistsAlias = new ApiUrls(new[] { "/_alias/{name}", "/{index}/_alias/{name}" });
 		internal static ApiUrls IndexManagementExistsIndexTemplate = new ApiUrls(new[] { "/_index_template/{name}" });
 		internal static ApiUrls IndexManagementExists = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementExistsTemplate = new ApiUrls(new[] { "/_template/{name}" });
 		internal static ApiUrls IndexManagementGetFieldMapping = new ApiUrls(new[] { "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}" });
-		internal static ApiUrls IndexManagementFieldUsageStats = new ApiUrls(new[] { "/{index}/_field_usage_stats" });
 		internal static ApiUrls IndexManagementFlush = new ApiUrls(new[] { "/_flush", "/{index}/_flush" });
 		internal static ApiUrls IndexManagementForcemerge = new ApiUrls(new[] { "/_forcemerge", "/{index}/_forcemerge" });
 		internal static ApiUrls IndexManagementGet = new ApiUrls(new[] { "/{index}" });
@@ -150,7 +147,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IngestProcessorGrok = new ApiUrls(new[] { "/_ingest/processor/grok" });
 		internal static ApiUrls IngestPutPipeline = new ApiUrls(new[] { "/_ingest/pipeline/{id}" });
 		internal static ApiUrls IngestSimulate = new ApiUrls(new[] { "/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate" });
-		internal static ApiUrls NoNamespaceKnnSearch = new ApiUrls(new[] { "/{index}/_knn_search" });
 		internal static ApiUrls LicenseDelete = new ApiUrls(new[] { "/_license" });
 		internal static ApiUrls LicenseGet = new ApiUrls(new[] { "/_license" });
 		internal static ApiUrls LicenseGetBasicStatus = new ApiUrls(new[] { "/_license/basic_status" });
@@ -188,7 +184,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls MachineLearningGetOverallBuckets = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/results/overall_buckets" });
 		internal static ApiUrls MachineLearningGetRecords = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/results/records" });
 		internal static ApiUrls MachineLearningGetTrainedModelsStats = new ApiUrls(new[] { "/_ml/trained_models/{model_id}/_stats", "/_ml/trained_models/_stats" });
-		internal static ApiUrls MachineLearningInferTrainedModelDeployment = new ApiUrls(new[] { "/_ml/trained_models/{model_id}/deployment/_infer" });
 		internal static ApiUrls MachineLearningInfo = new ApiUrls(new[] { "/_ml/info" });
 		internal static ApiUrls MachineLearningOpenJob = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/_open" });
 		internal static ApiUrls MachineLearningPostCalendarEvents = new ApiUrls(new[] { "/_ml/calendars/{calendar_id}/events" });
@@ -202,16 +197,13 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls MachineLearningPutJob = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}" });
 		internal static ApiUrls MachineLearningPutTrainedModelAlias = new ApiUrls(new[] { "/_ml/trained_models/{model_id}/model_aliases/{model_alias}" });
 		internal static ApiUrls MachineLearningPutTrainedModel = new ApiUrls(new[] { "/_ml/trained_models/{model_id}" });
-		internal static ApiUrls MachineLearningPutTrainedModelVocabulary = new ApiUrls(new[] { "/_ml/trained_models/{model_id}/vocabulary" });
 		internal static ApiUrls MachineLearningResetJob = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/_reset" });
 		internal static ApiUrls MachineLearningRevertModelSnapshot = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert" });
 		internal static ApiUrls MachineLearningSetUpgradeMode = new ApiUrls(new[] { "/_ml/set_upgrade_mode" });
 		internal static ApiUrls MachineLearningStartDatafeed = new ApiUrls(new[] { "/_ml/datafeeds/{datafeed_id}/_start" });
 		internal static ApiUrls MachineLearningStartDataFrameAnalytics = new ApiUrls(new[] { "/_ml/data_frame/analytics/{id}/_start" });
-		internal static ApiUrls MachineLearningStartTrainedModelDeployment = new ApiUrls(new[] { "/_ml/trained_models/{model_id}/deployment/_start" });
 		internal static ApiUrls MachineLearningStopDatafeed = new ApiUrls(new[] { "/_ml/datafeeds/{datafeed_id}/_stop" });
 		internal static ApiUrls MachineLearningStopDataFrameAnalytics = new ApiUrls(new[] { "/_ml/data_frame/analytics/{id}/_stop" });
-		internal static ApiUrls MachineLearningStopTrainedModelDeployment = new ApiUrls(new[] { "/_ml/trained_models/{model_id}/deployment/_stop" });
 		internal static ApiUrls MachineLearningUpdateDatafeed = new ApiUrls(new[] { "/_ml/datafeeds/{datafeed_id}/_update" });
 		internal static ApiUrls MachineLearningUpdateDataFrameAnalytics = new ApiUrls(new[] { "/_ml/data_frame/analytics/{id}/_update" });
 		internal static ApiUrls MachineLearningUpdateFilter = new ApiUrls(new[] { "/_ml/filters/{filter_id}/_update" });
@@ -234,10 +226,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceGetScriptContext = new ApiUrls(new[] { "/_script_context" });
 		internal static ApiUrls NoNamespaceGetScriptLanguages = new ApiUrls(new[] { "/_script_language" });
 		internal static ApiUrls NoNamespaceGetScript = new ApiUrls(new[] { "/_scripts/{id}" });
-		internal static ApiUrls NoNamespaceScriptsPainlessExecute = new ApiUrls(new[] { "/_scripts/painless/_execute" });
 		internal static ApiUrls NoNamespaceScroll = new ApiUrls(new[] { "/_search/scroll" });
-		internal static ApiUrls SearchableSnapshotsCacheStats = new ApiUrls(new[] { "/_searchable_snapshots/cache/stats", "/_searchable_snapshots/{node_id}/cache/stats" });
-		internal static ApiUrls SearchableSnapshotsClearCache = new ApiUrls(new[] { "/_searchable_snapshots/cache/clear", "/{index}/_searchable_snapshots/cache/clear" });
 		internal static ApiUrls SearchableSnapshotsMount = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}/_mount" });
 		internal static ApiUrls SearchableSnapshotsStats = new ApiUrls(new[] { "/_searchable_snapshots/stats", "/{index}/_searchable_snapshots/stats" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
@@ -300,9 +289,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls SqlGetAsyncStatus = new ApiUrls(new[] { "/_sql/async/status/{id}" });
 		internal static ApiUrls SqlQuery = new ApiUrls(new[] { "/_sql" });
 		internal static ApiUrls SecurityCertificates = new ApiUrls(new[] { "/_ssl/certificates" });
-		internal static ApiUrls TasksGet = new ApiUrls(new[] { "/_tasks/{task_id}" });
-		internal static ApiUrls TasksCancel = new ApiUrls(new[] { "/_tasks/_cancel", "/_tasks/{task_id}/_cancel" });
-		internal static ApiUrls TasksList = new ApiUrls(new[] { "/_tasks" });
 		internal static ApiUrls NoNamespaceTermsEnum = new ApiUrls(new[] { "/{index}/_terms_enum" });
 		internal static ApiUrls TransformManagementDeleteTransform = new ApiUrls(new[] { "/_transform/{transform_id}" });
 		internal static ApiUrls TransformManagementGetTransform = new ApiUrls(new[] { "/_transform/{transform_id}", "/_transform" });
