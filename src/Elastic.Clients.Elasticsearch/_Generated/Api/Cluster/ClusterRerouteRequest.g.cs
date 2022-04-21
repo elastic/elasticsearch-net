@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public class ClusterRerouteRequestParameters : RequestParameters<ClusterRerouteRequestParameters>
+	public sealed class ClusterRerouteRequestParameters : RequestParameters<ClusterRerouteRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }

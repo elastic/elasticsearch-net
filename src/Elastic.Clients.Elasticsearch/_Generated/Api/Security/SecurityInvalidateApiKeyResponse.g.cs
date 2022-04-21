@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class SecurityInvalidateApiKeyResponse : ElasticsearchResponseBase
+	public sealed partial class SecurityInvalidateApiKeyResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("error_count")]

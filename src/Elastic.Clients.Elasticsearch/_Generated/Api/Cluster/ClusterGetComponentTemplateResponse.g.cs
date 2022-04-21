@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterGetComponentTemplateResponse : ElasticsearchResponseBase
+	public sealed partial class ClusterGetComponentTemplateResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("component_templates")]

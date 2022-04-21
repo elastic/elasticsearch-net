@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ReindexResponse : ElasticsearchResponseBase
+	public sealed partial class ReindexResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("batches")]

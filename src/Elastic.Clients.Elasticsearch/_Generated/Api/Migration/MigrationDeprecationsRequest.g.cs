@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Migration
 {
-	public class MigrationDeprecationsRequestParameters : RequestParameters<MigrationDeprecationsRequestParameters>
+	public sealed class MigrationDeprecationsRequestParameters : RequestParameters<MigrationDeprecationsRequestParameters>
 	{
 	}
 

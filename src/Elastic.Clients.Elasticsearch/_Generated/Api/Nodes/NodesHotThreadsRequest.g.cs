@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public class NodesHotThreadsRequestParameters : RequestParameters<NodesHotThreadsRequestParameters>
+	public sealed class NodesHotThreadsRequestParameters : RequestParameters<NodesHotThreadsRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }

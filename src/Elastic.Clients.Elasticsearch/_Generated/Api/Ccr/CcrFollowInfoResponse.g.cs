@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public partial class CcrFollowInfoResponse : ElasticsearchResponseBase
+	public sealed partial class CcrFollowInfoResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("follower_indices")]

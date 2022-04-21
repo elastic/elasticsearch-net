@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.License
 {
-	public class GetLicenseRequestParameters : RequestParameters<GetLicenseRequestParameters>
+	public sealed class GetLicenseRequestParameters : RequestParameters<GetLicenseRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
