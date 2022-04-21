@@ -13,26 +13,26 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(TaskIdConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public partial class TaskId : IUrlParameter, IEquatable<TaskId>
+public sealed class TaskId : IUrlParameter, IEquatable<TaskId>
 {
 	/// <summary>
-	/// A task id exists in the form [node_id]:[task_id]
+	/// A task id exists in the form [node_id]:[task_id].
 	/// </summary>
-	/// <param name="taskId">the task identifier</param>
+	/// <param name="taskId">The task identifier as a string.</param>
 	public TaskId(string taskId)
 	{
 		if (string.IsNullOrWhiteSpace(taskId))
-			throw new ArgumentException("TaskId can not be an empty string", nameof(taskId));
+			throw new ArgumentException("TaskId can not be an empty string.", nameof(taskId));
 
 		var tokens = taskId.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
 		if (tokens.Length != 2)
-			throw new ArgumentException($"TaskId:{taskId} not in expected format of <node_id>:<task_id>", nameof(taskId));
+			throw new ArgumentException($"TaskId:{taskId} not in expected format of <node_id>:<task_id>.", nameof(taskId));
 
 		NodeId = tokens[0];
 		FullyQualifiedId = taskId;
 
 		if (!long.TryParse(tokens[1].Trim(), NumberStyles.Any, CultureInfo.InvariantCulture, out var t) || t < -1 || t == 0)
-			throw new ArgumentException($"TaskId task component:{tokens[1]} could not be parsed to long or is out of range", nameof(taskId));
+			throw new ArgumentException($"TaskId task component:{tokens[1]} could not be parsed to long or is out of range.", nameof(taskId));
 
 		TaskNumber = t;
 	}
@@ -85,5 +85,11 @@ internal sealed class TaskIdConverter : JsonConverter<TaskId>
 		throw new JsonException("Unexpected JSON token");
 	}
 
-	public override void Write(Utf8JsonWriter writer, TaskId value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, TaskId value, JsonSerializerOptions options)
+	{
+		if (value is null)
+			writer.WriteNullValue();
+
+		writer.WriteStringValue(value.FullyQualifiedId);
+	}
 }
