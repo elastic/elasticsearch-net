@@ -25,6 +25,16 @@ namespace Tests.Serialization
 		}
 
 		[U]
+		public async void DataStreamNames_DeserialisationTest()
+		{
+			const string json = @"{""dataStreamName"":[""test-datastream-1"",""test-datastream-2""]}";
+
+			var obj = DeserializeJsonString<TestThing>(json);
+
+			await Verifier.Verify(obj);
+		}
+
+		[U]
 		public void ImplictlyCreatedFromCommaSeparatedNames()
 		{
 			DataStreamNames dataStreamNames = "test-datastream-1,test-datastream-2";
