@@ -9,19 +9,6 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch
 {
-
-	internal interface ISelfDeserializable
-	{
-		void Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings);
-	}
-
-	internal interface ISelfTwoWaySerializable
-	{
-		void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
-		void Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings);
-	}
-
-
 	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum)]
 	public class StringEnumAttribute : Attribute { }
 
@@ -35,7 +22,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		public Type ConverterType { get; }
 	}
-
 	internal sealed class SimpleInterfaceConverter<TInterface, TConcrete> : JsonConverter<TInterface> where TConcrete : class, TInterface
 	{
 		public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>

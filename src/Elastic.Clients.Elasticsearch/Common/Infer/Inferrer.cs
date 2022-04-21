@@ -20,7 +20,7 @@ using System.Text.Json;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class Inferrer
+	public sealed class Inferrer
 	{
 		private readonly IElasticsearchClientSettings _elasticsearchClientSettings;
 

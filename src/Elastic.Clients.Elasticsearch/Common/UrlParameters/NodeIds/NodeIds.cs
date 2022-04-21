@@ -11,7 +11,7 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public class NodeIds : IEquatable<NodeIds>, IUrlParameter
+public sealed class NodeIds : IEquatable<NodeIds>, IUrlParameter
 {
 	public NodeIds(IEnumerable<string> nodeIds)
 	{

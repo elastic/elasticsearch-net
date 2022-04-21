@@ -97,13 +97,13 @@ public sealed class Field : IEquatable<Field>, IUrlParameter
 
 	string IUrlParameter.GetString(ITransportConfiguration? settings)
 	{
-		if (settings is not IElasticsearchClientSettings elasticsearchSettings)
+		if (!(settings is IElasticsearchClientSettings ElasticsearchSettings))
 		{
 			throw new ArgumentNullException(nameof(settings),
 				$"Can not resolve {nameof(Field)} if no {nameof(IElasticsearchClientSettings)} is provided");
 		}
 
-		return elasticsearchSettings.Inferrer.Field(this);
+		return ElasticsearchSettings.Inferrer.Field(this);
 	}
 
 	public override string ToString() => DebugDisplay;
@@ -130,7 +130,8 @@ public sealed class Field : IEquatable<Field>, IUrlParameter
 		if (name == null)
 			return null;
 
-		if (!name.Contains('^'))
+		var caretIndex = name.IndexOf('^');
+		if (caretIndex == -1)
 			return name;
 
 		var parts = name.Split(new[] { '^' }, 2, StringSplitOptions.RemoveEmptyEntries);

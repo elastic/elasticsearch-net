@@ -11,7 +11,7 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public class Names : IEquatable<Names>, IUrlParameter
+public sealed class Names : IEquatable<Names>, IUrlParameter
 {
 	public Names(IEnumerable<string> names) : this(names?.Select(n => (Name)n).ToList()) { }
 

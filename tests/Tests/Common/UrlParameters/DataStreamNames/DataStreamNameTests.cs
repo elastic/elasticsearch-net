@@ -8,21 +8,9 @@ using VerifyXunit;
 
 namespace Tests.Serialization
 {
-	[UsesVerify]
-	[SystemTextJsonOnly]
-	public class DataStreamNameTests : SerializerTestBase
+	public class DataStreamNameTests
 	{
 		private const string TestDataStreamName = "test-datastream";
-
-		[U]
-		public async Task DataStreamName_SerialisationTest()
-		{
-			var obj = new TestThing();
-
-			var serialisedJson = await SerializeAndGetJsonStringAsync(obj);
-
-			await Verifier.VerifyJson(serialisedJson);
-		}
 
 		[U]
 		public void GetHashCode_Matches()
@@ -48,6 +36,29 @@ namespace Tests.Serialization
 			DataStreamName dsn1 = TestDataStreamName;
 
 			dsn1.Equals(TestDataStreamName).Should().BeTrue();
+		}
+	}
+
+	[UsesVerify]
+	[SystemTextJsonOnly]
+	public class DataStreamNameSerializationTests : SerializerTestBase
+	{
+		private const string TestDataStreamName = "test-datastream";
+
+		[U]
+		public async Task SerializesCorrectly()
+		{
+			var obj = new TestThing();
+			var serialisedJson = await SerializeAndGetJsonStringAsync(obj);
+			await Verifier.VerifyJson(serialisedJson);
+		}
+
+		[U]
+		public async void DeserializesCorrectly()
+		{
+			const string json = @"{""dataStreamName"":""test-datastream""}";
+			var obj = DeserializeJsonString<TestThing>(json);
+			await Verifier.Verify(obj);
 		}
 
 		private class TestThing
