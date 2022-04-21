@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public class OpenPointInTimeRequestParameters : RequestParameters<OpenPointInTimeRequestParameters>
+	public sealed class OpenPointInTimeRequestParameters : RequestParameters<OpenPointInTimeRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Time>("keep_alive"); set => Q("keep_alive", value); }

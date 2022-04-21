@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public class TransformUpdateTransformRequestParameters : RequestParameters<TransformUpdateTransformRequestParameters>
+	public sealed class TransformUpdateTransformRequestParameters : RequestParameters<TransformUpdateTransformRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }

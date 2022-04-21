@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public class TransformDeleteTransformRequestParameters : RequestParameters<TransformDeleteTransformRequestParameters>
+	public sealed class TransformDeleteTransformRequestParameters : RequestParameters<TransformDeleteTransformRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }

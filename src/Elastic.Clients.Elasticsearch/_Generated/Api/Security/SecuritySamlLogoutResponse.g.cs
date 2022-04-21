@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class SecuritySamlLogoutResponse : ElasticsearchResponseBase
+	public sealed partial class SecuritySamlLogoutResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("redirect")]

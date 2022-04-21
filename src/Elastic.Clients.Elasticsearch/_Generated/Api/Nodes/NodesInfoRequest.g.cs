@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public class NodesInfoRequestParameters : RequestParameters<NodesInfoRequestParameters>
+	public sealed class NodesInfoRequestParameters : RequestParameters<NodesInfoRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlPostCalendarEventsRequestParameters : RequestParameters<MlPostCalendarEventsRequestParameters>
+	public sealed class MlPostCalendarEventsRequestParameters : RequestParameters<MlPostCalendarEventsRequestParameters>
 	{
 	}
 

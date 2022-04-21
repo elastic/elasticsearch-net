@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class CreateSnapshotResponse : ElasticsearchResponseBase
+	public sealed partial class CreateSnapshotResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("accepted")]

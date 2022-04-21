@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 {
-	public class SearchableSnapshotsStatsRequestParameters : RequestParameters<SearchableSnapshotsStatsRequestParameters>
+	public sealed class SearchableSnapshotsStatsRequestParameters : RequestParameters<SearchableSnapshotsStatsRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel? Level { get => Q<Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel?>("level"); set => Q("level", value); }

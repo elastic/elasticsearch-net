@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm
 {
-	public partial class IlmMigrateToDataTiersResponse : ElasticsearchResponseBase
+	public sealed partial class IlmMigrateToDataTiersResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("dry_run")]

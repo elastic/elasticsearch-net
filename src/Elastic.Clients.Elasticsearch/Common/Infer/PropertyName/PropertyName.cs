@@ -11,14 +11,9 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public interface IDictionaryKey
-	{
-		string Key { get; }
-	}
-
 	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	[JsonConverter(typeof(PropertyNameConverter))]
-	public class PropertyName : IEquatable<PropertyName>, IUrlParameter, IDictionaryKey
+	public sealed class PropertyName : IEquatable<PropertyName>, IUrlParameter, IDictionaryKey
 	{
 		private readonly object _comparisonValue;
 		private readonly Type _type;
@@ -67,8 +62,7 @@ namespace Elastic.Clients.Elasticsearch
 					$"Can not resolve {nameof(PropertyName)} if no {nameof(IElasticsearchClientSettings)} is provided");
 			}
 
-			return string.Empty;
-			//return elasticsearchSettings.Inferrer.PropertyName(this);
+			return elasticsearchSettings.Inferrer.PropertyName(this);
 		}
 
 		public override string ToString() => DebugDisplay;

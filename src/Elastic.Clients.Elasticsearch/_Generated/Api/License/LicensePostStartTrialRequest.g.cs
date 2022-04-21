@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.License
 {
-	public class LicensePostStartTrialRequestParameters : RequestParameters<LicensePostStartTrialRequestParameters>
+	public sealed class LicensePostStartTrialRequestParameters : RequestParameters<LicensePostStartTrialRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }

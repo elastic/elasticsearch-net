@@ -11,8 +11,6 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ElasticsearchClient
 {
-	//public HelpersNamespace Helpers { get; private set; }
-
 	public BulkAllObservable<T> BulkAll<T>(IEnumerable<T> documents, Action<BulkAllRequestDescriptor<T>> configure, CancellationToken cancellationToken = default)
     {
         var descriptor = new BulkAllRequestDescriptor<T>(documents);
@@ -23,20 +21,3 @@ public partial class ElasticsearchClient
     public BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default) =>
         new(this, request, cancellationToken);
 }
-
-//public class HelpersNamespace : NamespacedClientProxy
-//{
-//	private readonly ElasticsearchClient _client;
-
-//	internal HelpersNamespace(ElasticsearchClient client) : base(client) => _client = client;
-
-//	public BulkAllObservable<T> BulkAllObservable<T>(IEnumerable<T> documents, Action<BulkAllRequestDescriptor<T>> configure, CancellationToken cancellationToken = default)
-//	{
-//		var descriptor = new BulkAllRequestDescriptor<T>(documents);
-//		configure?.Invoke(descriptor);
-//		return BulkAllObservable<T>(descriptor, cancellationToken);
-//	}
-
-//	public BulkAllObservable<T> BulkAllObservable<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default) =>
-//		new(_client, request, cancellationToken);
-//}

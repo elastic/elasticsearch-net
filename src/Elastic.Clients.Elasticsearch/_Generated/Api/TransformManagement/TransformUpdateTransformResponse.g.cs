@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class TransformUpdateTransformResponse : ElasticsearchResponseBase
+	public sealed partial class TransformUpdateTransformResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("create_time")]

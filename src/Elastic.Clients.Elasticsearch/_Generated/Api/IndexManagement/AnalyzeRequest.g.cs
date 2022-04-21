@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public class AnalyzeRequestParameters : RequestParameters<AnalyzeRequestParameters>
+	public sealed class AnalyzeRequestParameters : RequestParameters<AnalyzeRequestParameters>
 	{
 	}
 

@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Slm
 {
-	public partial class SlmExecuteLifecycleResponse : ElasticsearchResponseBase
+	public sealed partial class SlmExecuteLifecycleResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("snapshot_name")]

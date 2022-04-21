@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlDeleteDatafeedRequestParameters : RequestParameters<MlDeleteDatafeedRequestParameters>
+	public sealed class MlDeleteDatafeedRequestParameters : RequestParameters<MlDeleteDatafeedRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }

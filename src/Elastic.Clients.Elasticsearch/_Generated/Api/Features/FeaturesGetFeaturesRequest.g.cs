@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Features
 {
-	public class FeaturesGetFeaturesRequestParameters : RequestParameters<FeaturesGetFeaturesRequestParameters>
+	public sealed class FeaturesGetFeaturesRequestParameters : RequestParameters<FeaturesGetFeaturesRequestParameters>
 	{
 	}
 

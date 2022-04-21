@@ -15,7 +15,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ResolvedRouteValues(int size) : base(size) { }
 	}
 
-	public class RouteValues : Dictionary<string, IUrlParameter>
+	public sealed class RouteValues : Dictionary<string, IUrlParameter>
 	{
 		/// <summary>
 		/// Used specifically by index requests to determine whether to use PUT or POST.

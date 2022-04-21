@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Features
 {
-	public partial class FeaturesGetFeaturesResponse : ElasticsearchResponseBase
+	public sealed partial class FeaturesGetFeaturesResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("features")]
