@@ -93,7 +93,7 @@ public abstract class IsADictionaryDescriptorBase<TDescriptor, TPromised, TKey, 
 	where TDescriptor : IsADictionaryDescriptorBase<TDescriptor, TPromised, TKey, TValue>
 	where TPromised : class, IIsADictionary<TKey, TValue>
 {
-	protected IsADictionaryDescriptorBase(TPromised instance) : base(instance) { }
+	internal IsADictionaryDescriptorBase(TPromised instance) : base(instance) { }
 
 	protected TDescriptor Assign(TKey key, TValue value)
 	{
@@ -108,7 +108,7 @@ public interface IIsAReadOnlyDictionary<TKey, TValue> : IReadOnlyDictionary<TKey
 
 public abstract class IsAReadOnlyDictionaryBase<TKey, TValue> : IIsAReadOnlyDictionary<TKey, TValue>
 {
-	protected IsAReadOnlyDictionaryBase(IReadOnlyDictionary<TKey, TValue> backingDictionary)
+	internal IsAReadOnlyDictionaryBase(IReadOnlyDictionary<TKey, TValue> backingDictionary)
 	{
 		if (backingDictionary == null)
 			return;

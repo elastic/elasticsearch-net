@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Elastic.Clients.Elasticsearch.Helpers;
 
-public class BulkAllObserver : CoordinatedRequestObserverBase<BulkAllResponse>
+public sealed class BulkAllObserver : CoordinatedRequestObserverBase<BulkAllResponse>
 {
 	private long _totalNumberOfFailedBuffers;
 	private long _totalNumberOfRetries;
