@@ -2,9 +2,10 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
+
 namespace Elastic.Clients.Elasticsearch
 {
-	internal class JsonWriter
-	{
-	}
+	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum)]
+	public class StringEnumAttribute : Attribute { }
 }
