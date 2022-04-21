@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public class ClusterRemoteInfoRequestParameters : RequestParameters<ClusterRemoteInfoRequestParameters>
+	public sealed class ClusterRemoteInfoRequestParameters : RequestParameters<ClusterRemoteInfoRequestParameters>
 	{
 	}
 

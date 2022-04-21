@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Enrich
 {
-	public partial class EnrichDeletePolicyResponse : ElasticsearchResponseBase
+	public sealed partial class EnrichDeletePolicyResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("acknowledged")]

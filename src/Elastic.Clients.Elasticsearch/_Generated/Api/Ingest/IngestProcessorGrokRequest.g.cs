@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public class IngestProcessorGrokRequestParameters : RequestParameters<IngestProcessorGrokRequestParameters>
+	public sealed class IngestProcessorGrokRequestParameters : RequestParameters<IngestProcessorGrokRequestParameters>
 	{
 	}
 

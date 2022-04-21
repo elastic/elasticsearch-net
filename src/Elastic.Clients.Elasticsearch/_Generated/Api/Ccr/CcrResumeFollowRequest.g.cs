@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public class CcrResumeFollowRequestParameters : RequestParameters<CcrResumeFollowRequestParameters>
+	public sealed class CcrResumeFollowRequestParameters : RequestParameters<CcrResumeFollowRequestParameters>
 	{
 	}
 

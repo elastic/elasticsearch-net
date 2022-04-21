@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class TransformPreviewTransformResponse<TTransform> : ElasticsearchResponseBase
+	public sealed partial class TransformPreviewTransformResponse<TTransform> : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("generated_dest_index")]

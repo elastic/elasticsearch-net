@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class XpackInfoResponse : ElasticsearchResponseBase
+	public sealed partial class XpackInfoResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("build")]

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public class SecuritySamlCompleteLogoutRequestParameters : RequestParameters<SecuritySamlCompleteLogoutRequestParameters>
+	public sealed class SecuritySamlCompleteLogoutRequestParameters : RequestParameters<SecuritySamlCompleteLogoutRequestParameters>
 	{
 	}
 

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Autoscaling
 {
-	public class AutoscalingDeleteAutoscalingPolicyRequestParameters : RequestParameters<AutoscalingDeleteAutoscalingPolicyRequestParameters>
+	public sealed class AutoscalingDeleteAutoscalingPolicyRequestParameters : RequestParameters<AutoscalingDeleteAutoscalingPolicyRequestParameters>
 	{
 	}
 

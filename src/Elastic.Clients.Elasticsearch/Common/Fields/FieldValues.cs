@@ -12,7 +12,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch
 {
 	[JsonConverter(typeof(FieldValuesConverter))]
-	public class FieldValues : IsADictionaryBase<string, LazyDocument>
+	public sealed class FieldValues : IsADictionaryBase<string, LazyDocument>
 	{
 		public static readonly FieldValues Empty = new();
 
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch
 		public TValue[] Values<TValue>(Field field)
 		{
 			if (_inferrer == null)
-				return new TValue[0];
+				return Array.Empty<TValue>();
 
 			var path = _inferrer.Field(field);
 			return FieldArray<TValue>(path);
@@ -59,7 +59,7 @@ namespace Elastic.Clients.Elasticsearch
 		public TValue[] ValuesOf<T, TValue>(Expression<Func<T, TValue>> objectPath)
 		{
 			if (_inferrer == null)
-				return new TValue[0];
+				return Array.Empty<TValue>();
 
 			var field = _inferrer.Field(objectPath);
 			return FieldArray<TValue>(field);

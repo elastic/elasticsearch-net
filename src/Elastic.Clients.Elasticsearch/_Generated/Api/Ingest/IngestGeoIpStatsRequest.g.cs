@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public class IngestGeoIpStatsRequestParameters : RequestParameters<IngestGeoIpStatsRequestParameters>
+	public sealed class IngestGeoIpStatsRequestParameters : RequestParameters<IngestGeoIpStatsRequestParameters>
 	{
 	}
 

@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class IngestDeletePipelineResponse : ElasticsearchResponseBase
+	public sealed partial class IngestDeletePipelineResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("acknowledged")]

@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class OpenResponse : ElasticsearchResponseBase
+	public sealed partial class OpenResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("acknowledged")]

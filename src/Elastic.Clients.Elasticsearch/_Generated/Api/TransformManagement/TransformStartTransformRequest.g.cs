@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public class TransformStartTransformRequestParameters : RequestParameters<TransformStartTransformRequestParameters>
+	public sealed class TransformStartTransformRequestParameters : RequestParameters<TransformStartTransformRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }

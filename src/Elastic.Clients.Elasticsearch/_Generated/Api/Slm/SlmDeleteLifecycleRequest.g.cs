@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Slm
 {
-	public class SlmDeleteLifecycleRequestParameters : RequestParameters<SlmDeleteLifecycleRequestParameters>
+	public sealed class SlmDeleteLifecycleRequestParameters : RequestParameters<SlmDeleteLifecycleRequestParameters>
 	{
 	}
 

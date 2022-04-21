@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class SourceResponse<TDocument> : ElasticsearchResponseBase
+	public sealed partial class SourceResponse<TDocument> : ElasticsearchResponseBase
 	{
 	}
 }

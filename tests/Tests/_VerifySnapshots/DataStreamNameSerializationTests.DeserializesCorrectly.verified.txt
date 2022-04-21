@@ -1,0 +1,5 @@
+{
+  DataStreamName: {
+    Name: test-datastream
+  }
+}

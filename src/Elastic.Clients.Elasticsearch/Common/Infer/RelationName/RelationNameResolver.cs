@@ -2,49 +2,43 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-//using System;
-//using System.Collections.Concurrent;
+using System;
+using System.Collections.Concurrent;
 
-//namespace Elastic.Clients.Elasticsearch
-//{
-//	public class RelationNameResolver
-//	{
-//		private readonly ITransportClientSettingsValues _transportClientSettings;
-//		private readonly ConcurrentDictionary<Type, string> _relationNames = new ConcurrentDictionary<Type, string>();
+namespace Elastic.Clients.Elasticsearch;
 
-//		public RelationNameResolver(ITransportClientSettingsValues connectionSettings)
-//		{
-//			connectionSettings.ThrowIfNull(nameof(connectionSettings));
-//			_transportClientSettings = connectionSettings;
-//		}
+internal sealed class RelationNameResolver
+{
+	private readonly IElasticsearchClientSettings _transportClientSettings;
+	private readonly ConcurrentDictionary<Type, string> _relationNames = new();
 
-//		public string Resolve<T>() where T : class => Resolve(typeof(T));
+	public RelationNameResolver(IElasticsearchClientSettings connectionSettings)
+	{
+		connectionSettings.ThrowIfNull(nameof(connectionSettings));
+		_transportClientSettings = connectionSettings;
+	}
 
-//		public string Resolve(RelationName t) => t?.Name ?? ResolveType(t?.Type);
+	public string Resolve<T>() => Resolve(typeof(T));
 
-//		private string ResolveType(Type type)
-//		{
-//			if (type == null) return null;
+	public string Resolve(RelationName t) => t?.Name ?? ResolveType(t?.Type);
 
-//			string typeName;
+	private string ResolveType(Type type)
+	{
+		if (type == null)
+			return null;
 
-//			if (_relationNames.TryGetValue(type, out typeName))
-//				return typeName;
+		if (_relationNames.TryGetValue(type, out var typeName))
+			return typeName;
 
-//			if (_transportClientSettings.DefaultRelationNames.TryGetValue(type, out typeName))
-//			{
-//				_relationNames.TryAdd(type, typeName);
-//				return typeName;
-//			}
+		if (_transportClientSettings.DefaultRelationNames.TryGetValue(type, out typeName))
+		{
+			_relationNames.TryAdd(type, typeName);
+			return typeName;
+		}
 
-//			var att = ElasticsearchTypeAttribute.From(type);
-//			if (att != null && !att.RelationName.IsNullOrEmpty())
-//				typeName = att.RelationName;
-//			else
-//				typeName = type.Name.ToLowerInvariant();
+		typeName = type.Name.ToLowerInvariant();
 
-//			_relationNames.TryAdd(type, typeName);
-//			return typeName;
-//		}
-//	}
-//}
+		_relationNames.TryAdd(type, typeName);
+		return typeName;
+	}
+}

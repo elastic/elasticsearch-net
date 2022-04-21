@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterRemoteInfoResponse : ElasticsearchResponseBase
+	public sealed partial class ClusterRemoteInfoResponse : ElasticsearchResponseBase
 	{
 	}
 }

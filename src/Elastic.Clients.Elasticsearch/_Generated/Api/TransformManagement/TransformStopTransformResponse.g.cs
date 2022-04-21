@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class TransformStopTransformResponse : ElasticsearchResponseBase
+	public sealed partial class TransformStopTransformResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("acknowledged")]

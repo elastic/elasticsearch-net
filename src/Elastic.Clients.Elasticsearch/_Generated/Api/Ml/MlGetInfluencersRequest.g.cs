@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlGetInfluencersRequestParameters : RequestParameters<MlGetInfluencersRequestParameters>
+	public sealed class MlGetInfluencersRequestParameters : RequestParameters<MlGetInfluencersRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }

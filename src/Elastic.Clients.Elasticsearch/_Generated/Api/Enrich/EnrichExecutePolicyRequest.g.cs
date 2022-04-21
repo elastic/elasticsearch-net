@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Enrich
 {
-	public class EnrichExecutePolicyRequestParameters : RequestParameters<EnrichExecutePolicyRequestParameters>
+	public sealed class EnrichExecutePolicyRequestParameters : RequestParameters<EnrichExecutePolicyRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }

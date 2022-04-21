@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Slm
 {
-	public partial class SlmGetStatusResponse : ElasticsearchResponseBase
+	public sealed partial class SlmGetStatusResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("operation_mode")]

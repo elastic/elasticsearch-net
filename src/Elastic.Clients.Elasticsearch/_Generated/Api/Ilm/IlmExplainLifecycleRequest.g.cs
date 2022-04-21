@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm
 {
-	public class IlmExplainLifecycleRequestParameters : RequestParameters<IlmExplainLifecycleRequestParameters>
+	public sealed class IlmExplainLifecycleRequestParameters : RequestParameters<IlmExplainLifecycleRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? OnlyErrors { get => Q<bool?>("only_errors"); set => Q("only_errors", value); }

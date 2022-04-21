@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm
 {
-	public class IlmMoveToStepRequestParameters : RequestParameters<IlmMoveToStepRequestParameters>
+	public sealed class IlmMoveToStepRequestParameters : RequestParameters<IlmMoveToStepRequestParameters>
 	{
 	}
 

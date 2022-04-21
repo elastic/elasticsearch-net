@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class MlPutTrainedModelResponse : ElasticsearchResponseBase
+	public sealed partial class MlPutTrainedModelResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("compressed_definition")]

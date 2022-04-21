@@ -7,7 +7,7 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public interface ICustomJsonWriter
+	internal interface ICustomJsonWriter
 	{
 		// TODO: Temp
 		//void WriteJson(Stream stream, ITransportSerializer sourceSerializer, SerializationFormatting formatting);

@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class DataStreamsStatsResponse : ElasticsearchResponseBase
+	public sealed partial class DataStreamsStatsResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("backing_indices")]

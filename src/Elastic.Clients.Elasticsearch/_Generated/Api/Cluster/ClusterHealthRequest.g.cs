@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public class ClusterHealthRequestParameters : RequestParameters<ClusterHealthRequestParameters>
+	public sealed class ClusterHealthRequestParameters : RequestParameters<ClusterHealthRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }

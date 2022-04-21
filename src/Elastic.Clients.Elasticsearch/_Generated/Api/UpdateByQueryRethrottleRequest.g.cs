@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public class UpdateByQueryRethrottleRequestParameters : RequestParameters<UpdateByQueryRethrottleRequestParameters>
+	public sealed class UpdateByQueryRethrottleRequestParameters : RequestParameters<UpdateByQueryRethrottleRequestParameters>
 	{
 		[JsonIgnore]
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }

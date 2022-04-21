@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Slm
 {
-	public class SlmGetStatusRequestParameters : RequestParameters<SlmGetStatusRequestParameters>
+	public sealed class SlmGetStatusRequestParameters : RequestParameters<SlmGetStatusRequestParameters>
 	{
 	}
 
