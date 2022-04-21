@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm
 {
-	public class IlmRetryRequestParameters : RequestParameters<IlmRetryRequestParameters>
+	public sealed class IlmRetryRequestParameters : RequestParameters<IlmRetryRequestParameters>
 	{
 	}
 

@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class MlFlushJobResponse : ElasticsearchResponseBase
+	public sealed partial class MlFlushJobResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("flushed")]

@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class IngestProcessorGrokResponse : ElasticsearchResponseBase
+	public sealed partial class IngestProcessorGrokResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("patterns")]

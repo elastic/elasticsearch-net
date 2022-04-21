@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlDeleteForecastRequestParameters : RequestParameters<MlDeleteForecastRequestParameters>
+	public sealed class MlDeleteForecastRequestParameters : RequestParameters<MlDeleteForecastRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }

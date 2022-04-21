@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public class ClusterStatsRequestParameters : RequestParameters<ClusterStatsRequestParameters>
+	public sealed class ClusterStatsRequestParameters : RequestParameters<ClusterStatsRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }

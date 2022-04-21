@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlSetUpgradeModeRequestParameters : RequestParameters<MlSetUpgradeModeRequestParameters>
+	public sealed class MlSetUpgradeModeRequestParameters : RequestParameters<MlSetUpgradeModeRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? Enabled { get => Q<bool?>("enabled"); set => Q("enabled", value); }

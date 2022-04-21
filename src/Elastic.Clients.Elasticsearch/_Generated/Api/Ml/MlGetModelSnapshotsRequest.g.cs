@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlGetModelSnapshotsRequestParameters : RequestParameters<MlGetModelSnapshotsRequestParameters>
+	public sealed class MlGetModelSnapshotsRequestParameters : RequestParameters<MlGetModelSnapshotsRequestParameters>
 	{
 		[JsonIgnore]
 		public int? From { get => Q<int?>("from"); set => Q("from", value); }

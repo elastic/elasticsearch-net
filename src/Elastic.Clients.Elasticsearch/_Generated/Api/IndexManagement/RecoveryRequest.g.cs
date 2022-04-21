@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public class RecoveryRequestParameters : RequestParameters<RecoveryRequestParameters>
+	public sealed class RecoveryRequestParameters : RequestParameters<RecoveryRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }

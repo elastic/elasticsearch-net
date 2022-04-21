@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class MlOpenJobResponse : ElasticsearchResponseBase
+	public sealed partial class MlOpenJobResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("opened")]

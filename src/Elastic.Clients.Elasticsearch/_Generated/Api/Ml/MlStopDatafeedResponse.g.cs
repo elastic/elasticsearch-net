@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class MlStopDatafeedResponse : ElasticsearchResponseBase
+	public sealed partial class MlStopDatafeedResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("stopped")]

@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class MlDeleteExpiredDataResponse : ElasticsearchResponseBase
+	public sealed partial class MlDeleteExpiredDataResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("deleted")]

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlPutFilterRequestParameters : RequestParameters<MlPutFilterRequestParameters>
+	public sealed class MlPutFilterRequestParameters : RequestParameters<MlPutFilterRequestParameters>
 	{
 	}
 
