@@ -20,7 +20,7 @@ using System.Text.Json;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class Inferrer
+	public sealed class Inferrer
 	{
 		private readonly IElasticsearchClientSettings _elasticsearchClientSettings;
 
@@ -79,46 +79,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string Routing(Type type, object instance) => RoutingResolver.Resolve(type, instance);
 	}
 
-	public class RelationNameResolver
-	{
-		private readonly IElasticsearchClientSettings _transportClientSettings;
-		private readonly ConcurrentDictionary<Type, string> _relationNames = new();
-
-		public RelationNameResolver(IElasticsearchClientSettings connectionSettings)
-		{
-			connectionSettings.ThrowIfNull(nameof(connectionSettings));
-			_transportClientSettings = connectionSettings;
-		}
-
-		public string Resolve<T>() => Resolve(typeof(T));
-
-		public string Resolve(RelationName t) => t?.Name ?? ResolveType(t?.Type);
-
-		private string ResolveType(Type type)
-		{
-			if (type == null)
-				return null;
-
-			if (_relationNames.TryGetValue(type, out var typeName))
-				return typeName;
-
-			if (_transportClientSettings.DefaultRelationNames.TryGetValue(type, out typeName))
-			{
-				_relationNames.TryAdd(type, typeName);
-				return typeName;
-			}
-
-			//var att = ElasticsearchTypeAttribute.From(type);
-			//if (att != null && !att.RelationName.IsNullOrEmpty())
-			//	typeName = att.RelationName;
-			//else
-
-			typeName = type.Name.ToLowerInvariant();
-
-			_relationNames.TryAdd(type, typeName);
-			return typeName;
-		}
-	}
+	
 
 	public class RoutingResolver
 	{
@@ -337,106 +298,9 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(RelationNameConverter))]
-	public class RelationName : IEquatable<RelationName>, IUrlParameter
-	{
-		private RelationName(string type) => Name = type;
+	
 
-		private RelationName(Type type) => Type = type;
-
-		public string Name { get; }
-		public Type Type { get; }
-
-		internal string DebugDisplay => Type == null ? Name : $"{nameof(RelationName)} for typeof: {Type?.Name}";
-
-		private static int TypeHashCode { get; } = typeof(RelationName).GetHashCode();
-
-		public bool Equals(RelationName other) => EqualsMarker(other);
-
-		string IUrlParameter.GetString(ITransportConfiguration? settings)
-		{
-			if (settings is not IElasticsearchClientSettings nestSettings)
-				throw new ArgumentNullException(nameof(settings),
-					$"Can not resolve {nameof(RelationName)} if no {nameof(IElasticsearchClientSettings)} is provided");
-
-			return nestSettings.Inferrer.RelationName(this);
-		}
-
-		public static RelationName From<T>() => typeof(T);
-
-		public static RelationName Create(Type type) => GetRelationNameForType(type);
-
-		public static RelationName Create<T>() where T : class => GetRelationNameForType(typeof(T));
-
-		private static RelationName GetRelationNameForType(Type type) => new(type);
-
-		public static implicit operator RelationName(string typeName) => typeName.IsNullOrEmpty() ? null : new RelationName(typeName);
-
-		public static implicit operator RelationName(Type type) => type == null ? null : new RelationName(type);
-
-		public override int GetHashCode()
-		{
-			unchecked
-			{
-				var result = TypeHashCode;
-				result = (result * 397) ^ (Name?.GetHashCode() ?? Type?.GetHashCode() ?? 0);
-				return result;
-			}
-		}
-
-		public static bool operator ==(RelationName left, RelationName right) => Equals(left, right);
-
-		public static bool operator !=(RelationName left, RelationName right) => !Equals(left, right);
-
-		public override bool Equals(object obj) =>
-			obj is string s ? EqualsString(s) : obj is RelationName r && EqualsMarker(r);
-
-		public bool EqualsMarker(RelationName other)
-		{
-			if (!Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
-				return EqualsString(other.Name);
-			if (Type != null && other?.Type != null)
-				return Type == other.Type;
-
-			return false;
-		}
-
-		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == Name;
-
-		public override string ToString() => DebugDisplay;
-
-	}
-
-	internal sealed class RelationNameConverter : JsonConverter<RelationName>
-	{
-		private readonly IElasticsearchClientSettings _settings;
-
-		public RelationNameConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
-		public override RelationName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			if (reader.TokenType == JsonTokenType.String)
-			{
-				RelationName relationName = reader.GetString();
-				return relationName;
-			}
-
-			return null;
-		}
-
-		public override void Write(Utf8JsonWriter writer, RelationName value, JsonSerializerOptions options)
-		{
-			if (value is null)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			var relationName = _settings.Inferrer.RelationName(value);
-			writer.WriteStringValue(relationName);
-		}
-	}
-
+	
 	internal class FieldResolver
 	{
 		protected readonly ConcurrentDictionary<Field, string> Fields = new();

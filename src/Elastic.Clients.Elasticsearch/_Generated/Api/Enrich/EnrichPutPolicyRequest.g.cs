@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Enrich
 {
-	public class EnrichPutPolicyRequestParameters : RequestParameters<EnrichPutPolicyRequestParameters>
+	public sealed class EnrichPutPolicyRequestParameters : RequestParameters<EnrichPutPolicyRequestParameters>
 	{
 	}
 

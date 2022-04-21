@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public class XpackInfoRequestParameters : RequestParameters<XpackInfoRequestParameters>
+	public sealed class XpackInfoRequestParameters : RequestParameters<XpackInfoRequestParameters>
 	{
 		[JsonIgnore]
 		public IEnumerable<string>? Categories { get => Q<IEnumerable<string>?>("categories"); set => Q("categories", value); }

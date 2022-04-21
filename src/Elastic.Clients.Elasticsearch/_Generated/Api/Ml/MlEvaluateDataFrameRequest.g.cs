@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlEvaluateDataFrameRequestParameters : RequestParameters<MlEvaluateDataFrameRequestParameters>
+	public sealed class MlEvaluateDataFrameRequestParameters : RequestParameters<MlEvaluateDataFrameRequestParameters>
 	{
 	}
 

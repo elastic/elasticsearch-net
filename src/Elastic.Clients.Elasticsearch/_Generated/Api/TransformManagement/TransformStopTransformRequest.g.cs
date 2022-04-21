@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public class TransformStopTransformRequestParameters : RequestParameters<TransformStopTransformRequestParameters>
+	public sealed class TransformStopTransformRequestParameters : RequestParameters<TransformStopTransformRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }

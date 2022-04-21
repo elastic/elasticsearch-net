@@ -9,7 +9,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public abstract class AggregationBase
 {
-	protected AggregationBase(string name) => Name = name;
+	internal AggregationBase(string name) => Name = name;
 
 	/// <summary>
 	/// Custom metadata associated with the aggregation.

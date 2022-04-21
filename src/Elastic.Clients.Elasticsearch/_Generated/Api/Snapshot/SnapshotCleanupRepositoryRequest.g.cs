@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public class SnapshotCleanupRepositoryRequestParameters : RequestParameters<SnapshotCleanupRepositoryRequestParameters>
+	public sealed class SnapshotCleanupRepositoryRequestParameters : RequestParameters<SnapshotCleanupRepositoryRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public class SecurityClearCachedRealmsRequestParameters : RequestParameters<SecurityClearCachedRealmsRequestParameters>
+	public sealed class SecurityClearCachedRealmsRequestParameters : RequestParameters<SecurityClearCachedRealmsRequestParameters>
 	{
 		[JsonIgnore]
 		public IEnumerable<string>? Usernames { get => Q<IEnumerable<string>?>("usernames"); set => Q("usernames", value); }

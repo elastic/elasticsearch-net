@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public class IngestSimulateRequestParameters : RequestParameters<IngestSimulateRequestParameters>
+	public sealed class IngestSimulateRequestParameters : RequestParameters<IngestSimulateRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }

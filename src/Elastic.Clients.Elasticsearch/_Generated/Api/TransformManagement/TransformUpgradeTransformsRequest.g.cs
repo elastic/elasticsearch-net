@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public class TransformUpgradeTransformsRequestParameters : RequestParameters<TransformUpgradeTransformsRequestParameters>
+	public sealed class TransformUpgradeTransformsRequestParameters : RequestParameters<TransformUpgradeTransformsRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public class NodesReloadSecureSettingsRequestParameters : RequestParameters<NodesReloadSecureSettingsRequestParameters>
+	public sealed class NodesReloadSecureSettingsRequestParameters : RequestParameters<NodesReloadSecureSettingsRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }

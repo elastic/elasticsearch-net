@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Migration
 {
-	public partial class MigrationDeprecationsResponse : ElasticsearchResponseBase
+	public sealed partial class MigrationDeprecationsResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("cluster_settings")]

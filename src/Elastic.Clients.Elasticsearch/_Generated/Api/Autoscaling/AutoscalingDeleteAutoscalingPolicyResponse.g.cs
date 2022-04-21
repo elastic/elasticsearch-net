@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Autoscaling
 {
-	public partial class AutoscalingDeleteAutoscalingPolicyResponse : ElasticsearchResponseBase
+	public sealed partial class AutoscalingDeleteAutoscalingPolicyResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("acknowledged")]

@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql
 {
-	public partial class GetEqlResponse<TEvent> : ElasticsearchResponseBase
+	public sealed partial class GetEqlResponse<TEvent> : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("hits")]

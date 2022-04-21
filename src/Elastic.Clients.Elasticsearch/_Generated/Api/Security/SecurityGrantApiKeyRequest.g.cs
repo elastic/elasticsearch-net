@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public class SecurityGrantApiKeyRequestParameters : RequestParameters<SecurityGrantApiKeyRequestParameters>
+	public sealed class SecurityGrantApiKeyRequestParameters : RequestParameters<SecurityGrantApiKeyRequestParameters>
 	{
 	}
 

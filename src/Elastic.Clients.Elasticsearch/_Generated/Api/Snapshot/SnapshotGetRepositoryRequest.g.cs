@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public class SnapshotGetRepositoryRequestParameters : RequestParameters<SnapshotGetRepositoryRequestParameters>
+	public sealed class SnapshotGetRepositoryRequestParameters : RequestParameters<SnapshotGetRepositoryRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }

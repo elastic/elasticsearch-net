@@ -15,7 +15,7 @@ using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch.Helpers;
 
-public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
+public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 {
 	private bool _disposedValue;
 
@@ -251,24 +251,15 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 
 	private static void DroppedDocumentCallbackDefault(BulkResponseItemBase bulkResponseItem, T d) { }
 
-	protected virtual void Dispose(bool disposing)
+	public void Dispose()
 	{
 		if (!_disposedValue)
 		{
-			if (disposing)
-			{
-				_compositeCancelTokenSource?.Cancel();
-				_compositeCancelTokenSource?.Dispose();
-			}
-
+			_compositeCancelTokenSource?.Cancel();
+			_compositeCancelTokenSource?.Dispose();
+			
 			_disposedValue = true;
 		}
-	}
-
-	public void Dispose()
-	{
-		Dispose(disposing: true);
-		GC.SuppressFinalize(this);
 	}
 
 	public IDisposable Subscribe(IObserver<BulkAllResponse> observer)
