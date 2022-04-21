@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class MlUpdateDataFrameAnalyticsResponse : ElasticsearchResponseBase
+	public sealed partial class MlUpdateDataFrameAnalyticsResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_lazy_start")]

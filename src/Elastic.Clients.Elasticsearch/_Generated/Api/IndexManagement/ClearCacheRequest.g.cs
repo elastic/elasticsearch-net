@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public class ClearCacheRequestParameters : RequestParameters<ClearCacheRequestParameters>
+	public sealed class ClearCacheRequestParameters : RequestParameters<ClearCacheRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }

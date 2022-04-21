@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterHealthResponse : ElasticsearchResponseBase
+	public sealed partial class ClusterHealthResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("active_primary_shards")]

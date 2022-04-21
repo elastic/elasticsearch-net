@@ -1,0 +1,5 @@
+{
+  IndexAlias: {
+    Alias: an-index-alias
+  }
+}

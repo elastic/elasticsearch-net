@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public class ResolveIndexRequestParameters : RequestParameters<ResolveIndexRequestParameters>
+	public sealed class ResolveIndexRequestParameters : RequestParameters<ResolveIndexRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }

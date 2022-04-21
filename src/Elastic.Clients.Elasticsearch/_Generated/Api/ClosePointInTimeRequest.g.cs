@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public class ClosePointInTimeRequestParameters : RequestParameters<ClosePointInTimeRequestParameters>
+	public sealed class ClosePointInTimeRequestParameters : RequestParameters<ClosePointInTimeRequestParameters>
 	{
 	}
 

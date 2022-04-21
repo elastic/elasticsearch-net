@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public class CreateRequestParameters : RequestParameters<CreateRequestParameters>
+	public sealed class CreateRequestParameters : RequestParameters<CreateRequestParameters>
 	{
 		[JsonIgnore]
 		public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }

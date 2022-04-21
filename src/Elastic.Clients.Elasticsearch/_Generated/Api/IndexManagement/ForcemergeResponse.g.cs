@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class ForcemergeResponse : ElasticsearchResponseBase
+	public sealed partial class ForcemergeResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("_shards")]

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlGetCalendarEventsRequestParameters : RequestParameters<MlGetCalendarEventsRequestParameters>
+	public sealed class MlGetCalendarEventsRequestParameters : RequestParameters<MlGetCalendarEventsRequestParameters>
 	{
 		[JsonIgnore]
 		public string? End { get => Q<string?>("end"); set => Q("end", value); }

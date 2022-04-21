@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql
 {
-	public class DeleteEqlRequestParameters : RequestParameters<DeleteEqlRequestParameters>
+	public sealed class DeleteEqlRequestParameters : RequestParameters<DeleteEqlRequestParameters>
 	{
 	}
 

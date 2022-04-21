@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Logstash
 {
-	public class LogstashPutPipelineRequestParameters : RequestParameters<LogstashPutPipelineRequestParameters>
+	public sealed class LogstashPutPipelineRequestParameters : RequestParameters<LogstashPutPipelineRequestParameters>
 	{
 	}
 

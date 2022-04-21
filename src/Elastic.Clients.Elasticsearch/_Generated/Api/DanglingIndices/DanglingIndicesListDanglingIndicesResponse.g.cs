@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.DanglingIndices
 {
-	public partial class DanglingIndicesListDanglingIndicesResponse : ElasticsearchResponseBase
+	public sealed partial class DanglingIndicesListDanglingIndicesResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("dangling_indices")]

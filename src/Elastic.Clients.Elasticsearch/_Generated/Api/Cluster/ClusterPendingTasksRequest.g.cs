@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public class ClusterPendingTasksRequestParameters : RequestParameters<ClusterPendingTasksRequestParameters>
+	public sealed class ClusterPendingTasksRequestParameters : RequestParameters<ClusterPendingTasksRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }

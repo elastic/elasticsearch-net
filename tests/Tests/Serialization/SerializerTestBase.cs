@@ -148,6 +148,12 @@ public abstract class SerializerTestBase
 		return reader.ReadToEnd();
 	}
 
+	protected static T DeserializeJsonString<T>(string json)
+	{
+		var stream = WrapInStream(json);
+		return _requestResponseSerializer.Deserialize<T>(stream);
+	}
+
 	/// <summary>
 	/// Serialises the <paramref name="data"/> using the sync and async request/response serializer methods, comparing the results.
 	/// </summary>

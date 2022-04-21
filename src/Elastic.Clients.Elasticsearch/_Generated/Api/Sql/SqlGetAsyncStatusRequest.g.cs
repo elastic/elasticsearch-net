@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql
 {
-	public class SqlGetAsyncStatusRequestParameters : RequestParameters<SqlGetAsyncStatusRequestParameters>
+	public sealed class SqlGetAsyncStatusRequestParameters : RequestParameters<SqlGetAsyncStatusRequestParameters>
 	{
 	}
 

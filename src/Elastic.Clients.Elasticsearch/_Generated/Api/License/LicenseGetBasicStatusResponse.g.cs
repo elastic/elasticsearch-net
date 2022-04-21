@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.License
 {
-	public partial class LicenseGetBasicStatusResponse : ElasticsearchResponseBase
+	public sealed partial class LicenseGetBasicStatusResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("eligible_to_start_basic")]

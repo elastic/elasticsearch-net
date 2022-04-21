@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlPutTrainedModelAliasRequestParameters : RequestParameters<MlPutTrainedModelAliasRequestParameters>
+	public sealed class MlPutTrainedModelAliasRequestParameters : RequestParameters<MlPutTrainedModelAliasRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? Reassign { get => Q<bool?>("reassign"); set => Q("reassign", value); }

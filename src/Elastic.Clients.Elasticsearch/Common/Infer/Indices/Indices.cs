@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(IndicesJsonConverter))]
-public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
+public sealed class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
 {
 	internal Indices(AllIndicesMarker all) : base(all) { }
 

@@ -8,7 +8,7 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class Timestamp : IUrlParameter, IEquatable<Timestamp>
+	public sealed class Timestamp : IUrlParameter, IEquatable<Timestamp>
 	{
 		internal readonly long Value;
 
@@ -25,20 +25,13 @@ namespace Elastic.Clients.Elasticsearch
 
 		public static implicit operator long(Timestamp categoryId) => categoryId.Value;
 
-		public override bool Equals(object obj)
+		public override bool Equals(object obj) => obj switch
 		{
-			switch (obj)
-			{
-				case int l:
-					return Value == l;
-				case long l:
-					return Value == l;
-				case Timestamp i:
-					return Value == i.Value;
-				default:
-					return false;
-			}
-		}
+			int l => Value == l,
+			long l => Value == l,
+			Timestamp i => Value == i.Value,
+			_ => false,
+		};
 
 		public override int GetHashCode() => Value.GetHashCode();
 

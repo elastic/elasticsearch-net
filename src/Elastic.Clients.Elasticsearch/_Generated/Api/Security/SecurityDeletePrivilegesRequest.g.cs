@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public class SecurityDeletePrivilegesRequestParameters : RequestParameters<SecurityDeletePrivilegesRequestParameters>
+	public sealed class SecurityDeletePrivilegesRequestParameters : RequestParameters<SecurityDeletePrivilegesRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }

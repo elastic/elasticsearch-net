@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm
 {
-	public class IlmMigrateToDataTiersRequestParameters : RequestParameters<IlmMigrateToDataTiersRequestParameters>
+	public sealed class IlmMigrateToDataTiersRequestParameters : RequestParameters<IlmMigrateToDataTiersRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
