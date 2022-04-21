@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.License
 {
-	public partial class DeleteLicenseResponse : ElasticsearchResponseBase
+	public sealed partial class DeleteLicenseResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("acknowledged")]

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlPutTrainedModelRequestParameters : RequestParameters<MlPutTrainedModelRequestParameters>
+	public sealed class MlPutTrainedModelRequestParameters : RequestParameters<MlPutTrainedModelRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? DeferDefinitionDecompression { get => Q<bool?>("defer_definition_decompression"); set => Q("defer_definition_decompression", value); }

@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class SecuritySamlAuthenticateResponse : ElasticsearchResponseBase
+	public sealed partial class SecuritySamlAuthenticateResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("access_token")]

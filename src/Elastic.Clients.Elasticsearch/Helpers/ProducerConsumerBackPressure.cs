@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Elastic.Clients.Elasticsearch.Helpers;
 
-public class ProducerConsumerBackPressure
+public sealed class ProducerConsumerBackPressure
 {
 	private readonly int _backPressureFactor;
 	private readonly SemaphoreSlim _consumerLimiter;

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public class IngestDeletePipelineRequestParameters : RequestParameters<IngestDeletePipelineRequestParameters>
+	public sealed class IngestDeletePipelineRequestParameters : RequestParameters<IngestDeletePipelineRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }

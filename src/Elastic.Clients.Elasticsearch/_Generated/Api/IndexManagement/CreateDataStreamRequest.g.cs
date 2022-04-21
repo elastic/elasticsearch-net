@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public class CreateDataStreamRequestParameters : RequestParameters<CreateDataStreamRequestParameters>
+	public sealed class CreateDataStreamRequestParameters : RequestParameters<CreateDataStreamRequestParameters>
 	{
 	}
 

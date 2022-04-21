@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Elastic.Clients.Elasticsearch.Helpers;
 
-public class BulkAllResponse
+public sealed class BulkAllResponse
 {
 	/// <summary>This is the Nth buffer.</summary>
 	public long Page { get; internal set; }

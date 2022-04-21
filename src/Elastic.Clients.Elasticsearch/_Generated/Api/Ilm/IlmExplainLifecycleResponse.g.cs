@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm
 {
-	public partial class IlmExplainLifecycleResponse : ElasticsearchResponseBase
+	public sealed partial class IlmExplainLifecycleResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("indices")]

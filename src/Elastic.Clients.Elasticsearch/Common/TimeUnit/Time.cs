@@ -15,7 +15,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// Represents a time value
 /// </summary>
 [JsonConverter(typeof(TimeConverter))]
-public class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
+public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 {
 	private const double MicrosecondsInATick = 0.1; // 10 ticks = 1 microsecond
 	private const double MillisecondsInADay = MillisecondsInAnHour * 24;

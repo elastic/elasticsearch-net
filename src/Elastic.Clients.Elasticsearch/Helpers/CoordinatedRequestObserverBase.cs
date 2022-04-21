@@ -13,7 +13,7 @@ public abstract class CoordinatedRequestObserverBase<T> : IObserver<T>
 	private readonly Action<Exception> _onError;
 	private readonly Action<T> _onNext;
 
-	protected CoordinatedRequestObserverBase(Action<T> onNext = null, Action<Exception> onError = null, Action completed = null)
+	internal CoordinatedRequestObserverBase(Action<T> onNext = null, Action<Exception> onError = null, Action completed = null)
 	{
 		_onNext = onNext;
 		_onError = onError;

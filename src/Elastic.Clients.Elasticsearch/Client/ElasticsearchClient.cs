@@ -11,7 +11,7 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <inheritdoc />
-public partial class ElasticsearchClient
+public sealed partial class ElasticsearchClient
 {
 	private readonly ITransport<IElasticsearchClientSettings> _transport;
 

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public class CcrDeleteAutoFollowPatternRequestParameters : RequestParameters<CcrDeleteAutoFollowPatternRequestParameters>
+	public sealed class CcrDeleteAutoFollowPatternRequestParameters : RequestParameters<CcrDeleteAutoFollowPatternRequestParameters>
 	{
 	}
 

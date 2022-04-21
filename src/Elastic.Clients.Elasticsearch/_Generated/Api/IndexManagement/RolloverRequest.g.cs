@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public class RolloverRequestParameters : RequestParameters<RolloverRequestParameters>
+	public sealed class RolloverRequestParameters : RequestParameters<RolloverRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }

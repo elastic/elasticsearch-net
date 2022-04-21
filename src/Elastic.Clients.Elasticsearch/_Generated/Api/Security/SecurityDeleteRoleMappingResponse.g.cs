@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class SecurityDeleteRoleMappingResponse : ElasticsearchResponseBase
+	public sealed partial class SecurityDeleteRoleMappingResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("found")]

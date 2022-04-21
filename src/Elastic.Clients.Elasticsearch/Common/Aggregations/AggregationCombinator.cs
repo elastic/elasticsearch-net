@@ -8,7 +8,7 @@ using System.Linq;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
-/// Combines aggregations into a single list of aggregations
+/// Combines aggregations into a single list of aggregations.
 /// </summary>
 internal class AggregationCombinator : AggregationBase
 {

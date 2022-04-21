@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlUpgradeJobSnapshotRequestParameters : RequestParameters<MlUpgradeJobSnapshotRequestParameters>
+	public sealed class MlUpgradeJobSnapshotRequestParameters : RequestParameters<MlUpgradeJobSnapshotRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }

@@ -107,7 +107,7 @@ internal sealed class FieldConverter : JsonConverter<Field>
 
 [JsonConverter(typeof(FieldsConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public partial class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fields>
+public sealed class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fields>
 {
 	internal readonly List<Field> ListOfFields;
 

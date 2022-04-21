@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class XpackUsageResponse : ElasticsearchResponseBase
+	public sealed partial class XpackUsageResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("aggregate_metric")]
