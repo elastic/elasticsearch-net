@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public class UpdateRequestParameters : RequestParameters<UpdateRequestParameters>
+	public sealed class UpdateRequestParameters : RequestParameters<UpdateRequestParameters>
 	{
 		[JsonIgnore]
 		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.DanglingIndices
 {
-	public class DanglingIndicesListDanglingIndicesRequestParameters : RequestParameters<DanglingIndicesListDanglingIndicesRequestParameters>
+	public sealed class DanglingIndicesListDanglingIndicesRequestParameters : RequestParameters<DanglingIndicesListDanglingIndicesRequestParameters>
 	{
 	}
 

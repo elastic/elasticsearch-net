@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql
 {
-	public partial class SqlGetAsyncResponse : ElasticsearchResponseBase
+	public sealed partial class SqlGetAsyncResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("columns")]

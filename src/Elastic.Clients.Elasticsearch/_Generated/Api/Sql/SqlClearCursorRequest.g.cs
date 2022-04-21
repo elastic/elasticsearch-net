@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql
 {
-	public class SqlClearCursorRequestParameters : RequestParameters<SqlClearCursorRequestParameters>
+	public sealed class SqlClearCursorRequestParameters : RequestParameters<SqlClearCursorRequestParameters>
 	{
 	}
 

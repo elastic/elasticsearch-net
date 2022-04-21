@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class OpenPointInTimeResponse : ElasticsearchResponseBase
+	public sealed partial class OpenPointInTimeResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]

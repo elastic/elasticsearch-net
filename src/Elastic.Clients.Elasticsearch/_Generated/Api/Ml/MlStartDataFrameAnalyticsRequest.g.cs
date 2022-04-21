@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlStartDataFrameAnalyticsRequestParameters : RequestParameters<MlStartDataFrameAnalyticsRequestParameters>
+	public sealed class MlStartDataFrameAnalyticsRequestParameters : RequestParameters<MlStartDataFrameAnalyticsRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }

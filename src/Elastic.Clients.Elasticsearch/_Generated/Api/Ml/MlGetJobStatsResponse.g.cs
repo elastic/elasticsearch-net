@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class MlGetJobStatsResponse : ElasticsearchResponseBase
+	public sealed partial class MlGetJobStatsResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]

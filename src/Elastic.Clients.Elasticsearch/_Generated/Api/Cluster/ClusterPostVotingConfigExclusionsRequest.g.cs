@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public class ClusterPostVotingConfigExclusionsRequestParameters : RequestParameters<ClusterPostVotingConfigExclusionsRequestParameters>
+	public sealed class ClusterPostVotingConfigExclusionsRequestParameters : RequestParameters<ClusterPostVotingConfigExclusionsRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Names? NodeNames { get => Q<Elastic.Clients.Elasticsearch.Names?>("node_names"); set => Q("node_names", value); }

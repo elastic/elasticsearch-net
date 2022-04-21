@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlDeleteTrainedModelAliasRequestParameters : RequestParameters<MlDeleteTrainedModelAliasRequestParameters>
+	public sealed class MlDeleteTrainedModelAliasRequestParameters : RequestParameters<MlDeleteTrainedModelAliasRequestParameters>
 	{
 	}
 

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch
 {
-	public class AsyncSearchSubmitRequestParameters : RequestParameters<AsyncSearchSubmitRequestParameters>
+	public sealed class AsyncSearchSubmitRequestParameters : RequestParameters<AsyncSearchSubmitRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }

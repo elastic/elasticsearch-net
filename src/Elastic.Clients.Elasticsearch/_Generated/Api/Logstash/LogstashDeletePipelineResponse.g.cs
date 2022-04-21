@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Logstash
 {
-	public partial class LogstashDeletePipelineResponse : ElasticsearchResponseBase
+	public sealed partial class LogstashDeletePipelineResponse : ElasticsearchResponseBase
 	{
 	}
 }

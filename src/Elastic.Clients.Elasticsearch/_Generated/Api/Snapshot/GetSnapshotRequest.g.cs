@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public class GetSnapshotRequestParameters : RequestParameters<GetSnapshotRequestParameters>
+	public sealed class GetSnapshotRequestParameters : RequestParameters<GetSnapshotRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }

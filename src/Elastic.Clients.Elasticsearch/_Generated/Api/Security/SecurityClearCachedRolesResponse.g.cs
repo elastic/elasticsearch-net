@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class SecurityClearCachedRolesResponse : ElasticsearchResponseBase
+	public sealed partial class SecurityClearCachedRolesResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("cluster_name")]

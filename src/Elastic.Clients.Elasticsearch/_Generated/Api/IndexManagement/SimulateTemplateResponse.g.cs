@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class SimulateTemplateResponse : ElasticsearchResponseBase
+	public sealed partial class SimulateTemplateResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("template")]

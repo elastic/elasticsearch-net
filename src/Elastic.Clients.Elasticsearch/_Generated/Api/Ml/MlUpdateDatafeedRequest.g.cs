@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlUpdateDatafeedRequestParameters : RequestParameters<MlUpdateDatafeedRequestParameters>
+	public sealed class MlUpdateDatafeedRequestParameters : RequestParameters<MlUpdateDatafeedRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }

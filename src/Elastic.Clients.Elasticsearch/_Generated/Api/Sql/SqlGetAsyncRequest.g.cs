@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql
 {
-	public class SqlGetAsyncRequestParameters : RequestParameters<SqlGetAsyncRequestParameters>
+	public sealed class SqlGetAsyncRequestParameters : RequestParameters<SqlGetAsyncRequestParameters>
 	{
 		[JsonIgnore]
 		public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }

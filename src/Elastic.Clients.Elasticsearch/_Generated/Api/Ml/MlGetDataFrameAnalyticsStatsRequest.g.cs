@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlGetDataFrameAnalyticsStatsRequestParameters : RequestParameters<MlGetDataFrameAnalyticsStatsRequestParameters>
+	public sealed class MlGetDataFrameAnalyticsStatsRequestParameters : RequestParameters<MlGetDataFrameAnalyticsStatsRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }

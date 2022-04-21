@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public partial class CcrPauseAutoFollowPatternResponse : ElasticsearchResponseBase
+	public sealed partial class CcrPauseAutoFollowPatternResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("acknowledged")]

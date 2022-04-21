@@ -68,8 +68,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-
-
 	internal sealed class SelfDeserializableConverterFactory : JsonConverterFactory
 	{
 		private readonly IElasticsearchClientSettings _settings;

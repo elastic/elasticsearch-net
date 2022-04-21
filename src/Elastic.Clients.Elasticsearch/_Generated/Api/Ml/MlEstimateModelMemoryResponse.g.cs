@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class MlEstimateModelMemoryResponse : ElasticsearchResponseBase
+	public sealed partial class MlEstimateModelMemoryResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("model_memory_estimate")]

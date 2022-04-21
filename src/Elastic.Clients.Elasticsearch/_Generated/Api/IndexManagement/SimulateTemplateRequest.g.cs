@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public class SimulateTemplateRequestParameters : RequestParameters<SimulateTemplateRequestParameters>
+	public sealed class SimulateTemplateRequestParameters : RequestParameters<SimulateTemplateRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }

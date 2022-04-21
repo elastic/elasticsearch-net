@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql
 {
-	public class SqlQueryRequestParameters : RequestParameters<SqlQueryRequestParameters>
+	public sealed class SqlQueryRequestParameters : RequestParameters<SqlQueryRequestParameters>
 	{
 		[JsonIgnore]
 		public string? Format { get => Q<string?>("format"); set => Q("format", value); }

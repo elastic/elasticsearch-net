@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public class ExistsSourceRequestParameters : RequestParameters<ExistsSourceRequestParameters>
+	public sealed class ExistsSourceRequestParameters : RequestParameters<ExistsSourceRequestParameters>
 	{
 		[JsonIgnore]
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }

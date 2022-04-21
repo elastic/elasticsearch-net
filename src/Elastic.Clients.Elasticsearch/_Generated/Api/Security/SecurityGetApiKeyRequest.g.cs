@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public class SecurityGetApiKeyRequestParameters : RequestParameters<SecurityGetApiKeyRequestParameters>
+	public sealed class SecurityGetApiKeyRequestParameters : RequestParameters<SecurityGetApiKeyRequestParameters>
 	{
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Id? Id { get => Q<Elastic.Clients.Elasticsearch.Id?>("id"); set => Q("id", value); }

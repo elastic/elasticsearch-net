@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Graph
 {
-	public partial class GraphExploreResponse : ElasticsearchResponseBase
+	public sealed partial class GraphExploreResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("connections")]

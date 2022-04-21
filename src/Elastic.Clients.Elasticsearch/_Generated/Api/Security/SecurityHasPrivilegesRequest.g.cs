@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public class SecurityHasPrivilegesRequestParameters : RequestParameters<SecurityHasPrivilegesRequestParameters>
+	public sealed class SecurityHasPrivilegesRequestParameters : RequestParameters<SecurityHasPrivilegesRequestParameters>
 	{
 	}
 

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public class MlResetJobRequestParameters : RequestParameters<MlResetJobRequestParameters>
+	public sealed class MlResetJobRequestParameters : RequestParameters<MlResetJobRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }

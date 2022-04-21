@@ -4,7 +4,7 @@
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class MinimumShouldMatch : Union<int?, string>
+	public sealed class MinimumShouldMatch : Union<int?, string>
 	{
 		public MinimumShouldMatch(int count) : base(count) { }
 
