@@ -2,13 +2,11 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using System;
-
 namespace Elastic.Clients.Elasticsearch;
 
-public abstract class ContainerBase : IContainer
+public abstract class VariantDescriptorBase<T> : DescriptorBase<T> where T : DescriptorBase<T>
 {
-	internal ContainerVariantBase Variant { get; }
+	internal string VariantName { get; private set; }
 
-	internal ContainerBase(ContainerVariantBase variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+	protected void SetVariantName(string name) => VariantName = name;
 }

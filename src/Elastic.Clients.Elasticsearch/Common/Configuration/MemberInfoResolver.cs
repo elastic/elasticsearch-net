@@ -11,7 +11,7 @@ namespace Elastic.Clients.Elasticsearch
 	/// <summary>
 	/// Resolves member infos in an expression, instance may NOT be shared.
 	/// </summary>
-	public class MemberInfoResolver : ExpressionVisitor
+	public sealed class MemberInfoResolver : ExpressionVisitor
 	{
 		// ReSharper disable once VirtualMemberCallInConstructor
 		public MemberInfoResolver(Expression expression) => Visit(expression);

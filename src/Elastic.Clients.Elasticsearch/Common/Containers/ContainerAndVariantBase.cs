@@ -6,9 +6,9 @@ using System;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public abstract class ContainerBase : IContainer
+public abstract class ContainerAndVariantBase<TVariantContainer> : ContainerVariantBase<TVariantContainer>, IContainer where TVariantContainer : IContainer
 {
 	internal ContainerVariantBase Variant { get; }
 
-	internal ContainerBase(ContainerVariantBase variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+	public ContainerAndVariantBase(ContainerVariantBase variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 }
