@@ -18,7 +18,7 @@ public class BoxplotAggregateDeserializationTests : SerializerTestBase
 
 		search.Aggregations.Should().HaveCount(1);
 
-		var agg = search.Aggregations.BoxPlot("my-agg-name");
+		var agg = search.Aggregations.GetBoxPlot("my-agg-name");
 		agg.Min.Should().Be(1);
 		agg.Max.Should().Be(990);
 		agg.Q1.Should().Be(165);

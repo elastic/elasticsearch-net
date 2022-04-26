@@ -43,7 +43,7 @@ public class CardinalityAggregationUsageTests : AggregationUsageTestBase<ReadOnl
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var projectCount = response.Aggregations.Cardinality("state_count");
+		var projectCount = response.Aggregations.GetCardinality("state_count");
 		projectCount.Should().NotBeNull();
 		projectCount.Value.Should().BeGreaterOrEqualTo(1);
 	}
