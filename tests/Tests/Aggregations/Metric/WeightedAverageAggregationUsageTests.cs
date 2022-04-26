@@ -66,7 +66,7 @@ public class WeightedAverageAggregationUsageTests : AggregationUsageTestBase<Rea
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var commitsAvg = response.Aggregations.WeightedAvg("weighted_avg_commits");
+		var commitsAvg = response.Aggregations.GetWeightedAvg("weighted_avg_commits");
 		commitsAvg.Should().NotBeNull();
 		commitsAvg.Value.Should().BeGreaterThan(0);
 	}

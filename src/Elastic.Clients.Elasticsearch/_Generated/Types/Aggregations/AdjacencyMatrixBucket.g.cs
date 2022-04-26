@@ -24,7 +24,53 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class AdjacencyMatrixBucket : MultiBucketBase
+	[JsonConverter(typeof(AdjacencyMatrixBucketConverter))]
+	public sealed partial class AdjacencyMatrixBucket : AggregateDictionary
 	{
+		public AdjacencyMatrixBucket(IReadOnlyDictionary<string, AggregateBase> backingDictionary) : base(backingDictionary)
+		{
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("doc_count")]
+		public long DocCount { get; init; }
+	}
+
+	internal sealed class AdjacencyMatrixBucketConverter : JsonConverter<AdjacencyMatrixBucket>
+	{
+		public override AdjacencyMatrixBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
+			var subAggs = new Dictionary<string, AggregateBase>(); // TODO - Optimise this and only create if we need it.
+			long docCount = default;
+			while (reader.Read())
+			{
+				if (reader.TokenType == JsonTokenType.EndObject)
+					break;
+				if (reader.TokenType != JsonTokenType.PropertyName)
+					throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
+				var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+				reader.Read();
+				if (name.Equals("doc_count", StringComparison.Ordinal))
+				{
+					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+					continue;
+				}
+
+				if (name.Contains("#"))
+				{
+					AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
+					continue;
+				}
+
+				throw new JsonException("Unknown property read from JSON.");
+			}
+
+			return new AdjacencyMatrixBucket(subAggs)
+			{ DocCount = docCount };
+		}
+
+		public override void Write(Utf8JsonWriter writer, AdjacencyMatrixBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
 	}
 }

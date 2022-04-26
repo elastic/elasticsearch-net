@@ -44,7 +44,7 @@ public class ExtendedStatsAggregationUsageTests : AggregationUsageTestBase<ReadO
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var commitStats = response.Aggregations.ExtendedStats("commit_stats");
+		var commitStats = response.Aggregations.GetExtendedStats("commit_stats");
 		commitStats.Should().NotBeNull();
 		commitStats.Avg.Should().BeGreaterThan(0);
 		commitStats.Max.Should().BeGreaterThan(0);

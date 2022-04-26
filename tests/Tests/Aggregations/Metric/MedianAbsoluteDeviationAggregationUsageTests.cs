@@ -48,7 +48,7 @@ public class MedianAbsoluteDeviationAggregationUsageTests : AggregationUsageTest
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var medianAbsoluteDeviation = response.Aggregations.MedianAbsoluteDeviation("commit_variability");
+		var medianAbsoluteDeviation = response.Aggregations.GetMedianAbsoluteDeviation("commit_variability");
 		medianAbsoluteDeviation.Should().NotBeNull();
 		medianAbsoluteDeviation.Value.Should().BeGreaterThan(0);
 	}
