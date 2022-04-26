@@ -38,7 +38,7 @@ public class StatsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var commitStats = response.Aggregations.Stats("commit_stats");
+		var commitStats = response.Aggregations.GetStats("commit_stats");
 		commitStats.Should().NotBeNull();
 		commitStats.Avg.Should().BeGreaterThan(0);
 		commitStats.Max.Should().BeGreaterThan(0);

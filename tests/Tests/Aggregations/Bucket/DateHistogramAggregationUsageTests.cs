@@ -102,7 +102,7 @@ public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTe
 	{
 		response.ShouldBeValid();
 
-		var dateHistogram = response.Aggregations.DateHistogram("projects_started_per_month");
+		var dateHistogram = response.Aggregations.GetDateHistogram("projects_started_per_month");
 		dateHistogram.Should().NotBeNull();
 		//dateHistogram.Buckets.Should().NotBeNull();
 		//dateHistogram.Buckets.Count.Should().BeGreaterThan(10);

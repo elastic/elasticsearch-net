@@ -24,10 +24,64 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class CompositeBucket : MultiBucketBase
+	[JsonConverter(typeof(CompositeBucketConverter))]
+	public sealed partial class CompositeBucket : AggregateDictionary
 	{
+		public CompositeBucket(IReadOnlyDictionary<string, AggregateBase> backingDictionary) : base(backingDictionary)
+		{
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("doc_count")]
+		public long DocCount { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("key")]
 		public Dictionary<string, object> Key { get; init; }
+	}
+
+	internal sealed class CompositeBucketConverter : JsonConverter<CompositeBucket>
+	{
+		public override CompositeBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
+			var subAggs = new Dictionary<string, AggregateBase>(); // TODO - Optimise this and only create if we need it.
+			long docCount = default;
+			Dictionary<string, object> key = default;
+			while (reader.Read())
+			{
+				if (reader.TokenType == JsonTokenType.EndObject)
+					break;
+				if (reader.TokenType != JsonTokenType.PropertyName)
+					throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
+				var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+				reader.Read();
+				if (name.Equals("doc_count", StringComparison.Ordinal))
+				{
+					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+					continue;
+				}
+
+				if (name.Equals("key", StringComparison.Ordinal))
+				{
+					key = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					continue;
+				}
+
+				if (name.Contains("#"))
+				{
+					AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
+					continue;
+				}
+
+				throw new JsonException("Unknown property read from JSON.");
+			}
+
+			return new CompositeBucket(subAggs)
+			{ DocCount = docCount, Key = key };
+		}
+
+		public override void Write(Utf8JsonWriter writer, CompositeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
 	}
 }
