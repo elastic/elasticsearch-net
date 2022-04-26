@@ -65,8 +65,7 @@ var aggExampleResponse = await client.SearchAsync<StockData>(s => s
 		.DateHistogram("by-month", dh => dh
 			.CalendarInterval(CalendarInterval.Month)
 			.Field(fld => fld.Date)
-			//.Order(HistogramOrder.KeyDescending)
-			.Order(new HistogramOrder { Key = SortOrder.Desc })
+			.Order(HistogramOrder.KeyDescending)
 			.Aggregations(agg => agg
 				.Sum("trade-volumes", sum => sum.Field(fld => fld.Volume))))));
 
