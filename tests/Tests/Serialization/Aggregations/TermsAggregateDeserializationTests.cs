@@ -21,7 +21,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 
 		search.Aggregations.Should().HaveCount(1);
 
-		var termsAgg = search.Aggregations.StringTerms("my-agg-name");
+		var termsAgg = search.Aggregations.GetStringTerms("my-agg-name");
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
 		termsAgg.Buckets.Should().HaveCount(2);
@@ -49,7 +49,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 
 		search.Aggregations.Should().HaveCount(1);
 
-		var termsAgg = search.Aggregations.LongTerms("my-agg-name");
+		var termsAgg = search.Aggregations.GetLongTerms("my-agg-name");
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
 		termsAgg.Buckets.Should().HaveCount(2);
@@ -79,7 +79,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 
 		search.Aggregations.Should().HaveCount(1);
 
-		var termsAgg = search.Aggregations.DoubleTerms("my-agg-name");
+		var termsAgg = search.Aggregations.GetDoubleTerms("my-agg-name");
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
 		termsAgg.Buckets.Should().HaveCount(2);
@@ -110,7 +110,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 
 		search.Aggregations.Should().HaveCount(1);
 
-		var termsAgg = search.Aggregations.MultiTerms("my-agg-name");
+		var termsAgg = search.Aggregations.GetMultiTerms("my-agg-name");
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
 

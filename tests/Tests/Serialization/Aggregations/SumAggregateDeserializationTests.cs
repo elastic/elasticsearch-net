@@ -17,7 +17,7 @@ public class SumAggregateDeserializationTests : SerializerTestBase
 
 		search.Aggregations.Should().HaveCount(1);
 
-		var agg = search.Aggregations.Sum("my-agg-name");
+		var agg = search.Aggregations.GetSum("my-agg-name");
 		agg.Value.HasValue.Should().BeTrue();
 		agg.Value.Should().Be(75);
 	}
@@ -33,7 +33,7 @@ public class SumAggregateDeserializationTests : SerializerTestBase
 
 		search.Aggregations.Should().HaveCount(1);
 
-		var agg = search.Aggregations.Sum("my-agg-name");
+		var agg = search.Aggregations.GetSum("my-agg-name");
 		agg.Value.HasValue.Should().BeFalse();
 	}
 }

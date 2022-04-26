@@ -58,7 +58,7 @@ public class BoxplotAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var boxplot = response.Aggregations.BoxPlot("boxplot_commits");
+		var boxplot = response.Aggregations.GetBoxPlot("boxplot_commits");
 		boxplot.Should().NotBeNull();
 		boxplot.Min.Should().BeGreaterOrEqualTo(0);
 		boxplot.Max.Should().BeGreaterOrEqualTo(0);
