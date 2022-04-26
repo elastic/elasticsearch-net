@@ -24,8 +24,17 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class MultiTermsBucket : MultiBucketBase
+	[JsonConverter(typeof(MultiTermsBucketConverter))]
+	public sealed partial class MultiTermsBucket : AggregateDictionary
 	{
+		public MultiTermsBucket(IReadOnlyDictionary<string, AggregateBase> backingDictionary) : base(backingDictionary)
+		{
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("doc_count")]
+		public long DocCount { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("doc_count_error_upper_bound")]
 		public long? DocCountErrorUpperBound { get; init; }
@@ -37,5 +46,64 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("key_as_string")]
 		public string? KeyAsString { get; init; }
+	}
+
+	internal sealed class MultiTermsBucketConverter : JsonConverter<MultiTermsBucket>
+	{
+		public override MultiTermsBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
+			var subAggs = new Dictionary<string, AggregateBase>(); // TODO - Optimise this and only create if we need it.
+			long docCount = default;
+			long? docCountErrorUpperBound = default;
+			IReadOnlyCollection<object> key = default;
+			string? keyAsString = default;
+			while (reader.Read())
+			{
+				if (reader.TokenType == JsonTokenType.EndObject)
+					break;
+				if (reader.TokenType != JsonTokenType.PropertyName)
+					throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
+				var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+				reader.Read();
+				if (name.Equals("doc_count", StringComparison.Ordinal))
+				{
+					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+					continue;
+				}
+
+				if (name.Equals("doc_count_error_upper_bound", StringComparison.Ordinal))
+				{
+					docCountErrorUpperBound = JsonSerializer.Deserialize<long?>(ref reader, options);
+					continue;
+				}
+
+				if (name.Equals("key", StringComparison.Ordinal))
+				{
+					key = JsonSerializer.Deserialize<IReadOnlyCollection<object>>(ref reader, options);
+					continue;
+				}
+
+				if (name.Equals("key_as_string", StringComparison.Ordinal))
+				{
+					keyAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (name.Contains("#"))
+				{
+					AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
+					continue;
+				}
+
+				throw new JsonException("Unknown property read from JSON.");
+			}
+
+			return new MultiTermsBucket(subAggs)
+			{ DocCount = docCount, DocCountErrorUpperBound = docCountErrorUpperBound, Key = key, KeyAsString = keyAsString };
+		}
+
+		public override void Write(Utf8JsonWriter writer, MultiTermsBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
 	}
 }

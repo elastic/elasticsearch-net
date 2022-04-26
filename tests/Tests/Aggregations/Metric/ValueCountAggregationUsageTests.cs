@@ -39,7 +39,7 @@ public class ValueCountAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var commitCount = response.Aggregations.ValueCount("commit_count");
+		var commitCount = response.Aggregations.GetValueCount("commit_count");
 		commitCount.Should().NotBeNull();
 		commitCount.Value.Should().BeGreaterThan(0);
 	}

@@ -39,7 +39,7 @@ public class MaxAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var max = response.Aggregations.Max("max_commits");
+		var max = response.Aggregations.GetMax("max_commits");
 		max.Should().NotBeNull();
 		max.Value.Should().BeGreaterThan(0);
 	}
