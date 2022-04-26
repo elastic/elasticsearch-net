@@ -61,7 +61,7 @@ public class AggregationMetaUsageTests : AggregationUsageTestBase<ReadOnlyCluste
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var min = response.Aggregations.Min("min_last_activity");
+		var min = response.Aggregations.GetMin("min_last_activity");
 		min.Meta.Should().NotBeNull().And.ContainKeys("meta_1", "meta_2", "meta_3");
 	}
 }
