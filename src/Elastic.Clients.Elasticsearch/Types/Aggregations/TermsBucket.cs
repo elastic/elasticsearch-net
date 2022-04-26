@@ -2,11 +2,10 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+
+public class TermsBucket<TKey> : TermsBucketBase
 {
-	public class TermsBucket<TKey> : TermsBucketBase
-	{
-		public TKey Key { get; init; }
-		public string? KeyAsString { get; init; }
-	}
+	public TKey Key { get; init; }
+	public string? KeyAsString { get; init; }
 }
