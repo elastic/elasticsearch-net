@@ -43,7 +43,7 @@ public class StringStatsWithDistributionAggregationUsageTests : AggregationUsage
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var commitStats = response.Aggregations.StringStats("name_stats");
+		var commitStats = response.Aggregations.GetStringStats("name_stats");
 		commitStats.Should().NotBeNull();
 		commitStats.AvgLength.Should().BeGreaterThan(0);
 		commitStats.MaxLength.Should().BeGreaterThan(0);

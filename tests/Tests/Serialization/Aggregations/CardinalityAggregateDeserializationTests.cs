@@ -18,7 +18,7 @@ public class CardinalityAggregateDeserializationTests : SerializerTestBase
 
 		search.Aggregations.Should().HaveCount(1);
 
-		var agg = search.Aggregations.Cardinality("my-agg-name");
+		var agg = search.Aggregations.GetCardinality("my-agg-name");
 		agg.Value.Should().Be(75);
 	}
 }

@@ -39,7 +39,7 @@ public class SumAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var commitsSum = response.Aggregations.Sum("commits_sum");
+		var commitsSum = response.Aggregations.GetSum("commits_sum");
 		commitsSum.Should().NotBeNull();
 		commitsSum.Value.Should().BeGreaterThan(0);
 	}

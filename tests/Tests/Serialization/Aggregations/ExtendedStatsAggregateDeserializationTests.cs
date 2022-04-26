@@ -20,7 +20,7 @@ public class ExtendedStatsAggregateDeserializationTests : SerializerTestBase
 
 		search.Aggregations.Should().HaveCount(1);
 
-		var agg = search.Aggregations.ExtendedStats("my-agg-name");
+		var agg = search.Aggregations.GetExtendedStats("my-agg-name");
 		agg.Count.Should().Be(2);
 		agg.Min.Should().Be(50);
 		agg.Max.Should().Be(100);

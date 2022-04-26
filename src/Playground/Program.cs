@@ -1,69 +1,227 @@
+
+
+
 // Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using System.Text;
 using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Aggregations;
+using Elastic.Clients.Elasticsearch.Helpers;
 using Elastic.Clients.Elasticsearch.Mapping;
+using Elastic.Clients.Elasticsearch.QueryDsl;
+using Elastic.Transport;
 
-var client = new ElasticsearchClient();
+const string IndexName = "stock-demo-v1";
 
-var putTemplateRequest = new PutIndexTemplateRequest("my-template")
+var settings = new ElasticsearchClientSettings(new Uri("https://localhost:9200"))
+	.CertificateFingerprint("E8:76:3D:91:81:8C:57:31:6F:2F:E0:4C:17:78:78:FB:38:CC:37:27:41:7A:94:B4:12:AA:B6:D1:D6:C4:4C:7D")
+	.Authentication(new BasicAuthentication("elastic", "password"))
+	.EnableDebugMode();
+
+var client = new ElasticsearchClient(settings);
+
+var existsResponse = await client.Indices.ExistsAsync(IndexName);
+
+if (!existsResponse.Exists)
 {
-	Template = new IndexTemplateMapping
-	{
-		Mappings = new TypeMapping
-		{
-			Properties = new Properties
+	var newIndexResponse = await client.Indices.CreateAsync(IndexName, i => i
+		.Mappings(m => m
+			.Properties(new Elastic.Clients.Elasticsearch.Mapping.Properties
 			{
-				{ "field1", new TextProperty { Boost = 2.0, Store = false } }
-			}
-		},
-		Settings = new IndexSettings
-		{
-			Index = new IndexSettings
-			{
-				NumberOfReplicas = 1,
-				Priority = 2,
-			}
-		}
-	}
-};
+				{ "symbol", new KeywordProperty() },
+				{ "high", new FloatNumberProperty() },
+				{ "low", new FloatNumberProperty() },
+				{ "open", new FloatNumberProperty() },
+				{ "close", new FloatNumberProperty() },
+			}))
+		//.Map(m => m
+		//    .AutoMap<StockData>()
+		//    .Properties<StockData>(p => p.Keyword(k => k.Name(n => n.Symbol))))
+		.Settings(s => s.NumberOfShards(1).NumberOfReplicas(0)));
 
-//var putMappingRequest = new PutMappingRequest("test-index")
+	if (!newIndexResponse.IsValid || newIndexResponse.Acknowledged is false)
+		throw new Exception("Oh no!");
+
+	var bulkAll = client.BulkAll(ReadStockData(), r => r
+		.Index(IndexName)
+		.BackOffRetries(20)
+		.BackOffTime(TimeSpan.FromSeconds(10))
+		.ContinueAfterDroppedDocuments()
+		.DroppedDocumentCallback((r, d) =>
+		{
+			Console.WriteLine(r.Error?.Reason ?? "NO REASON");
+		})
+		.MaxDegreeOfParallelism(4)
+		.Size(1000));
+
+	bulkAll.Wait(TimeSpan.FromMinutes(10), r => Console.WriteLine("Data indexed"));
+}
+
+var aggExampleResponse = await client.SearchAsync<StockData>(s => s
+	.Index(IndexName)
+	.Size(0)
+		.Query(q => q
+			.Bool(b => b
+				.Filter(new[] { new QueryContainer(new TermQuery { Field = "symbol", Value = "MSFT" }) })))
+	.Aggregations(a => a
+		.DateHistogram("by-month", dh => dh
+			.CalendarInterval(CalendarInterval.Month)
+			.Field(fld => fld.Date)
+			//.Order(HistogramOrder.KeyDescending)
+			.Order(new HistogramOrder { Key = SortOrder.Desc })
+			.Aggregations(agg => agg
+				.Sum("trade-volumes", sum => sum.Field(fld => fld.Volume))))));
+
+if (!aggExampleResponse.IsValid) throw new Exception("Oh no");
+
+var monthlyBuckets = aggExampleResponse.Aggregations?.GetDateHistogram("by-month")?.Buckets ?? Array.Empty<DateHistogramBucket>();
+
+foreach (var monthlyBucket in monthlyBuckets)
+{
+	//var volume = monthlyBucket..Sum("trade-volumes").Value;
+	//Console.WriteLine($"{monthlyBucket.Date} : {volume:n0}");
+}
+
+Console.WriteLine("Press any key to exit.");
+Console.ReadKey();
+
+static IEnumerable<StockData> ReadStockData()
+{
+	var file = new StreamReader("c:\\stock-data\\all_stocks_5yr.csv");
+
+	string? line;
+	while ((line = file.ReadLine()) is not null)
+	{
+		yield return new StockData(line);
+	}
+}
+
+public class StockData
+{
+	private static readonly Dictionary<string, string> CompanyLookup = new()
+	{
+		{ "AAL", "American Airlines Group Inc" },
+		{ "MSFT", "Microsoft Corporation" },
+		{ "AME", "AMETEK, Inc." },
+		{ "M", "Macy's inc" }
+	};
+
+	public StockData(string dataLine)
+	{
+		var columns = dataLine.Split(',', StringSplitOptions.TrimEntries);
+
+		if (DateTime.TryParse(columns[0], out var date))
+			Date = date;
+
+		if (double.TryParse(columns[1], out var open))
+			Open = open;
+
+		if (double.TryParse(columns[2], out var high))
+			High = high;
+
+		if (double.TryParse(columns[3], out var low))
+			Low = low;
+
+		if (double.TryParse(columns[4], out var close))
+			Close = close;
+
+		if (uint.TryParse(columns[5], out var volume))
+			Volume = volume;
+
+		Symbol = columns[6];
+
+		if (CompanyLookup.TryGetValue(Symbol, out var name))
+			Name = name;
+	}
+
+	public DateTime Date { get; init; }
+	public double Open { get; init; }
+	public double Close { get; init; }
+	public double High { get; init; }
+	public double Low { get; init; }
+	public uint Volume { get; init; }
+	public string Symbol { get; init; }
+	public string? Name { get; init; }
+}
+
+//using System.Text;
+//using Elastic.Clients.Elasticsearch;
+//using Elastic.Clients.Elasticsearch.IndexManagement;
+//using Elastic.Clients.Elasticsearch.Mapping;
+//using Elastic.Transport;
+//using Playground;
+
+
+
+
+//var settings = new ElasticsearchClientSettings(new InMemoryConnection())
+//	.EnableDebugMode()
+//	.DefaultMappingFor<Person>(p => p
+//		.PropertyName(pn => pn.Age, "custom-name")
+//		.Ignore(pn => pn.Email));
+
+//var client = new ElasticsearchClient(settings);
+
+//var response = await client.IndexAsync(new Person { FirstName = "Steve", LastName = "Gordon", Age = 37, Email = "test@example.com", Id = 1000 }, "test-index");
+
+
+
+//var putTemplateRequest = new PutIndexTemplateRequest("my-template")
 //{
-//	Properties = new Properties
+//	Template = new IndexTemplateMapping
 //	{
-//		{ "field1", new TextProperty { Boost = 2.0, Store = false } }
+//		Mappings = new TypeMapping
+//		{
+//			Properties = new Properties
+//			{
+//				{ "field1", new KeywordProperty { Boost = 2.0, Store = false } }
+//			}
+//		},
+//		Settings = new IndexSettings
+//		{
+//			Index = new IndexSettings
+//			{
+//				NumberOfReplicas = 1,
+//				Priority = 2,
+//			}
+//		}
 //	}
 //};
 
-var stream = new MemoryStream();
+////var putMappingRequest = new PutMappingRequest("test-index")
+////{
+////	Properties = new Properties
+////	{
+////		{ "field1", new TextProperty { Boost = 2.0, Store = false } }
+////	}
+////};
 
-client.RequestResponseSerializer.Serialize(putTemplateRequest, stream);
+//var stream = new MemoryStream();
 
-stream.Position = 0;
+//client.RequestResponseSerializer.Serialize(putTemplateRequest, stream);
 
-var sr = new StreamReader(stream);
+//stream.Position = 0;
 
-var json = sr.ReadToEnd();
+//var sr = new StreamReader(stream);
 
-Console.WriteLine(json);
+//var json = sr.ReadToEnd();
 
-Console.ReadKey();
+//Console.WriteLine(json);
 
-//const string propertiesJson = @"{""field1"":{""boost"":2,""type"":""text"",""store"":false},""field2"":{""type"":""ip""},""name"":{""properties"":{""first"":{""type"":""text"",""fields"":{""keyword"":{""type"":""keyword"",""ignore_above"":256}}},""last"":{""type"":""text"",""fields"":{""keyword"":{""type"":""keyword"",""ignore_above"":256}}}}}}";
+//Console.ReadKey();
 
-//stream = new MemoryStream(Encoding.UTF8.GetBytes(propertiesJson));
+////const string propertiesJson = @"{""field1"":{""boost"":2,""type"":""text"",""store"":false},""field2"":{""type"":""ip""},""name"":{""properties"":{""first"":{""type"":""text"",""fields"":{""keyword"":{""type"":""keyword"",""ignore_above"":256}}},""last"":{""type"":""text"",""fields"":{""keyword"":{""type"":""keyword"",""ignore_above"":256}}}}}}";
 
-//var properties = client.RequestResponseSerializer.Deserialize<Properties>(stream);
+////stream = new MemoryStream(Encoding.UTF8.GetBytes(propertiesJson));
 
-//if (properties.TryGetProperty<TextProperty>("field1", out var textProperty))
-//{
-//	Console.WriteLine($"Found field1 with boost: {textProperty.Boost}");
-//}
+////var properties = client.RequestResponseSerializer.Deserialize<Properties>(stream);
 
-Console.WriteLine("DONE");
+////if (properties.TryGetProperty<TextProperty>("field1", out var textProperty))
+////{
+////	Console.WriteLine($"Found field1 with boost: {textProperty.Boost}");
+////}
 
-Console.ReadKey();
+//Console.WriteLine("DONE");
+
+//Console.ReadKey();
