@@ -28,10 +28,6 @@ namespace Elastic.Clients.Elasticsearch
 		private static PropertyMapping PropertyMappingFromAttributes(MemberInfo memberInfo)
 		{
 			var jsonPropertyName = memberInfo.GetCustomAttribute<JsonPropertyNameAttribute>(true);
-			//var dataMemberProperty = memberInfo.GetCustomAttribute<DataMemberAttribute>(true);
-
-			//var propertyName = memberInfo.GetCustomAttribute<PropertyNameAttribute>(true);
-			//var ignore = memberInfo.GetCustomAttribute<IgnoreForMappingAttribute>(true);
 
 			if (jsonPropertyName == null)
 				return null;

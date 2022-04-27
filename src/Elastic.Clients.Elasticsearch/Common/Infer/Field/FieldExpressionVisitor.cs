@@ -46,10 +46,6 @@ namespace Elastic.Clients.Elasticsearch
 			if (_settings.PropertyMappings.TryGetValue(info, out var propertyMapping))
 				return propertyMapping.Name;
 
-			//var att = ElasticsearchPropertyAttributeBase.From(info);
-			//if (att != null && !att.Name.IsNullOrEmpty())
-			//	return att.Name;
-
 			return _settings.PropertyMappingProvider?.CreatePropertyMapping(info)?.Name ?? _settings.DefaultFieldNameInferrer(name);
 		}
 

@@ -28,7 +28,9 @@ var client = new ElasticsearchClient(settings);
 
 var person = new Person { Id = 101, FirstName = "Steve", LastName = "Gordon", Age = 37, Email = "sgordon@example.com" };
 
-var propertyName = Infer.Property<Person>(p => p.FirstName);
+var propertyName = (IUrlParameter)Infer.Property<Person>(p => p.SecondaryId);
+
+var propertyNameString = propertyName.GetString(settings);
 
 var response = await client.IndexAsync(person);
 
