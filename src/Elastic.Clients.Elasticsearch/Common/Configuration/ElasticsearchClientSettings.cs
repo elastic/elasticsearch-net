@@ -112,8 +112,8 @@ namespace Elastic.Clients.Elasticsearch
 			IPropertyMappingProvider propertyMappingProvider)
 			: base(nodePool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticsearchClientsElasticsearch)
 		{
-			var defaultSerializer = new DefaultRequestResponseSerializer(this);
-			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? new DefaultSourceSerializer(this);
+			var requestResponseSerializer = new DefaultRequestResponseSerializer(this);
+			var sourceSerializer = sourceSerializerFactory?.Invoke(requestResponseSerializer, this) ?? new DefaultSourceSerializer(this);
 
 			// TODO - Is the second condition ever true?
 			_propertyMappingProvider = propertyMappingProvider ?? sourceSerializer as IPropertyMappingProvider ?? new PropertyMappingProvider();
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch
 			_sourceSerializer = sourceSerializer;
 
 			//UseThisRequestResponseSerializer = new DiagnosticsSerializerProxy(defaultSerializer);
-			UseThisRequestResponseSerializer = defaultSerializer;
+			UseThisRequestResponseSerializer = requestResponseSerializer;
 
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
 			_defaultIndices = new FluentDictionary<Type, string>();
@@ -134,7 +134,7 @@ namespace Elastic.Clients.Elasticsearch
 			UserAgent(ElasticsearchClientSettings.DefaultUserAgent);
 		}
 
-		public Serializer SourceSerializer { get; }
+		public Serializer SourceSerializer => _sourceSerializer;
 
 		bool IElasticsearchClientSettings.DefaultDisableIdInference => _defaultDisableAllInference;
 		Func<string, string> IElasticsearchClientSettings.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
@@ -171,8 +171,15 @@ namespace Elastic.Clients.Elasticsearch
 		/// <example>
 		///     CLR property EmailAddress will be inferred as "emailAddress" Elasticsearch document field name
 		/// </example>
-		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) =>
-			Assign(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
+		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer)
+		{
+			if (_sourceSerializer is DefaultSourceSerializer dss)
+			{
+				dss.Options.PropertyNamingPolicy = new CustomizedNamingPolicy(fieldNameInferrer);
+			}
+			
+			return Assign<Func<string, string>>(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
+		}
 
 		public TConnectionSettings ExperimentalEnableSerializeNullInferredValues(bool enabled = true) =>
 			Assign(enabled, (a, v) => a._experimentalEnableSerializeNullInferredValues = v);
