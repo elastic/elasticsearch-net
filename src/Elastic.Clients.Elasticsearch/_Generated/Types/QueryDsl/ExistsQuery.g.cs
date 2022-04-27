@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
-	public sealed partial class ExistsQueryDescriptor<TDocument> : DescriptorBase<ExistsQueryDescriptor<TDocument>>
+	public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescriptorBase<ExistsQueryDescriptor<TDocument>>
 	{
 		internal ExistsQueryDescriptor(Action<ExistsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ExistsQueryDescriptor() : base()
@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class ExistsQueryDescriptor : DescriptorBase<ExistsQueryDescriptor>
+	public sealed partial class ExistsQueryDescriptor : SerializableDescriptorBase<ExistsQueryDescriptor>
 	{
 		internal ExistsQueryDescriptor(Action<ExistsQueryDescriptor> configure) => configure.Invoke(this);
 		public ExistsQueryDescriptor() : base()

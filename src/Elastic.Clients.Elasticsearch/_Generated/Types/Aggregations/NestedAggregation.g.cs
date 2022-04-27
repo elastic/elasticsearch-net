@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 	}
 
-	public sealed partial class NestedAggregationDescriptor<TDocument> : DescriptorBase<NestedAggregationDescriptor<TDocument>>
+	public sealed partial class NestedAggregationDescriptor<TDocument> : SerializableDescriptorBase<NestedAggregationDescriptor<TDocument>>
 	{
 		internal NestedAggregationDescriptor(Action<NestedAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public NestedAggregationDescriptor() : base()
@@ -221,7 +221,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class NestedAggregationDescriptor : DescriptorBase<NestedAggregationDescriptor>
+	public sealed partial class NestedAggregationDescriptor : SerializableDescriptorBase<NestedAggregationDescriptor>
 	{
 		internal NestedAggregationDescriptor(Action<NestedAggregationDescriptor> configure) => configure.Invoke(this);
 		public NestedAggregationDescriptor() : base()

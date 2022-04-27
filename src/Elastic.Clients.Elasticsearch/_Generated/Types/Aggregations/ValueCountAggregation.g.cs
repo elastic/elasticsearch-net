@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class ValueCountAggregationDescriptor<TDocument> : DescriptorBase<ValueCountAggregationDescriptor<TDocument>>
+	public sealed partial class ValueCountAggregationDescriptor<TDocument> : SerializableDescriptorBase<ValueCountAggregationDescriptor<TDocument>>
 	{
 		internal ValueCountAggregationDescriptor(Action<ValueCountAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ValueCountAggregationDescriptor() : base()
@@ -249,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class ValueCountAggregationDescriptor : DescriptorBase<ValueCountAggregationDescriptor>
+	public sealed partial class ValueCountAggregationDescriptor : SerializableDescriptorBase<ValueCountAggregationDescriptor>
 	{
 		internal ValueCountAggregationDescriptor(Action<ValueCountAggregationDescriptor> configure) => configure.Invoke(this);
 		public ValueCountAggregationDescriptor() : base()

@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class InferenceProcessorDescriptor<TDocument> : DescriptorBase<InferenceProcessorDescriptor<TDocument>>
+	public sealed partial class InferenceProcessorDescriptor<TDocument> : SerializableDescriptorBase<InferenceProcessorDescriptor<TDocument>>
 	{
 		internal InferenceProcessorDescriptor(Action<InferenceProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public InferenceProcessorDescriptor() : base()
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class InferenceProcessorDescriptor : DescriptorBase<InferenceProcessorDescriptor>
+	public sealed partial class InferenceProcessorDescriptor : SerializableDescriptorBase<InferenceProcessorDescriptor>
 	{
 		internal InferenceProcessorDescriptor(Action<InferenceProcessorDescriptor> configure) => configure.Invoke(this);
 		public InferenceProcessorDescriptor() : base()

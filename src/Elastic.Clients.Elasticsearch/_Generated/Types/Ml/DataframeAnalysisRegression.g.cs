@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public double? LossFunctionParameter { get; set; }
 	}
 
-	public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : DescriptorBase<DataframeAnalysisRegressionDescriptor<TDocument>>
+	public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalysisRegressionDescriptor<TDocument>>
 	{
 		internal DataframeAnalysisRegressionDescriptor(Action<DataframeAnalysisRegressionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeAnalysisRegressionDescriptor() : base()
@@ -333,7 +333,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeAnalysisRegressionDescriptor : DescriptorBase<DataframeAnalysisRegressionDescriptor>
+	public sealed partial class DataframeAnalysisRegressionDescriptor : SerializableDescriptorBase<DataframeAnalysisRegressionDescriptor>
 	{
 		internal DataframeAnalysisRegressionDescriptor(Action<DataframeAnalysisRegressionDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalysisRegressionDescriptor() : base()

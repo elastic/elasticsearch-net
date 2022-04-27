@@ -171,7 +171,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public object Value { get; set; }
 	}
 
-	public sealed partial class FuzzyQueryDescriptor<TDocument> : DescriptorBase<FuzzyQueryDescriptor<TDocument>>
+	public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescriptorBase<FuzzyQueryDescriptor<TDocument>>
 	{
 		internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FuzzyQueryDescriptor() : base()
@@ -310,7 +310,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class FuzzyQueryDescriptor : DescriptorBase<FuzzyQueryDescriptor>
+	public sealed partial class FuzzyQueryDescriptor : SerializableDescriptorBase<FuzzyQueryDescriptor>
 	{
 		internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor> configure) => configure.Invoke(this);
 		public FuzzyQueryDescriptor() : base()

@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, object>? ConfusionMatrix { get; set; }
 	}
 
-	public sealed partial class DataframeEvaluationOutlierDetectionMetricsDescriptor : DescriptorBase<DataframeEvaluationOutlierDetectionMetricsDescriptor>
+	public sealed partial class DataframeEvaluationOutlierDetectionMetricsDescriptor : SerializableDescriptorBase<DataframeEvaluationOutlierDetectionMetricsDescriptor>
 	{
 		internal DataframeEvaluationOutlierDetectionMetricsDescriptor(Action<DataframeEvaluationOutlierDetectionMetricsDescriptor> configure) => configure.Invoke(this);
 		public DataframeEvaluationOutlierDetectionMetricsDescriptor() : base()

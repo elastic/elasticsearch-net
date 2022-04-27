@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Format { get; set; }
 	}
 
-	public sealed partial class FormattableMetricAggregationBaseDescriptor<TDocument> : DescriptorBase<FormattableMetricAggregationBaseDescriptor<TDocument>>
+	public sealed partial class FormattableMetricAggregationBaseDescriptor<TDocument> : SerializableDescriptorBase<FormattableMetricAggregationBaseDescriptor<TDocument>>
 	{
 		internal FormattableMetricAggregationBaseDescriptor(Action<FormattableMetricAggregationBaseDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FormattableMetricAggregationBaseDescriptor() : base()
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class FormattableMetricAggregationBaseDescriptor : DescriptorBase<FormattableMetricAggregationBaseDescriptor>
+	public sealed partial class FormattableMetricAggregationBaseDescriptor : SerializableDescriptorBase<FormattableMetricAggregationBaseDescriptor>
 	{
 		internal FormattableMetricAggregationBaseDescriptor(Action<FormattableMetricAggregationBaseDescriptor> configure) => configure.Invoke(this);
 		public FormattableMetricAggregationBaseDescriptor() : base()

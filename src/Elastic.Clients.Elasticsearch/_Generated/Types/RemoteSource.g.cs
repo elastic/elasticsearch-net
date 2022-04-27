@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Username Username { get; set; }
 	}
 
-	public sealed partial class RemoteSourceDescriptor : DescriptorBase<RemoteSourceDescriptor>
+	public sealed partial class RemoteSourceDescriptor : SerializableDescriptorBase<RemoteSourceDescriptor>
 	{
 		internal RemoteSourceDescriptor(Action<RemoteSourceDescriptor> configure) => configure.Invoke(this);
 		public RemoteSourceDescriptor() : base()

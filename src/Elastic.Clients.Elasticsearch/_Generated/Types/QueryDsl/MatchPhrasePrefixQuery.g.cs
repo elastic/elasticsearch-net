@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
-	public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : DescriptorBase<MatchPhrasePrefixQueryDescriptor<TDocument>>
+	public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : SerializableDescriptorBase<MatchPhrasePrefixQueryDescriptor<TDocument>>
 	{
 		internal MatchPhrasePrefixQueryDescriptor(Action<MatchPhrasePrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MatchPhrasePrefixQueryDescriptor() : base()
@@ -280,7 +280,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class MatchPhrasePrefixQueryDescriptor : DescriptorBase<MatchPhrasePrefixQueryDescriptor>
+	public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescriptorBase<MatchPhrasePrefixQueryDescriptor>
 	{
 		internal MatchPhrasePrefixQueryDescriptor(Action<MatchPhrasePrefixQueryDescriptor> configure) => configure.Invoke(this);
 		public MatchPhrasePrefixQueryDescriptor() : base()

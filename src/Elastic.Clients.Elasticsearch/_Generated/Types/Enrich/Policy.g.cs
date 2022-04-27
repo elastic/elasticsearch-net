@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public string? Query { get; set; }
 	}
 
-	public sealed partial class PolicyDescriptor<TDocument> : DescriptorBase<PolicyDescriptor<TDocument>>
+	public sealed partial class PolicyDescriptor<TDocument> : SerializableDescriptorBase<PolicyDescriptor<TDocument>>
 	{
 		internal PolicyDescriptor(Action<PolicyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public PolicyDescriptor() : base()
@@ -131,7 +131,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		}
 	}
 
-	public sealed partial class PolicyDescriptor : DescriptorBase<PolicyDescriptor>
+	public sealed partial class PolicyDescriptor : SerializableDescriptorBase<PolicyDescriptor>
 	{
 		internal PolicyDescriptor(Action<PolicyDescriptor> configure) => configure.Invoke(this);
 		public PolicyDescriptor() : base()

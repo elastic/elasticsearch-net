@@ -90,7 +90,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeEvaluationContainerDescriptor<TDocument> : DescriptorBase<DataframeEvaluationContainerDescriptor<TDocument>>
+	public sealed partial class DataframeEvaluationContainerDescriptor<TDocument> : SerializableDescriptorBase<DataframeEvaluationContainerDescriptor<TDocument>>
 	{
 		internal DataframeEvaluationContainerDescriptor(Action<DataframeEvaluationContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeEvaluationContainerDescriptor() : base()
@@ -103,12 +103,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal DataframeEvaluationContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public void Regression(Action<DataframeEvaluationRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
 	}
 
-	public sealed partial class DataframeEvaluationContainerDescriptor : DescriptorBase<DataframeEvaluationContainerDescriptor>
+	public sealed partial class DataframeEvaluationContainerDescriptor : SerializableDescriptorBase<DataframeEvaluationContainerDescriptor>
 	{
 		internal DataframeEvaluationContainerDescriptor(Action<DataframeEvaluationContainerDescriptor> configure) => configure.Invoke(this);
 		public DataframeEvaluationContainerDescriptor() : base()
@@ -170,12 +170,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal DataframeEvaluationContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

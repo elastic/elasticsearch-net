@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
 	}
 
-	public sealed partial class IndexPrivilegesCheckDescriptor : DescriptorBase<IndexPrivilegesCheckDescriptor>
+	public sealed partial class IndexPrivilegesCheckDescriptor : SerializableDescriptorBase<IndexPrivilegesCheckDescriptor>
 	{
 		internal IndexPrivilegesCheckDescriptor(Action<IndexPrivilegesCheckDescriptor> configure) => configure.Invoke(this);
 		public IndexPrivilegesCheckDescriptor() : base()

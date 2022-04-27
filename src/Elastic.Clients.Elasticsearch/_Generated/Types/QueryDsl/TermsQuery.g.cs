@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string IQueryContainerVariant.QueryContainerVariantName => "terms";
 	}
 
-	public sealed partial class TermsQueryDescriptor : DescriptorBase<TermsQueryDescriptor>
+	public sealed partial class TermsQueryDescriptor : SerializableDescriptorBase<TermsQueryDescriptor>
 	{
 		internal TermsQueryDescriptor(Action<TermsQueryDescriptor> configure) => configure.Invoke(this);
 		public TermsQueryDescriptor() : base()

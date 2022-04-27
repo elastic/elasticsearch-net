@@ -158,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IEnumerable<double>? Percents { get; set; }
 	}
 
-	public sealed partial class PercentilesBucketAggregationDescriptor : DescriptorBase<PercentilesBucketAggregationDescriptor>
+	public sealed partial class PercentilesBucketAggregationDescriptor : SerializableDescriptorBase<PercentilesBucketAggregationDescriptor>
 	{
 		internal PercentilesBucketAggregationDescriptor(Action<PercentilesBucketAggregationDescriptor> configure) => configure.Invoke(this);
 		public PercentilesBucketAggregationDescriptor() : base()

@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public int? Slop { get; set; }
 	}
 
-	public sealed partial class SpanNearQueryDescriptor : DescriptorBase<SpanNearQueryDescriptor>
+	public sealed partial class SpanNearQueryDescriptor : SerializableDescriptorBase<SpanNearQueryDescriptor>
 	{
 		internal SpanNearQueryDescriptor(Action<SpanNearQueryDescriptor> configure) => configure.Invoke(this);
 		public SpanNearQueryDescriptor() : base()

@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? IgnoreUnlabeled { get; set; }
 	}
 
-	public sealed partial class RankEvalMetricPrecisionDescriptor : DescriptorBase<RankEvalMetricPrecisionDescriptor>
+	public sealed partial class RankEvalMetricPrecisionDescriptor : SerializableDescriptorBase<RankEvalMetricPrecisionDescriptor>
 	{
 		internal RankEvalMetricPrecisionDescriptor(Action<RankEvalMetricPrecisionDescriptor> configure) => configure.Invoke(this);
 		public RankEvalMetricPrecisionDescriptor() : base()

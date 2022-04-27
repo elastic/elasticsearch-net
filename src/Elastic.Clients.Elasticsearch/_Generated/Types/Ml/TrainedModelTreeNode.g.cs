@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public double? Threshold { get; set; }
 	}
 
-	public sealed partial class TrainedModelTreeNodeDescriptor : DescriptorBase<TrainedModelTreeNodeDescriptor>
+	public sealed partial class TrainedModelTreeNodeDescriptor : SerializableDescriptorBase<TrainedModelTreeNodeDescriptor>
 	{
 		internal TrainedModelTreeNodeDescriptor(Action<TrainedModelTreeNodeDescriptor> configure) => configure.Invoke(this);
 		public TrainedModelTreeNodeDescriptor() : base()

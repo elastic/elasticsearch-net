@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string ResultsField { get; set; }
 	}
 
-	public sealed partial class InferenceConfigRegressionDescriptor : DescriptorBase<InferenceConfigRegressionDescriptor>
+	public sealed partial class InferenceConfigRegressionDescriptor : SerializableDescriptorBase<InferenceConfigRegressionDescriptor>
 	{
 		internal InferenceConfigRegressionDescriptor(Action<InferenceConfigRegressionDescriptor> configure) => configure.Invoke(this);
 		public InferenceConfigRegressionDescriptor() : base()

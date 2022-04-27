@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Missing { get; set; }
 	}
 
-	public sealed partial class AverageAggregationDescriptor<TDocument> : DescriptorBase<AverageAggregationDescriptor<TDocument>>
+	public sealed partial class AverageAggregationDescriptor<TDocument> : SerializableDescriptorBase<AverageAggregationDescriptor<TDocument>>
 	{
 		internal AverageAggregationDescriptor(Action<AverageAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public AverageAggregationDescriptor() : base()
@@ -284,7 +284,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class AverageAggregationDescriptor : DescriptorBase<AverageAggregationDescriptor>
+	public sealed partial class AverageAggregationDescriptor : SerializableDescriptorBase<AverageAggregationDescriptor>
 	{
 		internal AverageAggregationDescriptor(Action<AverageAggregationDescriptor> configure) => configure.Invoke(this);
 		public AverageAggregationDescriptor() : base()

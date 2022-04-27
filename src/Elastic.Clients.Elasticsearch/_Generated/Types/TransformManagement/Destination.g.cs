@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public string? Pipeline { get; set; }
 	}
 
-	public sealed partial class DestinationDescriptor : DescriptorBase<DestinationDescriptor>
+	public sealed partial class DestinationDescriptor : SerializableDescriptorBase<DestinationDescriptor>
 	{
 		internal DestinationDescriptor(Action<DestinationDescriptor> configure) => configure.Invoke(this);
 		public DestinationDescriptor() : base()

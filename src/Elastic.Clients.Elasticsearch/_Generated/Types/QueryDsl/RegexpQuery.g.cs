@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Value { get; set; }
 	}
 
-	public sealed partial class RegexpQueryDescriptor<TDocument> : DescriptorBase<RegexpQueryDescriptor<TDocument>>
+	public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescriptorBase<RegexpQueryDescriptor<TDocument>>
 	{
 		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RegexpQueryDescriptor() : base()
@@ -280,7 +280,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class RegexpQueryDescriptor : DescriptorBase<RegexpQueryDescriptor>
+	public sealed partial class RegexpQueryDescriptor : SerializableDescriptorBase<RegexpQueryDescriptor>
 	{
 		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor> configure) => configure.Invoke(this);
 		public RegexpQueryDescriptor() : base()

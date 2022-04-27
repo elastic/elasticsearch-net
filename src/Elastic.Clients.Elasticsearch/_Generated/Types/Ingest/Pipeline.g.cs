@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public long? Version { get; set; }
 	}
 
-	public sealed partial class PipelineDescriptor : DescriptorBase<PipelineDescriptor>
+	public sealed partial class PipelineDescriptor : SerializableDescriptorBase<PipelineDescriptor>
 	{
 		internal PipelineDescriptor(Action<PipelineDescriptor> configure) => configure.Invoke(this);
 		public PipelineDescriptor() : base()

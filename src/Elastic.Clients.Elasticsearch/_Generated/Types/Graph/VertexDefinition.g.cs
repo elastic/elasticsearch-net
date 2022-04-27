@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public int? Size { get; set; }
 	}
 
-	public sealed partial class VertexDefinitionDescriptor<TDocument> : DescriptorBase<VertexDefinitionDescriptor<TDocument>>
+	public sealed partial class VertexDefinitionDescriptor<TDocument> : SerializableDescriptorBase<VertexDefinitionDescriptor<TDocument>>
 	{
 		internal VertexDefinitionDescriptor(Action<VertexDefinitionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public VertexDefinitionDescriptor() : base()
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		}
 	}
 
-	public sealed partial class VertexDefinitionDescriptor : DescriptorBase<VertexDefinitionDescriptor>
+	public sealed partial class VertexDefinitionDescriptor : SerializableDescriptorBase<VertexDefinitionDescriptor>
 	{
 		internal VertexDefinitionDescriptor(Action<VertexDefinitionDescriptor> configure) => configure.Invoke(this);
 		public VertexDefinitionDescriptor() : base()

@@ -95,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long? ResultsRetentionDays { get; set; }
 	}
 
-	public sealed partial class JobConfigDescriptor<TDocument> : DescriptorBase<JobConfigDescriptor<TDocument>>
+	public sealed partial class JobConfigDescriptor<TDocument> : SerializableDescriptorBase<JobConfigDescriptor<TDocument>>
 	{
 		internal JobConfigDescriptor(Action<JobConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public JobConfigDescriptor() : base()
@@ -507,7 +507,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class JobConfigDescriptor : DescriptorBase<JobConfigDescriptor>
+	public sealed partial class JobConfigDescriptor : SerializableDescriptorBase<JobConfigDescriptor>
 	{
 		internal JobConfigDescriptor(Action<JobConfigDescriptor> configure) => configure.Invoke(this);
 		public JobConfigDescriptor() : base()

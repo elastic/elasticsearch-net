@@ -12,7 +12,7 @@ namespace Elastic.Clients.Elasticsearch
 		TValue Value { get; }
 	}
 
-	public abstract class DescriptorPromiseBase<TDescriptor, TValue> : IDescriptor, IPromise<TValue>
+	public abstract class DescriptorPromiseBase<TDescriptor, TValue> : Descriptor, IPromise<TValue>
 		where TDescriptor : DescriptorPromiseBase<TDescriptor, TValue>
 		where TValue : class
 	{
@@ -46,29 +46,5 @@ namespace Elastic.Clients.Elasticsearch
 			descriptorAction(Self);
 			return Self;
 		}
-
-		/// <summary>
-		/// Hides the <see cref="Equals" /> method.
-		/// </summary>
-		[Browsable(false)]
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		// ReSharper disable BaseObjectEqualsIsObjectEquals
-		public override bool Equals(object obj) => base.Equals(obj);
-
-		/// <summary>
-		/// Hides the <see cref="GetHashCode" /> method.
-		/// </summary>
-		[Browsable(false)]
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		// ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-		public override int GetHashCode() => base.GetHashCode();
-		// ReSharper restore BaseObjectEqualsIsObjectEquals
-
-		/// <summary>
-		/// Hides the <see cref="ToString" /> method.
-		/// </summary>
-		[Browsable(false)]
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override string ToString() => base.ToString();
 	}
 }

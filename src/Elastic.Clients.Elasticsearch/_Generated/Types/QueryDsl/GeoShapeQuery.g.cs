@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? IgnoreUnmapped { get; set; }
 	}
 
-	public sealed partial class GeoShapeQueryDescriptor : DescriptorBase<GeoShapeQueryDescriptor>
+	public sealed partial class GeoShapeQueryDescriptor : SerializableDescriptorBase<GeoShapeQueryDescriptor>
 	{
 		internal GeoShapeQueryDescriptor(Action<GeoShapeQueryDescriptor> configure) => configure.Invoke(this);
 		public GeoShapeQueryDescriptor() : base()

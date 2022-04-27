@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptBase? Script { get; set; }
 	}
 
-	public sealed partial class TestPopulationDescriptor<TDocument> : DescriptorBase<TestPopulationDescriptor<TDocument>>
+	public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDescriptorBase<TestPopulationDescriptor<TDocument>>
 	{
 		internal TestPopulationDescriptor(Action<TestPopulationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TestPopulationDescriptor() : base()
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class TestPopulationDescriptor : DescriptorBase<TestPopulationDescriptor>
+	public sealed partial class TestPopulationDescriptor : SerializableDescriptorBase<TestPopulationDescriptor>
 	{
 		internal TestPopulationDescriptor(Action<TestPopulationDescriptor> configure) => configure.Invoke(this);
 		public TestPopulationDescriptor() : base()

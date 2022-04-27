@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string? Unmatch { get; set; }
 	}
 
-	public sealed partial class DynamicTemplateDescriptor : DescriptorBase<DynamicTemplateDescriptor>
+	public sealed partial class DynamicTemplateDescriptor : SerializableDescriptorBase<DynamicTemplateDescriptor>
 	{
 		internal DynamicTemplateDescriptor(Action<DynamicTemplateDescriptor> configure) => configure.Invoke(this);
 		public DynamicTemplateDescriptor() : base()

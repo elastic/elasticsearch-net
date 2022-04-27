@@ -20,7 +20,7 @@ public sealed class NestedSort
 	public int? MaxChildren { get; set; }
 }
 
-public sealed class NestedSortDescriptor : DescriptorBase<NestedSortDescriptor>
+public sealed class NestedSortDescriptor : SerializableDescriptorBase<NestedSortDescriptor>
 {
 	private QueryContainer _filter;
 	private QueryContainerDescriptor _queryContainerDescriptor;
@@ -76,7 +76,7 @@ public sealed class NestedSortDescriptor : DescriptorBase<NestedSortDescriptor>
 	}
 }
 
-public sealed class NestedSortDescriptor<TDocument> : DescriptorBase<NestedSortDescriptor<TDocument>>
+public sealed class NestedSortDescriptor<TDocument> : SerializableDescriptorBase<NestedSortDescriptor<TDocument>>
 {
 	private QueryContainer _filter;
 	private QueryContainerDescriptor<TDocument> _queryContainerDescriptor;

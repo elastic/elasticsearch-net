@@ -11,7 +11,7 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public abstract class BulkOperationDescriptorBase<TDescriptor> : DescriptorBase<TDescriptor>, IBulkOperation, IStreamSerializable where TDescriptor : BulkOperationDescriptorBase<TDescriptor>
+	public abstract class BulkOperationDescriptorBase<TDescriptor> : SerializableDescriptorBase<TDescriptor>, IBulkOperation, IStreamSerializable where TDescriptor : BulkOperationDescriptorBase<TDescriptor>
 	{
 		private long? _version;
 		private VersionType? _versionType;

@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Type { get; set; }
 	}
 
-	public sealed partial class HighlightDescriptor<TDocument> : DescriptorBase<HighlightDescriptor<TDocument>>
+	public sealed partial class HighlightDescriptor<TDocument> : SerializableDescriptorBase<HighlightDescriptor<TDocument>>
 	{
 		internal HighlightDescriptor(Action<HighlightDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public HighlightDescriptor() : base()
@@ -429,7 +429,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class HighlightDescriptor : DescriptorBase<HighlightDescriptor>
+	public sealed partial class HighlightDescriptor : SerializableDescriptorBase<HighlightDescriptor>
 	{
 		internal HighlightDescriptor(Action<HighlightDescriptor> configure) => configure.Invoke(this);
 		public HighlightDescriptor() : base()

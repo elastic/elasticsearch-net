@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public sealed partial class RankEvalMetricMeanReciprocalRankDescriptor : DescriptorBase<RankEvalMetricMeanReciprocalRankDescriptor>
+	public sealed partial class RankEvalMetricMeanReciprocalRankDescriptor : SerializableDescriptorBase<RankEvalMetricMeanReciprocalRankDescriptor>
 	{
 		internal RankEvalMetricMeanReciprocalRankDescriptor(Action<RankEvalMetricMeanReciprocalRankDescriptor> configure) => configure.Invoke(this);
 		public RankEvalMetricMeanReciprocalRankDescriptor() : base()

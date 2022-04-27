@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Sigma { get; set; }
 	}
 
-	public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : DescriptorBase<ExtendedStatsAggregationDescriptor<TDocument>>
+	public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : SerializableDescriptorBase<ExtendedStatsAggregationDescriptor<TDocument>>
 	{
 		internal ExtendedStatsAggregationDescriptor(Action<ExtendedStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ExtendedStatsAggregationDescriptor() : base()
@@ -284,7 +284,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class ExtendedStatsAggregationDescriptor : DescriptorBase<ExtendedStatsAggregationDescriptor>
+	public sealed partial class ExtendedStatsAggregationDescriptor : SerializableDescriptorBase<ExtendedStatsAggregationDescriptor>
 	{
 		internal ExtendedStatsAggregationDescriptor(Action<ExtendedStatsAggregationDescriptor> configure) => configure.Invoke(this);
 		public ExtendedStatsAggregationDescriptor() : base()

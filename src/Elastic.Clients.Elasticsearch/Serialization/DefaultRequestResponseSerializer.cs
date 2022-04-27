@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -11,6 +12,15 @@ using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
+
+internal class CustomizedNamingPolicy : JsonNamingPolicy
+{
+	private readonly Func<string, string> _namingAction;
+
+	public CustomizedNamingPolicy(Func<string, string> namingAction) => _namingAction = namingAction;
+
+	public override string ConvertName(string name) => _namingAction(name);
+}
 
 /// <summary>
 /// The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.
@@ -22,7 +32,7 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 	public DefaultRequestResponseSerializer(IElasticsearchClientSettings settings)
 	{
 		Options = new JsonSerializerOptions
-		{
+		{	
 			DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
 			IncludeFields = true,
 			Converters =

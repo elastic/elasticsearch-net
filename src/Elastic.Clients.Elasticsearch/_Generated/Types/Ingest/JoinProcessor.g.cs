@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public sealed partial class JoinProcessorDescriptor<TDocument> : DescriptorBase<JoinProcessorDescriptor<TDocument>>
+	public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDescriptorBase<JoinProcessorDescriptor<TDocument>>
 	{
 		internal JoinProcessorDescriptor(Action<JoinProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public JoinProcessorDescriptor() : base()
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class JoinProcessorDescriptor : DescriptorBase<JoinProcessorDescriptor>
+	public sealed partial class JoinProcessorDescriptor : SerializableDescriptorBase<JoinProcessorDescriptor>
 	{
 		internal JoinProcessorDescriptor(Action<JoinProcessorDescriptor> configure) => configure.Invoke(this);
 		public JoinProcessorDescriptor() : base()

@@ -166,7 +166,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 	}
 
-	public sealed partial class CompositeAggregationDescriptor<TDocument> : DescriptorBase<CompositeAggregationDescriptor<TDocument>>
+	public sealed partial class CompositeAggregationDescriptor<TDocument> : SerializableDescriptorBase<CompositeAggregationDescriptor<TDocument>>
 	{
 		internal CompositeAggregationDescriptor(Action<CompositeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public CompositeAggregationDescriptor() : base()
@@ -285,7 +285,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class CompositeAggregationDescriptor : DescriptorBase<CompositeAggregationDescriptor>
+	public sealed partial class CompositeAggregationDescriptor : SerializableDescriptorBase<CompositeAggregationDescriptor>
 	{
 		internal CompositeAggregationDescriptor(Action<CompositeAggregationDescriptor> configure) => configure.Invoke(this);
 		public CompositeAggregationDescriptor() : base()

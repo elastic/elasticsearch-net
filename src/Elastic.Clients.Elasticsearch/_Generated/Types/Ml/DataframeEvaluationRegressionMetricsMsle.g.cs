@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public double? Offset { get; set; }
 	}
 
-	public sealed partial class DataframeEvaluationRegressionMetricsMsleDescriptor : DescriptorBase<DataframeEvaluationRegressionMetricsMsleDescriptor>
+	public sealed partial class DataframeEvaluationRegressionMetricsMsleDescriptor : SerializableDescriptorBase<DataframeEvaluationRegressionMetricsMsleDescriptor>
 	{
 		internal DataframeEvaluationRegressionMetricsMsleDescriptor(Action<DataframeEvaluationRegressionMetricsMsleDescriptor> configure) => configure.Invoke(this);
 		public DataframeEvaluationRegressionMetricsMsleDescriptor() : base()

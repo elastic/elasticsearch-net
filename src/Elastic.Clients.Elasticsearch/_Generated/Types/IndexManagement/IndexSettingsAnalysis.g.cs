@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? Tokenizer { get; set; }
 	}
 
-	public sealed partial class IndexSettingsAnalysisDescriptor : DescriptorBase<IndexSettingsAnalysisDescriptor>
+	public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescriptorBase<IndexSettingsAnalysisDescriptor>
 	{
 		internal IndexSettingsAnalysisDescriptor(Action<IndexSettingsAnalysisDescriptor> configure) => configure.Invoke(this);
 		public IndexSettingsAnalysisDescriptor() : base()

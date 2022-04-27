@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Text { get; set; }
 	}
 
-	public sealed partial class SuggesterDescriptor : DescriptorBase<SuggesterDescriptor>
+	public sealed partial class SuggesterDescriptor : SerializableDescriptorBase<SuggesterDescriptor>
 	{
 		internal SuggesterDescriptor(Action<SuggesterDescriptor> configure) => configure.Invoke(this);
 		public SuggesterDescriptor() : base()
