@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? TimeZone { get; set; }
 	}
 
-	public sealed partial class DateRangeAggregationDescriptor<TDocument> : DescriptorBase<DateRangeAggregationDescriptor<TDocument>>
+	public sealed partial class DateRangeAggregationDescriptor<TDocument> : SerializableDescriptorBase<DateRangeAggregationDescriptor<TDocument>>
 	{
 		internal DateRangeAggregationDescriptor(Action<DateRangeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DateRangeAggregationDescriptor() : base()
@@ -326,7 +326,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class DateRangeAggregationDescriptor : DescriptorBase<DateRangeAggregationDescriptor>
+	public sealed partial class DateRangeAggregationDescriptor : SerializableDescriptorBase<DateRangeAggregationDescriptor>
 	{
 		internal DateRangeAggregationDescriptor(Action<DateRangeAggregationDescriptor> configure) => configure.Invoke(this);
 		public DateRangeAggregationDescriptor() : base()

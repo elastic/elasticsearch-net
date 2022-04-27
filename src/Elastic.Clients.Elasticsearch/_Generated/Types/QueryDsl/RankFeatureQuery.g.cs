@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 	}
 
-	public sealed partial class RankFeatureQueryDescriptor<TDocument> : DescriptorBase<RankFeatureQueryDescriptor<TDocument>>
+	public sealed partial class RankFeatureQueryDescriptor<TDocument> : SerializableDescriptorBase<RankFeatureQueryDescriptor<TDocument>>
 	{
 		internal RankFeatureQueryDescriptor(Action<RankFeatureQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RankFeatureQueryDescriptor() : base()
@@ -291,7 +291,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class RankFeatureQueryDescriptor : DescriptorBase<RankFeatureQueryDescriptor>
+	public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptorBase<RankFeatureQueryDescriptor>
 	{
 		internal RankFeatureQueryDescriptor(Action<RankFeatureQueryDescriptor> configure) => configure.Invoke(this);
 		public RankFeatureQueryDescriptor() : base()

@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? CreatedString { get; set; }
 	}
 
-	public sealed partial class IndexVersioningDescriptor : DescriptorBase<IndexVersioningDescriptor>
+	public sealed partial class IndexVersioningDescriptor : SerializableDescriptorBase<IndexVersioningDescriptor>
 	{
 		internal IndexVersioningDescriptor(Action<IndexVersioningDescriptor> configure) => configure.Invoke(this);
 		public IndexVersioningDescriptor() : base()

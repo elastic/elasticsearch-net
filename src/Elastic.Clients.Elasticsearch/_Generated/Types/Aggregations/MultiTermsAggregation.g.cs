@@ -120,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
 	}
 
-	public sealed partial class MultiTermsAggregationDescriptor<TDocument> : DescriptorBase<MultiTermsAggregationDescriptor<TDocument>>
+	public sealed partial class MultiTermsAggregationDescriptor<TDocument> : SerializableDescriptorBase<MultiTermsAggregationDescriptor<TDocument>>
 	{
 		internal MultiTermsAggregationDescriptor(Action<MultiTermsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MultiTermsAggregationDescriptor() : base()
@@ -207,7 +207,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class MultiTermsAggregationDescriptor : DescriptorBase<MultiTermsAggregationDescriptor>
+	public sealed partial class MultiTermsAggregationDescriptor : SerializableDescriptorBase<MultiTermsAggregationDescriptor>
 	{
 		internal MultiTermsAggregationDescriptor(Action<MultiTermsAggregationDescriptor> configure) => configure.Invoke(this);
 		public MultiTermsAggregationDescriptor() : base()

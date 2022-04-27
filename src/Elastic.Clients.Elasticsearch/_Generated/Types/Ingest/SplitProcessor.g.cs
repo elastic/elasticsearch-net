@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public sealed partial class SplitProcessorDescriptor<TDocument> : DescriptorBase<SplitProcessorDescriptor<TDocument>>
+	public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDescriptorBase<SplitProcessorDescriptor<TDocument>>
 	{
 		internal SplitProcessorDescriptor(Action<SplitProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SplitProcessorDescriptor() : base()
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class SplitProcessorDescriptor : DescriptorBase<SplitProcessorDescriptor>
+	public sealed partial class SplitProcessorDescriptor : SerializableDescriptorBase<SplitProcessorDescriptor>
 	{
 		internal SplitProcessorDescriptor(Action<SplitProcessorDescriptor> configure) => configure.Invoke(this);
 		public SplitProcessorDescriptor() : base()

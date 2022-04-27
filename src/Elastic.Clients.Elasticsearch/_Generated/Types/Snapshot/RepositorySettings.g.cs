@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Union<string?, bool?>? ReadOnly { get; set; }
 	}
 
-	public sealed partial class RepositorySettingsDescriptor : DescriptorBase<RepositorySettingsDescriptor>
+	public sealed partial class RepositorySettingsDescriptor : SerializableDescriptorBase<RepositorySettingsDescriptor>
 	{
 		internal RepositorySettingsDescriptor(Action<RepositorySettingsDescriptor> configure) => configure.Invoke(this);
 		public RepositorySettingsDescriptor() : base()

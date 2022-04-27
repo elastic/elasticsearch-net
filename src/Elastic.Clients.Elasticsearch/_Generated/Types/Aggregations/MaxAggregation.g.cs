@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class MaxAggregationDescriptor<TDocument> : DescriptorBase<MaxAggregationDescriptor<TDocument>>
+	public sealed partial class MaxAggregationDescriptor<TDocument> : SerializableDescriptorBase<MaxAggregationDescriptor<TDocument>>
 	{
 		internal MaxAggregationDescriptor(Action<MaxAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MaxAggregationDescriptor() : base()
@@ -249,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class MaxAggregationDescriptor : DescriptorBase<MaxAggregationDescriptor>
+	public sealed partial class MaxAggregationDescriptor : SerializableDescriptorBase<MaxAggregationDescriptor>
 	{
 		internal MaxAggregationDescriptor(Action<MaxAggregationDescriptor> configure) => configure.Invoke(this);
 		public MaxAggregationDescriptor() : base()

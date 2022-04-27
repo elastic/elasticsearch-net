@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle Idle { get; set; }
 	}
 
-	public sealed partial class SettingsSearchDescriptor : DescriptorBase<SettingsSearchDescriptor>
+	public sealed partial class SettingsSearchDescriptor : SerializableDescriptorBase<SettingsSearchDescriptor>
 	{
 		internal SettingsSearchDescriptor(Action<SettingsSearchDescriptor> configure) => configure.Invoke(this);
 		public SettingsSearchDescriptor() : base()

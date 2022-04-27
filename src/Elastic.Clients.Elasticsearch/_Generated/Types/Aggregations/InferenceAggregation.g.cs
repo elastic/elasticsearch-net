@@ -175,7 +175,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
 	}
 
-	public sealed partial class InferenceAggregationDescriptor<TDocument> : DescriptorBase<InferenceAggregationDescriptor<TDocument>>
+	public sealed partial class InferenceAggregationDescriptor<TDocument> : SerializableDescriptorBase<InferenceAggregationDescriptor<TDocument>>
 	{
 		internal InferenceAggregationDescriptor(Action<InferenceAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public InferenceAggregationDescriptor() : base()
@@ -304,7 +304,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class InferenceAggregationDescriptor : DescriptorBase<InferenceAggregationDescriptor>
+	public sealed partial class InferenceAggregationDescriptor : SerializableDescriptorBase<InferenceAggregationDescriptor>
 	{
 		internal InferenceAggregationDescriptor(Action<InferenceAggregationDescriptor> configure) => configure.Invoke(this);
 		public InferenceAggregationDescriptor() : base()

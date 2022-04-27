@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string IQueryContainerVariant.QueryContainerVariantName => "match_all";
 	}
 
-	public sealed partial class MatchAllQueryDescriptor : DescriptorBase<MatchAllQueryDescriptor>
+	public sealed partial class MatchAllQueryDescriptor : SerializableDescriptorBase<MatchAllQueryDescriptor>
 	{
 		internal MatchAllQueryDescriptor(Action<MatchAllQueryDescriptor> configure) => configure.Invoke(this);
 		public MatchAllQueryDescriptor() : base()

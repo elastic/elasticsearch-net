@@ -360,7 +360,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class ProcessorContainerDescriptor<TDocument> : DescriptorBase<ProcessorContainerDescriptor<TDocument>>
+	public sealed partial class ProcessorContainerDescriptor<TDocument> : SerializableDescriptorBase<ProcessorContainerDescriptor<TDocument>>
 	{
 		internal ProcessorContainerDescriptor(Action<ProcessorContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ProcessorContainerDescriptor() : base()
@@ -373,12 +373,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal ProcessorContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -487,7 +487,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public void UserAgent(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
 	}
 
-	public sealed partial class ProcessorContainerDescriptor : DescriptorBase<ProcessorContainerDescriptor>
+	public sealed partial class ProcessorContainerDescriptor : SerializableDescriptorBase<ProcessorContainerDescriptor>
 	{
 		internal ProcessorContainerDescriptor(Action<ProcessorContainerDescriptor> configure) => configure.Invoke(this);
 		public ProcessorContainerDescriptor() : base()
@@ -500,12 +500,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal ProcessorContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

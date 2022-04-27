@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public sealed partial class IntervalsFuzzyDescriptor<TDocument> : DescriptorBase<IntervalsFuzzyDescriptor<TDocument>>
+	public sealed partial class IntervalsFuzzyDescriptor<TDocument> : SerializableDescriptorBase<IntervalsFuzzyDescriptor<TDocument>>
 	{
 		internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IntervalsFuzzyDescriptor() : base()
@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class IntervalsFuzzyDescriptor : DescriptorBase<IntervalsFuzzyDescriptor>
+	public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptorBase<IntervalsFuzzyDescriptor>
 	{
 		internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor> configure) => configure.Invoke(this);
 		public IntervalsFuzzyDescriptor() : base()

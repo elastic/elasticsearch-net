@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 	}
 
-	public sealed partial class RegressionInferenceOptionsDescriptor<TDocument> : DescriptorBase<RegressionInferenceOptionsDescriptor<TDocument>>
+	public sealed partial class RegressionInferenceOptionsDescriptor<TDocument> : SerializableDescriptorBase<RegressionInferenceOptionsDescriptor<TDocument>>
 	{
 		internal RegressionInferenceOptionsDescriptor(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RegressionInferenceOptionsDescriptor() : base()
@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class RegressionInferenceOptionsDescriptor : DescriptorBase<RegressionInferenceOptionsDescriptor>
+	public sealed partial class RegressionInferenceOptionsDescriptor : SerializableDescriptorBase<RegressionInferenceOptionsDescriptor>
 	{
 		internal RegressionInferenceOptionsDescriptor(Action<RegressionInferenceOptionsDescriptor> configure) => configure.Invoke(this);
 		public RegressionInferenceOptionsDescriptor() : base()

@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ScriptBase Script { get; set; }
 	}
 
-	public sealed partial class ScriptFieldDescriptor : DescriptorBase<ScriptFieldDescriptor>
+	public sealed partial class ScriptFieldDescriptor : SerializableDescriptorBase<ScriptFieldDescriptor>
 	{
 		internal ScriptFieldDescriptor(Action<ScriptFieldDescriptor> configure) => configure.Invoke(this);
 		public ScriptFieldDescriptor() : base()

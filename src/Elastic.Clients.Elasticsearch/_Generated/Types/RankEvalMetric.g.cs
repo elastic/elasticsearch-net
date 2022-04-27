@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.RankEvalMetricRecall? Recall { get; set; }
 	}
 
-	public sealed partial class RankEvalMetricDescriptor : DescriptorBase<RankEvalMetricDescriptor>
+	public sealed partial class RankEvalMetricDescriptor : SerializableDescriptorBase<RankEvalMetricDescriptor>
 	{
 		internal RankEvalMetricDescriptor(Action<RankEvalMetricDescriptor> configure) => configure.Invoke(this);
 		public RankEvalMetricDescriptor() : base()

@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public sealed partial class IntervalsMatchDescriptor<TDocument> : DescriptorBase<IntervalsMatchDescriptor<TDocument>>
+	public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDescriptorBase<IntervalsMatchDescriptor<TDocument>>
 	{
 		internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IntervalsMatchDescriptor() : base()
@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class IntervalsMatchDescriptor : DescriptorBase<IntervalsMatchDescriptor>
+	public sealed partial class IntervalsMatchDescriptor : SerializableDescriptorBase<IntervalsMatchDescriptor>
 	{
 		internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor> configure) => configure.Invoke(this);
 		public IntervalsMatchDescriptor() : base()

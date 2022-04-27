@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 	}
 
-	public sealed partial class QueryStringQueryDescriptor<TDocument> : DescriptorBase<QueryStringQueryDescriptor<TDocument>>
+	public sealed partial class QueryStringQueryDescriptor<TDocument> : SerializableDescriptorBase<QueryStringQueryDescriptor<TDocument>>
 	{
 		internal QueryStringQueryDescriptor(Action<QueryStringQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public QueryStringQueryDescriptor() : base()
@@ -523,7 +523,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class QueryStringQueryDescriptor : DescriptorBase<QueryStringQueryDescriptor>
+	public sealed partial class QueryStringQueryDescriptor : SerializableDescriptorBase<QueryStringQueryDescriptor>
 	{
 		internal QueryStringQueryDescriptor(Action<QueryStringQueryDescriptor> configure) => configure.Invoke(this);
 		public QueryStringQueryDescriptor() : base()

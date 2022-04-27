@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class SortProcessorDescriptor<TDocument> : DescriptorBase<SortProcessorDescriptor<TDocument>>
+	public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDescriptorBase<SortProcessorDescriptor<TDocument>>
 	{
 		internal SortProcessorDescriptor(Action<SortProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SortProcessorDescriptor() : base()
@@ -153,7 +153,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class SortProcessorDescriptor : DescriptorBase<SortProcessorDescriptor>
+	public sealed partial class SortProcessorDescriptor : SerializableDescriptorBase<SortProcessorDescriptor>
 	{
 		internal SortProcessorDescriptor(Action<SortProcessorDescriptor> configure) => configure.Invoke(this);
 		public SortProcessorDescriptor() : base()

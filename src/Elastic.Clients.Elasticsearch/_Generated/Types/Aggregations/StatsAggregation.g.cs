@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class StatsAggregationDescriptor<TDocument> : DescriptorBase<StatsAggregationDescriptor<TDocument>>
+	public sealed partial class StatsAggregationDescriptor<TDocument> : SerializableDescriptorBase<StatsAggregationDescriptor<TDocument>>
 	{
 		internal StatsAggregationDescriptor(Action<StatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public StatsAggregationDescriptor() : base()
@@ -249,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class StatsAggregationDescriptor : DescriptorBase<StatsAggregationDescriptor>
+	public sealed partial class StatsAggregationDescriptor : SerializableDescriptorBase<StatsAggregationDescriptor>
 	{
 		internal StatsAggregationDescriptor(Action<StatsAggregationDescriptor> configure) => configure.Invoke(this);
 		public StatsAggregationDescriptor() : base()

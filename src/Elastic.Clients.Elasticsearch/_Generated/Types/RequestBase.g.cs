@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public sealed partial class RequestBaseDescriptor : DescriptorBase<RequestBaseDescriptor>
+	public sealed partial class RequestBaseDescriptor : SerializableDescriptorBase<RequestBaseDescriptor>
 	{
 		internal RequestBaseDescriptor(Action<RequestBaseDescriptor> configure) => configure.Invoke(this);
 		public RequestBaseDescriptor() : base()

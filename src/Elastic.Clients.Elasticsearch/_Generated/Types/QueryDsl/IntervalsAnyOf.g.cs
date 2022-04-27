@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> Intervals { get; set; }
 	}
 
-	public sealed partial class IntervalsAnyOfDescriptor : DescriptorBase<IntervalsAnyOfDescriptor>
+	public sealed partial class IntervalsAnyOfDescriptor : SerializableDescriptorBase<IntervalsAnyOfDescriptor>
 	{
 		internal IntervalsAnyOfDescriptor(Action<IntervalsAnyOfDescriptor> configure) => configure.Invoke(this);
 		public IntervalsAnyOfDescriptor() : base()

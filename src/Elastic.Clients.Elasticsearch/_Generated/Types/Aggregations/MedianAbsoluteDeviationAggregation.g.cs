@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Compression { get; set; }
 	}
 
-	public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocument> : DescriptorBase<MedianAbsoluteDeviationAggregationDescriptor<TDocument>>
+	public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocument> : SerializableDescriptorBase<MedianAbsoluteDeviationAggregationDescriptor<TDocument>>
 	{
 		internal MedianAbsoluteDeviationAggregationDescriptor(Action<MedianAbsoluteDeviationAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MedianAbsoluteDeviationAggregationDescriptor() : base()
@@ -284,7 +284,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : DescriptorBase<MedianAbsoluteDeviationAggregationDescriptor>
+	public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : SerializableDescriptorBase<MedianAbsoluteDeviationAggregationDescriptor>
 	{
 		internal MedianAbsoluteDeviationAggregationDescriptor(Action<MedianAbsoluteDeviationAggregationDescriptor> configure) => configure.Invoke(this);
 		public MedianAbsoluteDeviationAggregationDescriptor() : base()

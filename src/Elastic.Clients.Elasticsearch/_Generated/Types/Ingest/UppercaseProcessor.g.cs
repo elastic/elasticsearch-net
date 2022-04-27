@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public sealed partial class UppercaseProcessorDescriptor<TDocument> : DescriptorBase<UppercaseProcessorDescriptor<TDocument>>
+	public sealed partial class UppercaseProcessorDescriptor<TDocument> : SerializableDescriptorBase<UppercaseProcessorDescriptor<TDocument>>
 	{
 		internal UppercaseProcessorDescriptor(Action<UppercaseProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public UppercaseProcessorDescriptor() : base()
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class UppercaseProcessorDescriptor : DescriptorBase<UppercaseProcessorDescriptor>
+	public sealed partial class UppercaseProcessorDescriptor : SerializableDescriptorBase<UppercaseProcessorDescriptor>
 	{
 		internal UppercaseProcessorDescriptor(Action<UppercaseProcessorDescriptor> configure) => configure.Invoke(this);
 		public UppercaseProcessorDescriptor() : base()

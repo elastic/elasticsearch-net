@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		}
 	}
 
-	public sealed partial class RetentionPolicyContainerDescriptor<TDocument> : DescriptorBase<RetentionPolicyContainerDescriptor<TDocument>>
+	public sealed partial class RetentionPolicyContainerDescriptor<TDocument> : SerializableDescriptorBase<RetentionPolicyContainerDescriptor<TDocument>>
 	{
 		internal RetentionPolicyContainerDescriptor(Action<RetentionPolicyContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RetentionPolicyContainerDescriptor() : base()
@@ -85,12 +85,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		internal RetentionPolicyContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public void Time(Action<RetentionPolicyDescriptor<TDocument>> configure) => Set(configure, "time");
 	}
 
-	public sealed partial class RetentionPolicyContainerDescriptor : DescriptorBase<RetentionPolicyContainerDescriptor>
+	public sealed partial class RetentionPolicyContainerDescriptor : SerializableDescriptorBase<RetentionPolicyContainerDescriptor>
 	{
 		internal RetentionPolicyContainerDescriptor(Action<RetentionPolicyContainerDescriptor> configure) => configure.Invoke(this);
 		public RetentionPolicyContainerDescriptor() : base()
@@ -148,12 +148,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		internal RetentionPolicyContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

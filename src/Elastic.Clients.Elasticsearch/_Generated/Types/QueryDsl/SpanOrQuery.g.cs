@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 	}
 
-	public sealed partial class SpanOrQueryDescriptor : DescriptorBase<SpanOrQueryDescriptor>
+	public sealed partial class SpanOrQueryDescriptor : SerializableDescriptorBase<SpanOrQueryDescriptor>
 	{
 		internal SpanOrQueryDescriptor(Action<SpanOrQueryDescriptor> configure) => configure.Invoke(this);
 		public SpanOrQueryDescriptor() : base()

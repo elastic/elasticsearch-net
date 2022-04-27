@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string Type => "BM25";
 	}
 
-	public sealed partial class SettingsSimilarityBm25Descriptor : DescriptorBase<SettingsSimilarityBm25Descriptor>
+	public sealed partial class SettingsSimilarityBm25Descriptor : SerializableDescriptorBase<SettingsSimilarityBm25Descriptor>
 	{
 		internal SettingsSimilarityBm25Descriptor(Action<SettingsSimilarityBm25Descriptor> configure) => configure.Invoke(this);
 		public SettingsSimilarityBm25Descriptor() : base()

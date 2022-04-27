@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Type { get; set; }
 	}
 
-	public sealed partial class ChildrenAggregationDescriptor<TDocument> : DescriptorBase<ChildrenAggregationDescriptor<TDocument>>
+	public sealed partial class ChildrenAggregationDescriptor<TDocument> : SerializableDescriptorBase<ChildrenAggregationDescriptor<TDocument>>
 	{
 		internal ChildrenAggregationDescriptor(Action<ChildrenAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ChildrenAggregationDescriptor() : base()
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class ChildrenAggregationDescriptor : DescriptorBase<ChildrenAggregationDescriptor>
+	public sealed partial class ChildrenAggregationDescriptor : SerializableDescriptorBase<ChildrenAggregationDescriptor>
 	{
 		internal ChildrenAggregationDescriptor(Action<ChildrenAggregationDescriptor> configure) => configure.Invoke(this);
 		public ChildrenAggregationDescriptor() : base()

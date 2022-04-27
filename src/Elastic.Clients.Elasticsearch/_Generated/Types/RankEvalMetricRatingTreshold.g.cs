@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int? RelevantRatingThreshold { get; set; }
 	}
 
-	public sealed partial class RankEvalMetricRatingTresholdDescriptor : DescriptorBase<RankEvalMetricRatingTresholdDescriptor>
+	public sealed partial class RankEvalMetricRatingTresholdDescriptor : SerializableDescriptorBase<RankEvalMetricRatingTresholdDescriptor>
 	{
 		internal RankEvalMetricRatingTresholdDescriptor(Action<RankEvalMetricRatingTresholdDescriptor> configure) => configure.Invoke(this);
 		public RankEvalMetricRatingTresholdDescriptor() : base()

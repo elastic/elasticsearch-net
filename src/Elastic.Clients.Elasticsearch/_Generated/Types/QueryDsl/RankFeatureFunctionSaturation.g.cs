@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public float? Pivot { get; set; }
 	}
 
-	public sealed partial class RankFeatureFunctionSaturationDescriptor : DescriptorBase<RankFeatureFunctionSaturationDescriptor>
+	public sealed partial class RankFeatureFunctionSaturationDescriptor : SerializableDescriptorBase<RankFeatureFunctionSaturationDescriptor>
 	{
 		internal RankFeatureFunctionSaturationDescriptor(Action<RankFeatureFunctionSaturationDescriptor> configure) => configure.Invoke(this);
 		public RankFeatureFunctionSaturationDescriptor() : base()

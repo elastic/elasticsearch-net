@@ -90,7 +90,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class PreprocessorDescriptor<TDocument> : DescriptorBase<PreprocessorDescriptor<TDocument>>
+	public sealed partial class PreprocessorDescriptor<TDocument> : SerializableDescriptorBase<PreprocessorDescriptor<TDocument>>
 	{
 		internal PreprocessorDescriptor(Action<PreprocessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public PreprocessorDescriptor() : base()
@@ -103,12 +103,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal Preprocessor Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public void TargetMeanEncoding(Action<TargetMeanEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
 	}
 
-	public sealed partial class PreprocessorDescriptor : DescriptorBase<PreprocessorDescriptor>
+	public sealed partial class PreprocessorDescriptor : SerializableDescriptorBase<PreprocessorDescriptor>
 	{
 		internal PreprocessorDescriptor(Action<PreprocessorDescriptor> configure) => configure.Invoke(this);
 		public PreprocessorDescriptor() : base()
@@ -170,12 +170,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal Preprocessor Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

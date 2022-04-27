@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool Enabled { get; set; }
 	}
 
-	public sealed partial class FieldNamesFieldDescriptor : DescriptorBase<FieldNamesFieldDescriptor>
+	public sealed partial class FieldNamesFieldDescriptor : SerializableDescriptorBase<FieldNamesFieldDescriptor>
 	{
 		internal FieldNamesFieldDescriptor(Action<FieldNamesFieldDescriptor> configure) => configure.Invoke(this);
 		public FieldNamesFieldDescriptor() : base()
