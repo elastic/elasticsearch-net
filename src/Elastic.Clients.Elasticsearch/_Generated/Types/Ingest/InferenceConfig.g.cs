@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression? Regression { get; set; }
 	}
 
-	public sealed partial class InferenceConfigDescriptor : DescriptorBase<InferenceConfigDescriptor>
+	public sealed partial class InferenceConfigDescriptor : SerializableDescriptorBase<InferenceConfigDescriptor>
 	{
 		internal InferenceConfigDescriptor(Action<InferenceConfigDescriptor> configure) => configure.Invoke(this);
 		public InferenceConfigDescriptor() : base()

@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? Score { get; set; }
 	}
 
-	public sealed partial class HasParentQueryDescriptor<TDocument> : DescriptorBase<HasParentQueryDescriptor<TDocument>>
+	public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDescriptorBase<HasParentQueryDescriptor<TDocument>>
 	{
 		internal HasParentQueryDescriptor(Action<HasParentQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public HasParentQueryDescriptor() : base()
@@ -221,7 +221,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class HasParentQueryDescriptor : DescriptorBase<HasParentQueryDescriptor>
+	public sealed partial class HasParentQueryDescriptor : SerializableDescriptorBase<HasParentQueryDescriptor>
 	{
 		internal HasParentQueryDescriptor(Action<HasParentQueryDescriptor> configure) => configure.Invoke(this);
 		public HasParentQueryDescriptor() : base()

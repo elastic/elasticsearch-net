@@ -104,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class GlobalAggregationDescriptor<TDocument> : DescriptorBase<GlobalAggregationDescriptor<TDocument>>
+	public sealed partial class GlobalAggregationDescriptor<TDocument> : SerializableDescriptorBase<GlobalAggregationDescriptor<TDocument>>
 	{
 		internal GlobalAggregationDescriptor(Action<GlobalAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public GlobalAggregationDescriptor() : base()
@@ -181,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class GlobalAggregationDescriptor : DescriptorBase<GlobalAggregationDescriptor>
+	public sealed partial class GlobalAggregationDescriptor : SerializableDescriptorBase<GlobalAggregationDescriptor>
 	{
 		internal GlobalAggregationDescriptor(Action<GlobalAggregationDescriptor> configure) => configure.Invoke(this);
 		public GlobalAggregationDescriptor() : base()

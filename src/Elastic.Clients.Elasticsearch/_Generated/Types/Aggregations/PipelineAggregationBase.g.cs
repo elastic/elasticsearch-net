@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 	}
 
-	public sealed partial class PipelineAggregationBaseDescriptor : DescriptorBase<PipelineAggregationBaseDescriptor>
+	public sealed partial class PipelineAggregationBaseDescriptor : SerializableDescriptorBase<PipelineAggregationBaseDescriptor>
 	{
 		internal PipelineAggregationBaseDescriptor(Action<PipelineAggregationBaseDescriptor> configure) => configure.Invoke(this);
 		public PipelineAggregationBaseDescriptor() : base()

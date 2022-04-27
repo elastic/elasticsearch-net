@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Query { get; set; }
 	}
 
-	public sealed partial class WrapperQueryDescriptor : DescriptorBase<WrapperQueryDescriptor>
+	public sealed partial class WrapperQueryDescriptor : SerializableDescriptorBase<WrapperQueryDescriptor>
 	{
 		internal WrapperQueryDescriptor(Action<WrapperQueryDescriptor> configure) => configure.Invoke(this);
 		public WrapperQueryDescriptor() : base()

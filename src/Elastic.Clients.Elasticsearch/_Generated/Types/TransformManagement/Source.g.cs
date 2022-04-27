@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; set; }
 	}
 
-	public sealed partial class SourceDescriptor<TDocument> : DescriptorBase<SourceDescriptor<TDocument>>
+	public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptorBase<SourceDescriptor<TDocument>>
 	{
 		internal SourceDescriptor(Action<SourceDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SourceDescriptor() : base()
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		}
 	}
 
-	public sealed partial class SourceDescriptor : DescriptorBase<SourceDescriptor>
+	public sealed partial class SourceDescriptor : SerializableDescriptorBase<SourceDescriptor>
 	{
 		internal SourceDescriptor(Action<SourceDescriptor> configure) => configure.Invoke(this);
 		public SourceDescriptor() : base()

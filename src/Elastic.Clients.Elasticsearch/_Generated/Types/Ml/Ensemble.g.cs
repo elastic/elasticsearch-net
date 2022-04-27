@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.TrainedModel> TrainedModels { get; set; }
 	}
 
-	public sealed partial class EnsembleDescriptor : DescriptorBase<EnsembleDescriptor>
+	public sealed partial class EnsembleDescriptor : SerializableDescriptorBase<EnsembleDescriptor>
 	{
 		internal EnsembleDescriptor(Action<EnsembleDescriptor> configure) => configure.Invoke(this);
 		public EnsembleDescriptor() : base()

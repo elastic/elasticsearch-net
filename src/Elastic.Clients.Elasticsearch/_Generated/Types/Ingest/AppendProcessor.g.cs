@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IEnumerable<object> Value { get; set; }
 	}
 
-	public sealed partial class AppendProcessorDescriptor<TDocument> : DescriptorBase<AppendProcessorDescriptor<TDocument>>
+	public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableDescriptorBase<AppendProcessorDescriptor<TDocument>>
 	{
 		internal AppendProcessorDescriptor(Action<AppendProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public AppendProcessorDescriptor() : base()
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class AppendProcessorDescriptor : DescriptorBase<AppendProcessorDescriptor>
+	public sealed partial class AppendProcessorDescriptor : SerializableDescriptorBase<AppendProcessorDescriptor>
 	{
 		internal AppendProcessorDescriptor(Action<AppendProcessorDescriptor> configure) => configure.Invoke(this);
 		public AppendProcessorDescriptor() : base()

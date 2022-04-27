@@ -144,7 +144,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class SpanQueryDescriptor<TDocument> : DescriptorBase<SpanQueryDescriptor<TDocument>>
+	public sealed partial class SpanQueryDescriptor<TDocument> : SerializableDescriptorBase<SpanQueryDescriptor<TDocument>>
 	{
 		internal SpanQueryDescriptor(Action<SpanQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SpanQueryDescriptor() : base()
@@ -157,12 +157,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal SpanQuery Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -223,7 +223,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void SpanWithin(Action<SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
 	}
 
-	public sealed partial class SpanQueryDescriptor : DescriptorBase<SpanQueryDescriptor>
+	public sealed partial class SpanQueryDescriptor : SerializableDescriptorBase<SpanQueryDescriptor>
 	{
 		internal SpanQueryDescriptor(Action<SpanQueryDescriptor> configure) => configure.Invoke(this);
 		public SpanQueryDescriptor() : base()
@@ -236,12 +236,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal SpanQuery Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

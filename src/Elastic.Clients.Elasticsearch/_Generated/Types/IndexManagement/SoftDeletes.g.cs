@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? RetentionLease { get; set; }
 	}
 
-	public sealed partial class SoftDeletesDescriptor : DescriptorBase<SoftDeletesDescriptor>
+	public sealed partial class SoftDeletesDescriptor : SerializableDescriptorBase<SoftDeletesDescriptor>
 	{
 		internal SoftDeletesDescriptor(Action<SoftDeletesDescriptor> configure) => configure.Invoke(this);
 		public SoftDeletesDescriptor() : base()

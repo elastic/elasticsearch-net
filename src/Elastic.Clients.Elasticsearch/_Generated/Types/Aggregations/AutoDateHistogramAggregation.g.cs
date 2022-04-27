@@ -292,7 +292,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? TimeZone { get; set; }
 	}
 
-	public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : DescriptorBase<AutoDateHistogramAggregationDescriptor<TDocument>>
+	public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : SerializableDescriptorBase<AutoDateHistogramAggregationDescriptor<TDocument>>
 	{
 		internal AutoDateHistogramAggregationDescriptor(Action<AutoDateHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public AutoDateHistogramAggregationDescriptor() : base()
@@ -533,7 +533,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class AutoDateHistogramAggregationDescriptor : DescriptorBase<AutoDateHistogramAggregationDescriptor>
+	public sealed partial class AutoDateHistogramAggregationDescriptor : SerializableDescriptorBase<AutoDateHistogramAggregationDescriptor>
 	{
 		internal AutoDateHistogramAggregationDescriptor(Action<AutoDateHistogramAggregationDescriptor> configure) => configure.Invoke(this);
 		public AutoDateHistogramAggregationDescriptor() : base()

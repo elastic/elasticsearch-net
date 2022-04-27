@@ -22,7 +22,7 @@ public sealed class GeoDistanceSort : SortBase
 	public bool? IgnoreUnmapped { get; set; }
 }
 
-public sealed class GeoDistanceSortDescriptor : DescriptorBase<GeoDistanceSortDescriptor>
+public sealed class GeoDistanceSortDescriptor : SerializableDescriptorBase<GeoDistanceSortDescriptor>
 {
 	private Field _field;
 	private GeoDistanceType? _geoDistanceType;
@@ -99,7 +99,7 @@ public sealed class GeoDistanceSortDescriptor : DescriptorBase<GeoDistanceSortDe
 	}
 }
 
-public sealed class GeoDistanceSortDescriptor<TDocument> : DescriptorBase<GeoDistanceSortDescriptor<TDocument>>
+public sealed class GeoDistanceSortDescriptor<TDocument> : SerializableDescriptorBase<GeoDistanceSortDescriptor<TDocument>>
 {
 	private Field _field;
 	private GeoDistanceType? _geoDistanceType;

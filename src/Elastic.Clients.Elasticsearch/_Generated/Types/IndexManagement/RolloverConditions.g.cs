@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ByteSize? MaxSizeBytes { get; set; }
 	}
 
-	public sealed partial class RolloverConditionsDescriptor : DescriptorBase<RolloverConditionsDescriptor>
+	public sealed partial class RolloverConditionsDescriptor : SerializableDescriptorBase<RolloverConditionsDescriptor>
 	{
 		internal RolloverConditionsDescriptor(Action<RolloverConditionsDescriptor> configure) => configure.Invoke(this);
 		public RolloverConditionsDescriptor() : base()

@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public sealed partial class IntervalsWildcardDescriptor<TDocument> : DescriptorBase<IntervalsWildcardDescriptor<TDocument>>
+	public sealed partial class IntervalsWildcardDescriptor<TDocument> : SerializableDescriptorBase<IntervalsWildcardDescriptor<TDocument>>
 	{
 		internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IntervalsWildcardDescriptor() : base()
@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class IntervalsWildcardDescriptor : DescriptorBase<IntervalsWildcardDescriptor>
+	public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptorBase<IntervalsWildcardDescriptor>
 	{
 		internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor> configure) => configure.Invoke(this);
 		public IntervalsWildcardDescriptor() : base()

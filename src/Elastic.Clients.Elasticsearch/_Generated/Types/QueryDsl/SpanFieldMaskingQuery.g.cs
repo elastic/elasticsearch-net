@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Query { get; set; }
 	}
 
-	public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : DescriptorBase<SpanFieldMaskingQueryDescriptor<TDocument>>
+	public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : SerializableDescriptorBase<SpanFieldMaskingQueryDescriptor<TDocument>>
 	{
 		internal SpanFieldMaskingQueryDescriptor(Action<SpanFieldMaskingQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SpanFieldMaskingQueryDescriptor() : base()
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class SpanFieldMaskingQueryDescriptor : DescriptorBase<SpanFieldMaskingQueryDescriptor>
+	public sealed partial class SpanFieldMaskingQueryDescriptor : SerializableDescriptorBase<SpanFieldMaskingQueryDescriptor>
 	{
 		internal SpanFieldMaskingQueryDescriptor(Action<SpanFieldMaskingQueryDescriptor> configure) => configure.Invoke(this);
 		public SpanFieldMaskingQueryDescriptor() : base()

@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Positive { get; set; }
 	}
 
-	public sealed partial class BoostingQueryDescriptor<TDocument> : DescriptorBase<BoostingQueryDescriptor<TDocument>>
+	public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDescriptorBase<BoostingQueryDescriptor<TDocument>>
 	{
 		internal BoostingQueryDescriptor(Action<BoostingQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public BoostingQueryDescriptor() : base()
@@ -185,7 +185,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class BoostingQueryDescriptor : DescriptorBase<BoostingQueryDescriptor>
+	public sealed partial class BoostingQueryDescriptor : SerializableDescriptorBase<BoostingQueryDescriptor>
 	{
 		internal BoostingQueryDescriptor(Action<BoostingQueryDescriptor> configure) => configure.Invoke(this);
 		public BoostingQueryDescriptor() : base()

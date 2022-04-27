@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
 
-	public sealed partial class GeoBoundingBoxQueryDescriptor : DescriptorBase<GeoBoundingBoxQueryDescriptor>
+	public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescriptorBase<GeoBoundingBoxQueryDescriptor>
 	{
 		internal GeoBoundingBoxQueryDescriptor(Action<GeoBoundingBoxQueryDescriptor> configure) => configure.Invoke(this);
 		public GeoBoundingBoxQueryDescriptor() : base()

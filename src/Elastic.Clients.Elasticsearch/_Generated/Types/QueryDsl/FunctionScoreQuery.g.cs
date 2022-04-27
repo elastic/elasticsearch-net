@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
 	}
 
-	public sealed partial class FunctionScoreQueryDescriptor<TDocument> : DescriptorBase<FunctionScoreQueryDescriptor<TDocument>>
+	public sealed partial class FunctionScoreQueryDescriptor<TDocument> : SerializableDescriptorBase<FunctionScoreQueryDescriptor<TDocument>>
 	{
 		internal FunctionScoreQueryDescriptor(Action<FunctionScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FunctionScoreQueryDescriptor() : base()
@@ -211,7 +211,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class FunctionScoreQueryDescriptor : DescriptorBase<FunctionScoreQueryDescriptor>
+	public sealed partial class FunctionScoreQueryDescriptor : SerializableDescriptorBase<FunctionScoreQueryDescriptor>
 	{
 		internal FunctionScoreQueryDescriptor(Action<FunctionScoreQueryDescriptor> configure) => configure.Invoke(this);
 		public FunctionScoreQueryDescriptor() : base()

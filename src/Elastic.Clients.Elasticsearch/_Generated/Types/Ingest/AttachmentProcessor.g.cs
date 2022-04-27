@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public sealed partial class AttachmentProcessorDescriptor<TDocument> : DescriptorBase<AttachmentProcessorDescriptor<TDocument>>
+	public sealed partial class AttachmentProcessorDescriptor<TDocument> : SerializableDescriptorBase<AttachmentProcessorDescriptor<TDocument>>
 	{
 		internal AttachmentProcessorDescriptor(Action<AttachmentProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public AttachmentProcessorDescriptor() : base()
@@ -239,7 +239,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class AttachmentProcessorDescriptor : DescriptorBase<AttachmentProcessorDescriptor>
+	public sealed partial class AttachmentProcessorDescriptor : SerializableDescriptorBase<AttachmentProcessorDescriptor>
 	{
 		internal AttachmentProcessorDescriptor(Action<AttachmentProcessorDescriptor> configure) => configure.Invoke(this);
 		public AttachmentProcessorDescriptor() : base()

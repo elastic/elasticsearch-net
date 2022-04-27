@@ -158,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Sigma { get; set; }
 	}
 
-	public sealed partial class ExtendedStatsBucketAggregationDescriptor : DescriptorBase<ExtendedStatsBucketAggregationDescriptor>
+	public sealed partial class ExtendedStatsBucketAggregationDescriptor : SerializableDescriptorBase<ExtendedStatsBucketAggregationDescriptor>
 	{
 		internal ExtendedStatsBucketAggregationDescriptor(Action<ExtendedStatsBucketAggregationDescriptor> configure) => configure.Invoke(this);
 		public ExtendedStatsBucketAggregationDescriptor() : base()

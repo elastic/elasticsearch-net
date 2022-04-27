@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ScoreMode? ScoreMode { get; set; }
 	}
 
-	public sealed partial class RescoreQueryDescriptor<TDocument> : DescriptorBase<RescoreQueryDescriptor<TDocument>>
+	public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDescriptorBase<RescoreQueryDescriptor<TDocument>>
 	{
 		internal RescoreQueryDescriptor(Action<RescoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RescoreQueryDescriptor() : base()
@@ -145,7 +145,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class RescoreQueryDescriptor : DescriptorBase<RescoreQueryDescriptor>
+	public sealed partial class RescoreQueryDescriptor : SerializableDescriptorBase<RescoreQueryDescriptor>
 	{
 		internal RescoreQueryDescriptor(Action<RescoreQueryDescriptor> configure) => configure.Invoke(this);
 		public RescoreQueryDescriptor() : base()

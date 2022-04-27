@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IEnumerable<string> Includes { get; set; }
 	}
 
-	public sealed partial class DataframeAnalysisAnalyzedFieldsDescriptor : DescriptorBase<DataframeAnalysisAnalyzedFieldsDescriptor>
+	public sealed partial class DataframeAnalysisAnalyzedFieldsDescriptor : SerializableDescriptorBase<DataframeAnalysisAnalyzedFieldsDescriptor>
 	{
 		internal DataframeAnalysisAnalyzedFieldsDescriptor(Action<DataframeAnalysisAnalyzedFieldsDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalysisAnalyzedFieldsDescriptor() : base()

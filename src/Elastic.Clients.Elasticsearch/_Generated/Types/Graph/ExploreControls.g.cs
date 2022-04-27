@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public bool UseSignificance { get; set; }
 	}
 
-	public sealed partial class ExploreControlsDescriptor<TDocument> : DescriptorBase<ExploreControlsDescriptor<TDocument>>
+	public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableDescriptorBase<ExploreControlsDescriptor<TDocument>>
 	{
 		internal ExploreControlsDescriptor(Action<ExploreControlsDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ExploreControlsDescriptor() : base()
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		}
 	}
 
-	public sealed partial class ExploreControlsDescriptor : DescriptorBase<ExploreControlsDescriptor>
+	public sealed partial class ExploreControlsDescriptor : SerializableDescriptorBase<ExploreControlsDescriptor>
 	{
 		internal ExploreControlsDescriptor(Action<ExploreControlsDescriptor> configure) => configure.Invoke(this);
 		public ExploreControlsDescriptor() : base()

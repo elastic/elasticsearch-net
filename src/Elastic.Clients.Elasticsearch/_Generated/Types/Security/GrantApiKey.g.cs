@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IEnumerable<Dictionary<string, object>>? RoleDescriptors { get; set; }
 	}
 
-	public sealed partial class GrantApiKeyDescriptor : DescriptorBase<GrantApiKeyDescriptor>
+	public sealed partial class GrantApiKeyDescriptor : SerializableDescriptorBase<GrantApiKeyDescriptor>
 	{
 		internal GrantApiKeyDescriptor(Action<GrantApiKeyDescriptor> configure) => configure.Invoke(this);
 		public GrantApiKeyDescriptor() : base()

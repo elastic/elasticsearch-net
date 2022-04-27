@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 	}
 
-	public sealed partial class TTestAggregationDescriptor<TDocument> : DescriptorBase<TTestAggregationDescriptor<TDocument>>
+	public sealed partial class TTestAggregationDescriptor<TDocument> : SerializableDescriptorBase<TTestAggregationDescriptor<TDocument>>
 	{
 		internal TTestAggregationDescriptor(Action<TTestAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TTestAggregationDescriptor() : base()
@@ -286,7 +286,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class TTestAggregationDescriptor : DescriptorBase<TTestAggregationDescriptor>
+	public sealed partial class TTestAggregationDescriptor : SerializableDescriptorBase<TTestAggregationDescriptor>
 	{
 		internal TTestAggregationDescriptor(Action<TTestAggregationDescriptor> configure) => configure.Invoke(this);
 		public TTestAggregationDescriptor() : base()

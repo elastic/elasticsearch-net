@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		string IProcessorContainerVariant.ProcessorContainerVariantName => "drop";
 	}
 
-	public sealed partial class DropProcessorDescriptor : DescriptorBase<DropProcessorDescriptor>
+	public sealed partial class DropProcessorDescriptor : SerializableDescriptorBase<DropProcessorDescriptor>
 	{
 		internal DropProcessorDescriptor(Action<DropProcessorDescriptor> configure) => configure.Invoke(this);
 		public DropProcessorDescriptor() : base()

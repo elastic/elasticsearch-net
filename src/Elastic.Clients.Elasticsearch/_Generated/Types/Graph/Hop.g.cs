@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> Vertices { get; set; }
 	}
 
-	public sealed partial class HopDescriptor<TDocument> : DescriptorBase<HopDescriptor<TDocument>>
+	public sealed partial class HopDescriptor<TDocument> : SerializableDescriptorBase<HopDescriptor<TDocument>>
 	{
 		internal HopDescriptor(Action<HopDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public HopDescriptor() : base()
@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		}
 	}
 
-	public sealed partial class HopDescriptor : DescriptorBase<HopDescriptor>
+	public sealed partial class HopDescriptor : SerializableDescriptorBase<HopDescriptor>
 	{
 		internal HopDescriptor(Action<HopDescriptor> configure) => configure.Invoke(this);
 		public HopDescriptor() : base()

@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
 	}
 
-	public sealed partial class RuntimeFieldDescriptor : DescriptorBase<RuntimeFieldDescriptor>
+	public sealed partial class RuntimeFieldDescriptor : SerializableDescriptorBase<RuntimeFieldDescriptor>
 	{
 		internal RuntimeFieldDescriptor(Action<RuntimeFieldDescriptor> configure) => configure.Invoke(this);
 		public RuntimeFieldDescriptor() : base()

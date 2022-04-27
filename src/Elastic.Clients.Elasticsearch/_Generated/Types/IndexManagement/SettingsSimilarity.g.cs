@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedTfidf? ScriptedTfidf { get; set; }
 	}
 
-	public sealed partial class SettingsSimilarityDescriptor : DescriptorBase<SettingsSimilarityDescriptor>
+	public sealed partial class SettingsSimilarityDescriptor : SerializableDescriptorBase<SettingsSimilarityDescriptor>
 	{
 		internal SettingsSimilarityDescriptor(Action<SettingsSimilarityDescriptor> configure) => configure.Invoke(this);
 		public SettingsSimilarityDescriptor() : base()

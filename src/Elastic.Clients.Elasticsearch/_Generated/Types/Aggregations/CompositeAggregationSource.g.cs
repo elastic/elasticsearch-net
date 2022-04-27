@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get; set; }
 	}
 
-	public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : DescriptorBase<CompositeAggregationSourceDescriptor<TDocument>>
+	public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : SerializableDescriptorBase<CompositeAggregationSourceDescriptor<TDocument>>
 	{
 		internal CompositeAggregationSourceDescriptor(Action<CompositeAggregationSourceDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public CompositeAggregationSourceDescriptor() : base()
@@ -191,7 +191,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class CompositeAggregationSourceDescriptor : DescriptorBase<CompositeAggregationSourceDescriptor>
+	public sealed partial class CompositeAggregationSourceDescriptor : SerializableDescriptorBase<CompositeAggregationSourceDescriptor>
 	{
 		internal CompositeAggregationSourceDescriptor(Action<CompositeAggregationSourceDescriptor> configure) => configure.Invoke(this);
 		public CompositeAggregationSourceDescriptor() : base()

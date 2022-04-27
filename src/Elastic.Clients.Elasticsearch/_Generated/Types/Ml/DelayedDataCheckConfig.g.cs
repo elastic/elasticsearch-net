@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool Enabled { get; set; }
 	}
 
-	public sealed partial class DelayedDataCheckConfigDescriptor : DescriptorBase<DelayedDataCheckConfigDescriptor>
+	public sealed partial class DelayedDataCheckConfigDescriptor : SerializableDescriptorBase<DelayedDataCheckConfigDescriptor>
 	{
 		internal DelayedDataCheckConfigDescriptor(Action<DelayedDataCheckConfigDescriptor> configure) => configure.Invoke(this);
 		public DelayedDataCheckConfigDescriptor() : base()

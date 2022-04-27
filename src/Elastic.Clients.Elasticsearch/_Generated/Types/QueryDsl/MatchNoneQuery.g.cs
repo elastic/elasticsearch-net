@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string IQueryContainerVariant.QueryContainerVariantName => "match_none";
 	}
 
-	public sealed partial class MatchNoneQueryDescriptor : DescriptorBase<MatchNoneQueryDescriptor>
+	public sealed partial class MatchNoneQueryDescriptor : SerializableDescriptorBase<MatchNoneQueryDescriptor>
 	{
 		internal MatchNoneQueryDescriptor(Action<MatchNoneQueryDescriptor> configure) => configure.Invoke(this);
 		public MatchNoneQueryDescriptor() : base()

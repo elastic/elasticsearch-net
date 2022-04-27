@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? Normalize { get; set; }
 	}
 
-	public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : DescriptorBase<RankEvalMetricDiscountedCumulativeGainDescriptor>
+	public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : SerializableDescriptorBase<RankEvalMetricDiscountedCumulativeGainDescriptor>
 	{
 		internal RankEvalMetricDiscountedCumulativeGainDescriptor(Action<RankEvalMetricDiscountedCumulativeGainDescriptor> configure) => configure.Invoke(this);
 		public RankEvalMetricDiscountedCumulativeGainDescriptor() : base()

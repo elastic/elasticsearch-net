@@ -405,47 +405,47 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			public string Name { get; set; }
 		}
 
-		[U]
-		public void ExpressionsAreCachedButSeeDifferentTypes()
-		{
-			var client = TestClient.Default;
+		//[U]
+		//public void ExpressionsAreCachedButSeeDifferentTypes()
+		//{
+		//	var client = TestClient.Default;
 
-			var fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
-			var fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
+		//	var fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
+		//	var fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 
-			/**
-			* Here we have two similarly shaped expressions, one coming from A and one from B
-			* that will resolve to the same field name, as expected
-			*/
+		//	/**
+		//	* Here we have two similarly shaped expressions, one coming from A and one from B
+		//	* that will resolve to the same field name, as expected
+		//	*/
 
-			fieldNameOnA.Should().Be("c.name");
-			fieldNameOnB.Should().Be("c.name");
+		//	fieldNameOnA.Should().Be("c.name");
+		//	fieldNameOnB.Should().Be("c.name");
 
-			/**
-			* now we create a new connection settings with a re-map for `C` on class `A` to `"d"`
-			* now when we resolve the field path for property `C` on `A`, it will be different than
-			* for property `C` on `B`
-			*/
-			var newConnectionSettings = new TestElasticsearchClientSettings()
-				.DefaultMappingFor<A>(m => m
-					.PropertyName(p => p.C, "d")
-				);
+		//	/**
+		//	* now we create a new connection settings with a re-map for `C` on class `A` to `"d"`
+		//	* now when we resolve the field path for property `C` on `A`, it will be different than
+		//	* for property `C` on `B`
+		//	*/
+		//	var newConnectionSettings = new TestElasticsearchClientSettings()
+		//		.DefaultMappingFor<A>(m => m
+		//			//.PropertyName(p => p.C, "d")
+		//		);
 
-			var newClient = new ElasticsearchClient(newConnectionSettings);
+		//	var newClient = new ElasticsearchClient(newConnectionSettings);
 
-			fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));
-			fieldNameOnB = newClient.Infer.Field(Field<B>(p => p.C.Name));
+		//	fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));
+		//	fieldNameOnB = newClient.Infer.Field(Field<B>(p => p.C.Name));
 
-			fieldNameOnA.Should().Be("d.name");
-			fieldNameOnB.Should().Be("c.name");
+		//	fieldNameOnA.Should().Be("d.name");
+		//	fieldNameOnB.Should().Be("c.name");
 
-			/** however we didn't break inference on the first client instance using its separate connection settings */
-			fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
-			fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
+		//	/** however we didn't break inference on the first client instance using its separate connection settings */
+		//	fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
+		//	fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 
-			fieldNameOnA.Should().Be("c.name");
-			fieldNameOnB.Should().Be("c.name");
-		}
+		//	fieldNameOnA.Should().Be("c.name");
+		//	fieldNameOnB.Should().Be("c.name");
+		//}
 
 		///**
 		//* [[field-inference-precedence]]

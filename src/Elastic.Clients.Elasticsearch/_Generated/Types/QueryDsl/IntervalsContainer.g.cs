@@ -117,7 +117,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class IntervalsContainerDescriptor<TDocument> : DescriptorBase<IntervalsContainerDescriptor<TDocument>>
+	public sealed partial class IntervalsContainerDescriptor<TDocument> : SerializableDescriptorBase<IntervalsContainerDescriptor<TDocument>>
 	{
 		internal IntervalsContainerDescriptor(Action<IntervalsContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IntervalsContainerDescriptor() : base()
@@ -130,12 +130,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal IntervalsContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Wildcard(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 	}
 
-	public sealed partial class IntervalsContainerDescriptor : DescriptorBase<IntervalsContainerDescriptor>
+	public sealed partial class IntervalsContainerDescriptor : SerializableDescriptorBase<IntervalsContainerDescriptor>
 	{
 		internal IntervalsContainerDescriptor(Action<IntervalsContainerDescriptor> configure) => configure.Invoke(this);
 		public IntervalsContainerDescriptor() : base()
@@ -203,12 +203,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal IntervalsContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

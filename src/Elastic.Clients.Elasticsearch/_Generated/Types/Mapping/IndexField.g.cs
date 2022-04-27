@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool Enabled { get; set; }
 	}
 
-	public sealed partial class IndexFieldDescriptor : DescriptorBase<IndexFieldDescriptor>
+	public sealed partial class IndexFieldDescriptor : SerializableDescriptorBase<IndexFieldDescriptor>
 	{
 		internal IndexFieldDescriptor(Action<IndexFieldDescriptor> configure) => configure.Invoke(this);
 		public IndexFieldDescriptor() : base()

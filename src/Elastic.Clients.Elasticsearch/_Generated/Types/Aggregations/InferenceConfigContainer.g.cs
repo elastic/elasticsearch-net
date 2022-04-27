@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.RegressionInferenceOptions? Regression { get; set; }
 	}
 
-	public sealed partial class InferenceConfigContainerDescriptor<TDocument> : DescriptorBase<InferenceConfigContainerDescriptor<TDocument>>
+	public sealed partial class InferenceConfigContainerDescriptor<TDocument> : SerializableDescriptorBase<InferenceConfigContainerDescriptor<TDocument>>
 	{
 		internal InferenceConfigContainerDescriptor(Action<InferenceConfigContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public InferenceConfigContainerDescriptor() : base()
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class InferenceConfigContainerDescriptor : DescriptorBase<InferenceConfigContainerDescriptor>
+	public sealed partial class InferenceConfigContainerDescriptor : SerializableDescriptorBase<InferenceConfigContainerDescriptor>
 	{
 		internal InferenceConfigContainerDescriptor(Action<InferenceConfigContainerDescriptor> configure) => configure.Invoke(this);
 		public InferenceConfigContainerDescriptor() : base()

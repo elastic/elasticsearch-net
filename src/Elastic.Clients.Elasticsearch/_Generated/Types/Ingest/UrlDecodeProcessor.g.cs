@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : DescriptorBase<UrlDecodeProcessorDescriptor<TDocument>>
+	public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : SerializableDescriptorBase<UrlDecodeProcessorDescriptor<TDocument>>
 	{
 		internal UrlDecodeProcessorDescriptor(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public UrlDecodeProcessorDescriptor() : base()
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class UrlDecodeProcessorDescriptor : DescriptorBase<UrlDecodeProcessorDescriptor>
+	public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescriptorBase<UrlDecodeProcessorDescriptor>
 	{
 		internal UrlDecodeProcessorDescriptor(Action<UrlDecodeProcessorDescriptor> configure) => configure.Invoke(this);
 		public UrlDecodeProcessorDescriptor() : base()

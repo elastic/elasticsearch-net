@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public int? MaxAnalyzedOffset { get; set; }
 	}
 
-	public sealed partial class SettingsHighlightDescriptor : DescriptorBase<SettingsHighlightDescriptor>
+	public sealed partial class SettingsHighlightDescriptor : SerializableDescriptorBase<SettingsHighlightDescriptor>
 	{
 		internal SettingsHighlightDescriptor(Action<SettingsHighlightDescriptor> configure) => configure.Invoke(this);
 		public SettingsHighlightDescriptor() : base()

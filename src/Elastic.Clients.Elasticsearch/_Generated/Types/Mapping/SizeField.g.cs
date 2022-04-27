@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool Enabled { get; set; }
 	}
 
-	public sealed partial class SizeFieldDescriptor : DescriptorBase<SizeFieldDescriptor>
+	public sealed partial class SizeFieldDescriptor : SerializableDescriptorBase<SizeFieldDescriptor>
 	{
 		internal SizeFieldDescriptor(Action<SizeFieldDescriptor> configure) => configure.Invoke(this);
 		public SizeFieldDescriptor() : base()

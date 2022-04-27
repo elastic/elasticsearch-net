@@ -19,19 +19,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Field Field { get; set; }
 	}
 
-	//public abstract class FieldNameQueryDescriptorBase<TDescriptor, TInterface>
-	//	: QueryDescriptorBase<TDescriptor, TInterface>, IFieldNameQuery
-	//	where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, TInterface>, TInterface
-	//	where TInterface : class, IFieldNameQuery
-	//{
-	//	Field IFieldNameQuery.Field { get; set; }
-
-	//	public TDescriptor Field(Field field) => Assign(field, (a, v) => a.Field = v);
-
-	//	//public TDescriptor Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
-	//	//	Assign(objectPath, (a, v) => a.Field = v);
-	//}
-
 	public interface IQuery
 	{
 		/// <summary>
@@ -74,41 +61,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		/// </summary>
 		//string Name { get; set; }
 	}
-
-	//public abstract class QueryDescriptorBase<TDescriptor, TInterface>
-	//	: DescriptorBase<TDescriptor, TInterface>, IQuery
-	//	where TDescriptor : QueryDescriptorBase<TDescriptor, TInterface>, TInterface
-	//	where TInterface : class, IQuery
-	//{
-	//	///// <inheritdoc cref="IQuery.Conditionless"/>
-	//	//protected abstract bool Conditionless { get; }
-
-	//	//float? IQuery.Boost { get; set; }
-
-	//	//bool IQuery.Conditionless => Conditionless;
-
-	//	//bool IQuery.IsStrict { get; set; }
-
-	//	//bool IQuery.IsVerbatim { get; set; }
-
-	//	//bool IQuery.IsWritable => true; // Self.IsVerbatim || !Self.Conditionless;
-
-	//	//string IQuery.QueryName { get; set; }
-
-	//	///// <inheritdoc cref="IQuery.QueryName"/>
-	//	//public TDescriptor QueryName(string name) => Assign(name, (a, v) => a.QueryName = v);
-
-	//	///// <inheritdoc cref="IQuery.Boost"/>
-	//	//public TDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.Boost = v);
-
-	//	///// <inheritdoc cref="IQuery.IsVerbatim"/>
-	//	//public TDescriptor Verbatim(bool verbatim = true) => Assign(verbatim, (a, v) => a.IsVerbatim = v);
-
-	//	///// <inheritdoc cref="IQuery.IsStrict"/>
-	//	//public TDescriptor Strict(bool strict = true) => Assign(strict, (a, v) => a.IsStrict = v);
-	//}
-
-	//public abstract class QueryContainerVariantBase 
 
 	public abstract partial class QueryBase : IQuery
 	{

@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? Cache { get; set; }
 	}
 
-	public sealed partial class QueriesDescriptor : DescriptorBase<QueriesDescriptor>
+	public sealed partial class QueriesDescriptor : SerializableDescriptorBase<QueriesDescriptor>
 	{
 		internal QueriesDescriptor(Action<QueriesDescriptor> configure) => configure.Invoke(this);
 		public QueriesDescriptor() : base()

@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	}
 
-	public sealed partial class BucketAggregationBaseDescriptor<TDocument> : DescriptorBase<BucketAggregationBaseDescriptor<TDocument>>
+	public sealed partial class BucketAggregationBaseDescriptor<TDocument> : SerializableDescriptorBase<BucketAggregationBaseDescriptor<TDocument>>
 	{
 		internal BucketAggregationBaseDescriptor(Action<BucketAggregationBaseDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public BucketAggregationBaseDescriptor() : base()
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class BucketAggregationBaseDescriptor : DescriptorBase<BucketAggregationBaseDescriptor>
+	public sealed partial class BucketAggregationBaseDescriptor : SerializableDescriptorBase<BucketAggregationBaseDescriptor>
 	{
 		internal BucketAggregationBaseDescriptor(Action<BucketAggregationBaseDescriptor> configure) => configure.Invoke(this);
 		public BucketAggregationBaseDescriptor() : base()

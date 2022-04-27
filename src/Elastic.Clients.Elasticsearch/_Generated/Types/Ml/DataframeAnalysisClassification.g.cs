@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? NumTopClasses { get; set; }
 	}
 
-	public sealed partial class DataframeAnalysisClassificationDescriptor<TDocument> : DescriptorBase<DataframeAnalysisClassificationDescriptor<TDocument>>
+	public sealed partial class DataframeAnalysisClassificationDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalysisClassificationDescriptor<TDocument>>
 	{
 		internal DataframeAnalysisClassificationDescriptor(Action<DataframeAnalysisClassificationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeAnalysisClassificationDescriptor() : base()
@@ -333,7 +333,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeAnalysisClassificationDescriptor : DescriptorBase<DataframeAnalysisClassificationDescriptor>
+	public sealed partial class DataframeAnalysisClassificationDescriptor : SerializableDescriptorBase<DataframeAnalysisClassificationDescriptor>
 	{
 		internal DataframeAnalysisClassificationDescriptor(Action<DataframeAnalysisClassificationDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalysisClassificationDescriptor() : base()

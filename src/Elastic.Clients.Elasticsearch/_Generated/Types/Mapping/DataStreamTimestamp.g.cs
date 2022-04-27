@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool Enabled { get; set; }
 	}
 
-	public sealed partial class DataStreamTimestampDescriptor : DescriptorBase<DataStreamTimestampDescriptor>
+	public sealed partial class DataStreamTimestampDescriptor : SerializableDescriptorBase<DataStreamTimestampDescriptor>
 	{
 		internal DataStreamTimestampDescriptor(Action<DataStreamTimestampDescriptor> configure) => configure.Invoke(this);
 		public DataStreamTimestampDescriptor() : base()

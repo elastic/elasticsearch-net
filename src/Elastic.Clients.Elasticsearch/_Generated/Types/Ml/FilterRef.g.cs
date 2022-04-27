@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.FilterType? FilterType { get; set; }
 	}
 
-	public sealed partial class FilterRefDescriptor : DescriptorBase<FilterRefDescriptor>
+	public sealed partial class FilterRefDescriptor : SerializableDescriptorBase<FilterRefDescriptor>
 	{
 		internal FilterRefDescriptor(Action<FilterRefDescriptor> configure) => configure.Invoke(this);
 		public FilterRefDescriptor() : base()

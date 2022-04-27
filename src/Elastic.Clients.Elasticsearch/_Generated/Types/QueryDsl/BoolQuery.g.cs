@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Should { get; set; }
 	}
 
-	public sealed partial class BoolQueryDescriptor : DescriptorBase<BoolQueryDescriptor>
+	public sealed partial class BoolQueryDescriptor : SerializableDescriptorBase<BoolQueryDescriptor>
 	{
 		internal BoolQueryDescriptor(Action<BoolQueryDescriptor> configure) => configure.Invoke(this);
 		public BoolQueryDescriptor() : base()

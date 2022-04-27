@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public int MaxDocsPerValue { get; set; }
 	}
 
-	public sealed partial class SampleDiversityDescriptor<TDocument> : DescriptorBase<SampleDiversityDescriptor<TDocument>>
+	public sealed partial class SampleDiversityDescriptor<TDocument> : SerializableDescriptorBase<SampleDiversityDescriptor<TDocument>>
 	{
 		internal SampleDiversityDescriptor(Action<SampleDiversityDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SampleDiversityDescriptor() : base()
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		}
 	}
 
-	public sealed partial class SampleDiversityDescriptor : DescriptorBase<SampleDiversityDescriptor>
+	public sealed partial class SampleDiversityDescriptor : SerializableDescriptorBase<SampleDiversityDescriptor>
 	{
 		internal SampleDiversityDescriptor(Action<SampleDiversityDescriptor> configure) => configure.Invoke(this);
 		public SampleDiversityDescriptor() : base()

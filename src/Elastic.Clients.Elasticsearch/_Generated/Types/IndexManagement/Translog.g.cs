@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? Retention { get; set; }
 	}
 
-	public sealed partial class TranslogDescriptor : DescriptorBase<TranslogDescriptor>
+	public sealed partial class TranslogDescriptor : SerializableDescriptorBase<TranslogDescriptor>
 	{
 		internal TranslogDescriptor(Action<TranslogDescriptor> configure) => configure.Invoke(this);
 		public TranslogDescriptor() : base()

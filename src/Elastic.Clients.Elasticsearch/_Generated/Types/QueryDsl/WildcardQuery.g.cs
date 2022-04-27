@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string? Wildcard { get; set; }
 	}
 
-	public sealed partial class WildcardQueryDescriptor<TDocument> : DescriptorBase<WildcardQueryDescriptor<TDocument>>
+	public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDescriptorBase<WildcardQueryDescriptor<TDocument>>
 	{
 		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public WildcardQueryDescriptor() : base()
@@ -258,7 +258,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class WildcardQueryDescriptor : DescriptorBase<WildcardQueryDescriptor>
+	public sealed partial class WildcardQueryDescriptor : SerializableDescriptorBase<WildcardQueryDescriptor>
 	{
 		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor> configure) => configure.Invoke(this);
 		public WildcardQueryDescriptor() : base()

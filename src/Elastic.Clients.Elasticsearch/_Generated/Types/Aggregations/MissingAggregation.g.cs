@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	}
 
-	public sealed partial class MissingAggregationDescriptor<TDocument> : DescriptorBase<MissingAggregationDescriptor<TDocument>>
+	public sealed partial class MissingAggregationDescriptor<TDocument> : SerializableDescriptorBase<MissingAggregationDescriptor<TDocument>>
 	{
 		internal MissingAggregationDescriptor(Action<MissingAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MissingAggregationDescriptor() : base()
@@ -221,7 +221,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class MissingAggregationDescriptor : DescriptorBase<MissingAggregationDescriptor>
+	public sealed partial class MissingAggregationDescriptor : SerializableDescriptorBase<MissingAggregationDescriptor>
 	{
 		internal MissingAggregationDescriptor(Action<MissingAggregationDescriptor> configure) => configure.Invoke(this);
 		public MissingAggregationDescriptor() : base()
