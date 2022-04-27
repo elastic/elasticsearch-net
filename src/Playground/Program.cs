@@ -14,6 +14,7 @@ const string IndexName = "stock-demo-v1";
 var settings = new ElasticsearchClientSettings(new Uri("https://localhost:9200"))
 	.CertificateFingerprint("E8:76:3D:91:81:8C:57:31:6F:2F:E0:4C:17:78:78:FB:38:CC:37:27:41:7A:94:B4:12:AA:B6:D1:D6:C4:4C:7D")
 	.Authentication(new BasicAuthentication("elastic", "password"))
+	.DefaultIndex("default-index")
 	.EnableDebugMode();
 
 var client = new ElasticsearchClient(settings);
@@ -75,8 +76,8 @@ var monthlyBuckets = aggExampleResponse.Aggregations?.GetDateHistogram("by-month
 
 foreach (var monthlyBucket in monthlyBuckets)
 {
-	//var volume = monthlyBucket..Sum("trade-volumes").Value;
-	//Console.WriteLine($"{monthlyBucket.Date} : {volume:n0}");
+	var volume = monthlyBucket.GetSum("trade-volumes");
+	Console.WriteLine($"{monthlyBucket.Key.DateTimeOffset:d} : {volume:n0}");
 }
 
 Console.WriteLine("Press any key to exit.");
