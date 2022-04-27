@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
 	}
 
-	public sealed partial class MatrixAggregationBaseDescriptor<TDocument> : DescriptorBase<MatrixAggregationBaseDescriptor<TDocument>>
+	public sealed partial class MatrixAggregationBaseDescriptor<TDocument> : SerializableDescriptorBase<MatrixAggregationBaseDescriptor<TDocument>>
 	{
 		internal MatrixAggregationBaseDescriptor(Action<MatrixAggregationBaseDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MatrixAggregationBaseDescriptor() : base()
@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class MatrixAggregationBaseDescriptor : DescriptorBase<MatrixAggregationBaseDescriptor>
+	public sealed partial class MatrixAggregationBaseDescriptor : SerializableDescriptorBase<MatrixAggregationBaseDescriptor>
 	{
 		internal MatrixAggregationBaseDescriptor(Action<MatrixAggregationBaseDescriptor> configure) => configure.Invoke(this);
 		public MatrixAggregationBaseDescriptor() : base()

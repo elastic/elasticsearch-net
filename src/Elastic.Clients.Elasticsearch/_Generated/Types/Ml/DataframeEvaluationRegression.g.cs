@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Field PredictedField { get; set; }
 	}
 
-	public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> : DescriptorBase<DataframeEvaluationRegressionDescriptor<TDocument>>
+	public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> : SerializableDescriptorBase<DataframeEvaluationRegressionDescriptor<TDocument>>
 	{
 		internal DataframeEvaluationRegressionDescriptor(Action<DataframeEvaluationRegressionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeEvaluationRegressionDescriptor() : base()
@@ -133,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeEvaluationRegressionDescriptor : DescriptorBase<DataframeEvaluationRegressionDescriptor>
+	public sealed partial class DataframeEvaluationRegressionDescriptor : SerializableDescriptorBase<DataframeEvaluationRegressionDescriptor>
 	{
 		internal DataframeEvaluationRegressionDescriptor(Action<DataframeEvaluationRegressionDescriptor> configure) => configure.Invoke(this);
 		public DataframeEvaluationRegressionDescriptor() : base()

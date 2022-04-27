@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public string Phase { get; set; }
 	}
 
-	public sealed partial class StepKeyDescriptor : DescriptorBase<StepKeyDescriptor>
+	public sealed partial class StepKeyDescriptor : SerializableDescriptorBase<StepKeyDescriptor>
 	{
 		internal StepKeyDescriptor(Action<StepKeyDescriptor> configure) => configure.Invoke(this);
 		public StepKeyDescriptor() : base()

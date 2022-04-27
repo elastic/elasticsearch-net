@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, object> TargetMap { get; set; }
 	}
 
-	public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> : DescriptorBase<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>>
+	public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>>
 	{
 		internal DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor() : base()
@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor : DescriptorBase<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor>
+	public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor>
 	{
 		internal DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor() : base()

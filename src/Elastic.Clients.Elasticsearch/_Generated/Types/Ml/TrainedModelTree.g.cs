@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.TrainedModelTreeNode> TreeStructure { get; set; }
 	}
 
-	public sealed partial class TrainedModelTreeDescriptor : DescriptorBase<TrainedModelTreeDescriptor>
+	public sealed partial class TrainedModelTreeDescriptor : SerializableDescriptorBase<TrainedModelTreeDescriptor>
 	{
 		internal TrainedModelTreeDescriptor(Action<TrainedModelTreeDescriptor> configure) => configure.Invoke(this);
 		public TrainedModelTreeDescriptor() : base()

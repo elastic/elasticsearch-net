@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.EpochMillis StartTime { get; set; }
 	}
 
-	public sealed partial class CalendarEventDescriptor : DescriptorBase<CalendarEventDescriptor>
+	public sealed partial class CalendarEventDescriptor : SerializableDescriptorBase<CalendarEventDescriptor>
 	{
 		internal CalendarEventDescriptor(Action<CalendarEventDescriptor> configure) => configure.Invoke(this);
 		public CalendarEventDescriptor() : base()

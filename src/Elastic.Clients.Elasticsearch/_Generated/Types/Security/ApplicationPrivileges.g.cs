@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IEnumerable<string> Resources { get; set; }
 	}
 
-	public sealed partial class ApplicationPrivilegesDescriptor : DescriptorBase<ApplicationPrivilegesDescriptor>
+	public sealed partial class ApplicationPrivilegesDescriptor : SerializableDescriptorBase<ApplicationPrivilegesDescriptor>
 	{
 		internal ApplicationPrivilegesDescriptor(Action<ApplicationPrivilegesDescriptor> configure) => configure.Invoke(this);
 		public ApplicationPrivilegesDescriptor() : base()

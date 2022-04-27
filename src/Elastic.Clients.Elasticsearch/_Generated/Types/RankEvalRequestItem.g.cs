@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Id? TemplateId { get; set; }
 	}
 
-	public sealed partial class RankEvalRequestItemDescriptor<TDocument> : DescriptorBase<RankEvalRequestItemDescriptor<TDocument>>
+	public sealed partial class RankEvalRequestItemDescriptor<TDocument> : SerializableDescriptorBase<RankEvalRequestItemDescriptor<TDocument>>
 	{
 		internal RankEvalRequestItemDescriptor(Action<RankEvalRequestItemDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RankEvalRequestItemDescriptor() : base()
@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class RankEvalRequestItemDescriptor : DescriptorBase<RankEvalRequestItemDescriptor>
+	public sealed partial class RankEvalRequestItemDescriptor : SerializableDescriptorBase<RankEvalRequestItemDescriptor>
 	{
 		internal RankEvalRequestItemDescriptor(Action<RankEvalRequestItemDescriptor> configure) => configure.Invoke(this);
 		public RankEvalRequestItemDescriptor() : base()

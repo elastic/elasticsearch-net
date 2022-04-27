@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? Scheduler { get; set; }
 	}
 
-	public sealed partial class MergeDescriptor : DescriptorBase<MergeDescriptor>
+	public sealed partial class MergeDescriptor : SerializableDescriptorBase<MergeDescriptor>
 	{
 		internal MergeDescriptor(Action<MergeDescriptor> configure) => configure.Invoke(this);
 		public MergeDescriptor() : base()

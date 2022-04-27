@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? Ordered { get; set; }
 	}
 
-	public sealed partial class IntervalsAllOfDescriptor : DescriptorBase<IntervalsAllOfDescriptor>
+	public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptorBase<IntervalsAllOfDescriptor>
 	{
 		internal IntervalsAllOfDescriptor(Action<IntervalsAllOfDescriptor> configure) => configure.Invoke(this);
 		public IntervalsAllOfDescriptor() : base()

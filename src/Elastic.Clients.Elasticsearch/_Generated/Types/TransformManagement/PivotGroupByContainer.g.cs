@@ -90,7 +90,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		}
 	}
 
-	public sealed partial class PivotGroupByContainerDescriptor<TDocument> : DescriptorBase<PivotGroupByContainerDescriptor<TDocument>>
+	public sealed partial class PivotGroupByContainerDescriptor<TDocument> : SerializableDescriptorBase<PivotGroupByContainerDescriptor<TDocument>>
 	{
 		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public PivotGroupByContainerDescriptor() : base()
@@ -103,12 +103,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		internal PivotGroupByContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public void Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 	}
 
-	public sealed partial class PivotGroupByContainerDescriptor : DescriptorBase<PivotGroupByContainerDescriptor>
+	public sealed partial class PivotGroupByContainerDescriptor : SerializableDescriptorBase<PivotGroupByContainerDescriptor>
 	{
 		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor> configure) => configure.Invoke(this);
 		public PivotGroupByContainerDescriptor() : base()
@@ -170,12 +170,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		internal PivotGroupByContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

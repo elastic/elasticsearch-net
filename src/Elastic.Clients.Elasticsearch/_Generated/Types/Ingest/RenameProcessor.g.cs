@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class RenameProcessorDescriptor<TDocument> : DescriptorBase<RenameProcessorDescriptor<TDocument>>
+	public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableDescriptorBase<RenameProcessorDescriptor<TDocument>>
 	{
 		internal RenameProcessorDescriptor(Action<RenameProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RenameProcessorDescriptor() : base()
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class RenameProcessorDescriptor : DescriptorBase<RenameProcessorDescriptor>
+	public sealed partial class RenameProcessorDescriptor : SerializableDescriptorBase<RenameProcessorDescriptor>
 	{
 		internal RenameProcessorDescriptor(Action<RenameProcessorDescriptor> configure) => configure.Invoke(this);
 		public RenameProcessorDescriptor() : base()

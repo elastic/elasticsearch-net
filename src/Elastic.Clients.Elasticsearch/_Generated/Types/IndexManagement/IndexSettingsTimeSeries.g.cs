@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.DateOrEpochMillis? StartTime { get; set; }
 	}
 
-	public sealed partial class IndexSettingsTimeSeriesDescriptor : DescriptorBase<IndexSettingsTimeSeriesDescriptor>
+	public sealed partial class IndexSettingsTimeSeriesDescriptor : SerializableDescriptorBase<IndexSettingsTimeSeriesDescriptor>
 	{
 		internal IndexSettingsTimeSeriesDescriptor(Action<IndexSettingsTimeSeriesDescriptor> configure) => configure.Invoke(this);
 		public IndexSettingsTimeSeriesDescriptor() : base()

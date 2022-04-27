@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? Order { get; set; }
 	}
 
-	public sealed partial class IndexSegmentSortDescriptor<TDocument> : DescriptorBase<IndexSegmentSortDescriptor<TDocument>>
+	public sealed partial class IndexSegmentSortDescriptor<TDocument> : SerializableDescriptorBase<IndexSegmentSortDescriptor<TDocument>>
 	{
 		internal IndexSegmentSortDescriptor(Action<IndexSegmentSortDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IndexSegmentSortDescriptor() : base()
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 	}
 
-	public sealed partial class IndexSegmentSortDescriptor : DescriptorBase<IndexSegmentSortDescriptor>
+	public sealed partial class IndexSegmentSortDescriptor : SerializableDescriptorBase<IndexSegmentSortDescriptor>
 	{
 		internal IndexSegmentSortDescriptor(Action<IndexSegmentSortDescriptor> configure) => configure.Invoke(this);
 		public IndexSegmentSortDescriptor() : base()

@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Percentage? TrainingPercent { get; set; }
 	}
 
-	public sealed partial class DataframeAnalysisDescriptor<TDocument> : DescriptorBase<DataframeAnalysisDescriptor<TDocument>>
+	public sealed partial class DataframeAnalysisDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalysisDescriptor<TDocument>>
 	{
 		internal DataframeAnalysisDescriptor(Action<DataframeAnalysisDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeAnalysisDescriptor() : base()
@@ -367,7 +367,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeAnalysisDescriptor : DescriptorBase<DataframeAnalysisDescriptor>
+	public sealed partial class DataframeAnalysisDescriptor : SerializableDescriptorBase<DataframeAnalysisDescriptor>
 	{
 		internal DataframeAnalysisDescriptor(Action<DataframeAnalysisDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalysisDescriptor() : base()

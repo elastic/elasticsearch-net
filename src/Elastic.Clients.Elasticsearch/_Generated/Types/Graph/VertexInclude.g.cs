@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public string Term { get; set; }
 	}
 
-	public sealed partial class VertexIncludeDescriptor : DescriptorBase<VertexIncludeDescriptor>
+	public sealed partial class VertexIncludeDescriptor : SerializableDescriptorBase<VertexIncludeDescriptor>
 	{
 		internal VertexIncludeDescriptor(Action<VertexIncludeDescriptor> configure) => configure.Invoke(this);
 		public VertexIncludeDescriptor() : base()

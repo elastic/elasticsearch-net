@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Names FieldNames { get; set; }
 	}
 
-	public sealed partial class InputDescriptor : DescriptorBase<InputDescriptor>
+	public sealed partial class InputDescriptor : SerializableDescriptorBase<InputDescriptor>
 	{
 		internal InputDescriptor(Action<InputDescriptor> configure) => configure.Invoke(this);
 		public InputDescriptor() : base()

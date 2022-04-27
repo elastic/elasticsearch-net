@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 	}
 
-	public sealed partial class IndexStateDescriptor<TDocument> : DescriptorBase<IndexStateDescriptor<TDocument>>
+	public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescriptorBase<IndexStateDescriptor<TDocument>>
 	{
 		internal IndexStateDescriptor(Action<IndexStateDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IndexStateDescriptor() : base()
@@ -227,7 +227,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 	}
 
-	public sealed partial class IndexStateDescriptor : DescriptorBase<IndexStateDescriptor>
+	public sealed partial class IndexStateDescriptor : SerializableDescriptorBase<IndexStateDescriptor>
 	{
 		internal IndexStateDescriptor(Action<IndexStateDescriptor> configure) => configure.Invoke(this);
 		public IndexStateDescriptor() : base()

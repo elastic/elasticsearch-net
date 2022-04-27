@@ -4,7 +4,7 @@
 
 namespace Elastic.Clients.Elasticsearch;
 
-public abstract class VariantDescriptorBase<T> : DescriptorBase<T> where T : DescriptorBase<T>
+public abstract class VariantDescriptorBase<T> : SerializableDescriptorBase<T> where T : SerializableDescriptorBase<T>
 {
 	internal string VariantName { get; private set; }
 

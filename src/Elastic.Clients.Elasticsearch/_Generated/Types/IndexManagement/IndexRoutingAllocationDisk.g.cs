@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Union<bool?, string?>? ThresholdEnabled { get; set; }
 	}
 
-	public sealed partial class IndexRoutingAllocationDiskDescriptor : DescriptorBase<IndexRoutingAllocationDiskDescriptor>
+	public sealed partial class IndexRoutingAllocationDiskDescriptor : SerializableDescriptorBase<IndexRoutingAllocationDiskDescriptor>
 	{
 		internal IndexRoutingAllocationDiskDescriptor(Action<IndexRoutingAllocationDiskDescriptor> configure) => configure.Invoke(this);
 		public IndexRoutingAllocationDiskDescriptor() : base()

@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public sealed partial class LowercaseProcessorDescriptor<TDocument> : DescriptorBase<LowercaseProcessorDescriptor<TDocument>>
+	public sealed partial class LowercaseProcessorDescriptor<TDocument> : SerializableDescriptorBase<LowercaseProcessorDescriptor<TDocument>>
 	{
 		internal LowercaseProcessorDescriptor(Action<LowercaseProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public LowercaseProcessorDescriptor() : base()
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class LowercaseProcessorDescriptor : DescriptorBase<LowercaseProcessorDescriptor>
+	public sealed partial class LowercaseProcessorDescriptor : SerializableDescriptorBase<LowercaseProcessorDescriptor>
 	{
 		internal LowercaseProcessorDescriptor(Action<LowercaseProcessorDescriptor> configure) => configure.Invoke(this);
 		public LowercaseProcessorDescriptor() : base()

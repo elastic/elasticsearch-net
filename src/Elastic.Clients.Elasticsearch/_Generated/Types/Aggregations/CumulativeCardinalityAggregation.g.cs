@@ -137,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class CumulativeCardinalityAggregationDescriptor : DescriptorBase<CumulativeCardinalityAggregationDescriptor>
+	public sealed partial class CumulativeCardinalityAggregationDescriptor : SerializableDescriptorBase<CumulativeCardinalityAggregationDescriptor>
 	{
 		internal CumulativeCardinalityAggregationDescriptor(Action<CumulativeCardinalityAggregationDescriptor> configure) => configure.Invoke(this);
 		public CumulativeCardinalityAggregationDescriptor() : base()

@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public ScriptBase Script { get; set; }
 	}
 
-	public sealed partial class ScriptQueryDescriptor : DescriptorBase<ScriptQueryDescriptor>
+	public sealed partial class ScriptQueryDescriptor : SerializableDescriptorBase<ScriptQueryDescriptor>
 	{
 		internal ScriptQueryDescriptor(Action<ScriptQueryDescriptor> configure) => configure.Invoke(this);
 		public ScriptQueryDescriptor() : base()

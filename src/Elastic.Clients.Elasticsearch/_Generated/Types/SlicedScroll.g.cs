@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int Max { get; set; }
 	}
 
-	public sealed partial class SlicedScrollDescriptor<TDocument> : DescriptorBase<SlicedScrollDescriptor<TDocument>>
+	public sealed partial class SlicedScrollDescriptor<TDocument> : SerializableDescriptorBase<SlicedScrollDescriptor<TDocument>>
 	{
 		internal SlicedScrollDescriptor(Action<SlicedScrollDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SlicedScrollDescriptor() : base()
@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class SlicedScrollDescriptor : DescriptorBase<SlicedScrollDescriptor>
+	public sealed partial class SlicedScrollDescriptor : SerializableDescriptorBase<SlicedScrollDescriptor>
 	{
 		internal SlicedScrollDescriptor(Action<SlicedScrollDescriptor> configure) => configure.Invoke(this);
 		public SlicedScrollDescriptor() : base()

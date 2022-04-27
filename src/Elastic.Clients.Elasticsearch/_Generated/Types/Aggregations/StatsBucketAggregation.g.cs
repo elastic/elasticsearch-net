@@ -137,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class StatsBucketAggregationDescriptor : DescriptorBase<StatsBucketAggregationDescriptor>
+	public sealed partial class StatsBucketAggregationDescriptor : SerializableDescriptorBase<StatsBucketAggregationDescriptor>
 	{
 		internal StatsBucketAggregationDescriptor(Action<StatsBucketAggregationDescriptor> configure) => configure.Invoke(this);
 		public StatsBucketAggregationDescriptor() : base()

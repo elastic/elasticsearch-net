@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public string ToNode { get; set; }
 	}
 
-	public sealed partial class CommandMoveActionDescriptor : DescriptorBase<CommandMoveActionDescriptor>
+	public sealed partial class CommandMoveActionDescriptor : SerializableDescriptorBase<CommandMoveActionDescriptor>
 	{
 		internal CommandMoveActionDescriptor(Action<CommandMoveActionDescriptor> configure) => configure.Invoke(this);
 		public CommandMoveActionDescriptor() : base()

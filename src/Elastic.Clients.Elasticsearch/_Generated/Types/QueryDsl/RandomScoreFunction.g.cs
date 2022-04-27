@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Union<long?, string?>? Seed { get; set; }
 	}
 
-	public sealed partial class RandomScoreFunctionDescriptor<TDocument> : DescriptorBase<RandomScoreFunctionDescriptor<TDocument>>
+	public sealed partial class RandomScoreFunctionDescriptor<TDocument> : SerializableDescriptorBase<RandomScoreFunctionDescriptor<TDocument>>
 	{
 		internal RandomScoreFunctionDescriptor(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RandomScoreFunctionDescriptor() : base()
@@ -145,7 +145,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class RandomScoreFunctionDescriptor : DescriptorBase<RandomScoreFunctionDescriptor>
+	public sealed partial class RandomScoreFunctionDescriptor : SerializableDescriptorBase<RandomScoreFunctionDescriptor>
 	{
 		internal RandomScoreFunctionDescriptor(Action<RandomScoreFunctionDescriptor> configure) => configure.Invoke(this);
 		public RandomScoreFunctionDescriptor() : base()

@@ -239,7 +239,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? Version { get; set; }
 	}
 
-	public sealed partial class IndexSettingsDescriptor<TDocument> : DescriptorBase<IndexSettingsDescriptor<TDocument>>
+	public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDescriptorBase<IndexSettingsDescriptor<TDocument>>
 	{
 		internal IndexSettingsDescriptor(Action<IndexSettingsDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IndexSettingsDescriptor() : base()
@@ -1571,7 +1571,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 	}
 
-	public sealed partial class IndexSettingsDescriptor : DescriptorBase<IndexSettingsDescriptor>
+	public sealed partial class IndexSettingsDescriptor : SerializableDescriptorBase<IndexSettingsDescriptor>
 	{
 		internal IndexSettingsDescriptor(Action<IndexSettingsDescriptor> configure) => configure.Invoke(this);
 		public IndexSettingsDescriptor() : base()

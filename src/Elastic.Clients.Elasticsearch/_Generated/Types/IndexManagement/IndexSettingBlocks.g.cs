@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Union<bool?, string?>? Write { get; set; }
 	}
 
-	public sealed partial class IndexSettingBlocksDescriptor : DescriptorBase<IndexSettingBlocksDescriptor>
+	public sealed partial class IndexSettingBlocksDescriptor : SerializableDescriptorBase<IndexSettingBlocksDescriptor>
 	{
 		internal IndexSettingBlocksDescriptor(Action<IndexSettingBlocksDescriptor> configure) => configure.Invoke(this);
 		public IndexSettingBlocksDescriptor() : base()

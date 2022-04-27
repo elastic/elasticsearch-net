@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string Type => "DFR";
 	}
 
-	public sealed partial class SettingsSimilarityDfrDescriptor : DescriptorBase<SettingsSimilarityDfrDescriptor>
+	public sealed partial class SettingsSimilarityDfrDescriptor : SerializableDescriptorBase<SettingsSimilarityDfrDescriptor>
 	{
 		internal SettingsSimilarityDfrDescriptor(Action<SettingsSimilarityDfrDescriptor> configure) => configure.Invoke(this);
 		public SettingsSimilarityDfrDescriptor() : base()

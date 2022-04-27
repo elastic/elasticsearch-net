@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 	}
 
-	public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : DescriptorBase<MoreLikeThisQueryDescriptor<TDocument>>
+	public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : SerializableDescriptorBase<MoreLikeThisQueryDescriptor<TDocument>>
 	{
 		internal MoreLikeThisQueryDescriptor(Action<MoreLikeThisQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MoreLikeThisQueryDescriptor() : base()
@@ -409,7 +409,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class MoreLikeThisQueryDescriptor : DescriptorBase<MoreLikeThisQueryDescriptor>
+	public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptorBase<MoreLikeThisQueryDescriptor>
 	{
 		internal MoreLikeThisQueryDescriptor(Action<MoreLikeThisQueryDescriptor> configure) => configure.Invoke(this);
 		public MoreLikeThisQueryDescriptor() : base()

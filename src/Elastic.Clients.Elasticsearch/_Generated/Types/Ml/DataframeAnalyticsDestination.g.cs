@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 	}
 
-	public sealed partial class DataframeAnalyticsDestinationDescriptor<TDocument> : DescriptorBase<DataframeAnalyticsDestinationDescriptor<TDocument>>
+	public sealed partial class DataframeAnalyticsDestinationDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalyticsDestinationDescriptor<TDocument>>
 	{
 		internal DataframeAnalyticsDestinationDescriptor(Action<DataframeAnalyticsDestinationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeAnalyticsDestinationDescriptor() : base()
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeAnalyticsDestinationDescriptor : DescriptorBase<DataframeAnalyticsDestinationDescriptor>
+	public sealed partial class DataframeAnalyticsDestinationDescriptor : SerializableDescriptorBase<DataframeAnalyticsDestinationDescriptor>
 	{
 		internal DataframeAnalyticsDestinationDescriptor(Action<DataframeAnalyticsDestinationDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalyticsDestinationDescriptor() : base()

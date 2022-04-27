@@ -283,7 +283,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class AggregationContainerDescriptor<TDocument> : DescriptorBase<AggregationContainerDescriptor<TDocument>>
+	public sealed partial class AggregationContainerDescriptor<TDocument> : SerializableDescriptorBase<AggregationContainerDescriptor<TDocument>>
 	{
 		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public AggregationContainerDescriptor() : base()
@@ -506,7 +506,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class AggregationContainerDescriptor : DescriptorBase<AggregationContainerDescriptor>
+	public sealed partial class AggregationContainerDescriptor : SerializableDescriptorBase<AggregationContainerDescriptor>
 	{
 		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor> configure) => configure.Invoke(this);
 		public AggregationContainerDescriptor() : base()

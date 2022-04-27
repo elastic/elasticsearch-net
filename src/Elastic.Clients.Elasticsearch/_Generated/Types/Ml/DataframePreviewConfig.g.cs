@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source { get; set; }
 	}
 
-	public sealed partial class DataframePreviewConfigDescriptor<TDocument> : DescriptorBase<DataframePreviewConfigDescriptor<TDocument>>
+	public sealed partial class DataframePreviewConfigDescriptor<TDocument> : SerializableDescriptorBase<DataframePreviewConfigDescriptor<TDocument>>
 	{
 		internal DataframePreviewConfigDescriptor(Action<DataframePreviewConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframePreviewConfigDescriptor() : base()
@@ -227,7 +227,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframePreviewConfigDescriptor : DescriptorBase<DataframePreviewConfigDescriptor>
+	public sealed partial class DataframePreviewConfigDescriptor : SerializableDescriptorBase<DataframePreviewConfigDescriptor>
 	{
 		internal DataframePreviewConfigDescriptor(Action<DataframePreviewConfigDescriptor> configure) => configure.Invoke(this);
 		public DataframePreviewConfigDescriptor() : base()

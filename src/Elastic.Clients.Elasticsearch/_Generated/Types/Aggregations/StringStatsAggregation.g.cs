@@ -142,7 +142,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? ShowDistribution { get; set; }
 	}
 
-	public sealed partial class StringStatsAggregationDescriptor<TDocument> : DescriptorBase<StringStatsAggregationDescriptor<TDocument>>
+	public sealed partial class StringStatsAggregationDescriptor<TDocument> : SerializableDescriptorBase<StringStatsAggregationDescriptor<TDocument>>
 	{
 		internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public StringStatsAggregationDescriptor() : base()
@@ -253,7 +253,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class StringStatsAggregationDescriptor : DescriptorBase<StringStatsAggregationDescriptor>
+	public sealed partial class StringStatsAggregationDescriptor : SerializableDescriptorBase<StringStatsAggregationDescriptor>
 	{
 		internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor> configure) => configure.Invoke(this);
 		public StringStatsAggregationDescriptor() : base()

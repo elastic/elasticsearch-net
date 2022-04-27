@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class GeoIpProcessorDescriptor<TDocument> : DescriptorBase<GeoIpProcessorDescriptor<TDocument>>
+	public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDescriptorBase<GeoIpProcessorDescriptor<TDocument>>
 	{
 		internal GeoIpProcessorDescriptor(Action<GeoIpProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public GeoIpProcessorDescriptor() : base()
@@ -195,7 +195,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class GeoIpProcessorDescriptor : DescriptorBase<GeoIpProcessorDescriptor>
+	public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptorBase<GeoIpProcessorDescriptor>
 	{
 		internal GeoIpProcessorDescriptor(Action<GeoIpProcessorDescriptor> configure) => configure.Invoke(this);
 		public GeoIpProcessorDescriptor() : base()

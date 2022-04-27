@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptBase? Script { get; set; }
 	}
 
-	public sealed partial class WeightedAverageValueDescriptor<TDocument> : DescriptorBase<WeightedAverageValueDescriptor<TDocument>>
+	public sealed partial class WeightedAverageValueDescriptor<TDocument> : SerializableDescriptorBase<WeightedAverageValueDescriptor<TDocument>>
 	{
 		internal WeightedAverageValueDescriptor(Action<WeightedAverageValueDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public WeightedAverageValueDescriptor() : base()
@@ -133,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class WeightedAverageValueDescriptor : DescriptorBase<WeightedAverageValueDescriptor>
+	public sealed partial class WeightedAverageValueDescriptor : SerializableDescriptorBase<WeightedAverageValueDescriptor>
 	{
 		internal WeightedAverageValueDescriptor(Action<WeightedAverageValueDescriptor> configure) => configure.Invoke(this);
 		public WeightedAverageValueDescriptor() : base()

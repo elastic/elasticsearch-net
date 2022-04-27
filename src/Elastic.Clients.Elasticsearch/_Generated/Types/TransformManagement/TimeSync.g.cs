@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
-	public sealed partial class TimeSyncDescriptor<TDocument> : DescriptorBase<TimeSyncDescriptor<TDocument>>
+	public sealed partial class TimeSyncDescriptor<TDocument> : SerializableDescriptorBase<TimeSyncDescriptor<TDocument>>
 	{
 		internal TimeSyncDescriptor(Action<TimeSyncDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TimeSyncDescriptor() : base()
@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		}
 	}
 
-	public sealed partial class TimeSyncDescriptor : DescriptorBase<TimeSyncDescriptor>
+	public sealed partial class TimeSyncDescriptor : SerializableDescriptorBase<TimeSyncDescriptor>
 	{
 		internal TimeSyncDescriptor(Action<TimeSyncDescriptor> configure) => configure.Invoke(this);
 		public TimeSyncDescriptor() : base()

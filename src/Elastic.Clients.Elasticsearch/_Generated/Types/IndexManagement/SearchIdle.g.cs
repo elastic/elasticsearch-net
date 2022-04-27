@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? After { get; set; }
 	}
 
-	public sealed partial class SearchIdleDescriptor : DescriptorBase<SearchIdleDescriptor>
+	public sealed partial class SearchIdleDescriptor : SerializableDescriptorBase<SearchIdleDescriptor>
 	{
 		internal SearchIdleDescriptor(Action<SearchIdleDescriptor> configure) => configure.Invoke(this);
 		public SearchIdleDescriptor() : base()

@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
-	public sealed partial class MultiTermLookupDescriptor<TDocument> : DescriptorBase<MultiTermLookupDescriptor<TDocument>>
+	public sealed partial class MultiTermLookupDescriptor<TDocument> : SerializableDescriptorBase<MultiTermLookupDescriptor<TDocument>>
 	{
 		internal MultiTermLookupDescriptor(Action<MultiTermLookupDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MultiTermLookupDescriptor() : base()
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class MultiTermLookupDescriptor : DescriptorBase<MultiTermLookupDescriptor>
+	public sealed partial class MultiTermLookupDescriptor : SerializableDescriptorBase<MultiTermLookupDescriptor>
 	{
 		internal MultiTermLookupDescriptor(Action<MultiTermLookupDescriptor> configure) => configure.Invoke(this);
 		public MultiTermLookupDescriptor() : base()

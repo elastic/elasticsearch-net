@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool Required { get; set; }
 	}
 
-	public sealed partial class RoutingFieldDescriptor : DescriptorBase<RoutingFieldDescriptor>
+	public sealed partial class RoutingFieldDescriptor : SerializableDescriptorBase<RoutingFieldDescriptor>
 	{
 		internal RoutingFieldDescriptor(Action<RoutingFieldDescriptor> configure) => configure.Invoke(this);
 		public RoutingFieldDescriptor() : base()

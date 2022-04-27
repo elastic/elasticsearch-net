@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? Size { get; set; }
 	}
 
-	public sealed partial class PageDescriptor : DescriptorBase<PageDescriptor>
+	public sealed partial class PageDescriptor : SerializableDescriptorBase<PageDescriptor>
 	{
 		internal PageDescriptor(Action<PageDescriptor> configure) => configure.Invoke(this);
 		public PageDescriptor() : base()
