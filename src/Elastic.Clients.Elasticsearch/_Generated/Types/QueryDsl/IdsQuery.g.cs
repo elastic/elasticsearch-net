@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Ids? Values { get; set; }
 	}
 
-	public sealed partial class IdsQueryDescriptor : DescriptorBase<IdsQueryDescriptor>
+	public sealed partial class IdsQueryDescriptor : SerializableDescriptorBase<IdsQueryDescriptor>
 	{
 		internal IdsQueryDescriptor(Action<IdsQueryDescriptor> configure) => configure.Invoke(this);
 		public IdsQueryDescriptor() : base()

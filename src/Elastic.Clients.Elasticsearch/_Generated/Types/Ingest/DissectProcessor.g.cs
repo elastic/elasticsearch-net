@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string Pattern { get; set; }
 	}
 
-	public sealed partial class DissectProcessorDescriptor<TDocument> : DescriptorBase<DissectProcessorDescriptor<TDocument>>
+	public sealed partial class DissectProcessorDescriptor<TDocument> : SerializableDescriptorBase<DissectProcessorDescriptor<TDocument>>
 	{
 		internal DissectProcessorDescriptor(Action<DissectProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DissectProcessorDescriptor() : base()
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class DissectProcessorDescriptor : DescriptorBase<DissectProcessorDescriptor>
+	public sealed partial class DissectProcessorDescriptor : SerializableDescriptorBase<DissectProcessorDescriptor>
 	{
 		internal DissectProcessorDescriptor(Action<DissectProcessorDescriptor> configure) => configure.Invoke(this);
 		public DissectProcessorDescriptor() : base()

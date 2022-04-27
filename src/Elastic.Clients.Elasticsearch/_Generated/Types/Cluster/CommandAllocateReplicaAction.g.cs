@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int Shard { get; set; }
 	}
 
-	public sealed partial class CommandAllocateReplicaActionDescriptor : DescriptorBase<CommandAllocateReplicaActionDescriptor>
+	public sealed partial class CommandAllocateReplicaActionDescriptor : SerializableDescriptorBase<CommandAllocateReplicaActionDescriptor>
 	{
 		internal CommandAllocateReplicaActionDescriptor(Action<CommandAllocateReplicaActionDescriptor> configure) => configure.Invoke(this);
 		public CommandAllocateReplicaActionDescriptor() : base()

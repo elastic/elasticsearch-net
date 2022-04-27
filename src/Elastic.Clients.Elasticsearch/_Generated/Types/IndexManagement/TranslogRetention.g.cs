@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ByteSize Size { get; set; }
 	}
 
-	public sealed partial class TranslogRetentionDescriptor : DescriptorBase<TranslogRetentionDescriptor>
+	public sealed partial class TranslogRetentionDescriptor : SerializableDescriptorBase<TranslogRetentionDescriptor>
 	{
 		internal TranslogRetentionDescriptor(Action<TranslogRetentionDescriptor> configure) => configure.Invoke(this);
 		public TranslogRetentionDescriptor() : base()

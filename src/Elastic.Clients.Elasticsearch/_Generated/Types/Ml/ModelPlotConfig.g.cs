@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Field? Terms { get; set; }
 	}
 
-	public sealed partial class ModelPlotConfigDescriptor<TDocument> : DescriptorBase<ModelPlotConfigDescriptor<TDocument>>
+	public sealed partial class ModelPlotConfigDescriptor<TDocument> : SerializableDescriptorBase<ModelPlotConfigDescriptor<TDocument>>
 	{
 		internal ModelPlotConfigDescriptor(Action<ModelPlotConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ModelPlotConfigDescriptor() : base()
@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class ModelPlotConfigDescriptor : DescriptorBase<ModelPlotConfigDescriptor>
+	public sealed partial class ModelPlotConfigDescriptor : SerializableDescriptorBase<ModelPlotConfigDescriptor>
 	{
 		internal ModelPlotConfigDescriptor(Action<ModelPlotConfigDescriptor> configure) => configure.Invoke(this);
 		public ModelPlotConfigDescriptor() : base()

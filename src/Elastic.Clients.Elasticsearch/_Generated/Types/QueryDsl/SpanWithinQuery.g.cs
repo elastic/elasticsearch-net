@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
 	}
 
-	public sealed partial class SpanWithinQueryDescriptor<TDocument> : DescriptorBase<SpanWithinQueryDescriptor<TDocument>>
+	public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableDescriptorBase<SpanWithinQueryDescriptor<TDocument>>
 	{
 		internal SpanWithinQueryDescriptor(Action<SpanWithinQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SpanWithinQueryDescriptor() : base()
@@ -173,7 +173,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class SpanWithinQueryDescriptor : DescriptorBase<SpanWithinQueryDescriptor>
+	public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptorBase<SpanWithinQueryDescriptor>
 	{
 		internal SpanWithinQueryDescriptor(Action<SpanWithinQueryDescriptor> configure) => configure.Invoke(this);
 		public SpanWithinQueryDescriptor() : base()

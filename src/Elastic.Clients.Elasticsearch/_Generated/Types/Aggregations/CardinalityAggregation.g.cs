@@ -163,7 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Rehash { get; set; }
 	}
 
-	public sealed partial class CardinalityAggregationDescriptor<TDocument> : DescriptorBase<CardinalityAggregationDescriptor<TDocument>>
+	public sealed partial class CardinalityAggregationDescriptor<TDocument> : SerializableDescriptorBase<CardinalityAggregationDescriptor<TDocument>>
 	{
 		internal CardinalityAggregationDescriptor(Action<CardinalityAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public CardinalityAggregationDescriptor() : base()
@@ -288,7 +288,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class CardinalityAggregationDescriptor : DescriptorBase<CardinalityAggregationDescriptor>
+	public sealed partial class CardinalityAggregationDescriptor : SerializableDescriptorBase<CardinalityAggregationDescriptor>
 	{
 		internal CardinalityAggregationDescriptor(Action<CardinalityAggregationDescriptor> configure) => configure.Invoke(this);
 		public CardinalityAggregationDescriptor() : base()

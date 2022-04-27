@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? IgnoreMissing { get; set; }
 	}
 
-	public sealed partial class RemoveProcessorDescriptor<TDocument> : DescriptorBase<RemoveProcessorDescriptor<TDocument>>
+	public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableDescriptorBase<RemoveProcessorDescriptor<TDocument>>
 	{
 		internal RemoveProcessorDescriptor(Action<RemoveProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RemoveProcessorDescriptor() : base()
@@ -137,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class RemoveProcessorDescriptor : DescriptorBase<RemoveProcessorDescriptor>
+	public sealed partial class RemoveProcessorDescriptor : SerializableDescriptorBase<RemoveProcessorDescriptor>
 	{
 		internal RemoveProcessorDescriptor(Action<RemoveProcessorDescriptor> configure) => configure.Invoke(this);
 		public RemoveProcessorDescriptor() : base()

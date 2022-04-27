@@ -166,7 +166,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? OtherBucketKey { get; set; }
 	}
 
-	public sealed partial class FiltersAggregationDescriptor<TDocument> : DescriptorBase<FiltersAggregationDescriptor<TDocument>>
+	public sealed partial class FiltersAggregationDescriptor<TDocument> : SerializableDescriptorBase<FiltersAggregationDescriptor<TDocument>>
 	{
 		internal FiltersAggregationDescriptor(Action<FiltersAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FiltersAggregationDescriptor() : base()
@@ -285,7 +285,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class FiltersAggregationDescriptor : DescriptorBase<FiltersAggregationDescriptor>
+	public sealed partial class FiltersAggregationDescriptor : SerializableDescriptorBase<FiltersAggregationDescriptor>
 	{
 		internal FiltersAggregationDescriptor(Action<FiltersAggregationDescriptor> configure) => configure.Invoke(this);
 		public FiltersAggregationDescriptor() : base()

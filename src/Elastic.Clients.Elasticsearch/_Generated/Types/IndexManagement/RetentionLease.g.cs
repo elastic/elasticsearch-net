@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time Period { get; set; }
 	}
 
-	public sealed partial class RetentionLeaseDescriptor : DescriptorBase<RetentionLeaseDescriptor>
+	public sealed partial class RetentionLeaseDescriptor : SerializableDescriptorBase<RetentionLeaseDescriptor>
 	{
 		internal RetentionLeaseDescriptor(Action<RetentionLeaseDescriptor> configure) => configure.Invoke(this);
 		public RetentionLeaseDescriptor() : base()

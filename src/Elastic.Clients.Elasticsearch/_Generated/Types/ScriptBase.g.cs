@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, object>? Params { get; set; }
 	}
 
-	public sealed partial class ScriptBaseDescriptor : DescriptorBase<ScriptBaseDescriptor>
+	public sealed partial class ScriptBaseDescriptor : SerializableDescriptorBase<ScriptBaseDescriptor>
 	{
 		internal ScriptBaseDescriptor(Action<ScriptBaseDescriptor> configure) => configure.Invoke(this);
 		public ScriptBaseDescriptor() : base()

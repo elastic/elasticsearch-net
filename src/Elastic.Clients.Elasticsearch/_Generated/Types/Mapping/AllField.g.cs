@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool StoreTermVectors { get; set; }
 	}
 
-	public sealed partial class AllFieldDescriptor : DescriptorBase<AllFieldDescriptor>
+	public sealed partial class AllFieldDescriptor : SerializableDescriptorBase<AllFieldDescriptor>
 	{
 		internal AllFieldDescriptor(Action<AllFieldDescriptor> configure) => configure.Invoke(this);
 		public AllFieldDescriptor() : base()

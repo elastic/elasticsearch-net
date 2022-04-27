@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public sealed partial class BytesProcessorDescriptor<TDocument> : DescriptorBase<BytesProcessorDescriptor<TDocument>>
+	public sealed partial class BytesProcessorDescriptor<TDocument> : SerializableDescriptorBase<BytesProcessorDescriptor<TDocument>>
 	{
 		internal BytesProcessorDescriptor(Action<BytesProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public BytesProcessorDescriptor() : base()
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class BytesProcessorDescriptor : DescriptorBase<BytesProcessorDescriptor>
+	public sealed partial class BytesProcessorDescriptor : SerializableDescriptorBase<BytesProcessorDescriptor>
 	{
 		internal BytesProcessorDescriptor(Action<BytesProcessorDescriptor> configure) => configure.Invoke(this);
 		public BytesProcessorDescriptor() : base()

@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 	}
 
-	public sealed partial class IndexRoutingAllocationInitialRecoveryDescriptor : DescriptorBase<IndexRoutingAllocationInitialRecoveryDescriptor>
+	public sealed partial class IndexRoutingAllocationInitialRecoveryDescriptor : SerializableDescriptorBase<IndexRoutingAllocationInitialRecoveryDescriptor>
 	{
 		internal IndexRoutingAllocationInitialRecoveryDescriptor(Action<IndexRoutingAllocationInitialRecoveryDescriptor> configure) => configure.Invoke(this);
 		public IndexRoutingAllocationInitialRecoveryDescriptor() : base()

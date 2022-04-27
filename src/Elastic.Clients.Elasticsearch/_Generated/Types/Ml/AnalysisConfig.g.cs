@@ -71,7 +71,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Field? SummaryCountFieldName { get; set; }
 	}
 
-	public sealed partial class AnalysisConfigDescriptor<TDocument> : DescriptorBase<AnalysisConfigDescriptor<TDocument>>
+	public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDescriptorBase<AnalysisConfigDescriptor<TDocument>>
 	{
 		internal AnalysisConfigDescriptor(Action<AnalysisConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public AnalysisConfigDescriptor() : base()
@@ -275,7 +275,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class AnalysisConfigDescriptor : DescriptorBase<AnalysisConfigDescriptor>
+	public sealed partial class AnalysisConfigDescriptor : SerializableDescriptorBase<AnalysisConfigDescriptor>
 	{
 		internal AnalysisConfigDescriptor(Action<AnalysisConfigDescriptor> configure) => configure.Invoke(this);
 		public AnalysisConfigDescriptor() : base()

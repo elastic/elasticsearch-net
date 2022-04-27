@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IEnumerable<double> QueryVector { get; set; }
 	}
 
-	public sealed partial class KnnQueryDescriptor<TDocument> : DescriptorBase<KnnQueryDescriptor<TDocument>>
+	public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescriptorBase<KnnQueryDescriptor<TDocument>>
 	{
 		internal KnnQueryDescriptor(Action<KnnQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public KnnQueryDescriptor() : base()
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class KnnQueryDescriptor : DescriptorBase<KnnQueryDescriptor>
+	public sealed partial class KnnQueryDescriptor : SerializableDescriptorBase<KnnQueryDescriptor>
 	{
 		internal KnnQueryDescriptor(Action<KnnQueryDescriptor> configure) => configure.Invoke(this);
 		public KnnQueryDescriptor() : base()

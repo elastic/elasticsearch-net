@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.CommandMoveAction? Move { get; set; }
 	}
 
-	public sealed partial class CommandDescriptor : DescriptorBase<CommandDescriptor>
+	public sealed partial class CommandDescriptor : SerializableDescriptorBase<CommandDescriptor>
 	{
 		internal CommandDescriptor(Action<CommandDescriptor> configure) => configure.Invoke(this);
 		public CommandDescriptor() : base()

@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Field PredictedProbabilityField { get; set; }
 	}
 
-	public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocument> : DescriptorBase<DataframeEvaluationOutlierDetectionDescriptor<TDocument>>
+	public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocument> : SerializableDescriptorBase<DataframeEvaluationOutlierDetectionDescriptor<TDocument>>
 	{
 		internal DataframeEvaluationOutlierDetectionDescriptor(Action<DataframeEvaluationOutlierDetectionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeEvaluationOutlierDetectionDescriptor() : base()
@@ -133,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : DescriptorBase<DataframeEvaluationOutlierDetectionDescriptor>
+	public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : SerializableDescriptorBase<DataframeEvaluationOutlierDetectionDescriptor>
 	{
 		internal DataframeEvaluationOutlierDetectionDescriptor(Action<DataframeEvaluationOutlierDetectionDescriptor> configure) => configure.Invoke(this);
 		public DataframeEvaluationOutlierDetectionDescriptor() : base()

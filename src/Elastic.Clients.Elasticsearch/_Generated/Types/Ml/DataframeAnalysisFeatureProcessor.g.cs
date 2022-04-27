@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeAnalysisFeatureProcessorDescriptor<TDocument> : DescriptorBase<DataframeAnalysisFeatureProcessorDescriptor<TDocument>>
+	public sealed partial class DataframeAnalysisFeatureProcessorDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorDescriptor<TDocument>>
 	{
 		internal DataframeAnalysisFeatureProcessorDescriptor(Action<DataframeAnalysisFeatureProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeAnalysisFeatureProcessorDescriptor() : base()
@@ -121,12 +121,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal DataframeAnalysisFeatureProcessor Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public void TargetMeanEncoding(Action<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
 	}
 
-	public sealed partial class DataframeAnalysisFeatureProcessorDescriptor : DescriptorBase<DataframeAnalysisFeatureProcessorDescriptor>
+	public sealed partial class DataframeAnalysisFeatureProcessorDescriptor : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorDescriptor>
 	{
 		internal DataframeAnalysisFeatureProcessorDescriptor(Action<DataframeAnalysisFeatureProcessorDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalysisFeatureProcessorDescriptor() : base()
@@ -192,12 +192,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal DataframeAnalysisFeatureProcessor Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

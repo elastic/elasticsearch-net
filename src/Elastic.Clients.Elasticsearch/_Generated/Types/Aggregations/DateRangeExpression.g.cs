@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? To { get; set; }
 	}
 
-	public sealed partial class DateRangeExpressionDescriptor : DescriptorBase<DateRangeExpressionDescriptor>
+	public sealed partial class DateRangeExpressionDescriptor : SerializableDescriptorBase<DateRangeExpressionDescriptor>
 	{
 		internal DateRangeExpressionDescriptor(Action<DateRangeExpressionDescriptor> configure) => configure.Invoke(this);
 		public DateRangeExpressionDescriptor() : base()

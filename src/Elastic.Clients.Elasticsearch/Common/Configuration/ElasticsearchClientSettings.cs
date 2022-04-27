@@ -112,8 +112,8 @@ namespace Elastic.Clients.Elasticsearch
 			IPropertyMappingProvider propertyMappingProvider)
 			: base(nodePool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticsearchClientsElasticsearch)
 		{
-			var defaultSerializer = new DefaultRequestResponseSerializer(this);
-			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? new DefaultSourceSerializer(this);
+			var requestResponseSerializer = new DefaultRequestResponseSerializer(this);
+			var sourceSerializer = sourceSerializerFactory?.Invoke(requestResponseSerializer, this) ?? new DefaultSourceSerializer(this);
 
 			// TODO - Is the second condition ever true?
 			_propertyMappingProvider = propertyMappingProvider ?? sourceSerializer as IPropertyMappingProvider ?? new PropertyMappingProvider();
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch
 			_sourceSerializer = sourceSerializer;
 
 			//UseThisRequestResponseSerializer = new DiagnosticsSerializerProxy(defaultSerializer);
-			UseThisRequestResponseSerializer = defaultSerializer;
+			UseThisRequestResponseSerializer = requestResponseSerializer;
 
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
 			_defaultIndices = new FluentDictionary<Type, string>();
@@ -134,7 +134,7 @@ namespace Elastic.Clients.Elasticsearch
 			UserAgent(ElasticsearchClientSettings.DefaultUserAgent);
 		}
 
-		public Serializer SourceSerializer { get; }
+		public Serializer SourceSerializer => _sourceSerializer;
 
 		bool IElasticsearchClientSettings.DefaultDisableIdInference => _defaultDisableAllInference;
 		Func<string, string> IElasticsearchClientSettings.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
@@ -171,8 +171,15 @@ namespace Elastic.Clients.Elasticsearch
 		/// <example>
 		///     CLR property EmailAddress will be inferred as "emailAddress" Elasticsearch document field name
 		/// </example>
-		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) =>
-			Assign(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
+		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer)
+		{
+			if (_sourceSerializer is DefaultSourceSerializer dss)
+			{
+				dss.Options.PropertyNamingPolicy = new CustomizedNamingPolicy(fieldNameInferrer);
+			}
+			
+			return Assign<Func<string, string>>(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
+		}
 
 		public TConnectionSettings ExperimentalEnableSerializeNullInferredValues(bool enabled = true) =>
 			Assign(enabled, (a, v) => a._experimentalEnableSerializeNullInferredValues = v);
@@ -230,42 +237,6 @@ namespace Elastic.Clients.Elasticsearch
 			_routeProperties.Add(typeof(TDocument), fieldName);
 		}
 
-		private void ApplyPropertyMappings<TDocument>(IList<IClrPropertyMapping<TDocument>> mappings)
-			where TDocument : class
-		{
-			foreach (var mapping in mappings)
-			{
-				var e = mapping.Property;
-				var memberInfoResolver = new MemberInfoResolver(e);
-				if (memberInfoResolver.Members.Count > 1)
-					throw new ArgumentException($"{nameof(ApplyPropertyMappings)} can only map direct properties");
-
-				if (memberInfoResolver.Members.Count == 0)
-					throw new ArgumentException($"Expression {e} does contain any member access");
-
-				var memberInfo = memberInfoResolver.Members[0];
-
-				if (_propertyMappings.TryGetValue(memberInfo, out var propertyMapping))
-				{
-					var newName = mapping.NewName;
-					var mappedAs = propertyMapping.Name;
-					var typeName = typeof(TDocument).Name;
-					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
-						throw new ArgumentException($"Property mapping '{e}' on type is already ignored");
-					if (mappedAs.IsNullOrEmpty())
-						throw new ArgumentException(
-							$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' it already has an ignore mapping");
-					if (newName.IsNullOrEmpty())
-						throw new ArgumentException(
-							$"Property mapping '{e}' on type {typeName} can not be ignored it already has a mapping to '{mappedAs}'");
-
-					throw new ArgumentException(
-						$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' already mapped as '{mappedAs}'");
-				}
-				_propertyMappings[memberInfo] = mapping.ToPropertyMapping();
-			}
-		}
-
 		/// <summary>
 		///     Specify how the mapping is inferred for a given CLR type.
 		///     The mapping can infer the index, id and relation name for a given CLR type, as well as control
@@ -292,9 +263,6 @@ namespace Elastic.Clients.Elasticsearch
 
 			if (inferMapping._routingPropertyExpression != null)
 				MapRoutePropertyFor(inferMapping._routingPropertyExpression);
-
-			if (inferMapping._properties != null)
-				ApplyPropertyMappings(inferMapping._properties);
 
 			if (inferMapping._disableIdInference)
 				_disableIdInference.Add(inferMapping._clrType);

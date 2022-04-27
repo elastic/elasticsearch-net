@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, string> HotMap { get; set; }
 	}
 
-	public sealed partial class OneHotEncodingPreprocessorDescriptor<TDocument> : DescriptorBase<OneHotEncodingPreprocessorDescriptor<TDocument>>
+	public sealed partial class OneHotEncodingPreprocessorDescriptor<TDocument> : SerializableDescriptorBase<OneHotEncodingPreprocessorDescriptor<TDocument>>
 	{
 		internal OneHotEncodingPreprocessorDescriptor(Action<OneHotEncodingPreprocessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public OneHotEncodingPreprocessorDescriptor() : base()
@@ -71,7 +71,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class OneHotEncodingPreprocessorDescriptor : DescriptorBase<OneHotEncodingPreprocessorDescriptor>
+	public sealed partial class OneHotEncodingPreprocessorDescriptor : SerializableDescriptorBase<OneHotEncodingPreprocessorDescriptor>
 	{
 		internal OneHotEncodingPreprocessorDescriptor(Action<OneHotEncodingPreprocessorDescriptor> configure) => configure.Invoke(this);
 		public OneHotEncodingPreprocessorDescriptor() : base()

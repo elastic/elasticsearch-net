@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class CircleProcessorDescriptor<TDocument> : DescriptorBase<CircleProcessorDescriptor<TDocument>>
+	public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableDescriptorBase<CircleProcessorDescriptor<TDocument>>
 	{
 		internal CircleProcessorDescriptor(Action<CircleProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public CircleProcessorDescriptor() : base()
@@ -181,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class CircleProcessorDescriptor : DescriptorBase<CircleProcessorDescriptor>
+	public sealed partial class CircleProcessorDescriptor : SerializableDescriptorBase<CircleProcessorDescriptor>
 	{
 		internal CircleProcessorDescriptor(Action<CircleProcessorDescriptor> configure) => configure.Invoke(this);
 		public CircleProcessorDescriptor() : base()

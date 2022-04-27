@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public double? TieBreaker { get; set; }
 	}
 
-	public sealed partial class DisMaxQueryDescriptor : DescriptorBase<DisMaxQueryDescriptor>
+	public sealed partial class DisMaxQueryDescriptor : SerializableDescriptorBase<DisMaxQueryDescriptor>
 	{
 		internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor> configure) => configure.Invoke(this);
 		public DisMaxQueryDescriptor() : base()

@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string? Type { get; set; }
 	}
 
-	public sealed partial class ParentIdQueryDescriptor : DescriptorBase<ParentIdQueryDescriptor>
+	public sealed partial class ParentIdQueryDescriptor : SerializableDescriptorBase<ParentIdQueryDescriptor>
 	{
 		internal ParentIdQueryDescriptor(Action<ParentIdQueryDescriptor> configure) => configure.Invoke(this);
 		public ParentIdQueryDescriptor() : base()

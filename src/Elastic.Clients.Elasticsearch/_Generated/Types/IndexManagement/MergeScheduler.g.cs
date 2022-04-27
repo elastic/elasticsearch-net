@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public int? MaxThreadCount { get; set; }
 	}
 
-	public sealed partial class MergeSchedulerDescriptor : DescriptorBase<MergeSchedulerDescriptor>
+	public sealed partial class MergeSchedulerDescriptor : SerializableDescriptorBase<MergeSchedulerDescriptor>
 	{
 		internal MergeSchedulerDescriptor(Action<MergeSchedulerDescriptor> configure) => configure.Invoke(this);
 		public MergeSchedulerDescriptor() : base()

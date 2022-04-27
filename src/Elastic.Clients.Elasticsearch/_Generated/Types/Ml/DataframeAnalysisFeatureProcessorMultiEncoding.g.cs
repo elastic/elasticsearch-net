@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IEnumerable<int> Processors { get; set; }
 	}
 
-	public sealed partial class DataframeAnalysisFeatureProcessorMultiEncodingDescriptor : DescriptorBase<DataframeAnalysisFeatureProcessorMultiEncodingDescriptor>
+	public sealed partial class DataframeAnalysisFeatureProcessorMultiEncodingDescriptor : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorMultiEncodingDescriptor>
 	{
 		internal DataframeAnalysisFeatureProcessorMultiEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorMultiEncodingDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalysisFeatureProcessorMultiEncodingDescriptor() : base()

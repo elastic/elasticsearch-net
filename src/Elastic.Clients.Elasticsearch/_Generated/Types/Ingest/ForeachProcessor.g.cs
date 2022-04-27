@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer Processor { get; set; }
 	}
 
-	public sealed partial class ForeachProcessorDescriptor<TDocument> : DescriptorBase<ForeachProcessorDescriptor<TDocument>>
+	public sealed partial class ForeachProcessorDescriptor<TDocument> : SerializableDescriptorBase<ForeachProcessorDescriptor<TDocument>>
 	{
 		internal ForeachProcessorDescriptor(Action<ForeachProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ForeachProcessorDescriptor() : base()
@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class ForeachProcessorDescriptor : DescriptorBase<ForeachProcessorDescriptor>
+	public sealed partial class ForeachProcessorDescriptor : SerializableDescriptorBase<ForeachProcessorDescriptor>
 	{
 		internal ForeachProcessorDescriptor(Action<ForeachProcessorDescriptor> configure) => configure.Invoke(this);
 		public ForeachProcessorDescriptor() : base()

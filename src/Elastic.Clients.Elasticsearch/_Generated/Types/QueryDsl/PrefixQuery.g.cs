@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Value { get; set; }
 	}
 
-	public sealed partial class PrefixQueryDescriptor<TDocument> : DescriptorBase<PrefixQueryDescriptor<TDocument>>
+	public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescriptorBase<PrefixQueryDescriptor<TDocument>>
 	{
 		internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public PrefixQueryDescriptor() : base()
@@ -220,7 +220,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class PrefixQueryDescriptor : DescriptorBase<PrefixQueryDescriptor>
+	public sealed partial class PrefixQueryDescriptor : SerializableDescriptorBase<PrefixQueryDescriptor>
 	{
 		internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor> configure) => configure.Invoke(this);
 		public PrefixQueryDescriptor() : base()

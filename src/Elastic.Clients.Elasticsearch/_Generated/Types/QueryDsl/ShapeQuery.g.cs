@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? IgnoreUnmapped { get; set; }
 	}
 
-	public sealed partial class ShapeQueryDescriptor : DescriptorBase<ShapeQueryDescriptor>
+	public sealed partial class ShapeQueryDescriptor : SerializableDescriptorBase<ShapeQueryDescriptor>
 	{
 		internal ShapeQueryDescriptor(Action<ShapeQueryDescriptor> configure) => configure.Invoke(this);
 		public ShapeQueryDescriptor() : base()

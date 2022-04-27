@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class SumAggregationDescriptor<TDocument> : DescriptorBase<SumAggregationDescriptor<TDocument>>
+	public sealed partial class SumAggregationDescriptor<TDocument> : SerializableDescriptorBase<SumAggregationDescriptor<TDocument>>
 	{
 		internal SumAggregationDescriptor(Action<SumAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SumAggregationDescriptor() : base()
@@ -249,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class SumAggregationDescriptor : DescriptorBase<SumAggregationDescriptor>
+	public sealed partial class SumAggregationDescriptor : SerializableDescriptorBase<SumAggregationDescriptor>
 	{
 		internal SumAggregationDescriptor(Action<SumAggregationDescriptor> configure) => configure.Invoke(this);
 		public SumAggregationDescriptor() : base()

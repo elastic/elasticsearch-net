@@ -170,7 +170,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Weight { get; set; }
 	}
 
-	public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : DescriptorBase<WeightedAverageAggregationDescriptor<TDocument>>
+	public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : SerializableDescriptorBase<WeightedAverageAggregationDescriptor<TDocument>>
 	{
 		internal WeightedAverageAggregationDescriptor(Action<WeightedAverageAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public WeightedAverageAggregationDescriptor() : base()
@@ -321,7 +321,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class WeightedAverageAggregationDescriptor : DescriptorBase<WeightedAverageAggregationDescriptor>
+	public sealed partial class WeightedAverageAggregationDescriptor : SerializableDescriptorBase<WeightedAverageAggregationDescriptor>
 	{
 		internal WeightedAverageAggregationDescriptor(Action<WeightedAverageAggregationDescriptor> configure) => configure.Invoke(this);
 		public WeightedAverageAggregationDescriptor() : base()

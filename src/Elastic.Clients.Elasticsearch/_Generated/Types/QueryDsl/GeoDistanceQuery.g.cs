@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
 
-	public sealed partial class GeoDistanceQueryDescriptor : DescriptorBase<GeoDistanceQueryDescriptor>
+	public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptorBase<GeoDistanceQueryDescriptor>
 	{
 		internal GeoDistanceQueryDescriptor(Action<GeoDistanceQueryDescriptor> configure) => configure.Invoke(this);
 		public GeoDistanceQueryDescriptor() : base()

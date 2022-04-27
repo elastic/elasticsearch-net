@@ -145,7 +145,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? Ranges { get; set; }
 	}
 
-	public sealed partial class IpRangeAggregationDescriptor<TDocument> : DescriptorBase<IpRangeAggregationDescriptor<TDocument>>
+	public sealed partial class IpRangeAggregationDescriptor<TDocument> : SerializableDescriptorBase<IpRangeAggregationDescriptor<TDocument>>
 	{
 		internal IpRangeAggregationDescriptor(Action<IpRangeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IpRangeAggregationDescriptor() : base()
@@ -256,7 +256,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class IpRangeAggregationDescriptor : DescriptorBase<IpRangeAggregationDescriptor>
+	public sealed partial class IpRangeAggregationDescriptor : SerializableDescriptorBase<IpRangeAggregationDescriptor>
 	{
 		internal IpRangeAggregationDescriptor(Action<IpRangeAggregationDescriptor> configure) => configure.Invoke(this);
 		public IpRangeAggregationDescriptor() : base()

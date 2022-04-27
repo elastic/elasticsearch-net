@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? UseNull { get; set; }
 	}
 
-	public sealed partial class DetectorDescriptor<TDocument> : DescriptorBase<DetectorDescriptor<TDocument>>
+	public sealed partial class DetectorDescriptor<TDocument> : SerializableDescriptorBase<DetectorDescriptor<TDocument>>
 	{
 		internal DetectorDescriptor(Action<DetectorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DetectorDescriptor() : base()
@@ -241,7 +241,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DetectorDescriptor : DescriptorBase<DetectorDescriptor>
+	public sealed partial class DetectorDescriptor : SerializableDescriptorBase<DetectorDescriptor>
 	{
 		internal DetectorDescriptor(Action<DetectorDescriptor> configure) => configure.Invoke(this);
 		public DetectorDescriptor() : base()

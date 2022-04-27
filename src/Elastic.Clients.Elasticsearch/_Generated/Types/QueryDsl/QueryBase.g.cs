@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public float? Boost { get; set; }
 	}
 
-	public sealed partial class QueryBaseDescriptor : DescriptorBase<QueryBaseDescriptor>
+	public sealed partial class QueryBaseDescriptor : SerializableDescriptorBase<QueryBaseDescriptor>
 	{
 		internal QueryBaseDescriptor(Action<QueryBaseDescriptor> configure) => configure.Invoke(this);
 		public QueryBaseDescriptor() : base()

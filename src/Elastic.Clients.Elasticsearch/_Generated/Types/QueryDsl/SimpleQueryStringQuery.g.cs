@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string? QuoteFieldSuffix { get; set; }
 	}
 
-	public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : DescriptorBase<SimpleQueryStringQueryDescriptor<TDocument>>
+	public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : SerializableDescriptorBase<SimpleQueryStringQueryDescriptor<TDocument>>
 	{
 		internal SimpleQueryStringQueryDescriptor(Action<SimpleQueryStringQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SimpleQueryStringQueryDescriptor() : base()
@@ -301,7 +301,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class SimpleQueryStringQueryDescriptor : DescriptorBase<SimpleQueryStringQueryDescriptor>
+	public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescriptorBase<SimpleQueryStringQueryDescriptor>
 	{
 		internal SimpleQueryStringQueryDescriptor(Action<SimpleQueryStringQueryDescriptor> configure) => configure.Invoke(this);
 		public SimpleQueryStringQueryDescriptor() : base()

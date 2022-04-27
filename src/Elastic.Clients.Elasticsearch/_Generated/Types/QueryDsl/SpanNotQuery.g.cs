@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public int? Pre { get; set; }
 	}
 
-	public sealed partial class SpanNotQueryDescriptor<TDocument> : DescriptorBase<SpanNotQueryDescriptor<TDocument>>
+	public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDescriptorBase<SpanNotQueryDescriptor<TDocument>>
 	{
 		internal SpanNotQueryDescriptor(Action<SpanNotQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SpanNotQueryDescriptor() : base()
@@ -227,7 +227,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class SpanNotQueryDescriptor : DescriptorBase<SpanNotQueryDescriptor>
+	public sealed partial class SpanNotQueryDescriptor : SerializableDescriptorBase<SpanNotQueryDescriptor>
 	{
 		internal SpanNotQueryDescriptor(Action<SpanNotQueryDescriptor> configure) => configure.Invoke(this);
 		public SpanNotQueryDescriptor() : base()

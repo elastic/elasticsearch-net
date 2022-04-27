@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int? Size { get; set; }
 	}
 
-	public sealed partial class RankEvalQueryDescriptor<TDocument> : DescriptorBase<RankEvalQueryDescriptor<TDocument>>
+	public sealed partial class RankEvalQueryDescriptor<TDocument> : SerializableDescriptorBase<RankEvalQueryDescriptor<TDocument>>
 	{
 		internal RankEvalQueryDescriptor(Action<RankEvalQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RankEvalQueryDescriptor() : base()
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class RankEvalQueryDescriptor : DescriptorBase<RankEvalQueryDescriptor>
+	public sealed partial class RankEvalQueryDescriptor : SerializableDescriptorBase<RankEvalQueryDescriptor>
 	{
 		internal RankEvalQueryDescriptor(Action<RankEvalQueryDescriptor> configure) => configure.Invoke(this);
 		public RankEvalQueryDescriptor() : base()

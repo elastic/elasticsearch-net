@@ -7,28 +7,13 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// Internal marker for descriptors.
-/// </summary>
-internal interface IDescriptor { }
-
-public abstract class DescriptorBase<TDescriptor> : IDescriptor, ISelfSerializable
-	where TDescriptor : DescriptorBase<TDescriptor>
+public abstract class Descriptor
 {
-	private readonly TDescriptor _self;
-
-	internal DescriptorBase() => _self = (TDescriptor)this;
-
-	[IgnoreDataMember]
-	protected TDescriptor Self => _self;
-
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign) => Fluent.Assign(_self, value, assign);
-
-	protected abstract void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
+	internal Descriptor() { }
 
 	/// <summary>
 	/// Hides the <see cref="Equals" /> method.
@@ -45,7 +30,7 @@ public abstract class DescriptorBase<TDescriptor> : IDescriptor, ISelfSerializab
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	// ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-	//only used to hide by default
+	// only used to hide by default
 	public override int GetHashCode() => base.GetHashCode();
 
 	/// <summary>
@@ -54,7 +39,29 @@ public abstract class DescriptorBase<TDescriptor> : IDescriptor, ISelfSerializab
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public override string ToString() => base.ToString();
-
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => Serialize(writer, options, settings);
 }
 
+public abstract class DescriptorBase<TDescriptor> : Descriptor
+	where TDescriptor : DescriptorBase<TDescriptor>
+{
+	private readonly TDescriptor _self;
+
+	internal DescriptorBase() : base() => _self = (TDescriptor)this;
+
+	[JsonIgnore]
+	[IgnoreDataMember]
+	protected TDescriptor Self => _self;
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign) => Fluent.Assign(_self, value, assign);
+}
+
+public abstract class SerializableDescriptorBase<TDescriptor> : DescriptorBase<TDescriptor>, ISelfSerializable
+	where TDescriptor : SerializableDescriptorBase<TDescriptor>
+{
+	internal SerializableDescriptorBase(): base() { }
+
+	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => Serialize(writer, options, settings);
+
+	protected abstract void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
+}

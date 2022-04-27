@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public double? Delta { get; set; }
 	}
 
-	public sealed partial class DataframeEvaluationRegressionMetricsHuberDescriptor : DescriptorBase<DataframeEvaluationRegressionMetricsHuberDescriptor>
+	public sealed partial class DataframeEvaluationRegressionMetricsHuberDescriptor : SerializableDescriptorBase<DataframeEvaluationRegressionMetricsHuberDescriptor>
 	{
 		internal DataframeEvaluationRegressionMetricsHuberDescriptor(Action<DataframeEvaluationRegressionMetricsHuberDescriptor> configure) => configure.Invoke(this);
 		public DataframeEvaluationRegressionMetricsHuberDescriptor() : base()
