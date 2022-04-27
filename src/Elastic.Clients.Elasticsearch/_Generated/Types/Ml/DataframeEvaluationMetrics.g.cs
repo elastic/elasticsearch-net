@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, object>? Recall { get; set; }
 	}
 
-	public sealed partial class DataframeEvaluationMetricsDescriptor : DescriptorBase<DataframeEvaluationMetricsDescriptor>
+	public sealed partial class DataframeEvaluationMetricsDescriptor : SerializableDescriptorBase<DataframeEvaluationMetricsDescriptor>
 	{
 		internal DataframeEvaluationMetricsDescriptor(Action<DataframeEvaluationMetricsDescriptor> configure) => configure.Invoke(this);
 		public DataframeEvaluationMetricsDescriptor() : base()

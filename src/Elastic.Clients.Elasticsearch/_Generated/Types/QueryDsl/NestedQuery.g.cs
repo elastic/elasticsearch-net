@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
 	}
 
-	public sealed partial class NestedQueryDescriptor<TDocument> : DescriptorBase<NestedQueryDescriptor<TDocument>>
+	public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescriptorBase<NestedQueryDescriptor<TDocument>>
 	{
 		internal NestedQueryDescriptor(Action<NestedQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public NestedQueryDescriptor() : base()
@@ -227,7 +227,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class NestedQueryDescriptor : DescriptorBase<NestedQueryDescriptor>
+	public sealed partial class NestedQueryDescriptor : SerializableDescriptorBase<NestedQueryDescriptor>
 	{
 		internal NestedQueryDescriptor(Action<NestedQueryDescriptor> configure) => configure.Invoke(this);
 		public NestedQueryDescriptor() : base()

@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 	}
 
-	public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : DescriptorBase<CombinedFieldsQueryDescriptor<TDocument>>
+	public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : SerializableDescriptorBase<CombinedFieldsQueryDescriptor<TDocument>>
 	{
 		internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public CombinedFieldsQueryDescriptor() : base()
@@ -171,7 +171,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class CombinedFieldsQueryDescriptor : DescriptorBase<CombinedFieldsQueryDescriptor>
+	public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescriptorBase<CombinedFieldsQueryDescriptor>
 	{
 		internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor> configure) => configure.Invoke(this);
 		public CombinedFieldsQueryDescriptor() : base()

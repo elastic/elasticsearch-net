@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int? WindowSize { get; set; }
 	}
 
-	public sealed partial class RescoreDescriptor<TDocument> : DescriptorBase<RescoreDescriptor<TDocument>>
+	public sealed partial class RescoreDescriptor<TDocument> : SerializableDescriptorBase<RescoreDescriptor<TDocument>>
 	{
 		internal RescoreDescriptor(Action<RescoreDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RescoreDescriptor() : base()
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class RescoreDescriptor : DescriptorBase<RescoreDescriptor>
+	public sealed partial class RescoreDescriptor : SerializableDescriptorBase<RescoreDescriptor>
 	{
 		internal RescoreDescriptor(Action<RescoreDescriptor> configure) => configure.Invoke(this);
 		public RescoreDescriptor() : base()

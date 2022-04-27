@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string ValueSplit { get; set; }
 	}
 
-	public sealed partial class KeyValueProcessorDescriptor<TDocument> : DescriptorBase<KeyValueProcessorDescriptor<TDocument>>
+	public sealed partial class KeyValueProcessorDescriptor<TDocument> : SerializableDescriptorBase<KeyValueProcessorDescriptor<TDocument>>
 	{
 		internal KeyValueProcessorDescriptor(Action<KeyValueProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public KeyValueProcessorDescriptor() : base()
@@ -297,7 +297,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class KeyValueProcessorDescriptor : DescriptorBase<KeyValueProcessorDescriptor>
+	public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptorBase<KeyValueProcessorDescriptor>
 	{
 		internal KeyValueProcessorDescriptor(Action<KeyValueProcessorDescriptor> configure) => configure.Invoke(this);
 		public KeyValueProcessorDescriptor() : base()

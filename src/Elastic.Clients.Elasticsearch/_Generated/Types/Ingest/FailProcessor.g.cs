@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string Message { get; set; }
 	}
 
-	public sealed partial class FailProcessorDescriptor : DescriptorBase<FailProcessorDescriptor>
+	public sealed partial class FailProcessorDescriptor : SerializableDescriptorBase<FailProcessorDescriptor>
 	{
 		internal FailProcessorDescriptor(Action<FailProcessorDescriptor> configure) => configure.Invoke(this);
 		public FailProcessorDescriptor() : base()

@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IEnumerable<string> Terms { get; set; }
 	}
 
-	public sealed partial class TermsSetQueryDescriptor<TDocument> : DescriptorBase<TermsSetQueryDescriptor<TDocument>>
+	public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDescriptorBase<TermsSetQueryDescriptor<TDocument>>
 	{
 		internal TermsSetQueryDescriptor(Action<TermsSetQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TermsSetQueryDescriptor() : base()
@@ -258,7 +258,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class TermsSetQueryDescriptor : DescriptorBase<TermsSetQueryDescriptor>
+	public sealed partial class TermsSetQueryDescriptor : SerializableDescriptorBase<TermsSetQueryDescriptor>
 	{
 		internal TermsSetQueryDescriptor(Action<TermsSetQueryDescriptor> configure) => configure.Invoke(this);
 		public TermsSetQueryDescriptor() : base()

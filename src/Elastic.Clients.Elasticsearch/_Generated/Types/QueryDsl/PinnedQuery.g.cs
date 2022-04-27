@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class PinnedQueryDescriptor<TDocument> : DescriptorBase<PinnedQueryDescriptor<TDocument>>
+	public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescriptorBase<PinnedQueryDescriptor<TDocument>>
 	{
 		internal PinnedQueryDescriptor(Action<PinnedQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public PinnedQueryDescriptor() : base()
@@ -78,12 +78,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal PinnedQuery Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -125,7 +125,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class PinnedQueryDescriptor : DescriptorBase<PinnedQueryDescriptor>
+	public sealed partial class PinnedQueryDescriptor : SerializableDescriptorBase<PinnedQueryDescriptor>
 	{
 		internal PinnedQueryDescriptor(Action<PinnedQueryDescriptor> configure) => configure.Invoke(this);
 		public PinnedQueryDescriptor() : base()
@@ -138,12 +138,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal PinnedQuery Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

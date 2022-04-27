@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public IEnumerable<Elastic.Clients.Elasticsearch.Field> UniqueKey { get; set; }
 	}
 
-	public sealed partial class LatestDescriptor<TDocument> : DescriptorBase<LatestDescriptor<TDocument>>
+	public sealed partial class LatestDescriptor<TDocument> : SerializableDescriptorBase<LatestDescriptor<TDocument>>
 	{
 		internal LatestDescriptor(Action<LatestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public LatestDescriptor() : base()
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		}
 	}
 
-	public sealed partial class LatestDescriptor : DescriptorBase<LatestDescriptor>
+	public sealed partial class LatestDescriptor : SerializableDescriptorBase<LatestDescriptor>
 	{
 		internal LatestDescriptor(Action<LatestDescriptor> configure) => configure.Invoke(this);
 		public LatestDescriptor() : base()

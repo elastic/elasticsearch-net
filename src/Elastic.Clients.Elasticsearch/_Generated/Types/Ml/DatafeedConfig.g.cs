@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? ScrollSize { get; set; }
 	}
 
-	public sealed partial class DatafeedConfigDescriptor<TDocument> : DescriptorBase<DatafeedConfigDescriptor<TDocument>>
+	public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDescriptorBase<DatafeedConfigDescriptor<TDocument>>
 	{
 		internal DatafeedConfigDescriptor(Action<DatafeedConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DatafeedConfigDescriptor() : base()
@@ -435,7 +435,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DatafeedConfigDescriptor : DescriptorBase<DatafeedConfigDescriptor>
+	public sealed partial class DatafeedConfigDescriptor : SerializableDescriptorBase<DatafeedConfigDescriptor>
 	{
 		internal DatafeedConfigDescriptor(Action<DatafeedConfigDescriptor> configure) => configure.Invoke(this);
 		public DatafeedConfigDescriptor() : base()

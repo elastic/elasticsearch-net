@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? TierPreference { get; set; }
 	}
 
-	public sealed partial class IndexRoutingAllocationIncludeDescriptor : DescriptorBase<IndexRoutingAllocationIncludeDescriptor>
+	public sealed partial class IndexRoutingAllocationIncludeDescriptor : SerializableDescriptorBase<IndexRoutingAllocationIncludeDescriptor>
 	{
 		internal IndexRoutingAllocationIncludeDescriptor(Action<IndexRoutingAllocationIncludeDescriptor> configure) => configure.Invoke(this);
 		public IndexRoutingAllocationIncludeDescriptor() : base()

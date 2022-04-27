@@ -268,7 +268,7 @@ public abstract class SortBase
 
 public interface ISort { }
 
-public abstract class SortDescriptorBase<TDescriptor> : DescriptorBase<TDescriptor> where TDescriptor : DescriptorBase<TDescriptor>
+public abstract class SortDescriptorBase<TDescriptor> : SerializableDescriptorBase<TDescriptor> where TDescriptor : SerializableDescriptorBase<TDescriptor>
 {
 }
 

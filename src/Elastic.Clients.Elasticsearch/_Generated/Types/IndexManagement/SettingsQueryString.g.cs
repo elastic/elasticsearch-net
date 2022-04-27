@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool Lenient { get; set; }
 	}
 
-	public sealed partial class SettingsQueryStringDescriptor : DescriptorBase<SettingsQueryStringDescriptor>
+	public sealed partial class SettingsQueryStringDescriptor : SerializableDescriptorBase<SettingsQueryStringDescriptor>
 	{
 		internal SettingsQueryStringDescriptor(Action<SettingsQueryStringDescriptor> configure) => configure.Invoke(this);
 		public SettingsQueryStringDescriptor() : base()

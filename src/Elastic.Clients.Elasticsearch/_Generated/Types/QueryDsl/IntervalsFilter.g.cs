@@ -59,7 +59,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class IntervalsFilterDescriptor<TDocument> : DescriptorBase<IntervalsFilterDescriptor<TDocument>>
+	public sealed partial class IntervalsFilterDescriptor<TDocument> : SerializableDescriptorBase<IntervalsFilterDescriptor<TDocument>>
 	{
 		internal IntervalsFilterDescriptor(Action<IntervalsFilterDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IntervalsFilterDescriptor() : base()
@@ -72,12 +72,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal IntervalsFilter Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class IntervalsFilterDescriptor : DescriptorBase<IntervalsFilterDescriptor>
+	public sealed partial class IntervalsFilterDescriptor : SerializableDescriptorBase<IntervalsFilterDescriptor>
 	{
 		internal IntervalsFilterDescriptor(Action<IntervalsFilterDescriptor> configure) => configure.Invoke(this);
 		public IntervalsFilterDescriptor() : base()
@@ -132,12 +132,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal IntervalsFilter Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

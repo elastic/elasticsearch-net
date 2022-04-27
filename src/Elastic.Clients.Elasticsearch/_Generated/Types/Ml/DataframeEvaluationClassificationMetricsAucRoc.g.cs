@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? IncludeCurve { get; set; }
 	}
 
-	public sealed partial class DataframeEvaluationClassificationMetricsAucRocDescriptor : DescriptorBase<DataframeEvaluationClassificationMetricsAucRocDescriptor>
+	public sealed partial class DataframeEvaluationClassificationMetricsAucRocDescriptor : SerializableDescriptorBase<DataframeEvaluationClassificationMetricsAucRocDescriptor>
 	{
 		internal DataframeEvaluationClassificationMetricsAucRocDescriptor(Action<DataframeEvaluationClassificationMetricsAucRocDescriptor> configure) => configure.Invoke(this);
 		public DataframeEvaluationClassificationMetricsAucRocDescriptor() : base()

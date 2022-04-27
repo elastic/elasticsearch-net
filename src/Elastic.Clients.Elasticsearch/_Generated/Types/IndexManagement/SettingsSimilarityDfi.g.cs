@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string Type => "DFI";
 	}
 
-	public sealed partial class SettingsSimilarityDfiDescriptor : DescriptorBase<SettingsSimilarityDfiDescriptor>
+	public sealed partial class SettingsSimilarityDfiDescriptor : SerializableDescriptorBase<SettingsSimilarityDfiDescriptor>
 	{
 		internal SettingsSimilarityDfiDescriptor(Action<SettingsSimilarityDfiDescriptor> configure) => configure.Invoke(this);
 		public SettingsSimilarityDfiDescriptor() : base()

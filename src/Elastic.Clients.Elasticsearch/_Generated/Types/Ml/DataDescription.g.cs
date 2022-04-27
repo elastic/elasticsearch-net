@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string? TimeFormat { get; set; }
 	}
 
-	public sealed partial class DataDescriptionDescriptor<TDocument> : DescriptorBase<DataDescriptionDescriptor<TDocument>>
+	public sealed partial class DataDescriptionDescriptor<TDocument> : SerializableDescriptorBase<DataDescriptionDescriptor<TDocument>>
 	{
 		internal DataDescriptionDescriptor(Action<DataDescriptionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataDescriptionDescriptor() : base()
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataDescriptionDescriptor : DescriptorBase<DataDescriptionDescriptor>
+	public sealed partial class DataDescriptionDescriptor : SerializableDescriptorBase<DataDescriptionDescriptor>
 	{
 		internal DataDescriptionDescriptor(Action<DataDescriptionDescriptor> configure) => configure.Invoke(this);
 		public DataDescriptionDescriptor() : base()

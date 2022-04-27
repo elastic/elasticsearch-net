@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 	}
 
-	public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : DescriptorBase<MatrixStatsAggregationDescriptor<TDocument>>
+	public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : SerializableDescriptorBase<MatrixStatsAggregationDescriptor<TDocument>>
 	{
 		internal MatrixStatsAggregationDescriptor(Action<MatrixStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MatrixStatsAggregationDescriptor() : base()
@@ -220,7 +220,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class MatrixStatsAggregationDescriptor : DescriptorBase<MatrixStatsAggregationDescriptor>
+	public sealed partial class MatrixStatsAggregationDescriptor : SerializableDescriptorBase<MatrixStatsAggregationDescriptor>
 	{
 		internal MatrixStatsAggregationDescriptor(Action<MatrixStatsAggregationDescriptor> configure) => configure.Invoke(this);
 		public MatrixStatsAggregationDescriptor() : base()

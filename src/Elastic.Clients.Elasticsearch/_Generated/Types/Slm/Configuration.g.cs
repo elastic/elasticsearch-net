@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public bool? Partial { get; set; }
 	}
 
-	public sealed partial class ConfigurationDescriptor : DescriptorBase<ConfigurationDescriptor>
+	public sealed partial class ConfigurationDescriptor : SerializableDescriptorBase<ConfigurationDescriptor>
 	{
 		internal ConfigurationDescriptor(Action<ConfigurationDescriptor> configure) => configure.Invoke(this);
 		public ConfigurationDescriptor() : base()

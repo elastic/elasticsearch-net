@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		}
 	}
 
-	public sealed partial class SyncContainerDescriptor<TDocument> : DescriptorBase<SyncContainerDescriptor<TDocument>>
+	public sealed partial class SyncContainerDescriptor<TDocument> : SerializableDescriptorBase<SyncContainerDescriptor<TDocument>>
 	{
 		internal SyncContainerDescriptor(Action<SyncContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SyncContainerDescriptor() : base()
@@ -85,12 +85,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		internal SyncContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public void Time(Action<TimeSyncDescriptor<TDocument>> configure) => Set(configure, "time");
 	}
 
-	public sealed partial class SyncContainerDescriptor : DescriptorBase<SyncContainerDescriptor>
+	public sealed partial class SyncContainerDescriptor : SerializableDescriptorBase<SyncContainerDescriptor>
 	{
 		internal SyncContainerDescriptor(Action<SyncContainerDescriptor> configure) => configure.Invoke(this);
 		public SyncContainerDescriptor() : base()
@@ -148,12 +148,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		internal SyncContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

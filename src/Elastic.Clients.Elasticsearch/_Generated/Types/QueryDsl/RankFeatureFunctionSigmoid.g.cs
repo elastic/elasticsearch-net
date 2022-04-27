@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public float Pivot { get; set; }
 	}
 
-	public sealed partial class RankFeatureFunctionSigmoidDescriptor : DescriptorBase<RankFeatureFunctionSigmoidDescriptor>
+	public sealed partial class RankFeatureFunctionSigmoidDescriptor : SerializableDescriptorBase<RankFeatureFunctionSigmoidDescriptor>
 	{
 		internal RankFeatureFunctionSigmoidDescriptor(Action<RankFeatureFunctionSigmoidDescriptor> configure) => configure.Invoke(this);
 		public RankFeatureFunctionSigmoidDescriptor() : base()

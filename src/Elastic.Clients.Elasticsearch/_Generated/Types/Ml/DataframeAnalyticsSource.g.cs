@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; set; }
 	}
 
-	public sealed partial class DataframeAnalyticsSourceDescriptor<TDocument> : DescriptorBase<DataframeAnalyticsSourceDescriptor<TDocument>>
+	public sealed partial class DataframeAnalyticsSourceDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalyticsSourceDescriptor<TDocument>>
 	{
 		internal DataframeAnalyticsSourceDescriptor(Action<DataframeAnalyticsSourceDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeAnalyticsSourceDescriptor() : base()
@@ -173,7 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeAnalyticsSourceDescriptor : DescriptorBase<DataframeAnalyticsSourceDescriptor>
+	public sealed partial class DataframeAnalyticsSourceDescriptor : SerializableDescriptorBase<DataframeAnalyticsSourceDescriptor>
 	{
 		internal DataframeAnalyticsSourceDescriptor(Action<DataframeAnalyticsSourceDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalyticsSourceDescriptor() : base()

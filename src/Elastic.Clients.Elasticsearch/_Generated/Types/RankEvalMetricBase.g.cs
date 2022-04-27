@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int? k { get; set; }
 	}
 
-	public sealed partial class RankEvalMetricBaseDescriptor : DescriptorBase<RankEvalMetricBaseDescriptor>
+	public sealed partial class RankEvalMetricBaseDescriptor : SerializableDescriptorBase<RankEvalMetricBaseDescriptor>
 	{
 		internal RankEvalMetricBaseDescriptor(Action<RankEvalMetricBaseDescriptor> configure) => configure.Invoke(this);
 		public RankEvalMetricBaseDescriptor() : base()

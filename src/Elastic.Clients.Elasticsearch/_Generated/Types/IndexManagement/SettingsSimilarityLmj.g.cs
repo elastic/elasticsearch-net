@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string Type => "LMJelinekMercer";
 	}
 
-	public sealed partial class SettingsSimilarityLmjDescriptor : DescriptorBase<SettingsSimilarityLmjDescriptor>
+	public sealed partial class SettingsSimilarityLmjDescriptor : SerializableDescriptorBase<SettingsSimilarityLmjDescriptor>
 	{
 		internal SettingsSimilarityLmjDescriptor(Action<SettingsSimilarityLmjDescriptor> configure) => configure.Invoke(this);
 		public SettingsSimilarityLmjDescriptor() : base()

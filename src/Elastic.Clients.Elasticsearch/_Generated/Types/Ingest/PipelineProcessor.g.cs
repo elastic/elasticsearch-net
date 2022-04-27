@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	}
 
-	public sealed partial class PipelineProcessorDescriptor : DescriptorBase<PipelineProcessorDescriptor>
+	public sealed partial class PipelineProcessorDescriptor : SerializableDescriptorBase<PipelineProcessorDescriptor>
 	{
 		internal PipelineProcessorDescriptor(Action<PipelineProcessorDescriptor> configure) => configure.Invoke(this);
 		public PipelineProcessorDescriptor() : base()

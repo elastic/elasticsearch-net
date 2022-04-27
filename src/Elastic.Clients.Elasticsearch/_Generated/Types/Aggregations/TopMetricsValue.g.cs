@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
-	public sealed partial class TopMetricsValueDescriptor<TDocument> : DescriptorBase<TopMetricsValueDescriptor<TDocument>>
+	public sealed partial class TopMetricsValueDescriptor<TDocument> : SerializableDescriptorBase<TopMetricsValueDescriptor<TDocument>>
 	{
 		internal TopMetricsValueDescriptor(Action<TopMetricsValueDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TopMetricsValueDescriptor() : base()
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class TopMetricsValueDescriptor : DescriptorBase<TopMetricsValueDescriptor>
+	public sealed partial class TopMetricsValueDescriptor : SerializableDescriptorBase<TopMetricsValueDescriptor>
 	{
 		internal TopMetricsValueDescriptor(Action<TopMetricsValueDescriptor> configure) => configure.Invoke(this);
 		public TopMetricsValueDescriptor() : base()

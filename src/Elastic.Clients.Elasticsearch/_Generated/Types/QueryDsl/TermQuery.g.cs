@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public object Value { get; set; }
 	}
 
-	public sealed partial class TermQueryDescriptor<TDocument> : DescriptorBase<TermQueryDescriptor<TDocument>>
+	public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescriptorBase<TermQueryDescriptor<TDocument>>
 	{
 		internal TermQueryDescriptor(Action<TermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TermQueryDescriptor() : base()
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class TermQueryDescriptor : DescriptorBase<TermQueryDescriptor>
+	public sealed partial class TermQueryDescriptor : SerializableDescriptorBase<TermQueryDescriptor>
 	{
 		internal TermQueryDescriptor(Action<TermQueryDescriptor> configure) => configure.Invoke(this);
 		public TermQueryDescriptor() : base()

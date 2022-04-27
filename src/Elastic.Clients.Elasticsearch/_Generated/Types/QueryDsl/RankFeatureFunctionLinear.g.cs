@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 	}
 
-	public sealed partial class RankFeatureFunctionLinearDescriptor : DescriptorBase<RankFeatureFunctionLinearDescriptor>
+	public sealed partial class RankFeatureFunctionLinearDescriptor : SerializableDescriptorBase<RankFeatureFunctionLinearDescriptor>
 	{
 		internal RankFeatureFunctionLinearDescriptor(Action<RankFeatureFunctionLinearDescriptor> configure) => configure.Invoke(this);
 		public RankFeatureFunctionLinearDescriptor() : base()

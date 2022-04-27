@@ -2,96 +2,117 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System.Text.Json;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Clients.Elasticsearch.Helpers;
 using Elastic.Clients.Elasticsearch.Mapping;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Elastic.Transport;
+using Playground;
 
-const string IndexName = "stock-demo-v1";
+// const string IndexName = "stock-demo-v1";
 
-var settings = new ElasticsearchClientSettings(new Uri("https://localhost:9200"))
-	.CertificateFingerprint("E8:76:3D:91:81:8C:57:31:6F:2F:E0:4C:17:78:78:FB:38:CC:37:27:41:7A:94:B4:12:AA:B6:D1:D6:C4:4C:7D")
-	.Authentication(new BasicAuthentication("elastic", "password"))
+var settings = new ElasticsearchClientSettings(new InMemoryConnection())
+	.DefaultIndex("default-index")
+	.DefaultMappingFor<Person>(m => m
+		.DisableIdInference()
+		.IndexName("people")
+		.IdProperty(id => id.SecondaryId)
+		.RoutingProperty(id => id.SecondaryId)
+		.RelationName("relation"))
+	//.DefaultFieldNameInferrer(s => $"{s}_2")
 	.EnableDebugMode();
 
 var client = new ElasticsearchClient(settings);
 
-var existsResponse = await client.Indices.ExistsAsync(IndexName);
+var person = new Person { Id = 101, FirstName = "Steve", LastName = "Gordon", Age = 37, Email = "sgordon@example.com" };
 
-if (!existsResponse.Exists)
-{
-	var newIndexResponse = await client.Indices.CreateAsync(IndexName, i => i
-		.Mappings(m => m
-			.Properties(new Elastic.Clients.Elasticsearch.Mapping.Properties
-			{
-				{ "symbol", new KeywordProperty() },
-				{ "high", new FloatNumberProperty() },
-				{ "low", new FloatNumberProperty() },
-				{ "open", new FloatNumberProperty() },
-				{ "close", new FloatNumberProperty() },
-			}))
-		//.Map(m => m
-		//    .AutoMap<StockData>()
-		//    .Properties<StockData>(p => p.Keyword(k => k.Name(n => n.Symbol))))
-		.Settings(s => s.NumberOfShards(1).NumberOfReplicas(0)));
+var propertyName = (IUrlParameter)Infer.Property<Person>(p => p.SecondaryId);
 
-	if (!newIndexResponse.IsValid || newIndexResponse.Acknowledged is false)
-		throw new Exception("Oh no!");
+var propertyNameString = propertyName.GetString(settings);
 
-	var bulkAll = client.BulkAll(ReadStockData(), r => r
-		.Index(IndexName)
-		.BackOffRetries(20)
-		.BackOffTime(TimeSpan.FromSeconds(10))
-		.ContinueAfterDroppedDocuments()
-		.DroppedDocumentCallback((r, d) =>
-		{
-			Console.WriteLine(r.Error?.Reason ?? "NO REASON");
-		})
-		.MaxDegreeOfParallelism(4)
-		.Size(1000));
+var response = await client.IndexAsync(person);
 
-	bulkAll.Wait(TimeSpan.FromMinutes(10), r => Console.WriteLine("Data indexed"));
-}
+//var serializedPerson = JsonSerializer.Serialize(person);
 
-var aggExampleResponse = await client.SearchAsync<StockData>(s => s
-	.Index(IndexName)
-	.Size(0)
-		.Query(q => q
-			.Bool(b => b
-				.Filter(new[] { new QueryContainer(new TermQuery { Field = "symbol", Value = "MSFT" }) })))
-	.Aggregations(a => a
-		.DateHistogram("by-month", dh => dh
-			.CalendarInterval(CalendarInterval.Month)
-			.Field(fld => fld.Date)
-			.Order(HistogramOrder.KeyDescending)
-			.Aggregations(agg => agg
-				.Sum("trade-volumes", sum => sum.Field(fld => fld.Volume))))));
-
-if (!aggExampleResponse.IsValid) throw new Exception("Oh no");
-
-var monthlyBuckets = aggExampleResponse.Aggregations?.GetDateHistogram("by-month")?.Buckets ?? Array.Empty<DateHistogramBucket>();
-
-foreach (var monthlyBucket in monthlyBuckets)
-{
-	//var volume = monthlyBucket..Sum("trade-volumes").Value;
-	//Console.WriteLine($"{monthlyBucket.Date} : {volume:n0}");
-}
-
-Console.WriteLine("Press any key to exit.");
+Console.WriteLine("DONE");
 Console.ReadKey();
 
-static IEnumerable<StockData> ReadStockData()
-{
-	var file = new StreamReader("c:\\stock-data\\all_stocks_5yr.csv");
+//var existsResponse = await client.Indices.ExistsAsync(IndexName);
 
-	string? line;
-	while ((line = file.ReadLine()) is not null)
-	{
-		yield return new StockData(line);
-	}
-}
+//if (!existsResponse.Exists)
+//{
+//	var newIndexResponse = await client.Indices.CreateAsync(IndexName, i => i
+//		.Mappings(m => m
+//			.Properties(new Elastic.Clients.Elasticsearch.Mapping.Properties
+//			{
+//				{ "symbol", new KeywordProperty() },
+//				{ "high", new FloatNumberProperty() },
+//				{ "low", new FloatNumberProperty() },
+//				{ "open", new FloatNumberProperty() },
+//				{ "close", new FloatNumberProperty() },
+//			}))
+//		//.Map(m => m
+//		//    .AutoMap<StockData>()
+//		//    .Properties<StockData>(p => p.Keyword(k => k.Name(n => n.Symbol))))
+//		.Settings(s => s.NumberOfShards(1).NumberOfReplicas(0)));
+
+//	if (!newIndexResponse.IsValid || newIndexResponse.Acknowledged is false)
+//		throw new Exception("Oh no!");
+
+//	var bulkAll = client.BulkAll(ReadStockData(), r => r
+//		.Index(IndexName)
+//		.BackOffRetries(20)
+//		.BackOffTime(TimeSpan.FromSeconds(10))
+//		.ContinueAfterDroppedDocuments()
+//		.DroppedDocumentCallback((r, d) =>
+//		{
+//			Console.WriteLine(r.Error?.Reason ?? "NO REASON");
+//		})
+//		.MaxDegreeOfParallelism(4)
+//		.Size(1000));
+
+//	bulkAll.Wait(TimeSpan.FromMinutes(10), r => Console.WriteLine("Data indexed"));
+//}
+
+//var aggExampleResponse = await client.SearchAsync<StockData>(s => s
+//	.Index(IndexName)
+//	.Size(0)
+//		.Query(q => q
+//			.Bool(b => b
+//				.Filter(new[] { new QueryContainer(new TermQuery { Field = "symbol", Value = "MSFT" }) })))
+//	.Aggregations(a => a
+//		.DateHistogram("by-month", dh => dh
+//			.CalendarInterval(CalendarInterval.Month)
+//			.Field(fld => fld.Date)
+//			.Order(HistogramOrder.KeyDescending)
+//			.Aggregations(agg => agg
+//				.Sum("trade-volumes", sum => sum.Field(fld => fld.Volume))))));
+
+//if (!aggExampleResponse.IsValid) throw new Exception("Oh no");
+
+//var monthlyBuckets = aggExampleResponse.Aggregations?.GetDateHistogram("by-month")?.Buckets ?? Array.Empty<DateHistogramBucket>();
+
+//foreach (var monthlyBucket in monthlyBuckets)
+//{
+//	var volume = monthlyBucket.GetSum("trade-volumes");
+//	Console.WriteLine($"{monthlyBucket.Key.DateTimeOffset:d} : {volume:n0}");
+//}
+
+//Console.WriteLine("Press any key to exit.");
+//Console.ReadKey();
+
+//static IEnumerable<StockData> ReadStockData()
+//{
+//	var file = new StreamReader("c:\\stock-data\\all_stocks_5yr.csv");
+
+//	string? line;
+//	while ((line = file.ReadLine()) is not null)
+//	{
+//		yield return new StockData(line);
+//	}
+//}
 
 public class StockData
 {

@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IEnumerable<string>? Properties { get; set; }
 	}
 
-	public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : DescriptorBase<SetSecurityUserProcessorDescriptor<TDocument>>
+	public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : SerializableDescriptorBase<SetSecurityUserProcessorDescriptor<TDocument>>
 	{
 		internal SetSecurityUserProcessorDescriptor(Action<SetSecurityUserProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SetSecurityUserProcessorDescriptor() : base()
@@ -137,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class SetSecurityUserProcessorDescriptor : DescriptorBase<SetSecurityUserProcessorDescriptor>
+	public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDescriptorBase<SetSecurityUserProcessorDescriptor>
 	{
 		internal SetSecurityUserProcessorDescriptor(Action<SetSecurityUserProcessorDescriptor> configure) => configure.Invoke(this);
 		public SetSecurityUserProcessorDescriptor() : base()

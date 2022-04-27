@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.Weights? WeightedSum { get; set; }
 	}
 
-	public sealed partial class AggregateOutputDescriptor : DescriptorBase<AggregateOutputDescriptor>
+	public sealed partial class AggregateOutputDescriptor : SerializableDescriptorBase<AggregateOutputDescriptor>
 	{
 		internal AggregateOutputDescriptor(Action<AggregateOutputDescriptor> configure) => configure.Invoke(this);
 		public AggregateOutputDescriptor() : base()

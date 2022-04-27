@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? IncludeUnmapped { get; set; }
 	}
 
-	public sealed partial class FieldAndFormatDescriptor<TDocument> : DescriptorBase<FieldAndFormatDescriptor<TDocument>>
+	public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDescriptorBase<FieldAndFormatDescriptor<TDocument>>
 	{
 		internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FieldAndFormatDescriptor() : base()
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class FieldAndFormatDescriptor : DescriptorBase<FieldAndFormatDescriptor>
+	public sealed partial class FieldAndFormatDescriptor : SerializableDescriptorBase<FieldAndFormatDescriptor>
 	{
 		internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor> configure) => configure.Invoke(this);
 		public FieldAndFormatDescriptor() : base()

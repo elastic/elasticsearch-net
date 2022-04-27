@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int Shard { get; set; }
 	}
 
-	public sealed partial class CommandCancelActionDescriptor : DescriptorBase<CommandCancelActionDescriptor>
+	public sealed partial class CommandCancelActionDescriptor : SerializableDescriptorBase<CommandCancelActionDescriptor>
 	{
 		internal CommandCancelActionDescriptor(Action<CommandCancelActionDescriptor> configure) => configure.Invoke(this);
 		public CommandCancelActionDescriptor() : base()

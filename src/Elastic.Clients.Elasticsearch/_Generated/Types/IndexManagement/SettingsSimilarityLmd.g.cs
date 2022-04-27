@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string Type => "LMDirichlet";
 	}
 
-	public sealed partial class SettingsSimilarityLmdDescriptor : DescriptorBase<SettingsSimilarityLmdDescriptor>
+	public sealed partial class SettingsSimilarityLmdDescriptor : SerializableDescriptorBase<SettingsSimilarityLmdDescriptor>
 	{
 		internal SettingsSimilarityLmdDescriptor(Action<SettingsSimilarityLmdDescriptor> configure) => configure.Invoke(this);
 		public SettingsSimilarityLmdDescriptor() : base()

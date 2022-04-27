@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class JsonProcessorDescriptor<TDocument> : DescriptorBase<JsonProcessorDescriptor<TDocument>>
+	public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDescriptorBase<JsonProcessorDescriptor<TDocument>>
 	{
 		internal JsonProcessorDescriptor(Action<JsonProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public JsonProcessorDescriptor() : base()
@@ -153,7 +153,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class JsonProcessorDescriptor : DescriptorBase<JsonProcessorDescriptor>
+	public sealed partial class JsonProcessorDescriptor : SerializableDescriptorBase<JsonProcessorDescriptor>
 	{
 		internal JsonProcessorDescriptor(Action<JsonProcessorDescriptor> configure) => configure.Invoke(this);
 		public JsonProcessorDescriptor() : base()

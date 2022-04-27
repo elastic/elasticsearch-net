@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivileges> Index { get; set; }
 	}
 
-	public sealed partial class RoleDescriptorDescriptor : DescriptorBase<RoleDescriptorDescriptor>
+	public sealed partial class RoleDescriptorDescriptor : SerializableDescriptorBase<RoleDescriptorDescriptor>
 	{
 		internal RoleDescriptorDescriptor(Action<RoleDescriptorDescriptor> configure) => configure.Invoke(this);
 		public RoleDescriptorDescriptor() : base()

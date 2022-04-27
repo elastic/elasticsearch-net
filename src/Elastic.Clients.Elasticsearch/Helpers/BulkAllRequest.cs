@@ -58,7 +58,7 @@ public sealed class BulkAllRequest<T> : IBulkAllRequest<T>, IHelperCallable
 }
 
 
-public sealed class BulkAllRequestDescriptor<T> : DescriptorBase<BulkAllRequestDescriptor<T>>, IBulkAllRequest<T>, IHelperCallable
+public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<BulkAllRequestDescriptor<T>>, IBulkAllRequest<T>, IHelperCallable
 {
 	private readonly IEnumerable<T> _documents;
 

@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Tag { get; set; }
 	}
 
-	public sealed partial class ProcessorBaseDescriptor : DescriptorBase<ProcessorBaseDescriptor>
+	public sealed partial class ProcessorBaseDescriptor : SerializableDescriptorBase<ProcessorBaseDescriptor>
 	{
 		internal ProcessorBaseDescriptor(Action<ProcessorBaseDescriptor> configure) => configure.Invoke(this);
 		public ProcessorBaseDescriptor() : base()

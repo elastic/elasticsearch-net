@@ -180,7 +180,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? Unit { get; set; }
 	}
 
-	public sealed partial class RateAggregationDescriptor<TDocument> : DescriptorBase<RateAggregationDescriptor<TDocument>>
+	public sealed partial class RateAggregationDescriptor<TDocument> : SerializableDescriptorBase<RateAggregationDescriptor<TDocument>>
 	{
 		internal RateAggregationDescriptor(Action<RateAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RateAggregationDescriptor() : base()
@@ -319,7 +319,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class RateAggregationDescriptor : DescriptorBase<RateAggregationDescriptor>
+	public sealed partial class RateAggregationDescriptor : SerializableDescriptorBase<RateAggregationDescriptor>
 	{
 		internal RateAggregationDescriptor(Action<RateAggregationDescriptor> configure) => configure.Invoke(this);
 		public RateAggregationDescriptor() : base()

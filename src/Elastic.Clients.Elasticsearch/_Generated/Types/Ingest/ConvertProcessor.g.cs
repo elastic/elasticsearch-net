@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Ingest.ConvertType Type { get; set; }
 	}
 
-	public sealed partial class ConvertProcessorDescriptor<TDocument> : DescriptorBase<ConvertProcessorDescriptor<TDocument>>
+	public sealed partial class ConvertProcessorDescriptor<TDocument> : SerializableDescriptorBase<ConvertProcessorDescriptor<TDocument>>
 	{
 		internal ConvertProcessorDescriptor(Action<ConvertProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ConvertProcessorDescriptor() : base()
@@ -171,7 +171,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class ConvertProcessorDescriptor : DescriptorBase<ConvertProcessorDescriptor>
+	public sealed partial class ConvertProcessorDescriptor : SerializableDescriptorBase<ConvertProcessorDescriptor>
 	{
 		internal ConvertProcessorDescriptor(Action<ConvertProcessorDescriptor> configure) => configure.Invoke(this);
 		public ConvertProcessorDescriptor() : base()

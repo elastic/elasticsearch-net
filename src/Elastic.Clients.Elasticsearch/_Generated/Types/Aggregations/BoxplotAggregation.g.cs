@@ -142,7 +142,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Compression { get; set; }
 	}
 
-	public sealed partial class BoxplotAggregationDescriptor<TDocument> : DescriptorBase<BoxplotAggregationDescriptor<TDocument>>
+	public sealed partial class BoxplotAggregationDescriptor<TDocument> : SerializableDescriptorBase<BoxplotAggregationDescriptor<TDocument>>
 	{
 		internal BoxplotAggregationDescriptor(Action<BoxplotAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public BoxplotAggregationDescriptor() : base()
@@ -253,7 +253,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class BoxplotAggregationDescriptor : DescriptorBase<BoxplotAggregationDescriptor>
+	public sealed partial class BoxplotAggregationDescriptor : SerializableDescriptorBase<BoxplotAggregationDescriptor>
 	{
 		internal BoxplotAggregationDescriptor(Action<BoxplotAggregationDescriptor> configure) => configure.Invoke(this);
 		public BoxplotAggregationDescriptor() : base()

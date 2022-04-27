@@ -184,7 +184,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public SortCollection? Sort { get; set; }
 	}
 
-	public sealed partial class TopMetricsAggregationDescriptor<TDocument> : DescriptorBase<TopMetricsAggregationDescriptor<TDocument>>
+	public sealed partial class TopMetricsAggregationDescriptor<TDocument> : SerializableDescriptorBase<TopMetricsAggregationDescriptor<TDocument>>
 	{
 		internal TopMetricsAggregationDescriptor(Action<TopMetricsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TopMetricsAggregationDescriptor() : base()
@@ -355,7 +355,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class TopMetricsAggregationDescriptor : DescriptorBase<TopMetricsAggregationDescriptor>
+	public sealed partial class TopMetricsAggregationDescriptor : SerializableDescriptorBase<TopMetricsAggregationDescriptor>
 	{
 		internal TopMetricsAggregationDescriptor(Action<TopMetricsAggregationDescriptor> configure) => configure.Invoke(this);
 		public TopMetricsAggregationDescriptor() : base()

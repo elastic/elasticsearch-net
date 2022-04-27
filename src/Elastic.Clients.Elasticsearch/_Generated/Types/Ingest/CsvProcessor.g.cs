@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool Trim { get; set; }
 	}
 
-	public sealed partial class CsvProcessorDescriptor<TDocument> : DescriptorBase<CsvProcessorDescriptor<TDocument>>
+	public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDescriptorBase<CsvProcessorDescriptor<TDocument>>
 	{
 		internal CsvProcessorDescriptor(Action<CsvProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public CsvProcessorDescriptor() : base()
@@ -237,7 +237,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class CsvProcessorDescriptor : DescriptorBase<CsvProcessorDescriptor>
+	public sealed partial class CsvProcessorDescriptor : SerializableDescriptorBase<CsvProcessorDescriptor>
 	{
 		internal CsvProcessorDescriptor(Action<CsvProcessorDescriptor> configure) => configure.Invoke(this);
 		public CsvProcessorDescriptor() : base()
