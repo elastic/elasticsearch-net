@@ -17,11 +17,11 @@ var settings = new ElasticsearchClientSettings(new InMemoryConnection())
 	.DefaultIndex("default-index")
 	.DefaultMappingFor<Person>(m => m
 		.DisableIdInference()
-		//.IdProperty(id => id.SecondaryId)
+		.IndexName("people")
+		.IdProperty(id => id.SecondaryId)
 		.RoutingProperty(id => id.SecondaryId)
-		//.PropertyName(id => id.SecondaryId, "id2")
 		.RelationName("relation"))
-	.DefaultFieldNameInferrer(s => $"{s}_2")
+	//.DefaultFieldNameInferrer(s => $"{s}_2")
 	.EnableDebugMode();
 
 var client = new ElasticsearchClient(settings);
