@@ -219,7 +219,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Query { get; set; }
 	}
 
-	public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : DescriptorBase<MatchBoolPrefixQueryDescriptor<TDocument>>
+	public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : SerializableDescriptorBase<MatchBoolPrefixQueryDescriptor<TDocument>>
 	{
 		internal MatchBoolPrefixQueryDescriptor(Action<MatchBoolPrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MatchBoolPrefixQueryDescriptor() : base()
@@ -400,7 +400,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class MatchBoolPrefixQueryDescriptor : DescriptorBase<MatchBoolPrefixQueryDescriptor>
+	public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescriptorBase<MatchBoolPrefixQueryDescriptor>
 	{
 		internal MatchBoolPrefixQueryDescriptor(Action<MatchBoolPrefixQueryDescriptor> configure) => configure.Invoke(this);
 		public MatchBoolPrefixQueryDescriptor() : base()

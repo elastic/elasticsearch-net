@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Type { get; set; }
 	}
 
-	public sealed partial class HasChildQueryDescriptor<TDocument> : DescriptorBase<HasChildQueryDescriptor<TDocument>>
+	public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDescriptorBase<HasChildQueryDescriptor<TDocument>>
 	{
 		internal HasChildQueryDescriptor(Action<HasChildQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public HasChildQueryDescriptor() : base()
@@ -257,7 +257,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class HasChildQueryDescriptor : DescriptorBase<HasChildQueryDescriptor>
+	public sealed partial class HasChildQueryDescriptor : SerializableDescriptorBase<HasChildQueryDescriptor>
 	{
 		internal HasChildQueryDescriptor(Action<HasChildQueryDescriptor> configure) => configure.Invoke(this);
 		public HasChildQueryDescriptor() : base()

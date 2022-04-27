@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Timezone { get; set; }
 	}
 
-	public sealed partial class DateProcessorDescriptor<TDocument> : DescriptorBase<DateProcessorDescriptor<TDocument>>
+	public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDescriptorBase<DateProcessorDescriptor<TDocument>>
 	{
 		internal DateProcessorDescriptor(Action<DateProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DateProcessorDescriptor() : base()
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class DateProcessorDescriptor : DescriptorBase<DateProcessorDescriptor>
+	public sealed partial class DateProcessorDescriptor : SerializableDescriptorBase<DateProcessorDescriptor>
 	{
 		internal DateProcessorDescriptor(Action<DateProcessorDescriptor> configure) => configure.Invoke(this);
 		public DateProcessorDescriptor() : base()

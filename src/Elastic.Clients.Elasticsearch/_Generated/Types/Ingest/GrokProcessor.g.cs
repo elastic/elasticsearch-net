@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? TraceMatch { get; set; }
 	}
 
-	public sealed partial class GrokProcessorDescriptor<TDocument> : DescriptorBase<GrokProcessorDescriptor<TDocument>>
+	public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDescriptorBase<GrokProcessorDescriptor<TDocument>>
 	{
 		internal GrokProcessorDescriptor(Action<GrokProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public GrokProcessorDescriptor() : base()
@@ -183,7 +183,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class GrokProcessorDescriptor : DescriptorBase<GrokProcessorDescriptor>
+	public sealed partial class GrokProcessorDescriptor : SerializableDescriptorBase<GrokProcessorDescriptor>
 	{
 		internal GrokProcessorDescriptor(Action<GrokProcessorDescriptor> configure) => configure.Invoke(this);
 		public GrokProcessorDescriptor() : base()

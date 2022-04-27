@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Match { get; set; }
 	}
 
-	public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : DescriptorBase<SpanMultiTermQueryDescriptor<TDocument>>
+	public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : SerializableDescriptorBase<SpanMultiTermQueryDescriptor<TDocument>>
 	{
 		internal SpanMultiTermQueryDescriptor(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SpanMultiTermQueryDescriptor() : base()
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class SpanMultiTermQueryDescriptor : DescriptorBase<SpanMultiTermQueryDescriptor>
+	public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescriptorBase<SpanMultiTermQueryDescriptor>
 	{
 		internal SpanMultiTermQueryDescriptor(Action<SpanMultiTermQueryDescriptor> configure) => configure.Invoke(this);
 		public SpanMultiTermQueryDescriptor() : base()

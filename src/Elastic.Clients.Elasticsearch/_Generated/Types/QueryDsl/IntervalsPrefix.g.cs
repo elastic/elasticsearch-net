@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public sealed partial class IntervalsPrefixDescriptor<TDocument> : DescriptorBase<IntervalsPrefixDescriptor<TDocument>>
+	public sealed partial class IntervalsPrefixDescriptor<TDocument> : SerializableDescriptorBase<IntervalsPrefixDescriptor<TDocument>>
 	{
 		internal IntervalsPrefixDescriptor(Action<IntervalsPrefixDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IntervalsPrefixDescriptor() : base()
@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class IntervalsPrefixDescriptor : DescriptorBase<IntervalsPrefixDescriptor>
+	public sealed partial class IntervalsPrefixDescriptor : SerializableDescriptorBase<IntervalsPrefixDescriptor>
 	{
 		internal IntervalsPrefixDescriptor(Action<IntervalsPrefixDescriptor> configure) => configure.Invoke(this);
 		public IntervalsPrefixDescriptor() : base()

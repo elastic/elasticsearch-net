@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string Source { get; set; }
 	}
 
-	public sealed partial class StoredScriptDescriptor : DescriptorBase<StoredScriptDescriptor>
+	public sealed partial class StoredScriptDescriptor : SerializableDescriptorBase<StoredScriptDescriptor>
 	{
 		internal StoredScriptDescriptor(Action<StoredScriptDescriptor> configure) => configure.Invoke(this);
 		public StoredScriptDescriptor() : base()

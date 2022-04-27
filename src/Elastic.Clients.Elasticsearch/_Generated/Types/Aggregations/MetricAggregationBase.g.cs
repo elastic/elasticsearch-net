@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptBase? Script { get; set; }
 	}
 
-	public sealed partial class MetricAggregationBaseDescriptor<TDocument> : DescriptorBase<MetricAggregationBaseDescriptor<TDocument>>
+	public sealed partial class MetricAggregationBaseDescriptor<TDocument> : SerializableDescriptorBase<MetricAggregationBaseDescriptor<TDocument>>
 	{
 		internal MetricAggregationBaseDescriptor(Action<MetricAggregationBaseDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MetricAggregationBaseDescriptor() : base()
@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class MetricAggregationBaseDescriptor : DescriptorBase<MetricAggregationBaseDescriptor>
+	public sealed partial class MetricAggregationBaseDescriptor : SerializableDescriptorBase<MetricAggregationBaseDescriptor>
 	{
 		internal MetricAggregationBaseDescriptor(Action<MetricAggregationBaseDescriptor> configure) => configure.Invoke(this);
 		public MetricAggregationBaseDescriptor() : base()

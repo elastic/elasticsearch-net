@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Ml.FilterRef>? Scope { get; set; }
 	}
 
-	public sealed partial class DetectionRuleDescriptor : DescriptorBase<DetectionRuleDescriptor>
+	public sealed partial class DetectionRuleDescriptor : SerializableDescriptorBase<DetectionRuleDescriptor>
 	{
 		internal DetectionRuleDescriptor(Action<DetectionRuleDescriptor> configure) => configure.Invoke(this);
 		public DetectionRuleDescriptor() : base()

@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public double Value { get; set; }
 	}
 
-	public sealed partial class RuleConditionDescriptor : DescriptorBase<RuleConditionDescriptor>
+	public sealed partial class RuleConditionDescriptor : SerializableDescriptorBase<RuleConditionDescriptor>
 	{
 		internal RuleConditionDescriptor(Action<RuleConditionDescriptor> configure) => configure.Invoke(this);
 		public RuleConditionDescriptor() : base()

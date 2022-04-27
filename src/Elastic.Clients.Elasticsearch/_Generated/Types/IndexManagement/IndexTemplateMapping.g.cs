@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 	}
 
-	public sealed partial class IndexTemplateMappingDescriptor<TDocument> : DescriptorBase<IndexTemplateMappingDescriptor<TDocument>>
+	public sealed partial class IndexTemplateMappingDescriptor<TDocument> : SerializableDescriptorBase<IndexTemplateMappingDescriptor<TDocument>>
 	{
 		internal IndexTemplateMappingDescriptor(Action<IndexTemplateMappingDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IndexTemplateMappingDescriptor() : base()
@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 	}
 
-	public sealed partial class IndexTemplateMappingDescriptor : DescriptorBase<IndexTemplateMappingDescriptor>
+	public sealed partial class IndexTemplateMappingDescriptor : SerializableDescriptorBase<IndexTemplateMappingDescriptor>
 	{
 		internal IndexTemplateMappingDescriptor(Action<IndexTemplateMappingDescriptor> configure) => configure.Invoke(this);
 		public IndexTemplateMappingDescriptor() : base()

@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.License
 		public string Uid { get; set; }
 	}
 
-	public sealed partial class LicenseDescriptor : DescriptorBase<LicenseDescriptor>
+	public sealed partial class LicenseDescriptor : SerializableDescriptorBase<LicenseDescriptor>
 	{
 		internal LicenseDescriptor(Action<LicenseDescriptor> configure) => configure.Invoke(this);
 		public LicenseDescriptor() : base()

@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? Rebalance { get; set; }
 	}
 
-	public sealed partial class IndexRoutingDescriptor : DescriptorBase<IndexRoutingDescriptor>
+	public sealed partial class IndexRoutingDescriptor : SerializableDescriptorBase<IndexRoutingDescriptor>
 	{
 		internal IndexRoutingDescriptor(Action<IndexRoutingDescriptor> configure) => configure.Invoke(this);
 		public IndexRoutingDescriptor() : base()

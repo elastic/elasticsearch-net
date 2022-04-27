@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByContainer>? GroupBy { get; set; }
 	}
 
-	public sealed partial class PivotDescriptor : DescriptorBase<PivotDescriptor>
+	public sealed partial class PivotDescriptor : SerializableDescriptorBase<PivotDescriptor>
 	{
 		internal PivotDescriptor(Action<PivotDescriptor> configure) => configure.Invoke(this);
 		public PivotDescriptor() : base()

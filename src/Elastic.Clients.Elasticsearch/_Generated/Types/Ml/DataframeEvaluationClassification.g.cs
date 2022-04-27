@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Field? TopClassesField { get; set; }
 	}
 
-	public sealed partial class DataframeEvaluationClassificationDescriptor<TDocument> : DescriptorBase<DataframeEvaluationClassificationDescriptor<TDocument>>
+	public sealed partial class DataframeEvaluationClassificationDescriptor<TDocument> : SerializableDescriptorBase<DataframeEvaluationClassificationDescriptor<TDocument>>
 	{
 		internal DataframeEvaluationClassificationDescriptor(Action<DataframeEvaluationClassificationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeEvaluationClassificationDescriptor() : base()
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeEvaluationClassificationDescriptor : DescriptorBase<DataframeEvaluationClassificationDescriptor>
+	public sealed partial class DataframeEvaluationClassificationDescriptor : SerializableDescriptorBase<DataframeEvaluationClassificationDescriptor>
 	{
 		internal DataframeEvaluationClassificationDescriptor(Action<DataframeEvaluationClassificationDescriptor> configure) => configure.Invoke(this);
 		public DataframeEvaluationClassificationDescriptor() : base()

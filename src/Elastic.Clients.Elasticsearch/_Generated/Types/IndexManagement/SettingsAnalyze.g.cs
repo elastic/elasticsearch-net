@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public int? MaxTokenCount { get; set; }
 	}
 
-	public sealed partial class SettingsAnalyzeDescriptor : DescriptorBase<SettingsAnalyzeDescriptor>
+	public sealed partial class SettingsAnalyzeDescriptor : SerializableDescriptorBase<SettingsAnalyzeDescriptor>
 	{
 		internal SettingsAnalyzeDescriptor(Action<SettingsAnalyzeDescriptor> configure) => configure.Invoke(this);
 		public SettingsAnalyzeDescriptor() : base()

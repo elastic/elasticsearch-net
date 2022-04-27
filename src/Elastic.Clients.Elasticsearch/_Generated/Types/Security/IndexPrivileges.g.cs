@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
 	}
 
-	public sealed partial class IndexPrivilegesDescriptor : DescriptorBase<IndexPrivilegesDescriptor>
+	public sealed partial class IndexPrivilegesDescriptor : SerializableDescriptorBase<IndexPrivilegesDescriptor>
 	{
 		internal IndexPrivilegesDescriptor(Action<IndexPrivilegesDescriptor> configure) => configure.Invoke(this);
 		public IndexPrivilegesDescriptor() : base()

@@ -27,8 +27,8 @@ namespace Tests.Domain.Extensions
 
 				.DefaultMappingFor<Developer>(map => map
 					.IndexName("devs")
-					.Ignore(p => p.PrivateValue)
-					.PropertyName(p => p.OnlineHandle, "nickname")
+					//.Ignore(p => p.PrivateValue)
+					//.PropertyName(p => p.OnlineHandle, "nickname")
 				)
 
 				.DefaultMappingFor<ProjectPercolation>(map => map

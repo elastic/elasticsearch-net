@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, double> FrequencyMap { get; set; }
 	}
 
-	public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> : DescriptorBase<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>>
+	public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>>
 	{
 		internal DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor() : base()
@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor : DescriptorBase<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor>
+	public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor>
 	{
 		internal DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor() : base()

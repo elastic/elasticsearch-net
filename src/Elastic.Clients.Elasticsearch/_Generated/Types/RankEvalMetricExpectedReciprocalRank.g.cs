@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int MaximumRelevance { get; set; }
 	}
 
-	public sealed partial class RankEvalMetricExpectedReciprocalRankDescriptor : DescriptorBase<RankEvalMetricExpectedReciprocalRankDescriptor>
+	public sealed partial class RankEvalMetricExpectedReciprocalRankDescriptor : SerializableDescriptorBase<RankEvalMetricExpectedReciprocalRankDescriptor>
 	{
 		internal RankEvalMetricExpectedReciprocalRankDescriptor(Action<RankEvalMetricExpectedReciprocalRankDescriptor> configure) => configure.Invoke(this);
 		public RankEvalMetricExpectedReciprocalRankDescriptor() : base()

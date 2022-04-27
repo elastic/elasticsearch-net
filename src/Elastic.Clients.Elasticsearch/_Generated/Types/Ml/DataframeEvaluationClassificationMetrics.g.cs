@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, object>? MulticlassConfusionMatrix { get; set; }
 	}
 
-	public sealed partial class DataframeEvaluationClassificationMetricsDescriptor : DescriptorBase<DataframeEvaluationClassificationMetricsDescriptor>
+	public sealed partial class DataframeEvaluationClassificationMetricsDescriptor : SerializableDescriptorBase<DataframeEvaluationClassificationMetricsDescriptor>
 	{
 		internal DataframeEvaluationClassificationMetricsDescriptor(Action<DataframeEvaluationClassificationMetricsDescriptor> configure) => configure.Invoke(this);
 		public DataframeEvaluationClassificationMetricsDescriptor() : base()

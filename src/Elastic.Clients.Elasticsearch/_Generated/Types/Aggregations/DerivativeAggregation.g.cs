@@ -137,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class DerivativeAggregationDescriptor : DescriptorBase<DerivativeAggregationDescriptor>
+	public sealed partial class DerivativeAggregationDescriptor : SerializableDescriptorBase<DerivativeAggregationDescriptor>
 	{
 		internal DerivativeAggregationDescriptor(Action<DerivativeAggregationDescriptor> configure) => configure.Invoke(this);
 		public DerivativeAggregationDescriptor() : base()

@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? Version { get; set; }
 	}
 
-	public sealed partial class InnerHitsDescriptor<TDocument> : DescriptorBase<InnerHitsDescriptor<TDocument>>
+	public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescriptorBase<InnerHitsDescriptor<TDocument>>
 	{
 		internal InnerHitsDescriptor(Action<InnerHitsDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public InnerHitsDescriptor() : base()
@@ -437,7 +437,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class InnerHitsDescriptor : DescriptorBase<InnerHitsDescriptor>
+	public sealed partial class InnerHitsDescriptor : SerializableDescriptorBase<InnerHitsDescriptor>
 	{
 		internal InnerHitsDescriptor(Action<InnerHitsDescriptor> configure) => configure.Invoke(this);
 		public InnerHitsDescriptor() : base()

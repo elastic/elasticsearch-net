@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public IEnumerable<string>? Includes { get; set; }
 	}
 
-	public sealed partial class SourceFieldDescriptor : DescriptorBase<SourceFieldDescriptor>
+	public sealed partial class SourceFieldDescriptor : SerializableDescriptorBase<SourceFieldDescriptor>
 	{
 		internal SourceFieldDescriptor(Action<SourceFieldDescriptor> configure) => configure.Invoke(this);
 		public SourceFieldDescriptor() : base()

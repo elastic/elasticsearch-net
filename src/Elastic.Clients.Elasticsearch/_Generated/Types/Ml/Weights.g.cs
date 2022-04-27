@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public double WeightsTemp { get; set; }
 	}
 
-	public sealed partial class WeightsDescriptor : DescriptorBase<WeightsDescriptor>
+	public sealed partial class WeightsDescriptor : SerializableDescriptorBase<WeightsDescriptor>
 	{
 		internal WeightsDescriptor(Action<WeightsDescriptor> configure) => configure.Invoke(this);
 		public WeightsDescriptor() : base()

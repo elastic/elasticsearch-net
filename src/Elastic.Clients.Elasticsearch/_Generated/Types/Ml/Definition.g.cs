@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.TrainedModel TrainedModel { get; set; }
 	}
 
-	public sealed partial class DefinitionDescriptor : DescriptorBase<DefinitionDescriptor>
+	public sealed partial class DefinitionDescriptor : SerializableDescriptorBase<DefinitionDescriptor>
 	{
 		internal DefinitionDescriptor(Action<DefinitionDescriptor> configure) => configure.Invoke(this);
 		public DefinitionDescriptor() : base()

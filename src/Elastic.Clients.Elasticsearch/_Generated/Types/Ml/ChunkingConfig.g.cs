@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Time? TimeSpan { get; set; }
 	}
 
-	public sealed partial class ChunkingConfigDescriptor : DescriptorBase<ChunkingConfigDescriptor>
+	public sealed partial class ChunkingConfigDescriptor : SerializableDescriptorBase<ChunkingConfigDescriptor>
 	{
 		internal ChunkingConfigDescriptor(Action<ChunkingConfigDescriptor> configure) => configure.Invoke(this);
 		public ChunkingConfigDescriptor() : base()

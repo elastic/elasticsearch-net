@@ -522,7 +522,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class QueryContainerDescriptor<TDocument> : DescriptorBase<QueryContainerDescriptor<TDocument>>
+	public sealed partial class QueryContainerDescriptor<TDocument> : SerializableDescriptorBase<QueryContainerDescriptor<TDocument>>
 	{
 		internal QueryContainerDescriptor(Action<QueryContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public QueryContainerDescriptor() : base()
@@ -535,12 +535,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal QueryContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -685,7 +685,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Wrapper(Action<WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
 	}
 
-	public sealed partial class QueryContainerDescriptor : DescriptorBase<QueryContainerDescriptor>
+	public sealed partial class QueryContainerDescriptor : SerializableDescriptorBase<QueryContainerDescriptor>
 	{
 		internal QueryContainerDescriptor(Action<QueryContainerDescriptor> configure) => configure.Invoke(this);
 		public QueryContainerDescriptor() : base()
@@ -698,12 +698,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal QueryContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

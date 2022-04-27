@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? To { get; set; }
 	}
 
-	public sealed partial class IpRangeAggregationRangeDescriptor : DescriptorBase<IpRangeAggregationRangeDescriptor>
+	public sealed partial class IpRangeAggregationRangeDescriptor : SerializableDescriptorBase<IpRangeAggregationRangeDescriptor>
 	{
 		internal IpRangeAggregationRangeDescriptor(Action<IpRangeAggregationRangeDescriptor> configure) => configure.Invoke(this);
 		public IpRangeAggregationRangeDescriptor() : base()

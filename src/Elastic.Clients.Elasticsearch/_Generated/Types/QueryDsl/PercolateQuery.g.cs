@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public long? Version { get; set; }
 	}
 
-	public sealed partial class PercolateQueryDescriptor<TDocument> : DescriptorBase<PercolateQueryDescriptor<TDocument>>
+	public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDescriptorBase<PercolateQueryDescriptor<TDocument>>
 	{
 		internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public PercolateQueryDescriptor() : base()
@@ -229,7 +229,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class PercolateQueryDescriptor : DescriptorBase<PercolateQueryDescriptor>
+	public sealed partial class PercolateQueryDescriptor : SerializableDescriptorBase<PercolateQueryDescriptor>
 	{
 		internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor> configure) => configure.Invoke(this);
 		public PercolateQueryDescriptor() : base()

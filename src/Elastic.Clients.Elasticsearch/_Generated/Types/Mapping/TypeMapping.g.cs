@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 	}
 
-	public sealed partial class TypeMappingDescriptor : DescriptorBase<TypeMappingDescriptor>
+	public sealed partial class TypeMappingDescriptor : SerializableDescriptorBase<TypeMappingDescriptor>
 	{
 		internal TypeMappingDescriptor(Action<TypeMappingDescriptor> configure) => configure.Invoke(this);
 		public TypeMappingDescriptor() : base()

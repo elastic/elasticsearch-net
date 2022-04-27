@@ -120,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class IntervalsQueryDescriptor<TDocument> : DescriptorBase<IntervalsQueryDescriptor<TDocument>>
+	public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDescriptorBase<IntervalsQueryDescriptor<TDocument>>
 	{
 		internal IntervalsQueryDescriptor(Action<IntervalsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IntervalsQueryDescriptor() : base()
@@ -133,12 +133,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal IntervalsQuery Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Wildcard(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 	}
 
-	public sealed partial class IntervalsQueryDescriptor : DescriptorBase<IntervalsQueryDescriptor>
+	public sealed partial class IntervalsQueryDescriptor : SerializableDescriptorBase<IntervalsQueryDescriptor>
 	{
 		internal IntervalsQueryDescriptor(Action<IntervalsQueryDescriptor> configure) => configure.Invoke(this);
 		public IntervalsQueryDescriptor() : base()
@@ -206,12 +206,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal IntervalsQuery Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

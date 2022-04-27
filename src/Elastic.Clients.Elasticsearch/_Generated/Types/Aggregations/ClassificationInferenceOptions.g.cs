@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? TopClassesResultsField { get; set; }
 	}
 
-	public sealed partial class ClassificationInferenceOptionsDescriptor : DescriptorBase<ClassificationInferenceOptionsDescriptor>
+	public sealed partial class ClassificationInferenceOptionsDescriptor : SerializableDescriptorBase<ClassificationInferenceOptionsDescriptor>
 	{
 		internal ClassificationInferenceOptionsDescriptor(Action<ClassificationInferenceOptionsDescriptor> configure) => configure.Invoke(this);
 		public ClassificationInferenceOptionsDescriptor() : base()

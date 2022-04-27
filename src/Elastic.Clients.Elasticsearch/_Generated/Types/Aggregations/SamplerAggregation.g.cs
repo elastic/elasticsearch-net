@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? ShardSize { get; set; }
 	}
 
-	public sealed partial class SamplerAggregationDescriptor<TDocument> : DescriptorBase<SamplerAggregationDescriptor<TDocument>>
+	public sealed partial class SamplerAggregationDescriptor<TDocument> : SerializableDescriptorBase<SamplerAggregationDescriptor<TDocument>>
 	{
 		internal SamplerAggregationDescriptor(Action<SamplerAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SamplerAggregationDescriptor() : base()
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class SamplerAggregationDescriptor : DescriptorBase<SamplerAggregationDescriptor>
+	public sealed partial class SamplerAggregationDescriptor : SerializableDescriptorBase<SamplerAggregationDescriptor>
 	{
 		internal SamplerAggregationDescriptor(Action<SamplerAggregationDescriptor> configure) => configure.Invoke(this);
 		public SamplerAggregationDescriptor() : base()

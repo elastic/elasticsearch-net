@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? IgnoreUnavailable { get; set; }
 	}
 
-	public sealed partial class IndicesOptionsDescriptor : DescriptorBase<IndicesOptionsDescriptor>
+	public sealed partial class IndicesOptionsDescriptor : SerializableDescriptorBase<IndicesOptionsDescriptor>
 	{
 		internal IndicesOptionsDescriptor(Action<IndicesOptionsDescriptor> configure) => configure.Invoke(this);
 		public IndicesOptionsDescriptor() : base()

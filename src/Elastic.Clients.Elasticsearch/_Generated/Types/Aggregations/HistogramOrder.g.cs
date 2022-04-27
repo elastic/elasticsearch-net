@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.SortOrder? Key { get; set; }
 	}
 
-	public sealed partial class HistogramOrderDescriptor : DescriptorBase<HistogramOrderDescriptor>
+	public sealed partial class HistogramOrderDescriptor : SerializableDescriptorBase<HistogramOrderDescriptor>
 	{
 		internal HistogramOrderDescriptor(Action<HistogramOrderDescriptor> configure) => configure.Invoke(this);
 		public HistogramOrderDescriptor() : base()

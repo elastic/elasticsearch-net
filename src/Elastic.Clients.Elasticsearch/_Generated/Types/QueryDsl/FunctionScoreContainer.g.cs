@@ -98,7 +98,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class FunctionScoreContainerDescriptor<TDocument> : DescriptorBase<FunctionScoreContainerDescriptor<TDocument>>
+	public sealed partial class FunctionScoreContainerDescriptor<TDocument> : SerializableDescriptorBase<FunctionScoreContainerDescriptor<TDocument>>
 	{
 		internal FunctionScoreContainerDescriptor(Action<FunctionScoreContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FunctionScoreContainerDescriptor() : base()
@@ -111,12 +111,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal FunctionScoreContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -165,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void ScriptScore(Action<ScriptScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "script_score");
 	}
 
-	public sealed partial class FunctionScoreContainerDescriptor : DescriptorBase<FunctionScoreContainerDescriptor>
+	public sealed partial class FunctionScoreContainerDescriptor : SerializableDescriptorBase<FunctionScoreContainerDescriptor>
 	{
 		internal FunctionScoreContainerDescriptor(Action<FunctionScoreContainerDescriptor> configure) => configure.Invoke(this);
 		public FunctionScoreContainerDescriptor() : base()
@@ -178,12 +178,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal FunctionScoreContainer Container { get; private set; }
 
-		internal IDescriptor Descriptor { get; private set; }
+		internal Descriptor Descriptor { get; private set; }
 
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : IDescriptor, new()
+			where T : Descriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

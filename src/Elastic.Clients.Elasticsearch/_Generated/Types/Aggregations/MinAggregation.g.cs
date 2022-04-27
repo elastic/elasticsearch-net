@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class MinAggregationDescriptor<TDocument> : DescriptorBase<MinAggregationDescriptor<TDocument>>
+	public sealed partial class MinAggregationDescriptor<TDocument> : SerializableDescriptorBase<MinAggregationDescriptor<TDocument>>
 	{
 		internal MinAggregationDescriptor(Action<MinAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MinAggregationDescriptor() : base()
@@ -249,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class MinAggregationDescriptor : DescriptorBase<MinAggregationDescriptor>
+	public sealed partial class MinAggregationDescriptor : SerializableDescriptorBase<MinAggregationDescriptor>
 	{
 		internal MinAggregationDescriptor(Action<MinAggregationDescriptor> configure) => configure.Invoke(this);
 		public MinAggregationDescriptor() : base()

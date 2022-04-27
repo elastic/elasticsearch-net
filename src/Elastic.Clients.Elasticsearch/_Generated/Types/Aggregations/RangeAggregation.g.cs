@@ -208,7 +208,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptBase? Script { get; set; }
 	}
 
-	public sealed partial class RangeAggregationDescriptor<TDocument> : DescriptorBase<RangeAggregationDescriptor<TDocument>>
+	public sealed partial class RangeAggregationDescriptor<TDocument> : SerializableDescriptorBase<RangeAggregationDescriptor<TDocument>>
 	{
 		internal RangeAggregationDescriptor(Action<RangeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RangeAggregationDescriptor() : base()
@@ -393,7 +393,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class RangeAggregationDescriptor : DescriptorBase<RangeAggregationDescriptor>
+	public sealed partial class RangeAggregationDescriptor : SerializableDescriptorBase<RangeAggregationDescriptor>
 	{
 		internal RangeAggregationDescriptor(Action<RangeAggregationDescriptor> configure) => configure.Invoke(this);
 		public RangeAggregationDescriptor() : base()

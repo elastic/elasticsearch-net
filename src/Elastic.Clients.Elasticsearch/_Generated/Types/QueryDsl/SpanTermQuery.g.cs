@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Value { get; set; }
 	}
 
-	public sealed partial class SpanTermQueryDescriptor<TDocument> : DescriptorBase<SpanTermQueryDescriptor<TDocument>>
+	public sealed partial class SpanTermQueryDescriptor<TDocument> : SerializableDescriptorBase<SpanTermQueryDescriptor<TDocument>>
 	{
 		internal SpanTermQueryDescriptor(Action<SpanTermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SpanTermQueryDescriptor() : base()
@@ -162,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class SpanTermQueryDescriptor : DescriptorBase<SpanTermQueryDescriptor>
+	public sealed partial class SpanTermQueryDescriptor : SerializableDescriptorBase<SpanTermQueryDescriptor>
 	{
 		internal SpanTermQueryDescriptor(Action<SpanTermQueryDescriptor> configure) => configure.Invoke(this);
 		public SpanTermQueryDescriptor() : base()
