@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? SearchRouting { get; set; }
 	}
 
-	public sealed partial class AliasDefinitionDescriptor<TDocument> : DescriptorBase<AliasDefinitionDescriptor<TDocument>>
+	public sealed partial class AliasDefinitionDescriptor<TDocument> : SerializableDescriptorBase<AliasDefinitionDescriptor<TDocument>>
 	{
 		internal AliasDefinitionDescriptor(Action<AliasDefinitionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public AliasDefinitionDescriptor() : base()
@@ -181,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 	}
 
-	public sealed partial class AliasDefinitionDescriptor : DescriptorBase<AliasDefinitionDescriptor>
+	public sealed partial class AliasDefinitionDescriptor : SerializableDescriptorBase<AliasDefinitionDescriptor>
 	{
 		internal AliasDefinitionDescriptor(Action<AliasDefinitionDescriptor> configure) => configure.Invoke(this);
 		public AliasDefinitionDescriptor() : base()

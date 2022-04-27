@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public object Source { get; set; }
 	}
 
-	public sealed partial class DocumentDescriptor : DescriptorBase<DocumentDescriptor>
+	public sealed partial class DocumentDescriptor : SerializableDescriptorBase<DocumentDescriptor>
 	{
 		internal DocumentDescriptor(Action<DocumentDescriptor> configure) => configure.Invoke(this);
 		public DocumentDescriptor() : base()

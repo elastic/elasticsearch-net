@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int Rating { get; set; }
 	}
 
-	public sealed partial class DocumentRatingDescriptor : DescriptorBase<DocumentRatingDescriptor>
+	public sealed partial class DocumentRatingDescriptor : SerializableDescriptorBase<DocumentRatingDescriptor>
 	{
 		internal DocumentRatingDescriptor(Action<DocumentRatingDescriptor> configure) => configure.Invoke(this);
 		public DocumentRatingDescriptor() : base()

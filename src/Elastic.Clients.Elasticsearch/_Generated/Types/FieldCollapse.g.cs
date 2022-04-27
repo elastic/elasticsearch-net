@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int? MaxConcurrentGroupSearches { get; set; }
 	}
 
-	public sealed partial class FieldCollapseDescriptor<TDocument> : DescriptorBase<FieldCollapseDescriptor<TDocument>>
+	public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDescriptorBase<FieldCollapseDescriptor<TDocument>>
 	{
 		internal FieldCollapseDescriptor(Action<FieldCollapseDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FieldCollapseDescriptor() : base()
@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class FieldCollapseDescriptor : DescriptorBase<FieldCollapseDescriptor>
+	public sealed partial class FieldCollapseDescriptor : SerializableDescriptorBase<FieldCollapseDescriptor>
 	{
 		internal FieldCollapseDescriptor(Action<FieldCollapseDescriptor> configure) => configure.Invoke(this);
 		public FieldCollapseDescriptor() : base()

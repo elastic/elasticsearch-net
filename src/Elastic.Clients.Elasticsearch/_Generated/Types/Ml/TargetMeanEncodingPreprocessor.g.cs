@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, double> TargetMap { get; set; }
 	}
 
-	public sealed partial class TargetMeanEncodingPreprocessorDescriptor<TDocument> : DescriptorBase<TargetMeanEncodingPreprocessorDescriptor<TDocument>>
+	public sealed partial class TargetMeanEncodingPreprocessorDescriptor<TDocument> : SerializableDescriptorBase<TargetMeanEncodingPreprocessorDescriptor<TDocument>>
 	{
 		internal TargetMeanEncodingPreprocessorDescriptor(Action<TargetMeanEncodingPreprocessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TargetMeanEncodingPreprocessorDescriptor() : base()
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class TargetMeanEncodingPreprocessorDescriptor : DescriptorBase<TargetMeanEncodingPreprocessorDescriptor>
+	public sealed partial class TargetMeanEncodingPreprocessorDescriptor : SerializableDescriptorBase<TargetMeanEncodingPreprocessorDescriptor>
 	{
 		internal TargetMeanEncodingPreprocessorDescriptor(Action<TargetMeanEncodingPreprocessorDescriptor> configure) => configure.Invoke(this);
 		public TargetMeanEncodingPreprocessorDescriptor() : base()

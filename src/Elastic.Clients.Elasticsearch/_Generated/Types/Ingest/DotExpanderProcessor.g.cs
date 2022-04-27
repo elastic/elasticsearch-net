@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Path { get; set; }
 	}
 
-	public sealed partial class DotExpanderProcessorDescriptor<TDocument> : DescriptorBase<DotExpanderProcessorDescriptor<TDocument>>
+	public sealed partial class DotExpanderProcessorDescriptor<TDocument> : SerializableDescriptorBase<DotExpanderProcessorDescriptor<TDocument>>
 	{
 		internal DotExpanderProcessorDescriptor(Action<DotExpanderProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DotExpanderProcessorDescriptor() : base()
@@ -137,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class DotExpanderProcessorDescriptor : DescriptorBase<DotExpanderProcessorDescriptor>
+	public sealed partial class DotExpanderProcessorDescriptor : SerializableDescriptorBase<DotExpanderProcessorDescriptor>
 	{
 		internal DotExpanderProcessorDescriptor(Action<DotExpanderProcessorDescriptor> configure) => configure.Invoke(this);
 		public DotExpanderProcessorDescriptor() : base()

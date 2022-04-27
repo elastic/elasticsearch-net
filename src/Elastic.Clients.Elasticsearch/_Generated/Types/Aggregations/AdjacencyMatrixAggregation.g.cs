@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filters { get; set; }
 	}
 
-	public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : DescriptorBase<AdjacencyMatrixAggregationDescriptor<TDocument>>
+	public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : SerializableDescriptorBase<AdjacencyMatrixAggregationDescriptor<TDocument>>
 	{
 		internal AdjacencyMatrixAggregationDescriptor(Action<AdjacencyMatrixAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public AdjacencyMatrixAggregationDescriptor() : base()
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class AdjacencyMatrixAggregationDescriptor : DescriptorBase<AdjacencyMatrixAggregationDescriptor>
+	public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableDescriptorBase<AdjacencyMatrixAggregationDescriptor>
 	{
 		internal AdjacencyMatrixAggregationDescriptor(Action<AdjacencyMatrixAggregationDescriptor> configure) => configure.Invoke(this);
 		public AdjacencyMatrixAggregationDescriptor() : base()

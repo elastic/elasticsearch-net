@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public float ScalingFactor { get; set; }
 	}
 
-	public sealed partial class RankFeatureFunctionLogarithmDescriptor : DescriptorBase<RankFeatureFunctionLogarithmDescriptor>
+	public sealed partial class RankFeatureFunctionLogarithmDescriptor : SerializableDescriptorBase<RankFeatureFunctionLogarithmDescriptor>
 	{
 		internal RankFeatureFunctionLogarithmDescriptor(Action<RankFeatureFunctionLogarithmDescriptor> configure) => configure.Invoke(this);
 		public RankFeatureFunctionLogarithmDescriptor() : base()

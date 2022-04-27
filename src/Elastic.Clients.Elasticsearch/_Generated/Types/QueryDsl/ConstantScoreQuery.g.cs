@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Filter { get; set; }
 	}
 
-	public sealed partial class ConstantScoreQueryDescriptor<TDocument> : DescriptorBase<ConstantScoreQueryDescriptor<TDocument>>
+	public sealed partial class ConstantScoreQueryDescriptor<TDocument> : SerializableDescriptorBase<ConstantScoreQueryDescriptor<TDocument>>
 	{
 		internal ConstantScoreQueryDescriptor(Action<ConstantScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ConstantScoreQueryDescriptor() : base()
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class ConstantScoreQueryDescriptor : DescriptorBase<ConstantScoreQueryDescriptor>
+	public sealed partial class ConstantScoreQueryDescriptor : SerializableDescriptorBase<ConstantScoreQueryDescriptor>
 	{
 		internal ConstantScoreQueryDescriptor(Action<ConstantScoreQueryDescriptor> configure) => configure.Invoke(this);
 		public ConstantScoreQueryDescriptor() : base()

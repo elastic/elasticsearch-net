@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public double? Weight { get; set; }
 	}
 
-	public sealed partial class ScoreFunctionBaseDescriptor<TDocument> : DescriptorBase<ScoreFunctionBaseDescriptor<TDocument>>
+	public sealed partial class ScoreFunctionBaseDescriptor<TDocument> : SerializableDescriptorBase<ScoreFunctionBaseDescriptor<TDocument>>
 	{
 		internal ScoreFunctionBaseDescriptor(Action<ScoreFunctionBaseDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ScoreFunctionBaseDescriptor() : base()
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class ScoreFunctionBaseDescriptor : DescriptorBase<ScoreFunctionBaseDescriptor>
+	public sealed partial class ScoreFunctionBaseDescriptor : SerializableDescriptorBase<ScoreFunctionBaseDescriptor>
 	{
 		internal ScoreFunctionBaseDescriptor(Action<ScoreFunctionBaseDescriptor> configure) => configure.Invoke(this);
 		public ScoreFunctionBaseDescriptor() : base()

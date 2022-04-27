@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class UserAgentProcessorDescriptor<TDocument> : DescriptorBase<UserAgentProcessorDescriptor<TDocument>>
+	public sealed partial class UserAgentProcessorDescriptor<TDocument> : SerializableDescriptorBase<UserAgentProcessorDescriptor<TDocument>>
 	{
 		internal UserAgentProcessorDescriptor(Action<UserAgentProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public UserAgentProcessorDescriptor() : base()
@@ -181,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class UserAgentProcessorDescriptor : DescriptorBase<UserAgentProcessorDescriptor>
+	public sealed partial class UserAgentProcessorDescriptor : SerializableDescriptorBase<UserAgentProcessorDescriptor>
 	{
 		internal UserAgentProcessorDescriptor(Action<UserAgentProcessorDescriptor> configure) => configure.Invoke(this);
 		public UserAgentProcessorDescriptor() : base()

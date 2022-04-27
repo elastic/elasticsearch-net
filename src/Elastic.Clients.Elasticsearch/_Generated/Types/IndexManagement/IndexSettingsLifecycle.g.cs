@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	}
 
-	public sealed partial class IndexSettingsLifecycleDescriptor : DescriptorBase<IndexSettingsLifecycleDescriptor>
+	public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescriptorBase<IndexSettingsLifecycleDescriptor>
 	{
 		internal IndexSettingsLifecycleDescriptor(Action<IndexSettingsLifecycleDescriptor> configure) => configure.Invoke(this);
 		public IndexSettingsLifecycleDescriptor() : base()

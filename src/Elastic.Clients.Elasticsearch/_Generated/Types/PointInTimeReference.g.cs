@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get; set; }
 	}
 
-	public sealed partial class PointInTimeReferenceDescriptor : DescriptorBase<PointInTimeReferenceDescriptor>
+	public sealed partial class PointInTimeReferenceDescriptor : SerializableDescriptorBase<PointInTimeReferenceDescriptor>
 	{
 		internal PointInTimeReferenceDescriptor(Action<PointInTimeReferenceDescriptor> configure) => configure.Invoke(this);
 		public PointInTimeReferenceDescriptor() : base()

@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 	}
 
-	public sealed partial class BucketPathAggregationBaseDescriptor : DescriptorBase<BucketPathAggregationBaseDescriptor>
+	public sealed partial class BucketPathAggregationBaseDescriptor : SerializableDescriptorBase<BucketPathAggregationBaseDescriptor>
 	{
 		internal BucketPathAggregationBaseDescriptor(Action<BucketPathAggregationBaseDescriptor> configure) => configure.Invoke(this);
 		public BucketPathAggregationBaseDescriptor() : base()

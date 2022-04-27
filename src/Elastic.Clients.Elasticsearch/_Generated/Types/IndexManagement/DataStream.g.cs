@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Hidden { get; set; }
 	}
 
-	public sealed partial class DataStreamDescriptor : DescriptorBase<DataStreamDescriptor>
+	public sealed partial class DataStreamDescriptor : SerializableDescriptorBase<DataStreamDescriptor>
 	{
 		internal DataStreamDescriptor(Action<DataStreamDescriptor> configure) => configure.Invoke(this);
 		public DataStreamDescriptor() : base()

@@ -170,7 +170,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? ShardSize { get; set; }
 	}
 
-	public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocument> : DescriptorBase<VariableWidthHistogramAggregationDescriptor<TDocument>>
+	public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocument> : SerializableDescriptorBase<VariableWidthHistogramAggregationDescriptor<TDocument>>
 	{
 		internal VariableWidthHistogramAggregationDescriptor(Action<VariableWidthHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public VariableWidthHistogramAggregationDescriptor() : base()
@@ -263,7 +263,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class VariableWidthHistogramAggregationDescriptor : DescriptorBase<VariableWidthHistogramAggregationDescriptor>
+	public sealed partial class VariableWidthHistogramAggregationDescriptor : SerializableDescriptorBase<VariableWidthHistogramAggregationDescriptor>
 	{
 		internal VariableWidthHistogramAggregationDescriptor(Action<VariableWidthHistogramAggregationDescriptor> configure) => configure.Invoke(this);
 		public VariableWidthHistogramAggregationDescriptor() : base()

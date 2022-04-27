@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? StandardizationEnabled { get; set; }
 	}
 
-	public sealed partial class DataframeAnalysisOutlierDetectionDescriptor : DescriptorBase<DataframeAnalysisOutlierDetectionDescriptor>
+	public sealed partial class DataframeAnalysisOutlierDetectionDescriptor : SerializableDescriptorBase<DataframeAnalysisOutlierDetectionDescriptor>
 	{
 		internal DataframeAnalysisOutlierDetectionDescriptor(Action<DataframeAnalysisOutlierDetectionDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalysisOutlierDetectionDescriptor() : base()

@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch
 		bool ExperimentalEnableSerializeNullInferredValues { get; }
 
 		/// <summary>
-		/// TODO
+		/// Experimental settings.
 		/// </summary>
 		ExperimentalSettings Experimental { get; }
 	}
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed class ExperimentalSettings
 	{
 		/// <summary>
-		/// When enabled, the parameters for a script will be serialised using the SourceSerializer
+		/// When enabled, the parameters for a script will be serialised using the SourceSerializer.
 		/// </summary>
 		public bool UseSourceSerializerForScriptParameters { get; set; }
 	}

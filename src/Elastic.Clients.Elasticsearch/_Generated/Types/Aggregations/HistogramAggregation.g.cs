@@ -273,7 +273,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptBase? Script { get; set; }
 	}
 
-	public sealed partial class HistogramAggregationDescriptor<TDocument> : DescriptorBase<HistogramAggregationDescriptor<TDocument>>
+	public sealed partial class HistogramAggregationDescriptor<TDocument> : SerializableDescriptorBase<HistogramAggregationDescriptor<TDocument>>
 	{
 		internal HistogramAggregationDescriptor(Action<HistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public HistogramAggregationDescriptor() : base()
@@ -532,7 +532,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class HistogramAggregationDescriptor : DescriptorBase<HistogramAggregationDescriptor>
+	public sealed partial class HistogramAggregationDescriptor : SerializableDescriptorBase<HistogramAggregationDescriptor>
 	{
 		internal HistogramAggregationDescriptor(Action<HistogramAggregationDescriptor> configure) => configure.Invoke(this);
 		public HistogramAggregationDescriptor() : base()

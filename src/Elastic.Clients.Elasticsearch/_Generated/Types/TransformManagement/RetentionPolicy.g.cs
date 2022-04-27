@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Time MaxAge { get; set; }
 	}
 
-	public sealed partial class RetentionPolicyDescriptor<TDocument> : DescriptorBase<RetentionPolicyDescriptor<TDocument>>
+	public sealed partial class RetentionPolicyDescriptor<TDocument> : SerializableDescriptorBase<RetentionPolicyDescriptor<TDocument>>
 	{
 		internal RetentionPolicyDescriptor(Action<RetentionPolicyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RetentionPolicyDescriptor() : base()
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		}
 	}
 
-	public sealed partial class RetentionPolicyDescriptor : DescriptorBase<RetentionPolicyDescriptor>
+	public sealed partial class RetentionPolicyDescriptor : SerializableDescriptorBase<RetentionPolicyDescriptor>
 	{
 		internal RetentionPolicyDescriptor(Action<RetentionPolicyDescriptor> configure) => configure.Invoke(this);
 		public RetentionPolicyDescriptor() : base()

@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class EnrichProcessorDescriptor<TDocument> : DescriptorBase<EnrichProcessorDescriptor<TDocument>>
+	public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableDescriptorBase<EnrichProcessorDescriptor<TDocument>>
 	{
 		internal EnrichProcessorDescriptor(Action<EnrichProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public EnrichProcessorDescriptor() : base()
@@ -225,7 +225,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class EnrichProcessorDescriptor : DescriptorBase<EnrichProcessorDescriptor>
+	public sealed partial class EnrichProcessorDescriptor : SerializableDescriptorBase<EnrichProcessorDescriptor>
 	{
 		internal EnrichProcessorDescriptor(Action<EnrichProcessorDescriptor> configure) => configure.Invoke(this);
 		public EnrichProcessorDescriptor() : base()

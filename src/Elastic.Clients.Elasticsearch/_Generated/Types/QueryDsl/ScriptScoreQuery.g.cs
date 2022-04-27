@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public ScriptBase Script { get; set; }
 	}
 
-	public sealed partial class ScriptScoreQueryDescriptor<TDocument> : DescriptorBase<ScriptScoreQueryDescriptor<TDocument>>
+	public sealed partial class ScriptScoreQueryDescriptor<TDocument> : SerializableDescriptorBase<ScriptScoreQueryDescriptor<TDocument>>
 	{
 		internal ScriptScoreQueryDescriptor(Action<ScriptScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ScriptScoreQueryDescriptor() : base()
@@ -189,7 +189,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class ScriptScoreQueryDescriptor : DescriptorBase<ScriptScoreQueryDescriptor>
+	public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptorBase<ScriptScoreQueryDescriptor>
 	{
 		internal ScriptScoreQueryDescriptor(Action<ScriptScoreQueryDescriptor> configure) => configure.Invoke(this);
 		public ScriptScoreQueryDescriptor() : base()

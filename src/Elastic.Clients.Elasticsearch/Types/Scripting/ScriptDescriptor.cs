@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public sealed partial class ScriptDescriptor : DescriptorBase<ScriptDescriptor>
+	public sealed partial class ScriptDescriptor : SerializableDescriptorBase<ScriptDescriptor>
 	{
 		internal ScriptDescriptor(Action<ScriptDescriptor> configure) => configure.Invoke(this);
 

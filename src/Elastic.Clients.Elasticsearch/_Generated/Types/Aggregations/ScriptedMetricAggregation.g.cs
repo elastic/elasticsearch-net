@@ -226,7 +226,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptBase? ReduceScript { get; set; }
 	}
 
-	public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : DescriptorBase<ScriptedMetricAggregationDescriptor<TDocument>>
+	public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : SerializableDescriptorBase<ScriptedMetricAggregationDescriptor<TDocument>>
 	{
 		internal ScriptedMetricAggregationDescriptor(Action<ScriptedMetricAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ScriptedMetricAggregationDescriptor() : base()
@@ -521,7 +521,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class ScriptedMetricAggregationDescriptor : DescriptorBase<ScriptedMetricAggregationDescriptor>
+	public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDescriptorBase<ScriptedMetricAggregationDescriptor>
 	{
 		internal ScriptedMetricAggregationDescriptor(Action<ScriptedMetricAggregationDescriptor> configure) => configure.Invoke(this);
 		public ScriptedMetricAggregationDescriptor() : base()

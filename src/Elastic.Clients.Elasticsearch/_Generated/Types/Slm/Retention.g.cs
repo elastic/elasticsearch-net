@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public int MinCount { get; set; }
 	}
 
-	public sealed partial class RetentionDescriptor : DescriptorBase<RetentionDescriptor>
+	public sealed partial class RetentionDescriptor : SerializableDescriptorBase<RetentionDescriptor>
 	{
 		internal RetentionDescriptor(Action<RetentionDescriptor> configure) => configure.Invoke(this);
 		public RetentionDescriptor() : base()

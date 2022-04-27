@@ -441,7 +441,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? ValueType { get; set; }
 	}
 
-	public sealed partial class TermsAggregationDescriptor<TDocument> : DescriptorBase<TermsAggregationDescriptor<TDocument>>
+	public sealed partial class TermsAggregationDescriptor<TDocument> : SerializableDescriptorBase<TermsAggregationDescriptor<TDocument>>
 	{
 		internal TermsAggregationDescriptor(Action<TermsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TermsAggregationDescriptor() : base()
@@ -786,7 +786,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class TermsAggregationDescriptor : DescriptorBase<TermsAggregationDescriptor>
+	public sealed partial class TermsAggregationDescriptor : SerializableDescriptorBase<TermsAggregationDescriptor>
 	{
 		internal TermsAggregationDescriptor(Action<TermsAggregationDescriptor> configure) => configure.Invoke(this);
 		public TermsAggregationDescriptor() : base()

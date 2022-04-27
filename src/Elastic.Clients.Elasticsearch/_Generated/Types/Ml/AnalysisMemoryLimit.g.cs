@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string ModelMemoryLimit { get; set; }
 	}
 
-	public sealed partial class AnalysisMemoryLimitDescriptor : DescriptorBase<AnalysisMemoryLimitDescriptor>
+	public sealed partial class AnalysisMemoryLimitDescriptor : SerializableDescriptorBase<AnalysisMemoryLimitDescriptor>
 	{
 		internal AnalysisMemoryLimitDescriptor(Action<AnalysisMemoryLimitDescriptor> configure) => configure.Invoke(this);
 		public AnalysisMemoryLimitDescriptor() : base()

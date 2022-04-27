@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
 
-	public sealed partial class GeoPolygonQueryDescriptor : DescriptorBase<GeoPolygonQueryDescriptor>
+	public sealed partial class GeoPolygonQueryDescriptor : SerializableDescriptorBase<GeoPolygonQueryDescriptor>
 	{
 		internal GeoPolygonQueryDescriptor(Action<GeoPolygonQueryDescriptor> configure) => configure.Invoke(this);
 		public GeoPolygonQueryDescriptor() : base()

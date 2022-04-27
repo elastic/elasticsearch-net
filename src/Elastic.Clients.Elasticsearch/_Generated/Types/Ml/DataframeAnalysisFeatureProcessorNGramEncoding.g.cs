@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? Start { get; set; }
 	}
 
-	public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> : DescriptorBase<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>>
+	public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>>
 	{
 		internal DataframeAnalysisFeatureProcessorNGramEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor() : base()
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescriptor : DescriptorBase<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor>
+	public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescriptor : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor>
 	{
 		internal DataframeAnalysisFeatureProcessorNGramEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor() : base()

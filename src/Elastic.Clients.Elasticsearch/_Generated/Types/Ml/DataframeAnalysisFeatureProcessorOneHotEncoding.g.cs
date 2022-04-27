@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string HotMap { get; set; }
 	}
 
-	public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> : DescriptorBase<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>>
+	public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>>
 	{
 		internal DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor() : base()
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor : DescriptorBase<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor>
+	public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor>
 	{
 		internal DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor> configure) => configure.Invoke(this);
 		public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor() : base()

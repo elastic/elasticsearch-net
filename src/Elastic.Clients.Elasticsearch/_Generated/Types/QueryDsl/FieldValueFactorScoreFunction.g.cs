@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
 	}
 
-	public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> : DescriptorBase<FieldValueFactorScoreFunctionDescriptor<TDocument>>
+	public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> : SerializableDescriptorBase<FieldValueFactorScoreFunctionDescriptor<TDocument>>
 	{
 		internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FieldValueFactorScoreFunctionDescriptor() : base()
@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class FieldValueFactorScoreFunctionDescriptor : DescriptorBase<FieldValueFactorScoreFunctionDescriptor>
+	public sealed partial class FieldValueFactorScoreFunctionDescriptor : SerializableDescriptorBase<FieldValueFactorScoreFunctionDescriptor>
 	{
 		internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => configure.Invoke(this);
 		public FieldValueFactorScoreFunctionDescriptor() : base()

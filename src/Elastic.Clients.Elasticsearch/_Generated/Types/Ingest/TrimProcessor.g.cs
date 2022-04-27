@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public sealed partial class TrimProcessorDescriptor<TDocument> : DescriptorBase<TrimProcessorDescriptor<TDocument>>
+	public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDescriptorBase<TrimProcessorDescriptor<TDocument>>
 	{
 		internal TrimProcessorDescriptor(Action<TrimProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TrimProcessorDescriptor() : base()
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class TrimProcessorDescriptor : DescriptorBase<TrimProcessorDescriptor>
+	public sealed partial class TrimProcessorDescriptor : SerializableDescriptorBase<TrimProcessorDescriptor>
 	{
 		internal TrimProcessorDescriptor(Action<TrimProcessorDescriptor> configure) => configure.Invoke(this);
 		public TrimProcessorDescriptor() : base()

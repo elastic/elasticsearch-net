@@ -373,7 +373,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Version { get; set; }
 	}
 
-	public sealed partial class TopHitsAggregationDescriptor<TDocument> : DescriptorBase<TopHitsAggregationDescriptor<TDocument>>
+	public sealed partial class TopHitsAggregationDescriptor<TDocument> : SerializableDescriptorBase<TopHitsAggregationDescriptor<TDocument>>
 	{
 		internal TopHitsAggregationDescriptor(Action<TopHitsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TopHitsAggregationDescriptor() : base()
@@ -714,7 +714,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class TopHitsAggregationDescriptor : DescriptorBase<TopHitsAggregationDescriptor>
+	public sealed partial class TopHitsAggregationDescriptor : SerializableDescriptorBase<TopHitsAggregationDescriptor>
 	{
 		internal TopHitsAggregationDescriptor(Action<TopHitsAggregationDescriptor> configure) => configure.Invoke(this);
 		public TopHitsAggregationDescriptor() : base()

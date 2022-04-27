@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public int? MaxPageSearchSize { get; set; }
 	}
 
-	public sealed partial class SettingsDescriptor : DescriptorBase<SettingsDescriptor>
+	public sealed partial class SettingsDescriptor : SerializableDescriptorBase<SettingsDescriptor>
 	{
 		internal SettingsDescriptor(Action<SettingsDescriptor> configure) => configure.Invoke(this);
 		public SettingsDescriptor() : base()

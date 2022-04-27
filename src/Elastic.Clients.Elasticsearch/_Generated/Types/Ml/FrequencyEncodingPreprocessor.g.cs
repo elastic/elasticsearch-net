@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, double> FrequencyMap { get; set; }
 	}
 
-	public sealed partial class FrequencyEncodingPreprocessorDescriptor<TDocument> : DescriptorBase<FrequencyEncodingPreprocessorDescriptor<TDocument>>
+	public sealed partial class FrequencyEncodingPreprocessorDescriptor<TDocument> : SerializableDescriptorBase<FrequencyEncodingPreprocessorDescriptor<TDocument>>
 	{
 		internal FrequencyEncodingPreprocessorDescriptor(Action<FrequencyEncodingPreprocessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FrequencyEncodingPreprocessorDescriptor() : base()
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public sealed partial class FrequencyEncodingPreprocessorDescriptor : DescriptorBase<FrequencyEncodingPreprocessorDescriptor>
+	public sealed partial class FrequencyEncodingPreprocessorDescriptor : SerializableDescriptorBase<FrequencyEncodingPreprocessorDescriptor>
 	{
 		internal FrequencyEncodingPreprocessorDescriptor(Action<FrequencyEncodingPreprocessorDescriptor> configure) => configure.Invoke(this);
 		public FrequencyEncodingPreprocessorDescriptor() : base()

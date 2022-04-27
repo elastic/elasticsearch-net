@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? StopOnWarn { get; set; }
 	}
 
-	public sealed partial class PerPartitionCategorizationDescriptor : DescriptorBase<PerPartitionCategorizationDescriptor>
+	public sealed partial class PerPartitionCategorizationDescriptor : SerializableDescriptorBase<PerPartitionCategorizationDescriptor>
 	{
 		internal PerPartitionCategorizationDescriptor(Action<PerPartitionCategorizationDescriptor> configure) => configure.Invoke(this);
 		public PerPartitionCategorizationDescriptor() : base()
