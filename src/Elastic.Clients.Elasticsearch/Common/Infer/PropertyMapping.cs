@@ -7,7 +7,7 @@ namespace Elastic.Clients.Elasticsearch
 	/// <summary>
 	/// Represents meta data about a property which may be used by inferrence and during serialization.
 	/// </summary>
-	public struct PropertyMapping
+	public readonly struct PropertyMapping
 	{
 		public static PropertyMapping Ignored = new() { Ignore = true };
 
