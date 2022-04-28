@@ -25,5 +25,9 @@ namespace Elastic.Clients.Elasticsearch
 		/// The JSON name for the property.
 		/// </summary>
 		public string? Name { get; init; }
+
+		public override bool Equals(object? obj) => obj is PropertyMapping mapping && Ignore == mapping.Ignore && Name == mapping.Name;
+
+		public override int GetHashCode() => (Ignore, Name).GetHashCode();
 	}
 }
