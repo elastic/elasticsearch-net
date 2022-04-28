@@ -4,14 +4,26 @@
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class PropertyMapping : IPropertyMapping
+	/// <summary>
+	/// Represents meta data about a property which may be used by inferrence and during serialization.
+	/// </summary>
+	public struct PropertyMapping
 	{
 		public static PropertyMapping Ignored = new() { Ignore = true };
 
-		///// <inheritdoc />
-		public bool Ignore { get; set; }
+		/// <summary>
+		/// The property should be ignored during serialization.
+		/// <para>
+		/// NOTE: This only applies if a custom source serializer is registered which supports
+		/// modifying the JSON contract. The <see cref="DefaultSourceSerializer"/> does not support
+		/// ignoring properties via a <see cref="PropertyMapping"/>.
+		/// </para>
+		/// </summary>
+		public bool Ignore { get; init; }
 
-		/// <inheritdoc />
-		public string Name { get; set; }
+		/// <summary>
+		/// The JSON name for the property.
+		/// </summary>
+		public string? Name { get; init; }
 	}
 }

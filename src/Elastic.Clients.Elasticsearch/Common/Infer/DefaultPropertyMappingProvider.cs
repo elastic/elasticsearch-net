@@ -9,14 +9,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch
 {
 	/// <inheritdoc />
-	public class PropertyMappingProvider : IPropertyMappingProvider
+	public class DefaultPropertyMappingProvider : IPropertyMappingProvider
 	{
 		protected readonly ConcurrentDictionary<string, PropertyMapping> Properties = new();
 
 		/// <inheritdoc />
 		public virtual PropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 		{
+			// FUTURE: Perf: Can we avoid this string allocation by using a ValueTuple as the key?
+			// This is only called once per property on each `PropertyName` as the `FieldResolver` also caches the final string.
+			// We'd need to benchmark this before assuming a ValueTuple is better as we'd keep the FullName and Name strings alive in the
+			// dictionary which may have more overall impact that the string creation.
 			var memberInfoString = $"{memberInfo.DeclaringType?.FullName}.{memberInfo.Name}";
+
 			if (Properties.TryGetValue(memberInfoString, out var mapping))
 				return mapping;
 
@@ -27,10 +32,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		private static PropertyMapping PropertyMappingFromAttributes(MemberInfo memberInfo)
 		{
+			// If the property includes a System.Text.Json `JsonPropertyName` attribute, grab the name from that.
 			var jsonPropertyName = memberInfo.GetCustomAttribute<JsonPropertyNameAttribute>(true);
 
-			if (jsonPropertyName == null)
-				return null;
+			if (jsonPropertyName is null)
+				return default;
 
 			return new PropertyMapping
 			{
