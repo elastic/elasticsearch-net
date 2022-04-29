@@ -48,6 +48,7 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 					new SortCollectionConverter(settings),
 					new LazyDocumentConverter(settings),
 					new RelationNameConverter(settings),
+					new JoinFieldConverter(settings),
 					new CustomJsonWriterConverterFactory(settings),
 					new RoutingConverter(settings),
 					new SelfSerializableConverterFactory(settings),
