@@ -7,12 +7,12 @@ using System.Reflection;
 namespace Elastic.Clients.Elasticsearch
 {
 	/// <summary>
-	/// Provides mappings for CLR types
+	/// Provides mappings for CLR types.
 	/// </summary>
 	public interface IPropertyMappingProvider
 	{
 		/// <summary>
-		/// Creates an <see cref="PropertyMapping" /> for a <see cref="MemberInfo" />
+		/// Creates an <see cref="PropertyMapping" /> for a <see cref="MemberInfo" />.
 		/// </summary>
 		PropertyMapping CreatePropertyMapping(MemberInfo memberInfo);
 	}

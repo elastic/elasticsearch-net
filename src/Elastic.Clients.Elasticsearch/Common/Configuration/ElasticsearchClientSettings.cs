@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		/// <summary> The default user agent for Elastic.Clients.Elasticsearch </summary>
 		public static readonly UserAgent DefaultUserAgent =
-			Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(IElasticsearchClientSettings));
+			Transport.UserAgent.Create("elasticsearch-net", typeof(IElasticsearchClientSettings));
 
 		/// <summary>
 		///     Creates a new instance of connection settings, if <paramref name="uri" /> is not specified will default to
@@ -95,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly Inferrer _inferrer;
 
 		private readonly IPropertyMappingProvider _propertyMappingProvider;
-		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new();
+		private readonly FluentDictionary<MemberInfo, PropertyMapping> _propertyMappings = new();
 		private readonly FluentDictionary<Type, string> _routeProperties = new();
 		private readonly Serializer _sourceSerializer;
 		private bool _experimentalEnableSerializeNullInferredValues;
@@ -115,8 +115,7 @@ namespace Elastic.Clients.Elasticsearch
 			var requestResponseSerializer = new DefaultRequestResponseSerializer(this);
 			var sourceSerializer = sourceSerializerFactory?.Invoke(requestResponseSerializer, this) ?? new DefaultSourceSerializer(this);
 
-			// TODO - Is the second condition ever true?
-			_propertyMappingProvider = propertyMappingProvider ?? sourceSerializer as IPropertyMappingProvider ?? new PropertyMappingProvider();
+			_propertyMappingProvider = propertyMappingProvider ?? sourceSerializer as IPropertyMappingProvider ?? new DefaultPropertyMappingProvider();
 
 			// TODO - Serializer implementations should directly call diagnostics to avoid wrapping
 			//We wrap these in an internal proxy to facilitate serialization diagnostics
@@ -147,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch
 		Inferrer IElasticsearchClientSettings.Inferrer => _inferrer;
 
 		IPropertyMappingProvider IElasticsearchClientSettings.PropertyMappingProvider => _propertyMappingProvider;
-		FluentDictionary<MemberInfo, IPropertyMapping> IElasticsearchClientSettings.PropertyMappings => _propertyMappings;
+		FluentDictionary<MemberInfo, PropertyMapping> IElasticsearchClientSettings.PropertyMappings => _propertyMappings;
 
 		FluentDictionary<Type, string> IElasticsearchClientSettings.RouteProperties => _routeProperties;
 		Serializer IElasticsearchClientSettings.SourceSerializer => _sourceSerializer;
