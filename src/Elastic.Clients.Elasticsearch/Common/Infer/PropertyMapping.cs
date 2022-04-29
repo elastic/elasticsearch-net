@@ -2,12 +2,14 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
+
 namespace Elastic.Clients.Elasticsearch
 {
 	/// <summary>
 	/// Represents meta data about a property which may be used by inferrence and during serialization.
 	/// </summary>
-	public readonly struct PropertyMapping
+	public readonly struct PropertyMapping : IEquatable<PropertyMapping>
 	{
 		public static PropertyMapping Ignored = new() { Ignore = true };
 
@@ -26,8 +28,10 @@ namespace Elastic.Clients.Elasticsearch
 		/// </summary>
 		public string? Name { get; init; }
 
-		public override bool Equals(object? obj) => obj is PropertyMapping mapping && Ignore == mapping.Ignore && Name == mapping.Name;
-
+		public override bool Equals(object? obj) => obj is PropertyMapping mapping && Equals(mapping);
+		public bool Equals(PropertyMapping other) => Ignore.Equals(other.Ignore) && Name.Equals(other.Name);
+		public static bool operator ==(PropertyMapping a, PropertyMapping b) => a.Equals(b);
+		public static bool operator !=(PropertyMapping a, PropertyMapping b) => !(a == b);
 		public override int GetHashCode() => (Ignore, Name).GetHashCode();
 	}
 }
