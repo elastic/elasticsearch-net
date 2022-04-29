@@ -2,7 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-#if !NET5_0_OR_GREATER
+#if !NET5_0_OR_GREATER || NETSTANDARD2_0 || NET461
 
 namespace System.Runtime.CompilerServices;
 

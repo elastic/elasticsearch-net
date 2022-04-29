@@ -15,9 +15,9 @@ using Tests.Configuration;
 namespace Tests.Core.Xunit
 {
 	/// <summary> Feeding TestClient.Configuration options to the runner</summary>
-	public class NestXunitRunOptions : ElasticXunitRunOptions
+	public class ElasticsearchXunitRunOptions : ElasticXunitRunOptions
 	{
-		public NestXunitRunOptions()
+		public ElasticsearchXunitRunOptions()
 		{
 			RunIntegrationTests = TestConfiguration.Instance.RunIntegrationTests;
 			RunUnitTests = TestConfiguration.Instance.RunUnitTests;
