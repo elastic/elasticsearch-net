@@ -4,6 +4,7 @@
 
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 using Elastic.Clients.Elasticsearch;
@@ -11,16 +12,15 @@ using Elastic.Transport;
 using Nest;
 using System.Globalization;
 using System.Text;
-using System.Text.Json;
 
 var config = ManualConfig.Create(DefaultConfig.Instance);
 config.SummaryStyle = new SummaryStyle(CultureInfo.CurrentCulture, true, BenchmarkDotNet.Columns.SizeUnit.B, null);
+config.AddDiagnoser(MemoryDiagnoser.Default);
 
 BenchmarkRunner.Run<Benchmarks.BulkIngest>(config);
 
 namespace Benchmarks
 {
-	[MemoryDiagnoser]
 	public class BulkIngest
 	{
 		//private static readonly List<SampleData> Data = Enumerable.Range(0, 100).Select(r => new SampleData()).ToList();
