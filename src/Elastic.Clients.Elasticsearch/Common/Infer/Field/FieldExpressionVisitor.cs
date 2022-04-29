@@ -46,7 +46,9 @@ namespace Elastic.Clients.Elasticsearch
 			if (_settings.PropertyMappings.TryGetValue(info, out var propertyMapping))
 				return propertyMapping.Name;
 
-			return _settings.PropertyMappingProvider?.CreatePropertyMapping(info)?.Name ?? _settings.DefaultFieldNameInferrer(name);
+			// If an IPropertyMappingProvider is available, first attempt to create a mapping and access the name.
+			// If no IPropertyMappingProvider is available or a null PropertyMapping is returned, fallback to the configured DefaultFieldNameInferrer function.
+			return _settings.PropertyMappingProvider?.CreatePropertyMapping(info).Name ?? _settings.DefaultFieldNameInferrer(name);
 		}
 
 		protected override Expression VisitMember(MemberExpression expression)

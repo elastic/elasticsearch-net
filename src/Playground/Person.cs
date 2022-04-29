@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System.Runtime.Serialization;
 using Elastic.Clients.Elasticsearch;
 using Newtonsoft.Json;
 
@@ -23,6 +24,15 @@ namespace Playground
 
 		[System.Text.Json.Serialization.JsonIgnore]
 		public string? Email { get; init; }
+
+		[DataMember(Name = "STEVE")]
+		[IgnoreDataMember]
+		public string Data { get; init; } = "NOTHING";
+	}
+
+	public class PersonV3
+	{
+		public Guid SecondaryId { get; set; } = Guid.NewGuid();
 	}
 
 	public class PersonV2

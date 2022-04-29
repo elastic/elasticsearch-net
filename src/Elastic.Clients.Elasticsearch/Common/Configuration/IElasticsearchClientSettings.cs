@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch
 		/// <summary>
 		/// Provides mappings for CLR type members
 		/// </summary>
-		FluentDictionary<MemberInfo, IPropertyMapping> PropertyMappings { get; }
+		FluentDictionary<MemberInfo, PropertyMapping> PropertyMappings { get; }
 
 		/// <summary>
 		///     Specify a property for a CLR type to use to infer the routing for of a document when indexed in Elasticsearch.
