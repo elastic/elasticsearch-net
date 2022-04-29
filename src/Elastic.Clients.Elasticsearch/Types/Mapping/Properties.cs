@@ -18,3 +18,9 @@ public partial class Properties
 		return false;
 	}
 }
+
+public partial class TypeMappingDescriptor
+{
+	
+}
+
