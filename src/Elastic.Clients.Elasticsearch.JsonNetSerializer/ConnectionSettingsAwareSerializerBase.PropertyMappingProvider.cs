@@ -28,14 +28,15 @@ namespace Elastic.Clients.JsonNetSerializer
 		{
 			var jsonProperty = memberInfo.GetCustomAttribute<JsonPropertyAttribute>(true);
 			var dataMemberProperty = memberInfo.GetCustomAttribute<DataMemberAttribute>(true);
-			//var propertyName = memberInfo.GetCustomAttribute<PropertyNameAttribute>(true);
-			var ignore = memberInfo.GetCustomAttribute<IgnoreAttribute>(true);
 			var jsonIgnore = memberInfo.GetCustomAttribute<JsonIgnoreAttribute>(true);
 
-			if (jsonProperty == null && ignore == null /*&& propertyName == null*/ && dataMemberProperty == null && jsonIgnore == null) return null;
+			if (jsonProperty is null && dataMemberProperty is null && jsonIgnore is null) return default;
 
 			return new PropertyMapping
-				{ Name = /*propertyName?.Name ??*/ jsonProperty?.PropertyName ?? dataMemberProperty?.Name, Ignore = ignore != null || jsonIgnore != null };
+			{
+				Name = jsonProperty?.PropertyName ?? dataMemberProperty?.Name,
+				Ignore = jsonIgnore != null
+			};
 		}
 	}
 }
