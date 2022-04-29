@@ -29,8 +29,16 @@ var client = new ElasticsearchClient(settings);
 var person = new Person { Id = 101, FirstName = "Steve", LastName = "Gordon", Age = 37, Email = "sgordon@example.com" };
 
 var propertyName = (IUrlParameter)Infer.Property<Person>(p => p.SecondaryId);
+var propertyName2 = (IUrlParameter)Infer.Property<PersonV3>(p => p.SecondaryId);
+
+//var a = new PropertyMapping();
+//var b = PropertyMapping.Default;
+
+//var equal = a.Equals(b);
 
 var propertyNameString = propertyName.GetString(settings);
+propertyNameString = propertyName.GetString(settings);
+propertyNameString = propertyName2.GetString(settings);
 
 var response = await client.IndexAsync(person);
 
