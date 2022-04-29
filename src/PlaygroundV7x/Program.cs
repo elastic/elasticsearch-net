@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using Nest;
 
 namespace PlaygroundV7x
@@ -36,7 +37,20 @@ namespace PlaygroundV7x
 				})
 			};
 
-			var client = new ElasticClient();
+			var client = new ElasticClient(new ConnectionSettings(new InMemoryConnection())
+				.DefaultIndex("default-index")
+				.DefaultMappingFor<Person>(m => m
+					.DisableIdInference()
+					.IndexName("people")
+					.IdProperty(id => id.SecondaryId)
+					.RoutingProperty(id => id.SecondaryId)
+					.RelationName("relation"))
+				//.DefaultFieldNameInferrer(s => $"{s}_2")
+				.EnableDebugMode());
+
+			var person = new Person { Id = 101, FirstName = "Steve", LastName = "Gordon", Age = 37, Email = "sgordon@example.com" };
+
+			var routingResponse = await client.IndexAsync(person, r => r);
 
 			client.Update<Person>("a", d => d.Index("test").Script(s => s.Source("script").Params(new Dictionary<string, object?> { { "null", new Person { FirstName = null, LastName = "test-surname" } } })));
 
