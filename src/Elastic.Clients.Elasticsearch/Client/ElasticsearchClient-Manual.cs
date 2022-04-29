@@ -17,6 +17,12 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
 		}
 
+		public IndexResponse Index<TDocument>(TDocument document)
+		{
+			var descriptor = new IndexRequestDescriptor<TDocument>(documentWithId: document);
+			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+		}
+
 		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IndexRequestDescriptor<TDocument>(documentWithId: document);
