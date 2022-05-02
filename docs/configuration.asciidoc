@@ -50,6 +50,34 @@ the `HttpClientHandler` instances used by the `HttpClient` inside the default
 The time to put dead nodes out of rotation (this will be multiplied by the 
 number of times they've been dead).
 
+`DefaultDisableIdInference`::
+
+Disables automatic Id inference for given CLR types.
++
+The client by default will use the value of a property named `Id` on a CLR type 
+as the `_id` to send to {es}. Adding a type will disable this behaviour for that 
+CLR type. If `Id` inference should be disabled for all CLR types, use 
+`DefaultDisableIdInference`.
+
+`DefaultFieldNameInferrer`::
+
+Specifies how field names are inferred from CLR property names.
++
+By default, the client camel cases property names. For example, CLR property 
+`EmailAddress` will be inferred as "emailAddress" {es} document field name.
+
+`DefaultIndex`::
+
+The default index to use for a request when no index has been explicitly 
+specified and no default indices are specified for the given CLR type specified 
+for the request.
+
+`DefaultMappingFor`::
+
+Specify how the mapping is inferred for a given CLR type. The mapping can infer 
+the index, id and relation name for a given CLR type, as well as control 
+serialization behaviour for CLR properties.
+
 `DisableAutomaticProxyDetection`::
 
 Disabled proxy detection on the webrequest, in some cases this may speed up the 
@@ -199,39 +227,6 @@ Whether the request should be sent with chunked Transfer-Encoding.
 The user agent string to send with requests. Useful for debugging purposes to 
 understand client and framework versions that initiate requests to {es}.
 
-
-==== Options on ConnectionSettings
-
-The following is a list of available connection configuration options on 
-`ConnectionSettings`:
-
-`DefaultDisableIdInference`::
-
-Disables automatic Id inference for given CLR types.
-+
-The client by default will use the value of a property named `Id` on a CLR type 
-as the `_id` to send to {es}. Adding a type will disable this behaviour for that 
-CLR type. If `Id` inference should be disabled for all CLR types, use 
-`DefaultDisableIdInference`.
-
-`DefaultFieldNameInferrer`::
-
-Specifies how field names are inferred from CLR property names.
-+
-By default, the client camel cases property names. For example, CLR property 
-`EmailAddress` will be inferred as "emailAddress" {es} document field name.
-
-`DefaultIndex`::
-
-The default index to use for a request when no index has been explicitly 
-specified and no default indices are specified for the given CLR type specified 
-for the request.
-
-`DefaultMappingFor`::
-
-Specify how the mapping is inferred for a given CLR type. The mapping can infer 
-the index, id and relation name for a given CLR type, as well as control 
-serialization behaviour for CLR properties.
 
 ==== ElasticsearchClientSettings with ElasticsearchClient
 
