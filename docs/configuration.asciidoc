@@ -3,13 +3,13 @@
 
 Connecting to {es} with the client is easy, but it's possible that you'd like to 
 change the default connection behaviour. There are a number of configuration 
-options available on `ConnectionSettings` that can be used to control how the 
+options available on `ElasticsearchClientSettings` that can be used to control how the 
 client interact with {es}.
 
-=== Options on ConnectionConfiguration
+=== Options on ElasticsearchClientSettings
 
 The following is a list of available connection configuration options on 
-`ConnectionConfiguration`:
+`ElasticsearchClientSettings`:
 
 `Authentication`::
 
@@ -233,13 +233,13 @@ Specify how the mapping is inferred for a given CLR type. The mapping can infer
 the index, id and relation name for a given CLR type, as well as control 
 serialization behaviour for CLR properties.
 
-==== ConnectionSettings with ElasticClient
+==== ElasticsearchClientSettings with ElasticsearchClient
 
 Here's an example to demonstrate setting configuration options using the client.
 
 [source,csharp]
 ----
-var connectionSettings = new ConnectionSettings()
+var settings= new ElasticsearchClientSettings()
     .DefaultMappingFor<Project>(i => i
         .IndexName("my-projects")
         .IdProperty(p => p.Name)
@@ -248,5 +248,5 @@ var connectionSettings = new ConnectionSettings()
     .PrettyJson()
     .RequestTimeout(TimeSpan.FromMinutes(2));
 
-var client = new ElasticClient(connectionSettings);
+var client = new ElasticsearchClient(settings);
 ----
