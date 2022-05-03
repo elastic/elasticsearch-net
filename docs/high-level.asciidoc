@@ -52,6 +52,8 @@ include::{output-dir}/getting-started.asciidoc[]
 NEST uses sensible defaults for connecting to and interacting with an Elasticsearch cluster but provides numerous
 configuration options and components to change this behaviour
 
+* <<configuration-options, Configuration options>>
+
 * <<connection-pooling, Connection pools>>
 
 * <<modifying-default-connection, Modifying the default connection>>
@@ -59,6 +61,8 @@ configuration options and components to change this behaviour
 * <<working-with-certificates, Working with certificates>>
 
 * <<function-as-a-service-environments, Using the Client in a Function-as-a-Service Environment>>
+
+include::client-concepts/connection/configuration-options.asciidoc[]
 
 include::client-concepts/connection-pooling/building-blocks/connection-pooling.asciidoc[]
 
