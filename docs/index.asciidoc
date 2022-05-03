@@ -19,6 +19,8 @@ include::install.asciidoc[]
 
 include::connecting.asciidoc[]
 
+include::configuration.asciidoc[]
+
 include::breaking-changes.asciidoc[]
 
 include::conventions.asciidoc[]
