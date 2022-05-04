@@ -19,6 +19,8 @@ include::install.asciidoc[]
 
 include::connecting.asciidoc[]
 
+include::configuration.asciidoc[]
+
 include::breaking-changes.asciidoc[]
 
 include::conventions.asciidoc[]
@@ -32,3 +34,5 @@ include::search.asciidoc[]
 include::query-dsl.asciidoc[]
 
 include::aggregations.asciidoc[]
+
+include::redirects.asciidoc[]

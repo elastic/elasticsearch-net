@@ -41,7 +41,7 @@ var client = new ElasticClient(settings);
 ----
 
 In this example, a default index was also specified to use if no other index is supplied for the request or can be inferred for the
-POCO generic type parameter in the request. There are many other <<configuration-options,Configuration options>> on `ConnectionSettings`.
+POCO generic type parameter in the request. There are many other <<configuration,configuration options>> on `ConnectionSettings`.
 
 TIP: Specifying a default index is _optional_ but NEST may throw an exception if no index can be inferred for a given request. To understand more around how
 an index can be specified for a request, see <<index-name-inference,Index name inference>>.
