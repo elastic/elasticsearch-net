@@ -288,7 +288,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor<TDocument> CombineScript(Action<ScriptDescriptor> configure)
 		{
 			CombineScriptValue = null;
-			CombineScriptDescriptorAction = null;
+			CombineScriptDescriptor = null;
 			CombineScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -312,7 +312,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor<TDocument> InitScript(Action<ScriptDescriptor> configure)
 		{
 			InitScriptValue = null;
-			InitScriptDescriptorAction = null;
+			InitScriptDescriptor = null;
 			InitScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -336,7 +336,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor<TDocument> MapScript(Action<ScriptDescriptor> configure)
 		{
 			MapScriptValue = null;
-			MapScriptDescriptorAction = null;
+			MapScriptDescriptor = null;
 			MapScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -360,7 +360,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(Action<ScriptDescriptor> configure)
 		{
 			ReduceScriptValue = null;
-			ReduceScriptDescriptorAction = null;
+			ReduceScriptDescriptor = null;
 			ReduceScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -384,7 +384,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -583,7 +583,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor CombineScript(Action<ScriptDescriptor> configure)
 		{
 			CombineScriptValue = null;
-			CombineScriptDescriptorAction = null;
+			CombineScriptDescriptor = null;
 			CombineScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -607,7 +607,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor InitScript(Action<ScriptDescriptor> configure)
 		{
 			InitScriptValue = null;
-			InitScriptDescriptorAction = null;
+			InitScriptDescriptor = null;
 			InitScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -631,7 +631,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor MapScript(Action<ScriptDescriptor> configure)
 		{
 			MapScriptValue = null;
-			MapScriptDescriptorAction = null;
+			MapScriptDescriptor = null;
 			MapScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -655,7 +655,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor ReduceScript(Action<ScriptDescriptor> configure)
 		{
 			ReduceScriptValue = null;
-			ReduceScriptDescriptorAction = null;
+			ReduceScriptDescriptor = null;
 			ReduceScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -679,7 +679,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}

@@ -237,6 +237,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
 
+		private AggregationRangeDescriptor RangesDescriptor { get; set; }
+
+		private Action<AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
+
+		private Action<AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
+
 		public RangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
@@ -256,7 +262,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public RangeAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
@@ -280,7 +286,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public RangeAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -317,7 +323,37 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public RangeAggregationDescriptor<TDocument> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges)
 		{
+			RangesDescriptor = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = null;
 			RangesValue = ranges;
+			return Self;
+		}
+
+		public RangeAggregationDescriptor<TDocument> Ranges(AggregationRangeDescriptor descriptor)
+		{
+			RangesValue = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = null;
+			RangesDescriptor = descriptor;
+			return Self;
+		}
+
+		public RangeAggregationDescriptor<TDocument> Ranges(Action<AggregationRangeDescriptor> configure)
+		{
+			RangesValue = null;
+			RangesDescriptor = null;
+			RangesDescriptorActions = null;
+			RangesDescriptorAction = configure;
+			return Self;
+		}
+
+		public RangeAggregationDescriptor<TDocument> Ranges(params Action<AggregationRangeDescriptor>[] configure)
+		{
+			RangesValue = null;
+			RangesDescriptor = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = configure;
 			return Self;
 		}
 
@@ -360,7 +396,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(MissingValue.Value);
 			}
 
-			if (RangesValue is not null)
+			if (RangesDescriptor is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, RangesDescriptor, options);
+			}
+			else if (RangesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(RangesDescriptorAction), options);
+			}
+			else if (RangesDescriptorActions is not null)
+			{
+				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
+				foreach (var action in RangesDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (RangesValue is not null)
 			{
 				writer.WritePropertyName("ranges");
 				JsonSerializer.Serialize(writer, RangesValue, options);
@@ -422,6 +479,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
 
+		private AggregationRangeDescriptor RangesDescriptor { get; set; }
+
+		private Action<AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
+
+		private Action<AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
+
 		public RangeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
@@ -441,7 +504,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public RangeAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
@@ -465,7 +528,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public RangeAggregationDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -508,7 +571,37 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public RangeAggregationDescriptor Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges)
 		{
+			RangesDescriptor = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = null;
 			RangesValue = ranges;
+			return Self;
+		}
+
+		public RangeAggregationDescriptor Ranges(AggregationRangeDescriptor descriptor)
+		{
+			RangesValue = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = null;
+			RangesDescriptor = descriptor;
+			return Self;
+		}
+
+		public RangeAggregationDescriptor Ranges(Action<AggregationRangeDescriptor> configure)
+		{
+			RangesValue = null;
+			RangesDescriptor = null;
+			RangesDescriptorActions = null;
+			RangesDescriptorAction = configure;
+			return Self;
+		}
+
+		public RangeAggregationDescriptor Ranges(params Action<AggregationRangeDescriptor>[] configure)
+		{
+			RangesValue = null;
+			RangesDescriptor = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = configure;
 			return Self;
 		}
 
@@ -551,7 +644,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(MissingValue.Value);
 			}
 
-			if (RangesValue is not null)
+			if (RangesDescriptor is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, RangesDescriptor, options);
+			}
+			else if (RangesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(RangesDescriptorAction), options);
+			}
+			else if (RangesDescriptorActions is not null)
+			{
+				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
+				foreach (var action in RangesDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (RangesValue is not null)
 			{
 				writer.WritePropertyName("ranges");
 				JsonSerializer.Serialize(writer, RangesValue, options);

@@ -171,7 +171,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public ValidateQueryRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -252,7 +252,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public ValidateQueryRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}

@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public RuntimeFieldDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}

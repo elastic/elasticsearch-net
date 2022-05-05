@@ -85,6 +85,8 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		public TermsOrderDescriptor() : base(new List<TermsOrder>()) { }
 
+		internal TermsOrderDescriptor(Action<TermsOrderDescriptor> configure) : this() => configure?.Invoke(this);
+
 		public TermsOrderDescriptor CountAscending() => Assign(a => a.Add(TermsOrder.CountAscending));
 
 		public TermsOrderDescriptor CountDescending() => Assign(a => a.Add(TermsOrder.CountDescending));

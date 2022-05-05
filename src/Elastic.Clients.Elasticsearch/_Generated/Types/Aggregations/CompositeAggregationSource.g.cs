@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(Action<DateHistogramAggregationDescriptor<TDocument>> configure)
 		{
 			DateHistogramValue = null;
-			DateHistogramDescriptorAction = null;
+			DateHistogramDescriptor = null;
 			DateHistogramDescriptorAction = configure;
 			return Self;
 		}
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public CompositeAggregationSourceDescriptor<TDocument> Histogram(Action<HistogramAggregationDescriptor<TDocument>> configure)
 		{
 			HistogramValue = null;
-			HistogramDescriptorAction = null;
+			HistogramDescriptor = null;
 			HistogramDescriptorAction = configure;
 			return Self;
 		}
@@ -131,7 +131,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public CompositeAggregationSourceDescriptor<TDocument> Terms(Action<TermsAggregationDescriptor<TDocument>> configure)
 		{
 			TermsValue = null;
-			TermsDescriptorAction = null;
+			TermsDescriptor = null;
 			TermsDescriptorAction = configure;
 			return Self;
 		}
@@ -235,7 +235,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public CompositeAggregationSourceDescriptor DateHistogram(Action<DateHistogramAggregationDescriptor> configure)
 		{
 			DateHistogramValue = null;
-			DateHistogramDescriptorAction = null;
+			DateHistogramDescriptor = null;
 			DateHistogramDescriptorAction = configure;
 			return Self;
 		}
@@ -259,7 +259,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public CompositeAggregationSourceDescriptor Histogram(Action<HistogramAggregationDescriptor> configure)
 		{
 			HistogramValue = null;
-			HistogramDescriptorAction = null;
+			HistogramDescriptor = null;
 			HistogramDescriptorAction = configure;
 			return Self;
 		}
@@ -283,7 +283,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public CompositeAggregationSourceDescriptor Terms(Action<TermsAggregationDescriptor> configure)
 		{
 			TermsValue = null;
-			TermsDescriptorAction = null;
+			TermsDescriptor = null;
 			TermsDescriptorAction = configure;
 			return Self;
 		}

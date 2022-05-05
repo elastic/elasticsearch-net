@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch
 		public HighlightDescriptor<TDocument> HighlightQuery(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			HighlightQueryValue = null;
-			HighlightQueryDescriptorAction = null;
+			HighlightQueryDescriptor = null;
 			HighlightQueryDescriptorAction = configure;
 			return Self;
 		}
@@ -499,7 +499,7 @@ namespace Elastic.Clients.Elasticsearch
 		public HighlightDescriptor HighlightQuery(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			HighlightQueryValue = null;
-			HighlightQueryDescriptorAction = null;
+			HighlightQueryDescriptor = null;
 			HighlightQueryDescriptorAction = configure;
 			return Self;
 		}

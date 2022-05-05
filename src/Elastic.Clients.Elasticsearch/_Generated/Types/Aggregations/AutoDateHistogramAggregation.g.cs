@@ -348,7 +348,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AutoDateHistogramAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
@@ -372,7 +372,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AutoDateHistogramAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -589,7 +589,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AutoDateHistogramAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
@@ -613,7 +613,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AutoDateHistogramAggregationDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}

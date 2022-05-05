@@ -95,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframePreviewConfigDescriptor<TDocument> Source(Action<DataframeAnalyticsSourceDescriptor<TDocument>> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframePreviewConfigDescriptor<TDocument> Analysis(Action<DataframeAnalysisContainerDescriptor> configure)
 		{
 			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = null;
 			AnalysisDescriptorAction = configure;
 			return Self;
 		}
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframePreviewConfigDescriptor<TDocument> AnalyzedFields(Action<DataframeAnalysisAnalyzedFieldsDescriptor> configure)
 		{
 			AnalyzedFieldsValue = null;
-			AnalyzedFieldsDescriptorAction = null;
+			AnalyzedFieldsDescriptor = null;
 			AnalyzedFieldsDescriptorAction = configure;
 			return Self;
 		}
@@ -275,7 +275,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframePreviewConfigDescriptor Source(Action<DataframeAnalyticsSourceDescriptor> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -299,7 +299,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframePreviewConfigDescriptor Analysis(Action<DataframeAnalysisContainerDescriptor> configure)
 		{
 			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = null;
 			AnalysisDescriptorAction = configure;
 			return Self;
 		}
@@ -323,7 +323,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframePreviewConfigDescriptor AnalyzedFields(Action<DataframeAnalysisAnalyzedFieldsDescriptor> configure)
 		{
 			AnalyzedFieldsValue = null;
-			AnalyzedFieldsDescriptorAction = null;
+			AnalyzedFieldsDescriptor = null;
 			AnalyzedFieldsDescriptorAction = configure;
 			return Self;
 		}

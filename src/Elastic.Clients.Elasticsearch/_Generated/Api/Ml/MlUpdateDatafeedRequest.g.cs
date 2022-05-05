@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateDatafeedRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -223,7 +223,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateDatafeedRequestDescriptor<TDocument> ChunkingConfig(Action<ChunkingConfigDescriptor> configure)
 		{
 			ChunkingConfigValue = null;
-			ChunkingConfigDescriptorAction = null;
+			ChunkingConfigDescriptor = null;
 			ChunkingConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -247,7 +247,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateDatafeedRequestDescriptor<TDocument> DelayedDataCheckConfig(Action<DelayedDataCheckConfigDescriptor> configure)
 		{
 			DelayedDataCheckConfigValue = null;
-			DelayedDataCheckConfigDescriptorAction = null;
+			DelayedDataCheckConfigDescriptor = null;
 			DelayedDataCheckConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -283,7 +283,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateDatafeedRequestDescriptor<TDocument> IndicesOptions(Action<IndicesOptionsDescriptor> configure)
 		{
 			IndicesOptionsValue = null;
-			IndicesOptionsDescriptorAction = null;
+			IndicesOptionsDescriptor = null;
 			IndicesOptionsDescriptorAction = configure;
 			return Self;
 		}
@@ -520,7 +520,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateDatafeedRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -550,7 +550,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateDatafeedRequestDescriptor ChunkingConfig(Action<ChunkingConfigDescriptor> configure)
 		{
 			ChunkingConfigValue = null;
-			ChunkingConfigDescriptorAction = null;
+			ChunkingConfigDescriptor = null;
 			ChunkingConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -574,7 +574,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateDatafeedRequestDescriptor DelayedDataCheckConfig(Action<DelayedDataCheckConfigDescriptor> configure)
 		{
 			DelayedDataCheckConfigValue = null;
-			DelayedDataCheckConfigDescriptorAction = null;
+			DelayedDataCheckConfigDescriptor = null;
 			DelayedDataCheckConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -610,7 +610,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateDatafeedRequestDescriptor IndicesOptions(Action<IndicesOptionsDescriptor> configure)
 		{
 			IndicesOptionsValue = null;
-			IndicesOptionsDescriptorAction = null;
+			IndicesOptionsDescriptor = null;
 			IndicesOptionsDescriptorAction = configure;
 			return Self;
 		}

@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public AliasDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
-			FilterDescriptorAction = null;
+			FilterDescriptor = null;
 			FilterDescriptorAction = configure;
 			return Self;
 		}
@@ -223,7 +223,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public AliasDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			FilterValue = null;
-			FilterDescriptorAction = null;
+			FilterDescriptor = null;
 			FilterDescriptorAction = configure;
 			return Self;
 		}
