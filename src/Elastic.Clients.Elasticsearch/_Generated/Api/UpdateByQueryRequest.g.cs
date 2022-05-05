@@ -315,7 +315,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -339,7 +339,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -363,7 +363,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor<TDocument> Slice(Action<SlicedScrollDescriptor<TDocument>> configure)
 		{
 			SliceValue = null;
-			SliceDescriptorAction = null;
+			SliceDescriptor = null;
 			SliceDescriptorAction = configure;
 			return Self;
 		}
@@ -536,7 +536,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -560,7 +560,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -584,7 +584,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor Slice(Action<SlicedScrollDescriptor> configure)
 		{
 			SliceValue = null;
-			SliceDescriptorAction = null;
+			SliceDescriptor = null;
 			SliceDescriptorAction = configure;
 			return Self;
 		}

@@ -49,6 +49,346 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Should { get; set; }
 	}
 
+	public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescriptorBase<BoolQueryDescriptor<TDocument>>
+	{
+		internal BoolQueryDescriptor(Action<BoolQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public BoolQueryDescriptor() : base()
+		{
+		}
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+
+		private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustValue { get; set; }
+
+		private QueryContainerDescriptor<TDocument> MustDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>> MustDescriptorAction { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>>[] MustDescriptorActions { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNotValue { get; set; }
+
+		private QueryContainerDescriptor<TDocument> MustNotDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>> MustNotDescriptorAction { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>>[] MustNotDescriptorActions { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; set; }
+
+		private QueryContainerDescriptor<TDocument> ShouldDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>> ShouldDescriptorAction { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>>[] ShouldDescriptorActions { get; set; }
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
+
+		public BoolQueryDescriptor<TDocument> Filter(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = null;
+			FilterValue = filter;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = null;
+			FilterDescriptor = descriptor;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
+		{
+			FilterValue = null;
+			FilterDescriptor = null;
+			FilterDescriptorActions = null;
+			FilterDescriptorAction = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Filter(params Action<QueryContainerDescriptor<TDocument>>[] configure)
+		{
+			FilterValue = null;
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Must(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must)
+		{
+			MustDescriptor = null;
+			MustDescriptorAction = null;
+			MustDescriptorActions = null;
+			MustValue = must;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Must(QueryContainerDescriptor<TDocument> descriptor)
+		{
+			MustValue = null;
+			MustDescriptorAction = null;
+			MustDescriptorActions = null;
+			MustDescriptor = descriptor;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Must(Action<QueryContainerDescriptor<TDocument>> configure)
+		{
+			MustValue = null;
+			MustDescriptor = null;
+			MustDescriptorActions = null;
+			MustDescriptorAction = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Must(params Action<QueryContainerDescriptor<TDocument>>[] configure)
+		{
+			MustValue = null;
+			MustDescriptor = null;
+			MustDescriptorAction = null;
+			MustDescriptorActions = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> MustNot(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot)
+		{
+			MustNotDescriptor = null;
+			MustNotDescriptorAction = null;
+			MustNotDescriptorActions = null;
+			MustNotValue = mustNot;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> MustNot(QueryContainerDescriptor<TDocument> descriptor)
+		{
+			MustNotValue = null;
+			MustNotDescriptorAction = null;
+			MustNotDescriptorActions = null;
+			MustNotDescriptor = descriptor;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> MustNot(Action<QueryContainerDescriptor<TDocument>> configure)
+		{
+			MustNotValue = null;
+			MustNotDescriptor = null;
+			MustNotDescriptorActions = null;
+			MustNotDescriptorAction = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> MustNot(params Action<QueryContainerDescriptor<TDocument>>[] configure)
+		{
+			MustNotValue = null;
+			MustNotDescriptor = null;
+			MustNotDescriptorAction = null;
+			MustNotDescriptorActions = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Should(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should)
+		{
+			ShouldDescriptor = null;
+			ShouldDescriptorAction = null;
+			ShouldDescriptorActions = null;
+			ShouldValue = should;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Should(QueryContainerDescriptor<TDocument> descriptor)
+		{
+			ShouldValue = null;
+			ShouldDescriptorAction = null;
+			ShouldDescriptorActions = null;
+			ShouldDescriptor = descriptor;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Should(Action<QueryContainerDescriptor<TDocument>> configure)
+		{
+			ShouldValue = null;
+			ShouldDescriptor = null;
+			ShouldDescriptorActions = null;
+			ShouldDescriptorAction = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Should(params Action<QueryContainerDescriptor<TDocument>>[] configure)
+		{
+			ShouldValue = null;
+			ShouldDescriptor = null;
+			ShouldDescriptorAction = null;
+			ShouldDescriptorActions = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public BoolQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (FilterDescriptor is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+			}
+			else if (FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			}
+			else if (FilterDescriptorActions is not null)
+			{
+				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
+				foreach (var action in FilterDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			if (MustDescriptor is not null)
+			{
+				writer.WritePropertyName("must");
+				JsonSerializer.Serialize(writer, MustDescriptor, options);
+			}
+			else if (MustDescriptorAction is not null)
+			{
+				writer.WritePropertyName("must");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(MustDescriptorAction), options);
+			}
+			else if (MustDescriptorActions is not null)
+			{
+				writer.WritePropertyName("must");
+				writer.WriteStartArray();
+				foreach (var action in MustDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (MustValue is not null)
+			{
+				writer.WritePropertyName("must");
+				JsonSerializer.Serialize(writer, MustValue, options);
+			}
+
+			if (MustNotDescriptor is not null)
+			{
+				writer.WritePropertyName("must_not");
+				JsonSerializer.Serialize(writer, MustNotDescriptor, options);
+			}
+			else if (MustNotDescriptorAction is not null)
+			{
+				writer.WritePropertyName("must_not");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(MustNotDescriptorAction), options);
+			}
+			else if (MustNotDescriptorActions is not null)
+			{
+				writer.WritePropertyName("must_not");
+				writer.WriteStartArray();
+				foreach (var action in MustNotDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (MustNotValue is not null)
+			{
+				writer.WritePropertyName("must_not");
+				JsonSerializer.Serialize(writer, MustNotValue, options);
+			}
+
+			if (ShouldDescriptor is not null)
+			{
+				writer.WritePropertyName("should");
+				JsonSerializer.Serialize(writer, ShouldDescriptor, options);
+			}
+			else if (ShouldDescriptorAction is not null)
+			{
+				writer.WritePropertyName("should");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(ShouldDescriptorAction), options);
+			}
+			else if (ShouldDescriptorActions is not null)
+			{
+				writer.WritePropertyName("should");
+				writer.WriteStartArray();
+				foreach (var action in ShouldDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (ShouldValue is not null)
+			{
+				writer.WritePropertyName("should");
+				JsonSerializer.Serialize(writer, ShouldValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (MinimumShouldMatchValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public sealed partial class BoolQueryDescriptor : SerializableDescriptorBase<BoolQueryDescriptor>
 	{
 		internal BoolQueryDescriptor(Action<BoolQueryDescriptor> configure) => configure.Invoke(this);
@@ -56,19 +396,187 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+
+		private QueryContainerDescriptor FilterDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+
+		private Action<QueryContainerDescriptor>[] FilterDescriptorActions { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustValue { get; set; }
+
+		private QueryContainerDescriptor MustDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> MustDescriptorAction { get; set; }
+
+		private Action<QueryContainerDescriptor>[] MustDescriptorActions { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNotValue { get; set; }
+
+		private QueryContainerDescriptor MustNotDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> MustNotDescriptorAction { get; set; }
+
+		private Action<QueryContainerDescriptor>[] MustNotDescriptorActions { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; set; }
+
+		private QueryContainerDescriptor ShouldDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> ShouldDescriptorAction { get; set; }
+
+		private Action<QueryContainerDescriptor>[] ShouldDescriptorActions { get; set; }
+
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
-
 		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustValue { get; set; }
+		public BoolQueryDescriptor Filter(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = null;
+			FilterValue = filter;
+			return Self;
+		}
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNotValue { get; set; }
+		public BoolQueryDescriptor Filter(QueryContainerDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = null;
+			FilterDescriptor = descriptor;
+			return Self;
+		}
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; set; }
+		public BoolQueryDescriptor Filter(Action<QueryContainerDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptor = null;
+			FilterDescriptorActions = null;
+			FilterDescriptorAction = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Filter(params Action<QueryContainerDescriptor>[] configure)
+		{
+			FilterValue = null;
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Must(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must)
+		{
+			MustDescriptor = null;
+			MustDescriptorAction = null;
+			MustDescriptorActions = null;
+			MustValue = must;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Must(QueryContainerDescriptor descriptor)
+		{
+			MustValue = null;
+			MustDescriptorAction = null;
+			MustDescriptorActions = null;
+			MustDescriptor = descriptor;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Must(Action<QueryContainerDescriptor> configure)
+		{
+			MustValue = null;
+			MustDescriptor = null;
+			MustDescriptorActions = null;
+			MustDescriptorAction = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Must(params Action<QueryContainerDescriptor>[] configure)
+		{
+			MustValue = null;
+			MustDescriptor = null;
+			MustDescriptorAction = null;
+			MustDescriptorActions = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor MustNot(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot)
+		{
+			MustNotDescriptor = null;
+			MustNotDescriptorAction = null;
+			MustNotDescriptorActions = null;
+			MustNotValue = mustNot;
+			return Self;
+		}
+
+		public BoolQueryDescriptor MustNot(QueryContainerDescriptor descriptor)
+		{
+			MustNotValue = null;
+			MustNotDescriptorAction = null;
+			MustNotDescriptorActions = null;
+			MustNotDescriptor = descriptor;
+			return Self;
+		}
+
+		public BoolQueryDescriptor MustNot(Action<QueryContainerDescriptor> configure)
+		{
+			MustNotValue = null;
+			MustNotDescriptor = null;
+			MustNotDescriptorActions = null;
+			MustNotDescriptorAction = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor MustNot(params Action<QueryContainerDescriptor>[] configure)
+		{
+			MustNotValue = null;
+			MustNotDescriptor = null;
+			MustNotDescriptorAction = null;
+			MustNotDescriptorActions = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Should(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should)
+		{
+			ShouldDescriptor = null;
+			ShouldDescriptorAction = null;
+			ShouldDescriptorActions = null;
+			ShouldValue = should;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Should(QueryContainerDescriptor descriptor)
+		{
+			ShouldValue = null;
+			ShouldDescriptorAction = null;
+			ShouldDescriptorActions = null;
+			ShouldDescriptor = descriptor;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Should(Action<QueryContainerDescriptor> configure)
+		{
+			ShouldValue = null;
+			ShouldDescriptor = null;
+			ShouldDescriptorActions = null;
+			ShouldDescriptorAction = configure;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Should(params Action<QueryContainerDescriptor>[] configure)
+		{
+			ShouldValue = null;
+			ShouldDescriptor = null;
+			ShouldDescriptorAction = null;
+			ShouldDescriptorActions = configure;
+			return Self;
+		}
 
 		public BoolQueryDescriptor QueryName(string? queryName)
 		{
@@ -82,39 +590,123 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public BoolQueryDescriptor Filter(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
-		{
-			FilterValue = filter;
-			return Self;
-		}
-
 		public BoolQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
 		{
 			MinimumShouldMatchValue = minimumShouldMatch;
 			return Self;
 		}
 
-		public BoolQueryDescriptor Must(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must)
-		{
-			MustValue = must;
-			return Self;
-		}
-
-		public BoolQueryDescriptor MustNot(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot)
-		{
-			MustNotValue = mustNot;
-			return Self;
-		}
-
-		public BoolQueryDescriptor Should(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should)
-		{
-			ShouldValue = should;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FilterDescriptor is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+			}
+			else if (FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
+			}
+			else if (FilterDescriptorActions is not null)
+			{
+				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
+				foreach (var action in FilterDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryContainerDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			if (MustDescriptor is not null)
+			{
+				writer.WritePropertyName("must");
+				JsonSerializer.Serialize(writer, MustDescriptor, options);
+			}
+			else if (MustDescriptorAction is not null)
+			{
+				writer.WritePropertyName("must");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(MustDescriptorAction), options);
+			}
+			else if (MustDescriptorActions is not null)
+			{
+				writer.WritePropertyName("must");
+				writer.WriteStartArray();
+				foreach (var action in MustDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryContainerDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (MustValue is not null)
+			{
+				writer.WritePropertyName("must");
+				JsonSerializer.Serialize(writer, MustValue, options);
+			}
+
+			if (MustNotDescriptor is not null)
+			{
+				writer.WritePropertyName("must_not");
+				JsonSerializer.Serialize(writer, MustNotDescriptor, options);
+			}
+			else if (MustNotDescriptorAction is not null)
+			{
+				writer.WritePropertyName("must_not");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(MustNotDescriptorAction), options);
+			}
+			else if (MustNotDescriptorActions is not null)
+			{
+				writer.WritePropertyName("must_not");
+				writer.WriteStartArray();
+				foreach (var action in MustNotDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryContainerDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (MustNotValue is not null)
+			{
+				writer.WritePropertyName("must_not");
+				JsonSerializer.Serialize(writer, MustNotValue, options);
+			}
+
+			if (ShouldDescriptor is not null)
+			{
+				writer.WritePropertyName("should");
+				JsonSerializer.Serialize(writer, ShouldDescriptor, options);
+			}
+			else if (ShouldDescriptorAction is not null)
+			{
+				writer.WritePropertyName("should");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(ShouldDescriptorAction), options);
+			}
+			else if (ShouldDescriptorActions is not null)
+			{
+				writer.WritePropertyName("should");
+				writer.WriteStartArray();
+				foreach (var action in ShouldDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryContainerDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (ShouldValue is not null)
+			{
+				writer.WritePropertyName("should");
+				JsonSerializer.Serialize(writer, ShouldValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -127,34 +719,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
-			if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
 			if (MinimumShouldMatchValue is not null)
 			{
 				writer.WritePropertyName("minimum_should_match");
 				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
-			}
-
-			if (MustValue is not null)
-			{
-				writer.WritePropertyName("must");
-				JsonSerializer.Serialize(writer, MustValue, options);
-			}
-
-			if (MustNotValue is not null)
-			{
-				writer.WritePropertyName("must_not");
-				JsonSerializer.Serialize(writer, MustNotValue, options);
-			}
-
-			if (ShouldValue is not null)
-			{
-				writer.WritePropertyName("should");
-				JsonSerializer.Serialize(writer, ShouldValue, options);
 			}
 
 			writer.WriteEndObject();

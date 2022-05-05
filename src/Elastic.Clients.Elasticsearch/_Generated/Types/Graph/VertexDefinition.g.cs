@@ -64,6 +64,12 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? IncludeValue { get; set; }
 
+		private VertexIncludeDescriptor IncludeDescriptor { get; set; }
+
+		private Action<VertexIncludeDescriptor> IncludeDescriptorAction { get; set; }
+
+		private Action<VertexIncludeDescriptor>[] IncludeDescriptorActions { get; set; }
+
 		private long? MinDocCountValue { get; set; }
 
 		private long? ShardMinDocCountValue { get; set; }
@@ -90,7 +96,37 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		public VertexDefinitionDescriptor<TDocument> Include(IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? include)
 		{
+			IncludeDescriptor = null;
+			IncludeDescriptorAction = null;
+			IncludeDescriptorActions = null;
 			IncludeValue = include;
+			return Self;
+		}
+
+		public VertexDefinitionDescriptor<TDocument> Include(VertexIncludeDescriptor descriptor)
+		{
+			IncludeValue = null;
+			IncludeDescriptorAction = null;
+			IncludeDescriptorActions = null;
+			IncludeDescriptor = descriptor;
+			return Self;
+		}
+
+		public VertexDefinitionDescriptor<TDocument> Include(Action<VertexIncludeDescriptor> configure)
+		{
+			IncludeValue = null;
+			IncludeDescriptor = null;
+			IncludeDescriptorActions = null;
+			IncludeDescriptorAction = configure;
+			return Self;
+		}
+
+		public VertexDefinitionDescriptor<TDocument> Include(params Action<VertexIncludeDescriptor>[] configure)
+		{
+			IncludeValue = null;
+			IncludeDescriptor = null;
+			IncludeDescriptorAction = null;
+			IncludeDescriptorActions = configure;
 			return Self;
 		}
 
@@ -123,7 +159,28 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 			writer.WritePropertyName("field");
 			JsonSerializer.Serialize(writer, FieldValue, options);
-			if (IncludeValue is not null)
+			if (IncludeDescriptor is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, IncludeDescriptor, options);
+			}
+			else if (IncludeDescriptorAction is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, new VertexIncludeDescriptor(IncludeDescriptorAction), options);
+			}
+			else if (IncludeDescriptorActions is not null)
+			{
+				writer.WritePropertyName("include");
+				writer.WriteStartArray();
+				foreach (var action in IncludeDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new VertexIncludeDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (IncludeValue is not null)
 			{
 				writer.WritePropertyName("include");
 				JsonSerializer.Serialize(writer, IncludeValue, options);
@@ -164,6 +221,12 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? IncludeValue { get; set; }
 
+		private VertexIncludeDescriptor IncludeDescriptor { get; set; }
+
+		private Action<VertexIncludeDescriptor> IncludeDescriptorAction { get; set; }
+
+		private Action<VertexIncludeDescriptor>[] IncludeDescriptorActions { get; set; }
+
 		private long? MinDocCountValue { get; set; }
 
 		private long? ShardMinDocCountValue { get; set; }
@@ -196,7 +259,37 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		public VertexDefinitionDescriptor Include(IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? include)
 		{
+			IncludeDescriptor = null;
+			IncludeDescriptorAction = null;
+			IncludeDescriptorActions = null;
 			IncludeValue = include;
+			return Self;
+		}
+
+		public VertexDefinitionDescriptor Include(VertexIncludeDescriptor descriptor)
+		{
+			IncludeValue = null;
+			IncludeDescriptorAction = null;
+			IncludeDescriptorActions = null;
+			IncludeDescriptor = descriptor;
+			return Self;
+		}
+
+		public VertexDefinitionDescriptor Include(Action<VertexIncludeDescriptor> configure)
+		{
+			IncludeValue = null;
+			IncludeDescriptor = null;
+			IncludeDescriptorActions = null;
+			IncludeDescriptorAction = configure;
+			return Self;
+		}
+
+		public VertexDefinitionDescriptor Include(params Action<VertexIncludeDescriptor>[] configure)
+		{
+			IncludeValue = null;
+			IncludeDescriptor = null;
+			IncludeDescriptorAction = null;
+			IncludeDescriptorActions = configure;
 			return Self;
 		}
 
@@ -229,7 +322,28 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 			writer.WritePropertyName("field");
 			JsonSerializer.Serialize(writer, FieldValue, options);
-			if (IncludeValue is not null)
+			if (IncludeDescriptor is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, IncludeDescriptor, options);
+			}
+			else if (IncludeDescriptorAction is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, new VertexIncludeDescriptor(IncludeDescriptorAction), options);
+			}
+			else if (IncludeDescriptorActions is not null)
+			{
+				writer.WritePropertyName("include");
+				writer.WriteStartArray();
+				foreach (var action in IncludeDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new VertexIncludeDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (IncludeValue is not null)
 			{
 				writer.WritePropertyName("include");
 				JsonSerializer.Serialize(writer, IncludeValue, options);

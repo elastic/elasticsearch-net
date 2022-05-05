@@ -58,6 +58,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.TrainedModelTreeNode> TreeStructureValue { get; set; }
 
+		private TrainedModelTreeNodeDescriptor TreeStructureDescriptor { get; set; }
+
+		private Action<TrainedModelTreeNodeDescriptor> TreeStructureDescriptorAction { get; set; }
+
+		private Action<TrainedModelTreeNodeDescriptor>[] TreeStructureDescriptorActions { get; set; }
+
 		public TrainedModelTreeDescriptor ClassificationLabels(IEnumerable<string>? classificationLabels)
 		{
 			ClassificationLabelsValue = classificationLabels;
@@ -78,7 +84,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public TrainedModelTreeDescriptor TreeStructure(IEnumerable<Elastic.Clients.Elasticsearch.Ml.TrainedModelTreeNode> treeStructure)
 		{
+			TreeStructureDescriptor = null;
+			TreeStructureDescriptorAction = null;
+			TreeStructureDescriptorActions = null;
 			TreeStructureValue = treeStructure;
+			return Self;
+		}
+
+		public TrainedModelTreeDescriptor TreeStructure(TrainedModelTreeNodeDescriptor descriptor)
+		{
+			TreeStructureValue = null;
+			TreeStructureDescriptorAction = null;
+			TreeStructureDescriptorActions = null;
+			TreeStructureDescriptor = descriptor;
+			return Self;
+		}
+
+		public TrainedModelTreeDescriptor TreeStructure(Action<TrainedModelTreeNodeDescriptor> configure)
+		{
+			TreeStructureValue = null;
+			TreeStructureDescriptor = null;
+			TreeStructureDescriptorActions = null;
+			TreeStructureDescriptorAction = configure;
+			return Self;
+		}
+
+		public TrainedModelTreeDescriptor TreeStructure(params Action<TrainedModelTreeNodeDescriptor>[] configure)
+		{
+			TreeStructureValue = null;
+			TreeStructureDescriptor = null;
+			TreeStructureDescriptorAction = null;
+			TreeStructureDescriptorActions = configure;
 			return Self;
 		}
 
@@ -99,8 +135,33 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				writer.WriteStringValue(TargetTypeValue);
 			}
 
-			writer.WritePropertyName("tree_structure");
-			JsonSerializer.Serialize(writer, TreeStructureValue, options);
+			if (TreeStructureDescriptor is not null)
+			{
+				writer.WritePropertyName("tree_structure");
+				JsonSerializer.Serialize(writer, TreeStructureDescriptor, options);
+			}
+			else if (TreeStructureDescriptorAction is not null)
+			{
+				writer.WritePropertyName("tree_structure");
+				JsonSerializer.Serialize(writer, new TrainedModelTreeNodeDescriptor(TreeStructureDescriptorAction), options);
+			}
+			else if (TreeStructureDescriptorActions is not null)
+			{
+				writer.WritePropertyName("tree_structure");
+				writer.WriteStartArray();
+				foreach (var action in TreeStructureDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new TrainedModelTreeNodeDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("tree_structure");
+				JsonSerializer.Serialize(writer, TreeStructureValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

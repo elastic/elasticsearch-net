@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ReverseNestedAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
@@ -257,7 +257,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ReverseNestedAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}

@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TestPopulationDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
-			FilterDescriptorAction = null;
+			FilterDescriptor = null;
 			FilterDescriptorAction = configure;
 			return Self;
 		}
@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TestPopulationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TestPopulationDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			FilterValue = null;
-			FilterDescriptorAction = null;
+			FilterDescriptor = null;
 			FilterDescriptorAction = configure;
 			return Self;
 		}
@@ -225,7 +225,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TestPopulationDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}

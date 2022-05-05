@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IntervalsMatchDescriptor<TDocument> Filter(Action<IntervalsFilterDescriptor> configure)
 		{
 			FilterValue = null;
-			FilterDescriptorAction = null;
+			FilterDescriptor = null;
 			FilterDescriptorAction = configure;
 			return Self;
 		}
@@ -235,7 +235,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IntervalsMatchDescriptor Filter(Action<IntervalsFilterDescriptor> configure)
 		{
 			FilterValue = null;
-			FilterDescriptorAction = null;
+			FilterDescriptor = null;
 			FilterDescriptorAction = configure;
 			return Self;
 		}

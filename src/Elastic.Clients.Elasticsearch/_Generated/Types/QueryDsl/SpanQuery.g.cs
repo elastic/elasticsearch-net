@@ -212,11 +212,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void SpanMulti(SpanMultiTermQuery variant) => Set(variant, "span_multi");
 		public void SpanMulti(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
 		public void SpanNear(SpanNearQuery variant) => Set(variant, "span_near");
-		public void SpanNear(Action<SpanNearQueryDescriptor> configure) => Set(configure, "span_near");
+		public void SpanNear(Action<SpanNearQueryDescriptor<TDocument>> configure) => Set(configure, "span_near");
 		public void SpanNot(SpanNotQuery variant) => Set(variant, "span_not");
 		public void SpanNot(Action<SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
 		public void SpanOr(SpanOrQuery variant) => Set(variant, "span_or");
-		public void SpanOr(Action<SpanOrQueryDescriptor> configure) => Set(configure, "span_or");
+		public void SpanOr(Action<SpanOrQueryDescriptor<TDocument>> configure) => Set(configure, "span_or");
 		public void SpanTerm(SpanTermQuery variant) => Set(variant, "span_term");
 		public void SpanTerm(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
 		public void SpanWithin(SpanWithinQuery variant) => Set(variant, "span_within");
@@ -296,11 +296,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void SpanMulti<TDocument>(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
 		public void SpanNear(SpanNearQuery variant) => Set(variant, "span_near");
 		public void SpanNear(Action<SpanNearQueryDescriptor> configure) => Set(configure, "span_near");
+		public void SpanNear<TDocument>(Action<SpanNearQueryDescriptor<TDocument>> configure) => Set(configure, "span_near");
 		public void SpanNot(SpanNotQuery variant) => Set(variant, "span_not");
 		public void SpanNot(Action<SpanNotQueryDescriptor> configure) => Set(configure, "span_not");
 		public void SpanNot<TDocument>(Action<SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
 		public void SpanOr(SpanOrQuery variant) => Set(variant, "span_or");
 		public void SpanOr(Action<SpanOrQueryDescriptor> configure) => Set(configure, "span_or");
+		public void SpanOr<TDocument>(Action<SpanOrQueryDescriptor<TDocument>> configure) => Set(configure, "span_or");
 		public void SpanTerm(SpanTermQuery variant) => Set(variant, "span_term");
 		public void SpanTerm(Action<SpanTermQueryDescriptor> configure) => Set(configure, "span_term");
 		public void SpanTerm<TDocument>(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");

@@ -78,6 +78,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.DetectionRule>? CustomRulesValue { get; set; }
 
+		private DetectionRuleDescriptor CustomRulesDescriptor { get; set; }
+
+		private Action<DetectionRuleDescriptor> CustomRulesDescriptorAction { get; set; }
+
+		private Action<DetectionRuleDescriptor>[] CustomRulesDescriptorActions { get; set; }
+
 		private string? DetectorDescriptionValue { get; set; }
 
 		private int? DetectorIndexValue { get; set; }
@@ -108,7 +114,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public DetectorDescriptor<TDocument> CustomRules(IEnumerable<Elastic.Clients.Elasticsearch.Ml.DetectionRule>? customRules)
 		{
+			CustomRulesDescriptor = null;
+			CustomRulesDescriptorAction = null;
+			CustomRulesDescriptorActions = null;
 			CustomRulesValue = customRules;
+			return Self;
+		}
+
+		public DetectorDescriptor<TDocument> CustomRules(DetectionRuleDescriptor descriptor)
+		{
+			CustomRulesValue = null;
+			CustomRulesDescriptorAction = null;
+			CustomRulesDescriptorActions = null;
+			CustomRulesDescriptor = descriptor;
+			return Self;
+		}
+
+		public DetectorDescriptor<TDocument> CustomRules(Action<DetectionRuleDescriptor> configure)
+		{
+			CustomRulesValue = null;
+			CustomRulesDescriptor = null;
+			CustomRulesDescriptorActions = null;
+			CustomRulesDescriptorAction = configure;
+			return Self;
+		}
+
+		public DetectorDescriptor<TDocument> CustomRules(params Action<DetectionRuleDescriptor>[] configure)
+		{
+			CustomRulesValue = null;
+			CustomRulesDescriptor = null;
+			CustomRulesDescriptorAction = null;
+			CustomRulesDescriptorActions = configure;
 			return Self;
 		}
 
@@ -187,7 +223,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				JsonSerializer.Serialize(writer, ByFieldNameValue, options);
 			}
 
-			if (CustomRulesValue is not null)
+			if (CustomRulesDescriptor is not null)
+			{
+				writer.WritePropertyName("custom_rules");
+				JsonSerializer.Serialize(writer, CustomRulesDescriptor, options);
+			}
+			else if (CustomRulesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("custom_rules");
+				JsonSerializer.Serialize(writer, new DetectionRuleDescriptor(CustomRulesDescriptorAction), options);
+			}
+			else if (CustomRulesDescriptorActions is not null)
+			{
+				writer.WritePropertyName("custom_rules");
+				writer.WriteStartArray();
+				foreach (var action in CustomRulesDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DetectionRuleDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (CustomRulesValue is not null)
 			{
 				writer.WritePropertyName("custom_rules");
 				JsonSerializer.Serialize(writer, CustomRulesValue, options);
@@ -252,6 +309,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.DetectionRule>? CustomRulesValue { get; set; }
 
+		private DetectionRuleDescriptor CustomRulesDescriptor { get; set; }
+
+		private Action<DetectionRuleDescriptor> CustomRulesDescriptorAction { get; set; }
+
+		private Action<DetectionRuleDescriptor>[] CustomRulesDescriptorActions { get; set; }
+
 		private string? DetectorDescriptionValue { get; set; }
 
 		private int? DetectorIndexValue { get; set; }
@@ -288,7 +351,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public DetectorDescriptor CustomRules(IEnumerable<Elastic.Clients.Elasticsearch.Ml.DetectionRule>? customRules)
 		{
+			CustomRulesDescriptor = null;
+			CustomRulesDescriptorAction = null;
+			CustomRulesDescriptorActions = null;
 			CustomRulesValue = customRules;
+			return Self;
+		}
+
+		public DetectorDescriptor CustomRules(DetectionRuleDescriptor descriptor)
+		{
+			CustomRulesValue = null;
+			CustomRulesDescriptorAction = null;
+			CustomRulesDescriptorActions = null;
+			CustomRulesDescriptor = descriptor;
+			return Self;
+		}
+
+		public DetectorDescriptor CustomRules(Action<DetectionRuleDescriptor> configure)
+		{
+			CustomRulesValue = null;
+			CustomRulesDescriptor = null;
+			CustomRulesDescriptorActions = null;
+			CustomRulesDescriptorAction = configure;
+			return Self;
+		}
+
+		public DetectorDescriptor CustomRules(params Action<DetectionRuleDescriptor>[] configure)
+		{
+			CustomRulesValue = null;
+			CustomRulesDescriptor = null;
+			CustomRulesDescriptorAction = null;
+			CustomRulesDescriptorActions = configure;
 			return Self;
 		}
 
@@ -385,7 +478,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				JsonSerializer.Serialize(writer, ByFieldNameValue, options);
 			}
 
-			if (CustomRulesValue is not null)
+			if (CustomRulesDescriptor is not null)
+			{
+				writer.WritePropertyName("custom_rules");
+				JsonSerializer.Serialize(writer, CustomRulesDescriptor, options);
+			}
+			else if (CustomRulesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("custom_rules");
+				JsonSerializer.Serialize(writer, new DetectionRuleDescriptor(CustomRulesDescriptorAction), options);
+			}
+			else if (CustomRulesDescriptorActions is not null)
+			{
+				writer.WritePropertyName("custom_rules");
+				writer.WriteStartArray();
+				foreach (var action in CustomRulesDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DetectionRuleDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (CustomRulesValue is not null)
 			{
 				writer.WritePropertyName("custom_rules");
 				JsonSerializer.Serialize(writer, CustomRulesValue, options);

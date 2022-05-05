@@ -167,7 +167,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ReindexRequestDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -191,7 +191,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ReindexRequestDescriptor<TDocument> Source(Action<SourceDescriptor<TDocument>> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -221,7 +221,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ReindexRequestDescriptor<TDocument> Dest(Action<DestinationDescriptor> configure)
 		{
 			DestValue = null;
-			DestDescriptorAction = null;
+			DestDescriptor = null;
 			DestDescriptorAction = configure;
 			return Self;
 		}
@@ -372,7 +372,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ReindexRequestDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -396,7 +396,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ReindexRequestDescriptor Source(Action<SourceDescriptor> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -426,7 +426,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ReindexRequestDescriptor Dest(Action<DestinationDescriptor> configure)
 		{
 			DestValue = null;
-			DestDescriptorAction = null;
+			DestDescriptor = null;
 			DestDescriptorAction = configure;
 			return Self;
 		}

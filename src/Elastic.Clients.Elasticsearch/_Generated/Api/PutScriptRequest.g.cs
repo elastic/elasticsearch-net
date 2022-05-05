@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch
 		public PutScriptRequestDescriptor<TDocument> Script(Action<StoredScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -200,7 +200,7 @@ namespace Elastic.Clients.Elasticsearch
 		public PutScriptRequestDescriptor Script(Action<StoredScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}

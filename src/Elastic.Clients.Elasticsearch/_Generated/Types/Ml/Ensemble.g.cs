@@ -68,6 +68,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.TrainedModel> TrainedModelsValue { get; set; }
 
+		private TrainedModelDescriptor TrainedModelsDescriptor { get; set; }
+
+		private Action<TrainedModelDescriptor> TrainedModelsDescriptorAction { get; set; }
+
+		private Action<TrainedModelDescriptor>[] TrainedModelsDescriptorActions { get; set; }
+
 		public EnsembleDescriptor AggregateOutput(Elastic.Clients.Elasticsearch.Ml.AggregateOutput? aggregateOutput)
 		{
 			AggregateOutputDescriptor = null;
@@ -87,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public EnsembleDescriptor AggregateOutput(Action<AggregateOutputDescriptor> configure)
 		{
 			AggregateOutputValue = null;
-			AggregateOutputDescriptorAction = null;
+			AggregateOutputDescriptor = null;
 			AggregateOutputDescriptorAction = configure;
 			return Self;
 		}
@@ -112,7 +118,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public EnsembleDescriptor TrainedModels(IEnumerable<Elastic.Clients.Elasticsearch.Ml.TrainedModel> trainedModels)
 		{
+			TrainedModelsDescriptor = null;
+			TrainedModelsDescriptorAction = null;
+			TrainedModelsDescriptorActions = null;
 			TrainedModelsValue = trainedModels;
+			return Self;
+		}
+
+		public EnsembleDescriptor TrainedModels(TrainedModelDescriptor descriptor)
+		{
+			TrainedModelsValue = null;
+			TrainedModelsDescriptorAction = null;
+			TrainedModelsDescriptorActions = null;
+			TrainedModelsDescriptor = descriptor;
+			return Self;
+		}
+
+		public EnsembleDescriptor TrainedModels(Action<TrainedModelDescriptor> configure)
+		{
+			TrainedModelsValue = null;
+			TrainedModelsDescriptor = null;
+			TrainedModelsDescriptorActions = null;
+			TrainedModelsDescriptorAction = configure;
+			return Self;
+		}
+
+		public EnsembleDescriptor TrainedModels(params Action<TrainedModelDescriptor>[] configure)
+		{
+			TrainedModelsValue = null;
+			TrainedModelsDescriptor = null;
+			TrainedModelsDescriptorAction = null;
+			TrainedModelsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -153,8 +189,33 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				writer.WriteStringValue(TargetTypeValue);
 			}
 
-			writer.WritePropertyName("trained_models");
-			JsonSerializer.Serialize(writer, TrainedModelsValue, options);
+			if (TrainedModelsDescriptor is not null)
+			{
+				writer.WritePropertyName("trained_models");
+				JsonSerializer.Serialize(writer, TrainedModelsDescriptor, options);
+			}
+			else if (TrainedModelsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("trained_models");
+				JsonSerializer.Serialize(writer, new TrainedModelDescriptor(TrainedModelsDescriptorAction), options);
+			}
+			else if (TrainedModelsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("trained_models");
+				writer.WriteStartArray();
+				foreach (var action in TrainedModelsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new TrainedModelDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("trained_models");
+				JsonSerializer.Serialize(writer, TrainedModelsValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
