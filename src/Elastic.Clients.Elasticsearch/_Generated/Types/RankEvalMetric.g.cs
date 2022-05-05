@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch
 		public RankEvalMetricDescriptor Dcg(Action<RankEvalMetricDiscountedCumulativeGainDescriptor> configure)
 		{
 			DcgValue = null;
-			DcgDescriptorAction = null;
+			DcgDescriptor = null;
 			DcgDescriptorAction = configure;
 			return Self;
 		}
@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch
 		public RankEvalMetricDescriptor ExpectedReciprocalRank(Action<RankEvalMetricExpectedReciprocalRankDescriptor> configure)
 		{
 			ExpectedReciprocalRankValue = null;
-			ExpectedReciprocalRankDescriptorAction = null;
+			ExpectedReciprocalRankDescriptor = null;
 			ExpectedReciprocalRankDescriptorAction = configure;
 			return Self;
 		}
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch
 		public RankEvalMetricDescriptor MeanReciprocalRank(Action<RankEvalMetricMeanReciprocalRankDescriptor> configure)
 		{
 			MeanReciprocalRankValue = null;
-			MeanReciprocalRankDescriptorAction = null;
+			MeanReciprocalRankDescriptor = null;
 			MeanReciprocalRankDescriptorAction = configure;
 			return Self;
 		}
@@ -175,7 +175,7 @@ namespace Elastic.Clients.Elasticsearch
 		public RankEvalMetricDescriptor Precision(Action<RankEvalMetricPrecisionDescriptor> configure)
 		{
 			PrecisionValue = null;
-			PrecisionDescriptorAction = null;
+			PrecisionDescriptor = null;
 			PrecisionDescriptorAction = configure;
 			return Self;
 		}
@@ -199,7 +199,7 @@ namespace Elastic.Clients.Elasticsearch
 		public RankEvalMetricDescriptor Recall(Action<RankEvalMetricRecallDescriptor> configure)
 		{
 			RecallValue = null;
-			RecallDescriptorAction = null;
+			RecallDescriptor = null;
 			RecallDescriptorAction = configure;
 			return Self;
 		}

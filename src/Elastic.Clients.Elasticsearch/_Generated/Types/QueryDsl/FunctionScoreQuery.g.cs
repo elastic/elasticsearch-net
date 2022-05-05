@@ -62,6 +62,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? FunctionsValue { get; set; }
 
+		private FunctionScoreContainerDescriptor<TDocument> FunctionsDescriptor { get; set; }
+
+		private Action<FunctionScoreContainerDescriptor<TDocument>> FunctionsDescriptorAction { get; set; }
+
+		private Action<FunctionScoreContainerDescriptor<TDocument>>[] FunctionsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
 
 		private QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
@@ -82,7 +88,37 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public FunctionScoreQueryDescriptor<TDocument> Functions(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? functions)
 		{
+			FunctionsDescriptor = null;
+			FunctionsDescriptorAction = null;
+			FunctionsDescriptorActions = null;
 			FunctionsValue = functions;
+			return Self;
+		}
+
+		public FunctionScoreQueryDescriptor<TDocument> Functions(FunctionScoreContainerDescriptor<TDocument> descriptor)
+		{
+			FunctionsValue = null;
+			FunctionsDescriptorAction = null;
+			FunctionsDescriptorActions = null;
+			FunctionsDescriptor = descriptor;
+			return Self;
+		}
+
+		public FunctionScoreQueryDescriptor<TDocument> Functions(Action<FunctionScoreContainerDescriptor<TDocument>> configure)
+		{
+			FunctionsValue = null;
+			FunctionsDescriptor = null;
+			FunctionsDescriptorActions = null;
+			FunctionsDescriptorAction = configure;
+			return Self;
+		}
+
+		public FunctionScoreQueryDescriptor<TDocument> Functions(params Action<FunctionScoreContainerDescriptor<TDocument>>[] configure)
+		{
+			FunctionsValue = null;
+			FunctionsDescriptor = null;
+			FunctionsDescriptorAction = null;
+			FunctionsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -105,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public FunctionScoreQueryDescriptor<TDocument> Query(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -149,7 +185,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FunctionsValue is not null)
+			if (FunctionsDescriptor is not null)
+			{
+				writer.WritePropertyName("functions");
+				JsonSerializer.Serialize(writer, FunctionsDescriptor, options);
+			}
+			else if (FunctionsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("functions");
+				JsonSerializer.Serialize(writer, new FunctionScoreContainerDescriptor<TDocument>(FunctionsDescriptorAction), options);
+			}
+			else if (FunctionsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("functions");
+				writer.WriteStartArray();
+				foreach (var action in FunctionsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new FunctionScoreContainerDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FunctionsValue is not null)
 			{
 				writer.WritePropertyName("functions");
 				JsonSerializer.Serialize(writer, FunctionsValue, options);
@@ -220,6 +277,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? FunctionsValue { get; set; }
 
+		private FunctionScoreContainerDescriptor FunctionsDescriptor { get; set; }
+
+		private Action<FunctionScoreContainerDescriptor> FunctionsDescriptorAction { get; set; }
+
+		private Action<FunctionScoreContainerDescriptor>[] FunctionsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
 
 		private QueryContainerDescriptor QueryDescriptor { get; set; }
@@ -240,7 +303,37 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public FunctionScoreQueryDescriptor Functions(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? functions)
 		{
+			FunctionsDescriptor = null;
+			FunctionsDescriptorAction = null;
+			FunctionsDescriptorActions = null;
 			FunctionsValue = functions;
+			return Self;
+		}
+
+		public FunctionScoreQueryDescriptor Functions(FunctionScoreContainerDescriptor descriptor)
+		{
+			FunctionsValue = null;
+			FunctionsDescriptorAction = null;
+			FunctionsDescriptorActions = null;
+			FunctionsDescriptor = descriptor;
+			return Self;
+		}
+
+		public FunctionScoreQueryDescriptor Functions(Action<FunctionScoreContainerDescriptor> configure)
+		{
+			FunctionsValue = null;
+			FunctionsDescriptor = null;
+			FunctionsDescriptorActions = null;
+			FunctionsDescriptorAction = configure;
+			return Self;
+		}
+
+		public FunctionScoreQueryDescriptor Functions(params Action<FunctionScoreContainerDescriptor>[] configure)
+		{
+			FunctionsValue = null;
+			FunctionsDescriptor = null;
+			FunctionsDescriptorAction = null;
+			FunctionsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -263,7 +356,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public FunctionScoreQueryDescriptor Query(Action<QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -307,7 +400,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FunctionsValue is not null)
+			if (FunctionsDescriptor is not null)
+			{
+				writer.WritePropertyName("functions");
+				JsonSerializer.Serialize(writer, FunctionsDescriptor, options);
+			}
+			else if (FunctionsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("functions");
+				JsonSerializer.Serialize(writer, new FunctionScoreContainerDescriptor(FunctionsDescriptorAction), options);
+			}
+			else if (FunctionsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("functions");
+				writer.WriteStartArray();
+				foreach (var action in FunctionsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new FunctionScoreContainerDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FunctionsValue is not null)
 			{
 				writer.WritePropertyName("functions");
 				JsonSerializer.Serialize(writer, FunctionsValue, options);

@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlGetRecordsRequestDescriptor<TDocument> Page(Action<PageDescriptor> configure)
 		{
 			PageValue = null;
-			PageDescriptorAction = null;
+			PageDescriptor = null;
 			PageDescriptorAction = configure;
 			return Self;
 		}
@@ -320,7 +320,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlGetRecordsRequestDescriptor Page(Action<PageDescriptor> configure)
 		{
 			PageValue = null;
-			PageDescriptorAction = null;
+			PageDescriptor = null;
 			PageDescriptorAction = configure;
 			return Self;
 		}

@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public ScriptQueryDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}

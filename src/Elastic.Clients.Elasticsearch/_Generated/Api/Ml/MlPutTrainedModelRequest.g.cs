@@ -101,6 +101,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
+		private Elastic.Clients.Elasticsearch.Ml.Definition? DefinitionValue { get; set; }
+
+		private DefinitionDescriptor<TDocument> DefinitionDescriptor { get; set; }
+
+		private Action<DefinitionDescriptor<TDocument>> DefinitionDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer InferenceConfigValue { get; set; }
 
 		private Aggregations.InferenceConfigContainerDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
@@ -108,12 +114,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private Action<Aggregations.InferenceConfigContainerDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
 
 		private string? CompressedDefinitionValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Ml.Definition? DefinitionValue { get; set; }
-
-		private DefinitionDescriptor DefinitionDescriptor { get; set; }
-
-		private Action<DefinitionDescriptor> DefinitionDescriptorAction { get; set; }
 
 		private string? DescriptionValue { get; set; }
 
@@ -130,6 +130,30 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private Elastic.Clients.Elasticsearch.Ml.TrainedModelType? ModelTypeValue { get; set; }
 
 		private IEnumerable<string>? TagsValue { get; set; }
+
+		public MlPutTrainedModelRequestDescriptor<TDocument> Definition(Elastic.Clients.Elasticsearch.Ml.Definition? definition)
+		{
+			DefinitionDescriptor = null;
+			DefinitionDescriptorAction = null;
+			DefinitionValue = definition;
+			return Self;
+		}
+
+		public MlPutTrainedModelRequestDescriptor<TDocument> Definition(DefinitionDescriptor<TDocument> descriptor)
+		{
+			DefinitionValue = null;
+			DefinitionDescriptorAction = null;
+			DefinitionDescriptor = descriptor;
+			return Self;
+		}
+
+		public MlPutTrainedModelRequestDescriptor<TDocument> Definition(Action<DefinitionDescriptor<TDocument>> configure)
+		{
+			DefinitionValue = null;
+			DefinitionDescriptor = null;
+			DefinitionDescriptorAction = configure;
+			return Self;
+		}
 
 		public MlPutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer inferenceConfig)
 		{
@@ -150,7 +174,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Action<Aggregations.InferenceConfigContainerDescriptor<TDocument>> configure)
 		{
 			InferenceConfigValue = null;
-			InferenceConfigDescriptorAction = null;
+			InferenceConfigDescriptor = null;
 			InferenceConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -158,30 +182,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutTrainedModelRequestDescriptor<TDocument> CompressedDefinition(string? compressedDefinition)
 		{
 			CompressedDefinitionValue = compressedDefinition;
-			return Self;
-		}
-
-		public MlPutTrainedModelRequestDescriptor<TDocument> Definition(Elastic.Clients.Elasticsearch.Ml.Definition? definition)
-		{
-			DefinitionDescriptor = null;
-			DefinitionDescriptorAction = null;
-			DefinitionValue = definition;
-			return Self;
-		}
-
-		public MlPutTrainedModelRequestDescriptor<TDocument> Definition(DefinitionDescriptor descriptor)
-		{
-			DefinitionValue = null;
-			DefinitionDescriptorAction = null;
-			DefinitionDescriptor = descriptor;
-			return Self;
-		}
-
-		public MlPutTrainedModelRequestDescriptor<TDocument> Definition(Action<DefinitionDescriptor> configure)
-		{
-			DefinitionValue = null;
-			DefinitionDescriptorAction = null;
-			DefinitionDescriptorAction = configure;
 			return Self;
 		}
 
@@ -210,7 +210,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutTrainedModelRequestDescriptor<TDocument> Input(Action<InputDescriptor> configure)
 		{
 			InputValue = null;
-			InputDescriptorAction = null;
+			InputDescriptor = null;
 			InputDescriptorAction = configure;
 			return Self;
 		}
@@ -242,6 +242,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (DefinitionDescriptor is not null)
+			{
+				writer.WritePropertyName("definition");
+				JsonSerializer.Serialize(writer, DefinitionDescriptor, options);
+			}
+			else if (DefinitionDescriptorAction is not null)
+			{
+				writer.WritePropertyName("definition");
+				JsonSerializer.Serialize(writer, new DefinitionDescriptor<TDocument>(DefinitionDescriptorAction), options);
+			}
+			else if (DefinitionValue is not null)
+			{
+				writer.WritePropertyName("definition");
+				JsonSerializer.Serialize(writer, DefinitionValue, options);
+			}
+
 			if (InferenceConfigDescriptor is not null)
 			{
 				writer.WritePropertyName("inference_config");
@@ -262,22 +278,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			{
 				writer.WritePropertyName("compressed_definition");
 				writer.WriteStringValue(CompressedDefinitionValue);
-			}
-
-			if (DefinitionDescriptor is not null)
-			{
-				writer.WritePropertyName("definition");
-				JsonSerializer.Serialize(writer, DefinitionDescriptor, options);
-			}
-			else if (DefinitionDescriptorAction is not null)
-			{
-				writer.WritePropertyName("definition");
-				JsonSerializer.Serialize(writer, new DefinitionDescriptor(DefinitionDescriptorAction), options);
-			}
-			else if (DefinitionValue is not null)
-			{
-				writer.WritePropertyName("definition");
-				JsonSerializer.Serialize(writer, DefinitionValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(DescriptionValue))
@@ -345,6 +345,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
+		private Elastic.Clients.Elasticsearch.Ml.Definition? DefinitionValue { get; set; }
+
+		private DefinitionDescriptor DefinitionDescriptor { get; set; }
+
+		private Action<DefinitionDescriptor> DefinitionDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer InferenceConfigValue { get; set; }
 
 		private Aggregations.InferenceConfigContainerDescriptor InferenceConfigDescriptor { get; set; }
@@ -352,12 +358,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private Action<Aggregations.InferenceConfigContainerDescriptor> InferenceConfigDescriptorAction { get; set; }
 
 		private string? CompressedDefinitionValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Ml.Definition? DefinitionValue { get; set; }
-
-		private DefinitionDescriptor DefinitionDescriptor { get; set; }
-
-		private Action<DefinitionDescriptor> DefinitionDescriptorAction { get; set; }
 
 		private string? DescriptionValue { get; set; }
 
@@ -374,36 +374,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private Elastic.Clients.Elasticsearch.Ml.TrainedModelType? ModelTypeValue { get; set; }
 
 		private IEnumerable<string>? TagsValue { get; set; }
-
-		public MlPutTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer inferenceConfig)
-		{
-			InferenceConfigDescriptor = null;
-			InferenceConfigDescriptorAction = null;
-			InferenceConfigValue = inferenceConfig;
-			return Self;
-		}
-
-		public MlPutTrainedModelRequestDescriptor InferenceConfig(Aggregations.InferenceConfigContainerDescriptor descriptor)
-		{
-			InferenceConfigValue = null;
-			InferenceConfigDescriptorAction = null;
-			InferenceConfigDescriptor = descriptor;
-			return Self;
-		}
-
-		public MlPutTrainedModelRequestDescriptor InferenceConfig(Action<Aggregations.InferenceConfigContainerDescriptor> configure)
-		{
-			InferenceConfigValue = null;
-			InferenceConfigDescriptorAction = null;
-			InferenceConfigDescriptorAction = configure;
-			return Self;
-		}
-
-		public MlPutTrainedModelRequestDescriptor CompressedDefinition(string? compressedDefinition)
-		{
-			CompressedDefinitionValue = compressedDefinition;
-			return Self;
-		}
 
 		public MlPutTrainedModelRequestDescriptor Definition(Elastic.Clients.Elasticsearch.Ml.Definition? definition)
 		{
@@ -424,8 +394,38 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutTrainedModelRequestDescriptor Definition(Action<DefinitionDescriptor> configure)
 		{
 			DefinitionValue = null;
-			DefinitionDescriptorAction = null;
+			DefinitionDescriptor = null;
 			DefinitionDescriptorAction = configure;
+			return Self;
+		}
+
+		public MlPutTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer inferenceConfig)
+		{
+			InferenceConfigDescriptor = null;
+			InferenceConfigDescriptorAction = null;
+			InferenceConfigValue = inferenceConfig;
+			return Self;
+		}
+
+		public MlPutTrainedModelRequestDescriptor InferenceConfig(Aggregations.InferenceConfigContainerDescriptor descriptor)
+		{
+			InferenceConfigValue = null;
+			InferenceConfigDescriptorAction = null;
+			InferenceConfigDescriptor = descriptor;
+			return Self;
+		}
+
+		public MlPutTrainedModelRequestDescriptor InferenceConfig(Action<Aggregations.InferenceConfigContainerDescriptor> configure)
+		{
+			InferenceConfigValue = null;
+			InferenceConfigDescriptor = null;
+			InferenceConfigDescriptorAction = configure;
+			return Self;
+		}
+
+		public MlPutTrainedModelRequestDescriptor CompressedDefinition(string? compressedDefinition)
+		{
+			CompressedDefinitionValue = compressedDefinition;
 			return Self;
 		}
 
@@ -454,7 +454,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutTrainedModelRequestDescriptor Input(Action<InputDescriptor> configure)
 		{
 			InputValue = null;
-			InputDescriptorAction = null;
+			InputDescriptor = null;
 			InputDescriptorAction = configure;
 			return Self;
 		}
@@ -486,6 +486,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (DefinitionDescriptor is not null)
+			{
+				writer.WritePropertyName("definition");
+				JsonSerializer.Serialize(writer, DefinitionDescriptor, options);
+			}
+			else if (DefinitionDescriptorAction is not null)
+			{
+				writer.WritePropertyName("definition");
+				JsonSerializer.Serialize(writer, new DefinitionDescriptor(DefinitionDescriptorAction), options);
+			}
+			else if (DefinitionValue is not null)
+			{
+				writer.WritePropertyName("definition");
+				JsonSerializer.Serialize(writer, DefinitionValue, options);
+			}
+
 			if (InferenceConfigDescriptor is not null)
 			{
 				writer.WritePropertyName("inference_config");
@@ -506,22 +522,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			{
 				writer.WritePropertyName("compressed_definition");
 				writer.WriteStringValue(CompressedDefinitionValue);
-			}
-
-			if (DefinitionDescriptor is not null)
-			{
-				writer.WritePropertyName("definition");
-				JsonSerializer.Serialize(writer, DefinitionDescriptor, options);
-			}
-			else if (DefinitionDescriptorAction is not null)
-			{
-				writer.WritePropertyName("definition");
-				JsonSerializer.Serialize(writer, new DefinitionDescriptor(DefinitionDescriptorAction), options);
-			}
-			else if (DefinitionValue is not null)
-			{
-				writer.WritePropertyName("definition");
-				JsonSerializer.Serialize(writer, DefinitionValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(DescriptionValue))

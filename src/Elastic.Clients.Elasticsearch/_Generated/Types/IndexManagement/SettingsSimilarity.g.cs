@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SettingsSimilarityDescriptor Bm25(Action<SettingsSimilarityBm25Descriptor> configure)
 		{
 			Bm25Value = null;
-			Bm25DescriptorAction = null;
+			Bm25Descriptor = null;
 			Bm25DescriptorAction = configure;
 			return Self;
 		}
@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SettingsSimilarityDescriptor Dfi(Action<SettingsSimilarityDfiDescriptor> configure)
 		{
 			DfiValue = null;
-			DfiDescriptorAction = null;
+			DfiDescriptor = null;
 			DfiDescriptorAction = configure;
 			return Self;
 		}
@@ -171,7 +171,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SettingsSimilarityDescriptor Dfr(Action<SettingsSimilarityDfrDescriptor> configure)
 		{
 			DfrValue = null;
-			DfrDescriptorAction = null;
+			DfrDescriptor = null;
 			DfrDescriptorAction = configure;
 			return Self;
 		}
@@ -195,7 +195,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SettingsSimilarityDescriptor Ib(Action<SettingsSimilarityIbDescriptor> configure)
 		{
 			IbValue = null;
-			IbDescriptorAction = null;
+			IbDescriptor = null;
 			IbDescriptorAction = configure;
 			return Self;
 		}
@@ -219,7 +219,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SettingsSimilarityDescriptor Lmd(Action<SettingsSimilarityLmdDescriptor> configure)
 		{
 			LmdValue = null;
-			LmdDescriptorAction = null;
+			LmdDescriptor = null;
 			LmdDescriptorAction = configure;
 			return Self;
 		}
@@ -243,7 +243,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SettingsSimilarityDescriptor Lmj(Action<SettingsSimilarityLmjDescriptor> configure)
 		{
 			LmjValue = null;
-			LmjDescriptorAction = null;
+			LmjDescriptor = null;
 			LmjDescriptorAction = configure;
 			return Self;
 		}
@@ -267,7 +267,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SettingsSimilarityDescriptor ScriptedTfidf(Action<SettingsSimilarityScriptedTfidfDescriptor> configure)
 		{
 			ScriptedTfidfValue = null;
-			ScriptedTfidfDescriptorAction = null;
+			ScriptedTfidfDescriptor = null;
 			ScriptedTfidfDescriptorAction = configure;
 			return Self;
 		}

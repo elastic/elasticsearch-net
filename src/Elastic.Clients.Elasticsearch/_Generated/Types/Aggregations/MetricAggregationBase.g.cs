@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public MetricAggregationBaseDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -185,7 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public MetricAggregationBaseDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}

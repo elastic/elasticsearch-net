@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public TypeMappingDescriptor DataStreamTimestamp(Action<DataStreamTimestampDescriptor> configure)
 		{
 			DataStreamTimestampValue = null;
-			DataStreamTimestampDescriptorAction = null;
+			DataStreamTimestampDescriptor = null;
 			DataStreamTimestampDescriptorAction = configure;
 			return Self;
 		}
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public TypeMappingDescriptor FieldNames(Action<FieldNamesFieldDescriptor> configure)
 		{
 			FieldNamesValue = null;
-			FieldNamesDescriptorAction = null;
+			FieldNamesDescriptor = null;
 			FieldNamesDescriptorAction = configure;
 			return Self;
 		}
@@ -231,7 +231,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public TypeMappingDescriptor Routing(Action<RoutingFieldDescriptor> configure)
 		{
 			RoutingValue = null;
-			RoutingDescriptorAction = null;
+			RoutingDescriptor = null;
 			RoutingDescriptorAction = configure;
 			return Self;
 		}
@@ -255,7 +255,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public TypeMappingDescriptor Size(Action<SizeFieldDescriptor> configure)
 		{
 			SizeValue = null;
-			SizeDescriptorAction = null;
+			SizeDescriptor = null;
 			SizeDescriptorAction = configure;
 			return Self;
 		}
@@ -279,7 +279,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public TypeMappingDescriptor Source(Action<SourceFieldDescriptor> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -303,7 +303,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public TypeMappingDescriptor AllField(Action<AllFieldDescriptor> configure)
 		{
 			AllFieldValue = null;
-			AllFieldDescriptorAction = null;
+			AllFieldDescriptor = null;
 			AllFieldDescriptorAction = configure;
 			return Self;
 		}
@@ -357,7 +357,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public TypeMappingDescriptor IndexField(Action<IndexFieldDescriptor> configure)
 		{
 			IndexFieldValue = null;
-			IndexFieldDescriptorAction = null;
+			IndexFieldDescriptor = null;
 			IndexFieldDescriptorAction = configure;
 			return Self;
 		}

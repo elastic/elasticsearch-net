@@ -137,7 +137,19 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 
+		private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
+
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+
+		private QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+
+		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+
+		private Action<QueryDsl.QueryContainerDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
 
 		private bool? CaseSensitiveValue { get; set; }
 
@@ -165,13 +177,73 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		public EqlSearchRequestDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 		{
+			FieldsDescriptor = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = null;
 			FieldsValue = fields;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor<TDocument> Fields(QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+		{
+			FieldsValue = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = null;
+			FieldsDescriptor = descriptor;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor<TDocument> Fields(Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+		{
+			FieldsValue = null;
+			FieldsDescriptor = null;
+			FieldsDescriptorActions = null;
+			FieldsDescriptorAction = configure;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor<TDocument> Fields(params Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+		{
+			FieldsValue = null;
+			FieldsDescriptor = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = configure;
 			return Self;
 		}
 
 		public EqlSearchRequestDescriptor<TDocument> Filter(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
 		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = null;
 			FilterValue = filter;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = null;
+			FilterDescriptor = descriptor;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		{
+			FilterValue = null;
+			FilterDescriptor = null;
+			FilterDescriptorActions = null;
+			FilterDescriptorAction = configure;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor<TDocument> Filter(params Action<QueryDsl.QueryContainerDescriptor<TDocument>>[] configure)
+		{
+			FilterValue = null;
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = configure;
 			return Self;
 		}
 
@@ -268,13 +340,55 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FieldsValue is not null)
+			if (FieldsDescriptor is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+			}
+			else if (FieldsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
+			}
+			else if (FieldsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
+				foreach (var action in FieldsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FieldsValue is not null)
 			{
 				writer.WritePropertyName("fields");
 				JsonSerializer.Serialize(writer, FieldsValue, options);
 			}
 
-			if (FilterValue is not null)
+			if (FilterDescriptor is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+			}
+			else if (FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			}
+			else if (FilterDescriptorActions is not null)
+			{
+				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
+				foreach (var action in FilterDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FilterValue is not null)
 			{
 				writer.WritePropertyName("filter");
 				JsonSerializer.Serialize(writer, FilterValue, options);
@@ -377,7 +491,19 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 
+		private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
+
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+
+		private QueryDsl.QueryContainerDescriptor FilterDescriptor { get; set; }
+
+		private Action<QueryDsl.QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+
+		private Action<QueryDsl.QueryContainerDescriptor>[] FilterDescriptorActions { get; set; }
 
 		private bool? CaseSensitiveValue { get; set; }
 
@@ -405,13 +531,73 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		public EqlSearchRequestDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 		{
+			FieldsDescriptor = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = null;
 			FieldsValue = fields;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor Fields(QueryDsl.FieldAndFormatDescriptor descriptor)
+		{
+			FieldsValue = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = null;
+			FieldsDescriptor = descriptor;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor Fields(Action<QueryDsl.FieldAndFormatDescriptor> configure)
+		{
+			FieldsValue = null;
+			FieldsDescriptor = null;
+			FieldsDescriptorActions = null;
+			FieldsDescriptorAction = configure;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor Fields(params Action<QueryDsl.FieldAndFormatDescriptor>[] configure)
+		{
+			FieldsValue = null;
+			FieldsDescriptor = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = configure;
 			return Self;
 		}
 
 		public EqlSearchRequestDescriptor Filter(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
 		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = null;
 			FilterValue = filter;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = null;
+			FilterDescriptor = descriptor;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptor = null;
+			FilterDescriptorActions = null;
+			FilterDescriptorAction = configure;
+			return Self;
+		}
+
+		public EqlSearchRequestDescriptor Filter(params Action<QueryDsl.QueryContainerDescriptor>[] configure)
+		{
+			FilterValue = null;
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorActions = configure;
 			return Self;
 		}
 
@@ -526,13 +712,55 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FieldsValue is not null)
+			if (FieldsDescriptor is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+			}
+			else if (FieldsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
+			}
+			else if (FieldsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
+				foreach (var action in FieldsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FieldsValue is not null)
 			{
 				writer.WritePropertyName("fields");
 				JsonSerializer.Serialize(writer, FieldsValue, options);
 			}
 
-			if (FilterValue is not null)
+			if (FilterDescriptor is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+			}
+			else if (FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+			}
+			else if (FilterDescriptorActions is not null)
+			{
+				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
+				foreach (var action in FilterDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FilterValue is not null)
 			{
 				writer.WritePropertyName("filter");
 				JsonSerializer.Serialize(writer, FilterValue, options);

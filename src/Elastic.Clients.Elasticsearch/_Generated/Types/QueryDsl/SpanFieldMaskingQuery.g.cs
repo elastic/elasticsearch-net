@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanFieldMaskingQueryDescriptor<TDocument> Query(Action<SpanQueryDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -181,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanFieldMaskingQueryDescriptor Query(Action<SpanQueryDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}

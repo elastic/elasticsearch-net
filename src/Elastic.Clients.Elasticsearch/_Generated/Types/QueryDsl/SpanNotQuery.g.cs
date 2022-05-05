@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanNotQueryDescriptor<TDocument> Exclude(Action<SpanQueryDescriptor<TDocument>> configure)
 		{
 			ExcludeValue = null;
-			ExcludeDescriptorAction = null;
+			ExcludeDescriptor = null;
 			ExcludeDescriptorAction = configure;
 			return Self;
 		}
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanNotQueryDescriptor<TDocument> Include(Action<SpanQueryDescriptor<TDocument>> configure)
 		{
 			IncludeValue = null;
-			IncludeDescriptorAction = null;
+			IncludeDescriptor = null;
 			IncludeDescriptorAction = configure;
 			return Self;
 		}
@@ -275,7 +275,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanNotQueryDescriptor Exclude(Action<SpanQueryDescriptor> configure)
 		{
 			ExcludeValue = null;
-			ExcludeDescriptorAction = null;
+			ExcludeDescriptor = null;
 			ExcludeDescriptorAction = configure;
 			return Self;
 		}
@@ -299,7 +299,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanNotQueryDescriptor Include(Action<SpanQueryDescriptor> configure)
 		{
 			IncludeValue = null;
-			IncludeDescriptorAction = null;
+			IncludeDescriptor = null;
 			IncludeDescriptorAction = configure;
 			return Self;
 		}

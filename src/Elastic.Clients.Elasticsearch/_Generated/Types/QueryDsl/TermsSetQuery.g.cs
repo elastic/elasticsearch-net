@@ -165,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Action<ScriptDescriptor> configure)
 		{
 			MinimumShouldMatchScriptValue = null;
-			MinimumShouldMatchScriptDescriptorAction = null;
+			MinimumShouldMatchScriptDescriptor = null;
 			MinimumShouldMatchScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -300,7 +300,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public TermsSetQueryDescriptor MinimumShouldMatchScript(Action<ScriptDescriptor> configure)
 		{
 			MinimumShouldMatchScriptValue = null;
-			MinimumShouldMatchScriptDescriptorAction = null;
+			MinimumShouldMatchScriptDescriptor = null;
 			MinimumShouldMatchScriptDescriptorAction = configure;
 			return Self;
 		}

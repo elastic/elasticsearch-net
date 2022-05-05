@@ -66,6 +66,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; set; }
 
+		private ProcessorContainerDescriptor<TDocument> OnFailureDescriptor { get; set; }
+
+		private Action<ProcessorContainerDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+
+		private Action<ProcessorContainerDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? IfValue { get; set; }
@@ -88,7 +94,37 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		public EnrichProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure)
 		{
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
 			OnFailureValue = onFailure;
+			return Self;
+		}
+
+		public EnrichProcessorDescriptor<TDocument> OnFailure(ProcessorContainerDescriptor<TDocument> descriptor)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptor = descriptor;
+			return Self;
+		}
+
+		public EnrichProcessorDescriptor<TDocument> OnFailure(Action<ProcessorContainerDescriptor<TDocument>> configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptorAction = configure;
+			return Self;
+		}
+
+		public EnrichProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorContainerDescriptor<TDocument>>[] configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = configure;
 			return Self;
 		}
 
@@ -167,7 +203,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (OnFailureValue is not null)
+			if (OnFailureDescriptor is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			}
+			else if (OnFailureDescriptorAction is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			}
+			else if (OnFailureDescriptorActions is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
+				foreach (var action in OnFailureDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (OnFailureValue is not null)
 			{
 				writer.WritePropertyName("on_failure");
 				JsonSerializer.Serialize(writer, OnFailureValue, options);
@@ -234,6 +291,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; set; }
 
+		private ProcessorContainerDescriptor OnFailureDescriptor { get; set; }
+
+		private Action<ProcessorContainerDescriptor> OnFailureDescriptorAction { get; set; }
+
+		private Action<ProcessorContainerDescriptor>[] OnFailureDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? IfValue { get; set; }
@@ -256,7 +319,37 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		public EnrichProcessorDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure)
 		{
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
 			OnFailureValue = onFailure;
+			return Self;
+		}
+
+		public EnrichProcessorDescriptor OnFailure(ProcessorContainerDescriptor descriptor)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptor = descriptor;
+			return Self;
+		}
+
+		public EnrichProcessorDescriptor OnFailure(Action<ProcessorContainerDescriptor> configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptorAction = configure;
+			return Self;
+		}
+
+		public EnrichProcessorDescriptor OnFailure(params Action<ProcessorContainerDescriptor>[] configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = configure;
 			return Self;
 		}
 
@@ -347,7 +440,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (OnFailureValue is not null)
+			if (OnFailureDescriptor is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			}
+			else if (OnFailureDescriptorAction is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(OnFailureDescriptorAction), options);
+			}
+			else if (OnFailureDescriptorActions is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
+				foreach (var action in OnFailureDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (OnFailureValue is not null)
 			{
 				writer.WritePropertyName("on_failure");
 				JsonSerializer.Serialize(writer, OnFailureValue, options);

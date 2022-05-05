@@ -59,6 +59,103 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string? Start { get; set; }
 	}
 
+	public sealed partial class MlFlushJobRequestDescriptor<TDocument> : RequestDescriptorBase<MlFlushJobRequestDescriptor<TDocument>, MlFlushJobRequestParameters>
+	{
+		internal MlFlushJobRequestDescriptor(Action<MlFlushJobRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public MlFlushJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
+		{
+		}
+
+		internal MlFlushJobRequestDescriptor()
+		{
+		}
+
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningFlushJob;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		public MlFlushJobRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id job_id)
+		{
+			RouteValues.Required("job_id", job_id);
+			return Self;
+		}
+
+		private string? AdvanceTimeValue { get; set; }
+
+		private bool? CalcInterimValue { get; set; }
+
+		private string? EndValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.EpochMillis? SkipTimeValue { get; set; }
+
+		private string? StartValue { get; set; }
+
+		public MlFlushJobRequestDescriptor<TDocument> AdvanceTime(string? advanceTime)
+		{
+			AdvanceTimeValue = advanceTime;
+			return Self;
+		}
+
+		public MlFlushJobRequestDescriptor<TDocument> CalcInterim(bool? calcInterim = true)
+		{
+			CalcInterimValue = calcInterim;
+			return Self;
+		}
+
+		public MlFlushJobRequestDescriptor<TDocument> End(string? end)
+		{
+			EndValue = end;
+			return Self;
+		}
+
+		public MlFlushJobRequestDescriptor<TDocument> SkipTime(Elastic.Clients.Elasticsearch.EpochMillis? skipTime)
+		{
+			SkipTimeValue = skipTime;
+			return Self;
+		}
+
+		public MlFlushJobRequestDescriptor<TDocument> Start(string? start)
+		{
+			StartValue = start;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (AdvanceTimeValue is not null)
+			{
+				writer.WritePropertyName("advance_time");
+				JsonSerializer.Serialize(writer, AdvanceTimeValue, options);
+			}
+
+			if (CalcInterimValue.HasValue)
+			{
+				writer.WritePropertyName("calc_interim");
+				writer.WriteBooleanValue(CalcInterimValue.Value);
+			}
+
+			if (EndValue is not null)
+			{
+				writer.WritePropertyName("end");
+				JsonSerializer.Serialize(writer, EndValue, options);
+			}
+
+			if (SkipTimeValue is not null)
+			{
+				writer.WritePropertyName("skip_time");
+				JsonSerializer.Serialize(writer, SkipTimeValue, options);
+			}
+
+			if (StartValue is not null)
+			{
+				writer.WritePropertyName("start");
+				JsonSerializer.Serialize(writer, StartValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public sealed partial class MlFlushJobRequestDescriptor : RequestDescriptorBase<MlFlushJobRequestDescriptor, MlFlushJobRequestParameters>
 	{
 		internal MlFlushJobRequestDescriptor(Action<MlFlushJobRequestDescriptor> configure) => configure.Invoke(this);

@@ -104,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public SecurityGrantApiKeyRequestDescriptor ApiKey(Action<GrantApiKeyDescriptor> configure)
 		{
 			ApiKeyValue = null;
-			ApiKeyDescriptorAction = null;
+			ApiKeyDescriptor = null;
 			ApiKeyDescriptorAction = configure;
 			return Self;
 		}

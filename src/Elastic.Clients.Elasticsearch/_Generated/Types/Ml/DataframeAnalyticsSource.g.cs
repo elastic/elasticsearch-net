@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeAnalyticsSourceDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeAnalyticsSourceDescriptor<TDocument> Source(Action<DataframeAnalysisAnalyzedFieldsDescriptor> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeAnalyticsSourceDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -239,7 +239,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeAnalyticsSourceDescriptor Source(Action<DataframeAnalysisAnalyzedFieldsDescriptor> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}

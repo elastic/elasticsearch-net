@@ -71,7 +71,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanMultiTermQueryDescriptor<TDocument> Match(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			MatchValue = null;
-			MatchDescriptorAction = null;
+			MatchDescriptor = null;
 			MatchDescriptorAction = configure;
 			return Self;
 		}
@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanMultiTermQueryDescriptor Match(Action<QueryContainerDescriptor> configure)
 		{
 			MatchValue = null;
-			MatchDescriptorAction = null;
+			MatchDescriptor = null;
 			MatchDescriptorAction = configure;
 			return Self;
 		}

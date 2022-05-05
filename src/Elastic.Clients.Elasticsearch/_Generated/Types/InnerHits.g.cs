@@ -106,6 +106,12 @@ namespace Elastic.Clients.Elasticsearch
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
+		private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
 
 		private HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
@@ -161,14 +167,44 @@ namespace Elastic.Clients.Elasticsearch
 		public InnerHitsDescriptor<TDocument> Collapse(Action<FieldCollapseDescriptor<TDocument>> configure)
 		{
 			CollapseValue = null;
-			CollapseDescriptorAction = null;
+			CollapseDescriptor = null;
 			CollapseDescriptorAction = configure;
 			return Self;
 		}
 
 		public InnerHitsDescriptor<TDocument> DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 		{
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = null;
 			DocvalueFieldsValue = docvalueFields;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> DocvalueFields(QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = null;
+			DocvalueFieldsDescriptor = descriptor;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> DocvalueFields(Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorActions = null;
+			DocvalueFieldsDescriptorAction = configure;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> DocvalueFields(params Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -191,7 +227,7 @@ namespace Elastic.Clients.Elasticsearch
 		public InnerHitsDescriptor<TDocument> Highlight(Action<HighlightDescriptor<TDocument>> configure)
 		{
 			HighlightValue = null;
-			HighlightDescriptorAction = null;
+			HighlightDescriptor = null;
 			HighlightDescriptorAction = configure;
 			return Self;
 		}
@@ -215,7 +251,7 @@ namespace Elastic.Clients.Elasticsearch
 		public InnerHitsDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}
@@ -323,7 +359,28 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, CollapseValue, options);
 			}
 
-			if (DocvalueFieldsValue is not null)
+			if (DocvalueFieldsDescriptor is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
+			}
+			else if (DocvalueFieldsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(DocvalueFieldsDescriptorAction), options);
+			}
+			else if (DocvalueFieldsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
+				foreach (var action in DocvalueFieldsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (DocvalueFieldsValue is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
 				JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
@@ -452,6 +509,12 @@ namespace Elastic.Clients.Elasticsearch
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
+		private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
 
 		private HighlightDescriptor HighlightDescriptor { get; set; }
@@ -507,14 +570,44 @@ namespace Elastic.Clients.Elasticsearch
 		public InnerHitsDescriptor Collapse(Action<FieldCollapseDescriptor> configure)
 		{
 			CollapseValue = null;
-			CollapseDescriptorAction = null;
+			CollapseDescriptor = null;
 			CollapseDescriptorAction = configure;
 			return Self;
 		}
 
 		public InnerHitsDescriptor DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 		{
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = null;
 			DocvalueFieldsValue = docvalueFields;
+			return Self;
+		}
+
+		public InnerHitsDescriptor DocvalueFields(QueryDsl.FieldAndFormatDescriptor descriptor)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = null;
+			DocvalueFieldsDescriptor = descriptor;
+			return Self;
+		}
+
+		public InnerHitsDescriptor DocvalueFields(Action<QueryDsl.FieldAndFormatDescriptor> configure)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorActions = null;
+			DocvalueFieldsDescriptorAction = configure;
+			return Self;
+		}
+
+		public InnerHitsDescriptor DocvalueFields(params Action<QueryDsl.FieldAndFormatDescriptor>[] configure)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -537,7 +630,7 @@ namespace Elastic.Clients.Elasticsearch
 		public InnerHitsDescriptor Highlight(Action<HighlightDescriptor> configure)
 		{
 			HighlightValue = null;
-			HighlightDescriptorAction = null;
+			HighlightDescriptor = null;
 			HighlightDescriptorAction = configure;
 			return Self;
 		}
@@ -561,7 +654,7 @@ namespace Elastic.Clients.Elasticsearch
 		public InnerHitsDescriptor Sort(Action<SortDescriptor> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}
@@ -681,7 +774,28 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, CollapseValue, options);
 			}
 
-			if (DocvalueFieldsValue is not null)
+			if (DocvalueFieldsDescriptor is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
+			}
+			else if (DocvalueFieldsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(DocvalueFieldsDescriptorAction), options);
+			}
+			else if (DocvalueFieldsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
+				foreach (var action in DocvalueFieldsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (DocvalueFieldsValue is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
 				JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);

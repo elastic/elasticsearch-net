@@ -197,7 +197,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutMappingRequestDescriptor<TDocument> FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
 		{
 			FieldNamesValue = null;
-			FieldNamesDescriptorAction = null;
+			FieldNamesDescriptor = null;
 			FieldNamesDescriptorAction = configure;
 			return Self;
 		}
@@ -227,7 +227,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutMappingRequestDescriptor<TDocument> Routing(Action<Mapping.RoutingFieldDescriptor> configure)
 		{
 			RoutingValue = null;
-			RoutingDescriptorAction = null;
+			RoutingDescriptor = null;
 			RoutingDescriptorAction = configure;
 			return Self;
 		}
@@ -251,7 +251,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutMappingRequestDescriptor<TDocument> Source(Action<Mapping.SourceFieldDescriptor> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -480,7 +480,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutMappingRequestDescriptor FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
 		{
 			FieldNamesValue = null;
-			FieldNamesDescriptorAction = null;
+			FieldNamesDescriptor = null;
 			FieldNamesDescriptorAction = configure;
 			return Self;
 		}
@@ -510,7 +510,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutMappingRequestDescriptor Routing(Action<Mapping.RoutingFieldDescriptor> configure)
 		{
 			RoutingValue = null;
-			RoutingDescriptorAction = null;
+			RoutingDescriptor = null;
 			RoutingDescriptorAction = configure;
 			return Self;
 		}
@@ -534,7 +534,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutMappingRequestDescriptor Source(Action<Mapping.SourceFieldDescriptor> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}

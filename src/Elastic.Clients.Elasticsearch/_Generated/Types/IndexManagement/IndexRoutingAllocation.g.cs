@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexRoutingAllocationDescriptor Disk(Action<IndexRoutingAllocationDiskDescriptor> configure)
 		{
 			DiskValue = null;
-			DiskDescriptorAction = null;
+			DiskDescriptor = null;
 			DiskDescriptorAction = configure;
 			return Self;
 		}
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexRoutingAllocationDescriptor Include(Action<IndexRoutingAllocationIncludeDescriptor> configure)
 		{
 			IncludeValue = null;
-			IncludeDescriptorAction = null;
+			IncludeDescriptor = null;
 			IncludeDescriptorAction = configure;
 			return Self;
 		}
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexRoutingAllocationDescriptor InitialRecovery(Action<IndexRoutingAllocationInitialRecoveryDescriptor> configure)
 		{
 			InitialRecoveryValue = null;
-			InitialRecoveryDescriptorAction = null;
+			InitialRecoveryDescriptor = null;
 			InitialRecoveryDescriptorAction = configure;
 			return Self;
 		}

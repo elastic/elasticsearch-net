@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public TranslogDescriptor Retention(Action<TranslogRetentionDescriptor> configure)
 		{
 			RetentionValue = null;
-			RetentionDescriptorAction = null;
+			RetentionDescriptor = null;
 			RetentionDescriptorAction = configure;
 			return Self;
 		}

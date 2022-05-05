@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public ExploreControlsDescriptor<TDocument> SampleDiversity(Action<SampleDiversityDescriptor<TDocument>> configure)
 		{
 			SampleDiversityValue = null;
-			SampleDiversityDescriptorAction = null;
+			SampleDiversityDescriptor = null;
 			SampleDiversityDescriptorAction = configure;
 			return Self;
 		}
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public ExploreControlsDescriptor SampleDiversity(Action<SampleDiversityDescriptor> configure)
 		{
 			SampleDiversityValue = null;
-			SampleDiversityDescriptorAction = null;
+			SampleDiversityDescriptor = null;
 			SampleDiversityDescriptorAction = configure;
 			return Self;
 		}

@@ -50,6 +50,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.RuleCondition>? ConditionsValue { get; set; }
 
+		private RuleConditionDescriptor ConditionsDescriptor { get; set; }
+
+		private Action<RuleConditionDescriptor> ConditionsDescriptorAction { get; set; }
+
+		private Action<RuleConditionDescriptor>[] ConditionsDescriptorActions { get; set; }
+
 		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Ml.FilterRef>? ScopeValue { get; set; }
 
 		public DetectionRuleDescriptor Actions(IEnumerable<Elastic.Clients.Elasticsearch.Ml.RuleAction>? actions)
@@ -60,7 +66,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public DetectionRuleDescriptor Conditions(IEnumerable<Elastic.Clients.Elasticsearch.Ml.RuleCondition>? conditions)
 		{
+			ConditionsDescriptor = null;
+			ConditionsDescriptorAction = null;
+			ConditionsDescriptorActions = null;
 			ConditionsValue = conditions;
+			return Self;
+		}
+
+		public DetectionRuleDescriptor Conditions(RuleConditionDescriptor descriptor)
+		{
+			ConditionsValue = null;
+			ConditionsDescriptorAction = null;
+			ConditionsDescriptorActions = null;
+			ConditionsDescriptor = descriptor;
+			return Self;
+		}
+
+		public DetectionRuleDescriptor Conditions(Action<RuleConditionDescriptor> configure)
+		{
+			ConditionsValue = null;
+			ConditionsDescriptor = null;
+			ConditionsDescriptorActions = null;
+			ConditionsDescriptorAction = configure;
+			return Self;
+		}
+
+		public DetectionRuleDescriptor Conditions(params Action<RuleConditionDescriptor>[] configure)
+		{
+			ConditionsValue = null;
+			ConditionsDescriptor = null;
+			ConditionsDescriptorAction = null;
+			ConditionsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -79,7 +115,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				JsonSerializer.Serialize(writer, ActionsValue, options);
 			}
 
-			if (ConditionsValue is not null)
+			if (ConditionsDescriptor is not null)
+			{
+				writer.WritePropertyName("conditions");
+				JsonSerializer.Serialize(writer, ConditionsDescriptor, options);
+			}
+			else if (ConditionsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("conditions");
+				JsonSerializer.Serialize(writer, new RuleConditionDescriptor(ConditionsDescriptorAction), options);
+			}
+			else if (ConditionsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("conditions");
+				writer.WriteStartArray();
+				foreach (var action in ConditionsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new RuleConditionDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (ConditionsValue is not null)
 			{
 				writer.WritePropertyName("conditions");
 				JsonSerializer.Serialize(writer, ConditionsValue, options);

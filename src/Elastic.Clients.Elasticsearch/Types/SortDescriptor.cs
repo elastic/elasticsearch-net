@@ -87,7 +87,7 @@ public sealed class SortDescriptor<TDocument> : DescriptorPromiseBase<SortDescri
 
 	private SortDescriptor<TDocument> AddSort(SortBase sort) => sort == null ? this : Assign(sort, (a, v) => a.Add(v), a => a._serializationOrderTracker.Add(0));
 
-	public void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartArray();
 

@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeEvaluationRegressionMetricsDescriptor Huber(Action<DataframeEvaluationRegressionMetricsHuberDescriptor> configure)
 		{
 			HuberValue = null;
-			HuberDescriptorAction = null;
+			HuberDescriptor = null;
 			HuberDescriptorAction = configure;
 			return Self;
 		}
@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeEvaluationRegressionMetricsDescriptor Msle(Action<DataframeEvaluationRegressionMetricsMsleDescriptor> configure)
 		{
 			MsleValue = null;
-			MsleDescriptorAction = null;
+			MsleDescriptor = null;
 			MsleDescriptorAction = configure;
 			return Self;
 		}
