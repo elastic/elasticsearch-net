@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public RolloverRequestDescriptor Conditions(Action<RolloverConditionsDescriptor> configure)
 		{
 			ConditionsValue = null;
-			ConditionsDescriptorAction = null;
+			ConditionsDescriptor = null;
 			ConditionsDescriptorAction = configure;
 			return Self;
 		}
@@ -181,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public RolloverRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
-			MappingsDescriptorAction = null;
+			MappingsDescriptor = null;
 			MappingsDescriptorAction = configure;
 			return Self;
 		}

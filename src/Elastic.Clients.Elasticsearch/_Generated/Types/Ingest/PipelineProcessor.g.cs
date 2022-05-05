@@ -33,12 +33,20 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	}
 
-	public sealed partial class PipelineProcessorDescriptor : SerializableDescriptorBase<PipelineProcessorDescriptor>
+	public sealed partial class PipelineProcessorDescriptor<TDocument> : SerializableDescriptorBase<PipelineProcessorDescriptor<TDocument>>
 	{
-		internal PipelineProcessorDescriptor(Action<PipelineProcessorDescriptor> configure) => configure.Invoke(this);
+		internal PipelineProcessorDescriptor(Action<PipelineProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public PipelineProcessorDescriptor() : base()
 		{
 		}
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; set; }
+
+		private ProcessorContainerDescriptor<TDocument> OnFailureDescriptor { get; set; }
+
+		private Action<ProcessorContainerDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+
+		private Action<ProcessorContainerDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 
 		private string? IfValue { get; set; }
 
@@ -46,9 +54,180 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
 
+		private string? TagValue { get; set; }
+
+		public PipelineProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure)
+		{
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
+			OnFailureValue = onFailure;
+			return Self;
+		}
+
+		public PipelineProcessorDescriptor<TDocument> OnFailure(ProcessorContainerDescriptor<TDocument> descriptor)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptor = descriptor;
+			return Self;
+		}
+
+		public PipelineProcessorDescriptor<TDocument> OnFailure(Action<ProcessorContainerDescriptor<TDocument>> configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptorAction = configure;
+			return Self;
+		}
+
+		public PipelineProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorContainerDescriptor<TDocument>>[] configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = configure;
+			return Self;
+		}
+
+		public PipelineProcessorDescriptor<TDocument> If(string? ifValue)
+		{
+			IfValue = ifValue;
+			return Self;
+		}
+
+		public PipelineProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+		{
+			IgnoreFailureValue = ignoreFailure;
+			return Self;
+		}
+
+		public PipelineProcessorDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public PipelineProcessorDescriptor<TDocument> Tag(string? tag)
+		{
+			TagValue = tag;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (OnFailureDescriptor is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			}
+			else if (OnFailureDescriptorAction is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			}
+			else if (OnFailureDescriptorActions is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
+				foreach (var action in OnFailureDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (OnFailureValue is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(IfValue))
+			{
+				writer.WritePropertyName("if");
+				writer.WriteStringValue(IfValue);
+			}
+
+			if (IgnoreFailureValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_failure");
+				writer.WriteBooleanValue(IgnoreFailureValue.Value);
+			}
+
+			writer.WritePropertyName("name");
+			JsonSerializer.Serialize(writer, NameValue, options);
+			if (!string.IsNullOrEmpty(TagValue))
+			{
+				writer.WritePropertyName("tag");
+				writer.WriteStringValue(TagValue);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class PipelineProcessorDescriptor : SerializableDescriptorBase<PipelineProcessorDescriptor>
+	{
+		internal PipelineProcessorDescriptor(Action<PipelineProcessorDescriptor> configure) => configure.Invoke(this);
+		public PipelineProcessorDescriptor() : base()
+		{
+		}
+
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; set; }
 
+		private ProcessorContainerDescriptor OnFailureDescriptor { get; set; }
+
+		private Action<ProcessorContainerDescriptor> OnFailureDescriptorAction { get; set; }
+
+		private Action<ProcessorContainerDescriptor>[] OnFailureDescriptorActions { get; set; }
+
+		private string? IfValue { get; set; }
+
+		private bool? IgnoreFailureValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
+
 		private string? TagValue { get; set; }
+
+		public PipelineProcessorDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure)
+		{
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
+			OnFailureValue = onFailure;
+			return Self;
+		}
+
+		public PipelineProcessorDescriptor OnFailure(ProcessorContainerDescriptor descriptor)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptor = descriptor;
+			return Self;
+		}
+
+		public PipelineProcessorDescriptor OnFailure(Action<ProcessorContainerDescriptor> configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptorAction = configure;
+			return Self;
+		}
+
+		public PipelineProcessorDescriptor OnFailure(params Action<ProcessorContainerDescriptor>[] configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = configure;
+			return Self;
+		}
 
 		public PipelineProcessorDescriptor If(string? ifValue)
 		{
@@ -68,12 +247,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public PipelineProcessorDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure)
-		{
-			OnFailureValue = onFailure;
-			return Self;
-		}
-
 		public PipelineProcessorDescriptor Tag(string? tag)
 		{
 			TagValue = tag;
@@ -83,6 +256,33 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (OnFailureDescriptor is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			}
+			else if (OnFailureDescriptorAction is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(OnFailureDescriptorAction), options);
+			}
+			else if (OnFailureDescriptorActions is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
+				foreach (var action in OnFailureDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (OnFailureValue is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(IfValue))
 			{
 				writer.WritePropertyName("if");
@@ -97,12 +297,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			writer.WritePropertyName("name");
 			JsonSerializer.Serialize(writer, NameValue, options);
-			if (OnFailureValue is not null)
-			{
-				writer.WritePropertyName("on_failure");
-				JsonSerializer.Serialize(writer, OnFailureValue, options);
-			}
-
 			if (!string.IsNullOrEmpty(TagValue))
 			{
 				writer.WritePropertyName("tag");

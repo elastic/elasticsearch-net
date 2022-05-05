@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor<TDocument> Latest(Action<LatestDescriptor<TDocument>> configure)
 		{
 			LatestValue = null;
-			LatestDescriptorAction = null;
+			LatestDescriptor = null;
 			LatestDescriptorAction = configure;
 			return Self;
 		}
@@ -203,7 +203,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor<TDocument> RetentionPolicy(Action<RetentionPolicyContainerDescriptor<TDocument>> configure)
 		{
 			RetentionPolicyValue = null;
-			RetentionPolicyDescriptorAction = null;
+			RetentionPolicyDescriptor = null;
 			RetentionPolicyDescriptorAction = configure;
 			return Self;
 		}
@@ -227,7 +227,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor<TDocument> Source(Action<SourceDescriptor<TDocument>> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -251,7 +251,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor<TDocument> Sync(Action<SyncContainerDescriptor<TDocument>> configure)
 		{
 			SyncValue = null;
-			SyncDescriptorAction = null;
+			SyncDescriptor = null;
 			SyncDescriptorAction = configure;
 			return Self;
 		}
@@ -287,7 +287,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor<TDocument> Dest(Action<DestinationDescriptor> configure)
 		{
 			DestValue = null;
-			DestDescriptorAction = null;
+			DestDescriptor = null;
 			DestDescriptorAction = configure;
 			return Self;
 		}
@@ -317,7 +317,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor<TDocument> Pivot(Action<PivotDescriptor> configure)
 		{
 			PivotValue = null;
-			PivotDescriptorAction = null;
+			PivotDescriptor = null;
 			PivotDescriptorAction = configure;
 			return Self;
 		}
@@ -341,7 +341,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor<TDocument> Settings(Action<SettingsDescriptor> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}
@@ -572,7 +572,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor Latest(Action<LatestDescriptor> configure)
 		{
 			LatestValue = null;
-			LatestDescriptorAction = null;
+			LatestDescriptor = null;
 			LatestDescriptorAction = configure;
 			return Self;
 		}
@@ -596,7 +596,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor RetentionPolicy(Action<RetentionPolicyContainerDescriptor> configure)
 		{
 			RetentionPolicyValue = null;
-			RetentionPolicyDescriptorAction = null;
+			RetentionPolicyDescriptor = null;
 			RetentionPolicyDescriptorAction = configure;
 			return Self;
 		}
@@ -620,7 +620,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor Source(Action<SourceDescriptor> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -644,7 +644,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor Sync(Action<SyncContainerDescriptor> configure)
 		{
 			SyncValue = null;
-			SyncDescriptorAction = null;
+			SyncDescriptor = null;
 			SyncDescriptorAction = configure;
 			return Self;
 		}
@@ -680,7 +680,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor Dest(Action<DestinationDescriptor> configure)
 		{
 			DestValue = null;
-			DestDescriptorAction = null;
+			DestDescriptor = null;
 			DestDescriptorAction = configure;
 			return Self;
 		}
@@ -710,7 +710,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor Pivot(Action<PivotDescriptor> configure)
 		{
 			PivotValue = null;
-			PivotDescriptorAction = null;
+			PivotDescriptor = null;
 			PivotDescriptorAction = configure;
 			return Self;
 		}
@@ -734,7 +734,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformPutTransformRequestDescriptor Settings(Action<SettingsDescriptor> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}

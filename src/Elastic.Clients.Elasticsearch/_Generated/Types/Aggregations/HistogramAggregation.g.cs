@@ -331,7 +331,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public HistogramAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
@@ -355,7 +355,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public HistogramAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -427,7 +427,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public HistogramAggregationDescriptor<TDocument> Order(Action<HistogramOrderDescriptor> configure)
 		{
 			OrderValue = null;
-			OrderDescriptorAction = null;
+			OrderDescriptor = null;
 			OrderDescriptorAction = configure;
 			return Self;
 		}
@@ -590,7 +590,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public HistogramAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
@@ -614,7 +614,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public HistogramAggregationDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -692,7 +692,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public HistogramAggregationDescriptor Order(Action<HistogramOrderDescriptor> configure)
 		{
 			OrderValue = null;
-			OrderDescriptorAction = null;
+			OrderDescriptor = null;
 			OrderDescriptorAction = configure;
 			return Self;
 		}

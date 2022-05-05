@@ -217,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public InferenceAggregationDescriptor<TDocument> InferenceConfig(Action<InferenceConfigContainerDescriptor<TDocument>> configure)
 		{
 			InferenceConfigValue = null;
-			InferenceConfigDescriptorAction = null;
+			InferenceConfigDescriptor = null;
 			InferenceConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -346,7 +346,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public InferenceAggregationDescriptor InferenceConfig(Action<InferenceConfigContainerDescriptor> configure)
 		{
 			InferenceConfigValue = null;
-			InferenceConfigDescriptorAction = null;
+			InferenceConfigDescriptor = null;
 			InferenceConfigDescriptorAction = configure;
 			return Self;
 		}

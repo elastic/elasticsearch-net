@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexTemplateMappingDescriptor<TDocument> Settings(Action<IndexSettingsDescriptor<TDocument>> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexTemplateMappingDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
-			MappingsDescriptorAction = null;
+			MappingsDescriptor = null;
 			MappingsDescriptorAction = configure;
 			return Self;
 		}
@@ -199,7 +199,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexTemplateMappingDescriptor Settings(Action<IndexSettingsDescriptor> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}
@@ -229,7 +229,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexTemplateMappingDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
-			MappingsDescriptorAction = null;
+			MappingsDescriptor = null;
 			MappingsDescriptorAction = configure;
 			return Self;
 		}

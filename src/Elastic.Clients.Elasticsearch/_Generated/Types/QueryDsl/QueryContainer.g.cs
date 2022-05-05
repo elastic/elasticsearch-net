@@ -582,7 +582,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		public void Bool(BoolQuery query) => Set(query, "bool");
-		public void Bool(Action<BoolQueryDescriptor> configure) => Set(configure, "bool");
+		public void Bool(Action<BoolQueryDescriptor<TDocument>> configure) => Set(configure, "bool");
 		public void Boosting(BoostingQuery query) => Set(query, "boosting");
 		public void Boosting(Action<BoostingQueryDescriptor<TDocument>> configure) => Set(configure, "boosting");
 		public void CombinedFields(CombinedFieldsQuery query) => Set(query, "combined_fields");
@@ -590,7 +590,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void ConstantScore(ConstantScoreQuery query) => Set(query, "constant_score");
 		public void ConstantScore(Action<ConstantScoreQueryDescriptor<TDocument>> configure) => Set(configure, "constant_score");
 		public void DisMax(DisMaxQuery query) => Set(query, "dis_max");
-		public void DisMax(Action<DisMaxQueryDescriptor> configure) => Set(configure, "dis_max");
+		public void DisMax(Action<DisMaxQueryDescriptor<TDocument>> configure) => Set(configure, "dis_max");
 		public void Exists(ExistsQuery query) => Set(query, "exists");
 		public void Exists(Action<ExistsQueryDescriptor<TDocument>> configure) => Set(configure, "exists");
 		public void FieldMaskingSpan(SpanFieldMaskingQuery query) => Set(query, "field_masking_span");
@@ -664,11 +664,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void SpanMulti(SpanMultiTermQuery query) => Set(query, "span_multi");
 		public void SpanMulti(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
 		public void SpanNear(SpanNearQuery query) => Set(query, "span_near");
-		public void SpanNear(Action<SpanNearQueryDescriptor> configure) => Set(configure, "span_near");
+		public void SpanNear(Action<SpanNearQueryDescriptor<TDocument>> configure) => Set(configure, "span_near");
 		public void SpanNot(SpanNotQuery query) => Set(query, "span_not");
 		public void SpanNot(Action<SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
 		public void SpanOr(SpanOrQuery query) => Set(query, "span_or");
-		public void SpanOr(Action<SpanOrQueryDescriptor> configure) => Set(configure, "span_or");
+		public void SpanOr(Action<SpanOrQueryDescriptor<TDocument>> configure) => Set(configure, "span_or");
 		public void SpanTerm(SpanTermQuery query) => Set(query, "span_term");
 		public void SpanTerm(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
 		public void SpanWithin(SpanWithinQuery query) => Set(query, "span_within");
@@ -746,6 +746,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public void Bool(BoolQuery query) => Set(query, "bool");
 		public void Bool(Action<BoolQueryDescriptor> configure) => Set(configure, "bool");
+		public void Bool<TDocument>(Action<BoolQueryDescriptor<TDocument>> configure) => Set(configure, "bool");
 		public void Boosting(BoostingQuery query) => Set(query, "boosting");
 		public void Boosting(Action<BoostingQueryDescriptor> configure) => Set(configure, "boosting");
 		public void Boosting<TDocument>(Action<BoostingQueryDescriptor<TDocument>> configure) => Set(configure, "boosting");
@@ -757,6 +758,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void ConstantScore<TDocument>(Action<ConstantScoreQueryDescriptor<TDocument>> configure) => Set(configure, "constant_score");
 		public void DisMax(DisMaxQuery query) => Set(query, "dis_max");
 		public void DisMax(Action<DisMaxQueryDescriptor> configure) => Set(configure, "dis_max");
+		public void DisMax<TDocument>(Action<DisMaxQueryDescriptor<TDocument>> configure) => Set(configure, "dis_max");
 		public void Exists(ExistsQuery query) => Set(query, "exists");
 		public void Exists(Action<ExistsQueryDescriptor> configure) => Set(configure, "exists");
 		public void Exists<TDocument>(Action<ExistsQueryDescriptor<TDocument>> configure) => Set(configure, "exists");
@@ -857,11 +859,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void SpanMulti<TDocument>(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
 		public void SpanNear(SpanNearQuery query) => Set(query, "span_near");
 		public void SpanNear(Action<SpanNearQueryDescriptor> configure) => Set(configure, "span_near");
+		public void SpanNear<TDocument>(Action<SpanNearQueryDescriptor<TDocument>> configure) => Set(configure, "span_near");
 		public void SpanNot(SpanNotQuery query) => Set(query, "span_not");
 		public void SpanNot(Action<SpanNotQueryDescriptor> configure) => Set(configure, "span_not");
 		public void SpanNot<TDocument>(Action<SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
 		public void SpanOr(SpanOrQuery query) => Set(query, "span_or");
 		public void SpanOr(Action<SpanOrQueryDescriptor> configure) => Set(configure, "span_or");
+		public void SpanOr<TDocument>(Action<SpanOrQueryDescriptor<TDocument>> configure) => Set(configure, "span_or");
 		public void SpanTerm(SpanTermQuery query) => Set(query, "span_term");
 		public void SpanTerm(Action<SpanTermQueryDescriptor> configure) => Set(configure, "span_term");
 		public void SpanTerm<TDocument>(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");

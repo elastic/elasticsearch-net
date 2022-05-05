@@ -41,12 +41,22 @@ namespace PlaygroundV7x
 				.DefaultIndex("default-index")
 				.DefaultMappingFor<Person>(m => m
 					.DisableIdInference()
-					.IndexName("people")
-					.IdProperty(id => id.SecondaryId)
-					.RoutingProperty(id => id.SecondaryId)
-					.RelationName("relation"))
+					.IndexName("people"))
+					//.IdProperty(id => id.SecondaryId)
+					//.RoutingProperty(id => id.SecondaryId)
+					//.RelationName("relation"))
 				//.DefaultFieldNameInferrer(s => $"{s}_2")
 				.EnableDebugMode());
+
+
+
+			var filterResponse = await client.SearchAsync<Person>(s => s
+				.Query(q => q
+					.Bool(b => b
+						.Filter(
+							f => f.Term(t => t.Field(f => f.Age).Value(37)),
+							f => f.Term(t => t.Field(f => f.FirstName).Value("Steve"))
+						))));
 
 			var person = new Person { Id = 101, FirstName = "Steve", LastName = "Gordon", Age = 37, Email = "sgordon@example.com" };
 

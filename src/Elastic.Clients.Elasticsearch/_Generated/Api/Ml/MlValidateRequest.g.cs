@@ -134,7 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlValidateRequestDescriptor<TDocument> AnalysisConfig(Action<AnalysisConfigDescriptor<TDocument>> configure)
 		{
 			AnalysisConfigValue = null;
-			AnalysisConfigDescriptorAction = null;
+			AnalysisConfigDescriptor = null;
 			AnalysisConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -158,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlValidateRequestDescriptor<TDocument> DataDescription(Action<DataDescriptionDescriptor<TDocument>> configure)
 		{
 			DataDescriptionValue = null;
-			DataDescriptionDescriptorAction = null;
+			DataDescriptionDescriptor = null;
 			DataDescriptionDescriptorAction = configure;
 			return Self;
 		}
@@ -182,7 +182,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlValidateRequestDescriptor<TDocument> ModelPlot(Action<ModelPlotConfigDescriptor<TDocument>> configure)
 		{
 			ModelPlotValue = null;
-			ModelPlotDescriptorAction = null;
+			ModelPlotDescriptor = null;
 			ModelPlotDescriptorAction = configure;
 			return Self;
 		}
@@ -206,7 +206,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlValidateRequestDescriptor<TDocument> AnalysisLimits(Action<AnalysisLimitsDescriptor> configure)
 		{
 			AnalysisLimitsValue = null;
-			AnalysisLimitsDescriptorAction = null;
+			AnalysisLimitsDescriptor = null;
 			AnalysisLimitsDescriptorAction = configure;
 			return Self;
 		}
@@ -405,7 +405,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlValidateRequestDescriptor AnalysisConfig(Action<AnalysisConfigDescriptor> configure)
 		{
 			AnalysisConfigValue = null;
-			AnalysisConfigDescriptorAction = null;
+			AnalysisConfigDescriptor = null;
 			AnalysisConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -429,7 +429,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlValidateRequestDescriptor DataDescription(Action<DataDescriptionDescriptor> configure)
 		{
 			DataDescriptionValue = null;
-			DataDescriptionDescriptorAction = null;
+			DataDescriptionDescriptor = null;
 			DataDescriptionDescriptorAction = configure;
 			return Self;
 		}
@@ -453,7 +453,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlValidateRequestDescriptor ModelPlot(Action<ModelPlotConfigDescriptor> configure)
 		{
 			ModelPlotValue = null;
-			ModelPlotDescriptorAction = null;
+			ModelPlotDescriptor = null;
 			ModelPlotDescriptorAction = configure;
 			return Self;
 		}
@@ -477,7 +477,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlValidateRequestDescriptor AnalysisLimits(Action<AnalysisLimitsDescriptor> configure)
 		{
 			AnalysisLimitsValue = null;
-			AnalysisLimitsDescriptorAction = null;
+			AnalysisLimitsDescriptor = null;
 			AnalysisLimitsDescriptorAction = configure;
 			return Self;
 		}

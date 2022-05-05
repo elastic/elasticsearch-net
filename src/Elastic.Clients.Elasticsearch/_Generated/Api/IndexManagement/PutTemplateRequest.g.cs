@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutTemplateRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
-			MappingsDescriptorAction = null;
+			MappingsDescriptor = null;
 			MappingsDescriptorAction = configure;
 			return Self;
 		}

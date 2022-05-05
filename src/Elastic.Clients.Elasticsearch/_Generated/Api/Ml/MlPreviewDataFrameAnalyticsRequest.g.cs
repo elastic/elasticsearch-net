@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPreviewDataFrameAnalyticsRequestDescriptor<TDocument> Config(Action<DataframePreviewConfigDescriptor<TDocument>> configure)
 		{
 			ConfigValue = null;
-			ConfigDescriptorAction = null;
+			ConfigDescriptor = null;
 			ConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPreviewDataFrameAnalyticsRequestDescriptor Config(Action<DataframePreviewConfigDescriptor> configure)
 		{
 			ConfigValue = null;
-			ConfigDescriptorAction = null;
+			ConfigDescriptor = null;
 			ConfigDescriptorAction = configure;
 			return Self;
 		}

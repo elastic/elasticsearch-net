@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlGetModelSnapshotsRequestDescriptor<TDocument> Page(Action<PageDescriptor> configure)
 		{
 			PageValue = null;
-			PageDescriptorAction = null;
+			PageDescriptor = null;
 			PageDescriptorAction = configure;
 			return Self;
 		}
@@ -298,7 +298,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlGetModelSnapshotsRequestDescriptor Page(Action<PageDescriptor> configure)
 		{
 			PageValue = null;
-			PageDescriptorAction = null;
+			PageDescriptor = null;
 			PageDescriptorAction = configure;
 			return Self;
 		}

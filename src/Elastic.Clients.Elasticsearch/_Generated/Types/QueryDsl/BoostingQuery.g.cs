@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public BoostingQueryDescriptor<TDocument> Negative(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			NegativeValue = null;
-			NegativeDescriptorAction = null;
+			NegativeDescriptor = null;
 			NegativeDescriptorAction = configure;
 			return Self;
 		}
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public BoostingQueryDescriptor<TDocument> Positive(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			PositiveValue = null;
-			PositiveDescriptorAction = null;
+			PositiveDescriptor = null;
 			PositiveDescriptorAction = configure;
 			return Self;
 		}
@@ -229,7 +229,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public BoostingQueryDescriptor Negative(Action<QueryContainerDescriptor> configure)
 		{
 			NegativeValue = null;
-			NegativeDescriptorAction = null;
+			NegativeDescriptor = null;
 			NegativeDescriptorAction = configure;
 			return Self;
 		}
@@ -253,7 +253,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public BoostingQueryDescriptor Positive(Action<QueryContainerDescriptor> configure)
 		{
 			PositiveValue = null;
-			PositiveDescriptorAction = null;
+			PositiveDescriptor = null;
 			PositiveDescriptorAction = configure;
 			return Self;
 		}

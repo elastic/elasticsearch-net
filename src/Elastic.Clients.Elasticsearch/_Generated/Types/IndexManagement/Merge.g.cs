@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public MergeDescriptor Scheduler(Action<MergeSchedulerDescriptor> configure)
 		{
 			SchedulerValue = null;
-			SchedulerDescriptorAction = null;
+			SchedulerDescriptor = null;
 			SchedulerDescriptorAction = configure;
 			return Self;
 		}

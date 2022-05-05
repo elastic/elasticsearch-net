@@ -108,6 +108,12 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? VerticesValue { get; set; }
 
+		private VertexDefinitionDescriptor<TDocument> VerticesDescriptor { get; set; }
+
+		private Action<VertexDefinitionDescriptor<TDocument>> VerticesDescriptorAction { get; set; }
+
+		private Action<VertexDefinitionDescriptor<TDocument>>[] VerticesDescriptorActions { get; set; }
+
 		public GraphExploreRequestDescriptor<TDocument> Connections(Elastic.Clients.Elasticsearch.Graph.Hop? connections)
 		{
 			ConnectionsDescriptor = null;
@@ -127,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public GraphExploreRequestDescriptor<TDocument> Connections(Action<HopDescriptor<TDocument>> configure)
 		{
 			ConnectionsValue = null;
-			ConnectionsDescriptorAction = null;
+			ConnectionsDescriptor = null;
 			ConnectionsDescriptorAction = configure;
 			return Self;
 		}
@@ -151,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public GraphExploreRequestDescriptor<TDocument> Controls(Action<ExploreControlsDescriptor<TDocument>> configure)
 		{
 			ControlsValue = null;
-			ControlsDescriptorAction = null;
+			ControlsDescriptor = null;
 			ControlsDescriptorAction = configure;
 			return Self;
 		}
@@ -175,14 +181,44 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public GraphExploreRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
 
 		public GraphExploreRequestDescriptor<TDocument> Vertices(IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? vertices)
 		{
+			VerticesDescriptor = null;
+			VerticesDescriptorAction = null;
+			VerticesDescriptorActions = null;
 			VerticesValue = vertices;
+			return Self;
+		}
+
+		public GraphExploreRequestDescriptor<TDocument> Vertices(VertexDefinitionDescriptor<TDocument> descriptor)
+		{
+			VerticesValue = null;
+			VerticesDescriptorAction = null;
+			VerticesDescriptorActions = null;
+			VerticesDescriptor = descriptor;
+			return Self;
+		}
+
+		public GraphExploreRequestDescriptor<TDocument> Vertices(Action<VertexDefinitionDescriptor<TDocument>> configure)
+		{
+			VerticesValue = null;
+			VerticesDescriptor = null;
+			VerticesDescriptorActions = null;
+			VerticesDescriptorAction = configure;
+			return Self;
+		}
+
+		public GraphExploreRequestDescriptor<TDocument> Vertices(params Action<VertexDefinitionDescriptor<TDocument>>[] configure)
+		{
+			VerticesValue = null;
+			VerticesDescriptor = null;
+			VerticesDescriptorAction = null;
+			VerticesDescriptorActions = configure;
 			return Self;
 		}
 
@@ -237,7 +273,28 @@ namespace Elastic.Clients.Elasticsearch.Graph
 				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (VerticesValue is not null)
+			if (VerticesDescriptor is not null)
+			{
+				writer.WritePropertyName("vertices");
+				JsonSerializer.Serialize(writer, VerticesDescriptor, options);
+			}
+			else if (VerticesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("vertices");
+				JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor<TDocument>(VerticesDescriptorAction), options);
+			}
+			else if (VerticesDescriptorActions is not null)
+			{
+				writer.WritePropertyName("vertices");
+				writer.WriteStartArray();
+				foreach (var action in VerticesDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (VerticesValue is not null)
 			{
 				writer.WritePropertyName("vertices");
 				JsonSerializer.Serialize(writer, VerticesValue, options);
@@ -289,6 +346,12 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? VerticesValue { get; set; }
 
+		private VertexDefinitionDescriptor VerticesDescriptor { get; set; }
+
+		private Action<VertexDefinitionDescriptor> VerticesDescriptorAction { get; set; }
+
+		private Action<VertexDefinitionDescriptor>[] VerticesDescriptorActions { get; set; }
+
 		public GraphExploreRequestDescriptor Connections(Elastic.Clients.Elasticsearch.Graph.Hop? connections)
 		{
 			ConnectionsDescriptor = null;
@@ -308,7 +371,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public GraphExploreRequestDescriptor Connections(Action<HopDescriptor> configure)
 		{
 			ConnectionsValue = null;
-			ConnectionsDescriptorAction = null;
+			ConnectionsDescriptor = null;
 			ConnectionsDescriptorAction = configure;
 			return Self;
 		}
@@ -332,7 +395,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public GraphExploreRequestDescriptor Controls(Action<ExploreControlsDescriptor> configure)
 		{
 			ControlsValue = null;
-			ControlsDescriptorAction = null;
+			ControlsDescriptor = null;
 			ControlsDescriptorAction = configure;
 			return Self;
 		}
@@ -356,14 +419,44 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public GraphExploreRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
 
 		public GraphExploreRequestDescriptor Vertices(IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? vertices)
 		{
+			VerticesDescriptor = null;
+			VerticesDescriptorAction = null;
+			VerticesDescriptorActions = null;
 			VerticesValue = vertices;
+			return Self;
+		}
+
+		public GraphExploreRequestDescriptor Vertices(VertexDefinitionDescriptor descriptor)
+		{
+			VerticesValue = null;
+			VerticesDescriptorAction = null;
+			VerticesDescriptorActions = null;
+			VerticesDescriptor = descriptor;
+			return Self;
+		}
+
+		public GraphExploreRequestDescriptor Vertices(Action<VertexDefinitionDescriptor> configure)
+		{
+			VerticesValue = null;
+			VerticesDescriptor = null;
+			VerticesDescriptorActions = null;
+			VerticesDescriptorAction = configure;
+			return Self;
+		}
+
+		public GraphExploreRequestDescriptor Vertices(params Action<VertexDefinitionDescriptor>[] configure)
+		{
+			VerticesValue = null;
+			VerticesDescriptor = null;
+			VerticesDescriptorAction = null;
+			VerticesDescriptorActions = configure;
 			return Self;
 		}
 
@@ -418,7 +511,28 @@ namespace Elastic.Clients.Elasticsearch.Graph
 				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (VerticesValue is not null)
+			if (VerticesDescriptor is not null)
+			{
+				writer.WritePropertyName("vertices");
+				JsonSerializer.Serialize(writer, VerticesDescriptor, options);
+			}
+			else if (VerticesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("vertices");
+				JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor(VerticesDescriptorAction), options);
+			}
+			else if (VerticesDescriptorActions is not null)
+			{
+				writer.WritePropertyName("vertices");
+				writer.WriteStartArray();
+				foreach (var action in VerticesDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (VerticesValue is not null)
 			{
 				writer.WritePropertyName("vertices");
 				JsonSerializer.Serialize(writer, VerticesValue, options);

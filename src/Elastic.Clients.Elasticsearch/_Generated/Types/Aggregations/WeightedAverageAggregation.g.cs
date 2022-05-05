@@ -214,7 +214,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public WeightedAverageAggregationDescriptor<TDocument> Value(Action<WeightedAverageValueDescriptor<TDocument>> configure)
 		{
 			ValueValue = null;
-			ValueDescriptorAction = null;
+			ValueDescriptor = null;
 			ValueDescriptorAction = configure;
 			return Self;
 		}
@@ -238,7 +238,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public WeightedAverageAggregationDescriptor<TDocument> Weight(Action<WeightedAverageValueDescriptor<TDocument>> configure)
 		{
 			WeightValue = null;
-			WeightDescriptorAction = null;
+			WeightDescriptor = null;
 			WeightDescriptorAction = configure;
 			return Self;
 		}
@@ -365,7 +365,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public WeightedAverageAggregationDescriptor Value(Action<WeightedAverageValueDescriptor> configure)
 		{
 			ValueValue = null;
-			ValueDescriptorAction = null;
+			ValueDescriptor = null;
 			ValueDescriptorAction = configure;
 			return Self;
 		}
@@ -389,7 +389,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public WeightedAverageAggregationDescriptor Weight(Action<WeightedAverageValueDescriptor> configure)
 		{
 			WeightValue = null;
-			WeightDescriptorAction = null;
+			WeightDescriptor = null;
 			WeightDescriptorAction = configure;
 			return Self;
 		}
