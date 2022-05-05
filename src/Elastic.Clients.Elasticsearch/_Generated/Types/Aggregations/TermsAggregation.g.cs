@@ -456,12 +456,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private IEnumerable<TermsOrder>? OrderValue { get; set; }
 
-		private TermsOrderDescriptor OrderDescriptor { get; set; }
-
-		private Action<TermsOrderDescriptor> OrderDescriptorAction { get; set; }
-
-		private Action<TermsOrderDescriptor>[] OrderDescriptorActions { get; set; }
-
 		private ScriptBase? ScriptValue { get; set; }
 
 		private ScriptDescriptor ScriptDescriptor { get; set; }
@@ -524,37 +518,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public TermsAggregationDescriptor<TDocument> Order(IEnumerable<TermsOrder>? order)
 		{
-			OrderDescriptor = null;
-			OrderDescriptorAction = null;
-			OrderDescriptorActions = null;
 			OrderValue = order;
 			return Self;
 		}
 
-		public TermsAggregationDescriptor<TDocument> Order(TermsOrderDescriptor descriptor)
+		public TermsAggregationDescriptor<TDocument> Order(Func<Elastic.Clients.Elasticsearch.TermsOrderDescriptor, IPromise<IList<TermsOrder>>> configure)
 		{
-			OrderValue = null;
-			OrderDescriptorAction = null;
-			OrderDescriptorActions = null;
-			OrderDescriptor = descriptor;
-			return Self;
-		}
-
-		public TermsAggregationDescriptor<TDocument> Order(Action<TermsOrderDescriptor> configure)
-		{
-			OrderValue = null;
-			OrderDescriptor = null;
-			OrderDescriptorActions = null;
-			OrderDescriptorAction = configure;
-			return Self;
-		}
-
-		public TermsAggregationDescriptor<TDocument> Order(params Action<TermsOrderDescriptor>[] configure)
-		{
-			OrderValue = null;
-			OrderDescriptor = null;
-			OrderDescriptorAction = null;
-			OrderDescriptorActions = configure;
+			OrderValue = configure?.Invoke(new Elastic.Clients.Elasticsearch.TermsOrderDescriptor())?.Value;
 			return Self;
 		}
 
@@ -683,28 +653,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("terms");
 			writer.WriteStartObject();
-			if (OrderDescriptor is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, OrderDescriptor, options);
-			}
-			else if (OrderDescriptorAction is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, new TermsOrderDescriptor(OrderDescriptorAction), options);
-			}
-			else if (OrderDescriptorActions is not null)
-			{
-				writer.WritePropertyName("order");
-				writer.WriteStartArray();
-				foreach (var action in OrderDescriptorActions)
-				{
-					JsonSerializer.Serialize(writer, new TermsOrderDescriptor(action), options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else if (OrderValue is not null)
+			if (OrderValue is not null)
 			{
 				writer.WritePropertyName("order");
 				JsonSerializer.Serialize(writer, OrderValue, options);
@@ -852,12 +801,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private IEnumerable<TermsOrder>? OrderValue { get; set; }
 
-		private TermsOrderDescriptor OrderDescriptor { get; set; }
-
-		private Action<TermsOrderDescriptor> OrderDescriptorAction { get; set; }
-
-		private Action<TermsOrderDescriptor>[] OrderDescriptorActions { get; set; }
-
 		private ScriptBase? ScriptValue { get; set; }
 
 		private ScriptDescriptor ScriptDescriptor { get; set; }
@@ -920,37 +863,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public TermsAggregationDescriptor Order(IEnumerable<TermsOrder>? order)
 		{
-			OrderDescriptor = null;
-			OrderDescriptorAction = null;
-			OrderDescriptorActions = null;
 			OrderValue = order;
 			return Self;
 		}
 
-		public TermsAggregationDescriptor Order(TermsOrderDescriptor descriptor)
+		public TermsAggregationDescriptor Order(Func<Elastic.Clients.Elasticsearch.TermsOrderDescriptor, IPromise<IList<TermsOrder>>> configure)
 		{
-			OrderValue = null;
-			OrderDescriptorAction = null;
-			OrderDescriptorActions = null;
-			OrderDescriptor = descriptor;
-			return Self;
-		}
-
-		public TermsAggregationDescriptor Order(Action<TermsOrderDescriptor> configure)
-		{
-			OrderValue = null;
-			OrderDescriptor = null;
-			OrderDescriptorActions = null;
-			OrderDescriptorAction = configure;
-			return Self;
-		}
-
-		public TermsAggregationDescriptor Order(params Action<TermsOrderDescriptor>[] configure)
-		{
-			OrderValue = null;
-			OrderDescriptor = null;
-			OrderDescriptorAction = null;
-			OrderDescriptorActions = configure;
+			OrderValue = configure?.Invoke(new Elastic.Clients.Elasticsearch.TermsOrderDescriptor())?.Value;
 			return Self;
 		}
 
@@ -1085,28 +1004,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("terms");
 			writer.WriteStartObject();
-			if (OrderDescriptor is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, OrderDescriptor, options);
-			}
-			else if (OrderDescriptorAction is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, new TermsOrderDescriptor(OrderDescriptorAction), options);
-			}
-			else if (OrderDescriptorActions is not null)
-			{
-				writer.WritePropertyName("order");
-				writer.WriteStartArray();
-				foreach (var action in OrderDescriptorActions)
-				{
-					JsonSerializer.Serialize(writer, new TermsOrderDescriptor(action), options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else if (OrderValue is not null)
+			if (OrderValue is not null)
 			{
 				writer.WritePropertyName("order");
 				JsonSerializer.Serialize(writer, OrderValue, options);
