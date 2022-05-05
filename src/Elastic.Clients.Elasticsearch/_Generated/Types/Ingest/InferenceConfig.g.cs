@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public InferenceConfigDescriptor Regression(Action<InferenceConfigRegressionDescriptor> configure)
 		{
 			RegressionValue = null;
-			RegressionDescriptorAction = null;
+			RegressionDescriptor = null;
 			RegressionDescriptorAction = configure;
 			return Self;
 		}

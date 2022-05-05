@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public InferenceConfigContainerDescriptor<TDocument> Regression(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure)
 		{
 			RegressionValue = null;
-			RegressionDescriptorAction = null;
+			RegressionDescriptor = null;
 			RegressionDescriptorAction = configure;
 			return Self;
 		}
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public InferenceConfigContainerDescriptor<TDocument> Classification(Action<ClassificationInferenceOptionsDescriptor> configure)
 		{
 			ClassificationValue = null;
-			ClassificationDescriptorAction = null;
+			ClassificationDescriptor = null;
 			ClassificationDescriptorAction = configure;
 			return Self;
 		}
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public InferenceConfigContainerDescriptor Regression(Action<RegressionInferenceOptionsDescriptor> configure)
 		{
 			RegressionValue = null;
-			RegressionDescriptorAction = null;
+			RegressionDescriptor = null;
 			RegressionDescriptorAction = configure;
 			return Self;
 		}
@@ -203,7 +203,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public InferenceConfigContainerDescriptor Classification(Action<ClassificationInferenceOptionsDescriptor> configure)
 		{
 			ClassificationValue = null;
-			ClassificationDescriptorAction = null;
+			ClassificationDescriptor = null;
 			ClassificationDescriptorAction = configure;
 			return Self;
 		}

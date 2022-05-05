@@ -80,6 +80,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector> DetectorsValue { get; set; }
 
+		private DetectorDescriptor<TDocument> DetectorsDescriptor { get; set; }
+
+		private Action<DetectorDescriptor<TDocument>> DetectorsDescriptorAction { get; set; }
+
+		private Action<DetectorDescriptor<TDocument>>[] DetectorsDescriptorActions { get; set; }
+
 		private string BucketSpanValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzer? CategorizationAnalyzerValue { get; set; }
@@ -106,7 +112,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public AnalysisConfigDescriptor<TDocument> Detectors(IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector> detectors)
 		{
+			DetectorsDescriptor = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = null;
 			DetectorsValue = detectors;
+			return Self;
+		}
+
+		public AnalysisConfigDescriptor<TDocument> Detectors(DetectorDescriptor<TDocument> descriptor)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = null;
+			DetectorsDescriptor = descriptor;
+			return Self;
+		}
+
+		public AnalysisConfigDescriptor<TDocument> Detectors(Action<DetectorDescriptor<TDocument>> configure)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptor = null;
+			DetectorsDescriptorActions = null;
+			DetectorsDescriptorAction = configure;
+			return Self;
+		}
+
+		public AnalysisConfigDescriptor<TDocument> Detectors(params Action<DetectorDescriptor<TDocument>>[] configure)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptor = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -183,7 +219,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public AnalysisConfigDescriptor<TDocument> PerPartitionCategorization(Action<PerPartitionCategorizationDescriptor> configure)
 		{
 			PerPartitionCategorizationValue = null;
-			PerPartitionCategorizationDescriptorAction = null;
+			PerPartitionCategorizationDescriptor = null;
 			PerPartitionCategorizationDescriptorAction = configure;
 			return Self;
 		}
@@ -203,8 +239,33 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("detectors");
-			JsonSerializer.Serialize(writer, DetectorsValue, options);
+			if (DetectorsDescriptor is not null)
+			{
+				writer.WritePropertyName("detectors");
+				JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
+			}
+			else if (DetectorsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("detectors");
+				JsonSerializer.Serialize(writer, new DetectorDescriptor<TDocument>(DetectorsDescriptorAction), options);
+			}
+			else if (DetectorsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
+				foreach (var action in DetectorsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DetectorDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("detectors");
+				JsonSerializer.Serialize(writer, DetectorsValue, options);
+			}
+
 			writer.WritePropertyName("bucket_span");
 			JsonSerializer.Serialize(writer, BucketSpanValue, options);
 			if (CategorizationAnalyzerValue is not null)
@@ -284,6 +345,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector> DetectorsValue { get; set; }
 
+		private DetectorDescriptor DetectorsDescriptor { get; set; }
+
+		private Action<DetectorDescriptor> DetectorsDescriptorAction { get; set; }
+
+		private Action<DetectorDescriptor>[] DetectorsDescriptorActions { get; set; }
+
 		private string BucketSpanValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzer? CategorizationAnalyzerValue { get; set; }
@@ -310,7 +377,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public AnalysisConfigDescriptor Detectors(IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector> detectors)
 		{
+			DetectorsDescriptor = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = null;
 			DetectorsValue = detectors;
+			return Self;
+		}
+
+		public AnalysisConfigDescriptor Detectors(DetectorDescriptor descriptor)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = null;
+			DetectorsDescriptor = descriptor;
+			return Self;
+		}
+
+		public AnalysisConfigDescriptor Detectors(Action<DetectorDescriptor> configure)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptor = null;
+			DetectorsDescriptorActions = null;
+			DetectorsDescriptorAction = configure;
+			return Self;
+		}
+
+		public AnalysisConfigDescriptor Detectors(params Action<DetectorDescriptor>[] configure)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptor = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -393,7 +490,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public AnalysisConfigDescriptor PerPartitionCategorization(Action<PerPartitionCategorizationDescriptor> configure)
 		{
 			PerPartitionCategorizationValue = null;
-			PerPartitionCategorizationDescriptorAction = null;
+			PerPartitionCategorizationDescriptor = null;
 			PerPartitionCategorizationDescriptorAction = configure;
 			return Self;
 		}
@@ -419,8 +516,33 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("detectors");
-			JsonSerializer.Serialize(writer, DetectorsValue, options);
+			if (DetectorsDescriptor is not null)
+			{
+				writer.WritePropertyName("detectors");
+				JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
+			}
+			else if (DetectorsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("detectors");
+				JsonSerializer.Serialize(writer, new DetectorDescriptor(DetectorsDescriptorAction), options);
+			}
+			else if (DetectorsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
+				foreach (var action in DetectorsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DetectorDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("detectors");
+				JsonSerializer.Serialize(writer, DetectorsValue, options);
+			}
+
 			writer.WritePropertyName("bucket_span");
 			JsonSerializer.Serialize(writer, BucketSpanValue, options);
 			if (CategorizationAnalyzerValue is not null)

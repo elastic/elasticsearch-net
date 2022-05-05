@@ -443,7 +443,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Index(Action<IndexSettingsDescriptor<TDocument>> configure)
 		{
 			IndexValue = null;
-			IndexDescriptorAction = null;
+			IndexDescriptor = null;
 			IndexDescriptorAction = configure;
 			return Self;
 		}
@@ -467,7 +467,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Settings(Action<IndexSettingsDescriptor<TDocument>> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}
@@ -491,7 +491,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Sort(Action<IndexSegmentSortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}
@@ -515,7 +515,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Analysis(Action<IndexSettingsAnalysisDescriptor> configure)
 		{
 			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = null;
 			AnalysisDescriptorAction = configure;
 			return Self;
 		}
@@ -539,7 +539,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Analyze(Action<SettingsAnalyzeDescriptor> configure)
 		{
 			AnalyzeValue = null;
-			AnalyzeDescriptorAction = null;
+			AnalyzeDescriptor = null;
 			AnalyzeDescriptorAction = configure;
 			return Self;
 		}
@@ -569,7 +569,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Blocks(Action<IndexSettingBlocksDescriptor> configure)
 		{
 			BlocksValue = null;
-			BlocksDescriptorAction = null;
+			BlocksDescriptor = null;
 			BlocksDescriptorAction = configure;
 			return Self;
 		}
@@ -647,7 +647,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Highlight(Action<SettingsHighlightDescriptor> configure)
 		{
 			HighlightValue = null;
-			HighlightDescriptorAction = null;
+			HighlightDescriptor = null;
 			HighlightDescriptorAction = configure;
 			return Self;
 		}
@@ -671,7 +671,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Lifecycle(Action<IndexSettingsLifecycleDescriptor> configure)
 		{
 			LifecycleValue = null;
-			LifecycleDescriptorAction = null;
+			LifecycleDescriptor = null;
 			LifecycleDescriptorAction = configure;
 			return Self;
 		}
@@ -767,7 +767,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Merge(Action<MergeDescriptor> configure)
 		{
 			MergeValue = null;
-			MergeDescriptorAction = null;
+			MergeDescriptor = null;
 			MergeDescriptorAction = configure;
 			return Self;
 		}
@@ -827,7 +827,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Queries(Action<QueriesDescriptor> configure)
 		{
 			QueriesValue = null;
-			QueriesDescriptorAction = null;
+			QueriesDescriptor = null;
 			QueriesDescriptorAction = configure;
 			return Self;
 		}
@@ -851,7 +851,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> QueryString(Action<SettingsQueryStringDescriptor> configure)
 		{
 			QueryStringValue = null;
-			QueryStringDescriptorAction = null;
+			QueryStringDescriptor = null;
 			QueryStringDescriptorAction = configure;
 			return Self;
 		}
@@ -881,7 +881,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Routing(Action<IndexRoutingDescriptor> configure)
 		{
 			RoutingValue = null;
-			RoutingDescriptorAction = null;
+			RoutingDescriptor = null;
 			RoutingDescriptorAction = configure;
 			return Self;
 		}
@@ -917,7 +917,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Search(Action<SettingsSearchDescriptor> configure)
 		{
 			SearchValue = null;
-			SearchDescriptorAction = null;
+			SearchDescriptor = null;
 			SearchDescriptorAction = configure;
 			return Self;
 		}
@@ -947,7 +947,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Similarity(Action<SettingsSimilarityDescriptor> configure)
 		{
 			SimilarityValue = null;
-			SimilarityDescriptorAction = null;
+			SimilarityDescriptor = null;
 			SimilarityDescriptorAction = configure;
 			return Self;
 		}
@@ -971,7 +971,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> SoftDeletes(Action<SoftDeletesDescriptor> configure)
 		{
 			SoftDeletesValue = null;
-			SoftDeletesDescriptorAction = null;
+			SoftDeletesDescriptor = null;
 			SoftDeletesDescriptorAction = configure;
 			return Self;
 		}
@@ -995,7 +995,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> TimeSeries(Action<IndexSettingsTimeSeriesDescriptor> configure)
 		{
 			TimeSeriesValue = null;
-			TimeSeriesDescriptorAction = null;
+			TimeSeriesDescriptor = null;
 			TimeSeriesDescriptorAction = configure;
 			return Self;
 		}
@@ -1025,7 +1025,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Translog(Action<TranslogDescriptor> configure)
 		{
 			TranslogValue = null;
-			TranslogDescriptorAction = null;
+			TranslogDescriptor = null;
 			TranslogDescriptorAction = configure;
 			return Self;
 		}
@@ -1061,7 +1061,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> Version(Action<IndexVersioningDescriptor> configure)
 		{
 			VersionValue = null;
-			VersionDescriptorAction = null;
+			VersionDescriptor = null;
 			VersionDescriptorAction = configure;
 			return Self;
 		}
@@ -1775,7 +1775,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Index(Action<IndexSettingsDescriptor> configure)
 		{
 			IndexValue = null;
-			IndexDescriptorAction = null;
+			IndexDescriptor = null;
 			IndexDescriptorAction = configure;
 			return Self;
 		}
@@ -1799,7 +1799,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Settings(Action<IndexSettingsDescriptor> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}
@@ -1823,7 +1823,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Sort(Action<IndexSegmentSortDescriptor> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}
@@ -1847,7 +1847,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Analysis(Action<IndexSettingsAnalysisDescriptor> configure)
 		{
 			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = null;
 			AnalysisDescriptorAction = configure;
 			return Self;
 		}
@@ -1871,7 +1871,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Analyze(Action<SettingsAnalyzeDescriptor> configure)
 		{
 			AnalyzeValue = null;
-			AnalyzeDescriptorAction = null;
+			AnalyzeDescriptor = null;
 			AnalyzeDescriptorAction = configure;
 			return Self;
 		}
@@ -1901,7 +1901,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Blocks(Action<IndexSettingBlocksDescriptor> configure)
 		{
 			BlocksValue = null;
-			BlocksDescriptorAction = null;
+			BlocksDescriptor = null;
 			BlocksDescriptorAction = configure;
 			return Self;
 		}
@@ -1979,7 +1979,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Highlight(Action<SettingsHighlightDescriptor> configure)
 		{
 			HighlightValue = null;
-			HighlightDescriptorAction = null;
+			HighlightDescriptor = null;
 			HighlightDescriptorAction = configure;
 			return Self;
 		}
@@ -2003,7 +2003,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Lifecycle(Action<IndexSettingsLifecycleDescriptor> configure)
 		{
 			LifecycleValue = null;
-			LifecycleDescriptorAction = null;
+			LifecycleDescriptor = null;
 			LifecycleDescriptorAction = configure;
 			return Self;
 		}
@@ -2099,7 +2099,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Merge(Action<MergeDescriptor> configure)
 		{
 			MergeValue = null;
-			MergeDescriptorAction = null;
+			MergeDescriptor = null;
 			MergeDescriptorAction = configure;
 			return Self;
 		}
@@ -2159,7 +2159,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Queries(Action<QueriesDescriptor> configure)
 		{
 			QueriesValue = null;
-			QueriesDescriptorAction = null;
+			QueriesDescriptor = null;
 			QueriesDescriptorAction = configure;
 			return Self;
 		}
@@ -2183,7 +2183,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor QueryString(Action<SettingsQueryStringDescriptor> configure)
 		{
 			QueryStringValue = null;
-			QueryStringDescriptorAction = null;
+			QueryStringDescriptor = null;
 			QueryStringDescriptorAction = configure;
 			return Self;
 		}
@@ -2213,7 +2213,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Routing(Action<IndexRoutingDescriptor> configure)
 		{
 			RoutingValue = null;
-			RoutingDescriptorAction = null;
+			RoutingDescriptor = null;
 			RoutingDescriptorAction = configure;
 			return Self;
 		}
@@ -2249,7 +2249,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Search(Action<SettingsSearchDescriptor> configure)
 		{
 			SearchValue = null;
-			SearchDescriptorAction = null;
+			SearchDescriptor = null;
 			SearchDescriptorAction = configure;
 			return Self;
 		}
@@ -2279,7 +2279,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Similarity(Action<SettingsSimilarityDescriptor> configure)
 		{
 			SimilarityValue = null;
-			SimilarityDescriptorAction = null;
+			SimilarityDescriptor = null;
 			SimilarityDescriptorAction = configure;
 			return Self;
 		}
@@ -2303,7 +2303,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor SoftDeletes(Action<SoftDeletesDescriptor> configure)
 		{
 			SoftDeletesValue = null;
-			SoftDeletesDescriptorAction = null;
+			SoftDeletesDescriptor = null;
 			SoftDeletesDescriptorAction = configure;
 			return Self;
 		}
@@ -2327,7 +2327,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor TimeSeries(Action<IndexSettingsTimeSeriesDescriptor> configure)
 		{
 			TimeSeriesValue = null;
-			TimeSeriesDescriptorAction = null;
+			TimeSeriesDescriptor = null;
 			TimeSeriesDescriptorAction = configure;
 			return Self;
 		}
@@ -2357,7 +2357,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Translog(Action<TranslogDescriptor> configure)
 		{
 			TranslogValue = null;
-			TranslogDescriptorAction = null;
+			TranslogDescriptor = null;
 			TranslogDescriptorAction = configure;
 			return Self;
 		}
@@ -2393,7 +2393,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor Version(Action<IndexVersioningDescriptor> configure)
 		{
 			VersionValue = null;
-			VersionDescriptorAction = null;
+			VersionDescriptor = null;
 			VersionDescriptorAction = configure;
 			return Self;
 		}

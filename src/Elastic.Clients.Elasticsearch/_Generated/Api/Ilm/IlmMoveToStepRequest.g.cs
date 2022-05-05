@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public IlmMoveToStepRequestDescriptor<TDocument> CurrentStep(Action<StepKeyDescriptor> configure)
 		{
 			CurrentStepValue = null;
-			CurrentStepDescriptorAction = null;
+			CurrentStepDescriptor = null;
 			CurrentStepDescriptorAction = configure;
 			return Self;
 		}
@@ -126,7 +126,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public IlmMoveToStepRequestDescriptor<TDocument> NextStep(Action<StepKeyDescriptor> configure)
 		{
 			NextStepValue = null;
-			NextStepDescriptorAction = null;
+			NextStepDescriptor = null;
 			NextStepDescriptorAction = configure;
 			return Self;
 		}
@@ -221,7 +221,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public IlmMoveToStepRequestDescriptor CurrentStep(Action<StepKeyDescriptor> configure)
 		{
 			CurrentStepValue = null;
-			CurrentStepDescriptorAction = null;
+			CurrentStepDescriptor = null;
 			CurrentStepDescriptorAction = configure;
 			return Self;
 		}
@@ -245,7 +245,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public IlmMoveToStepRequestDescriptor NextStep(Action<StepKeyDescriptor> configure)
 		{
 			NextStepValue = null;
-			NextStepDescriptorAction = null;
+			NextStepDescriptor = null;
 			NextStepDescriptorAction = configure;
 			return Self;
 		}

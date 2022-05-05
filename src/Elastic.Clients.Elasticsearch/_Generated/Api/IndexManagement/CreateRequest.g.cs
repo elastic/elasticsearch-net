@@ -128,7 +128,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public CreateRequestDescriptor<TDocument> Settings(Action<IndexSettingsDescriptor<TDocument>> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}
@@ -158,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public CreateRequestDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
-			MappingsDescriptorAction = null;
+			MappingsDescriptor = null;
 			MappingsDescriptorAction = configure;
 			return Self;
 		}
@@ -264,7 +264,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public CreateRequestDescriptor Settings(Action<IndexSettingsDescriptor> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}
@@ -294,7 +294,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public CreateRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
-			MappingsDescriptorAction = null;
+			MappingsDescriptor = null;
 			MappingsDescriptorAction = configure;
 			return Self;
 		}

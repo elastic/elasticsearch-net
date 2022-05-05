@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public SecurityQueryApiKeysRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -126,7 +126,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public SecurityQueryApiKeysRequestDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}
@@ -253,7 +253,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public SecurityQueryApiKeysRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -277,7 +277,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public SecurityQueryApiKeysRequestDescriptor Sort(Action<SortDescriptor> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}

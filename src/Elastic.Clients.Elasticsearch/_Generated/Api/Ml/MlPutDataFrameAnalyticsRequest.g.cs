@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Action<DataframeAnalyticsDestinationDescriptor<TDocument>> configure)
 		{
 			DestValue = null;
-			DestDescriptorAction = null;
+			DestDescriptor = null;
 			DestDescriptorAction = configure;
 			return Self;
 		}
@@ -178,7 +178,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> Source(Action<DataframeAnalyticsSourceDescriptor<TDocument>> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -208,7 +208,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Action<DataframeAnalysisContainerDescriptor> configure)
 		{
 			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = null;
 			AnalysisDescriptorAction = configure;
 			return Self;
 		}
@@ -232,7 +232,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Action<DataframeAnalysisAnalyzedFieldsDescriptor> configure)
 		{
 			AnalyzedFieldsValue = null;
-			AnalyzedFieldsDescriptorAction = null;
+			AnalyzedFieldsDescriptor = null;
 			AnalyzedFieldsDescriptorAction = configure;
 			return Self;
 		}
@@ -449,7 +449,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutDataFrameAnalyticsRequestDescriptor Dest(Action<DataframeAnalyticsDestinationDescriptor> configure)
 		{
 			DestValue = null;
-			DestDescriptorAction = null;
+			DestDescriptor = null;
 			DestDescriptorAction = configure;
 			return Self;
 		}
@@ -473,7 +473,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutDataFrameAnalyticsRequestDescriptor Source(Action<DataframeAnalyticsSourceDescriptor> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -503,7 +503,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutDataFrameAnalyticsRequestDescriptor Analysis(Action<DataframeAnalysisContainerDescriptor> configure)
 		{
 			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = null;
 			AnalysisDescriptorAction = configure;
 			return Self;
 		}
@@ -527,7 +527,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutDataFrameAnalyticsRequestDescriptor AnalyzedFields(Action<DataframeAnalysisAnalyzedFieldsDescriptor> configure)
 		{
 			AnalyzedFieldsValue = null;
-			AnalyzedFieldsDescriptorAction = null;
+			AnalyzedFieldsDescriptor = null;
 			AnalyzedFieldsDescriptorAction = configure;
 			return Self;
 		}

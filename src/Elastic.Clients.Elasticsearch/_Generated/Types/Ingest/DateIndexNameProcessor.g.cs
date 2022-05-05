@@ -66,6 +66,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; set; }
 
+		private ProcessorContainerDescriptor<TDocument> OnFailureDescriptor { get; set; }
+
+		private Action<ProcessorContainerDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+
+		private Action<ProcessorContainerDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+
 		private IEnumerable<string> DateFormatsValue { get; set; }
 
 		private string DateRoundingValue { get; set; }
@@ -88,7 +94,37 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		public DateIndexNameProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure)
 		{
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
 			OnFailureValue = onFailure;
+			return Self;
+		}
+
+		public DateIndexNameProcessorDescriptor<TDocument> OnFailure(ProcessorContainerDescriptor<TDocument> descriptor)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptor = descriptor;
+			return Self;
+		}
+
+		public DateIndexNameProcessorDescriptor<TDocument> OnFailure(Action<ProcessorContainerDescriptor<TDocument>> configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptorAction = configure;
+			return Self;
+		}
+
+		public DateIndexNameProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorContainerDescriptor<TDocument>>[] configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = configure;
 			return Self;
 		}
 
@@ -161,7 +197,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (OnFailureValue is not null)
+			if (OnFailureDescriptor is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			}
+			else if (OnFailureDescriptorAction is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			}
+			else if (OnFailureDescriptorActions is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
+				foreach (var action in OnFailureDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (OnFailureValue is not null)
 			{
 				writer.WritePropertyName("on_failure");
 				JsonSerializer.Serialize(writer, OnFailureValue, options);
@@ -212,6 +269,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; set; }
 
+		private ProcessorContainerDescriptor OnFailureDescriptor { get; set; }
+
+		private Action<ProcessorContainerDescriptor> OnFailureDescriptorAction { get; set; }
+
+		private Action<ProcessorContainerDescriptor>[] OnFailureDescriptorActions { get; set; }
+
 		private IEnumerable<string> DateFormatsValue { get; set; }
 
 		private string DateRoundingValue { get; set; }
@@ -234,7 +297,37 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		public DateIndexNameProcessorDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure)
 		{
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
 			OnFailureValue = onFailure;
+			return Self;
+		}
+
+		public DateIndexNameProcessorDescriptor OnFailure(ProcessorContainerDescriptor descriptor)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptor = descriptor;
+			return Self;
+		}
+
+		public DateIndexNameProcessorDescriptor OnFailure(Action<ProcessorContainerDescriptor> configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptorAction = configure;
+			return Self;
+		}
+
+		public DateIndexNameProcessorDescriptor OnFailure(params Action<ProcessorContainerDescriptor>[] configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = configure;
 			return Self;
 		}
 
@@ -313,7 +406,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (OnFailureValue is not null)
+			if (OnFailureDescriptor is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			}
+			else if (OnFailureDescriptorAction is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(OnFailureDescriptorAction), options);
+			}
+			else if (OnFailureDescriptorActions is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
+				foreach (var action in OnFailureDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (OnFailureValue is not null)
 			{
 				writer.WritePropertyName("on_failure");
 				JsonSerializer.Serialize(writer, OnFailureValue, options);

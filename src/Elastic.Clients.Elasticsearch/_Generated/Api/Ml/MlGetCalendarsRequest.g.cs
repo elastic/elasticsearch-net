@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlGetCalendarsRequestDescriptor Page(Action<PageDescriptor> configure)
 		{
 			PageValue = null;
-			PageDescriptorAction = null;
+			PageDescriptor = null;
 			PageDescriptorAction = configure;
 			return Self;
 		}

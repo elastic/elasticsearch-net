@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public QueriesDescriptor Cache(Action<CacheQueriesDescriptor> configure)
 		{
 			CacheValue = null;
-			CacheDescriptorAction = null;
+			CacheDescriptor = null;
 			CacheDescriptorAction = configure;
 			return Self;
 		}

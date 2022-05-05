@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public TrainedModelDescriptor Ensemble(Action<EnsembleDescriptor> configure)
 		{
 			EnsembleValue = null;
-			EnsembleDescriptorAction = null;
+			EnsembleDescriptor = null;
 			EnsembleDescriptorAction = configure;
 			return Self;
 		}
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public TrainedModelDescriptor Tree(Action<TrainedModelTreeDescriptor> configure)
 		{
 			TreeValue = null;
-			TreeDescriptorAction = null;
+			TreeDescriptor = null;
 			TreeDescriptorAction = configure;
 			return Self;
 		}
@@ -131,7 +131,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public TrainedModelDescriptor TreeNode(Action<TrainedModelTreeNodeDescriptor> configure)
 		{
 			TreeNodeValue = null;
-			TreeNodeDescriptorAction = null;
+			TreeNodeDescriptor = null;
 			TreeNodeDescriptorAction = configure;
 			return Self;
 		}

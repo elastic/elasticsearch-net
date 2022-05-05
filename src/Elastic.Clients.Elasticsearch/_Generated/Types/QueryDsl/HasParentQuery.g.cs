@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public HasParentQueryDescriptor<TDocument> InnerHits(Action<InnerHitsDescriptor<TDocument>> configure)
 		{
 			InnerHitsValue = null;
-			InnerHitsDescriptorAction = null;
+			InnerHitsDescriptor = null;
 			InnerHitsDescriptorAction = configure;
 			return Self;
 		}
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public HasParentQueryDescriptor<TDocument> Query(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -269,7 +269,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public HasParentQueryDescriptor InnerHits(Action<InnerHitsDescriptor> configure)
 		{
 			InnerHitsValue = null;
-			InnerHitsDescriptorAction = null;
+			InnerHitsDescriptor = null;
 			InnerHitsDescriptorAction = configure;
 			return Self;
 		}
@@ -293,7 +293,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public HasParentQueryDescriptor Query(Action<QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}

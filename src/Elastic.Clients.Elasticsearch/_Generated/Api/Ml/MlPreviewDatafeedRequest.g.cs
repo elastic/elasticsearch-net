@@ -98,7 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPreviewDatafeedRequestDescriptor<TDocument> DatafeedConfig(Action<DatafeedConfigDescriptor<TDocument>> configure)
 		{
 			DatafeedConfigValue = null;
-			DatafeedConfigDescriptorAction = null;
+			DatafeedConfigDescriptor = null;
 			DatafeedConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -122,7 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPreviewDatafeedRequestDescriptor<TDocument> JobConfig(Action<JobConfigDescriptor<TDocument>> configure)
 		{
 			JobConfigValue = null;
-			JobConfigDescriptorAction = null;
+			JobConfigDescriptor = null;
 			JobConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -213,7 +213,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPreviewDatafeedRequestDescriptor DatafeedConfig(Action<DatafeedConfigDescriptor> configure)
 		{
 			DatafeedConfigValue = null;
-			DatafeedConfigDescriptorAction = null;
+			DatafeedConfigDescriptor = null;
 			DatafeedConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -237,7 +237,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPreviewDatafeedRequestDescriptor JobConfig(Action<JobConfigDescriptor> configure)
 		{
 			JobConfigValue = null;
-			JobConfigDescriptorAction = null;
+			JobConfigDescriptor = null;
 			JobConfigDescriptorAction = configure;
 			return Self;
 		}

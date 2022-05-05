@@ -299,7 +299,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -323,7 +323,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor<TDocument> Slice(Action<SlicedScrollDescriptor<TDocument>> configure)
 		{
 			SliceValue = null;
-			SliceDescriptorAction = null;
+			SliceDescriptor = null;
 			SliceDescriptorAction = configure;
 			return Self;
 		}
@@ -460,7 +460,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -484,7 +484,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor Slice(Action<SlicedScrollDescriptor> configure)
 		{
 			SliceValue = null;
-			SliceDescriptorAction = null;
+			SliceDescriptor = null;
 			SliceDescriptorAction = configure;
 			return Self;
 		}

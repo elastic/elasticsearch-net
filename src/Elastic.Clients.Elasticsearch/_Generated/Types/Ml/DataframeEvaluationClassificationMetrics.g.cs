@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeEvaluationClassificationMetricsDescriptor AucRoc(Action<DataframeEvaluationClassificationMetricsAucRocDescriptor> configure)
 		{
 			AucRocValue = null;
-			AucRocDescriptorAction = null;
+			AucRocDescriptor = null;
 			AucRocDescriptorAction = configure;
 			return Self;
 		}

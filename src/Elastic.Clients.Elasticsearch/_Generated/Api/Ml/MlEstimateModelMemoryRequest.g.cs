@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlEstimateModelMemoryRequestDescriptor<TDocument> AnalysisConfig(Action<AnalysisConfigDescriptor<TDocument>> configure)
 		{
 			AnalysisConfigValue = null;
-			AnalysisConfigDescriptorAction = null;
+			AnalysisConfigDescriptor = null;
 			AnalysisConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlEstimateModelMemoryRequestDescriptor AnalysisConfig(Action<AnalysisConfigDescriptor> configure)
 		{
 			AnalysisConfigValue = null;
-			AnalysisConfigDescriptorAction = null;
+			AnalysisConfigDescriptor = null;
 			AnalysisConfigDescriptorAction = configure;
 			return Self;
 		}

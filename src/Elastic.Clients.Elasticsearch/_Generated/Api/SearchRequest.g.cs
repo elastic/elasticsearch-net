@@ -406,7 +406,19 @@ namespace Elastic.Clients.Elasticsearch
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
+		private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
+
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+
+		private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
 
@@ -427,6 +439,12 @@ namespace Elastic.Clients.Elasticsearch
 		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? RescoreValue { get; set; }
+
+		private RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
+
+		private Action<RescoreDescriptor<TDocument>> RescoreDescriptorAction { get; set; }
+
+		private Action<RescoreDescriptor<TDocument>>[] RescoreDescriptorActions { get; set; }
 
 		private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
@@ -507,7 +525,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
@@ -531,20 +549,80 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<TDocument> Collapse(Action<FieldCollapseDescriptor<TDocument>> configure)
 		{
 			CollapseValue = null;
-			CollapseDescriptorAction = null;
+			CollapseDescriptor = null;
 			CollapseDescriptorAction = configure;
 			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 		{
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = null;
 			DocvalueFieldsValue = docvalueFields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> DocvalueFields(QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = null;
+			DocvalueFieldsDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> DocvalueFields(Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorActions = null;
+			DocvalueFieldsDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> DocvalueFields(params Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = configure;
 			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 		{
+			FieldsDescriptor = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = null;
 			FieldsValue = fields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Fields(QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+		{
+			FieldsValue = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = null;
+			FieldsDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Fields(Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+		{
+			FieldsValue = null;
+			FieldsDescriptor = null;
+			FieldsDescriptorActions = null;
+			FieldsDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Fields(params Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+		{
+			FieldsValue = null;
+			FieldsDescriptor = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -567,7 +645,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<TDocument> Highlight(Action<HighlightDescriptor<TDocument>> configure)
 		{
 			HighlightValue = null;
-			HighlightDescriptorAction = null;
+			HighlightDescriptor = null;
 			HighlightDescriptorAction = configure;
 			return Self;
 		}
@@ -591,7 +669,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<TDocument> PostFilter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			PostFilterValue = null;
-			PostFilterDescriptorAction = null;
+			PostFilterDescriptor = null;
 			PostFilterDescriptorAction = configure;
 			return Self;
 		}
@@ -615,14 +693,44 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? rescore)
 		{
+			RescoreDescriptor = null;
+			RescoreDescriptorAction = null;
+			RescoreDescriptorActions = null;
 			RescoreValue = rescore;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Rescore(RescoreDescriptor<TDocument> descriptor)
+		{
+			RescoreValue = null;
+			RescoreDescriptorAction = null;
+			RescoreDescriptorActions = null;
+			RescoreDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Rescore(Action<RescoreDescriptor<TDocument>> configure)
+		{
+			RescoreValue = null;
+			RescoreDescriptor = null;
+			RescoreDescriptorActions = null;
+			RescoreDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Rescore(params Action<RescoreDescriptor<TDocument>>[] configure)
+		{
+			RescoreValue = null;
+			RescoreDescriptor = null;
+			RescoreDescriptorAction = null;
+			RescoreDescriptorActions = configure;
 			return Self;
 		}
 
@@ -645,7 +753,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<TDocument> Slice(Action<SlicedScrollDescriptor<TDocument>> configure)
 		{
 			SliceValue = null;
-			SliceDescriptorAction = null;
+			SliceDescriptor = null;
 			SliceDescriptorAction = configure;
 			return Self;
 		}
@@ -669,7 +777,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}
@@ -723,7 +831,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<TDocument> Pit(Action<PointInTimeReferenceDescriptor> configure)
 		{
 			PitValue = null;
-			PitDescriptorAction = null;
+			PitDescriptor = null;
 			PitDescriptorAction = configure;
 			return Self;
 		}
@@ -801,7 +909,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<TDocument> Suggest(Action<SuggesterDescriptor> configure)
 		{
 			SuggestValue = null;
-			SuggestDescriptorAction = null;
+			SuggestDescriptor = null;
 			SuggestDescriptorAction = configure;
 			return Self;
 		}
@@ -871,13 +979,55 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, CollapseValue, options);
 			}
 
-			if (DocvalueFieldsValue is not null)
+			if (DocvalueFieldsDescriptor is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
+			}
+			else if (DocvalueFieldsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(DocvalueFieldsDescriptorAction), options);
+			}
+			else if (DocvalueFieldsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
+				foreach (var action in DocvalueFieldsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (DocvalueFieldsValue is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
 				JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 			}
 
-			if (FieldsValue is not null)
+			if (FieldsDescriptor is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+			}
+			else if (FieldsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
+			}
+			else if (FieldsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
+				foreach (var action in FieldsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FieldsValue is not null)
 			{
 				writer.WritePropertyName("fields");
 				JsonSerializer.Serialize(writer, FieldsValue, options);
@@ -931,7 +1081,28 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (RescoreValue is not null)
+			if (RescoreDescriptor is not null)
+			{
+				writer.WritePropertyName("rescore");
+				JsonSerializer.Serialize(writer, RescoreDescriptor, options);
+			}
+			else if (RescoreDescriptorAction is not null)
+			{
+				writer.WritePropertyName("rescore");
+				JsonSerializer.Serialize(writer, new RescoreDescriptor<TDocument>(RescoreDescriptorAction), options);
+			}
+			else if (RescoreDescriptorActions is not null)
+			{
+				writer.WritePropertyName("rescore");
+				writer.WriteStartArray();
+				foreach (var action in RescoreDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new RescoreDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (RescoreValue is not null)
 			{
 				writer.WritePropertyName("rescore");
 				JsonSerializer.Serialize(writer, RescoreValue, options);
@@ -1176,7 +1347,19 @@ namespace Elastic.Clients.Elasticsearch
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
+		private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
+
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+
+		private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
+
+		private Action<QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
 
@@ -1197,6 +1380,12 @@ namespace Elastic.Clients.Elasticsearch
 		private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? RescoreValue { get; set; }
+
+		private RescoreDescriptor RescoreDescriptor { get; set; }
+
+		private Action<RescoreDescriptor> RescoreDescriptorAction { get; set; }
+
+		private Action<RescoreDescriptor>[] RescoreDescriptorActions { get; set; }
 
 		private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
@@ -1277,7 +1466,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
@@ -1301,20 +1490,80 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor Collapse(Action<FieldCollapseDescriptor> configure)
 		{
 			CollapseValue = null;
-			CollapseDescriptorAction = null;
+			CollapseDescriptor = null;
 			CollapseDescriptorAction = configure;
 			return Self;
 		}
 
 		public SearchRequestDescriptor DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 		{
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = null;
 			DocvalueFieldsValue = docvalueFields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor DocvalueFields(QueryDsl.FieldAndFormatDescriptor descriptor)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = null;
+			DocvalueFieldsDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor DocvalueFields(Action<QueryDsl.FieldAndFormatDescriptor> configure)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorActions = null;
+			DocvalueFieldsDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor DocvalueFields(params Action<QueryDsl.FieldAndFormatDescriptor>[] configure)
+		{
+			DocvalueFieldsValue = null;
+			DocvalueFieldsDescriptor = null;
+			DocvalueFieldsDescriptorAction = null;
+			DocvalueFieldsDescriptorActions = configure;
 			return Self;
 		}
 
 		public SearchRequestDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 		{
+			FieldsDescriptor = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = null;
 			FieldsValue = fields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Fields(QueryDsl.FieldAndFormatDescriptor descriptor)
+		{
+			FieldsValue = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = null;
+			FieldsDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Fields(Action<QueryDsl.FieldAndFormatDescriptor> configure)
+		{
+			FieldsValue = null;
+			FieldsDescriptor = null;
+			FieldsDescriptorActions = null;
+			FieldsDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Fields(params Action<QueryDsl.FieldAndFormatDescriptor>[] configure)
+		{
+			FieldsValue = null;
+			FieldsDescriptor = null;
+			FieldsDescriptorAction = null;
+			FieldsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -1337,7 +1586,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor Highlight(Action<HighlightDescriptor> configure)
 		{
 			HighlightValue = null;
-			HighlightDescriptorAction = null;
+			HighlightDescriptor = null;
 			HighlightDescriptorAction = configure;
 			return Self;
 		}
@@ -1361,7 +1610,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor PostFilter(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			PostFilterValue = null;
-			PostFilterDescriptorAction = null;
+			PostFilterDescriptor = null;
 			PostFilterDescriptorAction = configure;
 			return Self;
 		}
@@ -1385,14 +1634,44 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
 
 		public SearchRequestDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? rescore)
 		{
+			RescoreDescriptor = null;
+			RescoreDescriptorAction = null;
+			RescoreDescriptorActions = null;
 			RescoreValue = rescore;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Rescore(RescoreDescriptor descriptor)
+		{
+			RescoreValue = null;
+			RescoreDescriptorAction = null;
+			RescoreDescriptorActions = null;
+			RescoreDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Rescore(Action<RescoreDescriptor> configure)
+		{
+			RescoreValue = null;
+			RescoreDescriptor = null;
+			RescoreDescriptorActions = null;
+			RescoreDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Rescore(params Action<RescoreDescriptor>[] configure)
+		{
+			RescoreValue = null;
+			RescoreDescriptor = null;
+			RescoreDescriptorAction = null;
+			RescoreDescriptorActions = configure;
 			return Self;
 		}
 
@@ -1415,7 +1694,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor Slice(Action<SlicedScrollDescriptor> configure)
 		{
 			SliceValue = null;
-			SliceDescriptorAction = null;
+			SliceDescriptor = null;
 			SliceDescriptorAction = configure;
 			return Self;
 		}
@@ -1439,7 +1718,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor Sort(Action<SortDescriptor> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}
@@ -1493,7 +1772,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor Pit(Action<PointInTimeReferenceDescriptor> configure)
 		{
 			PitValue = null;
-			PitDescriptorAction = null;
+			PitDescriptor = null;
 			PitDescriptorAction = configure;
 			return Self;
 		}
@@ -1577,7 +1856,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor Suggest(Action<SuggesterDescriptor> configure)
 		{
 			SuggestValue = null;
-			SuggestDescriptorAction = null;
+			SuggestDescriptor = null;
 			SuggestDescriptorAction = configure;
 			return Self;
 		}
@@ -1647,13 +1926,55 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, CollapseValue, options);
 			}
 
-			if (DocvalueFieldsValue is not null)
+			if (DocvalueFieldsDescriptor is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
+			}
+			else if (DocvalueFieldsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(DocvalueFieldsDescriptorAction), options);
+			}
+			else if (DocvalueFieldsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
+				foreach (var action in DocvalueFieldsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (DocvalueFieldsValue is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
 				JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 			}
 
-			if (FieldsValue is not null)
+			if (FieldsDescriptor is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+			}
+			else if (FieldsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
+			}
+			else if (FieldsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
+				foreach (var action in FieldsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FieldsValue is not null)
 			{
 				writer.WritePropertyName("fields");
 				JsonSerializer.Serialize(writer, FieldsValue, options);
@@ -1707,7 +2028,28 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (RescoreValue is not null)
+			if (RescoreDescriptor is not null)
+			{
+				writer.WritePropertyName("rescore");
+				JsonSerializer.Serialize(writer, RescoreDescriptor, options);
+			}
+			else if (RescoreDescriptorAction is not null)
+			{
+				writer.WritePropertyName("rescore");
+				JsonSerializer.Serialize(writer, new RescoreDescriptor(RescoreDescriptorAction), options);
+			}
+			else if (RescoreDescriptorActions is not null)
+			{
+				writer.WritePropertyName("rescore");
+				writer.WriteStartArray();
+				foreach (var action in RescoreDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new RescoreDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (RescoreValue is not null)
 			{
 				writer.WritePropertyName("rescore");
 				JsonSerializer.Serialize(writer, RescoreValue, options);

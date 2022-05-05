@@ -96,6 +96,12 @@ namespace Elastic.Clients.Elasticsearch
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.RankEvalRequestItem> RequestsValue { get; set; }
 
+		private RankEvalRequestItemDescriptor<TDocument> RequestsDescriptor { get; set; }
+
+		private Action<RankEvalRequestItemDescriptor<TDocument>> RequestsDescriptorAction { get; set; }
+
+		private Action<RankEvalRequestItemDescriptor<TDocument>>[] RequestsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.RankEvalMetric? MetricValue { get; set; }
 
 		private RankEvalMetricDescriptor MetricDescriptor { get; set; }
@@ -104,7 +110,37 @@ namespace Elastic.Clients.Elasticsearch
 
 		public RankEvalRequestDescriptor<TDocument> Requests(IEnumerable<Elastic.Clients.Elasticsearch.RankEvalRequestItem> requests)
 		{
+			RequestsDescriptor = null;
+			RequestsDescriptorAction = null;
+			RequestsDescriptorActions = null;
 			RequestsValue = requests;
+			return Self;
+		}
+
+		public RankEvalRequestDescriptor<TDocument> Requests(RankEvalRequestItemDescriptor<TDocument> descriptor)
+		{
+			RequestsValue = null;
+			RequestsDescriptorAction = null;
+			RequestsDescriptorActions = null;
+			RequestsDescriptor = descriptor;
+			return Self;
+		}
+
+		public RankEvalRequestDescriptor<TDocument> Requests(Action<RankEvalRequestItemDescriptor<TDocument>> configure)
+		{
+			RequestsValue = null;
+			RequestsDescriptor = null;
+			RequestsDescriptorActions = null;
+			RequestsDescriptorAction = configure;
+			return Self;
+		}
+
+		public RankEvalRequestDescriptor<TDocument> Requests(params Action<RankEvalRequestItemDescriptor<TDocument>>[] configure)
+		{
+			RequestsValue = null;
+			RequestsDescriptor = null;
+			RequestsDescriptorAction = null;
+			RequestsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -127,7 +163,7 @@ namespace Elastic.Clients.Elasticsearch
 		public RankEvalRequestDescriptor<TDocument> Metric(Action<RankEvalMetricDescriptor> configure)
 		{
 			MetricValue = null;
-			MetricDescriptorAction = null;
+			MetricDescriptor = null;
 			MetricDescriptorAction = configure;
 			return Self;
 		}
@@ -135,8 +171,33 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("requests");
-			JsonSerializer.Serialize(writer, RequestsValue, options);
+			if (RequestsDescriptor is not null)
+			{
+				writer.WritePropertyName("requests");
+				JsonSerializer.Serialize(writer, RequestsDescriptor, options);
+			}
+			else if (RequestsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("requests");
+				JsonSerializer.Serialize(writer, new RankEvalRequestItemDescriptor<TDocument>(RequestsDescriptorAction), options);
+			}
+			else if (RequestsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("requests");
+				writer.WriteStartArray();
+				foreach (var action in RequestsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new RankEvalRequestItemDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("requests");
+				JsonSerializer.Serialize(writer, RequestsValue, options);
+			}
+
 			if (MetricDescriptor is not null)
 			{
 				writer.WritePropertyName("metric");
@@ -183,6 +244,12 @@ namespace Elastic.Clients.Elasticsearch
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.RankEvalRequestItem> RequestsValue { get; set; }
 
+		private RankEvalRequestItemDescriptor RequestsDescriptor { get; set; }
+
+		private Action<RankEvalRequestItemDescriptor> RequestsDescriptorAction { get; set; }
+
+		private Action<RankEvalRequestItemDescriptor>[] RequestsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.RankEvalMetric? MetricValue { get; set; }
 
 		private RankEvalMetricDescriptor MetricDescriptor { get; set; }
@@ -191,7 +258,37 @@ namespace Elastic.Clients.Elasticsearch
 
 		public RankEvalRequestDescriptor Requests(IEnumerable<Elastic.Clients.Elasticsearch.RankEvalRequestItem> requests)
 		{
+			RequestsDescriptor = null;
+			RequestsDescriptorAction = null;
+			RequestsDescriptorActions = null;
 			RequestsValue = requests;
+			return Self;
+		}
+
+		public RankEvalRequestDescriptor Requests(RankEvalRequestItemDescriptor descriptor)
+		{
+			RequestsValue = null;
+			RequestsDescriptorAction = null;
+			RequestsDescriptorActions = null;
+			RequestsDescriptor = descriptor;
+			return Self;
+		}
+
+		public RankEvalRequestDescriptor Requests(Action<RankEvalRequestItemDescriptor> configure)
+		{
+			RequestsValue = null;
+			RequestsDescriptor = null;
+			RequestsDescriptorActions = null;
+			RequestsDescriptorAction = configure;
+			return Self;
+		}
+
+		public RankEvalRequestDescriptor Requests(params Action<RankEvalRequestItemDescriptor>[] configure)
+		{
+			RequestsValue = null;
+			RequestsDescriptor = null;
+			RequestsDescriptorAction = null;
+			RequestsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -214,7 +311,7 @@ namespace Elastic.Clients.Elasticsearch
 		public RankEvalRequestDescriptor Metric(Action<RankEvalMetricDescriptor> configure)
 		{
 			MetricValue = null;
-			MetricDescriptorAction = null;
+			MetricDescriptor = null;
 			MetricDescriptorAction = configure;
 			return Self;
 		}
@@ -222,8 +319,33 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("requests");
-			JsonSerializer.Serialize(writer, RequestsValue, options);
+			if (RequestsDescriptor is not null)
+			{
+				writer.WritePropertyName("requests");
+				JsonSerializer.Serialize(writer, RequestsDescriptor, options);
+			}
+			else if (RequestsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("requests");
+				JsonSerializer.Serialize(writer, new RankEvalRequestItemDescriptor(RequestsDescriptorAction), options);
+			}
+			else if (RequestsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("requests");
+				writer.WriteStartArray();
+				foreach (var action in RequestsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new RankEvalRequestItemDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("requests");
+				JsonSerializer.Serialize(writer, RequestsValue, options);
+			}
+
 			if (MetricDescriptor is not null)
 			{
 				writer.WritePropertyName("metric");

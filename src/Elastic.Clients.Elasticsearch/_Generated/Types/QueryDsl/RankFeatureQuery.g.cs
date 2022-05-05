@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public RankFeatureQueryDescriptor<TDocument> Linear(Action<RankFeatureFunctionLinearDescriptor> configure)
 		{
 			LinearValue = null;
-			LinearDescriptorAction = null;
+			LinearDescriptor = null;
 			LinearDescriptorAction = configure;
 			return Self;
 		}
@@ -153,7 +153,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public RankFeatureQueryDescriptor<TDocument> Log(Action<RankFeatureFunctionLogarithmDescriptor> configure)
 		{
 			LogValue = null;
-			LogDescriptorAction = null;
+			LogDescriptor = null;
 			LogDescriptorAction = configure;
 			return Self;
 		}
@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public RankFeatureQueryDescriptor<TDocument> Saturation(Action<RankFeatureFunctionSaturationDescriptor> configure)
 		{
 			SaturationValue = null;
-			SaturationDescriptorAction = null;
+			SaturationDescriptor = null;
 			SaturationDescriptorAction = configure;
 			return Self;
 		}
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public RankFeatureQueryDescriptor<TDocument> Sigmoid(Action<RankFeatureFunctionSigmoidDescriptor> configure)
 		{
 			SigmoidValue = null;
-			SigmoidDescriptorAction = null;
+			SigmoidDescriptor = null;
 			SigmoidDescriptorAction = configure;
 			return Self;
 		}
@@ -377,7 +377,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public RankFeatureQueryDescriptor Linear(Action<RankFeatureFunctionLinearDescriptor> configure)
 		{
 			LinearValue = null;
-			LinearDescriptorAction = null;
+			LinearDescriptor = null;
 			LinearDescriptorAction = configure;
 			return Self;
 		}
@@ -401,7 +401,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public RankFeatureQueryDescriptor Log(Action<RankFeatureFunctionLogarithmDescriptor> configure)
 		{
 			LogValue = null;
-			LogDescriptorAction = null;
+			LogDescriptor = null;
 			LogDescriptorAction = configure;
 			return Self;
 		}
@@ -425,7 +425,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public RankFeatureQueryDescriptor Saturation(Action<RankFeatureFunctionSaturationDescriptor> configure)
 		{
 			SaturationValue = null;
-			SaturationDescriptorAction = null;
+			SaturationDescriptor = null;
 			SaturationDescriptorAction = configure;
 			return Self;
 		}
@@ -449,7 +449,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public RankFeatureQueryDescriptor Sigmoid(Action<RankFeatureFunctionSigmoidDescriptor> configure)
 		{
 			SigmoidValue = null;
-			SigmoidDescriptorAction = null;
+			SigmoidDescriptor = null;
 			SigmoidDescriptorAction = configure;
 			return Self;
 		}
