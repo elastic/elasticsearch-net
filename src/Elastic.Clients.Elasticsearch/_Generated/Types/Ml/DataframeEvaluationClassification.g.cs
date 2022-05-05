@@ -95,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeEvaluationClassificationDescriptor<TDocument> Metrics(Action<DataframeEvaluationClassificationMetricsDescriptor> configure)
 		{
 			MetricsValue = null;
-			MetricsDescriptorAction = null;
+			MetricsDescriptor = null;
 			MetricsDescriptorAction = configure;
 			return Self;
 		}
@@ -217,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeEvaluationClassificationDescriptor Metrics(Action<DataframeEvaluationClassificationMetricsDescriptor> configure)
 		{
 			MetricsValue = null;
-			MetricsDescriptorAction = null;
+			MetricsDescriptor = null;
 			MetricsDescriptorAction = configure;
 			return Self;
 		}

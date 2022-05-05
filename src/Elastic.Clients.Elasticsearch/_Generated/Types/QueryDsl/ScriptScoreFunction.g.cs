@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public ScriptScoreFunctionDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
-			FilterDescriptorAction = null;
+			FilterDescriptor = null;
 			FilterDescriptorAction = configure;
 			return Self;
 		}
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public ScriptScoreFunctionDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public ScriptScoreFunctionDescriptor Filter(Action<QueryContainerDescriptor> configure)
 		{
 			FilterValue = null;
-			FilterDescriptorAction = null;
+			FilterDescriptor = null;
 			FilterDescriptorAction = configure;
 			return Self;
 		}
@@ -217,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public ScriptScoreFunctionDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}

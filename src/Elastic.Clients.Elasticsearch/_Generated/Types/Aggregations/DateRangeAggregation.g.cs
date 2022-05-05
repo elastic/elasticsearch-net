@@ -208,6 +208,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
 
+		private DateRangeExpressionDescriptor RangesDescriptor { get; set; }
+
+		private Action<DateRangeExpressionDescriptor> RangesDescriptorAction { get; set; }
+
+		private Action<DateRangeExpressionDescriptor>[] RangesDescriptorActions { get; set; }
+
 		private string? TimeZoneValue { get; set; }
 
 		public DateRangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -229,7 +235,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public DateRangeAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
@@ -260,7 +266,37 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public DateRangeAggregationDescriptor<TDocument> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
 		{
+			RangesDescriptor = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = null;
 			RangesValue = ranges;
+			return Self;
+		}
+
+		public DateRangeAggregationDescriptor<TDocument> Ranges(DateRangeExpressionDescriptor descriptor)
+		{
+			RangesValue = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = null;
+			RangesDescriptor = descriptor;
+			return Self;
+		}
+
+		public DateRangeAggregationDescriptor<TDocument> Ranges(Action<DateRangeExpressionDescriptor> configure)
+		{
+			RangesValue = null;
+			RangesDescriptor = null;
+			RangesDescriptorActions = null;
+			RangesDescriptorAction = configure;
+			return Self;
+		}
+
+		public DateRangeAggregationDescriptor<TDocument> Ranges(params Action<DateRangeExpressionDescriptor>[] configure)
+		{
+			RangesValue = null;
+			RangesDescriptor = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = configure;
 			return Self;
 		}
 
@@ -287,7 +323,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(FormatValue);
 			}
 
-			if (RangesValue is not null)
+			if (RangesDescriptor is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, RangesDescriptor, options);
+			}
+			else if (RangesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(RangesDescriptorAction), options);
+			}
+			else if (RangesDescriptorActions is not null)
+			{
+				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
+				foreach (var action in RangesDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (RangesValue is not null)
 			{
 				writer.WritePropertyName("ranges");
 				JsonSerializer.Serialize(writer, RangesValue, options);
@@ -347,6 +404,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
 
+		private DateRangeExpressionDescriptor RangesDescriptor { get; set; }
+
+		private Action<DateRangeExpressionDescriptor> RangesDescriptorAction { get; set; }
+
+		private Action<DateRangeExpressionDescriptor>[] RangesDescriptorActions { get; set; }
+
 		private string? TimeZoneValue { get; set; }
 
 		public DateRangeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -368,7 +431,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public DateRangeAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
@@ -405,7 +468,37 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public DateRangeAggregationDescriptor Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
 		{
+			RangesDescriptor = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = null;
 			RangesValue = ranges;
+			return Self;
+		}
+
+		public DateRangeAggregationDescriptor Ranges(DateRangeExpressionDescriptor descriptor)
+		{
+			RangesValue = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = null;
+			RangesDescriptor = descriptor;
+			return Self;
+		}
+
+		public DateRangeAggregationDescriptor Ranges(Action<DateRangeExpressionDescriptor> configure)
+		{
+			RangesValue = null;
+			RangesDescriptor = null;
+			RangesDescriptorActions = null;
+			RangesDescriptorAction = configure;
+			return Self;
+		}
+
+		public DateRangeAggregationDescriptor Ranges(params Action<DateRangeExpressionDescriptor>[] configure)
+		{
+			RangesValue = null;
+			RangesDescriptor = null;
+			RangesDescriptorAction = null;
+			RangesDescriptorActions = configure;
 			return Self;
 		}
 
@@ -432,7 +525,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(FormatValue);
 			}
 
-			if (RangesValue is not null)
+			if (RangesDescriptor is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, RangesDescriptor, options);
+			}
+			else if (RangesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(RangesDescriptorAction), options);
+			}
+			else if (RangesDescriptorActions is not null)
+			{
+				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
+				foreach (var action in RangesDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (RangesValue is not null)
 			{
 				writer.WritePropertyName("ranges");
 				JsonSerializer.Serialize(writer, RangesValue, options);

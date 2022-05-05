@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public CommandDescriptor AllocateEmptyPrimary(Action<CommandAllocatePrimaryActionDescriptor> configure)
 		{
 			AllocateEmptyPrimaryValue = null;
-			AllocateEmptyPrimaryDescriptorAction = null;
+			AllocateEmptyPrimaryDescriptor = null;
 			AllocateEmptyPrimaryDescriptorAction = configure;
 			return Self;
 		}
@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public CommandDescriptor AllocateReplica(Action<CommandAllocateReplicaActionDescriptor> configure)
 		{
 			AllocateReplicaValue = null;
-			AllocateReplicaDescriptorAction = null;
+			AllocateReplicaDescriptor = null;
 			AllocateReplicaDescriptorAction = configure;
 			return Self;
 		}
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public CommandDescriptor AllocateStalePrimary(Action<CommandAllocatePrimaryActionDescriptor> configure)
 		{
 			AllocateStalePrimaryValue = null;
-			AllocateStalePrimaryDescriptorAction = null;
+			AllocateStalePrimaryDescriptor = null;
 			AllocateStalePrimaryDescriptorAction = configure;
 			return Self;
 		}
@@ -175,7 +175,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public CommandDescriptor Cancel(Action<CommandCancelActionDescriptor> configure)
 		{
 			CancelValue = null;
-			CancelDescriptorAction = null;
+			CancelDescriptor = null;
 			CancelDescriptorAction = configure;
 			return Self;
 		}
@@ -199,7 +199,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public CommandDescriptor Move(Action<CommandMoveActionDescriptor> configure)
 		{
 			MoveValue = null;
-			MoveDescriptorAction = null;
+			MoveDescriptor = null;
 			MoveDescriptorAction = configure;
 			return Self;
 		}

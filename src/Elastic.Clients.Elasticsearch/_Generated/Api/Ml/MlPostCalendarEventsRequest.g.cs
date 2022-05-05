@@ -65,17 +65,78 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> EventsValue { get; set; }
 
+		private CalendarEventDescriptor EventsDescriptor { get; set; }
+
+		private Action<CalendarEventDescriptor> EventsDescriptorAction { get; set; }
+
+		private Action<CalendarEventDescriptor>[] EventsDescriptorActions { get; set; }
+
 		public MlPostCalendarEventsRequestDescriptor Events(IEnumerable<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> events)
 		{
+			EventsDescriptor = null;
+			EventsDescriptorAction = null;
+			EventsDescriptorActions = null;
 			EventsValue = events;
+			return Self;
+		}
+
+		public MlPostCalendarEventsRequestDescriptor Events(CalendarEventDescriptor descriptor)
+		{
+			EventsValue = null;
+			EventsDescriptorAction = null;
+			EventsDescriptorActions = null;
+			EventsDescriptor = descriptor;
+			return Self;
+		}
+
+		public MlPostCalendarEventsRequestDescriptor Events(Action<CalendarEventDescriptor> configure)
+		{
+			EventsValue = null;
+			EventsDescriptor = null;
+			EventsDescriptorActions = null;
+			EventsDescriptorAction = configure;
+			return Self;
+		}
+
+		public MlPostCalendarEventsRequestDescriptor Events(params Action<CalendarEventDescriptor>[] configure)
+		{
+			EventsValue = null;
+			EventsDescriptor = null;
+			EventsDescriptorAction = null;
+			EventsDescriptorActions = configure;
 			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("events");
-			JsonSerializer.Serialize(writer, EventsValue, options);
+			if (EventsDescriptor is not null)
+			{
+				writer.WritePropertyName("events");
+				JsonSerializer.Serialize(writer, EventsDescriptor, options);
+			}
+			else if (EventsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("events");
+				JsonSerializer.Serialize(writer, new CalendarEventDescriptor(EventsDescriptorAction), options);
+			}
+			else if (EventsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("events");
+				writer.WriteStartArray();
+				foreach (var action in EventsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new CalendarEventDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("events");
+				JsonSerializer.Serialize(writer, EventsValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

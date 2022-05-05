@@ -69,7 +69,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public ConstantScoreQueryDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
-			FilterDescriptorAction = null;
+			FilterDescriptor = null;
 			FilterDescriptorAction = configure;
 			return Self;
 		}
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public ConstantScoreQueryDescriptor Filter(Action<QueryContainerDescriptor> configure)
 		{
 			FilterValue = null;
-			FilterDescriptorAction = null;
+			FilterDescriptor = null;
 			FilterDescriptorAction = configure;
 			return Self;
 		}

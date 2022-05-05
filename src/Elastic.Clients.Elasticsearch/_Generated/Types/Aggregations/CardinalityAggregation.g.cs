@@ -203,7 +203,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public CardinalityAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -328,7 +328,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public CardinalityAggregationDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}

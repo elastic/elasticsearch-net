@@ -117,6 +117,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector>? DetectorsValue { get; set; }
 
+		private DetectorDescriptor<TDocument> DetectorsDescriptor { get; set; }
+
+		private Action<DetectorDescriptor<TDocument>> DetectorsDescriptorAction { get; set; }
+
+		private Action<DetectorDescriptor<TDocument>>[] DetectorsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfigValue { get; set; }
 
 		private ModelPlotConfigDescriptor<TDocument> ModelPlotConfigDescriptor { get; set; }
@@ -157,7 +163,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public MlUpdateJobRequestDescriptor<TDocument> Detectors(IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector>? detectors)
 		{
+			DetectorsDescriptor = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = null;
 			DetectorsValue = detectors;
+			return Self;
+		}
+
+		public MlUpdateJobRequestDescriptor<TDocument> Detectors(DetectorDescriptor<TDocument> descriptor)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = null;
+			DetectorsDescriptor = descriptor;
+			return Self;
+		}
+
+		public MlUpdateJobRequestDescriptor<TDocument> Detectors(Action<DetectorDescriptor<TDocument>> configure)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptor = null;
+			DetectorsDescriptorActions = null;
+			DetectorsDescriptorAction = configure;
+			return Self;
+		}
+
+		public MlUpdateJobRequestDescriptor<TDocument> Detectors(params Action<DetectorDescriptor<TDocument>>[] configure)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptor = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -180,7 +216,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateJobRequestDescriptor<TDocument> ModelPlotConfig(Action<ModelPlotConfigDescriptor<TDocument>> configure)
 		{
 			ModelPlotConfigValue = null;
-			ModelPlotConfigDescriptorAction = null;
+			ModelPlotConfigDescriptor = null;
 			ModelPlotConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -210,7 +246,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateJobRequestDescriptor<TDocument> AnalysisLimits(Action<AnalysisMemoryLimitDescriptor> configure)
 		{
 			AnalysisLimitsValue = null;
-			AnalysisLimitsDescriptorAction = null;
+			AnalysisLimitsDescriptor = null;
 			AnalysisLimitsDescriptorAction = configure;
 			return Self;
 		}
@@ -276,7 +312,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateJobRequestDescriptor<TDocument> PerPartitionCategorization(Action<PerPartitionCategorizationDescriptor> configure)
 		{
 			PerPartitionCategorizationValue = null;
-			PerPartitionCategorizationDescriptorAction = null;
+			PerPartitionCategorizationDescriptor = null;
 			PerPartitionCategorizationDescriptorAction = configure;
 			return Self;
 		}
@@ -296,7 +332,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (DetectorsValue is not null)
+			if (DetectorsDescriptor is not null)
+			{
+				writer.WritePropertyName("detectors");
+				JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
+			}
+			else if (DetectorsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("detectors");
+				JsonSerializer.Serialize(writer, new DetectorDescriptor<TDocument>(DetectorsDescriptorAction), options);
+			}
+			else if (DetectorsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
+				foreach (var action in DetectorsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DetectorDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (DetectorsValue is not null)
 			{
 				writer.WritePropertyName("detectors");
 				JsonSerializer.Serialize(writer, DetectorsValue, options);
@@ -436,6 +493,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector>? DetectorsValue { get; set; }
 
+		private DetectorDescriptor DetectorsDescriptor { get; set; }
+
+		private Action<DetectorDescriptor> DetectorsDescriptorAction { get; set; }
+
+		private Action<DetectorDescriptor>[] DetectorsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfigValue { get; set; }
 
 		private ModelPlotConfigDescriptor ModelPlotConfigDescriptor { get; set; }
@@ -476,7 +539,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public MlUpdateJobRequestDescriptor Detectors(IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector>? detectors)
 		{
+			DetectorsDescriptor = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = null;
 			DetectorsValue = detectors;
+			return Self;
+		}
+
+		public MlUpdateJobRequestDescriptor Detectors(DetectorDescriptor descriptor)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = null;
+			DetectorsDescriptor = descriptor;
+			return Self;
+		}
+
+		public MlUpdateJobRequestDescriptor Detectors(Action<DetectorDescriptor> configure)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptor = null;
+			DetectorsDescriptorActions = null;
+			DetectorsDescriptorAction = configure;
+			return Self;
+		}
+
+		public MlUpdateJobRequestDescriptor Detectors(params Action<DetectorDescriptor>[] configure)
+		{
+			DetectorsValue = null;
+			DetectorsDescriptor = null;
+			DetectorsDescriptorAction = null;
+			DetectorsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -499,7 +592,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateJobRequestDescriptor ModelPlotConfig(Action<ModelPlotConfigDescriptor> configure)
 		{
 			ModelPlotConfigValue = null;
-			ModelPlotConfigDescriptorAction = null;
+			ModelPlotConfigDescriptor = null;
 			ModelPlotConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -529,7 +622,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateJobRequestDescriptor AnalysisLimits(Action<AnalysisMemoryLimitDescriptor> configure)
 		{
 			AnalysisLimitsValue = null;
-			AnalysisLimitsDescriptorAction = null;
+			AnalysisLimitsDescriptor = null;
 			AnalysisLimitsDescriptorAction = configure;
 			return Self;
 		}
@@ -595,7 +688,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlUpdateJobRequestDescriptor PerPartitionCategorization(Action<PerPartitionCategorizationDescriptor> configure)
 		{
 			PerPartitionCategorizationValue = null;
-			PerPartitionCategorizationDescriptorAction = null;
+			PerPartitionCategorizationDescriptor = null;
 			PerPartitionCategorizationDescriptorAction = configure;
 			return Self;
 		}
@@ -615,7 +708,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (DetectorsValue is not null)
+			if (DetectorsDescriptor is not null)
+			{
+				writer.WritePropertyName("detectors");
+				JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
+			}
+			else if (DetectorsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("detectors");
+				JsonSerializer.Serialize(writer, new DetectorDescriptor(DetectorsDescriptorAction), options);
+			}
+			else if (DetectorsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
+				foreach (var action in DetectorsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DetectorDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (DetectorsValue is not null)
 			{
 				writer.WritePropertyName("detectors");
 				JsonSerializer.Serialize(writer, DetectorsValue, options);

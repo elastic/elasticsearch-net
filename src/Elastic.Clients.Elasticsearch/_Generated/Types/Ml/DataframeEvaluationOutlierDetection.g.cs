@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeEvaluationOutlierDetectionDescriptor<TDocument> Metrics(Action<DataframeEvaluationOutlierDetectionMetricsDescriptor> configure)
 		{
 			MetricsValue = null;
-			MetricsDescriptorAction = null;
+			MetricsDescriptor = null;
 			MetricsDescriptorAction = configure;
 			return Self;
 		}
@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeEvaluationOutlierDetectionDescriptor Metrics(Action<DataframeEvaluationOutlierDetectionMetricsDescriptor> configure)
 		{
 			MetricsValue = null;
-			MetricsDescriptorAction = null;
+			MetricsDescriptor = null;
 			MetricsDescriptorAction = configure;
 			return Self;
 		}

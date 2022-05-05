@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public SlmPutLifecycleRequestDescriptor Config(Action<ConfigurationDescriptor> configure)
 		{
 			ConfigValue = null;
-			ConfigDescriptorAction = null;
+			ConfigDescriptor = null;
 			ConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -165,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public SlmPutLifecycleRequestDescriptor Retention(Action<RetentionDescriptor> configure)
 		{
 			RetentionValue = null;
-			RetentionDescriptorAction = null;
+			RetentionDescriptor = null;
 			RetentionDescriptorAction = configure;
 			return Self;
 		}

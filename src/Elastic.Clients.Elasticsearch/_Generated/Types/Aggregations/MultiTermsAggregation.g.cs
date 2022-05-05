@@ -135,6 +135,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> TermsValue { get; set; }
 
+		private MultiTermLookupDescriptor<TDocument> TermsDescriptor { get; set; }
+
+		private Action<MultiTermLookupDescriptor<TDocument>> TermsDescriptorAction { get; set; }
+
+		private Action<MultiTermLookupDescriptor<TDocument>>[] TermsDescriptorActions { get; set; }
+
 		private Dictionary<string, object>? MetaValue { get; set; }
 
 		public MultiTermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -156,14 +162,44 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public MultiTermsAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
 
 		public MultiTermsAggregationDescriptor<TDocument> Terms(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> terms)
 		{
+			TermsDescriptor = null;
+			TermsDescriptorAction = null;
+			TermsDescriptorActions = null;
 			TermsValue = terms;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor<TDocument> Terms(MultiTermLookupDescriptor<TDocument> descriptor)
+		{
+			TermsValue = null;
+			TermsDescriptorAction = null;
+			TermsDescriptorActions = null;
+			TermsDescriptor = descriptor;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor<TDocument> Terms(Action<MultiTermLookupDescriptor<TDocument>> configure)
+		{
+			TermsValue = null;
+			TermsDescriptor = null;
+			TermsDescriptorActions = null;
+			TermsDescriptorAction = configure;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor<TDocument> Terms(params Action<MultiTermLookupDescriptor<TDocument>>[] configure)
+		{
+			TermsValue = null;
+			TermsDescriptor = null;
+			TermsDescriptorAction = null;
+			TermsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -178,8 +214,33 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("multi_terms");
 			writer.WriteStartObject();
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsValue, options);
+			if (TermsDescriptor is not null)
+			{
+				writer.WritePropertyName("terms");
+				JsonSerializer.Serialize(writer, TermsDescriptor, options);
+			}
+			else if (TermsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("terms");
+				JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor<TDocument>(TermsDescriptorAction), options);
+			}
+			else if (TermsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("terms");
+				writer.WriteStartArray();
+				foreach (var action in TermsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("terms");
+				JsonSerializer.Serialize(writer, TermsValue, options);
+			}
+
 			writer.WriteEndObject();
 			if (MetaValue is not null)
 			{
@@ -222,6 +283,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> TermsValue { get; set; }
 
+		private MultiTermLookupDescriptor TermsDescriptor { get; set; }
+
+		private Action<MultiTermLookupDescriptor> TermsDescriptorAction { get; set; }
+
+		private Action<MultiTermLookupDescriptor>[] TermsDescriptorActions { get; set; }
+
 		private Dictionary<string, object>? MetaValue { get; set; }
 
 		public MultiTermsAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -243,14 +310,44 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public MultiTermsAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
 		{
 			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
 			return Self;
 		}
 
 		public MultiTermsAggregationDescriptor Terms(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> terms)
 		{
+			TermsDescriptor = null;
+			TermsDescriptorAction = null;
+			TermsDescriptorActions = null;
 			TermsValue = terms;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor Terms(MultiTermLookupDescriptor descriptor)
+		{
+			TermsValue = null;
+			TermsDescriptorAction = null;
+			TermsDescriptorActions = null;
+			TermsDescriptor = descriptor;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor Terms(Action<MultiTermLookupDescriptor> configure)
+		{
+			TermsValue = null;
+			TermsDescriptor = null;
+			TermsDescriptorActions = null;
+			TermsDescriptorAction = configure;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor Terms(params Action<MultiTermLookupDescriptor>[] configure)
+		{
+			TermsValue = null;
+			TermsDescriptor = null;
+			TermsDescriptorAction = null;
+			TermsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -265,8 +362,33 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("multi_terms");
 			writer.WriteStartObject();
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsValue, options);
+			if (TermsDescriptor is not null)
+			{
+				writer.WritePropertyName("terms");
+				JsonSerializer.Serialize(writer, TermsDescriptor, options);
+			}
+			else if (TermsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("terms");
+				JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor(TermsDescriptorAction), options);
+			}
+			else if (TermsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("terms");
+				writer.WriteStartArray();
+				foreach (var action in TermsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("terms");
+				JsonSerializer.Serialize(writer, TermsValue, options);
+			}
+
 			writer.WriteEndObject();
 			if (MetaValue is not null)
 			{

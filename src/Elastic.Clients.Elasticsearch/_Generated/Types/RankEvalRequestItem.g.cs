@@ -66,6 +66,12 @@ namespace Elastic.Clients.Elasticsearch
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.DocumentRating> RatingsValue { get; set; }
 
+		private DocumentRatingDescriptor RatingsDescriptor { get; set; }
+
+		private Action<DocumentRatingDescriptor> RatingsDescriptorAction { get; set; }
+
+		private Action<DocumentRatingDescriptor>[] RatingsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Id? TemplateIdValue { get; set; }
 
 		public RankEvalRequestItemDescriptor<TDocument> Request(Elastic.Clients.Elasticsearch.RankEvalQuery? request)
@@ -87,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch
 		public RankEvalRequestItemDescriptor<TDocument> Request(Action<RankEvalQueryDescriptor<TDocument>> configure)
 		{
 			RequestValue = null;
-			RequestDescriptorAction = null;
+			RequestDescriptor = null;
 			RequestDescriptorAction = configure;
 			return Self;
 		}
@@ -106,7 +112,37 @@ namespace Elastic.Clients.Elasticsearch
 
 		public RankEvalRequestItemDescriptor<TDocument> Ratings(IEnumerable<Elastic.Clients.Elasticsearch.DocumentRating> ratings)
 		{
+			RatingsDescriptor = null;
+			RatingsDescriptorAction = null;
+			RatingsDescriptorActions = null;
 			RatingsValue = ratings;
+			return Self;
+		}
+
+		public RankEvalRequestItemDescriptor<TDocument> Ratings(DocumentRatingDescriptor descriptor)
+		{
+			RatingsValue = null;
+			RatingsDescriptorAction = null;
+			RatingsDescriptorActions = null;
+			RatingsDescriptor = descriptor;
+			return Self;
+		}
+
+		public RankEvalRequestItemDescriptor<TDocument> Ratings(Action<DocumentRatingDescriptor> configure)
+		{
+			RatingsValue = null;
+			RatingsDescriptor = null;
+			RatingsDescriptorActions = null;
+			RatingsDescriptorAction = configure;
+			return Self;
+		}
+
+		public RankEvalRequestItemDescriptor<TDocument> Ratings(params Action<DocumentRatingDescriptor>[] configure)
+		{
+			RatingsValue = null;
+			RatingsDescriptor = null;
+			RatingsDescriptorAction = null;
+			RatingsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -143,8 +179,33 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, ParamsValue, options);
 			}
 
-			writer.WritePropertyName("ratings");
-			JsonSerializer.Serialize(writer, RatingsValue, options);
+			if (RatingsDescriptor is not null)
+			{
+				writer.WritePropertyName("ratings");
+				JsonSerializer.Serialize(writer, RatingsDescriptor, options);
+			}
+			else if (RatingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("ratings");
+				JsonSerializer.Serialize(writer, new DocumentRatingDescriptor(RatingsDescriptorAction), options);
+			}
+			else if (RatingsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("ratings");
+				writer.WriteStartArray();
+				foreach (var action in RatingsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DocumentRatingDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("ratings");
+				JsonSerializer.Serialize(writer, RatingsValue, options);
+			}
+
 			if (TemplateIdValue is not null)
 			{
 				writer.WritePropertyName("template_id");
@@ -174,6 +235,12 @@ namespace Elastic.Clients.Elasticsearch
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.DocumentRating> RatingsValue { get; set; }
 
+		private DocumentRatingDescriptor RatingsDescriptor { get; set; }
+
+		private Action<DocumentRatingDescriptor> RatingsDescriptorAction { get; set; }
+
+		private Action<DocumentRatingDescriptor>[] RatingsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Id? TemplateIdValue { get; set; }
 
 		public RankEvalRequestItemDescriptor Request(Elastic.Clients.Elasticsearch.RankEvalQuery? request)
@@ -195,7 +262,7 @@ namespace Elastic.Clients.Elasticsearch
 		public RankEvalRequestItemDescriptor Request(Action<RankEvalQueryDescriptor> configure)
 		{
 			RequestValue = null;
-			RequestDescriptorAction = null;
+			RequestDescriptor = null;
 			RequestDescriptorAction = configure;
 			return Self;
 		}
@@ -214,7 +281,37 @@ namespace Elastic.Clients.Elasticsearch
 
 		public RankEvalRequestItemDescriptor Ratings(IEnumerable<Elastic.Clients.Elasticsearch.DocumentRating> ratings)
 		{
+			RatingsDescriptor = null;
+			RatingsDescriptorAction = null;
+			RatingsDescriptorActions = null;
 			RatingsValue = ratings;
+			return Self;
+		}
+
+		public RankEvalRequestItemDescriptor Ratings(DocumentRatingDescriptor descriptor)
+		{
+			RatingsValue = null;
+			RatingsDescriptorAction = null;
+			RatingsDescriptorActions = null;
+			RatingsDescriptor = descriptor;
+			return Self;
+		}
+
+		public RankEvalRequestItemDescriptor Ratings(Action<DocumentRatingDescriptor> configure)
+		{
+			RatingsValue = null;
+			RatingsDescriptor = null;
+			RatingsDescriptorActions = null;
+			RatingsDescriptorAction = configure;
+			return Self;
+		}
+
+		public RankEvalRequestItemDescriptor Ratings(params Action<DocumentRatingDescriptor>[] configure)
+		{
+			RatingsValue = null;
+			RatingsDescriptor = null;
+			RatingsDescriptorAction = null;
+			RatingsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -251,8 +348,33 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, ParamsValue, options);
 			}
 
-			writer.WritePropertyName("ratings");
-			JsonSerializer.Serialize(writer, RatingsValue, options);
+			if (RatingsDescriptor is not null)
+			{
+				writer.WritePropertyName("ratings");
+				JsonSerializer.Serialize(writer, RatingsDescriptor, options);
+			}
+			else if (RatingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("ratings");
+				JsonSerializer.Serialize(writer, new DocumentRatingDescriptor(RatingsDescriptorAction), options);
+			}
+			else if (RatingsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("ratings");
+				writer.WriteStartArray();
+				foreach (var action in RatingsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DocumentRatingDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("ratings");
+				JsonSerializer.Serialize(writer, RatingsValue, options);
+			}
+
 			if (TemplateIdValue is not null)
 			{
 				writer.WritePropertyName("template_id");

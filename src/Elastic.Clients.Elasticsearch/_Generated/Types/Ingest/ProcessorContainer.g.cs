@@ -440,11 +440,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public void DotExpander(DotExpanderProcessor variant) => Set(variant, "dot_expander");
 		public void DotExpander(Action<DotExpanderProcessorDescriptor<TDocument>> configure) => Set(configure, "dot_expander");
 		public void Drop(DropProcessor variant) => Set(variant, "drop");
-		public void Drop(Action<DropProcessorDescriptor> configure) => Set(configure, "drop");
+		public void Drop(Action<DropProcessorDescriptor<TDocument>> configure) => Set(configure, "drop");
 		public void Enrich(EnrichProcessor variant) => Set(variant, "enrich");
 		public void Enrich(Action<EnrichProcessorDescriptor<TDocument>> configure) => Set(configure, "enrich");
 		public void Fail(FailProcessor variant) => Set(variant, "fail");
-		public void Fail(Action<FailProcessorDescriptor> configure) => Set(configure, "fail");
+		public void Fail(Action<FailProcessorDescriptor<TDocument>> configure) => Set(configure, "fail");
 		public void Foreach(ForeachProcessor variant) => Set(variant, "foreach");
 		public void Foreach(Action<ForeachProcessorDescriptor<TDocument>> configure) => Set(configure, "foreach");
 		public void Geoip(GeoIpProcessor variant) => Set(variant, "geoip");
@@ -464,7 +464,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public void Lowercase(LowercaseProcessor variant) => Set(variant, "lowercase");
 		public void Lowercase(Action<LowercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "lowercase");
 		public void Pipeline(PipelineProcessor variant) => Set(variant, "pipeline");
-		public void Pipeline(Action<PipelineProcessorDescriptor> configure) => Set(configure, "pipeline");
+		public void Pipeline(Action<PipelineProcessorDescriptor<TDocument>> configure) => Set(configure, "pipeline");
 		public void Remove(RemoveProcessor variant) => Set(variant, "remove");
 		public void Remove(Action<RemoveProcessorDescriptor<TDocument>> configure) => Set(configure, "remove");
 		public void Rename(RenameProcessor variant) => Set(variant, "rename");
@@ -578,11 +578,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public void DotExpander<TDocument>(Action<DotExpanderProcessorDescriptor<TDocument>> configure) => Set(configure, "dot_expander");
 		public void Drop(DropProcessor variant) => Set(variant, "drop");
 		public void Drop(Action<DropProcessorDescriptor> configure) => Set(configure, "drop");
+		public void Drop<TDocument>(Action<DropProcessorDescriptor<TDocument>> configure) => Set(configure, "drop");
 		public void Enrich(EnrichProcessor variant) => Set(variant, "enrich");
 		public void Enrich(Action<EnrichProcessorDescriptor> configure) => Set(configure, "enrich");
 		public void Enrich<TDocument>(Action<EnrichProcessorDescriptor<TDocument>> configure) => Set(configure, "enrich");
 		public void Fail(FailProcessor variant) => Set(variant, "fail");
 		public void Fail(Action<FailProcessorDescriptor> configure) => Set(configure, "fail");
+		public void Fail<TDocument>(Action<FailProcessorDescriptor<TDocument>> configure) => Set(configure, "fail");
 		public void Foreach(ForeachProcessor variant) => Set(variant, "foreach");
 		public void Foreach(Action<ForeachProcessorDescriptor> configure) => Set(configure, "foreach");
 		public void Foreach<TDocument>(Action<ForeachProcessorDescriptor<TDocument>> configure) => Set(configure, "foreach");
@@ -612,6 +614,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public void Lowercase<TDocument>(Action<LowercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "lowercase");
 		public void Pipeline(PipelineProcessor variant) => Set(variant, "pipeline");
 		public void Pipeline(Action<PipelineProcessorDescriptor> configure) => Set(configure, "pipeline");
+		public void Pipeline<TDocument>(Action<PipelineProcessorDescriptor<TDocument>> configure) => Set(configure, "pipeline");
 		public void Remove(RemoveProcessor variant) => Set(variant, "remove");
 		public void Remove(Action<RemoveProcessorDescriptor> configure) => Set(configure, "remove");
 		public void Remove<TDocument>(Action<RemoveProcessorDescriptor<TDocument>> configure) => Set(configure, "remove");

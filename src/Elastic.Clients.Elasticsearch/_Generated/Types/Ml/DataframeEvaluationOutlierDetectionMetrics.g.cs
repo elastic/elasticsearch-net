@@ -69,7 +69,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DataframeEvaluationOutlierDetectionMetricsDescriptor AucRoc(Action<DataframeEvaluationClassificationMetricsAucRocDescriptor> configure)
 		{
 			AucRocValue = null;
-			AucRocDescriptorAction = null;
+			AucRocDescriptor = null;
 			AucRocDescriptorAction = configure;
 			return Self;
 		}

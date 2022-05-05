@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ScriptFieldDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}

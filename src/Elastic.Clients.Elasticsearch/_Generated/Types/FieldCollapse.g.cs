@@ -58,6 +58,12 @@ namespace Elastic.Clients.Elasticsearch
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? InnerHitsValue { get; set; }
 
+		private InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
+
+		private Action<InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
+
+		private Action<InnerHitsDescriptor<TDocument>>[] InnerHitsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private int? MaxConcurrentGroupSearchesValue { get; set; }
@@ -81,14 +87,44 @@ namespace Elastic.Clients.Elasticsearch
 		public FieldCollapseDescriptor<TDocument> Collapse(Action<FieldCollapseDescriptor<TDocument>> configure)
 		{
 			CollapseValue = null;
-			CollapseDescriptorAction = null;
+			CollapseDescriptor = null;
 			CollapseDescriptorAction = configure;
 			return Self;
 		}
 
 		public FieldCollapseDescriptor<TDocument> InnerHits(IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? innerHits)
 		{
+			InnerHitsDescriptor = null;
+			InnerHitsDescriptorAction = null;
+			InnerHitsDescriptorActions = null;
 			InnerHitsValue = innerHits;
+			return Self;
+		}
+
+		public FieldCollapseDescriptor<TDocument> InnerHits(InnerHitsDescriptor<TDocument> descriptor)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptorAction = null;
+			InnerHitsDescriptorActions = null;
+			InnerHitsDescriptor = descriptor;
+			return Self;
+		}
+
+		public FieldCollapseDescriptor<TDocument> InnerHits(Action<InnerHitsDescriptor<TDocument>> configure)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptor = null;
+			InnerHitsDescriptorActions = null;
+			InnerHitsDescriptorAction = configure;
+			return Self;
+		}
+
+		public FieldCollapseDescriptor<TDocument> InnerHits(params Action<InnerHitsDescriptor<TDocument>>[] configure)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptor = null;
+			InnerHitsDescriptorAction = null;
+			InnerHitsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -129,7 +165,28 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, CollapseValue, options);
 			}
 
-			if (InnerHitsValue is not null)
+			if (InnerHitsDescriptor is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
+			}
+			else if (InnerHitsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, new InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
+			}
+			else if (InnerHitsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				writer.WriteStartArray();
+				foreach (var action in InnerHitsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new InnerHitsDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (InnerHitsValue is not null)
 			{
 				writer.WritePropertyName("inner_hits");
 				JsonSerializer.Serialize(writer, InnerHitsValue, options);
@@ -162,6 +219,12 @@ namespace Elastic.Clients.Elasticsearch
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? InnerHitsValue { get; set; }
 
+		private InnerHitsDescriptor InnerHitsDescriptor { get; set; }
+
+		private Action<InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
+
+		private Action<InnerHitsDescriptor>[] InnerHitsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private int? MaxConcurrentGroupSearchesValue { get; set; }
@@ -185,14 +248,44 @@ namespace Elastic.Clients.Elasticsearch
 		public FieldCollapseDescriptor Collapse(Action<FieldCollapseDescriptor> configure)
 		{
 			CollapseValue = null;
-			CollapseDescriptorAction = null;
+			CollapseDescriptor = null;
 			CollapseDescriptorAction = configure;
 			return Self;
 		}
 
 		public FieldCollapseDescriptor InnerHits(IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? innerHits)
 		{
+			InnerHitsDescriptor = null;
+			InnerHitsDescriptorAction = null;
+			InnerHitsDescriptorActions = null;
 			InnerHitsValue = innerHits;
+			return Self;
+		}
+
+		public FieldCollapseDescriptor InnerHits(InnerHitsDescriptor descriptor)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptorAction = null;
+			InnerHitsDescriptorActions = null;
+			InnerHitsDescriptor = descriptor;
+			return Self;
+		}
+
+		public FieldCollapseDescriptor InnerHits(Action<InnerHitsDescriptor> configure)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptor = null;
+			InnerHitsDescriptorActions = null;
+			InnerHitsDescriptorAction = configure;
+			return Self;
+		}
+
+		public FieldCollapseDescriptor InnerHits(params Action<InnerHitsDescriptor>[] configure)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptor = null;
+			InnerHitsDescriptorAction = null;
+			InnerHitsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -239,7 +332,28 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, CollapseValue, options);
 			}
 
-			if (InnerHitsValue is not null)
+			if (InnerHitsDescriptor is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
+			}
+			else if (InnerHitsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, new InnerHitsDescriptor(InnerHitsDescriptorAction), options);
+			}
+			else if (InnerHitsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				writer.WriteStartArray();
+				foreach (var action in InnerHitsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new InnerHitsDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (InnerHitsValue is not null)
 			{
 				writer.WritePropertyName("inner_hits");
 				JsonSerializer.Serialize(writer, InnerHitsValue, options);
