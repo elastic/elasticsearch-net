@@ -92,16 +92,73 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterRerouteRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		private IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Command>? CommandsValue { get; set; }
 
+		private CommandDescriptor CommandsDescriptor { get; set; }
+
+		private Action<CommandDescriptor> CommandsDescriptorAction { get; set; }
+
+		private Action<CommandDescriptor>[] CommandsDescriptorActions { get; set; }
+
 		public ClusterRerouteRequestDescriptor Commands(IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Command>? commands)
 		{
+			CommandsDescriptor = null;
+			CommandsDescriptorAction = null;
+			CommandsDescriptorActions = null;
 			CommandsValue = commands;
+			return Self;
+		}
+
+		public ClusterRerouteRequestDescriptor Commands(CommandDescriptor descriptor)
+		{
+			CommandsValue = null;
+			CommandsDescriptorAction = null;
+			CommandsDescriptorActions = null;
+			CommandsDescriptor = descriptor;
+			return Self;
+		}
+
+		public ClusterRerouteRequestDescriptor Commands(Action<CommandDescriptor> configure)
+		{
+			CommandsValue = null;
+			CommandsDescriptor = null;
+			CommandsDescriptorActions = null;
+			CommandsDescriptorAction = configure;
+			return Self;
+		}
+
+		public ClusterRerouteRequestDescriptor Commands(params Action<CommandDescriptor>[] configure)
+		{
+			CommandsValue = null;
+			CommandsDescriptor = null;
+			CommandsDescriptorAction = null;
+			CommandsDescriptorActions = configure;
 			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (CommandsValue is not null)
+			if (CommandsDescriptor is not null)
+			{
+				writer.WritePropertyName("commands");
+				JsonSerializer.Serialize(writer, CommandsDescriptor, options);
+			}
+			else if (CommandsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("commands");
+				JsonSerializer.Serialize(writer, new CommandDescriptor(CommandsDescriptorAction), options);
+			}
+			else if (CommandsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("commands");
+				writer.WriteStartArray();
+				foreach (var action in CommandsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new CommandDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (CommandsValue is not null)
 			{
 				writer.WritePropertyName("commands");
 				JsonSerializer.Serialize(writer, CommandsValue, options);

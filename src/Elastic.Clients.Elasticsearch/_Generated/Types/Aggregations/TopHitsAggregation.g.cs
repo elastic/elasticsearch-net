@@ -441,7 +441,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopHitsAggregationDescriptor<TDocument> Highlight(Action<HighlightDescriptor<TDocument>> configure)
 		{
 			HighlightValue = null;
-			HighlightDescriptorAction = null;
+			HighlightDescriptor = null;
 			HighlightDescriptorAction = configure;
 			return Self;
 		}
@@ -465,7 +465,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopHitsAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -489,7 +489,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopHitsAggregationDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}
@@ -782,7 +782,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopHitsAggregationDescriptor Highlight(Action<HighlightDescriptor> configure)
 		{
 			HighlightValue = null;
-			HighlightDescriptorAction = null;
+			HighlightDescriptor = null;
 			HighlightDescriptorAction = configure;
 			return Self;
 		}
@@ -806,7 +806,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopHitsAggregationDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -830,7 +830,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopHitsAggregationDescriptor Sort(Action<SortDescriptor> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}

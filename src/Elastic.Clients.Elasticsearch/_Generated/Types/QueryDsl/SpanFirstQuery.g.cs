@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanFirstQueryDescriptor<TDocument> Match(Action<SpanQueryDescriptor<TDocument>> configure)
 		{
 			MatchValue = null;
-			MatchDescriptorAction = null;
+			MatchDescriptor = null;
 			MatchDescriptorAction = configure;
 			return Self;
 		}
@@ -175,7 +175,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanFirstQueryDescriptor Match(Action<SpanQueryDescriptor> configure)
 		{
 			MatchValue = null;
-			MatchDescriptorAction = null;
+			MatchDescriptor = null;
 			MatchDescriptorAction = configure;
 			return Self;
 		}

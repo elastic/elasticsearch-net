@@ -48,13 +48,55 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? ApplicationsValue { get; set; }
 
+		private ApplicationPrivilegesDescriptor ApplicationsDescriptor { get; set; }
+
+		private Action<ApplicationPrivilegesDescriptor> ApplicationsDescriptorAction { get; set; }
+
+		private Action<ApplicationPrivilegesDescriptor>[] ApplicationsDescriptorActions { get; set; }
+
 		private IEnumerable<string> ClusterValue { get; set; }
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivileges> IndexValue { get; set; }
 
+		private IndexPrivilegesDescriptor IndexDescriptor { get; set; }
+
+		private Action<IndexPrivilegesDescriptor> IndexDescriptorAction { get; set; }
+
+		private Action<IndexPrivilegesDescriptor>[] IndexDescriptorActions { get; set; }
+
 		public RoleDescriptorDescriptor Applications(IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? applications)
 		{
+			ApplicationsDescriptor = null;
+			ApplicationsDescriptorAction = null;
+			ApplicationsDescriptorActions = null;
 			ApplicationsValue = applications;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor Applications(ApplicationPrivilegesDescriptor descriptor)
+		{
+			ApplicationsValue = null;
+			ApplicationsDescriptorAction = null;
+			ApplicationsDescriptorActions = null;
+			ApplicationsDescriptor = descriptor;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor Applications(Action<ApplicationPrivilegesDescriptor> configure)
+		{
+			ApplicationsValue = null;
+			ApplicationsDescriptor = null;
+			ApplicationsDescriptorActions = null;
+			ApplicationsDescriptorAction = configure;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor Applications(params Action<ApplicationPrivilegesDescriptor>[] configure)
+		{
+			ApplicationsValue = null;
+			ApplicationsDescriptor = null;
+			ApplicationsDescriptorAction = null;
+			ApplicationsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -66,14 +108,65 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		public RoleDescriptorDescriptor Index(IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivileges> index)
 		{
+			IndexDescriptor = null;
+			IndexDescriptorAction = null;
+			IndexDescriptorActions = null;
 			IndexValue = index;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor Index(IndexPrivilegesDescriptor descriptor)
+		{
+			IndexValue = null;
+			IndexDescriptorAction = null;
+			IndexDescriptorActions = null;
+			IndexDescriptor = descriptor;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor Index(Action<IndexPrivilegesDescriptor> configure)
+		{
+			IndexValue = null;
+			IndexDescriptor = null;
+			IndexDescriptorActions = null;
+			IndexDescriptorAction = configure;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor Index(params Action<IndexPrivilegesDescriptor>[] configure)
+		{
+			IndexValue = null;
+			IndexDescriptor = null;
+			IndexDescriptorAction = null;
+			IndexDescriptorActions = configure;
 			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (ApplicationsValue is not null)
+			if (ApplicationsDescriptor is not null)
+			{
+				writer.WritePropertyName("applications");
+				JsonSerializer.Serialize(writer, ApplicationsDescriptor, options);
+			}
+			else if (ApplicationsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("applications");
+				JsonSerializer.Serialize(writer, new ApplicationPrivilegesDescriptor(ApplicationsDescriptorAction), options);
+			}
+			else if (ApplicationsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("applications");
+				writer.WriteStartArray();
+				foreach (var action in ApplicationsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new ApplicationPrivilegesDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (ApplicationsValue is not null)
 			{
 				writer.WritePropertyName("applications");
 				JsonSerializer.Serialize(writer, ApplicationsValue, options);
@@ -81,8 +174,33 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 			writer.WritePropertyName("cluster");
 			JsonSerializer.Serialize(writer, ClusterValue, options);
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
+			if (IndexDescriptor is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, IndexDescriptor, options);
+			}
+			else if (IndexDescriptorAction is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, new IndexPrivilegesDescriptor(IndexDescriptorAction), options);
+			}
+			else if (IndexDescriptorActions is not null)
+			{
+				writer.WritePropertyName("index");
+				writer.WriteStartArray();
+				foreach (var action in IndexDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new IndexPrivilegesDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, IndexValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexRoutingDescriptor Allocation(Action<IndexRoutingAllocationDescriptor> configure)
 		{
 			AllocationValue = null;
-			AllocationDescriptorAction = null;
+			AllocationDescriptor = null;
 			AllocationDescriptorAction = configure;
 			return Self;
 		}
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexRoutingDescriptor Rebalance(Action<IndexRoutingRebalanceDescriptor> configure)
 		{
 			RebalanceValue = null;
-			RebalanceDescriptorAction = null;
+			RebalanceDescriptor = null;
 			RebalanceDescriptorAction = configure;
 			return Self;
 		}

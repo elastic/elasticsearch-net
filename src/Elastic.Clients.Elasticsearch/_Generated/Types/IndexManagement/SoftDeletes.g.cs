@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SoftDeletesDescriptor RetentionLease(Action<RetentionLeaseDescriptor> configure)
 		{
 			RetentionLeaseValue = null;
-			RetentionLeaseDescriptorAction = null;
+			RetentionLeaseDescriptor = null;
 			RetentionLeaseDescriptorAction = configure;
 			return Self;
 		}

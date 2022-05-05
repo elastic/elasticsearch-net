@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SimulateIndexTemplateRequestDescriptor<TDocument> Template(Action<IndexTemplateMappingDescriptor<TDocument>> configure)
 		{
 			TemplateValue = null;
-			TemplateDescriptorAction = null;
+			TemplateDescriptor = null;
 			TemplateDescriptorAction = configure;
 			return Self;
 		}
@@ -189,7 +189,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SimulateIndexTemplateRequestDescriptor<TDocument> DataStream(Action<DataStreamDescriptor> configure)
 		{
 			DataStreamValue = null;
-			DataStreamDescriptorAction = null;
+			DataStreamDescriptor = null;
 			DataStreamDescriptorAction = configure;
 			return Self;
 		}
@@ -352,7 +352,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SimulateIndexTemplateRequestDescriptor Template(Action<IndexTemplateMappingDescriptor> configure)
 		{
 			TemplateValue = null;
-			TemplateDescriptorAction = null;
+			TemplateDescriptor = null;
 			TemplateDescriptorAction = configure;
 			return Self;
 		}
@@ -394,7 +394,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SimulateIndexTemplateRequestDescriptor DataStream(Action<DataStreamDescriptor> configure)
 		{
 			DataStreamValue = null;
-			DataStreamDescriptorAction = null;
+			DataStreamDescriptor = null;
 			DataStreamDescriptorAction = configure;
 			return Self;
 		}

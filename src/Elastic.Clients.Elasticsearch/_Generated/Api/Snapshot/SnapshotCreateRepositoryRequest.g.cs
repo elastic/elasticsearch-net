@@ -114,7 +114,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public SnapshotCreateRepositoryRequestDescriptor Settings(Action<RepositorySettingsDescriptor> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}

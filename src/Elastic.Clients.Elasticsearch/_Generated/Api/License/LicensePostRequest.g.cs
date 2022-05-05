@@ -67,6 +67,12 @@ namespace Elastic.Clients.Elasticsearch.License
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.License.License> LicensesValue { get; set; }
 
+		private LicenseDescriptor LicensesDescriptor { get; set; }
+
+		private Action<LicenseDescriptor> LicensesDescriptorAction { get; set; }
+
+		private Action<LicenseDescriptor>[] LicensesDescriptorActions { get; set; }
+
 		public LicensePostRequestDescriptor License(Elastic.Clients.Elasticsearch.License.License? license)
 		{
 			LicenseDescriptor = null;
@@ -86,14 +92,44 @@ namespace Elastic.Clients.Elasticsearch.License
 		public LicensePostRequestDescriptor License(Action<LicenseDescriptor> configure)
 		{
 			LicenseValue = null;
-			LicenseDescriptorAction = null;
+			LicenseDescriptor = null;
 			LicenseDescriptorAction = configure;
 			return Self;
 		}
 
 		public LicensePostRequestDescriptor Licenses(IEnumerable<Elastic.Clients.Elasticsearch.License.License> licenses)
 		{
+			LicensesDescriptor = null;
+			LicensesDescriptorAction = null;
+			LicensesDescriptorActions = null;
 			LicensesValue = licenses;
+			return Self;
+		}
+
+		public LicensePostRequestDescriptor Licenses(LicenseDescriptor descriptor)
+		{
+			LicensesValue = null;
+			LicensesDescriptorAction = null;
+			LicensesDescriptorActions = null;
+			LicensesDescriptor = descriptor;
+			return Self;
+		}
+
+		public LicensePostRequestDescriptor Licenses(Action<LicenseDescriptor> configure)
+		{
+			LicensesValue = null;
+			LicensesDescriptor = null;
+			LicensesDescriptorActions = null;
+			LicensesDescriptorAction = configure;
+			return Self;
+		}
+
+		public LicensePostRequestDescriptor Licenses(params Action<LicenseDescriptor>[] configure)
+		{
+			LicensesValue = null;
+			LicensesDescriptor = null;
+			LicensesDescriptorAction = null;
+			LicensesDescriptorActions = configure;
 			return Self;
 		}
 
@@ -116,8 +152,33 @@ namespace Elastic.Clients.Elasticsearch.License
 				JsonSerializer.Serialize(writer, LicenseValue, options);
 			}
 
-			writer.WritePropertyName("licenses");
-			JsonSerializer.Serialize(writer, LicensesValue, options);
+			if (LicensesDescriptor is not null)
+			{
+				writer.WritePropertyName("licenses");
+				JsonSerializer.Serialize(writer, LicensesDescriptor, options);
+			}
+			else if (LicensesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("licenses");
+				JsonSerializer.Serialize(writer, new LicenseDescriptor(LicensesDescriptorAction), options);
+			}
+			else if (LicensesDescriptorActions is not null)
+			{
+				writer.WritePropertyName("licenses");
+				writer.WriteStartArray();
+				foreach (var action in LicensesDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new LicenseDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else
+			{
+				writer.WritePropertyName("licenses");
+				JsonSerializer.Serialize(writer, LicensesValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

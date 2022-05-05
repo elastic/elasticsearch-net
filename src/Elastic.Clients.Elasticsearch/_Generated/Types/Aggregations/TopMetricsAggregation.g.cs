@@ -193,6 +193,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
 
+		private TopMetricsValueDescriptor<TDocument> MetricsDescriptor { get; set; }
+
+		private Action<TopMetricsValueDescriptor<TDocument>> MetricsDescriptorAction { get; set; }
+
+		private Action<TopMetricsValueDescriptor<TDocument>>[] MetricsDescriptorActions { get; set; }
+
 		private ScriptBase? ScriptValue { get; set; }
 
 		private ScriptDescriptor ScriptDescriptor { get; set; }
@@ -213,7 +219,37 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public TopMetricsAggregationDescriptor<TDocument> Metrics(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
 		{
+			MetricsDescriptor = null;
+			MetricsDescriptorAction = null;
+			MetricsDescriptorActions = null;
 			MetricsValue = metrics;
+			return Self;
+		}
+
+		public TopMetricsAggregationDescriptor<TDocument> Metrics(TopMetricsValueDescriptor<TDocument> descriptor)
+		{
+			MetricsValue = null;
+			MetricsDescriptorAction = null;
+			MetricsDescriptorActions = null;
+			MetricsDescriptor = descriptor;
+			return Self;
+		}
+
+		public TopMetricsAggregationDescriptor<TDocument> Metrics(Action<TopMetricsValueDescriptor<TDocument>> configure)
+		{
+			MetricsValue = null;
+			MetricsDescriptor = null;
+			MetricsDescriptorActions = null;
+			MetricsDescriptorAction = configure;
+			return Self;
+		}
+
+		public TopMetricsAggregationDescriptor<TDocument> Metrics(params Action<TopMetricsValueDescriptor<TDocument>>[] configure)
+		{
+			MetricsValue = null;
+			MetricsDescriptor = null;
+			MetricsDescriptorAction = null;
+			MetricsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -236,7 +272,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopMetricsAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -260,7 +296,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopMetricsAggregationDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}
@@ -294,7 +330,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("top_metrics");
 			writer.WriteStartObject();
-			if (MetricsValue is not null)
+			if (MetricsDescriptor is not null)
+			{
+				writer.WritePropertyName("metrics");
+				JsonSerializer.Serialize(writer, MetricsDescriptor, options);
+			}
+			else if (MetricsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("metrics");
+				JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor<TDocument>(MetricsDescriptorAction), options);
+			}
+			else if (MetricsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("metrics");
+				writer.WriteStartArray();
+				foreach (var action in MetricsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (MetricsValue is not null)
 			{
 				writer.WritePropertyName("metrics");
 				JsonSerializer.Serialize(writer, MetricsValue, options);
@@ -364,6 +421,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
 
+		private TopMetricsValueDescriptor MetricsDescriptor { get; set; }
+
+		private Action<TopMetricsValueDescriptor> MetricsDescriptorAction { get; set; }
+
+		private Action<TopMetricsValueDescriptor>[] MetricsDescriptorActions { get; set; }
+
 		private ScriptBase? ScriptValue { get; set; }
 
 		private ScriptDescriptor ScriptDescriptor { get; set; }
@@ -384,7 +447,37 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public TopMetricsAggregationDescriptor Metrics(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
 		{
+			MetricsDescriptor = null;
+			MetricsDescriptorAction = null;
+			MetricsDescriptorActions = null;
 			MetricsValue = metrics;
+			return Self;
+		}
+
+		public TopMetricsAggregationDescriptor Metrics(TopMetricsValueDescriptor descriptor)
+		{
+			MetricsValue = null;
+			MetricsDescriptorAction = null;
+			MetricsDescriptorActions = null;
+			MetricsDescriptor = descriptor;
+			return Self;
+		}
+
+		public TopMetricsAggregationDescriptor Metrics(Action<TopMetricsValueDescriptor> configure)
+		{
+			MetricsValue = null;
+			MetricsDescriptor = null;
+			MetricsDescriptorActions = null;
+			MetricsDescriptorAction = configure;
+			return Self;
+		}
+
+		public TopMetricsAggregationDescriptor Metrics(params Action<TopMetricsValueDescriptor>[] configure)
+		{
+			MetricsValue = null;
+			MetricsDescriptor = null;
+			MetricsDescriptorAction = null;
+			MetricsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -407,7 +500,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopMetricsAggregationDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
-			ScriptDescriptorAction = null;
+			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
 			return Self;
 		}
@@ -431,7 +524,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopMetricsAggregationDescriptor Sort(Action<SortDescriptor> configure)
 		{
 			SortValue = null;
-			SortDescriptorAction = null;
+			SortDescriptor = null;
 			SortDescriptorAction = configure;
 			return Self;
 		}
@@ -471,7 +564,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("top_metrics");
 			writer.WriteStartObject();
-			if (MetricsValue is not null)
+			if (MetricsDescriptor is not null)
+			{
+				writer.WritePropertyName("metrics");
+				JsonSerializer.Serialize(writer, MetricsDescriptor, options);
+			}
+			else if (MetricsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("metrics");
+				JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor(MetricsDescriptorAction), options);
+			}
+			else if (MetricsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("metrics");
+				writer.WriteStartArray();
+				foreach (var action in MetricsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (MetricsValue is not null)
 			{
 				writer.WritePropertyName("metrics");
 				JsonSerializer.Serialize(writer, MetricsValue, options);

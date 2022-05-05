@@ -73,19 +73,19 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? DocsValue { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Ingest.Pipeline? PipelineValue { get; set; }
 
-		private PipelineDescriptor PipelineDescriptor { get; set; }
+		private PipelineDescriptor<TDocument> PipelineDescriptor { get; set; }
 
-		private Action<PipelineDescriptor> PipelineDescriptorAction { get; set; }
+		private Action<PipelineDescriptor<TDocument>> PipelineDescriptorAction { get; set; }
 
-		public IngestSimulateRequestDescriptor<TDocument> Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? docs)
-		{
-			DocsValue = docs;
-			return Self;
-		}
+		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? DocsValue { get; set; }
+
+		private DocumentDescriptor DocsDescriptor { get; set; }
+
+		private Action<DocumentDescriptor> DocsDescriptorAction { get; set; }
+
+		private Action<DocumentDescriptor>[] DocsDescriptorActions { get; set; }
 
 		public IngestSimulateRequestDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? pipeline)
 		{
@@ -95,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public IngestSimulateRequestDescriptor<TDocument> Pipeline(PipelineDescriptor descriptor)
+		public IngestSimulateRequestDescriptor<TDocument> Pipeline(PipelineDescriptor<TDocument> descriptor)
 		{
 			PipelineValue = null;
 			PipelineDescriptorAction = null;
@@ -103,23 +103,53 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public IngestSimulateRequestDescriptor<TDocument> Pipeline(Action<PipelineDescriptor> configure)
+		public IngestSimulateRequestDescriptor<TDocument> Pipeline(Action<PipelineDescriptor<TDocument>> configure)
 		{
 			PipelineValue = null;
-			PipelineDescriptorAction = null;
+			PipelineDescriptor = null;
 			PipelineDescriptorAction = configure;
+			return Self;
+		}
+
+		public IngestSimulateRequestDescriptor<TDocument> Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? docs)
+		{
+			DocsDescriptor = null;
+			DocsDescriptorAction = null;
+			DocsDescriptorActions = null;
+			DocsValue = docs;
+			return Self;
+		}
+
+		public IngestSimulateRequestDescriptor<TDocument> Docs(DocumentDescriptor descriptor)
+		{
+			DocsValue = null;
+			DocsDescriptorAction = null;
+			DocsDescriptorActions = null;
+			DocsDescriptor = descriptor;
+			return Self;
+		}
+
+		public IngestSimulateRequestDescriptor<TDocument> Docs(Action<DocumentDescriptor> configure)
+		{
+			DocsValue = null;
+			DocsDescriptor = null;
+			DocsDescriptorActions = null;
+			DocsDescriptorAction = configure;
+			return Self;
+		}
+
+		public IngestSimulateRequestDescriptor<TDocument> Docs(params Action<DocumentDescriptor>[] configure)
+		{
+			DocsValue = null;
+			DocsDescriptor = null;
+			DocsDescriptorAction = null;
+			DocsDescriptorActions = configure;
 			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (DocsValue is not null)
-			{
-				writer.WritePropertyName("docs");
-				JsonSerializer.Serialize(writer, DocsValue, options);
-			}
-
 			if (PipelineDescriptor is not null)
 			{
 				writer.WritePropertyName("pipeline");
@@ -128,12 +158,39 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			else if (PipelineDescriptorAction is not null)
 			{
 				writer.WritePropertyName("pipeline");
-				JsonSerializer.Serialize(writer, new PipelineDescriptor(PipelineDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new PipelineDescriptor<TDocument>(PipelineDescriptorAction), options);
 			}
 			else if (PipelineValue is not null)
 			{
 				writer.WritePropertyName("pipeline");
 				JsonSerializer.Serialize(writer, PipelineValue, options);
+			}
+
+			if (DocsDescriptor is not null)
+			{
+				writer.WritePropertyName("docs");
+				JsonSerializer.Serialize(writer, DocsDescriptor, options);
+			}
+			else if (DocsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("docs");
+				JsonSerializer.Serialize(writer, new DocumentDescriptor(DocsDescriptorAction), options);
+			}
+			else if (DocsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("docs");
+				writer.WriteStartArray();
+				foreach (var action in DocsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DocumentDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (DocsValue is not null)
+			{
+				writer.WritePropertyName("docs");
+				JsonSerializer.Serialize(writer, DocsValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -157,19 +214,19 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? DocsValue { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Ingest.Pipeline? PipelineValue { get; set; }
 
 		private PipelineDescriptor PipelineDescriptor { get; set; }
 
 		private Action<PipelineDescriptor> PipelineDescriptorAction { get; set; }
 
-		public IngestSimulateRequestDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? docs)
-		{
-			DocsValue = docs;
-			return Self;
-		}
+		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? DocsValue { get; set; }
+
+		private DocumentDescriptor DocsDescriptor { get; set; }
+
+		private Action<DocumentDescriptor> DocsDescriptorAction { get; set; }
+
+		private Action<DocumentDescriptor>[] DocsDescriptorActions { get; set; }
 
 		public IngestSimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? pipeline)
 		{
@@ -190,20 +247,50 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IngestSimulateRequestDescriptor Pipeline(Action<PipelineDescriptor> configure)
 		{
 			PipelineValue = null;
-			PipelineDescriptorAction = null;
+			PipelineDescriptor = null;
 			PipelineDescriptorAction = configure;
+			return Self;
+		}
+
+		public IngestSimulateRequestDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Document>? docs)
+		{
+			DocsDescriptor = null;
+			DocsDescriptorAction = null;
+			DocsDescriptorActions = null;
+			DocsValue = docs;
+			return Self;
+		}
+
+		public IngestSimulateRequestDescriptor Docs(DocumentDescriptor descriptor)
+		{
+			DocsValue = null;
+			DocsDescriptorAction = null;
+			DocsDescriptorActions = null;
+			DocsDescriptor = descriptor;
+			return Self;
+		}
+
+		public IngestSimulateRequestDescriptor Docs(Action<DocumentDescriptor> configure)
+		{
+			DocsValue = null;
+			DocsDescriptor = null;
+			DocsDescriptorActions = null;
+			DocsDescriptorAction = configure;
+			return Self;
+		}
+
+		public IngestSimulateRequestDescriptor Docs(params Action<DocumentDescriptor>[] configure)
+		{
+			DocsValue = null;
+			DocsDescriptor = null;
+			DocsDescriptorAction = null;
+			DocsDescriptorActions = configure;
 			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (DocsValue is not null)
-			{
-				writer.WritePropertyName("docs");
-				JsonSerializer.Serialize(writer, DocsValue, options);
-			}
-
 			if (PipelineDescriptor is not null)
 			{
 				writer.WritePropertyName("pipeline");
@@ -218,6 +305,33 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			{
 				writer.WritePropertyName("pipeline");
 				JsonSerializer.Serialize(writer, PipelineValue, options);
+			}
+
+			if (DocsDescriptor is not null)
+			{
+				writer.WritePropertyName("docs");
+				JsonSerializer.Serialize(writer, DocsDescriptor, options);
+			}
+			else if (DocsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("docs");
+				JsonSerializer.Serialize(writer, new DocumentDescriptor(DocsDescriptorAction), options);
+			}
+			else if (DocsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("docs");
+				writer.WriteStartArray();
+				foreach (var action in DocsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DocumentDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (DocsValue is not null)
+			{
+				writer.WritePropertyName("docs");
+				JsonSerializer.Serialize(writer, DocsValue, options);
 			}
 
 			writer.WriteEndObject();

@@ -90,7 +90,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlEvaluateDataFrameRequestDescriptor<TDocument> Evaluation(Action<DataframeEvaluationContainerDescriptor<TDocument>> configure)
 		{
 			EvaluationValue = null;
-			EvaluationDescriptorAction = null;
+			EvaluationDescriptor = null;
 			EvaluationDescriptorAction = configure;
 			return Self;
 		}
@@ -114,7 +114,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlEvaluateDataFrameRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}
@@ -209,7 +209,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlEvaluateDataFrameRequestDescriptor Evaluation(Action<DataframeEvaluationContainerDescriptor> configure)
 		{
 			EvaluationValue = null;
-			EvaluationDescriptorAction = null;
+			EvaluationDescriptor = null;
 			EvaluationDescriptorAction = configure;
 			return Self;
 		}
@@ -233,7 +233,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlEvaluateDataFrameRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
-			QueryDescriptorAction = null;
+			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
 			return Self;
 		}

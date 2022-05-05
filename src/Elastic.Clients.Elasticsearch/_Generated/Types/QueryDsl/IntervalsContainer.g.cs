@@ -177,9 +177,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		public void AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
-		public void AllOf(Action<IntervalsAllOfDescriptor> configure) => Set(configure, "all_of");
+		public void AllOf(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
 		public void AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
-		public void AnyOf(Action<IntervalsAnyOfDescriptor> configure) => Set(configure, "any_of");
+		public void AnyOf(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
 		public void Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
 		public void Fuzzy(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
 		public void Match(IntervalsMatch variant) => Set(variant, "match");
@@ -251,8 +251,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public void AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
 		public void AllOf(Action<IntervalsAllOfDescriptor> configure) => Set(configure, "all_of");
+		public void AllOf<TDocument>(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
 		public void AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
 		public void AnyOf(Action<IntervalsAnyOfDescriptor> configure) => Set(configure, "any_of");
+		public void AnyOf<TDocument>(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
 		public void Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
 		public void Fuzzy(Action<IntervalsFuzzyDescriptor> configure) => Set(configure, "fuzzy");
 		public void Fuzzy<TDocument>(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");

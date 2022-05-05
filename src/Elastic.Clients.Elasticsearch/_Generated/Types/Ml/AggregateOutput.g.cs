@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public AggregateOutputDescriptor Exponent(Action<WeightsDescriptor> configure)
 		{
 			ExponentValue = null;
-			ExponentDescriptorAction = null;
+			ExponentDescriptor = null;
 			ExponentDescriptorAction = configure;
 			return Self;
 		}
@@ -117,7 +117,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public AggregateOutputDescriptor LogisticRegression(Action<WeightsDescriptor> configure)
 		{
 			LogisticRegressionValue = null;
-			LogisticRegressionDescriptorAction = null;
+			LogisticRegressionDescriptor = null;
 			LogisticRegressionDescriptorAction = configure;
 			return Self;
 		}
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public AggregateOutputDescriptor WeightedMode(Action<WeightsDescriptor> configure)
 		{
 			WeightedModeValue = null;
-			WeightedModeDescriptorAction = null;
+			WeightedModeDescriptor = null;
 			WeightedModeDescriptorAction = configure;
 			return Self;
 		}
@@ -165,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public AggregateOutputDescriptor WeightedSum(Action<WeightsDescriptor> configure)
 		{
 			WeightedSumValue = null;
-			WeightedSumDescriptorAction = null;
+			WeightedSumDescriptor = null;
 			WeightedSumDescriptorAction = configure;
 			return Self;
 		}

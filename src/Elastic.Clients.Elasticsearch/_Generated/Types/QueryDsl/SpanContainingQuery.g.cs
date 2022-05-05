@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanContainingQueryDescriptor<TDocument> Big(Action<SpanQueryDescriptor<TDocument>> configure)
 		{
 			BigValue = null;
-			BigDescriptorAction = null;
+			BigDescriptor = null;
 			BigDescriptorAction = configure;
 			return Self;
 		}
@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanContainingQueryDescriptor<TDocument> Little(Action<SpanQueryDescriptor<TDocument>> configure)
 		{
 			LittleValue = null;
-			LittleDescriptorAction = null;
+			LittleDescriptor = null;
 			LittleDescriptorAction = configure;
 			return Self;
 		}
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanContainingQueryDescriptor Big(Action<SpanQueryDescriptor> configure)
 		{
 			BigValue = null;
-			BigDescriptorAction = null;
+			BigDescriptor = null;
 			BigDescriptorAction = configure;
 			return Self;
 		}
@@ -239,7 +239,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SpanContainingQueryDescriptor Little(Action<SpanQueryDescriptor> configure)
 		{
 			LittleValue = null;
-			LittleDescriptorAction = null;
+			LittleDescriptor = null;
 			LittleDescriptorAction = configure;
 			return Self;
 		}

@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public SettingsSearchDescriptor Idle(Action<SearchIdleDescriptor> configure)
 		{
 			IdleValue = null;
-			IdleDescriptorAction = null;
+			IdleDescriptor = null;
 			IdleDescriptorAction = configure;
 			return Self;
 		}
