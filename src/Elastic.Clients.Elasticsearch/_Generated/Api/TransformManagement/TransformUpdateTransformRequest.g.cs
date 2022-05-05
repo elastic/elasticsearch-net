@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformUpdateTransformRequestDescriptor<TDocument> RetentionPolicy(Action<RetentionPolicyContainerDescriptor<TDocument>> configure)
 		{
 			RetentionPolicyValue = null;
-			RetentionPolicyDescriptorAction = null;
+			RetentionPolicyDescriptor = null;
 			RetentionPolicyDescriptorAction = configure;
 			return Self;
 		}
@@ -183,7 +183,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformUpdateTransformRequestDescriptor<TDocument> Source(Action<SourceDescriptor<TDocument>> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -207,7 +207,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformUpdateTransformRequestDescriptor<TDocument> Sync(Action<SyncContainerDescriptor<TDocument>> configure)
 		{
 			SyncValue = null;
-			SyncDescriptorAction = null;
+			SyncDescriptor = null;
 			SyncDescriptorAction = configure;
 			return Self;
 		}
@@ -243,7 +243,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformUpdateTransformRequestDescriptor<TDocument> Dest(Action<DestinationDescriptor> configure)
 		{
 			DestValue = null;
-			DestDescriptorAction = null;
+			DestDescriptor = null;
 			DestDescriptorAction = configure;
 			return Self;
 		}
@@ -273,7 +273,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformUpdateTransformRequestDescriptor<TDocument> Settings(Action<SettingsDescriptor> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}
@@ -460,7 +460,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformUpdateTransformRequestDescriptor RetentionPolicy(Action<RetentionPolicyContainerDescriptor> configure)
 		{
 			RetentionPolicyValue = null;
-			RetentionPolicyDescriptorAction = null;
+			RetentionPolicyDescriptor = null;
 			RetentionPolicyDescriptorAction = configure;
 			return Self;
 		}
@@ -484,7 +484,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformUpdateTransformRequestDescriptor Source(Action<SourceDescriptor> configure)
 		{
 			SourceValue = null;
-			SourceDescriptorAction = null;
+			SourceDescriptor = null;
 			SourceDescriptorAction = configure;
 			return Self;
 		}
@@ -508,7 +508,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformUpdateTransformRequestDescriptor Sync(Action<SyncContainerDescriptor> configure)
 		{
 			SyncValue = null;
-			SyncDescriptorAction = null;
+			SyncDescriptor = null;
 			SyncDescriptorAction = configure;
 			return Self;
 		}
@@ -544,7 +544,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformUpdateTransformRequestDescriptor Dest(Action<DestinationDescriptor> configure)
 		{
 			DestValue = null;
-			DestDescriptorAction = null;
+			DestDescriptor = null;
 			DestDescriptorAction = configure;
 			return Self;
 		}
@@ -574,7 +574,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public TransformUpdateTransformRequestDescriptor Settings(Action<SettingsDescriptor> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}

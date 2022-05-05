@@ -27,16 +27,12 @@ var settings = new ElasticsearchClientSettings(new InMemoryConnection())
 var client = new ElasticsearchClient(settings);
 
 var filterResponse = await client.SearchAsync<Person>(s => s
-				.Query(q => q
-					.Bool(b => b
-						.Filter( // TODO - Avoid the generic here by cascading from above - WIP
-							f => f.Term(t => t.Field(f => f.Age).Value(37)),
-							f => f.Term(t => t.Field(f => f.FirstName).Value("Steve"))
-						))));
-
-
-
-
+	.Query(q => q
+		.Bool(b => b
+			.Filter(
+				f => f.Term(t => t.Field(f => f.Age).Value(37)),
+				f => f.Term(t => t.Field(f => f.FirstName).Value("Steve"))
+			))));
 
 var person = new Person { Id = 101, FirstName = "Steve", LastName = "Gordon", Age = 37, Email = "sgordon@example.com" };
 

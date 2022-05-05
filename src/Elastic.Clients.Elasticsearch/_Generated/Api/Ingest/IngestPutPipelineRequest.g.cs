@@ -94,7 +94,19 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; set; }
 
+		private ProcessorContainerDescriptor<TDocument> OnFailureDescriptor { get; set; }
+
+		private Action<ProcessorContainerDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+
+		private Action<ProcessorContainerDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? ProcessorsValue { get; set; }
+
+		private ProcessorContainerDescriptor<TDocument> ProcessorsDescriptor { get; set; }
+
+		private Action<ProcessorContainerDescriptor<TDocument>> ProcessorsDescriptorAction { get; set; }
+
+		private Action<ProcessorContainerDescriptor<TDocument>>[] ProcessorsDescriptorActions { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
@@ -104,13 +116,73 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		public IngestPutPipelineRequestDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure)
 		{
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
 			OnFailureValue = onFailure;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor<TDocument> OnFailure(ProcessorContainerDescriptor<TDocument> descriptor)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptor = descriptor;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor<TDocument> OnFailure(Action<ProcessorContainerDescriptor<TDocument>> configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptorAction = configure;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor<TDocument> OnFailure(params Action<ProcessorContainerDescriptor<TDocument>>[] configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = configure;
 			return Self;
 		}
 
 		public IngestPutPipelineRequestDescriptor<TDocument> Processors(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? processors)
 		{
+			ProcessorsDescriptor = null;
+			ProcessorsDescriptorAction = null;
+			ProcessorsDescriptorActions = null;
 			ProcessorsValue = processors;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor<TDocument> Processors(ProcessorContainerDescriptor<TDocument> descriptor)
+		{
+			ProcessorsValue = null;
+			ProcessorsDescriptorAction = null;
+			ProcessorsDescriptorActions = null;
+			ProcessorsDescriptor = descriptor;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor<TDocument> Processors(Action<ProcessorContainerDescriptor<TDocument>> configure)
+		{
+			ProcessorsValue = null;
+			ProcessorsDescriptor = null;
+			ProcessorsDescriptorActions = null;
+			ProcessorsDescriptorAction = configure;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor<TDocument> Processors(params Action<ProcessorContainerDescriptor<TDocument>>[] configure)
+		{
+			ProcessorsValue = null;
+			ProcessorsDescriptor = null;
+			ProcessorsDescriptorAction = null;
+			ProcessorsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -135,13 +207,55 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (OnFailureValue is not null)
+			if (OnFailureDescriptor is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			}
+			else if (OnFailureDescriptorAction is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			}
+			else if (OnFailureDescriptorActions is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
+				foreach (var action in OnFailureDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (OnFailureValue is not null)
 			{
 				writer.WritePropertyName("on_failure");
 				JsonSerializer.Serialize(writer, OnFailureValue, options);
 			}
 
-			if (ProcessorsValue is not null)
+			if (ProcessorsDescriptor is not null)
+			{
+				writer.WritePropertyName("processors");
+				JsonSerializer.Serialize(writer, ProcessorsDescriptor, options);
+			}
+			else if (ProcessorsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("processors");
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(ProcessorsDescriptorAction), options);
+			}
+			else if (ProcessorsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("processors");
+				writer.WriteStartArray();
+				foreach (var action in ProcessorsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (ProcessorsValue is not null)
 			{
 				writer.WritePropertyName("processors");
 				JsonSerializer.Serialize(writer, ProcessorsValue, options);
@@ -193,7 +307,19 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; set; }
 
+		private ProcessorContainerDescriptor OnFailureDescriptor { get; set; }
+
+		private Action<ProcessorContainerDescriptor> OnFailureDescriptorAction { get; set; }
+
+		private Action<ProcessorContainerDescriptor>[] OnFailureDescriptorActions { get; set; }
+
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? ProcessorsValue { get; set; }
+
+		private ProcessorContainerDescriptor ProcessorsDescriptor { get; set; }
+
+		private Action<ProcessorContainerDescriptor> ProcessorsDescriptorAction { get; set; }
+
+		private Action<ProcessorContainerDescriptor>[] ProcessorsDescriptorActions { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
@@ -203,13 +329,73 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		public IngestPutPipelineRequestDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure)
 		{
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
 			OnFailureValue = onFailure;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor OnFailure(ProcessorContainerDescriptor descriptor)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptor = descriptor;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor OnFailure(Action<ProcessorContainerDescriptor> configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorActions = null;
+			OnFailureDescriptorAction = configure;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor OnFailure(params Action<ProcessorContainerDescriptor>[] configure)
+		{
+			OnFailureValue = null;
+			OnFailureDescriptor = null;
+			OnFailureDescriptorAction = null;
+			OnFailureDescriptorActions = configure;
 			return Self;
 		}
 
 		public IngestPutPipelineRequestDescriptor Processors(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? processors)
 		{
+			ProcessorsDescriptor = null;
+			ProcessorsDescriptorAction = null;
+			ProcessorsDescriptorActions = null;
 			ProcessorsValue = processors;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor Processors(ProcessorContainerDescriptor descriptor)
+		{
+			ProcessorsValue = null;
+			ProcessorsDescriptorAction = null;
+			ProcessorsDescriptorActions = null;
+			ProcessorsDescriptor = descriptor;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor Processors(Action<ProcessorContainerDescriptor> configure)
+		{
+			ProcessorsValue = null;
+			ProcessorsDescriptor = null;
+			ProcessorsDescriptorActions = null;
+			ProcessorsDescriptorAction = configure;
+			return Self;
+		}
+
+		public IngestPutPipelineRequestDescriptor Processors(params Action<ProcessorContainerDescriptor>[] configure)
+		{
+			ProcessorsValue = null;
+			ProcessorsDescriptor = null;
+			ProcessorsDescriptorAction = null;
+			ProcessorsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -234,13 +420,55 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (OnFailureValue is not null)
+			if (OnFailureDescriptor is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			}
+			else if (OnFailureDescriptorAction is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(OnFailureDescriptorAction), options);
+			}
+			else if (OnFailureDescriptorActions is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
+				foreach (var action in OnFailureDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (OnFailureValue is not null)
 			{
 				writer.WritePropertyName("on_failure");
 				JsonSerializer.Serialize(writer, OnFailureValue, options);
 			}
 
-			if (ProcessorsValue is not null)
+			if (ProcessorsDescriptor is not null)
+			{
+				writer.WritePropertyName("processors");
+				JsonSerializer.Serialize(writer, ProcessorsDescriptor, options);
+			}
+			else if (ProcessorsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("processors");
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(ProcessorsDescriptorAction), options);
+			}
+			else if (ProcessorsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("processors");
+				writer.WriteStartArray();
+				foreach (var action in ProcessorsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (ProcessorsValue is not null)
 			{
 				writer.WritePropertyName("processors");
 				JsonSerializer.Serialize(writer, ProcessorsValue, options);

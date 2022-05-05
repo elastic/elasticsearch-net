@@ -128,7 +128,7 @@ namespace Elastic.Clients.Elasticsearch
 		public FieldCapsRequestDescriptor<TDocument> IndexFilter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			IndexFilterValue = null;
-			IndexFilterDescriptorAction = null;
+			IndexFilterDescriptor = null;
 			IndexFilterDescriptorAction = configure;
 			return Self;
 		}
@@ -216,7 +216,7 @@ namespace Elastic.Clients.Elasticsearch
 		public FieldCapsRequestDescriptor IndexFilter(Action<QueryDsl.QueryContainerDescriptor> configure)
 		{
 			IndexFilterValue = null;
-			IndexFilterDescriptorAction = null;
+			IndexFilterDescriptor = null;
 			IndexFilterDescriptorAction = configure;
 			return Self;
 		}

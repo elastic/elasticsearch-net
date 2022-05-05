@@ -35,6 +35,137 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.TrainedModel TrainedModel { get; set; }
 	}
 
+	public sealed partial class DefinitionDescriptor<TDocument> : SerializableDescriptorBase<DefinitionDescriptor<TDocument>>
+	{
+		internal DefinitionDescriptor(Action<DefinitionDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public DefinitionDescriptor() : base()
+		{
+		}
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.Preprocessor>? PreprocessorsValue { get; set; }
+
+		private PreprocessorDescriptor<TDocument> PreprocessorsDescriptor { get; set; }
+
+		private Action<PreprocessorDescriptor<TDocument>> PreprocessorsDescriptorAction { get; set; }
+
+		private Action<PreprocessorDescriptor<TDocument>>[] PreprocessorsDescriptorActions { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Ml.TrainedModel TrainedModelValue { get; set; }
+
+		private TrainedModelDescriptor TrainedModelDescriptor { get; set; }
+
+		private Action<TrainedModelDescriptor> TrainedModelDescriptorAction { get; set; }
+
+		public DefinitionDescriptor<TDocument> Preprocessors(IEnumerable<Elastic.Clients.Elasticsearch.Ml.Preprocessor>? preprocessors)
+		{
+			PreprocessorsDescriptor = null;
+			PreprocessorsDescriptorAction = null;
+			PreprocessorsDescriptorActions = null;
+			PreprocessorsValue = preprocessors;
+			return Self;
+		}
+
+		public DefinitionDescriptor<TDocument> Preprocessors(PreprocessorDescriptor<TDocument> descriptor)
+		{
+			PreprocessorsValue = null;
+			PreprocessorsDescriptorAction = null;
+			PreprocessorsDescriptorActions = null;
+			PreprocessorsDescriptor = descriptor;
+			return Self;
+		}
+
+		public DefinitionDescriptor<TDocument> Preprocessors(Action<PreprocessorDescriptor<TDocument>> configure)
+		{
+			PreprocessorsValue = null;
+			PreprocessorsDescriptor = null;
+			PreprocessorsDescriptorActions = null;
+			PreprocessorsDescriptorAction = configure;
+			return Self;
+		}
+
+		public DefinitionDescriptor<TDocument> Preprocessors(params Action<PreprocessorDescriptor<TDocument>>[] configure)
+		{
+			PreprocessorsValue = null;
+			PreprocessorsDescriptor = null;
+			PreprocessorsDescriptorAction = null;
+			PreprocessorsDescriptorActions = configure;
+			return Self;
+		}
+
+		public DefinitionDescriptor<TDocument> TrainedModel(Elastic.Clients.Elasticsearch.Ml.TrainedModel trainedModel)
+		{
+			TrainedModelDescriptor = null;
+			TrainedModelDescriptorAction = null;
+			TrainedModelValue = trainedModel;
+			return Self;
+		}
+
+		public DefinitionDescriptor<TDocument> TrainedModel(TrainedModelDescriptor descriptor)
+		{
+			TrainedModelValue = null;
+			TrainedModelDescriptorAction = null;
+			TrainedModelDescriptor = descriptor;
+			return Self;
+		}
+
+		public DefinitionDescriptor<TDocument> TrainedModel(Action<TrainedModelDescriptor> configure)
+		{
+			TrainedModelValue = null;
+			TrainedModelDescriptor = null;
+			TrainedModelDescriptorAction = configure;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (PreprocessorsDescriptor is not null)
+			{
+				writer.WritePropertyName("preprocessors");
+				JsonSerializer.Serialize(writer, PreprocessorsDescriptor, options);
+			}
+			else if (PreprocessorsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("preprocessors");
+				JsonSerializer.Serialize(writer, new PreprocessorDescriptor<TDocument>(PreprocessorsDescriptorAction), options);
+			}
+			else if (PreprocessorsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("preprocessors");
+				writer.WriteStartArray();
+				foreach (var action in PreprocessorsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new PreprocessorDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (PreprocessorsValue is not null)
+			{
+				writer.WritePropertyName("preprocessors");
+				JsonSerializer.Serialize(writer, PreprocessorsValue, options);
+			}
+
+			if (TrainedModelDescriptor is not null)
+			{
+				writer.WritePropertyName("trained_model");
+				JsonSerializer.Serialize(writer, TrainedModelDescriptor, options);
+			}
+			else if (TrainedModelDescriptorAction is not null)
+			{
+				writer.WritePropertyName("trained_model");
+				JsonSerializer.Serialize(writer, new TrainedModelDescriptor(TrainedModelDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("trained_model");
+				JsonSerializer.Serialize(writer, TrainedModelValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public sealed partial class DefinitionDescriptor : SerializableDescriptorBase<DefinitionDescriptor>
 	{
 		internal DefinitionDescriptor(Action<DefinitionDescriptor> configure) => configure.Invoke(this);
@@ -44,6 +175,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.Preprocessor>? PreprocessorsValue { get; set; }
 
+		private PreprocessorDescriptor PreprocessorsDescriptor { get; set; }
+
+		private Action<PreprocessorDescriptor> PreprocessorsDescriptorAction { get; set; }
+
+		private Action<PreprocessorDescriptor>[] PreprocessorsDescriptorActions { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Ml.TrainedModel TrainedModelValue { get; set; }
 
 		private TrainedModelDescriptor TrainedModelDescriptor { get; set; }
@@ -52,7 +189,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public DefinitionDescriptor Preprocessors(IEnumerable<Elastic.Clients.Elasticsearch.Ml.Preprocessor>? preprocessors)
 		{
+			PreprocessorsDescriptor = null;
+			PreprocessorsDescriptorAction = null;
+			PreprocessorsDescriptorActions = null;
 			PreprocessorsValue = preprocessors;
+			return Self;
+		}
+
+		public DefinitionDescriptor Preprocessors(PreprocessorDescriptor descriptor)
+		{
+			PreprocessorsValue = null;
+			PreprocessorsDescriptorAction = null;
+			PreprocessorsDescriptorActions = null;
+			PreprocessorsDescriptor = descriptor;
+			return Self;
+		}
+
+		public DefinitionDescriptor Preprocessors(Action<PreprocessorDescriptor> configure)
+		{
+			PreprocessorsValue = null;
+			PreprocessorsDescriptor = null;
+			PreprocessorsDescriptorActions = null;
+			PreprocessorsDescriptorAction = configure;
+			return Self;
+		}
+
+		public DefinitionDescriptor Preprocessors(params Action<PreprocessorDescriptor>[] configure)
+		{
+			PreprocessorsValue = null;
+			PreprocessorsDescriptor = null;
+			PreprocessorsDescriptorAction = null;
+			PreprocessorsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -75,7 +242,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DefinitionDescriptor TrainedModel(Action<TrainedModelDescriptor> configure)
 		{
 			TrainedModelValue = null;
-			TrainedModelDescriptorAction = null;
+			TrainedModelDescriptor = null;
 			TrainedModelDescriptorAction = configure;
 			return Self;
 		}
@@ -83,7 +250,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (PreprocessorsValue is not null)
+			if (PreprocessorsDescriptor is not null)
+			{
+				writer.WritePropertyName("preprocessors");
+				JsonSerializer.Serialize(writer, PreprocessorsDescriptor, options);
+			}
+			else if (PreprocessorsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("preprocessors");
+				JsonSerializer.Serialize(writer, new PreprocessorDescriptor(PreprocessorsDescriptorAction), options);
+			}
+			else if (PreprocessorsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("preprocessors");
+				writer.WriteStartArray();
+				foreach (var action in PreprocessorsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new PreprocessorDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (PreprocessorsValue is not null)
 			{
 				writer.WritePropertyName("preprocessors");
 				JsonSerializer.Serialize(writer, PreprocessorsValue, options);

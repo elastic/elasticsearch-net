@@ -191,7 +191,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TTestAggregationDescriptor<TDocument> a(Action<TestPopulationDescriptor<TDocument>> configure)
 		{
 			aValue = null;
-			aDescriptorAction = null;
+			aDescriptor = null;
 			aDescriptorAction = configure;
 			return Self;
 		}
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TTestAggregationDescriptor<TDocument> b(Action<TestPopulationDescriptor<TDocument>> configure)
 		{
 			bValue = null;
-			bDescriptorAction = null;
+			bDescriptor = null;
 			bDescriptorAction = configure;
 			return Self;
 		}
@@ -328,7 +328,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TTestAggregationDescriptor a(Action<TestPopulationDescriptor> configure)
 		{
 			aValue = null;
-			aDescriptorAction = null;
+			aDescriptor = null;
 			aDescriptorAction = configure;
 			return Self;
 		}
@@ -352,7 +352,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TTestAggregationDescriptor b(Action<TestPopulationDescriptor> configure)
 		{
 			bValue = null;
-			bDescriptorAction = null;
+			bDescriptor = null;
 			bDescriptorAction = configure;
 			return Self;
 		}

@@ -188,7 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutJobRequestDescriptor<TDocument> AnalysisConfig(Action<AnalysisConfigDescriptor<TDocument>> configure)
 		{
 			AnalysisConfigValue = null;
-			AnalysisConfigDescriptorAction = null;
+			AnalysisConfigDescriptor = null;
 			AnalysisConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutJobRequestDescriptor<TDocument> DataDescription(Action<DataDescriptionDescriptor<TDocument>> configure)
 		{
 			DataDescriptionValue = null;
-			DataDescriptionDescriptorAction = null;
+			DataDescriptionDescriptor = null;
 			DataDescriptionDescriptorAction = configure;
 			return Self;
 		}
@@ -236,7 +236,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutJobRequestDescriptor<TDocument> DatafeedConfig(Action<DatafeedConfigDescriptor<TDocument>> configure)
 		{
 			DatafeedConfigValue = null;
-			DatafeedConfigDescriptorAction = null;
+			DatafeedConfigDescriptor = null;
 			DatafeedConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -260,7 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutJobRequestDescriptor<TDocument> ModelPlotConfig(Action<ModelPlotConfigDescriptor<TDocument>> configure)
 		{
 			ModelPlotConfigValue = null;
-			ModelPlotConfigDescriptorAction = null;
+			ModelPlotConfigDescriptor = null;
 			ModelPlotConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -290,7 +290,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutJobRequestDescriptor<TDocument> AnalysisLimits(Action<AnalysisLimitsDescriptor> configure)
 		{
 			AnalysisLimitsValue = null;
-			AnalysisLimitsDescriptorAction = null;
+			AnalysisLimitsDescriptor = null;
 			AnalysisLimitsDescriptorAction = configure;
 			return Self;
 		}
@@ -581,7 +581,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutJobRequestDescriptor AnalysisConfig(Action<AnalysisConfigDescriptor> configure)
 		{
 			AnalysisConfigValue = null;
-			AnalysisConfigDescriptorAction = null;
+			AnalysisConfigDescriptor = null;
 			AnalysisConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -605,7 +605,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutJobRequestDescriptor DataDescription(Action<DataDescriptionDescriptor> configure)
 		{
 			DataDescriptionValue = null;
-			DataDescriptionDescriptorAction = null;
+			DataDescriptionDescriptor = null;
 			DataDescriptionDescriptorAction = configure;
 			return Self;
 		}
@@ -629,7 +629,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutJobRequestDescriptor DatafeedConfig(Action<DatafeedConfigDescriptor> configure)
 		{
 			DatafeedConfigValue = null;
-			DatafeedConfigDescriptorAction = null;
+			DatafeedConfigDescriptor = null;
 			DatafeedConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -653,7 +653,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutJobRequestDescriptor ModelPlotConfig(Action<ModelPlotConfigDescriptor> configure)
 		{
 			ModelPlotConfigValue = null;
-			ModelPlotConfigDescriptorAction = null;
+			ModelPlotConfigDescriptor = null;
 			ModelPlotConfigDescriptorAction = configure;
 			return Self;
 		}
@@ -683,7 +683,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutJobRequestDescriptor AnalysisLimits(Action<AnalysisLimitsDescriptor> configure)
 		{
 			AnalysisLimitsValue = null;
-			AnalysisLimitsDescriptorAction = null;
+			AnalysisLimitsDescriptor = null;
 			AnalysisLimitsDescriptorAction = configure;
 			return Self;
 		}

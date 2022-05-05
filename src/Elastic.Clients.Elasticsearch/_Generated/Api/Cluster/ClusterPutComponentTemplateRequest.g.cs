@@ -139,7 +139,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Settings(Action<IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}
@@ -163,7 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Template(Action<IndexManagement.IndexStateDescriptor<TDocument>> configure)
 		{
 			TemplateValue = null;
-			TemplateDescriptorAction = null;
+			TemplateDescriptor = null;
 			TemplateDescriptorAction = configure;
 			return Self;
 		}
@@ -199,7 +199,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
-			MappingsDescriptorAction = null;
+			MappingsDescriptor = null;
 			MappingsDescriptorAction = configure;
 			return Self;
 		}
@@ -348,7 +348,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPutComponentTemplateRequestDescriptor Settings(Action<IndexManagement.IndexSettingsDescriptor> configure)
 		{
 			SettingsValue = null;
-			SettingsDescriptorAction = null;
+			SettingsDescriptor = null;
 			SettingsDescriptorAction = configure;
 			return Self;
 		}
@@ -372,7 +372,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPutComponentTemplateRequestDescriptor Template(Action<IndexManagement.IndexStateDescriptor> configure)
 		{
 			TemplateValue = null;
-			TemplateDescriptorAction = null;
+			TemplateDescriptor = null;
 			TemplateDescriptorAction = configure;
 			return Self;
 		}
@@ -408,7 +408,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPutComponentTemplateRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
-			MappingsDescriptorAction = null;
+			MappingsDescriptor = null;
 			MappingsDescriptorAction = configure;
 			return Self;
 		}

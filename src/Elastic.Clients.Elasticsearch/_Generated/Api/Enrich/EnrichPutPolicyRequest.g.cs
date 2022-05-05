@@ -98,7 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public EnrichPutPolicyRequestDescriptor<TDocument> GeoMatch(Action<PolicyDescriptor<TDocument>> configure)
 		{
 			GeoMatchValue = null;
-			GeoMatchDescriptorAction = null;
+			GeoMatchDescriptor = null;
 			GeoMatchDescriptorAction = configure;
 			return Self;
 		}
@@ -122,7 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public EnrichPutPolicyRequestDescriptor<TDocument> Match(Action<PolicyDescriptor<TDocument>> configure)
 		{
 			MatchValue = null;
-			MatchDescriptorAction = null;
+			MatchDescriptor = null;
 			MatchDescriptorAction = configure;
 			return Self;
 		}
@@ -217,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public EnrichPutPolicyRequestDescriptor GeoMatch(Action<PolicyDescriptor> configure)
 		{
 			GeoMatchValue = null;
-			GeoMatchDescriptorAction = null;
+			GeoMatchDescriptor = null;
 			GeoMatchDescriptorAction = configure;
 			return Self;
 		}
@@ -241,7 +241,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public EnrichPutPolicyRequestDescriptor Match(Action<PolicyDescriptor> configure)
 		{
 			MatchValue = null;
-			MatchDescriptorAction = null;
+			MatchDescriptor = null;
 			MatchDescriptorAction = configure;
 			return Self;
 		}

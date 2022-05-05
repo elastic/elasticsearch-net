@@ -46,6 +46,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessor>? FeatureProcessorsValue { get; set; }
 
+		private DataframeAnalysisFeatureProcessorDescriptor<TDocument> FeatureProcessorsDescriptor { get; set; }
+
+		private Action<DataframeAnalysisFeatureProcessorDescriptor<TDocument>> FeatureProcessorsDescriptorAction { get; set; }
+
+		private Action<DataframeAnalysisFeatureProcessorDescriptor<TDocument>>[] FeatureProcessorsDescriptorActions { get; set; }
+
 		private double? AlphaValue { get; set; }
 
 		private string DependentVariableValue { get; set; }
@@ -86,7 +92,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(IEnumerable<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessor>? featureProcessors)
 		{
+			FeatureProcessorsDescriptor = null;
+			FeatureProcessorsDescriptorAction = null;
+			FeatureProcessorsDescriptorActions = null;
 			FeatureProcessorsValue = featureProcessors;
+			return Self;
+		}
+
+		public DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(DataframeAnalysisFeatureProcessorDescriptor<TDocument> descriptor)
+		{
+			FeatureProcessorsValue = null;
+			FeatureProcessorsDescriptorAction = null;
+			FeatureProcessorsDescriptorActions = null;
+			FeatureProcessorsDescriptor = descriptor;
+			return Self;
+		}
+
+		public DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(Action<DataframeAnalysisFeatureProcessorDescriptor<TDocument>> configure)
+		{
+			FeatureProcessorsValue = null;
+			FeatureProcessorsDescriptor = null;
+			FeatureProcessorsDescriptorActions = null;
+			FeatureProcessorsDescriptorAction = configure;
+			return Self;
+		}
+
+		public DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(params Action<DataframeAnalysisFeatureProcessorDescriptor<TDocument>>[] configure)
+		{
+			FeatureProcessorsValue = null;
+			FeatureProcessorsDescriptor = null;
+			FeatureProcessorsDescriptorAction = null;
+			FeatureProcessorsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -213,7 +249,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FeatureProcessorsValue is not null)
+			if (FeatureProcessorsDescriptor is not null)
+			{
+				writer.WritePropertyName("feature_processors");
+				JsonSerializer.Serialize(writer, FeatureProcessorsDescriptor, options);
+			}
+			else if (FeatureProcessorsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("feature_processors");
+				JsonSerializer.Serialize(writer, new DataframeAnalysisFeatureProcessorDescriptor<TDocument>(FeatureProcessorsDescriptorAction), options);
+			}
+			else if (FeatureProcessorsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("feature_processors");
+				writer.WriteStartArray();
+				foreach (var action in FeatureProcessorsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DataframeAnalysisFeatureProcessorDescriptor<TDocument>(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FeatureProcessorsValue is not null)
 			{
 				writer.WritePropertyName("feature_processors");
 				JsonSerializer.Serialize(writer, FeatureProcessorsValue, options);
@@ -342,6 +399,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessor>? FeatureProcessorsValue { get; set; }
 
+		private DataframeAnalysisFeatureProcessorDescriptor FeatureProcessorsDescriptor { get; set; }
+
+		private Action<DataframeAnalysisFeatureProcessorDescriptor> FeatureProcessorsDescriptorAction { get; set; }
+
+		private Action<DataframeAnalysisFeatureProcessorDescriptor>[] FeatureProcessorsDescriptorActions { get; set; }
+
 		private double? AlphaValue { get; set; }
 
 		private string DependentVariableValue { get; set; }
@@ -382,7 +445,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public DataframeAnalysisRegressionDescriptor FeatureProcessors(IEnumerable<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessor>? featureProcessors)
 		{
+			FeatureProcessorsDescriptor = null;
+			FeatureProcessorsDescriptorAction = null;
+			FeatureProcessorsDescriptorActions = null;
 			FeatureProcessorsValue = featureProcessors;
+			return Self;
+		}
+
+		public DataframeAnalysisRegressionDescriptor FeatureProcessors(DataframeAnalysisFeatureProcessorDescriptor descriptor)
+		{
+			FeatureProcessorsValue = null;
+			FeatureProcessorsDescriptorAction = null;
+			FeatureProcessorsDescriptorActions = null;
+			FeatureProcessorsDescriptor = descriptor;
+			return Self;
+		}
+
+		public DataframeAnalysisRegressionDescriptor FeatureProcessors(Action<DataframeAnalysisFeatureProcessorDescriptor> configure)
+		{
+			FeatureProcessorsValue = null;
+			FeatureProcessorsDescriptor = null;
+			FeatureProcessorsDescriptorActions = null;
+			FeatureProcessorsDescriptorAction = configure;
+			return Self;
+		}
+
+		public DataframeAnalysisRegressionDescriptor FeatureProcessors(params Action<DataframeAnalysisFeatureProcessorDescriptor>[] configure)
+		{
+			FeatureProcessorsValue = null;
+			FeatureProcessorsDescriptor = null;
+			FeatureProcessorsDescriptorAction = null;
+			FeatureProcessorsDescriptorActions = configure;
 			return Self;
 		}
 
@@ -515,7 +608,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FeatureProcessorsValue is not null)
+			if (FeatureProcessorsDescriptor is not null)
+			{
+				writer.WritePropertyName("feature_processors");
+				JsonSerializer.Serialize(writer, FeatureProcessorsDescriptor, options);
+			}
+			else if (FeatureProcessorsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("feature_processors");
+				JsonSerializer.Serialize(writer, new DataframeAnalysisFeatureProcessorDescriptor(FeatureProcessorsDescriptorAction), options);
+			}
+			else if (FeatureProcessorsDescriptorActions is not null)
+			{
+				writer.WritePropertyName("feature_processors");
+				writer.WriteStartArray();
+				foreach (var action in FeatureProcessorsDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new DataframeAnalysisFeatureProcessorDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (FeatureProcessorsValue is not null)
 			{
 				writer.WritePropertyName("feature_processors");
 				JsonSerializer.Serialize(writer, FeatureProcessorsValue, options);
