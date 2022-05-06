@@ -28,26 +28,108 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("char_filter")]
-		public IReadOnlyCollection<string>? CharFilter { get; init; }
+		public IEnumerable<string>? CharFilter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public IReadOnlyCollection<string>? Filter { get; init; }
+		public IEnumerable<string>? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("position_increment_gap")]
-		public int? PositionIncrementGap { get; init; }
+		public int? PositionIncrementGap { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("position_offset_gap")]
-		public int? PositionOffsetGap { get; init; }
+		public int? PositionOffsetGap { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("tokenizer")]
-		public string Tokenizer { get; init; }
+		public string Tokenizer { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "custom";
+	}
+
+	public sealed partial class CustomAnalyzerDescriptor : SerializableDescriptorBase<CustomAnalyzerDescriptor>
+	{
+		internal CustomAnalyzerDescriptor(Action<CustomAnalyzerDescriptor> configure) => configure.Invoke(this);
+		public CustomAnalyzerDescriptor() : base()
+		{
+		}
+
+		private IEnumerable<string>? CharFilterValue { get; set; }
+
+		private IEnumerable<string>? FilterValue { get; set; }
+
+		private int? PositionIncrementGapValue { get; set; }
+
+		private int? PositionOffsetGapValue { get; set; }
+
+		private string TokenizerValue { get; set; }
+
+		public CustomAnalyzerDescriptor CharFilter(IEnumerable<string>? charFilter)
+		{
+			CharFilterValue = charFilter;
+			return Self;
+		}
+
+		public CustomAnalyzerDescriptor Filter(IEnumerable<string>? filter)
+		{
+			FilterValue = filter;
+			return Self;
+		}
+
+		public CustomAnalyzerDescriptor PositionIncrementGap(int? positionIncrementGap)
+		{
+			PositionIncrementGapValue = positionIncrementGap;
+			return Self;
+		}
+
+		public CustomAnalyzerDescriptor PositionOffsetGap(int? positionOffsetGap)
+		{
+			PositionOffsetGapValue = positionOffsetGap;
+			return Self;
+		}
+
+		public CustomAnalyzerDescriptor Tokenizer(string tokenizer)
+		{
+			TokenizerValue = tokenizer;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (CharFilterValue is not null)
+			{
+				writer.WritePropertyName("char_filter");
+				JsonSerializer.Serialize(writer, CharFilterValue, options);
+			}
+
+			if (FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			if (PositionIncrementGapValue.HasValue)
+			{
+				writer.WritePropertyName("position_increment_gap");
+				writer.WriteNumberValue(PositionIncrementGapValue.Value);
+			}
+
+			if (PositionOffsetGapValue.HasValue)
+			{
+				writer.WritePropertyName("position_offset_gap");
+				writer.WriteNumberValue(PositionOffsetGapValue.Value);
+			}
+
+			writer.WritePropertyName("tokenizer");
+			writer.WriteStringValue(TokenizerValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("custom");
+			writer.WriteEndObject();
+		}
 	}
 }

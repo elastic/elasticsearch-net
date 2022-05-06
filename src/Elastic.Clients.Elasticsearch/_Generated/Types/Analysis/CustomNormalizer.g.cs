@@ -28,14 +28,58 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("char_filter")]
-		public IReadOnlyCollection<string>? CharFilter { get; init; }
+		public IEnumerable<string>? CharFilter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public IReadOnlyCollection<string>? Filter { get; init; }
+		public IEnumerable<string>? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "custom";
+	}
+
+	public sealed partial class CustomNormalizerDescriptor : SerializableDescriptorBase<CustomNormalizerDescriptor>
+	{
+		internal CustomNormalizerDescriptor(Action<CustomNormalizerDescriptor> configure) => configure.Invoke(this);
+		public CustomNormalizerDescriptor() : base()
+		{
+		}
+
+		private IEnumerable<string>? CharFilterValue { get; set; }
+
+		private IEnumerable<string>? FilterValue { get; set; }
+
+		public CustomNormalizerDescriptor CharFilter(IEnumerable<string>? charFilter)
+		{
+			CharFilterValue = charFilter;
+			return Self;
+		}
+
+		public CustomNormalizerDescriptor Filter(IEnumerable<string>? filter)
+		{
+			FilterValue = filter;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (CharFilterValue is not null)
+			{
+				writer.WritePropertyName("char_filter");
+				JsonSerializer.Serialize(writer, CharFilterValue, options);
+			}
+
+			if (FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("custom");
+			writer.WriteEndObject();
+		}
 	}
 }

@@ -28,14 +28,58 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("ef_construction")]
-		public int EfConstruction { get; init; }
+		public int EfConstruction { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("m")]
-		public int m { get; init; }
+		public int m { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public string Type { get; init; }
+		public string Type { get; set; }
+	}
+
+	public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDescriptorBase<DenseVectorIndexOptionsDescriptor>
+	{
+		internal DenseVectorIndexOptionsDescriptor(Action<DenseVectorIndexOptionsDescriptor> configure) => configure.Invoke(this);
+		public DenseVectorIndexOptionsDescriptor() : base()
+		{
+		}
+
+		private int EfConstructionValue { get; set; }
+
+		private int mValue { get; set; }
+
+		private string TypeValue { get; set; }
+
+		public DenseVectorIndexOptionsDescriptor EfConstruction(int efConstruction)
+		{
+			EfConstructionValue = efConstruction;
+			return Self;
+		}
+
+		public DenseVectorIndexOptionsDescriptor m(int m)
+		{
+			mValue = m;
+			return Self;
+		}
+
+		public DenseVectorIndexOptionsDescriptor Type(string type)
+		{
+			TypeValue = type;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("ef_construction");
+			writer.WriteNumberValue(EfConstructionValue);
+			writer.WritePropertyName("m");
+			writer.WriteNumberValue(mValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue(TypeValue);
+			writer.WriteEndObject();
+		}
 	}
 }

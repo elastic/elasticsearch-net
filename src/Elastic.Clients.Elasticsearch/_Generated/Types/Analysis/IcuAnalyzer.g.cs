@@ -28,14 +28,50 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("method")]
-		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Method { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Method { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mode")]
-		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "icu_analyzer";
+	}
+
+	public sealed partial class IcuAnalyzerDescriptor : SerializableDescriptorBase<IcuAnalyzerDescriptor>
+	{
+		internal IcuAnalyzerDescriptor(Action<IcuAnalyzerDescriptor> configure) => configure.Invoke(this);
+		public IcuAnalyzerDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType MethodValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode ModeValue { get; set; }
+
+		public IcuAnalyzerDescriptor Method(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType method)
+		{
+			MethodValue = method;
+			return Self;
+		}
+
+		public IcuAnalyzerDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode mode)
+		{
+			ModeValue = mode;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("method");
+			JsonSerializer.Serialize(writer, MethodValue, options);
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("icu_analyzer");
+			writer.WriteEndObject();
+		}
 	}
 }

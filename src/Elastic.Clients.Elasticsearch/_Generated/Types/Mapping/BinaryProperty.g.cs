@@ -30,4 +30,380 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonPropertyName("type")]
 		public string Type => "binary";
 	}
+
+	public sealed partial class BinaryPropertyDescriptor<TDocument> : SerializableDescriptorBase<BinaryPropertyDescriptor<TDocument>>
+	{
+		internal BinaryPropertyDescriptor(Action<BinaryPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public BinaryPropertyDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+		private bool? DocValuesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		private bool? StoreValue { get; set; }
+
+		public BinaryPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+		{
+			DocValuesValue = docValues;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> Name<TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor<TDocument> Store(bool? store = true)
+		{
+			StoreValue = store;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (CopyToValue is not null)
+			{
+				writer.WritePropertyName("copy_to");
+				JsonSerializer.Serialize(writer, CopyToValue, options);
+			}
+
+			if (DocValuesValue.HasValue)
+			{
+				writer.WritePropertyName("doc_values");
+				writer.WriteBooleanValue(DocValuesValue.Value);
+			}
+
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			if (StoreValue.HasValue)
+			{
+				writer.WritePropertyName("store");
+				writer.WriteBooleanValue(StoreValue.Value);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("binary");
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class BinaryPropertyDescriptor : SerializableDescriptorBase<BinaryPropertyDescriptor>
+	{
+		internal BinaryPropertyDescriptor(Action<BinaryPropertyDescriptor> configure) => configure.Invoke(this);
+		public BinaryPropertyDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+		private bool? DocValuesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		private bool? StoreValue { get; set; }
+
+		public BinaryPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor DocValues(bool? docValues = true)
+		{
+			DocValuesValue = docValues;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor Name<TDocument, TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor Name<TDocument>(Expression<Func<TDocument, object>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public BinaryPropertyDescriptor Store(bool? store = true)
+		{
+			StoreValue = store;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (CopyToValue is not null)
+			{
+				writer.WritePropertyName("copy_to");
+				JsonSerializer.Serialize(writer, CopyToValue, options);
+			}
+
+			if (DocValuesValue.HasValue)
+			{
+				writer.WritePropertyName("doc_values");
+				writer.WriteBooleanValue(DocValuesValue.Value);
+			}
+
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			if (StoreValue.HasValue)
+			{
+				writer.WritePropertyName("store");
+				writer.WriteBooleanValue(StoreValue.Value);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("binary");
+			writer.WriteEndObject();
+		}
+	}
 }

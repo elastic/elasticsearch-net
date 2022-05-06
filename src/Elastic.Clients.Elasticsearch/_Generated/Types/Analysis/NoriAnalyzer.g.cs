@@ -28,21 +28,93 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("decompound_mode")]
-		public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundMode { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundMode { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stoptags")]
-		public IReadOnlyCollection<string>? Stoptags { get; init; }
+		public IEnumerable<string>? Stoptags { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "nori";
 		[JsonInclude]
 		[JsonPropertyName("user_dictionary")]
-		public string? UserDictionary { get; init; }
+		public string? UserDictionary { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public string? Version { get; init; }
+		public string? Version { get; set; }
+	}
+
+	public sealed partial class NoriAnalyzerDescriptor : SerializableDescriptorBase<NoriAnalyzerDescriptor>
+	{
+		internal NoriAnalyzerDescriptor(Action<NoriAnalyzerDescriptor> configure) => configure.Invoke(this);
+		public NoriAnalyzerDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundModeValue { get; set; }
+
+		private IEnumerable<string>? StoptagsValue { get; set; }
+
+		private string? UserDictionaryValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public NoriAnalyzerDescriptor DecompoundMode(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? decompoundMode)
+		{
+			DecompoundModeValue = decompoundMode;
+			return Self;
+		}
+
+		public NoriAnalyzerDescriptor Stoptags(IEnumerable<string>? stoptags)
+		{
+			StoptagsValue = stoptags;
+			return Self;
+		}
+
+		public NoriAnalyzerDescriptor UserDictionary(string? userDictionary)
+		{
+			UserDictionaryValue = userDictionary;
+			return Self;
+		}
+
+		public NoriAnalyzerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (DecompoundModeValue is not null)
+			{
+				writer.WritePropertyName("decompound_mode");
+				JsonSerializer.Serialize(writer, DecompoundModeValue, options);
+			}
+
+			if (StoptagsValue is not null)
+			{
+				writer.WritePropertyName("stoptags");
+				JsonSerializer.Serialize(writer, StoptagsValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("nori");
+			if (!string.IsNullOrEmpty(UserDictionaryValue))
+			{
+				writer.WritePropertyName("user_dictionary");
+				writer.WriteStringValue(UserDictionaryValue);
+			}
+
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

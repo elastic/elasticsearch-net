@@ -30,4 +30,250 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonPropertyName("type")]
 		public string Type => "rank_features";
 	}
+
+	public sealed partial class RankFeaturesPropertyDescriptor<TDocument> : SerializableDescriptorBase<RankFeaturesPropertyDescriptor<TDocument>>
+	{
+		internal RankFeaturesPropertyDescriptor(Action<RankFeaturesPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public RankFeaturesPropertyDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		public RankFeaturesPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor<TDocument> Name<TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("rank_features");
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescriptorBase<RankFeaturesPropertyDescriptor>
+	{
+		internal RankFeaturesPropertyDescriptor(Action<RankFeaturesPropertyDescriptor> configure) => configure.Invoke(this);
+		public RankFeaturesPropertyDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		public RankFeaturesPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor Name<TDocument, TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor Name<TDocument>(Expression<Func<TDocument, object>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public RankFeaturesPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("rank_features");
+			writer.WriteEndObject();
+		}
+	}
 }

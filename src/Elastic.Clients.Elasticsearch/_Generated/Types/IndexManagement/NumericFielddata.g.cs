@@ -28,6 +28,30 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("format")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; set; }
+	}
+
+	public sealed partial class NumericFielddataDescriptor : SerializableDescriptorBase<NumericFielddataDescriptor>
+	{
+		internal NumericFielddataDescriptor(Action<NumericFielddataDescriptor> configure) => configure.Invoke(this);
+		public NumericFielddataDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat FormatValue { get; set; }
+
+		public NumericFielddataDescriptor Format(Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("format");
+			JsonSerializer.Serialize(writer, FormatValue, options);
+			writer.WriteEndObject();
+		}
 	}
 }

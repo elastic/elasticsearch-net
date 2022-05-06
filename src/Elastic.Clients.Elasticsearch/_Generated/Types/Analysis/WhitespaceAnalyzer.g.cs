@@ -31,6 +31,36 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "whitespace";
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public string? Version { get; init; }
+		public string? Version { get; set; }
+	}
+
+	public sealed partial class WhitespaceAnalyzerDescriptor : SerializableDescriptorBase<WhitespaceAnalyzerDescriptor>
+	{
+		internal WhitespaceAnalyzerDescriptor(Action<WhitespaceAnalyzerDescriptor> configure) => configure.Invoke(this);
+		public WhitespaceAnalyzerDescriptor() : base()
+		{
+		}
+
+		private string? VersionValue { get; set; }
+
+		public WhitespaceAnalyzerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("whitespace");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

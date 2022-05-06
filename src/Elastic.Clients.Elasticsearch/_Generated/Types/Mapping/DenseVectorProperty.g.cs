@@ -28,22 +28,436 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("dims")]
-		public int Dims { get; init; }
+		public int Dims { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public bool? Index { get; init; }
+		public bool? Index { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_options")]
-		public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? IndexOptions { get; init; }
+		public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? IndexOptions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("similarity")]
-		public string? Similarity { get; init; }
+		public string? Similarity { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "dense_vector";
+	}
+
+	public sealed partial class DenseVectorPropertyDescriptor<TDocument> : SerializableDescriptorBase<DenseVectorPropertyDescriptor<TDocument>>
+	{
+		internal DenseVectorPropertyDescriptor(Action<DenseVectorPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public DenseVectorPropertyDescriptor() : base()
+		{
+		}
+
+		private int DimsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private bool? IndexValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? IndexOptionsValue { get; set; }
+
+		private DenseVectorIndexOptionsDescriptor IndexOptionsDescriptor { get; set; }
+
+		private Action<DenseVectorIndexOptionsDescriptor> IndexOptionsDescriptorAction { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		public DenseVectorPropertyDescriptor<TDocument> Dims(int dims)
+		{
+			DimsValue = dims;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> Index(bool? index = true)
+		{
+			IndexValue = index;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? indexOptions)
+		{
+			IndexOptionsDescriptor = null;
+			IndexOptionsDescriptorAction = null;
+			IndexOptionsValue = indexOptions;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> IndexOptions(DenseVectorIndexOptionsDescriptor descriptor)
+		{
+			IndexOptionsValue = null;
+			IndexOptionsDescriptorAction = null;
+			IndexOptionsDescriptor = descriptor;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> IndexOptions(Action<DenseVectorIndexOptionsDescriptor> configure)
+		{
+			IndexOptionsValue = null;
+			IndexOptionsDescriptor = null;
+			IndexOptionsDescriptorAction = configure;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> Name<TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor<TDocument> Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("dims");
+			writer.WriteNumberValue(DimsValue);
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (IndexValue.HasValue)
+			{
+				writer.WritePropertyName("index");
+				writer.WriteBooleanValue(IndexValue.Value);
+			}
+
+			if (IndexOptionsDescriptor is not null)
+			{
+				writer.WritePropertyName("index_options");
+				JsonSerializer.Serialize(writer, IndexOptionsDescriptor, options);
+			}
+			else if (IndexOptionsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("index_options");
+				JsonSerializer.Serialize(writer, new DenseVectorIndexOptionsDescriptor(IndexOptionsDescriptorAction), options);
+			}
+			else if (IndexOptionsValue is not null)
+			{
+				writer.WritePropertyName("index_options");
+				JsonSerializer.Serialize(writer, IndexOptionsValue, options);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("dense_vector");
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class DenseVectorPropertyDescriptor : SerializableDescriptorBase<DenseVectorPropertyDescriptor>
+	{
+		internal DenseVectorPropertyDescriptor(Action<DenseVectorPropertyDescriptor> configure) => configure.Invoke(this);
+		public DenseVectorPropertyDescriptor() : base()
+		{
+		}
+
+		private int DimsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private bool? IndexValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? IndexOptionsValue { get; set; }
+
+		private DenseVectorIndexOptionsDescriptor IndexOptionsDescriptor { get; set; }
+
+		private Action<DenseVectorIndexOptionsDescriptor> IndexOptionsDescriptorAction { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		public DenseVectorPropertyDescriptor Dims(int dims)
+		{
+			DimsValue = dims;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor Index(bool? index = true)
+		{
+			IndexValue = index;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? indexOptions)
+		{
+			IndexOptionsDescriptor = null;
+			IndexOptionsDescriptorAction = null;
+			IndexOptionsValue = indexOptions;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor IndexOptions(DenseVectorIndexOptionsDescriptor descriptor)
+		{
+			IndexOptionsValue = null;
+			IndexOptionsDescriptorAction = null;
+			IndexOptionsDescriptor = descriptor;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor IndexOptions(Action<DenseVectorIndexOptionsDescriptor> configure)
+		{
+			IndexOptionsValue = null;
+			IndexOptionsDescriptor = null;
+			IndexOptionsDescriptorAction = configure;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor Name<TDocument, TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor Name<TDocument>(Expression<Func<TDocument, object>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public DenseVectorPropertyDescriptor Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("dims");
+			writer.WriteNumberValue(DimsValue);
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (IndexValue.HasValue)
+			{
+				writer.WritePropertyName("index");
+				writer.WriteBooleanValue(IndexValue.Value);
+			}
+
+			if (IndexOptionsDescriptor is not null)
+			{
+				writer.WritePropertyName("index_options");
+				JsonSerializer.Serialize(writer, IndexOptionsDescriptor, options);
+			}
+			else if (IndexOptionsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("index_options");
+				JsonSerializer.Serialize(writer, new DenseVectorIndexOptionsDescriptor(IndexOptionsDescriptorAction), options);
+			}
+			else if (IndexOptionsValue is not null)
+			{
+				writer.WritePropertyName("index_options");
+				JsonSerializer.Serialize(writer, IndexOptionsValue, options);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("dense_vector");
+			writer.WriteEndObject();
+		}
 	}
 }

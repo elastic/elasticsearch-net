@@ -28,42 +28,670 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; init; }
+		public double? Boost { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("eager_global_ordinals")]
-		public bool? EagerGlobalOrdinals { get; init; }
+		public bool? EagerGlobalOrdinals { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public bool? Index { get; init; }
+		public bool? Index { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_options")]
-		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; init; }
+		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("normalizer")]
-		public string? Normalizer { get; init; }
+		public string? Normalizer { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("norms")]
-		public bool? Norms { get; init; }
+		public bool? Norms { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public string? NullValue { get; init; }
+		public string? NullValue { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("split_queries_on_whitespace")]
-		public bool? SplitQueriesOnWhitespace { get; init; }
+		public bool? SplitQueriesOnWhitespace { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_series_dimension")]
-		public bool? TimeSeriesDimension { get; init; }
+		public bool? TimeSeriesDimension { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "keyword";
+	}
+
+	public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableDescriptorBase<KeywordPropertyDescriptor<TDocument>>
+	{
+		internal KeywordPropertyDescriptor(Action<KeywordPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public KeywordPropertyDescriptor() : base()
+		{
+		}
+
+		private double? BoostValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+		private bool? DocValuesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private bool? EagerGlobalOrdinalsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private bool? IndexValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private string? NormalizerValue { get; set; }
+
+		private bool? NormsValue { get; set; }
+
+		private string? NullValueValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		private bool? SplitQueriesOnWhitespaceValue { get; set; }
+
+		private bool? StoreValue { get; set; }
+
+		private bool? TimeSeriesDimensionValue { get; set; }
+
+		public KeywordPropertyDescriptor<TDocument> Boost(double? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+		{
+			DocValuesValue = docValues;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true)
+		{
+			EagerGlobalOrdinalsValue = eagerGlobalOrdinals;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> Index(bool? index = true)
+		{
+			IndexValue = index;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
+		{
+			IndexOptionsValue = indexOptions;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> Name<TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> Normalizer(string? normalizer)
+		{
+			NormalizerValue = normalizer;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> Norms(bool? norms = true)
+		{
+			NormsValue = norms;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> NullValue(string? nullValue)
+		{
+			NullValueValue = nullValue;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> SplitQueriesOnWhitespace(bool? splitQueriesOnWhitespace = true)
+		{
+			SplitQueriesOnWhitespaceValue = splitQueriesOnWhitespace;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> Store(bool? store = true)
+		{
+			StoreValue = store;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (CopyToValue is not null)
+			{
+				writer.WritePropertyName("copy_to");
+				JsonSerializer.Serialize(writer, CopyToValue, options);
+			}
+
+			if (DocValuesValue.HasValue)
+			{
+				writer.WritePropertyName("doc_values");
+				writer.WriteBooleanValue(DocValuesValue.Value);
+			}
+
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (EagerGlobalOrdinalsValue.HasValue)
+			{
+				writer.WritePropertyName("eager_global_ordinals");
+				writer.WriteBooleanValue(EagerGlobalOrdinalsValue.Value);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (IndexValue.HasValue)
+			{
+				writer.WritePropertyName("index");
+				writer.WriteBooleanValue(IndexValue.Value);
+			}
+
+			if (IndexOptionsValue is not null)
+			{
+				writer.WritePropertyName("index_options");
+				JsonSerializer.Serialize(writer, IndexOptionsValue, options);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(NormalizerValue))
+			{
+				writer.WritePropertyName("normalizer");
+				writer.WriteStringValue(NormalizerValue);
+			}
+
+			if (NormsValue.HasValue)
+			{
+				writer.WritePropertyName("norms");
+				writer.WriteBooleanValue(NormsValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(NullValueValue))
+			{
+				writer.WritePropertyName("null_value");
+				writer.WriteStringValue(NullValueValue);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			if (SplitQueriesOnWhitespaceValue.HasValue)
+			{
+				writer.WritePropertyName("split_queries_on_whitespace");
+				writer.WriteBooleanValue(SplitQueriesOnWhitespaceValue.Value);
+			}
+
+			if (StoreValue.HasValue)
+			{
+				writer.WritePropertyName("store");
+				writer.WriteBooleanValue(StoreValue.Value);
+			}
+
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("keyword");
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class KeywordPropertyDescriptor : SerializableDescriptorBase<KeywordPropertyDescriptor>
+	{
+		internal KeywordPropertyDescriptor(Action<KeywordPropertyDescriptor> configure) => configure.Invoke(this);
+		public KeywordPropertyDescriptor() : base()
+		{
+		}
+
+		private double? BoostValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+		private bool? DocValuesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private bool? EagerGlobalOrdinalsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private bool? IndexValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private string? NormalizerValue { get; set; }
+
+		private bool? NormsValue { get; set; }
+
+		private string? NullValueValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		private bool? SplitQueriesOnWhitespaceValue { get; set; }
+
+		private bool? StoreValue { get; set; }
+
+		private bool? TimeSeriesDimensionValue { get; set; }
+
+		public KeywordPropertyDescriptor Boost(double? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor DocValues(bool? docValues = true)
+		{
+			DocValuesValue = docValues;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true)
+		{
+			EagerGlobalOrdinalsValue = eagerGlobalOrdinals;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Index(bool? index = true)
+		{
+			IndexValue = index;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
+		{
+			IndexOptionsValue = indexOptions;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Name<TDocument, TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Name<TDocument>(Expression<Func<TDocument, object>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Normalizer(string? normalizer)
+		{
+			NormalizerValue = normalizer;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Norms(bool? norms = true)
+		{
+			NormsValue = norms;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor NullValue(string? nullValue)
+		{
+			NullValueValue = nullValue;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor SplitQueriesOnWhitespace(bool? splitQueriesOnWhitespace = true)
+		{
+			SplitQueriesOnWhitespaceValue = splitQueriesOnWhitespace;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor Store(bool? store = true)
+		{
+			StoreValue = store;
+			return Self;
+		}
+
+		public KeywordPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (CopyToValue is not null)
+			{
+				writer.WritePropertyName("copy_to");
+				JsonSerializer.Serialize(writer, CopyToValue, options);
+			}
+
+			if (DocValuesValue.HasValue)
+			{
+				writer.WritePropertyName("doc_values");
+				writer.WriteBooleanValue(DocValuesValue.Value);
+			}
+
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (EagerGlobalOrdinalsValue.HasValue)
+			{
+				writer.WritePropertyName("eager_global_ordinals");
+				writer.WriteBooleanValue(EagerGlobalOrdinalsValue.Value);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (IndexValue.HasValue)
+			{
+				writer.WritePropertyName("index");
+				writer.WriteBooleanValue(IndexValue.Value);
+			}
+
+			if (IndexOptionsValue is not null)
+			{
+				writer.WritePropertyName("index_options");
+				JsonSerializer.Serialize(writer, IndexOptionsValue, options);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(NormalizerValue))
+			{
+				writer.WritePropertyName("normalizer");
+				writer.WriteStringValue(NormalizerValue);
+			}
+
+			if (NormsValue.HasValue)
+			{
+				writer.WritePropertyName("norms");
+				writer.WriteBooleanValue(NormsValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(NullValueValue))
+			{
+				writer.WritePropertyName("null_value");
+				writer.WriteStringValue(NullValueValue);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			if (SplitQueriesOnWhitespaceValue.HasValue)
+			{
+				writer.WritePropertyName("split_queries_on_whitespace");
+				writer.WriteBooleanValue(SplitQueriesOnWhitespaceValue.Value);
+			}
+
+			if (StoreValue.HasValue)
+			{
+				writer.WritePropertyName("store");
+				writer.WriteBooleanValue(StoreValue.Value);
+			}
+
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("keyword");
+			writer.WriteEndObject();
+		}
 	}
 }

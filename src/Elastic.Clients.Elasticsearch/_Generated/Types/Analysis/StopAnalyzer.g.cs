@@ -28,17 +28,75 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
-		public string? StopwordsPath { get; init; }
+		public string? StopwordsPath { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "stop";
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public string? Version { get; init; }
+		public string? Version { get; set; }
+	}
+
+	public sealed partial class StopAnalyzerDescriptor : SerializableDescriptorBase<StopAnalyzerDescriptor>
+	{
+		internal StopAnalyzerDescriptor(Action<StopAnalyzerDescriptor> configure) => configure.Invoke(this);
+		public StopAnalyzerDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
+
+		private string? StopwordsPathValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public StopAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
+		{
+			StopwordsValue = stopwords;
+			return Self;
+		}
+
+		public StopAnalyzerDescriptor StopwordsPath(string? stopwordsPath)
+		{
+			StopwordsPathValue = stopwordsPath;
+			return Self;
+		}
+
+		public StopAnalyzerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (StopwordsValue is not null)
+			{
+				writer.WritePropertyName("stopwords");
+				JsonSerializer.Serialize(writer, StopwordsValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(StopwordsPathValue))
+			{
+				writer.WritePropertyName("stopwords_path");
+				writer.WriteStringValue(StopwordsPathValue);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("stop");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

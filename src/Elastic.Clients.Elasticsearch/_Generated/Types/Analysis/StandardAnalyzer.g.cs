@@ -28,14 +28,58 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
-		public int? MaxTokenLength { get; init; }
+		public int? MaxTokenLength { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "standard";
+	}
+
+	public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptorBase<StandardAnalyzerDescriptor>
+	{
+		internal StandardAnalyzerDescriptor(Action<StandardAnalyzerDescriptor> configure) => configure.Invoke(this);
+		public StandardAnalyzerDescriptor() : base()
+		{
+		}
+
+		private int? MaxTokenLengthValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
+
+		public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength)
+		{
+			MaxTokenLengthValue = maxTokenLength;
+			return Self;
+		}
+
+		public StandardAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
+		{
+			StopwordsValue = stopwords;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (MaxTokenLengthValue.HasValue)
+			{
+				writer.WritePropertyName("max_token_length");
+				writer.WriteNumberValue(MaxTokenLengthValue.Value);
+			}
+
+			if (StopwordsValue is not null)
+			{
+				writer.WritePropertyName("stopwords");
+				JsonSerializer.Serialize(writer, StopwordsValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("standard");
+			writer.WriteEndObject();
+		}
 	}
 }

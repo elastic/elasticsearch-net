@@ -28,25 +28,103 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("language")]
-		public Elastic.Clients.Elasticsearch.Analysis.Language Language { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.Language Language { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stem_exclusion")]
-		public IReadOnlyCollection<string> StemExclusion { get; init; }
+		public IEnumerable<string> StemExclusion { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
-		public string? StopwordsPath { get; init; }
+		public string? StopwordsPath { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "language";
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public string? Version { get; init; }
+		public string? Version { get; set; }
+	}
+
+	public sealed partial class LanguageAnalyzerDescriptor : SerializableDescriptorBase<LanguageAnalyzerDescriptor>
+	{
+		internal LanguageAnalyzerDescriptor(Action<LanguageAnalyzerDescriptor> configure) => configure.Invoke(this);
+		public LanguageAnalyzerDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Analysis.Language LanguageValue { get; set; }
+
+		private IEnumerable<string> StemExclusionValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
+
+		private string? StopwordsPathValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public LanguageAnalyzerDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.Language language)
+		{
+			LanguageValue = language;
+			return Self;
+		}
+
+		public LanguageAnalyzerDescriptor StemExclusion(IEnumerable<string> stemExclusion)
+		{
+			StemExclusionValue = stemExclusion;
+			return Self;
+		}
+
+		public LanguageAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
+		{
+			StopwordsValue = stopwords;
+			return Self;
+		}
+
+		public LanguageAnalyzerDescriptor StopwordsPath(string? stopwordsPath)
+		{
+			StopwordsPathValue = stopwordsPath;
+			return Self;
+		}
+
+		public LanguageAnalyzerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("language");
+			JsonSerializer.Serialize(writer, LanguageValue, options);
+			writer.WritePropertyName("stem_exclusion");
+			JsonSerializer.Serialize(writer, StemExclusionValue, options);
+			if (StopwordsValue is not null)
+			{
+				writer.WritePropertyName("stopwords");
+				JsonSerializer.Serialize(writer, StopwordsValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(StopwordsPathValue))
+			{
+				writer.WritePropertyName("stopwords_path");
+				writer.WriteStringValue(StopwordsPathValue);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("language");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

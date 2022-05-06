@@ -28,13 +28,53 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("mode")]
-		public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "kuromoji";
 		[JsonInclude]
 		[JsonPropertyName("user_dictionary")]
-		public string? UserDictionary { get; init; }
+		public string? UserDictionary { get; set; }
+	}
+
+	public sealed partial class KuromojiAnalyzerDescriptor : SerializableDescriptorBase<KuromojiAnalyzerDescriptor>
+	{
+		internal KuromojiAnalyzerDescriptor(Action<KuromojiAnalyzerDescriptor> configure) => configure.Invoke(this);
+		public KuromojiAnalyzerDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode ModeValue { get; set; }
+
+		private string? UserDictionaryValue { get; set; }
+
+		public KuromojiAnalyzerDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode mode)
+		{
+			ModeValue = mode;
+			return Self;
+		}
+
+		public KuromojiAnalyzerDescriptor UserDictionary(string? userDictionary)
+		{
+			UserDictionaryValue = userDictionary;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("kuromoji");
+			if (!string.IsNullOrEmpty(UserDictionaryValue))
+			{
+				writer.WritePropertyName("user_dictionary");
+				writer.WriteStringValue(UserDictionaryValue);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

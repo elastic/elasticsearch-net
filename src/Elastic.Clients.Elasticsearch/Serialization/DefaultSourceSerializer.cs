@@ -16,11 +16,12 @@ internal class DefaultSourceSerializer : SystemTextJsonSourceSerializer
 			Converters =
 			{
 					new JsonStringEnumConverter(),
-					new DictionaryConverter(),
+					new DictionaryConverter(settings),
 					new UnionConverter(),
 					new IdConverter(settings),
 					new RelationNameConverter(settings),
 					new RoutingConverter(settings),
+					new PropertyNameConverter(settings),
 					new JoinFieldConverter(settings),
 					new LazyDocumentConverter(settings),
 			},

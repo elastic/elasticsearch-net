@@ -28,22 +28,510 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("coerce")]
-		public bool? Coerce { get; init; }
+		public bool? Coerce { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
-		public bool? IgnoreMalformed { get; init; }
+		public bool? IgnoreMalformed { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_z_value")]
-		public bool? IgnoreZValue { get; init; }
+		public bool? IgnoreZValue { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("orientation")]
-		public Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? Orientation { get; init; }
+		public Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? Orientation { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "shape";
+	}
+
+	public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDescriptorBase<ShapePropertyDescriptor<TDocument>>
+	{
+		internal ShapePropertyDescriptor(Action<ShapePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public ShapePropertyDescriptor() : base()
+		{
+		}
+
+		private bool? CoerceValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+		private bool? DocValuesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private bool? IgnoreMalformedValue { get; set; }
+
+		private bool? IgnoreZValueValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? OrientationValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		private bool? StoreValue { get; set; }
+
+		public ShapePropertyDescriptor<TDocument> Coerce(bool? coerce = true)
+		{
+			CoerceValue = coerce;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+		{
+			DocValuesValue = docValues;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> IgnoreMalformed(bool? ignoreMalformed = true)
+		{
+			IgnoreMalformedValue = ignoreMalformed;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> IgnoreZValue(bool? ignoreZValue = true)
+		{
+			IgnoreZValueValue = ignoreZValue;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> Name<TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> Orientation(Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? orientation)
+		{
+			OrientationValue = orientation;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor<TDocument> Store(bool? store = true)
+		{
+			StoreValue = store;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (CoerceValue.HasValue)
+			{
+				writer.WritePropertyName("coerce");
+				writer.WriteBooleanValue(CoerceValue.Value);
+			}
+
+			if (CopyToValue is not null)
+			{
+				writer.WritePropertyName("copy_to");
+				JsonSerializer.Serialize(writer, CopyToValue, options);
+			}
+
+			if (DocValuesValue.HasValue)
+			{
+				writer.WritePropertyName("doc_values");
+				writer.WriteBooleanValue(DocValuesValue.Value);
+			}
+
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (IgnoreMalformedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_malformed");
+				writer.WriteBooleanValue(IgnoreMalformedValue.Value);
+			}
+
+			if (IgnoreZValueValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_z_value");
+				writer.WriteBooleanValue(IgnoreZValueValue.Value);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (OrientationValue is not null)
+			{
+				writer.WritePropertyName("orientation");
+				JsonSerializer.Serialize(writer, OrientationValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			if (StoreValue.HasValue)
+			{
+				writer.WritePropertyName("store");
+				writer.WriteBooleanValue(StoreValue.Value);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("shape");
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class ShapePropertyDescriptor : SerializableDescriptorBase<ShapePropertyDescriptor>
+	{
+		internal ShapePropertyDescriptor(Action<ShapePropertyDescriptor> configure) => configure.Invoke(this);
+		public ShapePropertyDescriptor() : base()
+		{
+		}
+
+		private bool? CoerceValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+		private bool? DocValuesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private bool? IgnoreMalformedValue { get; set; }
+
+		private bool? IgnoreZValueValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? OrientationValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		private bool? StoreValue { get; set; }
+
+		public ShapePropertyDescriptor Coerce(bool? coerce = true)
+		{
+			CoerceValue = coerce;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor DocValues(bool? docValues = true)
+		{
+			DocValuesValue = docValues;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
+		{
+			IgnoreMalformedValue = ignoreMalformed;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor IgnoreZValue(bool? ignoreZValue = true)
+		{
+			IgnoreZValueValue = ignoreZValue;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public ShapePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public ShapePropertyDescriptor Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor Name<TDocument, TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor Name<TDocument>(Expression<Func<TDocument, object>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor Orientation(Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? orientation)
+		{
+			OrientationValue = orientation;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public ShapePropertyDescriptor Store(bool? store = true)
+		{
+			StoreValue = store;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (CoerceValue.HasValue)
+			{
+				writer.WritePropertyName("coerce");
+				writer.WriteBooleanValue(CoerceValue.Value);
+			}
+
+			if (CopyToValue is not null)
+			{
+				writer.WritePropertyName("copy_to");
+				JsonSerializer.Serialize(writer, CopyToValue, options);
+			}
+
+			if (DocValuesValue.HasValue)
+			{
+				writer.WritePropertyName("doc_values");
+				writer.WriteBooleanValue(DocValuesValue.Value);
+			}
+
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (IgnoreMalformedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_malformed");
+				writer.WriteBooleanValue(IgnoreMalformedValue.Value);
+			}
+
+			if (IgnoreZValueValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_z_value");
+				writer.WriteBooleanValue(IgnoreZValueValue.Value);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (OrientationValue is not null)
+			{
+				writer.WritePropertyName("orientation");
+				JsonSerializer.Serialize(writer, OrientationValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			if (StoreValue.HasValue)
+			{
+				writer.WritePropertyName("store");
+				writer.WriteBooleanValue(StoreValue.Value);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("shape");
+			writer.WriteEndObject();
+		}
 	}
 }

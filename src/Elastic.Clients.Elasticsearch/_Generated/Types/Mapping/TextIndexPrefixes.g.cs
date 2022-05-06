@@ -28,10 +28,44 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_chars")]
-		public int MaxChars { get; init; }
+		public int MaxChars { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_chars")]
-		public int MinChars { get; init; }
+		public int MinChars { get; set; }
+	}
+
+	public sealed partial class TextIndexPrefixesDescriptor : SerializableDescriptorBase<TextIndexPrefixesDescriptor>
+	{
+		internal TextIndexPrefixesDescriptor(Action<TextIndexPrefixesDescriptor> configure) => configure.Invoke(this);
+		public TextIndexPrefixesDescriptor() : base()
+		{
+		}
+
+		private int MaxCharsValue { get; set; }
+
+		private int MinCharsValue { get; set; }
+
+		public TextIndexPrefixesDescriptor MaxChars(int maxChars)
+		{
+			MaxCharsValue = maxChars;
+			return Self;
+		}
+
+		public TextIndexPrefixesDescriptor MinChars(int minChars)
+		{
+			MinCharsValue = minChars;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("max_chars");
+			writer.WriteNumberValue(MaxCharsValue);
+			writer.WritePropertyName("min_chars");
+			writer.WriteNumberValue(MinCharsValue);
+			writer.WriteEndObject();
+		}
 	}
 }

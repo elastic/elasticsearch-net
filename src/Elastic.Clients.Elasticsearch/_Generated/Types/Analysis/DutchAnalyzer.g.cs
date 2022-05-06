@@ -28,10 +28,40 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "dutch";
+	}
+
+	public sealed partial class DutchAnalyzerDescriptor : SerializableDescriptorBase<DutchAnalyzerDescriptor>
+	{
+		internal DutchAnalyzerDescriptor(Action<DutchAnalyzerDescriptor> configure) => configure.Invoke(this);
+		public DutchAnalyzerDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
+
+		public DutchAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
+		{
+			StopwordsValue = stopwords;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (StopwordsValue is not null)
+			{
+				writer.WritePropertyName("stopwords");
+				JsonSerializer.Serialize(writer, StopwordsValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("dutch");
+			writer.WriteEndObject();
+		}
 	}
 }

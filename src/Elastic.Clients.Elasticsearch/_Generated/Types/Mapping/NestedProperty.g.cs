@@ -28,18 +28,450 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
-		public bool? Enabled { get; init; }
+		public bool? Enabled { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("include_in_parent")]
-		public bool? IncludeInParent { get; init; }
+		public bool? IncludeInParent { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("include_in_root")]
-		public bool? IncludeInRoot { get; init; }
+		public bool? IncludeInRoot { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "nested";
+	}
+
+	public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDescriptorBase<NestedPropertyDescriptor<TDocument>>
+	{
+		internal NestedPropertyDescriptor(Action<NestedPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public NestedPropertyDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private bool? EnabledValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private bool? IncludeInParentValue { get; set; }
+
+		private bool? IncludeInRootValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		private bool? StoreValue { get; set; }
+
+		public NestedPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> Enabled(bool? enabled = true)
+		{
+			EnabledValue = enabled;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> IncludeInParent(bool? includeInParent = true)
+		{
+			IncludeInParentValue = includeInParent;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> IncludeInRoot(bool? includeInRoot = true)
+		{
+			IncludeInRootValue = includeInRoot;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> Name<TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor<TDocument> Store(bool? store = true)
+		{
+			StoreValue = store;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (CopyToValue is not null)
+			{
+				writer.WritePropertyName("copy_to");
+				JsonSerializer.Serialize(writer, CopyToValue, options);
+			}
+
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (EnabledValue.HasValue)
+			{
+				writer.WritePropertyName("enabled");
+				writer.WriteBooleanValue(EnabledValue.Value);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (IncludeInParentValue.HasValue)
+			{
+				writer.WritePropertyName("include_in_parent");
+				writer.WriteBooleanValue(IncludeInParentValue.Value);
+			}
+
+			if (IncludeInRootValue.HasValue)
+			{
+				writer.WritePropertyName("include_in_root");
+				writer.WriteBooleanValue(IncludeInRootValue.Value);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			if (StoreValue.HasValue)
+			{
+				writer.WritePropertyName("store");
+				writer.WriteBooleanValue(StoreValue.Value);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("nested");
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class NestedPropertyDescriptor : SerializableDescriptorBase<NestedPropertyDescriptor>
+	{
+		internal NestedPropertyDescriptor(Action<NestedPropertyDescriptor> configure) => configure.Invoke(this);
+		public NestedPropertyDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private bool? EnabledValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private bool? IncludeInParentValue { get; set; }
+
+		private bool? IncludeInRootValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		private bool? StoreValue { get; set; }
+
+		public NestedPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor Enabled(bool? enabled = true)
+		{
+			EnabledValue = enabled;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor IncludeInParent(bool? includeInParent = true)
+		{
+			IncludeInParentValue = includeInParent;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor IncludeInRoot(bool? includeInRoot = true)
+		{
+			IncludeInRootValue = includeInRoot;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public NestedPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public NestedPropertyDescriptor Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor Name<TDocument, TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor Name<TDocument>(Expression<Func<TDocument, object>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public NestedPropertyDescriptor Store(bool? store = true)
+		{
+			StoreValue = store;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (CopyToValue is not null)
+			{
+				writer.WritePropertyName("copy_to");
+				JsonSerializer.Serialize(writer, CopyToValue, options);
+			}
+
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (EnabledValue.HasValue)
+			{
+				writer.WritePropertyName("enabled");
+				writer.WriteBooleanValue(EnabledValue.Value);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (IncludeInParentValue.HasValue)
+			{
+				writer.WritePropertyName("include_in_parent");
+				writer.WriteBooleanValue(IncludeInParentValue.Value);
+			}
+
+			if (IncludeInRootValue.HasValue)
+			{
+				writer.WritePropertyName("include_in_root");
+				writer.WriteBooleanValue(IncludeInRootValue.Value);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			if (StoreValue.HasValue)
+			{
+				writer.WritePropertyName("store");
+				writer.WriteBooleanValue(StoreValue.Value);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("nested");
+			writer.WriteEndObject();
+		}
 	}
 }

@@ -31,6 +31,36 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "keyword";
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public string? Version { get; init; }
+		public string? Version { get; set; }
+	}
+
+	public sealed partial class KeywordAnalyzerDescriptor : SerializableDescriptorBase<KeywordAnalyzerDescriptor>
+	{
+		internal KeywordAnalyzerDescriptor(Action<KeywordAnalyzerDescriptor> configure) => configure.Invoke(this);
+		public KeywordAnalyzerDescriptor() : base()
+		{
+		}
+
+		private string? VersionValue { get; set; }
+
+		public KeywordAnalyzerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("keyword");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

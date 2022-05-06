@@ -28,10 +28,646 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public float? NullValue { get; init; }
+		public float? NullValue { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "float";
+	}
+
+	public sealed partial class FloatNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<FloatNumberPropertyDescriptor<TDocument>>
+	{
+		internal FloatNumberPropertyDescriptor(Action<FloatNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public FloatNumberPropertyDescriptor() : base()
+		{
+		}
+
+		private ScriptBase? ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private bool? CoerceValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+		private bool? DocValuesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private bool? IgnoreMalformedValue { get; set; }
+
+		private bool? IndexValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private float? NullValueValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		private bool? StoreValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		public FloatNumberPropertyDescriptor<TDocument> Script(ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Coerce(bool? coerce = true)
+		{
+			CoerceValue = coerce;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+		{
+			DocValuesValue = docValues;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> IgnoreMalformed(bool? ignoreMalformed = true)
+		{
+			IgnoreMalformedValue = ignoreMalformed;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Index(bool? index = true)
+		{
+			IndexValue = index;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Name<TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> NullValue(float? nullValue)
+		{
+			NullValueValue = nullValue;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+		{
+			OnScriptErrorValue = onScriptError;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> Store(bool? store = true)
+		{
+			StoreValue = store;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
+		{
+			TimeSeriesMetricValue = timeSeriesMetric;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (CoerceValue.HasValue)
+			{
+				writer.WritePropertyName("coerce");
+				writer.WriteBooleanValue(CoerceValue.Value);
+			}
+
+			if (CopyToValue is not null)
+			{
+				writer.WritePropertyName("copy_to");
+				JsonSerializer.Serialize(writer, CopyToValue, options);
+			}
+
+			if (DocValuesValue.HasValue)
+			{
+				writer.WritePropertyName("doc_values");
+				writer.WriteBooleanValue(DocValuesValue.Value);
+			}
+
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (IgnoreMalformedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_malformed");
+				writer.WriteBooleanValue(IgnoreMalformedValue.Value);
+			}
+
+			if (IndexValue.HasValue)
+			{
+				writer.WritePropertyName("index");
+				writer.WriteBooleanValue(IndexValue.Value);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (NullValueValue.HasValue)
+			{
+				writer.WritePropertyName("null_value");
+				writer.WriteNumberValue(NullValueValue.Value);
+			}
+
+			if (OnScriptErrorValue is not null)
+			{
+				writer.WritePropertyName("on_script_error");
+				JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			if (StoreValue.HasValue)
+			{
+				writer.WritePropertyName("store");
+				writer.WriteBooleanValue(StoreValue.Value);
+			}
+
+			if (TimeSeriesMetricValue is not null)
+			{
+				writer.WritePropertyName("time_series_metric");
+				JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("float");
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class FloatNumberPropertyDescriptor : SerializableDescriptorBase<FloatNumberPropertyDescriptor>
+	{
+		internal FloatNumberPropertyDescriptor(Action<FloatNumberPropertyDescriptor> configure) => configure.Invoke(this);
+		public FloatNumberPropertyDescriptor() : base()
+		{
+		}
+
+		private ScriptBase? ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private bool? CoerceValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+		private bool? DocValuesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+		private int? IgnoreAboveValue { get; set; }
+
+		private bool? IgnoreMalformedValue { get; set; }
+
+		private bool? IndexValue { get; set; }
+
+		private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
+
+		private float? NullValueValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private string? SimilarityValue { get; set; }
+
+		private bool? StoreValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		public FloatNumberPropertyDescriptor Script(ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Coerce(bool? coerce = true)
+		{
+			CoerceValue = coerce;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
+		{
+			CopyToValue = copyTo;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor DocValues(bool? docValues = true)
+		{
+			DocValuesValue = docValues;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		{
+			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+		{
+			IgnoreAboveValue = ignoreAbove;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
+		{
+			IgnoreMalformedValue = ignoreMalformed;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Index(bool? index = true)
+		{
+			IndexValue = index;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Name(Elastic.Clients.Elasticsearch.PropertyName? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Name<TDocument, TValue>(Expression<Func<TDocument, TValue>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Name<TDocument>(Expression<Func<TDocument, object>> name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor NullValue(float? nullValue)
+		{
+			NullValueValue = nullValue;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+		{
+			OnScriptErrorValue = onScriptError;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		{
+			PropertiesValue = properties;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Similarity(string? similarity)
+		{
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor Store(bool? store = true)
+		{
+			StoreValue = store;
+			return Self;
+		}
+
+		public FloatNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
+		{
+			TimeSeriesMetricValue = timeSeriesMetric;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (CoerceValue.HasValue)
+			{
+				writer.WritePropertyName("coerce");
+				writer.WriteBooleanValue(CoerceValue.Value);
+			}
+
+			if (CopyToValue is not null)
+			{
+				writer.WritePropertyName("copy_to");
+				JsonSerializer.Serialize(writer, CopyToValue, options);
+			}
+
+			if (DocValuesValue.HasValue)
+			{
+				writer.WritePropertyName("doc_values");
+				writer.WriteBooleanValue(DocValuesValue.Value);
+			}
+
+			if (DynamicValue is not null)
+			{
+				writer.WritePropertyName("dynamic");
+				JsonSerializer.Serialize(writer, DynamicValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IgnoreAboveValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_above");
+				writer.WriteNumberValue(IgnoreAboveValue.Value);
+			}
+
+			if (IgnoreMalformedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_malformed");
+				writer.WriteBooleanValue(IgnoreMalformedValue.Value);
+			}
+
+			if (IndexValue.HasValue)
+			{
+				writer.WritePropertyName("index");
+				writer.WriteBooleanValue(IndexValue.Value);
+			}
+
+			if (LocalMetadataValue is not null)
+			{
+				writer.WritePropertyName("local_metadata");
+				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (NullValueValue.HasValue)
+			{
+				writer.WritePropertyName("null_value");
+				writer.WriteNumberValue(NullValueValue.Value);
+			}
+
+			if (OnScriptErrorValue is not null)
+			{
+				writer.WritePropertyName("on_script_error");
+				JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+			}
+
+			if (PropertiesValue is not null)
+			{
+				writer.WritePropertyName("properties");
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(SimilarityValue))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(SimilarityValue);
+			}
+
+			if (StoreValue.HasValue)
+			{
+				writer.WritePropertyName("store");
+				writer.WriteBooleanValue(StoreValue.Value);
+			}
+
+			if (TimeSeriesMetricValue is not null)
+			{
+				writer.WritePropertyName("time_series_metric");
+				JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("float");
+			writer.WriteEndObject();
+		}
 	}
 }

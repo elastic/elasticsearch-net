@@ -31,6 +31,36 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "simple";
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public string? Version { get; init; }
+		public string? Version { get; set; }
+	}
+
+	public sealed partial class SimpleAnalyzerDescriptor : SerializableDescriptorBase<SimpleAnalyzerDescriptor>
+	{
+		internal SimpleAnalyzerDescriptor(Action<SimpleAnalyzerDescriptor> configure) => configure.Invoke(this);
+		public SimpleAnalyzerDescriptor() : base()
+		{
+		}
+
+		private string? VersionValue { get; set; }
+
+		public SimpleAnalyzerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("simple");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }
