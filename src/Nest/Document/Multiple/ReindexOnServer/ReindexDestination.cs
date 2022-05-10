@@ -5,7 +5,6 @@
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
 
-
 namespace Nest
 {
 	/// <summary>
@@ -30,6 +29,7 @@ namespace Nest
 		/// <summary>
 		/// Id of the pipeline to use to process documents
 		/// </summary>
+		[DataMember(Name ="pipeline")]
 		string Pipeline { get; set; }
 
 		/// <summary>
@@ -91,6 +91,5 @@ namespace Nest
 
 		/// <inheritdoc cref="IReindexDestination.Index" />
 		public ReindexDestinationDescriptor Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
-
 	}
 }
