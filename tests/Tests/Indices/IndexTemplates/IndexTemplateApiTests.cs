@@ -95,10 +95,10 @@ namespace Tests.Indices.IndexTemplates
 					(v, c, r) => c.Indices.PutTemplateV2Async(r)
 				)
 			},
-			//{"WaitStep", u => u.Call(async (v, c) =>
-			//{
-			//	await Task.Delay(2000); // allow template to be fully created
-			//})},
+			{"WaitStep", u => u.Call(async (v, c) =>
+			{
+				await Task.Delay(2000); // allow template to be fully created
+			})},
 			{ExistsStep, u =>
 				u.Calls<IndexTemplateV2ExistsDescriptor, IndexTemplateV2ExistsRequest, IIndexTemplateV2ExistsRequest, ExistsResponse>(
 					v => new IndexTemplateV2ExistsRequest(v),
