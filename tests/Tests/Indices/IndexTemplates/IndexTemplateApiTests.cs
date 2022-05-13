@@ -97,7 +97,7 @@ namespace Tests.Indices.IndexTemplates
 			},
 			//{"WaitStep", u => u.Call(async (v, c) =>
 			//{
-			//	await Task.Delay(2000); // allow template to be fully created
+			//	await Task.Delay(5000); // allow template to be fully created
 			//})},
 			{ExistsStep, u =>
 				u.Calls<IndexTemplateV2ExistsDescriptor, IndexTemplateV2ExistsRequest, IIndexTemplateV2ExistsRequest, ExistsResponse>(
