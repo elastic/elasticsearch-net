@@ -38,12 +38,13 @@ var searchResponse = Client.Search<Project>(s => s
 while (searchResponse.Documents.Any()) <2>
 {
     ProcessResponse(searchResponse); <3>
-    searchResponse = Client.Scroll<Project>("10s", searchResponse.ScrollId);
+    searchResponse = Client.Scroll<Project>("10s", searchResponse.ScrollId); <4>
 }
 ----
 <1> Specify a scroll time for how long Elasticsearch should keep this scroll open on the server side. The time specified should be sufficient to process the response on the client side.
 <2> make subsequent requests to the scroll API to keep fetching documents, whilst documents are returned
-<3> do something with the response
+<3> do something with the response, (Client search request also return the first iteration of query)
+<4> Get next page scroll response and set it to searchReponse to use it on ProcessResponse
 
 [[scrollall-observable]]
 ==== ScrollAllObservable
