@@ -46,9 +46,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonPropertyName("meta")]
 		public Dictionary<string, string>? Meta { get; set; }
 
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.PropertyName? Name { get; set; }
-
 		[JsonInclude]
 		[JsonPropertyName("properties")]
 		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }

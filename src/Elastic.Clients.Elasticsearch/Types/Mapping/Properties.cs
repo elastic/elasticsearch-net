@@ -24,15 +24,21 @@ public partial class Properties
 	}
 }
 
-public partial class BooleanPropertyDescriptor<TDocument> : IBuildable<BooleanProperty>
+internal interface IPropertyDescriptor
 {
+	public PropertyName Name { get; }
+}
+
+public partial class BooleanPropertyDescriptor<TDocument> : IBuildable<BooleanProperty>, IPropertyDescriptor
+{
+	PropertyName IPropertyDescriptor.Name => NameValue;
+
 	BooleanProperty IBuildable<BooleanProperty>.Build() =>
 		new()
 		{
 			Boost = BoostValue,
 			CopyTo = CopyToValue,
 			DocValues = DocValuesValue,
-			Name = NameValue,
 			NullValue = NullValueValue,
 			Store = StoreValue,
 		};
@@ -55,32 +61,25 @@ public partial class PropertiesDescriptor<T>
 
 	public PropertiesDescriptor(Properties properties) : base(properties ?? new Properties<T>()) { }
 
-	public PropertiesDescriptor<T> Boolean(Action<BooleanPropertyDescriptor<T>> selector) => SetProperty<BooleanPropertyDescriptor<T>, BooleanProperty>(selector);
+	public PropertiesDescriptor<T> Boolean(Action<BooleanPropertyDescriptor<T>> selector) => SetVariant<BooleanPropertyDescriptor<T>, BooleanProperty>(selector);
 
-	private PropertiesDescriptor<T> SetProperty<TDescriptor, TProperty>(Action<TDescriptor> selector)
-			where TDescriptor : Descriptor, IBuildable<TProperty>, new()
+	private PropertiesDescriptor<T> SetVariant<TDescriptor, TProperty>(Action<TDescriptor> selector)
+			where TDescriptor : Descriptor, IBuildable<TProperty>, IPropertyDescriptor, new()
 			where TProperty : IProperty
 	{
-		selector.ThrowIfNull(nameof(selector));
-
 		var descriptor = new TDescriptor();
-		selector(descriptor);
-
-		var property = descriptor.Build();
-
-		return SetProperty(property);
+		selector?.Invoke(descriptor);
+		return SetVariant(descriptor.Name, descriptor.Build());
 	}
 
-	private PropertiesDescriptor<T> SetProperty(IProperty type)
+	private PropertiesDescriptor<T> SetVariant(PropertyName name, IProperty type)
 	{
 		type.ThrowIfNull(nameof(type));
 
-		var typeName = type.GetType().Name;
+		if (name.IsConditionless())
+			throw new ArgumentException($"Could not get property name for {type.GetType().Name} mapping.");
 
-		if (type.Name.IsConditionless())
-			throw new ArgumentException($"Could not get property name for {typeName} mapping.");
-
-		return Assign(type, (a, v) => a[v.Name] = v);
+		return Assign((name, type), (a, v) => a[v.name] = v.type);
 	}
 }
 
@@ -97,11 +96,11 @@ public partial class TypeMappingDescriptor
 
 public partial interface IProperty
 {
-	public PropertyName Name { get; }
+	//public PropertyName Name { get; }
 }
 
 internal static class PropertyNameExtensions
 {
 	internal static bool IsConditionless(this PropertyName property) =>
-		property == null || property.Name.IsNullOrEmpty() && property.Expression == null && property.Property == null;
+		property is null || property.Name.IsNullOrEmpty() && property.Expression is null && property.Property is null;
 }
