@@ -290,6 +290,104 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
+	[JsonConverter(typeof(DeploymentAllocationStateConverter))]
+	public enum DeploymentAllocationState
+	{
+		[EnumMember(Value = "starting")]
+		Starting,
+		[EnumMember(Value = "started")]
+		Started,
+		[EnumMember(Value = "fully_allocated")]
+		FullyAllocated
+	}
+
+	internal sealed class DeploymentAllocationStateConverter : JsonConverter<DeploymentAllocationState>
+	{
+		public override DeploymentAllocationState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "starting":
+					return DeploymentAllocationState.Starting;
+				case "started":
+					return DeploymentAllocationState.Started;
+				case "fully_allocated":
+					return DeploymentAllocationState.FullyAllocated;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, DeploymentAllocationState value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case DeploymentAllocationState.Starting:
+					writer.WriteStringValue("starting");
+					return;
+				case DeploymentAllocationState.Started:
+					writer.WriteStringValue("started");
+					return;
+				case DeploymentAllocationState.FullyAllocated:
+					writer.WriteStringValue("fully_allocated");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(DeploymentStateConverter))]
+	public enum DeploymentState
+	{
+		[EnumMember(Value = "stopping")]
+		Stopping,
+		[EnumMember(Value = "starting")]
+		Starting,
+		[EnumMember(Value = "started")]
+		Started
+	}
+
+	internal sealed class DeploymentStateConverter : JsonConverter<DeploymentState>
+	{
+		public override DeploymentState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "stopping":
+					return DeploymentState.Stopping;
+				case "starting":
+					return DeploymentState.Starting;
+				case "started":
+					return DeploymentState.Started;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, DeploymentState value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case DeploymentState.Stopping:
+					writer.WriteStringValue("stopping");
+					return;
+				case DeploymentState.Starting:
+					writer.WriteStringValue("starting");
+					return;
+				case DeploymentState.Started:
+					writer.WriteStringValue("started");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(ExcludeFrequentConverter))]
 	public enum ExcludeFrequent
 	{
@@ -500,6 +598,69 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
+	[JsonConverter(typeof(RoutingStateConverter))]
+	public enum RoutingState
+	{
+		[EnumMember(Value = "stopping")]
+		Stopping,
+		[EnumMember(Value = "stopped")]
+		Stopped,
+		[EnumMember(Value = "starting")]
+		Starting,
+		[EnumMember(Value = "started")]
+		Started,
+		[EnumMember(Value = "failed")]
+		Failed
+	}
+
+	internal sealed class RoutingStateConverter : JsonConverter<RoutingState>
+	{
+		public override RoutingState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "stopping":
+					return RoutingState.Stopping;
+				case "stopped":
+					return RoutingState.Stopped;
+				case "starting":
+					return RoutingState.Starting;
+				case "started":
+					return RoutingState.Started;
+				case "failed":
+					return RoutingState.Failed;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, RoutingState value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case RoutingState.Stopping:
+					writer.WriteStringValue("stopping");
+					return;
+				case RoutingState.Stopped:
+					writer.WriteStringValue("stopped");
+					return;
+				case RoutingState.Starting:
+					writer.WriteStringValue("starting");
+					return;
+				case RoutingState.Started:
+					writer.WriteStringValue("started");
+					return;
+				case RoutingState.Failed:
+					writer.WriteStringValue("failed");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(RuleActionConverter))]
 	public enum RuleAction
 	{
@@ -535,6 +696,55 @@ namespace Elastic.Clients.Elasticsearch.Ml
 					return;
 				case RuleAction.SkipModelUpdate:
 					writer.WriteStringValue("skip_model_update");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(TokenizationTruncateConverter))]
+	public enum TokenizationTruncate
+	{
+		[EnumMember(Value = "second")]
+		Second,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "first")]
+		First
+	}
+
+	internal sealed class TokenizationTruncateConverter : JsonConverter<TokenizationTruncate>
+	{
+		public override TokenizationTruncate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "second":
+					return TokenizationTruncate.Second;
+				case "none":
+					return TokenizationTruncate.None;
+				case "first":
+					return TokenizationTruncate.First;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, TokenizationTruncate value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case TokenizationTruncate.Second:
+					writer.WriteStringValue("second");
+					return;
+				case TokenizationTruncate.None:
+					writer.WriteStringValue("none");
+					return;
+				case TokenizationTruncate.First:
+					writer.WriteStringValue("first");
 					return;
 			}
 

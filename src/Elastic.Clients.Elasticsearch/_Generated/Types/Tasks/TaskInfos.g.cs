@@ -15,19 +15,23 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.Tasks
 {
-	public partial class IndicesGetDataStreamItemTimestampField
+	public partial class TaskInfos : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>?, Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>?>
 	{
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string Name { get; init; }
+		public TaskInfos(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>? item) : base(item)
+		{
+		}
+
+		public TaskInfos(Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>? item) : base(item)
+		{
+		}
 	}
 }

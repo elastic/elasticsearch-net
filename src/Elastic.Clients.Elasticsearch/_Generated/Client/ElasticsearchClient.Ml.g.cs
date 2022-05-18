@@ -672,6 +672,34 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequestAsync<MlGetJobStatsRequestDescriptor, MlGetJobStatsResponse>(descriptor);
 		}
 
+		public MlGetMemoryStatsResponse GetMemoryStats(MlGetMemoryStatsRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<MlGetMemoryStatsRequest, MlGetMemoryStatsResponse>(request);
+		}
+
+		public Task<MlGetMemoryStatsResponse> GetMemoryStatsAsync(MlGetMemoryStatsRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<MlGetMemoryStatsRequest, MlGetMemoryStatsResponse>(request, cancellationToken);
+		}
+
+		public MlGetMemoryStatsResponse GetMemoryStats(Action<MlGetMemoryStatsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new MlGetMemoryStatsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MlGetMemoryStatsRequestDescriptor, MlGetMemoryStatsResponse>(descriptor);
+		}
+
+		public Task<MlGetMemoryStatsResponse> GetMemoryStatsAsync(Action<MlGetMemoryStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MlGetMemoryStatsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MlGetMemoryStatsRequestDescriptor, MlGetMemoryStatsResponse>(descriptor);
+		}
+
 		public MlGetModelSnapshotsResponse GetModelSnapshots(MlGetModelSnapshotsRequest request)
 		{
 			request.BeforeRequest();

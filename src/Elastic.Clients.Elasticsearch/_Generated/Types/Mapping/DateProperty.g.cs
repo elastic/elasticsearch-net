@@ -100,8 +100,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Dictionary<string, string>? MetaValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
-
 		private string? NullValueValue { get; set; }
 
 		private int? PrecisionStepValue { get; set; }
@@ -211,18 +209,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public DatePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public DatePropertyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.PropertyName? name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public DatePropertyDescriptor<TDocument> Name<TValue>(Expression<Func<TDocument, TValue>> name)
-		{
-			NameValue = name;
 			return Self;
 		}
 
@@ -347,12 +333,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
-			if (NameValue is not null)
-			{
-				writer.WritePropertyName("name");
-				JsonSerializer.Serialize(writer, NameValue, options);
-			}
-
 			if (NullValueValue is not null)
 			{
 				writer.WritePropertyName("null_value");
@@ -425,8 +405,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? LocaleValue { get; set; }
 
 		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
 
 		private string? NullValueValue { get; set; }
 
@@ -543,24 +521,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public DatePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public DatePropertyDescriptor Name(Elastic.Clients.Elasticsearch.PropertyName? name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public DatePropertyDescriptor Name<TDocument, TValue>(Expression<Func<TDocument, TValue>> name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public DatePropertyDescriptor Name<TDocument>(Expression<Func<TDocument, object>> name)
-		{
-			NameValue = name;
 			return Self;
 		}
 
@@ -683,12 +643,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (NameValue is not null)
-			{
-				writer.WritePropertyName("name");
-				JsonSerializer.Serialize(writer, NameValue, options);
 			}
 
 			if (NullValueValue is not null)

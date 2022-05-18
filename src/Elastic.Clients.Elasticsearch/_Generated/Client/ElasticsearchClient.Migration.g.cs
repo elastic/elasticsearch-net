@@ -55,5 +55,61 @@ namespace Elastic.Clients.Elasticsearch.Migration
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MigrationDeprecationsRequestDescriptor, MigrationDeprecationsResponse>(descriptor);
 		}
+
+		public MigrationGetFeatureUpgradeStatusResponse GetFeatureUpgradeStatus(MigrationGetFeatureUpgradeStatusRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<MigrationGetFeatureUpgradeStatusRequest, MigrationGetFeatureUpgradeStatusResponse>(request);
+		}
+
+		public Task<MigrationGetFeatureUpgradeStatusResponse> GetFeatureUpgradeStatusAsync(MigrationGetFeatureUpgradeStatusRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<MigrationGetFeatureUpgradeStatusRequest, MigrationGetFeatureUpgradeStatusResponse>(request, cancellationToken);
+		}
+
+		public MigrationGetFeatureUpgradeStatusResponse GetFeatureUpgradeStatus(Action<MigrationGetFeatureUpgradeStatusRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new MigrationGetFeatureUpgradeStatusRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MigrationGetFeatureUpgradeStatusRequestDescriptor, MigrationGetFeatureUpgradeStatusResponse>(descriptor);
+		}
+
+		public Task<MigrationGetFeatureUpgradeStatusResponse> GetFeatureUpgradeStatusAsync(Action<MigrationGetFeatureUpgradeStatusRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MigrationGetFeatureUpgradeStatusRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MigrationGetFeatureUpgradeStatusRequestDescriptor, MigrationGetFeatureUpgradeStatusResponse>(descriptor);
+		}
+
+		public MigrationPostFeatureUpgradeResponse PostFeatureUpgrade(MigrationPostFeatureUpgradeRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<MigrationPostFeatureUpgradeRequest, MigrationPostFeatureUpgradeResponse>(request);
+		}
+
+		public Task<MigrationPostFeatureUpgradeResponse> PostFeatureUpgradeAsync(MigrationPostFeatureUpgradeRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<MigrationPostFeatureUpgradeRequest, MigrationPostFeatureUpgradeResponse>(request, cancellationToken);
+		}
+
+		public MigrationPostFeatureUpgradeResponse PostFeatureUpgrade(Action<MigrationPostFeatureUpgradeRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new MigrationPostFeatureUpgradeRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MigrationPostFeatureUpgradeRequestDescriptor, MigrationPostFeatureUpgradeResponse>(descriptor);
+		}
+
+		public Task<MigrationPostFeatureUpgradeResponse> PostFeatureUpgradeAsync(Action<MigrationPostFeatureUpgradeRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MigrationPostFeatureUpgradeRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MigrationPostFeatureUpgradeRequestDescriptor, MigrationPostFeatureUpgradeResponse>(descriptor);
+		}
 	}
 }

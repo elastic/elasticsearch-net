@@ -60,8 +60,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private IEnumerable<string> MetricsValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		public AggregateMetricDoublePropertyDescriptor<TDocument> DefaultMetric(string defaultMetric)
@@ -103,18 +101,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public AggregateMetricDoublePropertyDescriptor<TDocument> Metrics(IEnumerable<string> metrics)
 		{
 			MetricsValue = metrics;
-			return Self;
-		}
-
-		public AggregateMetricDoublePropertyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.PropertyName? name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public AggregateMetricDoublePropertyDescriptor<TDocument> Name<TValue>(Expression<Func<TDocument, TValue>> name)
-		{
-			NameValue = name;
 			return Self;
 		}
 
@@ -161,12 +147,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 			writer.WritePropertyName("metrics");
 			JsonSerializer.Serialize(writer, MetricsValue, options);
-			if (NameValue is not null)
-			{
-				writer.WritePropertyName("name");
-				JsonSerializer.Serialize(writer, NameValue, options);
-			}
-
 			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
@@ -199,8 +179,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, string>? MetaValue { get; set; }
 
 		private IEnumerable<string> MetricsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
@@ -243,24 +221,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public AggregateMetricDoublePropertyDescriptor Metrics(IEnumerable<string> metrics)
 		{
 			MetricsValue = metrics;
-			return Self;
-		}
-
-		public AggregateMetricDoublePropertyDescriptor Name(Elastic.Clients.Elasticsearch.PropertyName? name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public AggregateMetricDoublePropertyDescriptor Name<TDocument, TValue>(Expression<Func<TDocument, TValue>> name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public AggregateMetricDoublePropertyDescriptor Name<TDocument>(Expression<Func<TDocument, object>> name)
-		{
-			NameValue = name;
 			return Self;
 		}
 
@@ -307,12 +267,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 			writer.WritePropertyName("metrics");
 			JsonSerializer.Serialize(writer, MetricsValue, options);
-			if (NameValue is not null)
-			{
-				writer.WritePropertyName("name");
-				JsonSerializer.Serialize(writer, NameValue, options);
-			}
-
 			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");

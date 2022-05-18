@@ -24,19 +24,19 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class MatchOnlyTextProperty : PropertyBase, IProperty
+	public partial class MatchOnlyTextProperty : IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("copy_to")]
 		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 
-		//[JsonInclude]
-		//[JsonPropertyName("fields")]
-		//public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
-		//[JsonInclude]
-		//[JsonPropertyName("meta")]
-		//public Dictionary<string, string>? Meta { get; set; }
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, string>? Meta { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]

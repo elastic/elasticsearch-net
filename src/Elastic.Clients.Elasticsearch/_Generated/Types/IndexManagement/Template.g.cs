@@ -35,11 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("overlapping")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Overlapping> Overlapping { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Dictionary<string, object> Settings { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; init; }
 	}
 }

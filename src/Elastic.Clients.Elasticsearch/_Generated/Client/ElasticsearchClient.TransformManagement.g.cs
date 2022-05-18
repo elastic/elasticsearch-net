@@ -168,6 +168,34 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			return DoRequestAsync<TransformPutTransformRequestDescriptor, TransformPutTransformResponse>(descriptor);
 		}
 
+		public TransformResetTransformResponse TransformResetTransform(TransformResetTransformRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<TransformResetTransformRequest, TransformResetTransformResponse>(request);
+		}
+
+		public Task<TransformResetTransformResponse> TransformResetTransformAsync(TransformResetTransformRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<TransformResetTransformRequest, TransformResetTransformResponse>(request, cancellationToken);
+		}
+
+		public TransformResetTransformResponse TransformResetTransform(Elastic.Clients.Elasticsearch.Id transform_id, Action<TransformResetTransformRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new TransformResetTransformRequestDescriptor(transform_id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<TransformResetTransformRequestDescriptor, TransformResetTransformResponse>(descriptor);
+		}
+
+		public Task<TransformResetTransformResponse> TransformResetTransformAsync(Elastic.Clients.Elasticsearch.Id transform_id, Action<TransformResetTransformRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new TransformResetTransformRequestDescriptor(transform_id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<TransformResetTransformRequestDescriptor, TransformResetTransformResponse>(descriptor);
+		}
+
 		public TransformStartTransformResponse TransformStartTransform(TransformStartTransformRequest request)
 		{
 			request.BeforeRequest();

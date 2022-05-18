@@ -54,7 +54,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("inference_config")]
-		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer InferenceConfig { get; init; }
+		public Elastic.Clients.Elasticsearch.Ml.InferenceConfigCreateContainer InferenceConfig { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("input")]

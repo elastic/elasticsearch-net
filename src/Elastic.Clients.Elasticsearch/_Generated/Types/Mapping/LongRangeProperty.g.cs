@@ -58,8 +58,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Dictionary<string, string>? MetaValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private string? SimilarityValue { get; set; }
@@ -129,18 +127,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public LongRangePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public LongRangePropertyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.PropertyName? name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public LongRangePropertyDescriptor<TDocument> Name<TValue>(Expression<Func<TDocument, TValue>> name)
-		{
-			NameValue = name;
 			return Self;
 		}
 
@@ -225,12 +211,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
-			if (NameValue is not null)
-			{
-				writer.WritePropertyName("name");
-				JsonSerializer.Serialize(writer, NameValue, options);
-			}
-
 			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
@@ -281,8 +261,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
@@ -359,24 +337,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public LongRangePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public LongRangePropertyDescriptor Name(Elastic.Clients.Elasticsearch.PropertyName? name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public LongRangePropertyDescriptor Name<TDocument, TValue>(Expression<Func<TDocument, TValue>> name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public LongRangePropertyDescriptor Name<TDocument>(Expression<Func<TDocument, object>> name)
-		{
-			NameValue = name;
 			return Self;
 		}
 
@@ -459,12 +419,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (NameValue is not null)
-			{
-				writer.WritePropertyName("name");
-				JsonSerializer.Serialize(writer, NameValue, options);
 			}
 
 			if (PropertiesValue is not null)

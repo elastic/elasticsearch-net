@@ -78,8 +78,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Dictionary<string, string>? MetaValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
-
 		private bool? NullValueValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
@@ -169,18 +167,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public BooleanPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public BooleanPropertyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.PropertyName? name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public BooleanPropertyDescriptor<TDocument> Name<TValue>(Expression<Func<TDocument, TValue>> name)
-		{
-			NameValue = name;
 			return Self;
 		}
 
@@ -281,12 +267,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
-			if (NameValue is not null)
-			{
-				writer.WritePropertyName("name");
-				JsonSerializer.Serialize(writer, NameValue, options);
-			}
-
 			if (NullValueValue.HasValue)
 			{
 				writer.WritePropertyName("null_value");
@@ -347,8 +327,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.PropertyName? NameValue { get; set; }
 
 		private bool? NullValueValue { get; set; }
 
@@ -448,24 +426,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
-		public BooleanPropertyDescriptor Name(Elastic.Clients.Elasticsearch.PropertyName? name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public BooleanPropertyDescriptor Name<TDocument, TValue>(Expression<Func<TDocument, TValue>> name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
-		public BooleanPropertyDescriptor Name<TDocument>(Expression<Func<TDocument, object>> name)
-		{
-			NameValue = name;
-			return Self;
-		}
-
 		public BooleanPropertyDescriptor NullValue(bool? nullValue = true)
 		{
 			NullValueValue = nullValue;
@@ -561,12 +521,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (NameValue is not null)
-			{
-				writer.WritePropertyName("name");
-				JsonSerializer.Serialize(writer, NameValue, options);
 			}
 
 			if (NullValueValue.HasValue)

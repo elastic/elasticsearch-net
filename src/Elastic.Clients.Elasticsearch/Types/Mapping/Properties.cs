@@ -29,9 +29,9 @@ internal interface IPropertyDescriptor
 	public PropertyName Name { get; }
 }
 
-public partial class BooleanPropertyDescriptor<TDocument> : IBuildable<BooleanProperty>, IPropertyDescriptor
+public partial class BooleanPropertyDescriptor<TDocument> : IBuildable<BooleanProperty>//, IPropertyDescriptor
 {
-	PropertyName IPropertyDescriptor.Name => NameValue;
+	//PropertyName IPropertyDescriptor.Name => NameValue;
 
 	BooleanProperty IBuildable<BooleanProperty>.Build() =>
 		new()
@@ -61,7 +61,7 @@ public partial class PropertiesDescriptor<T>
 
 	public PropertiesDescriptor(Properties properties) : base(properties ?? new Properties<T>()) { }
 
-	public PropertiesDescriptor<T> Boolean(Action<BooleanPropertyDescriptor<T>> selector) => SetVariant<BooleanPropertyDescriptor<T>, BooleanProperty>(selector);
+	//public PropertiesDescriptor<T> Boolean(Action<BooleanPropertyDescriptor<T>> selector) => SetVariant<BooleanPropertyDescriptor<T>, BooleanProperty>(selector);
 
 	private PropertiesDescriptor<T> SetVariant<TDescriptor, TProperty>(Action<TDescriptor> selector)
 			where TDescriptor : Descriptor, IBuildable<TProperty>, IPropertyDescriptor, new()
