@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "byte";
 	}
 
-	public sealed partial class ByteNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<ByteNumberPropertyDescriptor<TDocument>>
+	public sealed partial class ByteNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<ByteNumberPropertyDescriptor<TDocument>>, IBuildableDescriptor<ByteNumberProperty>
 	{
 		internal ByteNumberPropertyDescriptor(Action<ByteNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ByteNumberPropertyDescriptor() : base()
@@ -79,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ByteNumberPropertyDescriptor<TDocument> Script(ScriptBase? script)
 		{
@@ -325,9 +327,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("byte");
 			writer.WriteEndObject();
 		}
+
+		ByteNumberProperty IBuildableDescriptor<ByteNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
-	public sealed partial class ByteNumberPropertyDescriptor : SerializableDescriptorBase<ByteNumberPropertyDescriptor>
+	public sealed partial class ByteNumberPropertyDescriptor : SerializableDescriptorBase<ByteNumberPropertyDescriptor>, IBuildableDescriptor<ByteNumberProperty>
 	{
 		internal ByteNumberPropertyDescriptor(Action<ByteNumberPropertyDescriptor> configure) => configure.Invoke(this);
 		public ByteNumberPropertyDescriptor() : base()
@@ -371,6 +376,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ByteNumberPropertyDescriptor Script(ScriptBase? script)
 		{
@@ -623,5 +630,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("byte");
 			writer.WriteEndObject();
 		}
+
+		ByteNumberProperty IBuildableDescriptor<ByteNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

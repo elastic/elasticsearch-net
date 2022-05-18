@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "lowercase";
 	}
 
-	public sealed partial class LowercaseNormalizerDescriptor : SerializableDescriptorBase<LowercaseNormalizerDescriptor>
+	public sealed partial class LowercaseNormalizerDescriptor : SerializableDescriptorBase<LowercaseNormalizerDescriptor>, IBuildableDescriptor<LowercaseNormalizer>
 	{
 		internal LowercaseNormalizerDescriptor(Action<LowercaseNormalizerDescriptor> configure) => configure.Invoke(this);
 		public LowercaseNormalizerDescriptor() : base()
@@ -45,5 +45,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			writer.WriteStringValue("lowercase");
 			writer.WriteEndObject();
 		}
+
+		LowercaseNormalizer IBuildableDescriptor<LowercaseNormalizer>.Build() => new()
+		{ };
 	}
 }

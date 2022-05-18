@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; set; }
 	}
 
-	public sealed partial class StopAnalyzerDescriptor : SerializableDescriptorBase<StopAnalyzerDescriptor>
+	public sealed partial class StopAnalyzerDescriptor : SerializableDescriptorBase<StopAnalyzerDescriptor>, IBuildableDescriptor<StopAnalyzer>
 	{
 		internal StopAnalyzerDescriptor(Action<StopAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public StopAnalyzerDescriptor() : base()
@@ -98,5 +98,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 			writer.WriteEndObject();
 		}
+
+		StopAnalyzer IBuildableDescriptor<StopAnalyzer>.Build() => new()
+		{ Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
 	}
 }

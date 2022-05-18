@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; set; }
 	}
 
-	public sealed partial class KeywordAnalyzerDescriptor : SerializableDescriptorBase<KeywordAnalyzerDescriptor>
+	public sealed partial class KeywordAnalyzerDescriptor : SerializableDescriptorBase<KeywordAnalyzerDescriptor>, IBuildableDescriptor<KeywordAnalyzer>
 	{
 		internal KeywordAnalyzerDescriptor(Action<KeywordAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public KeywordAnalyzerDescriptor() : base()
@@ -62,5 +62,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 			writer.WriteEndObject();
 		}
+
+		KeywordAnalyzer IBuildableDescriptor<KeywordAnalyzer>.Build() => new()
+		{ Version = VersionValue };
 	}
 }

@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "match_only_text";
 	}
 
-	public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : SerializableDescriptorBase<MatchOnlyTextPropertyDescriptor<TDocument>>
+	public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : SerializableDescriptorBase<MatchOnlyTextPropertyDescriptor<TDocument>>, IBuildableDescriptor<MatchOnlyTextProperty>
 	{
 		internal MatchOnlyTextPropertyDescriptor(Action<MatchOnlyTextPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MatchOnlyTextPropertyDescriptor() : base()
@@ -55,6 +55,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -105,9 +107,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("match_only_text");
 			writer.WriteEndObject();
 		}
+
+		MatchOnlyTextProperty IBuildableDescriptor<MatchOnlyTextProperty>.Build() => new()
+		{ CopyTo = CopyToValue, Fields = FieldsValue, Meta = MetaValue };
 	}
 
-	public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescriptorBase<MatchOnlyTextPropertyDescriptor>
+	public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescriptorBase<MatchOnlyTextPropertyDescriptor>, IBuildableDescriptor<MatchOnlyTextProperty>
 	{
 		internal MatchOnlyTextPropertyDescriptor(Action<MatchOnlyTextPropertyDescriptor> configure) => configure.Invoke(this);
 		public MatchOnlyTextPropertyDescriptor() : base()
@@ -119,6 +124,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 		private Dictionary<string, string>? MetaValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public MatchOnlyTextPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -175,5 +182,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("match_only_text");
 			writer.WriteEndObject();
 		}
+
+		MatchOnlyTextProperty IBuildableDescriptor<MatchOnlyTextProperty>.Build() => new()
+		{ CopyTo = CopyToValue, Fields = FieldsValue, Meta = MetaValue };
 	}
 }

@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "completion";
 	}
 
-	public sealed partial class CompletionPropertyDescriptor<TDocument> : SerializableDescriptorBase<CompletionPropertyDescriptor<TDocument>>
+	public sealed partial class CompletionPropertyDescriptor<TDocument> : SerializableDescriptorBase<CompletionPropertyDescriptor<TDocument>>, IBuildableDescriptor<CompletionProperty>
 	{
 		internal CompletionPropertyDescriptor(Action<CompletionPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public CompletionPropertyDescriptor() : base()
@@ -99,6 +99,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public CompletionPropertyDescriptor<TDocument> Contexts(IEnumerable<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? contexts)
 		{
@@ -356,9 +358,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("completion");
 			writer.WriteEndObject();
 		}
+
+		CompletionProperty IBuildableDescriptor<CompletionProperty>.Build() => new()
+		{ Contexts = ContextsValue, Analyzer = AnalyzerValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, MaxInputLength = MaxInputLengthValue, Meta = MetaValue, PreservePositionIncrements = PreservePositionIncrementsValue, PreserveSeparators = PreserveSeparatorsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class CompletionPropertyDescriptor : SerializableDescriptorBase<CompletionPropertyDescriptor>
+	public sealed partial class CompletionPropertyDescriptor : SerializableDescriptorBase<CompletionPropertyDescriptor>, IBuildableDescriptor<CompletionProperty>
 	{
 		internal CompletionPropertyDescriptor(Action<CompletionPropertyDescriptor> configure) => configure.Invoke(this);
 		public CompletionPropertyDescriptor() : base()
@@ -402,6 +407,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public CompletionPropertyDescriptor Contexts(IEnumerable<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? contexts)
 		{
@@ -665,5 +672,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("completion");
 			writer.WriteEndObject();
 		}
+
+		CompletionProperty IBuildableDescriptor<CompletionProperty>.Build() => new()
+		{ Contexts = ContextsValue, Analyzer = AnalyzerValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, MaxInputLength = MaxInputLengthValue, Meta = MetaValue, PreservePositionIncrements = PreservePositionIncrementsValue, PreserveSeparators = PreserveSeparatorsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

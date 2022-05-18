@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "histogram";
 	}
 
-	public sealed partial class HistogramPropertyDescriptor<TDocument> : SerializableDescriptorBase<HistogramPropertyDescriptor<TDocument>>
+	public sealed partial class HistogramPropertyDescriptor<TDocument> : SerializableDescriptorBase<HistogramPropertyDescriptor<TDocument>>, IBuildableDescriptor<HistogramProperty>
 	{
 		internal HistogramPropertyDescriptor(Action<HistogramPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public HistogramPropertyDescriptor() : base()
@@ -55,6 +55,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, string>? MetaValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public HistogramPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -147,9 +149,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("histogram");
 			writer.WriteEndObject();
 		}
+
+		HistogramProperty IBuildableDescriptor<HistogramProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
 	}
 
-	public sealed partial class HistogramPropertyDescriptor : SerializableDescriptorBase<HistogramPropertyDescriptor>
+	public sealed partial class HistogramPropertyDescriptor : SerializableDescriptorBase<HistogramPropertyDescriptor>, IBuildableDescriptor<HistogramProperty>
 	{
 		internal HistogramPropertyDescriptor(Action<HistogramPropertyDescriptor> configure) => configure.Invoke(this);
 		public HistogramPropertyDescriptor() : base()
@@ -169,6 +174,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, string>? MetaValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public HistogramPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -261,5 +268,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("histogram");
 			writer.WriteEndObject();
 		}
+
+		HistogramProperty IBuildableDescriptor<HistogramProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
 	}
 }

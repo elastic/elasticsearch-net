@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type { get; set; }
 	}
 
-	public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDescriptorBase<DenseVectorIndexOptionsDescriptor>
+	public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDescriptorBase<DenseVectorIndexOptionsDescriptor>, IBuildableDescriptor<DenseVectorIndexOptions>
 	{
 		internal DenseVectorIndexOptionsDescriptor(Action<DenseVectorIndexOptionsDescriptor> configure) => configure.Invoke(this);
 		public DenseVectorIndexOptionsDescriptor() : base()
@@ -81,5 +81,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue(TypeValue);
 			writer.WriteEndObject();
 		}
+
+		DenseVectorIndexOptions IBuildableDescriptor<DenseVectorIndexOptions>.Build() => new()
+		{ EfConstruction = EfConstructionValue, m = mValue, Type = TypeValue };
 	}
 }

@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "standard";
 	}
 
-	public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptorBase<StandardAnalyzerDescriptor>
+	public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptorBase<StandardAnalyzerDescriptor>, IBuildableDescriptor<StandardAnalyzer>
 	{
 		internal StandardAnalyzerDescriptor(Action<StandardAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public StandardAnalyzerDescriptor() : base()
@@ -81,5 +81,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			writer.WriteStringValue("standard");
 			writer.WriteEndObject();
 		}
+
+		StandardAnalyzer IBuildableDescriptor<StandardAnalyzer>.Build() => new()
+		{ MaxTokenLength = MaxTokenLengthValue, Stopwords = StopwordsValue };
 	}
 }

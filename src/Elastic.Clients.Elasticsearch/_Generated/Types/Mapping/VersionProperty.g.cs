@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "version";
 	}
 
-	public sealed partial class VersionPropertyDescriptor<TDocument> : SerializableDescriptorBase<VersionPropertyDescriptor<TDocument>>
+	public sealed partial class VersionPropertyDescriptor<TDocument> : SerializableDescriptorBase<VersionPropertyDescriptor<TDocument>>, IBuildableDescriptor<VersionProperty>
 	{
 		internal VersionPropertyDescriptor(Action<VersionPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public VersionPropertyDescriptor() : base()
@@ -57,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public VersionPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -191,9 +193,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("version");
 			writer.WriteEndObject();
 		}
+
+		VersionProperty IBuildableDescriptor<VersionProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class VersionPropertyDescriptor : SerializableDescriptorBase<VersionPropertyDescriptor>
+	public sealed partial class VersionPropertyDescriptor : SerializableDescriptorBase<VersionPropertyDescriptor>, IBuildableDescriptor<VersionProperty>
 	{
 		internal VersionPropertyDescriptor(Action<VersionPropertyDescriptor> configure) => configure.Invoke(this);
 		public VersionPropertyDescriptor() : base()
@@ -219,6 +224,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public VersionPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -359,5 +366,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("version");
 			writer.WriteEndObject();
 		}
+
+		VersionProperty IBuildableDescriptor<VersionProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

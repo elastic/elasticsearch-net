@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "wildcard";
 	}
 
-	public sealed partial class WildcardPropertyDescriptor<TDocument> : SerializableDescriptorBase<WildcardPropertyDescriptor<TDocument>>
+	public sealed partial class WildcardPropertyDescriptor<TDocument> : SerializableDescriptorBase<WildcardPropertyDescriptor<TDocument>>, IBuildableDescriptor<WildcardProperty>
 	{
 		internal WildcardPropertyDescriptor(Action<WildcardPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public WildcardPropertyDescriptor() : base()
@@ -63,6 +63,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public WildcardPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -209,9 +211,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("wildcard");
 			writer.WriteEndObject();
 		}
+
+		WildcardProperty IBuildableDescriptor<WildcardProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class WildcardPropertyDescriptor : SerializableDescriptorBase<WildcardPropertyDescriptor>
+	public sealed partial class WildcardPropertyDescriptor : SerializableDescriptorBase<WildcardPropertyDescriptor>, IBuildableDescriptor<WildcardProperty>
 	{
 		internal WildcardPropertyDescriptor(Action<WildcardPropertyDescriptor> configure) => configure.Invoke(this);
 		public WildcardPropertyDescriptor() : base()
@@ -239,6 +244,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public WildcardPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -391,5 +398,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("wildcard");
 			writer.WriteEndObject();
 		}
+
+		WildcardProperty IBuildableDescriptor<WildcardProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

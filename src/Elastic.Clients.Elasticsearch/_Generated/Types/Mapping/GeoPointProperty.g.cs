@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "geo_point";
 	}
 
-	public sealed partial class GeoPointPropertyDescriptor<TDocument> : SerializableDescriptorBase<GeoPointPropertyDescriptor<TDocument>>
+	public sealed partial class GeoPointPropertyDescriptor<TDocument> : SerializableDescriptorBase<GeoPointPropertyDescriptor<TDocument>>, IBuildableDescriptor<GeoPointProperty>
 	{
 		internal GeoPointPropertyDescriptor(Action<GeoPointPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public GeoPointPropertyDescriptor() : base()
@@ -75,6 +75,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public GeoPointPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -245,9 +247,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("geo_point");
 			writer.WriteEndObject();
 		}
+
+		GeoPointProperty IBuildableDescriptor<GeoPointProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptorBase<GeoPointPropertyDescriptor>
+	public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptorBase<GeoPointPropertyDescriptor>, IBuildableDescriptor<GeoPointProperty>
 	{
 		internal GeoPointPropertyDescriptor(Action<GeoPointPropertyDescriptor> configure) => configure.Invoke(this);
 		public GeoPointPropertyDescriptor() : base()
@@ -279,6 +284,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public GeoPointPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -455,5 +462,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("geo_point");
 			writer.WriteEndObject();
 		}
+
+		GeoPointProperty IBuildableDescriptor<GeoPointProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "scaled_float";
 	}
 
-	public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<ScaledFloatNumberPropertyDescriptor<TDocument>>
+	public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<ScaledFloatNumberPropertyDescriptor<TDocument>>, IBuildableDescriptor<ScaledFloatNumberProperty>
 	{
 		internal ScaledFloatNumberPropertyDescriptor(Action<ScaledFloatNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ScaledFloatNumberPropertyDescriptor() : base()
@@ -81,6 +81,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ScaledFloatNumberPropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 		{
@@ -287,9 +289,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("scaled_float");
 			writer.WriteEndObject();
 		}
+
+		ScaledFloatNumberProperty IBuildableDescriptor<ScaledFloatNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, ScalingFactor = ScalingFactorValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
-	public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDescriptorBase<ScaledFloatNumberPropertyDescriptor>
+	public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDescriptorBase<ScaledFloatNumberPropertyDescriptor>, IBuildableDescriptor<ScaledFloatNumberProperty>
 	{
 		internal ScaledFloatNumberPropertyDescriptor(Action<ScaledFloatNumberPropertyDescriptor> configure) => configure.Invoke(this);
 		public ScaledFloatNumberPropertyDescriptor() : base()
@@ -327,6 +332,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ScaledFloatNumberPropertyDescriptor Coerce(bool? coerce = true)
 		{
@@ -539,5 +546,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("scaled_float");
 			writer.WriteEndObject();
 		}
+
+		ScaledFloatNumberProperty IBuildableDescriptor<ScaledFloatNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, ScalingFactor = ScalingFactorValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

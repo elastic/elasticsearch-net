@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "flattened";
 	}
 
-	public sealed partial class FlattenedPropertyDescriptor<TDocument> : SerializableDescriptorBase<FlattenedPropertyDescriptor<TDocument>>
+	public sealed partial class FlattenedPropertyDescriptor<TDocument> : SerializableDescriptorBase<FlattenedPropertyDescriptor<TDocument>>, IBuildableDescriptor<FlattenedProperty>
 	{
 		internal FlattenedPropertyDescriptor(Action<FlattenedPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FlattenedPropertyDescriptor() : base()
@@ -103,6 +103,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? SplitQueriesOnWhitespaceValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public FlattenedPropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -291,9 +293,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("flattened");
 			writer.WriteEndObject();
 		}
+
+		FlattenedProperty IBuildableDescriptor<FlattenedProperty>.Build() => new()
+		{ Boost = BoostValue, DepthLimit = DepthLimitValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue };
 	}
 
-	public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptorBase<FlattenedPropertyDescriptor>
+	public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptorBase<FlattenedPropertyDescriptor>, IBuildableDescriptor<FlattenedProperty>
 	{
 		internal FlattenedPropertyDescriptor(Action<FlattenedPropertyDescriptor> configure) => configure.Invoke(this);
 		public FlattenedPropertyDescriptor() : base()
@@ -329,6 +334,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? SplitQueriesOnWhitespaceValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public FlattenedPropertyDescriptor Boost(double? boost)
 		{
@@ -517,5 +524,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("flattened");
 			writer.WriteEndObject();
 		}
+
+		FlattenedProperty IBuildableDescriptor<FlattenedProperty>.Build() => new()
+		{ Boost = BoostValue, DepthLimit = DepthLimitValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue };
 	}
 }

@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "ip";
 	}
 
-	public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescriptorBase<IpPropertyDescriptor<TDocument>>
+	public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescriptorBase<IpPropertyDescriptor<TDocument>>, IBuildableDescriptor<IpProperty>
 	{
 		internal IpPropertyDescriptor(Action<IpPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IpPropertyDescriptor() : base()
@@ -81,6 +81,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public IpPropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -263,9 +265,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("ip");
 			writer.WriteEndObject();
 		}
+
+		IpProperty IBuildableDescriptor<IpProperty>.Build() => new()
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class IpPropertyDescriptor : SerializableDescriptorBase<IpPropertyDescriptor>
+	public sealed partial class IpPropertyDescriptor : SerializableDescriptorBase<IpPropertyDescriptor>, IBuildableDescriptor<IpProperty>
 	{
 		internal IpPropertyDescriptor(Action<IpPropertyDescriptor> configure) => configure.Invoke(this);
 		public IpPropertyDescriptor() : base()
@@ -299,6 +304,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public IpPropertyDescriptor Boost(double? boost)
 		{
@@ -487,5 +494,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("ip");
 			writer.WriteEndObject();
 		}
+
+		IpProperty IBuildableDescriptor<IpProperty>.Build() => new()
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

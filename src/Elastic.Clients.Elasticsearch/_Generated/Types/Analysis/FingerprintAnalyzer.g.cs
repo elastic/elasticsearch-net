@@ -54,7 +54,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; set; }
 	}
 
-	public sealed partial class FingerprintAnalyzerDescriptor : SerializableDescriptorBase<FingerprintAnalyzerDescriptor>
+	public sealed partial class FingerprintAnalyzerDescriptor : SerializableDescriptorBase<FingerprintAnalyzerDescriptor>, IBuildableDescriptor<FingerprintAnalyzer>
 	{
 		internal FingerprintAnalyzerDescriptor(Action<FingerprintAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public FingerprintAnalyzerDescriptor() : base()
@@ -140,5 +140,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 			writer.WriteEndObject();
 		}
+
+		FingerprintAnalyzer IBuildableDescriptor<FingerprintAnalyzer>.Build() => new()
+		{ MaxOutputSize = MaxOutputSizeValue, PreserveOriginal = PreserveOriginalValue, Separator = SeparatorValue, Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
 	}
 }

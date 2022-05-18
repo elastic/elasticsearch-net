@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "geo_shape";
 	}
 
-	public sealed partial class GeoShapePropertyDescriptor<TDocument> : SerializableDescriptorBase<GeoShapePropertyDescriptor<TDocument>>
+	public sealed partial class GeoShapePropertyDescriptor<TDocument> : SerializableDescriptorBase<GeoShapePropertyDescriptor<TDocument>>, IBuildableDescriptor<GeoShapeProperty>
 	{
 		internal GeoShapePropertyDescriptor(Action<GeoShapePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public GeoShapePropertyDescriptor() : base()
@@ -87,6 +87,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? StrategyValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public GeoShapePropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 		{
@@ -281,9 +283,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("geo_shape");
 			writer.WriteEndObject();
 		}
+
+		GeoShapeProperty IBuildableDescriptor<GeoShapeProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, Strategy = StrategyValue };
 	}
 
-	public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptorBase<GeoShapePropertyDescriptor>
+	public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptorBase<GeoShapePropertyDescriptor>, IBuildableDescriptor<GeoShapeProperty>
 	{
 		internal GeoShapePropertyDescriptor(Action<GeoShapePropertyDescriptor> configure) => configure.Invoke(this);
 		public GeoShapePropertyDescriptor() : base()
@@ -319,6 +324,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? StrategyValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public GeoShapePropertyDescriptor Coerce(bool? coerce = true)
 		{
@@ -519,5 +526,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("geo_shape");
 			writer.WriteEndObject();
 		}
+
+		GeoShapeProperty IBuildableDescriptor<GeoShapeProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, Strategy = StrategyValue };
 	}
 }

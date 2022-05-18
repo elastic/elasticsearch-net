@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "double";
 	}
 
-	public sealed partial class DoubleNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<DoubleNumberPropertyDescriptor<TDocument>>
+	public sealed partial class DoubleNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<DoubleNumberPropertyDescriptor<TDocument>>, IBuildableDescriptor<DoubleNumberProperty>
 	{
 		internal DoubleNumberPropertyDescriptor(Action<DoubleNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DoubleNumberPropertyDescriptor() : base()
@@ -79,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public DoubleNumberPropertyDescriptor<TDocument> Script(ScriptBase? script)
 		{
@@ -325,9 +327,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("double");
 			writer.WriteEndObject();
 		}
+
+		DoubleNumberProperty IBuildableDescriptor<DoubleNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
-	public sealed partial class DoubleNumberPropertyDescriptor : SerializableDescriptorBase<DoubleNumberPropertyDescriptor>
+	public sealed partial class DoubleNumberPropertyDescriptor : SerializableDescriptorBase<DoubleNumberPropertyDescriptor>, IBuildableDescriptor<DoubleNumberProperty>
 	{
 		internal DoubleNumberPropertyDescriptor(Action<DoubleNumberPropertyDescriptor> configure) => configure.Invoke(this);
 		public DoubleNumberPropertyDescriptor() : base()
@@ -371,6 +376,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public DoubleNumberPropertyDescriptor Script(ScriptBase? script)
 		{
@@ -623,5 +630,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("double");
 			writer.WriteEndObject();
 		}
+
+		DoubleNumberProperty IBuildableDescriptor<DoubleNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

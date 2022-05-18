@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "aggregate_metric_double";
 	}
 
-	public sealed partial class AggregateMetricDoublePropertyDescriptor<TDocument> : SerializableDescriptorBase<AggregateMetricDoublePropertyDescriptor<TDocument>>
+	public sealed partial class AggregateMetricDoublePropertyDescriptor<TDocument> : SerializableDescriptorBase<AggregateMetricDoublePropertyDescriptor<TDocument>>, IBuildableDescriptor<AggregateMetricDoubleProperty>
 	{
 		internal AggregateMetricDoublePropertyDescriptor(Action<AggregateMetricDoublePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public AggregateMetricDoublePropertyDescriptor() : base()
@@ -61,6 +61,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private IEnumerable<string> MetricsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public AggregateMetricDoublePropertyDescriptor<TDocument> DefaultMetric(string defaultMetric)
 		{
@@ -157,9 +159,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("aggregate_metric_double");
 			writer.WriteEndObject();
 		}
+
+		AggregateMetricDoubleProperty IBuildableDescriptor<AggregateMetricDoubleProperty>.Build() => new()
+		{ DefaultMetric = DefaultMetricValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Metrics = MetricsValue, Properties = PropertiesValue };
 	}
 
-	public sealed partial class AggregateMetricDoublePropertyDescriptor : SerializableDescriptorBase<AggregateMetricDoublePropertyDescriptor>
+	public sealed partial class AggregateMetricDoublePropertyDescriptor : SerializableDescriptorBase<AggregateMetricDoublePropertyDescriptor>, IBuildableDescriptor<AggregateMetricDoubleProperty>
 	{
 		internal AggregateMetricDoublePropertyDescriptor(Action<AggregateMetricDoublePropertyDescriptor> configure) => configure.Invoke(this);
 		public AggregateMetricDoublePropertyDescriptor() : base()
@@ -181,6 +186,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private IEnumerable<string> MetricsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public AggregateMetricDoublePropertyDescriptor DefaultMetric(string defaultMetric)
 		{
@@ -277,5 +284,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("aggregate_metric_double");
 			writer.WriteEndObject();
 		}
+
+		AggregateMetricDoubleProperty IBuildableDescriptor<AggregateMetricDoubleProperty>.Build() => new()
+		{ DefaultMetric = DefaultMetricValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Metrics = MetricsValue, Properties = PropertiesValue };
 	}
 }

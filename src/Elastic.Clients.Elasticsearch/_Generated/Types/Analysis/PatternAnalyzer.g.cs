@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; set; }
 	}
 
-	public sealed partial class PatternAnalyzerDescriptor : SerializableDescriptorBase<PatternAnalyzerDescriptor>
+	public sealed partial class PatternAnalyzerDescriptor : SerializableDescriptorBase<PatternAnalyzerDescriptor>, IBuildableDescriptor<PatternAnalyzer>
 	{
 		internal PatternAnalyzerDescriptor(Action<PatternAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public PatternAnalyzerDescriptor() : base()
@@ -130,5 +130,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 			writer.WriteEndObject();
 		}
+
+		PatternAnalyzer IBuildableDescriptor<PatternAnalyzer>.Build() => new()
+		{ Flags = FlagsValue, Lowercase = LowercaseValue, Pattern = PatternValue, Stopwords = StopwordsValue, Version = VersionValue };
 	}
 }

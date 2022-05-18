@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "rank_features";
 	}
 
-	public sealed partial class RankFeaturesPropertyDescriptor<TDocument> : SerializableDescriptorBase<RankFeaturesPropertyDescriptor<TDocument>>
+	public sealed partial class RankFeaturesPropertyDescriptor<TDocument> : SerializableDescriptorBase<RankFeaturesPropertyDescriptor<TDocument>>, IBuildableDescriptor<RankFeaturesProperty>
 	{
 		internal RankFeaturesPropertyDescriptor(Action<RankFeaturesPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RankFeaturesPropertyDescriptor() : base()
@@ -49,6 +49,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, string>? MetaValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public RankFeaturesPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -129,9 +131,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("rank_features");
 			writer.WriteEndObject();
 		}
+
+		RankFeaturesProperty IBuildableDescriptor<RankFeaturesProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
 	}
 
-	public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescriptorBase<RankFeaturesPropertyDescriptor>
+	public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescriptorBase<RankFeaturesPropertyDescriptor>, IBuildableDescriptor<RankFeaturesProperty>
 	{
 		internal RankFeaturesPropertyDescriptor(Action<RankFeaturesPropertyDescriptor> configure) => configure.Invoke(this);
 		public RankFeaturesPropertyDescriptor() : base()
@@ -149,6 +154,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, string>? MetaValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public RankFeaturesPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -229,5 +236,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("rank_features");
 			writer.WriteEndObject();
 		}
+
+		RankFeaturesProperty IBuildableDescriptor<RankFeaturesProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
 	}
 }

@@ -24,65 +24,95 @@ public partial class Properties
 	}
 }
 
-internal interface IPropertyDescriptor
-{
-	public PropertyName Name { get; }
-}
-
-public partial class BooleanPropertyDescriptor<TDocument> : IBuildable<BooleanProperty>//, IPropertyDescriptor
-{
-	//PropertyName IPropertyDescriptor.Name => NameValue;
-
-	BooleanProperty IBuildable<BooleanProperty>.Build() =>
-		new()
-		{
-			Boost = BoostValue,
-			CopyTo = CopyToValue,
-			DocValues = DocValuesValue,
-			NullValue = NullValueValue,
-			Store = StoreValue,
-		};
-}
-
-internal interface IBuildable<T>
-{
-	T Build();
-}
-
 public partial class Properties<T> : Properties
 {
 	public void Add<TValue>(Expression<Func<T, TValue>> name, IProperty property) => BackingDictionary.Add(name, property);
 }
 
-public partial class PropertiesDescriptor<T>
-		: IsADictionaryDescriptorBase<PropertiesDescriptor<T>, Properties, PropertyName, IProperty>
+
+// TODO - BUG
+// BuildableDescriptor is not marked correctly higher up the chain (or we fail to generate expected descriptor), e.g. BooleanPropertyDescriptor and NumericFielddata
+
+// TODO
+// Generate after Buildable implementation
+public partial class PropertiesDescriptor<TDocument>
+		: IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
 {
-	public PropertiesDescriptor() : base(new Properties<T>()) { }
+	public PropertiesDescriptor() : base(new Properties<TDocument>()) { }
 
-	public PropertiesDescriptor(Properties properties) : base(properties ?? new Properties<T>()) { }
+	public PropertiesDescriptor(Properties properties) : base(properties ?? new Properties<TDocument>()) { }
 
+	// Do we continue to special case properties to support the fluent Name on the property descriptor? If so, we generate this
 	//public PropertiesDescriptor<T> Boolean(Action<BooleanPropertyDescriptor<T>> selector) => SetVariant<BooleanPropertyDescriptor<T>, BooleanProperty>(selector);
 
-	private PropertiesDescriptor<T> SetVariant<TDescriptor, TProperty>(Action<TDescriptor> selector)
-			where TDescriptor : Descriptor, IBuildable<TProperty>, IPropertyDescriptor, new()
-			where TProperty : IProperty
-	{
-		var descriptor = new TDescriptor();
-		selector?.Invoke(descriptor);
-		return SetVariant(descriptor.Name, descriptor.Build());
-	}
+	public PropertiesDescriptor<TDocument> Boolean(PropertyName fieldName) =>
+		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
 
-	private PropertiesDescriptor<T> SetVariant(PropertyName name, IProperty type)
+	public PropertiesDescriptor<TDocument> Boolean(PropertyName fieldName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
+		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, configure);
+
+	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> fieldName) =>
+		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
+
+	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> fieldName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
+		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, configure);
+
+	public PropertiesDescriptor<TDocument> Boolean<TValue>(Expression<Func<TDocument, TValue>> fieldName) =>
+		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
+
+	public PropertiesDescriptor<TDocument> Boolean<TValue>(Expression<Func<TDocument, TValue>> fieldName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
+		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, configure);
+
+	// These might be manually added to a partial class which seems reasonable.
+
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int>> fieldName) =>
+		AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(fieldName, null);
+
+	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int>> fieldName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure) =>
+		AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(fieldName, configure);
+
+	//private PropertiesDescriptor<TDocument> SetVariant<TDescriptor, TProperty>(Action<TDescriptor> selector)
+	//		where TDescriptor : Descriptor, IBuildableDescriptor<TProperty>, IPropertyDescriptor, new()
+	//		where TProperty : IProperty
+	//{
+	//	var descriptor = new TDescriptor();
+	//	selector?.Invoke(descriptor);
+	//	return SetVariant(descriptor.Name, descriptor.Build());
+	//}
+
+	//private PropertiesDescriptor<TDocument> SetVariant<TDescriptor, TProperty>(PropertyName name, Action<TDescriptor> selector)
+	//		where TDescriptor : Descriptor, IBuildableDescriptor<TProperty>, new()
+	//		where TProperty : IProperty
+	//{
+	//	var descriptor = new TDescriptor();
+	//	selector?.Invoke(descriptor);
+	//	return SetVariant(name, descriptor.Build());
+	//}
+
+	//private PropertiesDescriptor<TDocument> SetVariant(PropertyName name, IProperty type)
+	//{
+	//	type.ThrowIfNull(nameof(type));
+
+	//	if (name.IsConditionless())
+	//		throw new ArgumentException($"Could not get property name for {type.GetType().Name} mapping.");
+
+	//	return Assign(name, type);
+	//}
+
+	protected override PropertiesDescriptor<TDocument> AssignVariant(PropertyName name, IProperty type)
 	{
 		type.ThrowIfNull(nameof(type));
 
 		if (name.IsConditionless())
 			throw new ArgumentException($"Could not get property name for {type.GetType().Name} mapping.");
 
-		return Assign((name, type), (a, v) => a[v.name] = v.type);
+		return Assign(name, type);
 	}
 }
 
+// TODO
+// After we are generating the container descriptor e.g. PropertiesDescriptor
+// Code generator should generate these for any InternallyTaggedUnions that are IsADictionary types
 public partial class TypeMappingDescriptor
 {
 	public TypeMappingDescriptor Properties<T>(Action<PropertiesDescriptor<T>>? properties)
@@ -92,11 +122,6 @@ public partial class TypeMappingDescriptor
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
-}
-
-public partial interface IProperty
-{
-	//public PropertyName Name { get; }
 }
 
 internal static class PropertyNameExtensions

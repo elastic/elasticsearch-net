@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "double_range";
 	}
 
-	public sealed partial class DoubleRangePropertyDescriptor<TDocument> : SerializableDescriptorBase<DoubleRangePropertyDescriptor<TDocument>>
+	public sealed partial class DoubleRangePropertyDescriptor<TDocument> : SerializableDescriptorBase<DoubleRangePropertyDescriptor<TDocument>>, IBuildableDescriptor<DoubleRangeProperty>
 	{
 		internal DoubleRangePropertyDescriptor(Action<DoubleRangePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DoubleRangePropertyDescriptor() : base()
@@ -63,6 +63,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public DoubleRangePropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -233,9 +235,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("double_range");
 			writer.WriteEndObject();
 		}
+
+		DoubleRangeProperty IBuildableDescriptor<DoubleRangeProperty>.Build() => new()
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class DoubleRangePropertyDescriptor : SerializableDescriptorBase<DoubleRangePropertyDescriptor>
+	public sealed partial class DoubleRangePropertyDescriptor : SerializableDescriptorBase<DoubleRangePropertyDescriptor>, IBuildableDescriptor<DoubleRangeProperty>
 	{
 		internal DoubleRangePropertyDescriptor(Action<DoubleRangePropertyDescriptor> configure) => configure.Invoke(this);
 		public DoubleRangePropertyDescriptor() : base()
@@ -267,6 +272,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public DoubleRangePropertyDescriptor Boost(double? boost)
 		{
@@ -443,5 +450,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("double_range");
 			writer.WriteEndObject();
 		}
+
+		DoubleRangeProperty IBuildableDescriptor<DoubleRangeProperty>.Build() => new()
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

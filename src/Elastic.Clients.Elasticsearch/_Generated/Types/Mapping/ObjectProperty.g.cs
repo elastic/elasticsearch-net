@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "object";
 	}
 
-	public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDescriptorBase<ObjectPropertyDescriptor<TDocument>>
+	public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDescriptorBase<ObjectPropertyDescriptor<TDocument>>, IBuildableDescriptor<ObjectProperty>
 	{
 		internal ObjectPropertyDescriptor(Action<ObjectPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ObjectPropertyDescriptor() : base()
@@ -61,6 +61,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ObjectPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -195,9 +197,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("object");
 			writer.WriteEndObject();
 		}
+
+		ObjectProperty IBuildableDescriptor<ObjectProperty>.Build() => new()
+		{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class ObjectPropertyDescriptor : SerializableDescriptorBase<ObjectPropertyDescriptor>
+	public sealed partial class ObjectPropertyDescriptor : SerializableDescriptorBase<ObjectPropertyDescriptor>, IBuildableDescriptor<ObjectProperty>
 	{
 		internal ObjectPropertyDescriptor(Action<ObjectPropertyDescriptor> configure) => configure.Invoke(this);
 		public ObjectPropertyDescriptor() : base()
@@ -223,6 +228,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ObjectPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -363,5 +370,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("object");
 			writer.WriteEndObject();
 		}
+
+		ObjectProperty IBuildableDescriptor<ObjectProperty>.Build() => new()
+		{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

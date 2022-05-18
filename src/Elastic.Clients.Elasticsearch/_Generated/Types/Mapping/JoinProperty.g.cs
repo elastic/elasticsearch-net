@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "join";
 	}
 
-	public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDescriptorBase<JoinPropertyDescriptor<TDocument>>
+	public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDescriptorBase<JoinPropertyDescriptor<TDocument>>, IBuildableDescriptor<JoinProperty>
 	{
 		internal JoinPropertyDescriptor(Action<JoinPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public JoinPropertyDescriptor() : base()
@@ -55,6 +55,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private Dictionary<string, IEnumerable<string>>? RelationsValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public JoinPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -147,9 +149,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("join");
 			writer.WriteEndObject();
 		}
+
+		JoinProperty IBuildableDescriptor<JoinProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
 	}
 
-	public sealed partial class JoinPropertyDescriptor : SerializableDescriptorBase<JoinPropertyDescriptor>
+	public sealed partial class JoinPropertyDescriptor : SerializableDescriptorBase<JoinPropertyDescriptor>, IBuildableDescriptor<JoinProperty>
 	{
 		internal JoinPropertyDescriptor(Action<JoinPropertyDescriptor> configure) => configure.Invoke(this);
 		public JoinPropertyDescriptor() : base()
@@ -169,6 +174,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private Dictionary<string, IEnumerable<string>>? RelationsValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public JoinPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -261,5 +268,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("join");
 			writer.WriteEndObject();
 		}
+
+		JoinProperty IBuildableDescriptor<JoinProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
 	}
 }

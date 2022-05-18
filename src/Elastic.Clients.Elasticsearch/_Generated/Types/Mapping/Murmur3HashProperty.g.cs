@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "murmur3";
 	}
 
-	public sealed partial class Murmur3HashPropertyDescriptor<TDocument> : SerializableDescriptorBase<Murmur3HashPropertyDescriptor<TDocument>>
+	public sealed partial class Murmur3HashPropertyDescriptor<TDocument> : SerializableDescriptorBase<Murmur3HashPropertyDescriptor<TDocument>>, IBuildableDescriptor<Murmur3HashProperty>
 	{
 		internal Murmur3HashPropertyDescriptor(Action<Murmur3HashPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public Murmur3HashPropertyDescriptor() : base()
@@ -57,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public Murmur3HashPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -191,9 +193,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("murmur3");
 			writer.WriteEndObject();
 		}
+
+		Murmur3HashProperty IBuildableDescriptor<Murmur3HashProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class Murmur3HashPropertyDescriptor : SerializableDescriptorBase<Murmur3HashPropertyDescriptor>
+	public sealed partial class Murmur3HashPropertyDescriptor : SerializableDescriptorBase<Murmur3HashPropertyDescriptor>, IBuildableDescriptor<Murmur3HashProperty>
 	{
 		internal Murmur3HashPropertyDescriptor(Action<Murmur3HashPropertyDescriptor> configure) => configure.Invoke(this);
 		public Murmur3HashPropertyDescriptor() : base()
@@ -219,6 +224,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public Murmur3HashPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -359,5 +366,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("murmur3");
 			writer.WriteEndObject();
 		}
+
+		Murmur3HashProperty IBuildableDescriptor<Murmur3HashProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

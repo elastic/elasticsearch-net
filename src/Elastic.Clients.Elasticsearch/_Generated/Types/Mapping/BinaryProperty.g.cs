@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "binary";
 	}
 
-	public sealed partial class BinaryPropertyDescriptor<TDocument> : SerializableDescriptorBase<BinaryPropertyDescriptor<TDocument>>
+	public sealed partial class BinaryPropertyDescriptor<TDocument> : SerializableDescriptorBase<BinaryPropertyDescriptor<TDocument>>, IBuildableDescriptor<BinaryProperty>
 	{
 		internal BinaryPropertyDescriptor(Action<BinaryPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public BinaryPropertyDescriptor() : base()
@@ -57,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public BinaryPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -191,9 +193,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("binary");
 			writer.WriteEndObject();
 		}
+
+		BinaryProperty IBuildableDescriptor<BinaryProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class BinaryPropertyDescriptor : SerializableDescriptorBase<BinaryPropertyDescriptor>
+	public sealed partial class BinaryPropertyDescriptor : SerializableDescriptorBase<BinaryPropertyDescriptor>, IBuildableDescriptor<BinaryProperty>
 	{
 		internal BinaryPropertyDescriptor(Action<BinaryPropertyDescriptor> configure) => configure.Invoke(this);
 		public BinaryPropertyDescriptor() : base()
@@ -219,6 +224,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public BinaryPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -359,5 +366,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("binary");
 			writer.WriteEndObject();
 		}
+
+		BinaryProperty IBuildableDescriptor<BinaryProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "dense_vector";
 	}
 
-	public sealed partial class DenseVectorPropertyDescriptor<TDocument> : SerializableDescriptorBase<DenseVectorPropertyDescriptor<TDocument>>
+	public sealed partial class DenseVectorPropertyDescriptor<TDocument> : SerializableDescriptorBase<DenseVectorPropertyDescriptor<TDocument>>, IBuildableDescriptor<DenseVectorProperty>
 	{
 		internal DenseVectorPropertyDescriptor(Action<DenseVectorPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DenseVectorPropertyDescriptor() : base()
@@ -77,6 +77,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private string? SimilarityValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public DenseVectorPropertyDescriptor<TDocument> Dims(int dims)
 		{
@@ -229,9 +231,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("dense_vector");
 			writer.WriteEndObject();
 		}
+
+		DenseVectorProperty IBuildableDescriptor<DenseVectorProperty>.Build() => new()
+		{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
 	}
 
-	public sealed partial class DenseVectorPropertyDescriptor : SerializableDescriptorBase<DenseVectorPropertyDescriptor>
+	public sealed partial class DenseVectorPropertyDescriptor : SerializableDescriptorBase<DenseVectorPropertyDescriptor>, IBuildableDescriptor<DenseVectorProperty>
 	{
 		internal DenseVectorPropertyDescriptor(Action<DenseVectorPropertyDescriptor> configure) => configure.Invoke(this);
 		public DenseVectorPropertyDescriptor() : base()
@@ -261,6 +266,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private string? SimilarityValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public DenseVectorPropertyDescriptor Dims(int dims)
 		{
@@ -413,5 +420,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("dense_vector");
 			writer.WriteEndObject();
 		}
+
+		DenseVectorProperty IBuildableDescriptor<DenseVectorProperty>.Build() => new()
+		{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
 	}
 }

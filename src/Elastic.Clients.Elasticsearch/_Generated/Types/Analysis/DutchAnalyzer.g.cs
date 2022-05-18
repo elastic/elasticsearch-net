@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "dutch";
 	}
 
-	public sealed partial class DutchAnalyzerDescriptor : SerializableDescriptorBase<DutchAnalyzerDescriptor>
+	public sealed partial class DutchAnalyzerDescriptor : SerializableDescriptorBase<DutchAnalyzerDescriptor>, IBuildableDescriptor<DutchAnalyzer>
 	{
 		internal DutchAnalyzerDescriptor(Action<DutchAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public DutchAnalyzerDescriptor() : base()
@@ -63,5 +63,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			writer.WriteStringValue("dutch");
 			writer.WriteEndObject();
 		}
+
+		DutchAnalyzer IBuildableDescriptor<DutchAnalyzer>.Build() => new()
+		{ Stopwords = StopwordsValue };
 	}
 }

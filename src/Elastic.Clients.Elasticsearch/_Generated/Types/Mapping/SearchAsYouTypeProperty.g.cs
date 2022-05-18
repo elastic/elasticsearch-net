@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "search_as_you_type";
 	}
 
-	public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : SerializableDescriptorBase<SearchAsYouTypePropertyDescriptor<TDocument>>
+	public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : SerializableDescriptorBase<SearchAsYouTypePropertyDescriptor<TDocument>>, IBuildableDescriptor<SearchAsYouTypeProperty>
 	{
 		internal SearchAsYouTypePropertyDescriptor(Action<SearchAsYouTypePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SearchAsYouTypePropertyDescriptor() : base()
@@ -103,6 +103,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public SearchAsYouTypePropertyDescriptor<TDocument> Analyzer(string? analyzer)
 		{
@@ -321,9 +323,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("search_as_you_type");
 			writer.WriteEndObject();
 		}
+
+		SearchAsYouTypeProperty IBuildableDescriptor<SearchAsYouTypeProperty>.Build() => new()
+		{ Analyzer = AnalyzerValue, CopyTo = CopyToValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, MaxShingleSize = MaxShingleSizeValue, Meta = MetaValue, Norms = NormsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
 	}
 
-	public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDescriptorBase<SearchAsYouTypePropertyDescriptor>
+	public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDescriptorBase<SearchAsYouTypePropertyDescriptor>, IBuildableDescriptor<SearchAsYouTypeProperty>
 	{
 		internal SearchAsYouTypePropertyDescriptor(Action<SearchAsYouTypePropertyDescriptor> configure) => configure.Invoke(this);
 		public SearchAsYouTypePropertyDescriptor() : base()
@@ -363,6 +368,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public SearchAsYouTypePropertyDescriptor Analyzer(string? analyzer)
 		{
@@ -587,5 +594,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("search_as_you_type");
 			writer.WriteEndObject();
 		}
+
+		SearchAsYouTypeProperty IBuildableDescriptor<SearchAsYouTypeProperty>.Build() => new()
+		{ Analyzer = AnalyzerValue, CopyTo = CopyToValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, MaxShingleSize = MaxShingleSizeValue, Meta = MetaValue, Norms = NormsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
 	}
 }

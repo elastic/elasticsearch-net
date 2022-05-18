@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "ip_range";
 	}
 
-	public sealed partial class IpRangePropertyDescriptor<TDocument> : SerializableDescriptorBase<IpRangePropertyDescriptor<TDocument>>
+	public sealed partial class IpRangePropertyDescriptor<TDocument> : SerializableDescriptorBase<IpRangePropertyDescriptor<TDocument>>, IBuildableDescriptor<IpRangeProperty>
 	{
 		internal IpRangePropertyDescriptor(Action<IpRangePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IpRangePropertyDescriptor() : base()
@@ -63,6 +63,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public IpRangePropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -233,9 +235,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("ip_range");
 			writer.WriteEndObject();
 		}
+
+		IpRangeProperty IBuildableDescriptor<IpRangeProperty>.Build() => new()
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class IpRangePropertyDescriptor : SerializableDescriptorBase<IpRangePropertyDescriptor>
+	public sealed partial class IpRangePropertyDescriptor : SerializableDescriptorBase<IpRangePropertyDescriptor>, IBuildableDescriptor<IpRangeProperty>
 	{
 		internal IpRangePropertyDescriptor(Action<IpRangePropertyDescriptor> configure) => configure.Invoke(this);
 		public IpRangePropertyDescriptor() : base()
@@ -267,6 +272,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public IpRangePropertyDescriptor Boost(double? boost)
 		{
@@ -443,5 +450,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("ip_range");
 			writer.WriteEndObject();
 		}
+
+		IpRangeProperty IBuildableDescriptor<IpRangeProperty>.Build() => new()
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

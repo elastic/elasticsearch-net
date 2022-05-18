@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "point";
 	}
 
-	public sealed partial class PointPropertyDescriptor<TDocument> : SerializableDescriptorBase<PointPropertyDescriptor<TDocument>>
+	public sealed partial class PointPropertyDescriptor<TDocument> : SerializableDescriptorBase<PointPropertyDescriptor<TDocument>>, IBuildableDescriptor<PointProperty>
 	{
 		internal PointPropertyDescriptor(Action<PointPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public PointPropertyDescriptor() : base()
@@ -75,6 +75,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public PointPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -245,9 +247,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("point");
 			writer.WriteEndObject();
 		}
+
+		PointProperty IBuildableDescriptor<PointProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class PointPropertyDescriptor : SerializableDescriptorBase<PointPropertyDescriptor>
+	public sealed partial class PointPropertyDescriptor : SerializableDescriptorBase<PointPropertyDescriptor>, IBuildableDescriptor<PointProperty>
 	{
 		internal PointPropertyDescriptor(Action<PointPropertyDescriptor> configure) => configure.Invoke(this);
 		public PointPropertyDescriptor() : base()
@@ -279,6 +284,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public PointPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -455,5 +462,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("point");
 			writer.WriteEndObject();
 		}
+
+		PointProperty IBuildableDescriptor<PointProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

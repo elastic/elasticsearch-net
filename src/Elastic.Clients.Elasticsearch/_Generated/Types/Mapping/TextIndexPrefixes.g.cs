@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public int MinChars { get; set; }
 	}
 
-	public sealed partial class TextIndexPrefixesDescriptor : SerializableDescriptorBase<TextIndexPrefixesDescriptor>
+	public sealed partial class TextIndexPrefixesDescriptor : SerializableDescriptorBase<TextIndexPrefixesDescriptor>, IBuildableDescriptor<TextIndexPrefixes>
 	{
 		internal TextIndexPrefixesDescriptor(Action<TextIndexPrefixesDescriptor> configure) => configure.Invoke(this);
 		public TextIndexPrefixesDescriptor() : base()
@@ -67,5 +67,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteNumberValue(MinCharsValue);
 			writer.WriteEndObject();
 		}
+
+		TextIndexPrefixes IBuildableDescriptor<TextIndexPrefixes>.Build() => new()
+		{ MaxChars = MaxCharsValue, MinChars = MinCharsValue };
 	}
 }

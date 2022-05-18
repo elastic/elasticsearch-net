@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "text";
 	}
 
-	public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDescriptorBase<TextPropertyDescriptor<TDocument>>
+	public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDescriptorBase<TextPropertyDescriptor<TDocument>>, IBuildableDescriptor<TextProperty>
 	{
 		internal TextPropertyDescriptor(Action<TextPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TextPropertyDescriptor() : base()
@@ -147,6 +147,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public TextPropertyDescriptor<TDocument> Analyzer(string? analyzer)
 		{
@@ -493,9 +495,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("text");
 			writer.WriteEndObject();
 		}
+
+		TextProperty IBuildableDescriptor<TextProperty>.Build() => new()
+		{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fielddata = FielddataValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Norms = NormsValue, PositionIncrementGap = PositionIncrementGapValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
 	}
 
-	public sealed partial class TextPropertyDescriptor : SerializableDescriptorBase<TextPropertyDescriptor>
+	public sealed partial class TextPropertyDescriptor : SerializableDescriptorBase<TextPropertyDescriptor>, IBuildableDescriptor<TextProperty>
 	{
 		internal TextPropertyDescriptor(Action<TextPropertyDescriptor> configure) => configure.Invoke(this);
 		public TextPropertyDescriptor() : base()
@@ -555,6 +560,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public TextPropertyDescriptor Analyzer(string? analyzer)
 		{
@@ -907,5 +914,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("text");
 			writer.WriteEndObject();
 		}
+
+		TextProperty IBuildableDescriptor<TextProperty>.Build() => new()
+		{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fielddata = FielddataValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Norms = NormsValue, PositionIncrementGap = PositionIncrementGapValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
 	}
 }

@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "long_range";
 	}
 
-	public sealed partial class LongRangePropertyDescriptor<TDocument> : SerializableDescriptorBase<LongRangePropertyDescriptor<TDocument>>
+	public sealed partial class LongRangePropertyDescriptor<TDocument> : SerializableDescriptorBase<LongRangePropertyDescriptor<TDocument>>, IBuildableDescriptor<LongRangeProperty>
 	{
 		internal LongRangePropertyDescriptor(Action<LongRangePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public LongRangePropertyDescriptor() : base()
@@ -63,6 +63,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public LongRangePropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -233,9 +235,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("long_range");
 			writer.WriteEndObject();
 		}
+
+		LongRangeProperty IBuildableDescriptor<LongRangeProperty>.Build() => new()
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class LongRangePropertyDescriptor : SerializableDescriptorBase<LongRangePropertyDescriptor>
+	public sealed partial class LongRangePropertyDescriptor : SerializableDescriptorBase<LongRangePropertyDescriptor>, IBuildableDescriptor<LongRangeProperty>
 	{
 		internal LongRangePropertyDescriptor(Action<LongRangePropertyDescriptor> configure) => configure.Invoke(this);
 		public LongRangePropertyDescriptor() : base()
@@ -267,6 +272,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public LongRangePropertyDescriptor Boost(double? boost)
 		{
@@ -443,5 +450,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("long_range");
 			writer.WriteEndObject();
 		}
+
+		LongRangeProperty IBuildableDescriptor<LongRangeProperty>.Build() => new()
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

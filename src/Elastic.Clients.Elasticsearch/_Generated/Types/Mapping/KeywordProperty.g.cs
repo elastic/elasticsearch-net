@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "keyword";
 	}
 
-	public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableDescriptorBase<KeywordPropertyDescriptor<TDocument>>
+	public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableDescriptorBase<KeywordPropertyDescriptor<TDocument>>, IBuildableDescriptor<KeywordProperty>
 	{
 		internal KeywordPropertyDescriptor(Action<KeywordPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public KeywordPropertyDescriptor() : base()
@@ -111,6 +111,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private bool? TimeSeriesDimensionValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public KeywordPropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -353,9 +355,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("keyword");
 			writer.WriteEndObject();
 		}
+
+		KeywordProperty IBuildableDescriptor<KeywordProperty>.Build() => new()
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Normalizer = NormalizerValue, Norms = NormsValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
 	}
 
-	public sealed partial class KeywordPropertyDescriptor : SerializableDescriptorBase<KeywordPropertyDescriptor>
+	public sealed partial class KeywordPropertyDescriptor : SerializableDescriptorBase<KeywordPropertyDescriptor>, IBuildableDescriptor<KeywordProperty>
 	{
 		internal KeywordPropertyDescriptor(Action<KeywordPropertyDescriptor> configure) => configure.Invoke(this);
 		public KeywordPropertyDescriptor() : base()
@@ -399,6 +404,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private bool? TimeSeriesDimensionValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public KeywordPropertyDescriptor Boost(double? boost)
 		{
@@ -647,5 +654,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("keyword");
 			writer.WriteEndObject();
 		}
+
+		KeywordProperty IBuildableDescriptor<KeywordProperty>.Build() => new()
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Normalizer = NormalizerValue, Norms = NormsValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
 	}
 }

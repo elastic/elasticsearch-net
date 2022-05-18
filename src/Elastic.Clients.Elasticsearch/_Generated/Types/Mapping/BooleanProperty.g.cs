@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "boolean";
 	}
 
-	public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableDescriptorBase<BooleanPropertyDescriptor<TDocument>>
+	public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableDescriptorBase<BooleanPropertyDescriptor<TDocument>>, IBuildableDescriptor<BooleanProperty>
 	{
 		internal BooleanPropertyDescriptor(Action<BooleanPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public BooleanPropertyDescriptor() : base()
@@ -85,6 +85,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public BooleanPropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -295,9 +297,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("boolean");
 			writer.WriteEndObject();
 		}
+
+		BooleanProperty IBuildableDescriptor<BooleanProperty>.Build() => new()
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class BooleanPropertyDescriptor : SerializableDescriptorBase<BooleanPropertyDescriptor>
+	public sealed partial class BooleanPropertyDescriptor : SerializableDescriptorBase<BooleanPropertyDescriptor>, IBuildableDescriptor<BooleanProperty>
 	{
 		internal BooleanPropertyDescriptor(Action<BooleanPropertyDescriptor> configure) => configure.Invoke(this);
 		public BooleanPropertyDescriptor() : base()
@@ -335,6 +340,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public BooleanPropertyDescriptor Boost(double? boost)
 		{
@@ -551,5 +558,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("boolean");
 			writer.WriteEndObject();
 		}
+
+		BooleanProperty IBuildableDescriptor<BooleanProperty>.Build() => new()
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

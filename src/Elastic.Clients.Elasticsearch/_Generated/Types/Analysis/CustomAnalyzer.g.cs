@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "custom";
 	}
 
-	public sealed partial class CustomAnalyzerDescriptor : SerializableDescriptorBase<CustomAnalyzerDescriptor>
+	public sealed partial class CustomAnalyzerDescriptor : SerializableDescriptorBase<CustomAnalyzerDescriptor>, IBuildableDescriptor<CustomAnalyzer>
 	{
 		internal CustomAnalyzerDescriptor(Action<CustomAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public CustomAnalyzerDescriptor() : base()
@@ -131,5 +131,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			writer.WriteStringValue("custom");
 			writer.WriteEndObject();
 		}
+
+		CustomAnalyzer IBuildableDescriptor<CustomAnalyzer>.Build() => new()
+		{ CharFilter = CharFilterValue, Filter = FilterValue, PositionIncrementGap = PositionIncrementGapValue, PositionOffsetGap = PositionOffsetGapValue, Tokenizer = TokenizerValue };
 	}
 }

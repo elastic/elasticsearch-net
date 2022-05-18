@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "percolator";
 	}
 
-	public sealed partial class PercolatorPropertyDescriptor<TDocument> : SerializableDescriptorBase<PercolatorPropertyDescriptor<TDocument>>
+	public sealed partial class PercolatorPropertyDescriptor<TDocument> : SerializableDescriptorBase<PercolatorPropertyDescriptor<TDocument>>, IBuildableDescriptor<PercolatorProperty>
 	{
 		internal PercolatorPropertyDescriptor(Action<PercolatorPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public PercolatorPropertyDescriptor() : base()
@@ -49,6 +49,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, string>? MetaValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public PercolatorPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -129,9 +131,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("percolator");
 			writer.WriteEndObject();
 		}
+
+		PercolatorProperty IBuildableDescriptor<PercolatorProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
 	}
 
-	public sealed partial class PercolatorPropertyDescriptor : SerializableDescriptorBase<PercolatorPropertyDescriptor>
+	public sealed partial class PercolatorPropertyDescriptor : SerializableDescriptorBase<PercolatorPropertyDescriptor>, IBuildableDescriptor<PercolatorProperty>
 	{
 		internal PercolatorPropertyDescriptor(Action<PercolatorPropertyDescriptor> configure) => configure.Invoke(this);
 		public PercolatorPropertyDescriptor() : base()
@@ -149,6 +154,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, string>? MetaValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public PercolatorPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -229,5 +236,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("percolator");
 			writer.WriteEndObject();
 		}
+
+		PercolatorProperty IBuildableDescriptor<PercolatorProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
 	}
 }

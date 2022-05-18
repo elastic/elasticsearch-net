@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public object? Value { get; set; }
 	}
 
-	public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : SerializableDescriptorBase<ConstantKeywordPropertyDescriptor<TDocument>>
+	public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : SerializableDescriptorBase<ConstantKeywordPropertyDescriptor<TDocument>>, IBuildableDescriptor<ConstantKeywordProperty>
 	{
 		internal ConstantKeywordPropertyDescriptor(Action<ConstantKeywordPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ConstantKeywordPropertyDescriptor() : base()
@@ -54,6 +54,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private object? ValueValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ConstantKeywordPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -140,9 +142,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("constant_keyword");
 			writer.WriteEndObject();
 		}
+
+		ConstantKeywordProperty IBuildableDescriptor<ConstantKeywordProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Value = ValueValue };
 	}
 
-	public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDescriptorBase<ConstantKeywordPropertyDescriptor>
+	public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDescriptorBase<ConstantKeywordPropertyDescriptor>, IBuildableDescriptor<ConstantKeywordProperty>
 	{
 		internal ConstantKeywordPropertyDescriptor(Action<ConstantKeywordPropertyDescriptor> configure) => configure.Invoke(this);
 		public ConstantKeywordPropertyDescriptor() : base()
@@ -162,6 +167,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private object? ValueValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ConstantKeywordPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -248,5 +255,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("constant_keyword");
 			writer.WriteEndObject();
 		}
+
+		ConstantKeywordProperty IBuildableDescriptor<ConstantKeywordProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Value = ValueValue };
 	}
 }

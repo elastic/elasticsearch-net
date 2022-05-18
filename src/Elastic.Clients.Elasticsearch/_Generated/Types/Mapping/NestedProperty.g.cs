@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "nested";
 	}
 
-	public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDescriptorBase<NestedPropertyDescriptor<TDocument>>
+	public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDescriptorBase<NestedPropertyDescriptor<TDocument>>, IBuildableDescriptor<NestedProperty>
 	{
 		internal NestedPropertyDescriptor(Action<NestedPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public NestedPropertyDescriptor() : base()
@@ -73,6 +73,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public NestedPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -231,9 +233,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("nested");
 			writer.WriteEndObject();
 		}
+
+		NestedProperty IBuildableDescriptor<NestedProperty>.Build() => new()
+		{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IncludeInParent = IncludeInParentValue, IncludeInRoot = IncludeInRootValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class NestedPropertyDescriptor : SerializableDescriptorBase<NestedPropertyDescriptor>
+	public sealed partial class NestedPropertyDescriptor : SerializableDescriptorBase<NestedPropertyDescriptor>, IBuildableDescriptor<NestedProperty>
 	{
 		internal NestedPropertyDescriptor(Action<NestedPropertyDescriptor> configure) => configure.Invoke(this);
 		public NestedPropertyDescriptor() : base()
@@ -263,6 +268,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public NestedPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -427,5 +434,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("nested");
 			writer.WriteEndObject();
 		}
+
+		NestedProperty IBuildableDescriptor<NestedProperty>.Build() => new()
+		{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IncludeInParent = IncludeInParentValue, IncludeInRoot = IncludeInRootValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

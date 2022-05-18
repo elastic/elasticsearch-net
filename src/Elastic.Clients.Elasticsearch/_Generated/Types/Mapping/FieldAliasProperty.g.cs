@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "alias";
 	}
 
-	public sealed partial class FieldAliasPropertyDescriptor<TDocument> : SerializableDescriptorBase<FieldAliasPropertyDescriptor<TDocument>>
+	public sealed partial class FieldAliasPropertyDescriptor<TDocument> : SerializableDescriptorBase<FieldAliasPropertyDescriptor<TDocument>>, IBuildableDescriptor<FieldAliasProperty>
 	{
 		internal FieldAliasPropertyDescriptor(Action<FieldAliasPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FieldAliasPropertyDescriptor() : base()
@@ -55,6 +55,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public FieldAliasPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -153,9 +155,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("alias");
 			writer.WriteEndObject();
 		}
+
+		FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
 	}
 
-	public sealed partial class FieldAliasPropertyDescriptor : SerializableDescriptorBase<FieldAliasPropertyDescriptor>
+	public sealed partial class FieldAliasPropertyDescriptor : SerializableDescriptorBase<FieldAliasPropertyDescriptor>, IBuildableDescriptor<FieldAliasProperty>
 	{
 		internal FieldAliasPropertyDescriptor(Action<FieldAliasPropertyDescriptor> configure) => configure.Invoke(this);
 		public FieldAliasPropertyDescriptor() : base()
@@ -175,6 +180,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public FieldAliasPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
@@ -279,5 +286,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("alias");
 			writer.WriteEndObject();
 		}
+
+		FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
+		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
 	}
 }

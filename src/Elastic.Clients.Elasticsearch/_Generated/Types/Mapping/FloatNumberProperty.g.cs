@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "float";
 	}
 
-	public sealed partial class FloatNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<FloatNumberPropertyDescriptor<TDocument>>
+	public sealed partial class FloatNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<FloatNumberPropertyDescriptor<TDocument>>, IBuildableDescriptor<FloatNumberProperty>
 	{
 		internal FloatNumberPropertyDescriptor(Action<FloatNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FloatNumberPropertyDescriptor() : base()
@@ -79,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public FloatNumberPropertyDescriptor<TDocument> Script(ScriptBase? script)
 		{
@@ -325,9 +327,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("float");
 			writer.WriteEndObject();
 		}
+
+		FloatNumberProperty IBuildableDescriptor<FloatNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
-	public sealed partial class FloatNumberPropertyDescriptor : SerializableDescriptorBase<FloatNumberPropertyDescriptor>
+	public sealed partial class FloatNumberPropertyDescriptor : SerializableDescriptorBase<FloatNumberPropertyDescriptor>, IBuildableDescriptor<FloatNumberProperty>
 	{
 		internal FloatNumberPropertyDescriptor(Action<FloatNumberPropertyDescriptor> configure) => configure.Invoke(this);
 		public FloatNumberPropertyDescriptor() : base()
@@ -371,6 +376,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public FloatNumberPropertyDescriptor Script(ScriptBase? script)
 		{
@@ -623,5 +630,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("float");
 			writer.WriteEndObject();
 		}
+
+		FloatNumberProperty IBuildableDescriptor<FloatNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

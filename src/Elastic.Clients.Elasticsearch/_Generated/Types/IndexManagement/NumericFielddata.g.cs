@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; set; }
 	}
 
-	public sealed partial class NumericFielddataDescriptor : SerializableDescriptorBase<NumericFielddataDescriptor>
+	public sealed partial class NumericFielddataDescriptor : SerializableDescriptorBase<NumericFielddataDescriptor>, IBuildableDescriptor<NumericFielddata>
 	{
 		internal NumericFielddataDescriptor(Action<NumericFielddataDescriptor> configure) => configure.Invoke(this);
 		public NumericFielddataDescriptor() : base()
@@ -53,5 +53,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			JsonSerializer.Serialize(writer, FormatValue, options);
 			writer.WriteEndObject();
 		}
+
+		NumericFielddata IBuildableDescriptor<NumericFielddata>.Build() => new()
+		{ Format = FormatValue };
 	}
 }

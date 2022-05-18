@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; set; }
 	}
 
-	public sealed partial class NoriAnalyzerDescriptor : SerializableDescriptorBase<NoriAnalyzerDescriptor>
+	public sealed partial class NoriAnalyzerDescriptor : SerializableDescriptorBase<NoriAnalyzerDescriptor>, IBuildableDescriptor<NoriAnalyzer>
 	{
 		internal NoriAnalyzerDescriptor(Action<NoriAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public NoriAnalyzerDescriptor() : base()
@@ -116,5 +116,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 			writer.WriteEndObject();
 		}
+
+		NoriAnalyzer IBuildableDescriptor<NoriAnalyzer>.Build() => new()
+		{ DecompoundMode = DecompoundModeValue, Stoptags = StoptagsValue, UserDictionary = UserDictionaryValue, Version = VersionValue };
 	}
 }

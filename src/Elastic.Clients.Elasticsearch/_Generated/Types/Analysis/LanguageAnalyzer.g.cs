@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; set; }
 	}
 
-	public sealed partial class LanguageAnalyzerDescriptor : SerializableDescriptorBase<LanguageAnalyzerDescriptor>
+	public sealed partial class LanguageAnalyzerDescriptor : SerializableDescriptorBase<LanguageAnalyzerDescriptor>, IBuildableDescriptor<LanguageAnalyzer>
 	{
 		internal LanguageAnalyzerDescriptor(Action<LanguageAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public LanguageAnalyzerDescriptor() : base()
@@ -126,5 +126,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 			writer.WriteEndObject();
 		}
+
+		LanguageAnalyzer IBuildableDescriptor<LanguageAnalyzer>.Build() => new()
+		{ Language = LanguageValue, StemExclusion = StemExclusionValue, Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
 	}
 }

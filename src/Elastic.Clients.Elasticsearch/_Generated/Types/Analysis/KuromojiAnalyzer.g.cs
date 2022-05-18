@@ -38,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? UserDictionary { get; set; }
 	}
 
-	public sealed partial class KuromojiAnalyzerDescriptor : SerializableDescriptorBase<KuromojiAnalyzerDescriptor>
+	public sealed partial class KuromojiAnalyzerDescriptor : SerializableDescriptorBase<KuromojiAnalyzerDescriptor>, IBuildableDescriptor<KuromojiAnalyzer>
 	{
 		internal KuromojiAnalyzerDescriptor(Action<KuromojiAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public KuromojiAnalyzerDescriptor() : base()
@@ -76,5 +76,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 			writer.WriteEndObject();
 		}
+
+		KuromojiAnalyzer IBuildableDescriptor<KuromojiAnalyzer>.Build() => new()
+		{ Mode = ModeValue, UserDictionary = UserDictionaryValue };
 	}
 }

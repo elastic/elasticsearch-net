@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; set; }
 	}
 
-	public sealed partial class WhitespaceAnalyzerDescriptor : SerializableDescriptorBase<WhitespaceAnalyzerDescriptor>
+	public sealed partial class WhitespaceAnalyzerDescriptor : SerializableDescriptorBase<WhitespaceAnalyzerDescriptor>, IBuildableDescriptor<WhitespaceAnalyzer>
 	{
 		internal WhitespaceAnalyzerDescriptor(Action<WhitespaceAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public WhitespaceAnalyzerDescriptor() : base()
@@ -62,5 +62,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 			writer.WriteEndObject();
 		}
+
+		WhitespaceAnalyzer IBuildableDescriptor<WhitespaceAnalyzer>.Build() => new()
+		{ Version = VersionValue };
 	}
 }

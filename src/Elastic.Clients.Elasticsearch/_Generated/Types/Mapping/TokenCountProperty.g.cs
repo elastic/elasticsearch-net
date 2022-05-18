@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "token_count";
 	}
 
-	public sealed partial class TokenCountPropertyDescriptor<TDocument> : SerializableDescriptorBase<TokenCountPropertyDescriptor<TDocument>>
+	public sealed partial class TokenCountPropertyDescriptor<TDocument> : SerializableDescriptorBase<TokenCountPropertyDescriptor<TDocument>>, IBuildableDescriptor<TokenCountProperty>
 	{
 		internal TokenCountPropertyDescriptor(Action<TokenCountPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public TokenCountPropertyDescriptor() : base()
@@ -87,6 +87,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public TokenCountPropertyDescriptor<TDocument> Analyzer(string? analyzer)
 		{
@@ -281,9 +283,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("token_count");
 			writer.WriteEndObject();
 		}
+
+		TokenCountProperty IBuildableDescriptor<TokenCountProperty>.Build() => new()
+		{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class TokenCountPropertyDescriptor : SerializableDescriptorBase<TokenCountPropertyDescriptor>
+	public sealed partial class TokenCountPropertyDescriptor : SerializableDescriptorBase<TokenCountPropertyDescriptor>, IBuildableDescriptor<TokenCountProperty>
 	{
 		internal TokenCountPropertyDescriptor(Action<TokenCountPropertyDescriptor> configure) => configure.Invoke(this);
 		public TokenCountPropertyDescriptor() : base()
@@ -319,6 +324,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public TokenCountPropertyDescriptor Analyzer(string? analyzer)
 		{
@@ -519,5 +526,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("token_count");
 			writer.WriteEndObject();
 		}
+
+		TokenCountProperty IBuildableDescriptor<TokenCountProperty>.Build() => new()
+		{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

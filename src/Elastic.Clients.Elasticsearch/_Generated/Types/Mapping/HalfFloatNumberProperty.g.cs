@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "half_float";
 	}
 
-	public sealed partial class HalfFloatNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<HalfFloatNumberPropertyDescriptor<TDocument>>
+	public sealed partial class HalfFloatNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<HalfFloatNumberPropertyDescriptor<TDocument>>, IBuildableDescriptor<HalfFloatNumberProperty>
 	{
 		internal HalfFloatNumberPropertyDescriptor(Action<HalfFloatNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public HalfFloatNumberPropertyDescriptor() : base()
@@ -79,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public HalfFloatNumberPropertyDescriptor<TDocument> Script(ScriptBase? script)
 		{
@@ -325,9 +327,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("half_float");
 			writer.WriteEndObject();
 		}
+
+		HalfFloatNumberProperty IBuildableDescriptor<HalfFloatNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
-	public sealed partial class HalfFloatNumberPropertyDescriptor : SerializableDescriptorBase<HalfFloatNumberPropertyDescriptor>
+	public sealed partial class HalfFloatNumberPropertyDescriptor : SerializableDescriptorBase<HalfFloatNumberPropertyDescriptor>, IBuildableDescriptor<HalfFloatNumberProperty>
 	{
 		internal HalfFloatNumberPropertyDescriptor(Action<HalfFloatNumberPropertyDescriptor> configure) => configure.Invoke(this);
 		public HalfFloatNumberPropertyDescriptor() : base()
@@ -371,6 +376,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public HalfFloatNumberPropertyDescriptor Script(ScriptBase? script)
 		{
@@ -623,5 +630,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("half_float");
 			writer.WriteEndObject();
 		}
+
+		HalfFloatNumberProperty IBuildableDescriptor<HalfFloatNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

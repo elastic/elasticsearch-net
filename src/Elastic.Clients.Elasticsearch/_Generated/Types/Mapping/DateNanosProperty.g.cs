@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "date_nanos";
 	}
 
-	public sealed partial class DateNanosPropertyDescriptor<TDocument> : SerializableDescriptorBase<DateNanosPropertyDescriptor<TDocument>>
+	public sealed partial class DateNanosPropertyDescriptor<TDocument> : SerializableDescriptorBase<DateNanosPropertyDescriptor<TDocument>>, IBuildableDescriptor<DateNanosProperty>
 	{
 		internal DateNanosPropertyDescriptor(Action<DateNanosPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DateNanosPropertyDescriptor() : base()
@@ -93,6 +93,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public DateNanosPropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -299,9 +301,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("date_nanos");
 			writer.WriteEndObject();
 		}
+
+		DateNanosProperty IBuildableDescriptor<DateNanosProperty>.Build() => new()
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptorBase<DateNanosPropertyDescriptor>
+	public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptorBase<DateNanosPropertyDescriptor>, IBuildableDescriptor<DateNanosProperty>
 	{
 		internal DateNanosPropertyDescriptor(Action<DateNanosPropertyDescriptor> configure) => configure.Invoke(this);
 		public DateNanosPropertyDescriptor() : base()
@@ -339,6 +344,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public DateNanosPropertyDescriptor Boost(double? boost)
 		{
@@ -551,5 +558,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("date_nanos");
 			writer.WriteEndObject();
 		}
+
+		DateNanosProperty IBuildableDescriptor<DateNanosProperty>.Build() => new()
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "icu_analyzer";
 	}
 
-	public sealed partial class IcuAnalyzerDescriptor : SerializableDescriptorBase<IcuAnalyzerDescriptor>
+	public sealed partial class IcuAnalyzerDescriptor : SerializableDescriptorBase<IcuAnalyzerDescriptor>, IBuildableDescriptor<IcuAnalyzer>
 	{
 		internal IcuAnalyzerDescriptor(Action<IcuAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public IcuAnalyzerDescriptor() : base()
@@ -73,5 +73,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			writer.WriteStringValue("icu_analyzer");
 			writer.WriteEndObject();
 		}
+
+		IcuAnalyzer IBuildableDescriptor<IcuAnalyzer>.Build() => new()
+		{ Method = MethodValue, Mode = ModeValue };
 	}
 }

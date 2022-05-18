@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "integer_range";
 	}
 
-	public sealed partial class IntegerRangePropertyDescriptor<TDocument> : SerializableDescriptorBase<IntegerRangePropertyDescriptor<TDocument>>
+	public sealed partial class IntegerRangePropertyDescriptor<TDocument> : SerializableDescriptorBase<IntegerRangePropertyDescriptor<TDocument>>, IBuildableDescriptor<IntegerRangeProperty>
 	{
 		internal IntegerRangePropertyDescriptor(Action<IntegerRangePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IntegerRangePropertyDescriptor() : base()
@@ -63,6 +63,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public IntegerRangePropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -233,9 +235,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("integer_range");
 			writer.WriteEndObject();
 		}
+
+		IntegerRangeProperty IBuildableDescriptor<IntegerRangeProperty>.Build() => new()
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class IntegerRangePropertyDescriptor : SerializableDescriptorBase<IntegerRangePropertyDescriptor>
+	public sealed partial class IntegerRangePropertyDescriptor : SerializableDescriptorBase<IntegerRangePropertyDescriptor>, IBuildableDescriptor<IntegerRangeProperty>
 	{
 		internal IntegerRangePropertyDescriptor(Action<IntegerRangePropertyDescriptor> configure) => configure.Invoke(this);
 		public IntegerRangePropertyDescriptor() : base()
@@ -267,6 +272,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public IntegerRangePropertyDescriptor Boost(double? boost)
 		{
@@ -443,5 +450,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("integer_range");
 			writer.WriteEndObject();
 		}
+
+		IntegerRangeProperty IBuildableDescriptor<IntegerRangeProperty>.Build() => new()
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

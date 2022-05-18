@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "short";
 	}
 
-	public sealed partial class ShortNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<ShortNumberPropertyDescriptor<TDocument>>
+	public sealed partial class ShortNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<ShortNumberPropertyDescriptor<TDocument>>, IBuildableDescriptor<ShortNumberProperty>
 	{
 		internal ShortNumberPropertyDescriptor(Action<ShortNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ShortNumberPropertyDescriptor() : base()
@@ -79,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ShortNumberPropertyDescriptor<TDocument> Script(ScriptBase? script)
 		{
@@ -325,9 +327,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("short");
 			writer.WriteEndObject();
 		}
+
+		ShortNumberProperty IBuildableDescriptor<ShortNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
-	public sealed partial class ShortNumberPropertyDescriptor : SerializableDescriptorBase<ShortNumberPropertyDescriptor>
+	public sealed partial class ShortNumberPropertyDescriptor : SerializableDescriptorBase<ShortNumberPropertyDescriptor>, IBuildableDescriptor<ShortNumberProperty>
 	{
 		internal ShortNumberPropertyDescriptor(Action<ShortNumberPropertyDescriptor> configure) => configure.Invoke(this);
 		public ShortNumberPropertyDescriptor() : base()
@@ -371,6 +376,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ShortNumberPropertyDescriptor Script(ScriptBase? script)
 		{
@@ -623,5 +630,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("short");
 			writer.WriteEndObject();
 		}
+
+		ShortNumberProperty IBuildableDescriptor<ShortNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

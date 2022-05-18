@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "long";
 	}
 
-	public sealed partial class LongNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<LongNumberPropertyDescriptor<TDocument>>
+	public sealed partial class LongNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<LongNumberPropertyDescriptor<TDocument>>, IBuildableDescriptor<LongNumberProperty>
 	{
 		internal LongNumberPropertyDescriptor(Action<LongNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public LongNumberPropertyDescriptor() : base()
@@ -79,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public LongNumberPropertyDescriptor<TDocument> Script(ScriptBase? script)
 		{
@@ -325,9 +327,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("long");
 			writer.WriteEndObject();
 		}
+
+		LongNumberProperty IBuildableDescriptor<LongNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
-	public sealed partial class LongNumberPropertyDescriptor : SerializableDescriptorBase<LongNumberPropertyDescriptor>
+	public sealed partial class LongNumberPropertyDescriptor : SerializableDescriptorBase<LongNumberPropertyDescriptor>, IBuildableDescriptor<LongNumberProperty>
 	{
 		internal LongNumberPropertyDescriptor(Action<LongNumberPropertyDescriptor> configure) => configure.Invoke(this);
 		public LongNumberPropertyDescriptor() : base()
@@ -371,6 +376,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public LongNumberPropertyDescriptor Script(ScriptBase? script)
 		{
@@ -623,5 +630,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("long");
 			writer.WriteEndObject();
 		}
+
+		LongNumberProperty IBuildableDescriptor<LongNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

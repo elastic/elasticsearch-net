@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "custom";
 	}
 
-	public sealed partial class CustomNormalizerDescriptor : SerializableDescriptorBase<CustomNormalizerDescriptor>
+	public sealed partial class CustomNormalizerDescriptor : SerializableDescriptorBase<CustomNormalizerDescriptor>, IBuildableDescriptor<CustomNormalizer>
 	{
 		internal CustomNormalizerDescriptor(Action<CustomNormalizerDescriptor> configure) => configure.Invoke(this);
 		public CustomNormalizerDescriptor() : base()
@@ -81,5 +81,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			writer.WriteStringValue("custom");
 			writer.WriteEndObject();
 		}
+
+		CustomNormalizer IBuildableDescriptor<CustomNormalizer>.Build() => new()
+		{ CharFilter = CharFilterValue, Filter = FilterValue };
 	}
 }

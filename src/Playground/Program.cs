@@ -29,6 +29,12 @@ var client = new ElasticsearchClient(settings);
 //var createIndexResponse = await client.Indices.CreateAsync("aa", i => i
 //	.Mappings(m => m.Properties<Person>(p => p.Boolean(b => b.Name(n => n.IsDeleted).NullValue(true).Store(false)))));
 
+var createIndexResponse = await client.Indices.CreateAsync("my-index-name", i => i
+	.Mappings(m => m.Properties<Person>(p => p
+		.Boolean(p => p.IsDeleted, b => b.NullValue(true).Store(false))
+		.Scalar(p => p.Id)
+		.Boolean("not-on-type")
+	)));
 
 
 var filterResponse = await client.SearchAsync<Person>(s => s

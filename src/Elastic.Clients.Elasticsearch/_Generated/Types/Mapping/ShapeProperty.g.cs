@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "shape";
 	}
 
-	public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDescriptorBase<ShapePropertyDescriptor<TDocument>>
+	public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDescriptorBase<ShapePropertyDescriptor<TDocument>>, IBuildableDescriptor<ShapeProperty>
 	{
 		internal ShapePropertyDescriptor(Action<ShapePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ShapePropertyDescriptor() : base()
@@ -81,6 +81,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ShapePropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 		{
@@ -263,9 +265,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("shape");
 			writer.WriteEndObject();
 		}
+
+		ShapeProperty IBuildableDescriptor<ShapeProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class ShapePropertyDescriptor : SerializableDescriptorBase<ShapePropertyDescriptor>
+	public sealed partial class ShapePropertyDescriptor : SerializableDescriptorBase<ShapePropertyDescriptor>, IBuildableDescriptor<ShapeProperty>
 	{
 		internal ShapePropertyDescriptor(Action<ShapePropertyDescriptor> configure) => configure.Invoke(this);
 		public ShapePropertyDescriptor() : base()
@@ -299,6 +304,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ShapePropertyDescriptor Coerce(bool? coerce = true)
 		{
@@ -487,5 +494,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("shape");
 			writer.WriteEndObject();
 		}
+
+		ShapeProperty IBuildableDescriptor<ShapeProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; set; }
 	}
 
-	public sealed partial class SnowballAnalyzerDescriptor : SerializableDescriptorBase<SnowballAnalyzerDescriptor>
+	public sealed partial class SnowballAnalyzerDescriptor : SerializableDescriptorBase<SnowballAnalyzerDescriptor>, IBuildableDescriptor<SnowballAnalyzer>
 	{
 		internal SnowballAnalyzerDescriptor(Action<SnowballAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public SnowballAnalyzerDescriptor() : base()
@@ -94,5 +94,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 			writer.WriteEndObject();
 		}
+
+		SnowballAnalyzer IBuildableDescriptor<SnowballAnalyzer>.Build() => new()
+		{ Language = LanguageValue, Stopwords = StopwordsValue, Version = VersionValue };
 	}
 }

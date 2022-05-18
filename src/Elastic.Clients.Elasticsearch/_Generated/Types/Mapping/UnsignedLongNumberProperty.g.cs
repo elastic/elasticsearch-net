@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "unsigned_long";
 	}
 
-	public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<UnsignedLongNumberPropertyDescriptor<TDocument>>
+	public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<UnsignedLongNumberPropertyDescriptor<TDocument>>, IBuildableDescriptor<UnsignedLongNumberProperty>
 	{
 		internal UnsignedLongNumberPropertyDescriptor(Action<UnsignedLongNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public UnsignedLongNumberPropertyDescriptor() : base()
@@ -69,6 +69,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public UnsignedLongNumberPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -251,9 +253,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("unsigned_long");
 			writer.WriteEndObject();
 		}
+
+		UnsignedLongNumberProperty IBuildableDescriptor<UnsignedLongNumberProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
-	public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableDescriptorBase<UnsignedLongNumberPropertyDescriptor>
+	public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableDescriptorBase<UnsignedLongNumberPropertyDescriptor>, IBuildableDescriptor<UnsignedLongNumberProperty>
 	{
 		internal UnsignedLongNumberPropertyDescriptor(Action<UnsignedLongNumberPropertyDescriptor> configure) => configure.Invoke(this);
 		public UnsignedLongNumberPropertyDescriptor() : base()
@@ -287,6 +292,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public UnsignedLongNumberPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
@@ -475,5 +482,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("unsigned_long");
 			writer.WriteEndObject();
 		}
+
+		UnsignedLongNumberProperty IBuildableDescriptor<UnsignedLongNumberProperty>.Build() => new()
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

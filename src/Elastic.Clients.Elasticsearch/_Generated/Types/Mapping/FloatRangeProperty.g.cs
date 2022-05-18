@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "float_range";
 	}
 
-	public sealed partial class FloatRangePropertyDescriptor<TDocument> : SerializableDescriptorBase<FloatRangePropertyDescriptor<TDocument>>
+	public sealed partial class FloatRangePropertyDescriptor<TDocument> : SerializableDescriptorBase<FloatRangePropertyDescriptor<TDocument>>, IBuildableDescriptor<FloatRangeProperty>
 	{
 		internal FloatRangePropertyDescriptor(Action<FloatRangePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public FloatRangePropertyDescriptor() : base()
@@ -63,6 +63,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public FloatRangePropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -233,9 +235,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("float_range");
 			writer.WriteEndObject();
 		}
+
+		FloatRangeProperty IBuildableDescriptor<FloatRangeProperty>.Build() => new()
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class FloatRangePropertyDescriptor : SerializableDescriptorBase<FloatRangePropertyDescriptor>
+	public sealed partial class FloatRangePropertyDescriptor : SerializableDescriptorBase<FloatRangePropertyDescriptor>, IBuildableDescriptor<FloatRangeProperty>
 	{
 		internal FloatRangePropertyDescriptor(Action<FloatRangePropertyDescriptor> configure) => configure.Invoke(this);
 		public FloatRangePropertyDescriptor() : base()
@@ -267,6 +272,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public FloatRangePropertyDescriptor Boost(double? boost)
 		{
@@ -443,5 +450,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("float_range");
 			writer.WriteEndObject();
 		}
+
+		FloatRangeProperty IBuildableDescriptor<FloatRangeProperty>.Build() => new()
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

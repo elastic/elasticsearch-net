@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "integer";
 	}
 
-	public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<IntegerNumberPropertyDescriptor<TDocument>>
+	public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : SerializableDescriptorBase<IntegerNumberPropertyDescriptor<TDocument>>, IBuildableDescriptor<IntegerNumberProperty>
 	{
 		internal IntegerNumberPropertyDescriptor(Action<IntegerNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IntegerNumberPropertyDescriptor() : base()
@@ -79,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public IntegerNumberPropertyDescriptor<TDocument> Script(ScriptBase? script)
 		{
@@ -325,9 +327,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("integer");
 			writer.WriteEndObject();
 		}
+
+		IntegerNumberProperty IBuildableDescriptor<IntegerNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
-	public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescriptorBase<IntegerNumberPropertyDescriptor>
+	public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescriptorBase<IntegerNumberPropertyDescriptor>, IBuildableDescriptor<IntegerNumberProperty>
 	{
 		internal IntegerNumberPropertyDescriptor(Action<IntegerNumberPropertyDescriptor> configure) => configure.Invoke(this);
 		public IntegerNumberPropertyDescriptor() : base()
@@ -371,6 +376,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public IntegerNumberPropertyDescriptor Script(ScriptBase? script)
 		{
@@ -623,5 +630,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("integer");
 			writer.WriteEndObject();
 		}
+
+		IntegerNumberProperty IBuildableDescriptor<IntegerNumberProperty>.Build() => new()
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "date";
 	}
 
-	public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDescriptorBase<DatePropertyDescriptor<TDocument>>
+	public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDescriptorBase<DatePropertyDescriptor<TDocument>>, IBuildableDescriptor<DateProperty>
 	{
 		internal DatePropertyDescriptor(Action<DatePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DatePropertyDescriptor() : base()
@@ -109,6 +109,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public DatePropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -367,9 +369,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("date");
 			writer.WriteEndObject();
 		}
+
+		DateProperty IBuildableDescriptor<DateProperty>.Build() => new()
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
-	public sealed partial class DatePropertyDescriptor : SerializableDescriptorBase<DatePropertyDescriptor>
+	public sealed partial class DatePropertyDescriptor : SerializableDescriptorBase<DatePropertyDescriptor>, IBuildableDescriptor<DateProperty>
 	{
 		internal DatePropertyDescriptor(Action<DatePropertyDescriptor> configure) => configure.Invoke(this);
 		public DatePropertyDescriptor() : base()
@@ -415,6 +420,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public DatePropertyDescriptor Boost(double? boost)
 		{
@@ -679,5 +686,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("date");
 			writer.WriteEndObject();
 		}
+
+		DateProperty IBuildableDescriptor<DateProperty>.Build() => new()
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

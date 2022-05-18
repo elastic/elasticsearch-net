@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; set; }
 	}
 
-	public sealed partial class SimpleAnalyzerDescriptor : SerializableDescriptorBase<SimpleAnalyzerDescriptor>
+	public sealed partial class SimpleAnalyzerDescriptor : SerializableDescriptorBase<SimpleAnalyzerDescriptor>, IBuildableDescriptor<SimpleAnalyzer>
 	{
 		internal SimpleAnalyzerDescriptor(Action<SimpleAnalyzerDescriptor> configure) => configure.Invoke(this);
 		public SimpleAnalyzerDescriptor() : base()
@@ -62,5 +62,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 			writer.WriteEndObject();
 		}
+
+		SimpleAnalyzer IBuildableDescriptor<SimpleAnalyzer>.Build() => new()
+		{ Version = VersionValue };
 	}
 }

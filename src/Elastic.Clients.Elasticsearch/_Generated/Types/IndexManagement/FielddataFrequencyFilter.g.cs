@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public int MinSegmentSize { get; set; }
 	}
 
-	public sealed partial class FielddataFrequencyFilterDescriptor : SerializableDescriptorBase<FielddataFrequencyFilterDescriptor>
+	public sealed partial class FielddataFrequencyFilterDescriptor : SerializableDescriptorBase<FielddataFrequencyFilterDescriptor>, IBuildableDescriptor<FielddataFrequencyFilter>
 	{
 		internal FielddataFrequencyFilterDescriptor(Action<FielddataFrequencyFilterDescriptor> configure) => configure.Invoke(this);
 		public FielddataFrequencyFilterDescriptor() : base()
@@ -81,5 +81,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			writer.WriteNumberValue(MinSegmentSizeValue);
 			writer.WriteEndObject();
 		}
+
+		FielddataFrequencyFilter IBuildableDescriptor<FielddataFrequencyFilter>.Build() => new()
+		{ Max = MaxValue, Min = MinValue, MinSegmentSize = MinSegmentSizeValue };
 	}
 }
