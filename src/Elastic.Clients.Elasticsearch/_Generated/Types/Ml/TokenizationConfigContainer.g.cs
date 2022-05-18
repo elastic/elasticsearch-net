@@ -54,12 +54,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				return new TokenizationConfigContainer(variant);
 			}
 
-			if (propertyName == "mpnet")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig?>(ref reader, options);
-				return new TokenizationConfigContainer(variant);
-			}
-
 			if (propertyName == "roberta")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig?>(ref reader, options);
@@ -78,12 +72,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				case Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
-				//case Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
-				//case Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
+				case Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
 			}
 
 			writer.WriteEndObject();
@@ -151,8 +142,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public void Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
 		public void Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-		public void Mpnet(NlpBertTokenizationConfig variant) => Set(variant, "mpnet");
-		public void Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
 		public void Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
 		public void Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 	}
@@ -218,8 +207,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public void Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
 		public void Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-		public void Mpnet(NlpBertTokenizationConfig variant) => Set(variant, "mpnet");
-		public void Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
 		public void Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
 		public void Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 	}

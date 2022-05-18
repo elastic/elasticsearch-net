@@ -29,11 +29,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string ClusterName { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("_nodes")]
-		public Elastic.Clients.Elasticsearch.NodeStatistics Nodes { get; init; }
+		[JsonPropertyName("nodes")]
+		public Dictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Ml.Memory> Nodes { get; init; }
 
-		//[JsonInclude]
-		//[JsonPropertyName("nodes")]
-		//public Dictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Ml.Memory> Nodes { get; init; }
+		[JsonInclude]
+		[JsonPropertyName("_nodes")]
+		public Elastic.Clients.Elasticsearch.NodeStatistics NodeStatistics { get; init; }
 	}
 }
