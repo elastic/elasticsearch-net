@@ -37,6 +37,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public void Add(string name, INormalizer normalizers) => BackingDictionary.Add(name, normalizers);
 	}
 
+	public sealed partial class NormalizersDescriptor : IsADictionaryDescriptor<NormalizersDescriptor, Normalizers, string, INormalizer>
+	{
+		public NormalizersDescriptor() : base(new Normalizers())
+		{
+		}
+
+		public NormalizersDescriptor(Normalizers normalizers) : base(normalizers ?? new Normalizers())
+		{
+		}
+	}
+
 	internal sealed partial class NormalizerInterfaceConverter
 	{
 		private static INormalizer DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)

@@ -37,6 +37,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public void Add(string name, ITokenizerDefinition tokenizerdefinitions) => BackingDictionary.Add(name, tokenizerdefinitions);
 	}
 
+	public sealed partial class TokenizerDefinitionsDescriptor : IsADictionaryDescriptor<TokenizerDefinitionsDescriptor, TokenizerDefinitions, string, ITokenizerDefinition>
+	{
+		public TokenizerDefinitionsDescriptor() : base(new TokenizerDefinitions())
+		{
+		}
+
+		public TokenizerDefinitionsDescriptor(TokenizerDefinitions tokenizerDefinitions) : base(tokenizerDefinitions ?? new TokenizerDefinitions())
+		{
+		}
+	}
+
 	internal sealed partial class TokenizerDefinitionInterfaceConverter
 	{
 		private static ITokenizerDefinition DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)

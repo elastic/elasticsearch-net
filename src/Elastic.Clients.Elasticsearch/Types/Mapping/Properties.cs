@@ -9,7 +9,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class Properties
 {
-	public void Add<T>(Expression<Func<T, object>> name, IProperty property) => BackingDictionary.Add(name, property);
+	public void Add<T>(Expression<Func<T, object>> propertyName, IProperty property) => BackingDictionary.Add(propertyName, property);
 
 	public bool TryGetProperty<T>(PropertyName propertyName, out T property) where T : IProperty
 	{
@@ -24,25 +24,21 @@ public partial class Properties
 	}
 }
 
-public partial class Properties<T> : Properties
+public partial class Properties<TDocument> : Properties
 {
-	public void Add<TValue>(Expression<Func<T, TValue>> name, IProperty property) => BackingDictionary.Add(name, property);
+	public void Add<TValue>(Expression<Func<TDocument, TValue>> name, IProperty property) => BackingDictionary.Add(name, property);
 }
 
 // TODO
 // Generate after Buildable implementation
-public partial class PropertiesDescriptor<TDocument>
+public sealed partial class PropertiesDescriptor<TDocument>
 		: IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
 {
-	public PropertiesDescriptor() : base(new Properties<TDocument>()) { }
+	public PropertiesDescriptor<TDocument> Boolean(PropertyName propertyName) =>
+		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, null);
 
-	public PropertiesDescriptor(Properties properties) : base(properties ?? new Properties<TDocument>()) { }
-
-	public PropertiesDescriptor<TDocument> Boolean(PropertyName fieldName) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
-
-	public PropertiesDescriptor<TDocument> Boolean(PropertyName fieldName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, configure);
+	public PropertiesDescriptor<TDocument> Boolean(PropertyName propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
+		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
 
 	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> fieldName) =>
 		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
@@ -81,9 +77,9 @@ public partial class PropertiesDescriptor<TDocument>
 // Code generator should generate these for any InternallyTaggedUnions that are IsADictionary types
 public partial class TypeMappingDescriptor
 {
-	public TypeMappingDescriptor Properties<T>(Action<PropertiesDescriptor<T>>? properties)
+	public TypeMappingDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>>? properties)
 	{
-		var descriptor = new PropertiesDescriptor<T>();
+		var descriptor = new PropertiesDescriptor<TDocument>();
 		properties?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;

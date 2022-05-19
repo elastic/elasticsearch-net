@@ -37,6 +37,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public void Add(string name, IAnalyzer analyzers) => BackingDictionary.Add(name, analyzers);
 	}
 
+	public sealed partial class AnalyzersDescriptor : IsADictionaryDescriptor<AnalyzersDescriptor, Analyzers, string, IAnalyzer>
+	{
+		public AnalyzersDescriptor() : base(new Analyzers())
+		{
+		}
+
+		public AnalyzersDescriptor(Analyzers analyzers) : base(analyzers ?? new Analyzers())
+		{
+		}
+	}
+
 	internal sealed partial class AnalyzerInterfaceConverter
 	{
 		private static IAnalyzer DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)

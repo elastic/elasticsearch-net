@@ -37,6 +37,17 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public void Add(string name, ILifecycleExplain lifecycleexplains) => BackingDictionary.Add(name, lifecycleexplains);
 	}
 
+	public sealed partial class LifecycleExplainsDescriptor : IsADictionaryDescriptor<LifecycleExplainsDescriptor, LifecycleExplains, string, ILifecycleExplain>
+	{
+		public LifecycleExplainsDescriptor() : base(new LifecycleExplains())
+		{
+		}
+
+		public LifecycleExplainsDescriptor(LifecycleExplains lifecycleExplains) : base(lifecycleExplains ?? new LifecycleExplains())
+		{
+		}
+	}
+
 	internal sealed partial class LifecycleExplainInterfaceConverter
 	{
 		private static ILifecycleExplain DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)

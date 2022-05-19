@@ -37,6 +37,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public void Add(string name, ITokenFilterDefinition tokenfilterdefinitions) => BackingDictionary.Add(name, tokenfilterdefinitions);
 	}
 
+	public sealed partial class TokenFilterDefinitionsDescriptor : IsADictionaryDescriptor<TokenFilterDefinitionsDescriptor, TokenFilterDefinitions, string, ITokenFilterDefinition>
+	{
+		public TokenFilterDefinitionsDescriptor() : base(new TokenFilterDefinitions())
+		{
+		}
+
+		public TokenFilterDefinitionsDescriptor(TokenFilterDefinitions tokenFilterDefinitions) : base(tokenFilterDefinitions ?? new TokenFilterDefinitions())
+		{
+		}
+	}
+
 	internal sealed partial class TokenFilterDefinitionInterfaceConverter
 	{
 		private static ITokenFilterDefinition DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)

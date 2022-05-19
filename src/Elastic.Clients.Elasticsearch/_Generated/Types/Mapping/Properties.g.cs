@@ -37,6 +37,17 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public void Add(string name, IProperty property) => BackingDictionary.Add(name, property);
 	}
 
+	public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
+	{
+		public PropertiesDescriptor() : base(new Properties())
+		{
+		}
+
+		public PropertiesDescriptor(Properties properties) : base(properties ?? new Properties())
+		{
+		}
+	}
+
 	internal sealed partial class PropertyInterfaceConverter
 	{
 		private static IProperty DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)

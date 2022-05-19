@@ -37,6 +37,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public void Add(string name, ICharFilterDefinition charfilterdefinitions) => BackingDictionary.Add(name, charfilterdefinitions);
 	}
 
+	public sealed partial class CharFilterDefinitionsDescriptor : IsADictionaryDescriptor<CharFilterDefinitionsDescriptor, CharFilterDefinitions, string, ICharFilterDefinition>
+	{
+		public CharFilterDefinitionsDescriptor() : base(new CharFilterDefinitions())
+		{
+		}
+
+		public CharFilterDefinitionsDescriptor(CharFilterDefinitions charFilterDefinitions) : base(charFilterDefinitions ?? new CharFilterDefinitions())
+		{
+		}
+	}
+
 	internal sealed partial class CharFilterDefinitionInterfaceConverter
 	{
 		private static ICharFilterDefinition DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
