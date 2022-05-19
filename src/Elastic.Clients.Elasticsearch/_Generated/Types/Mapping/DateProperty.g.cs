@@ -368,8 +368,32 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
+		private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? BuildFielddata()
+		{
+			if (FielddataValue is not null)
+			{
+				return FielddataValue;
+			}
+
+			if (FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (FielddataDescriptorAction is not null)
+			{
+				var descriptor = new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
+				if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
 		DateProperty IBuildableDescriptor<DateProperty>.Build() => new()
-		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
 	public sealed partial class DatePropertyDescriptor : SerializableDescriptorBase<DatePropertyDescriptor>, IBuildableDescriptor<DateProperty>
@@ -683,7 +707,31 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
+		private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? BuildFielddata()
+		{
+			if (FielddataValue is not null)
+			{
+				return FielddataValue;
+			}
+
+			if (FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (FielddataDescriptorAction is not null)
+			{
+				var descriptor = new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
+				if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
 		DateProperty IBuildableDescriptor<DateProperty>.Build() => new()
-		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

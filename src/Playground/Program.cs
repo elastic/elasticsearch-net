@@ -6,6 +6,7 @@ using System.Text.Json;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Clients.Elasticsearch.Helpers;
+using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Mapping;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Elastic.Transport;
@@ -31,11 +32,10 @@ var client = new ElasticsearchClient(settings);
 
 var createIndexResponse = await client.Indices.CreateAsync("my-index-name", i => i
 	.Mappings(m => m.Properties<Person>(p => p
-		.Boolean(p => p.IsDeleted, b => b.NullValue(true).Store(false))
+		.Boolean(p => p.IsDeleted, b => b.NullValue(true).Store(false).Fielddata(f => f.Format(NumericFielddataFormat.Array)))
 		.Scalar(p => p.Id)
 		.Boolean("not-on-type")
 	)));
-
 
 var filterResponse = await client.SearchAsync<Person>(s => s
 	.Query(q => q

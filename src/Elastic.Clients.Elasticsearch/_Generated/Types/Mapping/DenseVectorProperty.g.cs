@@ -230,8 +230,32 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
+		private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? BuildIndexOptions()
+		{
+			if (IndexOptionsValue is not null)
+			{
+				return IndexOptionsValue;
+			}
+
+			if (IndexOptionsDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (IndexOptionsDescriptorAction is not null)
+			{
+				var descriptor = new DenseVectorIndexOptionsDescriptor(IndexOptionsDescriptorAction);
+				if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
 		DenseVectorProperty IBuildableDescriptor<DenseVectorProperty>.Build() => new()
-		{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
+		{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = BuildIndexOptions(), LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
 	}
 
 	public sealed partial class DenseVectorPropertyDescriptor : SerializableDescriptorBase<DenseVectorPropertyDescriptor>, IBuildableDescriptor<DenseVectorProperty>
@@ -417,7 +441,31 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
+		private Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? BuildIndexOptions()
+		{
+			if (IndexOptionsValue is not null)
+			{
+				return IndexOptionsValue;
+			}
+
+			if (IndexOptionsDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (IndexOptionsDescriptorAction is not null)
+			{
+				var descriptor = new DenseVectorIndexOptionsDescriptor(IndexOptionsDescriptorAction);
+				if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
 		DenseVectorProperty IBuildableDescriptor<DenseVectorProperty>.Build() => new()
-		{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
+		{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = BuildIndexOptions(), LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
 	}
 }

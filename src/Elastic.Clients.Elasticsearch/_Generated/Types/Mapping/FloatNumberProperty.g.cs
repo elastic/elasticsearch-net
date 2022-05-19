@@ -326,8 +326,32 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
+		private ScriptBase? BuildScript()
+		{
+			if (ScriptValue is not null)
+			{
+				return ScriptValue;
+			}
+
+			if (ScriptDescriptor is IBuildableDescriptor<ScriptBase?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (ScriptDescriptorAction is not null)
+			{
+				var descriptor = new ScriptDescriptor(ScriptDescriptorAction);
+				if (descriptor is IBuildableDescriptor<ScriptBase?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
 		FloatNumberProperty IBuildableDescriptor<FloatNumberProperty>.Build() => new()
-		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Script = BuildScript(), Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
 	public sealed partial class FloatNumberPropertyDescriptor : SerializableDescriptorBase<FloatNumberPropertyDescriptor>, IBuildableDescriptor<FloatNumberProperty>
@@ -627,7 +651,31 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
+		private ScriptBase? BuildScript()
+		{
+			if (ScriptValue is not null)
+			{
+				return ScriptValue;
+			}
+
+			if (ScriptDescriptor is IBuildableDescriptor<ScriptBase?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (ScriptDescriptorAction is not null)
+			{
+				var descriptor = new ScriptDescriptor(ScriptDescriptorAction);
+				if (descriptor is IBuildableDescriptor<ScriptBase?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
 		FloatNumberProperty IBuildableDescriptor<FloatNumberProperty>.Build() => new()
-		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Script = BuildScript(), Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

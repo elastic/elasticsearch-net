@@ -296,8 +296,32 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
+		private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? BuildFielddata()
+		{
+			if (FielddataValue is not null)
+			{
+				return FielddataValue;
+			}
+
+			if (FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (FielddataDescriptorAction is not null)
+			{
+				var descriptor = new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
+				if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
 		BooleanProperty IBuildableDescriptor<BooleanProperty>.Build() => new()
-		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
 	public sealed partial class BooleanPropertyDescriptor : SerializableDescriptorBase<BooleanPropertyDescriptor>, IBuildableDescriptor<BooleanProperty>
@@ -555,7 +579,31 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
+		private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? BuildFielddata()
+		{
+			if (FielddataValue is not null)
+			{
+				return FielddataValue;
+			}
+
+			if (FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (FielddataDescriptorAction is not null)
+			{
+				var descriptor = new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
+				if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
 		BooleanProperty IBuildableDescriptor<BooleanProperty>.Build() => new()
-		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }

@@ -29,10 +29,6 @@ public partial class Properties<T> : Properties
 	public void Add<TValue>(Expression<Func<T, TValue>> name, IProperty property) => BackingDictionary.Add(name, property);
 }
 
-
-// TODO - BUG
-// BuildableDescriptor is not marked correctly higher up the chain (or we fail to generate expected descriptor), e.g. BooleanPropertyDescriptor and NumericFielddata
-
 // TODO
 // Generate after Buildable implementation
 public partial class PropertiesDescriptor<TDocument>
@@ -41,9 +37,6 @@ public partial class PropertiesDescriptor<TDocument>
 	public PropertiesDescriptor() : base(new Properties<TDocument>()) { }
 
 	public PropertiesDescriptor(Properties properties) : base(properties ?? new Properties<TDocument>()) { }
-
-	// Do we continue to special case properties to support the fluent Name on the property descriptor? If so, we generate this
-	//public PropertiesDescriptor<T> Boolean(Action<BooleanPropertyDescriptor<T>> selector) => SetVariant<BooleanPropertyDescriptor<T>, BooleanProperty>(selector);
 
 	public PropertiesDescriptor<TDocument> Boolean(PropertyName fieldName) =>
 		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
@@ -71,34 +64,7 @@ public partial class PropertiesDescriptor<TDocument>
 	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int>> fieldName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure) =>
 		AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(fieldName, configure);
 
-	//private PropertiesDescriptor<TDocument> SetVariant<TDescriptor, TProperty>(Action<TDescriptor> selector)
-	//		where TDescriptor : Descriptor, IBuildableDescriptor<TProperty>, IPropertyDescriptor, new()
-	//		where TProperty : IProperty
-	//{
-	//	var descriptor = new TDescriptor();
-	//	selector?.Invoke(descriptor);
-	//	return SetVariant(descriptor.Name, descriptor.Build());
-	//}
-
-	//private PropertiesDescriptor<TDocument> SetVariant<TDescriptor, TProperty>(PropertyName name, Action<TDescriptor> selector)
-	//		where TDescriptor : Descriptor, IBuildableDescriptor<TProperty>, new()
-	//		where TProperty : IProperty
-	//{
-	//	var descriptor = new TDescriptor();
-	//	selector?.Invoke(descriptor);
-	//	return SetVariant(name, descriptor.Build());
-	//}
-
-	//private PropertiesDescriptor<TDocument> SetVariant(PropertyName name, IProperty type)
-	//{
-	//	type.ThrowIfNull(nameof(type));
-
-	//	if (name.IsConditionless())
-	//		throw new ArgumentException($"Could not get property name for {type.GetType().Name} mapping.");
-
-	//	return Assign(name, type);
-	//}
-
+	// This will remain non-code-generated
 	protected override PropertiesDescriptor<TDocument> AssignVariant(PropertyName name, IProperty type)
 	{
 		type.ThrowIfNull(nameof(type));

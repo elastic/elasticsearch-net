@@ -494,8 +494,56 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
+		private Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? BuildFielddataFrequencyFilter()
+		{
+			if (FielddataFrequencyFilterValue is not null)
+			{
+				return FielddataFrequencyFilterValue;
+			}
+
+			if (FielddataFrequencyFilterDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (FielddataFrequencyFilterDescriptorAction is not null)
+			{
+				var descriptor = new IndexManagement.FielddataFrequencyFilterDescriptor(FielddataFrequencyFilterDescriptorAction);
+				if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
+		private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? BuildIndexPrefixes()
+		{
+			if (IndexPrefixesValue is not null)
+			{
+				return IndexPrefixesValue;
+			}
+
+			if (IndexPrefixesDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (IndexPrefixesDescriptorAction is not null)
+			{
+				var descriptor = new TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction);
+				if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
 		TextProperty IBuildableDescriptor<TextProperty>.Build() => new()
-		{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fielddata = FielddataValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Norms = NormsValue, PositionIncrementGap = PositionIncrementGapValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
+		{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fielddata = FielddataValue, FielddataFrequencyFilter = BuildFielddataFrequencyFilter(), Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), LocalMetadata = LocalMetadataValue, Meta = MetaValue, Norms = NormsValue, PositionIncrementGap = PositionIncrementGapValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
 	}
 
 	public sealed partial class TextPropertyDescriptor : SerializableDescriptorBase<TextPropertyDescriptor>, IBuildableDescriptor<TextProperty>
@@ -911,7 +959,55 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
+		private Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? BuildFielddataFrequencyFilter()
+		{
+			if (FielddataFrequencyFilterValue is not null)
+			{
+				return FielddataFrequencyFilterValue;
+			}
+
+			if (FielddataFrequencyFilterDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (FielddataFrequencyFilterDescriptorAction is not null)
+			{
+				var descriptor = new IndexManagement.FielddataFrequencyFilterDescriptor(FielddataFrequencyFilterDescriptorAction);
+				if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
+		private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? BuildIndexPrefixes()
+		{
+			if (IndexPrefixesValue is not null)
+			{
+				return IndexPrefixesValue;
+			}
+
+			if (IndexPrefixesDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (IndexPrefixesDescriptorAction is not null)
+			{
+				var descriptor = new TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction);
+				if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
 		TextProperty IBuildableDescriptor<TextProperty>.Build() => new()
-		{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fielddata = FielddataValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Norms = NormsValue, PositionIncrementGap = PositionIncrementGapValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
+		{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fielddata = FielddataValue, FielddataFrequencyFilter = BuildFielddataFrequencyFilter(), Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), LocalMetadata = LocalMetadataValue, Meta = MetaValue, Norms = NormsValue, PositionIncrementGap = PositionIncrementGapValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
 	}
 }

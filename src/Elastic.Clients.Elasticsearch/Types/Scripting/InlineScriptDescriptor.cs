@@ -4,8 +4,16 @@
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public sealed partial class InlineScriptDescriptor
+	public sealed partial class InlineScriptDescriptor : IBuildableDescriptor<InlineScript>
 	{
 		public InlineScriptDescriptor(string source) => SourceValue = source;
+
+		InlineScript IBuildableDescriptor<InlineScript>.Build() => new()
+		{
+				Source = SourceValue,
+				Options = OptionsValue,
+				Params = ParamsValue,
+				Language = LanguageValue
+			};
 	}
 }
