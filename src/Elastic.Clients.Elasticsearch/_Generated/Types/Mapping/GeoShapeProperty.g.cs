@@ -88,8 +88,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? StrategyValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public GeoShapePropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 		{
 			CoerceValue = coerce;
@@ -324,8 +322,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? StrategyValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public GeoShapePropertyDescriptor Coerce(bool? coerce = true)
 		{

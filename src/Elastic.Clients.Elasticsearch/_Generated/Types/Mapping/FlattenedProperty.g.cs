@@ -104,8 +104,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? SplitQueriesOnWhitespaceValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public FlattenedPropertyDescriptor<TDocument> Boost(double? boost)
 		{
 			BoostValue = boost;
@@ -334,8 +332,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? SplitQueriesOnWhitespaceValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public FlattenedPropertyDescriptor Boost(double? boost)
 		{

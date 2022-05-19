@@ -56,8 +56,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Dictionary<string, string>? MetaValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
 			CopyToValue = copyTo;
@@ -124,8 +122,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public MatchOnlyTextPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{

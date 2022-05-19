@@ -82,8 +82,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? StoreValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public ShapePropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 		{
 			CoerceValue = coerce;
@@ -304,8 +302,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ShapePropertyDescriptor Coerce(bool? coerce = true)
 		{

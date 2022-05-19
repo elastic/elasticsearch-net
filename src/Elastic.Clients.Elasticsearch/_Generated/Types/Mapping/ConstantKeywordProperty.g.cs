@@ -55,8 +55,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private object? ValueValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public ConstantKeywordPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
 			DynamicValue = dynamic;
@@ -167,8 +165,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private object? ValueValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ConstantKeywordPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{

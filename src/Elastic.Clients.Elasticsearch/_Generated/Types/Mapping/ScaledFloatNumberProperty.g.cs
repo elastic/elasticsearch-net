@@ -82,8 +82,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public ScaledFloatNumberPropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 		{
 			CoerceValue = coerce;
@@ -332,8 +330,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ScaledFloatNumberPropertyDescriptor Coerce(bool? coerce = true)
 		{

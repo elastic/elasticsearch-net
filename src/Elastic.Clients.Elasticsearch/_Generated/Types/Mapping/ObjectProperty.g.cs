@@ -62,8 +62,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? StoreValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public ObjectPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
 			CopyToValue = copyTo;
@@ -228,8 +226,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public ObjectPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{

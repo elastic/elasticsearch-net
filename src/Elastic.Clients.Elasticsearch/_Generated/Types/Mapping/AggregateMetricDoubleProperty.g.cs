@@ -62,8 +62,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public AggregateMetricDoublePropertyDescriptor<TDocument> DefaultMetric(string defaultMetric)
 		{
 			DefaultMetricValue = defaultMetric;
@@ -186,8 +184,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private IEnumerable<string> MetricsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public AggregateMetricDoublePropertyDescriptor DefaultMetric(string defaultMetric)
 		{

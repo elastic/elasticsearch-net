@@ -56,8 +56,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Dictionary<string, IEnumerable<string>>? RelationsValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public JoinPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
 			DynamicValue = dynamic;
@@ -174,8 +172,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private Dictionary<string, IEnumerable<string>>? RelationsValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public JoinPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{

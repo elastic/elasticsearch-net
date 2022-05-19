@@ -64,8 +64,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? StoreValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public LongRangePropertyDescriptor<TDocument> Boost(double? boost)
 		{
 			BoostValue = boost;
@@ -272,8 +270,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public LongRangePropertyDescriptor Boost(double? boost)
 		{

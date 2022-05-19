@@ -56,8 +56,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public RankFeaturePropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
 			DynamicValue = dynamic;
@@ -174,8 +172,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? PositiveScoreImpactValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public RankFeaturePropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{

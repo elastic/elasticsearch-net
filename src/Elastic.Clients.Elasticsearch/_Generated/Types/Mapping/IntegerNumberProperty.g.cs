@@ -80,8 +80,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public IntegerNumberPropertyDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
@@ -376,8 +374,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public IntegerNumberPropertyDescriptor Script(ScriptBase? script)
 		{

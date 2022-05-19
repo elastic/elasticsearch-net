@@ -104,8 +104,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public SearchAsYouTypePropertyDescriptor<TDocument> Analyzer(string? analyzer)
 		{
 			AnalyzerValue = analyzer;
@@ -368,8 +366,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public SearchAsYouTypePropertyDescriptor Analyzer(string? analyzer)
 		{

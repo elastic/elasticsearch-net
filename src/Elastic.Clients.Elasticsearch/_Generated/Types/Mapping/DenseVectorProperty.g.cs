@@ -78,8 +78,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private string? SimilarityValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public DenseVectorPropertyDescriptor<TDocument> Dims(int dims)
 		{
 			DimsValue = dims;
@@ -266,8 +264,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private string? SimilarityValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public DenseVectorPropertyDescriptor Dims(int dims)
 		{

@@ -112,8 +112,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? TimeSeriesDimensionValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public KeywordPropertyDescriptor<TDocument> Boost(double? boost)
 		{
 			BoostValue = boost;
@@ -404,8 +402,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		private bool? TimeSeriesDimensionValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public KeywordPropertyDescriptor Boost(double? boost)
 		{

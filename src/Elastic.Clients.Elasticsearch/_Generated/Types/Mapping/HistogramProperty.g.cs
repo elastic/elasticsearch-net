@@ -56,8 +56,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public HistogramPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
 			DynamicValue = dynamic;
@@ -174,8 +172,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, string>? MetaValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public HistogramPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{

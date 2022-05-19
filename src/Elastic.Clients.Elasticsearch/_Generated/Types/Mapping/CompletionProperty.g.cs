@@ -100,8 +100,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? StoreValue { get; set; }
 
-		private PropertyName VariantPropertyNameValue { get; set; }
-
 		public CompletionPropertyDescriptor<TDocument> Contexts(IEnumerable<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? contexts)
 		{
 			ContextsDescriptor = null;
@@ -407,8 +405,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
-
-		private PropertyName VariantPropertyNameValue { get; set; }
 
 		public CompletionPropertyDescriptor Contexts(IEnumerable<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? contexts)
 		{
