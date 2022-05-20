@@ -36,38 +36,38 @@ public partial class Properties<TDocument> : Properties
 }
 
 // TODO
-// After we are generating the container descriptor e.g. PropertiesDescriptor
-// Code generator should generate these for any InternallyTaggedUnions that are IsADictionary types
-public partial class TypeMappingDescriptor
-{
-	public TypeMappingDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
-	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
-	}
+// Code generator should generate these for any InternallyTaggedUnions that are IsADictionary types.
+// These work on generic and non-generic descriptors.
+//public partial class TypeMappingDescriptor
+//{
+//	public TypeMappingDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+//	{
+//		PropertiesValue = descriptor.PromisedValue;
+//		return Self;
+//	}
 
-	public TypeMappingDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
-	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
-	}
-}
+//	public TypeMappingDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+//	{
+//		var descriptor = new PropertiesDescriptor<TDocument>();
+//		configure?.Invoke(descriptor);
+//		PropertiesValue = descriptor.PromisedValue;
+//		return Self;
+//	}
+//}
 
-public partial class TypeMappingDescriptor<TDocument>
-{
-	public TypeMappingDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
-	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
-	}
+//public partial class TypeMappingDescriptor<TDocument>
+//{
+//	public TypeMappingDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+//	{
+//		PropertiesValue = descriptor.PromisedValue;
+//		return Self;
+//	}
 
-	public TypeMappingDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
-	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
-	}
-}
+//	public TypeMappingDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+//	{
+//		var descriptor = new PropertiesDescriptor<TDocument>();
+//		configure?.Invoke(descriptor);
+//		PropertiesValue = descriptor.PromisedValue;
+//		return Self;
+//	}
+//}

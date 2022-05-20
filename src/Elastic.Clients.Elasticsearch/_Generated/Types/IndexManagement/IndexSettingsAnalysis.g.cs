@@ -56,25 +56,31 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzerValue { get; set; }
 
-		private Analysis.AnalyzersDescriptor AnalyzerDescriptor { get; set; }
-
-		private Action<Analysis.AnalyzersDescriptor> AnalyzerDescriptorAction { get; set; }
-
 		private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilterValue { get; set; }
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Analysis.Normalizers? NormalizerValue { get; set; }
 
-		private Analysis.NormalizersDescriptor NormalizerDescriptor { get; set; }
-
-		private Action<Analysis.NormalizersDescriptor> NormalizerDescriptorAction { get; set; }
-
 		private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? TokenizerValue { get; set; }
 
 		public IndexSettingsAnalysisDescriptor Analyzer(Elastic.Clients.Elasticsearch.Analysis.Analyzers? analyzer)
 		{
 			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public IndexSettingsAnalysisDescriptor Analyzer(Analysis.AnalyzersDescriptor descriptor)
+		{
+			AnalyzerValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public IndexSettingsAnalysisDescriptor Analyzer(Action<Analysis.AnalyzersDescriptor> configure)
+		{
+			var descriptor = new Analysis.AnalyzersDescriptor();
+			configure?.Invoke(descriptor);
+			AnalyzerValue = descriptor.PromisedValue;
 			return Self;
 		}
 
@@ -93,6 +99,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsAnalysisDescriptor Normalizer(Elastic.Clients.Elasticsearch.Analysis.Normalizers? normalizer)
 		{
 			NormalizerValue = normalizer;
+			return Self;
+		}
+
+		public IndexSettingsAnalysisDescriptor Normalizer(Analysis.NormalizersDescriptor descriptor)
+		{
+			NormalizerValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public IndexSettingsAnalysisDescriptor Normalizer(Action<Analysis.NormalizersDescriptor> configure)
+		{
+			var descriptor = new Analysis.NormalizersDescriptor();
+			configure?.Invoke(descriptor);
+			NormalizerValue = descriptor.PromisedValue;
 			return Self;
 		}
 

@@ -60,10 +60,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
-		private PropertiesDescriptor<TDocument> FieldsDescriptor { get; set; }
-
-		private Action<PropertiesDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-
 		private int? IgnoreAboveValue { get; set; }
 
 		private bool? IgnoreMalformedValue { get; set; }
@@ -77,10 +73,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private double? NullValueValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private PropertiesDescriptor<TDocument> PropertiesDescriptor { get; set; }
-
-		private Action<PropertiesDescriptor<TDocument>> PropertiesDescriptorAction { get; set; }
 
 		private double? ScalingFactorValue { get; set; }
 
@@ -126,6 +118,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public ScaledFloatNumberPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+		{
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public ScaledFloatNumberPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
 		public ScaledFloatNumberPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
 		{
 			IgnoreAboveValue = ignoreAbove;
@@ -165,6 +171,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public ScaledFloatNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
+			return Self;
+		}
+
+		public ScaledFloatNumberPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+		{
+			PropertiesValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public ScaledFloatNumberPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			PropertiesValue = descriptor.PromisedValue;
 			return Self;
 		}
 
@@ -381,6 +401,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public ScaledFloatNumberPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+		{
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public ScaledFloatNumberPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
 		public ScaledFloatNumberPropertyDescriptor IgnoreAbove(int? ignoreAbove)
 		{
 			IgnoreAboveValue = ignoreAbove;
@@ -420,6 +454,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public ScaledFloatNumberPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
+			return Self;
+		}
+
+		public ScaledFloatNumberPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+		{
+			PropertiesValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public ScaledFloatNumberPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			PropertiesValue = descriptor.PromisedValue;
 			return Self;
 		}
 

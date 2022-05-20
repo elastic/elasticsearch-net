@@ -114,10 +114,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
-		private PropertiesDescriptor<TDocument> FieldsDescriptor { get; set; }
-
-		private Action<PropertiesDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-
 		private int? IgnoreAboveValue { get; set; }
 
 		private bool? IndexValue { get; set; }
@@ -141,10 +137,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private int? PositionIncrementGapValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private PropertiesDescriptor<TDocument> PropertiesDescriptor { get; set; }
-
-		private Action<PropertiesDescriptor<TDocument>> PropertiesDescriptorAction { get; set; }
 
 		private string? SearchAnalyzerValue { get; set; }
 
@@ -228,6 +220,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public TextPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+		{
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public TextPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
 		public TextPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
 		{
 			IgnoreAboveValue = ignoreAbove;
@@ -303,6 +309,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public TextPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
+			return Self;
+		}
+
+		public TextPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+		{
+			PropertiesValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public TextPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			PropertiesValue = descriptor.PromisedValue;
 			return Self;
 		}
 
@@ -693,6 +713,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public TextPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+		{
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public TextPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
 		public TextPropertyDescriptor IgnoreAbove(int? ignoreAbove)
 		{
 			IgnoreAboveValue = ignoreAbove;
@@ -768,6 +802,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public TextPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
+			return Self;
+		}
+
+		public TextPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+		{
+			PropertiesValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public TextPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			PropertiesValue = descriptor.PromisedValue;
 			return Self;
 		}
 

@@ -54,10 +54,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
-		private PropertiesDescriptor<TDocument> FieldsDescriptor { get; set; }
-
-		private Action<PropertiesDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-
 		private Dictionary<string, string>? MetaValue { get; set; }
 
 		public MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
@@ -75,6 +71,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public MatchOnlyTextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
 		{
 			FieldsValue = fields;
+			return Self;
+		}
+
+		public MatchOnlyTextPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+		{
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public MatchOnlyTextPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			FieldsValue = descriptor.PromisedValue;
 			return Self;
 		}
 
@@ -148,6 +158,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public MatchOnlyTextPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
 		{
 			FieldsValue = fields;
+			return Self;
+		}
+
+		public MatchOnlyTextPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+		{
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public MatchOnlyTextPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			FieldsValue = descriptor.PromisedValue;
 			return Self;
 		}
 

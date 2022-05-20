@@ -50,10 +50,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
-		private PropertiesDescriptor<TDocument> FieldsDescriptor { get; set; }
-
-		private Action<PropertiesDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-
 		private int? IgnoreAboveValue { get; set; }
 
 		private bool? IgnoreMalformedValue { get; set; }
@@ -67,10 +63,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private long? NullValueValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private PropertiesDescriptor<TDocument> PropertiesDescriptor { get; set; }
-
-		private Action<PropertiesDescriptor<TDocument>> PropertiesDescriptorAction { get; set; }
 
 		private string? SimilarityValue { get; set; }
 
@@ -105,6 +97,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public UnsignedLongNumberPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
 		{
 			FieldsValue = fields;
+			return Self;
+		}
+
+		public UnsignedLongNumberPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+		{
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public UnsignedLongNumberPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			FieldsValue = descriptor.PromisedValue;
 			return Self;
 		}
 
@@ -147,6 +153,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public UnsignedLongNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
+			return Self;
+		}
+
+		public UnsignedLongNumberPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+		{
+			PropertiesValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public UnsignedLongNumberPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			PropertiesValue = descriptor.PromisedValue;
 			return Self;
 		}
 
@@ -335,6 +355,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public UnsignedLongNumberPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+		{
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public UnsignedLongNumberPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			FieldsValue = descriptor.PromisedValue;
+			return Self;
+		}
+
 		public UnsignedLongNumberPropertyDescriptor IgnoreAbove(int? ignoreAbove)
 		{
 			IgnoreAboveValue = ignoreAbove;
@@ -374,6 +408,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public UnsignedLongNumberPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
+			return Self;
+		}
+
+		public UnsignedLongNumberPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+		{
+			PropertiesValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public UnsignedLongNumberPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			PropertiesValue = descriptor.PromisedValue;
 			return Self;
 		}
 

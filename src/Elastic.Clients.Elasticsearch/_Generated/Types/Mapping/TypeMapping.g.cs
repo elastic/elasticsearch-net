@@ -156,10 +156,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
-		private PropertiesDescriptor<TDocument> PropertiesDescriptor { get; set; }
-
-		private Action<PropertiesDescriptor<TDocument>> PropertiesDescriptorAction { get; set; }
-
 		private Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
 
 		public TypeMappingDescriptor<TDocument> DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? dataStreamTimestamp)
@@ -375,6 +371,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public TypeMappingDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
+			return Self;
+		}
+
+		public TypeMappingDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+		{
+			PropertiesValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public TypeMappingDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			PropertiesValue = descriptor.PromisedValue;
 			return Self;
 		}
 
@@ -837,6 +847,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public TypeMappingDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
+			return Self;
+		}
+
+		public TypeMappingDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+		{
+			PropertiesValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public TypeMappingDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			PropertiesValue = descriptor.PromisedValue;
 			return Self;
 		}
 
