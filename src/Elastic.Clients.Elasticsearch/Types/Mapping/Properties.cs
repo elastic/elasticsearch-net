@@ -32,24 +32,17 @@ public partial class Properties<TDocument> : Properties
 	public void Add<TValue>(Expression<Func<TDocument, TValue>> name, IProperty property) => BackingDictionary.Add(name, property);
 }
 
-// TODO
-// Generate after Buildable implementation
 public sealed partial class PropertiesDescriptor<TDocument>
 		: IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
 {
-	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> fieldName) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
+	// Skipping these for now
+	//public PropertiesDescriptor<TDocument> Boolean<TValue>(Expression<Func<TDocument, TValue>> fieldName) =>
+	//	AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
 
-	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> fieldName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, configure);
+	//public PropertiesDescriptor<TDocument> Boolean<TValue>(Expression<Func<TDocument, TValue>> fieldName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
+	//	AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, configure);
 
-	public PropertiesDescriptor<TDocument> Boolean<TValue>(Expression<Func<TDocument, TValue>> fieldName) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
-
-	public PropertiesDescriptor<TDocument> Boolean<TValue>(Expression<Func<TDocument, TValue>> fieldName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, configure);
-
-	// These might be manually added to a partial class which seems reasonable.
+	// Scalar can be manually added to a partial class which seems reasonable.
 
 	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int>> fieldName) =>
 		AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(fieldName, null);

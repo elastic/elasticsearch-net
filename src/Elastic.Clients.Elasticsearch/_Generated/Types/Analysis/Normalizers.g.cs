@@ -18,6 +18,7 @@
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -47,12 +48,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		public NormalizersDescriptor Custom(string normalizers) => AssignVariant<CustomNormalizerDescriptor, CustomNormalizer>(normalizers, null);
-		public NormalizersDescriptor Custom(string normalizers, Action<CustomNormalizerDescriptor> configure) => AssignVariant<CustomNormalizerDescriptor, CustomNormalizer>(normalizers, configure);
-		public NormalizersDescriptor Custom(string normalizers, CustomNormalizer customNormalizer) => AssignVariant(normalizers, customNormalizer);
-		public NormalizersDescriptor Lowercase(string normalizers) => AssignVariant<LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizers, null);
-		public NormalizersDescriptor Lowercase(string normalizers, Action<LowercaseNormalizerDescriptor> configure) => AssignVariant<LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizers, configure);
-		public NormalizersDescriptor Lowercase(string normalizers, LowercaseNormalizer lowercaseNormalizer) => AssignVariant(normalizers, lowercaseNormalizer);
+		public NormalizersDescriptor Custom(string normalizerName) => AssignVariant<CustomNormalizerDescriptor, CustomNormalizer>(normalizerName, null);
+		public NormalizersDescriptor Custom(string normalizerName, Action<CustomNormalizerDescriptor> configure) => AssignVariant<CustomNormalizerDescriptor, CustomNormalizer>(normalizerName, configure);
+		public NormalizersDescriptor Custom(string normalizerName, CustomNormalizer customNormalizer) => AssignVariant(normalizerName, customNormalizer);
+		public NormalizersDescriptor Lowercase(string normalizerName) => AssignVariant<LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizerName, null);
+		public NormalizersDescriptor Lowercase(string normalizerName, Action<LowercaseNormalizerDescriptor> configure) => AssignVariant<LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizerName, configure);
+		public NormalizersDescriptor Lowercase(string normalizerName, LowercaseNormalizer lowercaseNormalizer) => AssignVariant(normalizerName, lowercaseNormalizer);
 	}
 
 	internal sealed partial class NormalizerInterfaceConverter
