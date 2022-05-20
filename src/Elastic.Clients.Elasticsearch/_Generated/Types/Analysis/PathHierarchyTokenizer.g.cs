@@ -28,26 +28,109 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("buffer_size")]
-		public int BufferSize { get; init; }
+		public int BufferSize { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("delimiter")]
-		public string Delimiter { get; init; }
+		public string Delimiter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("replacement")]
-		public string Replacement { get; init; }
+		public string Replacement { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("reverse")]
-		public bool Reverse { get; init; }
+		public bool Reverse { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("skip")]
-		public int Skip { get; init; }
+		public int Skip { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "path_hierarchy";
+	}
+
+	public sealed partial class PathHierarchyTokenizerDescriptor : SerializableDescriptorBase<PathHierarchyTokenizerDescriptor>, IBuildableDescriptor<PathHierarchyTokenizer>
+	{
+		internal PathHierarchyTokenizerDescriptor(Action<PathHierarchyTokenizerDescriptor> configure) => configure.Invoke(this);
+		public PathHierarchyTokenizerDescriptor() : base()
+		{
+		}
+
+		private int BufferSizeValue { get; set; }
+
+		private string DelimiterValue { get; set; }
+
+		private string ReplacementValue { get; set; }
+
+		private bool ReverseValue { get; set; }
+
+		private int SkipValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public PathHierarchyTokenizerDescriptor BufferSize(int bufferSize)
+		{
+			BufferSizeValue = bufferSize;
+			return Self;
+		}
+
+		public PathHierarchyTokenizerDescriptor Delimiter(string delimiter)
+		{
+			DelimiterValue = delimiter;
+			return Self;
+		}
+
+		public PathHierarchyTokenizerDescriptor Replacement(string replacement)
+		{
+			ReplacementValue = replacement;
+			return Self;
+		}
+
+		public PathHierarchyTokenizerDescriptor Reverse(bool reverse = true)
+		{
+			ReverseValue = reverse;
+			return Self;
+		}
+
+		public PathHierarchyTokenizerDescriptor Skip(int skip)
+		{
+			SkipValue = skip;
+			return Self;
+		}
+
+		public PathHierarchyTokenizerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("buffer_size");
+			writer.WriteNumberValue(BufferSizeValue);
+			writer.WritePropertyName("delimiter");
+			writer.WriteStringValue(DelimiterValue);
+			writer.WritePropertyName("replacement");
+			writer.WriteStringValue(ReplacementValue);
+			writer.WritePropertyName("reverse");
+			writer.WriteBooleanValue(ReverseValue);
+			writer.WritePropertyName("skip");
+			writer.WriteNumberValue(SkipValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("path_hierarchy");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		PathHierarchyTokenizer IBuildableDescriptor<PathHierarchyTokenizer>.Build() => new()
+		{ BufferSize = BufferSizeValue, Delimiter = DelimiterValue, Replacement = ReplacementValue, Reverse = ReverseValue, Skip = SkipValue, Version = VersionValue };
 	}
 }

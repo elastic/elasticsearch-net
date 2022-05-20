@@ -28,14 +28,127 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public IReadOnlyCollection<string> Filter { get; init; }
+		public IEnumerable<string> Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public ScriptBase Script { get; init; }
+		public ScriptBase Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "condition";
+	}
+
+	public sealed partial class ConditionTokenFilterDescriptor : SerializableDescriptorBase<ConditionTokenFilterDescriptor>, IBuildableDescriptor<ConditionTokenFilter>
+	{
+		internal ConditionTokenFilterDescriptor(Action<ConditionTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public ConditionTokenFilterDescriptor() : base()
+		{
+		}
+
+		private IEnumerable<string> FilterValue { get; set; }
+
+		private ScriptBase ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public ConditionTokenFilterDescriptor Filter(IEnumerable<string> filter)
+		{
+			FilterValue = filter;
+			return Self;
+		}
+
+		public ConditionTokenFilterDescriptor Script(ScriptBase script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public ConditionTokenFilterDescriptor Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public ConditionTokenFilterDescriptor Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public ConditionTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("condition");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		private ScriptBase BuildScript()
+		{
+			if (ScriptValue is not null)
+			{
+				return ScriptValue;
+			}
+
+			if (ScriptDescriptor is IBuildableDescriptor<ScriptBase> buildable)
+			{
+				return buildable.Build();
+			}
+
+			if (ScriptDescriptorAction is not null)
+			{
+				var descriptor = new ScriptDescriptor(ScriptDescriptorAction);
+				if (descriptor is IBuildableDescriptor<ScriptBase> buildableFromAction)
+				{
+					return buildableFromAction.Build();
+				}
+			}
+
+			return null;
+		}
+
+		ConditionTokenFilter IBuildableDescriptor<ConditionTokenFilter>.Build() => new()
+		{ Filter = FilterValue, Script = BuildScript(), Version = VersionValue };
 	}
 }

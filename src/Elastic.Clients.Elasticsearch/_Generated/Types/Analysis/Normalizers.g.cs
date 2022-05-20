@@ -46,6 +46,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public NormalizersDescriptor(Normalizers normalizers) : base(normalizers ?? new Normalizers())
 		{
 		}
+
+		public NormalizersDescriptor Custom(string normalizers) => AssignVariant<CustomNormalizerDescriptor, CustomNormalizer>(normalizers, null);
+		public NormalizersDescriptor Custom(string normalizers, Action<CustomNormalizerDescriptor> configure) => AssignVariant<CustomNormalizerDescriptor, CustomNormalizer>(normalizers, configure);
+		public NormalizersDescriptor Lowercase(string normalizers) => AssignVariant<LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizers, null);
+		public NormalizersDescriptor Lowercase(string normalizers, Action<LowercaseNormalizerDescriptor> configure) => AssignVariant<LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizers, configure);
 	}
 
 	internal sealed partial class NormalizerInterfaceConverter

@@ -28,18 +28,81 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("flags")]
-		public string Flags { get; init; }
+		public string Flags { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("pattern")]
-		public string Pattern { get; init; }
+		public string Pattern { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("replacement")]
-		public string Replacement { get; init; }
+		public string Replacement { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "pattern_replace";
+	}
+
+	public sealed partial class PatternReplaceTokenFilterDescriptor : SerializableDescriptorBase<PatternReplaceTokenFilterDescriptor>, IBuildableDescriptor<PatternReplaceTokenFilter>
+	{
+		internal PatternReplaceTokenFilterDescriptor(Action<PatternReplaceTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public PatternReplaceTokenFilterDescriptor() : base()
+		{
+		}
+
+		private string FlagsValue { get; set; }
+
+		private string PatternValue { get; set; }
+
+		private string ReplacementValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public PatternReplaceTokenFilterDescriptor Flags(string flags)
+		{
+			FlagsValue = flags;
+			return Self;
+		}
+
+		public PatternReplaceTokenFilterDescriptor Pattern(string pattern)
+		{
+			PatternValue = pattern;
+			return Self;
+		}
+
+		public PatternReplaceTokenFilterDescriptor Replacement(string replacement)
+		{
+			ReplacementValue = replacement;
+			return Self;
+		}
+
+		public PatternReplaceTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("flags");
+			writer.WriteStringValue(FlagsValue);
+			writer.WritePropertyName("pattern");
+			writer.WriteStringValue(PatternValue);
+			writer.WritePropertyName("replacement");
+			writer.WriteStringValue(ReplacementValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("pattern_replace");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		PatternReplaceTokenFilter IBuildableDescriptor<PatternReplaceTokenFilter>.Build() => new()
+		{ Flags = FlagsValue, Pattern = PatternValue, Replacement = ReplacementValue, Version = VersionValue };
 	}
 }

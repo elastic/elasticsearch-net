@@ -28,30 +28,30 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("hyphenation_patterns_path")]
-		public string? HyphenationPatternsPath { get; init; }
+		public string? HyphenationPatternsPath { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_subword_size")]
-		public int? MaxSubwordSize { get; init; }
+		public int? MaxSubwordSize { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_subword_size")]
-		public int? MinSubwordSize { get; init; }
+		public int? MinSubwordSize { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_word_size")]
-		public int? MinWordSize { get; init; }
+		public int? MinWordSize { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("only_longest_match")]
-		public bool? OnlyLongestMatch { get; init; }
+		public bool? OnlyLongestMatch { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("word_list")]
-		public IReadOnlyCollection<string>? WordList { get; init; }
+		public IEnumerable<string>? WordList { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("word_list_path")]
-		public string? WordListPath { get; init; }
+		public string? WordListPath { get; set; }
 	}
 }

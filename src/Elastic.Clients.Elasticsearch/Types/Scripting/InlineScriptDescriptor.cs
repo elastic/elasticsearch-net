@@ -9,7 +9,7 @@ namespace Elastic.Clients.Elasticsearch
 		public InlineScriptDescriptor(string source) => SourceValue = source;
 
 		InlineScript IBuildableDescriptor<InlineScript>.Build() => new()
-		{
+			{
 				Source = SourceValue,
 				Options = OptionsValue,
 				Params = ParamsValue,

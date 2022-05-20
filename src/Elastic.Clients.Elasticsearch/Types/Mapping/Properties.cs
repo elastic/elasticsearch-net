@@ -9,8 +9,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class Properties
 {
+	// TODO - Generate this
 	public void Add<T>(Expression<Func<T, object>> propertyName, IProperty property) => BackingDictionary.Add(propertyName, property);
 
+	// TODO - Generate this
 	public bool TryGetProperty<T>(PropertyName propertyName, out T property) where T : IProperty
 	{
 		if (BackingDictionary.TryGetValue(propertyName, out var matchedProperty) && matchedProperty is T finalProperty)
@@ -24,6 +26,7 @@ public partial class Properties
 	}
 }
 
+// TODO - Generate this?
 public partial class Properties<TDocument> : Properties
 {
 	public void Add<TValue>(Expression<Func<TDocument, TValue>> name, IProperty property) => BackingDictionary.Add(name, property);
@@ -34,11 +37,8 @@ public partial class Properties<TDocument> : Properties
 public sealed partial class PropertiesDescriptor<TDocument>
 		: IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
 {
-	public PropertiesDescriptor<TDocument> Boolean(PropertyName propertyName) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, null);
-
-	public PropertiesDescriptor<TDocument> Boolean(PropertyName propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Boolean(PropertyName propertyName, BooleanProperty property) =>
+		AssignVariant(propertyName, property);
 
 	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> fieldName) =>
 		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);

@@ -28,10 +28,44 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("num_partitions")]
-		public long NumPartitions { get; init; }
+		public long NumPartitions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("partition")]
-		public long Partition { get; init; }
+		public long Partition { get; set; }
+	}
+
+	public sealed partial class TermsPartitionDescriptor : SerializableDescriptorBase<TermsPartitionDescriptor>
+	{
+		internal TermsPartitionDescriptor(Action<TermsPartitionDescriptor> configure) => configure.Invoke(this);
+		public TermsPartitionDescriptor() : base()
+		{
+		}
+
+		private long NumPartitionsValue { get; set; }
+
+		private long PartitionValue { get; set; }
+
+		public TermsPartitionDescriptor NumPartitions(long numPartitions)
+		{
+			NumPartitionsValue = numPartitions;
+			return Self;
+		}
+
+		public TermsPartitionDescriptor Partition(long partition)
+		{
+			PartitionValue = partition;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("num_partitions");
+			writer.WriteNumberValue(NumPartitionsValue);
+			writer.WritePropertyName("partition");
+			writer.WriteNumberValue(PartitionValue);
+			writer.WriteEndObject();
+		}
 	}
 }

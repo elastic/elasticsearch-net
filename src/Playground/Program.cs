@@ -37,6 +37,14 @@ var createIndexResponse = await client.Indices.CreateAsync("my-index-name", i =>
 		.Boolean("not-on-type")
 	)));
 
+// TODO - This should eventually be possible.
+//var createIndexResponse = await client.Indices.CreateAsync<Person>("my-index-name", i => i
+//	.Mappings(m => m.Properties(p => p
+//		.Boolean(p => p.IsDeleted, b => b.NullValue(true).Store(false).Fielddata(f => f.Format(NumericFielddataFormat.Array)))
+//		.Scalar(p => p.Id)
+//		.Boolean("not-on-type")
+//	)));
+
 var filterResponse = await client.SearchAsync<Person>(s => s
 	.Query(q => q
 		.Bool(b => b

@@ -28,10 +28,53 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("name")]
-		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Name { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Name { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "icu_normalizer";
+	}
+
+	public sealed partial class IcuNormalizationTokenFilterDescriptor : SerializableDescriptorBase<IcuNormalizationTokenFilterDescriptor>, IBuildableDescriptor<IcuNormalizationTokenFilter>
+	{
+		internal IcuNormalizationTokenFilterDescriptor(Action<IcuNormalizationTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public IcuNormalizationTokenFilterDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType NameValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public IcuNormalizationTokenFilterDescriptor Name(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public IcuNormalizationTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("name");
+			JsonSerializer.Serialize(writer, NameValue, options);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("icu_normalizer");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		IcuNormalizationTokenFilter IBuildableDescriptor<IcuNormalizationTokenFilter>.Build() => new()
+		{ Name = NameValue, Version = VersionValue };
 	}
 }

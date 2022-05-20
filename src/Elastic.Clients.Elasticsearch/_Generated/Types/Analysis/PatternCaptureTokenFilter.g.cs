@@ -28,14 +28,67 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("patterns")]
-		public IReadOnlyCollection<string> Patterns { get; init; }
+		public IEnumerable<string> Patterns { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
-		public bool PreserveOriginal { get; init; }
+		public bool PreserveOriginal { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "pattern_capture";
+	}
+
+	public sealed partial class PatternCaptureTokenFilterDescriptor : SerializableDescriptorBase<PatternCaptureTokenFilterDescriptor>, IBuildableDescriptor<PatternCaptureTokenFilter>
+	{
+		internal PatternCaptureTokenFilterDescriptor(Action<PatternCaptureTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public PatternCaptureTokenFilterDescriptor() : base()
+		{
+		}
+
+		private IEnumerable<string> PatternsValue { get; set; }
+
+		private bool PreserveOriginalValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public PatternCaptureTokenFilterDescriptor Patterns(IEnumerable<string> patterns)
+		{
+			PatternsValue = patterns;
+			return Self;
+		}
+
+		public PatternCaptureTokenFilterDescriptor PreserveOriginal(bool preserveOriginal = true)
+		{
+			PreserveOriginalValue = preserveOriginal;
+			return Self;
+		}
+
+		public PatternCaptureTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("patterns");
+			JsonSerializer.Serialize(writer, PatternsValue, options);
+			writer.WritePropertyName("preserve_original");
+			writer.WriteBooleanValue(PreserveOriginalValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("pattern_capture");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		PatternCaptureTokenFilter IBuildableDescriptor<PatternCaptureTokenFilter>.Build() => new()
+		{ Patterns = PatternsValue, PreserveOriginal = PreserveOriginalValue, Version = VersionValue };
 	}
 }

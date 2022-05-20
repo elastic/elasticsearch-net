@@ -28,10 +28,44 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("lat")]
-		public double Lat { get; init; }
+		public double Lat { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("lon")]
-		public double Lon { get; init; }
+		public double Lon { get; set; }
+	}
+
+	public sealed partial class LatLonGeoLocationDescriptor : SerializableDescriptorBase<LatLonGeoLocationDescriptor>
+	{
+		internal LatLonGeoLocationDescriptor(Action<LatLonGeoLocationDescriptor> configure) => configure.Invoke(this);
+		public LatLonGeoLocationDescriptor() : base()
+		{
+		}
+
+		private double LatValue { get; set; }
+
+		private double LonValue { get; set; }
+
+		public LatLonGeoLocationDescriptor Lat(double lat)
+		{
+			LatValue = lat;
+			return Self;
+		}
+
+		public LatLonGeoLocationDescriptor Lon(double lon)
+		{
+			LonValue = lon;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("lat");
+			writer.WriteNumberValue(LatValue);
+			writer.WritePropertyName("lon");
+			writer.WriteNumberValue(LonValue);
+			writer.WriteEndObject();
+		}
 	}
 }

@@ -28,22 +28,95 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("dedup")]
-		public bool Dedup { get; init; }
+		public bool Dedup { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("dictionary")]
-		public string Dictionary { get; init; }
+		public string Dictionary { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("locale")]
-		public string Locale { get; init; }
+		public string Locale { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("longest_only")]
-		public bool LongestOnly { get; init; }
+		public bool LongestOnly { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "hunspell";
+	}
+
+	public sealed partial class HunspellTokenFilterDescriptor : SerializableDescriptorBase<HunspellTokenFilterDescriptor>, IBuildableDescriptor<HunspellTokenFilter>
+	{
+		internal HunspellTokenFilterDescriptor(Action<HunspellTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public HunspellTokenFilterDescriptor() : base()
+		{
+		}
+
+		private bool DedupValue { get; set; }
+
+		private string DictionaryValue { get; set; }
+
+		private string LocaleValue { get; set; }
+
+		private bool LongestOnlyValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public HunspellTokenFilterDescriptor Dedup(bool dedup = true)
+		{
+			DedupValue = dedup;
+			return Self;
+		}
+
+		public HunspellTokenFilterDescriptor Dictionary(string dictionary)
+		{
+			DictionaryValue = dictionary;
+			return Self;
+		}
+
+		public HunspellTokenFilterDescriptor Locale(string locale)
+		{
+			LocaleValue = locale;
+			return Self;
+		}
+
+		public HunspellTokenFilterDescriptor LongestOnly(bool longestOnly = true)
+		{
+			LongestOnlyValue = longestOnly;
+			return Self;
+		}
+
+		public HunspellTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("dedup");
+			writer.WriteBooleanValue(DedupValue);
+			writer.WritePropertyName("dictionary");
+			writer.WriteStringValue(DictionaryValue);
+			writer.WritePropertyName("locale");
+			writer.WriteStringValue(LocaleValue);
+			writer.WritePropertyName("longest_only");
+			writer.WriteBooleanValue(LongestOnlyValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("hunspell");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		HunspellTokenFilter IBuildableDescriptor<HunspellTokenFilter>.Build() => new()
+		{ Dedup = DedupValue, Dictionary = DictionaryValue, Locale = LocaleValue, LongestOnly = LongestOnlyValue, Version = VersionValue };
 	}
 }

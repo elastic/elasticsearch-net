@@ -24,28 +24,17 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm
 {
-	public partial class LifecycleExplains : IsADictionaryBase<string, ILifecycleExplain>
+	public partial class LifecycleExplain : IsADictionaryBase<string, ILifecycleExplain>
 	{
-		public LifecycleExplains()
+		public LifecycleExplain()
 		{
 		}
 
-		public LifecycleExplains(IDictionary<string, ILifecycleExplain> container) : base(container)
+		public LifecycleExplain(IDictionary<string, ILifecycleExplain> container) : base(container)
 		{
 		}
 
-		public void Add(string name, ILifecycleExplain lifecycleexplains) => BackingDictionary.Add(name, lifecycleexplains);
-	}
-
-	public sealed partial class LifecycleExplainsDescriptor : IsADictionaryDescriptor<LifecycleExplainsDescriptor, LifecycleExplains, string, ILifecycleExplain>
-	{
-		public LifecycleExplainsDescriptor() : base(new LifecycleExplains())
-		{
-		}
-
-		public LifecycleExplainsDescriptor(LifecycleExplains lifecycleExplains) : base(lifecycleExplains ?? new LifecycleExplains())
-		{
-		}
+		public void Add(string name, ILifecycleExplain lifecycleExplain) => BackingDictionary.Add(name, lifecycleExplain);
 	}
 
 	internal sealed partial class LifecycleExplainInterfaceConverter

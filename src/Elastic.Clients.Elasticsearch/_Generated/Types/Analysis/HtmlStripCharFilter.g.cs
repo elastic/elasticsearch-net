@@ -30,4 +30,37 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("type")]
 		public string Type => "html_strip";
 	}
+
+	public sealed partial class HtmlStripCharFilterDescriptor : SerializableDescriptorBase<HtmlStripCharFilterDescriptor>, IBuildableDescriptor<HtmlStripCharFilter>
+	{
+		internal HtmlStripCharFilterDescriptor(Action<HtmlStripCharFilterDescriptor> configure) => configure.Invoke(this);
+		public HtmlStripCharFilterDescriptor() : base()
+		{
+		}
+
+		private string? VersionValue { get; set; }
+
+		public HtmlStripCharFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("html_strip");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		HtmlStripCharFilter IBuildableDescriptor<HtmlStripCharFilter>.Build() => new()
+		{ Version = VersionValue };
+	}
 }
