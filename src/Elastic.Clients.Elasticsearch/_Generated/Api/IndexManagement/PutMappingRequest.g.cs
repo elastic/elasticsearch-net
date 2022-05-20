@@ -176,6 +176,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
+		private Mapping.PropertiesDescriptor<TDocument> PropertiesDescriptor { get; set; }
+
+		private Action<Mapping.PropertiesDescriptor<TDocument>> PropertiesDescriptorAction { get; set; }
+
 		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeValue { get; set; }
 
 		public PutMappingRequestDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)

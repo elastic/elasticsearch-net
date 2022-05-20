@@ -80,6 +80,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
+		private PropertiesDescriptor<TDocument> FieldsDescriptor { get; set; }
+
+		private Action<PropertiesDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
+
 		private int? IgnoreAboveValue { get; set; }
 
 		private Dictionary<string, object>? LocalMetadataValue { get; set; }
@@ -93,6 +97,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? PreserveSeparatorsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private PropertiesDescriptor<TDocument> PropertiesDescriptor { get; set; }
+
+		private Action<PropertiesDescriptor<TDocument>> PropertiesDescriptorAction { get; set; }
 
 		private string? SearchAnalyzerValue { get; set; }
 

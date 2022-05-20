@@ -54,6 +54,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
+		private PropertiesDescriptor<TDocument> FieldsDescriptor { get; set; }
+
+		private Action<PropertiesDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
+
 		private Dictionary<string, string>? MetaValue { get; set; }
 
 		public MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
