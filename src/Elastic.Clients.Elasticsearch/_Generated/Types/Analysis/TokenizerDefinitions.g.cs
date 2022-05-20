@@ -49,32 +49,46 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		public TokenizerDefinitionsDescriptor CharGroupTokenizer(string tokenizerDefinitions) => AssignVariant<CharGroupTokenizerDescriptor, CharGroupTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor CharGroupTokenizer(string tokenizerDefinitions, Action<CharGroupTokenizerDescriptor> configure) => AssignVariant<CharGroupTokenizerDescriptor, CharGroupTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor CharGroupTokenizer(string tokenizerDefinitions, CharGroupTokenizer charGroupTokenizer) => AssignVariant(tokenizerDefinitions, charGroupTokenizer);
 		public TokenizerDefinitionsDescriptor EdgeNGramTokenizer(string tokenizerDefinitions) => AssignVariant<EdgeNGramTokenizerDescriptor, EdgeNGramTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor EdgeNGramTokenizer(string tokenizerDefinitions, Action<EdgeNGramTokenizerDescriptor> configure) => AssignVariant<EdgeNGramTokenizerDescriptor, EdgeNGramTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor EdgeNGramTokenizer(string tokenizerDefinitions, EdgeNGramTokenizer edgeNGramTokenizer) => AssignVariant(tokenizerDefinitions, edgeNGramTokenizer);
 		public TokenizerDefinitionsDescriptor IcuTokenizer(string tokenizerDefinitions) => AssignVariant<IcuTokenizerDescriptor, IcuTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor IcuTokenizer(string tokenizerDefinitions, Action<IcuTokenizerDescriptor> configure) => AssignVariant<IcuTokenizerDescriptor, IcuTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor IcuTokenizer(string tokenizerDefinitions, IcuTokenizer icuTokenizer) => AssignVariant(tokenizerDefinitions, icuTokenizer);
 		public TokenizerDefinitionsDescriptor KeywordTokenizer(string tokenizerDefinitions) => AssignVariant<KeywordTokenizerDescriptor, KeywordTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor KeywordTokenizer(string tokenizerDefinitions, Action<KeywordTokenizerDescriptor> configure) => AssignVariant<KeywordTokenizerDescriptor, KeywordTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor KeywordTokenizer(string tokenizerDefinitions, KeywordTokenizer keywordTokenizer) => AssignVariant(tokenizerDefinitions, keywordTokenizer);
 		public TokenizerDefinitionsDescriptor KuromojiTokenizer(string tokenizerDefinitions) => AssignVariant<KuromojiTokenizerDescriptor, KuromojiTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor KuromojiTokenizer(string tokenizerDefinitions, Action<KuromojiTokenizerDescriptor> configure) => AssignVariant<KuromojiTokenizerDescriptor, KuromojiTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor KuromojiTokenizer(string tokenizerDefinitions, KuromojiTokenizer kuromojiTokenizer) => AssignVariant(tokenizerDefinitions, kuromojiTokenizer);
 		public TokenizerDefinitionsDescriptor LetterTokenizer(string tokenizerDefinitions) => AssignVariant<LetterTokenizerDescriptor, LetterTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor LetterTokenizer(string tokenizerDefinitions, Action<LetterTokenizerDescriptor> configure) => AssignVariant<LetterTokenizerDescriptor, LetterTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor LetterTokenizer(string tokenizerDefinitions, LetterTokenizer letterTokenizer) => AssignVariant(tokenizerDefinitions, letterTokenizer);
 		public TokenizerDefinitionsDescriptor LowercaseTokenizer(string tokenizerDefinitions) => AssignVariant<LowercaseTokenizerDescriptor, LowercaseTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor LowercaseTokenizer(string tokenizerDefinitions, Action<LowercaseTokenizerDescriptor> configure) => AssignVariant<LowercaseTokenizerDescriptor, LowercaseTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor LowercaseTokenizer(string tokenizerDefinitions, LowercaseTokenizer lowercaseTokenizer) => AssignVariant(tokenizerDefinitions, lowercaseTokenizer);
 		public TokenizerDefinitionsDescriptor NGramTokenizer(string tokenizerDefinitions) => AssignVariant<NGramTokenizerDescriptor, NGramTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor NGramTokenizer(string tokenizerDefinitions, Action<NGramTokenizerDescriptor> configure) => AssignVariant<NGramTokenizerDescriptor, NGramTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor NGramTokenizer(string tokenizerDefinitions, NGramTokenizer nGramTokenizer) => AssignVariant(tokenizerDefinitions, nGramTokenizer);
 		public TokenizerDefinitionsDescriptor NoriTokenizer(string tokenizerDefinitions) => AssignVariant<NoriTokenizerDescriptor, NoriTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor NoriTokenizer(string tokenizerDefinitions, Action<NoriTokenizerDescriptor> configure) => AssignVariant<NoriTokenizerDescriptor, NoriTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor NoriTokenizer(string tokenizerDefinitions, NoriTokenizer noriTokenizer) => AssignVariant(tokenizerDefinitions, noriTokenizer);
 		public TokenizerDefinitionsDescriptor PathHierarchyTokenizer(string tokenizerDefinitions) => AssignVariant<PathHierarchyTokenizerDescriptor, PathHierarchyTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor PathHierarchyTokenizer(string tokenizerDefinitions, Action<PathHierarchyTokenizerDescriptor> configure) => AssignVariant<PathHierarchyTokenizerDescriptor, PathHierarchyTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor PathHierarchyTokenizer(string tokenizerDefinitions, PathHierarchyTokenizer pathHierarchyTokenizer) => AssignVariant(tokenizerDefinitions, pathHierarchyTokenizer);
 		public TokenizerDefinitionsDescriptor PatternTokenizer(string tokenizerDefinitions) => AssignVariant<PatternTokenizerDescriptor, PatternTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor PatternTokenizer(string tokenizerDefinitions, Action<PatternTokenizerDescriptor> configure) => AssignVariant<PatternTokenizerDescriptor, PatternTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor PatternTokenizer(string tokenizerDefinitions, PatternTokenizer patternTokenizer) => AssignVariant(tokenizerDefinitions, patternTokenizer);
 		public TokenizerDefinitionsDescriptor StandardTokenizer(string tokenizerDefinitions) => AssignVariant<StandardTokenizerDescriptor, StandardTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor StandardTokenizer(string tokenizerDefinitions, Action<StandardTokenizerDescriptor> configure) => AssignVariant<StandardTokenizerDescriptor, StandardTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor StandardTokenizer(string tokenizerDefinitions, StandardTokenizer standardTokenizer) => AssignVariant(tokenizerDefinitions, standardTokenizer);
 		public TokenizerDefinitionsDescriptor UaxEmailUrlTokenizer(string tokenizerDefinitions) => AssignVariant<UaxEmailUrlTokenizerDescriptor, UaxEmailUrlTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor UaxEmailUrlTokenizer(string tokenizerDefinitions, Action<UaxEmailUrlTokenizerDescriptor> configure) => AssignVariant<UaxEmailUrlTokenizerDescriptor, UaxEmailUrlTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor UaxEmailUrlTokenizer(string tokenizerDefinitions, UaxEmailUrlTokenizer uaxEmailUrlTokenizer) => AssignVariant(tokenizerDefinitions, uaxEmailUrlTokenizer);
 		public TokenizerDefinitionsDescriptor WhitespaceTokenizer(string tokenizerDefinitions) => AssignVariant<WhitespaceTokenizerDescriptor, WhitespaceTokenizer>(tokenizerDefinitions, null);
 		public TokenizerDefinitionsDescriptor WhitespaceTokenizer(string tokenizerDefinitions, Action<WhitespaceTokenizerDescriptor> configure) => AssignVariant<WhitespaceTokenizerDescriptor, WhitespaceTokenizer>(tokenizerDefinitions, configure);
+		public TokenizerDefinitionsDescriptor WhitespaceTokenizer(string tokenizerDefinitions, WhitespaceTokenizer whitespaceTokenizer) => AssignVariant(tokenizerDefinitions, whitespaceTokenizer);
 	}
 
 	internal sealed partial class TokenizerDefinitionInterfaceConverter

@@ -49,14 +49,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		public CharFilterDefinitionsDescriptor HtmlStripCharFilter(string charFilterDefinitions) => AssignVariant<HtmlStripCharFilterDescriptor, HtmlStripCharFilter>(charFilterDefinitions, null);
 		public CharFilterDefinitionsDescriptor HtmlStripCharFilter(string charFilterDefinitions, Action<HtmlStripCharFilterDescriptor> configure) => AssignVariant<HtmlStripCharFilterDescriptor, HtmlStripCharFilter>(charFilterDefinitions, configure);
+		public CharFilterDefinitionsDescriptor HtmlStripCharFilter(string charFilterDefinitions, HtmlStripCharFilter htmlStripCharFilter) => AssignVariant(charFilterDefinitions, htmlStripCharFilter);
 		public CharFilterDefinitionsDescriptor IcuNormalizationCharFilter(string charFilterDefinitions) => AssignVariant<IcuNormalizationCharFilterDescriptor, IcuNormalizationCharFilter>(charFilterDefinitions, null);
 		public CharFilterDefinitionsDescriptor IcuNormalizationCharFilter(string charFilterDefinitions, Action<IcuNormalizationCharFilterDescriptor> configure) => AssignVariant<IcuNormalizationCharFilterDescriptor, IcuNormalizationCharFilter>(charFilterDefinitions, configure);
+		public CharFilterDefinitionsDescriptor IcuNormalizationCharFilter(string charFilterDefinitions, IcuNormalizationCharFilter icuNormalizationCharFilter) => AssignVariant(charFilterDefinitions, icuNormalizationCharFilter);
 		public CharFilterDefinitionsDescriptor KuromojiIterationMarkCharFilter(string charFilterDefinitions) => AssignVariant<KuromojiIterationMarkCharFilterDescriptor, KuromojiIterationMarkCharFilter>(charFilterDefinitions, null);
 		public CharFilterDefinitionsDescriptor KuromojiIterationMarkCharFilter(string charFilterDefinitions, Action<KuromojiIterationMarkCharFilterDescriptor> configure) => AssignVariant<KuromojiIterationMarkCharFilterDescriptor, KuromojiIterationMarkCharFilter>(charFilterDefinitions, configure);
+		public CharFilterDefinitionsDescriptor KuromojiIterationMarkCharFilter(string charFilterDefinitions, KuromojiIterationMarkCharFilter kuromojiIterationMarkCharFilter) => AssignVariant(charFilterDefinitions, kuromojiIterationMarkCharFilter);
 		public CharFilterDefinitionsDescriptor MappingCharFilter(string charFilterDefinitions) => AssignVariant<MappingCharFilterDescriptor, MappingCharFilter>(charFilterDefinitions, null);
 		public CharFilterDefinitionsDescriptor MappingCharFilter(string charFilterDefinitions, Action<MappingCharFilterDescriptor> configure) => AssignVariant<MappingCharFilterDescriptor, MappingCharFilter>(charFilterDefinitions, configure);
+		public CharFilterDefinitionsDescriptor MappingCharFilter(string charFilterDefinitions, MappingCharFilter mappingCharFilter) => AssignVariant(charFilterDefinitions, mappingCharFilter);
 		public CharFilterDefinitionsDescriptor PatternReplaceCharFilter(string charFilterDefinitions) => AssignVariant<PatternReplaceCharFilterDescriptor, PatternReplaceCharFilter>(charFilterDefinitions, null);
 		public CharFilterDefinitionsDescriptor PatternReplaceCharFilter(string charFilterDefinitions, Action<PatternReplaceCharFilterDescriptor> configure) => AssignVariant<PatternReplaceCharFilterDescriptor, PatternReplaceCharFilter>(charFilterDefinitions, configure);
+		public CharFilterDefinitionsDescriptor PatternReplaceCharFilter(string charFilterDefinitions, PatternReplaceCharFilter patternReplaceCharFilter) => AssignVariant(charFilterDefinitions, patternReplaceCharFilter);
 	}
 
 	internal sealed partial class CharFilterDefinitionInterfaceConverter

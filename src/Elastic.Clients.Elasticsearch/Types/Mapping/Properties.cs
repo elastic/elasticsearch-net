@@ -37,9 +37,6 @@ public partial class Properties<TDocument> : Properties
 public sealed partial class PropertiesDescriptor<TDocument>
 		: IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
 {
-	public PropertiesDescriptor<TDocument> Boolean(PropertyName propertyName, BooleanProperty property) =>
-		AssignVariant(propertyName, property);
-
 	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> fieldName) =>
 		AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
 
