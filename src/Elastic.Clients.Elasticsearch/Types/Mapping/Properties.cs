@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
@@ -32,52 +33,22 @@ public partial class Properties<TDocument> : Properties
 	public void Add<TValue>(Expression<Func<TDocument, TValue>> name, IProperty property) => BackingDictionary.Add(name, property);
 }
 
-public sealed partial class PropertiesDescriptor<TDocument>
-		: IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
-{
-	// Skipping these for now
-	//public PropertiesDescriptor<TDocument> Boolean<TValue>(Expression<Func<TDocument, TValue>> fieldName) =>
-	//	AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, null);
-
-	//public PropertiesDescriptor<TDocument> Boolean<TValue>(Expression<Func<TDocument, TValue>> fieldName, Action<BooleanPropertyDescriptor<TDocument>> configure) =>
-	//	AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(fieldName, configure);
-
-	// Scalar can be manually added to a partial class which seems reasonable.
-
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int>> fieldName) =>
-		AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(fieldName, null);
-
-	public PropertiesDescriptor<TDocument> Scalar(Expression<Func<TDocument, int>> fieldName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure) =>
-		AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(fieldName, configure);
-
-	// This will remain non-code-generated
-	protected override PropertiesDescriptor<TDocument> AssignVariant(PropertyName name, IProperty type)
-	{
-		type.ThrowIfNull(nameof(type));
-
-		if (name.IsConditionless())
-			throw new ArgumentException($"Could not get property name for {type.GetType().Name} mapping.");
-
-		return Assign(name, type);
-	}
-}
-
 // TODO
 // After we are generating the container descriptor e.g. PropertiesDescriptor
 // Code generator should generate these for any InternallyTaggedUnions that are IsADictionary types
 public partial class TypeMappingDescriptor
 {
-	public TypeMappingDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>>? properties)
+	public TypeMappingDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
-		properties?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
-}
 
-internal static class PropertyNameExtensions
-{
-	internal static bool IsConditionless(this PropertyName property) =>
-		property is null || property.Name.IsNullOrEmpty() && property.Expression is null && property.Property is null;
+	public TypeMappingDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
 }
