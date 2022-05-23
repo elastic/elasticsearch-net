@@ -44,32 +44,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public sealed partial class TransformStartTransformRequestDescriptor<TDocument> : RequestDescriptorBase<TransformStartTransformRequestDescriptor<TDocument>, TransformStartTransformRequestParameters>
-	{
-		internal TransformStartTransformRequestDescriptor(Action<TransformStartTransformRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public TransformStartTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id transform_id) : base(r => r.Required("transform_id", transform_id))
-		{
-		}
-
-		internal TransformStartTransformRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformManagementStartTransform;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		public TransformStartTransformRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public TransformStartTransformRequestDescriptor<TDocument> TransformId(Elastic.Clients.Elasticsearch.Id transform_id)
-		{
-			RouteValues.Required("transform_id", transform_id);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
-	}
-
 	public sealed partial class TransformStartTransformRequestDescriptor : RequestDescriptorBase<TransformStartTransformRequestDescriptor, TransformStartTransformRequestParameters>
 	{
 		internal TransformStartTransformRequestDescriptor(Action<TransformStartTransformRequestDescriptor> configure) => configure.Invoke(this);

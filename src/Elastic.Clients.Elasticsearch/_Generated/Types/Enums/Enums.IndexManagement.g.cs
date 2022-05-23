@@ -24,6 +24,55 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
+	[JsonConverter(typeof(FeatureConverter))]
+	public enum Feature
+	{
+		[EnumMember(Value = "settings")]
+		Settings,
+		[EnumMember(Value = "mappings")]
+		Mappings,
+		[EnumMember(Value = "aliases")]
+		Aliases
+	}
+
+	internal sealed class FeatureConverter : JsonConverter<Feature>
+	{
+		public override Feature Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "settings":
+					return Feature.Settings;
+				case "mappings":
+					return Feature.Mappings;
+				case "aliases":
+					return Feature.Aliases;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, Feature value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case Feature.Settings:
+					writer.WriteStringValue("settings");
+					return;
+				case Feature.Mappings:
+					writer.WriteStringValue("mappings");
+					return;
+				case Feature.Aliases:
+					writer.WriteStringValue("aliases");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(IndexCheckOnStartupConverter))]
 	public enum IndexCheckOnStartup
 	{
@@ -66,6 +115,48 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 					return;
 				case IndexCheckOnStartup.Checksum:
 					writer.WriteStringValue("checksum");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(IndexMetadataStateConverter))]
+	public enum IndexMetadataState
+	{
+		[EnumMember(Value = "open")]
+		Open,
+		[EnumMember(Value = "close")]
+		Close
+	}
+
+	internal sealed class IndexMetadataStateConverter : JsonConverter<IndexMetadataState>
+	{
+		public override IndexMetadataState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "open":
+					return IndexMetadataState.Open;
+				case "close":
+					return IndexMetadataState.Close;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IndexMetadataState value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case IndexMetadataState.Open:
+					writer.WriteStringValue("open");
+					return;
+				case IndexMetadataState.Close:
+					writer.WriteStringValue("close");
 					return;
 			}
 
@@ -507,6 +598,104 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 					return;
 				case ShardStoreStatus.All:
 					writer.WriteStringValue("all");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(StorageTypeConverter))]
+	public enum StorageType
+	{
+		[EnumMember(Value = "niofs")]
+		Niofs,
+		[EnumMember(Value = "mmapfs")]
+		Mmapfs,
+		[EnumMember(Value = "hybridfs")]
+		Hybridfs,
+		[EnumMember(Value = "fs")]
+		Fs
+	}
+
+	internal sealed class StorageTypeConverter : JsonConverter<StorageType>
+	{
+		public override StorageType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "niofs":
+					return StorageType.Niofs;
+				case "mmapfs":
+					return StorageType.Mmapfs;
+				case "hybridfs":
+					return StorageType.Hybridfs;
+				case "fs":
+					return StorageType.Fs;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, StorageType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case StorageType.Niofs:
+					writer.WriteStringValue("niofs");
+					return;
+				case StorageType.Mmapfs:
+					writer.WriteStringValue("mmapfs");
+					return;
+				case StorageType.Hybridfs:
+					writer.WriteStringValue("hybridfs");
+					return;
+				case StorageType.Fs:
+					writer.WriteStringValue("fs");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(TranslogDurabilityConverter))]
+	public enum TranslogDurability
+	{
+		[EnumMember(Value = "request")]
+		Request,
+		[EnumMember(Value = "async")]
+		Async
+	}
+
+	internal sealed class TranslogDurabilityConverter : JsonConverter<TranslogDurability>
+	{
+		public override TranslogDurability Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "request":
+					return TranslogDurability.Request;
+				case "async":
+					return TranslogDurability.Async;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, TranslogDurability value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case TranslogDurability.Request:
+					writer.WriteStringValue("request");
+					return;
+				case TranslogDurability.Async:
+					writer.WriteStringValue("async");
 					return;
 			}
 

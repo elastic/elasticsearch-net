@@ -36,6 +36,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Dictionary<string, object>? Settings { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; init; }
 	}
 }

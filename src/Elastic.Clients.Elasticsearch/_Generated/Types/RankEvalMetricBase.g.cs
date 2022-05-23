@@ -30,32 +30,4 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonPropertyName("k")]
 		public int? k { get; set; }
 	}
-
-	public sealed partial class RankEvalMetricBaseDescriptor : SerializableDescriptorBase<RankEvalMetricBaseDescriptor>
-	{
-		internal RankEvalMetricBaseDescriptor(Action<RankEvalMetricBaseDescriptor> configure) => configure.Invoke(this);
-		public RankEvalMetricBaseDescriptor() : base()
-		{
-		}
-
-		private int? kValue { get; set; }
-
-		public RankEvalMetricBaseDescriptor k(int? k)
-		{
-			kValue = k;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (kValue.HasValue)
-			{
-				writer.WritePropertyName("k");
-				writer.WriteNumberValue(kValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
 }

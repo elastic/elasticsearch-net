@@ -27,8 +27,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class TranslogRetention
 	{
 		[JsonInclude]
+		[JsonPropertyName("age")]
+		public Elastic.Clients.Elasticsearch.Time? Age { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("size")]
-		public Elastic.Clients.Elasticsearch.ByteSize Size { get; set; }
+		public Elastic.Clients.Elasticsearch.ByteSize? Size { get; set; }
 	}
 
 	public sealed partial class TranslogRetentionDescriptor : SerializableDescriptorBase<TranslogRetentionDescriptor>
@@ -38,9 +42,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.ByteSize SizeValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Time? AgeValue { get; set; }
 
-		public TranslogRetentionDescriptor Size(Elastic.Clients.Elasticsearch.ByteSize size)
+		private Elastic.Clients.Elasticsearch.ByteSize? SizeValue { get; set; }
+
+		public TranslogRetentionDescriptor Age(Elastic.Clients.Elasticsearch.Time? age)
+		{
+			AgeValue = age;
+			return Self;
+		}
+
+		public TranslogRetentionDescriptor Size(Elastic.Clients.Elasticsearch.ByteSize? size)
 		{
 			SizeValue = size;
 			return Self;
@@ -49,8 +61,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("size");
-			JsonSerializer.Serialize(writer, SizeValue, options);
+			if (AgeValue is not null)
+			{
+				writer.WritePropertyName("age");
+				JsonSerializer.Serialize(writer, AgeValue, options);
+			}
+
+			if (SizeValue is not null)
+			{
+				writer.WritePropertyName("size");
+				JsonSerializer.Serialize(writer, SizeValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

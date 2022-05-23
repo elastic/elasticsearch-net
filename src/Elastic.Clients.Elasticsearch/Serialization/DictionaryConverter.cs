@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -12,6 +13,10 @@ namespace Elastic.Clients.Elasticsearch;
 
 internal sealed class DictionaryConverter : JsonConverterFactory
 {
+	private readonly IElasticsearchClientSettings _settings;
+
+	public DictionaryConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
 	public override bool CanConvert(Type typeToConvert)
 	{
 		if (!typeToConvert.IsGenericType)
@@ -32,7 +37,7 @@ internal sealed class DictionaryConverter : JsonConverterFactory
 		if (keyType.IsClass)
 		{
 			return (JsonConverter)Activator.CreateInstance(
-				typeof(DictionaryConverterInner<,>).MakeGenericType(keyType, valueType));
+				typeof(DictionaryConverterInner<,>).MakeGenericType(keyType, valueType), _settings);
 		}
 
 		return null;
@@ -42,8 +47,13 @@ internal sealed class DictionaryConverter : JsonConverterFactory
 	{
 		private readonly JsonConverter<TValue>? _valueConverter = null;
 		private readonly Type _valueType;
+		private readonly IElasticsearchClientSettings _settings;
 
-		public DictionaryConverterInner() => _valueType = typeof(TValue);
+		public DictionaryConverterInner(IElasticsearchClientSettings settings)
+		{
+			_valueType = typeof(TValue);
+			_settings = settings;
+		}
 
 		public override Dictionary<TKey, TValue> Read(
 			ref Utf8JsonReader reader,
@@ -127,13 +137,13 @@ internal sealed class DictionaryConverter : JsonConverterFactory
 			foreach (var item in dictionary)
 			{
 				if (item.Key is null)
-					throw new SerializationException("Null key");
+					throw new JsonException("Null key");
 
 				var propertyName = item.Key switch
 				{
 					string stringKey => stringKey,
-					IDictionaryKey key => key.Key,
-					_ => throw new SerializationException("Must implement IDictionaryKey")
+					IDictionaryKey key => key.Key(_settings),
+					_ => throw new JsonException("Must implement IDictionaryKey")
 				};
 
 				writer.WritePropertyName
@@ -144,9 +154,13 @@ internal sealed class DictionaryConverter : JsonConverterFactory
 					writer.WriteNullValue();
 				}
 				else if (_valueConverter != null)
+				{
 					_valueConverter.Write(writer, item.Value, options);
+				}
 				else
+				{
 					JsonSerializer.Serialize(writer, item.Value, item.Value.GetType(), options);
+				}
 			}
 
 			writer.WriteEndObject();

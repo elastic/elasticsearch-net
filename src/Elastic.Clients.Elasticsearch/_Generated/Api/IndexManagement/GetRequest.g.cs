@@ -47,6 +47,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Elastic.Clients.Elasticsearch.IndexManagement.Features? Features { get => Q<Elastic.Clients.Elasticsearch.IndexManagement.Features?>("features"); set => Q("features", value); }
 	}
 
 	public partial class GetRequest : PlainRequestBase<GetRequestParameters>
@@ -78,6 +81,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Elastic.Clients.Elasticsearch.IndexManagement.Features? Features { get => Q<Elastic.Clients.Elasticsearch.IndexManagement.Features?>("features"); set => Q("features", value); }
 	}
 
 	public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptorBase<GetRequestDescriptor<TDocument>, GetRequestParameters>
@@ -96,6 +102,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 		public GetRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public GetRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetRequestDescriptor<TDocument> Features(Elastic.Clients.Elasticsearch.IndexManagement.Features? features) => Qs("features", features);
 		public GetRequestDescriptor<TDocument> FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		public GetRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public GetRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
@@ -128,6 +135,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 		public GetRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public GetRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetRequestDescriptor Features(Elastic.Clients.Elasticsearch.IndexManagement.Features? features) => Qs("features", features);
 		public GetRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		public GetRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public GetRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);

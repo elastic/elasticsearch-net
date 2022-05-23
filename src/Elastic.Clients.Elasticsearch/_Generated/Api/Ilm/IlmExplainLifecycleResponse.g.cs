@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 	{
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public Elastic.Clients.Elasticsearch.Ilm.LifecycleExplains Indices { get; init; }
+		public Elastic.Clients.Elasticsearch.Ilm.LifecycleExplain Indices { get; init; }
 	}
 }

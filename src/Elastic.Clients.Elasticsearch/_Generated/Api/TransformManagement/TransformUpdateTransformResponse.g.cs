@@ -45,12 +45,20 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public string Id { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("latest")]
+		public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("_meta")]
 		public Dictionary<string, object>? Meta { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("pivot")]
-		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot Pivot { get; init; }
+		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("retention_policy")]
+		public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyContainer? RetentionPolicy { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]

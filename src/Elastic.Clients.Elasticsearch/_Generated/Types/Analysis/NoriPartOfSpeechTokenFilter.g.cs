@@ -28,10 +28,53 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("stoptags")]
-		public IReadOnlyCollection<string> Stoptags { get; init; }
+		public IEnumerable<string> Stoptags { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "nori_part_of_speech";
+	}
+
+	public sealed partial class NoriPartOfSpeechTokenFilterDescriptor : SerializableDescriptorBase<NoriPartOfSpeechTokenFilterDescriptor>, IBuildableDescriptor<NoriPartOfSpeechTokenFilter>
+	{
+		internal NoriPartOfSpeechTokenFilterDescriptor(Action<NoriPartOfSpeechTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public NoriPartOfSpeechTokenFilterDescriptor() : base()
+		{
+		}
+
+		private IEnumerable<string> StoptagsValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public NoriPartOfSpeechTokenFilterDescriptor Stoptags(IEnumerable<string> stoptags)
+		{
+			StoptagsValue = stoptags;
+			return Self;
+		}
+
+		public NoriPartOfSpeechTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("stoptags");
+			JsonSerializer.Serialize(writer, StoptagsValue, options);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("nori_part_of_speech");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		NoriPartOfSpeechTokenFilter IBuildableDescriptor<NoriPartOfSpeechTokenFilter>.Build() => new()
+		{ Stoptags = StoptagsValue, Version = VersionValue };
 	}
 }

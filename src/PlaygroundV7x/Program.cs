@@ -39,14 +39,18 @@ namespace PlaygroundV7x
 
 			var client = new ElasticClient(new ConnectionSettings(new InMemoryConnection())
 				.DefaultIndex("default-index")
-				.DefaultMappingFor<Person>(m => m
-					.DisableIdInference()
-					.IndexName("people"))
-					//.IdProperty(id => id.SecondaryId)
-					//.RoutingProperty(id => id.SecondaryId)
-					//.RelationName("relation"))
+				//.DefaultMappingFor<Person>(m => m
+					//.DisableIdInference()
+					//.IndexName("people"))
+				//.IdProperty(id => id.SecondaryId)
+				//.RoutingProperty(id => id.SecondaryId)
+				//.RelationName("relation"))
 				//.DefaultFieldNameInferrer(s => $"{s}_2")
 				.EnableDebugMode());
+
+
+			var createIndexResponse = await client.Indices.CreateAsync("aa", i => i
+				.Map<Person>(m => m.Properties(p => p.Boolean(b => b))));
 
 
 

@@ -76,12 +76,28 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return DoRequest<SqlDeleteAsyncRequestDescriptor, SqlDeleteAsyncResponse>(descriptor);
 		}
 
+		public SqlDeleteAsyncResponse DeleteAsyncSearch<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlDeleteAsyncRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new SqlDeleteAsyncRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SqlDeleteAsyncRequestDescriptor<TDocument>, SqlDeleteAsyncResponse>(descriptor);
+		}
+
 		public Task<SqlDeleteAsyncResponse> DeleteAsyncSearchAsync(Elastic.Clients.Elasticsearch.Id id, Action<SqlDeleteAsyncRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SqlDeleteAsyncRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SqlDeleteAsyncRequestDescriptor, SqlDeleteAsyncResponse>(descriptor);
+		}
+
+		public Task<SqlDeleteAsyncResponse> DeleteAsyncSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlDeleteAsyncRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SqlDeleteAsyncRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SqlDeleteAsyncRequestDescriptor<TDocument>, SqlDeleteAsyncResponse>(descriptor);
 		}
 
 		public SqlGetAsyncResponse GetAsyncSearch(SqlGetAsyncRequest request)
@@ -104,12 +120,28 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return DoRequest<SqlGetAsyncRequestDescriptor, SqlGetAsyncResponse>(descriptor);
 		}
 
+		public SqlGetAsyncResponse GetAsyncSearch<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new SqlGetAsyncRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SqlGetAsyncRequestDescriptor<TDocument>, SqlGetAsyncResponse>(descriptor);
+		}
+
 		public Task<SqlGetAsyncResponse> GetAsyncSearchAsync(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SqlGetAsyncRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SqlGetAsyncRequestDescriptor, SqlGetAsyncResponse>(descriptor);
+		}
+
+		public Task<SqlGetAsyncResponse> GetAsyncSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SqlGetAsyncRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SqlGetAsyncRequestDescriptor<TDocument>, SqlGetAsyncResponse>(descriptor);
 		}
 
 		public SqlGetAsyncStatusResponse GetAsyncSearchStatus(SqlGetAsyncStatusRequest request)
@@ -132,12 +164,28 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return DoRequest<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusResponse>(descriptor);
 		}
 
+		public SqlGetAsyncStatusResponse GetAsyncSearchStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncStatusRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new SqlGetAsyncStatusRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SqlGetAsyncStatusRequestDescriptor<TDocument>, SqlGetAsyncStatusResponse>(descriptor);
+		}
+
 		public Task<SqlGetAsyncStatusResponse> GetAsyncSearchStatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncStatusRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SqlGetAsyncStatusRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusResponse>(descriptor);
+		}
+
+		public Task<SqlGetAsyncStatusResponse> GetAsyncSearchStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncStatusRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SqlGetAsyncStatusRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SqlGetAsyncStatusRequestDescriptor<TDocument>, SqlGetAsyncStatusResponse>(descriptor);
 		}
 
 		public SqlQueryResponse Query(SqlQueryRequest request)

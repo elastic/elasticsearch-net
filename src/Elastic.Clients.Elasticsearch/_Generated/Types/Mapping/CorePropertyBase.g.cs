@@ -28,14 +28,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("copy_to")]
-		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; init; }
+		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("similarity")]
-		public string? Similarity { get; init; }
+		public string? Similarity { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("store")]
-		public bool? Store { get; init; }
+		public bool? Store { get; set; }
 	}
 }

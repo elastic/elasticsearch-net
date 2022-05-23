@@ -28,30 +28,26 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("dynamic")]
-		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; init; }
+		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; init; }
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_above")]
-		public int? IgnoreAbove { get; init; }
+		public int? IgnoreAbove { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("local_metadata")]
-		public Dictionary<string, object>? LocalMetadata { get; init; }
+		public Dictionary<string, object>? LocalMetadata { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("meta")]
-		public Dictionary<string, string>? Meta { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string? Name { get; init; }
+		public Dictionary<string, string>? Meta { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("properties")]
-		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; init; }
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	}
 }
