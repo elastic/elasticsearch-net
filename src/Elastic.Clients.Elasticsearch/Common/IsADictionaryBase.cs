@@ -88,20 +88,6 @@ public abstract class IsADictionaryBase<TKey, TValue> : IIsADictionary<TKey, TVa
 	protected virtual TKey Sanitize(TKey key) => key;
 }
 
-public abstract class IsADictionaryDescriptorBase<TDescriptor, TPromised, TKey, TValue>
-	: DescriptorPromiseBase<TDescriptor, TPromised>
-	where TDescriptor : IsADictionaryDescriptorBase<TDescriptor, TPromised, TKey, TValue>
-	where TPromised : class, IIsADictionary<TKey, TValue>
-{
-	internal IsADictionaryDescriptorBase(TPromised instance) : base(instance) { }
-
-	protected TDescriptor Assign(TKey key, TValue value)
-	{
-		PromisedValue.Add(key, value);
-		return Self;
-	}
-}
-
 public interface IIsAReadOnlyDictionary { }
 
 public interface IIsAReadOnlyDictionary<TKey, TValue> : IReadOnlyDictionary<TKey, TValue>, IIsAReadOnlyDictionary { }

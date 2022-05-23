@@ -70,6 +70,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
+		public IndexSettingsAnalysisDescriptor Analyzer(Analysis.AnalyzersDescriptor descriptor)
+		{
+			AnalyzerValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public IndexSettingsAnalysisDescriptor Analyzer(Action<Analysis.AnalyzersDescriptor> configure)
+		{
+			var descriptor = new Analysis.AnalyzersDescriptor();
+			configure?.Invoke(descriptor);
+			AnalyzerValue = descriptor.PromisedValue;
+			return Self;
+		}
+
 		public IndexSettingsAnalysisDescriptor CharFilter(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>> selector)
 		{
 			CharFilterValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>());
@@ -85,6 +99,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsAnalysisDescriptor Normalizer(Elastic.Clients.Elasticsearch.Analysis.Normalizers? normalizer)
 		{
 			NormalizerValue = normalizer;
+			return Self;
+		}
+
+		public IndexSettingsAnalysisDescriptor Normalizer(Analysis.NormalizersDescriptor descriptor)
+		{
+			NormalizerValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public IndexSettingsAnalysisDescriptor Normalizer(Action<Analysis.NormalizersDescriptor> configure)
+		{
+			var descriptor = new Analysis.NormalizersDescriptor();
+			configure?.Invoke(descriptor);
+			NormalizerValue = descriptor.PromisedValue;
 			return Self;
 		}
 

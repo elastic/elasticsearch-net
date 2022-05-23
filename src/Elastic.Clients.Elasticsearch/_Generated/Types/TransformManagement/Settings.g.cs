@@ -35,6 +35,10 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public bool? DatesAsEpochMillis { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("deduce_mappings")]
+		public bool? DeduceMappings { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("docs_per_second")]
 		public float? DocsPerSecond { get; set; }
 
@@ -54,6 +58,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		private bool? DatesAsEpochMillisValue { get; set; }
 
+		private bool? DeduceMappingsValue { get; set; }
+
 		private float? DocsPerSecondValue { get; set; }
 
 		private int? MaxPageSearchSizeValue { get; set; }
@@ -67,6 +73,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public SettingsDescriptor DatesAsEpochMillis(bool? datesAsEpochMillis = true)
 		{
 			DatesAsEpochMillisValue = datesAsEpochMillis;
+			return Self;
+		}
+
+		public SettingsDescriptor DeduceMappings(bool? deduceMappings = true)
+		{
+			DeduceMappingsValue = deduceMappings;
 			return Self;
 		}
 
@@ -95,6 +107,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			{
 				writer.WritePropertyName("dates_as_epoch_millis");
 				writer.WriteBooleanValue(DatesAsEpochMillisValue.Value);
+			}
+
+			if (DeduceMappingsValue.HasValue)
+			{
+				writer.WritePropertyName("deduce_mappings");
+				writer.WriteBooleanValue(DeduceMappingsValue.Value);
 			}
 
 			if (DocsPerSecondValue.HasValue)

@@ -28,10 +28,57 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
-		public int? MaxTokenLength { get; init; }
+		public int? MaxTokenLength { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "whitespace";
+	}
+
+	public sealed partial class WhitespaceTokenizerDescriptor : SerializableDescriptorBase<WhitespaceTokenizerDescriptor>, IBuildableDescriptor<WhitespaceTokenizer>
+	{
+		internal WhitespaceTokenizerDescriptor(Action<WhitespaceTokenizerDescriptor> configure) => configure.Invoke(this);
+		public WhitespaceTokenizerDescriptor() : base()
+		{
+		}
+
+		private int? MaxTokenLengthValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public WhitespaceTokenizerDescriptor MaxTokenLength(int? maxTokenLength)
+		{
+			MaxTokenLengthValue = maxTokenLength;
+			return Self;
+		}
+
+		public WhitespaceTokenizerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (MaxTokenLengthValue.HasValue)
+			{
+				writer.WritePropertyName("max_token_length");
+				writer.WriteNumberValue(MaxTokenLengthValue.Value);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("whitespace");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		WhitespaceTokenizer IBuildableDescriptor<WhitespaceTokenizer>.Build() => new()
+		{ MaxTokenLength = MaxTokenLengthValue, Version = VersionValue };
 	}
 }

@@ -28,14 +28,67 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("articles")]
-		public IReadOnlyCollection<string> Articles { get; init; }
+		public IEnumerable<string> Articles { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("articles_case")]
-		public bool ArticlesCase { get; init; }
+		public bool ArticlesCase { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "elision";
+	}
+
+	public sealed partial class ElisionTokenFilterDescriptor : SerializableDescriptorBase<ElisionTokenFilterDescriptor>, IBuildableDescriptor<ElisionTokenFilter>
+	{
+		internal ElisionTokenFilterDescriptor(Action<ElisionTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public ElisionTokenFilterDescriptor() : base()
+		{
+		}
+
+		private IEnumerable<string> ArticlesValue { get; set; }
+
+		private bool ArticlesCaseValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public ElisionTokenFilterDescriptor Articles(IEnumerable<string> articles)
+		{
+			ArticlesValue = articles;
+			return Self;
+		}
+
+		public ElisionTokenFilterDescriptor ArticlesCase(bool articlesCase = true)
+		{
+			ArticlesCaseValue = articlesCase;
+			return Self;
+		}
+
+		public ElisionTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("articles");
+			JsonSerializer.Serialize(writer, ArticlesValue, options);
+			writer.WritePropertyName("articles_case");
+			writer.WriteBooleanValue(ArticlesCaseValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("elision");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		ElisionTokenFilter IBuildableDescriptor<ElisionTokenFilter>.Build() => new()
+		{ Articles = ArticlesValue, ArticlesCase = ArticlesCaseValue, Version = VersionValue };
 	}
 }

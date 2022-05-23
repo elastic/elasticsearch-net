@@ -30,4 +30,37 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("type")]
 		public string Type => "lowercase";
 	}
+
+	public sealed partial class LowercaseTokenizerDescriptor : SerializableDescriptorBase<LowercaseTokenizerDescriptor>, IBuildableDescriptor<LowercaseTokenizer>
+	{
+		internal LowercaseTokenizerDescriptor(Action<LowercaseTokenizerDescriptor> configure) => configure.Invoke(this);
+		public LowercaseTokenizerDescriptor() : base()
+		{
+		}
+
+		private string? VersionValue { get; set; }
+
+		public LowercaseTokenizerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("lowercase");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		LowercaseTokenizer IBuildableDescriptor<LowercaseTokenizer>.Build() => new()
+		{ Version = VersionValue };
+	}
 }

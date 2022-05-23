@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed class TermsOrderDescriptor : DescriptorPromiseBase<TermsOrderDescriptor, IList<TermsOrder>>
+	public sealed class TermsOrderDescriptor : PromiseDescriptor<TermsOrderDescriptor, IList<TermsOrder>>
 	{
 		public TermsOrderDescriptor() : base(new List<TermsOrder>()) { }
 

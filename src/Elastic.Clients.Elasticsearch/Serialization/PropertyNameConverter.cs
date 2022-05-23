@@ -10,9 +10,20 @@ namespace Elastic.Clients.Elasticsearch
 {
 	internal sealed class PropertyNameConverter : JsonConverter<PropertyName?>
 	{
-		public override PropertyName?
-			Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-			throw new NotImplementedException();
+		private readonly IElasticsearchClientSettings _settings;
+
+		public PropertyNameConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+		public override PropertyName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType == JsonTokenType.String)
+			{
+				PropertyName propertyName = reader.GetString();
+				return propertyName;
+			}
+
+			return null;
+		}
 
 		public override void Write(Utf8JsonWriter writer, PropertyName? value, JsonSerializerOptions options)
 		{
@@ -22,7 +33,8 @@ namespace Elastic.Clients.Elasticsearch
 				return;
 			}
 
-			writer.WriteStringValue(value.ToString());
+			var propertyName = _settings.Inferrer.PropertyName(value);
+			writer.WriteStringValue(propertyName);
 		}
 	}
 }

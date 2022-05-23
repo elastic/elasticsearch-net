@@ -27,8 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Sql
 {
 	public sealed class SqlQueryRequestParameters : RequestParameters<SqlQueryRequestParameters>
 	{
-		[JsonIgnore]
-		public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 	}
 
 	public partial class SqlQueryRequest : PlainRequestBase<SqlQueryRequestParameters>
@@ -36,9 +34,6 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		[JsonIgnore]
-		public string? Format { get => Q<string?>("format"); set => Q("format", value); }
-
 		[JsonInclude]
 		[JsonPropertyName("catalog")]
 		public string? Catalog { get; set; }
@@ -114,7 +109,6 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public SqlQueryRequestDescriptor<TDocument> Format(string? format) => Qs("format", format);
 		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
 
 		private QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
@@ -388,7 +382,6 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public SqlQueryRequestDescriptor Format(string? format) => Qs("format", format);
 		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
 
 		private QueryDsl.QueryContainerDescriptor FilterDescriptor { get; set; }

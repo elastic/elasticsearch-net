@@ -55,7 +55,8 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 					new SelfDeserializableConverterFactory(settings),
 					new SelfTwoWaySerializableConverterFactory(settings),
 					new IndicesJsonConverter(settings),
-					new DictionaryConverter(),
+					new DictionaryConverter(settings),
+					new PropertyNameConverter(settings),
 					new IsADictionaryConverter(),
 					new UnionConverter()
 				},
