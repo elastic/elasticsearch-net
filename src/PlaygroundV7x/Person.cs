@@ -23,5 +23,9 @@ namespace PlaygroundV7x
 		public string? Email { get; init; }
 
 		public string Data { get; init; } = "NOTHING";
+
+		public DateTime Date { get; set; }
+
+		public Guid Guid { get; set; }
 	}
 }

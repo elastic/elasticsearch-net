@@ -40,11 +40,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("data_stream")]
-		public Dictionary<string, object>? DataStream { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration? DataStream { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name> IndexPatterns { get; init; }
+		public Elastic.Clients.Elasticsearch.Names IndexPatterns { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("priority")]

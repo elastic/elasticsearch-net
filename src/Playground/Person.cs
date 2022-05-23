@@ -17,6 +17,7 @@ namespace Playground
 		public string? FirstName { get; init; }
 		public string? LastName { get; init; }
 		public int? Age { get; init; }
+		public bool IsDeleted { get; init; }	
 		public Routing? Routing { get; init; }
 
 		public Id Idv3 => "testing";

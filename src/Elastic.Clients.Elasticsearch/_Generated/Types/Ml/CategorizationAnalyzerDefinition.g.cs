@@ -28,14 +28,70 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		[JsonInclude]
 		[JsonPropertyName("char_filter")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilter { get; init; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? Filter { get; init; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("tokenizer")]
-		public Elastic.Clients.Elasticsearch.Analysis.Tokenizer? Tokenizer { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.Tokenizer? Tokenizer { get; set; }
+	}
+
+	public sealed partial class CategorizationAnalyzerDefinitionDescriptor : SerializableDescriptorBase<CategorizationAnalyzerDefinitionDescriptor>
+	{
+		internal CategorizationAnalyzerDefinitionDescriptor(Action<CategorizationAnalyzerDefinitionDescriptor> configure) => configure.Invoke(this);
+		public CategorizationAnalyzerDefinitionDescriptor() : base()
+		{
+		}
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilterValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Analysis.Tokenizer? TokenizerValue { get; set; }
+
+		public CategorizationAnalyzerDefinitionDescriptor CharFilter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? charFilter)
+		{
+			CharFilterValue = charFilter;
+			return Self;
+		}
+
+		public CategorizationAnalyzerDefinitionDescriptor Filter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? filter)
+		{
+			FilterValue = filter;
+			return Self;
+		}
+
+		public CategorizationAnalyzerDefinitionDescriptor Tokenizer(Elastic.Clients.Elasticsearch.Analysis.Tokenizer? tokenizer)
+		{
+			TokenizerValue = tokenizer;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (CharFilterValue is not null)
+			{
+				writer.WritePropertyName("char_filter");
+				JsonSerializer.Serialize(writer, CharFilterValue, options);
+			}
+
+			if (FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			if (TokenizerValue is not null)
+			{
+				writer.WritePropertyName("tokenizer");
+				JsonSerializer.Serialize(writer, TokenizerValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

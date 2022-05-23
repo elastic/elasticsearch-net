@@ -28,22 +28,103 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_gram")]
-		public int MaxGram { get; init; }
+		public int MaxGram { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_gram")]
-		public int MinGram { get; init; }
+		public int MinGram { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
-		public bool? PreserveOriginal { get; init; }
+		public bool? PreserveOriginal { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("side")]
-		public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? Side { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? Side { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "edge_ngram";
+	}
+
+	public sealed partial class EdgeNGramTokenFilterDescriptor : SerializableDescriptorBase<EdgeNGramTokenFilterDescriptor>, IBuildableDescriptor<EdgeNGramTokenFilter>
+	{
+		internal EdgeNGramTokenFilterDescriptor(Action<EdgeNGramTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public EdgeNGramTokenFilterDescriptor() : base()
+		{
+		}
+
+		private int MaxGramValue { get; set; }
+
+		private int MinGramValue { get; set; }
+
+		private bool? PreserveOriginalValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? SideValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public EdgeNGramTokenFilterDescriptor MaxGram(int maxGram)
+		{
+			MaxGramValue = maxGram;
+			return Self;
+		}
+
+		public EdgeNGramTokenFilterDescriptor MinGram(int minGram)
+		{
+			MinGramValue = minGram;
+			return Self;
+		}
+
+		public EdgeNGramTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
+		{
+			PreserveOriginalValue = preserveOriginal;
+			return Self;
+		}
+
+		public EdgeNGramTokenFilterDescriptor Side(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? side)
+		{
+			SideValue = side;
+			return Self;
+		}
+
+		public EdgeNGramTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("max_gram");
+			writer.WriteNumberValue(MaxGramValue);
+			writer.WritePropertyName("min_gram");
+			writer.WriteNumberValue(MinGramValue);
+			if (PreserveOriginalValue.HasValue)
+			{
+				writer.WritePropertyName("preserve_original");
+				writer.WriteBooleanValue(PreserveOriginalValue.Value);
+			}
+
+			if (SideValue is not null)
+			{
+				writer.WritePropertyName("side");
+				JsonSerializer.Serialize(writer, SideValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("edge_ngram");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		EdgeNGramTokenFilter IBuildableDescriptor<EdgeNGramTokenFilter>.Build() => new()
+		{ MaxGram = MaxGramValue, MinGram = MinGramValue, PreserveOriginal = PreserveOriginalValue, Side = SideValue, Version = VersionValue };
 	}
 }

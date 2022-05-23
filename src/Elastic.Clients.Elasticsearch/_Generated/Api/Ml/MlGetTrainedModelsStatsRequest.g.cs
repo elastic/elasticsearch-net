@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		public MlGetTrainedModelsStatsRequest(Elastic.Clients.Elasticsearch.Id? model_id) : base(r => r.Optional("model_id", model_id))
+		public MlGetTrainedModelsStatsRequest(Elastic.Clients.Elasticsearch.Ids? model_id) : base(r => r.Optional("model_id", model_id))
 		{
 		}
 
@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlGetTrainedModelsStatsRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
 		public MlGetTrainedModelsStatsRequestDescriptor From(int? from) => Qs("from", from);
 		public MlGetTrainedModelsStatsRequestDescriptor Size(int? size) => Qs("size", size);
-		public MlGetTrainedModelsStatsRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id? model_id)
+		public MlGetTrainedModelsStatsRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Ids? model_id)
 		{
 			RouteValues.Optional("model_id", model_id);
 			return Self;

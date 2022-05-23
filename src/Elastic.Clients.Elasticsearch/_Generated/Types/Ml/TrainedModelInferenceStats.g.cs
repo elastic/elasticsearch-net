@@ -28,19 +28,19 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		[JsonInclude]
 		[JsonPropertyName("cache_miss_count")]
-		public long CacheMissCount { get; init; }
+		public int CacheMissCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("failure_count")]
-		public long FailureCount { get; init; }
+		public int FailureCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("inference_count")]
-		public long InferenceCount { get; init; }
+		public int InferenceCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing_all_fields_count")]
-		public long MissingAllFieldsCount { get; init; }
+		public int MissingAllFieldsCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]

@@ -33,6 +33,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Analytics Analytics { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("archive")]
+		public Elastic.Clients.Elasticsearch.Xpack.Archive Archive { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("ccr")]
 		public Elastic.Clients.Elasticsearch.Xpack.Ccr Ccr { get; init; }
 

@@ -28,6 +28,44 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public string Id { get; init; }
+		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	}
+
+	public sealed partial class StoredScriptIdDescriptor : SerializableDescriptorBase<StoredScriptIdDescriptor>
+	{
+		internal StoredScriptIdDescriptor(Action<StoredScriptIdDescriptor> configure) => configure.Invoke(this);
+		public StoredScriptIdDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
+
+		private Dictionary<string, object>? ParamsValue { get; set; }
+
+		public StoredScriptIdDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			IdValue = id;
+			return Self;
+		}
+
+		public StoredScriptIdDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("id");
+			JsonSerializer.Serialize(writer, IdValue, options);
+			if (ParamsValue is not null)
+			{
+				writer.WritePropertyName("params");
+				SourceSerialisation.SerializeParams(ParamsValue, writer, settings);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

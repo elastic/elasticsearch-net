@@ -7,13 +7,23 @@ using System.Text.Json;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public sealed partial class ScriptDescriptor : SerializableDescriptorBase<ScriptDescriptor>
+	public sealed partial class ScriptDescriptor : SerializableDescriptorBase<ScriptDescriptor>, IBuildableDescriptor<ScriptBase>
 	{
 		internal ScriptDescriptor(Action<ScriptDescriptor> configure) => configure.Invoke(this);
 
 		internal InlineScriptDescriptor InlineScriptDescriptor { get; private set; }
 
 		internal StoredScriptId StoredScriptId { get; private set; }
+
+		ScriptBase IBuildableDescriptor<ScriptBase>.Build()
+		{
+			if (InlineScriptDescriptor is IBuildableDescriptor<InlineScript> buildable)
+			{
+				return buildable.Build();
+			}
+
+			return StoredScriptId;
+		}
 
 		/// <summary>
 		/// A script that has been stored in Elasticsearch with the specified <paramref name="id"/>.

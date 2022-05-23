@@ -28,10 +28,53 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("buffer_size")]
-		public int BufferSize { get; init; }
+		public int BufferSize { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "keyword";
+	}
+
+	public sealed partial class KeywordTokenizerDescriptor : SerializableDescriptorBase<KeywordTokenizerDescriptor>, IBuildableDescriptor<KeywordTokenizer>
+	{
+		internal KeywordTokenizerDescriptor(Action<KeywordTokenizerDescriptor> configure) => configure.Invoke(this);
+		public KeywordTokenizerDescriptor() : base()
+		{
+		}
+
+		private int BufferSizeValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public KeywordTokenizerDescriptor BufferSize(int bufferSize)
+		{
+			BufferSizeValue = bufferSize;
+			return Self;
+		}
+
+		public KeywordTokenizerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("buffer_size");
+			writer.WriteNumberValue(BufferSizeValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("keyword");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		KeywordTokenizer IBuildableDescriptor<KeywordTokenizer>.Build() => new()
+		{ BufferSize = BufferSizeValue, Version = VersionValue };
 	}
 }

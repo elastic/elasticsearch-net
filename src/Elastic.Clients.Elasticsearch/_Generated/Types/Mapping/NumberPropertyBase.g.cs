@@ -28,14 +28,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
-		public bool? IgnoreMalformed { get; init; }
+		public bool? IgnoreMalformed { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public bool? Index { get; init; }
+		public bool? Index { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_series_metric")]
-		public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; init; }
+		public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 	}
 }

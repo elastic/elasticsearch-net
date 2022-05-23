@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	public partial class TrainedModelStats
 	{
 		[JsonInclude]
+		[JsonPropertyName("deployment_stats")]
+		public Elastic.Clients.Elasticsearch.Ml.TrainedModelDeploymentStats? DeploymentStats { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("inference_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.TrainedModelInferenceStats? InferenceStats { get; init; }
 
@@ -37,6 +41,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonInclude]
 		[JsonPropertyName("model_id")]
 		public string ModelId { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("model_size_stats")]
+		public Elastic.Clients.Elasticsearch.Ml.TrainedModelSizeStats ModelSizeStats { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("pipeline_count")]

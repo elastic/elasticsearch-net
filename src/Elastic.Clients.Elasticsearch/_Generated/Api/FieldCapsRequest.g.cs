@@ -41,6 +41,12 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore]
 		public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
+
+		[JsonIgnore]
+		public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
+
+		[JsonIgnore]
+		public IEnumerable<string>? Types { get => Q<IEnumerable<string>?>("types"); set => Q("types", value); }
 	}
 
 	public partial class FieldCapsRequest : PlainRequestBase<FieldCapsRequestParameters>
@@ -71,6 +77,12 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
 
+		[JsonIgnore]
+		public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
+
+		[JsonIgnore]
+		public IEnumerable<string>? Types { get => Q<IEnumerable<string>?>("types"); set => Q("types", value); }
+
 		[JsonInclude]
 		[JsonPropertyName("index_filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IndexFilter { get; set; }
@@ -93,8 +105,10 @@ namespace Elastic.Clients.Elasticsearch
 		public FieldCapsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public FieldCapsRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields fields) => Qs("fields", fields);
+		public FieldCapsRequestDescriptor<TDocument> Filters(string? filters) => Qs("filters", filters);
 		public FieldCapsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public FieldCapsRequestDescriptor<TDocument> IncludeUnmapped(bool? includeUnmapped = true) => Qs("include_unmapped", includeUnmapped);
+		public FieldCapsRequestDescriptor<TDocument> Types(IEnumerable<string>? types) => Qs("types", types);
 		public FieldCapsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 		{
 			RouteValues.Optional("index", indices);
@@ -181,8 +195,10 @@ namespace Elastic.Clients.Elasticsearch
 		public FieldCapsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public FieldCapsRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields fields) => Qs("fields", fields);
+		public FieldCapsRequestDescriptor Filters(string? filters) => Qs("filters", filters);
 		public FieldCapsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public FieldCapsRequestDescriptor IncludeUnmapped(bool? includeUnmapped = true) => Qs("include_unmapped", includeUnmapped);
+		public FieldCapsRequestDescriptor Types(IEnumerable<string>? types) => Qs("types", types);
 		public FieldCapsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 		{
 			RouteValues.Optional("index", indices);

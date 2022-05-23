@@ -30,4 +30,37 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("type")]
 		public string Type => "letter";
 	}
+
+	public sealed partial class LetterTokenizerDescriptor : SerializableDescriptorBase<LetterTokenizerDescriptor>, IBuildableDescriptor<LetterTokenizer>
+	{
+		internal LetterTokenizerDescriptor(Action<LetterTokenizerDescriptor> configure) => configure.Invoke(this);
+		public LetterTokenizerDescriptor() : base()
+		{
+		}
+
+		private string? VersionValue { get; set; }
+
+		public LetterTokenizerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("letter");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		LetterTokenizer IBuildableDescriptor<LetterTokenizer>.Build() => new()
+		{ Version = VersionValue };
+	}
 }

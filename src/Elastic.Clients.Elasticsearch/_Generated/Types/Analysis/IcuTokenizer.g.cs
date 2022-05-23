@@ -28,10 +28,53 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("rule_files")]
-		public string RuleFiles { get; init; }
+		public string RuleFiles { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "icu_tokenizer";
+	}
+
+	public sealed partial class IcuTokenizerDescriptor : SerializableDescriptorBase<IcuTokenizerDescriptor>, IBuildableDescriptor<IcuTokenizer>
+	{
+		internal IcuTokenizerDescriptor(Action<IcuTokenizerDescriptor> configure) => configure.Invoke(this);
+		public IcuTokenizerDescriptor() : base()
+		{
+		}
+
+		private string RuleFilesValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public IcuTokenizerDescriptor RuleFiles(string ruleFiles)
+		{
+			RuleFilesValue = ruleFiles;
+			return Self;
+		}
+
+		public IcuTokenizerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("rule_files");
+			writer.WriteStringValue(RuleFilesValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("icu_tokenizer");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		IcuTokenizer IBuildableDescriptor<IcuTokenizer>.Build() => new()
+		{ RuleFiles = RuleFilesValue, Version = VersionValue };
 	}
 }

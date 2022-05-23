@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class FieldValueFactorScoreFunction : ScoreFunctionBase, IFunctionScoreContainerVariant
+	public partial class FieldValueFactorScoreFunction : IFunctionScoreContainerVariant
 	{
 		[JsonIgnore]
 		string IFunctionScoreContainerVariant.FunctionScoreContainerVariantName => "field_value_factor";
@@ -52,12 +52,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
-
-		private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
-
-		private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 		private double? FactorValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
@@ -65,32 +59,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private double? MissingValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
-
-		private double? WeightValue { get; set; }
-
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
-		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
-		}
-
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
-		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
-		}
-
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
-		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
-		}
 
 		public FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? factor)
 		{
@@ -122,31 +90,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Weight(double? weight)
-		{
-			WeightValue = weight;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
 			if (FactorValue.HasValue)
 			{
 				writer.WritePropertyName("factor");
@@ -167,12 +113,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, ModifierValue, options);
 			}
 
-			if (WeightValue.HasValue)
-			{
-				writer.WritePropertyName("weight");
-				writer.WriteNumberValue(WeightValue.Value);
-			}
-
 			writer.WriteEndObject();
 		}
 	}
@@ -184,12 +124,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
-
-		private QueryContainerDescriptor FilterDescriptor { get; set; }
-
-		private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
-
 		private double? FactorValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
@@ -197,32 +131,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private double? MissingValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
-
-		private double? WeightValue { get; set; }
-
-		public FieldValueFactorScoreFunctionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
-		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
-		}
-
-		public FieldValueFactorScoreFunctionDescriptor Filter(QueryContainerDescriptor descriptor)
-		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
-		}
-
-		public FieldValueFactorScoreFunctionDescriptor Filter(Action<QueryContainerDescriptor> configure)
-		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
-		}
 
 		public FieldValueFactorScoreFunctionDescriptor Factor(double? factor)
 		{
@@ -260,31 +168,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor Weight(double? weight)
-		{
-			WeightValue = weight;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
 			if (FactorValue.HasValue)
 			{
 				writer.WritePropertyName("factor");
@@ -303,12 +189,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("modifier");
 				JsonSerializer.Serialize(writer, ModifierValue, options);
-			}
-
-			if (WeightValue.HasValue)
-			{
-				writer.WritePropertyName("weight");
-				writer.WriteNumberValue(WeightValue.Value);
 			}
 
 			writer.WriteEndObject();

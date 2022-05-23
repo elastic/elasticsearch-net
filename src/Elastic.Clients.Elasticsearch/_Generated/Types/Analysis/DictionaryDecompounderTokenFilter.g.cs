@@ -30,4 +30,135 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("type")]
 		public string Type => "dictionary_decompounder";
 	}
+
+	public sealed partial class DictionaryDecompounderTokenFilterDescriptor : SerializableDescriptorBase<DictionaryDecompounderTokenFilterDescriptor>, IBuildableDescriptor<DictionaryDecompounderTokenFilter>
+	{
+		internal DictionaryDecompounderTokenFilterDescriptor(Action<DictionaryDecompounderTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public DictionaryDecompounderTokenFilterDescriptor() : base()
+		{
+		}
+
+		private string? HyphenationPatternsPathValue { get; set; }
+
+		private int? MaxSubwordSizeValue { get; set; }
+
+		private int? MinSubwordSizeValue { get; set; }
+
+		private int? MinWordSizeValue { get; set; }
+
+		private bool? OnlyLongestMatchValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		private IEnumerable<string>? WordListValue { get; set; }
+
+		private string? WordListPathValue { get; set; }
+
+		public DictionaryDecompounderTokenFilterDescriptor HyphenationPatternsPath(string? hyphenationPatternsPath)
+		{
+			HyphenationPatternsPathValue = hyphenationPatternsPath;
+			return Self;
+		}
+
+		public DictionaryDecompounderTokenFilterDescriptor MaxSubwordSize(int? maxSubwordSize)
+		{
+			MaxSubwordSizeValue = maxSubwordSize;
+			return Self;
+		}
+
+		public DictionaryDecompounderTokenFilterDescriptor MinSubwordSize(int? minSubwordSize)
+		{
+			MinSubwordSizeValue = minSubwordSize;
+			return Self;
+		}
+
+		public DictionaryDecompounderTokenFilterDescriptor MinWordSize(int? minWordSize)
+		{
+			MinWordSizeValue = minWordSize;
+			return Self;
+		}
+
+		public DictionaryDecompounderTokenFilterDescriptor OnlyLongestMatch(bool? onlyLongestMatch = true)
+		{
+			OnlyLongestMatchValue = onlyLongestMatch;
+			return Self;
+		}
+
+		public DictionaryDecompounderTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		public DictionaryDecompounderTokenFilterDescriptor WordList(IEnumerable<string>? wordList)
+		{
+			WordListValue = wordList;
+			return Self;
+		}
+
+		public DictionaryDecompounderTokenFilterDescriptor WordListPath(string? wordListPath)
+		{
+			WordListPathValue = wordListPath;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(HyphenationPatternsPathValue))
+			{
+				writer.WritePropertyName("hyphenation_patterns_path");
+				writer.WriteStringValue(HyphenationPatternsPathValue);
+			}
+
+			if (MaxSubwordSizeValue.HasValue)
+			{
+				writer.WritePropertyName("max_subword_size");
+				writer.WriteNumberValue(MaxSubwordSizeValue.Value);
+			}
+
+			if (MinSubwordSizeValue.HasValue)
+			{
+				writer.WritePropertyName("min_subword_size");
+				writer.WriteNumberValue(MinSubwordSizeValue.Value);
+			}
+
+			if (MinWordSizeValue.HasValue)
+			{
+				writer.WritePropertyName("min_word_size");
+				writer.WriteNumberValue(MinWordSizeValue.Value);
+			}
+
+			if (OnlyLongestMatchValue.HasValue)
+			{
+				writer.WritePropertyName("only_longest_match");
+				writer.WriteBooleanValue(OnlyLongestMatchValue.Value);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("dictionary_decompounder");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			if (WordListValue is not null)
+			{
+				writer.WritePropertyName("word_list");
+				JsonSerializer.Serialize(writer, WordListValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(WordListPathValue))
+			{
+				writer.WritePropertyName("word_list_path");
+				writer.WriteStringValue(WordListPathValue);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		DictionaryDecompounderTokenFilter IBuildableDescriptor<DictionaryDecompounderTokenFilter>.Build() => new()
+		{ HyphenationPatternsPath = HyphenationPatternsPathValue, MaxSubwordSize = MaxSubwordSizeValue, MinSubwordSize = MinSubwordSizeValue, MinWordSize = MinWordSizeValue, OnlyLongestMatch = OnlyLongestMatchValue, Version = VersionValue, WordList = WordListValue, WordListPath = WordListPathValue };
+	}
 }

@@ -9,7 +9,7 @@ using System.Text.Json;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class SortDescriptor<TDocument> : DescriptorPromiseBase<SortDescriptor<TDocument>, SortCollection>, ISelfSerializable
+public sealed class SortDescriptor<TDocument> : PromiseDescriptor<SortDescriptor<TDocument>, SortCollection>, ISelfSerializable
 {
 	public SortDescriptor() : base(new SortCollection()) { }
 
@@ -153,7 +153,7 @@ public sealed class SortDescriptor<TDocument> : DescriptorPromiseBase<SortDescri
 	}
 }
 
-public sealed class SortDescriptor : DescriptorPromiseBase<SortDescriptor, SortCollection>, ISelfSerializable
+public sealed class SortDescriptor : PromiseDescriptor<SortDescriptor, SortCollection>, ISelfSerializable
 {
 	public SortDescriptor() : base(new SortCollection()) { }
 

@@ -48,12 +48,28 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return DoRequest<DeleteEqlRequestDescriptor, DeleteEqlResponse>(descriptor);
 		}
 
+		public DeleteEqlResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteEqlRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new DeleteEqlRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlResponse>(descriptor);
+		}
+
 		public Task<DeleteEqlResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteEqlRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new DeleteEqlRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<DeleteEqlRequestDescriptor, DeleteEqlResponse>(descriptor);
+		}
+
+		public Task<DeleteEqlResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteEqlRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new DeleteEqlRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlResponse>(descriptor);
 		}
 
 		public EqlGetStatusResponse GetStatus(EqlGetStatusRequest request)
@@ -76,12 +92,28 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return DoRequest<EqlGetStatusRequestDescriptor, EqlGetStatusResponse>(descriptor);
 		}
 
+		public EqlGetStatusResponse GetStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetStatusRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new EqlGetStatusRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusResponse>(descriptor);
+		}
+
 		public Task<EqlGetStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetStatusRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new EqlGetStatusRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<EqlGetStatusRequestDescriptor, EqlGetStatusResponse>(descriptor);
+		}
+
+		public Task<EqlGetStatusResponse> GetStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetStatusRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new EqlGetStatusRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusResponse>(descriptor);
 		}
 
 		public EqlSearchResponse<TEvent> Search<TEvent>(EqlSearchRequest request)
@@ -104,12 +136,28 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return DoRequest<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>>(descriptor);
 		}
 
+		public EqlSearchResponse<TEvent> Search<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new EqlSearchRequestDescriptor<TDocument>(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<EqlSearchRequestDescriptor<TDocument>, EqlSearchResponse<TEvent>>(descriptor);
+		}
+
 		public Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new EqlSearchRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>>(descriptor);
+		}
+
+		public Task<EqlSearchResponse<TEvent>> SearchAsync<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new EqlSearchRequestDescriptor<TDocument>(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<EqlSearchRequestDescriptor<TDocument>, EqlSearchResponse<TEvent>>(descriptor);
 		}
 
 		public GetEqlResponse<TEvent> Get<TEvent>(GetEqlRequest request)
@@ -132,12 +180,28 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return DoRequest<GetEqlRequestDescriptor, GetEqlResponse<TEvent>>(descriptor);
 		}
 
+		public GetEqlResponse<TEvent> Get<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new GetEqlRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<GetEqlRequestDescriptor<TDocument>, GetEqlResponse<TEvent>>(descriptor);
+		}
+
 		public Task<GetEqlResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new GetEqlRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<GetEqlRequestDescriptor, GetEqlResponse<TEvent>>(descriptor);
+		}
+
+		public Task<GetEqlResponse<TEvent>> GetAsync<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new GetEqlRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<GetEqlRequestDescriptor<TDocument>, GetEqlResponse<TEvent>>(descriptor);
 		}
 	}
 }
