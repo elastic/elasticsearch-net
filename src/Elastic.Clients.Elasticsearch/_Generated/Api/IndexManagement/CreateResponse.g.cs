@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("acknowledged")]
-		public bool? Acknowledged { get; init; }
+		public bool Acknowledged { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]

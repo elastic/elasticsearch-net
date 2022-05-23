@@ -50,7 +50,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		private string PropertyDebug => Property == null ? null : $"PropertyInfo: {Property.Name}";
 		private static int TypeHashCode { get; } = typeof(PropertyName).GetHashCode();
-		public string Key => Name;
+
+		string IDictionaryKey.Key(IElasticsearchClientSettings settings) => GetInferredString(settings);
 
 		public bool Equals(PropertyName other) => EqualsMarker(other);
 
@@ -62,8 +63,10 @@ namespace Elastic.Clients.Elasticsearch
 					$"Can not resolve {nameof(PropertyName)} if no {nameof(IElasticsearchClientSettings)} is provided");
 			}
 
-			return elasticsearchSettings.Inferrer.PropertyName(this);
+			return GetInferredString(elasticsearchSettings);
 		}
+
+		private string GetInferredString(IElasticsearchClientSettings settings) => settings.Inferrer.PropertyName(this);
 
 		public override string ToString() => DebugDisplay;
 

@@ -79,4 +79,60 @@ namespace Elastic.Clients.Elasticsearch.Migration
 			writer.WriteNullValue();
 		}
 	}
+
+	[JsonConverter(typeof(MigrationStatusConverter))]
+	public enum MigrationStatus
+	{
+		[EnumMember(Value = "NO_MIGRATION_NEEDED")]
+		NoMigrationNeeded,
+		[EnumMember(Value = "MIGRATION_NEEDED")]
+		MigrationNeeded,
+		[EnumMember(Value = "IN_PROGRESS")]
+		InProgress,
+		[EnumMember(Value = "ERROR")]
+		Error
+	}
+
+	internal sealed class MigrationStatusConverter : JsonConverter<MigrationStatus>
+	{
+		public override MigrationStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "NO_MIGRATION_NEEDED":
+					return MigrationStatus.NoMigrationNeeded;
+				case "MIGRATION_NEEDED":
+					return MigrationStatus.MigrationNeeded;
+				case "IN_PROGRESS":
+					return MigrationStatus.InProgress;
+				case "ERROR":
+					return MigrationStatus.Error;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, MigrationStatus value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case MigrationStatus.NoMigrationNeeded:
+					writer.WriteStringValue("NO_MIGRATION_NEEDED");
+					return;
+				case MigrationStatus.MigrationNeeded:
+					writer.WriteStringValue("MIGRATION_NEEDED");
+					return;
+				case MigrationStatus.InProgress:
+					writer.WriteStringValue("IN_PROGRESS");
+					return;
+				case MigrationStatus.Error:
+					writer.WriteStringValue("ERROR");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
 }

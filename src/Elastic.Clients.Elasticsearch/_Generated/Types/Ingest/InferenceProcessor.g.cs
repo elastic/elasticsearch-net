@@ -52,6 +52,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 		}
 
+		private Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
+
+		private InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
+
+		private Action<InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
+
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; set; }
 
 		private ProcessorContainerDescriptor<TDocument> OnFailureDescriptor { get; set; }
@@ -66,17 +72,35 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		private bool? IgnoreFailureValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
-
-		private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
-
-		private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Id ModelIdValue { get; set; }
 
 		private string? TagValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field TargetFieldValue { get; set; }
+
+		public InferenceProcessorDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
+		{
+			InferenceConfigDescriptor = null;
+			InferenceConfigDescriptorAction = null;
+			InferenceConfigValue = inferenceConfig;
+			return Self;
+		}
+
+		public InferenceProcessorDescriptor<TDocument> InferenceConfig(InferenceConfigDescriptor<TDocument> descriptor)
+		{
+			InferenceConfigValue = null;
+			InferenceConfigDescriptorAction = null;
+			InferenceConfigDescriptor = descriptor;
+			return Self;
+		}
+
+		public InferenceProcessorDescriptor<TDocument> InferenceConfig(Action<InferenceConfigDescriptor<TDocument>> configure)
+		{
+			InferenceConfigValue = null;
+			InferenceConfigDescriptor = null;
+			InferenceConfigDescriptorAction = configure;
+			return Self;
+		}
 
 		public InferenceProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure)
 		{
@@ -132,30 +156,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public InferenceProcessorDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
-		{
-			InferenceConfigDescriptor = null;
-			InferenceConfigDescriptorAction = null;
-			InferenceConfigValue = inferenceConfig;
-			return Self;
-		}
-
-		public InferenceProcessorDescriptor<TDocument> InferenceConfig(InferenceConfigDescriptor descriptor)
-		{
-			InferenceConfigValue = null;
-			InferenceConfigDescriptorAction = null;
-			InferenceConfigDescriptor = descriptor;
-			return Self;
-		}
-
-		public InferenceProcessorDescriptor<TDocument> InferenceConfig(Action<InferenceConfigDescriptor> configure)
-		{
-			InferenceConfigValue = null;
-			InferenceConfigDescriptor = null;
-			InferenceConfigDescriptorAction = configure;
-			return Self;
-		}
-
 		public InferenceProcessorDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Id modelId)
 		{
 			ModelIdValue = modelId;
@@ -183,6 +183,22 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (InferenceConfigDescriptor is not null)
+			{
+				writer.WritePropertyName("inference_config");
+				JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
+			}
+			else if (InferenceConfigDescriptorAction is not null)
+			{
+				writer.WritePropertyName("inference_config");
+				JsonSerializer.Serialize(writer, new InferenceConfigDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
+			}
+			else if (InferenceConfigValue is not null)
+			{
+				writer.WritePropertyName("inference_config");
+				JsonSerializer.Serialize(writer, InferenceConfigValue, options);
+			}
+
 			if (OnFailureDescriptor is not null)
 			{
 				writer.WritePropertyName("on_failure");
@@ -228,22 +244,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				writer.WriteBooleanValue(IgnoreFailureValue.Value);
 			}
 
-			if (InferenceConfigDescriptor is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-			}
-			else if (InferenceConfigDescriptorAction is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
-			}
-			else if (InferenceConfigValue is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, InferenceConfigValue, options);
-			}
-
 			writer.WritePropertyName("model_id");
 			JsonSerializer.Serialize(writer, ModelIdValue, options);
 			if (!string.IsNullOrEmpty(TagValue))
@@ -265,6 +265,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 		}
 
+		private Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
+
+		private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
+
+		private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
+
 		private IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; set; }
 
 		private ProcessorContainerDescriptor OnFailureDescriptor { get; set; }
@@ -279,17 +285,35 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		private bool? IgnoreFailureValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
-
-		private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
-
-		private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Id ModelIdValue { get; set; }
 
 		private string? TagValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field TargetFieldValue { get; set; }
+
+		public InferenceProcessorDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
+		{
+			InferenceConfigDescriptor = null;
+			InferenceConfigDescriptorAction = null;
+			InferenceConfigValue = inferenceConfig;
+			return Self;
+		}
+
+		public InferenceProcessorDescriptor InferenceConfig(InferenceConfigDescriptor descriptor)
+		{
+			InferenceConfigValue = null;
+			InferenceConfigDescriptorAction = null;
+			InferenceConfigDescriptor = descriptor;
+			return Self;
+		}
+
+		public InferenceProcessorDescriptor InferenceConfig(Action<InferenceConfigDescriptor> configure)
+		{
+			InferenceConfigValue = null;
+			InferenceConfigDescriptor = null;
+			InferenceConfigDescriptorAction = configure;
+			return Self;
+		}
 
 		public InferenceProcessorDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure)
 		{
@@ -345,30 +369,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public InferenceProcessorDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
-		{
-			InferenceConfigDescriptor = null;
-			InferenceConfigDescriptorAction = null;
-			InferenceConfigValue = inferenceConfig;
-			return Self;
-		}
-
-		public InferenceProcessorDescriptor InferenceConfig(InferenceConfigDescriptor descriptor)
-		{
-			InferenceConfigValue = null;
-			InferenceConfigDescriptorAction = null;
-			InferenceConfigDescriptor = descriptor;
-			return Self;
-		}
-
-		public InferenceProcessorDescriptor InferenceConfig(Action<InferenceConfigDescriptor> configure)
-		{
-			InferenceConfigValue = null;
-			InferenceConfigDescriptor = null;
-			InferenceConfigDescriptorAction = configure;
-			return Self;
-		}
-
 		public InferenceProcessorDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
 		{
 			ModelIdValue = modelId;
@@ -402,6 +402,22 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (InferenceConfigDescriptor is not null)
+			{
+				writer.WritePropertyName("inference_config");
+				JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
+			}
+			else if (InferenceConfigDescriptorAction is not null)
+			{
+				writer.WritePropertyName("inference_config");
+				JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
+			}
+			else if (InferenceConfigValue is not null)
+			{
+				writer.WritePropertyName("inference_config");
+				JsonSerializer.Serialize(writer, InferenceConfigValue, options);
+			}
+
 			if (OnFailureDescriptor is not null)
 			{
 				writer.WritePropertyName("on_failure");
@@ -445,22 +461,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			{
 				writer.WritePropertyName("ignore_failure");
 				writer.WriteBooleanValue(IgnoreFailureValue.Value);
-			}
-
-			if (InferenceConfigDescriptor is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-			}
-			else if (InferenceConfigDescriptorAction is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
-			}
-			else if (InferenceConfigValue is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 			}
 
 			writer.WritePropertyName("model_id");

@@ -30,4 +30,37 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("type")]
 		public string Type => "porter_stem";
 	}
+
+	public sealed partial class PorterStemTokenFilterDescriptor : SerializableDescriptorBase<PorterStemTokenFilterDescriptor>, IBuildableDescriptor<PorterStemTokenFilter>
+	{
+		internal PorterStemTokenFilterDescriptor(Action<PorterStemTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public PorterStemTokenFilterDescriptor() : base()
+		{
+		}
+
+		private string? VersionValue { get; set; }
+
+		public PorterStemTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("porter_stem");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		PorterStemTokenFilter IBuildableDescriptor<PorterStemTokenFilter>.Build() => new()
+		{ Version = VersionValue };
+	}
 }

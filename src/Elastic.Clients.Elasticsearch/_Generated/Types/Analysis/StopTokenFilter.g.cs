@@ -28,22 +28,107 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("ignore_case")]
-		public bool? IgnoreCase { get; init; }
+		public bool? IgnoreCase { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("remove_trailing")]
-		public bool? RemoveTrailing { get; init; }
+		public bool? RemoveTrailing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords Stopwords { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
-		public string? StopwordsPath { get; init; }
+		public string? StopwordsPath { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "stop";
+	}
+
+	public sealed partial class StopTokenFilterDescriptor : SerializableDescriptorBase<StopTokenFilterDescriptor>, IBuildableDescriptor<StopTokenFilter>
+	{
+		internal StopTokenFilterDescriptor(Action<StopTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public StopTokenFilterDescriptor() : base()
+		{
+		}
+
+		private bool? IgnoreCaseValue { get; set; }
+
+		private bool? RemoveTrailingValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Analysis.StopWords StopwordsValue { get; set; }
+
+		private string? StopwordsPathValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public StopTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true)
+		{
+			IgnoreCaseValue = ignoreCase;
+			return Self;
+		}
+
+		public StopTokenFilterDescriptor RemoveTrailing(bool? removeTrailing = true)
+		{
+			RemoveTrailingValue = removeTrailing;
+			return Self;
+		}
+
+		public StopTokenFilterDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords stopwords)
+		{
+			StopwordsValue = stopwords;
+			return Self;
+		}
+
+		public StopTokenFilterDescriptor StopwordsPath(string? stopwordsPath)
+		{
+			StopwordsPathValue = stopwordsPath;
+			return Self;
+		}
+
+		public StopTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (IgnoreCaseValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_case");
+				writer.WriteBooleanValue(IgnoreCaseValue.Value);
+			}
+
+			if (RemoveTrailingValue.HasValue)
+			{
+				writer.WritePropertyName("remove_trailing");
+				writer.WriteBooleanValue(RemoveTrailingValue.Value);
+			}
+
+			writer.WritePropertyName("stopwords");
+			JsonSerializer.Serialize(writer, StopwordsValue, options);
+			if (!string.IsNullOrEmpty(StopwordsPathValue))
+			{
+				writer.WritePropertyName("stopwords_path");
+				writer.WriteStringValue(StopwordsPathValue);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("stop");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		StopTokenFilter IBuildableDescriptor<StopTokenFilter>.Build() => new()
+		{ IgnoreCase = IgnoreCaseValue, RemoveTrailing = RemoveTrailingValue, Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
 	}
 }

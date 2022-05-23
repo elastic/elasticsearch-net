@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
-		public bool Enabled { get; set; }
+		public bool? Enabled { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("retention_lease")]
@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private bool EnabledValue { get; set; }
+		private bool? EnabledValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? RetentionLeaseValue { get; set; }
 
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Action<RetentionLeaseDescriptor> RetentionLeaseDescriptorAction { get; set; }
 
-		public SoftDeletesDescriptor Enabled(bool enabled = true)
+		public SoftDeletesDescriptor Enabled(bool? enabled = true)
 		{
 			EnabledValue = enabled;
 			return Self;
@@ -83,8 +83,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue);
+			if (EnabledValue.HasValue)
+			{
+				writer.WritePropertyName("enabled");
+				writer.WriteBooleanValue(EnabledValue.Value);
+			}
+
 			if (RetentionLeaseDescriptor is not null)
 			{
 				writer.WritePropertyName("retention_lease");

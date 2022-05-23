@@ -35,6 +35,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Feature Analytics { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("archive")]
+		public Elastic.Clients.Elasticsearch.Xpack.Feature Archive { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("ccr")]
 		public Elastic.Clients.Elasticsearch.Xpack.Feature Ccr { get; init; }
 

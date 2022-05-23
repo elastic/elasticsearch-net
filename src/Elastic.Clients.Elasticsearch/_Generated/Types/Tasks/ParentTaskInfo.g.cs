@@ -22,16 +22,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.Tasks
 {
-	public partial class IndicesGetDataStreamItemIndex
+	public partial class ParentTaskInfo : TaskInfo
 	{
 		[JsonInclude]
-		[JsonPropertyName("index_name")]
-		public string IndexName { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("index_uuid")]
-		public string IndexUuid { get; init; }
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>? Children { get; init; }
 	}
 }

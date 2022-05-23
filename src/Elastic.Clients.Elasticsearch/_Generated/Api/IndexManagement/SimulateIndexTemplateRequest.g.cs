@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("data_stream")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.DataStream? DataStream { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStream { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("priority")]
@@ -116,11 +116,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.DataStream? DataStreamValue { get; set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
 
-		private DataStreamDescriptor DataStreamDescriptor { get; set; }
+		private DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
 
-		private Action<DataStreamDescriptor> DataStreamDescriptorAction { get; set; }
+		private Action<DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Indices? IndexPatternsValue { get; set; }
 
@@ -170,7 +170,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SimulateIndexTemplateRequestDescriptor<TDocument> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStream? dataStream)
+		public SimulateIndexTemplateRequestDescriptor<TDocument> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? dataStream)
 		{
 			DataStreamDescriptor = null;
 			DataStreamDescriptorAction = null;
@@ -178,7 +178,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SimulateIndexTemplateRequestDescriptor<TDocument> DataStream(DataStreamDescriptor descriptor)
+		public SimulateIndexTemplateRequestDescriptor<TDocument> DataStream(DataStreamVisibilityDescriptor descriptor)
 		{
 			DataStreamValue = null;
 			DataStreamDescriptorAction = null;
@@ -186,7 +186,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SimulateIndexTemplateRequestDescriptor<TDocument> DataStream(Action<DataStreamDescriptor> configure)
+		public SimulateIndexTemplateRequestDescriptor<TDocument> DataStream(Action<DataStreamVisibilityDescriptor> configure)
 		{
 			DataStreamValue = null;
 			DataStreamDescriptor = null;
@@ -257,7 +257,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (DataStreamDescriptorAction is not null)
 			{
 				writer.WritePropertyName("data_stream");
-				JsonSerializer.Serialize(writer, new DataStreamDescriptor(DataStreamDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
 			}
 			else if (DataStreamValue is not null)
 			{
@@ -321,11 +321,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.DataStream? DataStreamValue { get; set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
 
-		private DataStreamDescriptor DataStreamDescriptor { get; set; }
+		private DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
 
-		private Action<DataStreamDescriptor> DataStreamDescriptorAction { get; set; }
+		private Action<DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Indices? IndexPatternsValue { get; set; }
 
@@ -375,7 +375,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SimulateIndexTemplateRequestDescriptor DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStream? dataStream)
+		public SimulateIndexTemplateRequestDescriptor DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? dataStream)
 		{
 			DataStreamDescriptor = null;
 			DataStreamDescriptorAction = null;
@@ -383,7 +383,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SimulateIndexTemplateRequestDescriptor DataStream(DataStreamDescriptor descriptor)
+		public SimulateIndexTemplateRequestDescriptor DataStream(DataStreamVisibilityDescriptor descriptor)
 		{
 			DataStreamValue = null;
 			DataStreamDescriptorAction = null;
@@ -391,7 +391,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public SimulateIndexTemplateRequestDescriptor DataStream(Action<DataStreamDescriptor> configure)
+		public SimulateIndexTemplateRequestDescriptor DataStream(Action<DataStreamVisibilityDescriptor> configure)
 		{
 			DataStreamValue = null;
 			DataStreamDescriptor = null;
@@ -462,7 +462,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (DataStreamDescriptorAction is not null)
 			{
 				writer.WritePropertyName("data_stream");
-				JsonSerializer.Serialize(writer, new DataStreamDescriptor(DataStreamDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
 			}
 			else if (DataStreamValue is not null)
 			{

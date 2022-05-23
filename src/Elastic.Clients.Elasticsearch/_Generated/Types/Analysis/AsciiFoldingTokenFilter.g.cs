@@ -28,10 +28,53 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
-		public bool PreserveOriginal { get; init; }
+		public bool PreserveOriginal { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "asciifolding";
+	}
+
+	public sealed partial class AsciiFoldingTokenFilterDescriptor : SerializableDescriptorBase<AsciiFoldingTokenFilterDescriptor>, IBuildableDescriptor<AsciiFoldingTokenFilter>
+	{
+		internal AsciiFoldingTokenFilterDescriptor(Action<AsciiFoldingTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public AsciiFoldingTokenFilterDescriptor() : base()
+		{
+		}
+
+		private bool PreserveOriginalValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool preserveOriginal = true)
+		{
+			PreserveOriginalValue = preserveOriginal;
+			return Self;
+		}
+
+		public AsciiFoldingTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("preserve_original");
+			writer.WriteBooleanValue(PreserveOriginalValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("asciifolding");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		AsciiFoldingTokenFilter IBuildableDescriptor<AsciiFoldingTokenFilter>.Build() => new()
+		{ PreserveOriginal = PreserveOriginalValue, Version = VersionValue };
 	}
 }

@@ -27,12 +27,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class IndicesStats
 	{
 		[JsonInclude]
+		[JsonPropertyName("health")]
+		public Elastic.Clients.Elasticsearch.HealthStatus? Health { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("primaries")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexStats? Primaries { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>? Shards { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("status")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState? Status { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total")]

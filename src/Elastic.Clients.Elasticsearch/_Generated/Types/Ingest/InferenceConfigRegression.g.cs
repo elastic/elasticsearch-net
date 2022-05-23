@@ -24,11 +24,65 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class InferenceConfigRegression
+	public partial class InferenceConfigRegression : IInferenceConfigVariant
 	{
+		[JsonIgnore]
+		string IInferenceConfigVariant.InferenceConfigVariantName => "regression";
+		[JsonInclude]
+		[JsonPropertyName("num_top_feature_importance_values")]
+		public int? NumTopFeatureImportanceValues { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("results_field")]
-		public string ResultsField { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
+	}
+
+	public sealed partial class InferenceConfigRegressionDescriptor<TDocument> : SerializableDescriptorBase<InferenceConfigRegressionDescriptor<TDocument>>
+	{
+		internal InferenceConfigRegressionDescriptor(Action<InferenceConfigRegressionDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public InferenceConfigRegressionDescriptor() : base()
+		{
+		}
+
+		private int? NumTopFeatureImportanceValuesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
+
+		public InferenceConfigRegressionDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
+		{
+			NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
+			return Self;
+		}
+
+		public InferenceConfigRegressionDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
+		{
+			ResultsFieldValue = resultsField;
+			return Self;
+		}
+
+		public InferenceConfigRegressionDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField)
+		{
+			ResultsFieldValue = resultsField;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (NumTopFeatureImportanceValuesValue.HasValue)
+			{
+				writer.WritePropertyName("num_top_feature_importance_values");
+				writer.WriteNumberValue(NumTopFeatureImportanceValuesValue.Value);
+			}
+
+			if (ResultsFieldValue is not null)
+			{
+				writer.WritePropertyName("results_field");
+				JsonSerializer.Serialize(writer, ResultsFieldValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public sealed partial class InferenceConfigRegressionDescriptor : SerializableDescriptorBase<InferenceConfigRegressionDescriptor>
@@ -38,9 +92,29 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 		}
 
-		private string ResultsFieldValue { get; set; }
+		private int? NumTopFeatureImportanceValuesValue { get; set; }
 
-		public InferenceConfigRegressionDescriptor ResultsField(string resultsField)
+		private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
+
+		public InferenceConfigRegressionDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
+		{
+			NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
+			return Self;
+		}
+
+		public InferenceConfigRegressionDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
+		{
+			ResultsFieldValue = resultsField;
+			return Self;
+		}
+
+		public InferenceConfigRegressionDescriptor ResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> resultsField)
+		{
+			ResultsFieldValue = resultsField;
+			return Self;
+		}
+
+		public InferenceConfigRegressionDescriptor ResultsField<TDocument>(Expression<Func<TDocument, object>> resultsField)
 		{
 			ResultsFieldValue = resultsField;
 			return Self;
@@ -49,8 +123,18 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("results_field");
-			writer.WriteStringValue(ResultsFieldValue);
+			if (NumTopFeatureImportanceValuesValue.HasValue)
+			{
+				writer.WritePropertyName("num_top_feature_importance_values");
+				writer.WriteNumberValue(NumTopFeatureImportanceValuesValue.Value);
+			}
+
+			if (ResultsFieldValue is not null)
+			{
+				writer.WritePropertyName("results_field");
+				JsonSerializer.Serialize(writer, ResultsFieldValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

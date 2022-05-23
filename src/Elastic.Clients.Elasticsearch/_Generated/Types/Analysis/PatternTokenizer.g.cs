@@ -28,18 +28,81 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("flags")]
-		public string Flags { get; init; }
+		public string Flags { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("group")]
-		public int Group { get; init; }
+		public int Group { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("pattern")]
-		public string Pattern { get; init; }
+		public string Pattern { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "pattern";
+	}
+
+	public sealed partial class PatternTokenizerDescriptor : SerializableDescriptorBase<PatternTokenizerDescriptor>, IBuildableDescriptor<PatternTokenizer>
+	{
+		internal PatternTokenizerDescriptor(Action<PatternTokenizerDescriptor> configure) => configure.Invoke(this);
+		public PatternTokenizerDescriptor() : base()
+		{
+		}
+
+		private string FlagsValue { get; set; }
+
+		private int GroupValue { get; set; }
+
+		private string PatternValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public PatternTokenizerDescriptor Flags(string flags)
+		{
+			FlagsValue = flags;
+			return Self;
+		}
+
+		public PatternTokenizerDescriptor Group(int group)
+		{
+			GroupValue = group;
+			return Self;
+		}
+
+		public PatternTokenizerDescriptor Pattern(string pattern)
+		{
+			PatternValue = pattern;
+			return Self;
+		}
+
+		public PatternTokenizerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("flags");
+			writer.WriteStringValue(FlagsValue);
+			writer.WritePropertyName("group");
+			writer.WriteNumberValue(GroupValue);
+			writer.WritePropertyName("pattern");
+			writer.WriteStringValue(PatternValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("pattern");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		PatternTokenizer IBuildableDescriptor<PatternTokenizer>.Build() => new()
+		{ Flags = FlagsValue, Group = GroupValue, Pattern = PatternValue, Version = VersionValue };
 	}
 }

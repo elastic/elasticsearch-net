@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("inference_config")]
-		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer InferenceConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.InferenceConfigCreateContainer InferenceConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("input")]
@@ -107,11 +107,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<DefinitionDescriptor<TDocument>> DefinitionDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer InferenceConfigValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Ml.InferenceConfigCreateContainer InferenceConfigValue { get; set; }
 
-		private Aggregations.InferenceConfigContainerDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
+		private InferenceConfigCreateContainerDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
 
-		private Action<Aggregations.InferenceConfigContainerDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
+		private Action<InferenceConfigCreateContainerDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
 
 		private string? CompressedDefinitionValue { get; set; }
 
@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer inferenceConfig)
+		public MlPutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Ml.InferenceConfigCreateContainer inferenceConfig)
 		{
 			InferenceConfigDescriptor = null;
 			InferenceConfigDescriptorAction = null;
@@ -163,7 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Aggregations.InferenceConfigContainerDescriptor<TDocument> descriptor)
+		public MlPutTrainedModelRequestDescriptor<TDocument> InferenceConfig(InferenceConfigCreateContainerDescriptor<TDocument> descriptor)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -171,7 +171,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Action<Aggregations.InferenceConfigContainerDescriptor<TDocument>> configure)
+		public MlPutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Action<InferenceConfigCreateContainerDescriptor<TDocument>> configure)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptor = null;
@@ -266,7 +266,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			else if (InferenceConfigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new Aggregations.InferenceConfigContainerDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new InferenceConfigCreateContainerDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
 			}
 			else
 			{
@@ -351,11 +351,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<DefinitionDescriptor> DefinitionDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer InferenceConfigValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Ml.InferenceConfigCreateContainer InferenceConfigValue { get; set; }
 
-		private Aggregations.InferenceConfigContainerDescriptor InferenceConfigDescriptor { get; set; }
+		private InferenceConfigCreateContainerDescriptor InferenceConfigDescriptor { get; set; }
 
-		private Action<Aggregations.InferenceConfigContainerDescriptor> InferenceConfigDescriptorAction { get; set; }
+		private Action<InferenceConfigCreateContainerDescriptor> InferenceConfigDescriptorAction { get; set; }
 
 		private string? CompressedDefinitionValue { get; set; }
 
@@ -399,7 +399,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer inferenceConfig)
+		public MlPutTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Ml.InferenceConfigCreateContainer inferenceConfig)
 		{
 			InferenceConfigDescriptor = null;
 			InferenceConfigDescriptorAction = null;
@@ -407,7 +407,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutTrainedModelRequestDescriptor InferenceConfig(Aggregations.InferenceConfigContainerDescriptor descriptor)
+		public MlPutTrainedModelRequestDescriptor InferenceConfig(InferenceConfigCreateContainerDescriptor descriptor)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -415,7 +415,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutTrainedModelRequestDescriptor InferenceConfig(Action<Aggregations.InferenceConfigContainerDescriptor> configure)
+		public MlPutTrainedModelRequestDescriptor InferenceConfig(Action<InferenceConfigCreateContainerDescriptor> configure)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptor = null;
@@ -510,7 +510,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			else if (InferenceConfigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new Aggregations.InferenceConfigContainerDescriptor(InferenceConfigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new InferenceConfigCreateContainerDescriptor(InferenceConfigDescriptorAction), options);
 			}
 			else
 			{

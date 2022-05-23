@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class RandomScoreFunction : ScoreFunctionBase, IFunctionScoreContainerVariant
+	public partial class RandomScoreFunction : IFunctionScoreContainerVariant
 	{
 		[JsonIgnore]
 		string IFunctionScoreContainerVariant.FunctionScoreContainerVariantName => "random_score";
@@ -44,41 +44,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
-
-		private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
-
-		private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private Union<long?, string?>? SeedValue { get; set; }
-
-		private double? WeightValue { get; set; }
-
-		public RandomScoreFunctionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
-		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
-		}
-
-		public RandomScoreFunctionDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
-		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
-		}
-
-		public RandomScoreFunctionDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
-		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
-		}
 
 		public RandomScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 		{
@@ -98,31 +66,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public RandomScoreFunctionDescriptor<TDocument> Weight(double? weight)
-		{
-			WeightValue = weight;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
 			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
@@ -133,12 +79,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("seed");
 				JsonSerializer.Serialize(writer, SeedValue, options);
-			}
-
-			if (WeightValue.HasValue)
-			{
-				writer.WritePropertyName("weight");
-				writer.WriteNumberValue(WeightValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -152,41 +92,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
-
-		private QueryContainerDescriptor FilterDescriptor { get; set; }
-
-		private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private Union<long?, string?>? SeedValue { get; set; }
-
-		private double? WeightValue { get; set; }
-
-		public RandomScoreFunctionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
-		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
-		}
-
-		public RandomScoreFunctionDescriptor Filter(QueryContainerDescriptor descriptor)
-		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
-		}
-
-		public RandomScoreFunctionDescriptor Filter(Action<QueryContainerDescriptor> configure)
-		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
-		}
 
 		public RandomScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 		{
@@ -212,31 +120,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public RandomScoreFunctionDescriptor Weight(double? weight)
-		{
-			WeightValue = weight;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
 			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
@@ -247,12 +133,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("seed");
 				JsonSerializer.Serialize(writer, SeedValue, options);
-			}
-
-			if (WeightValue.HasValue)
-			{
-				writer.WritePropertyName("weight");
-				writer.WriteNumberValue(WeightValue.Value);
 			}
 
 			writer.WriteEndObject();

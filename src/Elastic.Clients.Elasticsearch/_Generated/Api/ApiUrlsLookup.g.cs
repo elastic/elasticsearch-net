@@ -157,6 +157,8 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls LogstashDeletePipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
 		internal static ApiUrls LogstashPutPipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
 		internal static ApiUrls MigrationDeprecations = new ApiUrls(new[] { "/_migration/deprecations", "/{index}/_migration/deprecations" });
+		internal static ApiUrls MigrationGetFeatureUpgradeStatus = new ApiUrls(new[] { "/_migration/system_features" });
+		internal static ApiUrls MigrationPostFeatureUpgrade = new ApiUrls(new[] { "/_migration/system_features" });
 		internal static ApiUrls MachineLearningCloseJob = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/_close" });
 		internal static ApiUrls MachineLearningDeleteCalendarEvent = new ApiUrls(new[] { "/_ml/calendars/{calendar_id}/events/{event_id}" });
 		internal static ApiUrls MachineLearningDeleteCalendar = new ApiUrls(new[] { "/_ml/calendars/{calendar_id}" });
@@ -180,6 +182,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls MachineLearningGetDataFrameAnalyticsStats = new ApiUrls(new[] { "/_ml/data_frame/analytics/_stats", "/_ml/data_frame/analytics/{id}/_stats" });
 		internal static ApiUrls MachineLearningGetInfluencers = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/results/influencers" });
 		internal static ApiUrls MachineLearningGetJobStats = new ApiUrls(new[] { "/_ml/anomaly_detectors/_stats", "/_ml/anomaly_detectors/{job_id}/_stats" });
+		internal static ApiUrls MachineLearningGetMemoryStats = new ApiUrls(new[] { "/_ml/memory/_stats", "/_ml/memory/{node_id}/_stats" });
 		internal static ApiUrls MachineLearningGetModelSnapshots = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_ml/anomaly_detectors/{job_id}/model_snapshots" });
 		internal static ApiUrls MachineLearningGetOverallBuckets = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/results/overall_buckets" });
 		internal static ApiUrls MachineLearningGetRecords = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/results/records" });
@@ -295,6 +298,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls TransformManagementGetTransformStats = new ApiUrls(new[] { "/_transform/{transform_id}/_stats" });
 		internal static ApiUrls TransformManagementPreviewTransform = new ApiUrls(new[] { "/_transform/{transform_id}/_preview", "/_transform/_preview" });
 		internal static ApiUrls TransformManagementPutTransform = new ApiUrls(new[] { "/_transform/{transform_id}" });
+		internal static ApiUrls TransformManagementResetTransform = new ApiUrls(new[] { "/_transform/{transform_id}/_reset" });
 		internal static ApiUrls TransformManagementStartTransform = new ApiUrls(new[] { "/_transform/{transform_id}/_start" });
 		internal static ApiUrls TransformManagementStopTransform = new ApiUrls(new[] { "/_transform/{transform_id}/_stop" });
 		internal static ApiUrls TransformManagementUpdateTransform = new ApiUrls(new[] { "/_transform/{transform_id}/_update" });

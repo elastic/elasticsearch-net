@@ -28,6 +28,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_values")]
-		public bool? DocValues { get; init; }
+		public bool? DocValues { get; set; }
 	}
 }
