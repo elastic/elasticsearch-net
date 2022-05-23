@@ -48,12 +48,28 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return DoRequest<GraphExploreRequestDescriptor, GraphExploreResponse>(descriptor);
 		}
 
+		public GraphExploreResponse Explore<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GraphExploreRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new GraphExploreRequestDescriptor<TDocument>(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<GraphExploreRequestDescriptor<TDocument>, GraphExploreResponse>(descriptor);
+		}
+
 		public Task<GraphExploreResponse> ExploreAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<GraphExploreRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new GraphExploreRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<GraphExploreRequestDescriptor, GraphExploreResponse>(descriptor);
+		}
+
+		public Task<GraphExploreResponse> ExploreAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GraphExploreRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new GraphExploreRequestDescriptor<TDocument>(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<GraphExploreRequestDescriptor<TDocument>, GraphExploreResponse>(descriptor);
 		}
 	}
 }

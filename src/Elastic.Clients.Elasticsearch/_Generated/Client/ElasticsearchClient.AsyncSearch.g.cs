@@ -48,12 +48,28 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return DoRequest<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse>(descriptor);
 		}
 
+		public AsyncSearchStatusResponse Status<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new AsyncSearchStatusRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse>(descriptor);
+		}
+
 		public Task<AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new AsyncSearchStatusRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse>(descriptor);
+		}
+
+		public Task<AsyncSearchStatusResponse> StatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new AsyncSearchStatusRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse>(descriptor);
 		}
 
 		public AsyncSearchSubmitResponse<TDocument> Submit<TDocument>(AsyncSearchSubmitRequest request)
@@ -104,12 +120,28 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return DoRequest<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchResponse>(descriptor);
 		}
 
+		public DeleteAsyncSearchResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new DeleteAsyncSearchRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse>(descriptor);
+		}
+
 		public Task<DeleteAsyncSearchResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new DeleteAsyncSearchRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchResponse>(descriptor);
+		}
+
+		public Task<DeleteAsyncSearchResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new DeleteAsyncSearchRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse>(descriptor);
 		}
 
 		public GetAsyncSearchResponse<TDocument> Get<TDocument>(GetAsyncSearchRequest request)

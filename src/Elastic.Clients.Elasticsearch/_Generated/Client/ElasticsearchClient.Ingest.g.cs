@@ -48,12 +48,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestDeletePipelineRequestDescriptor, IngestDeletePipelineResponse>(descriptor);
 		}
 
+		public IngestDeletePipelineResponse DeletePipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestDeletePipelineRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new IngestDeletePipelineRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<IngestDeletePipelineRequestDescriptor<TDocument>, IngestDeletePipelineResponse>(descriptor);
+		}
+
 		public Task<IngestDeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<IngestDeletePipelineRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestDeletePipelineRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<IngestDeletePipelineRequestDescriptor, IngestDeletePipelineResponse>(descriptor);
+		}
+
+		public Task<IngestDeletePipelineResponse> DeletePipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestDeletePipelineRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IngestDeletePipelineRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IngestDeletePipelineRequestDescriptor<TDocument>, IngestDeletePipelineResponse>(descriptor);
 		}
 
 		public IngestGeoIpStatsResponse GeoIpStats(IngestGeoIpStatsRequest request)
@@ -160,12 +176,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestPutPipelineRequestDescriptor, IngestPutPipelineResponse>(descriptor);
 		}
 
+		public IngestPutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestPutPipelineRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new IngestPutPipelineRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<IngestPutPipelineRequestDescriptor<TDocument>, IngestPutPipelineResponse>(descriptor);
+		}
+
 		public Task<IngestPutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<IngestPutPipelineRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestPutPipelineRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<IngestPutPipelineRequestDescriptor, IngestPutPipelineResponse>(descriptor);
+		}
+
+		public Task<IngestPutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestPutPipelineRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IngestPutPipelineRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IngestPutPipelineRequestDescriptor<TDocument>, IngestPutPipelineResponse>(descriptor);
 		}
 
 		public IngestSimulateResponse Simulate(IngestSimulateRequest request)

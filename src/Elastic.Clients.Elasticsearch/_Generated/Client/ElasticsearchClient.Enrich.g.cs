@@ -132,12 +132,28 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequest<EnrichPutPolicyRequestDescriptor, EnrichPutPolicyResponse>(descriptor);
 		}
 
+		public EnrichPutPolicyResponse PutPolicy<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<EnrichPutPolicyRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new EnrichPutPolicyRequestDescriptor<TDocument>(name);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<EnrichPutPolicyRequestDescriptor<TDocument>, EnrichPutPolicyResponse>(descriptor);
+		}
+
 		public Task<EnrichPutPolicyResponse> PutPolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<EnrichPutPolicyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new EnrichPutPolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<EnrichPutPolicyRequestDescriptor, EnrichPutPolicyResponse>(descriptor);
+		}
+
+		public Task<EnrichPutPolicyResponse> PutPolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<EnrichPutPolicyRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new EnrichPutPolicyRequestDescriptor<TDocument>(name);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<EnrichPutPolicyRequestDescriptor<TDocument>, EnrichPutPolicyResponse>(descriptor);
 		}
 
 		public EnrichStatsResponse Stats(EnrichStatsRequest request)
