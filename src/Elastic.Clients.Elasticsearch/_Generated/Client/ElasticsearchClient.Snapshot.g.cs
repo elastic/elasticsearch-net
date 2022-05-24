@@ -272,12 +272,28 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 			return DoRequest<SnapshotRestoreRequestDescriptor, SnapshotRestoreResponse>(descriptor);
 		}
 
+		public SnapshotRestoreResponse Restore<TDocument>(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<SnapshotRestoreRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new SnapshotRestoreRequestDescriptor<TDocument>(repository, snapshot);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SnapshotRestoreRequestDescriptor<TDocument>, SnapshotRestoreResponse>(descriptor);
+		}
+
 		public Task<SnapshotRestoreResponse> RestoreAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<SnapshotRestoreRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SnapshotRestoreRequestDescriptor(repository, snapshot);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SnapshotRestoreRequestDescriptor, SnapshotRestoreResponse>(descriptor);
+		}
+
+		public Task<SnapshotRestoreResponse> RestoreAsync<TDocument>(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<SnapshotRestoreRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SnapshotRestoreRequestDescriptor<TDocument>(repository, snapshot);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SnapshotRestoreRequestDescriptor<TDocument>, SnapshotRestoreResponse>(descriptor);
 		}
 
 		public SnapshotStatusResponse Status(SnapshotStatusRequest request)

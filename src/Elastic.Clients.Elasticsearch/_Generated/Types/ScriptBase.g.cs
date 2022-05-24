@@ -30,32 +30,4 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonPropertyName("params")]
 		public Dictionary<string, object>? Params { get; set; }
 	}
-
-	public sealed partial class ScriptBaseDescriptor : SerializableDescriptorBase<ScriptBaseDescriptor>
-	{
-		internal ScriptBaseDescriptor(Action<ScriptBaseDescriptor> configure) => configure.Invoke(this);
-		public ScriptBaseDescriptor() : base()
-		{
-		}
-
-		private Dictionary<string, object>? ParamsValue { get; set; }
-
-		public ScriptBaseDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (ParamsValue is not null)
-			{
-				writer.WritePropertyName("params");
-				SourceSerialisation.SerializeParams(ParamsValue, writer, settings);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
 }

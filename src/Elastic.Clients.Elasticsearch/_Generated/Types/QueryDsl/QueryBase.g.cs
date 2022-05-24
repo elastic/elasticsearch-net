@@ -34,46 +34,4 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonPropertyName("boost")]
 		public float? Boost { get; set; }
 	}
-
-	public sealed partial class QueryBaseDescriptor : SerializableDescriptorBase<QueryBaseDescriptor>
-	{
-		internal QueryBaseDescriptor(Action<QueryBaseDescriptor> configure) => configure.Invoke(this);
-		public QueryBaseDescriptor() : base()
-		{
-		}
-
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		public QueryBaseDescriptor QueryName(string? queryName)
-		{
-			QueryNameValue = queryName;
-			return Self;
-		}
-
-		public QueryBaseDescriptor Boost(float? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
 }

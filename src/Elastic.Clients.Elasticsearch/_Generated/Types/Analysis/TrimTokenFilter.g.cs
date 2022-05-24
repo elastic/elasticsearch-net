@@ -30,4 +30,37 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("type")]
 		public string Type => "trim";
 	}
+
+	public sealed partial class TrimTokenFilterDescriptor : SerializableDescriptorBase<TrimTokenFilterDescriptor>, IBuildableDescriptor<TrimTokenFilter>
+	{
+		internal TrimTokenFilterDescriptor(Action<TrimTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public TrimTokenFilterDescriptor() : base()
+		{
+		}
+
+		private string? VersionValue { get; set; }
+
+		public TrimTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("trim");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		TrimTokenFilter IBuildableDescriptor<TrimTokenFilter>.Build() => new()
+		{ Version = VersionValue };
+	}
 }

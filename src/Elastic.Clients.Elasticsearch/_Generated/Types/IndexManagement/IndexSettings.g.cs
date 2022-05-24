@@ -87,12 +87,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Index { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("indexing_pressure")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? IndexingPressure { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("indexing.slowlog")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? IndexingSlowlog { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("lifecycle")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? Lifecycle { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("load_fixed_bitset_filters_eagerly")]
 		public bool? LoadFixedBitsetFiltersEagerly { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("mappings")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_docvalue_fields_search")]
@@ -215,6 +227,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? Sort { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("store")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.Storage? Store { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("time_series")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeries { get; set; }
 
@@ -308,6 +324,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Action<SettingsHighlightDescriptor> HighlightDescriptorAction { get; set; }
 
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? IndexingPressureValue { get; set; }
+
+		private IndexingPressureDescriptor IndexingPressureDescriptor { get; set; }
+
+		private Action<IndexingPressureDescriptor> IndexingPressureDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? IndexingSlowlogValue { get; set; }
+
+		private SlowlogSettingsDescriptor IndexingSlowlogDescriptor { get; set; }
+
+		private Action<SlowlogSettingsDescriptor> IndexingSlowlogDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? LifecycleValue { get; set; }
 
 		private IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; set; }
@@ -315,6 +343,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		private Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 
 		private bool? LoadFixedBitsetFiltersEagerlyValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? MappingsValue { get; set; }
+
+		private MappingLimitSettingsDescriptor MappingsDescriptor { get; set; }
+
+		private Action<MappingLimitSettingsDescriptor> MappingsDescriptorAction { get; set; }
 
 		private int? MaxDocvalueFieldsSearchValue { get; set; }
 
@@ -399,6 +433,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		private SoftDeletesDescriptor SoftDeletesDescriptor { get; set; }
 
 		private Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.Storage? StoreValue { get; set; }
+
+		private StorageDescriptor StoreDescriptor { get; set; }
+
+		private Action<StorageDescriptor> StoreDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeriesValue { get; set; }
 
@@ -652,6 +692,54 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
+		public IndexSettingsDescriptor<TDocument> IndexingPressure(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? indexingPressure)
+		{
+			IndexingPressureDescriptor = null;
+			IndexingPressureDescriptorAction = null;
+			IndexingPressureValue = indexingPressure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> IndexingPressure(IndexingPressureDescriptor descriptor)
+		{
+			IndexingPressureValue = null;
+			IndexingPressureDescriptorAction = null;
+			IndexingPressureDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> IndexingPressure(Action<IndexingPressureDescriptor> configure)
+		{
+			IndexingPressureValue = null;
+			IndexingPressureDescriptor = null;
+			IndexingPressureDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> IndexingSlowlog(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? indexingSlowlog)
+		{
+			IndexingSlowlogDescriptor = null;
+			IndexingSlowlogDescriptorAction = null;
+			IndexingSlowlogValue = indexingSlowlog;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> IndexingSlowlog(SlowlogSettingsDescriptor descriptor)
+		{
+			IndexingSlowlogValue = null;
+			IndexingSlowlogDescriptorAction = null;
+			IndexingSlowlogDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> IndexingSlowlog(Action<SlowlogSettingsDescriptor> configure)
+		{
+			IndexingSlowlogValue = null;
+			IndexingSlowlogDescriptor = null;
+			IndexingSlowlogDescriptorAction = configure;
+			return Self;
+		}
+
 		public IndexSettingsDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? lifecycle)
 		{
 			LifecycleDescriptor = null;
@@ -679,6 +767,30 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true)
 		{
 			LoadFixedBitsetFiltersEagerlyValue = loadFixedBitsetFiltersEagerly;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? mappings)
+		{
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = null;
+			MappingsValue = mappings;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Mappings(MappingLimitSettingsDescriptor descriptor)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			MappingsDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Mappings(Action<MappingLimitSettingsDescriptor> configure)
+		{
+			MappingsValue = null;
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = configure;
 			return Self;
 		}
 
@@ -976,6 +1088,30 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
+		public IndexSettingsDescriptor<TDocument> Store(Elastic.Clients.Elasticsearch.IndexManagement.Storage? store)
+		{
+			StoreDescriptor = null;
+			StoreDescriptorAction = null;
+			StoreValue = store;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Store(StorageDescriptor descriptor)
+		{
+			StoreValue = null;
+			StoreDescriptorAction = null;
+			StoreDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Store(Action<StorageDescriptor> configure)
+		{
+			StoreValue = null;
+			StoreDescriptor = null;
+			StoreDescriptorAction = configure;
+			return Self;
+		}
+
 		public IndexSettingsDescriptor<TDocument> TimeSeries(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? timeSeries)
 		{
 			TimeSeriesDescriptor = null;
@@ -1241,6 +1377,38 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, HighlightValue, options);
 			}
 
+			if (IndexingPressureDescriptor is not null)
+			{
+				writer.WritePropertyName("indexing_pressure");
+				JsonSerializer.Serialize(writer, IndexingPressureDescriptor, options);
+			}
+			else if (IndexingPressureDescriptorAction is not null)
+			{
+				writer.WritePropertyName("indexing_pressure");
+				JsonSerializer.Serialize(writer, new IndexingPressureDescriptor(IndexingPressureDescriptorAction), options);
+			}
+			else if (IndexingPressureValue is not null)
+			{
+				writer.WritePropertyName("indexing_pressure");
+				JsonSerializer.Serialize(writer, IndexingPressureValue, options);
+			}
+
+			if (IndexingSlowlogDescriptor is not null)
+			{
+				writer.WritePropertyName("indexing.slowlog");
+				JsonSerializer.Serialize(writer, IndexingSlowlogDescriptor, options);
+			}
+			else if (IndexingSlowlogDescriptorAction is not null)
+			{
+				writer.WritePropertyName("indexing.slowlog");
+				JsonSerializer.Serialize(writer, new SlowlogSettingsDescriptor(IndexingSlowlogDescriptorAction), options);
+			}
+			else if (IndexingSlowlogValue is not null)
+			{
+				writer.WritePropertyName("indexing.slowlog");
+				JsonSerializer.Serialize(writer, IndexingSlowlogValue, options);
+			}
+
 			if (LifecycleDescriptor is not null)
 			{
 				writer.WritePropertyName("lifecycle");
@@ -1261,6 +1429,22 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("load_fixed_bitset_filters_eagerly");
 				writer.WriteBooleanValue(LoadFixedBitsetFiltersEagerlyValue.Value);
+			}
+
+			if (MappingsDescriptor is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+			}
+			else if (MappingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, new MappingLimitSettingsDescriptor(MappingsDescriptorAction), options);
+			}
+			else if (MappingsValue is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsValue, options);
 			}
 
 			if (MaxDocvalueFieldsSearchValue.HasValue)
@@ -1501,6 +1685,22 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, SoftDeletesValue, options);
 			}
 
+			if (StoreDescriptor is not null)
+			{
+				writer.WritePropertyName("store");
+				JsonSerializer.Serialize(writer, StoreDescriptor, options);
+			}
+			else if (StoreDescriptorAction is not null)
+			{
+				writer.WritePropertyName("store");
+				JsonSerializer.Serialize(writer, new StorageDescriptor(StoreDescriptorAction), options);
+			}
+			else if (StoreValue is not null)
+			{
+				writer.WritePropertyName("store");
+				JsonSerializer.Serialize(writer, StoreValue, options);
+			}
+
 			if (TimeSeriesDescriptor is not null)
 			{
 				writer.WritePropertyName("time_series");
@@ -1640,6 +1840,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Action<SettingsHighlightDescriptor> HighlightDescriptorAction { get; set; }
 
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? IndexingPressureValue { get; set; }
+
+		private IndexingPressureDescriptor IndexingPressureDescriptor { get; set; }
+
+		private Action<IndexingPressureDescriptor> IndexingPressureDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? IndexingSlowlogValue { get; set; }
+
+		private SlowlogSettingsDescriptor IndexingSlowlogDescriptor { get; set; }
+
+		private Action<SlowlogSettingsDescriptor> IndexingSlowlogDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? LifecycleValue { get; set; }
 
 		private IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; set; }
@@ -1647,6 +1859,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		private Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 
 		private bool? LoadFixedBitsetFiltersEagerlyValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? MappingsValue { get; set; }
+
+		private MappingLimitSettingsDescriptor MappingsDescriptor { get; set; }
+
+		private Action<MappingLimitSettingsDescriptor> MappingsDescriptorAction { get; set; }
 
 		private int? MaxDocvalueFieldsSearchValue { get; set; }
 
@@ -1731,6 +1949,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		private SoftDeletesDescriptor SoftDeletesDescriptor { get; set; }
 
 		private Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.Storage? StoreValue { get; set; }
+
+		private StorageDescriptor StoreDescriptor { get; set; }
+
+		private Action<StorageDescriptor> StoreDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeriesValue { get; set; }
 
@@ -1984,6 +2208,54 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
+		public IndexSettingsDescriptor IndexingPressure(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? indexingPressure)
+		{
+			IndexingPressureDescriptor = null;
+			IndexingPressureDescriptorAction = null;
+			IndexingPressureValue = indexingPressure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor IndexingPressure(IndexingPressureDescriptor descriptor)
+		{
+			IndexingPressureValue = null;
+			IndexingPressureDescriptorAction = null;
+			IndexingPressureDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor IndexingPressure(Action<IndexingPressureDescriptor> configure)
+		{
+			IndexingPressureValue = null;
+			IndexingPressureDescriptor = null;
+			IndexingPressureDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor IndexingSlowlog(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? indexingSlowlog)
+		{
+			IndexingSlowlogDescriptor = null;
+			IndexingSlowlogDescriptorAction = null;
+			IndexingSlowlogValue = indexingSlowlog;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor IndexingSlowlog(SlowlogSettingsDescriptor descriptor)
+		{
+			IndexingSlowlogValue = null;
+			IndexingSlowlogDescriptorAction = null;
+			IndexingSlowlogDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor IndexingSlowlog(Action<SlowlogSettingsDescriptor> configure)
+		{
+			IndexingSlowlogValue = null;
+			IndexingSlowlogDescriptor = null;
+			IndexingSlowlogDescriptorAction = configure;
+			return Self;
+		}
+
 		public IndexSettingsDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? lifecycle)
 		{
 			LifecycleDescriptor = null;
@@ -2011,6 +2283,30 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true)
 		{
 			LoadFixedBitsetFiltersEagerlyValue = loadFixedBitsetFiltersEagerly;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Mappings(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? mappings)
+		{
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = null;
+			MappingsValue = mappings;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Mappings(MappingLimitSettingsDescriptor descriptor)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			MappingsDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Mappings(Action<MappingLimitSettingsDescriptor> configure)
+		{
+			MappingsValue = null;
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = configure;
 			return Self;
 		}
 
@@ -2308,6 +2604,30 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
+		public IndexSettingsDescriptor Store(Elastic.Clients.Elasticsearch.IndexManagement.Storage? store)
+		{
+			StoreDescriptor = null;
+			StoreDescriptorAction = null;
+			StoreValue = store;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Store(StorageDescriptor descriptor)
+		{
+			StoreValue = null;
+			StoreDescriptorAction = null;
+			StoreDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Store(Action<StorageDescriptor> configure)
+		{
+			StoreValue = null;
+			StoreDescriptor = null;
+			StoreDescriptorAction = configure;
+			return Self;
+		}
+
 		public IndexSettingsDescriptor TimeSeries(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? timeSeries)
 		{
 			TimeSeriesDescriptor = null;
@@ -2573,6 +2893,38 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, HighlightValue, options);
 			}
 
+			if (IndexingPressureDescriptor is not null)
+			{
+				writer.WritePropertyName("indexing_pressure");
+				JsonSerializer.Serialize(writer, IndexingPressureDescriptor, options);
+			}
+			else if (IndexingPressureDescriptorAction is not null)
+			{
+				writer.WritePropertyName("indexing_pressure");
+				JsonSerializer.Serialize(writer, new IndexingPressureDescriptor(IndexingPressureDescriptorAction), options);
+			}
+			else if (IndexingPressureValue is not null)
+			{
+				writer.WritePropertyName("indexing_pressure");
+				JsonSerializer.Serialize(writer, IndexingPressureValue, options);
+			}
+
+			if (IndexingSlowlogDescriptor is not null)
+			{
+				writer.WritePropertyName("indexing.slowlog");
+				JsonSerializer.Serialize(writer, IndexingSlowlogDescriptor, options);
+			}
+			else if (IndexingSlowlogDescriptorAction is not null)
+			{
+				writer.WritePropertyName("indexing.slowlog");
+				JsonSerializer.Serialize(writer, new SlowlogSettingsDescriptor(IndexingSlowlogDescriptorAction), options);
+			}
+			else if (IndexingSlowlogValue is not null)
+			{
+				writer.WritePropertyName("indexing.slowlog");
+				JsonSerializer.Serialize(writer, IndexingSlowlogValue, options);
+			}
+
 			if (LifecycleDescriptor is not null)
 			{
 				writer.WritePropertyName("lifecycle");
@@ -2593,6 +2945,22 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("load_fixed_bitset_filters_eagerly");
 				writer.WriteBooleanValue(LoadFixedBitsetFiltersEagerlyValue.Value);
+			}
+
+			if (MappingsDescriptor is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+			}
+			else if (MappingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, new MappingLimitSettingsDescriptor(MappingsDescriptorAction), options);
+			}
+			else if (MappingsValue is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsValue, options);
 			}
 
 			if (MaxDocvalueFieldsSearchValue.HasValue)
@@ -2831,6 +3199,22 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("soft_deletes");
 				JsonSerializer.Serialize(writer, SoftDeletesValue, options);
+			}
+
+			if (StoreDescriptor is not null)
+			{
+				writer.WritePropertyName("store");
+				JsonSerializer.Serialize(writer, StoreDescriptor, options);
+			}
+			else if (StoreDescriptorAction is not null)
+			{
+				writer.WritePropertyName("store");
+				JsonSerializer.Serialize(writer, new StorageDescriptor(StoreDescriptorAction), options);
+			}
+			else if (StoreValue is not null)
+			{
+				writer.WritePropertyName("store");
+				JsonSerializer.Serialize(writer, StoreValue, options);
 			}
 
 			if (TimeSeriesDescriptor is not null)

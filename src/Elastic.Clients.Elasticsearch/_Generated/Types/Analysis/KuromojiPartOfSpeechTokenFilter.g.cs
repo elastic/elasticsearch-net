@@ -28,10 +28,53 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("stoptags")]
-		public IReadOnlyCollection<string> Stoptags { get; init; }
+		public IEnumerable<string> Stoptags { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "kuromoji_part_of_speech";
+	}
+
+	public sealed partial class KuromojiPartOfSpeechTokenFilterDescriptor : SerializableDescriptorBase<KuromojiPartOfSpeechTokenFilterDescriptor>, IBuildableDescriptor<KuromojiPartOfSpeechTokenFilter>
+	{
+		internal KuromojiPartOfSpeechTokenFilterDescriptor(Action<KuromojiPartOfSpeechTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public KuromojiPartOfSpeechTokenFilterDescriptor() : base()
+		{
+		}
+
+		private IEnumerable<string> StoptagsValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public KuromojiPartOfSpeechTokenFilterDescriptor Stoptags(IEnumerable<string> stoptags)
+		{
+			StoptagsValue = stoptags;
+			return Self;
+		}
+
+		public KuromojiPartOfSpeechTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("stoptags");
+			JsonSerializer.Serialize(writer, StoptagsValue, options);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("kuromoji_part_of_speech");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		KuromojiPartOfSpeechTokenFilter IBuildableDescriptor<KuromojiPartOfSpeechTokenFilter>.Build() => new()
+		{ Stoptags = StoptagsValue, Version = VersionValue };
 	}
 }

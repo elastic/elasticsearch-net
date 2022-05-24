@@ -300,12 +300,28 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return DoRequest<ClusterPutComponentTemplateRequestDescriptor, ClusterPutComponentTemplateResponse>(descriptor);
 		}
 
+		public ClusterPutComponentTemplateResponse PutComponentTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new ClusterPutComponentTemplateRequestDescriptor<TDocument>(name);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ClusterPutComponentTemplateRequestDescriptor<TDocument>, ClusterPutComponentTemplateResponse>(descriptor);
+		}
+
 		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new ClusterPutComponentTemplateRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<ClusterPutComponentTemplateRequestDescriptor, ClusterPutComponentTemplateResponse>(descriptor);
+		}
+
+		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterPutComponentTemplateRequestDescriptor<TDocument>(name);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ClusterPutComponentTemplateRequestDescriptor<TDocument>, ClusterPutComponentTemplateResponse>(descriptor);
 		}
 
 		public ClusterPutSettingsResponse PutSettings(ClusterPutSettingsRequest request)

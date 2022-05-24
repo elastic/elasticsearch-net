@@ -9,6 +9,6 @@ namespace Elastic.Clients.Elasticsearch
 	/// </summary>
 	internal interface IDictionaryKey
 	{
-		string Key { get; }
+		string Key(IElasticsearchClientSettings settings);
 	}
 }

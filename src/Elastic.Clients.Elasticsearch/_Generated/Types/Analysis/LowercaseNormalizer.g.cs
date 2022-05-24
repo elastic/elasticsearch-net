@@ -30,4 +30,23 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("type")]
 		public string Type => "lowercase";
 	}
+
+	public sealed partial class LowercaseNormalizerDescriptor : SerializableDescriptorBase<LowercaseNormalizerDescriptor>, IBuildableDescriptor<LowercaseNormalizer>
+	{
+		internal LowercaseNormalizerDescriptor(Action<LowercaseNormalizerDescriptor> configure) => configure.Invoke(this);
+		public LowercaseNormalizerDescriptor() : base()
+		{
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("lowercase");
+			writer.WriteEndObject();
+		}
+
+		LowercaseNormalizer IBuildableDescriptor<LowercaseNormalizer>.Build() => new()
+		{ };
+	}
 }

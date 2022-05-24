@@ -292,6 +292,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
+		public PutMappingRequestDescriptor<TDocument> Properties(Mapping.PropertiesDescriptor<TDocument> descriptor)
+		{
+			PropertiesValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public PutMappingRequestDescriptor<TDocument> Properties(Action<Mapping.PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new Mapping.PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			PropertiesValue = descriptor.PromisedValue;
+			return Self;
+		}
+
 		public PutMappingRequestDescriptor<TDocument> Runtime(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
 		{
 			RuntimeValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
@@ -572,6 +586,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutMappingRequestDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
+			return Self;
+		}
+
+		public PutMappingRequestDescriptor Properties<TDocument>(Mapping.PropertiesDescriptor<TDocument> descriptor)
+		{
+			PropertiesValue = descriptor.PromisedValue;
+			return Self;
+		}
+
+		public PutMappingRequestDescriptor Properties<TDocument>(Action<Mapping.PropertiesDescriptor<TDocument>> configure)
+		{
+			var descriptor = new Mapping.PropertiesDescriptor<TDocument>();
+			configure?.Invoke(descriptor);
+			PropertiesValue = descriptor.PromisedValue;
 			return Self;
 		}
 
