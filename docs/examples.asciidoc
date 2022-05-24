@@ -1,0 +1,91 @@
+[[examples]]
+== Examples
+
+This page contains the information you need to perform various {es} operations 
+by using the Client.
+
+
+[discrete]
+[[indexing-net]]
+=== Indexing a document
+
+Indexing a document is as simple as:
+
+[source,csharp]
+----
+var tweet = new Tweet
+{
+    Id = 1,
+    User = "kimchy",
+    PostDate = new DateTime(2009, 11, 15),
+    Message = "Trying out NEST, so far so good?"
+};
+
+var response = client.Index(tweet, idx => idx.Index("mytweetindex")); //or specify index via settings.DefaultIndex("mytweetindex");
+All the calls have async variants:
+
+var response = client.IndexAsync(tweet, idx => idx.Index("mytweetindex")); // returns a Task<IndexResponse>
+
+// Or, in an async-context
+var response = await client.IndexAsync(tweet, idx => idx.Index("mytweetindex")); // awaits a Task<IndexResponse>
+----
+
+
+[discrete]
+[[getting-net]]
+=== Getting a document
+
+[source,csharp]
+----
+var response = client.Get<Tweet>(1, idx => idx.Index("mytweetindex")); // returns an IGetResponse mapped 1-to-1 with the Elasticsearch JSON response
+var tweet = response.Source; // the original document
+----
+
+
+[discrete]
+[[searching-net]]
+=== Searching for documents
+
+The client exposes a fluent interface and a powerful query DSL.
+
+[source,csharp]
+----
+var response = client.Search<Tweet>(s => s
+    .Index("mytweetindex") //or specify index via settings.DefaultIndex("mytweetindex");
+    .From(0)
+    .Size(10)
+    .Query(q => q
+        .Term(t => t.User, "kimchy") || q
+        .Match(mq => mq.Field(f => f.User).Query("nest"))
+    )
+);
+----
+
+As well as an object initializer syntax if lambdas aren't your thing:
+
+[source,csharp]
+----
+var request = new SearchRequest
+{
+    Index = "mytweetindex", //or specify index via settings.DefaultIndex("mytweetindex"),
+    From = 0,
+    Size = 10,
+    Query = new TermQuery { Field = "user", Value = "kimchy" } || 
+            new MatchQuery { Field = "description", Query = "nest" }
+};
+
+var response = client.Search<Tweet>(request);
+----
+
+
+[discrete]
+[[updating-net]]
+=== Updating documents
+
+
+
+[discrete]
+[[deleting-net]]
+=== Deleting documents
+
+
