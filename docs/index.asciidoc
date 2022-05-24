@@ -21,7 +21,7 @@ include::connecting.asciidoc[]
 
 include::configuration.asciidoc[]
 
-include::examples.asciidoc[]s
+include::examples.asciidoc[]
 
 include::breaking-changes.asciidoc[]
 
