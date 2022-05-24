@@ -27,35 +27,51 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class DataStream
 	{
 		[JsonInclude]
+		[JsonPropertyName("_meta")]
+		public Dictionary<string, object>? Meta { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("allow_custom_routing")]
+		public bool? AllowCustomRouting { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("generation")]
+		public int Generation { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("hidden")]
-		public bool? Hidden { get; set; }
-	}
+		public bool Hidden { get; init; }
 
-	public sealed partial class DataStreamDescriptor : SerializableDescriptorBase<DataStreamDescriptor>
-	{
-		internal DataStreamDescriptor(Action<DataStreamDescriptor> configure) => configure.Invoke(this);
-		public DataStreamDescriptor() : base()
-		{
-		}
+		[JsonInclude]
+		[JsonPropertyName("ilm_policy")]
+		public string? IlmPolicy { get; init; }
 
-		private bool? HiddenValue { get; set; }
+		[JsonInclude]
+		[JsonPropertyName("indices")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> Indices { get; init; }
 
-		public DataStreamDescriptor Hidden(bool? hidden = true)
-		{
-			HiddenValue = hidden;
-			return Self;
-		}
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public string Name { get; init; }
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (HiddenValue.HasValue)
-			{
-				writer.WritePropertyName("hidden");
-				writer.WriteBooleanValue(HiddenValue.Value);
-			}
+		[JsonInclude]
+		[JsonPropertyName("replicated")]
+		public bool? Replicated { get; init; }
 
-			writer.WriteEndObject();
-		}
+		[JsonInclude]
+		[JsonPropertyName("status")]
+		public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("system")]
+		public bool? System { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("template")]
+		public string Template { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("timestamp_field")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField TimestampField { get; init; }
 	}
 }

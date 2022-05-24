@@ -27,16 +27,4 @@ namespace Elastic.Clients.Elasticsearch
 	public abstract partial class RequestBase
 	{
 	}
-
-	public sealed partial class RequestBaseDescriptor : SerializableDescriptorBase<RequestBaseDescriptor>
-	{
-		internal RequestBaseDescriptor(Action<RequestBaseDescriptor> configure) => configure.Invoke(this);
-		public RequestBaseDescriptor() : base()
-		{
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
-	}
 }

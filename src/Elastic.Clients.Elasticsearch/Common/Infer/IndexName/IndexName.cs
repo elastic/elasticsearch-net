@@ -48,7 +48,7 @@ public class IndexName : IEquatable<IndexName>, IUrlParameter
 	public string GetString(ITransportConfiguration settings)
 	{
 		if (settings is not IElasticsearchClientSettings elasticsearchClientSettings)
-			throw new Exception("Tried to pass index name on querystring but it could not be resolved because no Elastic.Clients.Elasticsearch settings are available");
+			throw new Exception("Tried to pass index name on querystring but it could not be resolved because no Elastic.Clients.Elasticsearch settings are available.");
 
 		return elasticsearchClientSettings.Inferrer.IndexName(this);
 	}

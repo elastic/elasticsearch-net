@@ -162,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
 		public void RandomScore(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
 		public void ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
-		public void ScriptScore(Action<ScriptScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "script_score");
+		public void ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
 	}
 
 	public sealed partial class FunctionScoreContainerDescriptor : SerializableDescriptorBase<FunctionScoreContainerDescriptor>
@@ -232,6 +232,5 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void RandomScore<TDocument>(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
 		public void ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
 		public void ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
-		public void ScriptScore<TDocument>(Action<ScriptScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "script_score");
 	}
 }

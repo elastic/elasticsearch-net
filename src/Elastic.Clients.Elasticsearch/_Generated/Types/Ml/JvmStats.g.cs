@@ -22,12 +22,32 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class IndicesGetDataStreamItemTimestampField
+	public partial class JvmStats
 	{
 		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string Name { get; init; }
+		[JsonPropertyName("heap_max")]
+		public Elastic.Clients.Elasticsearch.ByteSize? HeapMax { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("heap_max_in_bytes")]
+		public int HeapMaxInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("java_inference")]
+		public Elastic.Clients.Elasticsearch.ByteSize? JavaInference { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("java_inference_in_bytes")]
+		public int JavaInferenceInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("java_inference_max")]
+		public Elastic.Clients.Elasticsearch.ByteSize? JavaInferenceMax { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("java_inference_max_in_bytes")]
+		public int JavaInferenceMaxInBytes { get; init; }
 	}
 }

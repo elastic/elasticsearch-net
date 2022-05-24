@@ -28,6 +28,30 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("geohash")]
-		public string Geohash { get; init; }
+		public string Geohash { get; set; }
+	}
+
+	public sealed partial class GeoHashLocationDescriptor : SerializableDescriptorBase<GeoHashLocationDescriptor>
+	{
+		internal GeoHashLocationDescriptor(Action<GeoHashLocationDescriptor> configure) => configure.Invoke(this);
+		public GeoHashLocationDescriptor() : base()
+		{
+		}
+
+		private string GeohashValue { get; set; }
+
+		public GeoHashLocationDescriptor Geohash(string geohash)
+		{
+			GeohashValue = geohash;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("geohash");
+			JsonSerializer.Serialize(writer, GeohashValue, options);
+			writer.WriteEndObject();
+		}
 	}
 }

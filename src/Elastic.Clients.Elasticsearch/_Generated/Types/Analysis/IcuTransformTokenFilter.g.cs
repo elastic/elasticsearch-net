@@ -28,14 +28,67 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("dir")]
-		public Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection Dir { get; init; }
+		public Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection Dir { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public string Id { get; init; }
+		public string Id { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "icu_transform";
+	}
+
+	public sealed partial class IcuTransformTokenFilterDescriptor : SerializableDescriptorBase<IcuTransformTokenFilterDescriptor>, IBuildableDescriptor<IcuTransformTokenFilter>
+	{
+		internal IcuTransformTokenFilterDescriptor(Action<IcuTransformTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public IcuTransformTokenFilterDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection DirValue { get; set; }
+
+		private string IdValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public IcuTransformTokenFilterDescriptor Dir(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection dir)
+		{
+			DirValue = dir;
+			return Self;
+		}
+
+		public IcuTransformTokenFilterDescriptor Id(string id)
+		{
+			IdValue = id;
+			return Self;
+		}
+
+		public IcuTransformTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("dir");
+			JsonSerializer.Serialize(writer, DirValue, options);
+			writer.WritePropertyName("id");
+			writer.WriteStringValue(IdValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("icu_transform");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		IcuTransformTokenFilter IBuildableDescriptor<IcuTransformTokenFilter>.Build() => new()
+		{ Dir = DirValue, Id = IdValue, Version = VersionValue };
 	}
 }
