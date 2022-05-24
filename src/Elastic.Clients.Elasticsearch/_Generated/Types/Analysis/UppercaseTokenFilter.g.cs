@@ -30,4 +30,37 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("type")]
 		public string Type => "uppercase";
 	}
+
+	public sealed partial class UppercaseTokenFilterDescriptor : SerializableDescriptorBase<UppercaseTokenFilterDescriptor>, IBuildableDescriptor<UppercaseTokenFilter>
+	{
+		internal UppercaseTokenFilterDescriptor(Action<UppercaseTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public UppercaseTokenFilterDescriptor() : base()
+		{
+		}
+
+		private string? VersionValue { get; set; }
+
+		public UppercaseTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("uppercase");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		UppercaseTokenFilter IBuildableDescriptor<UppercaseTokenFilter>.Build() => new()
+		{ Version = VersionValue };
+	}
 }

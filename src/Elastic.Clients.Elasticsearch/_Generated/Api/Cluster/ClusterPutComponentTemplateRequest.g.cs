@@ -96,6 +96,12 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return Self;
 		}
 
+		private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
+
+		private Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
+
+		private Action<Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
 
 		private IndexManagement.IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
@@ -112,13 +118,31 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? AliasesValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-
-		private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-
-		private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
-
 		private long? VersionValue { get; set; }
+
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+		{
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = null;
+			MappingsValue = mappings;
+			return Self;
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Mappings(Mapping.TypeMappingDescriptor<TDocument> descriptor)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			MappingsDescriptor = descriptor;
+			return Self;
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor<TDocument>> configure)
+		{
+			MappingsValue = null;
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = configure;
+			return Self;
+		}
 
 		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 		{
@@ -180,30 +204,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return Self;
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
-		{
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = null;
-			MappingsValue = mappings;
-			return Self;
-		}
-
-		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Mappings(Mapping.TypeMappingDescriptor descriptor)
-		{
-			MappingsValue = null;
-			MappingsDescriptorAction = null;
-			MappingsDescriptor = descriptor;
-			return Self;
-		}
-
-		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
-		{
-			MappingsValue = null;
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = configure;
-			return Self;
-		}
-
 		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Version(long? version)
 		{
 			VersionValue = version;
@@ -213,6 +213,22 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (MappingsDescriptor is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+			}
+			else if (MappingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
+			}
+			else if (MappingsValue is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsValue, options);
+			}
+
 			if (SettingsDescriptor is not null)
 			{
 				writer.WritePropertyName("settings");
@@ -257,22 +273,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 				JsonSerializer.Serialize(writer, AliasesValue, options);
 			}
 
-			if (MappingsDescriptor is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
-			}
-			else if (MappingsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
-			}
-			else if (MappingsValue is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsValue, options);
-			}
-
 			if (VersionValue is not null)
 			{
 				writer.WritePropertyName("version");
@@ -305,6 +305,12 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return Self;
 		}
 
+		private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
+
+		private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
+
+		private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
 
 		private IndexManagement.IndexSettingsDescriptor SettingsDescriptor { get; set; }
@@ -321,13 +327,31 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? AliasesValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-
-		private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-
-		private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
-
 		private long? VersionValue { get; set; }
+
+		public ClusterPutComponentTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+		{
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = null;
+			MappingsValue = mappings;
+			return Self;
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor Mappings(Mapping.TypeMappingDescriptor descriptor)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			MappingsDescriptor = descriptor;
+			return Self;
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
+		{
+			MappingsValue = null;
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = configure;
+			return Self;
+		}
 
 		public ClusterPutComponentTemplateRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 		{
@@ -389,30 +413,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return Self;
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
-		{
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = null;
-			MappingsValue = mappings;
-			return Self;
-		}
-
-		public ClusterPutComponentTemplateRequestDescriptor Mappings(Mapping.TypeMappingDescriptor descriptor)
-		{
-			MappingsValue = null;
-			MappingsDescriptorAction = null;
-			MappingsDescriptor = descriptor;
-			return Self;
-		}
-
-		public ClusterPutComponentTemplateRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
-		{
-			MappingsValue = null;
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = configure;
-			return Self;
-		}
-
 		public ClusterPutComponentTemplateRequestDescriptor Version(long? version)
 		{
 			VersionValue = version;
@@ -422,6 +422,22 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (MappingsDescriptor is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+			}
+			else if (MappingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
+			}
+			else if (MappingsValue is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsValue, options);
+			}
+
 			if (SettingsDescriptor is not null)
 			{
 				writer.WritePropertyName("settings");
@@ -464,22 +480,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			{
 				writer.WritePropertyName("aliases");
 				JsonSerializer.Serialize(writer, AliasesValue, options);
-			}
-
-			if (MappingsDescriptor is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
-			}
-			else if (MappingsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
-			}
-			else if (MappingsValue is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsValue, options);
 			}
 
 			if (VersionValue is not null)

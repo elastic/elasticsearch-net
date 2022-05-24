@@ -30,4 +30,37 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("type")]
 		public string Type => "reverse";
 	}
+
+	public sealed partial class ReverseTokenFilterDescriptor : SerializableDescriptorBase<ReverseTokenFilterDescriptor>, IBuildableDescriptor<ReverseTokenFilter>
+	{
+		internal ReverseTokenFilterDescriptor(Action<ReverseTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public ReverseTokenFilterDescriptor() : base()
+		{
+		}
+
+		private string? VersionValue { get; set; }
+
+		public ReverseTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("reverse");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		ReverseTokenFilter IBuildableDescriptor<ReverseTokenFilter>.Build() => new()
+		{ Version = VersionValue };
+	}
 }

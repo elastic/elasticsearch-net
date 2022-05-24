@@ -13,6 +13,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 public abstract class Descriptor
 {
+	// This internal ctor ensures that only types defined within the client assembly can derive from this base class.
+	// We don't expect consumers to derive from this public base class.
 	internal Descriptor() { }
 
 	/// <summary>

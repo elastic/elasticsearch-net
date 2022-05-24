@@ -28,10 +28,57 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
-		public int? MaxTokenLength { get; init; }
+		public int? MaxTokenLength { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "standard";
+	}
+
+	public sealed partial class StandardTokenizerDescriptor : SerializableDescriptorBase<StandardTokenizerDescriptor>, IBuildableDescriptor<StandardTokenizer>
+	{
+		internal StandardTokenizerDescriptor(Action<StandardTokenizerDescriptor> configure) => configure.Invoke(this);
+		public StandardTokenizerDescriptor() : base()
+		{
+		}
+
+		private int? MaxTokenLengthValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public StandardTokenizerDescriptor MaxTokenLength(int? maxTokenLength)
+		{
+			MaxTokenLengthValue = maxTokenLength;
+			return Self;
+		}
+
+		public StandardTokenizerDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (MaxTokenLengthValue.HasValue)
+			{
+				writer.WritePropertyName("max_token_length");
+				writer.WriteNumberValue(MaxTokenLengthValue.Value);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("standard");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		StandardTokenizer IBuildableDescriptor<StandardTokenizer>.Build() => new()
+		{ MaxTokenLength = MaxTokenLengthValue, Version = VersionValue };
 	}
 }

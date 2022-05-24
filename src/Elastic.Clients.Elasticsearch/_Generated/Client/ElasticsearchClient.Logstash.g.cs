@@ -48,12 +48,28 @@ namespace Elastic.Clients.Elasticsearch.Logstash
 			return DoRequest<LogstashDeletePipelineRequestDescriptor, LogstashDeletePipelineResponse>(descriptor);
 		}
 
+		public LogstashDeletePipelineResponse DeletePipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<LogstashDeletePipelineRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new LogstashDeletePipelineRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<LogstashDeletePipelineRequestDescriptor<TDocument>, LogstashDeletePipelineResponse>(descriptor);
+		}
+
 		public Task<LogstashDeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<LogstashDeletePipelineRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new LogstashDeletePipelineRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<LogstashDeletePipelineRequestDescriptor, LogstashDeletePipelineResponse>(descriptor);
+		}
+
+		public Task<LogstashDeletePipelineResponse> DeletePipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<LogstashDeletePipelineRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new LogstashDeletePipelineRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<LogstashDeletePipelineRequestDescriptor<TDocument>, LogstashDeletePipelineResponse>(descriptor);
 		}
 
 		public LogstashPutPipelineResponse PutPipeline(LogstashPutPipelineRequest request)
@@ -76,12 +92,28 @@ namespace Elastic.Clients.Elasticsearch.Logstash
 			return DoRequest<LogstashPutPipelineRequestDescriptor, LogstashPutPipelineResponse>(descriptor);
 		}
 
+		public LogstashPutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<LogstashPutPipelineRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new LogstashPutPipelineRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<LogstashPutPipelineRequestDescriptor<TDocument>, LogstashPutPipelineResponse>(descriptor);
+		}
+
 		public Task<LogstashPutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<LogstashPutPipelineRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new LogstashPutPipelineRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<LogstashPutPipelineRequestDescriptor, LogstashPutPipelineResponse>(descriptor);
+		}
+
+		public Task<LogstashPutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<LogstashPutPipelineRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new LogstashPutPipelineRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<LogstashPutPipelineRequestDescriptor<TDocument>, LogstashPutPipelineResponse>(descriptor);
 		}
 	}
 }

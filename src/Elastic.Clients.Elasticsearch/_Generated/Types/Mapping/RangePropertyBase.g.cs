@@ -28,14 +28,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; init; }
+		public double? Boost { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("coerce")]
-		public bool? Coerce { get; init; }
+		public bool? Coerce { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public bool? Index { get; init; }
+		public bool? Index { get; set; }
 	}
 }

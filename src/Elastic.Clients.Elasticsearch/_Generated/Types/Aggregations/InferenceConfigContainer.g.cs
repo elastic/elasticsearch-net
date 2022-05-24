@@ -24,15 +24,61 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class InferenceConfigContainer
+	public interface IInferenceConfigContainerVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("classification")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ClassificationInferenceOptions? Classification { get; set; }
+		string InferenceConfigContainerVariantName { get; }
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("regression")]
-		public Elastic.Clients.Elasticsearch.Aggregations.RegressionInferenceOptions? Regression { get; set; }
+	[JsonConverter(typeof(InferenceConfigContainerConverter))]
+	public partial class InferenceConfigContainer : IContainer
+	{
+		public InferenceConfigContainer(IInferenceConfigContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal IInferenceConfigContainerVariant Variant { get; }
+	}
+
+	internal sealed class InferenceConfigContainerConverter : JsonConverter<InferenceConfigContainer>
+	{
+		public override InferenceConfigContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var readerCopy = reader;
+			readerCopy.Read();
+			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException();
+			}
+
+			var propertyName = readerCopy.GetString();
+			if (propertyName == "classification")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions?>(ref reader, options);
+				return new InferenceConfigContainer(variant);
+			}
+
+			if (propertyName == "regression")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions?>(ref reader, options);
+				return new InferenceConfigContainer(variant);
+			}
+
+			throw new JsonException();
+		}
+
+		public override void Write(Utf8JsonWriter writer, InferenceConfigContainer value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName(value.Variant.InferenceConfigContainerVariantName);
+			switch (value.Variant)
+			{
+				case Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public sealed partial class InferenceConfigContainerDescriptor<TDocument> : SerializableDescriptorBase<InferenceConfigContainerDescriptor<TDocument>>
@@ -42,103 +88,62 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Aggregations.RegressionInferenceOptions? RegressionValue { get; set; }
+		internal bool ContainsVariant { get; private set; }
 
-		private RegressionInferenceOptionsDescriptor<TDocument> RegressionDescriptor { get; set; }
+		internal string ContainedVariantName { get; private set; }
 
-		private Action<RegressionInferenceOptionsDescriptor<TDocument>> RegressionDescriptorAction { get; set; }
+		internal InferenceConfigContainer Container { get; private set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.ClassificationInferenceOptions? ClassificationValue { get; set; }
+		internal Descriptor Descriptor { get; private set; }
 
-		private ClassificationInferenceOptionsDescriptor ClassificationDescriptor { get; set; }
+		internal Type DescriptorType { get; private set; }
 
-		private Action<ClassificationInferenceOptionsDescriptor> ClassificationDescriptorAction { get; set; }
-
-		public InferenceConfigContainerDescriptor<TDocument> Regression(Elastic.Clients.Elasticsearch.Aggregations.RegressionInferenceOptions? regression)
+		private void Set<T>(Action<T> descriptorAction, string variantName)
+			where T : Descriptor, new()
 		{
-			RegressionDescriptor = null;
-			RegressionDescriptorAction = null;
-			RegressionValue = regression;
-			return Self;
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+			DescriptorType = typeof(T);
+			var descriptor = new T();
+			descriptorAction?.Invoke(descriptor);
+			Descriptor = descriptor;
 		}
 
-		public InferenceConfigContainerDescriptor<TDocument> Regression(RegressionInferenceOptionsDescriptor<TDocument> descriptor)
+		private void Set(IInferenceConfigContainerVariant variant, string variantName)
 		{
-			RegressionValue = null;
-			RegressionDescriptorAction = null;
-			RegressionDescriptor = descriptor;
-			return Self;
-		}
-
-		public InferenceConfigContainerDescriptor<TDocument> Regression(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure)
-		{
-			RegressionValue = null;
-			RegressionDescriptor = null;
-			RegressionDescriptorAction = configure;
-			return Self;
-		}
-
-		public InferenceConfigContainerDescriptor<TDocument> Classification(Elastic.Clients.Elasticsearch.Aggregations.ClassificationInferenceOptions? classification)
-		{
-			ClassificationDescriptor = null;
-			ClassificationDescriptorAction = null;
-			ClassificationValue = classification;
-			return Self;
-		}
-
-		public InferenceConfigContainerDescriptor<TDocument> Classification(ClassificationInferenceOptionsDescriptor descriptor)
-		{
-			ClassificationValue = null;
-			ClassificationDescriptorAction = null;
-			ClassificationDescriptor = descriptor;
-			return Self;
-		}
-
-		public InferenceConfigContainerDescriptor<TDocument> Classification(Action<ClassificationInferenceOptionsDescriptor> configure)
-		{
-			ClassificationValue = null;
-			ClassificationDescriptor = null;
-			ClassificationDescriptorAction = configure;
-			return Self;
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			Container = new InferenceConfigContainer(variant);
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+				return;
+			}
+
 			writer.WriteStartObject();
-			if (RegressionDescriptor is not null)
-			{
-				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, RegressionDescriptor, options);
-			}
-			else if (RegressionDescriptorAction is not null)
-			{
-				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, new RegressionInferenceOptionsDescriptor<TDocument>(RegressionDescriptorAction), options);
-			}
-			else if (RegressionValue is not null)
-			{
-				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, RegressionValue, options);
-			}
-
-			if (ClassificationDescriptor is not null)
-			{
-				writer.WritePropertyName("classification");
-				JsonSerializer.Serialize(writer, ClassificationDescriptor, options);
-			}
-			else if (ClassificationDescriptorAction is not null)
-			{
-				writer.WritePropertyName("classification");
-				JsonSerializer.Serialize(writer, new ClassificationInferenceOptionsDescriptor(ClassificationDescriptorAction), options);
-			}
-			else if (ClassificationValue is not null)
-			{
-				writer.WritePropertyName("classification");
-				JsonSerializer.Serialize(writer, ClassificationValue, options);
-			}
-
+			writer.WritePropertyName(ContainedVariantName);
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
+
+		public void Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
+		public void Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
+		public void Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
+		public void Regression(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 	}
 
 	public sealed partial class InferenceConfigContainerDescriptor : SerializableDescriptorBase<InferenceConfigContainerDescriptor>
@@ -148,102 +153,62 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Aggregations.RegressionInferenceOptions? RegressionValue { get; set; }
+		internal bool ContainsVariant { get; private set; }
 
-		private RegressionInferenceOptionsDescriptor RegressionDescriptor { get; set; }
+		internal string ContainedVariantName { get; private set; }
 
-		private Action<RegressionInferenceOptionsDescriptor> RegressionDescriptorAction { get; set; }
+		internal InferenceConfigContainer Container { get; private set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.ClassificationInferenceOptions? ClassificationValue { get; set; }
+		internal Descriptor Descriptor { get; private set; }
 
-		private ClassificationInferenceOptionsDescriptor ClassificationDescriptor { get; set; }
+		internal Type DescriptorType { get; private set; }
 
-		private Action<ClassificationInferenceOptionsDescriptor> ClassificationDescriptorAction { get; set; }
-
-		public InferenceConfigContainerDescriptor Regression(Elastic.Clients.Elasticsearch.Aggregations.RegressionInferenceOptions? regression)
+		private void Set<T>(Action<T> descriptorAction, string variantName)
+			where T : Descriptor, new()
 		{
-			RegressionDescriptor = null;
-			RegressionDescriptorAction = null;
-			RegressionValue = regression;
-			return Self;
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+			DescriptorType = typeof(T);
+			var descriptor = new T();
+			descriptorAction?.Invoke(descriptor);
+			Descriptor = descriptor;
 		}
 
-		public InferenceConfigContainerDescriptor Regression(RegressionInferenceOptionsDescriptor descriptor)
+		private void Set(IInferenceConfigContainerVariant variant, string variantName)
 		{
-			RegressionValue = null;
-			RegressionDescriptorAction = null;
-			RegressionDescriptor = descriptor;
-			return Self;
-		}
-
-		public InferenceConfigContainerDescriptor Regression(Action<RegressionInferenceOptionsDescriptor> configure)
-		{
-			RegressionValue = null;
-			RegressionDescriptor = null;
-			RegressionDescriptorAction = configure;
-			return Self;
-		}
-
-		public InferenceConfigContainerDescriptor Classification(Elastic.Clients.Elasticsearch.Aggregations.ClassificationInferenceOptions? classification)
-		{
-			ClassificationDescriptor = null;
-			ClassificationDescriptorAction = null;
-			ClassificationValue = classification;
-			return Self;
-		}
-
-		public InferenceConfigContainerDescriptor Classification(ClassificationInferenceOptionsDescriptor descriptor)
-		{
-			ClassificationValue = null;
-			ClassificationDescriptorAction = null;
-			ClassificationDescriptor = descriptor;
-			return Self;
-		}
-
-		public InferenceConfigContainerDescriptor Classification(Action<ClassificationInferenceOptionsDescriptor> configure)
-		{
-			ClassificationValue = null;
-			ClassificationDescriptor = null;
-			ClassificationDescriptorAction = configure;
-			return Self;
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			Container = new InferenceConfigContainer(variant);
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+				return;
+			}
+
 			writer.WriteStartObject();
-			if (RegressionDescriptor is not null)
-			{
-				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, RegressionDescriptor, options);
-			}
-			else if (RegressionDescriptorAction is not null)
-			{
-				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, new RegressionInferenceOptionsDescriptor(RegressionDescriptorAction), options);
-			}
-			else if (RegressionValue is not null)
-			{
-				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, RegressionValue, options);
-			}
-
-			if (ClassificationDescriptor is not null)
-			{
-				writer.WritePropertyName("classification");
-				JsonSerializer.Serialize(writer, ClassificationDescriptor, options);
-			}
-			else if (ClassificationDescriptorAction is not null)
-			{
-				writer.WritePropertyName("classification");
-				JsonSerializer.Serialize(writer, new ClassificationInferenceOptionsDescriptor(ClassificationDescriptorAction), options);
-			}
-			else if (ClassificationValue is not null)
-			{
-				writer.WritePropertyName("classification");
-				JsonSerializer.Serialize(writer, ClassificationValue, options);
-			}
-
+			writer.WritePropertyName(ContainedVariantName);
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
+
+		public void Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
+		public void Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
+		public void Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
+		public void Regression(Action<Ml.RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
+		public void Regression<TDocument>(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 	}
 }

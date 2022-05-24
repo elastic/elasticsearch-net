@@ -15,55 +15,21 @@
 //
 // ------------------------------------------------
 
-using System;
+using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.Migration
 {
-	public partial class IndicesGetDataStreamItem
+	public sealed partial class MigrationGetFeatureUpgradeStatusResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("_meta")]
-		public Dictionary<string, object>? Meta { get; init; }
+		[JsonPropertyName("features")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.MigrationFeature> Features { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("generation")]
-		public int Generation { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("hidden")]
-		public bool Hidden { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("ilm_policy")]
-		public string? IlmPolicy { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndicesGetDataStreamItemIndex> Indices { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string Name { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("status")]
-		public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("system")]
-		public bool? System { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("template")]
-		public string Template { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("timestamp_field")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndicesGetDataStreamItemTimestampField TimestampField { get; init; }
+		[JsonPropertyName("migration_status")]
+		public Elastic.Clients.Elasticsearch.Migration.MigrationStatus MigrationStatus { get; init; }
 	}
 }

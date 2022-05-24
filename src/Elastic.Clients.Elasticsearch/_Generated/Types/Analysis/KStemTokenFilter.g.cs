@@ -30,4 +30,37 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("type")]
 		public string Type => "kstem";
 	}
+
+	public sealed partial class KStemTokenFilterDescriptor : SerializableDescriptorBase<KStemTokenFilterDescriptor>, IBuildableDescriptor<KStemTokenFilter>
+	{
+		internal KStemTokenFilterDescriptor(Action<KStemTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public KStemTokenFilterDescriptor() : base()
+		{
+		}
+
+		private string? VersionValue { get; set; }
+
+		public KStemTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("kstem");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		KStemTokenFilter IBuildableDescriptor<KStemTokenFilter>.Build() => new()
+		{ Version = VersionValue };
+	}
 }

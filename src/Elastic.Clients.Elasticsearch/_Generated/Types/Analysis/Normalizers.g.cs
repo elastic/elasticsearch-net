@@ -18,6 +18,7 @@
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -35,6 +36,24 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 
 		public void Add(string name, INormalizer normalizers) => BackingDictionary.Add(name, normalizers);
+	}
+
+	public sealed partial class NormalizersDescriptor : IsADictionaryDescriptor<NormalizersDescriptor, Normalizers, string, INormalizer>
+	{
+		public NormalizersDescriptor() : base(new Normalizers())
+		{
+		}
+
+		public NormalizersDescriptor(Normalizers normalizers) : base(normalizers ?? new Normalizers())
+		{
+		}
+
+		public NormalizersDescriptor Custom(string normalizerName) => AssignVariant<CustomNormalizerDescriptor, CustomNormalizer>(normalizerName, null);
+		public NormalizersDescriptor Custom(string normalizerName, Action<CustomNormalizerDescriptor> configure) => AssignVariant<CustomNormalizerDescriptor, CustomNormalizer>(normalizerName, configure);
+		public NormalizersDescriptor Custom(string normalizerName, CustomNormalizer customNormalizer) => AssignVariant(normalizerName, customNormalizer);
+		public NormalizersDescriptor Lowercase(string normalizerName) => AssignVariant<LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizerName, null);
+		public NormalizersDescriptor Lowercase(string normalizerName, Action<LowercaseNormalizerDescriptor> configure) => AssignVariant<LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizerName, configure);
+		public NormalizersDescriptor Lowercase(string normalizerName, LowercaseNormalizer lowercaseNormalizer) => AssignVariant(normalizerName, lowercaseNormalizer);
 	}
 
 	internal sealed partial class NormalizerInterfaceConverter

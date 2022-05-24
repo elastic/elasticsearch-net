@@ -28,14 +28,67 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("max")]
-		public int Max { get; init; }
+		public int Max { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min")]
-		public int Min { get; init; }
+		public int Min { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "length";
+	}
+
+	public sealed partial class LengthTokenFilterDescriptor : SerializableDescriptorBase<LengthTokenFilterDescriptor>, IBuildableDescriptor<LengthTokenFilter>
+	{
+		internal LengthTokenFilterDescriptor(Action<LengthTokenFilterDescriptor> configure) => configure.Invoke(this);
+		public LengthTokenFilterDescriptor() : base()
+		{
+		}
+
+		private int MaxValue { get; set; }
+
+		private int MinValue { get; set; }
+
+		private string? VersionValue { get; set; }
+
+		public LengthTokenFilterDescriptor Max(int max)
+		{
+			MaxValue = max;
+			return Self;
+		}
+
+		public LengthTokenFilterDescriptor Min(int min)
+		{
+			MinValue = min;
+			return Self;
+		}
+
+		public LengthTokenFilterDescriptor Version(string? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("max");
+			writer.WriteNumberValue(MaxValue);
+			writer.WritePropertyName("min");
+			writer.WriteNumberValue(MinValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("length");
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		LengthTokenFilter IBuildableDescriptor<LengthTokenFilter>.Build() => new()
+		{ Max = MaxValue, Min = MinValue, Version = VersionValue };
 	}
 }

@@ -18,6 +18,7 @@
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -35,6 +36,60 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 
 		public void Add(string name, IAnalyzer analyzers) => BackingDictionary.Add(name, analyzers);
+	}
+
+	public sealed partial class AnalyzersDescriptor : IsADictionaryDescriptor<AnalyzersDescriptor, Analyzers, string, IAnalyzer>
+	{
+		public AnalyzersDescriptor() : base(new Analyzers())
+		{
+		}
+
+		public AnalyzersDescriptor(Analyzers analyzers) : base(analyzers ?? new Analyzers())
+		{
+		}
+
+		public AnalyzersDescriptor Custom(string analyzerName) => AssignVariant<CustomAnalyzerDescriptor, CustomAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Custom(string analyzerName, Action<CustomAnalyzerDescriptor> configure) => AssignVariant<CustomAnalyzerDescriptor, CustomAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Custom(string analyzerName, CustomAnalyzer customAnalyzer) => AssignVariant(analyzerName, customAnalyzer);
+		public AnalyzersDescriptor Dutch(string analyzerName) => AssignVariant<DutchAnalyzerDescriptor, DutchAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Dutch(string analyzerName, Action<DutchAnalyzerDescriptor> configure) => AssignVariant<DutchAnalyzerDescriptor, DutchAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Dutch(string analyzerName, DutchAnalyzer dutchAnalyzer) => AssignVariant(analyzerName, dutchAnalyzer);
+		public AnalyzersDescriptor Fingerprint(string analyzerName) => AssignVariant<FingerprintAnalyzerDescriptor, FingerprintAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Fingerprint(string analyzerName, Action<FingerprintAnalyzerDescriptor> configure) => AssignVariant<FingerprintAnalyzerDescriptor, FingerprintAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Fingerprint(string analyzerName, FingerprintAnalyzer fingerprintAnalyzer) => AssignVariant(analyzerName, fingerprintAnalyzer);
+		public AnalyzersDescriptor Icu(string analyzerName) => AssignVariant<IcuAnalyzerDescriptor, IcuAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Icu(string analyzerName, Action<IcuAnalyzerDescriptor> configure) => AssignVariant<IcuAnalyzerDescriptor, IcuAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Icu(string analyzerName, IcuAnalyzer icuAnalyzer) => AssignVariant(analyzerName, icuAnalyzer);
+		public AnalyzersDescriptor Keyword(string analyzerName) => AssignVariant<KeywordAnalyzerDescriptor, KeywordAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Keyword(string analyzerName, Action<KeywordAnalyzerDescriptor> configure) => AssignVariant<KeywordAnalyzerDescriptor, KeywordAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Keyword(string analyzerName, KeywordAnalyzer keywordAnalyzer) => AssignVariant(analyzerName, keywordAnalyzer);
+		public AnalyzersDescriptor Kuromoji(string analyzerName) => AssignVariant<KuromojiAnalyzerDescriptor, KuromojiAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Kuromoji(string analyzerName, Action<KuromojiAnalyzerDescriptor> configure) => AssignVariant<KuromojiAnalyzerDescriptor, KuromojiAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Kuromoji(string analyzerName, KuromojiAnalyzer kuromojiAnalyzer) => AssignVariant(analyzerName, kuromojiAnalyzer);
+		public AnalyzersDescriptor Language(string analyzerName) => AssignVariant<LanguageAnalyzerDescriptor, LanguageAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Language(string analyzerName, Action<LanguageAnalyzerDescriptor> configure) => AssignVariant<LanguageAnalyzerDescriptor, LanguageAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Language(string analyzerName, LanguageAnalyzer languageAnalyzer) => AssignVariant(analyzerName, languageAnalyzer);
+		public AnalyzersDescriptor Nori(string analyzerName) => AssignVariant<NoriAnalyzerDescriptor, NoriAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Nori(string analyzerName, Action<NoriAnalyzerDescriptor> configure) => AssignVariant<NoriAnalyzerDescriptor, NoriAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Nori(string analyzerName, NoriAnalyzer noriAnalyzer) => AssignVariant(analyzerName, noriAnalyzer);
+		public AnalyzersDescriptor Pattern(string analyzerName) => AssignVariant<PatternAnalyzerDescriptor, PatternAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Pattern(string analyzerName, Action<PatternAnalyzerDescriptor> configure) => AssignVariant<PatternAnalyzerDescriptor, PatternAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Pattern(string analyzerName, PatternAnalyzer patternAnalyzer) => AssignVariant(analyzerName, patternAnalyzer);
+		public AnalyzersDescriptor Simple(string analyzerName) => AssignVariant<SimpleAnalyzerDescriptor, SimpleAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Simple(string analyzerName, Action<SimpleAnalyzerDescriptor> configure) => AssignVariant<SimpleAnalyzerDescriptor, SimpleAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Simple(string analyzerName, SimpleAnalyzer simpleAnalyzer) => AssignVariant(analyzerName, simpleAnalyzer);
+		public AnalyzersDescriptor Snowball(string analyzerName) => AssignVariant<SnowballAnalyzerDescriptor, SnowballAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Snowball(string analyzerName, Action<SnowballAnalyzerDescriptor> configure) => AssignVariant<SnowballAnalyzerDescriptor, SnowballAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Snowball(string analyzerName, SnowballAnalyzer snowballAnalyzer) => AssignVariant(analyzerName, snowballAnalyzer);
+		public AnalyzersDescriptor Standard(string analyzerName) => AssignVariant<StandardAnalyzerDescriptor, StandardAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Standard(string analyzerName, Action<StandardAnalyzerDescriptor> configure) => AssignVariant<StandardAnalyzerDescriptor, StandardAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Standard(string analyzerName, StandardAnalyzer standardAnalyzer) => AssignVariant(analyzerName, standardAnalyzer);
+		public AnalyzersDescriptor Stop(string analyzerName) => AssignVariant<StopAnalyzerDescriptor, StopAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Stop(string analyzerName, Action<StopAnalyzerDescriptor> configure) => AssignVariant<StopAnalyzerDescriptor, StopAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Stop(string analyzerName, StopAnalyzer stopAnalyzer) => AssignVariant(analyzerName, stopAnalyzer);
+		public AnalyzersDescriptor Whitespace(string analyzerName) => AssignVariant<WhitespaceAnalyzerDescriptor, WhitespaceAnalyzer>(analyzerName, null);
+		public AnalyzersDescriptor Whitespace(string analyzerName, Action<WhitespaceAnalyzerDescriptor> configure) => AssignVariant<WhitespaceAnalyzerDescriptor, WhitespaceAnalyzer>(analyzerName, configure);
+		public AnalyzersDescriptor Whitespace(string analyzerName, WhitespaceAnalyzer whitespaceAnalyzer) => AssignVariant(analyzerName, whitespaceAnalyzer);
 	}
 
 	internal sealed partial class AnalyzerInterfaceConverter

@@ -22,10 +22,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class RegressionInferenceOptions
+	public partial class RegressionInferenceOptions : Aggregations.IInferenceConfigContainerVariant, IInferenceConfigCreateContainerVariant
 	{
+		[JsonIgnore]
+		string Aggregations.IInferenceConfigContainerVariant.InferenceConfigContainerVariantName => "regression";
+		[JsonIgnore]
+		string IInferenceConfigCreateContainerVariant.InferenceConfigCreateContainerVariantName => "regression";
 		[JsonInclude]
 		[JsonPropertyName("num_top_feature_importance_values")]
 		public int? NumTopFeatureImportanceValues { get; set; }

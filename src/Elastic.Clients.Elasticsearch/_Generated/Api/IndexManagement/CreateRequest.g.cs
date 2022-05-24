@@ -95,6 +95,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
+		private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
+
+		private Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
+
+		private Action<Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
 
 		private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
@@ -103,11 +109,29 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
+		public CreateRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+		{
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = null;
+			MappingsValue = mappings;
+			return Self;
+		}
 
-		private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
+		public CreateRequestDescriptor<TDocument> Mappings(Mapping.TypeMappingDescriptor<TDocument> descriptor)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			MappingsDescriptor = descriptor;
+			return Self;
+		}
 
-		private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
+		public CreateRequestDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor<TDocument>> configure)
+		{
+			MappingsValue = null;
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = configure;
+			return Self;
+		}
 
 		public CreateRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 		{
@@ -139,33 +163,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public CreateRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
-		{
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = null;
-			MappingsValue = mappings;
-			return Self;
-		}
-
-		public CreateRequestDescriptor<TDocument> Mappings(Mapping.TypeMappingDescriptor descriptor)
-		{
-			MappingsValue = null;
-			MappingsDescriptorAction = null;
-			MappingsDescriptor = descriptor;
-			return Self;
-		}
-
-		public CreateRequestDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
-		{
-			MappingsValue = null;
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = configure;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (MappingsDescriptor is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+			}
+			else if (MappingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
+			}
+			else if (MappingsValue is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsValue, options);
+			}
+
 			if (SettingsDescriptor is not null)
 			{
 				writer.WritePropertyName("settings");
@@ -186,22 +202,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("aliases");
 				JsonSerializer.Serialize(writer, AliasesValue, options);
-			}
-
-			if (MappingsDescriptor is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
-			}
-			else if (MappingsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
-			}
-			else if (MappingsValue is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -231,6 +231,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
+		private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
+
+		private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
+
+		private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
 
 		private IndexSettingsDescriptor SettingsDescriptor { get; set; }
@@ -239,11 +245,29 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
+		public CreateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+		{
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = null;
+			MappingsValue = mappings;
+			return Self;
+		}
 
-		private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
+		public CreateRequestDescriptor Mappings(Mapping.TypeMappingDescriptor descriptor)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			MappingsDescriptor = descriptor;
+			return Self;
+		}
 
-		private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
+		public CreateRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
+		{
+			MappingsValue = null;
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = configure;
+			return Self;
+		}
 
 		public CreateRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 		{
@@ -275,33 +299,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public CreateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
-		{
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = null;
-			MappingsValue = mappings;
-			return Self;
-		}
-
-		public CreateRequestDescriptor Mappings(Mapping.TypeMappingDescriptor descriptor)
-		{
-			MappingsValue = null;
-			MappingsDescriptorAction = null;
-			MappingsDescriptor = descriptor;
-			return Self;
-		}
-
-		public CreateRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
-		{
-			MappingsValue = null;
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = configure;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (MappingsDescriptor is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+			}
+			else if (MappingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
+			}
+			else if (MappingsValue is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsValue, options);
+			}
+
 			if (SettingsDescriptor is not null)
 			{
 				writer.WritePropertyName("settings");
@@ -322,22 +338,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("aliases");
 				JsonSerializer.Serialize(writer, AliasesValue, options);
-			}
-
-			if (MappingsDescriptor is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
-			}
-			else if (MappingsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
-			}
-			else if (MappingsValue is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsValue, options);
 			}
 
 			writer.WriteEndObject();

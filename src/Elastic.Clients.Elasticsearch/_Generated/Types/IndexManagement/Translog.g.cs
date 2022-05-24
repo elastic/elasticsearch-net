@@ -28,15 +28,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("durability")]
-		public string? Durability { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? Durability { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("flush_threshold_size")]
-		public string? FlushThresholdSize { get; set; }
+		public Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSize { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("retention")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? Retention { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sync_interval")]
+		public Elastic.Clients.Elasticsearch.Time? SyncInterval { get; set; }
 	}
 
 	public sealed partial class TranslogDescriptor : SerializableDescriptorBase<TranslogDescriptor>
@@ -46,9 +50,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private string? DurabilityValue { get; set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? DurabilityValue { get; set; }
 
-		private string? FlushThresholdSizeValue { get; set; }
+		private Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSizeValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? RetentionValue { get; set; }
 
@@ -56,13 +60,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Action<TranslogRetentionDescriptor> RetentionDescriptorAction { get; set; }
 
-		public TranslogDescriptor Durability(string? durability)
+		private Elastic.Clients.Elasticsearch.Time? SyncIntervalValue { get; set; }
+
+		public TranslogDescriptor Durability(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? durability)
 		{
 			DurabilityValue = durability;
 			return Self;
 		}
 
-		public TranslogDescriptor FlushThresholdSize(string? flushThresholdSize)
+		public TranslogDescriptor FlushThresholdSize(Elastic.Clients.Elasticsearch.ByteSize? flushThresholdSize)
 		{
 			FlushThresholdSizeValue = flushThresholdSize;
 			return Self;
@@ -92,19 +98,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
+		public TranslogDescriptor SyncInterval(Elastic.Clients.Elasticsearch.Time? syncInterval)
+		{
+			SyncIntervalValue = syncInterval;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(DurabilityValue))
+			if (DurabilityValue is not null)
 			{
 				writer.WritePropertyName("durability");
-				writer.WriteStringValue(DurabilityValue);
+				JsonSerializer.Serialize(writer, DurabilityValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(FlushThresholdSizeValue))
+			if (FlushThresholdSizeValue is not null)
 			{
 				writer.WritePropertyName("flush_threshold_size");
-				writer.WriteStringValue(FlushThresholdSizeValue);
+				JsonSerializer.Serialize(writer, FlushThresholdSizeValue, options);
 			}
 
 			if (RetentionDescriptor is not null)
@@ -121,6 +133,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("retention");
 				JsonSerializer.Serialize(writer, RetentionValue, options);
+			}
+
+			if (SyncIntervalValue is not null)
+			{
+				writer.WritePropertyName("sync_interval");
+				JsonSerializer.Serialize(writer, SyncIntervalValue, options);
 			}
 
 			writer.WriteEndObject();
