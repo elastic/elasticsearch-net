@@ -36,20 +36,6 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
 		}
 
-		public CreateResponse Create<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(document);
-			configureRequest?.Invoke(descriptor);
-			return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
-		}
-
-		public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(document);
-			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
-		}
-
 		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
