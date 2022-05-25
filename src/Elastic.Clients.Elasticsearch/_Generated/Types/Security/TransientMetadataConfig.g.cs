@@ -22,12 +22,36 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class MigrationFeature
+	public partial class TransientMetadataConfig
 	{
 		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+	}
+
+	public sealed partial class TransientMetadataConfigDescriptor : SerializableDescriptorBase<TransientMetadataConfigDescriptor>
+	{
+		internal TransientMetadataConfigDescriptor(Action<TransientMetadataConfigDescriptor> configure) => configure.Invoke(this);
+		public TransientMetadataConfigDescriptor() : base()
+		{
+		}
+
+		private bool EnabledValue { get; set; }
+
+		public TransientMetadataConfigDescriptor Enabled(bool enabled = true)
+		{
+			EnabledValue = enabled;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("enabled");
+			writer.WriteBooleanValue(EnabledValue);
+			writer.WriteEndObject();
+		}
 	}
 }

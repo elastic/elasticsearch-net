@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,12 +23,16 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MigrationFeature
+	public partial class Slices : Union<int?, Elastic.Clients.Elasticsearch.SlicesCalculation?>
 	{
-		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		public Slices(int? item) : base(item)
+		{
+		}
+
+		public Slices(Elastic.Clients.Elasticsearch.SlicesCalculation? item) : base(item)
+		{
+		}
 	}
 }

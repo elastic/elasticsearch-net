@@ -24,47 +24,33 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class IndexPrivileges
+	public partial class ManageUserPrivileges
 	{
 		[JsonInclude]
-		[JsonPropertyName("names")]
-		public Elastic.Clients.Elasticsearch.Indices Names { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("privileges")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
+		[JsonPropertyName("applications")]
+		public IEnumerable<string> Applications { get; set; }
 	}
 
-	public sealed partial class IndexPrivilegesDescriptor : SerializableDescriptorBase<IndexPrivilegesDescriptor>
+	public sealed partial class ManageUserPrivilegesDescriptor : SerializableDescriptorBase<ManageUserPrivilegesDescriptor>
 	{
-		internal IndexPrivilegesDescriptor(Action<IndexPrivilegesDescriptor> configure) => configure.Invoke(this);
-		public IndexPrivilegesDescriptor() : base()
+		internal ManageUserPrivilegesDescriptor(Action<ManageUserPrivilegesDescriptor> configure) => configure.Invoke(this);
+		public ManageUserPrivilegesDescriptor() : base()
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Indices NamesValue { get; set; }
+		private IEnumerable<string> ApplicationsValue { get; set; }
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> PrivilegesValue { get; set; }
-
-		public IndexPrivilegesDescriptor Names(Elastic.Clients.Elasticsearch.Indices names)
+		public ManageUserPrivilegesDescriptor Applications(IEnumerable<string> applications)
 		{
-			NamesValue = names;
-			return Self;
-		}
-
-		public IndexPrivilegesDescriptor Privileges(IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> privileges)
-		{
-			PrivilegesValue = privileges;
+			ApplicationsValue = applications;
 			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("names");
-			JsonSerializer.Serialize(writer, NamesValue, options);
-			writer.WritePropertyName("privileges");
-			JsonSerializer.Serialize(writer, PrivilegesValue, options);
+			writer.WritePropertyName("applications");
+			JsonSerializer.Serialize(writer, ApplicationsValue, options);
 			writer.WriteEndObject();
 		}
 	}

@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,12 +23,16 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class MigrationFeature
+	public partial class RoleTemplateScript : Union<Elastic.Clients.Elasticsearch.Security.RoleTemplateInlineScript?, Elastic.Clients.Elasticsearch.StoredScriptId?>
 	{
-		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		public RoleTemplateScript(Elastic.Clients.Elasticsearch.Security.RoleTemplateInlineScript? item) : base(item)
+		{
+		}
+
+		public RoleTemplateScript(Elastic.Clients.Elasticsearch.StoredScriptId? item) : base(item)
+		{
+		}
 	}
 }
