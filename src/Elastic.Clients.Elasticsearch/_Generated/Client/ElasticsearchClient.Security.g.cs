@@ -196,34 +196,6 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityClearCachedRolesRequestDescriptor, SecurityClearCachedRolesResponse>(descriptor);
 		}
 
-		public SecurityCreateApiKeyResponse CreateApiKey(SecurityCreateApiKeyRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<SecurityCreateApiKeyRequest, SecurityCreateApiKeyResponse>(request);
-		}
-
-		public Task<SecurityCreateApiKeyResponse> CreateApiKeyAsync(SecurityCreateApiKeyRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<SecurityCreateApiKeyRequest, SecurityCreateApiKeyResponse>(request, cancellationToken);
-		}
-
-		public SecurityCreateApiKeyResponse CreateApiKey(Action<SecurityCreateApiKeyRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new SecurityCreateApiKeyRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SecurityCreateApiKeyRequestDescriptor, SecurityCreateApiKeyResponse>(descriptor);
-		}
-
-		public Task<SecurityCreateApiKeyResponse> CreateApiKeyAsync(Action<SecurityCreateApiKeyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SecurityCreateApiKeyRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SecurityCreateApiKeyRequestDescriptor, SecurityCreateApiKeyResponse>(descriptor);
-		}
-
 		public SecurityDeletePrivilegesResponse DeletePrivileges(SecurityDeletePrivilegesRequest request)
 		{
 			request.BeforeRequest();
@@ -720,12 +692,28 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityQueryApiKeysRequestDescriptor, SecurityQueryApiKeysResponse>(descriptor);
 		}
 
+		public SecurityQueryApiKeysResponse QueryApiKeys<TDocument>(Action<SecurityQueryApiKeysRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new SecurityQueryApiKeysRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityQueryApiKeysRequestDescriptor<TDocument>, SecurityQueryApiKeysResponse>(descriptor);
+		}
+
 		public Task<SecurityQueryApiKeysResponse> QueryApiKeysAsync(Action<SecurityQueryApiKeysRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityQueryApiKeysRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SecurityQueryApiKeysRequestDescriptor, SecurityQueryApiKeysResponse>(descriptor);
+		}
+
+		public Task<SecurityQueryApiKeysResponse> QueryApiKeysAsync<TDocument>(Action<SecurityQueryApiKeysRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityQueryApiKeysRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityQueryApiKeysRequestDescriptor<TDocument>, SecurityQueryApiKeysResponse>(descriptor);
 		}
 
 		public SecuritySamlAuthenticateResponse SamlAuthenticate(SecuritySamlAuthenticateRequest request)

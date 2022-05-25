@@ -216,12 +216,28 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return DoRequest<ClusterHealthRequestDescriptor, ClusterHealthResponse>(descriptor);
 		}
 
+		public ClusterHealthResponse Health<TDocument>(Action<ClusterHealthRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new ClusterHealthRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ClusterHealthRequestDescriptor<TDocument>, ClusterHealthResponse>(descriptor);
+		}
+
 		public Task<ClusterHealthResponse> HealthAsync(Action<ClusterHealthRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new ClusterHealthRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<ClusterHealthRequestDescriptor, ClusterHealthResponse>(descriptor);
+		}
+
+		public Task<ClusterHealthResponse> HealthAsync<TDocument>(Action<ClusterHealthRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterHealthRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ClusterHealthRequestDescriptor<TDocument>, ClusterHealthResponse>(descriptor);
 		}
 
 		public ClusterPendingTasksResponse PendingTasks(ClusterPendingTasksRequest request)
@@ -428,12 +444,28 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return DoRequest<ClusterStateRequestDescriptor, ClusterStateResponse>(descriptor);
 		}
 
+		public ClusterStateResponse State<TDocument>(Action<ClusterStateRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new ClusterStateRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ClusterStateRequestDescriptor<TDocument>, ClusterStateResponse>(descriptor);
+		}
+
 		public Task<ClusterStateResponse> StateAsync(Action<ClusterStateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new ClusterStateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<ClusterStateRequestDescriptor, ClusterStateResponse>(descriptor);
+		}
+
+		public Task<ClusterStateResponse> StateAsync<TDocument>(Action<ClusterStateRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterStateRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ClusterStateRequestDescriptor<TDocument>, ClusterStateResponse>(descriptor);
 		}
 
 		public ClusterStatsResponse Stats(ClusterStatsRequest request)

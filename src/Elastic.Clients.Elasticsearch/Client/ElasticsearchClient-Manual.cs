@@ -84,21 +84,5 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
 		}
-
-		public CountResponse Count<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null)
-		{
-			var descriptor = new CountRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<CountRequestDescriptor<TDocument>, CountResponse>(descriptor);
-		}
-
-		public Task<CountResponse> CountAsync<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new CountRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<CountRequestDescriptor<TDocument>, CountResponse>(descriptor);
-		}
 	}
 }

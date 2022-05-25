@@ -48,12 +48,28 @@ namespace Elastic.Clients.Elasticsearch.Migration
 			return DoRequest<MigrationDeprecationsRequestDescriptor, MigrationDeprecationsResponse>(descriptor);
 		}
 
+		public MigrationDeprecationsResponse Deprecations<TDocument>(Action<MigrationDeprecationsRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new MigrationDeprecationsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MigrationDeprecationsRequestDescriptor<TDocument>, MigrationDeprecationsResponse>(descriptor);
+		}
+
 		public Task<MigrationDeprecationsResponse> DeprecationsAsync(Action<MigrationDeprecationsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new MigrationDeprecationsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MigrationDeprecationsRequestDescriptor, MigrationDeprecationsResponse>(descriptor);
+		}
+
+		public Task<MigrationDeprecationsResponse> DeprecationsAsync<TDocument>(Action<MigrationDeprecationsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MigrationDeprecationsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MigrationDeprecationsRequestDescriptor<TDocument>, MigrationDeprecationsResponse>(descriptor);
 		}
 
 		public MigrationGetFeatureUpgradeStatusResponse GetFeatureUpgradeStatus(MigrationGetFeatureUpgradeStatusRequest request)

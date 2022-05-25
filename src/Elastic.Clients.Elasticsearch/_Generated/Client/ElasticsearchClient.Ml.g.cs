@@ -400,12 +400,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequest<MlEstimateModelMemoryRequestDescriptor, MlEstimateModelMemoryResponse>(descriptor);
 		}
 
+		public MlEstimateModelMemoryResponse EstimateModelMemory<TDocument>(Action<MlEstimateModelMemoryRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new MlEstimateModelMemoryRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MlEstimateModelMemoryRequestDescriptor<TDocument>, MlEstimateModelMemoryResponse>(descriptor);
+		}
+
 		public Task<MlEstimateModelMemoryResponse> EstimateModelMemoryAsync(Action<MlEstimateModelMemoryRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new MlEstimateModelMemoryRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MlEstimateModelMemoryRequestDescriptor, MlEstimateModelMemoryResponse>(descriptor);
+		}
+
+		public Task<MlEstimateModelMemoryResponse> EstimateModelMemoryAsync<TDocument>(Action<MlEstimateModelMemoryRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MlEstimateModelMemoryRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MlEstimateModelMemoryRequestDescriptor<TDocument>, MlEstimateModelMemoryResponse>(descriptor);
 		}
 
 		public MlEvaluateDataFrameResponse EvaluateDataFrame(MlEvaluateDataFrameRequest request)
@@ -428,12 +444,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequest<MlEvaluateDataFrameRequestDescriptor, MlEvaluateDataFrameResponse>(descriptor);
 		}
 
+		public MlEvaluateDataFrameResponse EvaluateDataFrame<TDocument>(Action<MlEvaluateDataFrameRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new MlEvaluateDataFrameRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MlEvaluateDataFrameRequestDescriptor<TDocument>, MlEvaluateDataFrameResponse>(descriptor);
+		}
+
 		public Task<MlEvaluateDataFrameResponse> EvaluateDataFrameAsync(Action<MlEvaluateDataFrameRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new MlEvaluateDataFrameRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MlEvaluateDataFrameRequestDescriptor, MlEvaluateDataFrameResponse>(descriptor);
+		}
+
+		public Task<MlEvaluateDataFrameResponse> EvaluateDataFrameAsync<TDocument>(Action<MlEvaluateDataFrameRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MlEvaluateDataFrameRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MlEvaluateDataFrameRequestDescriptor<TDocument>, MlEvaluateDataFrameResponse>(descriptor);
 		}
 
 		public MlExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics(MlExplainDataFrameAnalyticsRequest request)
@@ -456,12 +488,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequest<MlExplainDataFrameAnalyticsRequestDescriptor, MlExplainDataFrameAnalyticsResponse>(descriptor);
 		}
 
+		public MlExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics<TDocument>(Action<MlExplainDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new MlExplainDataFrameAnalyticsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MlExplainDataFrameAnalyticsRequestDescriptor<TDocument>, MlExplainDataFrameAnalyticsResponse>(descriptor);
+		}
+
 		public Task<MlExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(Action<MlExplainDataFrameAnalyticsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new MlExplainDataFrameAnalyticsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MlExplainDataFrameAnalyticsRequestDescriptor, MlExplainDataFrameAnalyticsResponse>(descriptor);
+		}
+
+		public Task<MlExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync<TDocument>(Action<MlExplainDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MlExplainDataFrameAnalyticsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MlExplainDataFrameAnalyticsRequestDescriptor<TDocument>, MlExplainDataFrameAnalyticsResponse>(descriptor);
 		}
 
 		public MlFlushJobResponse FlushJob(MlFlushJobRequest request)
@@ -612,12 +660,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequest<MlGetDataFrameAnalyticsRequestDescriptor, MlGetDataFrameAnalyticsResponse>(descriptor);
 		}
 
+		public MlGetDataFrameAnalyticsResponse GetDataFrameAnalytics<TDocument>(Action<MlGetDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new MlGetDataFrameAnalyticsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MlGetDataFrameAnalyticsRequestDescriptor<TDocument>, MlGetDataFrameAnalyticsResponse>(descriptor);
+		}
+
 		public Task<MlGetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(Action<MlGetDataFrameAnalyticsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new MlGetDataFrameAnalyticsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MlGetDataFrameAnalyticsRequestDescriptor, MlGetDataFrameAnalyticsResponse>(descriptor);
+		}
+
+		public Task<MlGetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync<TDocument>(Action<MlGetDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MlGetDataFrameAnalyticsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MlGetDataFrameAnalyticsRequestDescriptor<TDocument>, MlGetDataFrameAnalyticsResponse>(descriptor);
 		}
 
 		public MlGetDataFrameAnalyticsStatsResponse GetDataFrameAnalyticsStats(MlGetDataFrameAnalyticsStatsRequest request)
@@ -640,12 +704,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequest<MlGetDataFrameAnalyticsStatsRequestDescriptor, MlGetDataFrameAnalyticsStatsResponse>(descriptor);
 		}
 
+		public MlGetDataFrameAnalyticsStatsResponse GetDataFrameAnalyticsStats<TDocument>(Action<MlGetDataFrameAnalyticsStatsRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new MlGetDataFrameAnalyticsStatsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MlGetDataFrameAnalyticsStatsRequestDescriptor<TDocument>, MlGetDataFrameAnalyticsStatsResponse>(descriptor);
+		}
+
 		public Task<MlGetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(Action<MlGetDataFrameAnalyticsStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new MlGetDataFrameAnalyticsStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MlGetDataFrameAnalyticsStatsRequestDescriptor, MlGetDataFrameAnalyticsStatsResponse>(descriptor);
+		}
+
+		public Task<MlGetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync<TDocument>(Action<MlGetDataFrameAnalyticsStatsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MlGetDataFrameAnalyticsStatsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MlGetDataFrameAnalyticsStatsRequestDescriptor<TDocument>, MlGetDataFrameAnalyticsStatsResponse>(descriptor);
 		}
 
 		public MlGetInfluencersResponse GetInfluencers(MlGetInfluencersRequest request)
@@ -1024,12 +1104,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequest<MlPreviewDataFrameAnalyticsRequestDescriptor, MlPreviewDataFrameAnalyticsResponse>(descriptor);
 		}
 
+		public MlPreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics<TDocument>(Action<MlPreviewDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new MlPreviewDataFrameAnalyticsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MlPreviewDataFrameAnalyticsRequestDescriptor<TDocument>, MlPreviewDataFrameAnalyticsResponse>(descriptor);
+		}
+
 		public Task<MlPreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync(Action<MlPreviewDataFrameAnalyticsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new MlPreviewDataFrameAnalyticsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MlPreviewDataFrameAnalyticsRequestDescriptor, MlPreviewDataFrameAnalyticsResponse>(descriptor);
+		}
+
+		public Task<MlPreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync<TDocument>(Action<MlPreviewDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MlPreviewDataFrameAnalyticsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MlPreviewDataFrameAnalyticsRequestDescriptor<TDocument>, MlPreviewDataFrameAnalyticsResponse>(descriptor);
 		}
 
 		public MlPutCalendarJobResponse PutCalendarJob(MlPutCalendarJobRequest request)
@@ -1812,12 +1908,28 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return DoRequest<MlValidateRequestDescriptor, MlValidateResponse>(descriptor);
 		}
 
+		public MlValidateResponse Validate<TDocument>(Action<MlValidateRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new MlValidateRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MlValidateRequestDescriptor<TDocument>, MlValidateResponse>(descriptor);
+		}
+
 		public Task<MlValidateResponse> ValidateAsync(Action<MlValidateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new MlValidateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MlValidateRequestDescriptor, MlValidateResponse>(descriptor);
+		}
+
+		public Task<MlValidateResponse> ValidateAsync<TDocument>(Action<MlValidateRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MlValidateRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MlValidateRequestDescriptor<TDocument>, MlValidateResponse>(descriptor);
 		}
 	}
 }

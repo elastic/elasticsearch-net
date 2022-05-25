@@ -132,12 +132,28 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 			return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse>(descriptor);
 		}
 
+		public NodesStatsResponse Stats<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new NodesStatsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse>(descriptor);
+		}
+
 		public Task<NodesStatsResponse> StatsAsync(Action<NodesStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new NodesStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse>(descriptor);
+		}
+
+		public Task<NodesStatsResponse> StatsAsync<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new NodesStatsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse>(descriptor);
 		}
 
 		public NodesUsageResponse Usage(NodesUsageRequest request)

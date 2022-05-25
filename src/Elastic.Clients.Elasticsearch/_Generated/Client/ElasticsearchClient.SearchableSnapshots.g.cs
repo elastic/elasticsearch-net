@@ -76,12 +76,28 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 			return DoRequest<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse>(descriptor);
 		}
 
+		public SearchableSnapshotsStatsResponse Stats<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse>(descriptor);
+		}
+
 		public Task<SearchableSnapshotsStatsResponse> StatsAsync(Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SearchableSnapshotsStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse>(descriptor);
+		}
+
+		public Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse>(descriptor);
 		}
 	}
 }

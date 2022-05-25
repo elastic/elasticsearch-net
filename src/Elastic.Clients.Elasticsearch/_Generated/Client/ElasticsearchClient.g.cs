@@ -148,12 +148,28 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<BulkRequestDescriptor, BulkResponse>(descriptor);
 		}
 
+		public BulkResponse Bulk<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new BulkRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<BulkRequestDescriptor<TDocument>, BulkResponse>(descriptor);
+		}
+
 		public Task<BulkResponse> BulkAsync(Action<BulkRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new BulkRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<BulkRequestDescriptor, BulkResponse>(descriptor);
+		}
+
+		public Task<BulkResponse> BulkAsync<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new BulkRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<BulkRequestDescriptor<TDocument>, BulkResponse>(descriptor);
 		}
 
 		public ClearScrollResponse ClearScroll(ClearScrollRequest request)
@@ -232,12 +248,28 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<CountRequestDescriptor, CountResponse>(descriptor);
 		}
 
+		public CountResponse Count<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new CountRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<CountRequestDescriptor<TDocument>, CountResponse>(descriptor);
+		}
+
 		public Task<CountResponse> CountAsync(Action<CountRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CountRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<CountRequestDescriptor, CountResponse>(descriptor);
+		}
+
+		public Task<CountResponse> CountAsync<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CountRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CountRequestDescriptor<TDocument>, CountResponse>(descriptor);
 		}
 
 		public CreateResponse Create<TDocument>(CreateRequest<TDocument> request)
@@ -564,12 +596,28 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
 		}
 
+		public FieldCapsResponse FieldCaps<TDocument>(Action<FieldCapsRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new FieldCapsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<FieldCapsRequestDescriptor<TDocument>, FieldCapsResponse>(descriptor);
+		}
+
 		public Task<FieldCapsResponse> FieldCapsAsync(Action<FieldCapsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new FieldCapsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
+		}
+
+		public Task<FieldCapsResponse> FieldCapsAsync<TDocument>(Action<FieldCapsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new FieldCapsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<FieldCapsRequestDescriptor<TDocument>, FieldCapsResponse>(descriptor);
 		}
 
 		public GetResponse<TDocument> Get<TDocument>(GetRequest request)
@@ -792,6 +840,14 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
 		}
 
+		public RankEvalResponse RankEval<TDocument>(Action<RankEvalRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new RankEvalRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
+		}
+
 		public RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new RankEvalRequestDescriptor(indices);
@@ -814,6 +870,14 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+		}
+
+		public Task<RankEvalResponse> RankEvalAsync<TDocument>(Action<RankEvalRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new RankEvalRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
 		}
 
 		public Task<RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
@@ -852,12 +916,28 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<ReindexRequestDescriptor, ReindexResponse>(descriptor);
 		}
 
+		public ReindexResponse Reindex<TDocument>(Action<ReindexRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new ReindexRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ReindexRequestDescriptor<TDocument>, ReindexResponse>(descriptor);
+		}
+
 		public Task<ReindexResponse> ReindexAsync(Action<ReindexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new ReindexRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<ReindexRequestDescriptor, ReindexResponse>(descriptor);
+		}
+
+		public Task<ReindexResponse> ReindexAsync<TDocument>(Action<ReindexRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ReindexRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ReindexRequestDescriptor<TDocument>, ReindexResponse>(descriptor);
 		}
 
 		public ReindexRethrottleResponse ReindexRethrottle(ReindexRethrottleRequest request)
@@ -1064,12 +1144,28 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
 		}
 
+		public SearchShardsResponse SearchShards<TDocument>(Action<SearchShardsRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new SearchShardsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SearchShardsRequestDescriptor<TDocument>, SearchShardsResponse>(descriptor);
+		}
+
 		public Task<SearchShardsResponse> SearchShardsAsync(Action<SearchShardsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SearchShardsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
+		}
+
+		public Task<SearchShardsResponse> SearchShardsAsync<TDocument>(Action<SearchShardsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SearchShardsRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SearchShardsRequestDescriptor<TDocument>, SearchShardsResponse>(descriptor);
 		}
 
 		public SourceResponse<TDocument> GetSource<TDocument>(SourceRequest request)

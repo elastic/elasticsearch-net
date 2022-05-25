@@ -208,12 +208,28 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return DoRequest<SqlQueryRequestDescriptor, SqlQueryResponse>(descriptor);
 		}
 
+		public SqlQueryResponse Query<TDocument>(Action<SqlQueryRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new SqlQueryRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SqlQueryRequestDescriptor<TDocument>, SqlQueryResponse>(descriptor);
+		}
+
 		public Task<SqlQueryResponse> QueryAsync(Action<SqlQueryRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SqlQueryRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SqlQueryRequestDescriptor, SqlQueryResponse>(descriptor);
+		}
+
+		public Task<SqlQueryResponse> QueryAsync<TDocument>(Action<SqlQueryRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SqlQueryRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SqlQueryRequestDescriptor<TDocument>, SqlQueryResponse>(descriptor);
 		}
 	}
 }

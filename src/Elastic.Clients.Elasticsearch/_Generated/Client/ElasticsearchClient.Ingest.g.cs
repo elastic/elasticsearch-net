@@ -120,12 +120,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestGetPipelineRequestDescriptor, IngestGetPipelineResponse>(descriptor);
 		}
 
+		public IngestGetPipelineResponse GetPipeline<TDocument>(Action<IngestGetPipelineRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new IngestGetPipelineRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<IngestGetPipelineRequestDescriptor<TDocument>, IngestGetPipelineResponse>(descriptor);
+		}
+
 		public Task<IngestGetPipelineResponse> GetPipelineAsync(Action<IngestGetPipelineRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestGetPipelineRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<IngestGetPipelineRequestDescriptor, IngestGetPipelineResponse>(descriptor);
+		}
+
+		public Task<IngestGetPipelineResponse> GetPipelineAsync<TDocument>(Action<IngestGetPipelineRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IngestGetPipelineRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IngestGetPipelineRequestDescriptor<TDocument>, IngestGetPipelineResponse>(descriptor);
 		}
 
 		public IngestProcessorGrokResponse ProcessorGrok(IngestProcessorGrokRequest request)
@@ -220,12 +236,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestSimulateRequestDescriptor, IngestSimulateResponse>(descriptor);
 		}
 
+		public IngestSimulateResponse Simulate<TDocument>(Action<IngestSimulateRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new IngestSimulateRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<IngestSimulateRequestDescriptor<TDocument>, IngestSimulateResponse>(descriptor);
+		}
+
 		public Task<IngestSimulateResponse> SimulateAsync(Action<IngestSimulateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestSimulateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<IngestSimulateRequestDescriptor, IngestSimulateResponse>(descriptor);
+		}
+
+		public Task<IngestSimulateResponse> SimulateAsync<TDocument>(Action<IngestSimulateRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IngestSimulateRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IngestSimulateRequestDescriptor<TDocument>, IngestSimulateResponse>(descriptor);
 		}
 	}
 }
