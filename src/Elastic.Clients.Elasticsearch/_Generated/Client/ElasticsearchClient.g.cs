@@ -1051,6 +1051,21 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
 		}
 
+		public IndexResponse Index<TDocument>(TDocument document)
+		{
+			var descriptor = new IndexRequestDescriptor<TDocument>(document);
+			descriptor.BeforeRequest();
+			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+		}
+
+		public IndexResponse Index<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new IndexRequestDescriptor<TDocument>(document);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+		}
+
 		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
@@ -1061,6 +1076,21 @@ namespace Elastic.Clients.Elasticsearch
 		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+		}
+
+		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexRequestDescriptor<TDocument>(document);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+		}
+
+		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexRequestDescriptor<TDocument>(document);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
