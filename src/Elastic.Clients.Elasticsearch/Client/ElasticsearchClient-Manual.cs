@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
 		}
 
-		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configureRequest = null)
+		public SourceResponse<TDocument> GetSource<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configureRequest = null)
 		{
 			var descriptor = new SourceRequestDescriptor<TDocument>(document: id.Document, index: id?.Self?.Index ?? typeof(TDocument), id: id?.Self?.Id ?? Id.From(id.Document));
 			configureRequest?.Invoke(descriptor);

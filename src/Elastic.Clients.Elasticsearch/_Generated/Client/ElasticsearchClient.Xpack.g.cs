@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 			return DoRequestAsync<XpackInfoRequest, XpackInfoResponse>(request, cancellationToken);
 		}
 
-		public XpackInfoResponse Info(Action<XpackInfoRequestDescriptor> configureRequest = null)
+		public XpackInfoResponse Info()
+		{
+			var descriptor = new XpackInfoRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<XpackInfoRequestDescriptor, XpackInfoResponse>(descriptor);
+		}
+
+		public XpackInfoResponse Info(Action<XpackInfoRequestDescriptor> configureRequest)
 		{
 			var descriptor = new XpackInfoRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 			return DoRequest<XpackInfoRequestDescriptor, XpackInfoResponse>(descriptor);
 		}
 
-		public Task<XpackInfoResponse> InfoAsync(Action<XpackInfoRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<XpackInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new XpackInfoRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<XpackInfoRequestDescriptor, XpackInfoResponse>(descriptor);
+		}
+
+		public Task<XpackInfoResponse> InfoAsync(Action<XpackInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new XpackInfoRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -68,7 +82,14 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 			return DoRequestAsync<XpackUsageRequest, XpackUsageResponse>(request, cancellationToken);
 		}
 
-		public XpackUsageResponse Usage(Action<XpackUsageRequestDescriptor> configureRequest = null)
+		public XpackUsageResponse Usage()
+		{
+			var descriptor = new XpackUsageRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<XpackUsageRequestDescriptor, XpackUsageResponse>(descriptor);
+		}
+
+		public XpackUsageResponse Usage(Action<XpackUsageRequestDescriptor> configureRequest)
 		{
 			var descriptor = new XpackUsageRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -76,7 +97,14 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 			return DoRequest<XpackUsageRequestDescriptor, XpackUsageResponse>(descriptor);
 		}
 
-		public Task<XpackUsageResponse> UsageAsync(Action<XpackUsageRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<XpackUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new XpackUsageRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<XpackUsageRequestDescriptor, XpackUsageResponse>(descriptor);
+		}
+
+		public Task<XpackUsageResponse> UsageAsync(Action<XpackUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new XpackUsageRequestDescriptor();
 			configureRequest?.Invoke(descriptor);

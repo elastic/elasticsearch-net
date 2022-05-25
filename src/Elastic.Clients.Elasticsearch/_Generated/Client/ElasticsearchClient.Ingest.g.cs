@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequestAsync<IngestDeletePipelineRequest, IngestDeletePipelineResponse>(request, cancellationToken);
 		}
 
-		public IngestDeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id, Action<IngestDeletePipelineRequestDescriptor> configureRequest = null)
+		public IngestDeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id)
+		{
+			var descriptor = new IngestDeletePipelineRequestDescriptor(id);
+			descriptor.BeforeRequest();
+			return DoRequest<IngestDeletePipelineRequestDescriptor, IngestDeletePipelineResponse>(descriptor);
+		}
+
+		public IngestDeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id, Action<IngestDeletePipelineRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IngestDeletePipelineRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestDeletePipelineRequestDescriptor, IngestDeletePipelineResponse>(descriptor);
 		}
 
-		public IngestDeletePipelineResponse DeletePipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestDeletePipelineRequestDescriptor<TDocument>> configureRequest = null)
+		public IngestDeletePipelineResponse DeletePipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestDeletePipelineRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new IngestDeletePipelineRequestDescriptor<TDocument>(id);
 			configureRequest?.Invoke(descriptor);
@@ -56,7 +63,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestDeletePipelineRequestDescriptor<TDocument>, IngestDeletePipelineResponse>(descriptor);
 		}
 
-		public Task<IngestDeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<IngestDeletePipelineRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IngestDeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IngestDeletePipelineRequestDescriptor(id);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IngestDeletePipelineRequestDescriptor, IngestDeletePipelineResponse>(descriptor);
+		}
+
+		public Task<IngestDeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<IngestDeletePipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestDeletePipelineRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
@@ -64,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequestAsync<IngestDeletePipelineRequestDescriptor, IngestDeletePipelineResponse>(descriptor);
 		}
 
-		public Task<IngestDeletePipelineResponse> DeletePipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestDeletePipelineRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IngestDeletePipelineResponse> DeletePipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestDeletePipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestDeletePipelineRequestDescriptor<TDocument>(id);
 			configureRequest?.Invoke(descriptor);
@@ -84,7 +98,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequestAsync<IngestGeoIpStatsRequest, IngestGeoIpStatsResponse>(request, cancellationToken);
 		}
 
-		public IngestGeoIpStatsResponse GeoIpStats(Action<IngestGeoIpStatsRequestDescriptor> configureRequest = null)
+		public IngestGeoIpStatsResponse GeoIpStats()
+		{
+			var descriptor = new IngestGeoIpStatsRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<IngestGeoIpStatsRequestDescriptor, IngestGeoIpStatsResponse>(descriptor);
+		}
+
+		public IngestGeoIpStatsResponse GeoIpStats(Action<IngestGeoIpStatsRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IngestGeoIpStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -92,7 +113,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestGeoIpStatsRequestDescriptor, IngestGeoIpStatsResponse>(descriptor);
 		}
 
-		public Task<IngestGeoIpStatsResponse> GeoIpStatsAsync(Action<IngestGeoIpStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IngestGeoIpStatsResponse> GeoIpStatsAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IngestGeoIpStatsRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IngestGeoIpStatsRequestDescriptor, IngestGeoIpStatsResponse>(descriptor);
+		}
+
+		public Task<IngestGeoIpStatsResponse> GeoIpStatsAsync(Action<IngestGeoIpStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestGeoIpStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -112,7 +140,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequestAsync<IngestGetPipelineRequest, IngestGetPipelineResponse>(request, cancellationToken);
 		}
 
-		public IngestGetPipelineResponse GetPipeline(Action<IngestGetPipelineRequestDescriptor> configureRequest = null)
+		public IngestGetPipelineResponse GetPipeline()
+		{
+			var descriptor = new IngestGetPipelineRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<IngestGetPipelineRequestDescriptor, IngestGetPipelineResponse>(descriptor);
+		}
+
+		public IngestGetPipelineResponse GetPipeline(Action<IngestGetPipelineRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IngestGetPipelineRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -120,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestGetPipelineRequestDescriptor, IngestGetPipelineResponse>(descriptor);
 		}
 
-		public IngestGetPipelineResponse GetPipeline<TDocument>(Action<IngestGetPipelineRequestDescriptor<TDocument>> configureRequest = null)
+		public IngestGetPipelineResponse GetPipeline<TDocument>(Action<IngestGetPipelineRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new IngestGetPipelineRequestDescriptor<TDocument>();
 			configureRequest?.Invoke(descriptor);
@@ -128,7 +163,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestGetPipelineRequestDescriptor<TDocument>, IngestGetPipelineResponse>(descriptor);
 		}
 
-		public Task<IngestGetPipelineResponse> GetPipelineAsync(Action<IngestGetPipelineRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IngestGetPipelineResponse> GetPipelineAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IngestGetPipelineRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IngestGetPipelineRequestDescriptor, IngestGetPipelineResponse>(descriptor);
+		}
+
+		public Task<IngestGetPipelineResponse> GetPipelineAsync(Action<IngestGetPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestGetPipelineRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -136,7 +178,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequestAsync<IngestGetPipelineRequestDescriptor, IngestGetPipelineResponse>(descriptor);
 		}
 
-		public Task<IngestGetPipelineResponse> GetPipelineAsync<TDocument>(Action<IngestGetPipelineRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IngestGetPipelineResponse> GetPipelineAsync<TDocument>(Action<IngestGetPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestGetPipelineRequestDescriptor<TDocument>();
 			configureRequest?.Invoke(descriptor);
@@ -156,7 +198,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequestAsync<IngestProcessorGrokRequest, IngestProcessorGrokResponse>(request, cancellationToken);
 		}
 
-		public IngestProcessorGrokResponse ProcessorGrok(Action<IngestProcessorGrokRequestDescriptor> configureRequest = null)
+		public IngestProcessorGrokResponse ProcessorGrok()
+		{
+			var descriptor = new IngestProcessorGrokRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<IngestProcessorGrokRequestDescriptor, IngestProcessorGrokResponse>(descriptor);
+		}
+
+		public IngestProcessorGrokResponse ProcessorGrok(Action<IngestProcessorGrokRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IngestProcessorGrokRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -164,7 +213,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestProcessorGrokRequestDescriptor, IngestProcessorGrokResponse>(descriptor);
 		}
 
-		public Task<IngestProcessorGrokResponse> ProcessorGrokAsync(Action<IngestProcessorGrokRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IngestProcessorGrokResponse> ProcessorGrokAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IngestProcessorGrokRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IngestProcessorGrokRequestDescriptor, IngestProcessorGrokResponse>(descriptor);
+		}
+
+		public Task<IngestProcessorGrokResponse> ProcessorGrokAsync(Action<IngestProcessorGrokRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestProcessorGrokRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -184,7 +240,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequestAsync<IngestPutPipelineRequest, IngestPutPipelineResponse>(request, cancellationToken);
 		}
 
-		public IngestPutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id, Action<IngestPutPipelineRequestDescriptor> configureRequest = null)
+		public IngestPutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id)
+		{
+			var descriptor = new IngestPutPipelineRequestDescriptor(id);
+			descriptor.BeforeRequest();
+			return DoRequest<IngestPutPipelineRequestDescriptor, IngestPutPipelineResponse>(descriptor);
+		}
+
+		public IngestPutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id, Action<IngestPutPipelineRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IngestPutPipelineRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
@@ -192,7 +255,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestPutPipelineRequestDescriptor, IngestPutPipelineResponse>(descriptor);
 		}
 
-		public IngestPutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestPutPipelineRequestDescriptor<TDocument>> configureRequest = null)
+		public IngestPutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestPutPipelineRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new IngestPutPipelineRequestDescriptor<TDocument>(id);
 			configureRequest?.Invoke(descriptor);
@@ -200,7 +263,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestPutPipelineRequestDescriptor<TDocument>, IngestPutPipelineResponse>(descriptor);
 		}
 
-		public Task<IngestPutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<IngestPutPipelineRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IngestPutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IngestPutPipelineRequestDescriptor(id);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IngestPutPipelineRequestDescriptor, IngestPutPipelineResponse>(descriptor);
+		}
+
+		public Task<IngestPutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<IngestPutPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestPutPipelineRequestDescriptor(id);
 			configureRequest?.Invoke(descriptor);
@@ -208,7 +278,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequestAsync<IngestPutPipelineRequestDescriptor, IngestPutPipelineResponse>(descriptor);
 		}
 
-		public Task<IngestPutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestPutPipelineRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IngestPutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<IngestPutPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestPutPipelineRequestDescriptor<TDocument>(id);
 			configureRequest?.Invoke(descriptor);
@@ -228,7 +298,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequestAsync<IngestSimulateRequest, IngestSimulateResponse>(request, cancellationToken);
 		}
 
-		public IngestSimulateResponse Simulate(Action<IngestSimulateRequestDescriptor> configureRequest = null)
+		public IngestSimulateResponse Simulate()
+		{
+			var descriptor = new IngestSimulateRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<IngestSimulateRequestDescriptor, IngestSimulateResponse>(descriptor);
+		}
+
+		public IngestSimulateResponse Simulate(Action<IngestSimulateRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IngestSimulateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -236,7 +313,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestSimulateRequestDescriptor, IngestSimulateResponse>(descriptor);
 		}
 
-		public IngestSimulateResponse Simulate<TDocument>(Action<IngestSimulateRequestDescriptor<TDocument>> configureRequest = null)
+		public IngestSimulateResponse Simulate<TDocument>(Action<IngestSimulateRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new IngestSimulateRequestDescriptor<TDocument>();
 			configureRequest?.Invoke(descriptor);
@@ -244,7 +321,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequest<IngestSimulateRequestDescriptor<TDocument>, IngestSimulateResponse>(descriptor);
 		}
 
-		public Task<IngestSimulateResponse> SimulateAsync(Action<IngestSimulateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IngestSimulateResponse> SimulateAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IngestSimulateRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IngestSimulateRequestDescriptor, IngestSimulateResponse>(descriptor);
+		}
+
+		public Task<IngestSimulateResponse> SimulateAsync(Action<IngestSimulateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestSimulateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -252,7 +336,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequestAsync<IngestSimulateRequestDescriptor, IngestSimulateResponse>(descriptor);
 		}
 
-		public Task<IngestSimulateResponse> SimulateAsync<TDocument>(Action<IngestSimulateRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IngestSimulateResponse> SimulateAsync<TDocument>(Action<IngestSimulateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestSimulateRequestDescriptor<TDocument>();
 			configureRequest?.Invoke(descriptor);

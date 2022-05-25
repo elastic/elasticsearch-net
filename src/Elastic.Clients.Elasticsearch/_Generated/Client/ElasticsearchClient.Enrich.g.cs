@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequestAsync<EnrichDeletePolicyRequest, EnrichDeletePolicyResponse>(request, cancellationToken);
 		}
 
-		public EnrichDeletePolicyResponse DeletePolicy(Elastic.Clients.Elasticsearch.Name name, Action<EnrichDeletePolicyRequestDescriptor> configureRequest = null)
+		public EnrichDeletePolicyResponse DeletePolicy(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new EnrichDeletePolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<EnrichDeletePolicyRequestDescriptor, EnrichDeletePolicyResponse>(descriptor);
+		}
+
+		public EnrichDeletePolicyResponse DeletePolicy(Elastic.Clients.Elasticsearch.Name name, Action<EnrichDeletePolicyRequestDescriptor> configureRequest)
 		{
 			var descriptor = new EnrichDeletePolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequest<EnrichDeletePolicyRequestDescriptor, EnrichDeletePolicyResponse>(descriptor);
 		}
 
-		public Task<EnrichDeletePolicyResponse> DeletePolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<EnrichDeletePolicyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<EnrichDeletePolicyResponse> DeletePolicyAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new EnrichDeletePolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<EnrichDeletePolicyRequestDescriptor, EnrichDeletePolicyResponse>(descriptor);
+		}
+
+		public Task<EnrichDeletePolicyResponse> DeletePolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<EnrichDeletePolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new EnrichDeletePolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -68,7 +82,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequestAsync<EnrichExecutePolicyRequest, EnrichExecutePolicyResponse>(request, cancellationToken);
 		}
 
-		public EnrichExecutePolicyResponse ExecutePolicy(Elastic.Clients.Elasticsearch.Name name, Action<EnrichExecutePolicyRequestDescriptor> configureRequest = null)
+		public EnrichExecutePolicyResponse ExecutePolicy(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new EnrichExecutePolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<EnrichExecutePolicyRequestDescriptor, EnrichExecutePolicyResponse>(descriptor);
+		}
+
+		public EnrichExecutePolicyResponse ExecutePolicy(Elastic.Clients.Elasticsearch.Name name, Action<EnrichExecutePolicyRequestDescriptor> configureRequest)
 		{
 			var descriptor = new EnrichExecutePolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -76,7 +97,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequest<EnrichExecutePolicyRequestDescriptor, EnrichExecutePolicyResponse>(descriptor);
 		}
 
-		public Task<EnrichExecutePolicyResponse> ExecutePolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<EnrichExecutePolicyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<EnrichExecutePolicyResponse> ExecutePolicyAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new EnrichExecutePolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<EnrichExecutePolicyRequestDescriptor, EnrichExecutePolicyResponse>(descriptor);
+		}
+
+		public Task<EnrichExecutePolicyResponse> ExecutePolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<EnrichExecutePolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new EnrichExecutePolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -96,7 +124,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequestAsync<EnrichGetPolicyRequest, EnrichGetPolicyResponse>(request, cancellationToken);
 		}
 
-		public EnrichGetPolicyResponse GetPolicy(Action<EnrichGetPolicyRequestDescriptor> configureRequest = null)
+		public EnrichGetPolicyResponse GetPolicy()
+		{
+			var descriptor = new EnrichGetPolicyRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<EnrichGetPolicyRequestDescriptor, EnrichGetPolicyResponse>(descriptor);
+		}
+
+		public EnrichGetPolicyResponse GetPolicy(Action<EnrichGetPolicyRequestDescriptor> configureRequest)
 		{
 			var descriptor = new EnrichGetPolicyRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -104,7 +139,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequest<EnrichGetPolicyRequestDescriptor, EnrichGetPolicyResponse>(descriptor);
 		}
 
-		public Task<EnrichGetPolicyResponse> GetPolicyAsync(Action<EnrichGetPolicyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<EnrichGetPolicyResponse> GetPolicyAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new EnrichGetPolicyRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<EnrichGetPolicyRequestDescriptor, EnrichGetPolicyResponse>(descriptor);
+		}
+
+		public Task<EnrichGetPolicyResponse> GetPolicyAsync(Action<EnrichGetPolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new EnrichGetPolicyRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -124,7 +166,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequestAsync<EnrichPutPolicyRequest, EnrichPutPolicyResponse>(request, cancellationToken);
 		}
 
-		public EnrichPutPolicyResponse PutPolicy(Elastic.Clients.Elasticsearch.Name name, Action<EnrichPutPolicyRequestDescriptor> configureRequest = null)
+		public EnrichPutPolicyResponse PutPolicy(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new EnrichPutPolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<EnrichPutPolicyRequestDescriptor, EnrichPutPolicyResponse>(descriptor);
+		}
+
+		public EnrichPutPolicyResponse PutPolicy(Elastic.Clients.Elasticsearch.Name name, Action<EnrichPutPolicyRequestDescriptor> configureRequest)
 		{
 			var descriptor = new EnrichPutPolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -132,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequest<EnrichPutPolicyRequestDescriptor, EnrichPutPolicyResponse>(descriptor);
 		}
 
-		public EnrichPutPolicyResponse PutPolicy<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<EnrichPutPolicyRequestDescriptor<TDocument>> configureRequest = null)
+		public EnrichPutPolicyResponse PutPolicy<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<EnrichPutPolicyRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new EnrichPutPolicyRequestDescriptor<TDocument>(name);
 			configureRequest?.Invoke(descriptor);
@@ -140,7 +189,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequest<EnrichPutPolicyRequestDescriptor<TDocument>, EnrichPutPolicyResponse>(descriptor);
 		}
 
-		public Task<EnrichPutPolicyResponse> PutPolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<EnrichPutPolicyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<EnrichPutPolicyResponse> PutPolicyAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new EnrichPutPolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<EnrichPutPolicyRequestDescriptor, EnrichPutPolicyResponse>(descriptor);
+		}
+
+		public Task<EnrichPutPolicyResponse> PutPolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<EnrichPutPolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new EnrichPutPolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -148,7 +204,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequestAsync<EnrichPutPolicyRequestDescriptor, EnrichPutPolicyResponse>(descriptor);
 		}
 
-		public Task<EnrichPutPolicyResponse> PutPolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<EnrichPutPolicyRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<EnrichPutPolicyResponse> PutPolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<EnrichPutPolicyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new EnrichPutPolicyRequestDescriptor<TDocument>(name);
 			configureRequest?.Invoke(descriptor);
@@ -168,7 +224,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequestAsync<EnrichStatsRequest, EnrichStatsResponse>(request, cancellationToken);
 		}
 
-		public EnrichStatsResponse Stats(Action<EnrichStatsRequestDescriptor> configureRequest = null)
+		public EnrichStatsResponse Stats()
+		{
+			var descriptor = new EnrichStatsRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<EnrichStatsRequestDescriptor, EnrichStatsResponse>(descriptor);
+		}
+
+		public EnrichStatsResponse Stats(Action<EnrichStatsRequestDescriptor> configureRequest)
 		{
 			var descriptor = new EnrichStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -176,7 +239,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return DoRequest<EnrichStatsRequestDescriptor, EnrichStatsResponse>(descriptor);
 		}
 
-		public Task<EnrichStatsResponse> StatsAsync(Action<EnrichStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<EnrichStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new EnrichStatsRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<EnrichStatsRequestDescriptor, EnrichStatsResponse>(descriptor);
+		}
+
+		public Task<EnrichStatsResponse> StatsAsync(Action<EnrichStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new EnrichStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);

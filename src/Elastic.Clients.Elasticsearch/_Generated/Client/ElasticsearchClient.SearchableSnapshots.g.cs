@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 			return DoRequestAsync<SearchableSnapshotsMountRequest, SearchableSnapshotsMountResponse>(request, cancellationToken);
 		}
 
-		public SearchableSnapshotsMountResponse Mount(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<SearchableSnapshotsMountRequestDescriptor> configureRequest = null)
+		public SearchableSnapshotsMountResponse Mount(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
+		{
+			var descriptor = new SearchableSnapshotsMountRequestDescriptor(repository, snapshot);
+			descriptor.BeforeRequest();
+			return DoRequest<SearchableSnapshotsMountRequestDescriptor, SearchableSnapshotsMountResponse>(descriptor);
+		}
+
+		public SearchableSnapshotsMountResponse Mount(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<SearchableSnapshotsMountRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SearchableSnapshotsMountRequestDescriptor(repository, snapshot);
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 			return DoRequest<SearchableSnapshotsMountRequestDescriptor, SearchableSnapshotsMountResponse>(descriptor);
 		}
 
-		public Task<SearchableSnapshotsMountResponse> MountAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<SearchableSnapshotsMountRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SearchableSnapshotsMountResponse> MountAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SearchableSnapshotsMountRequestDescriptor(repository, snapshot);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SearchableSnapshotsMountRequestDescriptor, SearchableSnapshotsMountResponse>(descriptor);
+		}
+
+		public Task<SearchableSnapshotsMountResponse> MountAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<SearchableSnapshotsMountRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SearchableSnapshotsMountRequestDescriptor(repository, snapshot);
 			configureRequest?.Invoke(descriptor);
@@ -68,7 +82,14 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 			return DoRequestAsync<SearchableSnapshotsStatsRequest, SearchableSnapshotsStatsResponse>(request, cancellationToken);
 		}
 
-		public SearchableSnapshotsStatsResponse Stats(Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest = null)
+		public SearchableSnapshotsStatsResponse Stats()
+		{
+			var descriptor = new SearchableSnapshotsStatsRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse>(descriptor);
+		}
+
+		public SearchableSnapshotsStatsResponse Stats(Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SearchableSnapshotsStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -76,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 			return DoRequest<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse>(descriptor);
 		}
 
-		public SearchableSnapshotsStatsResponse Stats<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest = null)
+		public SearchableSnapshotsStatsResponse Stats<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>();
 			configureRequest?.Invoke(descriptor);
@@ -84,7 +105,14 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 			return DoRequest<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse>(descriptor);
 		}
 
-		public Task<SearchableSnapshotsStatsResponse> StatsAsync(Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SearchableSnapshotsStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SearchableSnapshotsStatsRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse>(descriptor);
+		}
+
+		public Task<SearchableSnapshotsStatsResponse> StatsAsync(Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SearchableSnapshotsStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -92,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 			return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse>(descriptor);
 		}
 
-		public Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>();
 			configureRequest?.Invoke(descriptor);
