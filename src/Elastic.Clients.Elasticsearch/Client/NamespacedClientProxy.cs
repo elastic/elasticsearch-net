@@ -18,7 +18,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		private readonly ElasticsearchClient _client;
 
-		protected NamespacedClientProxy(ElasticsearchClient client) => _client = client;
+		internal NamespacedClientProxy(ElasticsearchClient client) => _client = client;
 
 		internal TResponse DoRequest<TRequest, TResponse>(
 			TRequest request,
