@@ -50,20 +50,6 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
 		}
 
-		public DeleteResponse Delete<TDocument>(Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new DeleteRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
-		}
-
-		public Task<DeleteResponse> DeleteAsync<TDocument>(Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
-		}
-
 		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
@@ -76,13 +62,6 @@ namespace Elastic.Clients.Elasticsearch
 			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
 			return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
-		}
-
-		public SourceResponse<TDocument> GetSource<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configureRequest = null)
-		{
-			var descriptor = new SourceRequestDescriptor<TDocument>(document: id.Document, index: id?.Self?.Index ?? typeof(TDocument), id: id?.Self?.Id ?? Id.From(id.Document));
-			configureRequest?.Invoke(descriptor);
-			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
 		}
 	}
 }
