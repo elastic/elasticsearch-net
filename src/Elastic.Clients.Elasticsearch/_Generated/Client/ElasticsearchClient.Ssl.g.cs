@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 			return DoRequestAsync<SslCertificatesRequest, SslCertificatesResponse>(request, cancellationToken);
 		}
 
-		public SslCertificatesResponse Certificates(Action<SslCertificatesRequestDescriptor> configureRequest = null)
+		public SslCertificatesResponse Certificates()
+		{
+			var descriptor = new SslCertificatesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SslCertificatesRequestDescriptor, SslCertificatesResponse>(descriptor);
+		}
+
+		public SslCertificatesResponse Certificates(Action<SslCertificatesRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SslCertificatesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 			return DoRequest<SslCertificatesRequestDescriptor, SslCertificatesResponse>(descriptor);
 		}
 
-		public Task<SslCertificatesResponse> CertificatesAsync(Action<SslCertificatesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SslCertificatesResponse> CertificatesAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SslCertificatesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SslCertificatesRequestDescriptor, SslCertificatesResponse>(descriptor);
+		}
+
+		public Task<SslCertificatesResponse> CertificatesAsync(Action<SslCertificatesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SslCertificatesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);

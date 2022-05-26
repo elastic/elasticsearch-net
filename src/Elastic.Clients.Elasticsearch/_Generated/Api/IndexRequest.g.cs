@@ -114,15 +114,22 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed partial class IndexRequestDescriptor<TDocument> : RequestDescriptorBase<IndexRequestDescriptor<TDocument>, IndexRequestParameters>
 	{
 		internal IndexRequestDescriptor(Action<IndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
+		internal IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
 		{
 		}
 
-		internal IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+		public IndexRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document)) => DocumentValue = document;
+		public IndexRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id) => DocumentValue = document;
+		public IndexRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document)) => DocumentValue = document;
+		public IndexRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id) => DocumentValue = document;
+		public IndexRequestDescriptor(Id id) : this(typeof(TDocument), id)
 		{
 		}
 
-		public IndexRequestDescriptor(TDocument document) : this(typeof(TDocument)) => DocumentValue = document;
+		public IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+		{
+		}
+
 		internal IndexRequestDescriptor()
 		{
 		}

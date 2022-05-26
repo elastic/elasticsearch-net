@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequestAsync<DeleteLicenseRequest, DeleteLicenseResponse>(request, cancellationToken);
 		}
 
-		public DeleteLicenseResponse Delete(Action<DeleteLicenseRequestDescriptor> configureRequest = null)
+		public DeleteLicenseResponse Delete()
+		{
+			var descriptor = new DeleteLicenseRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<DeleteLicenseRequestDescriptor, DeleteLicenseResponse>(descriptor);
+		}
+
+		public DeleteLicenseResponse Delete(Action<DeleteLicenseRequestDescriptor> configureRequest)
 		{
 			var descriptor = new DeleteLicenseRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequest<DeleteLicenseRequestDescriptor, DeleteLicenseResponse>(descriptor);
 		}
 
-		public Task<DeleteLicenseResponse> DeleteAsync(Action<DeleteLicenseRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<DeleteLicenseResponse> DeleteAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new DeleteLicenseRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<DeleteLicenseRequestDescriptor, DeleteLicenseResponse>(descriptor);
+		}
+
+		public Task<DeleteLicenseResponse> DeleteAsync(Action<DeleteLicenseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new DeleteLicenseRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -68,7 +82,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequestAsync<GetLicenseRequest, GetLicenseResponse>(request, cancellationToken);
 		}
 
-		public GetLicenseResponse Get(Action<GetLicenseRequestDescriptor> configureRequest = null)
+		public GetLicenseResponse Get()
+		{
+			var descriptor = new GetLicenseRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<GetLicenseRequestDescriptor, GetLicenseResponse>(descriptor);
+		}
+
+		public GetLicenseResponse Get(Action<GetLicenseRequestDescriptor> configureRequest)
 		{
 			var descriptor = new GetLicenseRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -76,7 +97,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequest<GetLicenseRequestDescriptor, GetLicenseResponse>(descriptor);
 		}
 
-		public Task<GetLicenseResponse> GetAsync(Action<GetLicenseRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<GetLicenseResponse> GetAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new GetLicenseRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<GetLicenseRequestDescriptor, GetLicenseResponse>(descriptor);
+		}
+
+		public Task<GetLicenseResponse> GetAsync(Action<GetLicenseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new GetLicenseRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -96,7 +124,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequestAsync<LicenseGetBasicStatusRequest, LicenseGetBasicStatusResponse>(request, cancellationToken);
 		}
 
-		public LicenseGetBasicStatusResponse GetBasicStatus(Action<LicenseGetBasicStatusRequestDescriptor> configureRequest = null)
+		public LicenseGetBasicStatusResponse GetBasicStatus()
+		{
+			var descriptor = new LicenseGetBasicStatusRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<LicenseGetBasicStatusRequestDescriptor, LicenseGetBasicStatusResponse>(descriptor);
+		}
+
+		public LicenseGetBasicStatusResponse GetBasicStatus(Action<LicenseGetBasicStatusRequestDescriptor> configureRequest)
 		{
 			var descriptor = new LicenseGetBasicStatusRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -104,7 +139,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequest<LicenseGetBasicStatusRequestDescriptor, LicenseGetBasicStatusResponse>(descriptor);
 		}
 
-		public Task<LicenseGetBasicStatusResponse> GetBasicStatusAsync(Action<LicenseGetBasicStatusRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<LicenseGetBasicStatusResponse> GetBasicStatusAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new LicenseGetBasicStatusRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<LicenseGetBasicStatusRequestDescriptor, LicenseGetBasicStatusResponse>(descriptor);
+		}
+
+		public Task<LicenseGetBasicStatusResponse> GetBasicStatusAsync(Action<LicenseGetBasicStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new LicenseGetBasicStatusRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -124,7 +166,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequestAsync<LicenseGetTrialStatusRequest, LicenseGetTrialStatusResponse>(request, cancellationToken);
 		}
 
-		public LicenseGetTrialStatusResponse GetTrialStatus(Action<LicenseGetTrialStatusRequestDescriptor> configureRequest = null)
+		public LicenseGetTrialStatusResponse GetTrialStatus()
+		{
+			var descriptor = new LicenseGetTrialStatusRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<LicenseGetTrialStatusRequestDescriptor, LicenseGetTrialStatusResponse>(descriptor);
+		}
+
+		public LicenseGetTrialStatusResponse GetTrialStatus(Action<LicenseGetTrialStatusRequestDescriptor> configureRequest)
 		{
 			var descriptor = new LicenseGetTrialStatusRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -132,7 +181,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequest<LicenseGetTrialStatusRequestDescriptor, LicenseGetTrialStatusResponse>(descriptor);
 		}
 
-		public Task<LicenseGetTrialStatusResponse> GetTrialStatusAsync(Action<LicenseGetTrialStatusRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<LicenseGetTrialStatusResponse> GetTrialStatusAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new LicenseGetTrialStatusRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<LicenseGetTrialStatusRequestDescriptor, LicenseGetTrialStatusResponse>(descriptor);
+		}
+
+		public Task<LicenseGetTrialStatusResponse> GetTrialStatusAsync(Action<LicenseGetTrialStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new LicenseGetTrialStatusRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -152,7 +208,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequestAsync<LicensePostRequest, LicensePostResponse>(request, cancellationToken);
 		}
 
-		public LicensePostResponse Post(Action<LicensePostRequestDescriptor> configureRequest = null)
+		public LicensePostResponse Post()
+		{
+			var descriptor = new LicensePostRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<LicensePostRequestDescriptor, LicensePostResponse>(descriptor);
+		}
+
+		public LicensePostResponse Post(Action<LicensePostRequestDescriptor> configureRequest)
 		{
 			var descriptor = new LicensePostRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -160,7 +223,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequest<LicensePostRequestDescriptor, LicensePostResponse>(descriptor);
 		}
 
-		public Task<LicensePostResponse> PostAsync(Action<LicensePostRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<LicensePostResponse> PostAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new LicensePostRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<LicensePostRequestDescriptor, LicensePostResponse>(descriptor);
+		}
+
+		public Task<LicensePostResponse> PostAsync(Action<LicensePostRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new LicensePostRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -180,7 +250,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequestAsync<LicensePostStartBasicRequest, LicensePostStartBasicResponse>(request, cancellationToken);
 		}
 
-		public LicensePostStartBasicResponse PostStartBasic(Action<LicensePostStartBasicRequestDescriptor> configureRequest = null)
+		public LicensePostStartBasicResponse PostStartBasic()
+		{
+			var descriptor = new LicensePostStartBasicRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<LicensePostStartBasicRequestDescriptor, LicensePostStartBasicResponse>(descriptor);
+		}
+
+		public LicensePostStartBasicResponse PostStartBasic(Action<LicensePostStartBasicRequestDescriptor> configureRequest)
 		{
 			var descriptor = new LicensePostStartBasicRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -188,7 +265,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequest<LicensePostStartBasicRequestDescriptor, LicensePostStartBasicResponse>(descriptor);
 		}
 
-		public Task<LicensePostStartBasicResponse> PostStartBasicAsync(Action<LicensePostStartBasicRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<LicensePostStartBasicResponse> PostStartBasicAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new LicensePostStartBasicRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<LicensePostStartBasicRequestDescriptor, LicensePostStartBasicResponse>(descriptor);
+		}
+
+		public Task<LicensePostStartBasicResponse> PostStartBasicAsync(Action<LicensePostStartBasicRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new LicensePostStartBasicRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -208,7 +292,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequestAsync<LicensePostStartTrialRequest, LicensePostStartTrialResponse>(request, cancellationToken);
 		}
 
-		public LicensePostStartTrialResponse PostStartTrial(Action<LicensePostStartTrialRequestDescriptor> configureRequest = null)
+		public LicensePostStartTrialResponse PostStartTrial()
+		{
+			var descriptor = new LicensePostStartTrialRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<LicensePostStartTrialRequestDescriptor, LicensePostStartTrialResponse>(descriptor);
+		}
+
+		public LicensePostStartTrialResponse PostStartTrial(Action<LicensePostStartTrialRequestDescriptor> configureRequest)
 		{
 			var descriptor = new LicensePostStartTrialRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -216,7 +307,14 @@ namespace Elastic.Clients.Elasticsearch.License
 			return DoRequest<LicensePostStartTrialRequestDescriptor, LicensePostStartTrialResponse>(descriptor);
 		}
 
-		public Task<LicensePostStartTrialResponse> PostStartTrialAsync(Action<LicensePostStartTrialRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<LicensePostStartTrialResponse> PostStartTrialAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new LicensePostStartTrialRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<LicensePostStartTrialRequestDescriptor, LicensePostStartTrialResponse>(descriptor);
+		}
+
+		public Task<LicensePostStartTrialResponse> PostStartTrialAsync(Action<LicensePostStartTrialRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new LicensePostStartTrialRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
