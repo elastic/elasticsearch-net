@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling
 			return DoRequestAsync<AutoscalingDeleteAutoscalingPolicyRequest, AutoscalingDeleteAutoscalingPolicyResponse>(request, cancellationToken);
 		}
 
-		public AutoscalingDeleteAutoscalingPolicyResponse DeleteAutoscalingPolicy(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingDeleteAutoscalingPolicyRequestDescriptor> configureRequest = null)
+		public AutoscalingDeleteAutoscalingPolicyResponse DeleteAutoscalingPolicy(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new AutoscalingDeleteAutoscalingPolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<AutoscalingDeleteAutoscalingPolicyRequestDescriptor, AutoscalingDeleteAutoscalingPolicyResponse>(descriptor);
+		}
+
+		public AutoscalingDeleteAutoscalingPolicyResponse DeleteAutoscalingPolicy(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingDeleteAutoscalingPolicyRequestDescriptor> configureRequest)
 		{
 			var descriptor = new AutoscalingDeleteAutoscalingPolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling
 			return DoRequest<AutoscalingDeleteAutoscalingPolicyRequestDescriptor, AutoscalingDeleteAutoscalingPolicyResponse>(descriptor);
 		}
 
-		public Task<AutoscalingDeleteAutoscalingPolicyResponse> DeleteAutoscalingPolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingDeleteAutoscalingPolicyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<AutoscalingDeleteAutoscalingPolicyResponse> DeleteAutoscalingPolicyAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new AutoscalingDeleteAutoscalingPolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<AutoscalingDeleteAutoscalingPolicyRequestDescriptor, AutoscalingDeleteAutoscalingPolicyResponse>(descriptor);
+		}
+
+		public Task<AutoscalingDeleteAutoscalingPolicyResponse> DeleteAutoscalingPolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingDeleteAutoscalingPolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new AutoscalingDeleteAutoscalingPolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -68,7 +82,14 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling
 			return DoRequestAsync<AutoscalingGetAutoscalingCapacityRequest, AutoscalingGetAutoscalingCapacityResponse>(request, cancellationToken);
 		}
 
-		public AutoscalingGetAutoscalingCapacityResponse GetAutoscalingCapacity(Action<AutoscalingGetAutoscalingCapacityRequestDescriptor> configureRequest = null)
+		public AutoscalingGetAutoscalingCapacityResponse GetAutoscalingCapacity()
+		{
+			var descriptor = new AutoscalingGetAutoscalingCapacityRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<AutoscalingGetAutoscalingCapacityRequestDescriptor, AutoscalingGetAutoscalingCapacityResponse>(descriptor);
+		}
+
+		public AutoscalingGetAutoscalingCapacityResponse GetAutoscalingCapacity(Action<AutoscalingGetAutoscalingCapacityRequestDescriptor> configureRequest)
 		{
 			var descriptor = new AutoscalingGetAutoscalingCapacityRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -76,7 +97,14 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling
 			return DoRequest<AutoscalingGetAutoscalingCapacityRequestDescriptor, AutoscalingGetAutoscalingCapacityResponse>(descriptor);
 		}
 
-		public Task<AutoscalingGetAutoscalingCapacityResponse> GetAutoscalingCapacityAsync(Action<AutoscalingGetAutoscalingCapacityRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<AutoscalingGetAutoscalingCapacityResponse> GetAutoscalingCapacityAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new AutoscalingGetAutoscalingCapacityRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<AutoscalingGetAutoscalingCapacityRequestDescriptor, AutoscalingGetAutoscalingCapacityResponse>(descriptor);
+		}
+
+		public Task<AutoscalingGetAutoscalingCapacityResponse> GetAutoscalingCapacityAsync(Action<AutoscalingGetAutoscalingCapacityRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new AutoscalingGetAutoscalingCapacityRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -96,7 +124,14 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling
 			return DoRequestAsync<AutoscalingGetAutoscalingPolicyRequest, AutoscalingGetAutoscalingPolicyResponse>(request, cancellationToken);
 		}
 
-		public AutoscalingGetAutoscalingPolicyResponse GetAutoscalingPolicy(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingGetAutoscalingPolicyRequestDescriptor> configureRequest = null)
+		public AutoscalingGetAutoscalingPolicyResponse GetAutoscalingPolicy(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new AutoscalingGetAutoscalingPolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<AutoscalingGetAutoscalingPolicyRequestDescriptor, AutoscalingGetAutoscalingPolicyResponse>(descriptor);
+		}
+
+		public AutoscalingGetAutoscalingPolicyResponse GetAutoscalingPolicy(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingGetAutoscalingPolicyRequestDescriptor> configureRequest)
 		{
 			var descriptor = new AutoscalingGetAutoscalingPolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -104,7 +139,14 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling
 			return DoRequest<AutoscalingGetAutoscalingPolicyRequestDescriptor, AutoscalingGetAutoscalingPolicyResponse>(descriptor);
 		}
 
-		public Task<AutoscalingGetAutoscalingPolicyResponse> GetAutoscalingPolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingGetAutoscalingPolicyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<AutoscalingGetAutoscalingPolicyResponse> GetAutoscalingPolicyAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new AutoscalingGetAutoscalingPolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<AutoscalingGetAutoscalingPolicyRequestDescriptor, AutoscalingGetAutoscalingPolicyResponse>(descriptor);
+		}
+
+		public Task<AutoscalingGetAutoscalingPolicyResponse> GetAutoscalingPolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingGetAutoscalingPolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new AutoscalingGetAutoscalingPolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -124,7 +166,14 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling
 			return DoRequestAsync<AutoscalingPutAutoscalingPolicyRequest, AutoscalingPutAutoscalingPolicyResponse>(request, cancellationToken);
 		}
 
-		public AutoscalingPutAutoscalingPolicyResponse PutAutoscalingPolicy(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingPutAutoscalingPolicyRequestDescriptor> configureRequest = null)
+		public AutoscalingPutAutoscalingPolicyResponse PutAutoscalingPolicy(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new AutoscalingPutAutoscalingPolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<AutoscalingPutAutoscalingPolicyRequestDescriptor, AutoscalingPutAutoscalingPolicyResponse>(descriptor);
+		}
+
+		public AutoscalingPutAutoscalingPolicyResponse PutAutoscalingPolicy(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingPutAutoscalingPolicyRequestDescriptor> configureRequest)
 		{
 			var descriptor = new AutoscalingPutAutoscalingPolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -132,7 +181,14 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling
 			return DoRequest<AutoscalingPutAutoscalingPolicyRequestDescriptor, AutoscalingPutAutoscalingPolicyResponse>(descriptor);
 		}
 
-		public Task<AutoscalingPutAutoscalingPolicyResponse> PutAutoscalingPolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingPutAutoscalingPolicyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<AutoscalingPutAutoscalingPolicyResponse> PutAutoscalingPolicyAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new AutoscalingPutAutoscalingPolicyRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<AutoscalingPutAutoscalingPolicyRequestDescriptor, AutoscalingPutAutoscalingPolicyResponse>(descriptor);
+		}
+
+		public Task<AutoscalingPutAutoscalingPolicyResponse> PutAutoscalingPolicyAsync(Elastic.Clients.Elasticsearch.Name name, Action<AutoscalingPutAutoscalingPolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new AutoscalingPutAutoscalingPolicyRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);

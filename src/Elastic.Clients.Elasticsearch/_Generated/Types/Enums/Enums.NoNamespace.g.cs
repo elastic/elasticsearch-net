@@ -1341,6 +1341,41 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(SlicesCalculationConverter))]
+	public enum SlicesCalculation
+	{
+		[EnumMember(Value = "auto")]
+		Auto
+	}
+
+	internal sealed class SlicesCalculationConverter : JsonConverter<SlicesCalculation>
+	{
+		public override SlicesCalculation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "auto":
+					return SlicesCalculation.Auto;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SlicesCalculation value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case SlicesCalculation.Auto:
+					writer.WriteStringValue("auto");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(SortModeConverter))]
 	public enum SortMode
 	{
