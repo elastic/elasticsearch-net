@@ -240,7 +240,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls SecurityClearCachedPrivileges = new ApiUrls(new[] { "/_security/privilege/{application}/_clear_cache" });
 		internal static ApiUrls SecurityClearCachedRealms = new ApiUrls(new[] { "/_security/realm/{realms}/_clear_cache" });
 		internal static ApiUrls SecurityClearCachedRoles = new ApiUrls(new[] { "/_security/role/{name}/_clear_cache" });
-		internal static ApiUrls SecurityCreateApiKey = new ApiUrls(new[] { "/_security/api_key" });
 		internal static ApiUrls SecurityDeletePrivileges = new ApiUrls(new[] { "/_security/privilege/{application}/{name}" });
 		internal static ApiUrls SecurityDeleteRoleMapping = new ApiUrls(new[] { "/_security/role_mapping/{name}" });
 		internal static ApiUrls SecurityDeleteRole = new ApiUrls(new[] { "/_security/role/{name}" });

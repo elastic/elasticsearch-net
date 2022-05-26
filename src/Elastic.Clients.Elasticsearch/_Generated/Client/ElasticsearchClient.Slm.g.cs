@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequestAsync<SlmDeleteLifecycleRequest, SlmDeleteLifecycleResponse>(request, cancellationToken);
 		}
 
-		public SlmDeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmDeleteLifecycleRequestDescriptor> configureRequest = null)
+		public SlmDeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policy_id)
+		{
+			var descriptor = new SlmDeleteLifecycleRequestDescriptor(policy_id);
+			descriptor.BeforeRequest();
+			return DoRequest<SlmDeleteLifecycleRequestDescriptor, SlmDeleteLifecycleResponse>(descriptor);
+		}
+
+		public SlmDeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmDeleteLifecycleRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SlmDeleteLifecycleRequestDescriptor(policy_id);
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequest<SlmDeleteLifecycleRequestDescriptor, SlmDeleteLifecycleResponse>(descriptor);
 		}
 
-		public Task<SlmDeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmDeleteLifecycleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SlmDeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy_id, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SlmDeleteLifecycleRequestDescriptor(policy_id);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SlmDeleteLifecycleRequestDescriptor, SlmDeleteLifecycleResponse>(descriptor);
+		}
+
+		public Task<SlmDeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmDeleteLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SlmDeleteLifecycleRequestDescriptor(policy_id);
 			configureRequest?.Invoke(descriptor);
@@ -68,7 +82,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequestAsync<SlmExecuteLifecycleRequest, SlmExecuteLifecycleResponse>(request, cancellationToken);
 		}
 
-		public SlmExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmExecuteLifecycleRequestDescriptor> configureRequest = null)
+		public SlmExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name policy_id)
+		{
+			var descriptor = new SlmExecuteLifecycleRequestDescriptor(policy_id);
+			descriptor.BeforeRequest();
+			return DoRequest<SlmExecuteLifecycleRequestDescriptor, SlmExecuteLifecycleResponse>(descriptor);
+		}
+
+		public SlmExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmExecuteLifecycleRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SlmExecuteLifecycleRequestDescriptor(policy_id);
 			configureRequest?.Invoke(descriptor);
@@ -76,7 +97,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequest<SlmExecuteLifecycleRequestDescriptor, SlmExecuteLifecycleResponse>(descriptor);
 		}
 
-		public Task<SlmExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmExecuteLifecycleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SlmExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy_id, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SlmExecuteLifecycleRequestDescriptor(policy_id);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SlmExecuteLifecycleRequestDescriptor, SlmExecuteLifecycleResponse>(descriptor);
+		}
+
+		public Task<SlmExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmExecuteLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SlmExecuteLifecycleRequestDescriptor(policy_id);
 			configureRequest?.Invoke(descriptor);
@@ -96,7 +124,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequestAsync<SlmExecuteRetentionRequest, SlmExecuteRetentionResponse>(request, cancellationToken);
 		}
 
-		public SlmExecuteRetentionResponse ExecuteRetention(Action<SlmExecuteRetentionRequestDescriptor> configureRequest = null)
+		public SlmExecuteRetentionResponse ExecuteRetention()
+		{
+			var descriptor = new SlmExecuteRetentionRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SlmExecuteRetentionRequestDescriptor, SlmExecuteRetentionResponse>(descriptor);
+		}
+
+		public SlmExecuteRetentionResponse ExecuteRetention(Action<SlmExecuteRetentionRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SlmExecuteRetentionRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -104,7 +139,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequest<SlmExecuteRetentionRequestDescriptor, SlmExecuteRetentionResponse>(descriptor);
 		}
 
-		public Task<SlmExecuteRetentionResponse> ExecuteRetentionAsync(Action<SlmExecuteRetentionRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SlmExecuteRetentionResponse> ExecuteRetentionAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SlmExecuteRetentionRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SlmExecuteRetentionRequestDescriptor, SlmExecuteRetentionResponse>(descriptor);
+		}
+
+		public Task<SlmExecuteRetentionResponse> ExecuteRetentionAsync(Action<SlmExecuteRetentionRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SlmExecuteRetentionRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -124,7 +166,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequestAsync<SlmGetLifecycleRequest, SlmGetLifecycleResponse>(request, cancellationToken);
 		}
 
-		public SlmGetLifecycleResponse GetLifecycle(Action<SlmGetLifecycleRequestDescriptor> configureRequest = null)
+		public SlmGetLifecycleResponse GetLifecycle()
+		{
+			var descriptor = new SlmGetLifecycleRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SlmGetLifecycleRequestDescriptor, SlmGetLifecycleResponse>(descriptor);
+		}
+
+		public SlmGetLifecycleResponse GetLifecycle(Action<SlmGetLifecycleRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SlmGetLifecycleRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -132,7 +181,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequest<SlmGetLifecycleRequestDescriptor, SlmGetLifecycleResponse>(descriptor);
 		}
 
-		public Task<SlmGetLifecycleResponse> GetLifecycleAsync(Action<SlmGetLifecycleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SlmGetLifecycleResponse> GetLifecycleAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SlmGetLifecycleRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SlmGetLifecycleRequestDescriptor, SlmGetLifecycleResponse>(descriptor);
+		}
+
+		public Task<SlmGetLifecycleResponse> GetLifecycleAsync(Action<SlmGetLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SlmGetLifecycleRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -152,7 +208,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequestAsync<SlmGetStatsRequest, SlmGetStatsResponse>(request, cancellationToken);
 		}
 
-		public SlmGetStatsResponse GetStats(Action<SlmGetStatsRequestDescriptor> configureRequest = null)
+		public SlmGetStatsResponse GetStats()
+		{
+			var descriptor = new SlmGetStatsRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SlmGetStatsRequestDescriptor, SlmGetStatsResponse>(descriptor);
+		}
+
+		public SlmGetStatsResponse GetStats(Action<SlmGetStatsRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SlmGetStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -160,7 +223,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequest<SlmGetStatsRequestDescriptor, SlmGetStatsResponse>(descriptor);
 		}
 
-		public Task<SlmGetStatsResponse> GetStatsAsync(Action<SlmGetStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SlmGetStatsResponse> GetStatsAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SlmGetStatsRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SlmGetStatsRequestDescriptor, SlmGetStatsResponse>(descriptor);
+		}
+
+		public Task<SlmGetStatsResponse> GetStatsAsync(Action<SlmGetStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SlmGetStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -180,7 +250,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequestAsync<SlmGetStatusRequest, SlmGetStatusResponse>(request, cancellationToken);
 		}
 
-		public SlmGetStatusResponse GetStatus(Action<SlmGetStatusRequestDescriptor> configureRequest = null)
+		public SlmGetStatusResponse GetStatus()
+		{
+			var descriptor = new SlmGetStatusRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SlmGetStatusRequestDescriptor, SlmGetStatusResponse>(descriptor);
+		}
+
+		public SlmGetStatusResponse GetStatus(Action<SlmGetStatusRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SlmGetStatusRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -188,7 +265,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequest<SlmGetStatusRequestDescriptor, SlmGetStatusResponse>(descriptor);
 		}
 
-		public Task<SlmGetStatusResponse> GetStatusAsync(Action<SlmGetStatusRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SlmGetStatusResponse> GetStatusAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SlmGetStatusRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SlmGetStatusRequestDescriptor, SlmGetStatusResponse>(descriptor);
+		}
+
+		public Task<SlmGetStatusResponse> GetStatusAsync(Action<SlmGetStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SlmGetStatusRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -208,7 +292,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequestAsync<SlmPutLifecycleRequest, SlmPutLifecycleResponse>(request, cancellationToken);
 		}
 
-		public SlmPutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmPutLifecycleRequestDescriptor> configureRequest = null)
+		public SlmPutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policy_id)
+		{
+			var descriptor = new SlmPutLifecycleRequestDescriptor(policy_id);
+			descriptor.BeforeRequest();
+			return DoRequest<SlmPutLifecycleRequestDescriptor, SlmPutLifecycleResponse>(descriptor);
+		}
+
+		public SlmPutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmPutLifecycleRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SlmPutLifecycleRequestDescriptor(policy_id);
 			configureRequest?.Invoke(descriptor);
@@ -216,7 +307,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequest<SlmPutLifecycleRequestDescriptor, SlmPutLifecycleResponse>(descriptor);
 		}
 
-		public Task<SlmPutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmPutLifecycleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SlmPutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy_id, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SlmPutLifecycleRequestDescriptor(policy_id);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SlmPutLifecycleRequestDescriptor, SlmPutLifecycleResponse>(descriptor);
+		}
+
+		public Task<SlmPutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy_id, Action<SlmPutLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SlmPutLifecycleRequestDescriptor(policy_id);
 			configureRequest?.Invoke(descriptor);
@@ -236,7 +334,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequestAsync<SlmStartRequest, SlmStartResponse>(request, cancellationToken);
 		}
 
-		public SlmStartResponse Start(Action<SlmStartRequestDescriptor> configureRequest = null)
+		public SlmStartResponse Start()
+		{
+			var descriptor = new SlmStartRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SlmStartRequestDescriptor, SlmStartResponse>(descriptor);
+		}
+
+		public SlmStartResponse Start(Action<SlmStartRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SlmStartRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -244,7 +349,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequest<SlmStartRequestDescriptor, SlmStartResponse>(descriptor);
 		}
 
-		public Task<SlmStartResponse> StartAsync(Action<SlmStartRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SlmStartResponse> StartAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SlmStartRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SlmStartRequestDescriptor, SlmStartResponse>(descriptor);
+		}
+
+		public Task<SlmStartResponse> StartAsync(Action<SlmStartRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SlmStartRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -264,7 +376,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequestAsync<SlmStopRequest, SlmStopResponse>(request, cancellationToken);
 		}
 
-		public SlmStopResponse Stop(Action<SlmStopRequestDescriptor> configureRequest = null)
+		public SlmStopResponse Stop()
+		{
+			var descriptor = new SlmStopRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SlmStopRequestDescriptor, SlmStopResponse>(descriptor);
+		}
+
+		public SlmStopResponse Stop(Action<SlmStopRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SlmStopRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -272,7 +391,14 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return DoRequest<SlmStopRequestDescriptor, SlmStopResponse>(descriptor);
 		}
 
-		public Task<SlmStopResponse> StopAsync(Action<SlmStopRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SlmStopResponse> StopAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SlmStopRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SlmStopRequestDescriptor, SlmStopResponse>(descriptor);
+		}
+
+		public Task<SlmStopResponse> StopAsync(Action<SlmStopRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SlmStopRequestDescriptor();
 			configureRequest?.Invoke(descriptor);

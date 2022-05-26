@@ -15,33 +15,24 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport.Products.Elasticsearch;
+using Elastic.Transport;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Security
+namespace Elastic.Clients.Elasticsearch
 {
-	public sealed partial class SecurityCreateApiKeyResponse : ElasticsearchResponseBase
+	public partial class Slices : Union<int?, Elastic.Clients.Elasticsearch.SlicesCalculation?>
 	{
-		[JsonInclude]
-		[JsonPropertyName("api_key")]
-		public string ApiKey { get; init; }
+		public Slices(int? item) : base(item)
+		{
+		}
 
-		[JsonInclude]
-		[JsonPropertyName("encoded")]
-		public string Encoded { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("expiration")]
-		public long? Expiration { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public string Id { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string Name { get; init; }
+		public Slices(Elastic.Clients.Elasticsearch.SlicesCalculation? item) : base(item)
+		{
+		}
 	}
 }

@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices
 			return DoRequestAsync<DanglingIndicesListDanglingIndicesRequest, DanglingIndicesListDanglingIndicesResponse>(request, cancellationToken);
 		}
 
-		public DanglingIndicesListDanglingIndicesResponse ListDanglingIndices(Action<DanglingIndicesListDanglingIndicesRequestDescriptor> configureRequest = null)
+		public DanglingIndicesListDanglingIndicesResponse ListDanglingIndices()
+		{
+			var descriptor = new DanglingIndicesListDanglingIndicesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<DanglingIndicesListDanglingIndicesRequestDescriptor, DanglingIndicesListDanglingIndicesResponse>(descriptor);
+		}
+
+		public DanglingIndicesListDanglingIndicesResponse ListDanglingIndices(Action<DanglingIndicesListDanglingIndicesRequestDescriptor> configureRequest)
 		{
 			var descriptor = new DanglingIndicesListDanglingIndicesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices
 			return DoRequest<DanglingIndicesListDanglingIndicesRequestDescriptor, DanglingIndicesListDanglingIndicesResponse>(descriptor);
 		}
 
-		public Task<DanglingIndicesListDanglingIndicesResponse> ListDanglingIndicesAsync(Action<DanglingIndicesListDanglingIndicesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<DanglingIndicesListDanglingIndicesResponse> ListDanglingIndicesAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new DanglingIndicesListDanglingIndicesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<DanglingIndicesListDanglingIndicesRequestDescriptor, DanglingIndicesListDanglingIndicesResponse>(descriptor);
+		}
+
+		public Task<DanglingIndicesListDanglingIndicesResponse> ListDanglingIndicesAsync(Action<DanglingIndicesListDanglingIndicesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new DanglingIndicesListDanglingIndicesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);

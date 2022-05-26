@@ -190,11 +190,11 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 			item.Result.Should().NotBeNullOrEmpty();
 		}
 
-		var project1 = Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue)).Body;
+		var project1 = Client.GetSource<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue)).Body;
 		project1.LeadDeveloper.FirstName.Should().Be("martijn");
 		project1.Description.Should().Be("Overridden");
 
-		var project2 = Client.Source<Project>(Project.Instance.Name + "2", p => p
+		var project2 = Client.GetSource<Project>(Project.Instance.Name + "2", p => p
 			.Index(CallIsolatedValue)
 			.Routing(Project.Instance.Name)).Body;
 

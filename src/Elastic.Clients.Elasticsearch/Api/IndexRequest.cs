@@ -33,10 +33,6 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed partial class IndexRequestDescriptor<TDocument> : ICustomJsonWriter
 	{
 		// TODO: Codegen
-		public IndexRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Elasticsearch.Id.From(documentWithId)) => DocumentValue = documentWithId;
-			
-
-		// TODO: Codegen
 		public IndexRequestDescriptor<TDocument> Document(TDocument document)
 		{
 			DocumentValue = document;
