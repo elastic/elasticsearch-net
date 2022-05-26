@@ -24,91 +24,15 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class HighlightField
+	public partial class HighlightField : HighlightBase
 	{
-		[JsonInclude]
-		[JsonPropertyName("boundary_chars")]
-		public string? BoundaryChars { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("boundary_max_scan")]
-		public int? BoundaryMaxScan { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("boundary_scanner")]
-		public Elastic.Clients.Elasticsearch.BoundaryScanner? BoundaryScanner { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("boundary_scanner_locale")]
-		public string? BoundaryScannerLocale { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("force_source")]
-		public bool? ForceSource { get; set; }
-
 		[JsonInclude]
 		[JsonPropertyName("fragment_offset")]
 		public int? FragmentOffset { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("fragment_size")]
-		public int? FragmentSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("fragmenter")]
-		public Elastic.Clients.Elasticsearch.HighlighterFragmenter? Fragmenter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("highlight_query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? HighlightQuery { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("matched_fields")]
 		public Elastic.Clients.Elasticsearch.Fields? MatchedFields { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_fragment_length")]
-		public int? MaxFragmentLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("no_match_size")]
-		public int? NoMatchSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("number_of_fragments")]
-		public int? NumberOfFragments { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("order")]
-		public Elastic.Clients.Elasticsearch.HighlighterOrder? Order { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("phrase_limit")]
-		public int? PhraseLimit { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("post_tags")]
-		public IEnumerable<string>? PostTags { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("pre_tags")]
-		public IEnumerable<string>? PreTags { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("require_field_match")]
-		public bool? RequireFieldMatch { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("tags_schema")]
-		public Elastic.Clients.Elasticsearch.HighlighterTagsSchema? TagsSchema { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string? Type { get; set; }
 	}
 
 	public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDescriptorBase<HighlightFieldDescriptor<TDocument>>
@@ -132,8 +56,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private string? BoundaryScannerLocaleValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 		private bool? ForceSourceValue { get; set; }
 
 		private int? FragmentOffsetValue { get; set; }
@@ -142,13 +64,19 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.HighlighterFragmenter? FragmenterValue { get; set; }
 
+		private bool? HighlightFilterValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Fields? MatchedFieldsValue { get; set; }
+
+		private int? MaxAnalyzedOffsetValue { get; set; }
 
 		private int? MaxFragmentLengthValue { get; set; }
 
 		private int? NoMatchSizeValue { get; set; }
 
 		private int? NumberOfFragmentsValue { get; set; }
+
+		private Dictionary<string, object>? OptionsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.HighlighterOrder? OrderValue { get; set; }
 
@@ -212,18 +140,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public HighlightFieldDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public HighlightFieldDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
 		public HighlightFieldDescriptor<TDocument> ForceSource(bool? forceSource = true)
 		{
 			ForceSourceValue = forceSource;
@@ -248,6 +164,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public HighlightFieldDescriptor<TDocument> HighlightFilter(bool? highlightFilter = true)
+		{
+			HighlightFilterValue = highlightFilter;
+			return Self;
+		}
+
 		public HighlightFieldDescriptor<TDocument> MatchedFields(Elastic.Clients.Elasticsearch.Fields? matchedFields)
 		{
 			MatchedFieldsValue = matchedFields;
@@ -257,6 +179,12 @@ namespace Elastic.Clients.Elasticsearch
 		public HighlightFieldDescriptor<TDocument> MatchedFields<TValue>(Expression<Func<TDocument, TValue>> matchedFields)
 		{
 			MatchedFieldsValue = matchedFields;
+			return Self;
+		}
+
+		public HighlightFieldDescriptor<TDocument> MaxAnalyzedOffset(int? maxAnalyzedOffset)
+		{
+			MaxAnalyzedOffsetValue = maxAnalyzedOffset;
 			return Self;
 		}
 
@@ -275,6 +203,12 @@ namespace Elastic.Clients.Elasticsearch
 		public HighlightFieldDescriptor<TDocument> NumberOfFragments(int? numberOfFragments)
 		{
 			NumberOfFragmentsValue = numberOfFragments;
+			return Self;
+		}
+
+		public HighlightFieldDescriptor<TDocument> Options(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			OptionsValue = selector?.Invoke(new FluentDictionary<string, object>());
 			return Self;
 		}
 
@@ -363,12 +297,6 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteStringValue(BoundaryScannerLocaleValue);
 			}
 
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
 			if (ForceSourceValue.HasValue)
 			{
 				writer.WritePropertyName("force_source");
@@ -393,10 +321,22 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, FragmenterValue, options);
 			}
 
+			if (HighlightFilterValue.HasValue)
+			{
+				writer.WritePropertyName("highlight_filter");
+				writer.WriteBooleanValue(HighlightFilterValue.Value);
+			}
+
 			if (MatchedFieldsValue is not null)
 			{
 				writer.WritePropertyName("matched_fields");
 				JsonSerializer.Serialize(writer, MatchedFieldsValue, options);
+			}
+
+			if (MaxAnalyzedOffsetValue.HasValue)
+			{
+				writer.WritePropertyName("max_analyzed_offset");
+				writer.WriteNumberValue(MaxAnalyzedOffsetValue.Value);
 			}
 
 			if (MaxFragmentLengthValue.HasValue)
@@ -415,6 +355,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("number_of_fragments");
 				writer.WriteNumberValue(NumberOfFragmentsValue.Value);
+			}
+
+			if (OptionsValue is not null)
+			{
+				writer.WritePropertyName("options");
+				JsonSerializer.Serialize(writer, OptionsValue, options);
 			}
 
 			if (OrderValue is not null)
@@ -484,8 +430,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private string? BoundaryScannerLocaleValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 		private bool? ForceSourceValue { get; set; }
 
 		private int? FragmentOffsetValue { get; set; }
@@ -494,13 +438,19 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.HighlighterFragmenter? FragmenterValue { get; set; }
 
+		private bool? HighlightFilterValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Fields? MatchedFieldsValue { get; set; }
+
+		private int? MaxAnalyzedOffsetValue { get; set; }
 
 		private int? MaxFragmentLengthValue { get; set; }
 
 		private int? NoMatchSizeValue { get; set; }
 
 		private int? NumberOfFragmentsValue { get; set; }
+
+		private Dictionary<string, object>? OptionsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.HighlighterOrder? OrderValue { get; set; }
 
@@ -564,24 +514,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public HighlightFieldDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public HighlightFieldDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public HighlightFieldDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
 		public HighlightFieldDescriptor ForceSource(bool? forceSource = true)
 		{
 			ForceSourceValue = forceSource;
@@ -606,6 +538,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public HighlightFieldDescriptor HighlightFilter(bool? highlightFilter = true)
+		{
+			HighlightFilterValue = highlightFilter;
+			return Self;
+		}
+
 		public HighlightFieldDescriptor MatchedFields(Elastic.Clients.Elasticsearch.Fields? matchedFields)
 		{
 			MatchedFieldsValue = matchedFields;
@@ -624,6 +562,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public HighlightFieldDescriptor MaxAnalyzedOffset(int? maxAnalyzedOffset)
+		{
+			MaxAnalyzedOffsetValue = maxAnalyzedOffset;
+			return Self;
+		}
+
 		public HighlightFieldDescriptor MaxFragmentLength(int? maxFragmentLength)
 		{
 			MaxFragmentLengthValue = maxFragmentLength;
@@ -639,6 +583,12 @@ namespace Elastic.Clients.Elasticsearch
 		public HighlightFieldDescriptor NumberOfFragments(int? numberOfFragments)
 		{
 			NumberOfFragmentsValue = numberOfFragments;
+			return Self;
+		}
+
+		public HighlightFieldDescriptor Options(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			OptionsValue = selector?.Invoke(new FluentDictionary<string, object>());
 			return Self;
 		}
 
@@ -727,12 +677,6 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteStringValue(BoundaryScannerLocaleValue);
 			}
 
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
 			if (ForceSourceValue.HasValue)
 			{
 				writer.WritePropertyName("force_source");
@@ -757,10 +701,22 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, FragmenterValue, options);
 			}
 
+			if (HighlightFilterValue.HasValue)
+			{
+				writer.WritePropertyName("highlight_filter");
+				writer.WriteBooleanValue(HighlightFilterValue.Value);
+			}
+
 			if (MatchedFieldsValue is not null)
 			{
 				writer.WritePropertyName("matched_fields");
 				JsonSerializer.Serialize(writer, MatchedFieldsValue, options);
+			}
+
+			if (MaxAnalyzedOffsetValue.HasValue)
+			{
+				writer.WritePropertyName("max_analyzed_offset");
+				writer.WriteNumberValue(MaxAnalyzedOffsetValue.Value);
 			}
 
 			if (MaxFragmentLengthValue.HasValue)
@@ -779,6 +735,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("number_of_fragments");
 				writer.WriteNumberValue(NumberOfFragmentsValue.Value);
+			}
+
+			if (OptionsValue is not null)
+			{
+				writer.WritePropertyName("options");
+				JsonSerializer.Serialize(writer, OptionsValue, options);
 			}
 
 			if (OrderValue is not null)

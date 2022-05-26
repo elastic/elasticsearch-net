@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrDeleteAutoFollowPatternRequest, CcrDeleteAutoFollowPatternResponse>(request, cancellationToken);
 		}
 
-		public CcrDeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<CcrDeleteAutoFollowPatternRequestDescriptor> configureRequest = null)
+		public CcrDeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new CcrDeleteAutoFollowPatternRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrDeleteAutoFollowPatternRequestDescriptor, CcrDeleteAutoFollowPatternResponse>(descriptor);
+		}
+
+		public CcrDeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<CcrDeleteAutoFollowPatternRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrDeleteAutoFollowPatternRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrDeleteAutoFollowPatternRequestDescriptor, CcrDeleteAutoFollowPatternResponse>(descriptor);
 		}
 
-		public Task<CcrDeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<CcrDeleteAutoFollowPatternRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrDeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrDeleteAutoFollowPatternRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrDeleteAutoFollowPatternRequestDescriptor, CcrDeleteAutoFollowPatternResponse>(descriptor);
+		}
+
+		public Task<CcrDeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<CcrDeleteAutoFollowPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrDeleteAutoFollowPatternRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -68,7 +82,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrFollowInfoRequest, CcrFollowInfoResponse>(request, cancellationToken);
 		}
 
-		public CcrFollowInfoResponse FollowInfo(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowInfoRequestDescriptor> configureRequest = null)
+		public CcrFollowInfoResponse FollowInfo(Elastic.Clients.Elasticsearch.Indices indices)
+		{
+			var descriptor = new CcrFollowInfoRequestDescriptor(indices);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrFollowInfoRequestDescriptor, CcrFollowInfoResponse>(descriptor);
+		}
+
+		public CcrFollowInfoResponse FollowInfo(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowInfoRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrFollowInfoRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
@@ -76,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrFollowInfoRequestDescriptor, CcrFollowInfoResponse>(descriptor);
 		}
 
-		public CcrFollowInfoResponse FollowInfo<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowInfoRequestDescriptor<TDocument>> configureRequest = null)
+		public CcrFollowInfoResponse FollowInfo<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowInfoRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new CcrFollowInfoRequestDescriptor<TDocument>(indices);
 			configureRequest?.Invoke(descriptor);
@@ -84,7 +105,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrFollowInfoRequestDescriptor<TDocument>, CcrFollowInfoResponse>(descriptor);
 		}
 
-		public Task<CcrFollowInfoResponse> FollowInfoAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowInfoRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrFollowInfoResponse> FollowInfoAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrFollowInfoRequestDescriptor(indices);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrFollowInfoRequestDescriptor, CcrFollowInfoResponse>(descriptor);
+		}
+
+		public Task<CcrFollowInfoResponse> FollowInfoAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrFollowInfoRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
@@ -92,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrFollowInfoRequestDescriptor, CcrFollowInfoResponse>(descriptor);
 		}
 
-		public Task<CcrFollowInfoResponse> FollowInfoAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowInfoRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrFollowInfoResponse> FollowInfoAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowInfoRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrFollowInfoRequestDescriptor<TDocument>(indices);
 			configureRequest?.Invoke(descriptor);
@@ -112,7 +140,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrFollowRequest, CcrFollowResponse>(request, cancellationToken);
 		}
 
-		public CcrFollowResponse Follow(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrFollowRequestDescriptor> configureRequest = null)
+		public CcrFollowResponse Follow(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			var descriptor = new CcrFollowRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrFollowRequestDescriptor, CcrFollowResponse>(descriptor);
+		}
+
+		public CcrFollowResponse Follow(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrFollowRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrFollowRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -120,7 +155,22 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrFollowRequestDescriptor, CcrFollowResponse>(descriptor);
 		}
 
-		public CcrFollowResponse Follow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrFollowRequestDescriptor<TDocument>> configureRequest = null)
+		public CcrFollowResponse Follow<TDocument>()
+		{
+			var descriptor = new CcrFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequest<CcrFollowRequestDescriptor<TDocument>, CcrFollowResponse>(descriptor);
+		}
+
+		public CcrFollowResponse Follow<TDocument>(Action<CcrFollowRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new CcrFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrFollowRequestDescriptor<TDocument>, CcrFollowResponse>(descriptor);
+		}
+
+		public CcrFollowResponse Follow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrFollowRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new CcrFollowRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -128,7 +178,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrFollowRequestDescriptor<TDocument>, CcrFollowResponse>(descriptor);
 		}
 
-		public Task<CcrFollowResponse> FollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrFollowRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrFollowResponse> FollowAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrFollowRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrFollowRequestDescriptor, CcrFollowResponse>(descriptor);
+		}
+
+		public Task<CcrFollowResponse> FollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrFollowRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrFollowRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -136,7 +193,22 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrFollowRequestDescriptor, CcrFollowResponse>(descriptor);
 		}
 
-		public Task<CcrFollowResponse> FollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrFollowRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrFollowResponse> FollowAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrFollowRequestDescriptor<TDocument>, CcrFollowResponse>(descriptor);
+		}
+
+		public Task<CcrFollowResponse> FollowAsync<TDocument>(Action<CcrFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrFollowRequestDescriptor<TDocument>, CcrFollowResponse>(descriptor);
+		}
+
+		public Task<CcrFollowResponse> FollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrFollowRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -156,7 +228,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrFollowStatsRequest, CcrFollowStatsResponse>(request, cancellationToken);
 		}
 
-		public CcrFollowStatsResponse FollowStats(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowStatsRequestDescriptor> configureRequest = null)
+		public CcrFollowStatsResponse FollowStats(Elastic.Clients.Elasticsearch.Indices indices)
+		{
+			var descriptor = new CcrFollowStatsRequestDescriptor(indices);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrFollowStatsRequestDescriptor, CcrFollowStatsResponse>(descriptor);
+		}
+
+		public CcrFollowStatsResponse FollowStats(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowStatsRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrFollowStatsRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
@@ -164,7 +243,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrFollowStatsRequestDescriptor, CcrFollowStatsResponse>(descriptor);
 		}
 
-		public CcrFollowStatsResponse FollowStats<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowStatsRequestDescriptor<TDocument>> configureRequest = null)
+		public CcrFollowStatsResponse FollowStats<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowStatsRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new CcrFollowStatsRequestDescriptor<TDocument>(indices);
 			configureRequest?.Invoke(descriptor);
@@ -172,7 +251,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrFollowStatsRequestDescriptor<TDocument>, CcrFollowStatsResponse>(descriptor);
 		}
 
-		public Task<CcrFollowStatsResponse> FollowStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrFollowStatsResponse> FollowStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrFollowStatsRequestDescriptor(indices);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrFollowStatsRequestDescriptor, CcrFollowStatsResponse>(descriptor);
+		}
+
+		public Task<CcrFollowStatsResponse> FollowStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrFollowStatsRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
@@ -180,7 +266,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrFollowStatsRequestDescriptor, CcrFollowStatsResponse>(descriptor);
 		}
 
-		public Task<CcrFollowStatsResponse> FollowStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowStatsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrFollowStatsResponse> FollowStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CcrFollowStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrFollowStatsRequestDescriptor<TDocument>(indices);
 			configureRequest?.Invoke(descriptor);
@@ -200,7 +286,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrForgetFollowerRequest, CcrForgetFollowerResponse>(request, cancellationToken);
 		}
 
-		public CcrForgetFollowerResponse ForgetFollower(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrForgetFollowerRequestDescriptor> configureRequest = null)
+		public CcrForgetFollowerResponse ForgetFollower(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			var descriptor = new CcrForgetFollowerRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrForgetFollowerRequestDescriptor, CcrForgetFollowerResponse>(descriptor);
+		}
+
+		public CcrForgetFollowerResponse ForgetFollower(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrForgetFollowerRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrForgetFollowerRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -208,7 +301,22 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrForgetFollowerRequestDescriptor, CcrForgetFollowerResponse>(descriptor);
 		}
 
-		public CcrForgetFollowerResponse ForgetFollower<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrForgetFollowerRequestDescriptor<TDocument>> configureRequest = null)
+		public CcrForgetFollowerResponse ForgetFollower<TDocument>()
+		{
+			var descriptor = new CcrForgetFollowerRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequest<CcrForgetFollowerRequestDescriptor<TDocument>, CcrForgetFollowerResponse>(descriptor);
+		}
+
+		public CcrForgetFollowerResponse ForgetFollower<TDocument>(Action<CcrForgetFollowerRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new CcrForgetFollowerRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrForgetFollowerRequestDescriptor<TDocument>, CcrForgetFollowerResponse>(descriptor);
+		}
+
+		public CcrForgetFollowerResponse ForgetFollower<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrForgetFollowerRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new CcrForgetFollowerRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -216,7 +324,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrForgetFollowerRequestDescriptor<TDocument>, CcrForgetFollowerResponse>(descriptor);
 		}
 
-		public Task<CcrForgetFollowerResponse> ForgetFollowerAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrForgetFollowerRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrForgetFollowerResponse> ForgetFollowerAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrForgetFollowerRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrForgetFollowerRequestDescriptor, CcrForgetFollowerResponse>(descriptor);
+		}
+
+		public Task<CcrForgetFollowerResponse> ForgetFollowerAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrForgetFollowerRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrForgetFollowerRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -224,7 +339,22 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrForgetFollowerRequestDescriptor, CcrForgetFollowerResponse>(descriptor);
 		}
 
-		public Task<CcrForgetFollowerResponse> ForgetFollowerAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrForgetFollowerRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrForgetFollowerResponse> ForgetFollowerAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrForgetFollowerRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrForgetFollowerRequestDescriptor<TDocument>, CcrForgetFollowerResponse>(descriptor);
+		}
+
+		public Task<CcrForgetFollowerResponse> ForgetFollowerAsync<TDocument>(Action<CcrForgetFollowerRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrForgetFollowerRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrForgetFollowerRequestDescriptor<TDocument>, CcrForgetFollowerResponse>(descriptor);
+		}
+
+		public Task<CcrForgetFollowerResponse> ForgetFollowerAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrForgetFollowerRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrForgetFollowerRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -244,7 +374,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrGetAutoFollowPatternRequest, CcrGetAutoFollowPatternResponse>(request, cancellationToken);
 		}
 
-		public CcrGetAutoFollowPatternResponse GetAutoFollowPattern(Action<CcrGetAutoFollowPatternRequestDescriptor> configureRequest = null)
+		public CcrGetAutoFollowPatternResponse GetAutoFollowPattern()
+		{
+			var descriptor = new CcrGetAutoFollowPatternRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<CcrGetAutoFollowPatternRequestDescriptor, CcrGetAutoFollowPatternResponse>(descriptor);
+		}
+
+		public CcrGetAutoFollowPatternResponse GetAutoFollowPattern(Action<CcrGetAutoFollowPatternRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrGetAutoFollowPatternRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -252,7 +389,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrGetAutoFollowPatternRequestDescriptor, CcrGetAutoFollowPatternResponse>(descriptor);
 		}
 
-		public Task<CcrGetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Action<CcrGetAutoFollowPatternRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrGetAutoFollowPatternResponse> GetAutoFollowPatternAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrGetAutoFollowPatternRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrGetAutoFollowPatternRequestDescriptor, CcrGetAutoFollowPatternResponse>(descriptor);
+		}
+
+		public Task<CcrGetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Action<CcrGetAutoFollowPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrGetAutoFollowPatternRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -272,7 +416,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrPauseAutoFollowPatternRequest, CcrPauseAutoFollowPatternResponse>(request, cancellationToken);
 		}
 
-		public CcrPauseAutoFollowPatternResponse PauseAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<CcrPauseAutoFollowPatternRequestDescriptor> configureRequest = null)
+		public CcrPauseAutoFollowPatternResponse PauseAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new CcrPauseAutoFollowPatternRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrPauseAutoFollowPatternRequestDescriptor, CcrPauseAutoFollowPatternResponse>(descriptor);
+		}
+
+		public CcrPauseAutoFollowPatternResponse PauseAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<CcrPauseAutoFollowPatternRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrPauseAutoFollowPatternRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -280,7 +431,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrPauseAutoFollowPatternRequestDescriptor, CcrPauseAutoFollowPatternResponse>(descriptor);
 		}
 
-		public Task<CcrPauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<CcrPauseAutoFollowPatternRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrPauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrPauseAutoFollowPatternRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrPauseAutoFollowPatternRequestDescriptor, CcrPauseAutoFollowPatternResponse>(descriptor);
+		}
+
+		public Task<CcrPauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<CcrPauseAutoFollowPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrPauseAutoFollowPatternRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -300,7 +458,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrPauseFollowRequest, CcrPauseFollowResponse>(request, cancellationToken);
 		}
 
-		public CcrPauseFollowResponse PauseFollow(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrPauseFollowRequestDescriptor> configureRequest = null)
+		public CcrPauseFollowResponse PauseFollow(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			var descriptor = new CcrPauseFollowRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrPauseFollowRequestDescriptor, CcrPauseFollowResponse>(descriptor);
+		}
+
+		public CcrPauseFollowResponse PauseFollow(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrPauseFollowRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrPauseFollowRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -308,7 +473,22 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrPauseFollowRequestDescriptor, CcrPauseFollowResponse>(descriptor);
 		}
 
-		public CcrPauseFollowResponse PauseFollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrPauseFollowRequestDescriptor<TDocument>> configureRequest = null)
+		public CcrPauseFollowResponse PauseFollow<TDocument>()
+		{
+			var descriptor = new CcrPauseFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequest<CcrPauseFollowRequestDescriptor<TDocument>, CcrPauseFollowResponse>(descriptor);
+		}
+
+		public CcrPauseFollowResponse PauseFollow<TDocument>(Action<CcrPauseFollowRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new CcrPauseFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrPauseFollowRequestDescriptor<TDocument>, CcrPauseFollowResponse>(descriptor);
+		}
+
+		public CcrPauseFollowResponse PauseFollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrPauseFollowRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new CcrPauseFollowRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -316,7 +496,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrPauseFollowRequestDescriptor<TDocument>, CcrPauseFollowResponse>(descriptor);
 		}
 
-		public Task<CcrPauseFollowResponse> PauseFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrPauseFollowRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrPauseFollowResponse> PauseFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrPauseFollowRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrPauseFollowRequestDescriptor, CcrPauseFollowResponse>(descriptor);
+		}
+
+		public Task<CcrPauseFollowResponse> PauseFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrPauseFollowRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrPauseFollowRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -324,7 +511,22 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrPauseFollowRequestDescriptor, CcrPauseFollowResponse>(descriptor);
 		}
 
-		public Task<CcrPauseFollowResponse> PauseFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrPauseFollowRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrPauseFollowResponse> PauseFollowAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrPauseFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrPauseFollowRequestDescriptor<TDocument>, CcrPauseFollowResponse>(descriptor);
+		}
+
+		public Task<CcrPauseFollowResponse> PauseFollowAsync<TDocument>(Action<CcrPauseFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrPauseFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrPauseFollowRequestDescriptor<TDocument>, CcrPauseFollowResponse>(descriptor);
+		}
+
+		public Task<CcrPauseFollowResponse> PauseFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrPauseFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrPauseFollowRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -344,7 +546,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrPutAutoFollowPatternRequest, CcrPutAutoFollowPatternResponse>(request, cancellationToken);
 		}
 
-		public CcrPutAutoFollowPatternResponse PutAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<CcrPutAutoFollowPatternRequestDescriptor> configureRequest = null)
+		public CcrPutAutoFollowPatternResponse PutAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new CcrPutAutoFollowPatternRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrPutAutoFollowPatternRequestDescriptor, CcrPutAutoFollowPatternResponse>(descriptor);
+		}
+
+		public CcrPutAutoFollowPatternResponse PutAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<CcrPutAutoFollowPatternRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrPutAutoFollowPatternRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -352,7 +561,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrPutAutoFollowPatternRequestDescriptor, CcrPutAutoFollowPatternResponse>(descriptor);
 		}
 
-		public Task<CcrPutAutoFollowPatternResponse> PutAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<CcrPutAutoFollowPatternRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrPutAutoFollowPatternResponse> PutAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrPutAutoFollowPatternRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrPutAutoFollowPatternRequestDescriptor, CcrPutAutoFollowPatternResponse>(descriptor);
+		}
+
+		public Task<CcrPutAutoFollowPatternResponse> PutAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<CcrPutAutoFollowPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrPutAutoFollowPatternRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -372,7 +588,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrResumeAutoFollowPatternRequest, CcrResumeAutoFollowPatternResponse>(request, cancellationToken);
 		}
 
-		public CcrResumeAutoFollowPatternResponse ResumeAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<CcrResumeAutoFollowPatternRequestDescriptor> configureRequest = null)
+		public CcrResumeAutoFollowPatternResponse ResumeAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new CcrResumeAutoFollowPatternRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrResumeAutoFollowPatternRequestDescriptor, CcrResumeAutoFollowPatternResponse>(descriptor);
+		}
+
+		public CcrResumeAutoFollowPatternResponse ResumeAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<CcrResumeAutoFollowPatternRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrResumeAutoFollowPatternRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -380,7 +603,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrResumeAutoFollowPatternRequestDescriptor, CcrResumeAutoFollowPatternResponse>(descriptor);
 		}
 
-		public Task<CcrResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<CcrResumeAutoFollowPatternRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrResumeAutoFollowPatternRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrResumeAutoFollowPatternRequestDescriptor, CcrResumeAutoFollowPatternResponse>(descriptor);
+		}
+
+		public Task<CcrResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<CcrResumeAutoFollowPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrResumeAutoFollowPatternRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -400,7 +630,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrResumeFollowRequest, CcrResumeFollowResponse>(request, cancellationToken);
 		}
 
-		public CcrResumeFollowResponse ResumeFollow(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrResumeFollowRequestDescriptor> configureRequest = null)
+		public CcrResumeFollowResponse ResumeFollow(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			var descriptor = new CcrResumeFollowRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrResumeFollowRequestDescriptor, CcrResumeFollowResponse>(descriptor);
+		}
+
+		public CcrResumeFollowResponse ResumeFollow(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrResumeFollowRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrResumeFollowRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -408,7 +645,22 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrResumeFollowRequestDescriptor, CcrResumeFollowResponse>(descriptor);
 		}
 
-		public CcrResumeFollowResponse ResumeFollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrResumeFollowRequestDescriptor<TDocument>> configureRequest = null)
+		public CcrResumeFollowResponse ResumeFollow<TDocument>()
+		{
+			var descriptor = new CcrResumeFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequest<CcrResumeFollowRequestDescriptor<TDocument>, CcrResumeFollowResponse>(descriptor);
+		}
+
+		public CcrResumeFollowResponse ResumeFollow<TDocument>(Action<CcrResumeFollowRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new CcrResumeFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrResumeFollowRequestDescriptor<TDocument>, CcrResumeFollowResponse>(descriptor);
+		}
+
+		public CcrResumeFollowResponse ResumeFollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrResumeFollowRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new CcrResumeFollowRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -416,7 +668,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrResumeFollowRequestDescriptor<TDocument>, CcrResumeFollowResponse>(descriptor);
 		}
 
-		public Task<CcrResumeFollowResponse> ResumeFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrResumeFollowRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrResumeFollowResponse> ResumeFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrResumeFollowRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrResumeFollowRequestDescriptor, CcrResumeFollowResponse>(descriptor);
+		}
+
+		public Task<CcrResumeFollowResponse> ResumeFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrResumeFollowRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrResumeFollowRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -424,7 +683,22 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrResumeFollowRequestDescriptor, CcrResumeFollowResponse>(descriptor);
 		}
 
-		public Task<CcrResumeFollowResponse> ResumeFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrResumeFollowRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrResumeFollowResponse> ResumeFollowAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrResumeFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrResumeFollowRequestDescriptor<TDocument>, CcrResumeFollowResponse>(descriptor);
+		}
+
+		public Task<CcrResumeFollowResponse> ResumeFollowAsync<TDocument>(Action<CcrResumeFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrResumeFollowRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrResumeFollowRequestDescriptor<TDocument>, CcrResumeFollowResponse>(descriptor);
+		}
+
+		public Task<CcrResumeFollowResponse> ResumeFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrResumeFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrResumeFollowRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -444,7 +718,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrStatsRequest, CcrStatsResponse>(request, cancellationToken);
 		}
 
-		public CcrStatsResponse Stats(Action<CcrStatsRequestDescriptor> configureRequest = null)
+		public CcrStatsResponse Stats()
+		{
+			var descriptor = new CcrStatsRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<CcrStatsRequestDescriptor, CcrStatsResponse>(descriptor);
+		}
+
+		public CcrStatsResponse Stats(Action<CcrStatsRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -452,7 +733,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrStatsRequestDescriptor, CcrStatsResponse>(descriptor);
 		}
 
-		public Task<CcrStatsResponse> StatsAsync(Action<CcrStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrStatsRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrStatsRequestDescriptor, CcrStatsResponse>(descriptor);
+		}
+
+		public Task<CcrStatsResponse> StatsAsync(Action<CcrStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrStatsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -472,7 +760,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrUnfollowRequest, CcrUnfollowResponse>(request, cancellationToken);
 		}
 
-		public CcrUnfollowResponse Unfollow(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrUnfollowRequestDescriptor> configureRequest = null)
+		public CcrUnfollowResponse Unfollow(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			var descriptor = new CcrUnfollowRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrUnfollowRequestDescriptor, CcrUnfollowResponse>(descriptor);
+		}
+
+		public CcrUnfollowResponse Unfollow(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrUnfollowRequestDescriptor> configureRequest)
 		{
 			var descriptor = new CcrUnfollowRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -480,7 +775,22 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrUnfollowRequestDescriptor, CcrUnfollowResponse>(descriptor);
 		}
 
-		public CcrUnfollowResponse Unfollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrUnfollowRequestDescriptor<TDocument>> configureRequest = null)
+		public CcrUnfollowResponse Unfollow<TDocument>()
+		{
+			var descriptor = new CcrUnfollowRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequest<CcrUnfollowRequestDescriptor<TDocument>, CcrUnfollowResponse>(descriptor);
+		}
+
+		public CcrUnfollowResponse Unfollow<TDocument>(Action<CcrUnfollowRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new CcrUnfollowRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<CcrUnfollowRequestDescriptor<TDocument>, CcrUnfollowResponse>(descriptor);
+		}
+
+		public CcrUnfollowResponse Unfollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrUnfollowRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new CcrUnfollowRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -488,7 +798,14 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequest<CcrUnfollowRequestDescriptor<TDocument>, CcrUnfollowResponse>(descriptor);
 		}
 
-		public Task<CcrUnfollowResponse> UnfollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrUnfollowRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrUnfollowResponse> UnfollowAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrUnfollowRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrUnfollowRequestDescriptor, CcrUnfollowResponse>(descriptor);
+		}
+
+		public Task<CcrUnfollowResponse> UnfollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrUnfollowRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrUnfollowRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -496,7 +813,22 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return DoRequestAsync<CcrUnfollowRequestDescriptor, CcrUnfollowResponse>(descriptor);
 		}
 
-		public Task<CcrUnfollowResponse> UnfollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrUnfollowRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CcrUnfollowResponse> UnfollowAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrUnfollowRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrUnfollowRequestDescriptor<TDocument>, CcrUnfollowResponse>(descriptor);
+		}
+
+		public Task<CcrUnfollowResponse> UnfollowAsync<TDocument>(Action<CcrUnfollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CcrUnfollowRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CcrUnfollowRequestDescriptor<TDocument>, CcrUnfollowResponse>(descriptor);
+		}
+
+		public Task<CcrUnfollowResponse> UnfollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CcrUnfollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new CcrUnfollowRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);

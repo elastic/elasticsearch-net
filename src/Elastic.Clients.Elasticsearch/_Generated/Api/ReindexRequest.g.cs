@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Time? Scroll { get => Q<Elastic.Clients.Elasticsearch.Time?>("scroll"); set => Q("scroll", value); }
 
 		[JsonIgnore]
-		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+		public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Time? Scroll { get => Q<Elastic.Clients.Elasticsearch.Time?>("scroll"); set => Q("scroll", value); }
 
 		[JsonIgnore]
-		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+		public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
@@ -120,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ReindexRequestDescriptor<TDocument> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		public ReindexRequestDescriptor<TDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
 		public ReindexRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
-		public ReindexRequestDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
+		public ReindexRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
 		public ReindexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public ReindexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public ReindexRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
@@ -325,7 +325,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ReindexRequestDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		public ReindexRequestDescriptor RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
 		public ReindexRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
-		public ReindexRequestDescriptor Slices(long? slices) => Qs("slices", slices);
+		public ReindexRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
 		public ReindexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public ReindexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public ReindexRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);

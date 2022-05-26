@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmDeleteLifecycleRequest, IlmDeleteLifecycleResponse>(request, cancellationToken);
 		}
 
-		public IlmDeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policy, Action<IlmDeleteLifecycleRequestDescriptor> configureRequest = null)
+		public IlmDeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policy)
+		{
+			var descriptor = new IlmDeleteLifecycleRequestDescriptor(policy);
+			descriptor.BeforeRequest();
+			return DoRequest<IlmDeleteLifecycleRequestDescriptor, IlmDeleteLifecycleResponse>(descriptor);
+		}
+
+		public IlmDeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policy, Action<IlmDeleteLifecycleRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IlmDeleteLifecycleRequestDescriptor(policy);
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmDeleteLifecycleRequestDescriptor, IlmDeleteLifecycleResponse>(descriptor);
 		}
 
-		public Task<IlmDeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy, Action<IlmDeleteLifecycleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmDeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmDeleteLifecycleRequestDescriptor(policy);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmDeleteLifecycleRequestDescriptor, IlmDeleteLifecycleResponse>(descriptor);
+		}
+
+		public Task<IlmDeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy, Action<IlmDeleteLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmDeleteLifecycleRequestDescriptor(policy);
 			configureRequest?.Invoke(descriptor);
@@ -68,7 +82,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmExplainLifecycleRequest, IlmExplainLifecycleResponse>(request, cancellationToken);
 		}
 
-		public IlmExplainLifecycleResponse ExplainLifecycle(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmExplainLifecycleRequestDescriptor> configureRequest = null)
+		public IlmExplainLifecycleResponse ExplainLifecycle(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			var descriptor = new IlmExplainLifecycleRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequest<IlmExplainLifecycleRequestDescriptor, IlmExplainLifecycleResponse>(descriptor);
+		}
+
+		public IlmExplainLifecycleResponse ExplainLifecycle(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmExplainLifecycleRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IlmExplainLifecycleRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -76,7 +97,22 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmExplainLifecycleRequestDescriptor, IlmExplainLifecycleResponse>(descriptor);
 		}
 
-		public IlmExplainLifecycleResponse ExplainLifecycle<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmExplainLifecycleRequestDescriptor<TDocument>> configureRequest = null)
+		public IlmExplainLifecycleResponse ExplainLifecycle<TDocument>()
+		{
+			var descriptor = new IlmExplainLifecycleRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequest<IlmExplainLifecycleRequestDescriptor<TDocument>, IlmExplainLifecycleResponse>(descriptor);
+		}
+
+		public IlmExplainLifecycleResponse ExplainLifecycle<TDocument>(Action<IlmExplainLifecycleRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new IlmExplainLifecycleRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<IlmExplainLifecycleRequestDescriptor<TDocument>, IlmExplainLifecycleResponse>(descriptor);
+		}
+
+		public IlmExplainLifecycleResponse ExplainLifecycle<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmExplainLifecycleRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new IlmExplainLifecycleRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -84,7 +120,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmExplainLifecycleRequestDescriptor<TDocument>, IlmExplainLifecycleResponse>(descriptor);
 		}
 
-		public Task<IlmExplainLifecycleResponse> ExplainLifecycleAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmExplainLifecycleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmExplainLifecycleResponse> ExplainLifecycleAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmExplainLifecycleRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmExplainLifecycleRequestDescriptor, IlmExplainLifecycleResponse>(descriptor);
+		}
+
+		public Task<IlmExplainLifecycleResponse> ExplainLifecycleAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmExplainLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmExplainLifecycleRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -92,7 +135,22 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmExplainLifecycleRequestDescriptor, IlmExplainLifecycleResponse>(descriptor);
 		}
 
-		public Task<IlmExplainLifecycleResponse> ExplainLifecycleAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmExplainLifecycleRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmExplainLifecycleResponse> ExplainLifecycleAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmExplainLifecycleRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmExplainLifecycleRequestDescriptor<TDocument>, IlmExplainLifecycleResponse>(descriptor);
+		}
+
+		public Task<IlmExplainLifecycleResponse> ExplainLifecycleAsync<TDocument>(Action<IlmExplainLifecycleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmExplainLifecycleRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmExplainLifecycleRequestDescriptor<TDocument>, IlmExplainLifecycleResponse>(descriptor);
+		}
+
+		public Task<IlmExplainLifecycleResponse> ExplainLifecycleAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmExplainLifecycleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmExplainLifecycleRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -112,7 +170,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmGetLifecycleRequest, IlmGetLifecycleResponse>(request, cancellationToken);
 		}
 
-		public IlmGetLifecycleResponse GetLifecycle(Action<IlmGetLifecycleRequestDescriptor> configureRequest = null)
+		public IlmGetLifecycleResponse GetLifecycle()
+		{
+			var descriptor = new IlmGetLifecycleRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<IlmGetLifecycleRequestDescriptor, IlmGetLifecycleResponse>(descriptor);
+		}
+
+		public IlmGetLifecycleResponse GetLifecycle(Action<IlmGetLifecycleRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IlmGetLifecycleRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -120,7 +185,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmGetLifecycleRequestDescriptor, IlmGetLifecycleResponse>(descriptor);
 		}
 
-		public Task<IlmGetLifecycleResponse> GetLifecycleAsync(Action<IlmGetLifecycleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmGetLifecycleResponse> GetLifecycleAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmGetLifecycleRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmGetLifecycleRequestDescriptor, IlmGetLifecycleResponse>(descriptor);
+		}
+
+		public Task<IlmGetLifecycleResponse> GetLifecycleAsync(Action<IlmGetLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmGetLifecycleRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -140,7 +212,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmGetStatusRequest, IlmGetStatusResponse>(request, cancellationToken);
 		}
 
-		public IlmGetStatusResponse GetStatus(Action<IlmGetStatusRequestDescriptor> configureRequest = null)
+		public IlmGetStatusResponse GetStatus()
+		{
+			var descriptor = new IlmGetStatusRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<IlmGetStatusRequestDescriptor, IlmGetStatusResponse>(descriptor);
+		}
+
+		public IlmGetStatusResponse GetStatus(Action<IlmGetStatusRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IlmGetStatusRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -148,7 +227,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmGetStatusRequestDescriptor, IlmGetStatusResponse>(descriptor);
 		}
 
-		public Task<IlmGetStatusResponse> GetStatusAsync(Action<IlmGetStatusRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmGetStatusResponse> GetStatusAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmGetStatusRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmGetStatusRequestDescriptor, IlmGetStatusResponse>(descriptor);
+		}
+
+		public Task<IlmGetStatusResponse> GetStatusAsync(Action<IlmGetStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmGetStatusRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -168,7 +254,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmMigrateToDataTiersRequest, IlmMigrateToDataTiersResponse>(request, cancellationToken);
 		}
 
-		public IlmMigrateToDataTiersResponse MigrateToDataTiers(Action<IlmMigrateToDataTiersRequestDescriptor> configureRequest = null)
+		public IlmMigrateToDataTiersResponse MigrateToDataTiers()
+		{
+			var descriptor = new IlmMigrateToDataTiersRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<IlmMigrateToDataTiersRequestDescriptor, IlmMigrateToDataTiersResponse>(descriptor);
+		}
+
+		public IlmMigrateToDataTiersResponse MigrateToDataTiers(Action<IlmMigrateToDataTiersRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IlmMigrateToDataTiersRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -176,7 +269,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmMigrateToDataTiersRequestDescriptor, IlmMigrateToDataTiersResponse>(descriptor);
 		}
 
-		public Task<IlmMigrateToDataTiersResponse> MigrateToDataTiersAsync(Action<IlmMigrateToDataTiersRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmMigrateToDataTiersResponse> MigrateToDataTiersAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmMigrateToDataTiersRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmMigrateToDataTiersRequestDescriptor, IlmMigrateToDataTiersResponse>(descriptor);
+		}
+
+		public Task<IlmMigrateToDataTiersResponse> MigrateToDataTiersAsync(Action<IlmMigrateToDataTiersRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmMigrateToDataTiersRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -196,7 +296,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmMoveToStepRequest, IlmMoveToStepResponse>(request, cancellationToken);
 		}
 
-		public IlmMoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmMoveToStepRequestDescriptor> configureRequest = null)
+		public IlmMoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			var descriptor = new IlmMoveToStepRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequest<IlmMoveToStepRequestDescriptor, IlmMoveToStepResponse>(descriptor);
+		}
+
+		public IlmMoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmMoveToStepRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IlmMoveToStepRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -204,7 +311,22 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmMoveToStepRequestDescriptor, IlmMoveToStepResponse>(descriptor);
 		}
 
-		public IlmMoveToStepResponse MoveToStep<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmMoveToStepRequestDescriptor<TDocument>> configureRequest = null)
+		public IlmMoveToStepResponse MoveToStep<TDocument>()
+		{
+			var descriptor = new IlmMoveToStepRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequest<IlmMoveToStepRequestDescriptor<TDocument>, IlmMoveToStepResponse>(descriptor);
+		}
+
+		public IlmMoveToStepResponse MoveToStep<TDocument>(Action<IlmMoveToStepRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new IlmMoveToStepRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<IlmMoveToStepRequestDescriptor<TDocument>, IlmMoveToStepResponse>(descriptor);
+		}
+
+		public IlmMoveToStepResponse MoveToStep<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmMoveToStepRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new IlmMoveToStepRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -212,7 +334,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmMoveToStepRequestDescriptor<TDocument>, IlmMoveToStepResponse>(descriptor);
 		}
 
-		public Task<IlmMoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmMoveToStepRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmMoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmMoveToStepRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmMoveToStepRequestDescriptor, IlmMoveToStepResponse>(descriptor);
+		}
+
+		public Task<IlmMoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmMoveToStepRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmMoveToStepRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -220,7 +349,22 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmMoveToStepRequestDescriptor, IlmMoveToStepResponse>(descriptor);
 		}
 
-		public Task<IlmMoveToStepResponse> MoveToStepAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmMoveToStepRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmMoveToStepResponse> MoveToStepAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmMoveToStepRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmMoveToStepRequestDescriptor<TDocument>, IlmMoveToStepResponse>(descriptor);
+		}
+
+		public Task<IlmMoveToStepResponse> MoveToStepAsync<TDocument>(Action<IlmMoveToStepRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmMoveToStepRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmMoveToStepRequestDescriptor<TDocument>, IlmMoveToStepResponse>(descriptor);
+		}
+
+		public Task<IlmMoveToStepResponse> MoveToStepAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmMoveToStepRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmMoveToStepRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -240,7 +384,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmPutLifecycleRequest, IlmPutLifecycleResponse>(request, cancellationToken);
 		}
 
-		public IlmPutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policy, Action<IlmPutLifecycleRequestDescriptor> configureRequest = null)
+		public IlmPutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policy)
+		{
+			var descriptor = new IlmPutLifecycleRequestDescriptor(policy);
+			descriptor.BeforeRequest();
+			return DoRequest<IlmPutLifecycleRequestDescriptor, IlmPutLifecycleResponse>(descriptor);
+		}
+
+		public IlmPutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policy, Action<IlmPutLifecycleRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IlmPutLifecycleRequestDescriptor(policy);
 			configureRequest?.Invoke(descriptor);
@@ -248,7 +399,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmPutLifecycleRequestDescriptor, IlmPutLifecycleResponse>(descriptor);
 		}
 
-		public Task<IlmPutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy, Action<IlmPutLifecycleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmPutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmPutLifecycleRequestDescriptor(policy);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmPutLifecycleRequestDescriptor, IlmPutLifecycleResponse>(descriptor);
+		}
+
+		public Task<IlmPutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policy, Action<IlmPutLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmPutLifecycleRequestDescriptor(policy);
 			configureRequest?.Invoke(descriptor);
@@ -268,7 +426,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmRemovePolicyRequest, IlmRemovePolicyResponse>(request, cancellationToken);
 		}
 
-		public IlmRemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRemovePolicyRequestDescriptor> configureRequest = null)
+		public IlmRemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			var descriptor = new IlmRemovePolicyRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequest<IlmRemovePolicyRequestDescriptor, IlmRemovePolicyResponse>(descriptor);
+		}
+
+		public IlmRemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRemovePolicyRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IlmRemovePolicyRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -276,7 +441,22 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmRemovePolicyRequestDescriptor, IlmRemovePolicyResponse>(descriptor);
 		}
 
-		public IlmRemovePolicyResponse RemovePolicy<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRemovePolicyRequestDescriptor<TDocument>> configureRequest = null)
+		public IlmRemovePolicyResponse RemovePolicy<TDocument>()
+		{
+			var descriptor = new IlmRemovePolicyRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequest<IlmRemovePolicyRequestDescriptor<TDocument>, IlmRemovePolicyResponse>(descriptor);
+		}
+
+		public IlmRemovePolicyResponse RemovePolicy<TDocument>(Action<IlmRemovePolicyRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new IlmRemovePolicyRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<IlmRemovePolicyRequestDescriptor<TDocument>, IlmRemovePolicyResponse>(descriptor);
+		}
+
+		public IlmRemovePolicyResponse RemovePolicy<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRemovePolicyRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new IlmRemovePolicyRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -284,7 +464,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmRemovePolicyRequestDescriptor<TDocument>, IlmRemovePolicyResponse>(descriptor);
 		}
 
-		public Task<IlmRemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRemovePolicyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmRemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmRemovePolicyRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmRemovePolicyRequestDescriptor, IlmRemovePolicyResponse>(descriptor);
+		}
+
+		public Task<IlmRemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRemovePolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmRemovePolicyRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -292,7 +479,22 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmRemovePolicyRequestDescriptor, IlmRemovePolicyResponse>(descriptor);
 		}
 
-		public Task<IlmRemovePolicyResponse> RemovePolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRemovePolicyRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmRemovePolicyResponse> RemovePolicyAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmRemovePolicyRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmRemovePolicyRequestDescriptor<TDocument>, IlmRemovePolicyResponse>(descriptor);
+		}
+
+		public Task<IlmRemovePolicyResponse> RemovePolicyAsync<TDocument>(Action<IlmRemovePolicyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmRemovePolicyRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmRemovePolicyRequestDescriptor<TDocument>, IlmRemovePolicyResponse>(descriptor);
+		}
+
+		public Task<IlmRemovePolicyResponse> RemovePolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRemovePolicyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmRemovePolicyRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -312,7 +514,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmRetryRequest, IlmRetryResponse>(request, cancellationToken);
 		}
 
-		public IlmRetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRetryRequestDescriptor> configureRequest = null)
+		public IlmRetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			var descriptor = new IlmRetryRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequest<IlmRetryRequestDescriptor, IlmRetryResponse>(descriptor);
+		}
+
+		public IlmRetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRetryRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IlmRetryRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -320,7 +529,22 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmRetryRequestDescriptor, IlmRetryResponse>(descriptor);
 		}
 
-		public IlmRetryResponse Retry<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRetryRequestDescriptor<TDocument>> configureRequest = null)
+		public IlmRetryResponse Retry<TDocument>()
+		{
+			var descriptor = new IlmRetryRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequest<IlmRetryRequestDescriptor<TDocument>, IlmRetryResponse>(descriptor);
+		}
+
+		public IlmRetryResponse Retry<TDocument>(Action<IlmRetryRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new IlmRetryRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<IlmRetryRequestDescriptor<TDocument>, IlmRetryResponse>(descriptor);
+		}
+
+		public IlmRetryResponse Retry<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRetryRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new IlmRetryRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -328,7 +552,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmRetryRequestDescriptor<TDocument>, IlmRetryResponse>(descriptor);
 		}
 
-		public Task<IlmRetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRetryRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmRetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmRetryRequestDescriptor(index);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmRetryRequestDescriptor, IlmRetryResponse>(descriptor);
+		}
+
+		public Task<IlmRetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRetryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmRetryRequestDescriptor(index);
 			configureRequest?.Invoke(descriptor);
@@ -336,7 +567,22 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmRetryRequestDescriptor, IlmRetryResponse>(descriptor);
 		}
 
-		public Task<IlmRetryResponse> RetryAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRetryRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmRetryResponse> RetryAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmRetryRequestDescriptor<TDocument>(typeof(TDocument));
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmRetryRequestDescriptor<TDocument>, IlmRetryResponse>(descriptor);
+		}
+
+		public Task<IlmRetryResponse> RetryAsync<TDocument>(Action<IlmRetryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmRetryRequestDescriptor<TDocument>(typeof(TDocument));
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmRetryRequestDescriptor<TDocument>, IlmRetryResponse>(descriptor);
+		}
+
+		public Task<IlmRetryResponse> RetryAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<IlmRetryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmRetryRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
@@ -356,7 +602,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmStartRequest, IlmStartResponse>(request, cancellationToken);
 		}
 
-		public IlmStartResponse Start(Action<IlmStartRequestDescriptor> configureRequest = null)
+		public IlmStartResponse Start()
+		{
+			var descriptor = new IlmStartRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<IlmStartRequestDescriptor, IlmStartResponse>(descriptor);
+		}
+
+		public IlmStartResponse Start(Action<IlmStartRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IlmStartRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -364,7 +617,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmStartRequestDescriptor, IlmStartResponse>(descriptor);
 		}
 
-		public Task<IlmStartResponse> StartAsync(Action<IlmStartRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmStartResponse> StartAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmStartRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmStartRequestDescriptor, IlmStartResponse>(descriptor);
+		}
+
+		public Task<IlmStartResponse> StartAsync(Action<IlmStartRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmStartRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -384,7 +644,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequestAsync<IlmStopRequest, IlmStopResponse>(request, cancellationToken);
 		}
 
-		public IlmStopResponse Stop(Action<IlmStopRequestDescriptor> configureRequest = null)
+		public IlmStopResponse Stop()
+		{
+			var descriptor = new IlmStopRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<IlmStopRequestDescriptor, IlmStopResponse>(descriptor);
+		}
+
+		public IlmStopResponse Stop(Action<IlmStopRequestDescriptor> configureRequest)
 		{
 			var descriptor = new IlmStopRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -392,7 +659,14 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 			return DoRequest<IlmStopRequestDescriptor, IlmStopResponse>(descriptor);
 		}
 
-		public Task<IlmStopResponse> StopAsync(Action<IlmStopRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IlmStopResponse> StopAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IlmStopRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<IlmStopRequestDescriptor, IlmStopResponse>(descriptor);
+		}
+
+		public Task<IlmStopResponse> StopAsync(Action<IlmStopRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IlmStopRequestDescriptor();
 			configureRequest?.Invoke(descriptor);

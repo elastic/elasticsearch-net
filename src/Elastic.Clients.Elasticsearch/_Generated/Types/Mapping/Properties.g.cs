@@ -108,6 +108,11 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public PropertiesDescriptor<TDocument> DoubleRange(PropertyName propertyName, DoubleRangeProperty doubleRangeProperty) => AssignVariant(propertyName, doubleRangeProperty);
 		public PropertiesDescriptor<TDocument> DoubleRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, null);
 		public PropertiesDescriptor<TDocument> DoubleRange(Expression<Func<TDocument, object>> propertyName, Action<DoubleRangePropertyDescriptor<TDocument>> configure) => AssignVariant<DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, configure);
+		public PropertiesDescriptor<TDocument> Dynamic(PropertyName propertyName) => AssignVariant<DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, null);
+		public PropertiesDescriptor<TDocument> Dynamic(PropertyName propertyName, Action<DynamicPropertyDescriptor<TDocument>> configure) => AssignVariant<DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, configure);
+		public PropertiesDescriptor<TDocument> Dynamic(PropertyName propertyName, DynamicProperty dynamicProperty) => AssignVariant(propertyName, dynamicProperty);
+		public PropertiesDescriptor<TDocument> Dynamic(Expression<Func<TDocument, object>> propertyName) => AssignVariant<DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, null);
+		public PropertiesDescriptor<TDocument> Dynamic(Expression<Func<TDocument, object>> propertyName, Action<DynamicPropertyDescriptor<TDocument>> configure) => AssignVariant<DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, configure);
 		public PropertiesDescriptor<TDocument> FieldAlias(PropertyName propertyName) => AssignVariant<FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, null);
 		public PropertiesDescriptor<TDocument> FieldAlias(PropertyName propertyName, Action<FieldAliasPropertyDescriptor<TDocument>> configure) => AssignVariant<FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, configure);
 		public PropertiesDescriptor<TDocument> FieldAlias(PropertyName propertyName, FieldAliasProperty fieldAliasProperty) => AssignVariant(propertyName, fieldAliasProperty);
@@ -281,6 +286,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		{
 			switch (type)
 			{
+				case "{dynamic_property}":
+					return JsonSerializer.Deserialize<DynamicProperty>(ref reader, options);
 				case "match_only_text":
 					return JsonSerializer.Deserialize<MatchOnlyTextProperty>(ref reader, options);
 				case "point":
