@@ -6,13 +6,17 @@ using System;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public interface IDocumentPath
+// MARKED INTERNAL AS WE MAY NO LONGER USE THIS TYPE
+// TODO - REVIEW THIS
+internal interface IDocumentPath
 {
 	Id Id { get; set; }
 	IndexName Index { get; set; }
 }
 
-public sealed class DocumentPath<T> : IEquatable<DocumentPath<T>>, IDocumentPath
+// MARKED INTERNAL AS WE MAY NO LONGER USE THIS TYPE
+// TODO - REVIEW THIS
+internal sealed class DocumentPath<T> : IEquatable<DocumentPath<T>>, IDocumentPath
 {
 	public DocumentPath(T document) : this(Elasticsearch.Id.From(document)) => Document = document;
 

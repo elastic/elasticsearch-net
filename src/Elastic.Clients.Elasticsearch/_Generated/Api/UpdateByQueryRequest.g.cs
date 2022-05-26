@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+		public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 		[JsonIgnore]
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+		public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 		[JsonIgnore]
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
@@ -259,7 +259,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor<TDocument> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
 		public UpdateByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Time? searchTimeout) => Qs("search_timeout", searchTimeout);
 		public UpdateByQueryRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public UpdateByQueryRequestDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
+		public UpdateByQueryRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
 		public UpdateByQueryRequestDescriptor<TDocument> Sort(IEnumerable<string>? sort) => Qs("sort", sort);
 		public UpdateByQueryRequestDescriptor<TDocument> Stats(IEnumerable<string>? stats) => Qs("stats", stats);
 		public UpdateByQueryRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
@@ -480,7 +480,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
 		public UpdateByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Time? searchTimeout) => Qs("search_timeout", searchTimeout);
 		public UpdateByQueryRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public UpdateByQueryRequestDescriptor Slices(long? slices) => Qs("slices", slices);
+		public UpdateByQueryRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
 		public UpdateByQueryRequestDescriptor Sort(IEnumerable<string>? sort) => Qs("sort", sort);
 		public UpdateByQueryRequestDescriptor Stats(IEnumerable<string>? stats) => Qs("stats", stats);
 		public UpdateByQueryRequestDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);

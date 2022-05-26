@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Features
 			return DoRequestAsync<FeaturesGetFeaturesRequest, FeaturesGetFeaturesResponse>(request, cancellationToken);
 		}
 
-		public FeaturesGetFeaturesResponse GetFeatures(Action<FeaturesGetFeaturesRequestDescriptor> configureRequest = null)
+		public FeaturesGetFeaturesResponse GetFeatures()
+		{
+			var descriptor = new FeaturesGetFeaturesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<FeaturesGetFeaturesRequestDescriptor, FeaturesGetFeaturesResponse>(descriptor);
+		}
+
+		public FeaturesGetFeaturesResponse GetFeatures(Action<FeaturesGetFeaturesRequestDescriptor> configureRequest)
 		{
 			var descriptor = new FeaturesGetFeaturesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.Features
 			return DoRequest<FeaturesGetFeaturesRequestDescriptor, FeaturesGetFeaturesResponse>(descriptor);
 		}
 
-		public Task<FeaturesGetFeaturesResponse> GetFeaturesAsync(Action<FeaturesGetFeaturesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<FeaturesGetFeaturesResponse> GetFeaturesAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new FeaturesGetFeaturesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<FeaturesGetFeaturesRequestDescriptor, FeaturesGetFeaturesResponse>(descriptor);
+		}
+
+		public Task<FeaturesGetFeaturesResponse> GetFeaturesAsync(Action<FeaturesGetFeaturesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new FeaturesGetFeaturesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
