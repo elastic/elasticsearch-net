@@ -33,5 +33,9 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.Enrich.Policy Match { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("range")]
+		public Elastic.Clients.Elasticsearch.Enrich.Policy Range { get; init; }
 	}
 }

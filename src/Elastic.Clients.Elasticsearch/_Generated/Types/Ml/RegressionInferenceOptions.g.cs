@@ -24,12 +24,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class RegressionInferenceOptions : Aggregations.IInferenceConfigContainerVariant, IInferenceConfigCreateContainerVariant
+	public partial class RegressionInferenceOptions : Aggregations.IInferenceConfigContainerVariant, IInferenceConfigCreateContainerVariant, IInferenceConfigUpdateContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IInferenceConfigContainerVariant.InferenceConfigContainerVariantName => "regression";
 		[JsonIgnore]
 		string IInferenceConfigCreateContainerVariant.InferenceConfigCreateContainerVariantName => "regression";
+		[JsonIgnore]
+		string IInferenceConfigUpdateContainerVariant.InferenceConfigUpdateContainerVariantName => "regression";
 		[JsonInclude]
 		[JsonPropertyName("num_top_feature_importance_values")]
 		public int? NumTopFeatureImportanceValues { get; set; }

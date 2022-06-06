@@ -181,6 +181,8 @@ namespace Elastic.Clients.Elasticsearch.Security
 		ManageIndexTemplates,
 		[EnumMember(Value = "manage_ilm")]
 		ManageIlm,
+		[EnumMember(Value = "manage_enrich")]
+		ManageEnrich,
 		[EnumMember(Value = "manage_ccr")]
 		ManageCcr,
 		[EnumMember(Value = "manage_api_key")]
@@ -260,6 +262,8 @@ namespace Elastic.Clients.Elasticsearch.Security
 					return ClusterPrivilege.ManageIndexTemplates;
 				case "manage_ilm":
 					return ClusterPrivilege.ManageIlm;
+				case "manage_enrich":
+					return ClusterPrivilege.ManageEnrich;
 				case "manage_ccr":
 					return ClusterPrivilege.ManageCcr;
 				case "manage_api_key":
@@ -367,6 +371,9 @@ namespace Elastic.Clients.Elasticsearch.Security
 					return;
 				case ClusterPrivilege.ManageIlm:
 					writer.WriteStringValue("manage_ilm");
+					return;
+				case ClusterPrivilege.ManageEnrich:
+					writer.WriteStringValue("manage_enrich");
 					return;
 				case ClusterPrivilege.ManageCcr:
 					writer.WriteStringValue("manage_ccr");
