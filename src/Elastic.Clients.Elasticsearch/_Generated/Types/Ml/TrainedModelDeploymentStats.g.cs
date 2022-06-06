@@ -39,20 +39,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int InferenceCount { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("inference_threads")]
-		public int InferenceThreads { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("model_id")]
 		public string ModelId { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("model_threads")]
-		public int ModelThreads { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Elastic.Clients.Elasticsearch.Ml.TrainedModelDeploymentNodesStats Nodes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("number_of_allocations")]
+		public int NumberOfAllocations { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("queue_capacity")]
@@ -73,6 +69,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonInclude]
 		[JsonPropertyName("state")]
 		public Elastic.Clients.Elasticsearch.Ml.DeploymentState State { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("threads_per_allocation")]
+		public int ThreadsPerAllocation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timeout_count")]

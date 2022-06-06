@@ -72,6 +72,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				return new InferenceConfigCreateContainer(variant);
 			}
 
+			if (propertyName == "question_answering")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceOptions?>(ref reader, options);
+				return new InferenceConfigCreateContainer(variant);
+			}
+
 			if (propertyName == "regression")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions?>(ref reader, options);
@@ -115,6 +121,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
 				case Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceOptions variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceOptions variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
 				case Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions variant:
@@ -202,6 +211,8 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public void Ner(Action<NerInferenceOptionsDescriptor> configure) => Set(configure, "ner");
 		public void PassThrough(PassThroughInferenceOptions variant) => Set(variant, "pass_through");
 		public void PassThrough(Action<PassThroughInferenceOptionsDescriptor> configure) => Set(configure, "pass_through");
+		public void QuestionAnswering(QuestionAnsweringInferenceOptions variant) => Set(variant, "question_answering");
+		public void QuestionAnswering(Action<QuestionAnsweringInferenceOptionsDescriptor> configure) => Set(configure, "question_answering");
 		public void Regression(RegressionInferenceOptions variant) => Set(variant, "regression");
 		public void Regression(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 		public void TextClassification(TextClassificationInferenceOptions variant) => Set(variant, "text_classification");
@@ -279,6 +290,8 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public void Ner(Action<NerInferenceOptionsDescriptor> configure) => Set(configure, "ner");
 		public void PassThrough(PassThroughInferenceOptions variant) => Set(variant, "pass_through");
 		public void PassThrough(Action<PassThroughInferenceOptionsDescriptor> configure) => Set(configure, "pass_through");
+		public void QuestionAnswering(QuestionAnsweringInferenceOptions variant) => Set(variant, "question_answering");
+		public void QuestionAnswering(Action<QuestionAnsweringInferenceOptionsDescriptor> configure) => Set(configure, "question_answering");
 		public void Regression(RegressionInferenceOptions variant) => Set(variant, "regression");
 		public void Regression(Action<RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
 		public void Regression<TDocument>(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
