@@ -22,12 +22,20 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MigrationFeature
+	public partial class MultiGetError
 	{
 		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		[JsonPropertyName("_id")]
+		public string Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_index")]
+		public string Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("error")]
+		public Elastic.Clients.Elasticsearch.ErrorCause Error { get; init; }
 	}
 }
