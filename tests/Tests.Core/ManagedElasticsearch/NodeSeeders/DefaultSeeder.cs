@@ -270,8 +270,6 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			{
 				mappings = new
 				{
-					_routing = new { required = true },
-
 					properties = new Dictionary<string, object>
 					{
 						{ "onlineHandle", new { type = "keyword" } }
@@ -417,7 +415,8 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		{
 			var tasks = new Task[]
 			{
-				Client.IndexManyAsync(Project.Projects)
+				Client.IndexManyAsync(Project.Projects),
+				Client.IndexManyAsync(Developer.Developers)
 			};
 
 			await Task.WhenAll(tasks).ConfigureAwait(false);

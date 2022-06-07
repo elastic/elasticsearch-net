@@ -1,0 +1,14 @@
+{
+  Id: 1001,
+  Index: devs,
+  Error: {
+    Reason: routing is required for [devs]/[1001],
+    RootCause: [
+      {
+        Reason: routing is required for [devs]/[1001],
+        Type: routing_missing_exception
+      }
+    ],
+    Type: routing_missing_exception
+  }
+}

@@ -1138,6 +1138,48 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<InfoRequestDescriptor, InfoResponse>(descriptor);
 		}
 
+		public MultiGetResponse<TDocument> MultiGet<TDocument>(MultiGetRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<MultiGetRequest, MultiGetResponse<TDocument>>(request);
+		}
+
+		public Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(MultiGetRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<MultiGetRequest, MultiGetResponse<TDocument>>(request, cancellationToken);
+		}
+
+		public MultiGetResponse<TDocument> MultiGet<TDocument>()
+		{
+			var descriptor = new MultiGetRequestDescriptor<TDocument>();
+			descriptor.BeforeRequest();
+			return DoRequest<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
+		}
+
+		public MultiGetResponse<TDocument> MultiGet<TDocument>(Action<MultiGetRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new MultiGetRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
+		}
+
+		public Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MultiGetRequestDescriptor<TDocument>();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
+		}
+
+		public Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(Action<MultiGetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MultiGetRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
+		}
+
 		public OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
 		{
 			request.BeforeRequest();
