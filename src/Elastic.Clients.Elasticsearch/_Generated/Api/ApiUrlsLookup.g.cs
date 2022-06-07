@@ -215,6 +215,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls MachineLearningUpgradeJobSnapshot = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_upgrade" });
 		internal static ApiUrls MachineLearningValidateDetector = new ApiUrls(new[] { "/_ml/anomaly_detectors/_validate/detector" });
 		internal static ApiUrls MachineLearningValidate = new ApiUrls(new[] { "/_ml/anomaly_detectors/_validate" });
+		internal static ApiUrls NoNamespaceMget = new ApiUrls(new[] { "/_mget", "/{index}/_mget" });
 		internal static ApiUrls NodesHotThreads = new ApiUrls(new[] { "/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads" });
 		internal static ApiUrls NodesInfo = new ApiUrls(new[] { "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}" });
 		internal static ApiUrls NodesReloadSecureSettings = new ApiUrls(new[] { "/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings" });

@@ -22,12 +22,45 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MigrationFeature
+	public partial class GetResult<TDocument>
 	{
 		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		[JsonPropertyName("_id")]
+		public string Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_index")]
+		public string Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_primary_term")]
+		public long? PrimaryTerm { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_routing")]
+		public string? Routing { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_seq_no")]
+		public long? SeqNo { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_source")]
+		[SourceConverter]
+		public TDocument? Source { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_version")]
+		public long? Version { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Elastic.Clients.Elasticsearch.FieldValues? Fields { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("found")]
+		public bool Found { get; init; }
 	}
 }
