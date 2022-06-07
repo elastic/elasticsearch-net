@@ -15,19 +15,17 @@
 //
 // ------------------------------------------------
 
-using System;
+using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MigrationFeature
+	public sealed partial class MultiGetResponse<TDocument> : ElasticsearchResponseBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		[JsonPropertyName("docs")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ResponseItem<TDocument>> Docs { get; init; }
 	}
 }
