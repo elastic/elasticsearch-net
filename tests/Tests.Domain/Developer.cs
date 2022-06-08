@@ -6,6 +6,7 @@ using Bogus;
 using System.Collections.Generic;
 using Tests.Configuration;
 using System.Threading;
+using System.Text.Json.Serialization;
 
 namespace Tests.Domain;
 
@@ -17,6 +18,8 @@ public class Developer : Person
 	//public GeoIp GeoIp { get; set; }
 	public string IpAddress { get; set; }
 	public string OnlineHandle { get; set; }
+
+	[JsonIgnore]
 	public string PrivateValue { get; set; }
 
 	// @formatter:off — enable formatter after this line
@@ -34,5 +37,4 @@ public class Developer : Person
 			.RuleFor(p => p.IpAddress, p => p.Internet.Ip());
 
 	public static IList<Developer> Developers { get; } = Generator.Clone().Generate(1000);
-	// @formatter:on — enable formatter after this line
 }
