@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,24 +23,16 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MigrationFeature
+	public abstract partial class ErrorResponseBase : ElasticsearchResponseBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		[JsonPropertyName("error")]
+		public Elastic.Clients.Elasticsearch.ErrorCause Error { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.MigrationFeatureIndexInfo> Indices { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("migration_status")]
-		public Elastic.Clients.Elasticsearch.Migration.MigrationStatus MigrationStatus { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("minimum_index_version")]
-		public string MinimumIndexVersion { get; init; }
+		[JsonPropertyName("status")]
+		public int Status { get; init; }
 	}
 }

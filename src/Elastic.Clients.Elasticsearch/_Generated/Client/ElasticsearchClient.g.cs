@@ -1180,6 +1180,48 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
 		}
 
+		public MultiSearchResponse<TDocument> MultiSearch<TDocument>(MultiSearchRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<MultiSearchRequest, MultiSearchResponse<TDocument>>(request);
+		}
+
+		public Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(MultiSearchRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<MultiSearchRequest, MultiSearchResponse<TDocument>>(request, cancellationToken);
+		}
+
+		public MultiSearchResponse<TDocument> MultiSearch<TDocument>()
+		{
+			var descriptor = new MultiSearchRequestDescriptor<TDocument>();
+			descriptor.BeforeRequest();
+			return DoRequest<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
+		}
+
+		public MultiSearchResponse<TDocument> MultiSearch<TDocument>(Action<MultiSearchRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new MultiSearchRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
+		}
+
+		public Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MultiSearchRequestDescriptor<TDocument>();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
+		}
+
+		public Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(Action<MultiSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MultiSearchRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
+		}
+
 		public OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
 		{
 			request.BeforeRequest();

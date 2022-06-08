@@ -15,31 +15,21 @@
 //
 // ------------------------------------------------
 
-using System;
+using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MigrationFeature
+	public sealed partial class MultiSearchResponse<TDocument> : ElasticsearchResponseBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		[JsonPropertyName("responses")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchResponseItem<TDocument>> Responses { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.MigrationFeatureIndexInfo> Indices { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("migration_status")]
-		public Elastic.Clients.Elasticsearch.Migration.MigrationStatus MigrationStatus { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("minimum_index_version")]
-		public string MinimumIndexVersion { get; init; }
+		[JsonPropertyName("took")]
+		public long Took { get; init; }
 	}
 }
