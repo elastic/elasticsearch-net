@@ -22,12 +22,52 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MigrationFeature
+	public partial class MultisearchHeader
 	{
 		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		[JsonPropertyName("allow_no_indices")]
+		public bool? AllowNoIndices { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("allow_partial_search_results")]
+		public bool? AllowPartialSearchResults { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("ccs_minimize_roundtrips")]
+		public bool? CcsMinimizeRoundtrips { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("expand_wildcards")]
+		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_throttled")]
+		public bool? IgnoreThrottled { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_unavailable")]
+		public bool? IgnoreUnavailable { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public Elastic.Clients.Elasticsearch.Indices? Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("preference")]
+		public string? Preference { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("request_cache")]
+		public bool? RequestCache { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("routing")]
+		public string? Routing { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("search_type")]
+		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; init; }
 	}
 }
