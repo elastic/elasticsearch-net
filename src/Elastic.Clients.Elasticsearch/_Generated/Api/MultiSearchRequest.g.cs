@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
 
-	public partial class MultiSearchRequest : PlainRequestBase<MultiSearchRequestParameters>
+	public partial class MultiSearchRequest : PlainRequestBase<MultiSearchRequestParameters>, IStreamSerializable
 	{
 		public MultiSearchRequest()
 		{
@@ -112,6 +112,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+
+		public List<SearchRequestItem> Searches { get; set; }
 	}
 
 	public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDescriptorBase<MultiSearchRequestDescriptor<TDocument>, MultiSearchRequestParameters>

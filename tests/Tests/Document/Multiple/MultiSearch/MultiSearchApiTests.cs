@@ -34,10 +34,11 @@ public class MultiSearchApiTests
 
 	protected override MultiSearchRequest Initializer => new(Infer.Index<Project>())
 	{
-		Searches = new List<RequestItem>
+		Searches = new List<SearchRequestItem>
 		{
-			new RequestItem(new MultisearchBody { From = 0, Size = 10, Query = new MatchAllQuery() }),
-			new RequestItem(new MultisearchBody { From = 0, Size = 1, Query = new MatchAllQuery() })
+			// TODO after code-gen
+			//new RequestItem(new MultisearchBody { From = 0, Size = 10, Query = new MatchAllQuery() }),
+			//new RequestItem(new MultisearchBody { From = 0, Size = 1, Query = new MatchAllQuery() })
 		}
 	};
 

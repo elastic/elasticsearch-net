@@ -53,10 +53,8 @@ namespace Elastic.Clients.Elasticsearch
 		internal override void BeforeRequest() => TypedKeys(true);
 	}
 
-	public partial class MultiSearchRequest : IStreamSerializable
+	public partial class MultiSearchRequest
 	{
-		public List<RequestItem> Searches { get; set; }
-
 		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
 			if (Searches is null)

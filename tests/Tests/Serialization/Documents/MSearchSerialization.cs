@@ -33,10 +33,10 @@ public class MSearchSerialization
 
 		var request = (IStreamSerializable)new MultiSearchRequest
 		{
-			Searches = new List<RequestItem>
+			Searches = new List<SearchRequestItem>
 			{
-				new RequestItem(new MultisearchHeader { Index = Infer.Index<Project>() }, new MultisearchBody { From = 0, Query = new MatchAllQuery() }),
-				new RequestItem(new MultisearchHeader { Index = Infer.Index<Project>() }, new MultisearchBody { From = 0, Query = new MatchAllQuery() })
+				//new SearchRequestItem(new MultisearchHeader { Index = Infer.Index<Project>() }, new MultisearchBody { From = 0, Query = new MatchAllQuery() }),
+				//new SearchRequestItem(new MultisearchHeader { Index = Infer.Index<Project>() }, new MultisearchBody { From = 0, Query = new MatchAllQuery() })
 			}
 		};
 
