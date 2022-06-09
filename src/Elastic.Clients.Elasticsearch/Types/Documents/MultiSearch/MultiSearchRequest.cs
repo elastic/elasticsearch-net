@@ -18,7 +18,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		// Temporary implementation - TODO - Code gen properly
 
-		private List<RequestItem> _searches = new List<RequestItem>();
+		private readonly List<RequestItem> _searches = new();
 
 		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
@@ -84,6 +84,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal override void BeforeRequest() => TypedKeys = true;
 	}
 
+	// Will generate as SearchRequestItem
 	public class RequestItem : IStreamSerializable
 	{
 		public RequestItem(MultisearchBody body) => Body = body;
