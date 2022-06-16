@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <!-- Type Providers are restored using net461, fine for netcoreapp2.2 so we kill the warning -->
     <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commandline.fs" />
@@ -34,17 +35,15 @@
     <Content Include="..\..\.github\workflows\make-release-notes.yml"><Link>make-release-notes.yml</Link></Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FSharp.Core" Version="6.0.4" /> <!-- Hardcoded for manual control over the version, otherwise this updates when the SDK updates. -->
     <PackageReference Include="Bullseye" Version="3.3.0" />
     <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.3.0" />
-    
     <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
     <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />
     <PackageReference Include="Fake.IO.FileSystem" Version="5.15.0" />
     <PackageReference Include="Fake.IO.Zip" Version="5.15.0" />
     <PackageReference Include="Fake.Tools.Git" Version="5.15.0" />
-    
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-
     <PackageReference Include="Octokit" Version="0.32.0" />
     <PackageReference Include="Proc" Version="0.6.1" />
   </ItemGroup>

@@ -15,17 +15,21 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport;
-using System;
+using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Mapping
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class NumberProperty
+	public sealed partial class MultiSearchResponse<TDocument> : ElasticsearchResponseBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("responses")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchResponseItem<TDocument>> Responses { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("took")]
+		public long Took { get; init; }
 	}
 }
