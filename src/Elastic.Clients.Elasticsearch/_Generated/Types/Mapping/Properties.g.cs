@@ -286,98 +286,98 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		{
 			switch (type)
 			{
-				case "{dynamic_property}":
-					return JsonSerializer.Deserialize<DynamicProperty>(ref reader, options);
-				case "match_only_text":
-					return JsonSerializer.Deserialize<MatchOnlyTextProperty>(ref reader, options);
-				case "point":
-					return JsonSerializer.Deserialize<PointProperty>(ref reader, options);
-				case "wildcard":
-					return JsonSerializer.Deserialize<WildcardProperty>(ref reader, options);
-				case "version":
-					return JsonSerializer.Deserialize<VersionProperty>(ref reader, options);
-				case "token_count":
-					return JsonSerializer.Deserialize<TokenCountProperty>(ref reader, options);
-				case "shape":
-					return JsonSerializer.Deserialize<ShapeProperty>(ref reader, options);
-				case "murmur3":
-					return JsonSerializer.Deserialize<Murmur3HashProperty>(ref reader, options);
-				case "ip":
-					return JsonSerializer.Deserialize<IpProperty>(ref reader, options);
-				case "completion":
-					return JsonSerializer.Deserialize<CompletionProperty>(ref reader, options);
-				case "geo_shape":
-					return JsonSerializer.Deserialize<GeoShapeProperty>(ref reader, options);
-				case "geo_point":
-					return JsonSerializer.Deserialize<GeoPointProperty>(ref reader, options);
-				case "date_range":
-					return JsonSerializer.Deserialize<DateRangeProperty>(ref reader, options);
-				case "double_range":
-					return JsonSerializer.Deserialize<DoubleRangeProperty>(ref reader, options);
-				case "float_range":
-					return JsonSerializer.Deserialize<FloatRangeProperty>(ref reader, options);
-				case "integer_range":
-					return JsonSerializer.Deserialize<IntegerRangeProperty>(ref reader, options);
-				case "ip_range":
-					return JsonSerializer.Deserialize<IpRangeProperty>(ref reader, options);
 				case "long_range":
 					return JsonSerializer.Deserialize<LongRangeProperty>(ref reader, options);
-				case "scaled_float":
-					return JsonSerializer.Deserialize<ScaledFloatNumberProperty>(ref reader, options);
+				case "ip_range":
+					return JsonSerializer.Deserialize<IpRangeProperty>(ref reader, options);
+				case "integer_range":
+					return JsonSerializer.Deserialize<IntegerRangeProperty>(ref reader, options);
+				case "float_range":
+					return JsonSerializer.Deserialize<FloatRangeProperty>(ref reader, options);
+				case "double_range":
+					return JsonSerializer.Deserialize<DoubleRangeProperty>(ref reader, options);
+				case "date_range":
+					return JsonSerializer.Deserialize<DateRangeProperty>(ref reader, options);
 				case "unsigned_long":
 					return JsonSerializer.Deserialize<UnsignedLongNumberProperty>(ref reader, options);
-				case "byte":
-					return JsonSerializer.Deserialize<ByteNumberProperty>(ref reader, options);
 				case "short":
 					return JsonSerializer.Deserialize<ShortNumberProperty>(ref reader, options);
+				case "scaled_float":
+					return JsonSerializer.Deserialize<ScaledFloatNumberProperty>(ref reader, options);
 				case "long":
 					return JsonSerializer.Deserialize<LongNumberProperty>(ref reader, options);
 				case "integer":
 					return JsonSerializer.Deserialize<IntegerNumberProperty>(ref reader, options);
-				case "double":
-					return JsonSerializer.Deserialize<DoubleNumberProperty>(ref reader, options);
 				case "half_float":
 					return JsonSerializer.Deserialize<HalfFloatNumberProperty>(ref reader, options);
 				case "float":
 					return JsonSerializer.Deserialize<FloatNumberProperty>(ref reader, options);
-				case "keyword":
-					return JsonSerializer.Deserialize<KeywordProperty>(ref reader, options);
-				case "date_nanos":
-					return JsonSerializer.Deserialize<DateNanosProperty>(ref reader, options);
-				case "date":
-					return JsonSerializer.Deserialize<DateProperty>(ref reader, options);
-				case "boolean":
-					return JsonSerializer.Deserialize<BooleanProperty>(ref reader, options);
-				case "binary":
-					return JsonSerializer.Deserialize<BinaryProperty>(ref reader, options);
-				case "text":
-					return JsonSerializer.Deserialize<TextProperty>(ref reader, options);
-				case "search_as_you_type":
-					return JsonSerializer.Deserialize<SearchAsYouTypeProperty>(ref reader, options);
-				case "nested":
-					return JsonSerializer.Deserialize<NestedProperty>(ref reader, options);
-				case "object":
-					return JsonSerializer.Deserialize<ObjectProperty>(ref reader, options);
-				case "aggregate_metric_double":
-					return JsonSerializer.Deserialize<AggregateMetricDoubleProperty>(ref reader, options);
-				case "dense_vector":
-					return JsonSerializer.Deserialize<DenseVectorProperty>(ref reader, options);
+				case "double":
+					return JsonSerializer.Deserialize<DoubleNumberProperty>(ref reader, options);
+				case "byte":
+					return JsonSerializer.Deserialize<ByteNumberProperty>(ref reader, options);
+				case "shape":
+					return JsonSerializer.Deserialize<ShapeProperty>(ref reader, options);
+				case "point":
+					return JsonSerializer.Deserialize<PointProperty>(ref reader, options);
+				case "geo_shape":
+					return JsonSerializer.Deserialize<GeoShapeProperty>(ref reader, options);
+				case "geo_point":
+					return JsonSerializer.Deserialize<GeoPointProperty>(ref reader, options);
+				case "token_count":
+					return JsonSerializer.Deserialize<TokenCountProperty>(ref reader, options);
+				case "murmur3":
+					return JsonSerializer.Deserialize<Murmur3HashProperty>(ref reader, options);
+				case "ip":
+					return JsonSerializer.Deserialize<IpProperty>(ref reader, options);
 				case "histogram":
 					return JsonSerializer.Deserialize<HistogramProperty>(ref reader, options);
 				case "alias":
 					return JsonSerializer.Deserialize<FieldAliasProperty>(ref reader, options);
 				case "constant_keyword":
 					return JsonSerializer.Deserialize<ConstantKeywordProperty>(ref reader, options);
+				case "completion":
+					return JsonSerializer.Deserialize<CompletionProperty>(ref reader, options);
+				case "object":
+					return JsonSerializer.Deserialize<ObjectProperty>(ref reader, options);
+				case "nested":
+					return JsonSerializer.Deserialize<NestedProperty>(ref reader, options);
+				case "flattened":
+					return JsonSerializer.Deserialize<FlattenedProperty>(ref reader, options);
+				case "dense_vector":
+					return JsonSerializer.Deserialize<DenseVectorProperty>(ref reader, options);
+				case "aggregate_metric_double":
+					return JsonSerializer.Deserialize<AggregateMetricDoubleProperty>(ref reader, options);
+				case "date":
+					return JsonSerializer.Deserialize<DateProperty>(ref reader, options);
+				case "date_nanos":
+					return JsonSerializer.Deserialize<DateNanosProperty>(ref reader, options);
+				case "wildcard":
+					return JsonSerializer.Deserialize<WildcardProperty>(ref reader, options);
+				case "version":
+					return JsonSerializer.Deserialize<VersionProperty>(ref reader, options);
+				case "text":
+					return JsonSerializer.Deserialize<TextProperty>(ref reader, options);
+				case "search_as_you_type":
+					return JsonSerializer.Deserialize<SearchAsYouTypeProperty>(ref reader, options);
 				case "rank_features":
 					return JsonSerializer.Deserialize<RankFeaturesProperty>(ref reader, options);
 				case "rank_feature":
 					return JsonSerializer.Deserialize<RankFeatureProperty>(ref reader, options);
 				case "percolator":
 					return JsonSerializer.Deserialize<PercolatorProperty>(ref reader, options);
+				case "match_only_text":
+					return JsonSerializer.Deserialize<MatchOnlyTextProperty>(ref reader, options);
+				case "keyword":
+					return JsonSerializer.Deserialize<KeywordProperty>(ref reader, options);
 				case "join":
 					return JsonSerializer.Deserialize<JoinProperty>(ref reader, options);
-				case "flattened":
-					return JsonSerializer.Deserialize<FlattenedProperty>(ref reader, options);
+				case "{dynamic_property}":
+					return JsonSerializer.Deserialize<DynamicProperty>(ref reader, options);
+				case "boolean":
+					return JsonSerializer.Deserialize<BooleanProperty>(ref reader, options);
+				case "binary":
+					return JsonSerializer.Deserialize<BinaryProperty>(ref reader, options);
 				default:
 					throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
 			}

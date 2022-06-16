@@ -23,9 +23,16 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Mapping
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class CoreProperty
+	public partial class SearchResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.MultiSearchItem<TDocument>?, Elastic.Clients.Elasticsearch.ErrorResponseBase?>
 	{
+		public SearchResponseItem(Elastic.Clients.Elasticsearch.MultiSearchItem<TDocument>? item) : base(item)
+		{
+		}
+
+		public SearchResponseItem(Elastic.Clients.Elasticsearch.ErrorResponseBase? item) : base(item)
+		{
+		}
 	}
 }
