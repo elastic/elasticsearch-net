@@ -10,7 +10,7 @@ using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Document.Multiple.MultiGet;
+namespace Tests.Document.Multiple;
 
 public class MultiGetSimplifiedApiTests
 	: ApiIntegrationTestBase<ReadOnlyCluster, MultiGetResponse<Developer>, MultiGetRequestDescriptor<Developer>, MultiGetRequest>

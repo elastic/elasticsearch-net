@@ -12,82 +12,27 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	// STUBBED POC
-
-	public sealed partial class MultiSearchRequestDescriptor<TDocument> : IStreamSerializable
+	public sealed partial class MultiSearchRequestDescriptor<TDocument>
 	{
-		// Temporary implementation - TODO - Code gen properly
+		internal override void BeforeRequest() => TypedKeys(true);
+	}
 
-		private readonly List<RequestItem> _searches = new();
-
-		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-		{
-			if (_searches is null)
-				return;
-
-			foreach (var search in _searches)
-			{
-				if (search is IStreamSerializable serializable)
-					serializable.Serialize(stream, settings, formatting);
-			}
-		}
-
-		async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-		{
-			if (_searches is null)
-				return;
-
-			foreach (var search in _searches)
-			{
-				if (search is IStreamSerializable serializable)
-					await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-			}
-		}
-
-		public MultiSearchRequestDescriptor<TDocument> AddSearch(RequestItem item)
-		{
-			_searches.Add(item);
-			return this;
-		}
-
+	public sealed partial class MultiSearchRequestDescriptor
+	{
 		internal override void BeforeRequest() => TypedKeys(true);
 	}
 
 	public partial class MultiSearchRequest
 	{
-		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-		{
-			if (Searches is null)
-				return;
-
-			foreach (var search in Searches)
-			{
-				if (search is IStreamSerializable serializable)
-					serializable.Serialize(stream, settings, formatting);
-			}
-		}
-
-		async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-		{
-			if (Searches is null)
-				return;
-
-			foreach (var search in Searches)
-			{
-				if (search is IStreamSerializable serializable)
-					await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-			}
-		}
-
 		internal override void BeforeRequest() => TypedKeys = true;
 	}
 
-	// Will generate as SearchRequestItem
-	public class RequestItem : IStreamSerializable
+	// POC - If we have more than one union doing this, can we autogenerate with correct ctors etc.
+	public class SearchRequestItem : IStreamSerializable
 	{
-		public RequestItem(MultisearchBody body) => Body = body;
+		public SearchRequestItem(MultisearchBody body) => Body = body;
 
-		public RequestItem(MultisearchHeader header, MultisearchBody body)
+		public SearchRequestItem(MultisearchHeader header, MultisearchBody body)
 		{
 			Header = header;
 			Body = body;
@@ -139,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class MultiSearchResponse<TDocument>
 	{
-		public override bool IsValid => base.IsValid && Responses.All(b => b.Item1 is not null && b.Item1.Status == 200);
+		public override bool IsValid => base.IsValid && (Responses?.All(b => b.Item1 is not null && b.Item1.Status == 200) ?? true);
 
 		[JsonIgnore]
 		public int TotalResponses => Responses.HasAny() ? Responses.Count() : 0;

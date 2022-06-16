@@ -18,9 +18,11 @@
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
@@ -114,9 +116,31 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 		public List<SearchRequestItem> Searches { get; set; }
+
+		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+		{
+			if (Searches is null)
+				return;
+			foreach (var item in Searches)
+			{
+				if (item is IStreamSerializable serializable)
+					serializable.Serialize(stream, settings, formatting);
+			}
+		}
+
+		async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+		{
+			if (Searches is null)
+				return;
+			foreach (var item in Searches)
+			{
+				if (item is IStreamSerializable serializable)
+					await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+			}
+		}
 	}
 
-	public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDescriptorBase<MultiSearchRequestDescriptor<TDocument>, MultiSearchRequestParameters>
+	public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDescriptorBase<MultiSearchRequestDescriptor<TDocument>, MultiSearchRequestParameters>, IStreamSerializable
 	{
 		internal MultiSearchRequestDescriptor(Action<MultiSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public MultiSearchRequestDescriptor()
@@ -147,9 +171,38 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}
+
+		List<SearchRequestItem> _items = new();
+		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+		{
+			if (_items is null)
+				return;
+			foreach (var item in _items)
+			{
+				if (item is IStreamSerializable serializable)
+					serializable.Serialize(stream, settings, formatting);
+			}
+		}
+
+		async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+		{
+			if (_items is null)
+				return;
+			foreach (var item in _items)
+			{
+				if (item is IStreamSerializable serializable)
+					await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+			}
+		}
+
+		public MultiSearchRequestDescriptor<TDocument> AddSearch(SearchRequestItem search)
+		{
+			_items.Add(search);
+			return this;
+		}
 	}
 
-	public sealed partial class MultiSearchRequestDescriptor : RequestDescriptorBase<MultiSearchRequestDescriptor, MultiSearchRequestParameters>
+	public sealed partial class MultiSearchRequestDescriptor : RequestDescriptorBase<MultiSearchRequestDescriptor, MultiSearchRequestParameters>, IStreamSerializable
 	{
 		internal MultiSearchRequestDescriptor(Action<MultiSearchRequestDescriptor> configure) => configure.Invoke(this);
 		public MultiSearchRequestDescriptor()
@@ -179,6 +232,35 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+		}
+
+		List<SearchRequestItem> _items = new();
+		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+		{
+			if (_items is null)
+				return;
+			foreach (var item in _items)
+			{
+				if (item is IStreamSerializable serializable)
+					serializable.Serialize(stream, settings, formatting);
+			}
+		}
+
+		async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+		{
+			if (_items is null)
+				return;
+			foreach (var item in _items)
+			{
+				if (item is IStreamSerializable serializable)
+					await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+			}
+		}
+
+		public MultiSearchRequestDescriptor AddSearch(SearchRequestItem search)
+		{
+			_items.Add(search);
+			return this;
 		}
 	}
 }

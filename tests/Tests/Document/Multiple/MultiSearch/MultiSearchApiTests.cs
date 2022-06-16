@@ -11,7 +11,7 @@ using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Document.Multiple.MultiGet;
+namespace Tests.Document.Multiple;
 
 public class MultiSearchApiTests
 	: ApiIntegrationTestBase<ReadOnlyCluster, MultiSearchResponse<Developer>, MultiSearchRequestDescriptor<Developer>, MultiSearchRequest>
@@ -20,15 +20,17 @@ public class MultiSearchApiTests
 
 	protected override bool ExpectIsValid => true;
 
-	protected override bool VerifyJson => true;
+	protected override bool SupportsDeserialization => false;
+
+	protected override bool VerifyNdJson => true;
 
 	protected override int ExpectStatusCode => 200;
 
 	// TODO - Fluent API improvements after POC code-gen
 	protected override Action<MultiSearchRequestDescriptor<Developer>> Fluent => d => d
 		.Indices(Infer.Index<Project>()) // TODO - Should support fluent verion and ctor with Indices
-		.AddSearch(new RequestItem(new MultisearchBody { From = 0, Size = 10, Query = new MatchAllQuery() }))
-		.AddSearch(new RequestItem(new MultisearchBody { From = 0, Size = 1, Query = new MatchAllQuery() }));
+		.AddSearch(new SearchRequestItem(new MultisearchBody { From = 0, Size = 10, Query = new MatchAllQuery() }))
+		.AddSearch(new SearchRequestItem(new MultisearchBody { From = 0, Size = 1, Query = new MatchAllQuery() }));
 
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 
@@ -36,15 +38,12 @@ public class MultiSearchApiTests
 	{
 		Searches = new List<SearchRequestItem>
 		{
-			// TODO after code-gen
-			//new RequestItem(new MultisearchBody { From = 0, Size = 10, Query = new MatchAllQuery() }),
-			//new RequestItem(new MultisearchBody { From = 0, Size = 1, Query = new MatchAllQuery() })
+			new SearchRequestItem(new MultisearchBody { From = 0, Size = 10, Query = new MatchAllQuery() }),
+			new SearchRequestItem(new MultisearchBody { From = 0, Size = 1, Query = new MatchAllQuery() })
 		}
 	};
 
-	protected override bool SupportsDeserialization => false;
-
-	protected override string ExpectedUrlPathAndQuery => "/projects/_mget";
+	protected override string ExpectedUrlPathAndQuery => "/project/_msearch";
 
 	protected override LazyResponses ClientUsage() => Calls(
 		(client, f) => client.MultiSearch(f),
@@ -67,7 +66,5 @@ public class MultiSearchApiTests
 		lastResults.Should().NotBeNull();
 		lastResults.Total.Should().Be(100);
 		lastResults.Documents.Should().HaveCount(1);
-
-		// TODO - More assertions
 	}
 }

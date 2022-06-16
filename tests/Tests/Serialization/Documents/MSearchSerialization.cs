@@ -35,8 +35,8 @@ public class MSearchSerialization
 		{
 			Searches = new List<SearchRequestItem>
 			{
-				//new SearchRequestItem(new MultisearchHeader { Index = Infer.Index<Project>() }, new MultisearchBody { From = 0, Query = new MatchAllQuery() }),
-				//new SearchRequestItem(new MultisearchHeader { Index = Infer.Index<Project>() }, new MultisearchBody { From = 0, Query = new MatchAllQuery() })
+				new SearchRequestItem(new MultisearchHeader { Index = Infer.Index<Project>() }, new MultisearchBody { From = 0, Query = new MatchAllQuery() }),
+				new SearchRequestItem(new MultisearchHeader { Index = Infer.Index<Project>() }, new MultisearchBody { From = 0, Query = new MatchAllQuery() })
 			}
 		};
 
