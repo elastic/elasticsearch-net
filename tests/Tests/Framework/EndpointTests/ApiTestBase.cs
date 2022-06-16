@@ -27,6 +27,7 @@ namespace Tests.Framework.EndpointTests
 		protected ApiTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson { get; } = null;
+		protected virtual bool VerifyNdJson { get; } = false;
 		protected virtual bool VerifyJson { get; } = false;
 		protected virtual bool VerifyResponseObjects { get; } = false;
 
@@ -50,6 +51,24 @@ namespace Tests.Framework.EndpointTests
 				var descriptor = NewDescriptor();
 				Fluent?.Invoke(descriptor);
 				await Verifier.VerifyJson(SerializeUsingClient(descriptor));
+			}
+		}
+
+		[U]
+		protected virtual async Task VerifyInitializerNdJson()
+		{
+			if (VerifyNdJson)
+				await Verifier.Verify(SerializeUsingClient(Initializer));
+		}
+
+		[U]
+		protected virtual async Task VerifyDescriptorNdJson()
+		{
+			if (VerifyNdJson)
+			{
+				var descriptor = NewDescriptor();
+				Fluent?.Invoke(descriptor);
+				await Verifier.Verify(SerializeUsingClient(descriptor));
 			}
 		}
 
