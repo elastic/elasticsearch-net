@@ -15,7 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -23,9 +22,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Mapping
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RangeProperty
+	public partial class MultiSearchItem<TDocument> : ResponseBody<TDocument>
 	{
+		[JsonInclude]
+		[JsonPropertyName("status")]
+		public int? Status { get; init; }
 	}
 }
