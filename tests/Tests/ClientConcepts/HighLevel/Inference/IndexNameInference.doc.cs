@@ -260,7 +260,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			Indices indices1 = "foo,bar";
 			Indices indices2 = "bar,foo";
-			indices1.Should().Be(indices2);
+			indices1.Should().BeEquivalentTo(indices2);
 			(indices1 == indices2).Should().BeTrue();
 		}
 
