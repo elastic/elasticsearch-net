@@ -6,7 +6,7 @@
 using System;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch.Helpers;
+namespace Elastic.Clients.Elasticsearch;
 
 internal static class RequestParametersExtensions
 {
