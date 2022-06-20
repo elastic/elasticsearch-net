@@ -13,7 +13,7 @@ using Elastic.Transport.Diagnostics.Auditing;
 using Elastic.Transport.Extensions;
 using Elastic.Transport.Products.Elasticsearch;
 
-namespace Elastic.Clients.Elasticsearch.Helpers;
+namespace Elastic.Clients.Elasticsearch;
 
 public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 {
