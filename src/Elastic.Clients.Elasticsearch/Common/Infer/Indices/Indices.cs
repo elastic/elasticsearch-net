@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,42 +15,103 @@ namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(IndicesJsonConverter))]
-public sealed class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
+public sealed class Indices : IUrlParameter, IEnumerable<IndexName>, IEquatable<Indices>
 {
-	internal Indices(AllIndicesMarker all) : base(all) { }
+	private static readonly HashSet<IndexName> AllIndexList = new() { AllValue };
 
-	internal Indices(ManyIndices indices) : base(indices) { }
+	internal const string AllValue = "_all";
+	internal const string WildcardValue = "*";
 
-	internal Indices(IEnumerable<IndexName> indices) : base(new ManyIndices(indices)) { }
+	private readonly HashSet<IndexName>? _indices;
+	private readonly bool _isAllIndices;
 
-	internal Indices(IEnumerable<string> indices) : base(new ManyIndices(indices)) { }
+	internal Indices(IndexName indexName)
+	{
+		if (indexName.Equals(AllValue) || indexName.Equals(WildcardValue))
+		{
+			_isAllIndices = true;
+			_indices = AllIndexList;
+			return;
+		}
 
-	/// <summary>All indices. Represents _all</summary>
-	public static Indices All { get; } = new Indices(new AllIndicesMarker());
+		_indices = new HashSet<IndexName>
+		{
+			indexName
+		};
+	}
 
-	/// <inheritdoc cref="All" />
-	public static Indices AllIndices { get; } = All;
+	internal Indices(IEnumerable<IndexName> indices)
+	{
+		var enumerated = indices.NotEmpty(nameof(indices));
 
-	private string DebugDisplay => Match(
-		all => "_all",
-		types => $"Count: {types.Indices.Count} [" + string.Join(",", types.Indices.Select((t, i) => $"({i + 1}: {t.DebugDisplay})")) + "]"
-	);
+		foreach (var index in enumerated)
+		{
+			if (index.Equals(AllValue) || index.Equals(WildcardValue))
+			{
+				_isAllIndices = true;
+				_indices = AllIndexList;
+				return;
+			}
+		}
+
+		_indices = new HashSet<IndexName>(enumerated);
+	}
+
+	internal Indices(IEnumerable<string> indices)
+	{
+		var enumerated = indices.NotEmpty(nameof(indices));
+
+		foreach (var index in enumerated)
+		{
+			if (index.Equals(AllValue) || index.Equals(WildcardValue))
+			{
+				_isAllIndices = true;
+				_indices = AllIndexList;
+				return;
+			}
+		}
+
+		_indices = new HashSet<IndexName>(enumerated.Select(s => (IndexName)s));
+	}
+
+	public Indices And<T>()
+	{
+		if (_isAllIndices)
+			return this;
+
+		_indices.Add(typeof(T));
+
+		return this;
+	}
+
+	internal HashSet<IndexName> IndexNames => _indices;
+
+	public static Indices All { get; } = new Indices(AllValue);
+
+	private string DebugDisplay => _isAllIndices ? "_all" : $"Count: {_indices.Count} [" + string.Join(",", _indices.Select((t, i) => $"({i + 1}: {t.DebugDisplay})")) + "]";
 
 	public override string ToString() => DebugDisplay;
 
-	string IUrlParameter.GetString(ITransportConfiguration? settings) => Match(
-		all => "_all",
-		many =>
-		{
-			if (settings is not IElasticsearchClientSettings clientSettings)
-				throw new Exception(
-					"Tried to pass index names on querysting but it could not be resolved because no nest settings are available");
+	string IUrlParameter.GetString(ITransportConfiguration? settings)
+	{
+		if (settings is not IElasticsearchClientSettings clientSettings)
+			throw new Exception(
+				"Tried to pass index names on querysting but it could not be resolved because no nest settings are available.");
 
-			var infer = clientSettings.Inferrer;
-			var indices = many.Indices.Select(i => infer.IndexName(i)).Distinct();
-			return string.Join(",", indices);
+		if (_isAllIndices)
+			return "_all";
+
+		var inferrer = clientSettings.Inferrer;
+
+		if (_indices.Count == 1)
+		{
+			var value = inferrer.IndexName(_indices.First());
+			return value;
 		}
-	);
+		
+		var indices = _indices.Select(i => inferrer.IndexName(i));
+		return string.Join(",", indices);
+	}
 
 	public static IndexName Index(string index) => index;
 
@@ -57,89 +119,74 @@ public sealed class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndice
 
 	public static IndexName Index<T>() => typeof(T);
 
-	public static ManyIndices Index(IEnumerable<IndexName> indices) => new(indices);
-
-	public static ManyIndices Index(params IndexName[] indices) => new(indices);
-
-	public static ManyIndices Index(IEnumerable<string> indices) => new(indices);
-
-	public static ManyIndices Index(params string[] indices) => new(indices);
-
 	public static Indices Parse(string indicesString)
 	{
 		if (indicesString.IsNullOrEmptyCommaSeparatedList(out var indices))
 			return null;
 
-		return indices.Contains("_all") ? All : Index(indices.Select(i => (IndexName)i));
+		return indices.Contains(AllValue) || indices.Contains(WildcardValue) ? All : new Indices(indices);
 	}
 
 	public static implicit operator Indices(string indicesString) => Parse(indicesString);
 
-	public static implicit operator Indices(ManyIndices many) => many == null ? null : new Indices(many);
+	public static implicit operator Indices(string[] indices) => indices.IsEmpty() ? null : new Indices(indices);
 
-	public static implicit operator Indices(string[] many) => many.IsEmpty() ? null : new ManyIndices(many);
+	public static implicit operator Indices(IndexName[] indices) => indices.IsEmpty() ? null : new Indices(indices);
 
-	public static implicit operator Indices(IndexName[] many) => many.IsEmpty() ? null : new ManyIndices(many);
+	public static implicit operator Indices(IndexName index) => index == null ? null : new Indices(new[] { index });
 
-	public static implicit operator Indices(IndexName index) => index == null ? null : new ManyIndices(new[] { index });
-
-	public static implicit operator Indices(Type type) => type == null ? null : new ManyIndices(new IndexName[] { type });
+	public static implicit operator Indices(Type type) => type == null ? null : new Indices(new IndexName[] { type });
 
 	public static bool operator ==(Indices left, Indices right) => Equals(left, right);
 
 	public static bool operator !=(Indices left, Indices right) => !Equals(left, right);
 
+	public bool Equals(Indices other) => EqualsAllIndices(IndexNames, other.IndexNames);
+
 	public override bool Equals(object obj)
 	{
-		if (!(obj is Indices other))
+		if (obj is not Indices other)
 			return false;
 
-		return Match(
-			all => other.Match(a => true, m => false),
-			many => other.Match(
-				a => false,
-				m => EqualsAllIndices(m.Indices, many.Indices)
-			)
-		);
+		return EqualsAllIndices(IndexNames, other.IndexNames);
 	}
 
-	private static bool EqualsAllIndices(IReadOnlyList<IndexName> thisIndices, IReadOnlyList<IndexName> otherIndices)
+	private static bool EqualsAllIndices(HashSet<IndexName> thisIndices, HashSet<IndexName> otherIndices)
 	{
 		if (thisIndices == null && otherIndices == null)
 			return true;
+
 		if (thisIndices == null || otherIndices == null)
 			return false;
 
 		return thisIndices.Count == otherIndices.Count && !thisIndices.Except(otherIndices).Any();
 	}
 
-	public override int GetHashCode() => Match(
-		all => "_all".GetHashCode(),
-		many => string.Concat(many.Indices.OrderBy(i => i.ToString())).GetHashCode()
-	);
-
-	public class AllIndicesMarker
+	public override int GetHashCode()
 	{
-		internal AllIndicesMarker() { }
-	}
+		var hashCodes = new List<int>(IndexNames.Count);
 
-	public class ManyIndices
-	{
-		private readonly List<IndexName> _indices = new();
-
-		internal ManyIndices(IEnumerable<IndexName> indices) => _indices.AddRange(indices.NotEmpty(nameof(indices)));
-
-		internal ManyIndices(IEnumerable<string> indices) =>
-			_indices.AddRange(indices.NotEmpty(nameof(indices)).Select(s => (IndexName)s));
-
-		public IReadOnlyList<IndexName> Indices => _indices;
-
-		public ManyIndices And<T>()
+		foreach (var item in IndexNames.OrderBy(s => s))
 		{
-			_indices.Add(typeof(T));
-			return this;
+			hashCodes.Add(item.GetHashCode());
+		}
+
+		hashCodes.Sort();
+
+		unchecked
+		{
+			var hash = 17;
+			foreach (var hashCode in hashCodes)
+			{
+				hash = hash * 23 + hashCode;
+			}
+			return typeof(IndexName).GetHashCode() ^ hash;
 		}
 	}
+
+	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+	public IEnumerator<IndexName> GetEnumerator() => IndexNames.GetEnumerator();
 }
 
 internal sealed class IndicesJsonConverter : JsonConverter<Indices>
@@ -178,14 +225,6 @@ internal sealed class IndicesJsonConverter : JsonConverter<Indices>
 			return;
 		}
 
-		switch (value.Tag)
-		{
-			case 0:
-				writer.WriteStringValue("_all");
-				break;
-			case 1:
-				writer.WriteStringValue(((IUrlParameter)value).GetString(_settings));
-				break;
-		}
+		writer.WriteStringValue(((IUrlParameter)value).GetString(_settings));
 	}
 }
