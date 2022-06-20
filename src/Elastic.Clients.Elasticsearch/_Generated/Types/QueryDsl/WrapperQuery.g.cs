@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class WrapperQuery : QueryBase, IQueryContainerVariant
+	public partial class WrapperQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "wrapper";
 		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }

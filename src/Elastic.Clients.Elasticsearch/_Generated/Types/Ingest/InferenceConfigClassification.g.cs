@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class InferenceConfigClassification : IInferenceConfigVariant
 	{
-		[JsonIgnore]
-		string IInferenceConfigVariant.InferenceConfigVariantName => "classification";
 		[JsonInclude]
 		[JsonPropertyName("num_top_classes")]
 		public int? NumTopClasses { get; set; }

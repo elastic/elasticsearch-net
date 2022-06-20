@@ -24,12 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SpanWithinQuery : QueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public partial class SpanWithinQuery : QueryBase, IQueryVariant, ISpanQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "span_within";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "span_within";
 		[JsonInclude]
 		[JsonPropertyName("big")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
