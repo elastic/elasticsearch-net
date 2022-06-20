@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Elastic.Clients.Elasticsearch.Helpers
+namespace Elastic.Clients.Elasticsearch
 {
 	public interface IBulkAllRequest<T>
 	{

@@ -5,7 +5,6 @@
 using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Elastic.Clients.Elasticsearch.Helpers;
 using Tests.Framework.DocumentationTests;
 
 namespace Tests.ClientConcepts.HighLevel.Indexing
