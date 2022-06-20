@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class HasChildQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "has_child";
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }

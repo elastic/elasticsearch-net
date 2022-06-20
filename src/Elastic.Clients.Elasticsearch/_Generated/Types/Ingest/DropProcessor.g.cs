@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class DropProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "drop";
 	}
 
 	public sealed partial class DropProcessorDescriptor<TDocument> : SerializableDescriptorBase<DropProcessorDescriptor<TDocument>>

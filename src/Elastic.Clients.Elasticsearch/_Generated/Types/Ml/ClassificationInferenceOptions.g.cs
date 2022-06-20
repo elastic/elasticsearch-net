@@ -26,12 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class ClassificationInferenceOptions : Aggregations.IInferenceConfigVariant, IInferenceConfigCreateVariant, IInferenceConfigUpdateVariant
 	{
-		[JsonIgnore]
-		string Aggregations.IInferenceConfigVariant.InferenceConfigVariantName => "classification";
-		[JsonIgnore]
-		string IInferenceConfigCreateVariant.InferenceConfigCreateVariantName => "classification";
-		[JsonIgnore]
-		string IInferenceConfigUpdateVariant.InferenceConfigUpdateVariantName => "classification";
 		[JsonInclude]
 		[JsonPropertyName("num_top_classes")]
 		public int? NumTopClasses { get; set; }

@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class DotExpanderProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "dot_expander";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }

@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class UppercaseProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "uppercase";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }

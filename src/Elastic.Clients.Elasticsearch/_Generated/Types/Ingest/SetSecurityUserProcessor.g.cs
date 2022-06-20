@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class SetSecurityUserProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "set_security_user";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }

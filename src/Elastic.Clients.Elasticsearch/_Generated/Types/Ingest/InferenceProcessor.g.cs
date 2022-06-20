@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class InferenceProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "inference";
 		[JsonInclude]
 		[JsonPropertyName("field_map")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMap { get; set; }

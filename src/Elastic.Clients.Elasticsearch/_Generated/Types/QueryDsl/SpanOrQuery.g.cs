@@ -26,10 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class SpanOrQuery : QueryBase, IQueryVariant, ISpanQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "span_or";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "span_or";
 		[JsonInclude]
 		[JsonPropertyName("clauses")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }

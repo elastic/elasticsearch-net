@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class JsonProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "json";
 		[JsonInclude]
 		[JsonPropertyName("add_to_root")]
 		public bool AddToRoot { get; set; }

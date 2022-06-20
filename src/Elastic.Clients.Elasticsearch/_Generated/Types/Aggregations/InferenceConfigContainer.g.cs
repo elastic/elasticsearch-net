@@ -26,16 +26,29 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public interface IInferenceConfigVariant
 	{
-		string InferenceConfigVariantName { get; }
 	}
 
 	[JsonConverter(typeof(InferenceConfigContainerConverter))]
 	public partial class InferenceConfigContainer
 	{
-		public InferenceConfigContainer(IInferenceConfigVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		public InferenceConfigContainer(string variantName, IInferenceConfigVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
 		internal IInferenceConfigVariant Variant { get; }
 
-		internal string VariantName => Variant.InferenceConfigVariantName;
+		internal string VariantName { get; }
+
+		public static InferenceConfigContainer Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions variant) => new InferenceConfigContainer("classification", variant);
+		public static InferenceConfigContainer Regression(Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions variant) => new InferenceConfigContainer("regression", variant);
 	}
 
 	internal sealed class InferenceConfigContainerConverter : JsonConverter<InferenceConfigContainer>
@@ -53,13 +66,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions?>(ref reader, options);
-				return new InferenceConfigContainer(variant);
+				return new InferenceConfigContainer(propertyName, variant);
 			}
 
 			if (propertyName == "regression")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions?>(ref reader, options);
-				return new InferenceConfigContainer(variant);
+				return new InferenceConfigContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -68,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public override void Write(Utf8JsonWriter writer, InferenceConfigContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.InferenceConfigVariantName);
+			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
 				case "classification":
@@ -117,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new InferenceConfigContainer(variant);
+			Container = new InferenceConfigContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -182,7 +195,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new InferenceConfigContainer(variant);
+			Container = new InferenceConfigContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

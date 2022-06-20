@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class GeoIpProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "geoip";
 		[JsonInclude]
 		[JsonPropertyName("database_file")]
 		public string DatabaseFile { get; set; }

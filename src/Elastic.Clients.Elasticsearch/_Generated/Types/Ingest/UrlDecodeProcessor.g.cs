@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class UrlDecodeProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "urldecode";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }

@@ -374,8 +374,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonIgnore]
-		string TransformManagement.IPivotGroupByVariant.PivotGroupByVariantName => "terms";
 		[JsonInclude]
 		[JsonPropertyName("collect_mode")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }

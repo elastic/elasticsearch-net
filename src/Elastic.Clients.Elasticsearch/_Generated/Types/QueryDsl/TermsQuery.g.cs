@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class TermsQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "terms";
 	}
 
 	public sealed partial class TermsQueryDescriptor : SerializableDescriptorBase<TermsQueryDescriptor>

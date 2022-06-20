@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class RemoveProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "remove";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Fields Field { get; set; }

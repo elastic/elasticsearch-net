@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class CsvProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "csv";
 		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }

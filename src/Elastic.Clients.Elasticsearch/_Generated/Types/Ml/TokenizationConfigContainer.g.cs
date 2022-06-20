@@ -26,16 +26,30 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public interface ITokenizationConfigVariant
 	{
-		string TokenizationConfigVariantName { get; }
 	}
 
 	[JsonConverter(typeof(TokenizationConfigContainerConverter))]
 	public partial class TokenizationConfigContainer
 	{
-		public TokenizationConfigContainer(ITokenizationConfigVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		public TokenizationConfigContainer(string variantName, ITokenizationConfigVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
 		internal ITokenizationConfigVariant Variant { get; }
 
-		internal string VariantName => Variant.TokenizationConfigVariantName;
+		internal string VariantName { get; }
+
+		public static TokenizationConfigContainer Bert(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig variant) => new TokenizationConfigContainer("bert", variant);
+		public static TokenizationConfigContainer Mpnet(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig variant) => new TokenizationConfigContainer("mpnet", variant);
+		public static TokenizationConfigContainer Roberta(Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig variant) => new TokenizationConfigContainer("roberta", variant);
 	}
 
 	internal sealed class TokenizationConfigContainerConverter : JsonConverter<TokenizationConfigContainer>
@@ -53,19 +67,19 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (propertyName == "bert")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig?>(ref reader, options);
-				return new TokenizationConfigContainer(variant);
+				return new TokenizationConfigContainer(propertyName, variant);
 			}
 
 			if (propertyName == "mpnet")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig?>(ref reader, options);
-				return new TokenizationConfigContainer(variant);
+				return new TokenizationConfigContainer(propertyName, variant);
 			}
 
 			if (propertyName == "roberta")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig?>(ref reader, options);
-				return new TokenizationConfigContainer(variant);
+				return new TokenizationConfigContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -74,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public override void Write(Utf8JsonWriter writer, TokenizationConfigContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.TokenizationConfigVariantName);
+			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
 				case "bert":
@@ -126,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new TokenizationConfigContainer(variant);
+			Container = new TokenizationConfigContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -193,7 +207,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new TokenizationConfigContainer(variant);
+			Container = new TokenizationConfigContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

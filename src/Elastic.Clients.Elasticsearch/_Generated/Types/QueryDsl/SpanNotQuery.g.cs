@@ -26,10 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class SpanNotQuery : QueryBase, IQueryVariant, ISpanQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "span_not";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "span_not";
 		[JsonInclude]
 		[JsonPropertyName("dist")]
 		public int? Dist { get; set; }

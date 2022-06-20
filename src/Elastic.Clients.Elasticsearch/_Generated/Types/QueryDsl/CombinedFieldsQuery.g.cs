@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class CombinedFieldsQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "combined_fields";
 		[JsonInclude]
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
 		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }

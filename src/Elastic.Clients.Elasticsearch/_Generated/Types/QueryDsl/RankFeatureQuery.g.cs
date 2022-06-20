@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class RankFeatureQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "rank_feature";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }

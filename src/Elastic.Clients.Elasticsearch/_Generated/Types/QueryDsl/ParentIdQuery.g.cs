@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class ParentIdQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "parent_id";
 		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }

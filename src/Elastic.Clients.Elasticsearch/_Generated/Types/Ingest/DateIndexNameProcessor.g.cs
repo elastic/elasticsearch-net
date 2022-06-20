@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class DateIndexNameProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "date_index_name";
 		[JsonInclude]
 		[JsonPropertyName("date_formats")]
 		public IEnumerable<string> DateFormats { get; set; }

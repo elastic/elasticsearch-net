@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class PassThroughInferenceUpdateOptions : IInferenceConfigUpdateVariant
 	{
-		[JsonIgnore]
-		string IInferenceConfigUpdateVariant.InferenceConfigUpdateVariantName => "pass_through";
 		[JsonInclude]
 		[JsonPropertyName("results_field")]
 		public string? ResultsField { get; set; }

@@ -144,8 +144,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(FuzzyQueryConverter))]
 	public partial class FuzzyQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "fuzzy";
 		[JsonInclude]
 		[JsonPropertyName("fuzziness")]
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }

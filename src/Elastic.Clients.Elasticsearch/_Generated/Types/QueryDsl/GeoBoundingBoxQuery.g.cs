@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class GeoBoundingBoxQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "geo_bounding_box";
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }

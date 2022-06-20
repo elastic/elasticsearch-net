@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class ScriptScoreFunction : IFunctionScoreVariant
 	{
-		[JsonIgnore]
-		string IFunctionScoreVariant.FunctionScoreVariantName => "script_score";
 		[JsonInclude]
 		[JsonPropertyName("script")]
 		public ScriptBase Script { get; set; }

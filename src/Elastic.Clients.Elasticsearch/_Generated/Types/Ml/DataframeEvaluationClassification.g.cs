@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class DataframeEvaluationClassification : IDataframeEvaluationVariant
 	{
-		[JsonIgnore]
-		string IDataframeEvaluationVariant.DataframeEvaluationVariantName => "classification";
 		[JsonInclude]
 		[JsonPropertyName("actual_field")]
 		public Elastic.Clients.Elasticsearch.Field ActualField { get; set; }

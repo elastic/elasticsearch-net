@@ -26,10 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class SpanFieldMaskingQuery : QueryBase, IQueryVariant, ISpanQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "field_masking_span";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "field_masking_span";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }

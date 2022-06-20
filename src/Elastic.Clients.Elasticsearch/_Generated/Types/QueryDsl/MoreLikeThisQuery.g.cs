@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class MoreLikeThisQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "more_like_this";
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }

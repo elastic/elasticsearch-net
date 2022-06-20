@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class PercolateQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "percolate";
 		[JsonInclude]
 		[JsonPropertyName("document")]
 		public object? Document { get; set; }

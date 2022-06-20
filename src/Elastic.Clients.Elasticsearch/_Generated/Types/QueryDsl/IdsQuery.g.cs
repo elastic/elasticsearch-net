@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class IdsQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "ids";
 		[JsonInclude]
 		[JsonPropertyName("values")]
 		public Elastic.Clients.Elasticsearch.Ids? Values { get; set; }

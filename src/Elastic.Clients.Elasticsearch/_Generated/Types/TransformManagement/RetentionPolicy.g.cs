@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
 	public partial class RetentionPolicy : IRetentionPolicyVariant
 	{
-		[JsonIgnore]
-		string IRetentionPolicyVariant.RetentionPolicyVariantName => "time";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }

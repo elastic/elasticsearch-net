@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class KeyValueProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "kv";
 		[JsonInclude]
 		[JsonPropertyName("exclude_keys")]
 		public IEnumerable<string>? ExcludeKeys { get; set; }

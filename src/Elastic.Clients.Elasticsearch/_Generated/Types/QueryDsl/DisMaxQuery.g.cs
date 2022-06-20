@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class DisMaxQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "dis_max";
 		[JsonInclude]
 		[JsonPropertyName("queries")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> Queries { get; set; }

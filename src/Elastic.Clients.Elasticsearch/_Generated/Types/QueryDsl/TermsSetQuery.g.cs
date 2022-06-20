@@ -108,8 +108,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(TermsSetQueryConverter))]
 	public partial class TermsSetQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "terms_set";
 		[JsonInclude]
 		[JsonPropertyName("minimum_should_match_field")]
 		public Elastic.Clients.Elasticsearch.Field? MinimumShouldMatchField { get; set; }

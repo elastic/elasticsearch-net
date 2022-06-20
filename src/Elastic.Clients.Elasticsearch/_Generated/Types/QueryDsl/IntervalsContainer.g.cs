@@ -26,16 +26,33 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public interface IIntervalsVariant
 	{
-		string IntervalsVariantName { get; }
 	}
 
 	[JsonConverter(typeof(IntervalsContainerConverter))]
 	public partial class IntervalsContainer
 	{
-		public IntervalsContainer(IIntervalsVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		public IntervalsContainer(string variantName, IIntervalsVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
 		internal IIntervalsVariant Variant { get; }
 
-		internal string VariantName => Variant.IntervalsVariantName;
+		internal string VariantName { get; }
+
+		public static IntervalsContainer AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf variant) => new IntervalsContainer("all_of", variant);
+		public static IntervalsContainer AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf variant) => new IntervalsContainer("any_of", variant);
+		public static IntervalsContainer Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy variant) => new IntervalsContainer("fuzzy", variant);
+		public static IntervalsContainer Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch variant) => new IntervalsContainer("match", variant);
+		public static IntervalsContainer Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix variant) => new IntervalsContainer("prefix", variant);
+		public static IntervalsContainer Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard variant) => new IntervalsContainer("wildcard", variant);
 	}
 
 	internal sealed class IntervalsContainerConverter : JsonConverter<IntervalsContainer>
@@ -53,37 +70,37 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (propertyName == "all_of")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(ref reader, options);
-				return new IntervalsContainer(variant);
+				return new IntervalsContainer(propertyName, variant);
 			}
 
 			if (propertyName == "any_of")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(ref reader, options);
-				return new IntervalsContainer(variant);
+				return new IntervalsContainer(propertyName, variant);
 			}
 
 			if (propertyName == "fuzzy")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(ref reader, options);
-				return new IntervalsContainer(variant);
+				return new IntervalsContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(ref reader, options);
-				return new IntervalsContainer(variant);
+				return new IntervalsContainer(propertyName, variant);
 			}
 
 			if (propertyName == "prefix")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(ref reader, options);
-				return new IntervalsContainer(variant);
+				return new IntervalsContainer(propertyName, variant);
 			}
 
 			if (propertyName == "wildcard")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(ref reader, options);
-				return new IntervalsContainer(variant);
+				return new IntervalsContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -92,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, IntervalsContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.IntervalsVariantName);
+			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
 				case "all_of":
@@ -153,7 +170,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new IntervalsContainer(variant);
+			Container = new IntervalsContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -226,7 +243,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new IntervalsContainer(variant);
+			Container = new IntervalsContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

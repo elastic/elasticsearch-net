@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class ZeroShotClassificationInferenceOptions : IInferenceConfigCreateVariant
 	{
-		[JsonIgnore]
-		string IInferenceConfigCreateVariant.InferenceConfigCreateVariantName => "zero_shot_classification";
 		[JsonInclude]
 		[JsonPropertyName("classification_labels")]
 		public IEnumerable<string> ClassificationLabels { get; set; }

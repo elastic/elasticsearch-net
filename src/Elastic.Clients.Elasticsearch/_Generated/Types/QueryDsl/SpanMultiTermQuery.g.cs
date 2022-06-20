@@ -26,10 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class SpanMultiTermQuery : QueryBase, IQueryVariant, ISpanQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "span_multi";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "span_multi";
 		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Match { get; set; }

@@ -11,18 +11,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	// TODO - Generate more of these?
 	public partial class TermQuery
 	{
-		public static implicit operator QueryContainer(TermQuery termQuery) => new(termQuery);
+		public static implicit operator QueryContainer(TermQuery termQuery) => QueryContainer.Term(termQuery);
 	}
 
 	public partial class MatchAllQuery
 	{
-		public static implicit operator QueryContainer(MatchAllQuery matchAllQuery) => new(matchAllQuery);
+		public static implicit operator QueryContainer(MatchAllQuery matchAllQuery) => QueryContainer.MatchAll(matchAllQuery);
 	}
 
 	public partial class QueryContainer
 	{
 		// TODO - Generate more of these!
-		public TermQuery Term => Variant as TermQuery;
+		public TermQuery? GetTerm => Variant as TermQuery;
 	}
 }
 

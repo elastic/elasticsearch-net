@@ -26,10 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class SpanContainingQuery : QueryBase, IQueryVariant, ISpanQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "span_containing";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "span_containing";
 		[JsonInclude]
 		[JsonPropertyName("big")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }

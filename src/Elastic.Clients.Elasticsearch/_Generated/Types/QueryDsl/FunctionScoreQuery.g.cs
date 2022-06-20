@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class FunctionScoreQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "function_score";
 		[JsonInclude]
 		[JsonPropertyName("boost_mode")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostMode { get; set; }

@@ -26,12 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class RegressionInferenceOptions : Aggregations.IInferenceConfigVariant, IInferenceConfigCreateVariant, IInferenceConfigUpdateVariant
 	{
-		[JsonIgnore]
-		string Aggregations.IInferenceConfigVariant.InferenceConfigVariantName => "regression";
-		[JsonIgnore]
-		string IInferenceConfigCreateVariant.InferenceConfigCreateVariantName => "regression";
-		[JsonIgnore]
-		string IInferenceConfigUpdateVariant.InferenceConfigUpdateVariantName => "regression";
 		[JsonInclude]
 		[JsonPropertyName("num_top_feature_importance_values")]
 		public int? NumTopFeatureImportanceValues { get; set; }

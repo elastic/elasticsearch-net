@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class NlpRobertaTokenizationConfig : ITokenizationConfigVariant
 	{
-		[JsonIgnore]
-		string ITokenizationConfigVariant.TokenizationConfigVariantName => "roberta";
 		[JsonInclude]
 		[JsonPropertyName("add_prefix_space")]
 		public bool? AddPrefixSpace { get; set; }

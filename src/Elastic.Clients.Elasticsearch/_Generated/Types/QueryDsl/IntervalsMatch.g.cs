@@ -26,10 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class IntervalsMatch : IIntervalsVariant, IIntervalsQueryVariant
 	{
-		[JsonIgnore]
-		string IIntervalsVariant.IntervalsVariantName => "match";
-		[JsonIgnore]
-		string IIntervalsQueryVariant.IntervalsQueryVariantName => "match";
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }

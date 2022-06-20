@@ -26,16 +26,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public interface IFunctionScoreVariant
 	{
-		string FunctionScoreVariantName { get; }
 	}
 
 	[JsonConverter(typeof(FunctionScoreContainerConverter))]
 	public partial class FunctionScoreContainer
 	{
-		public FunctionScoreContainer(IFunctionScoreVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		public FunctionScoreContainer(string variantName, IFunctionScoreVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
 		internal IFunctionScoreVariant Variant { get; }
 
-		internal string VariantName => Variant.FunctionScoreVariantName;
+		internal string VariantName { get; }
+
+		public static FunctionScoreContainer FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction variant) => new FunctionScoreContainer("field_value_factor", variant);
+		public static FunctionScoreContainer RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction variant) => new FunctionScoreContainer("random_score", variant);
+		public static FunctionScoreContainer ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction variant) => new FunctionScoreContainer("script_score", variant);
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
@@ -60,19 +74,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (propertyName == "field_value_factor")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(ref reader, options);
-				return new FunctionScoreContainer(variant);
+				return new FunctionScoreContainer(propertyName, variant);
 			}
 
 			if (propertyName == "random_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?>(ref reader, options);
-				return new FunctionScoreContainer(variant);
+				return new FunctionScoreContainer(propertyName, variant);
 			}
 
 			if (propertyName == "script_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?>(ref reader, options);
-				return new FunctionScoreContainer(variant);
+				return new FunctionScoreContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -81,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, FunctionScoreContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.FunctionScoreVariantName);
+			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
 				case "field_value_factor":
@@ -133,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new FunctionScoreContainer(variant);
+			Container = new FunctionScoreContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -200,7 +214,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new FunctionScoreContainer(variant);
+			Container = new FunctionScoreContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

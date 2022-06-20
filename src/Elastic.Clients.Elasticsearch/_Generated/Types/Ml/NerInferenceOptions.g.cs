@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class NerInferenceOptions : IInferenceConfigCreateVariant
 	{
-		[JsonIgnore]
-		string IInferenceConfigCreateVariant.InferenceConfigCreateVariantName => "ner";
 		[JsonInclude]
 		[JsonPropertyName("classification_labels")]
 		public IEnumerable<string>? ClassificationLabels { get; set; }

@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class AppendProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "append";
 		[JsonInclude]
 		[JsonPropertyName("allow_duplicates")]
 		public bool? AllowDuplicates { get; set; }

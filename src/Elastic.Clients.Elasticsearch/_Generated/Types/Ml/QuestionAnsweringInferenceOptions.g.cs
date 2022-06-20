@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class QuestionAnsweringInferenceOptions : IInferenceConfigCreateVariant
 	{
-		[JsonIgnore]
-		string IInferenceConfigCreateVariant.InferenceConfigCreateVariantName => "question_answering";
 		[JsonInclude]
 		[JsonPropertyName("max_answer_length")]
 		public int? MaxAnswerLength { get; set; }

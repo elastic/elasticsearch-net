@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class ConstantScoreQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "constant_score";
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Filter { get; set; }

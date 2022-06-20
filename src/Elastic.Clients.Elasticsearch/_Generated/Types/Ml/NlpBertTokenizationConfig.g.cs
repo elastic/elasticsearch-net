@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class NlpBertTokenizationConfig : ITokenizationConfigVariant
 	{
-		[JsonIgnore]
-		string ITokenizationConfigVariant.TokenizationConfigVariantName => "bert";
 		[JsonInclude]
 		[JsonPropertyName("do_lower_case")]
 		public bool? DoLowerCase { get; set; }

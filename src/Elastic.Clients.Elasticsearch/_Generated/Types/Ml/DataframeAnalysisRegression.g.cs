@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class DataframeAnalysisRegression : DataframeAnalysis, IDataframeAnalysisVariant
 	{
-		[JsonIgnore]
-		string IDataframeAnalysisVariant.DataframeAnalysisVariantName => "regression";
 		[JsonInclude]
 		[JsonPropertyName("loss_function")]
 		public string? LossFunction { get; set; }

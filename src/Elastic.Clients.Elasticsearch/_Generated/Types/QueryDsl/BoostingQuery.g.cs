@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class BoostingQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "boosting";
 		[JsonInclude]
 		[JsonPropertyName("negative")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Negative { get; set; }

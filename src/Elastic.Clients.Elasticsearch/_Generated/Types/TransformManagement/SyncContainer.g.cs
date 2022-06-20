@@ -26,16 +26,28 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
 	public interface ISyncVariant
 	{
-		string SyncVariantName { get; }
 	}
 
 	[JsonConverter(typeof(SyncContainerConverter))]
 	public partial class SyncContainer
 	{
-		public SyncContainer(ISyncVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		public SyncContainer(string variantName, ISyncVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
 		internal ISyncVariant Variant { get; }
 
-		internal string VariantName => Variant.SyncVariantName;
+		internal string VariantName { get; }
+
+		public static SyncContainer Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync variant) => new SyncContainer("time", variant);
 	}
 
 	internal sealed class SyncContainerConverter : JsonConverter<SyncContainer>
@@ -53,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			if (propertyName == "time")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync?>(ref reader, options);
-				return new SyncContainer(variant);
+				return new SyncContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -62,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public override void Write(Utf8JsonWriter writer, SyncContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.SyncVariantName);
+			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
 				case "time":
@@ -108,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new SyncContainer(variant);
+			Container = new SyncContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -171,7 +183,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new SyncContainer(variant);
+			Container = new SyncContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

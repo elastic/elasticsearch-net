@@ -26,10 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class IntervalsWildcard : IIntervalsVariant, IIntervalsQueryVariant
 	{
-		[JsonIgnore]
-		string IIntervalsVariant.IntervalsVariantName => "wildcard";
-		[JsonIgnore]
-		string IIntervalsQueryVariant.IntervalsQueryVariantName => "wildcard";
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }

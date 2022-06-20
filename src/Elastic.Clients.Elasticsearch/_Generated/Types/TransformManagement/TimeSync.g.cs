@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
 	public partial class TimeSync : ISyncVariant
 	{
-		[JsonIgnore]
-		string ISyncVariant.SyncVariantName => "time";
 		[JsonInclude]
 		[JsonPropertyName("delay")]
 		public Elastic.Clients.Elasticsearch.Time? Delay { get; set; }

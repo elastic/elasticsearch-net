@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class WrapperQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "wrapper";
 		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }

@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class MatchNoneQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "match_none";
 	}
 
 	public sealed partial class MatchNoneQueryDescriptor : SerializableDescriptorBase<MatchNoneQueryDescriptor>

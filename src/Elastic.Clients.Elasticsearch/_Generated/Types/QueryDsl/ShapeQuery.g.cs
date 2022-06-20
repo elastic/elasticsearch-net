@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class ShapeQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "shape";
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }

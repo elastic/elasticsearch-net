@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class DissectProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "dissect";
 		[JsonInclude]
 		[JsonPropertyName("append_separator")]
 		public string AppendSeparator { get; set; }

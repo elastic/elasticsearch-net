@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class PipelineProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "pipeline";
 		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name { get; set; }

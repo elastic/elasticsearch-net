@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class MatchAllQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "match_all";
 	}
 
 	public sealed partial class MatchAllQueryDescriptor : SerializableDescriptorBase<MatchAllQueryDescriptor>

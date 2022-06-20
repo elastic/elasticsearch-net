@@ -120,8 +120,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(MatchPhraseQueryConverter))]
 	public partial class MatchPhraseQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "match_phrase";
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }

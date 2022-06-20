@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class SimpleQueryStringQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "simple_query_string";
 		[JsonInclude]
 		[JsonPropertyName("analyze_wildcard")]
 		public bool? AnalyzeWildcard { get; set; }

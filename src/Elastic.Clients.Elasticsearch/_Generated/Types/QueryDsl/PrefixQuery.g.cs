@@ -108,8 +108,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(PrefixQueryConverter))]
 	public partial class PrefixQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "prefix";
 		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }

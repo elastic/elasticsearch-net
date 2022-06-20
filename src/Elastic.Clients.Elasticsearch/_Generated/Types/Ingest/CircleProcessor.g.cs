@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class CircleProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorVariant.ProcessorVariantName => "circle";
 		[JsonInclude]
 		[JsonPropertyName("error_distance")]
 		public double ErrorDistance { get; set; }

@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class DataframeEvaluationOutlierDetection : IDataframeEvaluationVariant
 	{
-		[JsonIgnore]
-		string IDataframeEvaluationVariant.DataframeEvaluationVariantName => "outlier_detection";
 		[JsonInclude]
 		[JsonPropertyName("actual_field")]
 		public Elastic.Clients.Elasticsearch.Field ActualField { get; set; }

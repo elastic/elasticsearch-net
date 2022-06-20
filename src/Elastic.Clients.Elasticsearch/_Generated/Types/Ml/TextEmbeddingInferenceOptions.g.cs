@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class TextEmbeddingInferenceOptions : IInferenceConfigCreateVariant
 	{
-		[JsonIgnore]
-		string IInferenceConfigCreateVariant.InferenceConfigCreateVariantName => "text_embedding";
 		[JsonInclude]
 		[JsonPropertyName("results_field")]
 		public string? ResultsField { get; set; }

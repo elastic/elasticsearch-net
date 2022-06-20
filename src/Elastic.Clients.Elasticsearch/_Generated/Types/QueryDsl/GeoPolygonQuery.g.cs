@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class GeoPolygonQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "geo_polygon";
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }

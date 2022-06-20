@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class DataframeAnalysisClassification : DataframeAnalysis, IDataframeAnalysisVariant
 	{
-		[JsonIgnore]
-		string IDataframeAnalysisVariant.DataframeAnalysisVariantName => "classification";
 		[JsonInclude]
 		[JsonPropertyName("class_assignment_objective")]
 		public string? ClassAssignmentObjective { get; set; }

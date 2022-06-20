@@ -124,8 +124,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(WildcardQueryConverter))]
 	public partial class WildcardQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "wildcard";
 		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }

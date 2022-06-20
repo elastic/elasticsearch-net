@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class BoolQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "bool";
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filter { get; set; }

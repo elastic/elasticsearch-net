@@ -26,10 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class IntervalsAnyOf : IIntervalsVariant, IIntervalsQueryVariant
 	{
-		[JsonIgnore]
-		string IIntervalsVariant.IntervalsVariantName => "any_of";
-		[JsonIgnore]
-		string IIntervalsQueryVariant.IntervalsQueryVariantName => "any_of";
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }

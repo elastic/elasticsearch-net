@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class FieldValueFactorScoreFunction : IFunctionScoreVariant
 	{
-		[JsonIgnore]
-		string IFunctionScoreVariant.FunctionScoreVariantName => "field_value_factor";
 		[JsonInclude]
 		[JsonPropertyName("factor")]
 		public double? Factor { get; set; }

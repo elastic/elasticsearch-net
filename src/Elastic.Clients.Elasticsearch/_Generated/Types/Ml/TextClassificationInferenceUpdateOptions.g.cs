@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class TextClassificationInferenceUpdateOptions : IInferenceConfigUpdateVariant
 	{
-		[JsonIgnore]
-		string IInferenceConfigUpdateVariant.InferenceConfigUpdateVariantName => "text_classification";
 		[JsonInclude]
 		[JsonPropertyName("classification_labels")]
 		public IEnumerable<string>? ClassificationLabels { get; set; }

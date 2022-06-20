@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class DataframeAnalysisOutlierDetection : IDataframeAnalysisVariant
 	{
-		[JsonIgnore]
-		string IDataframeAnalysisVariant.DataframeAnalysisVariantName => "outlier_detection";
 		[JsonInclude]
 		[JsonPropertyName("compute_feature_influence")]
 		public bool? ComputeFeatureInfluence { get; set; }

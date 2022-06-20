@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class NerInferenceUpdateOptions : IInferenceConfigUpdateVariant
 	{
-		[JsonIgnore]
-		string IInferenceConfigUpdateVariant.InferenceConfigUpdateVariantName => "ner";
 		[JsonInclude]
 		[JsonPropertyName("results_field")]
 		public string? ResultsField { get; set; }

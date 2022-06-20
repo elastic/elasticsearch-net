@@ -306,8 +306,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonIgnore]
-		string TransformManagement.IPivotGroupByVariant.PivotGroupByVariantName => "date_histogram";
 		[JsonInclude]
 		[JsonPropertyName("calendar_interval")]
 		public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarInterval { get; set; }

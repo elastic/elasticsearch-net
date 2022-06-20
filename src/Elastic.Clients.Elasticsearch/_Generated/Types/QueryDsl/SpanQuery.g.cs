@@ -26,16 +26,36 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public interface ISpanQueryVariant
 	{
-		string SpanQueryVariantName { get; }
 	}
 
 	[JsonConverter(typeof(SpanQueryConverter))]
 	public partial class SpanQuery
 	{
-		public SpanQuery(ISpanQueryVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		public SpanQuery(string variantName, ISpanQueryVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
 		internal ISpanQueryVariant Variant { get; }
 
-		internal string VariantName => Variant.SpanQueryVariantName;
+		internal string VariantName { get; }
+
+		public static SpanQuery FieldMaskingSpan(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery variant) => new SpanQuery("field_masking_span", variant);
+		public static SpanQuery SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery variant) => new SpanQuery("span_containing", variant);
+		public static SpanQuery SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery variant) => new SpanQuery("span_first", variant);
+		public static SpanQuery SpanMulti(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery variant) => new SpanQuery("span_multi", variant);
+		public static SpanQuery SpanNear(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery variant) => new SpanQuery("span_near", variant);
+		public static SpanQuery SpanNot(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery variant) => new SpanQuery("span_not", variant);
+		public static SpanQuery SpanOr(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery variant) => new SpanQuery("span_or", variant);
+		public static SpanQuery SpanTerm(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery variant) => new SpanQuery("span_term", variant);
+		public static SpanQuery SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery variant) => new SpanQuery("span_within", variant);
 	}
 
 	internal sealed class SpanQueryConverter : JsonConverter<SpanQuery>
@@ -53,55 +73,55 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (propertyName == "field_masking_span")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery?>(ref reader, options);
-				return new SpanQuery(variant);
+				return new SpanQuery(propertyName, variant);
 			}
 
 			if (propertyName == "span_containing")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery?>(ref reader, options);
-				return new SpanQuery(variant);
+				return new SpanQuery(propertyName, variant);
 			}
 
 			if (propertyName == "span_first")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery?>(ref reader, options);
-				return new SpanQuery(variant);
+				return new SpanQuery(propertyName, variant);
 			}
 
 			if (propertyName == "span_multi")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery?>(ref reader, options);
-				return new SpanQuery(variant);
+				return new SpanQuery(propertyName, variant);
 			}
 
 			if (propertyName == "span_near")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery?>(ref reader, options);
-				return new SpanQuery(variant);
+				return new SpanQuery(propertyName, variant);
 			}
 
 			if (propertyName == "span_not")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery?>(ref reader, options);
-				return new SpanQuery(variant);
+				return new SpanQuery(propertyName, variant);
 			}
 
 			if (propertyName == "span_or")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery?>(ref reader, options);
-				return new SpanQuery(variant);
+				return new SpanQuery(propertyName, variant);
 			}
 
 			if (propertyName == "span_term")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery?>(ref reader, options);
-				return new SpanQuery(variant);
+				return new SpanQuery(propertyName, variant);
 			}
 
 			if (propertyName == "span_within")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery?>(ref reader, options);
-				return new SpanQuery(variant);
+				return new SpanQuery(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -110,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, SpanQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.SpanQueryVariantName);
+			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
 				case "field_masking_span":
@@ -180,7 +200,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new SpanQuery(variant);
+			Container = new SpanQuery(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -259,7 +279,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new SpanQuery(variant);
+			Container = new SpanQuery(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

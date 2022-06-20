@@ -26,16 +26,30 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
 	public interface IPivotGroupByVariant
 	{
-		string PivotGroupByVariantName { get; }
 	}
 
 	[JsonConverter(typeof(PivotGroupByContainerConverter))]
 	public partial class PivotGroupByContainer
 	{
-		public PivotGroupByContainer(IPivotGroupByVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		public PivotGroupByContainer(string variantName, IPivotGroupByVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
 		internal IPivotGroupByVariant Variant { get; }
 
-		internal string VariantName => Variant.PivotGroupByVariantName;
+		internal string VariantName { get; }
+
+		public static PivotGroupByContainer DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation variant) => new PivotGroupByContainer("date_histogram", variant);
+		public static PivotGroupByContainer Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation variant) => new PivotGroupByContainer("histogram", variant);
+		public static PivotGroupByContainer Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation variant) => new PivotGroupByContainer("terms", variant);
 	}
 
 	internal sealed class PivotGroupByContainerConverter : JsonConverter<PivotGroupByContainer>
@@ -53,19 +67,19 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			if (propertyName == "date_histogram")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
-				return new PivotGroupByContainer(variant);
+				return new PivotGroupByContainer(propertyName, variant);
 			}
 
 			if (propertyName == "histogram")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
-				return new PivotGroupByContainer(variant);
+				return new PivotGroupByContainer(propertyName, variant);
 			}
 
 			if (propertyName == "terms")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
-				return new PivotGroupByContainer(variant);
+				return new PivotGroupByContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -74,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public override void Write(Utf8JsonWriter writer, PivotGroupByContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.PivotGroupByVariantName);
+			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
 				case "date_histogram":
@@ -126,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new PivotGroupByContainer(variant);
+			Container = new PivotGroupByContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -193,7 +207,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new PivotGroupByContainer(variant);
+			Container = new PivotGroupByContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

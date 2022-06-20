@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class ScriptScoreQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "script_score";
 		[JsonInclude]
 		[JsonPropertyName("min_score")]
 		public float? MinScore { get; set; }

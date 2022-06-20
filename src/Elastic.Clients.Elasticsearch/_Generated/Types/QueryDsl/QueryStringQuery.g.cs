@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class QueryStringQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "query_string";
 		[JsonInclude]
 		[JsonPropertyName("allow_leading_wildcard")]
 		public bool? AllowLeadingWildcard { get; set; }

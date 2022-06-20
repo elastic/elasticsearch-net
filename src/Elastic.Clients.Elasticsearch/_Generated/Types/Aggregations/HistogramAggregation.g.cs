@@ -238,8 +238,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonIgnore]
-		string TransformManagement.IPivotGroupByVariant.PivotGroupByVariantName => "histogram";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }

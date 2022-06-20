@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class FillMaskInferenceUpdateOptions : IInferenceConfigUpdateVariant
 	{
-		[JsonIgnore]
-		string IInferenceConfigUpdateVariant.InferenceConfigUpdateVariantName => "fill_mask";
 		[JsonInclude]
 		[JsonPropertyName("num_top_classes")]
 		public int? NumTopClasses { get; set; }

@@ -26,10 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class SpanFirstQuery : QueryBase, IQueryVariant, ISpanQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryVariant.QueryVariantName => "span_first";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "span_first";
 		[JsonInclude]
 		[JsonPropertyName("end")]
 		public int End { get; set; }
