@@ -4,7 +4,6 @@
 
 using System;
 using System.Threading;
-using Elastic.Clients.Elasticsearch.Helpers;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Xunit;
 

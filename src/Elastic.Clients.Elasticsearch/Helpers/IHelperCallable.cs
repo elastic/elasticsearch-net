@@ -4,7 +4,7 @@
 
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch.Helpers;
+namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
 /// May be applied to helper requests where they may be called by an upstream helper.
