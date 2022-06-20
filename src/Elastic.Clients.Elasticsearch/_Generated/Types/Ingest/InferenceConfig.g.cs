@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	}
 
 	[JsonConverter(typeof(InferenceConfigConverter))]
-	public partial class InferenceConfig : IContainer
+	public partial class InferenceConfig
 	{
 		public InferenceConfig(IInferenceConfigVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IInferenceConfigVariant Variant { get; }

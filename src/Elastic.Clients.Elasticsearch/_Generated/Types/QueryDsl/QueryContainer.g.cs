@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(QueryContainerConverter))]
-	public partial class QueryContainer : IContainer
+	public partial class QueryContainer
 	{
 		public QueryContainer(IQueryVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IQueryVariant Variant { get; }

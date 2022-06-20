@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	}
 
 	[JsonConverter(typeof(SyncContainerConverter))]
-	public partial class SyncContainer : IContainer
+	public partial class SyncContainer
 	{
 		public SyncContainer(ISyncVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal ISyncVariant Variant { get; }

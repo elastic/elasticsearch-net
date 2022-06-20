@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IntervalsFilterConverter))]
-	public partial class IntervalsFilter : IContainer
+	public partial class IntervalsFilter
 	{
 		public IntervalsFilter(IIntervalsFilterVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IIntervalsFilterVariant Variant { get; }

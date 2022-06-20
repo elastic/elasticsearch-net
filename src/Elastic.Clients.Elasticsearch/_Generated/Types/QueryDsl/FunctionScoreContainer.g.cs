@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(FunctionScoreContainerConverter))]
-	public partial class FunctionScoreContainer : IContainer
+	public partial class FunctionScoreContainer
 	{
 		public FunctionScoreContainer(IFunctionScoreVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IFunctionScoreVariant Variant { get; }

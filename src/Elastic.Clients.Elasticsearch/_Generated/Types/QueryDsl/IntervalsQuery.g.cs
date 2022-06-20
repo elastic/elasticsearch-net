@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IntervalsQueryConverter))]
-	public partial class IntervalsQuery : FieldNameQueryBase, IContainer, IQueryVariant
+	public partial class IntervalsQuery : FieldNameQueryBase, IQueryVariant
 	{
 		public IntervalsQuery(IIntervalsQueryVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IIntervalsQueryVariant Variant { get; }

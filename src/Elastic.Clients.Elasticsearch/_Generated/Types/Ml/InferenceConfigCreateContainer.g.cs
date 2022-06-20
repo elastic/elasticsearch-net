@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	}
 
 	[JsonConverter(typeof(InferenceConfigCreateContainerConverter))]
-	public partial class InferenceConfigCreateContainer : IContainer
+	public partial class InferenceConfigCreateContainer
 	{
 		public InferenceConfigCreateContainer(IInferenceConfigCreateVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IInferenceConfigCreateVariant Variant { get; }

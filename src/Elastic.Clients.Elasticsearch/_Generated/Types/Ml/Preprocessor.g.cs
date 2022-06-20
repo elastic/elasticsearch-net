@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	}
 
 	[JsonConverter(typeof(PreprocessorConverter))]
-	public partial class Preprocessor : IContainer
+	public partial class Preprocessor
 	{
 		public Preprocessor(IPreprocessorVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IPreprocessorVariant Variant { get; }

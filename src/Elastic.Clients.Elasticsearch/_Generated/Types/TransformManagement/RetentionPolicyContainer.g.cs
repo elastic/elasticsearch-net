@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	}
 
 	[JsonConverter(typeof(RetentionPolicyContainerConverter))]
-	public partial class RetentionPolicyContainer : IContainer
+	public partial class RetentionPolicyContainer
 	{
 		public RetentionPolicyContainer(IRetentionPolicyVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IRetentionPolicyVariant Variant { get; }

@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	}
 
 	[JsonConverter(typeof(DataframeEvaluationContainerConverter))]
-	public partial class DataframeEvaluationContainer : IContainer
+	public partial class DataframeEvaluationContainer
 	{
 		public DataframeEvaluationContainer(IDataframeEvaluationVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IDataframeEvaluationVariant Variant { get; }

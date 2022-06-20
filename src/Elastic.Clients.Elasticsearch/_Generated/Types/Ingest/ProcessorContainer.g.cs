@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	}
 
 	[JsonConverter(typeof(ProcessorContainerConverter))]
-	public partial class ProcessorContainer : IContainer
+	public partial class ProcessorContainer
 	{
 		public ProcessorContainer(IProcessorVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IProcessorVariant Variant { get; }

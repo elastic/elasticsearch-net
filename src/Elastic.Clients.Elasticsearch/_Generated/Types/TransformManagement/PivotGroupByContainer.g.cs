@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	}
 
 	[JsonConverter(typeof(PivotGroupByContainerConverter))]
-	public partial class PivotGroupByContainer : IContainer
+	public partial class PivotGroupByContainer
 	{
 		public PivotGroupByContainer(IPivotGroupByVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IPivotGroupByVariant Variant { get; }
