@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Elastic.Clients.Elasticsearch.Helpers;
+namespace Elastic.Clients.Elasticsearch;
 
 internal class PartitionHelper<TDocument> : IEnumerable<IList<TDocument>>
 {
