@@ -1,0 +1,3 @@
+{
+  indices: index-a,index-b
+}
