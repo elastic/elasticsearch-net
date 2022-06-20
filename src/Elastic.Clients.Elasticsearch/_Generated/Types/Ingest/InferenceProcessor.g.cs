@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class InferenceProcessor : ProcessorBase, IProcessorContainerVariant
+	public partial class InferenceProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorContainerVariant.ProcessorContainerVariantName => "inference";
 		[JsonInclude]
 		[JsonPropertyName("field_map")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMap { get; set; }

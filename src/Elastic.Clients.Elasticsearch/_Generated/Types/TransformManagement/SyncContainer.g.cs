@@ -24,16 +24,30 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public interface ISyncContainerVariant
+	public interface ISyncVariant
 	{
-		string SyncContainerVariantName { get; }
 	}
 
 	[JsonConverter(typeof(SyncContainerConverter))]
-	public partial class SyncContainer : IContainer
+	public partial class SyncContainer
 	{
-		public SyncContainer(ISyncContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal ISyncContainerVariant Variant { get; }
+		public SyncContainer(string variantName, ISyncVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
+		internal ISyncVariant Variant { get; }
+
+		internal string VariantName { get; }
+
+		public static SyncContainer Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync variant) => new SyncContainer("time", variant);
 	}
 
 	internal sealed class SyncContainerConverter : JsonConverter<SyncContainer>
@@ -51,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			if (propertyName == "time")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync?>(ref reader, options);
-				return new SyncContainer(variant);
+				return new SyncContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -60,11 +74,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public override void Write(Utf8JsonWriter writer, SyncContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.SyncContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.TransformManagement.TimeSync variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "time":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync>(writer, (Elastic.Clients.Elasticsearch.TransformManagement.TimeSync)value.Variant, options);
 					break;
 			}
 
@@ -102,11 +116,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISyncContainerVariant variant, string variantName)
+		private void Set(ISyncVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new SyncContainer(variant);
+			Container = new SyncContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -165,11 +179,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISyncContainerVariant variant, string variantName)
+		private void Set(ISyncVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new SyncContainer(variant);
+			Container = new SyncContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

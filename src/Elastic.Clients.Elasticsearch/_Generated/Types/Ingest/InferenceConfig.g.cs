@@ -26,14 +26,29 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public interface IInferenceConfigVariant
 	{
-		string InferenceConfigVariantName { get; }
 	}
 
 	[JsonConverter(typeof(InferenceConfigConverter))]
-	public partial class InferenceConfig : IContainer
+	public partial class InferenceConfig
 	{
-		public InferenceConfig(IInferenceConfigVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		public InferenceConfig(string variantName, IInferenceConfigVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
 		internal IInferenceConfigVariant Variant { get; }
+
+		internal string VariantName { get; }
+
+		public static InferenceConfig Classification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification variant) => new InferenceConfig("classification", variant);
+		public static InferenceConfig Regression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression variant) => new InferenceConfig("regression", variant);
 	}
 
 	internal sealed class InferenceConfigConverter : JsonConverter<InferenceConfig>
@@ -51,13 +66,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (propertyName == "classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification?>(ref reader, options);
-				return new InferenceConfig(variant);
+				return new InferenceConfig(propertyName, variant);
 			}
 
 			if (propertyName == "regression")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression?>(ref reader, options);
-				return new InferenceConfig(variant);
+				return new InferenceConfig(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -66,14 +81,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public override void Write(Utf8JsonWriter writer, InferenceConfig value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.InferenceConfigVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "regression":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression)value.Variant, options);
 					break;
 			}
 
@@ -115,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new InferenceConfig(variant);
+			Container = new InferenceConfig(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -180,7 +195,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new InferenceConfig(variant);
+			Container = new InferenceConfig(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

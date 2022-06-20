@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class NlpBertTokenizationConfig : ITokenizationConfigContainerVariant
+	public partial class NlpBertTokenizationConfig : ITokenizationConfigVariant
 	{
-		[JsonIgnore]
-		string ITokenizationConfigContainerVariant.TokenizationConfigContainerVariantName => "bert";
 		[JsonInclude]
 		[JsonPropertyName("do_lower_case")]
 		public bool? DoLowerCase { get; set; }

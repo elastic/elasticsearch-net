@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class CircleProcessor : ProcessorBase, IProcessorContainerVariant
+	public partial class CircleProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorContainerVariant.ProcessorContainerVariantName => "circle";
 		[JsonInclude]
 		[JsonPropertyName("error_distance")]
 		public double ErrorDistance { get; set; }
