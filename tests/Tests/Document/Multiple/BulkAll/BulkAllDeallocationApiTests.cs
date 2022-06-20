@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using Elastic.Clients.Elasticsearch.Helpers;
 using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Multiple;

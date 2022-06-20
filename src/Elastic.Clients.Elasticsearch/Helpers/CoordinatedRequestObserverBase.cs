@@ -5,7 +5,7 @@
 using System;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch.Helpers;
+namespace Elastic.Clients.Elasticsearch;
 
 public abstract class CoordinatedRequestObserverBase<T> : IObserver<T>
 {
