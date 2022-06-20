@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch.Helpers;
+namespace Elastic.Clients.Elasticsearch;
 
 public sealed class BulkAllRequest<T> : IBulkAllRequest<T>, IHelperCallable
 {

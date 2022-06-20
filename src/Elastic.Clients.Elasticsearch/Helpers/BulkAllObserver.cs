@@ -5,7 +5,7 @@
 using System;
 using System.Threading;
 
-namespace Elastic.Clients.Elasticsearch.Helpers;
+namespace Elastic.Clients.Elasticsearch;
 
 public sealed class BulkAllObserver : CoordinatedRequestObserverBase<BulkAllResponse>
 {
