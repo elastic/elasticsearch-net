@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class NerInferenceUpdateOptions : IInferenceConfigUpdateContainerVariant
+	public partial class NerInferenceUpdateOptions : IInferenceConfigUpdateVariant
 	{
 		[JsonIgnore]
-		string IInferenceConfigUpdateContainerVariant.InferenceConfigUpdateContainerVariantName => "ner";
+		string IInferenceConfigUpdateVariant.InferenceConfigUpdateVariantName => "ner";
 		[JsonInclude]
 		[JsonPropertyName("results_field")]
 		public string? ResultsField { get; set; }

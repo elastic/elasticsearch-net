@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class CombinedFieldsQuery : QueryBase, IQueryContainerVariant
+	public partial class CombinedFieldsQuery : QueryBase, IQueryVariant
 	{
 		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "combined_fields";
+		string IQueryVariant.QueryVariantName => "combined_fields";
 		[JsonInclude]
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
 		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }

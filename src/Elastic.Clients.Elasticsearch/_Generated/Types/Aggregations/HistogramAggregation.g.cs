@@ -232,14 +232,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(HistogramAggregationConverter))]
-	public partial class HistogramAggregation : BucketAggregationBase, TransformManagement.IPivotGroupByContainerVariant
+	public partial class HistogramAggregation : BucketAggregationBase, TransformManagement.IPivotGroupByVariant
 	{
 		public HistogramAggregation(string name) : base(name)
 		{
 		}
 
 		[JsonIgnore]
-		string TransformManagement.IPivotGroupByContainerVariant.PivotGroupByContainerVariantName => "histogram";
+		string TransformManagement.IPivotGroupByVariant.PivotGroupByVariantName => "histogram";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }

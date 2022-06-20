@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class FieldValueFactorScoreFunction : IFunctionScoreContainerVariant
+	public partial class FieldValueFactorScoreFunction : IFunctionScoreVariant
 	{
 		[JsonIgnore]
-		string IFunctionScoreContainerVariant.FunctionScoreContainerVariantName => "field_value_factor";
+		string IFunctionScoreVariant.FunctionScoreVariantName => "field_value_factor";
 		[JsonInclude]
 		[JsonPropertyName("factor")]
 		public double? Factor { get; set; }

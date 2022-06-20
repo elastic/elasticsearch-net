@@ -24,16 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public interface IInferenceConfigUpdateContainerVariant
+	public interface IInferenceConfigUpdateVariant
 	{
-		string InferenceConfigUpdateContainerVariantName { get; }
+		string InferenceConfigUpdateVariantName { get; }
 	}
 
 	[JsonConverter(typeof(InferenceConfigUpdateContainerConverter))]
 	public partial class InferenceConfigUpdateContainer : IContainer
 	{
-		public InferenceConfigUpdateContainer(IInferenceConfigUpdateContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IInferenceConfigUpdateContainerVariant Variant { get; }
+		public InferenceConfigUpdateContainer(IInferenceConfigUpdateVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal IInferenceConfigUpdateVariant Variant { get; }
+
+		internal string VariantName => Variant.InferenceConfigUpdateVariantName;
 	}
 
 	internal sealed class InferenceConfigUpdateContainerConverter : JsonConverter<InferenceConfigUpdateContainer>
@@ -108,35 +110,35 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public override void Write(Utf8JsonWriter writer, InferenceConfigUpdateContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.InferenceConfigUpdateContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.Variant.InferenceConfigUpdateVariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "fill_mask":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.NerInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "ner":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.NerInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.NerInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "pass_through":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "question_answering":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "regression":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "text_classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "text_embedding":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "zero_shot_classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions)value.Variant, options);
 					break;
 			}
 
@@ -174,7 +176,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigUpdateContainerVariant variant, string variantName)
+		private void Set(IInferenceConfigUpdateVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -253,7 +255,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigUpdateContainerVariant variant, string variantName)
+		private void Set(IInferenceConfigUpdateVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

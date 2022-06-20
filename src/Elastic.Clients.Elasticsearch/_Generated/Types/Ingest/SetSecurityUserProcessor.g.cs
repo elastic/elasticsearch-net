@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class SetSecurityUserProcessor : ProcessorBase, IProcessorContainerVariant
+	public partial class SetSecurityUserProcessor : ProcessorBase, IProcessorVariant
 	{
 		[JsonIgnore]
-		string IProcessorContainerVariant.ProcessorContainerVariantName => "set_security_user";
+		string IProcessorVariant.ProcessorVariantName => "set_security_user";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }

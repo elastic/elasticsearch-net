@@ -368,14 +368,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(TermsAggregationConverter))]
-	public partial class TermsAggregation : BucketAggregationBase, TransformManagement.IPivotGroupByContainerVariant
+	public partial class TermsAggregation : BucketAggregationBase, TransformManagement.IPivotGroupByVariant
 	{
 		public TermsAggregation(string name) : base(name)
 		{
 		}
 
 		[JsonIgnore]
-		string TransformManagement.IPivotGroupByContainerVariant.PivotGroupByContainerVariantName => "terms";
+		string TransformManagement.IPivotGroupByVariant.PivotGroupByVariantName => "terms";
 		[JsonInclude]
 		[JsonPropertyName("collect_mode")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }

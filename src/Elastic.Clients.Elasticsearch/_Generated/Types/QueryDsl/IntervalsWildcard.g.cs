@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class IntervalsWildcard : IIntervalsContainerVariant, IIntervalsQueryVariant
+	public partial class IntervalsWildcard : IIntervalsVariant, IIntervalsQueryVariant
 	{
 		[JsonIgnore]
-		string IIntervalsContainerVariant.IntervalsContainerVariantName => "wildcard";
+		string IIntervalsVariant.IntervalsVariantName => "wildcard";
 		[JsonIgnore]
 		string IIntervalsQueryVariant.IntervalsQueryVariantName => "wildcard";
 		[JsonInclude]

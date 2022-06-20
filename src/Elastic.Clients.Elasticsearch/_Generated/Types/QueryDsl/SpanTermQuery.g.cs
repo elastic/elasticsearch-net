@@ -82,10 +82,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanTermQueryConverter))]
-	public partial class SpanTermQuery : FieldNameQueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public partial class SpanTermQuery : FieldNameQueryBase, IQueryVariant, ISpanQueryVariant
 	{
 		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "span_term";
+		string IQueryVariant.QueryVariantName => "span_term";
 		[JsonIgnore]
 		string ISpanQueryVariant.SpanQueryVariantName => "span_term";
 		[JsonInclude]

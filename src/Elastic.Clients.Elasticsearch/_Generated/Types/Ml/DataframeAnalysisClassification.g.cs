@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalysisClassification : DataframeAnalysis, IDataframeAnalysisContainerVariant
+	public partial class DataframeAnalysisClassification : DataframeAnalysis, IDataframeAnalysisVariant
 	{
 		[JsonIgnore]
-		string IDataframeAnalysisContainerVariant.DataframeAnalysisContainerVariantName => "classification";
+		string IDataframeAnalysisVariant.DataframeAnalysisVariantName => "classification";
 		[JsonInclude]
 		[JsonPropertyName("class_assignment_objective")]
 		public string? ClassAssignmentObjective { get; set; }

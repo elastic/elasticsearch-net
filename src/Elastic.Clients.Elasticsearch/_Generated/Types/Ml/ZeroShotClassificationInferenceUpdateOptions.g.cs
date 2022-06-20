@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class ZeroShotClassificationInferenceUpdateOptions : IInferenceConfigUpdateContainerVariant
+	public partial class ZeroShotClassificationInferenceUpdateOptions : IInferenceConfigUpdateVariant
 	{
 		[JsonIgnore]
-		string IInferenceConfigUpdateContainerVariant.InferenceConfigUpdateContainerVariantName => "zero_shot_classification";
+		string IInferenceConfigUpdateVariant.InferenceConfigUpdateVariantName => "zero_shot_classification";
 		[JsonInclude]
 		[JsonPropertyName("labels")]
 		public IEnumerable<string> Labels { get; set; }

@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalysisOutlierDetection : IDataframeAnalysisContainerVariant
+	public partial class DataframeAnalysisOutlierDetection : IDataframeAnalysisVariant
 	{
 		[JsonIgnore]
-		string IDataframeAnalysisContainerVariant.DataframeAnalysisContainerVariantName => "outlier_detection";
+		string IDataframeAnalysisVariant.DataframeAnalysisVariantName => "outlier_detection";
 		[JsonInclude]
 		[JsonPropertyName("compute_feature_influence")]
 		public bool? ComputeFeatureInfluence { get; set; }

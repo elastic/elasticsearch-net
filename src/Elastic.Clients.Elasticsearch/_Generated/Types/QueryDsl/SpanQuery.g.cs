@@ -34,6 +34,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		public SpanQuery(ISpanQueryVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal ISpanQueryVariant Variant { get; }
+
+		internal string VariantName => Variant.SpanQueryVariantName;
 	}
 
 	internal sealed class SpanQueryConverter : JsonConverter<SpanQuery>
@@ -109,34 +111,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName(value.Variant.SpanQueryVariantName);
-			switch (value.Variant)
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "field_masking_span":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "span_containing":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "span_first":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "span_multi":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "span_near":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "span_not":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "span_or":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "span_term":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "span_within":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery)value.Variant, options);
 					break;
 			}
 

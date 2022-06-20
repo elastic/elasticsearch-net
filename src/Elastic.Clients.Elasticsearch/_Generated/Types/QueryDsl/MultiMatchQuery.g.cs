@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class MultiMatchQuery : QueryBase, IQueryContainerVariant
+	public partial class MultiMatchQuery : QueryBase, IQueryVariant
 	{
 		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "multi_match";
+		string IQueryVariant.QueryVariantName => "multi_match";
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }

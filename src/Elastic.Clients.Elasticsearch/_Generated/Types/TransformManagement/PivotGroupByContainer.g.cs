@@ -24,16 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public interface IPivotGroupByContainerVariant
+	public interface IPivotGroupByVariant
 	{
-		string PivotGroupByContainerVariantName { get; }
+		string PivotGroupByVariantName { get; }
 	}
 
 	[JsonConverter(typeof(PivotGroupByContainerConverter))]
 	public partial class PivotGroupByContainer : IContainer
 	{
-		public PivotGroupByContainer(IPivotGroupByContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IPivotGroupByContainerVariant Variant { get; }
+		public PivotGroupByContainer(IPivotGroupByVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal IPivotGroupByVariant Variant { get; }
+
+		internal string VariantName => Variant.PivotGroupByVariantName;
 	}
 
 	internal sealed class PivotGroupByContainerConverter : JsonConverter<PivotGroupByContainer>
@@ -72,17 +74,17 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public override void Write(Utf8JsonWriter writer, PivotGroupByContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.PivotGroupByContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.Variant.PivotGroupByVariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "date_histogram":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "histogram":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "terms":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation)value.Variant, options);
 					break;
 			}
 
@@ -120,7 +122,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(IPivotGroupByContainerVariant variant, string variantName)
+		private void Set(IPivotGroupByVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -187,7 +189,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(IPivotGroupByContainerVariant variant, string variantName)
+		private void Set(IPivotGroupByVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

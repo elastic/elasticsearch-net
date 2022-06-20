@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class AppendProcessor : ProcessorBase, IProcessorContainerVariant
+	public partial class AppendProcessor : ProcessorBase, IProcessorVariant
 	{
 		[JsonIgnore]
-		string IProcessorContainerVariant.ProcessorContainerVariantName => "append";
+		string IProcessorVariant.ProcessorVariantName => "append";
 		[JsonInclude]
 		[JsonPropertyName("allow_duplicates")]
 		public bool? AllowDuplicates { get; set; }

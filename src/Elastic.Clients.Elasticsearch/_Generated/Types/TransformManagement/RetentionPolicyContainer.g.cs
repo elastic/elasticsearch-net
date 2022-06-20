@@ -24,16 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public interface IRetentionPolicyContainerVariant
+	public interface IRetentionPolicyVariant
 	{
-		string RetentionPolicyContainerVariantName { get; }
+		string RetentionPolicyVariantName { get; }
 	}
 
 	[JsonConverter(typeof(RetentionPolicyContainerConverter))]
 	public partial class RetentionPolicyContainer : IContainer
 	{
-		public RetentionPolicyContainer(IRetentionPolicyContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IRetentionPolicyContainerVariant Variant { get; }
+		public RetentionPolicyContainer(IRetentionPolicyVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal IRetentionPolicyVariant Variant { get; }
+
+		internal string VariantName => Variant.RetentionPolicyVariantName;
 	}
 
 	internal sealed class RetentionPolicyContainerConverter : JsonConverter<RetentionPolicyContainer>
@@ -60,11 +62,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public override void Write(Utf8JsonWriter writer, RetentionPolicyContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.RetentionPolicyContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.Variant.RetentionPolicyVariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "time":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy>(writer, (Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy)value.Variant, options);
 					break;
 			}
 
@@ -102,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(IRetentionPolicyContainerVariant variant, string variantName)
+		private void Set(IRetentionPolicyVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -165,7 +167,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(IRetentionPolicyContainerVariant variant, string variantName)
+		private void Set(IRetentionPolicyVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

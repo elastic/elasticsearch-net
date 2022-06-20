@@ -24,16 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public interface ISyncContainerVariant
+	public interface ISyncVariant
 	{
-		string SyncContainerVariantName { get; }
+		string SyncVariantName { get; }
 	}
 
 	[JsonConverter(typeof(SyncContainerConverter))]
 	public partial class SyncContainer : IContainer
 	{
-		public SyncContainer(ISyncContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal ISyncContainerVariant Variant { get; }
+		public SyncContainer(ISyncVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal ISyncVariant Variant { get; }
+
+		internal string VariantName => Variant.SyncVariantName;
 	}
 
 	internal sealed class SyncContainerConverter : JsonConverter<SyncContainer>
@@ -60,11 +62,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public override void Write(Utf8JsonWriter writer, SyncContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.SyncContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.Variant.SyncVariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.TransformManagement.TimeSync variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "time":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync>(writer, (Elastic.Clients.Elasticsearch.TransformManagement.TimeSync)value.Variant, options);
 					break;
 			}
 
@@ -102,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISyncContainerVariant variant, string variantName)
+		private void Set(ISyncVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -165,7 +167,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISyncContainerVariant variant, string variantName)
+		private void Set(ISyncVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

@@ -34,6 +34,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	{
 		public InferenceConfig(IInferenceConfigVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IInferenceConfigVariant Variant { get; }
+
+		internal string VariantName => Variant.InferenceConfigVariantName;
 	}
 
 	internal sealed class InferenceConfigConverter : JsonConverter<InferenceConfig>
@@ -67,13 +69,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName(value.Variant.InferenceConfigVariantName);
-			switch (value.Variant)
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "regression":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression)value.Variant, options);
 					break;
 			}
 

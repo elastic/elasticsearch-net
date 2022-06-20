@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class FillMaskInferenceOptions : IInferenceConfigCreateContainerVariant
+	public partial class FillMaskInferenceOptions : IInferenceConfigCreateVariant
 	{
 		[JsonIgnore]
-		string IInferenceConfigCreateContainerVariant.InferenceConfigCreateContainerVariantName => "fill_mask";
+		string IInferenceConfigCreateVariant.InferenceConfigCreateVariantName => "fill_mask";
 		[JsonInclude]
 		[JsonPropertyName("num_top_classes")]
 		public int? NumTopClasses { get; set; }

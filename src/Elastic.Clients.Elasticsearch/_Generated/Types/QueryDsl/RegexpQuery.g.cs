@@ -130,10 +130,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(RegexpQueryConverter))]
-	public partial class RegexpQuery : FieldNameQueryBase, IQueryContainerVariant
+	public partial class RegexpQuery : FieldNameQueryBase, IQueryVariant
 	{
 		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "regexp";
+		string IQueryVariant.QueryVariantName => "regexp";
 		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }

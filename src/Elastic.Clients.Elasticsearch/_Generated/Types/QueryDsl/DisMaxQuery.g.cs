@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class DisMaxQuery : QueryBase, IQueryContainerVariant
+	public partial class DisMaxQuery : QueryBase, IQueryVariant
 	{
 		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "dis_max";
+		string IQueryVariant.QueryVariantName => "dis_max";
 		[JsonInclude]
 		[JsonPropertyName("queries")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> Queries { get; set; }

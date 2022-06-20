@@ -34,6 +34,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		public IntervalsFilter(IIntervalsFilterVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IIntervalsFilterVariant Variant { get; }
+
+		internal string VariantName => Variant.IntervalsFilterVariantName;
 	}
 
 	internal sealed class IntervalsFilterConverter : JsonConverter<IntervalsFilter>

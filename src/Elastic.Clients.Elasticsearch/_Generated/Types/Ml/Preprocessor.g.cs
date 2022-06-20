@@ -34,6 +34,8 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		public Preprocessor(IPreprocessorVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IPreprocessorVariant Variant { get; }
+
+		internal string VariantName => Variant.PreprocessorVariantName;
 	}
 
 	internal sealed class PreprocessorConverter : JsonConverter<Preprocessor>
@@ -73,16 +75,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName(value.Variant.PreprocessorVariantName);
-			switch (value.Variant)
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Ml.FrequencyEncodingPreprocessor variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "frequency_encoding":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.FrequencyEncodingPreprocessor>(writer, (Elastic.Clients.Elasticsearch.Ml.FrequencyEncodingPreprocessor)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.OneHotEncodingPreprocessor variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "one_hot_encoding":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.OneHotEncodingPreprocessor>(writer, (Elastic.Clients.Elasticsearch.Ml.OneHotEncodingPreprocessor)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.TargetMeanEncodingPreprocessor variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "target_mean_encoding":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.TargetMeanEncodingPreprocessor>(writer, (Elastic.Clients.Elasticsearch.Ml.TargetMeanEncodingPreprocessor)value.Variant, options);
 					break;
 			}
 

@@ -34,6 +34,8 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		public DataframeAnalysisFeatureProcessor(IDataframeAnalysisFeatureProcessorVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IDataframeAnalysisFeatureProcessorVariant Variant { get; }
+
+		internal string VariantName => Variant.DataframeAnalysisFeatureProcessorVariantName;
 	}
 
 	internal sealed class DataframeAnalysisFeatureProcessorConverter : JsonConverter<DataframeAnalysisFeatureProcessor>
@@ -85,22 +87,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName(value.Variant.DataframeAnalysisFeatureProcessorVariantName);
-			switch (value.Variant)
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorFrequencyEncoding variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "frequency_encoding":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorFrequencyEncoding>(writer, (Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorFrequencyEncoding)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorMultiEncoding variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "multi_encoding":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorMultiEncoding>(writer, (Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorMultiEncoding)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorNGramEncoding variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "n_gram_encoding":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorNGramEncoding>(writer, (Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorNGramEncoding)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorOneHotEncoding variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "one_hot_encoding":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorOneHotEncoding>(writer, (Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorOneHotEncoding)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorTargetMeanEncoding variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "target_mean_encoding":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorTargetMeanEncoding>(writer, (Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorTargetMeanEncoding)value.Variant, options);
 					break;
 			}
 

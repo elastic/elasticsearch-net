@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class BoostingQuery : QueryBase, IQueryContainerVariant
+	public partial class BoostingQuery : QueryBase, IQueryVariant
 	{
 		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "boosting";
+		string IQueryVariant.QueryVariantName => "boosting";
 		[JsonInclude]
 		[JsonPropertyName("negative")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Negative { get; set; }

@@ -24,17 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public interface IFunctionScoreContainerVariant
+	public interface IFunctionScoreVariant
 	{
-		string FunctionScoreContainerVariantName { get; }
+		string FunctionScoreVariantName { get; }
 	}
 
 	[JsonConverter(typeof(FunctionScoreContainerConverter))]
 	public partial class FunctionScoreContainer : IContainer
 	{
-		public FunctionScoreContainer(IFunctionScoreContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IFunctionScoreContainerVariant Variant { get; }
+		public FunctionScoreContainer(IFunctionScoreVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal IFunctionScoreVariant Variant { get; }
 
+		internal string VariantName => Variant.FunctionScoreVariantName;
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
@@ -80,17 +81,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, FunctionScoreContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.FunctionScoreContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.Variant.FunctionScoreVariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "field_value_factor":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "random_score":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "script_score":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction)value.Variant, options);
 					break;
 			}
 
@@ -128,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Descriptor = descriptor;
 		}
 
-		private void Set(IFunctionScoreContainerVariant variant, string variantName)
+		private void Set(IFunctionScoreVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -195,7 +196,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Descriptor = descriptor;
 		}
 
-		private void Set(IFunctionScoreContainerVariant variant, string variantName)
+		private void Set(IFunctionScoreVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

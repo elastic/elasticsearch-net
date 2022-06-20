@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalysisRegression : DataframeAnalysis, IDataframeAnalysisContainerVariant
+	public partial class DataframeAnalysisRegression : DataframeAnalysis, IDataframeAnalysisVariant
 	{
 		[JsonIgnore]
-		string IDataframeAnalysisContainerVariant.DataframeAnalysisContainerVariantName => "regression";
+		string IDataframeAnalysisVariant.DataframeAnalysisVariantName => "regression";
 		[JsonInclude]
 		[JsonPropertyName("loss_function")]
 		public string? LossFunction { get; set; }

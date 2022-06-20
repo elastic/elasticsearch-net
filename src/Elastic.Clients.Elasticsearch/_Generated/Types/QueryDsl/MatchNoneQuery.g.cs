@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class MatchNoneQuery : QueryBase, IQueryContainerVariant
+	public partial class MatchNoneQuery : QueryBase, IQueryVariant
 	{
 		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "match_none";
+		string IQueryVariant.QueryVariantName => "match_none";
 	}
 
 	public sealed partial class MatchNoneQueryDescriptor : SerializableDescriptorBase<MatchNoneQueryDescriptor>

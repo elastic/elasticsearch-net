@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class IntervalsMatch : IIntervalsContainerVariant, IIntervalsQueryVariant
+	public partial class IntervalsMatch : IIntervalsVariant, IIntervalsQueryVariant
 	{
 		[JsonIgnore]
-		string IIntervalsContainerVariant.IntervalsContainerVariantName => "match";
+		string IIntervalsVariant.IntervalsVariantName => "match";
 		[JsonIgnore]
 		string IIntervalsQueryVariant.IntervalsQueryVariantName => "match";
 		[JsonInclude]

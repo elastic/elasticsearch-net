@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class ScriptQuery : QueryBase, IQueryContainerVariant
+	public partial class ScriptQuery : QueryBase, IQueryVariant
 	{
 		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "script";
+		string IQueryVariant.QueryVariantName => "script";
 		[JsonInclude]
 		[JsonPropertyName("script")]
 		public ScriptBase Script { get; set; }

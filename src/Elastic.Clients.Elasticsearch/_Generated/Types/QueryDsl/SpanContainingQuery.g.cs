@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SpanContainingQuery : QueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public partial class SpanContainingQuery : QueryBase, IQueryVariant, ISpanQueryVariant
 	{
 		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "span_containing";
+		string IQueryVariant.QueryVariantName => "span_containing";
 		[JsonIgnore]
 		string ISpanQueryVariant.SpanQueryVariantName => "span_containing";
 		[JsonInclude]

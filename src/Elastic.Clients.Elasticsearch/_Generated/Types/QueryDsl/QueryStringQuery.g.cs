@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class QueryStringQuery : QueryBase, IQueryContainerVariant
+	public partial class QueryStringQuery : QueryBase, IQueryVariant
 	{
 		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "query_string";
+		string IQueryVariant.QueryVariantName => "query_string";
 		[JsonInclude]
 		[JsonPropertyName("allow_leading_wildcard")]
 		public bool? AllowLeadingWildcard { get; set; }

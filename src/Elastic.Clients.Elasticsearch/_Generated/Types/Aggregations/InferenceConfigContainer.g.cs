@@ -24,16 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public interface IInferenceConfigContainerVariant
+	public interface IInferenceConfigVariant
 	{
-		string InferenceConfigContainerVariantName { get; }
+		string InferenceConfigVariantName { get; }
 	}
 
 	[JsonConverter(typeof(InferenceConfigContainerConverter))]
 	public partial class InferenceConfigContainer : IContainer
 	{
-		public InferenceConfigContainer(IInferenceConfigContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IInferenceConfigContainerVariant Variant { get; }
+		public InferenceConfigContainer(IInferenceConfigVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal IInferenceConfigVariant Variant { get; }
+
+		internal string VariantName => Variant.InferenceConfigVariantName;
 	}
 
 	internal sealed class InferenceConfigContainerConverter : JsonConverter<InferenceConfigContainer>
@@ -66,14 +68,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public override void Write(Utf8JsonWriter writer, InferenceConfigContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.InferenceConfigContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.Variant.InferenceConfigVariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "regression":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions)value.Variant, options);
 					break;
 			}
 
@@ -111,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigContainerVariant variant, string variantName)
+		private void Set(IInferenceConfigVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -176,7 +178,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigContainerVariant variant, string variantName)
+		private void Set(IInferenceConfigVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");

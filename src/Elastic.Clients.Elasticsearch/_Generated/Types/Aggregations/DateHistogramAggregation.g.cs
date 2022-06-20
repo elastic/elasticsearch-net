@@ -300,14 +300,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(DateHistogramAggregationConverter))]
-	public partial class DateHistogramAggregation : BucketAggregationBase, TransformManagement.IPivotGroupByContainerVariant
+	public partial class DateHistogramAggregation : BucketAggregationBase, TransformManagement.IPivotGroupByVariant
 	{
 		public DateHistogramAggregation(string name) : base(name)
 		{
 		}
 
 		[JsonIgnore]
-		string TransformManagement.IPivotGroupByContainerVariant.PivotGroupByContainerVariantName => "date_histogram";
+		string TransformManagement.IPivotGroupByVariant.PivotGroupByVariantName => "date_histogram";
 		[JsonInclude]
 		[JsonPropertyName("calendar_interval")]
 		public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarInterval { get; set; }

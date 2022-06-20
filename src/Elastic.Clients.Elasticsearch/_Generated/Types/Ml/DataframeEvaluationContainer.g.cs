@@ -24,16 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public interface IDataframeEvaluationContainerVariant
+	public interface IDataframeEvaluationVariant
 	{
-		string DataframeEvaluationContainerVariantName { get; }
+		string DataframeEvaluationVariantName { get; }
 	}
 
 	[JsonConverter(typeof(DataframeEvaluationContainerConverter))]
 	public partial class DataframeEvaluationContainer : IContainer
 	{
-		public DataframeEvaluationContainer(IDataframeEvaluationContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IDataframeEvaluationContainerVariant Variant { get; }
+		public DataframeEvaluationContainer(IDataframeEvaluationVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal IDataframeEvaluationVariant Variant { get; }
+
+		internal string VariantName => Variant.DataframeEvaluationVariantName;
 	}
 
 	internal sealed class DataframeEvaluationContainerConverter : JsonConverter<DataframeEvaluationContainer>
@@ -72,17 +74,17 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public override void Write(Utf8JsonWriter writer, DataframeEvaluationContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.DataframeEvaluationContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.Variant.DataframeEvaluationVariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationClassification variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationClassification>(writer, (Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationClassification)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationOutlierDetection variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "outlier_detection":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationOutlierDetection>(writer, (Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationOutlierDetection)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegression variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "regression":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegression>(writer, (Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegression)value.Variant, options);
 					break;
 			}
 
@@ -120,7 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IDataframeEvaluationContainerVariant variant, string variantName)
+		private void Set(IDataframeEvaluationVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
@@ -187,7 +189,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IDataframeEvaluationContainerVariant variant, string variantName)
+		private void Set(IDataframeEvaluationVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
