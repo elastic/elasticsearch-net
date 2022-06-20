@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class DataframeAnalysisFeatureProcessorFrequencyEncoding : IDataframeAnalysisFeatureProcessorVariant
 	{
-		[JsonIgnore]
-		string IDataframeAnalysisFeatureProcessorVariant.DataframeAnalysisFeatureProcessorVariantName => "frequency_encoding";
 		[JsonInclude]
 		[JsonPropertyName("feature_name")]
 		public Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
