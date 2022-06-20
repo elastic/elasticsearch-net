@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.Helpers;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Transport;
 using Tests.Core.Client;

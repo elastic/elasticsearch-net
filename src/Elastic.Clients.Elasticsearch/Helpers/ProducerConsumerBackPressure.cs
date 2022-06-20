@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Elastic.Clients.Elasticsearch.Helpers;
+namespace Elastic.Clients.Elasticsearch;
 
 public sealed class ProducerConsumerBackPressure
 {
