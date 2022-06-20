@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class FrequencyEncodingPreprocessor : IPreprocessorVariant
 	{
-		[JsonIgnore]
-		string IPreprocessorVariant.PreprocessorVariantName => "frequency_encoding";
 		[JsonInclude]
 		[JsonPropertyName("feature_name")]
 		public string FeatureName { get; set; }

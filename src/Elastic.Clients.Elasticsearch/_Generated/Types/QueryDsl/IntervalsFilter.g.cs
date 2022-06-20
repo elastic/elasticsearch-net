@@ -26,14 +26,26 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public interface IIntervalsFilterVariant
 	{
-		string IntervalsFilterVariantName { get; }
 	}
 
 	[JsonConverter(typeof(IntervalsFilterConverter))]
-	public partial class IntervalsFilter : IContainer
+	public partial class IntervalsFilter
 	{
-		public IntervalsFilter(IIntervalsFilterVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		public IntervalsFilter(string variantName, IIntervalsFilterVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
 		internal IIntervalsFilterVariant Variant { get; }
+
+		internal string VariantName { get; }
 	}
 
 	internal sealed class IntervalsFilterConverter : JsonConverter<IntervalsFilter>
@@ -54,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, IntervalsFilter value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.IntervalsFilterVariantName);
+			writer.WritePropertyName(value.VariantName);
 			writer.WriteEndObject();
 		}
 	}
@@ -93,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new IntervalsFilter(variant);
+			Container = new IntervalsFilter(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -153,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new IntervalsFilter(variant);
+			Container = new IntervalsFilter(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

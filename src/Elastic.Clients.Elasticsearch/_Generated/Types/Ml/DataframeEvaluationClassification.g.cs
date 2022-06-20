@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeEvaluationClassification : IDataframeEvaluationContainerVariant
+	public partial class DataframeEvaluationClassification : IDataframeEvaluationVariant
 	{
-		[JsonIgnore]
-		string IDataframeEvaluationContainerVariant.DataframeEvaluationContainerVariantName => "classification";
 		[JsonInclude]
 		[JsonPropertyName("actual_field")]
 		public Elastic.Clients.Elasticsearch.Field ActualField { get; set; }

@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class RetentionPolicy : IRetentionPolicyContainerVariant
+	public partial class RetentionPolicy : IRetentionPolicyVariant
 	{
-		[JsonIgnore]
-		string IRetentionPolicyContainerVariant.RetentionPolicyContainerVariantName => "time";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
