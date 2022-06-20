@@ -78,23 +78,23 @@ namespace Tests.Search.Search
 		{
 			From = 10,
 			Size = 20,
-			Query = new QueryContainer(new MatchAllQuery()),
+			Query = new MatchAllQuery(),
 			Aggregations = new TermsAggregation("startDates")
 			{
 				Field = "startedOn"
 			},
-			PostFilter = new QueryContainer(new TermQuery
+			PostFilter = new TermQuery
 			{
 				Field = "state",
 				Value = "Stable"
-			})
+			}
 		};
 
 		protected override string ExpectedUrlPathAndQuery => $"/project/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(c, f) => c.Search<Project>(f),
-			(c, f) => c.SearchAsync<Project>(f),
+			(c, f) => c.Search(f),
+			(c, f) => c.SearchAsync(f),
 			(c, r) => c.Search<Project>(r),
 			(c, r) => c.SearchAsync<Project>(r)
 		);
@@ -161,7 +161,7 @@ namespace Tests.Search.Search
 		protected override SearchRequest<Project> Initializer => new()
 		{
 			SeqNoPrimaryTerm = true,
-			Query = new QueryContainer(new MatchAllQuery()),
+			Query = new MatchAllQuery(),
 		};
 
 		protected override string ExpectedUrlPathAndQuery => $"/project/_search";
@@ -243,16 +243,16 @@ namespace Tests.Search.Search
 		{
 			From = 10,
 			Size = 20,
-			Query = new QueryContainer(new MatchAllQuery()),
+			Query = new MatchAllQuery(),
 			Aggregations = new TermsAggregation("startDates")
 			{
 				Field = "startedOn"
 			},
-			PostFilter = new QueryContainer(new TermQuery
+			PostFilter = new TermQuery
 			{
 				Field = "state",
 				Value = "Stable"
-			}),
+			},
 			StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
 		};
 

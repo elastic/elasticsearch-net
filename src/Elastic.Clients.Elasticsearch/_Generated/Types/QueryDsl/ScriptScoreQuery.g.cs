@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class ScriptScoreQuery : QueryBase, IQueryContainerVariant
+	public partial class ScriptScoreQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "script_score";
 		[JsonInclude]
 		[JsonPropertyName("min_score")]
 		public float? MinScore { get; set; }

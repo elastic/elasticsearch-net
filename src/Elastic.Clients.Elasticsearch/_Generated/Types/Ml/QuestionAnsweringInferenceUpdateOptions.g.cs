@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class QuestionAnsweringInferenceUpdateOptions : IInferenceConfigUpdateContainerVariant
+	public partial class QuestionAnsweringInferenceUpdateOptions : IInferenceConfigUpdateVariant
 	{
-		[JsonIgnore]
-		string IInferenceConfigUpdateContainerVariant.InferenceConfigUpdateContainerVariantName => "question_answering";
 		[JsonInclude]
 		[JsonPropertyName("max_answer_length")]
 		public int? MaxAnswerLength { get; set; }

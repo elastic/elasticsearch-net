@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class DissectProcessor : ProcessorBase, IProcessorContainerVariant
+	public partial class DissectProcessor : ProcessorBase, IProcessorVariant
 	{
-		[JsonIgnore]
-		string IProcessorContainerVariant.ProcessorContainerVariantName => "dissect";
 		[JsonInclude]
 		[JsonPropertyName("append_separator")]
 		public string AppendSeparator { get; set; }
