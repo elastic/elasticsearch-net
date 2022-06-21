@@ -24,16 +24,30 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public interface IRetentionPolicyContainerVariant
+	public interface IRetentionPolicyVariant
 	{
-		string RetentionPolicyContainerVariantName { get; }
 	}
 
 	[JsonConverter(typeof(RetentionPolicyContainerConverter))]
-	public partial class RetentionPolicyContainer : IContainer
+	public partial class RetentionPolicyContainer
 	{
-		public RetentionPolicyContainer(IRetentionPolicyContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IRetentionPolicyContainerVariant Variant { get; }
+		public RetentionPolicyContainer(string variantName, IRetentionPolicyVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
+		internal IRetentionPolicyVariant Variant { get; }
+
+		internal string VariantName { get; }
+
+		public static RetentionPolicyContainer Time(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy variant) => new RetentionPolicyContainer("time", variant);
 	}
 
 	internal sealed class RetentionPolicyContainerConverter : JsonConverter<RetentionPolicyContainer>
@@ -51,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			if (propertyName == "time")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy?>(ref reader, options);
-				return new RetentionPolicyContainer(variant);
+				return new RetentionPolicyContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -60,11 +74,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public override void Write(Utf8JsonWriter writer, RetentionPolicyContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.RetentionPolicyContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "time":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy>(writer, (Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy)value.Variant, options);
 					break;
 			}
 
@@ -102,11 +116,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(IRetentionPolicyContainerVariant variant, string variantName)
+		private void Set(IRetentionPolicyVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new RetentionPolicyContainer(variant);
+			Container = new RetentionPolicyContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -165,11 +179,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(IRetentionPolicyContainerVariant variant, string variantName)
+		private void Set(IRetentionPolicyVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new RetentionPolicyContainer(variant);
+			Container = new RetentionPolicyContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
