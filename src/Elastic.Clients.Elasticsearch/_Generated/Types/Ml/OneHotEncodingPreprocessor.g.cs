@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class OneHotEncodingPreprocessor : IPreprocessorVariant
 	{
-		[JsonIgnore]
-		string IPreprocessorVariant.PreprocessorVariantName => "one_hot_encoding";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public string Field { get; set; }

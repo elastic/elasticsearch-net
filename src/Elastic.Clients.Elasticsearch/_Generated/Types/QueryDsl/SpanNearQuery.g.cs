@@ -24,12 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SpanNearQuery : QueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public partial class SpanNearQuery : QueryBase, IQueryVariant, ISpanQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "span_near";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "span_near";
 		[JsonInclude]
 		[JsonPropertyName("clauses")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }

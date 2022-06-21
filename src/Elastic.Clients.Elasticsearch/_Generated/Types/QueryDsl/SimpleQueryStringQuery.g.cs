@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SimpleQueryStringQuery : QueryBase, IQueryContainerVariant
+	public partial class SimpleQueryStringQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "simple_query_string";
 		[JsonInclude]
 		[JsonPropertyName("analyze_wildcard")]
 		public bool? AnalyzeWildcard { get; set; }

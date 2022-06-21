@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class ZeroShotClassificationInferenceOptions : IInferenceConfigCreateContainerVariant
+	public partial class ZeroShotClassificationInferenceOptions : IInferenceConfigCreateVariant
 	{
-		[JsonIgnore]
-		string IInferenceConfigCreateContainerVariant.InferenceConfigCreateContainerVariantName => "zero_shot_classification";
 		[JsonInclude]
 		[JsonPropertyName("classification_labels")]
 		public IEnumerable<string> ClassificationLabels { get; set; }
