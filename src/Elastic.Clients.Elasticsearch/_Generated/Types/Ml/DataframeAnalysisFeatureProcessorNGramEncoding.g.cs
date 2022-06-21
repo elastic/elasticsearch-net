@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class DataframeAnalysisFeatureProcessorNGramEncoding : IDataframeAnalysisFeatureProcessorVariant
 	{
-		[JsonIgnore]
-		string IDataframeAnalysisFeatureProcessorVariant.DataframeAnalysisFeatureProcessorVariantName => "n_gram_encoding";
 		[JsonInclude]
 		[JsonPropertyName("custom")]
 		public bool? Custom { get; set; }

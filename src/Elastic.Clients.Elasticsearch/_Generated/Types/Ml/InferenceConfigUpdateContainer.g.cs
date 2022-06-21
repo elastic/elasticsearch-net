@@ -24,16 +24,38 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public interface IInferenceConfigUpdateContainerVariant
+	public interface IInferenceConfigUpdateVariant
 	{
-		string InferenceConfigUpdateContainerVariantName { get; }
 	}
 
 	[JsonConverter(typeof(InferenceConfigUpdateContainerConverter))]
-	public partial class InferenceConfigUpdateContainer : IContainer
+	public partial class InferenceConfigUpdateContainer
 	{
-		public InferenceConfigUpdateContainer(IInferenceConfigUpdateContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IInferenceConfigUpdateContainerVariant Variant { get; }
+		public InferenceConfigUpdateContainer(string variantName, IInferenceConfigUpdateVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
+		internal IInferenceConfigUpdateVariant Variant { get; }
+
+		internal string VariantName { get; }
+
+		public static InferenceConfigUpdateContainer Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions variant) => new InferenceConfigUpdateContainer("classification", variant);
+		public static InferenceConfigUpdateContainer FillMask(Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("fill_mask", variant);
+		public static InferenceConfigUpdateContainer Ner(Elastic.Clients.Elasticsearch.Ml.NerInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("ner", variant);
+		public static InferenceConfigUpdateContainer PassThrough(Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("pass_through", variant);
+		public static InferenceConfigUpdateContainer QuestionAnswering(Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("question_answering", variant);
+		public static InferenceConfigUpdateContainer Regression(Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions variant) => new InferenceConfigUpdateContainer("regression", variant);
+		public static InferenceConfigUpdateContainer TextClassification(Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("text_classification", variant);
+		public static InferenceConfigUpdateContainer TextEmbedding(Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("text_embedding", variant);
+		public static InferenceConfigUpdateContainer ZeroShotClassification(Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("zero_shot_classification", variant);
 	}
 
 	internal sealed class InferenceConfigUpdateContainerConverter : JsonConverter<InferenceConfigUpdateContainer>
@@ -51,55 +73,55 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (propertyName == "classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions?>(ref reader, options);
-				return new InferenceConfigUpdateContainer(variant);
+				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "fill_mask")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceUpdateOptions?>(ref reader, options);
-				return new InferenceConfigUpdateContainer(variant);
+				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "ner")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NerInferenceUpdateOptions?>(ref reader, options);
-				return new InferenceConfigUpdateContainer(variant);
+				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "pass_through")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceUpdateOptions?>(ref reader, options);
-				return new InferenceConfigUpdateContainer(variant);
+				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "question_answering")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceUpdateOptions?>(ref reader, options);
-				return new InferenceConfigUpdateContainer(variant);
+				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "regression")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions?>(ref reader, options);
-				return new InferenceConfigUpdateContainer(variant);
+				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "text_classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions?>(ref reader, options);
-				return new InferenceConfigUpdateContainer(variant);
+				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "text_embedding")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions?>(ref reader, options);
-				return new InferenceConfigUpdateContainer(variant);
+				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "zero_shot_classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions?>(ref reader, options);
-				return new InferenceConfigUpdateContainer(variant);
+				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -108,35 +130,35 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public override void Write(Utf8JsonWriter writer, InferenceConfigUpdateContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.InferenceConfigUpdateContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "fill_mask":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.NerInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "ner":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.NerInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.NerInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "pass_through":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "question_answering":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "regression":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "text_classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "text_embedding":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "zero_shot_classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions)value.Variant, options);
 					break;
 			}
 
@@ -174,11 +196,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigUpdateContainerVariant variant, string variantName)
+		private void Set(IInferenceConfigUpdateVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new InferenceConfigUpdateContainer(variant);
+			Container = new InferenceConfigUpdateContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -253,11 +275,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigUpdateContainerVariant variant, string variantName)
+		private void Set(IInferenceConfigUpdateVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new InferenceConfigUpdateContainer(variant);
+			Container = new InferenceConfigUpdateContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

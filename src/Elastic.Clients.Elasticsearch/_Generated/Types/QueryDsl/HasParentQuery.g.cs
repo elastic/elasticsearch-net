@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class HasParentQuery : QueryBase, IQueryContainerVariant
+	public partial class HasParentQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "has_parent";
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }

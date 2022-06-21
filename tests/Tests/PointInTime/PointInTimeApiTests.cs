@@ -42,7 +42,7 @@ public class PointInTimeApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 						v => new SearchRequest<Project>
 						{
 							Size = 1,
-							Query = new QueryContainer(new MatchAllQuery()),
+							Query = new MatchAllQuery(),
 							Pit = new PointInTimeReference
 							{
 								Id = v,

@@ -24,16 +24,32 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public interface IDataframeAnalysisContainerVariant
+	public interface IDataframeAnalysisVariant
 	{
-		string DataframeAnalysisContainerVariantName { get; }
 	}
 
 	[JsonConverter(typeof(DataframeAnalysisContainerConverter))]
-	public partial class DataframeAnalysisContainer : IContainer
+	public partial class DataframeAnalysisContainer
 	{
-		public DataframeAnalysisContainer(IDataframeAnalysisContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IDataframeAnalysisContainerVariant Variant { get; }
+		public DataframeAnalysisContainer(string variantName, IDataframeAnalysisVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
+		internal IDataframeAnalysisVariant Variant { get; }
+
+		internal string VariantName { get; }
+
+		public static DataframeAnalysisContainer Classification(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisClassification variant) => new DataframeAnalysisContainer("classification", variant);
+		public static DataframeAnalysisContainer OutlierDetection(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisOutlierDetection variant) => new DataframeAnalysisContainer("outlier_detection", variant);
+		public static DataframeAnalysisContainer Regression(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisRegression variant) => new DataframeAnalysisContainer("regression", variant);
 	}
 
 	internal sealed class DataframeAnalysisContainerConverter : JsonConverter<DataframeAnalysisContainer>
@@ -51,19 +67,19 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (propertyName == "classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisClassification?>(ref reader, options);
-				return new DataframeAnalysisContainer(variant);
+				return new DataframeAnalysisContainer(propertyName, variant);
 			}
 
 			if (propertyName == "outlier_detection")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisOutlierDetection?>(ref reader, options);
-				return new DataframeAnalysisContainer(variant);
+				return new DataframeAnalysisContainer(propertyName, variant);
 			}
 
 			if (propertyName == "regression")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisRegression?>(ref reader, options);
-				return new DataframeAnalysisContainer(variant);
+				return new DataframeAnalysisContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -72,17 +88,17 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public override void Write(Utf8JsonWriter writer, DataframeAnalysisContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.DataframeAnalysisContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisClassification variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisClassification>(writer, (Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisClassification)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisOutlierDetection variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "outlier_detection":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisOutlierDetection>(writer, (Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisOutlierDetection)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisRegression variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "regression":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisRegression>(writer, (Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisRegression)value.Variant, options);
 					break;
 			}
 
@@ -120,11 +136,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IDataframeAnalysisContainerVariant variant, string variantName)
+		private void Set(IDataframeAnalysisVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new DataframeAnalysisContainer(variant);
+			Container = new DataframeAnalysisContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -187,11 +203,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IDataframeAnalysisContainerVariant variant, string variantName)
+		private void Set(IDataframeAnalysisVariant variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			Container = new DataframeAnalysisContainer(variant);
+			Container = new DataframeAnalysisContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}

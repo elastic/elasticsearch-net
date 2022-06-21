@@ -26,8 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding : IDataframeAnalysisFeatureProcessorVariant
 	{
-		[JsonIgnore]
-		string IDataframeAnalysisFeatureProcessorVariant.DataframeAnalysisFeatureProcessorVariantName => "target_mean_encoding";
 		[JsonInclude]
 		[JsonPropertyName("default_value")]
 		public int DefaultValue { get; set; }
