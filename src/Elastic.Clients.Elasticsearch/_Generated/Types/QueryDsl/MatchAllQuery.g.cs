@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class MatchAllQuery : QueryBase, IQueryContainerVariant
+	public partial class MatchAllQuery : QueryBase, IQueryVariant
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "match_all";
 	}
 
 	public sealed partial class MatchAllQueryDescriptor : SerializableDescriptorBase<MatchAllQueryDescriptor>

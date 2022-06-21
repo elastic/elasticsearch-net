@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	[JsonConverter(typeof(AggregationContainerConverter))]
-	public partial class AggregationContainer : IContainer
+	public partial class AggregationContainer
 	{
 		public AggregationContainer(AggregationBase variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal AggregationBase Variant { get; }
