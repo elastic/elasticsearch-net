@@ -37,9 +37,5 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		[JsonInclude]
 		[JsonPropertyName("compilations")]
 		public long? Compilations { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("context")]
-		public string? ContextTemp { get; init; }
 	}
 }

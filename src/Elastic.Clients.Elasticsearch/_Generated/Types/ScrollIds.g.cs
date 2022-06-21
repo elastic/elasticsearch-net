@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,20 +23,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ComponentTemplateNode
+	public partial class ScrollIds
 	{
-		[JsonInclude]
-		[JsonPropertyName("_meta")]
-		public Dictionary<string, object>? Meta { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("template")]
-		public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Template { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public long? Version { get; init; }
+		private readonly List<ScrollId> _scrollIdList = new();
 	}
 }

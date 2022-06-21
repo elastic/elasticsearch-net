@@ -40,6 +40,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]
-		public string? Timestamp { get; init; }
+		public long? Timestamp { get; init; }
 	}
 }

@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public GetSnapshotRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public GetSnapshotRequestDescriptor IncludeRepository(bool? includeRepository = true) => Qs("include_repository", includeRepository);
 		public GetSnapshotRequestDescriptor IndexDetails(bool? indexDetails = true) => Qs("index_details", indexDetails);
-		public GetSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public GetSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public GetSnapshotRequestDescriptor Offset(int? offset) => Qs("offset", offset);
 		public GetSnapshotRequestDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order) => Qs("order", order);
 		public GetSnapshotRequestDescriptor Size(int? size) => Qs("size", size);

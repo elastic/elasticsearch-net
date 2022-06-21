@@ -32,7 +32,7 @@ namespace Tests.AsyncSearch
 					{
 						Query = new MatchAllQuery(),
 						KeepOnCompletion = true,
-						WaitForCompletionTimeout = Time.MinusOne,
+						WaitForCompletionTimeout = Duration.MinusOne,
 						Aggregations = new TermsAggregation("states")
 						{
 							Field = Infer.Field<Project>(p => p.State.Suffix("keyword")),

@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,28 +23,16 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster
+namespace Elastic.Clients.Elasticsearch.SpecUtils
 {
-	public partial class ComponentTemplateSummary
+	public partial class Stringified<T> : Union<T?, string?>
 	{
-		[JsonInclude]
-		[JsonPropertyName("_meta")]
-		public Dictionary<string, object>? Meta { get; init; }
+		public Stringified(T? item) : base(item)
+		{
+		}
 
-		[JsonInclude]
-		[JsonPropertyName("aliases")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("settings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings> Settings { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public long? Version { get; init; }
+		public Stringified(string? item) : base(item)
+		{
+		}
 	}
 }

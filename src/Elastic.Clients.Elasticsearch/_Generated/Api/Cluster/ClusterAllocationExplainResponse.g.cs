@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("allocation_delay")]
-		public string? AllocationDelay { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? AllocationDelay { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("allocation_delay_in_millis")]
@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("configured_delay")]
-		public string? ConfiguredDelay { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? ConfiguredDelay { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("configured_delay_in_millis")]
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("remaining_delay")]
-		public string? RemainingDelay { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? RemainingDelay { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("remaining_delay_in_millis")]
