@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("keep_alive")]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 	}
 
 	public sealed partial class PointInTimeReferenceDescriptor : SerializableDescriptorBase<PointInTimeReferenceDescriptor>
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private string IdValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? KeepAliveValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 
 		public PointInTimeReferenceDescriptor Id(string id)
 		{
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public PointInTimeReferenceDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive)
+		public PointInTimeReferenceDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
 		{
 			KeepAliveValue = keepAlive;
 			return Self;

@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("fixed_interval"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Time?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.FixedInterval = value;
@@ -83,17 +83,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("interval"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Time?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Interval = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("min_doc_count"))
 					{
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
@@ -107,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("missing"))
 					{
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Missing = value;
@@ -118,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("offset"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Time?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Offset = value;
@@ -234,12 +223,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(value.Format);
 			}
 
-			if (value.Interval is not null)
-			{
-				writer.WritePropertyName("interval");
-				JsonSerializer.Serialize(writer, value.Interval, options);
-			}
-
 			if (value.MinDocCount.HasValue)
 			{
 				writer.WritePropertyName("min_doc_count");
@@ -276,10 +259,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Script, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.TimeZone))
+			if (value.TimeZone is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(value.TimeZone);
+				JsonSerializer.Serialize(writer, value.TimeZone, options);
 			}
 
 			writer.WriteEndObject();
@@ -316,15 +299,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("fixed_interval")]
-		public Elastic.Clients.Elasticsearch.Time? FixedInterval { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? FixedInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("interval")]
-		public Elastic.Clients.Elasticsearch.Time? Interval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -332,11 +311,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
-		public string? Missing { get; set; }
+		public DateTimeOffset? Missing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("offset")]
-		public Elastic.Clients.Elasticsearch.Time? Offset { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
@@ -378,19 +357,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? FixedIntervalValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? FixedIntervalValue { get; set; }
 
 		private string? FormatValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Time? IntervalValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
 		private int? MinDocCountValue { get; set; }
 
-		private string? MissingValue { get; set; }
+		private DateTimeOffset? MissingValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? OffsetValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? OrderValue { get; set; }
 
@@ -468,7 +445,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public DateHistogramAggregationDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Time? fixedInterval)
+		public DateHistogramAggregationDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
 		{
 			FixedIntervalValue = fixedInterval;
 			return Self;
@@ -477,12 +454,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public DateHistogramAggregationDescriptor<TDocument> Format(string? format)
 		{
 			FormatValue = format;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Interval(Elastic.Clients.Elasticsearch.Time? interval)
-		{
-			IntervalValue = interval;
 			return Self;
 		}
 
@@ -498,13 +469,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public DateHistogramAggregationDescriptor<TDocument> Missing(string? missing)
+		public DateHistogramAggregationDescriptor<TDocument> Missing(DateTimeOffset? missing)
 		{
 			MissingValue = missing;
 			return Self;
 		}
 
-		public DateHistogramAggregationDescriptor<TDocument> Offset(Elastic.Clients.Elasticsearch.Time? offset)
+		public DateHistogramAggregationDescriptor<TDocument> Offset(Elastic.Clients.Elasticsearch.Duration? offset)
 		{
 			OffsetValue = offset;
 			return Self;
@@ -591,12 +562,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(FormatValue);
 			}
 
-			if (IntervalValue is not null)
-			{
-				writer.WritePropertyName("interval");
-				JsonSerializer.Serialize(writer, IntervalValue, options);
-			}
-
 			if (MinDocCountValue.HasValue)
 			{
 				writer.WritePropertyName("min_doc_count");
@@ -637,10 +602,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ParamsValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -693,19 +658,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? FixedIntervalValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? FixedIntervalValue { get; set; }
 
 		private string? FormatValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Time? IntervalValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
 		private int? MinDocCountValue { get; set; }
 
-		private string? MissingValue { get; set; }
+		private DateTimeOffset? MissingValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? OffsetValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? OrderValue { get; set; }
 
@@ -789,7 +752,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public DateHistogramAggregationDescriptor FixedInterval(Elastic.Clients.Elasticsearch.Time? fixedInterval)
+		public DateHistogramAggregationDescriptor FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
 		{
 			FixedIntervalValue = fixedInterval;
 			return Self;
@@ -798,12 +761,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public DateHistogramAggregationDescriptor Format(string? format)
 		{
 			FormatValue = format;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor Interval(Elastic.Clients.Elasticsearch.Time? interval)
-		{
-			IntervalValue = interval;
 			return Self;
 		}
 
@@ -819,13 +776,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public DateHistogramAggregationDescriptor Missing(string? missing)
+		public DateHistogramAggregationDescriptor Missing(DateTimeOffset? missing)
 		{
 			MissingValue = missing;
 			return Self;
 		}
 
-		public DateHistogramAggregationDescriptor Offset(Elastic.Clients.Elasticsearch.Time? offset)
+		public DateHistogramAggregationDescriptor Offset(Elastic.Clients.Elasticsearch.Duration? offset)
 		{
 			OffsetValue = offset;
 			return Self;
@@ -912,12 +869,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(FormatValue);
 			}
 
-			if (IntervalValue is not null)
-			{
-				writer.WritePropertyName("interval");
-				JsonSerializer.Serialize(writer, IntervalValue, options);
-			}
-
 			if (MinDocCountValue.HasValue)
 			{
 				writer.WritePropertyName("min_doc_count");
@@ -958,10 +909,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ParamsValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			writer.WriteEndObject();

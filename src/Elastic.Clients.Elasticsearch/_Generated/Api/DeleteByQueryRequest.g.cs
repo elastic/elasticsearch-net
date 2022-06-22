@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 		[JsonIgnore]
-		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -76,13 +76,13 @@ namespace Elastic.Clients.Elasticsearch
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Scroll { get => Q<Elastic.Clients.Elasticsearch.Time?>("scroll"); set => Q("scroll", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 		[JsonIgnore]
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("search_timeout"); set => Q("search_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
@@ -100,7 +100,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 		[JsonIgnore]
-		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -170,13 +170,13 @@ namespace Elastic.Clients.Elasticsearch
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Scroll { get => Q<Elastic.Clients.Elasticsearch.Time?>("scroll"); set => Q("scroll", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 		[JsonIgnore]
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("search_timeout"); set => Q("search_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
@@ -194,7 +194,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
@@ -246,17 +246,17 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
 		public DeleteByQueryRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		public DeleteByQueryRequestDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
-		public DeleteByQueryRequestDescriptor<TDocument> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+		public DeleteByQueryRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		public DeleteByQueryRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public DeleteByQueryRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
+		public DeleteByQueryRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
 		public DeleteByQueryRequestDescriptor<TDocument> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
-		public DeleteByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Time? searchTimeout) => Qs("search_timeout", searchTimeout);
+		public DeleteByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Duration? searchTimeout) => Qs("search_timeout", searchTimeout);
 		public DeleteByQueryRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
 		public DeleteByQueryRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
 		public DeleteByQueryRequestDescriptor<TDocument> Sort(IEnumerable<string>? sort) => Qs("sort", sort);
 		public DeleteByQueryRequestDescriptor<TDocument> Stats(IEnumerable<string>? stats) => Qs("stats", stats);
 		public DeleteByQueryRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
-		public DeleteByQueryRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public DeleteByQueryRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public DeleteByQueryRequestDescriptor<TDocument> Version(bool? version = true) => Qs("version", version);
 		public DeleteByQueryRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public DeleteByQueryRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
@@ -407,17 +407,17 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
 		public DeleteByQueryRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		public DeleteByQueryRequestDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
-		public DeleteByQueryRequestDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+		public DeleteByQueryRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		public DeleteByQueryRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public DeleteByQueryRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
+		public DeleteByQueryRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
 		public DeleteByQueryRequestDescriptor ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
-		public DeleteByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Time? searchTimeout) => Qs("search_timeout", searchTimeout);
+		public DeleteByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Duration? searchTimeout) => Qs("search_timeout", searchTimeout);
 		public DeleteByQueryRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
 		public DeleteByQueryRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
 		public DeleteByQueryRequestDescriptor Sort(IEnumerable<string>? sort) => Qs("sort", sort);
 		public DeleteByQueryRequestDescriptor Stats(IEnumerable<string>? stats) => Qs("stats", stats);
 		public DeleteByQueryRequestDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
-		public DeleteByQueryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public DeleteByQueryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public DeleteByQueryRequestDescriptor Version(bool? version = true) => Qs("version", version);
 		public DeleteByQueryRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public DeleteByQueryRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);

@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 	{
 		[JsonInclude]
 		[JsonPropertyName("date")]
-		public string Date { get; init; }
+		public DateTimeOffset Date { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("hash")]

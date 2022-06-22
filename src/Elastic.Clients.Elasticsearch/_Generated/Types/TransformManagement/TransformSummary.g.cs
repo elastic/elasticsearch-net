@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("create_time")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? CreateTime { get; init; }
+		public long? CreateTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("description")]
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("frequency")]
-		public Elastic.Clients.Elasticsearch.Time? Frequency { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? Frequency { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("id")]

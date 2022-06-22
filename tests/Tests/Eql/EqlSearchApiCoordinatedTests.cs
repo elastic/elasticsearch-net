@@ -109,12 +109,12 @@ namespace Tests.Eql
 
 			if (r.ExpirationTimeInMillis.HasValue)
 			{
-				r.ExpirationTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(DateTimeOffset.Now.AddHours(-2).ToUnixTimeMilliseconds());
+				r.ExpirationTimeInMillis.Value.Should().BeGreaterThan(DateTimeOffset.Now.AddHours(-2).ToUnixTimeMilliseconds());
 			}
 
 			if (r.StartTimeInMillis.HasValue)
 			{
-				r.StartTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(DateTimeOffset.Now.AddHours(-2).ToUnixTimeMilliseconds());
+				r.StartTimeInMillis.Value.Should().BeGreaterThan(DateTimeOffset.Now.AddHours(-2).ToUnixTimeMilliseconds());
 			}
 
 			if (!r.IsRunning)

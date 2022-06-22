@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -38,11 +39,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
-		public Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("create_time")]
-		public string CreateTime { get; init; }
+		public DateTimeOffset CreateTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("custom_settings")]

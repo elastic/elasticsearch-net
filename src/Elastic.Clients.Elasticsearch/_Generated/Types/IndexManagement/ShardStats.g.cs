@@ -107,10 +107,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.ShardPath? ShardPath { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("shard_stats")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? ShardStatsTemp { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? Shards { get; init; }
 

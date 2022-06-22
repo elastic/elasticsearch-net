@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		[JsonInclude]
 		[JsonPropertyName("keep_alive")]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("keep_on_completion")]
@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		[JsonInclude]
 		[JsonPropertyName("wait_for_completion_timeout")]
-		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private int? FetchSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? KeepAliveValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 
 		private bool? KeepOnCompletionValue { get; set; }
 
@@ -173,7 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 		public EqlSearchRequestDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 		{
@@ -271,7 +271,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive)
+		public EqlSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
 		{
 			KeepAliveValue = keepAlive;
 			return Self;
@@ -331,7 +331,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout)
+		public EqlSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
 		{
 			WaitForCompletionTimeoutValue = waitForCompletionTimeout;
 			return Self;
@@ -511,7 +511,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private int? FetchSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? KeepAliveValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 
 		private bool? KeepOnCompletionValue { get; set; }
 
@@ -527,7 +527,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 		public EqlSearchRequestDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 		{
@@ -631,7 +631,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive)
+		public EqlSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
 		{
 			KeepAliveValue = keepAlive;
 			return Self;
@@ -703,7 +703,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout)
+		public EqlSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
 		{
 			WaitForCompletionTimeoutValue = waitForCompletionTimeout;
 			return Self;

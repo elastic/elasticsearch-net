@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_time")]
-		public string? TotalTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
