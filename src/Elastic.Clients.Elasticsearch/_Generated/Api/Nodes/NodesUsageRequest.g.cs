@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 	public sealed class NodesUsageRequestParameters : RequestParameters<NodesUsageRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class NodesUsageRequest : PlainRequestBase<NodesUsageRequestParameters>
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class NodesUsageRequestDescriptor : RequestDescriptorBase<NodesUsageRequestDescriptor, NodesUsageRequestParameters>
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NodesUsage;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public NodesUsageRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public NodesUsageRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public NodesUsageRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? node_id)
 		{
 			RouteValues.Optional("node_id", node_id);

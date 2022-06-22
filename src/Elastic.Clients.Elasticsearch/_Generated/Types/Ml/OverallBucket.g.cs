@@ -48,6 +48,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]
-		public Elastic.Clients.Elasticsearch.Time Timestamp { get; init; }
+		public long Timestamp { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("timestamp_string")]
+		public DateTimeOffset TimestampString { get; init; }
 	}
 }

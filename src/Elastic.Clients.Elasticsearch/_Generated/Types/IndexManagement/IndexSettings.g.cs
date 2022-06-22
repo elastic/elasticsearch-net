@@ -52,11 +52,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("creation_date")]
-		public string? CreationDate { get; set; }
+		[JsonConverter(typeof(StringifiedLongConverter))]
+		public long? CreationDate { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("creation_date_string")]
-		public string? CreationDateString { get; set; }
+		public DateTimeOffset? CreationDateString { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("default_pipeline")]
@@ -72,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("gc_deletes")]
-		public Elastic.Clients.Elasticsearch.Time? GcDeletes { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? GcDeletes { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("hidden")]
@@ -188,7 +189,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("refresh_interval")]
-		public Elastic.Clients.Elasticsearch.Time? RefreshInterval { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? RefreshInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("routing")]
@@ -304,9 +305,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private string? CodecValue { get; set; }
 
-		private string? CreationDateValue { get; set; }
+		private long? CreationDateValue { get; set; }
 
-		private string? CreationDateStringValue { get; set; }
+		private DateTimeOffset? CreationDateStringValue { get; set; }
 
 		private string? DefaultPipelineValue { get; set; }
 
@@ -314,7 +315,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Union<string?, int?>? FormatValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? GcDeletesValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? GcDeletesValue { get; set; }
 
 		private Union<bool?, string?>? HiddenValue { get; set; }
 
@@ -402,7 +403,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Action<SettingsQueryStringDescriptor> QueryStringDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? RefreshIntervalValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? RefreshIntervalValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? RoutingValue { get; set; }
 
@@ -626,13 +627,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexSettingsDescriptor<TDocument> CreationDate(string? creationDate)
+		public IndexSettingsDescriptor<TDocument> CreationDate(long? creationDate)
 		{
 			CreationDateValue = creationDate;
 			return Self;
 		}
 
-		public IndexSettingsDescriptor<TDocument> CreationDateString(string? creationDateString)
+		public IndexSettingsDescriptor<TDocument> CreationDateString(DateTimeOffset? creationDateString)
 		{
 			CreationDateStringValue = creationDateString;
 			return Self;
@@ -656,7 +657,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexSettingsDescriptor<TDocument> GcDeletes(Elastic.Clients.Elasticsearch.Time? gcDeletes)
+		public IndexSettingsDescriptor<TDocument> GcDeletes(Elastic.Clients.Elasticsearch.Duration? gcDeletes)
 		{
 			GcDeletesValue = gcDeletes;
 			return Self;
@@ -968,7 +969,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexSettingsDescriptor<TDocument> RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval)
+		public IndexSettingsDescriptor<TDocument> RefreshInterval(Elastic.Clients.Elasticsearch.Duration? refreshInterval)
 		{
 			RefreshIntervalValue = refreshInterval;
 			return Self;
@@ -1820,9 +1821,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private string? CodecValue { get; set; }
 
-		private string? CreationDateValue { get; set; }
+		private long? CreationDateValue { get; set; }
 
-		private string? CreationDateStringValue { get; set; }
+		private DateTimeOffset? CreationDateStringValue { get; set; }
 
 		private string? DefaultPipelineValue { get; set; }
 
@@ -1830,7 +1831,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Union<string?, int?>? FormatValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? GcDeletesValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? GcDeletesValue { get; set; }
 
 		private Union<bool?, string?>? HiddenValue { get; set; }
 
@@ -1918,7 +1919,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Action<SettingsQueryStringDescriptor> QueryStringDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? RefreshIntervalValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? RefreshIntervalValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? RoutingValue { get; set; }
 
@@ -2142,13 +2143,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexSettingsDescriptor CreationDate(string? creationDate)
+		public IndexSettingsDescriptor CreationDate(long? creationDate)
 		{
 			CreationDateValue = creationDate;
 			return Self;
 		}
 
-		public IndexSettingsDescriptor CreationDateString(string? creationDateString)
+		public IndexSettingsDescriptor CreationDateString(DateTimeOffset? creationDateString)
 		{
 			CreationDateStringValue = creationDateString;
 			return Self;
@@ -2172,7 +2173,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexSettingsDescriptor GcDeletes(Elastic.Clients.Elasticsearch.Time? gcDeletes)
+		public IndexSettingsDescriptor GcDeletes(Elastic.Clients.Elasticsearch.Duration? gcDeletes)
 		{
 			GcDeletesValue = gcDeletes;
 			return Self;
@@ -2484,7 +2485,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexSettingsDescriptor RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval)
+		public IndexSettingsDescriptor RefreshInterval(Elastic.Clients.Elasticsearch.Duration? refreshInterval)
 		{
 			RefreshIntervalValue = refreshInterval;
 			return Self;

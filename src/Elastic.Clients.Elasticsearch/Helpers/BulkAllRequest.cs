@@ -23,7 +23,7 @@ public sealed class BulkAllRequest<T> : IBulkAllRequest<T>, IHelperCallable
 
 	public int? BackOffRetries { get; set; }
 
-	public Time? BackOffTime { get; set; }
+	public Duration? BackOffTime { get; set; }
 
 	public ProducerConsumerBackPressure? BackPressure { get; set; }
 
@@ -41,7 +41,7 @@ public sealed class BulkAllRequest<T> : IBulkAllRequest<T>, IHelperCallable
 
 	public int? MaxDegreeOfParallelism { get; set; }
 
-	public Time? Timeout { get; set; }
+	public Duration? Timeout { get; set; }
 
 	public string? Pipeline { get; set; }
 
@@ -63,7 +63,7 @@ public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<Bul
 	private readonly IEnumerable<T> _documents;
 
 	private int? _backOffRetries;
-	private Time _backOffTime;
+	private Duration _backOffTime;
 	private ProducerConsumerBackPressure _backPressure;
 	private Action<BulkResponse> _bulkResponseCallback;
 	private IndexName _index;
@@ -77,7 +77,7 @@ public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<Bul
 	private bool _continueAfterDroppedDocuments;
 	private string _pipeline;
 	private Indices _refreshIndices;
-	private Time _timeout;
+	private Duration _timeout;
 	private WaitForActiveShards? _waitForActiveShards;
 	private RequestMetaData _requestMetaData;
 
@@ -88,7 +88,7 @@ public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<Bul
 	}
 
 	int? IBulkAllRequest<T>.BackOffRetries => _backOffRetries;
-	Time? IBulkAllRequest<T>.BackOffTime => _backOffTime;
+	Duration? IBulkAllRequest<T>.BackOffTime => _backOffTime;
 	ProducerConsumerBackPressure? IBulkAllRequest<T>.BackPressure => _backPressure;
 	Action<BulkRequestDescriptor, IList<T>>? IBulkAllRequest<T>.BufferToBulk => _bufferToBulk;
 	Action<BulkResponse>? IBulkAllRequest<T>.BulkResponseCallback => _bulkResponseCallback;
@@ -103,13 +103,13 @@ public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<Bul
 	Func<BulkResponseItemBase, T, bool>? IBulkAllRequest<T>.RetryDocumentPredicate => _retryDocumentPredicate;
 	Routing? IBulkAllRequest<T>.Routing => _routing;
 	int? IBulkAllRequest<T>.Size => _size;
-	Time? IBulkAllRequest<T>.Timeout => _timeout;
+	Duration? IBulkAllRequest<T>.Timeout => _timeout;
 	WaitForActiveShards? IBulkAllRequest<T>.WaitForActiveShards => _waitForActiveShards;
 	RequestMetaData IHelperCallable.ParentMetaData { get => _requestMetaData; set => _requestMetaData = value; }
 
 	public BulkAllRequestDescriptor<T> BackOffRetries(int? backOffRetries) => Assign(backOffRetries, (a, v) => a._backOffRetries = v);
 
-	public BulkAllRequestDescriptor<T> BackOffTime(Time? backOffTime) => Assign(backOffTime, (a, v) => a._backOffTime = v);
+	public BulkAllRequestDescriptor<T> BackOffTime(Duration? backOffTime) => Assign(backOffTime, (a, v) => a._backOffTime = v);
 
 	public BulkAllRequestDescriptor<T> BackPressure(int maxConcurrency, int? backPressureFactor = null) =>
 			Assign(new ProducerConsumerBackPressure(backPressureFactor, maxConcurrency), (a, v) => a._backPressure = v);
@@ -143,7 +143,7 @@ public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<Bul
 
 	public BulkAllRequestDescriptor<T> Size(int? size) => Assign(size, (a, v) => a._size = v);
 
-	public BulkAllRequestDescriptor<T> Timeout(Time timeout) => Assign(timeout, (a, v) => a._timeout = v);
+	public BulkAllRequestDescriptor<T> Timeout(Duration timeout) => Assign(timeout, (a, v) => a._timeout = v);
 
 	public BulkAllRequestDescriptor<T> WaitForActiveShards(WaitForActiveShards? shards) => Assign(shards, (a, v) => a._waitForActiveShards = v);
 

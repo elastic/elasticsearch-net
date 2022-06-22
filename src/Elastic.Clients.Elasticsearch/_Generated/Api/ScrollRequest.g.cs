@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("scroll")]
-		public Elastic.Clients.Elasticsearch.Time? Scroll { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Scroll { get; set; }
 	}
 
 	public sealed partial class ScrollRequestDescriptor : RequestDescriptorBase<ScrollRequestDescriptor, ScrollRequestParameters>
@@ -55,9 +55,9 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public ScrollRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-		private Elastic.Clients.Elasticsearch.Time? ScrollValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? ScrollValue { get; set; }
 
-		public ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Time? scroll)
+		public ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll)
 		{
 			ScrollValue = scroll;
 			return Self;

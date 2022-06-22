@@ -77,8 +77,12 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("task_max_waiting_in_queue")]
+		public Elastic.Clients.Elasticsearch.Duration? TaskMaxWaitingInQueue { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("task_max_waiting_in_queue_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis TaskMaxWaitingInQueueMillis { get; init; }
+		public long TaskMaxWaitingInQueueMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timed_out")]

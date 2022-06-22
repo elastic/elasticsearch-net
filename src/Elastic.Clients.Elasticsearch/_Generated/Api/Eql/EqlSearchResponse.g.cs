@@ -46,6 +46,6 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		[JsonInclude]
 		[JsonPropertyName("took")]
-		public int? Took { get; init; }
+		public long? Took { get; init; }
 	}
 }

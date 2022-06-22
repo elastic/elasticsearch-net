@@ -31,19 +31,19 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Interval { get => Q<Elastic.Clients.Elasticsearch.Time?>("interval"); set => Q("interval", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Interval { get => Q<Elastic.Clients.Elasticsearch.Duration?>("interval"); set => Q("interval", value); }
 
 		[JsonIgnore]
 		public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.ThreadType? Type { get => Q<Elastic.Clients.Elasticsearch.ThreadType?>("type"); set => Q("type", value); }
@@ -69,19 +69,19 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Interval { get => Q<Elastic.Clients.Elasticsearch.Time?>("interval"); set => Q("interval", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Interval { get => Q<Elastic.Clients.Elasticsearch.Duration?>("interval"); set => Q("interval", value); }
 
 		[JsonIgnore]
 		public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.ThreadType? Type { get => Q<Elastic.Clients.Elasticsearch.ThreadType?>("type"); set => Q("type", value); }
@@ -101,12 +101,12 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public NodesHotThreadsRequestDescriptor IgnoreIdleThreads(bool? ignoreIdleThreads = true) => Qs("ignore_idle_threads", ignoreIdleThreads);
-		public NodesHotThreadsRequestDescriptor Interval(Elastic.Clients.Elasticsearch.Time? interval) => Qs("interval", interval);
-		public NodesHotThreadsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public NodesHotThreadsRequestDescriptor Interval(Elastic.Clients.Elasticsearch.Duration? interval) => Qs("interval", interval);
+		public NodesHotThreadsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public NodesHotThreadsRequestDescriptor Snapshots(long? snapshots) => Qs("snapshots", snapshots);
 		public NodesHotThreadsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.ThreadType? sort) => Qs("sort", sort);
 		public NodesHotThreadsRequestDescriptor Threads(long? threads) => Qs("threads", threads);
-		public NodesHotThreadsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public NodesHotThreadsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public NodesHotThreadsRequestDescriptor Type(Elastic.Clients.Elasticsearch.ThreadType? type) => Qs("type", type);
 		public NodesHotThreadsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? node_id)
 		{

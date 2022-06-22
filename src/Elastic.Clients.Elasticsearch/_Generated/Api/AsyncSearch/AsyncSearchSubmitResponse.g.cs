@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -25,8 +26,12 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 	public sealed partial class AsyncSearchSubmitResponse<TDocument> : ElasticsearchResponseBase
 	{
 		[JsonInclude]
+		[JsonPropertyName("expiration_time")]
+		public DateTimeOffset? ExpirationTime { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("expiration_time_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis ExpirationTimeInMillis { get; init; }
+		public long ExpirationTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
@@ -45,7 +50,11 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearch<TDocument> Response { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("start_time")]
+		public DateTimeOffset? StartTime { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis StartTimeInMillis { get; init; }
+		public long StartTimeInMillis { get; init; }
 	}
 }

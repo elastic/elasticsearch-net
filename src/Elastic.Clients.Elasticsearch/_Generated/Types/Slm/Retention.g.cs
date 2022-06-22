@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 	{
 		[JsonInclude]
 		[JsonPropertyName("expire_after")]
-		public Elastic.Clients.Elasticsearch.Time ExpireAfter { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration ExpireAfter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_count")]
@@ -46,13 +46,13 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time ExpireAfterValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration ExpireAfterValue { get; set; }
 
 		private int MaxCountValue { get; set; }
 
 		private int MinCountValue { get; set; }
 
-		public RetentionDescriptor ExpireAfter(Elastic.Clients.Elasticsearch.Time expireAfter)
+		public RetentionDescriptor ExpireAfter(Elastic.Clients.Elasticsearch.Duration expireAfter)
 		{
 			ExpireAfterValue = expireAfter;
 			return Self;

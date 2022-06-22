@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("at")]
-		public string At { get; init; }
+		public DateTimeOffset At { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("delayed")]

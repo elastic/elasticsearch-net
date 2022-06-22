@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 	{
 		[JsonInclude]
 		[JsonPropertyName("expiry_date_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis ExpiryDateInMillis { get; init; }
+		public long ExpiryDateInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("mode")]

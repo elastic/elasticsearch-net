@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("time_span")]
-		public Elastic.Clients.Elasticsearch.Time? TimeSpan { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? TimeSpan { get; set; }
 	}
 
 	public sealed partial class ChunkingConfigDescriptor : SerializableDescriptorBase<ChunkingConfigDescriptor>
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Elastic.Clients.Elasticsearch.Ml.ChunkingMode ModeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? TimeSpanValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? TimeSpanValue { get; set; }
 
 		public ChunkingConfigDescriptor Mode(Elastic.Clients.Elasticsearch.Ml.ChunkingMode mode)
 		{
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public ChunkingConfigDescriptor TimeSpan(Elastic.Clients.Elasticsearch.Time? timeSpan)
+		public ChunkingConfigDescriptor TimeSpan(Elastic.Clients.Elasticsearch.Duration? timeSpan)
 		{
 			TimeSpanValue = timeSpan;
 			return Self;

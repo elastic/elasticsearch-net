@@ -39,6 +39,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public long Failed { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("time")]
+		public Elastic.Clients.Elasticsearch.Duration? Time { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("time_in_millis")]
 		public long TimeInMillis { get; init; }
 	}

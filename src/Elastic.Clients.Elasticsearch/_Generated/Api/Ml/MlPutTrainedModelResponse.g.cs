@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -34,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("create_time")]
-		public Elastic.Clients.Elasticsearch.Time? CreateTime { get; init; }
+		public DateTimeOffset? CreateTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("default_field_map")]

@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	public sealed class TransformStartTransformRequestParameters : RequestParameters<TransformStartTransformRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class TransformStartTransformRequest : PlainRequestBase<TransformStartTransformRequestParameters>
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class TransformStartTransformRequestDescriptor : RequestDescriptorBase<TransformStartTransformRequestDescriptor, TransformStartTransformRequestParameters>
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformManagementStartTransform;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
-		public TransformStartTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public TransformStartTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public TransformStartTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id transform_id)
 		{
 			RouteValues.Required("transform_id", transform_id);

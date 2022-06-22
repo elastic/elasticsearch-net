@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public partial class ClusterPutComponentTemplateRequest : PlainRequestBase<ClusterPutComponentTemplateRequestParameters>
@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("template")]
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
-		public ClusterPutComponentTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
 		{
 			RouteValues.Required("name", name);
@@ -298,7 +298,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public ClusterPutComponentTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
-		public ClusterPutComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterPutComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterPutComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 		{
 			RouteValues.Required("name", name);

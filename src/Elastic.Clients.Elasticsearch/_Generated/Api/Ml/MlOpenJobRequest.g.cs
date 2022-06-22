@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override bool SupportsBody => true;
 		[JsonInclude]
 		[JsonPropertyName("timeout")]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 	}
 
 	public sealed partial class MlOpenJobRequestDescriptor : RequestDescriptorBase<MlOpenJobRequestDescriptor, MlOpenJobRequestParameters>
@@ -63,9 +63,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? TimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
-		public MlOpenJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout)
+		public MlOpenJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 		{
 			TimeoutValue = timeout;
 			return Self;
