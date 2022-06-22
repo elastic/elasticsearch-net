@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("keep_alive")]
-		public string? KeepAlive { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max")]

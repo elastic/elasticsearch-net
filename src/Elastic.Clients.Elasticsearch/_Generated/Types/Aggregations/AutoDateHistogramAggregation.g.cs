@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("missing"))
 					{
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Missing = value;
@@ -225,10 +225,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Script, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.TimeZone))
+			if (value.TimeZone is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(value.TimeZone);
+				JsonSerializer.Serialize(writer, value.TimeZone, options);
 			}
 
 			writer.WriteEndObject();
@@ -273,7 +273,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
-		public string? Missing { get; set; }
+		public DateTimeOffset? Missing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("offset")]
@@ -321,7 +321,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumIntervalValue { get; set; }
 
-		private string? MissingValue { get; set; }
+		private DateTimeOffset? MissingValue { get; set; }
 
 		private string? OffsetValue { get; set; }
 
@@ -413,7 +413,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public AutoDateHistogramAggregationDescriptor<TDocument> Missing(string? missing)
+		public AutoDateHistogramAggregationDescriptor<TDocument> Missing(DateTimeOffset? missing)
 		{
 			MissingValue = missing;
 			return Self;
@@ -500,10 +500,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ParamsValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -562,7 +562,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumIntervalValue { get; set; }
 
-		private string? MissingValue { get; set; }
+		private DateTimeOffset? MissingValue { get; set; }
 
 		private string? OffsetValue { get; set; }
 
@@ -660,7 +660,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public AutoDateHistogramAggregationDescriptor Missing(string? missing)
+		public AutoDateHistogramAggregationDescriptor Missing(DateTimeOffset? missing)
 		{
 			MissingValue = missing;
 			return Self;
@@ -747,10 +747,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ParamsValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			writer.WriteEndObject();

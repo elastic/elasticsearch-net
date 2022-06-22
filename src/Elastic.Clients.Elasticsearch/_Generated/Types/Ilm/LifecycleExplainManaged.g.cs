@@ -28,15 +28,19 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 	{
 		[JsonInclude]
 		[JsonPropertyName("action")]
-		public string Action { get; init; }
+		public string? Action { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("action_time")]
+		public DateTimeOffset? ActionTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("action_time_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis ActionTimeMillis { get; init; }
+		public long? ActionTimeMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("age")]
-		public Elastic.Clients.Elasticsearch.Time Age { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? Age { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("failed_step")]
@@ -48,19 +52,27 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public string Index { get; init; }
+		public string? Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("index_creation_date")]
+		public DateTimeOffset? IndexCreationDate { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_creation_date_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? IndexCreationDateMillis { get; init; }
+		public long? IndexCreationDateMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("is_auto_retryable_error")]
 		public bool? IsAutoRetryableError { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("lifecycle_date")]
+		public DateTimeOffset? LifecycleDate { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("lifecycle_date_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis LifecycleDateMillis { get; init; }
+		public long? LifecycleDateMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("managed")]
@@ -71,11 +83,15 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 		[JsonInclude]
 		[JsonPropertyName("phase_execution")]
-		public Elastic.Clients.Elasticsearch.Ilm.LifecycleExplainPhaseExecution PhaseExecution { get; init; }
+		public Elastic.Clients.Elasticsearch.Ilm.LifecycleExplainPhaseExecution? PhaseExecution { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("phase_time")]
+		public DateTimeOffset? PhaseTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("phase_time_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis PhaseTimeMillis { get; init; }
+		public long? PhaseTimeMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("policy")]
@@ -83,18 +99,22 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 		[JsonInclude]
 		[JsonPropertyName("step")]
-		public string Step { get; init; }
+		public string? Step { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("step_info")]
 		public Dictionary<string, object>? StepInfo { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("step_time")]
+		public DateTimeOffset? StepTime { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("step_time_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis StepTimeMillis { get; init; }
+		public long? StepTimeMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_since_index_creation")]
-		public Elastic.Clients.Elasticsearch.Time? TimeSinceIndexCreation { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? TimeSinceIndexCreation { get; init; }
 	}
 }

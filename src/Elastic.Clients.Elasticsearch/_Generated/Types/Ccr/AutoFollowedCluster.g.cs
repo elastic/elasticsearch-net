@@ -36,6 +36,6 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		[JsonInclude]
 		[JsonPropertyName("time_since_last_check_millis")]
-		public string TimeSinceLastCheckMillis { get; init; }
+		public long TimeSinceLastCheckMillis { get; init; }
 	}
 }

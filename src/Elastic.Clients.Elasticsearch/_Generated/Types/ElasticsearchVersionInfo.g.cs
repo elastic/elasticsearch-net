@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("build_date")]
-		public string BuildDate { get; init; }
+		public DateTimeOffset BuildDate { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("build_flavor")]

@@ -40,11 +40,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override bool SupportsBody => true;
 		[JsonInclude]
 		[JsonPropertyName("duration")]
-		public Elastic.Clients.Elasticsearch.Time? Duration { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Duration { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("expires_in")]
-		public Elastic.Clients.Elasticsearch.Time? ExpiresIn { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? ExpiresIn { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_model_memory")]
@@ -71,19 +71,19 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? DurationValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? DurationValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? ExpiresInValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? ExpiresInValue { get; set; }
 
 		private string? MaxModelMemoryValue { get; set; }
 
-		public MlForecastRequestDescriptor Duration(Elastic.Clients.Elasticsearch.Time? duration)
+		public MlForecastRequestDescriptor Duration(Elastic.Clients.Elasticsearch.Duration? duration)
 		{
 			DurationValue = duration;
 			return Self;
 		}
 
-		public MlForecastRequestDescriptor ExpiresIn(Elastic.Clients.Elasticsearch.Time? expiresIn)
+		public MlForecastRequestDescriptor ExpiresIn(Elastic.Clients.Elasticsearch.Duration? expiresIn)
 		{
 			ExpiresInValue = expiresIn;
 			return Self;

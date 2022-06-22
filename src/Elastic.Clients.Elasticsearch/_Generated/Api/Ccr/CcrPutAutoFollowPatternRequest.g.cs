@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		[JsonInclude]
 		[JsonPropertyName("read_poll_timeout")]
-		public Elastic.Clients.Elasticsearch.Time? ReadPollTimeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_read_request_operation_count")]
@@ -80,7 +80,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		[JsonInclude]
 		[JsonPropertyName("max_retry_delay")]
-		public Elastic.Clients.Elasticsearch.Time? MaxRetryDelay { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? MaxRetryDelay { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_write_buffer_count")]
@@ -133,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		private Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? MaxRetryDelayValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? MaxRetryDelayValue { get; set; }
 
 		private int? MaxWriteBufferCountValue { get; set; }
 
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		private Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? ReadPollTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? ReadPollTimeoutValue { get; set; }
 
 		private string RemoteClusterValue { get; set; }
 
@@ -191,7 +191,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return Self;
 		}
 
-		public CcrPutAutoFollowPatternRequestDescriptor MaxRetryDelay(Elastic.Clients.Elasticsearch.Time? maxRetryDelay)
+		public CcrPutAutoFollowPatternRequestDescriptor MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? maxRetryDelay)
 		{
 			MaxRetryDelayValue = maxRetryDelay;
 			return Self;
@@ -221,7 +221,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return Self;
 		}
 
-		public CcrPutAutoFollowPatternRequestDescriptor ReadPollTimeout(Elastic.Clients.Elasticsearch.Time? readPollTimeout)
+		public CcrPutAutoFollowPatternRequestDescriptor ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? readPollTimeout)
 		{
 			ReadPollTimeoutValue = readPollTimeout;
 			return Self;

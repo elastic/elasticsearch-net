@@ -27,10 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 	public partial class DataStreams : Base
 	{
 		[JsonInclude]
-		[JsonPropertyName("data_streams")]
-		public long DataStreamsTemp { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("indices_count")]
 		public long IndicesCount { get; init; }
 	}

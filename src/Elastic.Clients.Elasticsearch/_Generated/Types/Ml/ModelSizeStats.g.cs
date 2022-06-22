@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("log_time")]
-		public Elastic.Clients.Elasticsearch.Time LogTime { get; init; }
+		public DateTimeOffset LogTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("memory_status")]
