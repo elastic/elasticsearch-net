@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("refresh_interval_in_millis")]
-		public int RefreshIntervalInMillis { get; init; }
+		public long RefreshIntervalInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("swap")]

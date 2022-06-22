@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public partial class SimulateTemplateRequest : PlainRequestBase<SimulateTemplateRequestParameters>
@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public sealed partial class SimulateTemplateRequestDescriptor : RequestDescriptorBase<SimulateTemplateRequestDescriptor, SimulateTemplateRequestParameters>
@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		public SimulateTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
-		public SimulateTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public SimulateTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public SimulateTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
 		{
 			RouteValues.Optional("name", name);

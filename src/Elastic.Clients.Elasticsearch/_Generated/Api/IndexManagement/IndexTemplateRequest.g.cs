@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public partial class IndexTemplateRequest : PlainRequestBase<IndexTemplateRequestParameters>
@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public sealed partial class IndexTemplateRequestDescriptor : RequestDescriptorBase<IndexTemplateRequestDescriptor, IndexTemplateRequestParameters>
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 		public IndexTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		public IndexTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
-		public IndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
 		{
 			RouteValues.Optional("name", name);

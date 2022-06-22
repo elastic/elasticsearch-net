@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("end")]
-		public string? End { get; set; }
+		public DateTimeOffset? End { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("exclude_interim")]
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("start")]
-		public string? Start { get; set; }
+		public DateTimeOffset? Start { get; set; }
 	}
 
 	public sealed partial class MlGetRecordsRequestDescriptor<TDocument> : RequestDescriptorBase<MlGetRecordsRequestDescriptor<TDocument>, MlGetRecordsRequestParameters>
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private bool? DescValue { get; set; }
 
-		private string? EndValue { get; set; }
+		private DateTimeOffset? EndValue { get; set; }
 
 		private bool? ExcludeInterimValue { get; set; }
 
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Elastic.Clients.Elasticsearch.Field? SortValue { get; set; }
 
-		private string? StartValue { get; set; }
+		private DateTimeOffset? StartValue { get; set; }
 
 		public MlGetRecordsRequestDescriptor<TDocument> Desc(bool? desc = true)
 		{
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlGetRecordsRequestDescriptor<TDocument> End(string? end)
+		public MlGetRecordsRequestDescriptor<TDocument> End(DateTimeOffset? end)
 		{
 			EndValue = end;
 			return Self;
@@ -178,7 +178,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlGetRecordsRequestDescriptor<TDocument> Start(string? start)
+		public MlGetRecordsRequestDescriptor<TDocument> Start(DateTimeOffset? start)
 		{
 			StartValue = start;
 			return Self;
@@ -267,7 +267,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private bool? DescValue { get; set; }
 
-		private string? EndValue { get; set; }
+		private DateTimeOffset? EndValue { get; set; }
 
 		private bool? ExcludeInterimValue { get; set; }
 
@@ -281,7 +281,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Elastic.Clients.Elasticsearch.Field? SortValue { get; set; }
 
-		private string? StartValue { get; set; }
+		private DateTimeOffset? StartValue { get; set; }
 
 		public MlGetRecordsRequestDescriptor Desc(bool? desc = true)
 		{
@@ -289,7 +289,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlGetRecordsRequestDescriptor End(string? end)
+		public MlGetRecordsRequestDescriptor End(DateTimeOffset? end)
 		{
 			EndValue = end;
 			return Self;
@@ -349,7 +349,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlGetRecordsRequestDescriptor Start(string? start)
+		public MlGetRecordsRequestDescriptor Start(DateTimeOffset? start)
 		{
 			StartValue = start;
 			return Self;

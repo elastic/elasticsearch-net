@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("throttle_time")]
-		public string? ThrottleTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? ThrottleTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("throttle_time_in_millis")]

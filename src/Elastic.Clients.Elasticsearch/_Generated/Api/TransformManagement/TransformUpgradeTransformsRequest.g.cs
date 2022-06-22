@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class TransformUpgradeTransformsRequest : PlainRequestBase<TransformUpgradeTransformsRequestParameters>
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class TransformUpgradeTransformsRequestDescriptor : RequestDescriptorBase<TransformUpgradeTransformsRequestDescriptor, TransformUpgradeTransformsRequestParameters>
@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		public TransformUpgradeTransformsRequestDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
-		public TransformUpgradeTransformsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public TransformUpgradeTransformsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

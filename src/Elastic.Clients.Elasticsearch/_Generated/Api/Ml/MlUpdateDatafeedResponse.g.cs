@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("frequency")]
-		public Elastic.Clients.Elasticsearch.Time Frequency { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration Frequency { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("query_delay")]
-		public Elastic.Clients.Elasticsearch.Time QueryDelay { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration QueryDelay { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
