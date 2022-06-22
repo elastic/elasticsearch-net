@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		[JsonInclude]
 		[JsonPropertyName("expiration_time_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? ExpirationTimeInMillis { get; init; }
+		public long? ExpirationTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
@@ -46,6 +46,6 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? StartTimeInMillis { get; init; }
+		public long? StartTimeInMillis { get; init; }
 	}
 }

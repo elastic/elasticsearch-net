@@ -35,6 +35,10 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long StartTimeInMillis { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("time")]
+		public Elastic.Clients.Elasticsearch.Duration? Time { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("time_in_millis")]
 		public long TimeInMillis { get; init; }
 

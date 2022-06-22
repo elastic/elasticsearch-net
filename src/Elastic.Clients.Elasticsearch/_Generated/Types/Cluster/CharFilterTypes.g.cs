@@ -47,10 +47,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInTokenizers { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("char_filter_types")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> CharFilterTypesTemp { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("filter_types")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FilterTypes { get; init; }
 

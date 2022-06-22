@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public partial class SimulateIndexTemplateRequest : PlainRequestBase<SimulateIndexTemplateRequestParameters>
@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("allow_auto_create")]
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public SimulateIndexTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
-		public SimulateIndexTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public SimulateIndexTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public SimulateIndexTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
 		{
 			RouteValues.Required("name", name);
@@ -302,7 +302,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public SimulateIndexTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
-		public SimulateIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public SimulateIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public SimulateIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 		{
 			RouteValues.Required("name", name);

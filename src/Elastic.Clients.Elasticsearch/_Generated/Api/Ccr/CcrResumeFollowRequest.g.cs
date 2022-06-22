@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		[JsonInclude]
 		[JsonPropertyName("max_retry_delay")]
-		public Elastic.Clients.Elasticsearch.Time? MaxRetryDelay { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? MaxRetryDelay { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_write_buffer_count")]
@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		[JsonInclude]
 		[JsonPropertyName("read_poll_timeout")]
-		public Elastic.Clients.Elasticsearch.Time? ReadPollTimeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; set; }
 	}
 
 	public sealed partial class CcrResumeFollowRequestDescriptor<TDocument> : RequestDescriptorBase<CcrResumeFollowRequestDescriptor<TDocument>, CcrResumeFollowRequestParameters>
@@ -111,7 +111,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		private string? MaxReadRequestSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? MaxRetryDelayValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? MaxRetryDelayValue { get; set; }
 
 		private long? MaxWriteBufferCountValue { get; set; }
 
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		private string? MaxWriteRequestSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? ReadPollTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? ReadPollTimeoutValue { get; set; }
 
 		public CcrResumeFollowRequestDescriptor<TDocument> MaxOutstandingReadRequests(long? maxOutstandingReadRequests)
 		{
@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return Self;
 		}
 
-		public CcrResumeFollowRequestDescriptor<TDocument> MaxRetryDelay(Elastic.Clients.Elasticsearch.Time? maxRetryDelay)
+		public CcrResumeFollowRequestDescriptor<TDocument> MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? maxRetryDelay)
 		{
 			MaxRetryDelayValue = maxRetryDelay;
 			return Self;
@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return Self;
 		}
 
-		public CcrResumeFollowRequestDescriptor<TDocument> ReadPollTimeout(Elastic.Clients.Elasticsearch.Time? readPollTimeout)
+		public CcrResumeFollowRequestDescriptor<TDocument> ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? readPollTimeout)
 		{
 			ReadPollTimeoutValue = readPollTimeout;
 			return Self;
@@ -278,7 +278,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		private string? MaxReadRequestSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? MaxRetryDelayValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? MaxRetryDelayValue { get; set; }
 
 		private long? MaxWriteBufferCountValue { get; set; }
 
@@ -288,7 +288,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		private string? MaxWriteRequestSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? ReadPollTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? ReadPollTimeoutValue { get; set; }
 
 		public CcrResumeFollowRequestDescriptor MaxOutstandingReadRequests(long? maxOutstandingReadRequests)
 		{
@@ -314,7 +314,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return Self;
 		}
 
-		public CcrResumeFollowRequestDescriptor MaxRetryDelay(Elastic.Clients.Elasticsearch.Time? maxRetryDelay)
+		public CcrResumeFollowRequestDescriptor MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? maxRetryDelay)
 		{
 			MaxRetryDelayValue = maxRetryDelay;
 			return Self;
@@ -344,7 +344,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 			return Self;
 		}
 
-		public CcrResumeFollowRequestDescriptor ReadPollTimeout(Elastic.Clients.Elasticsearch.Time? readPollTimeout)
+		public CcrResumeFollowRequestDescriptor ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? readPollTimeout)
 		{
 			ReadPollTimeoutValue = readPollTimeout;
 			return Self;

@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
-		public Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
@@ -137,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<AnalysisMemoryLimitDescriptor> AnalysisLimitsDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? BackgroundPersistIntervalValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? BackgroundPersistIntervalValue { get; set; }
 
 		private IEnumerable<string>? CategorizationFiltersValue { get; set; }
 
@@ -251,7 +251,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlUpdateJobRequestDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Time? backgroundPersistInterval)
+		public MlUpdateJobRequestDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? backgroundPersistInterval)
 		{
 			BackgroundPersistIntervalValue = backgroundPersistInterval;
 			return Self;
@@ -513,7 +513,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<AnalysisMemoryLimitDescriptor> AnalysisLimitsDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? BackgroundPersistIntervalValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? BackgroundPersistIntervalValue { get; set; }
 
 		private IEnumerable<string>? CategorizationFiltersValue { get; set; }
 
@@ -627,7 +627,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlUpdateJobRequestDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Time? backgroundPersistInterval)
+		public MlUpdateJobRequestDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? backgroundPersistInterval)
 		{
 			BackgroundPersistIntervalValue = backgroundPersistInterval;
 			return Self;

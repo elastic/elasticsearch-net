@@ -45,7 +45,7 @@ public class ClusterHealthShardsApiTests
 		response.ActiveShardsPercentAsNumber.Should().BePositive();
 		response.DelayedUnassignedShards.Should().Be(0);
 		response.NumberOfInFlightFetch.Should().BeGreaterOrEqualTo(0);
-		response.TaskMaxWaitingInQueueMillis.MillisecondsSinceEpoch.Should().BeGreaterOrEqualTo(0);
+		response.TaskMaxWaitingInQueueMillis.Should().BeGreaterOrEqualTo(0);
 
 		response.Indices.HasValue.Should().BeTrue();
 

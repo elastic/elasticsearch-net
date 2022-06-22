@@ -27,10 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	public partial class ComponentTemplate
 	{
 		[JsonInclude]
-		[JsonPropertyName("component_template")]
-		public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode ComponentTemplateTemp { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("name")]
 		public string Name { get; init; }
 	}

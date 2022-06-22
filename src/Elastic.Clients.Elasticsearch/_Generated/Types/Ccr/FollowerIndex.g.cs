@@ -27,10 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 	public partial class FollowerIndex
 	{
 		[JsonInclude]
-		[JsonPropertyName("follower_index")]
-		public string FollowerIndexTemp { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("leader_index")]
 		public string LeaderIndex { get; init; }
 

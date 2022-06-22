@@ -36,10 +36,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("since")]
-		public Elastic.Clients.Elasticsearch.EpochMillis Since { get; init; }
+		public long Since { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]
-		public Elastic.Clients.Elasticsearch.EpochMillis Timestamp { get; init; }
+		public long Timestamp { get; init; }
 	}
 }

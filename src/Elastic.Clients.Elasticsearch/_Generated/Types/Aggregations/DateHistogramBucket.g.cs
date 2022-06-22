@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("key")]
-		public Elastic.Clients.Elasticsearch.EpochMillis Key { get; init; }
+		public long Key { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("key_as_string")]
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
 			var subAggs = new Dictionary<string, AggregateBase>(); // TODO - Optimise this and only create if we need it.
 			long docCount = default;
-			Elastic.Clients.Elasticsearch.EpochMillis key = default;
+			long key = default;
 			string? keyAsString = default;
 			while (reader.Read())
 			{
@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 				if (name.Equals("key", StringComparison.Ordinal))
 				{
-					key = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.EpochMillis>(ref reader, options);
+					key = JsonSerializer.Deserialize<long>(ref reader, options);
 					continue;
 				}
 

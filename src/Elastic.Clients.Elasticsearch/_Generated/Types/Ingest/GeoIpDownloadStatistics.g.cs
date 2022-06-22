@@ -44,6 +44,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("total_download_time")]
-		public int TotalDownloadTime { get; init; }
+		public long TotalDownloadTime { get; init; }
 	}
 }

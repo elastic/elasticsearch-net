@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 	public sealed class NodesReloadSecureSettingsRequestParameters : RequestParameters<NodesReloadSecureSettingsRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class NodesReloadSecureSettingsRequest : PlainRequestBase<NodesReloadSecureSettingsRequestParameters>
@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("secure_settings_password")]
@@ -62,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NodesReloadSecureSettings;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public NodesReloadSecureSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public NodesReloadSecureSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public NodesReloadSecureSettingsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? node_id)
 		{
 			RouteValues.Optional("node_id", node_id);
