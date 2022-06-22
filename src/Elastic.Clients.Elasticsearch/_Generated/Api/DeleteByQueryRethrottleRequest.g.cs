@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed class DeleteByQueryRethrottleRequestParameters : RequestParameters<DeleteByQueryRethrottleRequestParameters>
 	{
 		[JsonIgnore]
-		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
 
 	public partial class DeleteByQueryRethrottleRequest : PlainRequestBase<DeleteByQueryRethrottleRequestParameters>
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
 
 	public sealed partial class DeleteByQueryRethrottleRequestDescriptor : RequestDescriptorBase<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleRequestParameters>
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQueryRethrottle;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
-		public DeleteByQueryRethrottleRequestDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+		public DeleteByQueryRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		public DeleteByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id task_id)
 		{
 			RouteValues.Required("task_id", task_id);

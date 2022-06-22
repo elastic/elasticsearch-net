@@ -23,7 +23,7 @@ public class BucketSubAggregationSerializationTests : SerializerTestBase
 
 		var dateBucket = dateHistogramAgg.Buckets.First();
 
-		dateBucket.Key.Should().Be(new EpochMillis(1517443200000));
+		dateBucket.Key.Should().Be(1517443200000);
 		dateBucket.KeyAsString.Should().Be("2018-02-01T00:00:00.000Z");
 
 		var firstSum = dateBucket.GetSum("trade-volumes");

@@ -28,19 +28,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("debug")]
-		public Elastic.Clients.Elasticsearch.Time? Debug { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Debug { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("info")]
-		public Elastic.Clients.Elasticsearch.Time? Info { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Info { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("trace")]
-		public Elastic.Clients.Elasticsearch.Time? Trace { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Trace { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("warn")]
-		public Elastic.Clients.Elasticsearch.Time? Warn { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Warn { get; set; }
 	}
 
 	public sealed partial class SlowlogTresholdLevelsDescriptor : SerializableDescriptorBase<SlowlogTresholdLevelsDescriptor>
@@ -50,33 +50,33 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? DebugValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? DebugValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? InfoValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? InfoValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? TraceValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? TraceValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? WarnValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? WarnValue { get; set; }
 
-		public SlowlogTresholdLevelsDescriptor Debug(Elastic.Clients.Elasticsearch.Time? debug)
+		public SlowlogTresholdLevelsDescriptor Debug(Elastic.Clients.Elasticsearch.Duration? debug)
 		{
 			DebugValue = debug;
 			return Self;
 		}
 
-		public SlowlogTresholdLevelsDescriptor Info(Elastic.Clients.Elasticsearch.Time? info)
+		public SlowlogTresholdLevelsDescriptor Info(Elastic.Clients.Elasticsearch.Duration? info)
 		{
 			InfoValue = info;
 			return Self;
 		}
 
-		public SlowlogTresholdLevelsDescriptor Trace(Elastic.Clients.Elasticsearch.Time? trace)
+		public SlowlogTresholdLevelsDescriptor Trace(Elastic.Clients.Elasticsearch.Duration? trace)
 		{
 			TraceValue = trace;
 			return Self;
 		}
 
-		public SlowlogTresholdLevelsDescriptor Warn(Elastic.Clients.Elasticsearch.Time? warn)
+		public SlowlogTresholdLevelsDescriptor Warn(Elastic.Clients.Elasticsearch.Duration? warn)
 		{
 			WarnValue = warn;
 			return Self;

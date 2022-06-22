@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("exists_time")]
-		public string? ExistsTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? ExistsTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("exists_time_in_millis")]
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("missing_time")]
-		public string? MissingTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? MissingTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing_time_in_millis")]
@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("time")]
-		public string? Time { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? Time { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_in_millis")]

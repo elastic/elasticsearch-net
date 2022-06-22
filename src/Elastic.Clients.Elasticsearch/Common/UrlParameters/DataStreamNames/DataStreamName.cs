@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public sealed class DataStreamName : IEquatable<DataStreamName>, IUrlParameter
 	{
-		internal DataStreamName(string index) => Name = index;
+		internal DataStreamName(string dataStreamName) => Name = dataStreamName;
 
 		public string Name { get; }
 

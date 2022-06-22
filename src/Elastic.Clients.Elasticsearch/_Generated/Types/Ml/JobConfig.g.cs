@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
-		public Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
@@ -134,7 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<AnalysisLimitsDescriptor> AnalysisLimitsDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? BackgroundPersistIntervalValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? BackgroundPersistIntervalValue { get; set; }
 
 		private object? CustomSettingsValue { get; set; }
 
@@ -282,7 +282,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public JobConfigDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Time? backgroundPersistInterval)
+		public JobConfigDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? backgroundPersistInterval)
 		{
 			BackgroundPersistIntervalValue = backgroundPersistInterval;
 			return Self;
@@ -546,7 +546,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<AnalysisLimitsDescriptor> AnalysisLimitsDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? BackgroundPersistIntervalValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? BackgroundPersistIntervalValue { get; set; }
 
 		private object? CustomSettingsValue { get; set; }
 
@@ -694,7 +694,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public JobConfigDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Time? backgroundPersistInterval)
+		public JobConfigDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? backgroundPersistInterval)
 		{
 			BackgroundPersistIntervalValue = backgroundPersistInterval;
 			return Self;
