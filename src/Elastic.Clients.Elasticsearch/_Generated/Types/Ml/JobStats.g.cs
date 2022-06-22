@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("open_time")]
-		public string? OpenTime { get; init; }
+		public DateTimeOffset? OpenTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("state")]

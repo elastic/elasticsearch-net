@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("delay")]
-		public Elastic.Clients.Elasticsearch.Time? Delay { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Delay { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -42,11 +42,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? DelayValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? DelayValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		public TimeSyncDescriptor<TDocument> Delay(Elastic.Clients.Elasticsearch.Time? delay)
+		public TimeSyncDescriptor<TDocument> Delay(Elastic.Clients.Elasticsearch.Duration? delay)
 		{
 			DelayValue = delay;
 			return Self;
@@ -86,11 +86,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? DelayValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? DelayValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		public TimeSyncDescriptor Delay(Elastic.Clients.Elasticsearch.Time? delay)
+		public TimeSyncDescriptor Delay(Elastic.Clients.Elasticsearch.Duration? delay)
 		{
 			DelayValue = delay;
 			return Self;

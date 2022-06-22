@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public partial class ClusterGetComponentTemplateRequest : PlainRequestBase<ClusterGetComponentTemplateRequestParameters>
@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public sealed partial class ClusterGetComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterGetComponentTemplateRequestDescriptor, ClusterGetComponentTemplateRequestParameters>
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override bool SupportsBody => false;
 		public ClusterGetComponentTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		public ClusterGetComponentTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
-		public ClusterGetComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterGetComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterGetComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
 		{
 			RouteValues.Optional("name", name);

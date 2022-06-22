@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("frequency")]
-		public string? Frequency { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("indexes")]
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("query_delay")]
-		public string? QueryDelay { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? QueryDelay { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<DelayedDataCheckConfigDescriptor> DelayedDataCheckConfigDescriptorAction { get; set; }
 
-		private string? FrequencyValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
 
 		private IEnumerable<string>? IndexesValue { get; set; }
 
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private int? MaxEmptySearchesValue { get; set; }
 
-		private string? QueryDelayValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? QueryDelayValue { get; set; }
 
 		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
 
@@ -224,7 +224,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public DatafeedConfigDescriptor<TDocument> Frequency(string? frequency)
+		public DatafeedConfigDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 		{
 			FrequencyValue = frequency;
 			return Self;
@@ -278,7 +278,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public DatafeedConfigDescriptor<TDocument> QueryDelay(string? queryDelay)
+		public DatafeedConfigDescriptor<TDocument> QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
 		{
 			QueryDelayValue = queryDelay;
 			return Self;
@@ -464,7 +464,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<DelayedDataCheckConfigDescriptor> DelayedDataCheckConfigDescriptorAction { get; set; }
 
-		private string? FrequencyValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
 
 		private IEnumerable<string>? IndexesValue { get; set; }
 
@@ -480,7 +480,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private int? MaxEmptySearchesValue { get; set; }
 
-		private string? QueryDelayValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? QueryDelayValue { get; set; }
 
 		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
 
@@ -572,7 +572,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public DatafeedConfigDescriptor Frequency(string? frequency)
+		public DatafeedConfigDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 		{
 			FrequencyValue = frequency;
 			return Self;
@@ -626,7 +626,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public DatafeedConfigDescriptor QueryDelay(string? queryDelay)
+		public DatafeedConfigDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
 		{
 			QueryDelayValue = queryDelay;
 			return Self;

@@ -91,7 +91,7 @@ namespace Tests.Cluster.ClusterHealth
 			issueIndex.Status.Should().Be(HealthStatus.Green);
 			issueIndex.NumberOfShards.Should().Be(10);
 
-			response.TaskMaxWaitingInQueueMillis.MillisecondsSinceEpoch.Should().Be(56);
+			response.TaskMaxWaitingInQueueMillis.Should().Be(56);
 			response.ActiveShardsPercentAsNumber.Should().Be(100.0);
 		}
 	}

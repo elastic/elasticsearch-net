@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("timeout")]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private string? StringValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? TimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 		public TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? indexFilter)
 		{
@@ -169,7 +169,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public TermsEnumRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout)
+		public TermsEnumRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 		{
 			TimeoutValue = timeout;
 			return Self;
@@ -266,7 +266,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private string? StringValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? TimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 		public TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? indexFilter)
 		{
@@ -334,7 +334,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public TermsEnumRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout)
+		public TermsEnumRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 		{
 			TimeoutValue = timeout;
 			return Self;

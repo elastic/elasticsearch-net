@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("wait_time_threshold")]
-		public Elastic.Clients.Elasticsearch.Time? WaitTimeThreshold { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? WaitTimeThreshold { get; set; }
 	}
 
 	public sealed partial class IndexSettingsLifecycleStepDescriptor : SerializableDescriptorBase<IndexSettingsLifecycleStepDescriptor>
@@ -38,9 +38,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? WaitTimeThresholdValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? WaitTimeThresholdValue { get; set; }
 
-		public IndexSettingsLifecycleStepDescriptor WaitTimeThreshold(Elastic.Clients.Elasticsearch.Time? waitTimeThreshold)
+		public IndexSettingsLifecycleStepDescriptor WaitTimeThreshold(Elastic.Clients.Elasticsearch.Duration? waitTimeThreshold)
 		{
 			WaitTimeThresholdValue = waitTimeThreshold;
 			return Self;

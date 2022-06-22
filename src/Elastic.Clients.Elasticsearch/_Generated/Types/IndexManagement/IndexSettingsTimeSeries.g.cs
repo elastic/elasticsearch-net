@@ -28,11 +28,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("end_time")]
-		public Elastic.Clients.Elasticsearch.DateOrEpochMillis? EndTime { get; set; }
+		public DateTimeOffset? EndTime { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("start_time")]
-		public Elastic.Clients.Elasticsearch.DateOrEpochMillis? StartTime { get; set; }
+		public DateTimeOffset? StartTime { get; set; }
 	}
 
 	public sealed partial class IndexSettingsTimeSeriesDescriptor : SerializableDescriptorBase<IndexSettingsTimeSeriesDescriptor>
@@ -42,17 +42,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.DateOrEpochMillis? EndTimeValue { get; set; }
+		private DateTimeOffset? EndTimeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.DateOrEpochMillis? StartTimeValue { get; set; }
+		private DateTimeOffset? StartTimeValue { get; set; }
 
-		public IndexSettingsTimeSeriesDescriptor EndTime(Elastic.Clients.Elasticsearch.DateOrEpochMillis? endTime)
+		public IndexSettingsTimeSeriesDescriptor EndTime(DateTimeOffset? endTime)
 		{
 			EndTimeValue = endTime;
 			return Self;
 		}
 
-		public IndexSettingsTimeSeriesDescriptor StartTime(Elastic.Clients.Elasticsearch.DateOrEpochMillis? startTime)
+		public IndexSettingsTimeSeriesDescriptor StartTime(DateTimeOffset? startTime)
 		{
 			StartTimeValue = startTime;
 			return Self;

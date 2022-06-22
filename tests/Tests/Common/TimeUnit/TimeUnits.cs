@@ -24,10 +24,10 @@ namespace Tests.CommonOptions.TimeUnit
 		 */
 		[U] public void Constructor()
 		{
-			var unitString = new Time("2d");
-			var unitComposed = new Time(2, Elastic.Clients.Elasticsearch.TimeUnit.Days);
-			var unitTimeSpan = new Time(TimeSpan.FromDays(2));
-			var unitMilliseconds = new Time(1000 * 60 * 60 * 24 * 2);
+			var unitString = new Duration("2d");
+			var unitComposed = new Duration(2, Elastic.Clients.Elasticsearch.TimeUnit.Days);
+			var unitTimeSpan = new Duration(TimeSpan.FromDays(2));
+			var unitMilliseconds = new Duration(1000 * 60 * 60 * 24 * 2);
 
 			/**
 			* When serializing Time constructed from
@@ -59,9 +59,9 @@ namespace Tests.CommonOptions.TimeUnit
 		*/
 		[U] public void ImplicitConversion()
 		{
-			Time oneMinute = "1m";
-			Time fourteenDays = TimeSpan.FromDays(14);
-			Time twoDays = 1000*60*60*24*2;
+			Duration oneMinute = "1m";
+			Duration fourteenDays = TimeSpan.FromDays(14);
+			Duration twoDays = 1000*60*60*24*2;
 
 			Expect("1m").WhenSerializing(oneMinute);
 			Expect("14d").WhenSerializing(fourteenDays);
@@ -78,35 +78,35 @@ namespace Tests.CommonOptions.TimeUnit
 			* Comparisons on the expressions can be performed since Milliseconds are calculated
 			* even when values are not passed as `double` milliseconds
 			*/
-			Time fourteenDays = TimeSpan.FromDays(14);
+			Duration fourteenDays = TimeSpan.FromDays(14);
 			fourteenDays.Milliseconds.Should().Be(1209600000);
 
-			Time twoDays = 1000*60*60*24*2;
+			Duration twoDays = 1000*60*60*24*2;
 
 			fourteenDays.Should().BeGreaterThan(twoDays);
 			(fourteenDays > twoDays).Should().BeTrue();
 			(twoDays != null).Should().BeTrue();
-			(twoDays >= new Time("2d")).Should().BeTrue();
+			(twoDays >= new Duration("2d")).Should().BeTrue();
 
 			twoDays.Should().BeLessThan(fourteenDays);
 			(twoDays < fourteenDays).Should().BeTrue();
 			(twoDays <= fourteenDays).Should().BeTrue();
-			(twoDays <= new Time("2d")).Should().BeTrue();
+			(twoDays <= new Duration("2d")).Should().BeTrue();
 
 			/**
 			* Equality can also be performed
 			*/
-			twoDays.Should().Be(new Time("2d"));
-			(twoDays == new Time("2d")).Should().BeTrue();
-			(twoDays != new Time("2.1d")).Should().BeTrue();
-			(new Time("2.1d") == new Time(TimeSpan.FromDays(2.1))).Should().BeTrue();
+			twoDays.Should().Be(new Duration("2d"));
+			(twoDays == new Duration("2d")).Should().BeTrue();
+			(twoDays != new Duration("2.1d")).Should().BeTrue();
+			(new Duration("2.1d") == new Duration(TimeSpan.FromDays(2.1))).Should().BeTrue();
 
 			/**
 			 * Equality has down to 1/10 nanosecond precision
 			 */
-			Time oneNanosecond = new Time(1, Elastic.Clients.Elasticsearch.TimeUnit.Nanoseconds);
-			Time onePointNoughtNineNanoseconds = "1.09nanos";
-			Time onePointOneNanoseconds = "1.1nanos";
+			Duration oneNanosecond = new Duration(1, Elastic.Clients.Elasticsearch.TimeUnit.Nanoseconds);
+			Duration onePointNoughtNineNanoseconds = "1.09nanos";
+			Duration onePointOneNanoseconds = "1.1nanos";
 
 			(oneNanosecond == onePointNoughtNineNanoseconds).Should().BeTrue();
 			(oneNanosecond == onePointOneNanoseconds).Should().BeFalse();
@@ -124,38 +124,38 @@ namespace Tests.CommonOptions.TimeUnit
 			/**
 			 * The following are all equal to `Time.MinusOne`
 			 */
-			Time.MinusOne.Should().Be(Time.MinusOne);
-			new Time("-1").Should().Be(Time.MinusOne);
-			new Time(-1).Should().Be(Time.MinusOne);
-			((Time) (-1)).Should().Be(Time.MinusOne);
-			((Time) "-1").Should().Be(Time.MinusOne);
-			((Time) (-1)).Should().Be((Time) "-1");
+			Duration.MinusOne.Should().Be(Duration.MinusOne);
+			new Duration("-1").Should().Be(Duration.MinusOne);
+			new Duration(-1).Should().Be(Duration.MinusOne);
+			((Duration) (-1)).Should().Be(Duration.MinusOne);
+			((Duration) "-1").Should().Be(Duration.MinusOne);
+			((Duration) (-1)).Should().Be((Duration) "-1");
 
 			/**
 			 * Similarly, the following are all equal to `Time.Zero`
 			 */
-			Time.Zero.Should().Be(Time.Zero);
-			new Time("0").Should().Be(Time.Zero);
-			new Time(0).Should().Be(Time.Zero);
-			((Time) 0).Should().Be(Time.Zero);
-			((Time) "0").Should().Be(Time.Zero);
-			((Time) 0).Should().Be((Time) "0");
+			Duration.Zero.Should().Be(Duration.Zero);
+			new Duration("0").Should().Be(Duration.Zero);
+			new Duration(0).Should().Be(Duration.Zero);
+			((Duration) 0).Should().Be(Duration.Zero);
+			((Duration) "0").Should().Be(Duration.Zero);
+			((Duration) 0).Should().Be((Duration) "0");
 
 			/** Special Time values `0` and `-1` can be compared against other Time values
 			 * although admittedly, this is a tad nonsensical.
 			 */
-			var twoDays = new Time(2, Elastic.Clients.Elasticsearch.TimeUnit.Days);
-			Time.MinusOne.Should().BeLessThan(Time.Zero);
-			Time.Zero.Should().BeGreaterThan(Time.MinusOne);
-			Time.Zero.Should().BeLessThan(twoDays);
-			Time.MinusOne.Should().BeLessThan(twoDays);
+			var twoDays = new Duration(2, Elastic.Clients.Elasticsearch.TimeUnit.Days);
+			Duration.MinusOne.Should().BeLessThan(Duration.Zero);
+			Duration.Zero.Should().BeGreaterThan(Duration.MinusOne);
+			Duration.Zero.Should().BeLessThan(twoDays);
+			Duration.MinusOne.Should().BeLessThan(twoDays);
 
 			/**
 			 * If there is a need to construct a time of -1ms or 0ms, use the constructor
 			 * that accepts a factor and time unit, or specify a string with ms time units
 			 */
-			(new Time(-1, Elastic.Clients.Elasticsearch.TimeUnit.Milliseconds) == new Time("-1ms")).Should().BeTrue();
-			(new Time(0, Elastic.Clients.Elasticsearch.TimeUnit.Milliseconds) == new Time("0ms")).Should().BeTrue();
+			(new Duration(-1, Elastic.Clients.Elasticsearch.TimeUnit.Milliseconds) == new Duration("-1ms")).Should().BeTrue();
+			(new Duration(0, Elastic.Clients.Elasticsearch.TimeUnit.Milliseconds) == new Duration("0ms")).Should().BeTrue();
 		}
 
 		// hide
@@ -195,7 +195,7 @@ namespace Tests.CommonOptions.TimeUnit
 
 			foreach (var testCase in testCases)
 			{
-				var time = new Time(testCase.Item1);
+				var time = new Duration(testCase.Item1);
 				time.ToTimeSpan().Should().Be(testCase.Item2, "we passed in {0}", testCase.Item1);
 				time.ToString().Should().Be(testCase.Item3);
 			}
@@ -211,7 +211,7 @@ namespace Tests.CommonOptions.TimeUnit
 			};
 			foreach (var testCase in testCases)
 			{
-				Action create = () => new Time(testCase.Item1);
+				Action create = () => new Duration(testCase.Item1);
 				var e = create.Invoking((a) => a()).Should().Throw<ArgumentException>(testCase.Item1).Subject.First();
 				e.Message.Should().Contain(testCase.Item3);
 			}
@@ -248,7 +248,7 @@ namespace Tests.CommonOptions.TimeUnit
 			};
 			foreach (var testCase in testCases)
 			{
-				var time = new Time(testCase.Item1);
+				var time = new Duration(testCase.Item1);
 				time.ToTimeSpan().Should().Be(testCase.Item2, "we passed in {0}", testCase.Item1);
 				time.ToString().Should().Be(testCase.Item3);
 			}
@@ -257,7 +257,7 @@ namespace Tests.CommonOptions.TimeUnit
 		// hide
 		[U] public void DoubleImplicitConversionOneNanosecond()
 		{
-			Time oneNanosecond = 1e-6;
+			Duration oneNanosecond = 1e-6;
 			// cannot be expressed as a TimeSpan using ToTimeSpan(), as smaller than a one tick.
 			oneNanosecond.ToTimeSpan().Should().Be(TimeSpan.Zero);
 			oneNanosecond.ToString().Should().Be("1nanos");
@@ -290,55 +290,55 @@ namespace Tests.CommonOptions.TimeUnit
 		[U] public void MillisecondsNeverSerializeToMonthsOrYears()
 		{
 			double millisecondsInAMonth = 2592000000;
-			Expect("30d").WhenSerializing(new Time(millisecondsInAMonth));
-			Expect("60d").WhenSerializing(new Time(millisecondsInAMonth * 2));
-			Expect("360d").WhenSerializing(new Time(millisecondsInAMonth * 12));
-			Expect("720d").WhenSerializing(new Time(millisecondsInAMonth * 24));
+			Expect("30d").WhenSerializing(new Duration(millisecondsInAMonth));
+			Expect("60d").WhenSerializing(new Duration(millisecondsInAMonth * 2));
+			Expect("360d").WhenSerializing(new Duration(millisecondsInAMonth * 12));
+			Expect("720d").WhenSerializing(new Duration(millisecondsInAMonth * 24));
 		}
 
 		//hide
 		[U] public void ExpectedValues()
 		{
-			Expect(0).WhenSerializing(new Time(0));
-			Expect(0).WhenSerializing((Time)0);
-			Expect(0).WhenSerializing(new Time("0"));
-			Expect(0).WhenSerializing(Time.Zero);
-			Expect(-1).WhenSerializing(new Time(-1));
-			Expect(-1).WhenSerializing((Time)(-1));
-			Expect(-1).WhenSerializing(new Time("-1"));
-			Expect(-1).WhenSerializing(Time.MinusOne);
+			Expect(0).WhenSerializing(new Duration(0));
+			Expect(0).WhenSerializing((Duration)0);
+			Expect(0).WhenSerializing(new Duration("0"));
+			Expect(0).WhenSerializing(Duration.Zero);
+			Expect(-1).WhenSerializing(new Duration(-1));
+			Expect(-1).WhenSerializing((Duration)(-1));
+			Expect(-1).WhenSerializing(new Duration("-1"));
+			Expect(-1).WhenSerializing(Duration.MinusOne);
 
 			Assert(
 				1, Elastic.Clients.Elasticsearch.TimeUnit.Days, TimeSpan.FromDays(1).TotalMilliseconds, "1d",
-				new Time(1, Elastic.Clients.Elasticsearch.TimeUnit.Days),
-				new Time("1d"),
-				new Time(TimeSpan.FromDays(1).TotalMilliseconds)
+				new Duration(1, Elastic.Clients.Elasticsearch.TimeUnit.Days),
+				new Duration("1d"),
+				new Duration(TimeSpan.FromDays(1).TotalMilliseconds)
 			);
 
 			Assert(
 				1, Elastic.Clients.Elasticsearch.TimeUnit.Hours, TimeSpan.FromHours(1).TotalMilliseconds, "1h",
-				new Time(1, Elastic.Clients.Elasticsearch.TimeUnit.Hours),
-				new Time("1h"),
-				new Time(TimeSpan.FromHours(1).TotalMilliseconds)
+				new Duration(1, Elastic.Clients.Elasticsearch.TimeUnit.Hours),
+				new Duration("1h"),
+				new Duration(TimeSpan.FromHours(1).TotalMilliseconds)
 			);
 
 			Assert(
 				1, Elastic.Clients.Elasticsearch.TimeUnit.Minutes, TimeSpan.FromMinutes(1).TotalMilliseconds, "1m",
-				new Time(1, Elastic.Clients.Elasticsearch.TimeUnit.Minutes),
-				new Time("1m"),
-				new Time(TimeSpan.FromMinutes(1).TotalMilliseconds)
+				new Duration(1, Elastic.Clients.Elasticsearch.TimeUnit.Minutes),
+				new Duration("1m"),
+				new Duration(TimeSpan.FromMinutes(1).TotalMilliseconds)
 			);
 
 			Assert(
 				1, Elastic.Clients.Elasticsearch.TimeUnit.Seconds, TimeSpan.FromSeconds(1).TotalMilliseconds, "1s",
-				new Time(1, Elastic.Clients.Elasticsearch.TimeUnit.Seconds),
-				new Time("1s"),
-				new Time(TimeSpan.FromSeconds(1).TotalMilliseconds)
+				new Duration(1, Elastic.Clients.Elasticsearch.TimeUnit.Seconds),
+				new Duration("1s"),
+				new Duration(TimeSpan.FromSeconds(1).TotalMilliseconds)
 			);
 		}
 
 		//hide
-		private void Assert(double expectedFactor, Elastic.Clients.Elasticsearch.TimeUnit expectedInterval, double expectedMilliseconds, string expectedSerialized, params Time[] times)
+		private void Assert(double expectedFactor, Elastic.Clients.Elasticsearch.TimeUnit expectedInterval, double expectedMilliseconds, string expectedSerialized, params Duration[] times)
 		{
 			foreach (var time in times)
 			{
