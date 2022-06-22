@@ -32,6 +32,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]
-		public string Timestamp { get; init; }
+		public DateTimeOffset Timestamp { get; init; }
 	}
 }

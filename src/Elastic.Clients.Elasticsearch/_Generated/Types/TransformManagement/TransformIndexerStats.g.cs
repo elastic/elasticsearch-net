@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("delete_time_in_ms")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? DeleteTimeInMs { get; init; }
+		public long? DeleteTimeInMs { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("documents_deleted")]

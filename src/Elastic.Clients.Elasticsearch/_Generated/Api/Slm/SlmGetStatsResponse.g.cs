@@ -30,11 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Slm
 
 		[JsonInclude]
 		[JsonPropertyName("retention_deletion_time")]
-		public string RetentionDeletionTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration RetentionDeletionTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("retention_deletion_time_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis RetentionDeletionTimeMillis { get; init; }
+		public long RetentionDeletionTimeMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("retention_failed")]

@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	public sealed class MlGetCalendarEventsRequestParameters : RequestParameters<MlGetCalendarEventsRequestParameters>
 	{
 		[JsonIgnore]
-		public string? End { get => Q<string?>("end"); set => Q("end", value); }
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 
 		[JsonIgnore]
 		public int? From { get => Q<int?>("from"); set => Q("from", value); }
@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 		[JsonIgnore]
-		public string? Start { get => Q<string?>("start"); set => Q("start", value); }
+		public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
 	}
 
 	public partial class MlGetCalendarEventsRequest : PlainRequestBase<MlGetCalendarEventsRequestParameters>
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public string? End { get => Q<string?>("end"); set => Q("end", value); }
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 
 		[JsonIgnore]
 		public int? From { get => Q<int?>("from"); set => Q("from", value); }
@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 		[JsonIgnore]
-		public string? Start { get => Q<string?>("start"); set => Q("start", value); }
+		public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
 	}
 
 	public sealed partial class MlGetCalendarEventsRequestDescriptor : RequestDescriptorBase<MlGetCalendarEventsRequestDescriptor, MlGetCalendarEventsRequestParameters>
@@ -82,11 +82,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetCalendarEvents;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public MlGetCalendarEventsRequestDescriptor End(string? end) => Qs("end", end);
+		public MlGetCalendarEventsRequestDescriptor End(DateTimeOffset? end) => Qs("end", end);
 		public MlGetCalendarEventsRequestDescriptor From(int? from) => Qs("from", from);
 		public MlGetCalendarEventsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? jobId) => Qs("job_id", jobId);
 		public MlGetCalendarEventsRequestDescriptor Size(int? size) => Qs("size", size);
-		public MlGetCalendarEventsRequestDescriptor Start(string? start) => Qs("start", start);
+		public MlGetCalendarEventsRequestDescriptor Start(DateTimeOffset? start) => Qs("start", start);
 		public MlGetCalendarEventsRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id calendar_id)
 		{
 			RouteValues.Required("calendar_id", calendar_id);

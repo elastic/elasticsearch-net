@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 	public sealed class SearchableSnapshotsMountRequestParameters : RequestParameters<SearchableSnapshotsMountRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SearchableSnapshotsMount;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public SearchableSnapshotsMountRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public SearchableSnapshotsMountRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public SearchableSnapshotsMountRequestDescriptor Storage(string? storage) => Qs("storage", storage);
 		public SearchableSnapshotsMountRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		public SearchableSnapshotsMountRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name repository)

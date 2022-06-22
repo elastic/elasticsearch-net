@@ -36,6 +36,6 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 		[JsonInclude]
 		[JsonPropertyName("min_age")]
-		public Elastic.Clients.Elasticsearch.Time? MinAge { get; init; }
+		public Union<Elastic.Clients.Elasticsearch.Duration?, long?>? MinAge { get; init; }
 	}
 }

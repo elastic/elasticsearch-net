@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("connect_timeout")]
-		public Elastic.Clients.Elasticsearch.Time? ConnectTimeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? ConnectTimeout { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("headers")]
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("socket_timeout")]
-		public Elastic.Clients.Elasticsearch.Time? SocketTimeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? SocketTimeout { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("username")]
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? ConnectTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? ConnectTimeoutValue { get; set; }
 
 		private Dictionary<string, string>? HeadersValue { get; set; }
 
@@ -66,11 +66,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		private string? PasswordValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? SocketTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? SocketTimeoutValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
 
-		public RemoteSourceDescriptor ConnectTimeout(Elastic.Clients.Elasticsearch.Time? connectTimeout)
+		public RemoteSourceDescriptor ConnectTimeout(Elastic.Clients.Elasticsearch.Duration? connectTimeout)
 		{
 			ConnectTimeoutValue = connectTimeout;
 			return Self;
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public RemoteSourceDescriptor SocketTimeout(Elastic.Clients.Elasticsearch.Time? socketTimeout)
+		public RemoteSourceDescriptor SocketTimeout(Elastic.Clients.Elasticsearch.Duration? socketTimeout)
 		{
 			SocketTimeoutValue = socketTimeout;
 			return Self;

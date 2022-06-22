@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices
 	{
 		[JsonInclude]
 		[JsonPropertyName("creation_date_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis CreationDateMillis { get; init; }
+		public long CreationDateMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_name")]

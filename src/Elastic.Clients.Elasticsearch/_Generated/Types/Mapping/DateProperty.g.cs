@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public string? NullValue { get; set; }
+		public DateTimeOffset? NullValue { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("precision_step")]
@@ -100,7 +100,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Dictionary<string, string>? MetaValue { get; set; }
 
-		private string? NullValueValue { get; set; }
+		private DateTimeOffset? NullValueValue { get; set; }
 
 		private int? PrecisionStepValue { get; set; }
 
@@ -226,7 +226,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
-		public DatePropertyDescriptor<TDocument> NullValue(string? nullValue)
+		public DatePropertyDescriptor<TDocument> NullValue(DateTimeOffset? nullValue)
 		{
 			NullValueValue = nullValue;
 			return Self;
@@ -461,7 +461,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Dictionary<string, string>? MetaValue { get; set; }
 
-		private string? NullValueValue { get; set; }
+		private DateTimeOffset? NullValueValue { get; set; }
 
 		private int? PrecisionStepValue { get; set; }
 
@@ -593,7 +593,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
-		public DatePropertyDescriptor NullValue(string? nullValue)
+		public DatePropertyDescriptor NullValue(DateTimeOffset? nullValue)
 		{
 			NullValueValue = nullValue;
 			return Self;

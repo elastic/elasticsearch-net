@@ -28,10 +28,10 @@ namespace Elastic.Clients.Elasticsearch.Eql
 	public sealed class GetEqlRequestParameters : RequestParameters<GetEqlRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Time?>("keep_alive"); set => Q("keep_alive", value); }
+		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	}
 
 	public partial class GetEqlRequest : PlainRequestBase<GetEqlRequestParameters>
@@ -44,10 +44,10 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Time?>("keep_alive"); set => Q("keep_alive", value); }
+		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	}
 
 	public sealed partial class GetEqlRequestDescriptor<TDocument> : RequestDescriptorBase<GetEqlRequestDescriptor<TDocument>, GetEqlRequestParameters>
@@ -64,8 +64,8 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public GetEqlRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
-		public GetEqlRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+		public GetEqlRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
+		public GetEqlRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
 		public GetEqlRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);
@@ -91,8 +91,8 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public GetEqlRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
-		public GetEqlRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+		public GetEqlRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
+		public GetEqlRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
 		public GetEqlRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);
