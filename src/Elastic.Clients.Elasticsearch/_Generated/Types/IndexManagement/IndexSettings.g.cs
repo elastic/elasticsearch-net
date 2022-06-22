@@ -52,7 +52,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("creation_date")]
-		public Elastic.Clients.Elasticsearch.SpecUtils.Stringified<Unit>? CreationDate { get; set; }
+		[JsonConverter(typeof(StringifiedLongConverter))]
+		public long? CreationDate { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("creation_date_string")]
@@ -304,7 +305,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private string? CodecValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.SpecUtils.Stringified<Unit>? CreationDateValue { get; set; }
+		private long? CreationDateValue { get; set; }
 
 		private DateTimeOffset? CreationDateStringValue { get; set; }
 
@@ -626,7 +627,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexSettingsDescriptor<TDocument> CreationDate(Elastic.Clients.Elasticsearch.SpecUtils.Stringified<Unit>? creationDate)
+		public IndexSettingsDescriptor<TDocument> CreationDate(long? creationDate)
 		{
 			CreationDateValue = creationDate;
 			return Self;
@@ -1820,7 +1821,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private string? CodecValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.SpecUtils.Stringified<Unit>? CreationDateValue { get; set; }
+		private long? CreationDateValue { get; set; }
 
 		private DateTimeOffset? CreationDateStringValue { get; set; }
 
@@ -2142,7 +2143,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexSettingsDescriptor CreationDate(Elastic.Clients.Elasticsearch.SpecUtils.Stringified<Unit>? creationDate)
+		public IndexSettingsDescriptor CreationDate(long? creationDate)
 		{
 			CreationDateValue = creationDate;
 			return Self;

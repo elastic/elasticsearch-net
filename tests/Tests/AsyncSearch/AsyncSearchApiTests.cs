@@ -128,8 +128,9 @@ namespace Tests.AsyncSearch
 		public async Task AsyncSearchStatusResponse() => await Assert<AsyncSearchStatusResponse>(StatusStep, r =>
 		{
 			r.ShouldBeValid();
-			r.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);
-			r.ExpirationTime.Should().BeOnOrAfter(DateTimeOffset.Now);
+			r.StartTimeInMillis.Should().BeGreaterThan(DateTimeOffset.UtcNow.AddMinutes(-10).ToUnixTimeMilliseconds());
+			r.StartTimeInMillis.Should().BeLessOrEqualTo(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+			r.ExpirationTimeInMillis.Should().BeGreaterOrEqualTo(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
 			if (r.IsRunning)
 				r.CompletionStatus.HasValue.Should().BeFalse();
@@ -144,8 +145,9 @@ namespace Tests.AsyncSearch
 		{
 			r.ShouldBeValid();
 			r.Id.Should().NotBeNullOrEmpty();
-			r.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);
-			r.ExpirationTime.Should().BeOnOrAfter(DateTimeOffset.Now);
+			r.StartTimeInMillis.Should().BeGreaterThan(DateTimeOffset.UtcNow.AddMinutes(-10).ToUnixTimeMilliseconds());
+			r.StartTimeInMillis.Should().BeLessOrEqualTo(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+			r.ExpirationTimeInMillis.Should().BeGreaterOrEqualTo(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 			r.Response.Should().NotBeNull();
 			r.Response.Took.Should().BeGreaterOrEqualTo(0);
 			r.Response.Hits.Should().HaveCount(10);
