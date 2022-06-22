@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		[JsonInclude]
 		[JsonPropertyName("expiration")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? Expiration { get; init; }
+		public long? Expiration { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("id")]

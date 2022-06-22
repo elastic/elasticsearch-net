@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("after")]
-		public Elastic.Clients.Elasticsearch.Time? After { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? After { get; set; }
 	}
 
 	public sealed partial class SearchIdleDescriptor : SerializableDescriptorBase<SearchIdleDescriptor>
@@ -38,9 +38,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? AfterValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? AfterValue { get; set; }
 
-		public SearchIdleDescriptor After(Elastic.Clients.Elasticsearch.Time? after)
+		public SearchIdleDescriptor After(Elastic.Clients.Elasticsearch.Duration? after)
 		{
 			AfterValue = after;
 			return Self;

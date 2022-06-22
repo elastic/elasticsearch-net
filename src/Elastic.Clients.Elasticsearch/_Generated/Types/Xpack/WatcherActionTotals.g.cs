@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 	{
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public long Total { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_ms")]

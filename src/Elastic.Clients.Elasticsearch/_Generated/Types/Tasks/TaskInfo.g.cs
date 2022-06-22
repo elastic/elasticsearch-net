@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 
 		[JsonInclude]
 		[JsonPropertyName("running_time")]
-		public string? RunningTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? RunningTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("running_time_in_nanos")]

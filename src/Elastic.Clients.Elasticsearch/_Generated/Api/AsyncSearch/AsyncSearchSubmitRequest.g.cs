@@ -28,13 +28,13 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 	public sealed class AsyncSearchSubmitRequestParameters : RequestParameters<AsyncSearchSubmitRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 
 		[JsonIgnore]
 		public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Time?>("keep_alive"); set => Q("keep_alive", value); }
+		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 		[JsonIgnore]
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Scroll { get => Q<Elastic.Clients.Elasticsearch.Time?>("scroll"); set => Q("scroll", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
@@ -138,13 +138,13 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 
 		[JsonIgnore]
 		public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Time?>("keep_alive"); set => Q("keep_alive", value); }
+		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 		[JsonIgnore]
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Scroll { get => Q<Elastic.Clients.Elasticsearch.Time?>("scroll"); set => Q("scroll", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
@@ -384,7 +384,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public AsyncSearchSubmitRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
@@ -395,14 +395,14 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public AsyncSearchSubmitRequestDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> SuggestField(Elastic.Clients.Elasticsearch.Field? suggestField) => Qs("suggest_field", suggestField);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 		{
 			RouteValues.Optional("index", indices);
@@ -1324,7 +1324,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public AsyncSearchSubmitRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public AsyncSearchSubmitRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		public AsyncSearchSubmitRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-		public AsyncSearchSubmitRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
+		public AsyncSearchSubmitRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 		public AsyncSearchSubmitRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
 		public AsyncSearchSubmitRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		public AsyncSearchSubmitRequestDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
@@ -1335,14 +1335,14 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public AsyncSearchSubmitRequestDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		public AsyncSearchSubmitRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
 		public AsyncSearchSubmitRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public AsyncSearchSubmitRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
+		public AsyncSearchSubmitRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
 		public AsyncSearchSubmitRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
 		public AsyncSearchSubmitRequestDescriptor SuggestField(Elastic.Clients.Elasticsearch.Field? suggestField) => Qs("suggest_field", suggestField);
 		public AsyncSearchSubmitRequestDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
 		public AsyncSearchSubmitRequestDescriptor SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
 		public AsyncSearchSubmitRequestDescriptor SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
 		public AsyncSearchSubmitRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-		public AsyncSearchSubmitRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+		public AsyncSearchSubmitRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
 		public AsyncSearchSubmitRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 		{
 			RouteValues.Optional("index", indices);

@@ -60,11 +60,11 @@ namespace Elastic.Clients.Elasticsearch.Sql
 
 		[JsonInclude]
 		[JsonPropertyName("request_timeout")]
-		public Elastic.Clients.Elasticsearch.Time? RequestTimeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? RequestTimeout { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("page_timeout")]
-		public Elastic.Clients.Elasticsearch.Time? PageTimeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? PageTimeout { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_zone")]
@@ -80,7 +80,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 
 		[JsonInclude]
 		[JsonPropertyName("wait_for_completion_timeout")]
-		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("params")]
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 
 		[JsonInclude]
 		[JsonPropertyName("keep_alive")]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("keep_on_completion")]
@@ -127,23 +127,23 @@ namespace Elastic.Clients.Elasticsearch.Sql
 
 		private bool? IndexUsingFrozenValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? KeepAliveValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 
 		private bool? KeepOnCompletionValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? PageTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
 
 		private Dictionary<string, object>? ParamsValue { get; set; }
 
 		private string? QueryValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? RequestTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
 
 		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
 
 		private string? TimeZoneValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 		public SqlQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
@@ -205,7 +205,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return Self;
 		}
 
-		public SqlQueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive)
+		public SqlQueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
 		{
 			KeepAliveValue = keepAlive;
 			return Self;
@@ -217,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return Self;
 		}
 
-		public SqlQueryRequestDescriptor<TDocument> PageTimeout(Elastic.Clients.Elasticsearch.Time? pageTimeout)
+		public SqlQueryRequestDescriptor<TDocument> PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
 		{
 			PageTimeoutValue = pageTimeout;
 			return Self;
@@ -235,7 +235,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return Self;
 		}
 
-		public SqlQueryRequestDescriptor<TDocument> RequestTimeout(Elastic.Clients.Elasticsearch.Time? requestTimeout)
+		public SqlQueryRequestDescriptor<TDocument> RequestTimeout(Elastic.Clients.Elasticsearch.Duration? requestTimeout)
 		{
 			RequestTimeoutValue = requestTimeout;
 			return Self;
@@ -253,7 +253,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return Self;
 		}
 
-		public SqlQueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout)
+		public SqlQueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
 		{
 			WaitForCompletionTimeoutValue = waitForCompletionTimeout;
 			return Self;
@@ -356,10 +356,10 @@ namespace Elastic.Clients.Elasticsearch.Sql
 				JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			if (WaitForCompletionTimeoutValue is not null)
@@ -400,23 +400,23 @@ namespace Elastic.Clients.Elasticsearch.Sql
 
 		private bool? IndexUsingFrozenValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? KeepAliveValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 
 		private bool? KeepOnCompletionValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? PageTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
 
 		private Dictionary<string, object>? ParamsValue { get; set; }
 
 		private string? QueryValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? RequestTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
 
 		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
 
 		private string? TimeZoneValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 		public SqlQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
@@ -478,7 +478,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return Self;
 		}
 
-		public SqlQueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive)
+		public SqlQueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
 		{
 			KeepAliveValue = keepAlive;
 			return Self;
@@ -490,7 +490,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return Self;
 		}
 
-		public SqlQueryRequestDescriptor PageTimeout(Elastic.Clients.Elasticsearch.Time? pageTimeout)
+		public SqlQueryRequestDescriptor PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
 		{
 			PageTimeoutValue = pageTimeout;
 			return Self;
@@ -508,7 +508,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return Self;
 		}
 
-		public SqlQueryRequestDescriptor RequestTimeout(Elastic.Clients.Elasticsearch.Time? requestTimeout)
+		public SqlQueryRequestDescriptor RequestTimeout(Elastic.Clients.Elasticsearch.Duration? requestTimeout)
 		{
 			RequestTimeoutValue = requestTimeout;
 			return Self;
@@ -526,7 +526,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 			return Self;
 		}
 
-		public SqlQueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout)
+		public SqlQueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
 		{
 			WaitForCompletionTimeoutValue = waitForCompletionTimeout;
 			return Self;
@@ -629,10 +629,10 @@ namespace Elastic.Clients.Elasticsearch.Sql
 				JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			if (WaitForCompletionTimeoutValue is not null)

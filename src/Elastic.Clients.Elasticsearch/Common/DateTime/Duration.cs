@@ -12,10 +12,10 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
-/// Represents a time value
+/// Represents a duration value.
 /// </summary>
-[JsonConverter(typeof(TimeConverter))]
-public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
+[JsonConverter(typeof(DurationConverter))]
+public sealed class Duration : IComparable<Duration>, IEquatable<Duration>, IUrlParameter
 {
 	private const double MicrosecondsInATick = 0.1; // 10 ticks = 1 microsecond
 	private const double MillisecondsInADay = MillisecondsInAnHour * 24;
@@ -40,7 +40,7 @@ public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 
 	private static readonly double FLOAT_TOLERANCE = 1e-7; // less than 1 nanosecond
 
-	private Time(int specialFactor, bool specialValue)
+	private Duration(int specialFactor, bool specialValue)
 	{
 		if (!specialValue)
 			throw new ArgumentException("this constructor is only for static TimeValues");
@@ -48,10 +48,10 @@ public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 		StaticTimeValue = specialFactor;
 	}
 
-	public Time(TimeSpan timeSpan)
+	public Duration(TimeSpan timeSpan)
 		: this(timeSpan.TotalMilliseconds) { }
 
-	public Time(double milliseconds)
+	public Duration(double milliseconds)
 	{
 		if (Math.Abs(milliseconds - -1) < FLOAT_TOLERANCE)
 			StaticTimeValue = -1;
@@ -61,14 +61,14 @@ public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 			Reduce(milliseconds);
 	}
 
-	public Time(double factor, TimeUnit interval)
+	public Duration(double factor, TimeUnit interval)
 	{
 		Factor = factor;
 		Interval = interval;
 		Milliseconds = GetExactMilliseconds(Factor.Value, Interval.Value);
 	}
 
-	public Time(string timeUnit)
+	public Duration(string timeUnit)
 	{
 		if (timeUnit.IsNullOrEmpty())
 			throw new ArgumentException("Expression string is empty", nameof(timeUnit));
@@ -85,17 +85,17 @@ public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 
 	public double? Milliseconds { get; private set; }
 
-	public static Time MinusOne { get; } = new Time(-1, true);
+	public static Duration MinusOne { get; } = new Duration(-1, true);
 
-	public static Time Zero { get; } = new Time(0, true);
+	public static Duration Zero { get; } = new Duration(0, true);
 
 	private int? StaticTimeValue { get; }
 
-	public static implicit operator Time(TimeSpan span) => new(span);
+	public static implicit operator Duration(TimeSpan span) => new(span);
 
-	public static implicit operator Time(double milliseconds) => new(milliseconds);
+	public static implicit operator Duration(double milliseconds) => new(milliseconds);
 
-	public static implicit operator Time(string expression) => new(expression);
+	public static implicit operator Duration(string expression) => new(expression);
 
 	private void ParseExpression(string timeUnit)
 	{
@@ -147,7 +147,7 @@ public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 		Milliseconds = GetExactMilliseconds(Factor.Value, Interval.Value);
 	}
 
-	public int CompareTo(Time other)
+	public int CompareTo(Duration other)
 	{
 		if (other == null)
 			return 1;
@@ -182,21 +182,21 @@ public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 
 	private static bool IsIntegerGreaterThanZero(double d) => Math.Abs(d % 1) < double.Epsilon;
 
-	public static bool operator <(Time left, Time right) => left.CompareTo(right) < 0;
+	public static bool operator <(Duration left, Duration right) => left.CompareTo(right) < 0;
 
-	public static bool operator <=(Time left, Time right) => left.CompareTo(right) < 0 || left.Equals(right);
+	public static bool operator <=(Duration left, Duration right) => left.CompareTo(right) < 0 || left.Equals(right);
 
-	public static bool operator >(Time left, Time right) => left.CompareTo(right) > 0;
+	public static bool operator >(Duration left, Duration right) => left.CompareTo(right) > 0;
 
-	public static bool operator >=(Time left, Time right) => left.CompareTo(right) > 0 || left.Equals(right);
+	public static bool operator >=(Duration left, Duration right) => left.CompareTo(right) > 0 || left.Equals(right);
 
-	public static bool operator ==(Time left, Time right) =>
+	public static bool operator ==(Duration left, Duration right) =>
 		ReferenceEquals(left, null) ? right is null : left.Equals(right);
 
-	public static bool operator !=(Time left, Time right) => !(left == right);
+	public static bool operator !=(Duration left, Duration right) => !(left == right);
 
 	/// <summary>
-	/// Converts this instance of <see cref="Time" /> to an instance of <see cref="TimeSpan" />.
+	/// Converts this instance of <see cref="Duration" /> to an instance of <see cref="TimeSpan" />.
 	/// For values in <see cref="TimeUnit.Microseconds" /> and <see cref="TimeUnit.Nanoseconds" />, value will be rounded to
 	/// the nearest Tick.
 	/// All other values will be rounded to the nearest Millisecond.
@@ -206,7 +206,7 @@ public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 	/// special time values <see cref="MinusOne" /> and <see cref="Zero" /> do not have a <see cref="TimeSpan" />
 	/// representation.
 	/// </para>
-	/// <para>instance of <see cref="Time" /> has no value for <see cref="Interval" /></para>
+	/// <para>instance of <see cref="Duration" /> has no value for <see cref="Interval" /></para>
 	/// </exception>
 	public TimeSpan ToTimeSpan()
 	{
@@ -256,7 +256,7 @@ public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 		return Milliseconds.ToString();
 	}
 
-	public bool Equals(Time other)
+	public bool Equals(Duration other)
 	{
 		if (ReferenceEquals(null, other))
 			return false;
@@ -286,7 +286,7 @@ public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 		if (obj.GetType() != GetType())
 			return false;
 
-		return Equals((Time)obj);
+		return Equals((Duration)obj);
 	}
 
 	public override int GetHashCode() => StaticTimeValue.HasValue
@@ -392,33 +392,33 @@ public sealed class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 	}
 }
 
-internal sealed class TimeConverter : JsonConverter<Time>
+internal sealed class DurationConverter : JsonConverter<Duration>
 {
-	public override Time? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Duration? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		var token = reader.TokenType;
 
 		switch (token)
 		{
 			case JsonTokenType.String:
-				return new Time(reader.GetString());
+				return new Duration(reader.GetString());
 			case JsonTokenType.Number:
 				var milliseconds = reader.GetInt64();
 				if (milliseconds == -1)
-					return Time.MinusOne;
+					return Duration.MinusOne;
 				if (milliseconds == 0)
-					return Time.Zero;
-				return new Time(milliseconds);
+					return Duration.Zero;
+				return new Duration(milliseconds);
 			default:
 				return null;
 		}
 	}
 
-	public override void Write(Utf8JsonWriter writer, Time value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, Duration value, JsonSerializerOptions options)
 	{
-		if (value == Time.MinusOne)
+		if (value == Duration.MinusOne)
 			writer.WriteNumberValue(-1);
-		else if (value == Time.Zero)
+		else if (value == Duration.Zero)
 			writer.WriteNumberValue(0);
 		else if (value.Factor.HasValue && value.Interval.HasValue)
 			writer.WriteStringValue(value.ToString());

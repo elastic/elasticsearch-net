@@ -140,10 +140,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Ranges, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.TimeZone))
+			if (value.TimeZone is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(value.TimeZone);
+				JsonSerializer.Serialize(writer, value.TimeZone, options);
 			}
 
 			writer.WriteEndObject();
@@ -350,10 +350,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, RangesValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -552,10 +552,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, RangesValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			writer.WriteEndObject();
