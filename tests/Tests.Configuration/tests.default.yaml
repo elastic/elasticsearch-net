@@ -18,10 +18,10 @@ force_reseed: true
 # this is opt in during development in CI we never want to see our tests running against an already running node
 test_against_already_running_elasticsearch: true
 
-#random_source_serializer: true
+random_source_serializer: true
 #random_old_connection: true
 #random_http_compresssion: true
-random_api_versioning: true
+#random_api_versioning: true
 #seed: 74337
 
 # Can be helpful to speed up tests runs as setting this to true only randomly tests a single overload of the api rather than all 4.
