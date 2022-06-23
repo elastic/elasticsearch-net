@@ -221,8 +221,8 @@
       },
       "Newtonsoft.Json": {
         "type": "Transitive",
-        "resolved": "12.0.1",
-        "contentHash": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg=="
+        "resolved": "13.0.1",
+        "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
       },
       "NuGet.Frameworks": {
         "type": "Transitive",
@@ -1220,7 +1220,7 @@
         "type": "Project",
         "dependencies": {
           "Elastic.Clients.Elasticsearch": "8.0.0",
-          "Newtonsoft.Json": "12.0.1"
+          "Newtonsoft.Json": "13.0.1"
         }
       },
       "tests.configuration": {
@@ -1251,7 +1251,7 @@
           "Bogus": "22.1.2",
           "Elastic.Clients.Elasticsearch": "8.0.0",
           "Elastic.Elasticsearch.Managed": "0.3.1",
-          "Newtonsoft.Json": "12.0.1",
+          "Newtonsoft.Json": "13.0.1",
           "Tests.Configuration": "8.0.0"
         }
       }
@@ -1475,8 +1475,8 @@
       },
       "Newtonsoft.Json": {
         "type": "Transitive",
-        "resolved": "12.0.1",
-        "contentHash": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg=="
+        "resolved": "13.0.1",
+        "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
       },
       "NuGet.Frameworks": {
         "type": "Transitive",
@@ -2479,7 +2479,7 @@
         "type": "Project",
         "dependencies": {
           "Elastic.Clients.Elasticsearch": "8.0.0",
-          "Newtonsoft.Json": "12.0.1"
+          "Newtonsoft.Json": "13.0.1"
         }
       },
       "tests.configuration": {
@@ -2510,7 +2510,7 @@
           "Bogus": "22.1.2",
           "Elastic.Clients.Elasticsearch": "8.0.0",
           "Elastic.Elasticsearch.Managed": "0.3.1",
-          "Newtonsoft.Json": "12.0.1",
+          "Newtonsoft.Json": "13.0.1",
           "Tests.Configuration": "8.0.0"
         }
       }
@@ -2734,8 +2734,8 @@
       },
       "Newtonsoft.Json": {
         "type": "Transitive",
-        "resolved": "12.0.1",
-        "contentHash": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg=="
+        "resolved": "13.0.1",
+        "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
       },
       "NuGet.Frameworks": {
         "type": "Transitive",
@@ -3738,7 +3738,7 @@
         "type": "Project",
         "dependencies": {
           "Elastic.Clients.Elasticsearch": "8.0.0",
-          "Newtonsoft.Json": "12.0.1"
+          "Newtonsoft.Json": "13.0.1"
         }
       },
       "tests.configuration": {
@@ -3769,7 +3769,7 @@
           "Bogus": "22.1.2",
           "Elastic.Clients.Elasticsearch": "8.0.0",
           "Elastic.Elasticsearch.Managed": "0.3.1",
-          "Newtonsoft.Json": "12.0.1",
+          "Newtonsoft.Json": "13.0.1",
           "Tests.Configuration": "8.0.0"
         }
       }
