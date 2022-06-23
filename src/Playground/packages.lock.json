@@ -80,7 +80,7 @@
         "type": "Project",
         "dependencies": {
           "Elastic.Clients.Elasticsearch": "8.0.0",
-          "Newtonsoft.Json": "12.0.1"
+          "Newtonsoft.Json": "13.0.1"
         }
       }
     }
