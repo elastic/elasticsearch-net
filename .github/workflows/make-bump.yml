@@ -35,7 +35,7 @@ jobs:
       # Add version and backport labels automatically
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.0.100'
+          dotnet-version: '5.0.214'
       - name: Install dotnet-script
         run: dotnet tool install release-notes --tool-path dotnet-tool
 
