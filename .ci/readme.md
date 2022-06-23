@@ -30,7 +30,7 @@ $ STACK_VERSION=7.x-SNAPSHOT ELASTICSEARCH_VERSION=7.x-SNAPSHOT ./.ci/run-tests
 |-------------------------|-------------|-------------|
 | `STACK_VERSION` | `N/A`       | The elasticsearch version to target
 | `TEST_SUITE`            | `basic`     | `free` or `platinum` sets which test suite to run and which container to run against. |
-| `DOTNET_VERSION`        | `5.0.214`   | The .NET sdk version used to grab the proper container |
+| `DOTNET_VERSION`        | `5.0.408`   | The .NET sdk version used to grab the proper container |
 
 
 If you want to manually spin up elasticsearch for these tests and call the runner afterwards you can use
