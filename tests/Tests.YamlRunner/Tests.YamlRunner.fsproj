@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -11,9 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\src\Elasticsearch.Net\Elasticsearch.Net.csproj" />
-    
     <Compile Include="AsyncExtensions.fs" />
-    
     <Compile Include="SkipList.fs" />
     <Compile Include="Models.fs" />
     <Compile Include="Stashes.fs" />
@@ -30,10 +28,9 @@
  
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="4.7.0" />
-    
     <PackageReference Include="Argu" Version="5.5.0" />
     <PackageReference Include="FSharp.Data" Version="3.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="SemanticVersioning" Version="1.2.2" />
     <PackageReference Include="SharpYaml" Version="1.6.5" />
     <PackageReference Include="ShellProgressBar" Version="5.0.0" />

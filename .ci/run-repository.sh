@@ -9,7 +9,7 @@ script_path=$(dirname $(realpath -s $0))
 source $script_path/functions/imports.sh
 set -euo pipefail
 
-DOTNET_VERSION=${DOTNET_VERSION-5.0.103}
+DOTNET_VERSION=${DOTNET_VERSION-5.0.408}
 ELASTICSEARCH_URL=${ELASTICSEARCH_URL-"$elasticsearch_url"}
 elasticsearch_container=${elasticsearch_container-}
 
