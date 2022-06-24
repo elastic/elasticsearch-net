@@ -318,7 +318,7 @@ client.Index<BytesResponse>("myindex", "1", PostData.Serializable(myJson));
 ```
 This will execute the same request, but this time `myJson` will be serialized by the registered `IElasticsearchSerializer`.
 
-#### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/elasticsearch-net.html](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/elasticsearch-net.html) 
+#### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html) 
 
 ## Contributing
 
