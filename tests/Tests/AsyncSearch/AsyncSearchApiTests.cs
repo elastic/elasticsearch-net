@@ -94,8 +94,8 @@ namespace Tests.AsyncSearch
 				u.Calls<GetAsyncSearchRequestDescriptor<Project>, GetAsyncSearchRequest, GetAsyncSearchResponse<Project>>(
 					v => new GetAsyncSearchRequest(v),
 					(v, d) => d,
-					(v, c, f) => c.AsyncSearch.Get<Project>(v, f),
-					(v, c, f) => c.AsyncSearch.GetAsync<Project>(v, f),
+					(v, c, f) => c.AsyncSearch.Get(v, f),
+					(v, c, f) => c.AsyncSearch.GetAsync(v, f),
 					(v, c, r) => c.AsyncSearch.Get<Project>(r),
 					(v, c, r) => c.AsyncSearch.GetAsync<Project>(r),
 					uniqueValueSelector: values => values.ExtendedValue<string>("id")
@@ -120,6 +120,8 @@ namespace Tests.AsyncSearch
 		public async Task AsyncSearchSubmitResponse() => await Assert<AsyncSearchSubmitResponse<Project>>(SubmitStep, r =>
 		{
 			r.ShouldBeValid();
+			r.Id.Should().NotBeNullOrEmpty();
+			// TODO - MORE ASSERTIONS
 			r.Response.Should().NotBeNull();
 			r.Response.Took.Should().BeGreaterOrEqualTo(0);
 		});
