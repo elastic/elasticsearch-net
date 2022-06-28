@@ -1,7 +1,0 @@
-{
-  Indices: [
-    {
-      Name: _all
-    }
-  ]
-}

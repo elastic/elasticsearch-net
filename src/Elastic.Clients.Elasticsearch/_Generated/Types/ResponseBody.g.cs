@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_scroll_id")]
-		public string? ScrollId { get; init; }
+		public Elastic.Clients.Elasticsearch.ScrollId? ScrollId { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_shards")]
