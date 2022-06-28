@@ -42,6 +42,10 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("scroll")]
 		public Elastic.Clients.Elasticsearch.Duration? Scroll { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("scroll_id")]
+		public Elastic.Clients.Elasticsearch.ScrollId ScrollId { get; set; }
 	}
 
 	public sealed partial class ScrollRequestDescriptor : RequestDescriptorBase<ScrollRequestDescriptor, ScrollRequestParameters>
@@ -57,9 +61,17 @@ namespace Elastic.Clients.Elasticsearch
 		public ScrollRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
 		private Elastic.Clients.Elasticsearch.Duration? ScrollValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.ScrollId ScrollIdValue { get; set; }
+
 		public ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll)
 		{
 			ScrollValue = scroll;
+			return Self;
+		}
+
+		public ScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollId scrollId)
+		{
+			ScrollIdValue = scrollId;
 			return Self;
 		}
 
@@ -72,6 +84,8 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, ScrollValue, options);
 			}
 
+			writer.WritePropertyName("scroll_id");
+			JsonSerializer.Serialize(writer, ScrollIdValue, options);
 			writer.WriteEndObject();
 		}
 	}
