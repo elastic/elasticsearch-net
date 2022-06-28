@@ -108,11 +108,12 @@ namespace Tests.Serialization
 		}
 
 		[U]
-		public async void Deserializes_All_Correctly()
+		public void Deserializes_All_Correctly()
 		{
 			const string json = @"{""indices"":""_all""}";
 			var obj = DeserializeJsonString<TestThing>(json);
-			await Verifier.Verify(obj);
+			obj.Indices.Should().HaveCount(1);
+			obj.Indices.First().Name.Should().Be("_all");
 		}
 
 		[U]
