@@ -25,6 +25,9 @@ public class MGetSerialization : SerializerTestBase
 		var error = search.Docs.First().Item2;
 		error.Should().NotBeNull();
 
-		await Verifier.Verify(error);
+		error.Id.Should().Be("1001");
+		error.Index.Should().Be("devs");
+
+		await Verifier.Verify(error.Error);
 	}
 }

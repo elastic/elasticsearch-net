@@ -151,6 +151,8 @@ namespace Elastic.Clients.Elasticsearch.Security
 		Monitor,
 		[EnumMember(Value = "manage_watcher")]
 		ManageWatcher,
+		[EnumMember(Value = "manage_user_profile")]
+		ManageUserProfile,
 		[EnumMember(Value = "manage_transform")]
 		ManageTransform,
 		[EnumMember(Value = "manage_token")]
@@ -232,6 +234,8 @@ namespace Elastic.Clients.Elasticsearch.Security
 					return ClusterPrivilege.Monitor;
 				case "manage_watcher":
 					return ClusterPrivilege.ManageWatcher;
+				case "manage_user_profile":
+					return ClusterPrivilege.ManageUserProfile;
 				case "manage_transform":
 					return ClusterPrivilege.ManageTransform;
 				case "manage_token":
@@ -326,6 +330,9 @@ namespace Elastic.Clients.Elasticsearch.Security
 					return;
 				case ClusterPrivilege.ManageWatcher:
 					writer.WriteStringValue("manage_watcher");
+					return;
+				case ClusterPrivilege.ManageUserProfile:
+					writer.WriteStringValue("manage_user_profile");
 					return;
 				case ClusterPrivilege.ManageTransform:
 					writer.WriteStringValue("manage_transform");
