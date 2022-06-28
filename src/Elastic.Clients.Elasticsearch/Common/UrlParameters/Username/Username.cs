@@ -15,7 +15,7 @@ public class Username : IEquatable<Username>, IUrlParameter
 {
 	public Username(string name) => Value = name?.Trim();
 
-	internal string Value { get; }
+	public string Value { get; }
 
 	private string DebugDisplay => Value;
 
@@ -25,7 +25,7 @@ public class Username : IEquatable<Username>, IUrlParameter
 
 	string IUrlParameter.GetString(ITransportConfiguration? settings) => Value;
 
-	public override string ToString() => DebugDisplay;
+	public override string ToString() => Value;
 
 	public static implicit operator Username(string name) => name.IsNullOrEmpty() ? null : new Username(name);
 
