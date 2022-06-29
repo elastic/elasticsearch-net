@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("order"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Order = value;
@@ -264,7 +264,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? Order { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? Order { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
@@ -304,11 +304,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private double? OffsetValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? OrderValue { get; set; }
-
-		private HistogramOrderDescriptor OrderDescriptor { get; set; }
-
-		private Action<HistogramOrderDescriptor> OrderDescriptorAction { get; set; }
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? OrderValue { get; set; }
 
 		public HistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
@@ -406,27 +402,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public HistogramAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? order)
+		public HistogramAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? order)
 		{
-			OrderDescriptor = null;
-			OrderDescriptorAction = null;
 			OrderValue = order;
-			return Self;
-		}
-
-		public HistogramAggregationDescriptor<TDocument> Order(HistogramOrderDescriptor descriptor)
-		{
-			OrderValue = null;
-			OrderDescriptorAction = null;
-			OrderDescriptor = descriptor;
-			return Self;
-		}
-
-		public HistogramAggregationDescriptor<TDocument> Order(Action<HistogramOrderDescriptor> configure)
-		{
-			OrderValue = null;
-			OrderDescriptor = null;
-			OrderDescriptorAction = configure;
 			return Self;
 		}
 
@@ -487,17 +465,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(OffsetValue.Value);
 			}
 
-			if (OrderDescriptor is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, OrderDescriptor, options);
-			}
-			else if (OrderDescriptorAction is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, new HistogramOrderDescriptor(OrderDescriptorAction), options);
-			}
-			else if (OrderValue is not null)
+			if (OrderValue is not null)
 			{
 				writer.WritePropertyName("order");
 				JsonSerializer.Serialize(writer, OrderValue, options);
@@ -563,11 +531,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private double? OffsetValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? OrderValue { get; set; }
-
-		private HistogramOrderDescriptor OrderDescriptor { get; set; }
-
-		private Action<HistogramOrderDescriptor> OrderDescriptorAction { get; set; }
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? OrderValue { get; set; }
 
 		public HistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
@@ -671,27 +635,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public HistogramAggregationDescriptor Order(Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? order)
+		public HistogramAggregationDescriptor Order(Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? order)
 		{
-			OrderDescriptor = null;
-			OrderDescriptorAction = null;
 			OrderValue = order;
-			return Self;
-		}
-
-		public HistogramAggregationDescriptor Order(HistogramOrderDescriptor descriptor)
-		{
-			OrderValue = null;
-			OrderDescriptorAction = null;
-			OrderDescriptor = descriptor;
-			return Self;
-		}
-
-		public HistogramAggregationDescriptor Order(Action<HistogramOrderDescriptor> configure)
-		{
-			OrderValue = null;
-			OrderDescriptor = null;
-			OrderDescriptorAction = configure;
 			return Self;
 		}
 
@@ -752,17 +698,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(OffsetValue.Value);
 			}
 
-			if (OrderDescriptor is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, OrderDescriptor, options);
-			}
-			else if (OrderDescriptorAction is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, new HistogramOrderDescriptor(OrderDescriptorAction), options);
-			}
-			else if (OrderValue is not null)
+			if (OrderValue is not null)
 			{
 				writer.WritePropertyName("order");
 				JsonSerializer.Serialize(writer, OrderValue, options);
