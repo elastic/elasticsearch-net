@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
-		public bool PreserveOriginal { get; set; }
+		public bool? PreserveOriginal { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -42,11 +42,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private bool PreserveOriginalValue { get; set; }
+		private bool? PreserveOriginalValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool preserveOriginal = true)
+		public AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
 		{
 			PreserveOriginalValue = preserveOriginal;
 			return Self;
@@ -61,8 +61,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(PreserveOriginalValue);
+			if (PreserveOriginalValue.HasValue)
+			{
+				writer.WritePropertyName("preserve_original");
+				writer.WriteBooleanValue(PreserveOriginalValue.Value);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("asciifolding");
 			if (VersionValue is not null)

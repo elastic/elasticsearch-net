@@ -28,11 +28,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_gram")]
-		public int MaxGram { get; set; }
+		public int? MaxGram { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_gram")]
-		public int MinGram { get; set; }
+		public int? MinGram { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
@@ -54,9 +54,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private int MaxGramValue { get; set; }
+		private int? MaxGramValue { get; set; }
 
-		private int MinGramValue { get; set; }
+		private int? MinGramValue { get; set; }
 
 		private bool? PreserveOriginalValue { get; set; }
 
@@ -64,13 +64,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		private string? VersionValue { get; set; }
 
-		public EdgeNGramTokenFilterDescriptor MaxGram(int maxGram)
+		public EdgeNGramTokenFilterDescriptor MaxGram(int? maxGram)
 		{
 			MaxGramValue = maxGram;
 			return Self;
 		}
 
-		public EdgeNGramTokenFilterDescriptor MinGram(int minGram)
+		public EdgeNGramTokenFilterDescriptor MinGram(int? minGram)
 		{
 			MinGramValue = minGram;
 			return Self;
@@ -97,10 +97,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("max_gram");
-			writer.WriteNumberValue(MaxGramValue);
-			writer.WritePropertyName("min_gram");
-			writer.WriteNumberValue(MinGramValue);
+			if (MaxGramValue.HasValue)
+			{
+				writer.WritePropertyName("max_gram");
+				writer.WriteNumberValue(MaxGramValue.Value);
+			}
+
+			if (MinGramValue.HasValue)
+			{
+				writer.WritePropertyName("min_gram");
+				writer.WriteNumberValue(MinGramValue.Value);
+			}
+
 			if (PreserveOriginalValue.HasValue)
 			{
 				writer.WritePropertyName("preserve_original");
