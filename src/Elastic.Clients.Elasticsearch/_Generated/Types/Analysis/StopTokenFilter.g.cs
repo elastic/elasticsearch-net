@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords Stopwords { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		private bool? RemoveTrailingValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.StopWords StopwordsValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
 
 		private string? StopwordsPathValue { get; set; }
 
@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			return Self;
 		}
 
-		public StopTokenFilterDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords stopwords)
+		public StopTokenFilterDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
 		{
 			StopwordsValue = stopwords;
 			return Self;
@@ -109,8 +109,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 				writer.WriteBooleanValue(RemoveTrailingValue.Value);
 			}
 
-			writer.WritePropertyName("stopwords");
-			JsonSerializer.Serialize(writer, StopwordsValue, options);
+			if (StopwordsValue is not null)
+			{
+				writer.WritePropertyName("stopwords");
+				JsonSerializer.Serialize(writer, StopwordsValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(StopwordsPathValue))
 			{
 				writer.WritePropertyName("stopwords_path");
