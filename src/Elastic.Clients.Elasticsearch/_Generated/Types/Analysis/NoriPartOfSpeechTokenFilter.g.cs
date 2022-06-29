@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("stoptags")]
-		public IEnumerable<string> Stoptags { get; set; }
+		public IEnumerable<string>? Stoptags { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -42,11 +42,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private IEnumerable<string> StoptagsValue { get; set; }
+		private IEnumerable<string>? StoptagsValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public NoriPartOfSpeechTokenFilterDescriptor Stoptags(IEnumerable<string> stoptags)
+		public NoriPartOfSpeechTokenFilterDescriptor Stoptags(IEnumerable<string>? stoptags)
 		{
 			StoptagsValue = stoptags;
 			return Self;
@@ -61,8 +61,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("stoptags");
-			JsonSerializer.Serialize(writer, StoptagsValue, options);
+			if (StoptagsValue is not null)
+			{
+				writer.WritePropertyName("stoptags");
+				JsonSerializer.Serialize(writer, StoptagsValue, options);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("nori_part_of_speech");
 			if (VersionValue is not null)

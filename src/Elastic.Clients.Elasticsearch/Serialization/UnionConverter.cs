@@ -61,6 +61,7 @@ internal sealed class UnionConverter : JsonConverterFactory
 	}
 
 	private class DerivedUnionConverterInner<TType, TItem1, TItem2> : JsonConverter<TType>
+		where TType : Union<TItem1, TItem2>
 	{
 		public override TType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -72,7 +73,7 @@ internal sealed class UnionConverter : JsonConverterFactory
 			{
 				var itemOne = JsonSerializer.Deserialize<TItem1>(ref readerCopy, options);
 
-				if (itemOne is TItem1)
+				if (itemOne is not null)
 				{
 					reader = readerCopy;
 					return (TType)Activator.CreateInstance(typeof(TType), itemOne);
@@ -87,7 +88,7 @@ internal sealed class UnionConverter : JsonConverterFactory
 			{
 				var itemTwo = JsonSerializer.Deserialize<TItem2>(ref reader, options);
 
-				if (itemTwo is TItem2)
+				if (itemTwo is not null)
 				{
 					return (TType)Activator.CreateInstance(typeof(TType), itemTwo);
 				}
@@ -109,20 +110,19 @@ internal sealed class UnionConverter : JsonConverterFactory
 				return;
 			}
 
-			//if (value.Item1 is not null)
-			//{
-			//	JsonSerializer.Serialize(writer, value.Item1, value.Item1.GetType(), options);
-			//	return;
-			//}
+			if (value.Item1 is not null)
+			{
+				JsonSerializer.Serialize(writer, value.Item1, value.Item1.GetType(), options);
+				return;
+			}
 
-			//if (value.Item2 is not null)
-			//{
-			//	JsonSerializer.Serialize(writer, value.Item2, value.Item2.GetType(), options);
-			//	return;
-			//}
+			if (value.Item2 is not null)
+			{
+				JsonSerializer.Serialize(writer, value.Item2, value.Item2.GetType(), options);
+				return;
+			}
 
-			throw new JsonException("TODO");
-			//throw new JsonException("Invalid union type.");
+			throw new JsonException("Invalid union type.");
 		}
 	}
 
