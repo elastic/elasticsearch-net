@@ -27,7 +27,7 @@ public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTe
 				calendar_interval = "month",
 				min_doc_count = 2,
 				format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", // <1> Note the inclusion of `date_optional_time` to `format`
-				order = new { _count = "asc" },
+				order = new { _key = "asc" },
 				//extended_bounds = new
 				//{
 				//	min = FixedDate.AddYears(-1),
@@ -62,7 +62,7 @@ public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTe
 			.MinDocCount(2)
 			.Format("yyyy-MM-dd'T'HH:mm:ss||date_optional_time")
 			//.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
-			.Order(new HistogramOrder { Count = SortOrder.Asc })
+			.Order(AggregateOrder.KeyAscending)
 			.Missing(DateTimeOffset.Parse("2015-06-06T12:01:02.1230000", styles: System.Globalization.DateTimeStyles.AssumeUniversal))
 			.Aggregations(childAggs => childAggs
 				.Nested("project_tags", n => n
@@ -86,7 +86,7 @@ public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTe
 			//	Minimum = FixedDate.AddYears(-1),
 			//	Maximum = FixedDate.AddYears(1),
 			//},
-			Order = new HistogramOrder { Count = SortOrder.Asc },
+			Order = AggregateOrder.KeyAscending,
 			Missing = DateTimeOffset.Parse("2015-06-06T12:01:02.1230000", styles: System.Globalization.DateTimeStyles.AssumeUniversal),
 			Aggregations = new NestedAggregation("project_tags")
 			{

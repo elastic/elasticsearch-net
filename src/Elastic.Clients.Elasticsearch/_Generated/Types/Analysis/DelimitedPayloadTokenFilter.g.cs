@@ -28,11 +28,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("delimiter")]
-		public string Delimiter { get; set; }
+		public string? Delimiter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("encoding")]
-		public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding Encoding { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? Encoding { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -46,19 +46,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private string DelimiterValue { get; set; }
+		private string? DelimiterValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding EncodingValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? EncodingValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public DelimitedPayloadTokenFilterDescriptor Delimiter(string delimiter)
+		public DelimitedPayloadTokenFilterDescriptor Delimiter(string? delimiter)
 		{
 			DelimiterValue = delimiter;
 			return Self;
 		}
 
-		public DelimitedPayloadTokenFilterDescriptor Encoding(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding encoding)
+		public DelimitedPayloadTokenFilterDescriptor Encoding(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? encoding)
 		{
 			EncodingValue = encoding;
 			return Self;
@@ -73,10 +73,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("delimiter");
-			writer.WriteStringValue(DelimiterValue);
-			writer.WritePropertyName("encoding");
-			JsonSerializer.Serialize(writer, EncodingValue, options);
+			if (!string.IsNullOrEmpty(DelimiterValue))
+			{
+				writer.WritePropertyName("delimiter");
+				writer.WriteStringValue(DelimiterValue);
+			}
+
+			if (EncodingValue is not null)
+			{
+				writer.WritePropertyName("encoding");
+				JsonSerializer.Serialize(writer, EncodingValue, options);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("delimited_payload");
 			if (VersionValue is not null)

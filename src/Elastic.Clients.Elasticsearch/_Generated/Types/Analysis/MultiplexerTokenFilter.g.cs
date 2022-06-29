@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
-		public bool PreserveOriginal { get; set; }
+		public bool? PreserveOriginal { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		private IEnumerable<string> FiltersValue { get; set; }
 
-		private bool PreserveOriginalValue { get; set; }
+		private bool? PreserveOriginalValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			return Self;
 		}
 
-		public MultiplexerTokenFilterDescriptor PreserveOriginal(bool preserveOriginal = true)
+		public MultiplexerTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
 		{
 			PreserveOriginalValue = preserveOriginal;
 			return Self;
@@ -75,8 +75,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			writer.WriteStartObject();
 			writer.WritePropertyName("filters");
 			JsonSerializer.Serialize(writer, FiltersValue, options);
-			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(PreserveOriginalValue);
+			if (PreserveOriginalValue.HasValue)
+			{
+				writer.WritePropertyName("preserve_original");
+				writer.WriteBooleanValue(PreserveOriginalValue.Value);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("multiplexer");
 			if (VersionValue is not null)

@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(FieldConverter))]
 [DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
-public sealed class Field : IEquatable<Field>, IUrlParameter
+public sealed class Field : IEquatable<Field>, IUrlParameter, IDictionaryKey
 {
 	private readonly object _comparisonValue;
 	private readonly Type _type;
@@ -95,15 +95,26 @@ public sealed class Field : IEquatable<Field>, IUrlParameter
 		? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
 		: other != null && _comparisonValue.Equals(other._comparisonValue);
 
-	string IUrlParameter.GetString(ITransportConfiguration? settings)
+	string IUrlParameter.GetString(ITransportConfiguration settings)
 	{
-		if (!(settings is IElasticsearchClientSettings ElasticsearchSettings))
+		if (settings is not IElasticsearchClientSettings elasticsearchSettings)
 		{
 			throw new ArgumentNullException(nameof(settings),
 				$"Can not resolve {nameof(Field)} if no {nameof(IElasticsearchClientSettings)} is provided");
 		}
 
-		return ElasticsearchSettings.Inferrer.Field(this);
+		return GetStringCore(elasticsearchSettings);
+	}
+
+	private string GetStringCore(IElasticsearchClientSettings settings)
+	{
+		if (settings is null)
+		{
+			throw new ArgumentNullException(nameof(settings),
+				$"Can not resolve {nameof(Field)} if no {nameof(IElasticsearchClientSettings)} is provided");
+		}
+
+		return settings.Inferrer.Field(this);
 	}
 
 	public override string ToString() => DebugDisplay;
@@ -171,6 +182,8 @@ public sealed class Field : IEquatable<Field>, IUrlParameter
 				return false;
 		}
 	}
+
+	string IDictionaryKey.Key(IElasticsearchClientSettings settings) => GetStringCore(settings);
 
 	public static bool operator ==(Field x, Field y) => Equals(x, y);
 
