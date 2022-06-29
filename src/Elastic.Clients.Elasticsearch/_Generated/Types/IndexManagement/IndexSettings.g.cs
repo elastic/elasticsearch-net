@@ -104,8 +104,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? LoadFixedBitsetFiltersEagerly { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? Mappings { get; set; }
+		[JsonPropertyName("mapping")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? Mapping { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_docvalue_fields_search")]
@@ -345,11 +345,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private bool? LoadFixedBitsetFiltersEagerlyValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? MappingsValue { get; set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? MappingValue { get; set; }
 
-		private MappingLimitSettingsDescriptor MappingsDescriptor { get; set; }
+		private MappingLimitSettingsDescriptor MappingDescriptor { get; set; }
 
-		private Action<MappingLimitSettingsDescriptor> MappingsDescriptorAction { get; set; }
+		private Action<MappingLimitSettingsDescriptor> MappingDescriptorAction { get; set; }
 
 		private int? MaxDocvalueFieldsSearchValue { get; set; }
 
@@ -771,27 +771,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexSettingsDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? mappings)
+		public IndexSettingsDescriptor<TDocument> Mapping(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? mapping)
 		{
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = null;
-			MappingsValue = mappings;
+			MappingDescriptor = null;
+			MappingDescriptorAction = null;
+			MappingValue = mapping;
 			return Self;
 		}
 
-		public IndexSettingsDescriptor<TDocument> Mappings(MappingLimitSettingsDescriptor descriptor)
+		public IndexSettingsDescriptor<TDocument> Mapping(MappingLimitSettingsDescriptor descriptor)
 		{
-			MappingsValue = null;
-			MappingsDescriptorAction = null;
-			MappingsDescriptor = descriptor;
+			MappingValue = null;
+			MappingDescriptorAction = null;
+			MappingDescriptor = descriptor;
 			return Self;
 		}
 
-		public IndexSettingsDescriptor<TDocument> Mappings(Action<MappingLimitSettingsDescriptor> configure)
+		public IndexSettingsDescriptor<TDocument> Mapping(Action<MappingLimitSettingsDescriptor> configure)
 		{
-			MappingsValue = null;
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = configure;
+			MappingValue = null;
+			MappingDescriptor = null;
+			MappingDescriptorAction = configure;
 			return Self;
 		}
 
@@ -1432,20 +1432,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				writer.WriteBooleanValue(LoadFixedBitsetFiltersEagerlyValue.Value);
 			}
 
-			if (MappingsDescriptor is not null)
+			if (MappingDescriptor is not null)
 			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+				writer.WritePropertyName("mapping");
+				JsonSerializer.Serialize(writer, MappingDescriptor, options);
 			}
-			else if (MappingsDescriptorAction is not null)
+			else if (MappingDescriptorAction is not null)
 			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, new MappingLimitSettingsDescriptor(MappingsDescriptorAction), options);
+				writer.WritePropertyName("mapping");
+				JsonSerializer.Serialize(writer, new MappingLimitSettingsDescriptor(MappingDescriptorAction), options);
 			}
-			else if (MappingsValue is not null)
+			else if (MappingValue is not null)
 			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsValue, options);
+				writer.WritePropertyName("mapping");
+				JsonSerializer.Serialize(writer, MappingValue, options);
 			}
 
 			if (MaxDocvalueFieldsSearchValue.HasValue)
@@ -1861,11 +1861,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private bool? LoadFixedBitsetFiltersEagerlyValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? MappingsValue { get; set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? MappingValue { get; set; }
 
-		private MappingLimitSettingsDescriptor MappingsDescriptor { get; set; }
+		private MappingLimitSettingsDescriptor MappingDescriptor { get; set; }
 
-		private Action<MappingLimitSettingsDescriptor> MappingsDescriptorAction { get; set; }
+		private Action<MappingLimitSettingsDescriptor> MappingDescriptorAction { get; set; }
 
 		private int? MaxDocvalueFieldsSearchValue { get; set; }
 
@@ -2287,27 +2287,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexSettingsDescriptor Mappings(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? mappings)
+		public IndexSettingsDescriptor Mapping(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? mapping)
 		{
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = null;
-			MappingsValue = mappings;
+			MappingDescriptor = null;
+			MappingDescriptorAction = null;
+			MappingValue = mapping;
 			return Self;
 		}
 
-		public IndexSettingsDescriptor Mappings(MappingLimitSettingsDescriptor descriptor)
+		public IndexSettingsDescriptor Mapping(MappingLimitSettingsDescriptor descriptor)
 		{
-			MappingsValue = null;
-			MappingsDescriptorAction = null;
-			MappingsDescriptor = descriptor;
+			MappingValue = null;
+			MappingDescriptorAction = null;
+			MappingDescriptor = descriptor;
 			return Self;
 		}
 
-		public IndexSettingsDescriptor Mappings(Action<MappingLimitSettingsDescriptor> configure)
+		public IndexSettingsDescriptor Mapping(Action<MappingLimitSettingsDescriptor> configure)
 		{
-			MappingsValue = null;
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = configure;
+			MappingValue = null;
+			MappingDescriptor = null;
+			MappingDescriptorAction = configure;
 			return Self;
 		}
 
@@ -2948,20 +2948,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				writer.WriteBooleanValue(LoadFixedBitsetFiltersEagerlyValue.Value);
 			}
 
-			if (MappingsDescriptor is not null)
+			if (MappingDescriptor is not null)
 			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+				writer.WritePropertyName("mapping");
+				JsonSerializer.Serialize(writer, MappingDescriptor, options);
 			}
-			else if (MappingsDescriptorAction is not null)
+			else if (MappingDescriptorAction is not null)
 			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, new MappingLimitSettingsDescriptor(MappingsDescriptorAction), options);
+				writer.WritePropertyName("mapping");
+				JsonSerializer.Serialize(writer, new MappingLimitSettingsDescriptor(MappingDescriptorAction), options);
 			}
-			else if (MappingsValue is not null)
+			else if (MappingValue is not null)
 			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsValue, options);
+				writer.WritePropertyName("mapping");
+				JsonSerializer.Serialize(writer, MappingValue, options);
 			}
 
 			if (MaxDocvalueFieldsSearchValue.HasValue)
