@@ -28,11 +28,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("articles")]
-		public IEnumerable<string> Articles { get; set; }
+		public IEnumerable<string>? Articles { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("articles_case")]
-		public bool ArticlesCase { get; set; }
+		public bool? ArticlesCase { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("articles_path")]
+		public string? ArticlesPath { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -46,21 +50,29 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private IEnumerable<string> ArticlesValue { get; set; }
+		private IEnumerable<string>? ArticlesValue { get; set; }
 
-		private bool ArticlesCaseValue { get; set; }
+		private bool? ArticlesCaseValue { get; set; }
+
+		private string? ArticlesPathValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public ElisionTokenFilterDescriptor Articles(IEnumerable<string> articles)
+		public ElisionTokenFilterDescriptor Articles(IEnumerable<string>? articles)
 		{
 			ArticlesValue = articles;
 			return Self;
 		}
 
-		public ElisionTokenFilterDescriptor ArticlesCase(bool articlesCase = true)
+		public ElisionTokenFilterDescriptor ArticlesCase(bool? articlesCase = true)
 		{
 			ArticlesCaseValue = articlesCase;
+			return Self;
+		}
+
+		public ElisionTokenFilterDescriptor ArticlesPath(string? articlesPath)
+		{
+			ArticlesPathValue = articlesPath;
 			return Self;
 		}
 
@@ -73,10 +85,24 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("articles");
-			JsonSerializer.Serialize(writer, ArticlesValue, options);
-			writer.WritePropertyName("articles_case");
-			writer.WriteBooleanValue(ArticlesCaseValue);
+			if (ArticlesValue is not null)
+			{
+				writer.WritePropertyName("articles");
+				JsonSerializer.Serialize(writer, ArticlesValue, options);
+			}
+
+			if (ArticlesCaseValue.HasValue)
+			{
+				writer.WritePropertyName("articles_case");
+				writer.WriteBooleanValue(ArticlesCaseValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(ArticlesPathValue))
+			{
+				writer.WritePropertyName("articles_path");
+				writer.WriteStringValue(ArticlesPathValue);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("elision");
 			if (VersionValue is not null)
@@ -89,6 +115,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 
 		ElisionTokenFilter IBuildableDescriptor<ElisionTokenFilter>.Build() => new()
-		{ Articles = ArticlesValue, ArticlesCase = ArticlesCaseValue, Version = VersionValue };
+		{ Articles = ArticlesValue, ArticlesCase = ArticlesCaseValue, ArticlesPath = ArticlesPathValue, Version = VersionValue };
 	}
 }
