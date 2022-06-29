@@ -28,11 +28,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("consume_all_tokens")]
-		public bool ConsumeAllTokens { get; set; }
+		public bool? ConsumeAllTokens { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_token_count")]
-		public int MaxTokenCount { get; set; }
+		public int? MaxTokenCount { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -46,19 +46,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private bool ConsumeAllTokensValue { get; set; }
+		private bool? ConsumeAllTokensValue { get; set; }
 
-		private int MaxTokenCountValue { get; set; }
+		private int? MaxTokenCountValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public LimitTokenCountTokenFilterDescriptor ConsumeAllTokens(bool consumeAllTokens = true)
+		public LimitTokenCountTokenFilterDescriptor ConsumeAllTokens(bool? consumeAllTokens = true)
 		{
 			ConsumeAllTokensValue = consumeAllTokens;
 			return Self;
 		}
 
-		public LimitTokenCountTokenFilterDescriptor MaxTokenCount(int maxTokenCount)
+		public LimitTokenCountTokenFilterDescriptor MaxTokenCount(int? maxTokenCount)
 		{
 			MaxTokenCountValue = maxTokenCount;
 			return Self;
@@ -73,10 +73,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("consume_all_tokens");
-			writer.WriteBooleanValue(ConsumeAllTokensValue);
-			writer.WritePropertyName("max_token_count");
-			writer.WriteNumberValue(MaxTokenCountValue);
+			if (ConsumeAllTokensValue.HasValue)
+			{
+				writer.WritePropertyName("consume_all_tokens");
+				writer.WriteBooleanValue(ConsumeAllTokensValue.Value);
+			}
+
+			if (MaxTokenCountValue.HasValue)
+			{
+				writer.WritePropertyName("max_token_count");
+				writer.WriteNumberValue(MaxTokenCountValue.Value);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("limit");
 			if (VersionValue is not null)
