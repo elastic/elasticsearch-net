@@ -19,6 +19,13 @@ public sealed class Field : IEquatable<Field>, IUrlParameter, IDictionaryKey
 	private readonly object _comparisonValue;
 	private readonly Type _type;
 
+	// Pseudo and metadata fields
+
+	public static Field IdField = new("_id");
+	public static Field ScoreField = new("_score");
+	public static Field KeyField = new("_key");
+	public static Field CountField = new("_count");
+
 	public Field(string name) : this(name, null, null) { }
 
 	public Field(string name, double boost) : this(name, boost, null) { }

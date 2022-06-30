@@ -6,23 +6,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class AggregateOrder
 {
-	public static AggregateOrder KeyDescending => new(new System.Collections.Generic.Dictionary<Field, SortOrder>
-	{
-		{ "_key", SortOrder.Desc }
-	});
-
-	public static AggregateOrder KeyAscending => new(new System.Collections.Generic.Dictionary<Field, SortOrder>
-	{
-		{ "_key", SortOrder.Asc }
-	});
-
-	public static AggregateOrder CountDescending => new(new System.Collections.Generic.Dictionary<Field, SortOrder>
-	{
-		{ "_count", SortOrder.Desc }
-	});
-
-	public static AggregateOrder CountAscending => new(new System.Collections.Generic.Dictionary<Field, SortOrder>
-	{
-		{ "_count", SortOrder.Asc }
-	});
+	public static AggregateOrder KeyDescending => new() { new System.Collections.Generic.KeyValuePair<Field, SortOrder>(Field.KeyField, SortOrder.Desc) };
+	public static AggregateOrder KeyAscending => new() { new System.Collections.Generic.KeyValuePair<Field, SortOrder>(Field.KeyField, SortOrder.Asc) };
+	public static AggregateOrder CountDescending => new() { new System.Collections.Generic.KeyValuePair<Field, SortOrder>(Field.CountField, SortOrder.Desc) };
+	public static AggregateOrder CountAscending => new() { new System.Collections.Generic.KeyValuePair<Field, SortOrder>(Field.CountField, SortOrder.Asc) };
 }
