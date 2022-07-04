@@ -5,6 +5,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -13,6 +14,10 @@ internal sealed class FieldConverter : JsonConverter<Field>
 	private readonly IElasticsearchClientSettings _settings;
 
 	public FieldConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+	public override void WriteAsPropertyName(Utf8JsonWriter writer, Field value, JsonSerializerOptions options) => writer.WritePropertyName(((IUrlParameter)value).GetString(_settings));
+
+	public override Field ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.GetString();
 
 	public override Field? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

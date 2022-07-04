@@ -1,0 +1,8 @@
+[
+  {
+    field-1: asc
+  },
+  {
+    field-2: desc
+  }
+]
