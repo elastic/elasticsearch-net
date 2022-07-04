@@ -17,6 +17,7 @@
 
 using Elastic.Transport;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
@@ -25,14 +26,23 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class AggregateOrder : Union<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>?, IReadOnlyCollection<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?>
+	[SingleOrMany(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>))]
+	public partial class AggregateOrder : IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>
 	{
-		public AggregateOrder(Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>? item) : base(item)
-		{
-		}
+		private readonly IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>> _backingList = new List<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>();
+		public KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder> this[int index] { get => _backingList[index]; set => _backingList[index] = value; }
 
-		public AggregateOrder(IReadOnlyCollection<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? item) : base(item)
-		{
-		}
+		public int Count => _backingList.Count;
+		public bool IsReadOnly => _backingList.IsReadOnly;
+		public void Add(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder> item) => _backingList.Add(item);
+		public void Clear() => _backingList.Clear();
+		public bool Contains(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder> item) => _backingList.Contains(item);
+		public void CopyTo(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>[] array, int arrayIndex) => _backingList.CopyTo(array, arrayIndex);
+		public IEnumerator<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>> GetEnumerator() => _backingList.GetEnumerator();
+		public int IndexOf(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder> item) => _backingList.IndexOf(item);
+		public void Insert(int index, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder> item) => _backingList.Insert(index, item);
+		public bool Remove(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder> item) => _backingList.Remove(item);
+		public void RemoveAt(int index) => _backingList.RemoveAt(index);
+		IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_backingList).GetEnumerator();
 	}
 }
