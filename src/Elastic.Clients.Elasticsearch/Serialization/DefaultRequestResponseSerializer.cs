@@ -37,6 +37,7 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 			IncludeFields = true,
 			Converters =
 				{
+					new KeyValuePairConverterFactory(settings),
 					new SourceConverterFactory(settings),
 					new ReadOnlyIndexNameDictionaryConverterFactory(settings),
 					new CalendarIntervalConverter(),
@@ -55,11 +56,11 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 					new SelfDeserializableConverterFactory(settings),
 					new SelfTwoWaySerializableConverterFactory(settings),
 					new IndicesJsonConverter(settings),
-					new DictionaryConverter(settings),
 					new PropertyNameConverter(settings),
 					new IsADictionaryConverter(),
 					new ResponseItemConverterFactory(),
-					new UnionConverter()
+					new UnionConverter(),
+					new SingleOrManyConverterFactory(),
 				},
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 		};
