@@ -1,0 +1,6 @@
+{
+  field-name: {
+    age: 30,
+    name: Steve
+  }
+}
