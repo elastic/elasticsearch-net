@@ -26,6 +26,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
+	[SingleOrMany(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Feature))]
 	public partial class Features : IList<Elastic.Clients.Elasticsearch.IndexManagement.Feature>
 	{
 		private readonly IList<Elastic.Clients.Elasticsearch.IndexManagement.Feature> _backingList = new List<Elastic.Clients.Elasticsearch.IndexManagement.Feature>();

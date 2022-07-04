@@ -26,6 +26,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
+	[SingleOrMany(typeof(string))]
 	public partial class TextToAnalyze : IList<string>
 	{
 		private readonly IList<string> _backingList = new List<string>();

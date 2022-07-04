@@ -26,6 +26,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
+	[SingleOrMany(typeof(Elastic.Clients.Elasticsearch.ExpandWildcard))]
 	public partial class ExpandWildcards : IList<Elastic.Clients.Elasticsearch.ExpandWildcard>
 	{
 		private readonly IList<Elastic.Clients.Elasticsearch.ExpandWildcard> _backingList = new List<Elastic.Clients.Elasticsearch.ExpandWildcard>();
