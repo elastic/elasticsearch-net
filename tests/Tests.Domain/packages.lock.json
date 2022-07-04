@@ -10,11 +10,11 @@
       },
       "Elastic.Elasticsearch.Managed": {
         "type": "Direct",
-        "requested": "[0.3.1, )",
-        "resolved": "0.3.1",
-        "contentHash": "kEQe4lJdY6iInC487RLXFl3hKJhnVkvZActfYefDvEZpxz8k9+41R3vvLD2ouO1LEpj9INOZHt5VG92axizXvA==",
+        "requested": "[0.3.2, )",
+        "resolved": "0.3.2",
+        "contentHash": "dvTCMcM4KAIuKuTXBBSPjhbtCfurasPAmrqq8Nfb0B+siJwc6jlfQ1ZaVXzhQ1/g5eiOmFNuYEh/nh+afbcBoA==",
         "dependencies": {
-          "Elastic.Stack.ArtifactsApi": "0.3.1",
+          "Elastic.Stack.ArtifactsApi": "0.3.2",
           "Proc": "0.6.1",
           "System.Net.Http": "4.3.1"
         }
@@ -36,8 +36,8 @@
       },
       "Elastic.Stack.ArtifactsApi": {
         "type": "Transitive",
-        "resolved": "0.3.1",
-        "contentHash": "/zrZNOCCk6Nach1gAk8FkRqgNxlx9BFHchSGOZLQWdU3FwQ80uV+06oXCu4klX07Wma8P3AHBHrpb1LByn62XQ==",
+        "resolved": "0.3.2",
+        "contentHash": "IGYooA8pSRPrAyoTY7pWOg6gXoQklIHkY0i2oy7zIhBGXESPqlzM0ZuqG/RZprsFN25qzfZlm+1XRg/PYrag5Q==",
         "dependencies": {
           "SemanticVersioning": "0.8.0",
           "System.Text.Json": "4.6.0"
@@ -1090,7 +1090,7 @@
       "tests.configuration": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Elasticsearch.Managed": "0.3.1"
+          "Elastic.Elasticsearch.Managed": "0.3.2"
         }
       }
     }
