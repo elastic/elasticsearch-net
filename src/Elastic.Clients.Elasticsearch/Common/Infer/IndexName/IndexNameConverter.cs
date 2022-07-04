@@ -5,6 +5,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -16,6 +17,10 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly IElasticsearchClientSettings _settings;
 
 		public IndexNameConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+		public override void WriteAsPropertyName(Utf8JsonWriter writer, IndexName value, JsonSerializerOptions options) => writer.WritePropertyName(((IUrlParameter)value).GetString(_settings));
+
+		public override IndexName ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.GetString();
 
 		public override IndexName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

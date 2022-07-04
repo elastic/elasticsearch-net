@@ -13,7 +13,7 @@ namespace Elastic.Clients.Elasticsearch
 {
 	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	[JsonConverter(typeof(PropertyNameConverter))]
-	public sealed class PropertyName : IEquatable<PropertyName>, IUrlParameter, IDictionaryKey
+	public sealed class PropertyName : IEquatable<PropertyName>, IUrlParameter
 	{
 		private readonly object _comparisonValue;
 		private readonly Type _type;
@@ -50,8 +50,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private string PropertyDebug => Property == null ? null : $"PropertyInfo: {Property.Name}";
 		private static int TypeHashCode { get; } = typeof(PropertyName).GetHashCode();
-
-		string IDictionaryKey.Key(IElasticsearchClientSettings settings) => GetInferredString(settings);
 
 		public bool Equals(PropertyName other) => EqualsMarker(other);
 

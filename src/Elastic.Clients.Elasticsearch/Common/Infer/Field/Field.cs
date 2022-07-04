@@ -14,10 +14,17 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(FieldConverter))]
 [DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
-public sealed class Field : IEquatable<Field>, IUrlParameter, IDictionaryKey
+public sealed class Field : IEquatable<Field>, IUrlParameter
 {
 	private readonly object _comparisonValue;
 	private readonly Type _type;
+
+	// Pseudo and metadata fields
+
+	public static Field IdField = new("_id");
+	public static Field ScoreField = new("_score");
+	public static Field KeyField = new("_key");
+	public static Field CountField = new("_count");
 
 	public Field(string name) : this(name, null, null) { }
 
@@ -182,8 +189,6 @@ public sealed class Field : IEquatable<Field>, IUrlParameter, IDictionaryKey
 				return false;
 		}
 	}
-
-	string IDictionaryKey.Key(IElasticsearchClientSettings settings) => GetStringCore(settings);
 
 	public static bool operator ==(Field x, Field y) => Equals(x, y);
 
