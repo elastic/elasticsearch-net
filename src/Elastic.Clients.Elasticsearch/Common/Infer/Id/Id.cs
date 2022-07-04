@@ -109,39 +109,4 @@ namespace Elastic.Clients.Elasticsearch
 
 		public static bool operator !=(Id left, Id right) => !Equals(left, right);
 	}
-
-	internal sealed class IdConverter : JsonConverter<Id>
-	{
-		private readonly IElasticsearchClientSettings _settings;
-
-		public IdConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
-		public override Id? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-			reader.TokenType == JsonTokenType.Number
-				? new Id(reader.GetInt64())
-				: new Id(reader.GetString());
-
-		public override void Write(Utf8JsonWriter writer, Id value, JsonSerializerOptions options)
-		{
-			if (value is null)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			if (value.Document is not null)
-			{
-				var documentId = _settings.Inferrer.Id(value.Document.GetType(), value.Document);
-				writer.WriteStringValue(documentId);
-			}
-			else if (value.LongValue.HasValue)
-			{
-				writer.WriteNumberValue(value.LongValue.Value);
-			}
-			else
-			{
-				writer.WriteStringValue(value.StringValue);
-			}
-		}
-	}
 }

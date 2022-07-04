@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(FieldConverter))]
 [DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
-public sealed class Field : IEquatable<Field>, IUrlParameter, IDictionaryKey
+public sealed class Field : IEquatable<Field>, IUrlParameter
 {
 	private readonly object _comparisonValue;
 	private readonly Type _type;
@@ -189,8 +189,6 @@ public sealed class Field : IEquatable<Field>, IUrlParameter, IDictionaryKey
 				return false;
 		}
 	}
-
-	string IDictionaryKey.Key(IElasticsearchClientSettings settings) => GetStringCore(settings);
 
 	public static bool operator ==(Field x, Field y) => Equals(x, y);
 
