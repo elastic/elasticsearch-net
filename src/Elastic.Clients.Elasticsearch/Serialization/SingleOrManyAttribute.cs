@@ -2,13 +2,15 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
+
 namespace Elastic.Clients.Elasticsearch
 {
-	/// <summary>
-	/// Marker for types which may also act as a key in a dictionary.
-	/// </summary>
-	internal interface IDictionaryKey
+	[AttributeUsage(AttributeTargets.Class)]
+	internal sealed class SingleOrManyAttribute : Attribute
 	{
-		string Key(IElasticsearchClientSettings settings);
+		public SingleOrManyAttribute(Type itemType) => ItemType = itemType;
+
+		public Type ItemType { get; }
 	}
 }
