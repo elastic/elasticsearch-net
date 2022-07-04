@@ -16,7 +16,6 @@ internal class DefaultSourceSerializer : SystemTextJsonSourceSerializer
 			Converters =
 			{
 					new JsonStringEnumConverter(),
-					new DictionaryConverter(settings),
 					new UnionConverter(),
 					new IdConverter(settings),
 					new RelationNameConverter(settings),
