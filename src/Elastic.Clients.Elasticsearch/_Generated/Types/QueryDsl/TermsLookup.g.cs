@@ -22,12 +22,24 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class MigrationFeature
+	public partial class TermsLookup
 	{
 		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		[JsonPropertyName("id")]
+		public string Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public string Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("path")]
+		public string Path { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("routing")]
+		public string? Routing { get; init; }
 	}
 }

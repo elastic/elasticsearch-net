@@ -162,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch
 		public void Doc(ScoreSort variant) => Set(variant, "_doc");
 		public void Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
 		public void GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
-		public void GeoDistance(Action<GeoDistanceSortDescriptor> configure) => Set(configure, "_geo_distance");
+		public void GeoDistance(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
 		public void Score(ScoreSort variant) => Set(variant, "_score");
 		public void Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
 		public void Script(ScriptSort variant) => Set(variant, "_script");
@@ -232,6 +232,7 @@ namespace Elastic.Clients.Elasticsearch
 		public void Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
 		public void GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
 		public void GeoDistance(Action<GeoDistanceSortDescriptor> configure) => Set(configure, "_geo_distance");
+		public void GeoDistance<TDocument>(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
 		public void Score(ScoreSort variant) => Set(variant, "_score");
 		public void Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
 		public void Script(ScriptSort variant) => Set(variant, "_script");

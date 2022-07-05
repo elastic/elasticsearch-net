@@ -31,6 +31,62 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? IgnoreUnmapped { get; set; }
 	}
 
+	public sealed partial class ShapeQueryDescriptor<TDocument> : SerializableDescriptorBase<ShapeQueryDescriptor<TDocument>>
+	{
+		internal ShapeQueryDescriptor(Action<ShapeQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public ShapeQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private bool? IgnoreUnmappedValue { get; set; }
+
+		public ShapeQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public ShapeQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public ShapeQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+		{
+			IgnoreUnmappedValue = ignoreUnmapped;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (IgnoreUnmappedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public sealed partial class ShapeQueryDescriptor : SerializableDescriptorBase<ShapeQueryDescriptor>
 	{
 		internal ShapeQueryDescriptor(Action<ShapeQueryDescriptor> configure) => configure.Invoke(this);

@@ -22,12 +22,20 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class MigrationFeature
+	public partial class ShapeFieldQuery
 	{
 		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		[JsonPropertyName("indexed_shape")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup? IndexedShape { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("relation")]
+		public Elastic.Clients.Elasticsearch.GeoShapeRelation? Relation { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("shape")]
+		public object? Shape { get; init; }
 	}
 }

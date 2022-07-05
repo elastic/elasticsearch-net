@@ -22,12 +22,16 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MigrationFeature
+	public partial class TopRightBottomLeftGeoBounds
 	{
 		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		[JsonPropertyName("bottom_left")]
+		public Elastic.Clients.Elasticsearch.GeoLocation BottomLeft { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("top_right")]
+		public Elastic.Clients.Elasticsearch.GeoLocation TopRight { get; init; }
 	}
 }

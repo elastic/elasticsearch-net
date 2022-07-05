@@ -22,12 +22,32 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MigrationFeature
+	public partial class FieldSort : ISortOptionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		[JsonPropertyName("format")]
+		public string? Format { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("mode")]
+		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("nested")]
+		public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("numeric_type")]
+		public Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericType { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("order")]
+		public Elastic.Clients.Elasticsearch.SortOrder? Order { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("unmapped_type")]
+		public Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedType { get; init; }
 	}
 }

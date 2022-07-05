@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,12 +23,16 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class MigrationFeature
+	public partial class TermsQueryField : Union<IReadOnlyCollection<object>?, Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup?>
 	{
-		[JsonInclude]
-		[JsonPropertyName("feature_name")]
-		public string FeatureName { get; init; }
+		public TermsQueryField(IReadOnlyCollection<object>? item) : base(item)
+		{
+		}
+
+		public TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup? item) : base(item)
+		{
+		}
 	}
 }

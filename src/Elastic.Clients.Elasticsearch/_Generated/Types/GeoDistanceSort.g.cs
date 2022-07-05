@@ -47,6 +47,90 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
 	}
 
+	public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableDescriptorBase<GeoDistanceSortDescriptor<TDocument>>
+	{
+		internal GeoDistanceSortDescriptor(Action<GeoDistanceSortDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public GeoDistanceSortDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
+
+		private bool? IgnoreUnmappedValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
+
+		public GeoDistanceSortDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
+		{
+			DistanceTypeValue = distanceType;
+			return Self;
+		}
+
+		public GeoDistanceSortDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+		{
+			IgnoreUnmappedValue = ignoreUnmapped;
+			return Self;
+		}
+
+		public GeoDistanceSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+		{
+			ModeValue = mode;
+			return Self;
+		}
+
+		public GeoDistanceSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+		{
+			OrderValue = order;
+			return Self;
+		}
+
+		public GeoDistanceSortDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
+		{
+			UnitValue = unit;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (DistanceTypeValue is not null)
+			{
+				writer.WritePropertyName("distance_type");
+				JsonSerializer.Serialize(writer, DistanceTypeValue, options);
+			}
+
+			if (IgnoreUnmappedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+			}
+
+			if (ModeValue is not null)
+			{
+				writer.WritePropertyName("mode");
+				JsonSerializer.Serialize(writer, ModeValue, options);
+			}
+
+			if (OrderValue is not null)
+			{
+				writer.WritePropertyName("order");
+				JsonSerializer.Serialize(writer, OrderValue, options);
+			}
+
+			if (UnitValue is not null)
+			{
+				writer.WritePropertyName("unit");
+				JsonSerializer.Serialize(writer, UnitValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public sealed partial class GeoDistanceSortDescriptor : SerializableDescriptorBase<GeoDistanceSortDescriptor>
 	{
 		internal GeoDistanceSortDescriptor(Action<GeoDistanceSortDescriptor> configure) => configure.Invoke(this);
