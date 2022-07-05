@@ -13,11 +13,11 @@
       },
       "Elastic.Elasticsearch.Xunit": {
         "type": "Direct",
-        "requested": "[0.3.1, )",
-        "resolved": "0.3.1",
-        "contentHash": "DuTpxy14mOL02e7D24caI/Kq1Dum3+GCFJNefzT7xMvLgMCE2lRl5kQMxt9uFow0tQ/qa88MJmf5l9Llk7yOaw==",
+        "requested": "[0.3.5, )",
+        "resolved": "0.3.5",
+        "contentHash": "gSnvLb6Uv8N1e0hrQK2msoD+F4nZg47Iru8XY8bdi/J3rntflEb93dnYiTSQEeLQ17Y3QFlpdo08U3AH618YPg==",
         "dependencies": {
-          "Elastic.Elasticsearch.Ephemeral": "0.3.1",
+          "Elastic.Elasticsearch.Ephemeral": "0.3.5",
           "xunit": "2.4.1"
         }
       },
@@ -97,27 +97,27 @@
       },
       "Elastic.Elasticsearch.Ephemeral": {
         "type": "Transitive",
-        "resolved": "0.3.1",
-        "contentHash": "n7QRXJsCqKznk0HhH+ayAByh3Z6FiBra2kGW6Llm7IuFU8s1aub9ynsLjOPF+Kt6oF41uGtlgH16e2BKlaKbNw==",
+        "resolved": "0.3.5",
+        "contentHash": "X5nGiegs1pDAAG96gF1ELlrinNqgIIUE0LzAhHDcSbjyRzS9Apo01x+MTdvVvYJzGo/oRQZZn/tN/AVx2s72nA==",
         "dependencies": {
-          "Elastic.Elasticsearch.Managed": "0.3.1",
+          "Elastic.Elasticsearch.Managed": "0.3.5",
           "SharpZipLib.NETStandard": "1.0.7"
         }
       },
       "Elastic.Elasticsearch.Managed": {
         "type": "Transitive",
-        "resolved": "0.3.1",
-        "contentHash": "kEQe4lJdY6iInC487RLXFl3hKJhnVkvZActfYefDvEZpxz8k9+41R3vvLD2ouO1LEpj9INOZHt5VG92axizXvA==",
+        "resolved": "0.3.5",
+        "contentHash": "fA1pZoh3J88i2C+oWMsMugivVnD+1B1LvY89njwAJneptBNopQr9c8prgQj/de5+iYSpyIC9tjoQ99wFLZHdVQ==",
         "dependencies": {
-          "Elastic.Stack.ArtifactsApi": "0.3.1",
+          "Elastic.Stack.ArtifactsApi": "0.3.5",
           "Proc": "0.6.1",
           "System.Net.Http": "4.3.1"
         }
       },
       "Elastic.Stack.ArtifactsApi": {
         "type": "Transitive",
-        "resolved": "0.3.1",
-        "contentHash": "/zrZNOCCk6Nach1gAk8FkRqgNxlx9BFHchSGOZLQWdU3FwQ80uV+06oXCu4klX07Wma8P3AHBHrpb1LByn62XQ==",
+        "resolved": "0.3.5",
+        "contentHash": "cJiTtjJOYZJpGgaMOCfrrpxcWieqDK+CobXNeTISczq8orqhWF16wVCZT6iNvtho+Y0pU9C80qEgOPkzKYlPKA==",
         "dependencies": {
           "SemanticVersioning": "0.8.0",
           "System.Text.Json": "4.6.0"
@@ -1544,7 +1544,7 @@
       "tests.configuration": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Elasticsearch.Managed": "0.3.1"
+          "Elastic.Elasticsearch.Managed": "0.3.5"
         }
       },
       "tests.domain": {
@@ -1552,7 +1552,7 @@
         "dependencies": {
           "Bogus": "22.1.2",
           "Elastic.Clients.Elasticsearch": "8.0.0",
-          "Elastic.Elasticsearch.Managed": "0.3.1",
+          "Elastic.Elasticsearch.Managed": "0.3.5",
           "Newtonsoft.Json": "13.0.1",
           "Tests.Configuration": "8.0.0"
         }
