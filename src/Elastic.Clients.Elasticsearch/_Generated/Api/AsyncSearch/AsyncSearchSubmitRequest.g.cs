@@ -303,7 +303,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public SortCollection? Sort { get; set; }
+		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
@@ -469,12 +469,6 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor<TDocument> SortDescriptor { get; set; }
-
-		private Action<SortDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
 		private bool? ExplainValue { get; set; }
@@ -502,6 +496,8 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
 
 		private IEnumerable<string>? StatsValue { get; set; }
 
@@ -775,30 +771,6 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Sort(SortDescriptor<TDocument> descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
-			return Self;
-		}
-
 		public AsyncSearchSubmitRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
 		{
 			SourceValue = source;
@@ -886,6 +858,12 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public AsyncSearchSubmitRequestDescriptor<TDocument> Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -1141,22 +1119,6 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 				JsonSerializer.Serialize(writer, SliceValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor<TDocument>(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -1237,6 +1199,12 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortValue, options);
 			}
 
 			if (StatsValue is not null)
@@ -1409,12 +1377,6 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor SortDescriptor { get; set; }
-
-		private Action<SortDescriptor> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
 		private bool? ExplainValue { get; set; }
@@ -1442,6 +1404,8 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
 
 		private IEnumerable<string>? StatsValue { get; set; }
 
@@ -1715,30 +1679,6 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public AsyncSearchSubmitRequestDescriptor Sort(SortDescriptor descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public AsyncSearchSubmitRequestDescriptor Sort(Action<SortDescriptor> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
-			return Self;
-		}
-
 		public AsyncSearchSubmitRequestDescriptor Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
 		{
 			SourceValue = source;
@@ -1826,6 +1766,12 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public AsyncSearchSubmitRequestDescriptor Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public AsyncSearchSubmitRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -2087,22 +2033,6 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 				JsonSerializer.Serialize(writer, SliceValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -2183,6 +2113,12 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortValue, options);
 			}
 
 			if (StatsValue is not null)

@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("sort"))
 					{
-						var value = JsonSerializer.Deserialize<SortCollection?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Sort?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Sort = value;
@@ -358,7 +358,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public SortCollection? Sort { get; set; }
+		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stored_fields")]
@@ -392,12 +392,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor<TDocument> SortDescriptor { get; set; }
-
-		private Action<SortDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
@@ -415,6 +409,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -467,30 +463,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			ScriptValue = null;
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor<TDocument> Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor<TDocument> Sort(SortDescriptor<TDocument> descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
 			return Self;
 		}
 
@@ -560,6 +532,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public TopHitsAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		{
+			SortValue = sort;
+			return Self;
+		}
+
 		public TopHitsAggregationDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 		{
 			StoredFieldsValue = storedFields;
@@ -621,22 +599,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor<TDocument>(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -683,6 +645,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortValue, options);
 			}
 
 			if (StoredFieldsValue is not null)
@@ -733,12 +701,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor SortDescriptor { get; set; }
-
-		private Action<SortDescriptor> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
@@ -756,6 +718,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -808,30 +772,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			ScriptValue = null;
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor Sort(SortDescriptor descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor Sort(Action<SortDescriptor> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
 			return Self;
 		}
 
@@ -913,6 +853,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public TopHitsAggregationDescriptor Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		{
+			SortValue = sort;
+			return Self;
+		}
+
 		public TopHitsAggregationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 		{
 			StoredFieldsValue = storedFields;
@@ -980,22 +926,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -1042,6 +972,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortValue, options);
 			}
 
 			if (StoredFieldsValue is not null)

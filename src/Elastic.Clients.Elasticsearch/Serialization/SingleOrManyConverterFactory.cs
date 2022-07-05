@@ -41,9 +41,7 @@ namespace Elastic.Clients.Elasticsearch
 				if (reader.TokenType == JsonTokenType.StartObject)
 				{
 					var singleItem = JsonSerializer.Deserialize<TItem>(ref reader, options);
-					var list = new T();
-					list.Add(singleItem);
-					return list;
+					return new T() { singleItem };
 				}
 
 				if (reader.TokenType == JsonTokenType.StartArray)
@@ -55,6 +53,18 @@ namespace Elastic.Clients.Elasticsearch
 						list.Add(item);
 					}
 					return list;
+				}
+
+				// Handles situations such as a single sort value which can be a string
+				// e.g. GET nuget-stats/_search
+				// {
+				//    "sort": "version"
+				// }
+				if (reader.TokenType == JsonTokenType.String)
+				{
+					var value = reader.GetString();
+					var item = (TItem)Activator.CreateInstance(typeof(TItem), value);
+					return new T() { item };
 				}
 
 				throw new JsonException("Unexpected token.");
