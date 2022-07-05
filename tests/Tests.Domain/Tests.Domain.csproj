@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="22.1.2" />
-    <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.3.2" />
+    <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.3.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Configuration\Tests.Configuration.csproj" />
     <ProjectReference Include="$(SolutionRoot)\src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
