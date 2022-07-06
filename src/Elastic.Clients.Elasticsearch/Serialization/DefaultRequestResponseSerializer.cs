@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch.Aggregations;
@@ -46,7 +47,6 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 					new IdConverter(settings),
 					new FieldConverter(settings),
 					new FieldValuesConverter(settings),
-					//new SortCollectionConverter(settings),
 					new LazyDocumentConverter(settings),
 					new RelationNameConverter(settings),
 					new JoinFieldConverter(settings),
@@ -61,6 +61,7 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 					new ResponseItemConverterFactory(),
 					new UnionConverter(),
 					new SingleOrManyConverterFactory(),
+					new ExtraSerializationData(settings)
 				},
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 		};

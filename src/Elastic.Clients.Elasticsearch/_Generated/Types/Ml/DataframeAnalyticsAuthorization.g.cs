@@ -24,54 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalyticsSummary
+	public partial class DataframeAnalyticsAuthorization
 	{
 		[JsonInclude]
-		[JsonPropertyName("allow_lazy_start")]
-		public bool? AllowLazyStart { get; init; }
+		[JsonPropertyName("api_key")]
+		public Elastic.Clients.Elasticsearch.Ml.ApiKeyAuthorization? ApiKey { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("analysis")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis { get; init; }
+		[JsonPropertyName("roles")]
+		public IReadOnlyCollection<string>? Roles { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("analyzed_fields")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("authorization")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsAuthorization? Authorization { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("create_time")]
-		public long? CreateTime { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("description")]
-		public string? Description { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public string Id { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_num_threads")]
-		public int? MaxNumThreads { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("model_memory_limit")]
-		public string? ModelMemoryLimit { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; init; }
+		[JsonPropertyName("service_account")]
+		public string? ServiceAccount { get; init; }
 	}
 }

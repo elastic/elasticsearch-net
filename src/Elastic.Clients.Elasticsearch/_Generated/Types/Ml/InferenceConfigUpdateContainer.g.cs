@@ -47,15 +47,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal string VariantName { get; }
 
-		public static InferenceConfigUpdateContainer Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions variant) => new InferenceConfigUpdateContainer("classification", variant);
-		public static InferenceConfigUpdateContainer FillMask(Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("fill_mask", variant);
-		public static InferenceConfigUpdateContainer Ner(Elastic.Clients.Elasticsearch.Ml.NerInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("ner", variant);
-		public static InferenceConfigUpdateContainer PassThrough(Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("pass_through", variant);
-		public static InferenceConfigUpdateContainer QuestionAnswering(Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("question_answering", variant);
-		public static InferenceConfigUpdateContainer Regression(Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions variant) => new InferenceConfigUpdateContainer("regression", variant);
-		public static InferenceConfigUpdateContainer TextClassification(Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("text_classification", variant);
-		public static InferenceConfigUpdateContainer TextEmbedding(Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("text_embedding", variant);
-		public static InferenceConfigUpdateContainer ZeroShotClassification(Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions variant) => new InferenceConfigUpdateContainer("zero_shot_classification", variant);
+		public static InferenceConfigUpdateContainer Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions classificationInferenceOptions) => new InferenceConfigUpdateContainer("classification", classificationInferenceOptions);
+		public static InferenceConfigUpdateContainer FillMask(Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceUpdateOptions fillMaskInferenceUpdateOptions) => new InferenceConfigUpdateContainer("fill_mask", fillMaskInferenceUpdateOptions);
+		public static InferenceConfigUpdateContainer Ner(Elastic.Clients.Elasticsearch.Ml.NerInferenceUpdateOptions nerInferenceUpdateOptions) => new InferenceConfigUpdateContainer("ner", nerInferenceUpdateOptions);
+		public static InferenceConfigUpdateContainer PassThrough(Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceUpdateOptions passThroughInferenceUpdateOptions) => new InferenceConfigUpdateContainer("pass_through", passThroughInferenceUpdateOptions);
+		public static InferenceConfigUpdateContainer QuestionAnswering(Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceUpdateOptions questionAnsweringInferenceUpdateOptions) => new InferenceConfigUpdateContainer("question_answering", questionAnsweringInferenceUpdateOptions);
+		public static InferenceConfigUpdateContainer Regression(Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions regressionInferenceOptions) => new InferenceConfigUpdateContainer("regression", regressionInferenceOptions);
+		public static InferenceConfigUpdateContainer TextClassification(Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions textClassificationInferenceUpdateOptions) => new InferenceConfigUpdateContainer("text_classification", textClassificationInferenceUpdateOptions);
+		public static InferenceConfigUpdateContainer TextEmbedding(Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions textEmbeddingInferenceUpdateOptions) => new InferenceConfigUpdateContainer("text_embedding", textEmbeddingInferenceUpdateOptions);
+		public static InferenceConfigUpdateContainer ZeroShotClassification(Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions zeroShotClassificationInferenceUpdateOptions) => new InferenceConfigUpdateContainer("zero_shot_classification", zeroShotClassificationInferenceUpdateOptions);
 	}
 
 	internal sealed class InferenceConfigUpdateContainerConverter : JsonConverter<InferenceConfigUpdateContainer>

@@ -31,6 +31,10 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Dictionary<string, object>? Meta { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("authorization")]
+		public Elastic.Clients.Elasticsearch.Ml.TransformAuthorization? Authorization { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
 		public long? CreateTime { get; init; }
 
@@ -57,6 +61,10 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		[JsonInclude]
 		[JsonPropertyName("pivot")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("retention_policy")]
+		public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyContainer? RetentionPolicy { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]

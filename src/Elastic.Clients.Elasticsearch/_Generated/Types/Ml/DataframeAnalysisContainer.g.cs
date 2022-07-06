@@ -47,9 +47,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal string VariantName { get; }
 
-		public static DataframeAnalysisContainer Classification(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisClassification variant) => new DataframeAnalysisContainer("classification", variant);
-		public static DataframeAnalysisContainer OutlierDetection(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisOutlierDetection variant) => new DataframeAnalysisContainer("outlier_detection", variant);
-		public static DataframeAnalysisContainer Regression(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisRegression variant) => new DataframeAnalysisContainer("regression", variant);
+		public static DataframeAnalysisContainer Classification(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisClassification dataframeAnalysisClassification) => new DataframeAnalysisContainer("classification", dataframeAnalysisClassification);
+		public static DataframeAnalysisContainer OutlierDetection(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisOutlierDetection dataframeAnalysisOutlierDetection) => new DataframeAnalysisContainer("outlier_detection", dataframeAnalysisOutlierDetection);
+		public static DataframeAnalysisContainer Regression(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisRegression dataframeAnalysisRegression) => new DataframeAnalysisContainer("regression", dataframeAnalysisRegression);
 	}
 
 	internal sealed class DataframeAnalysisContainerConverter : JsonConverter<DataframeAnalysisContainer>

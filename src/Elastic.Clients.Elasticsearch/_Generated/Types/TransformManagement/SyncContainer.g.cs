@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		internal string VariantName { get; }
 
-		public static SyncContainer Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync variant) => new SyncContainer("time", variant);
+		public static SyncContainer Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync timeSync) => new SyncContainer("time", timeSync);
 	}
 
 	internal sealed class SyncContainerConverter : JsonConverter<SyncContainer>

@@ -30,7 +30,6 @@ internal sealed class FieldConverter : JsonConverter<Field>
 				return new Field(reader.GetString());
 		}
 
-		reader.Read();
 		return null;
 	}
 

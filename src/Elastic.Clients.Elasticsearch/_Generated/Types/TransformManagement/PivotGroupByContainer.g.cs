@@ -47,9 +47,9 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		internal string VariantName { get; }
 
-		public static PivotGroupByContainer DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation variant) => new PivotGroupByContainer("date_histogram", variant);
-		public static PivotGroupByContainer Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation variant) => new PivotGroupByContainer("histogram", variant);
-		public static PivotGroupByContainer Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation variant) => new PivotGroupByContainer("terms", variant);
+		public static PivotGroupByContainer DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => new PivotGroupByContainer("date_histogram", dateHistogramAggregation);
+		public static PivotGroupByContainer Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => new PivotGroupByContainer("histogram", histogramAggregation);
+		public static PivotGroupByContainer Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new PivotGroupByContainer("terms", termsAggregation);
 	}
 
 	internal sealed class PivotGroupByContainerConverter : JsonConverter<PivotGroupByContainer>

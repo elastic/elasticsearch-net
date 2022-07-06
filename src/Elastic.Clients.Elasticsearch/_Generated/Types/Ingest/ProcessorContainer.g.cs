@@ -47,39 +47,39 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string VariantName { get; }
 
-		public static ProcessorContainer Append(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor variant) => new ProcessorContainer("append", variant);
-		public static ProcessorContainer Attachment(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor variant) => new ProcessorContainer("attachment", variant);
-		public static ProcessorContainer Bytes(Elastic.Clients.Elasticsearch.Ingest.BytesProcessor variant) => new ProcessorContainer("bytes", variant);
-		public static ProcessorContainer Circle(Elastic.Clients.Elasticsearch.Ingest.CircleProcessor variant) => new ProcessorContainer("circle", variant);
-		public static ProcessorContainer Convert(Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor variant) => new ProcessorContainer("convert", variant);
-		public static ProcessorContainer Csv(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor variant) => new ProcessorContainer("csv", variant);
-		public static ProcessorContainer Date(Elastic.Clients.Elasticsearch.Ingest.DateProcessor variant) => new ProcessorContainer("date", variant);
-		public static ProcessorContainer DateIndexName(Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor variant) => new ProcessorContainer("date_index_name", variant);
-		public static ProcessorContainer Dissect(Elastic.Clients.Elasticsearch.Ingest.DissectProcessor variant) => new ProcessorContainer("dissect", variant);
-		public static ProcessorContainer DotExpander(Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor variant) => new ProcessorContainer("dot_expander", variant);
-		public static ProcessorContainer Drop(Elastic.Clients.Elasticsearch.Ingest.DropProcessor variant) => new ProcessorContainer("drop", variant);
-		public static ProcessorContainer Enrich(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor variant) => new ProcessorContainer("enrich", variant);
-		public static ProcessorContainer Fail(Elastic.Clients.Elasticsearch.Ingest.FailProcessor variant) => new ProcessorContainer("fail", variant);
-		public static ProcessorContainer Foreach(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor variant) => new ProcessorContainer("foreach", variant);
-		public static ProcessorContainer Geoip(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor variant) => new ProcessorContainer("geoip", variant);
-		public static ProcessorContainer Grok(Elastic.Clients.Elasticsearch.Ingest.GrokProcessor variant) => new ProcessorContainer("grok", variant);
-		public static ProcessorContainer Gsub(Elastic.Clients.Elasticsearch.Ingest.GsubProcessor variant) => new ProcessorContainer("gsub", variant);
-		public static ProcessorContainer Inference(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor variant) => new ProcessorContainer("inference", variant);
-		public static ProcessorContainer Join(Elastic.Clients.Elasticsearch.Ingest.JoinProcessor variant) => new ProcessorContainer("join", variant);
-		public static ProcessorContainer Json(Elastic.Clients.Elasticsearch.Ingest.JsonProcessor variant) => new ProcessorContainer("json", variant);
-		public static ProcessorContainer Kv(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor variant) => new ProcessorContainer("kv", variant);
-		public static ProcessorContainer Lowercase(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor variant) => new ProcessorContainer("lowercase", variant);
-		public static ProcessorContainer Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor variant) => new ProcessorContainer("pipeline", variant);
-		public static ProcessorContainer Remove(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor variant) => new ProcessorContainer("remove", variant);
-		public static ProcessorContainer Rename(Elastic.Clients.Elasticsearch.Ingest.RenameProcessor variant) => new ProcessorContainer("rename", variant);
-		public static ProcessorContainer Set(Elastic.Clients.Elasticsearch.Ingest.SetProcessor variant) => new ProcessorContainer("set", variant);
-		public static ProcessorContainer SetSecurityUser(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor variant) => new ProcessorContainer("set_security_user", variant);
-		public static ProcessorContainer Sort(Elastic.Clients.Elasticsearch.Ingest.SortProcessor variant) => new ProcessorContainer("sort", variant);
-		public static ProcessorContainer Split(Elastic.Clients.Elasticsearch.Ingest.SplitProcessor variant) => new ProcessorContainer("split", variant);
-		public static ProcessorContainer Trim(Elastic.Clients.Elasticsearch.Ingest.TrimProcessor variant) => new ProcessorContainer("trim", variant);
-		public static ProcessorContainer Uppercase(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor variant) => new ProcessorContainer("uppercase", variant);
-		public static ProcessorContainer Urldecode(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor variant) => new ProcessorContainer("urldecode", variant);
-		public static ProcessorContainer UserAgent(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor variant) => new ProcessorContainer("user_agent", variant);
+		public static ProcessorContainer Append(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor appendProcessor) => new ProcessorContainer("append", appendProcessor);
+		public static ProcessorContainer Attachment(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor attachmentProcessor) => new ProcessorContainer("attachment", attachmentProcessor);
+		public static ProcessorContainer Bytes(Elastic.Clients.Elasticsearch.Ingest.BytesProcessor bytesProcessor) => new ProcessorContainer("bytes", bytesProcessor);
+		public static ProcessorContainer Circle(Elastic.Clients.Elasticsearch.Ingest.CircleProcessor circleProcessor) => new ProcessorContainer("circle", circleProcessor);
+		public static ProcessorContainer Convert(Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor convertProcessor) => new ProcessorContainer("convert", convertProcessor);
+		public static ProcessorContainer Csv(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor csvProcessor) => new ProcessorContainer("csv", csvProcessor);
+		public static ProcessorContainer Date(Elastic.Clients.Elasticsearch.Ingest.DateProcessor dateProcessor) => new ProcessorContainer("date", dateProcessor);
+		public static ProcessorContainer DateIndexName(Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor dateIndexNameProcessor) => new ProcessorContainer("date_index_name", dateIndexNameProcessor);
+		public static ProcessorContainer Dissect(Elastic.Clients.Elasticsearch.Ingest.DissectProcessor dissectProcessor) => new ProcessorContainer("dissect", dissectProcessor);
+		public static ProcessorContainer DotExpander(Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor dotExpanderProcessor) => new ProcessorContainer("dot_expander", dotExpanderProcessor);
+		public static ProcessorContainer Drop(Elastic.Clients.Elasticsearch.Ingest.DropProcessor dropProcessor) => new ProcessorContainer("drop", dropProcessor);
+		public static ProcessorContainer Enrich(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor enrichProcessor) => new ProcessorContainer("enrich", enrichProcessor);
+		public static ProcessorContainer Fail(Elastic.Clients.Elasticsearch.Ingest.FailProcessor failProcessor) => new ProcessorContainer("fail", failProcessor);
+		public static ProcessorContainer Foreach(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor foreachProcessor) => new ProcessorContainer("foreach", foreachProcessor);
+		public static ProcessorContainer Geoip(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor geoIpProcessor) => new ProcessorContainer("geoip", geoIpProcessor);
+		public static ProcessorContainer Grok(Elastic.Clients.Elasticsearch.Ingest.GrokProcessor grokProcessor) => new ProcessorContainer("grok", grokProcessor);
+		public static ProcessorContainer Gsub(Elastic.Clients.Elasticsearch.Ingest.GsubProcessor gsubProcessor) => new ProcessorContainer("gsub", gsubProcessor);
+		public static ProcessorContainer Inference(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor inferenceProcessor) => new ProcessorContainer("inference", inferenceProcessor);
+		public static ProcessorContainer Join(Elastic.Clients.Elasticsearch.Ingest.JoinProcessor joinProcessor) => new ProcessorContainer("join", joinProcessor);
+		public static ProcessorContainer Json(Elastic.Clients.Elasticsearch.Ingest.JsonProcessor jsonProcessor) => new ProcessorContainer("json", jsonProcessor);
+		public static ProcessorContainer Kv(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor keyValueProcessor) => new ProcessorContainer("kv", keyValueProcessor);
+		public static ProcessorContainer Lowercase(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor lowercaseProcessor) => new ProcessorContainer("lowercase", lowercaseProcessor);
+		public static ProcessorContainer Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor pipelineProcessor) => new ProcessorContainer("pipeline", pipelineProcessor);
+		public static ProcessorContainer Remove(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor removeProcessor) => new ProcessorContainer("remove", removeProcessor);
+		public static ProcessorContainer Rename(Elastic.Clients.Elasticsearch.Ingest.RenameProcessor renameProcessor) => new ProcessorContainer("rename", renameProcessor);
+		public static ProcessorContainer Set(Elastic.Clients.Elasticsearch.Ingest.SetProcessor setProcessor) => new ProcessorContainer("set", setProcessor);
+		public static ProcessorContainer SetSecurityUser(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor setSecurityUserProcessor) => new ProcessorContainer("set_security_user", setSecurityUserProcessor);
+		public static ProcessorContainer Sort(Elastic.Clients.Elasticsearch.Ingest.SortProcessor sortProcessor) => new ProcessorContainer("sort", sortProcessor);
+		public static ProcessorContainer Split(Elastic.Clients.Elasticsearch.Ingest.SplitProcessor splitProcessor) => new ProcessorContainer("split", splitProcessor);
+		public static ProcessorContainer Trim(Elastic.Clients.Elasticsearch.Ingest.TrimProcessor trimProcessor) => new ProcessorContainer("trim", trimProcessor);
+		public static ProcessorContainer Uppercase(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor uppercaseProcessor) => new ProcessorContainer("uppercase", uppercaseProcessor);
+		public static ProcessorContainer Urldecode(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor urlDecodeProcessor) => new ProcessorContainer("urldecode", urlDecodeProcessor);
+		public static ProcessorContainer UserAgent(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor userAgentProcessor) => new ProcessorContainer("user_agent", userAgentProcessor);
 	}
 
 	internal sealed class ProcessorContainerConverter : JsonConverter<ProcessorContainer>

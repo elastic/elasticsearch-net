@@ -47,8 +47,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string VariantName { get; }
 
-		public static InferenceConfig Classification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification variant) => new InferenceConfig("classification", variant);
-		public static InferenceConfig Regression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression variant) => new InferenceConfig("regression", variant);
+		public static InferenceConfig Classification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification inferenceConfigClassification) => new InferenceConfig("classification", inferenceConfigClassification);
+		public static InferenceConfig Regression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression inferenceConfigRegression) => new InferenceConfig("regression", inferenceConfigRegression);
 	}
 
 	internal sealed class InferenceConfigConverter : JsonConverter<InferenceConfig>

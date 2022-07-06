@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		internal string VariantName { get; }
 
-		public static RetentionPolicyContainer Time(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy variant) => new RetentionPolicyContainer("time", variant);
+		public static RetentionPolicyContainer Time(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy retentionPolicy) => new RetentionPolicyContainer("time", retentionPolicy);
 	}
 
 	internal sealed class RetentionPolicyContainerConverter : JsonConverter<RetentionPolicyContainer>

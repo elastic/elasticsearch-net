@@ -47,8 +47,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal string VariantName { get; }
 
-		public static InferenceConfigContainer Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions variant) => new InferenceConfigContainer("classification", variant);
-		public static InferenceConfigContainer Regression(Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions variant) => new InferenceConfigContainer("regression", variant);
+		public static InferenceConfigContainer Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions classificationInferenceOptions) => new InferenceConfigContainer("classification", classificationInferenceOptions);
+		public static InferenceConfigContainer Regression(Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions regressionInferenceOptions) => new InferenceConfigContainer("regression", regressionInferenceOptions);
 	}
 
 	internal sealed class InferenceConfigContainerConverter : JsonConverter<InferenceConfigContainer>

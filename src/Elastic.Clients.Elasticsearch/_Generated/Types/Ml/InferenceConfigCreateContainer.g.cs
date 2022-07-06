@@ -47,15 +47,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal string VariantName { get; }
 
-		public static InferenceConfigCreateContainer Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions variant) => new InferenceConfigCreateContainer("classification", variant);
-		public static InferenceConfigCreateContainer FillMask(Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceOptions variant) => new InferenceConfigCreateContainer("fill_mask", variant);
-		public static InferenceConfigCreateContainer Ner(Elastic.Clients.Elasticsearch.Ml.NerInferenceOptions variant) => new InferenceConfigCreateContainer("ner", variant);
-		public static InferenceConfigCreateContainer PassThrough(Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceOptions variant) => new InferenceConfigCreateContainer("pass_through", variant);
-		public static InferenceConfigCreateContainer QuestionAnswering(Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceOptions variant) => new InferenceConfigCreateContainer("question_answering", variant);
-		public static InferenceConfigCreateContainer Regression(Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions variant) => new InferenceConfigCreateContainer("regression", variant);
-		public static InferenceConfigCreateContainer TextClassification(Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceOptions variant) => new InferenceConfigCreateContainer("text_classification", variant);
-		public static InferenceConfigCreateContainer TextEmbedding(Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceOptions variant) => new InferenceConfigCreateContainer("text_embedding", variant);
-		public static InferenceConfigCreateContainer ZeroShotClassification(Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceOptions variant) => new InferenceConfigCreateContainer("zero_shot_classification", variant);
+		public static InferenceConfigCreateContainer Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions classificationInferenceOptions) => new InferenceConfigCreateContainer("classification", classificationInferenceOptions);
+		public static InferenceConfigCreateContainer FillMask(Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceOptions fillMaskInferenceOptions) => new InferenceConfigCreateContainer("fill_mask", fillMaskInferenceOptions);
+		public static InferenceConfigCreateContainer Ner(Elastic.Clients.Elasticsearch.Ml.NerInferenceOptions nerInferenceOptions) => new InferenceConfigCreateContainer("ner", nerInferenceOptions);
+		public static InferenceConfigCreateContainer PassThrough(Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceOptions passThroughInferenceOptions) => new InferenceConfigCreateContainer("pass_through", passThroughInferenceOptions);
+		public static InferenceConfigCreateContainer QuestionAnswering(Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceOptions questionAnsweringInferenceOptions) => new InferenceConfigCreateContainer("question_answering", questionAnsweringInferenceOptions);
+		public static InferenceConfigCreateContainer Regression(Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions regressionInferenceOptions) => new InferenceConfigCreateContainer("regression", regressionInferenceOptions);
+		public static InferenceConfigCreateContainer TextClassification(Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceOptions textClassificationInferenceOptions) => new InferenceConfigCreateContainer("text_classification", textClassificationInferenceOptions);
+		public static InferenceConfigCreateContainer TextEmbedding(Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => new InferenceConfigCreateContainer("text_embedding", textEmbeddingInferenceOptions);
+		public static InferenceConfigCreateContainer ZeroShotClassification(Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => new InferenceConfigCreateContainer("zero_shot_classification", zeroShotClassificationInferenceOptions);
 	}
 
 	internal sealed class InferenceConfigCreateContainerConverter : JsonConverter<InferenceConfigCreateContainer>

@@ -47,11 +47,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal string VariantName { get; }
 
-		public static DataframeAnalysisFeatureProcessor FrequencyEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorFrequencyEncoding variant) => new DataframeAnalysisFeatureProcessor("frequency_encoding", variant);
-		public static DataframeAnalysisFeatureProcessor MultiEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorMultiEncoding variant) => new DataframeAnalysisFeatureProcessor("multi_encoding", variant);
-		public static DataframeAnalysisFeatureProcessor NGramEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorNGramEncoding variant) => new DataframeAnalysisFeatureProcessor("n_gram_encoding", variant);
-		public static DataframeAnalysisFeatureProcessor OneHotEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorOneHotEncoding variant) => new DataframeAnalysisFeatureProcessor("one_hot_encoding", variant);
-		public static DataframeAnalysisFeatureProcessor TargetMeanEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorTargetMeanEncoding variant) => new DataframeAnalysisFeatureProcessor("target_mean_encoding", variant);
+		public static DataframeAnalysisFeatureProcessor FrequencyEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorFrequencyEncoding dataframeAnalysisFeatureProcessorFrequencyEncoding) => new DataframeAnalysisFeatureProcessor("frequency_encoding", dataframeAnalysisFeatureProcessorFrequencyEncoding);
+		public static DataframeAnalysisFeatureProcessor MultiEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorMultiEncoding dataframeAnalysisFeatureProcessorMultiEncoding) => new DataframeAnalysisFeatureProcessor("multi_encoding", dataframeAnalysisFeatureProcessorMultiEncoding);
+		public static DataframeAnalysisFeatureProcessor NGramEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorNGramEncoding dataframeAnalysisFeatureProcessorNGramEncoding) => new DataframeAnalysisFeatureProcessor("n_gram_encoding", dataframeAnalysisFeatureProcessorNGramEncoding);
+		public static DataframeAnalysisFeatureProcessor OneHotEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorOneHotEncoding dataframeAnalysisFeatureProcessorOneHotEncoding) => new DataframeAnalysisFeatureProcessor("one_hot_encoding", dataframeAnalysisFeatureProcessorOneHotEncoding);
+		public static DataframeAnalysisFeatureProcessor TargetMeanEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorTargetMeanEncoding dataframeAnalysisFeatureProcessorTargetMeanEncoding) => new DataframeAnalysisFeatureProcessor("target_mean_encoding", dataframeAnalysisFeatureProcessorTargetMeanEncoding);
 	}
 
 	internal sealed class DataframeAnalysisFeatureProcessorConverter : JsonConverter<DataframeAnalysisFeatureProcessor>

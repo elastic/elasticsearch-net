@@ -47,10 +47,10 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal string VariantName { get; }
 
-		public static SortOptions Doc(Elastic.Clients.Elasticsearch.ScoreSort variant) => new SortOptions("_doc", variant);
-		public static SortOptions GeoDistance(Elastic.Clients.Elasticsearch.GeoDistanceSort variant) => new SortOptions("_geo_distance", variant);
-		public static SortOptions Score(Elastic.Clients.Elasticsearch.ScoreSort variant) => new SortOptions("_score", variant);
-		public static SortOptions Script(Elastic.Clients.Elasticsearch.ScriptSort variant) => new SortOptions("_script", variant);
+		public static SortOptions Doc(Elastic.Clients.Elasticsearch.ScoreSort scoreSort) => new SortOptions("_doc", scoreSort);
+		public static SortOptions GeoDistance(Elastic.Clients.Elasticsearch.GeoDistanceSort geoDistanceSort) => new SortOptions("_geo_distance", geoDistanceSort);
+		public static SortOptions Score(Elastic.Clients.Elasticsearch.ScoreSort scoreSort) => new SortOptions("_score", scoreSort);
+		public static SortOptions Script(Elastic.Clients.Elasticsearch.ScriptSort scriptSort) => new SortOptions("_script", scriptSort);
 	}
 
 	internal sealed class SortOptionsConverter : JsonConverter<SortOptions>
