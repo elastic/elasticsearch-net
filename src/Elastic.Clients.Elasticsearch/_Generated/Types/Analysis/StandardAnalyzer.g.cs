@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
+		public IEnumerable<string>? Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		private int? MaxTokenLengthValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
+		private IEnumerable<string>? StopwordsValue { get; set; }
 
 		public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength)
 		{
@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			return Self;
 		}
 
-		public StandardAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
+		public StandardAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
 		{
 			StopwordsValue = stopwords;
 			return Self;

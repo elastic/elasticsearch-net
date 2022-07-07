@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
+		public IEnumerable<string>? Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		private Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage LanguageValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
+		private IEnumerable<string>? StopwordsValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			return Self;
 		}
 
-		public SnowballAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
+		public SnowballAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
 		{
 			StopwordsValue = stopwords;
 			return Self;

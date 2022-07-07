@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("sort"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Sort?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Sort = value;
@@ -358,7 +358,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stored_fields")]
@@ -410,7 +410,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private int? SizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -532,7 +532,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TopHitsAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		public TopHitsAggregationDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 		{
 			SortValue = sort;
 			return Self;
@@ -719,7 +719,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private int? SizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -853,7 +853,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TopHitsAggregationDescriptor Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		public TopHitsAggregationDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 		{
 			SortValue = sort;
 			return Self;

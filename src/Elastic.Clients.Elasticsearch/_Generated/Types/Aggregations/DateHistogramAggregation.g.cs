@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("order"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Order = value;
@@ -319,7 +319,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
-		public Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? Order { get; set; }
+		public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("params")]
@@ -369,7 +369,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? OrderValue { get; set; }
+		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 		private Dictionary<string, object>? ParamsValue { get; set; }
 
@@ -477,7 +477,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public DateHistogramAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? order)
+		public DateHistogramAggregationDescriptor<TDocument> Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 		{
 			OrderValue = order;
 			return Self;
@@ -638,7 +638,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? OrderValue { get; set; }
+		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 		private Dictionary<string, object>? ParamsValue { get; set; }
 
@@ -752,7 +752,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public DateHistogramAggregationDescriptor Order(Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? order)
+		public DateHistogramAggregationDescriptor Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 		{
 			OrderValue = order;
 			return Self;

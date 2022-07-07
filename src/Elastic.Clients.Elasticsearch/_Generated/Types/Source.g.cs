@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 	}
 
 	public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptorBase<SourceDescriptor<TDocument>>
@@ -92,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private int? SizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -196,7 +196,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SourceDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		public SourceDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 		{
 			SortValue = sort;
 			return Self;
@@ -316,7 +316,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private int? SizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -426,7 +426,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SourceDescriptor Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		public SourceDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 		{
 			SortValue = sort;
 			return Self;

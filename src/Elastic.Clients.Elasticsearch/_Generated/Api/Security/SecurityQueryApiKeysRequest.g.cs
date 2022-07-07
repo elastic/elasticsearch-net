@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		private int? SizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		public SecurityQueryApiKeysRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return Self;
 		}
 
-		public SecurityQueryApiKeysRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		public SecurityQueryApiKeysRequestDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 		{
 			SortValue = sort;
 			return Self;
@@ -196,7 +196,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		private int? SizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		public SecurityQueryApiKeysRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -240,7 +240,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return Self;
 		}
 
-		public SecurityQueryApiKeysRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		public SecurityQueryApiKeysRequestDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 		{
 			SortValue = sort;
 			return Self;

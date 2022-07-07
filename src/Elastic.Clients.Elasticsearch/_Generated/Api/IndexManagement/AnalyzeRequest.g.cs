@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("text")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.TextToAnalyze? Text { get; set; }
+		public IEnumerable<string>? Text { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("tokenizer")]
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private string? NormalizerValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.TextToAnalyze? TextValue { get; set; }
+		private IEnumerable<string>? TextValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Analysis.Tokenizer? TokenizerValue { get; set; }
 
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public AnalyzeRequestDescriptor<TDocument> Text(Elastic.Clients.Elasticsearch.IndexManagement.TextToAnalyze? text)
+		public AnalyzeRequestDescriptor<TDocument> Text(IEnumerable<string>? text)
 		{
 			TextValue = text;
 			return Self;
@@ -264,7 +264,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private string? NormalizerValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.TextToAnalyze? TextValue { get; set; }
+		private IEnumerable<string>? TextValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Analysis.Tokenizer? TokenizerValue { get; set; }
 
@@ -322,7 +322,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public AnalyzeRequestDescriptor Text(Elastic.Clients.Elasticsearch.IndexManagement.TextToAnalyze? text)
+		public AnalyzeRequestDescriptor Text(IEnumerable<string>? text)
 		{
 			TextValue = text;
 			return Self;

@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("exclude"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsExclude?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Exclude = value;
@@ -380,7 +380,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("exclude")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
+		public IEnumerable<string>? Exclude { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("execution_hint")]
@@ -462,7 +462,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
+		private IEnumerable<string>? ExcludeValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHintValue { get; set; }
 
@@ -556,7 +556,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
+		public TermsAggregationDescriptor<TDocument> Exclude(IEnumerable<string>? exclude)
 		{
 			ExcludeValue = exclude;
 			return Self;
@@ -807,7 +807,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
+		private IEnumerable<string>? ExcludeValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHintValue { get; set; }
 
@@ -901,7 +901,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TermsAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
+		public TermsAggregationDescriptor Exclude(IEnumerable<string>? exclude)
 		{
 			ExcludeValue = exclude;
 			return Self;

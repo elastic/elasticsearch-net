@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stats")]
@@ -228,7 +228,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private int? SizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		private IEnumerable<string>? StatsValue { get; set; }
 
@@ -550,7 +550,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public MultisearchBodyDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		public MultisearchBodyDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 		{
 			SortValue = sort;
 			return Self;
@@ -1017,7 +1017,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private int? SizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Sort? SortValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		private IEnumerable<string>? StatsValue { get; set; }
 
@@ -1339,7 +1339,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public MultisearchBodyDescriptor Sort(Elastic.Clients.Elasticsearch.Sort? sort)
+		public MultisearchBodyDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 		{
 			SortValue = sort;
 			return Self;

@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("expand_wildcards")]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_throttled")]
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private bool? AllowNoIndicesValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcardsValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcardsValue { get; set; }
 
 		private bool? IgnoreThrottledValue { get; set; }
 
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public IndicesOptionsDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards)
+		public IndicesOptionsDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards)
 		{
 			ExpandWildcardsValue = expandWildcards;
 			return Self;

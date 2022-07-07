@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("order"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Order = value;
@@ -264,7 +264,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
-		public Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? Order { get; set; }
+		public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
@@ -304,7 +304,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private double? OffsetValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? OrderValue { get; set; }
+		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 		public HistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
@@ -402,7 +402,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public HistogramAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? order)
+		public HistogramAggregationDescriptor<TDocument> Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 		{
 			OrderValue = order;
 			return Self;
@@ -531,7 +531,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private double? OffsetValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? OrderValue { get; set; }
+		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 		public HistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
@@ -635,7 +635,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public HistogramAggregationDescriptor Order(Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? order)
+		public HistogramAggregationDescriptor Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 		{
 			OrderValue = order;
 			return Self;

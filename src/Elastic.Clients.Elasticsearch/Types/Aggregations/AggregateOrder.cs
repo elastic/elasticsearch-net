@@ -2,12 +2,14 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections.Generic;
+
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public partial class AggregateOrder
+public static class AggregateOrder
 {
-	public static AggregateOrder KeyDescending => new() { new System.Collections.Generic.KeyValuePair<Field, SortOrder>(Field.KeyField, SortOrder.Desc) };
-	public static AggregateOrder KeyAscending => new() { new System.Collections.Generic.KeyValuePair<Field, SortOrder>(Field.KeyField, SortOrder.Asc) };
-	public static AggregateOrder CountDescending => new() { new System.Collections.Generic.KeyValuePair<Field, SortOrder>(Field.CountField, SortOrder.Desc) };
-	public static AggregateOrder CountAscending => new() { new System.Collections.Generic.KeyValuePair<Field, SortOrder>(Field.CountField, SortOrder.Asc) };
+	public static IEnumerable<KeyValuePair<Field, SortOrder>> KeyDescending => new[] { new KeyValuePair<Field, SortOrder>(Field.KeyField, SortOrder.Desc) };
+	public static IEnumerable<KeyValuePair<Field, SortOrder>> KeyAscending => new[] { new KeyValuePair<Field, SortOrder>(Field.KeyField, SortOrder.Asc) };
+	public static IEnumerable<KeyValuePair<Field, SortOrder>> CountDescending => new[] { new KeyValuePair<Field, SortOrder>(Field.CountField, SortOrder.Desc) };
+	public static IEnumerable<KeyValuePair<Field, SortOrder>> CountAscending => new[] { new KeyValuePair<Field, SortOrder>(Field.CountField, SortOrder.Asc) };
 }
