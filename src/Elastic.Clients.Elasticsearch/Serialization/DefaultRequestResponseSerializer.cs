@@ -6,7 +6,6 @@ using System;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Text.Json.Serialization.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch.Aggregations;
@@ -26,7 +25,7 @@ internal class CustomizedNamingPolicy : JsonNamingPolicy
 /// <summary>
 /// The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.
 /// </summary>
-internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
+internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 {
 	private readonly IElasticsearchClientSettings _settings;
 

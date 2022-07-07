@@ -28,9 +28,46 @@ internal sealed class FieldConverter : JsonConverter<Field>
 
 			case JsonTokenType.String:
 				return new Field(reader.GetString());
+
+			case JsonTokenType.StartObject:
+				return ReadObjectField(ref reader);
 		}
 
 		return null;
+	}
+
+	private static Field ReadObjectField(ref Utf8JsonReader reader)
+	{
+		var field = string.Empty;
+		var format = string.Empty;
+
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
+			{
+				var propertyName = reader.GetString();
+				reader.Read();
+
+				switch (propertyName)
+				{
+					case "field":
+						field = reader.GetString();
+						break;
+					case "format":
+						format = reader.GetString();
+						break;
+					default:
+						throw new JsonException("Unexpected property while reading `Field`.");
+				}
+			}
+		}
+
+		if (!string.IsNullOrEmpty(field) && !string.IsNullOrEmpty(format))
+		{
+			return new Field(field, format);
+		}
+
+		throw new JsonException("Unable to read `Field` from JSON.");
 	}
 
 	public override void Write(Utf8JsonWriter writer, Field value, JsonSerializerOptions options)

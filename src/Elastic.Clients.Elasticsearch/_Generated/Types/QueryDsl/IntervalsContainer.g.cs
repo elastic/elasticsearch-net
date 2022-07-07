@@ -59,47 +59,58 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		public override IntervalsContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected property name token.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "all_of")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(ref reader, options);
+				reader.Read();
 				return new IntervalsContainer(propertyName, variant);
 			}
 
 			if (propertyName == "any_of")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(ref reader, options);
+				reader.Read();
 				return new IntervalsContainer(propertyName, variant);
 			}
 
 			if (propertyName == "fuzzy")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(ref reader, options);
+				reader.Read();
 				return new IntervalsContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(ref reader, options);
+				reader.Read();
 				return new IntervalsContainer(propertyName, variant);
 			}
 
 			if (propertyName == "prefix")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(ref reader, options);
+				reader.Read();
 				return new IntervalsContainer(propertyName, variant);
 			}
 
 			if (propertyName == "wildcard")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(ref reader, options);
+				reader.Read();
 				return new IntervalsContainer(propertyName, variant);
 			}
 

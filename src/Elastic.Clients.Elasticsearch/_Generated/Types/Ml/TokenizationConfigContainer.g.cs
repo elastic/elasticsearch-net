@@ -56,29 +56,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		public override TokenizationConfigContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected property name token.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "bert")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig?>(ref reader, options);
+				reader.Read();
 				return new TokenizationConfigContainer(propertyName, variant);
 			}
 
 			if (propertyName == "mpnet")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig?>(ref reader, options);
+				reader.Read();
 				return new TokenizationConfigContainer(propertyName, variant);
 			}
 
 			if (propertyName == "roberta")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig?>(ref reader, options);
+				reader.Read();
 				return new TokenizationConfigContainer(propertyName, variant);
 			}
 

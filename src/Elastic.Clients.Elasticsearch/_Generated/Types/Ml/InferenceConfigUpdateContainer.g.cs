@@ -62,65 +62,79 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		public override InferenceConfigUpdateContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected property name token.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions?>(ref reader, options);
+				reader.Read();
 				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "fill_mask")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.FillMaskInferenceUpdateOptions?>(ref reader, options);
+				reader.Read();
 				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "ner")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NerInferenceUpdateOptions?>(ref reader, options);
+				reader.Read();
 				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "pass_through")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.PassThroughInferenceUpdateOptions?>(ref reader, options);
+				reader.Read();
 				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "question_answering")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.QuestionAnsweringInferenceUpdateOptions?>(ref reader, options);
+				reader.Read();
 				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "regression")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions?>(ref reader, options);
+				reader.Read();
 				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "text_classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions?>(ref reader, options);
+				reader.Read();
 				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "text_embedding")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions?>(ref reader, options);
+				reader.Read();
 				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 
 			if (propertyName == "zero_shot_classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions?>(ref reader, options);
+				reader.Read();
 				return new InferenceConfigUpdateContainer(propertyName, variant);
 			}
 

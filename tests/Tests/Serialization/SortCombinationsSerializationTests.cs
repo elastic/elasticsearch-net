@@ -42,4 +42,16 @@ public class SortCombinationsSerializationTests : SerializerTestBase
 
 		fieldSort.Order.Should().Be(SortOrder.Asc);
 	}
+
+	[U]
+	public void DeserializesFieldString()
+	{
+		var json = @"""a-field""";
+		var result = DeserializeJsonString<SortCombinations>(json);
+
+		var field = result.Item1;
+
+		field.Should().NotBeNull();
+		field.Name.Should().Be("a-field");
+	}
 }

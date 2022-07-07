@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -43,49 +44,77 @@ namespace Elastic.Clients.Elasticsearch
 			Variant = variant;
 		}
 
+		public SortOptions(Elastic.Clients.Elasticsearch.Field field, ISortOptionsVariant variant)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			AdditionalPropertyName = field;
+			Variant = variant;
+		}
+
 		internal ISortOptionsVariant Variant { get; }
 
 		internal string VariantName { get; }
+
+		internal Elastic.Clients.Elasticsearch.Field? AdditionalPropertyName { get; }
 
 		public static SortOptions Doc(Elastic.Clients.Elasticsearch.ScoreSort scoreSort) => new SortOptions("_doc", scoreSort);
 		public static SortOptions GeoDistance(Elastic.Clients.Elasticsearch.GeoDistanceSort geoDistanceSort) => new SortOptions("_geo_distance", geoDistanceSort);
 		public static SortOptions Score(Elastic.Clients.Elasticsearch.ScoreSort scoreSort) => new SortOptions("_score", scoreSort);
 		public static SortOptions Script(Elastic.Clients.Elasticsearch.ScriptSort scriptSort) => new SortOptions("_script", scriptSort);
+		public static SortOptions Field(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.FieldSort fieldSort) => new SortOptions(field, fieldSort);
 	}
 
 	internal sealed class SortOptionsConverter : JsonConverter<SortOptions>
 	{
 		public override SortOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected property name token.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "_doc")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScoreSort?>(ref reader, options);
+				reader.Read();
 				return new SortOptions(propertyName, variant);
 			}
 
 			if (propertyName == "_geo_distance")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceSort?>(ref reader, options);
+				reader.Read();
 				return new SortOptions(propertyName, variant);
 			}
 
 			if (propertyName == "_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScoreSort?>(ref reader, options);
+				reader.Read();
 				return new SortOptions(propertyName, variant);
 			}
 
 			if (propertyName == "_script")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptSort?>(ref reader, options);
+				reader.Read();
+				return new SortOptions(propertyName, variant);
+			}
+
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.FieldSort>(ref reader, options);
+				reader.Read();
 				return new SortOptions(propertyName, variant);
 			}
 
@@ -95,7 +124,36 @@ namespace Elastic.Clients.Elasticsearch
 		public override void Write(Utf8JsonWriter writer, SortOptions value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.VariantName);
+			if (value.AdditionalPropertyName is IUrlParameter urlParameter)
+			{
+				var extraData = options.GetConverter(typeof(ExtraSerializationData)) as ExtraSerializationData;
+				var propertyName = urlParameter.GetString(extraData.Settings);
+				writer.WritePropertyName(propertyName);
+			}
+			else
+			{
+				writer.WritePropertyName(value.VariantName);
+			}
+
+			switch (value.VariantName)
+			{
+				case "_doc":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.ScoreSort>(writer, (Elastic.Clients.Elasticsearch.ScoreSort)value.Variant, options);
+					break;
+				case "_geo_distance":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.GeoDistanceSort>(writer, (Elastic.Clients.Elasticsearch.GeoDistanceSort)value.Variant, options);
+					break;
+				case "_score":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.ScoreSort>(writer, (Elastic.Clients.Elasticsearch.ScoreSort)value.Variant, options);
+					break;
+				case "_script":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.ScriptSort>(writer, (Elastic.Clients.Elasticsearch.ScriptSort)value.Variant, options);
+					break;
+				default:
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.FieldSort>(writer, (Elastic.Clients.Elasticsearch.FieldSort)value.Variant, options);
+					break;
+			}
+
 			writer.WriteEndObject();
 		}
 	}

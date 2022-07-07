@@ -56,29 +56,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		public override DataframeEvaluationContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected property name token.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationClassification?>(ref reader, options);
+				reader.Read();
 				return new DataframeEvaluationContainer(propertyName, variant);
 			}
 
 			if (propertyName == "outlier_detection")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationOutlierDetection?>(ref reader, options);
+				reader.Read();
 				return new DataframeEvaluationContainer(propertyName, variant);
 			}
 
 			if (propertyName == "regression")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegression?>(ref reader, options);
+				reader.Read();
 				return new DataframeEvaluationContainer(propertyName, variant);
 			}
 
