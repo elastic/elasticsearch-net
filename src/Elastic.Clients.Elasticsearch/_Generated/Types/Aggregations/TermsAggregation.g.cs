@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("collect_mode"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode?>(ref reader, options);
 						if (value is not null)
 						{
@@ -52,7 +53,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("exclude"))
 					{
-						var value = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
+						reader.Read();
+						var value = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Exclude = value;
@@ -63,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("execution_hint"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint?>(ref reader, options);
 						if (value is not null)
 						{
@@ -74,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("field"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						if (value is not null)
 						{
@@ -85,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("format"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -96,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("include"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?>(ref reader, options);
 						if (value is not null)
 						{
@@ -107,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("min_doc_count"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -116,19 +123,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("missing"))
-					{
-						var value = JsonSerializer.Deserialize<object?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("missing_bucket"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
 						if (value is not null)
 						{
@@ -140,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("missing_order"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder?>(ref reader, options);
 						if (value is not null)
 						{
@@ -151,7 +149,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("order"))
 					{
-						var value = JsonSerializer.Deserialize<IEnumerable<TermsOrder>?>(ref reader, options);
+						reader.Read();
+						var value = SingleOrManySerializationHelper.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Order = value;
@@ -162,6 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
 						if (value is not null)
 						{
@@ -173,6 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("shard_size"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -184,6 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("show_term_doc_count_error"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
 						if (value is not null)
 						{
@@ -195,6 +197,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("size"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -206,6 +209,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("value_type"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -263,7 +267,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (value.Exclude is not null)
 			{
 				writer.WritePropertyName("exclude");
-				JsonSerializer.Serialize(writer, value.Exclude, options);
+				SingleOrManySerializationHelper.Serialize<string>(value.Exclude, writer, options);
 			}
 
 			if (value.ExecutionHint is not null)
@@ -296,12 +300,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(value.MinDocCount.Value);
 			}
 
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
-			}
-
 			if (value.MissingBucket.HasValue)
 			{
 				writer.WritePropertyName("missing_bucket");
@@ -317,7 +315,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (value.Order is not null)
 			{
 				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, value.Order, options);
+				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(value.Order, writer, options);
 			}
 
 			if (value.Script is not null)
@@ -380,6 +378,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("exclude")]
+		[JsonConverter(typeof(TermsExcludeConverter))]
 		public IEnumerable<string>? Exclude { get; set; }
 
 		[JsonInclude]
@@ -403,10 +402,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? MinDocCount { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public object? Missing { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("missing_bucket")]
 		public bool? MissingBucket { get; set; }
 
@@ -416,7 +411,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
-		public IEnumerable<TermsOrder>? Order { get; set; }
+		[JsonConverter(typeof(AggregateOrderConverter))]
+		public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
@@ -452,8 +448,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
-		private IEnumerable<TermsOrder>? OrderValue { get; set; }
-
 		private ScriptBase? ScriptValue { get; set; }
 
 		private ScriptDescriptor ScriptDescriptor { get; set; }
@@ -476,11 +470,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private int? MinDocCountValue { get; set; }
 
-		private object? MissingValue { get; set; }
-
 		private bool? MissingBucketValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
+
+		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 		private int? ShardSizeValue { get; set; }
 
@@ -511,18 +505,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			AggregationsValue = null;
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
-			return Self;
-		}
-
-		public TermsAggregationDescriptor<TDocument> Order(IEnumerable<TermsOrder>? order)
-		{
-			OrderValue = order;
-			return Self;
-		}
-
-		public TermsAggregationDescriptor<TDocument> Order(Func<Elastic.Clients.Elasticsearch.TermsOrderDescriptor, IPromise<IList<TermsOrder>>> configure)
-		{
-			OrderValue = configure?.Invoke(new Elastic.Clients.Elasticsearch.TermsOrderDescriptor())?.Value;
 			return Self;
 		}
 
@@ -604,12 +586,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TermsAggregationDescriptor<TDocument> Missing(object? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
 		public TermsAggregationDescriptor<TDocument> MissingBucket(bool? missingBucket = true)
 		{
 			MissingBucketValue = missingBucket;
@@ -619,6 +595,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TermsAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder)
 		{
 			MissingOrderValue = missingOrder;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+		{
+			OrderValue = order;
 			return Self;
 		}
 
@@ -651,12 +633,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("terms");
 			writer.WriteStartObject();
-			if (OrderValue is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, OrderValue, options);
-			}
-
 			if (ScriptDescriptor is not null)
 			{
 				writer.WritePropertyName("script");
@@ -682,7 +658,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (ExcludeValue is not null)
 			{
 				writer.WritePropertyName("exclude");
-				JsonSerializer.Serialize(writer, ExcludeValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(ExcludeValue, writer, options);
 			}
 
 			if (ExecutionHintValue is not null)
@@ -715,12 +691,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(MinDocCountValue.Value);
 			}
 
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
 			if (MissingBucketValue.HasValue)
 			{
 				writer.WritePropertyName("missing_bucket");
@@ -731,6 +701,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("missing_order");
 				JsonSerializer.Serialize(writer, MissingOrderValue, options);
+			}
+
+			if (OrderValue is not null)
+			{
+				writer.WritePropertyName("order");
+				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
 			}
 
 			if (ShardSizeValue.HasValue)
@@ -797,8 +773,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
 
-		private IEnumerable<TermsOrder>? OrderValue { get; set; }
-
 		private ScriptBase? ScriptValue { get; set; }
 
 		private ScriptDescriptor ScriptDescriptor { get; set; }
@@ -821,11 +795,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private int? MinDocCountValue { get; set; }
 
-		private object? MissingValue { get; set; }
-
 		private bool? MissingBucketValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
+
+		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 		private int? ShardSizeValue { get; set; }
 
@@ -856,18 +830,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			AggregationsValue = null;
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
-			return Self;
-		}
-
-		public TermsAggregationDescriptor Order(IEnumerable<TermsOrder>? order)
-		{
-			OrderValue = order;
-			return Self;
-		}
-
-		public TermsAggregationDescriptor Order(Func<Elastic.Clients.Elasticsearch.TermsOrderDescriptor, IPromise<IList<TermsOrder>>> configure)
-		{
-			OrderValue = configure?.Invoke(new Elastic.Clients.Elasticsearch.TermsOrderDescriptor())?.Value;
 			return Self;
 		}
 
@@ -955,12 +917,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TermsAggregationDescriptor Missing(object? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
 		public TermsAggregationDescriptor MissingBucket(bool? missingBucket = true)
 		{
 			MissingBucketValue = missingBucket;
@@ -970,6 +926,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TermsAggregationDescriptor MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder)
 		{
 			MissingOrderValue = missingOrder;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+		{
+			OrderValue = order;
 			return Self;
 		}
 
@@ -1002,12 +964,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("terms");
 			writer.WriteStartObject();
-			if (OrderValue is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, OrderValue, options);
-			}
-
 			if (ScriptDescriptor is not null)
 			{
 				writer.WritePropertyName("script");
@@ -1033,7 +989,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (ExcludeValue is not null)
 			{
 				writer.WritePropertyName("exclude");
-				JsonSerializer.Serialize(writer, ExcludeValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(ExcludeValue, writer, options);
 			}
 
 			if (ExecutionHintValue is not null)
@@ -1066,12 +1022,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(MinDocCountValue.Value);
 			}
 
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
 			if (MissingBucketValue.HasValue)
 			{
 				writer.WritePropertyName("missing_bucket");
@@ -1082,6 +1032,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("missing_order");
 				JsonSerializer.Serialize(writer, MissingOrderValue, options);
+			}
+
+			if (OrderValue is not null)
+			{
+				writer.WritePropertyName("order");
+				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
 			}
 
 			if (ShardSizeValue.HasValue)

@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class Buckets<TBucket> : Union<Dictionary<string, TBucket>?, IReadOnlyCollection<TBucket>?>
+	public partial class Buckets<TBucket> : Union<Dictionary<string, TBucket>, IReadOnlyCollection<TBucket>>
 	{
-		public Buckets(Dictionary<string, TBucket>? item) : base(item)
+		public Buckets(Dictionary<string, TBucket> buckets) : base(buckets)
 		{
 		}
 
-		public Buckets(IReadOnlyCollection<TBucket>? item) : base(item)
+		public Buckets(IReadOnlyCollection<TBucket> buckets) : base(buckets)
 		{
 		}
 	}

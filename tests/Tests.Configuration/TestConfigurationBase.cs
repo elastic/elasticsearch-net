@@ -68,7 +68,7 @@ namespace Tests.Configuration
 
 	public class RandomConfiguration
 	{
-		/// <summary> Run tests with a custom source serializer rather than the build in one </summary>
+		/// <summary> Run tests with a custom source serializer rather than the built in one </summary>
 		public bool SourceSerializer { get; set; }
 
 		/// <summary> Randomly enable compression on the http requests</summary>

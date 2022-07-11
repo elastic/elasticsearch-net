@@ -88,6 +88,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("stop_words")]
+		[JsonConverter(typeof(StopWordsConverter))]
 		public IEnumerable<string>? StopWords { get; set; }
 
 		[JsonInclude]
@@ -382,7 +383,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (StopWordsValue is not null)
 			{
 				writer.WritePropertyName("stop_words");
-				JsonSerializer.Serialize(writer, StopWordsValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(StopWordsValue, writer, options);
 			}
 
 			if (UnlikeValue is not null)
@@ -686,7 +687,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (StopWordsValue is not null)
 			{
 				writer.WritePropertyName("stop_words");
-				JsonSerializer.Serialize(writer, StopWordsValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(StopWordsValue, writer, options);
 			}
 
 			if (UnlikeValue is not null)

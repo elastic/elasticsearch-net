@@ -72,6 +72,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("text")]
+		[JsonConverter(typeof(TextToAnalyzeConverter))]
 		public IEnumerable<string>? Text { get; set; }
 
 		[JsonInclude]
@@ -221,7 +222,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			if (TextValue is not null)
 			{
 				writer.WritePropertyName("text");
-				JsonSerializer.Serialize(writer, TextValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(TextValue, writer, options);
 			}
 
 			if (TokenizerValue is not null)
@@ -382,7 +383,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			if (TextValue is not null)
 			{
 				writer.WritePropertyName("text");
-				JsonSerializer.Serialize(writer, TextValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(TextValue, writer, options);
 			}
 
 			if (TokenizerValue is not null)

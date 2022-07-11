@@ -104,373 +104,317 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		public override QueryContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
+			var readerCopy = reader;
+			readerCopy.Read();
+			if (readerCopy.TokenType != JsonTokenType.PropertyName)
 			{
-				throw new JsonException("Expected start token.");
+				throw new JsonException();
 			}
 
-			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected property name token.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
+			var propertyName = readerCopy.GetString();
 			if (propertyName == "bool")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "boosting")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "combined_fields")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "constant_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "dis_max")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "exists")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "field_masking_span")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "function_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "fuzzy")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "geo_bounding_box")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "geo_distance")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "geo_polygon")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "geo_shape")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "has_child")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "has_parent")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "ids")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "intervals")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "knn")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.KnnQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match_all")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match_bool_prefix")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match_none")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match_phrase")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match_phrase_prefix")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "more_like_this")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "multi_match")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "nested")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "parent_id")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "percolate")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "pinned")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "prefix")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "query_string")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "rank_feature")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "regexp")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "script")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "script_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "shape")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "simple_query_string")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_containing")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_first")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_multi")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_near")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_not")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_or")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_term")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_within")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "term")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "terms")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "terms_set")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "wildcard")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "wrapper")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery?>(ref reader, options);
-				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 

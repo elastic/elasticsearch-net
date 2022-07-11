@@ -28,6 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
+		[JsonConverter(typeof(StopWordsConverter))]
 		public IEnumerable<string>? Stopwords { get; set; }
 
 		[JsonInclude]
@@ -79,7 +80,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			if (StopwordsValue is not null)
 			{
 				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, StopwordsValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
 			}
 
 			if (!string.IsNullOrEmpty(StopwordsPathValue))

@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class Tokenizer : Union<string?, Elastic.Clients.Elasticsearch.Analysis.TokenizerDefinitions?>
+	public partial class Tokenizer : Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenizerDefinitions>
 	{
-		public Tokenizer(string? item) : base(item)
+		public Tokenizer(string tokenizer) : base(tokenizer)
 		{
 		}
 
-		public Tokenizer(Elastic.Clients.Elasticsearch.Analysis.TokenizerDefinitions? item) : base(item)
+		public Tokenizer(Elastic.Clients.Elasticsearch.Analysis.TokenizerDefinitions tokenizerDefinitions) : base(tokenizerDefinitions)
 		{
 		}
 	}

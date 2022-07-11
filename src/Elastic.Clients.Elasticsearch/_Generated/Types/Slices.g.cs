@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Slices : Union<int?, Elastic.Clients.Elasticsearch.SlicesCalculation?>
+	public partial class Slices : Union<int, Elastic.Clients.Elasticsearch.SlicesCalculation>
 	{
-		public Slices(int? item) : base(item)
+		public Slices(int slices) : base(slices)
 		{
 		}
 
-		public Slices(Elastic.Clients.Elasticsearch.SlicesCalculation? item) : base(item)
+		public Slices(Elastic.Clients.Elasticsearch.SlicesCalculation slicesCalculation) : base(slicesCalculation)
 		{
 		}
 	}

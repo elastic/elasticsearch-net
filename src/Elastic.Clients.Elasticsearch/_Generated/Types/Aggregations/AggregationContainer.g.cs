@@ -35,19 +35,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		public override AggregationContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
+			var readerCopy = reader;
+			readerCopy.Read();
+			if (readerCopy.TokenType != JsonTokenType.PropertyName)
 			{
-				throw new JsonException("Expected start token.");
+				throw new JsonException();
 			}
 
-			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected property name token.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
+			var propertyName = readerCopy.GetString();
 			if (propertyName == "adjacency_matrix")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation?>("adjacency_matrix", ref reader, options);

@@ -56,6 +56,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
+		[JsonConverter(typeof(SortConverter))]
 		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 	}
 
@@ -276,7 +277,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (SortValue is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			writer.WriteEndObject();
@@ -506,7 +507,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (SortValue is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			writer.WriteEndObject();

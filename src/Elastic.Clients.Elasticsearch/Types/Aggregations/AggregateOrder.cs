@@ -8,8 +8,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class AggregateOrder
 {
-	public static IEnumerable<KeyValuePair<Field, SortOrder>> KeyDescending => new[] { new KeyValuePair<Field, SortOrder>(Field.KeyField, SortOrder.Desc) };
-	public static IEnumerable<KeyValuePair<Field, SortOrder>> KeyAscending => new[] { new KeyValuePair<Field, SortOrder>(Field.KeyField, SortOrder.Asc) };
-	public static IEnumerable<KeyValuePair<Field, SortOrder>> CountDescending => new[] { new KeyValuePair<Field, SortOrder>(Field.CountField, SortOrder.Desc) };
-	public static IEnumerable<KeyValuePair<Field, SortOrder>> CountAscending => new[] { new KeyValuePair<Field, SortOrder>(Field.CountField, SortOrder.Asc) };
+	public static KeyValuePair<Field, SortOrder> KeyDescending => new(Field.KeyField, SortOrder.Desc);
+	public static KeyValuePair<Field, SortOrder> KeyAscending => new(Field.KeyField, SortOrder.Asc);
+	public static KeyValuePair<Field, SortOrder> CountDescending => new(Field.CountField, SortOrder.Desc);
+	public static KeyValuePair<Field, SortOrder> CountAscending => new(Field.CountField, SortOrder.Asc);
 }

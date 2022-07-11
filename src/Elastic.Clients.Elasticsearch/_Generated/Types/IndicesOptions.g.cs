@@ -32,6 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("expand_wildcards")]
+		[JsonConverter(typeof(ExpandWildcardsConverter))]
 		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; set; }
 
 		[JsonInclude]
@@ -94,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (ExpandWildcardsValue is not null)
 			{
 				writer.WritePropertyName("expand_wildcards");
-				JsonSerializer.Serialize(writer, ExpandWildcardsValue, options);
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.ExpandWildcard>(ExpandWildcardsValue, writer, options);
 			}
 
 			if (IgnoreThrottledValue.HasValue)

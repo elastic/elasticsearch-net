@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class TokenFilter : Union<string?, Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions?>
+	public partial class TokenFilter : Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions>
 	{
-		public TokenFilter(string? item) : base(item)
+		public TokenFilter(string tokenFilter) : base(tokenFilter)
 		{
 		}
 
-		public TokenFilter(Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions? item) : base(item)
+		public TokenFilter(Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions tokenFilterDefinitions) : base(tokenFilterDefinitions)
 		{
 		}
 	}

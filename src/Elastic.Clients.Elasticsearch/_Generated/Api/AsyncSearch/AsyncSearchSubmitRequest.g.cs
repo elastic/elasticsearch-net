@@ -303,6 +303,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
+		[JsonConverter(typeof(SortConverter))]
 		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 
 		[JsonInclude]
@@ -1204,7 +1205,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			if (SortValue is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			if (StatsValue is not null)
@@ -2118,7 +2119,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			if (SortValue is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			if (StatsValue is not null)
