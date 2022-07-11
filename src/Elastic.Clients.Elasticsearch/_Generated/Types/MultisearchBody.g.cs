@@ -108,7 +108,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public SortCollection? Sort { get; set; }
+		[JsonConverter(typeof(SortConverter))]
+		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stats")]
@@ -198,12 +199,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<RescoreDescriptor<TDocument>>[] RescoreDescriptorActions { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor<TDocument> SortDescriptor { get; set; }
-
-		private Action<SortDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? AggregationsValue { get; set; }
@@ -233,6 +228,8 @@ namespace Elastic.Clients.Elasticsearch
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		private IEnumerable<string>? StatsValue { get; set; }
 
@@ -458,30 +455,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public MultisearchBodyDescriptor<TDocument> Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public MultisearchBodyDescriptor<TDocument> Sort(SortDescriptor<TDocument> descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public MultisearchBodyDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
-			return Self;
-		}
-
 		public MultisearchBodyDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
 		{
 			SourceValue = source;
@@ -575,6 +548,12 @@ namespace Elastic.Clients.Elasticsearch
 		public MultisearchBodyDescriptor<TDocument> Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public MultisearchBodyDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -798,22 +777,6 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, RescoreValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor<TDocument>(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -900,6 +863,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			if (StatsValue is not null)
@@ -1019,12 +988,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<RescoreDescriptor>[] RescoreDescriptorActions { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor SortDescriptor { get; set; }
-
-		private Action<SortDescriptor> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? AggregationsValue { get; set; }
@@ -1054,6 +1017,8 @@ namespace Elastic.Clients.Elasticsearch
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		private IEnumerable<string>? StatsValue { get; set; }
 
@@ -1279,30 +1244,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public MultisearchBodyDescriptor Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public MultisearchBodyDescriptor Sort(SortDescriptor descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public MultisearchBodyDescriptor Sort(Action<SortDescriptor> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
-			return Self;
-		}
-
 		public MultisearchBodyDescriptor Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
 		{
 			SourceValue = source;
@@ -1396,6 +1337,12 @@ namespace Elastic.Clients.Elasticsearch
 		public MultisearchBodyDescriptor Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public MultisearchBodyDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -1625,22 +1572,6 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, RescoreValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -1727,6 +1658,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			if (StatsValue is not null)

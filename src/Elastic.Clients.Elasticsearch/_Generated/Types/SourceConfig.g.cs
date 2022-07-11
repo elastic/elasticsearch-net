@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class SourceConfig : Union<bool?, Elastic.Clients.Elasticsearch.SourceFilter?>
+	public partial class SourceConfig : Union<bool, Elastic.Clients.Elasticsearch.SourceFilter>
 	{
-		public SourceConfig(bool? item) : base(item)
+		public SourceConfig(bool sourceConfig) : base(sourceConfig)
 		{
 		}
 
-		public SourceConfig(Elastic.Clients.Elasticsearch.SourceFilter? item) : base(item)
+		public SourceConfig(Elastic.Clients.Elasticsearch.SourceFilter sourceFilter) : base(sourceFilter)
 		{
 		}
 	}

@@ -15,34 +15,47 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch
 {
-	[SingleOrMany(typeof(string))]
-	public partial class StopWords : IList<string>
+	public partial class ScoreSort : ISortOptionsVariant
 	{
-		private readonly IList<string> _backingList = new List<string>();
-		public string this[int index] { get => _backingList[index]; set => _backingList[index] = value; }
+		[JsonInclude]
+		[JsonPropertyName("order")]
+		public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
+	}
 
-		public int Count => _backingList.Count;
-		public bool IsReadOnly => _backingList.IsReadOnly;
-		public void Add(string item) => _backingList.Add(item);
-		public void Clear() => _backingList.Clear();
-		public bool Contains(string item) => _backingList.Contains(item);
-		public void CopyTo(string[] array, int arrayIndex) => _backingList.CopyTo(array, arrayIndex);
-		public IEnumerator<string> GetEnumerator() => _backingList.GetEnumerator();
-		public int IndexOf(string item) => _backingList.IndexOf(item);
-		public void Insert(int index, string item) => _backingList.Insert(index, item);
-		public bool Remove(string item) => _backingList.Remove(item);
-		public void RemoveAt(int index) => _backingList.RemoveAt(index);
-		IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_backingList).GetEnumerator();
+	public sealed partial class ScoreSortDescriptor : SerializableDescriptorBase<ScoreSortDescriptor>
+	{
+		internal ScoreSortDescriptor(Action<ScoreSortDescriptor> configure) => configure.Invoke(this);
+		public ScoreSortDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
+
+		public ScoreSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+		{
+			OrderValue = order;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (OrderValue is not null)
+			{
+				writer.WritePropertyName("order");
+				JsonSerializer.Serialize(writer, OrderValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }
