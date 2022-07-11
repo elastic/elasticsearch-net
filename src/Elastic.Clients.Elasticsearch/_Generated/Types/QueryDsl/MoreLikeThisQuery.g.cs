@@ -88,7 +88,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("stop_words")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWords { get; set; }
+		[JsonConverter(typeof(StopWordsConverter))]
+		public IEnumerable<string>? StopWords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("unlike")]
@@ -144,7 +145,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWordsValue { get; set; }
+		private IEnumerable<string>? StopWordsValue { get; set; }
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
 
@@ -254,7 +255,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public MoreLikeThisQueryDescriptor<TDocument> StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords)
+		public MoreLikeThisQueryDescriptor<TDocument> StopWords(IEnumerable<string>? stopWords)
 		{
 			StopWordsValue = stopWords;
 			return Self;
@@ -382,7 +383,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (StopWordsValue is not null)
 			{
 				writer.WritePropertyName("stop_words");
-				JsonSerializer.Serialize(writer, StopWordsValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(StopWordsValue, writer, options);
 			}
 
 			if (UnlikeValue is not null)
@@ -448,7 +449,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWordsValue { get; set; }
+		private IEnumerable<string>? StopWordsValue { get; set; }
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
 
@@ -558,7 +559,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public MoreLikeThisQueryDescriptor StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords)
+		public MoreLikeThisQueryDescriptor StopWords(IEnumerable<string>? stopWords)
 		{
 			StopWordsValue = stopWords;
 			return Self;
@@ -686,7 +687,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (StopWordsValue is not null)
 			{
 				writer.WritePropertyName("stop_words");
-				JsonSerializer.Serialize(writer, StopWordsValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(StopWordsValue, writer, options);
 			}
 
 			if (UnlikeValue is not null)

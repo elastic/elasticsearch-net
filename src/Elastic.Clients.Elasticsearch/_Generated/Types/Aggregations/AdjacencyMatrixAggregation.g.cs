@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("filters"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?>(ref reader, options);
 						if (value is not null)
 						{

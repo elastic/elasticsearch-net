@@ -47,52 +47,62 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal string VariantName { get; }
 
-		public static DataframeAnalysisFeatureProcessor FrequencyEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorFrequencyEncoding variant) => new DataframeAnalysisFeatureProcessor("frequency_encoding", variant);
-		public static DataframeAnalysisFeatureProcessor MultiEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorMultiEncoding variant) => new DataframeAnalysisFeatureProcessor("multi_encoding", variant);
-		public static DataframeAnalysisFeatureProcessor NGramEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorNGramEncoding variant) => new DataframeAnalysisFeatureProcessor("n_gram_encoding", variant);
-		public static DataframeAnalysisFeatureProcessor OneHotEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorOneHotEncoding variant) => new DataframeAnalysisFeatureProcessor("one_hot_encoding", variant);
-		public static DataframeAnalysisFeatureProcessor TargetMeanEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorTargetMeanEncoding variant) => new DataframeAnalysisFeatureProcessor("target_mean_encoding", variant);
+		public static DataframeAnalysisFeatureProcessor FrequencyEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorFrequencyEncoding dataframeAnalysisFeatureProcessorFrequencyEncoding) => new DataframeAnalysisFeatureProcessor("frequency_encoding", dataframeAnalysisFeatureProcessorFrequencyEncoding);
+		public static DataframeAnalysisFeatureProcessor MultiEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorMultiEncoding dataframeAnalysisFeatureProcessorMultiEncoding) => new DataframeAnalysisFeatureProcessor("multi_encoding", dataframeAnalysisFeatureProcessorMultiEncoding);
+		public static DataframeAnalysisFeatureProcessor NGramEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorNGramEncoding dataframeAnalysisFeatureProcessorNGramEncoding) => new DataframeAnalysisFeatureProcessor("n_gram_encoding", dataframeAnalysisFeatureProcessorNGramEncoding);
+		public static DataframeAnalysisFeatureProcessor OneHotEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorOneHotEncoding dataframeAnalysisFeatureProcessorOneHotEncoding) => new DataframeAnalysisFeatureProcessor("one_hot_encoding", dataframeAnalysisFeatureProcessorOneHotEncoding);
+		public static DataframeAnalysisFeatureProcessor TargetMeanEncoding(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorTargetMeanEncoding dataframeAnalysisFeatureProcessorTargetMeanEncoding) => new DataframeAnalysisFeatureProcessor("target_mean_encoding", dataframeAnalysisFeatureProcessorTargetMeanEncoding);
 	}
 
 	internal sealed class DataframeAnalysisFeatureProcessorConverter : JsonConverter<DataframeAnalysisFeatureProcessor>
 	{
 		public override DataframeAnalysisFeatureProcessor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected property name token.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "frequency_encoding")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorFrequencyEncoding?>(ref reader, options);
+				reader.Read();
 				return new DataframeAnalysisFeatureProcessor(propertyName, variant);
 			}
 
 			if (propertyName == "multi_encoding")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorMultiEncoding?>(ref reader, options);
+				reader.Read();
 				return new DataframeAnalysisFeatureProcessor(propertyName, variant);
 			}
 
 			if (propertyName == "n_gram_encoding")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorNGramEncoding?>(ref reader, options);
+				reader.Read();
 				return new DataframeAnalysisFeatureProcessor(propertyName, variant);
 			}
 
 			if (propertyName == "one_hot_encoding")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorOneHotEncoding?>(ref reader, options);
+				reader.Read();
 				return new DataframeAnalysisFeatureProcessor(propertyName, variant);
 			}
 
 			if (propertyName == "target_mean_encoding")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorTargetMeanEncoding?>(ref reader, options);
+				reader.Read();
 				return new DataframeAnalysisFeatureProcessor(propertyName, variant);
 			}
 
