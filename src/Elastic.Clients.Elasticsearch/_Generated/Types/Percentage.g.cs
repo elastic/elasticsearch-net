@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Percentage : Union<string?, float?>
+	public partial class Percentage : Union<string, float>
 	{
-		public Percentage(string? item) : base(item)
+		public Percentage(string percentage) : base(percentage)
 		{
 		}
 
-		public Percentage(float? item) : base(item)
+		public Percentage(float percentage) : base(percentage)
 		{
 		}
 	}

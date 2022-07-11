@@ -76,7 +76,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public SortCollection? Sort { get; set; }
+		[JsonConverter(typeof(SortConverter))]
+		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stored_field")]
@@ -118,12 +119,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor<TDocument> SortDescriptor { get; set; }
-
-		private Action<SortDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
 		private bool? ExplainValue { get; set; }
@@ -141,6 +136,8 @@ namespace Elastic.Clients.Elasticsearch
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? StoredFieldValue { get; set; }
 
@@ -232,30 +229,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public InnerHitsDescriptor<TDocument> Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public InnerHitsDescriptor<TDocument> Sort(SortDescriptor<TDocument> descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public InnerHitsDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
-			return Self;
-		}
-
 		public InnerHitsDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
 		{
 			SourceValue = source;
@@ -313,6 +286,12 @@ namespace Elastic.Clients.Elasticsearch
 		public InnerHitsDescriptor<TDocument> Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -402,22 +381,6 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, HighlightValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor<TDocument>(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -472,6 +435,12 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteNumberValue(SizeValue.Value);
 			}
 
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+			}
+
 			if (StoredFieldValue is not null)
 			{
 				writer.WritePropertyName("stored_field");
@@ -521,12 +490,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<HighlightDescriptor> HighlightDescriptorAction { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor SortDescriptor { get; set; }
-
-		private Action<SortDescriptor> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
 		private bool? ExplainValue { get; set; }
@@ -544,6 +507,8 @@ namespace Elastic.Clients.Elasticsearch
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? StoredFieldValue { get; set; }
 
@@ -635,30 +600,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public InnerHitsDescriptor Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public InnerHitsDescriptor Sort(SortDescriptor descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public InnerHitsDescriptor Sort(Action<SortDescriptor> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
-			return Self;
-		}
-
 		public InnerHitsDescriptor Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
 		{
 			SourceValue = source;
@@ -722,6 +663,12 @@ namespace Elastic.Clients.Elasticsearch
 		public InnerHitsDescriptor Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -817,22 +764,6 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, HighlightValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -885,6 +816,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			if (StoredFieldValue is not null)

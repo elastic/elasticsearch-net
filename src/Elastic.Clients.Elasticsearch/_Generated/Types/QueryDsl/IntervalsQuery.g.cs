@@ -47,59 +47,70 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string VariantName { get; }
 
-		public static IntervalsQuery AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf variant) => new IntervalsQuery("all_of", variant);
-		public static IntervalsQuery AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf variant) => new IntervalsQuery("any_of", variant);
-		public static IntervalsQuery Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy variant) => new IntervalsQuery("fuzzy", variant);
-		public static IntervalsQuery Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch variant) => new IntervalsQuery("match", variant);
-		public static IntervalsQuery Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix variant) => new IntervalsQuery("prefix", variant);
-		public static IntervalsQuery Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard variant) => new IntervalsQuery("wildcard", variant);
+		public static IntervalsQuery AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf intervalsAllOf) => new IntervalsQuery("all_of", intervalsAllOf);
+		public static IntervalsQuery AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf intervalsAnyOf) => new IntervalsQuery("any_of", intervalsAnyOf);
+		public static IntervalsQuery Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy intervalsFuzzy) => new IntervalsQuery("fuzzy", intervalsFuzzy);
+		public static IntervalsQuery Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => new IntervalsQuery("match", intervalsMatch);
+		public static IntervalsQuery Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => new IntervalsQuery("prefix", intervalsPrefix);
+		public static IntervalsQuery Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => new IntervalsQuery("wildcard", intervalsWildcard);
 	}
 
 	internal sealed class IntervalsQueryConverter : JsonConverter<IntervalsQuery>
 	{
 		public override IntervalsQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected property name token.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "all_of")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(ref reader, options);
+				reader.Read();
 				return new IntervalsQuery(propertyName, variant);
 			}
 
 			if (propertyName == "any_of")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(ref reader, options);
+				reader.Read();
 				return new IntervalsQuery(propertyName, variant);
 			}
 
 			if (propertyName == "fuzzy")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(ref reader, options);
+				reader.Read();
 				return new IntervalsQuery(propertyName, variant);
 			}
 
 			if (propertyName == "match")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(ref reader, options);
+				reader.Read();
 				return new IntervalsQuery(propertyName, variant);
 			}
 
 			if (propertyName == "prefix")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(ref reader, options);
+				reader.Read();
 				return new IntervalsQuery(propertyName, variant);
 			}
 
 			if (propertyName == "wildcard")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(ref reader, options);
+				reader.Read();
 				return new IntervalsQuery(propertyName, variant);
 			}
 

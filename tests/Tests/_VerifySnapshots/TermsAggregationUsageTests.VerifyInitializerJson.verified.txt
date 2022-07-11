@@ -8,7 +8,6 @@
         execution_hint: map,
         field: state,
         min_doc_count: 2,
-        missing: n/a,
         order: [
           {
             _key: asc

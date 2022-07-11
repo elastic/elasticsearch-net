@@ -47,38 +47,46 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		internal string VariantName { get; }
 
-		public static TokenizationConfigContainer Bert(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig variant) => new TokenizationConfigContainer("bert", variant);
-		public static TokenizationConfigContainer Mpnet(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig variant) => new TokenizationConfigContainer("mpnet", variant);
-		public static TokenizationConfigContainer Roberta(Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig variant) => new TokenizationConfigContainer("roberta", variant);
+		public static TokenizationConfigContainer Bert(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfigContainer("bert", nlpBertTokenizationConfig);
+		public static TokenizationConfigContainer Mpnet(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfigContainer("mpnet", nlpBertTokenizationConfig);
+		public static TokenizationConfigContainer Roberta(Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => new TokenizationConfigContainer("roberta", nlpRobertaTokenizationConfig);
 	}
 
 	internal sealed class TokenizationConfigContainerConverter : JsonConverter<TokenizationConfigContainer>
 	{
 		public override TokenizationConfigContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected property name token.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "bert")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig?>(ref reader, options);
+				reader.Read();
 				return new TokenizationConfigContainer(propertyName, variant);
 			}
 
 			if (propertyName == "mpnet")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig?>(ref reader, options);
+				reader.Read();
 				return new TokenizationConfigContainer(propertyName, variant);
 			}
 
 			if (propertyName == "roberta")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig?>(ref reader, options);
+				reader.Read();
 				return new TokenizationConfigContainer(propertyName, variant);
 			}
 
