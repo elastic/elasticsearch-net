@@ -92,8 +92,11 @@ namespace Tests.Core.Serialization
 
 			while ((line = reader.ReadLine()) is not null)
 			{
-				var result = new RoundTripResult<T> { Success = false };
-				result.Serialized = line;
+				var result = new RoundTripResult<T>
+				{
+					Success = false,
+					Serialized = line
+				};
 
 				var expected = expectedJson[counter];
 				var expectedJsonToken = ExpectedJsonToJsonDocument(expected, preserveNullInExpected);

@@ -35,6 +35,76 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
 
+	public sealed partial class GeoPolygonQueryDescriptor<TDocument> : SerializableDescriptorBase<GeoPolygonQueryDescriptor<TDocument>>
+	{
+		internal GeoPolygonQueryDescriptor(Action<GeoPolygonQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public GeoPolygonQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private bool? IgnoreUnmappedValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
+
+		public GeoPolygonQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+		{
+			IgnoreUnmappedValue = ignoreUnmapped;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
+		{
+			ValidationMethodValue = validationMethod;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (IgnoreUnmappedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+			}
+
+			if (ValidationMethodValue is not null)
+			{
+				writer.WritePropertyName("validation_method");
+				JsonSerializer.Serialize(writer, ValidationMethodValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public sealed partial class GeoPolygonQueryDescriptor : SerializableDescriptorBase<GeoPolygonQueryDescriptor>
 	{
 		internal GeoPolygonQueryDescriptor(Action<GeoPolygonQueryDescriptor> configure) => configure.Invoke(this);

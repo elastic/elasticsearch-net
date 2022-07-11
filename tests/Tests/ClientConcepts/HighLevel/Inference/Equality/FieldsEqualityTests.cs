@@ -61,10 +61,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			(t1 != t2).ShouldBeTrue(t2);
 			t1.Should().NotBeEquivalentTo(t2);
 
-			t1 = Infer.Field<Project>(p => p.Name, 1.0);
-			t2 = Infer.Field<Project>(p => p.LocationPoint, 1.0);
-			(t1 != t2).ShouldBeTrue(t2);
-			t1.Should().NotBeEquivalentTo(t2);
+			//t1 = Infer.Field<Project>(p => p.Name, 1.0);
+			//t2 = Infer.Field<Project>(p => p.LocationPoint, 1.0);
+			//(t1 != t2).ShouldBeTrue(t2);
+			//t1.Should().NotBeEquivalentTo(t2);
 		}
 
 		[U] public void ReflectedEq()

@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class CharFilter : Union<string?, Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions?>
+	public partial class CharFilter : Union<string, Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions>
 	{
-		public CharFilter(string? item) : base(item)
+		public CharFilter(string charFilter) : base(charFilter)
 		{
 		}
 
-		public CharFilter(Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions? item) : base(item)
+		public CharFilter(Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions charFilterDefinitions) : base(charFilterDefinitions)
 		{
 		}
 	}

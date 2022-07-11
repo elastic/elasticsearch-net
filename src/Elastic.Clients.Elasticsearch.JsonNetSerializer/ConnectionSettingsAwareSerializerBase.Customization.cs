@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace Elastic.Clients.JsonNetSerializer
 {
-	public abstract partial class ConnectionSettingsAwareSerializer : SourceSerializer
+	public abstract partial class ConnectionSettingsAwareSerializer : Serializer
 	{
 		// Default buffer size of StreamWriter, which is private :(
 		internal const int DefaultBufferSize = 1024;
