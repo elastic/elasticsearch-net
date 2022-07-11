@@ -67,7 +67,15 @@ internal sealed class UnionConverter : JsonConverterFactory
 		{
 			// TODO - Aggregate Exception if both fail
 
+			//var requiresEndObject = false;
+
 			var readerCopy = reader;
+
+			//if (readerCopy.TokenType == JsonTokenType.StartObject)
+			//{
+			//	requiresEndObject = true;
+			//	readerCopy.Read();
+			//}
 
 			try
 			{
@@ -75,7 +83,11 @@ internal sealed class UnionConverter : JsonConverterFactory
 
 				if (itemOne is not null)
 				{
+					//if (requiresEndObject)
+					//	readerCopy.Read();
+
 					reader = readerCopy;
+
 					return (TType)Activator.CreateInstance(typeof(TType), itemOne);
 				}
 			}
@@ -84,12 +96,21 @@ internal sealed class UnionConverter : JsonConverterFactory
 				// TODO - Store for aggregate exception
 			}
 
+			//if (reader.TokenType == JsonTokenType.StartObject)
+			//{
+			//	requiresEndObject = true;
+			//	reader.Read();
+			//}
+
 			try
 			{
 				var itemTwo = JsonSerializer.Deserialize<TItem2>(ref reader, options);
 
 				if (itemTwo is not null)
 				{
+					//if (requiresEndObject)
+					//	reader.Read();
+
 					return (TType)Activator.CreateInstance(typeof(TType), itemTwo);
 				}
 			}

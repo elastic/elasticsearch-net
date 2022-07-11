@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class SearchResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.MultiSearchItem<TDocument>?, Elastic.Clients.Elasticsearch.ErrorResponseBase?>
+	public partial class SearchResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.MultiSearchItem<TDocument>, Elastic.Clients.Elasticsearch.ErrorResponseBase>
 	{
-		public SearchResponseItem(Elastic.Clients.Elasticsearch.MultiSearchItem<TDocument>? item) : base(item)
+		public SearchResponseItem(Elastic.Clients.Elasticsearch.MultiSearchItem<TDocument> multiSearchItem) : base(multiSearchItem)
 		{
 		}
 
-		public SearchResponseItem(Elastic.Clients.Elasticsearch.ErrorResponseBase? item) : base(item)
+		public SearchResponseItem(Elastic.Clients.Elasticsearch.ErrorResponseBase errorResponseBase) : base(errorResponseBase)
 		{
 		}
 	}

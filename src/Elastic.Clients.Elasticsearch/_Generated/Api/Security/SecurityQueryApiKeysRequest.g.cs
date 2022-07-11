@@ -44,7 +44,8 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public SortCollection? Sort { get; set; }
+		[JsonConverter(typeof(SortConverter))]
+		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -71,17 +72,13 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor<TDocument> SortDescriptor { get; set; }
-
-		private Action<SortDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 		private int? FromValue { get; set; }
 
 		private IEnumerable<object>? SearchAfterValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		public SecurityQueryApiKeysRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -107,30 +104,6 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return Self;
 		}
 
-		public SecurityQueryApiKeysRequestDescriptor<TDocument> Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public SecurityQueryApiKeysRequestDescriptor<TDocument> Sort(SortDescriptor<TDocument> descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public SecurityQueryApiKeysRequestDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
-			return Self;
-		}
-
 		public SecurityQueryApiKeysRequestDescriptor<TDocument> From(int? from)
 		{
 			FromValue = from;
@@ -146,6 +119,12 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public SecurityQueryApiKeysRequestDescriptor<TDocument> Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public SecurityQueryApiKeysRequestDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -168,22 +147,6 @@ namespace Elastic.Clients.Elasticsearch.Security
 				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor<TDocument>(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (FromValue.HasValue)
 			{
 				writer.WritePropertyName("from");
@@ -200,6 +163,12 @@ namespace Elastic.Clients.Elasticsearch.Security
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			writer.WriteEndObject();
@@ -222,17 +191,13 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor SortDescriptor { get; set; }
-
-		private Action<SortDescriptor> SortDescriptorAction { get; set; }
-
 		private int? FromValue { get; set; }
 
 		private IEnumerable<object>? SearchAfterValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		public SecurityQueryApiKeysRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -258,30 +223,6 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return Self;
 		}
 
-		public SecurityQueryApiKeysRequestDescriptor Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public SecurityQueryApiKeysRequestDescriptor Sort(SortDescriptor descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public SecurityQueryApiKeysRequestDescriptor Sort(Action<SortDescriptor> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
-			return Self;
-		}
-
 		public SecurityQueryApiKeysRequestDescriptor From(int? from)
 		{
 			FromValue = from;
@@ -297,6 +238,12 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public SecurityQueryApiKeysRequestDescriptor Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public SecurityQueryApiKeysRequestDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -319,22 +266,6 @@ namespace Elastic.Clients.Elasticsearch.Security
 				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (FromValue.HasValue)
 			{
 				writer.WritePropertyName("from");
@@ -351,6 +282,12 @@ namespace Elastic.Clients.Elasticsearch.Security
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			writer.WriteEndObject();

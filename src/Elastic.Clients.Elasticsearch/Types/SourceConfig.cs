@@ -11,15 +11,16 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(SourceConfigConverter))]
 	public partial class SourceConfig
 	{
-		public bool HasBoolValue => Item1.HasValue;
+		public bool HasBoolValue => Tag == 0;
 
-		public bool HasSourceFilterValue => Item2 is not null;
+		public bool HasSourceFilterValue => Tag == 1;
 
+		// TODO - Not null when
 		public bool TryGetBool(out bool? value)
 		{
-			if (Item1.HasValue)
+			if (Tag == 0)
 			{
-				value = Item1.Value;
+				value = Item1;
 				return true;
 			}
 
@@ -29,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public bool TryGetSourceFilter(out SourceFilter? value)
 		{
-			if (Item2 is not null)
+			if (Tag == 1)
 			{
 				value = Item2;
 				return true;

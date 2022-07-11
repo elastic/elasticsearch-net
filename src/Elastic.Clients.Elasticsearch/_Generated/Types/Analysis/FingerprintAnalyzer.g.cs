@@ -40,7 +40,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
+		[JsonConverter(typeof(StopWordsConverter))]
+		public IEnumerable<string>? Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
@@ -67,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		private string SeparatorValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
+		private IEnumerable<string>? StopwordsValue { get; set; }
 
 		private string? StopwordsPathValue { get; set; }
 
@@ -91,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			return Self;
 		}
 
-		public FingerprintAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
+		public FingerprintAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
 		{
 			StopwordsValue = stopwords;
 			return Self;
@@ -121,7 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			if (StopwordsValue is not null)
 			{
 				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, StopwordsValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
 			}
 
 			if (!string.IsNullOrEmpty(StopwordsPathValue))

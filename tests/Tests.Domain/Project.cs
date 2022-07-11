@@ -40,7 +40,7 @@ public class Project
 
 	public Developer LeadDeveloper { get; set; }
 
-	public GeoPoint LocationPoint { get; set; } // Was SimpleGeoPoint
+	//public GeoPoint LocationPoint { get; set; } // Was SimpleGeoPoint
 
 	//public IGeoShape LocationShape { get; set; }
 	//public IGeoShape ArbitraryShape { get; set; }

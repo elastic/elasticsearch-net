@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class TrackHits : Union<bool?, int?>
+	public partial class TrackHits : Union<bool, int>
 	{
-		public TrackHits(bool? item) : base(item)
+		public TrackHits(bool trackHits) : base(trackHits)
 		{
 		}
 
-		public TrackHits(int? item) : base(item)
+		public TrackHits(int trackHits) : base(trackHits)
 		{
 		}
 	}

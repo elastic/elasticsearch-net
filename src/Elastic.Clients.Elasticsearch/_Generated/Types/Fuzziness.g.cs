@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Fuzziness : Union<string?, int?>
+	public partial class Fuzziness : Union<string, int>
 	{
-		public Fuzziness(string? item) : base(item)
+		public Fuzziness(string fuzziness) : base(fuzziness)
 		{
 		}
 
-		public Fuzziness(int? item) : base(item)
+		public Fuzziness(int fuzziness) : base(fuzziness)
 		{
 		}
 	}

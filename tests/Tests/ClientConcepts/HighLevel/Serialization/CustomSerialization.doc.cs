@@ -62,7 +62,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 *
 		 * Implementing `IElasticsearchSerializer` is technically enough to inject your own `SourceSerializer`
 		 */
-		public class VanillaSerializer : SourceSerializer
+		public class VanillaSerializer : Serializer
 		{
 			public override T Deserialize<T>(Stream stream) => throw new NotImplementedException();
 
