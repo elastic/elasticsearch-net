@@ -25,7 +25,7 @@ internal class CustomizedNamingPolicy : JsonNamingPolicy
 /// <summary>
 /// The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.
 /// </summary>
-internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
+internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 {
 	private readonly IElasticsearchClientSettings _settings;
 
@@ -46,7 +46,6 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 					new IdConverter(settings),
 					new FieldConverter(settings),
 					new FieldValuesConverter(settings),
-					new SortCollectionConverter(settings),
 					new LazyDocumentConverter(settings),
 					new RelationNameConverter(settings),
 					new JoinFieldConverter(settings),
@@ -60,7 +59,7 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 					new IsADictionaryConverter(),
 					new ResponseItemConverterFactory(),
 					new UnionConverter(),
-					new SingleOrManyConverterFactory(),
+					new ExtraSerializationData(settings)
 				},
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 		};

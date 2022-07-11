@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("field"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						if (value is not null)
 						{
@@ -52,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("format"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("interval"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<double?>(ref reader, options);
 						if (value is not null)
 						{
@@ -74,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("min_doc_count"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -85,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("missing"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<double?>(ref reader, options);
 						if (value is not null)
 						{
@@ -96,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("offset"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<double?>(ref reader, options);
 						if (value is not null)
 						{
@@ -107,7 +113,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("order"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder?>(ref reader, options);
+						reader.Read();
+						var value = SingleOrManySerializationHelper.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Order = value;
@@ -118,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
 						if (value is not null)
 						{
@@ -205,7 +213,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (value.Order is not null)
 			{
 				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, value.Order, options);
+				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(value.Order, writer, options);
 			}
 
 			if (value.Script is not null)
@@ -264,7 +272,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
-		public Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? Order { get; set; }
+		[JsonConverter(typeof(AggregateOrderConverter))]
+		public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
@@ -304,7 +313,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private double? OffsetValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? OrderValue { get; set; }
+		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 		public HistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
@@ -402,7 +411,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public HistogramAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? order)
+		public HistogramAggregationDescriptor<TDocument> Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 		{
 			OrderValue = order;
 			return Self;
@@ -468,7 +477,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (OrderValue is not null)
 			{
 				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, OrderValue, options);
+				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
 			}
 
 			writer.WriteEndObject();
@@ -531,7 +540,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private double? OffsetValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? OrderValue { get; set; }
+		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 		public HistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
@@ -635,7 +644,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public HistogramAggregationDescriptor Order(Elastic.Clients.Elasticsearch.Aggregations.AggregateOrder? order)
+		public HistogramAggregationDescriptor Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 		{
 			OrderValue = order;
 			return Self;
@@ -701,7 +710,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (OrderValue is not null)
 			{
 				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, OrderValue, options);
+				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
 			}
 
 			writer.WriteEndObject();

@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class Like : Union<string?, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument?>
+	public partial class Like : Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
 	{
-		public Like(string? item) : base(item)
+		public Like(string like) : base(like)
 		{
 		}
 
-		public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument? item) : base(item)
+		public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument likeDocument) : base(likeDocument)
 		{
 		}
 	}

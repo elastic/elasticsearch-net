@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SimpleQueryStringFlags : Union<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag?, string?>
+	public partial class SimpleQueryStringFlags : Union<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag, string>
 	{
-		public SimpleQueryStringFlags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? item) : base(item)
+		public SimpleQueryStringFlags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag simpleQueryStringFlag) : base(simpleQueryStringFlag)
 		{
 		}
 
-		public SimpleQueryStringFlags(string? item) : base(item)
+		public SimpleQueryStringFlags(string simpleQueryStringFlags) : base(simpleQueryStringFlags)
 		{
 		}
 	}

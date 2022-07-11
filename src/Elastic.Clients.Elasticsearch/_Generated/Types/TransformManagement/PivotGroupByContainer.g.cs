@@ -47,38 +47,46 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		internal string VariantName { get; }
 
-		public static PivotGroupByContainer DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation variant) => new PivotGroupByContainer("date_histogram", variant);
-		public static PivotGroupByContainer Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation variant) => new PivotGroupByContainer("histogram", variant);
-		public static PivotGroupByContainer Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation variant) => new PivotGroupByContainer("terms", variant);
+		public static PivotGroupByContainer DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => new PivotGroupByContainer("date_histogram", dateHistogramAggregation);
+		public static PivotGroupByContainer Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => new PivotGroupByContainer("histogram", histogramAggregation);
+		public static PivotGroupByContainer Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new PivotGroupByContainer("terms", termsAggregation);
 	}
 
 	internal sealed class PivotGroupByContainerConverter : JsonConverter<PivotGroupByContainer>
 	{
 		public override PivotGroupByContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected property name token.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "date_histogram")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
+				reader.Read();
 				return new PivotGroupByContainer(propertyName, variant);
 			}
 
 			if (propertyName == "histogram")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
+				reader.Read();
 				return new PivotGroupByContainer(propertyName, variant);
 			}
 
 			if (propertyName == "terms")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
+				reader.Read();
 				return new PivotGroupByContainer(propertyName, variant);
 			}
 

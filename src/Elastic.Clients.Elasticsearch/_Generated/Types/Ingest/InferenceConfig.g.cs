@@ -47,31 +47,38 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string VariantName { get; }
 
-		public static InferenceConfig Classification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification variant) => new InferenceConfig("classification", variant);
-		public static InferenceConfig Regression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression variant) => new InferenceConfig("regression", variant);
+		public static InferenceConfig Classification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification inferenceConfigClassification) => new InferenceConfig("classification", inferenceConfigClassification);
+		public static InferenceConfig Regression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression inferenceConfigRegression) => new InferenceConfig("regression", inferenceConfigRegression);
 	}
 
 	internal sealed class InferenceConfigConverter : JsonConverter<InferenceConfig>
 	{
 		public override InferenceConfig Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected property name token.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification?>(ref reader, options);
+				reader.Read();
 				return new InferenceConfig(propertyName, variant);
 			}
 
 			if (propertyName == "regression")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression?>(ref reader, options);
+				reader.Read();
 				return new InferenceConfig(propertyName, variant);
 			}
 
