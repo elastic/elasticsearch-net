@@ -47,24 +47,30 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		internal string VariantName { get; }
 
-		public static RetentionPolicyContainer Time(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy variant) => new RetentionPolicyContainer("time", variant);
+		public static RetentionPolicyContainer Time(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy retentionPolicy) => new RetentionPolicyContainer("time", retentionPolicy);
 	}
 
 	internal sealed class RetentionPolicyContainerConverter : JsonConverter<RetentionPolicyContainer>
 	{
 		public override RetentionPolicyContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected property name token.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "time")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy?>(ref reader, options);
+				reader.Read();
 				return new RetentionPolicyContainer(propertyName, variant);
 			}
 

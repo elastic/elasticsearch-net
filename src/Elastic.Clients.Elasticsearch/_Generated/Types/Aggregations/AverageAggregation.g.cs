@@ -39,19 +39,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("missing"))
-					{
-						var value = JsonSerializer.Deserialize<double?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("format"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("field"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						if (value is not null)
 						{
@@ -74,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
 						if (value is not null)
 						{
@@ -111,12 +103,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("avg");
 			writer.WriteStartObject();
-			if (value.Missing.HasValue)
-			{
-				writer.WritePropertyName("missing");
-				writer.WriteNumberValue(value.Missing.Value);
-			}
-
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -153,10 +139,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AverageAggregation(string name) : base(name)
 		{
 		}
-
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public double? Missing { get; set; }
 	}
 
 	public sealed partial class AverageAggregationDescriptor<TDocument> : SerializableDescriptorBase<AverageAggregationDescriptor<TDocument>>
@@ -177,8 +159,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private string? FormatValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private double? MissingValue { get; set; }
 
 		public AverageAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
@@ -228,12 +208,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public AverageAggregationDescriptor<TDocument> Missing(double? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -267,12 +241,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(FormatValue);
 			}
 
-			if (MissingValue.HasValue)
-			{
-				writer.WritePropertyName("missing");
-				writer.WriteNumberValue(MissingValue.Value);
-			}
-
 			writer.WriteEndObject();
 			if (MetaValue is not null)
 			{
@@ -302,8 +270,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private string? FormatValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private double? MissingValue { get; set; }
 
 		public AverageAggregationDescriptor Script(ScriptBase? script)
 		{
@@ -359,12 +325,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public AverageAggregationDescriptor Missing(double? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -396,12 +356,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
-			}
-
-			if (MissingValue.HasValue)
-			{
-				writer.WritePropertyName("missing");
-				writer.WriteNumberValue(MissingValue.Value);
 			}
 
 			writer.WriteEndObject();

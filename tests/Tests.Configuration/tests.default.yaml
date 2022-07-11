@@ -5,7 +5,7 @@
 # tracked by git).
 
 # mode either u (unit test), i (integration test) or m (mixed mode)
-mode: i
+mode: u
 # the elasticsearch version that should be started
 # Can be a snapshot version of sonatype or "latest" to get the latest snapshot of sonatype
 elasticsearch_version: 8.4.0-SNAPSHOT
@@ -15,13 +15,13 @@ elasticsearch_version: 8.4.0-SNAPSHOT
 force_reseed: false
 # do not spawn nodes as part of the test setup if we find a node is already running
 # this is opt in during development in CI we never want to see our tests running against an already running node
-test_against_already_running_elasticsearch: false
-test_only_one: true
+test_against_already_running_elasticsearch: true
+#test_only_one: true
 
-random_source_serializer: true
+#random_source_serializer: true
 #random_old_transportClient: true
-random_http_compresssion: true
-seed: 29991
+#random_http_compresssion: true
+#seed: 29991
 
 # Can be helpful to speed up tests runs as setting this to true only randomly tests a single overload of the api rather than all 4.
 # Can also help keep the noise down in case of test failures

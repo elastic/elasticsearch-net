@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.GetResult<TDocument>?, Elastic.Clients.Elasticsearch.MultiGetError?>
+	public partial class ResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.GetResult<TDocument>, Elastic.Clients.Elasticsearch.MultiGetError>
 	{
-		public ResponseItem(Elastic.Clients.Elasticsearch.GetResult<TDocument>? item) : base(item)
+		public ResponseItem(Elastic.Clients.Elasticsearch.GetResult<TDocument> getResult) : base(getResult)
 		{
 		}
 
-		public ResponseItem(Elastic.Clients.Elasticsearch.MultiGetError? item) : base(item)
+		public ResponseItem(Elastic.Clients.Elasticsearch.MultiGetError multiGetError) : base(multiGetError)
 		{
 		}
 	}

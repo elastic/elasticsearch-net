@@ -34,7 +34,7 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 				size = 5,
 				shard_size = 100,
 				execution_hint = "map",
-				missing = "n/a",
+				//missing = "n/a",
 				script = new
 				{
 					source = "'State of Being: '+_value",
@@ -55,12 +55,13 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 			.Size(5)
 			.ShardSize(100)
 			.ExecutionHint(TermsAggregationExecutionHint.Map)
-			.Missing("n/a")
+			//.Missing("n/a")
 			.Script(ss => ss.Source("'State of Being: '+_value"))
-			.Order(o => o
-				.KeyAscending()
-				.CountDescending()
-			)
+			.Order(new[]
+			{
+				AggregateOrder.KeyAscending,
+				AggregateOrder.CountDescending
+			})
 			.Meta(m => m
 				.Add("foo", "bar")
 			)
@@ -74,12 +75,12 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 			Size = 5,
 			ShardSize = 100,
 			ExecutionHint = TermsAggregationExecutionHint.Map,
-			Missing = "n/a",
+			//Missing = "n/a",
 			Script = new InlineScript("'State of Being: '+_value"),
-			Order = new List<TermsOrder>
+			Order = new []
 			{
-				TermsOrder.KeyAscending,
-				TermsOrder.CountDescending
+				AggregateOrder.KeyAscending,
+				AggregateOrder.CountDescending
 			},
 			Meta = new Dictionary<string, object>
 			{

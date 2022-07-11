@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class SourceConfigParam : Union<bool?, Elastic.Clients.Elasticsearch.Fields?>
+	public partial class SourceConfigParam : Union<bool, Elastic.Clients.Elasticsearch.Fields>
 	{
-		public SourceConfigParam(bool? item) : base(item)
+		public SourceConfigParam(bool sourceConfigParam) : base(sourceConfigParam)
 		{
 		}
 
-		public SourceConfigParam(Elastic.Clients.Elasticsearch.Fields? item) : base(item)
+		public SourceConfigParam(Elastic.Clients.Elasticsearch.Fields fields) : base(fields)
 		{
 		}
 	}

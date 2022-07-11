@@ -444,6 +444,62 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(FieldSortNumericTypeConverter))]
+	public enum FieldSortNumericType
+	{
+		[EnumMember(Value = "long")]
+		Long,
+		[EnumMember(Value = "double")]
+		Double,
+		[EnumMember(Value = "date_nanos")]
+		DateNanos,
+		[EnumMember(Value = "date")]
+		Date
+	}
+
+	internal sealed class FieldSortNumericTypeConverter : JsonConverter<FieldSortNumericType>
+	{
+		public override FieldSortNumericType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "long":
+					return FieldSortNumericType.Long;
+				case "double":
+					return FieldSortNumericType.Double;
+				case "date_nanos":
+					return FieldSortNumericType.DateNanos;
+				case "date":
+					return FieldSortNumericType.Date;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, FieldSortNumericType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case FieldSortNumericType.Long:
+					writer.WriteStringValue("long");
+					return;
+				case FieldSortNumericType.Double:
+					writer.WriteStringValue("double");
+					return;
+				case FieldSortNumericType.DateNanos:
+					writer.WriteStringValue("date_nanos");
+					return;
+				case FieldSortNumericType.Date:
+					writer.WriteStringValue("date");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(GeoDistanceTypeConverter))]
 	public enum GeoDistanceType
 	{

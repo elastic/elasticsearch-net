@@ -39,6 +39,90 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
 
+	public sealed partial class GeoDistanceQueryDescriptor<TDocument> : SerializableDescriptorBase<GeoDistanceQueryDescriptor<TDocument>>
+	{
+		internal GeoDistanceQueryDescriptor(Action<GeoDistanceQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public GeoDistanceQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private string? DistanceValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
+
+		public GeoDistanceQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> Distance(string? distance)
+		{
+			DistanceValue = distance;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
+		{
+			DistanceTypeValue = distanceType;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
+		{
+			ValidationMethodValue = validationMethod;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (DistanceValue is not null)
+			{
+				writer.WritePropertyName("distance");
+				JsonSerializer.Serialize(writer, DistanceValue, options);
+			}
+
+			if (DistanceTypeValue is not null)
+			{
+				writer.WritePropertyName("distance_type");
+				JsonSerializer.Serialize(writer, DistanceTypeValue, options);
+			}
+
+			if (ValidationMethodValue is not null)
+			{
+				writer.WritePropertyName("validation_method");
+				JsonSerializer.Serialize(writer, ValidationMethodValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptorBase<GeoDistanceQueryDescriptor>
 	{
 		internal GeoDistanceQueryDescriptor(Action<GeoDistanceQueryDescriptor> configure) => configure.Invoke(this);
