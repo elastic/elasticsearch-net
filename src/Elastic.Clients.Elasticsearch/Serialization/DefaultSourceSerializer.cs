@@ -7,10 +7,10 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal class DefaultSourceSerializer : SystemTextJsonSourceSerializer
+internal class DefaultSourceSerializer : SystemTextJsonSerializer
 {
-	public DefaultSourceSerializer(IElasticsearchClientSettings settings, JsonSerializerOptions? options = null) => Options =
-		options ?? new JsonSerializerOptions
+	public DefaultSourceSerializer(IElasticsearchClientSettings settings, JsonSerializerOptions? options = null) =>
+		Options = options ?? new JsonSerializerOptions
 		{
 			DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
 			Converters =

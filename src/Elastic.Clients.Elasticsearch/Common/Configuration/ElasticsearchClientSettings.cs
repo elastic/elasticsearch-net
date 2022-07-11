@@ -22,7 +22,7 @@ namespace Elastic.Clients.Elasticsearch
 		///     documents.
 		///     By default, the internal serializer will be used to serializer all types.
 		/// </summary>
-		public delegate SourceSerializer SourceSerializerFactory(Serializer builtIn,
+		public delegate Serializer SourceSerializerFactory(Serializer builtIn,
 			IElasticsearchClientSettings values);
 
 		/// <summary> The default user agent for Elastic.Clients.Elasticsearch </summary>

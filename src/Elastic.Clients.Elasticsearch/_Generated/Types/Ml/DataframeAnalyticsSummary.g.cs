@@ -39,6 +39,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("authorization")]
+		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsAuthorization? Authorization { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
 		public long? CreateTime { get; init; }
 

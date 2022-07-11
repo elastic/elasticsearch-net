@@ -29,6 +29,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer> Aggregations { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("authorization")]
+		public Elastic.Clients.Elasticsearch.Ml.DatafeedAuthorization? Authorization { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("chunking_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig ChunkingConfig { get; init; }
 

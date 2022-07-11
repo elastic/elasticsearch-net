@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeReloadResult : Union<Elastic.Clients.Elasticsearch.Nodes.Stats?, Elastic.Clients.Elasticsearch.Nodes.NodeReloadError?>
+	public partial class NodeReloadResult : Union<Elastic.Clients.Elasticsearch.Nodes.Stats, Elastic.Clients.Elasticsearch.Nodes.NodeReloadError>
 	{
-		public NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.Stats? item) : base(item)
+		public NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.Stats stats) : base(stats)
 		{
 		}
 
-		public NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.NodeReloadError? item) : base(item)
+		public NodeReloadResult(Elastic.Clients.Elasticsearch.Nodes.NodeReloadError nodeReloadError) : base(nodeReloadError)
 		{
 		}
 	}

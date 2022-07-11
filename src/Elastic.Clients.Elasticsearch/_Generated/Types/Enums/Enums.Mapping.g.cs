@@ -80,6 +80,328 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 	}
 
+	[JsonConverter(typeof(FieldTypeConverter))]
+	public enum FieldType
+	{
+		[EnumMember(Value = "token_count")]
+		TokenCount,
+		[EnumMember(Value = "text")]
+		Text,
+		[EnumMember(Value = "short")]
+		Short,
+		[EnumMember(Value = "shape")]
+		Shape,
+		[EnumMember(Value = "search_as_you_type")]
+		SearchAsYouType,
+		[EnumMember(Value = "scaled_float")]
+		ScaledFloat,
+		[EnumMember(Value = "rank_features")]
+		RankFeatures,
+		[EnumMember(Value = "rank_feature")]
+		RankFeature,
+		[EnumMember(Value = "percolator")]
+		Percolator,
+		[EnumMember(Value = "object")]
+		Object,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "nested")]
+		Nested,
+		[EnumMember(Value = "murmur3")]
+		Murmur3,
+		[EnumMember(Value = "match_only_text")]
+		MatchOnlyText,
+		[EnumMember(Value = "long_range")]
+		LongRange,
+		[EnumMember(Value = "long")]
+		Long,
+		[EnumMember(Value = "keyword")]
+		Keyword,
+		[EnumMember(Value = "join")]
+		Join,
+		[EnumMember(Value = "ip_range")]
+		IpRange,
+		[EnumMember(Value = "ip")]
+		Ip,
+		[EnumMember(Value = "integer_range")]
+		IntegerRange,
+		[EnumMember(Value = "integer")]
+		Integer,
+		[EnumMember(Value = "histogram")]
+		Histogram,
+		[EnumMember(Value = "half_float")]
+		HalfFloat,
+		[EnumMember(Value = "geo_shape")]
+		GeoShape,
+		[EnumMember(Value = "geo_point")]
+		GeoPoint,
+		[EnumMember(Value = "float_range")]
+		FloatRange,
+		[EnumMember(Value = "float")]
+		Float,
+		[EnumMember(Value = "flattened")]
+		Flattened,
+		[EnumMember(Value = "double_range")]
+		DoubleRange,
+		[EnumMember(Value = "double")]
+		Double,
+		[EnumMember(Value = "dense_vector")]
+		DenseVector,
+		[EnumMember(Value = "date_range")]
+		DateRange,
+		[EnumMember(Value = "date_nanos")]
+		DateNanos,
+		[EnumMember(Value = "date")]
+		Date,
+		[EnumMember(Value = "constant_keyword")]
+		ConstantKeyword,
+		[EnumMember(Value = "completion")]
+		Completion,
+		[EnumMember(Value = "byte")]
+		Byte,
+		[EnumMember(Value = "boolean")]
+		Boolean,
+		[EnumMember(Value = "binary")]
+		Binary,
+		[EnumMember(Value = "alias")]
+		Alias,
+		[EnumMember(Value = "aggregate_metric_double")]
+		AggregateMetricDouble
+	}
+
+	internal sealed class FieldTypeConverter : JsonConverter<FieldType>
+	{
+		public override FieldType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "token_count":
+					return FieldType.TokenCount;
+				case "text":
+					return FieldType.Text;
+				case "short":
+					return FieldType.Short;
+				case "shape":
+					return FieldType.Shape;
+				case "search_as_you_type":
+					return FieldType.SearchAsYouType;
+				case "scaled_float":
+					return FieldType.ScaledFloat;
+				case "rank_features":
+					return FieldType.RankFeatures;
+				case "rank_feature":
+					return FieldType.RankFeature;
+				case "percolator":
+					return FieldType.Percolator;
+				case "object":
+					return FieldType.Object;
+				case "none":
+					return FieldType.None;
+				case "nested":
+					return FieldType.Nested;
+				case "murmur3":
+					return FieldType.Murmur3;
+				case "match_only_text":
+					return FieldType.MatchOnlyText;
+				case "long_range":
+					return FieldType.LongRange;
+				case "long":
+					return FieldType.Long;
+				case "keyword":
+					return FieldType.Keyword;
+				case "join":
+					return FieldType.Join;
+				case "ip_range":
+					return FieldType.IpRange;
+				case "ip":
+					return FieldType.Ip;
+				case "integer_range":
+					return FieldType.IntegerRange;
+				case "integer":
+					return FieldType.Integer;
+				case "histogram":
+					return FieldType.Histogram;
+				case "half_float":
+					return FieldType.HalfFloat;
+				case "geo_shape":
+					return FieldType.GeoShape;
+				case "geo_point":
+					return FieldType.GeoPoint;
+				case "float_range":
+					return FieldType.FloatRange;
+				case "float":
+					return FieldType.Float;
+				case "flattened":
+					return FieldType.Flattened;
+				case "double_range":
+					return FieldType.DoubleRange;
+				case "double":
+					return FieldType.Double;
+				case "dense_vector":
+					return FieldType.DenseVector;
+				case "date_range":
+					return FieldType.DateRange;
+				case "date_nanos":
+					return FieldType.DateNanos;
+				case "date":
+					return FieldType.Date;
+				case "constant_keyword":
+					return FieldType.ConstantKeyword;
+				case "completion":
+					return FieldType.Completion;
+				case "byte":
+					return FieldType.Byte;
+				case "boolean":
+					return FieldType.Boolean;
+				case "binary":
+					return FieldType.Binary;
+				case "alias":
+					return FieldType.Alias;
+				case "aggregate_metric_double":
+					return FieldType.AggregateMetricDouble;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, FieldType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case FieldType.TokenCount:
+					writer.WriteStringValue("token_count");
+					return;
+				case FieldType.Text:
+					writer.WriteStringValue("text");
+					return;
+				case FieldType.Short:
+					writer.WriteStringValue("short");
+					return;
+				case FieldType.Shape:
+					writer.WriteStringValue("shape");
+					return;
+				case FieldType.SearchAsYouType:
+					writer.WriteStringValue("search_as_you_type");
+					return;
+				case FieldType.ScaledFloat:
+					writer.WriteStringValue("scaled_float");
+					return;
+				case FieldType.RankFeatures:
+					writer.WriteStringValue("rank_features");
+					return;
+				case FieldType.RankFeature:
+					writer.WriteStringValue("rank_feature");
+					return;
+				case FieldType.Percolator:
+					writer.WriteStringValue("percolator");
+					return;
+				case FieldType.Object:
+					writer.WriteStringValue("object");
+					return;
+				case FieldType.None:
+					writer.WriteStringValue("none");
+					return;
+				case FieldType.Nested:
+					writer.WriteStringValue("nested");
+					return;
+				case FieldType.Murmur3:
+					writer.WriteStringValue("murmur3");
+					return;
+				case FieldType.MatchOnlyText:
+					writer.WriteStringValue("match_only_text");
+					return;
+				case FieldType.LongRange:
+					writer.WriteStringValue("long_range");
+					return;
+				case FieldType.Long:
+					writer.WriteStringValue("long");
+					return;
+				case FieldType.Keyword:
+					writer.WriteStringValue("keyword");
+					return;
+				case FieldType.Join:
+					writer.WriteStringValue("join");
+					return;
+				case FieldType.IpRange:
+					writer.WriteStringValue("ip_range");
+					return;
+				case FieldType.Ip:
+					writer.WriteStringValue("ip");
+					return;
+				case FieldType.IntegerRange:
+					writer.WriteStringValue("integer_range");
+					return;
+				case FieldType.Integer:
+					writer.WriteStringValue("integer");
+					return;
+				case FieldType.Histogram:
+					writer.WriteStringValue("histogram");
+					return;
+				case FieldType.HalfFloat:
+					writer.WriteStringValue("half_float");
+					return;
+				case FieldType.GeoShape:
+					writer.WriteStringValue("geo_shape");
+					return;
+				case FieldType.GeoPoint:
+					writer.WriteStringValue("geo_point");
+					return;
+				case FieldType.FloatRange:
+					writer.WriteStringValue("float_range");
+					return;
+				case FieldType.Float:
+					writer.WriteStringValue("float");
+					return;
+				case FieldType.Flattened:
+					writer.WriteStringValue("flattened");
+					return;
+				case FieldType.DoubleRange:
+					writer.WriteStringValue("double_range");
+					return;
+				case FieldType.Double:
+					writer.WriteStringValue("double");
+					return;
+				case FieldType.DenseVector:
+					writer.WriteStringValue("dense_vector");
+					return;
+				case FieldType.DateRange:
+					writer.WriteStringValue("date_range");
+					return;
+				case FieldType.DateNanos:
+					writer.WriteStringValue("date_nanos");
+					return;
+				case FieldType.Date:
+					writer.WriteStringValue("date");
+					return;
+				case FieldType.ConstantKeyword:
+					writer.WriteStringValue("constant_keyword");
+					return;
+				case FieldType.Completion:
+					writer.WriteStringValue("completion");
+					return;
+				case FieldType.Byte:
+					writer.WriteStringValue("byte");
+					return;
+				case FieldType.Boolean:
+					writer.WriteStringValue("boolean");
+					return;
+				case FieldType.Binary:
+					writer.WriteStringValue("binary");
+					return;
+				case FieldType.Alias:
+					writer.WriteStringValue("alias");
+					return;
+				case FieldType.AggregateMetricDouble:
+					writer.WriteStringValue("aggregate_metric_double");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(GeoOrientationConverter))]
 	public enum GeoOrientation
 	{
