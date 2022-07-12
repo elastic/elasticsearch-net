@@ -79,6 +79,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public static QueryContainer Pinned(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery pinnedQuery) => new QueryContainer("pinned", pinnedQuery);
 		public static QueryContainer Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery prefixQuery) => new QueryContainer("prefix", prefixQuery);
 		public static QueryContainer QueryString(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery queryStringQuery) => new QueryContainer("query_string", queryStringQuery);
+		public static QueryContainer Range(Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery rangeQuery) => new QueryContainer("range", rangeQuery);
 		public static QueryContainer RankFeature(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery rankFeatureQuery) => new QueryContainer("rank_feature", rankFeatureQuery);
 		public static QueryContainer Regexp(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery regexpQuery) => new QueryContainer("regexp", regexpQuery);
 		public static QueryContainer Script(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery scriptQuery) => new QueryContainer("script", scriptQuery);
@@ -304,6 +305,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return new QueryContainer(propertyName, variant);
 			}
 
+			if (propertyName == "range")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery?>(ref reader, options);
+				return new QueryContainer(propertyName, variant);
+			}
+
 			if (propertyName == "rank_feature")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery?>(ref reader, options);
@@ -523,6 +530,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				case "query_string":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery)value.Variant, options);
 					break;
+				case "range":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery)value.Variant, options);
+					break;
 				case "rank_feature":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery)value.Variant, options);
 					break;
@@ -709,6 +719,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Prefix(Action<PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
 		public void QueryString(QueryStringQuery query) => Set(query, "query_string");
 		public void QueryString(Action<QueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "query_string");
+		public void Range(RangeQuery query) => Set(query, "range");
 		public void RankFeature(RankFeatureQuery query) => Set(query, "rank_feature");
 		public void RankFeature(Action<RankFeatureQueryDescriptor<TDocument>> configure) => Set(configure, "rank_feature");
 		public void Regexp(RegexpQuery query) => Set(query, "regexp");
@@ -900,6 +911,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void QueryString(QueryStringQuery query) => Set(query, "query_string");
 		public void QueryString(Action<QueryStringQueryDescriptor> configure) => Set(configure, "query_string");
 		public void QueryString<TDocument>(Action<QueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "query_string");
+		public void Range(RangeQuery query) => Set(query, "range");
 		public void RankFeature(RankFeatureQuery query) => Set(query, "rank_feature");
 		public void RankFeature(Action<RankFeatureQueryDescriptor> configure) => Set(configure, "rank_feature");
 		public void RankFeature<TDocument>(Action<RankFeatureQueryDescriptor<TDocument>> configure) => Set(configure, "rank_feature");

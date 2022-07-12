@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 using VerifyXunit;
 
 namespace Tests.Serialization;
@@ -18,7 +19,8 @@ public class MultipleSearchFiltersTests : SerializerTestBase
 				.Bool(b => b
 					.Filter(
 						f => f.Term(t => t.Field(f => f.Age).Value(37)),
-						f => f.Term(t => t.Field(f => f.Name).Value("Steve"))
+						f => f.Term(t => t.Field(f => f.Name).Value("Steve")),
+						f => f.Range(new RangeQuery(new DateRangeQuery { Gte = "now-1d/d", Lt = "now/d" }))
 					))));
 
 		var serialisedJson = await SerializeAndGetJsonStringAsync(search);
