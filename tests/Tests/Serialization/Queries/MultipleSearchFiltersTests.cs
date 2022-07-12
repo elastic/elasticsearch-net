@@ -19,8 +19,8 @@ public class MultipleSearchFiltersTests : SerializerTestBase
 				.Bool(b => b
 					.Filter(
 						f => f.Term(t => t.Field(f => f.Age).Value(37)),
-						f => f.Term(t => t.Field(f => f.Name).Value("Steve")),
-						f => f.Range(new RangeQuery(new DateRangeQuery { Gte = "now-1d/d", Lt = "now/d" }))
+						f => f.Term(t => t.Field(f => f.Name).Value("Steve"))
+						//f => f.Range(new RangeQuery(new DateRangeQuery { Gte = "now-1d/d", Lt = "now/d" }))
 					))));
 
 		var serialisedJson = await SerializeAndGetJsonStringAsync(search);
