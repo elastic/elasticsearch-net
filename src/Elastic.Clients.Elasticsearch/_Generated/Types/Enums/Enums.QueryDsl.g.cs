@@ -500,6 +500,55 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
+	[JsonConverter(typeof(RangeRelationConverter))]
+	public enum RangeRelation
+	{
+		[EnumMember(Value = "within")]
+		Within,
+		[EnumMember(Value = "intersects")]
+		Intersects,
+		[EnumMember(Value = "contains")]
+		Contains
+	}
+
+	internal sealed class RangeRelationConverter : JsonConverter<RangeRelation>
+	{
+		public override RangeRelation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "within":
+					return RangeRelation.Within;
+				case "intersects":
+					return RangeRelation.Intersects;
+				case "contains":
+					return RangeRelation.Contains;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, RangeRelation value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case RangeRelation.Within:
+					writer.WriteStringValue("within");
+					return;
+				case RangeRelation.Intersects:
+					writer.WriteStringValue("intersects");
+					return;
+				case RangeRelation.Contains:
+					writer.WriteStringValue("contains");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(SimpleQueryStringFlagConverter))]
 	public enum SimpleQueryStringFlag
 	{
