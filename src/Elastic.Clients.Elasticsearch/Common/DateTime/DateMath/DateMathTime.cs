@@ -8,25 +8,25 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace Elastic.Clients.Elasticsearch
-{
-	/// <summary>
-	/// A time representation for use within <see cref="DateMath" /> expressions.
-	/// </summary>
-	[JsonConverter(typeof(DateMathTimeConverter))]
-	public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
-	{
-		private const double MillisecondsInADay = MillisecondsInAnHour * 24;
-		private const double MillisecondsInAMinute = MillisecondsInASecond * 60;
-		private const double MillisecondsInAMonthApproximate = MillisecondsInAYearApproximate / MonthsInAYear;
-		private const double MillisecondsInAnHour = MillisecondsInAMinute * 60;
-		private const double MillisecondsInASecond = 1000;
-		private const double MillisecondsInAWeek = MillisecondsInADay * 7;
-		private const double MillisecondsInAYearApproximate = MillisecondsInADay * 365;
-		private const int MonthsInAYear = 12;
+namespace Elastic.Clients.Elasticsearch;
 
-		private static readonly Regex ExpressionRegex =
-			new(@"^
+/// <summary>
+/// A time representation for use within <see cref="DateMath" /> expressions.
+/// </summary>
+[JsonConverter(typeof(DateMathTimeConverter))]
+public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
+{
+	private const double MillisecondsInADay = MillisecondsInAnHour * 24;
+	private const double MillisecondsInAMinute = MillisecondsInASecond * 60;
+	private const double MillisecondsInAMonthApproximate = MillisecondsInAYearApproximate / MonthsInAYear;
+	private const double MillisecondsInAnHour = MillisecondsInAMinute * 60;
+	private const double MillisecondsInASecond = 1000;
+	private const double MillisecondsInAWeek = MillisecondsInADay * 7;
+	private const double MillisecondsInAYearApproximate = MillisecondsInADay * 365;
+	private const int MonthsInAYear = 12;
+
+	private static readonly Regex ExpressionRegex =
+		new(@"^
 				(?<factor>[+\-]? # open factor capture, allowing optional +- signs
 					(?:(?#numeric)(?:\d+(?:\.\d*)?)|(?:\.\d+)) #a numeric in the forms: (N, N., .N, N.N)
 					(?:(?#exponent)e[+\-]?\d+)? #an optional exponential scientific component, E also matches here (IgnoreCase)
@@ -34,307 +34,306 @@ namespace Elastic.Clients.Elasticsearch
 				\s{0,10} #optional spaces (sanity checked for max 10 repetitions)
 				(?<interval>(?:y|w|d|h|m|s)) #interval indicator
 				$",
-				RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+			RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 
-		private double _approximateSeconds;
+	private double _approximateSeconds;
 
-		/// <summary>
-		/// Instantiates a new instance of <see cref="DateMathTime" /> from a TimeSpan.
-		/// Rounding can be specified to determine how fractional second values should be rounded.
-		/// </summary>
-		public DateMathTime(TimeSpan timeSpan, MidpointRounding rounding = MidpointRounding.AwayFromZero)
-			: this(timeSpan.TotalMilliseconds, rounding) { }
+	/// <summary>
+	/// Instantiates a new instance of <see cref="DateMathTime" /> from a TimeSpan.
+	/// Rounding can be specified to determine how fractional second values should be rounded.
+	/// </summary>
+	public DateMathTime(TimeSpan timeSpan, MidpointRounding rounding = MidpointRounding.AwayFromZero)
+		: this(timeSpan.TotalMilliseconds, rounding) { }
 
-		/// <summary>
-		/// Instantiates a new instance of <see cref="DateMathTime" /> from a milliseconds value.
-		/// Rounding can be specified to determine how fractional second values should be rounded.
-		/// </summary>
-		public DateMathTime(double milliseconds, MidpointRounding rounding = MidpointRounding.AwayFromZero) =>
-			SetWholeFactorIntervalAndSeconds(milliseconds, rounding);
+	/// <summary>
+	/// Instantiates a new instance of <see cref="DateMathTime" /> from a milliseconds value.
+	/// Rounding can be specified to determine how fractional second values should be rounded.
+	/// </summary>
+	public DateMathTime(double milliseconds, MidpointRounding rounding = MidpointRounding.AwayFromZero) =>
+		SetWholeFactorIntervalAndSeconds(milliseconds, rounding);
 
-		/// <summary>
-		/// Instantiates a new instance of <see cref="DateMathTime" /> from a factor and interval.
-		/// </summary>
-		public DateMathTime(int factor, DateMathTimeUnit interval) =>
-			SetWholeFactorIntervalAndSeconds(factor, interval, MidpointRounding.AwayFromZero);
+	/// <summary>
+	/// Instantiates a new instance of <see cref="DateMathTime" /> from a factor and interval.
+	/// </summary>
+	public DateMathTime(int factor, DateMathTimeUnit interval) =>
+		SetWholeFactorIntervalAndSeconds(factor, interval, MidpointRounding.AwayFromZero);
 
-		/// <summary>
-		/// Instantiates a new instance of <see cref="DateMathTime" /> from the timeUnit string expression.
-		/// Rounding can be specified to determine how fractional second values should be rounded.
-		/// </summary>
-		public DateMathTime(string timeUnit, MidpointRounding rounding = MidpointRounding.AwayFromZero)
+	/// <summary>
+	/// Instantiates a new instance of <see cref="DateMathTime" /> from the timeUnit string expression.
+	/// Rounding can be specified to determine how fractional second values should be rounded.
+	/// </summary>
+	public DateMathTime(string timeUnit, MidpointRounding rounding = MidpointRounding.AwayFromZero)
+	{
+		if (timeUnit == null) throw new ArgumentNullException(nameof(timeUnit));
+		if (timeUnit.Length == 0) throw new ArgumentException("Expression string is empty", nameof(timeUnit));
+
+		var match = ExpressionRegex.Match(timeUnit);
+		if (!match.Success) throw new ArgumentException($"Expression '{timeUnit}' string is invalid", nameof(timeUnit));
+
+		var factor = match.Groups["factor"].Value;
+		if (!double.TryParse(factor, NumberStyles.Any, CultureInfo.InvariantCulture, out var fraction))
+			throw new ArgumentException($"Expression '{timeUnit}' contains invalid factor: {factor}", nameof(timeUnit));
+
+		var intervalValue = match.Groups["interval"].Value;
+		var interval = intervalValue switch
 		{
-			if (timeUnit == null) throw new ArgumentNullException(nameof(timeUnit));
-			if (timeUnit.Length == 0) throw new ArgumentException("Expression string is empty", nameof(timeUnit));
+			"M" => DateMathTimeUnit.Month,
+			"m" => DateMathTimeUnit.Minute,
+			_ => intervalValue.ToEnum<DateMathTimeUnit>().GetValueOrDefault(),
+		};
+		SetWholeFactorIntervalAndSeconds(fraction, interval, rounding);
+	}
 
-			var match = ExpressionRegex.Match(timeUnit);
-			if (!match.Success) throw new ArgumentException($"Expression '{timeUnit}' string is invalid", nameof(timeUnit));
+	/// <summary>
+	/// The numeric time factor
+	/// </summary>
+	public int Factor { get; private set; }
 
-			var factor = match.Groups["factor"].Value;
-			if (!double.TryParse(factor, NumberStyles.Any, CultureInfo.InvariantCulture, out var fraction))
-				throw new ArgumentException($"Expression '{timeUnit}' contains invalid factor: {factor}", nameof(timeUnit));
+	/// <summary>
+	/// The time units
+	/// </summary>
+	public DateMathTimeUnit Interval { get; private set; }
 
-			var intervalValue = match.Groups["interval"].Value;
-			var interval = intervalValue switch
-			{
-				"M" => DateMathTimeUnit.Month,
-				"m" => DateMathTimeUnit.Minute,
-				_ => intervalValue.ToEnum<DateMathTimeUnit>().GetValueOrDefault(),
-			};
-			SetWholeFactorIntervalAndSeconds(fraction, interval, rounding);
-		}
+	public int CompareTo(DateMathTime other)
+	{
+		if (other == null) return 1;
+		if (Math.Abs(_approximateSeconds - other._approximateSeconds) < double.Epsilon) return 0;
+		if (_approximateSeconds < other._approximateSeconds) return -1;
 
-		/// <summary>
-		/// The numeric time factor
-		/// </summary>
-		public int Factor { get; private set; }
+		return 1;
+	}
 
-		/// <summary>
-		/// The time units
-		/// </summary>
-		public DateMathTimeUnit Interval { get; private set; }
+	public bool Equals(DateMathTime other)
+	{
+		if (other is null) return false;
+		if (ReferenceEquals(this, other)) return true;
 
-		public int CompareTo(DateMathTime other)
+		return Math.Abs(_approximateSeconds - other._approximateSeconds) < double.Epsilon;
+	}
+
+	public static implicit operator DateMathTime(TimeSpan span) => new(span);
+
+	public static implicit operator DateMathTime(double milliseconds) => new(milliseconds);
+
+	public static implicit operator DateMathTime(string expression) => new(expression);
+
+	private void SetWholeFactorIntervalAndSeconds(double factor, DateMathTimeUnit interval, MidpointRounding rounding)
+	{
+		var fraction = factor;
+		double milliseconds;
+
+		// if the factor is already a whole number then use it
+		if (TryGetIntegerGreaterThanZero(fraction, out var whole))
 		{
-			if (other == null) return 1;
-			if (Math.Abs(_approximateSeconds - other._approximateSeconds) < double.Epsilon) return 0;
-			if (_approximateSeconds < other._approximateSeconds) return -1;
-
-			return 1;
-		}
-
-		public bool Equals(DateMathTime other)
-		{
-			if (other is null) return false;
-			if (ReferenceEquals(this, other)) return true;
-
-			return Math.Abs(_approximateSeconds - other._approximateSeconds) < double.Epsilon;
-		}
-
-		public static implicit operator DateMathTime(TimeSpan span) => new(span);
-
-		public static implicit operator DateMathTime(double milliseconds) => new(milliseconds);
-
-		public static implicit operator DateMathTime(string expression) => new(expression);
-
-		private void SetWholeFactorIntervalAndSeconds(double factor, DateMathTimeUnit interval, MidpointRounding rounding)
-		{
-			var fraction = factor;
-			double milliseconds;
-
-			// if the factor is already a whole number then use it
-			if (TryGetIntegerGreaterThanZero(fraction, out var whole))
-			{
-				Factor = whole;
-				Interval = interval;
-				switch (interval)
-				{
-					case DateMathTimeUnit.Second:
-						_approximateSeconds = whole;
-						break;
-					case DateMathTimeUnit.Minute:
-						_approximateSeconds = whole * (MillisecondsInAMinute / MillisecondsInASecond);
-						break;
-					case DateMathTimeUnit.Hour:
-						_approximateSeconds = whole * (MillisecondsInAnHour / MillisecondsInASecond);
-						break;
-					case DateMathTimeUnit.Day:
-						_approximateSeconds = whole * (MillisecondsInADay / MillisecondsInASecond);
-						break;
-					case DateMathTimeUnit.Week:
-						_approximateSeconds = whole * (MillisecondsInAWeek / MillisecondsInASecond);
-						break;
-					case DateMathTimeUnit.Month:
-						_approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
-						break;
-					case DateMathTimeUnit.Year:
-						_approximateSeconds = whole * (MillisecondsInAYearApproximate / MillisecondsInASecond);
-						break;
-					default:
-						throw new ArgumentOutOfRangeException(nameof(interval), interval, null);
-				}
-				return;
-			}
-
+			Factor = whole;
+			Interval = interval;
 			switch (interval)
 			{
 				case DateMathTimeUnit.Second:
-					milliseconds = factor * MillisecondsInASecond;
+					_approximateSeconds = whole;
 					break;
 				case DateMathTimeUnit.Minute:
-					milliseconds = factor * MillisecondsInAMinute;
+					_approximateSeconds = whole * (MillisecondsInAMinute / MillisecondsInASecond);
 					break;
 				case DateMathTimeUnit.Hour:
-					milliseconds = factor * MillisecondsInAnHour;
+					_approximateSeconds = whole * (MillisecondsInAnHour / MillisecondsInASecond);
 					break;
 				case DateMathTimeUnit.Day:
-					milliseconds = factor * MillisecondsInADay;
+					_approximateSeconds = whole * (MillisecondsInADay / MillisecondsInASecond);
 					break;
 				case DateMathTimeUnit.Week:
-					milliseconds = factor * MillisecondsInAWeek;
+					_approximateSeconds = whole * (MillisecondsInAWeek / MillisecondsInASecond);
 					break;
 				case DateMathTimeUnit.Month:
-					if (TryGetIntegerGreaterThanZero(fraction, out whole))
-					{
-						Factor = whole;
-						Interval = interval;
-						_approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
-						return;
-					}
-
-					milliseconds = factor * MillisecondsInAMonthApproximate;
+					_approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
 					break;
 				case DateMathTimeUnit.Year:
-					if (TryGetIntegerGreaterThanZero(fraction, out whole))
-					{
-						Factor = whole;
-						Interval = interval;
-						_approximateSeconds = whole * (MillisecondsInAYearApproximate / MillisecondsInASecond);
-						return;
-					}
-
-					fraction = fraction * MonthsInAYear;
-					if (TryGetIntegerGreaterThanZero(fraction, out whole))
-					{
-						Factor = whole;
-						Interval = DateMathTimeUnit.Month;
-						_approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
-						return;
-					}
-					milliseconds = factor * MillisecondsInAYearApproximate;
+					_approximateSeconds = whole * (MillisecondsInAYearApproximate / MillisecondsInASecond);
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(interval), interval, null);
 			}
-
-			SetWholeFactorIntervalAndSeconds(milliseconds, rounding);
+			return;
 		}
 
-		private void SetWholeFactorIntervalAndSeconds(double milliseconds, MidpointRounding rounding)
+		switch (interval)
 		{
-			double fraction;
-			int whole;
+			case DateMathTimeUnit.Second:
+				milliseconds = factor * MillisecondsInASecond;
+				break;
+			case DateMathTimeUnit.Minute:
+				milliseconds = factor * MillisecondsInAMinute;
+				break;
+			case DateMathTimeUnit.Hour:
+				milliseconds = factor * MillisecondsInAnHour;
+				break;
+			case DateMathTimeUnit.Day:
+				milliseconds = factor * MillisecondsInADay;
+				break;
+			case DateMathTimeUnit.Week:
+				milliseconds = factor * MillisecondsInAWeek;
+				break;
+			case DateMathTimeUnit.Month:
+				if (TryGetIntegerGreaterThanZero(fraction, out whole))
+				{
+					Factor = whole;
+					Interval = interval;
+					_approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
+					return;
+				}
 
-			if (milliseconds >= MillisecondsInAWeek)
-			{
-				fraction = milliseconds / MillisecondsInAWeek;
+				milliseconds = factor * MillisecondsInAMonthApproximate;
+				break;
+			case DateMathTimeUnit.Year:
 				if (TryGetIntegerGreaterThanZero(fraction, out whole))
 				{
 					Factor = whole;
-					Interval = DateMathTimeUnit.Week;
-					_approximateSeconds = Factor * (MillisecondsInAWeek / MillisecondsInASecond);
+					Interval = interval;
+					_approximateSeconds = whole * (MillisecondsInAYearApproximate / MillisecondsInASecond);
 					return;
 				}
-			}
-			if (milliseconds >= MillisecondsInADay)
-			{
-				fraction = milliseconds / MillisecondsInADay;
-				if (TryGetIntegerGreaterThanZero(fraction, out whole))
-				{
-					Factor = whole;
-					Interval = DateMathTimeUnit.Day;
-					_approximateSeconds = Factor * (MillisecondsInADay / MillisecondsInASecond);
-					return;
-				}
-			}
-			if (milliseconds >= MillisecondsInAnHour)
-			{
-				fraction = milliseconds / MillisecondsInAnHour;
-				if (TryGetIntegerGreaterThanZero(fraction, out whole))
-				{
-					Factor = whole;
-					Interval = DateMathTimeUnit.Hour;
-					_approximateSeconds = Factor * (MillisecondsInAnHour / MillisecondsInASecond);
-					return;
-				}
-			}
-			if (milliseconds >= MillisecondsInAMinute)
-			{
-				fraction = milliseconds / MillisecondsInAMinute;
-				if (TryGetIntegerGreaterThanZero(fraction, out whole))
-				{
-					Factor = whole;
-					Interval = DateMathTimeUnit.Minute;
-					_approximateSeconds = Factor * (MillisecondsInAMinute / MillisecondsInASecond);
-					return;
-				}
-			}
-			if (milliseconds >= MillisecondsInASecond)
-			{
-				fraction = milliseconds / MillisecondsInASecond;
-				if (TryGetIntegerGreaterThanZero(fraction, out whole))
-				{
-					Factor = whole;
-					Interval = DateMathTimeUnit.Second;
-					_approximateSeconds = Factor;
-					return;
-				}
-			}
 
-			// round to nearest second, using specified rounding
-			Factor = Convert.ToInt32(Math.Round(milliseconds / MillisecondsInASecond, rounding));
-			Interval = DateMathTimeUnit.Second;
-			_approximateSeconds = Factor;
+				fraction = fraction * MonthsInAYear;
+				if (TryGetIntegerGreaterThanZero(fraction, out whole))
+				{
+					Factor = whole;
+					Interval = DateMathTimeUnit.Month;
+					_approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
+					return;
+				}
+				milliseconds = factor * MillisecondsInAYearApproximate;
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(interval), interval, null);
 		}
 
-		private static bool TryGetIntegerGreaterThanZero(double d, out int value)
-		{
-			if (Math.Abs(d % 1) < double.Epsilon)
-			{
-				value = Convert.ToInt32(d);
-				return true;
-			}
-
-			value = 0;
-			return false;
-		}
-
-		public static bool operator <(DateMathTime left, DateMathTime right) => left.CompareTo(right) < 0;
-
-		public static bool operator <=(DateMathTime left, DateMathTime right) => left.CompareTo(right) < 0 || left.Equals(right);
-
-		public static bool operator >(DateMathTime left, DateMathTime right) => left.CompareTo(right) > 0;
-
-		public static bool operator >=(DateMathTime left, DateMathTime right) => left.CompareTo(right) > 0 || left.Equals(right);
-
-		public static bool operator ==(DateMathTime left, DateMathTime right) =>
-			left?.Equals(right) ?? ReferenceEquals(right, null);
-
-		public static bool operator !=(DateMathTime left, DateMathTime right) => !(left == right);
-
-		public override string ToString() => Factor + Interval.GetStringValue();
-
-		public override bool Equals(object obj)
-		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != GetType()) return false;
-
-			return Equals((DateMathTime)obj);
-		}
-
-		// ReSharper disable once NonReadonlyMemberInGetHashCode
-		public override int GetHashCode() => _approximateSeconds.GetHashCode();
+		SetWholeFactorIntervalAndSeconds(milliseconds, rounding);
 	}
 
-	internal sealed class DateMathTimeConverter : JsonConverter<DateMathTime>
+	private void SetWholeFactorIntervalAndSeconds(double milliseconds, MidpointRounding rounding)
 	{
-		public override DateMathTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var value = reader.GetString();
-			reader.Read();
-			return value;
-		}
+		double fraction;
+		int whole;
 
-		public override void Write(Utf8JsonWriter writer, DateMathTime value, JsonSerializerOptions options)
+		if (milliseconds >= MillisecondsInAWeek)
 		{
-			if (value is null)
+			fraction = milliseconds / MillisecondsInAWeek;
+			if (TryGetIntegerGreaterThanZero(fraction, out whole))
 			{
-				writer.WriteNullValue();
+				Factor = whole;
+				Interval = DateMathTimeUnit.Week;
+				_approximateSeconds = Factor * (MillisecondsInAWeek / MillisecondsInASecond);
 				return;
 			}
-
-			writer.WriteStringValue(value.ToString());
 		}
+		if (milliseconds >= MillisecondsInADay)
+		{
+			fraction = milliseconds / MillisecondsInADay;
+			if (TryGetIntegerGreaterThanZero(fraction, out whole))
+			{
+				Factor = whole;
+				Interval = DateMathTimeUnit.Day;
+				_approximateSeconds = Factor * (MillisecondsInADay / MillisecondsInASecond);
+				return;
+			}
+		}
+		if (milliseconds >= MillisecondsInAnHour)
+		{
+			fraction = milliseconds / MillisecondsInAnHour;
+			if (TryGetIntegerGreaterThanZero(fraction, out whole))
+			{
+				Factor = whole;
+				Interval = DateMathTimeUnit.Hour;
+				_approximateSeconds = Factor * (MillisecondsInAnHour / MillisecondsInASecond);
+				return;
+			}
+		}
+		if (milliseconds >= MillisecondsInAMinute)
+		{
+			fraction = milliseconds / MillisecondsInAMinute;
+			if (TryGetIntegerGreaterThanZero(fraction, out whole))
+			{
+				Factor = whole;
+				Interval = DateMathTimeUnit.Minute;
+				_approximateSeconds = Factor * (MillisecondsInAMinute / MillisecondsInASecond);
+				return;
+			}
+		}
+		if (milliseconds >= MillisecondsInASecond)
+		{
+			fraction = milliseconds / MillisecondsInASecond;
+			if (TryGetIntegerGreaterThanZero(fraction, out whole))
+			{
+				Factor = whole;
+				Interval = DateMathTimeUnit.Second;
+				_approximateSeconds = Factor;
+				return;
+			}
+		}
+
+		// round to nearest second, using specified rounding
+		Factor = Convert.ToInt32(Math.Round(milliseconds / MillisecondsInASecond, rounding));
+		Interval = DateMathTimeUnit.Second;
+		_approximateSeconds = Factor;
+	}
+
+	private static bool TryGetIntegerGreaterThanZero(double d, out int value)
+	{
+		if (Math.Abs(d % 1) < double.Epsilon)
+		{
+			value = Convert.ToInt32(d);
+			return true;
+		}
+
+		value = 0;
+		return false;
+	}
+
+	public static bool operator <(DateMathTime left, DateMathTime right) => left.CompareTo(right) < 0;
+
+	public static bool operator <=(DateMathTime left, DateMathTime right) => left.CompareTo(right) < 0 || left.Equals(right);
+
+	public static bool operator >(DateMathTime left, DateMathTime right) => left.CompareTo(right) > 0;
+
+	public static bool operator >=(DateMathTime left, DateMathTime right) => left.CompareTo(right) > 0 || left.Equals(right);
+
+	public static bool operator ==(DateMathTime left, DateMathTime right) =>
+		left?.Equals(right) ?? ReferenceEquals(right, null);
+
+	public static bool operator !=(DateMathTime left, DateMathTime right) => !(left == right);
+
+	public override string ToString() => Factor + Interval.GetStringValue();
+
+	public override bool Equals(object obj)
+	{
+		if (ReferenceEquals(null, obj)) return false;
+		if (ReferenceEquals(this, obj)) return true;
+		if (obj.GetType() != GetType()) return false;
+
+		return Equals((DateMathTime)obj);
+	}
+
+	// ReSharper disable once NonReadonlyMemberInGetHashCode
+	public override int GetHashCode() => _approximateSeconds.GetHashCode();
+}
+
+internal sealed class DateMathTimeConverter : JsonConverter<DateMathTime>
+{
+	public override DateMathTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var value = reader.GetString();
+		reader.Read();
+		return value;
+	}
+
+	public override void Write(Utf8JsonWriter writer, DateMathTime value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		writer.WriteStringValue(value.ToString());
 	}
 }

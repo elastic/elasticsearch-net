@@ -7,65 +7,64 @@ using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+[StringEnum]
+[JsonConverter(typeof(DateMathOperationConverter))]
+public enum DateMathOperation
 {
-	[StringEnum]
-	[JsonConverter(typeof(DateMathOperationConverter))]
-	public enum DateMathOperation
-	{
-		[EnumMember(Value = "+")]
-		Add,
+	[EnumMember(Value = "+")]
+	Add,
 
-		[EnumMember(Value = "-")]
-		Subtract
-	}
+	[EnumMember(Value = "-")]
+	Subtract
+}
 
-	internal sealed class DateMathOperationConverter : JsonConverter<DateMathOperation>
+internal sealed class DateMathOperationConverter : JsonConverter<DateMathOperation>
+{
+	public override DateMathOperation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override DateMathOperation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		var enumString = reader.GetString();
+		switch (enumString)
 		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "+":
-					return DateMathOperation.Add;
-				case "-":
-					return DateMathOperation.Subtract;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
+			case "+":
+				return DateMathOperation.Add;
+			case "-":
+				return DateMathOperation.Subtract;
 		}
 
-		public override void Write(Utf8JsonWriter writer, DateMathOperation value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case DateMathOperation.Add:
-					writer.WriteStringValue("+");
-					return;
-				case DateMathOperation.Subtract:
-					writer.WriteStringValue("-");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	public static class DateMathOperationExtensions
+	public override void Write(Utf8JsonWriter writer, DateMathOperation value, JsonSerializerOptions options)
 	{
-		public static string GetStringValue(this DateMathOperation value)
+		switch (value)
 		{
-			switch (value)
-			{
-				case DateMathOperation.Add:
-					return "+";
-				case DateMathOperation.Subtract:
-					return "-";
-				default:
-					throw new ArgumentOutOfRangeException(nameof(value), value, null);
-			}
+			case DateMathOperation.Add:
+				writer.WriteStringValue("+");
+				return;
+			case DateMathOperation.Subtract:
+				writer.WriteStringValue("-");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+public static class DateMathOperationExtensions
+{
+	public static string GetStringValue(this DateMathOperation value)
+	{
+		switch (value)
+		{
+			case DateMathOperation.Add:
+				return "+";
+			case DateMathOperation.Subtract:
+				return "-";
+			default:
+				throw new ArgumentOutOfRangeException(nameof(value), value, null);
 		}
 	}
 }
