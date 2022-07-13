@@ -30,7 +30,7 @@ namespace Tests.Configuration
 			TestOnlyOne = RandomBoolConfig("TEST_ONLY_ONE", randomizer, false);
 			Random = new RandomConfiguration
 			{
-				SourceSerializer = RandomBoolConfig("SOURCESERIALIZER", randomizer),
+				//SourceSerializer = RandomBoolConfig("SOURCESERIALIZER", randomizer), // Disabling this until we have properly reviewed the Newtonsoft.JSON serializer.
 				HttpCompression = RandomBoolConfig("HTTPCOMPRESSION", randomizer)
 			};
 		}
