@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Elastic.Transport;
 using Elastic.Transport.Products.Elasticsearch;
 
@@ -28,7 +29,7 @@ internal sealed class ElasticsearchClientProductRegistration : ElasticsearchProd
 	///     Makes the low level transport aware of Elastic.Clients.Elasticsearch's <see cref="ElasticsearchResponseBase" />
 	///     so that it can peek in to its exposed error when reporting failures.
 	/// </summary>
-	public override bool TryGetServerErrorReason<TResponse>(TResponse response, out string? reason)
+	public override bool TryGetServerErrorReason<TResponse>(TResponse response, [NotNullWhen(returnValue: true)] out string? reason)
 	{
 		if (response is not ElasticsearchResponseBase r)
 			return base.TryGetServerErrorReason(response, out reason);
