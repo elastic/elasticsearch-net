@@ -36,7 +36,7 @@ namespace Tests.Configuration
 			SetExternalSeed(externalSeed, out var randomizer);
 			Random = new RandomConfiguration
 			{
-				SourceSerializer = RandomBool("source_serializer", randomizer),
+				//SourceSerializer = RandomBool("source_serializer", randomizer), // Disabling this until we have properly reviewed the Newtonsoft.JSON serializer.
 				HttpCompression = RandomBool("http_compression", randomizer)
 			};
 		}
