@@ -16,7 +16,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		public bool HasSourceFilterValue => Tag == 1;
 
-		// TODO - Not null when
 		public bool TryGetBool([NotNullWhen(returnValue: true)] out bool? value)
 		{
 			if (Tag == 0)
