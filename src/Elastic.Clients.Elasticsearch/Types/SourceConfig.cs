@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -16,7 +17,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool HasSourceFilterValue => Tag == 1;
 
 		// TODO - Not null when
-		public bool TryGetBool(out bool? value)
+		public bool TryGetBool([NotNullWhen(returnValue: true)] out bool? value)
 		{
 			if (Tag == 0)
 			{
@@ -28,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 			return false;
 		}
 
-		public bool TryGetSourceFilter(out SourceFilter? value)
+		public bool TryGetSourceFilter([NotNullWhen(returnValue: true)] out SourceFilter? value)
 		{
 			if (Tag == 1)
 			{
