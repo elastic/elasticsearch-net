@@ -341,12 +341,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (DocvalueFieldsDescriptor is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (DocvalueFieldsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(DocvalueFieldsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (DocvalueFieldsDescriptorActions is not null)
 			{
@@ -724,12 +728,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (DocvalueFieldsDescriptor is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (DocvalueFieldsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(DocvalueFieldsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (DocvalueFieldsDescriptorActions is not null)
 			{

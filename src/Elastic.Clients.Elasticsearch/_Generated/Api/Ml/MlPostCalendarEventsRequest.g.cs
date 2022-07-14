@@ -113,12 +113,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (EventsDescriptor is not null)
 			{
 				writer.WritePropertyName("events");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, EventsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (EventsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("events");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new CalendarEventDescriptor(EventsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (EventsDescriptorActions is not null)
 			{
