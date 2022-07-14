@@ -140,12 +140,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			if (CommandsDescriptor is not null)
 			{
 				writer.WritePropertyName("commands");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, CommandsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (CommandsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("commands");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new CommandDescriptor(CommandsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (CommandsDescriptorActions is not null)
 			{
