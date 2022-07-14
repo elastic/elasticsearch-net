@@ -173,12 +173,16 @@ namespace Elastic.Clients.Elasticsearch.Security
 			if (ApplicationDescriptor is not null)
 			{
 				writer.WritePropertyName("application");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, ApplicationDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (ApplicationDescriptorAction is not null)
 			{
 				writer.WritePropertyName("application");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new ApplicationPrivilegesCheckDescriptor(ApplicationDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (ApplicationDescriptorActions is not null)
 			{
@@ -206,12 +210,16 @@ namespace Elastic.Clients.Elasticsearch.Security
 			if (IndexDescriptor is not null)
 			{
 				writer.WritePropertyName("index");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, IndexDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (IndexDescriptorAction is not null)
 			{
 				writer.WritePropertyName("index");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new IndexPrivilegesCheckDescriptor(IndexDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (IndexDescriptorActions is not null)
 			{
