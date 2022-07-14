@@ -32,7 +32,7 @@ public class MGetSerialization : SerializerTestBase
 	}
 
 	[U]
-	public async Task SerializesRequestWithSingularIds()
+	public async Task SerializesRequestWithSingleIds()
 	{
 		var request = new MultiGetRequest()
 		{
@@ -45,10 +45,23 @@ public class MGetSerialization : SerializerTestBase
 	}
 
 	[U]
-	public async Task SerializesDescriptorWithSingularIds()
+	public async Task SerializesDescriptorWithSingleIds()
 	{
 		var request = new MultiGetRequestDescriptor()
 			.Ids("single-value");
+
+		var json = SerializeAndGetJsonString(request);
+
+		await Verifier.VerifyJson(json);
+	}
+
+	[U]
+	public async Task SerializesRequestWithMultipleIds()
+	{
+		var request = new MultiGetRequest()
+		{
+			Ids = new Ids(new[] { "value-1", "value-2" })
+		};
 
 		var json = SerializeAndGetJsonString(request);
 
