@@ -343,12 +343,16 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			if (FieldsDescriptor is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorActions is not null)
 			{
@@ -370,12 +374,16 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			if (FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorActions is not null)
 			{
@@ -715,12 +723,16 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			if (FieldsDescriptor is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorActions is not null)
 			{
@@ -742,12 +754,16 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			if (FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorActions is not null)
 			{

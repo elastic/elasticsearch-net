@@ -298,12 +298,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (FeatureProcessorsDescriptor is not null)
 			{
 				writer.WritePropertyName("feature_processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FeatureProcessorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FeatureProcessorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("feature_processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DataframeAnalysisFeatureProcessorDescriptor<TDocument>(FeatureProcessorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FeatureProcessorsDescriptorActions is not null)
 			{
@@ -629,12 +633,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (FeatureProcessorsDescriptor is not null)
 			{
 				writer.WritePropertyName("feature_processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FeatureProcessorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FeatureProcessorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("feature_processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DataframeAnalysisFeatureProcessorDescriptor(FeatureProcessorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FeatureProcessorsDescriptorActions is not null)
 			{
