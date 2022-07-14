@@ -1,6 +1,6 @@
 ---
-name: Bug report for version 5.x and below
-about: File a bug report for NEST / Elasticsearch.Net version 5.x and below
+name: Bug report for version 6.x and below
+about: File a bug report for NEST / Elasticsearch.Net version 6.x and below
 title: ''
 labels: Bug
 assignees: ''

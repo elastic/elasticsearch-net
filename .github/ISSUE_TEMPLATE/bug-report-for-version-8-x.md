@@ -1,15 +1,19 @@
 ---
-name: Bug report for version 6.x
-about: File a bug report for NEST / Elasticsearch.Net version 6.x
+name: Bug report for version 8.x
+about: File a bug report for Elastic.Clients.Elasticsearch version 8.x
 title: ''
-labels: Bug, Bug 6.x
+labels: Bug, 8.x
 assignees: ''
 
 ---
 
-**NEST/Elasticsearch.Net version**:
+**Elastic.Clients.Elasticsearch version**:
 
 **Elasticsearch version**:
+
+**.NET runtime version**:
+
+**Operating system version**:
 
 **Description of the problem including expected versus actual behavior**:
 A clear and concise description of what the bug is.

@@ -2,7 +2,7 @@
 name: Bug report for version 7.x
 about: File a bug report for NEST / Elasticsearch.Net version 7.x
 title: ''
-labels: Bug, Bug 7.x
+labels: Bug, 7.x
 assignees: ''
 
 ---
