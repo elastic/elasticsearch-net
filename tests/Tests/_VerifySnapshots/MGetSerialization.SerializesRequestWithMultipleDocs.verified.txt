@@ -1,0 +1,12 @@
+{
+  docs: [
+    {
+      _id: value-a,
+      _index: text-index
+    },
+    {
+      _id: value-b,
+      _index: text-index
+    }
+  ]
+}

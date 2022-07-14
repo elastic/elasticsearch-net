@@ -45,10 +45,12 @@ public class MGetSerialization : SerializerTestBase
 	}
 
 	[U]
-	public async Task SerializesDescriptorWithSingleIds()
+	public async Task SerializesRequestWithMultipleIds()
 	{
-		var request = new MultiGetRequestDescriptor()
-			.Ids("single-value");
+		var request = new MultiGetRequest()
+		{
+			Ids = new Ids(new[] { "value-1", "value-2" })
+		};
 
 		var json = SerializeAndGetJsonString(request);
 
@@ -56,12 +58,41 @@ public class MGetSerialization : SerializerTestBase
 	}
 
 	[U]
-	public async Task SerializesRequestWithMultipleIds()
+	public async Task SerializesRequestWithSingleDocs()
 	{
 		var request = new MultiGetRequest()
 		{
-			Ids = new Ids(new[] { "value-1", "value-2" })
+			Docs = new[] { new Operation { Index = "text-index", Id = "single-value" } }
 		};
+
+		var json = SerializeAndGetJsonString(request);
+
+		await Verifier.VerifyJson(json);
+	}
+
+	[U]
+	public async Task SerializesRequestWithMultipleDocs()
+	{
+		var request = new MultiGetRequest()
+		{
+			Docs = new[]
+			{
+				new Operation { Index = "text-index", Id = "value-a" },
+				new Operation { Index = "text-index", Id = "value-b" }
+			}
+		};
+
+		var json = SerializeAndGetJsonString(request);
+
+		await Verifier.VerifyJson(json);
+	}
+
+
+	[U]
+	public async Task SerializesDescriptorWithSingleIds()
+	{
+		var request = new MultiGetRequestDescriptor()
+			.Ids("single-value");
 
 		var json = SerializeAndGetJsonString(request);
 
