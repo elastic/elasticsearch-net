@@ -186,12 +186,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (FunctionsDescriptor is not null)
 			{
 				writer.WritePropertyName("functions");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FunctionsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FunctionsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("functions");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new FunctionScoreContainerDescriptor<TDocument>(FunctionsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FunctionsDescriptorActions is not null)
 			{
@@ -401,12 +405,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (FunctionsDescriptor is not null)
 			{
 				writer.WritePropertyName("functions");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FunctionsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FunctionsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("functions");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new FunctionScoreContainerDescriptor(FunctionsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FunctionsDescriptorActions is not null)
 			{

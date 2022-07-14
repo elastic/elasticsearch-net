@@ -651,12 +651,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (DocvalueFieldsDescriptor is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (DocvalueFieldsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(DocvalueFieldsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (DocvalueFieldsDescriptorActions is not null)
 			{
@@ -678,12 +682,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (FieldsDescriptor is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorActions is not null)
 			{
@@ -753,12 +761,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (RescoreDescriptor is not null)
 			{
 				writer.WritePropertyName("rescore");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RescoreDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RescoreDescriptorAction is not null)
 			{
 				writer.WritePropertyName("rescore");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new RescoreDescriptor<TDocument>(RescoreDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RescoreDescriptorActions is not null)
 			{
@@ -1446,12 +1458,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (DocvalueFieldsDescriptor is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (DocvalueFieldsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(DocvalueFieldsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (DocvalueFieldsDescriptorActions is not null)
 			{
@@ -1473,12 +1489,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (FieldsDescriptor is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorActions is not null)
 			{
@@ -1548,12 +1568,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (RescoreDescriptor is not null)
 			{
 				writer.WritePropertyName("rescore");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RescoreDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RescoreDescriptorAction is not null)
 			{
 				writer.WritePropertyName("rescore");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new RescoreDescriptor(RescoreDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RescoreDescriptorActions is not null)
 			{
