@@ -4,6 +4,10 @@ Repository for **Elastic.Clients.Elasticsearch** the official .NET client for [E
 
 The .NET client for Elasticsearch provides strongly typed requests and responses for Elasticsearch APIs. It delegates protocol handling to the [Elastic.Transport](https://github.com/elastic/elastic-transport-net) library, which takes care of all transport-level concerns (HTTP connection establishment and pooling, retries, etc.).
 
+## Compatibility
+
+Language clients are forward compatible; meaning that clients support communicating with greater or equal minor versions of Elasticsearch. Elasticsearch language clients are only backwards compatible with default distributions and without guarantees made.
+
 ## Versions
 
 ### Elasticsearch 8.x Clusters
