@@ -335,12 +335,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (DetectorsDescriptor is not null)
 			{
 				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (DetectorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DetectorDescriptor<TDocument>(DetectorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (DetectorsDescriptorActions is not null)
 			{
@@ -711,12 +715,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (DetectorsDescriptor is not null)
 			{
 				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (DetectorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DetectorDescriptor(DetectorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (DetectorsDescriptorActions is not null)
 			{

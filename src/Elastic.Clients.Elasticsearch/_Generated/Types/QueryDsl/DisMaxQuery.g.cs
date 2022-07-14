@@ -116,12 +116,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (QueriesDescriptor is not null)
 			{
 				writer.WritePropertyName("queries");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, QueriesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (QueriesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("queries");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(QueriesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (QueriesDescriptorActions is not null)
 			{
@@ -243,12 +247,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (QueriesDescriptor is not null)
 			{
 				writer.WritePropertyName("queries");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, QueriesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (QueriesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("queries");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(QueriesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (QueriesDescriptorActions is not null)
 			{

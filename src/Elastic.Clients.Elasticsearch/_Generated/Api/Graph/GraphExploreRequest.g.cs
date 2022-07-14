@@ -276,12 +276,16 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			if (VerticesDescriptor is not null)
 			{
 				writer.WritePropertyName("vertices");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, VerticesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (VerticesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("vertices");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor<TDocument>(VerticesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (VerticesDescriptorActions is not null)
 			{
@@ -514,12 +518,16 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			if (VerticesDescriptor is not null)
 			{
 				writer.WritePropertyName("vertices");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, VerticesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (VerticesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("vertices");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor(VerticesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (VerticesDescriptorActions is not null)
 			{

@@ -182,12 +182,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (RatingsDescriptor is not null)
 			{
 				writer.WritePropertyName("ratings");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RatingsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RatingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("ratings");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DocumentRatingDescriptor(RatingsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RatingsDescriptorActions is not null)
 			{
@@ -351,12 +355,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (RatingsDescriptor is not null)
 			{
 				writer.WritePropertyName("ratings");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RatingsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RatingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("ratings");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DocumentRatingDescriptor(RatingsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RatingsDescriptorActions is not null)
 			{

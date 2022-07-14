@@ -174,12 +174,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (RequestsDescriptor is not null)
 			{
 				writer.WritePropertyName("requests");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RequestsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RequestsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("requests");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new RankEvalRequestItemDescriptor<TDocument>(RequestsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RequestsDescriptorActions is not null)
 			{
@@ -322,12 +326,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (RequestsDescriptor is not null)
 			{
 				writer.WritePropertyName("requests");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RequestsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RequestsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("requests");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new RankEvalRequestItemDescriptor(RequestsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RequestsDescriptorActions is not null)
 			{
