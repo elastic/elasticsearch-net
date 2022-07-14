@@ -266,12 +266,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			if (ContextsDescriptor is not null)
 			{
 				writer.WritePropertyName("contexts");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, ContextsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (ContextsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("contexts");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new SuggestContextDescriptor<TDocument>(ContextsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (ContextsDescriptorActions is not null)
 			{
@@ -606,12 +610,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			if (ContextsDescriptor is not null)
 			{
 				writer.WritePropertyName("contexts");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, ContextsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (ContextsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("contexts");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new SuggestContextDescriptor(ContextsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (ContextsDescriptorActions is not null)
 			{
