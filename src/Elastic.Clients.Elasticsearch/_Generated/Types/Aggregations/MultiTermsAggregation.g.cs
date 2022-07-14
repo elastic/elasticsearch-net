@@ -429,12 +429,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (TermsDescriptor is not null)
 			{
 				writer.WritePropertyName("terms");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, TermsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (TermsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("terms");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor<TDocument>(TermsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (TermsDescriptorActions is not null)
 			{
@@ -675,12 +679,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (TermsDescriptor is not null)
 			{
 				writer.WritePropertyName("terms");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, TermsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (TermsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("terms");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor(TermsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (TermsDescriptorActions is not null)
 			{
