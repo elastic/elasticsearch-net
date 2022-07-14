@@ -155,12 +155,16 @@ namespace Elastic.Clients.Elasticsearch.License
 			if (LicensesDescriptor is not null)
 			{
 				writer.WritePropertyName("licenses");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, LicensesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (LicensesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("licenses");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new LicenseDescriptor(LicensesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (LicensesDescriptorActions is not null)
 			{

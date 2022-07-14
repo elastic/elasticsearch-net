@@ -122,12 +122,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (IntervalsDescriptor is not null)
 			{
 				writer.WritePropertyName("intervals");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, IntervalsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (IntervalsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("intervals");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor<TDocument>(IntervalsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (IntervalsDescriptorActions is not null)
 			{
@@ -253,12 +257,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (IntervalsDescriptor is not null)
 			{
 				writer.WritePropertyName("intervals");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, IntervalsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (IntervalsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("intervals");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor(IntervalsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (IntervalsDescriptorActions is not null)
 			{

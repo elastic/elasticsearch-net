@@ -169,12 +169,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (DocsDescriptor is not null)
 			{
 				writer.WritePropertyName("docs");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, DocsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (DocsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("docs");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DocumentDescriptor(DocsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (DocsDescriptorActions is not null)
 			{
@@ -310,12 +314,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (DocsDescriptor is not null)
 			{
 				writer.WritePropertyName("docs");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, DocsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (DocsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("docs");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DocumentDescriptor(DocsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (DocsDescriptorActions is not null)
 			{
