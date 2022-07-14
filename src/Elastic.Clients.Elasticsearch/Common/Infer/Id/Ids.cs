@@ -6,22 +6,31 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
+	[JsonConverter(typeof(IdsConverter))]
 	public partial class Ids : IUrlParameter, IEquatable<Ids>
 	{
-		private readonly List<string> _ids;
+		private readonly IList<Id> _ids;
 
-		public Ids(IEnumerable<string> value) => _ids = value?.ToList();
+		public Ids(IEnumerable<Id> ids) => _ids = ids.ToList();
+
+		public Ids(IList<Id> ids) => _ids = ids;
+
+		public Ids(IEnumerable<string> ids) => _ids = ids?.Select(i  => new Id(i)).ToList();
 
 		public Ids(string value)
 		{
 			if (!value.IsNullOrEmptyCommaSeparatedList(out var arr))
-				_ids = arr.ToList();
+				_ids = arr.Select(i => new Id(i)).ToList();
 		}
+
+		internal IList<Id> IdsToSerialize => _ids;
 
 		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
@@ -38,8 +47,15 @@ namespace Elastic.Clients.Elasticsearch
 				   _ids.OrderBy(id => id).SequenceEqual(other._ids.OrderBy(id => id));
 		}
 
-		string IUrlParameter.GetString(ITransportConfiguration? settings) =>
-			string.Join(",", _ids ?? Enumerable.Empty<string>());
+		string IUrlParameter.GetString(ITransportConfiguration? settings)
+		{
+			if (settings is not ElasticsearchClientSettings elasticsearchClientSettings)
+			{
+				throw new Exception("Unexpected settings type.");
+			}
+
+			return string.Join(",", _ids.Select(i => i.GetString(elasticsearchClientSettings)) ?? Enumerable.Empty<string>());
+		}
 
 		public override string ToString() => DebugDisplay;
 
@@ -67,5 +83,48 @@ namespace Elastic.Clients.Elasticsearch
 		public static bool operator ==(Ids left, Ids right) => Equals(left, right);
 
 		public static bool operator !=(Ids left, Ids right) => !Equals(left, right);
+	}
+
+	internal sealed class IdsConverter : JsonConverter<Ids>
+	{
+		private readonly IElasticsearchClientSettings _settings;
+
+		public IdsConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+		public override Ids? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartArray)
+				throw new JsonException($"Unexpected JSON token. Expected {JsonTokenType.StartArray} but read {reader.TokenType}");
+
+			var ids = new List<Id>();
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+			{
+				var id = JsonSerializer.Deserialize<Id>(ref reader, options);
+
+				if (id is not null)
+					ids.Add(id);
+			}
+
+			return new Ids(ids);
+		}
+
+		public override void Write(Utf8JsonWriter writer, Ids value, JsonSerializerOptions options)
+		{
+			if (value is null)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			writer.WriteStartArray();
+
+			foreach (var id in value.IdsToSerialize)
+			{
+				JsonSerializer.Serialize<Id>(writer, id, options);
+			}
+
+			writer.WriteEndArray();
+		}
 	}
 }

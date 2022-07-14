@@ -264,12 +264,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (RangesDescriptor is not null)
 			{
 				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RangesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RangesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new IpRangeAggregationRangeDescriptor(RangesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RangesDescriptorActions is not null)
 			{
@@ -438,12 +442,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (RangesDescriptor is not null)
 			{
 				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RangesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RangesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new IpRangeAggregationRangeDescriptor(RangesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RangesDescriptorActions is not null)
 			{

@@ -138,12 +138,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (TreeStructureDescriptor is not null)
 			{
 				writer.WritePropertyName("tree_structure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, TreeStructureDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (TreeStructureDescriptorAction is not null)
 			{
 				writer.WritePropertyName("tree_structure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new TrainedModelTreeNodeDescriptor(TreeStructureDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (TreeStructureDescriptorActions is not null)
 			{

@@ -317,12 +317,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (MetricsDescriptor is not null)
 			{
 				writer.WritePropertyName("metrics");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, MetricsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (MetricsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("metrics");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor<TDocument>(MetricsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (MetricsDescriptorActions is not null)
 			{
@@ -519,12 +523,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (MetricsDescriptor is not null)
 			{
 				writer.WritePropertyName("metrics");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, MetricsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (MetricsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("metrics");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor(MetricsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (MetricsDescriptorActions is not null)
 			{
