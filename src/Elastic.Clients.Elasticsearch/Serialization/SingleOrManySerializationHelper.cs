@@ -47,8 +47,21 @@ namespace Elastic.Clients.Elasticsearch
 
 		public static void Serialize<TItem>(IEnumerable<TItem> value, Utf8JsonWriter writer, JsonSerializerOptions options)
 		{
-			// TODO - Optimise to avoid the count
-			var count = value.Count();
+			if (value is not ICollection<TItem> collection)
+			{
+				// Avoid a double enumeration of counting then iterating.
+				// Instead, produce an array, even if it's an array of one.
+
+				writer.WriteStartArray();
+				foreach (var item in value)
+				{
+					JsonSerializer.Serialize<TItem>(writer, item, options);
+				}
+				writer.WriteEndArray();
+				return;
+			}
+
+			var count = collection.Count;
 
 			if (count == 0)
 			{
