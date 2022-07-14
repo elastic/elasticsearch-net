@@ -30,4 +30,28 @@ public class MGetSerialization : SerializerTestBase
 
 		await Verifier.Verify(error.Error);
 	}
+
+	[U]
+	public async Task SerializesRequestWithSingularIds()
+	{
+		var request = new MultiGetRequest()
+		{
+			Ids = new Ids("single-value")
+		};
+
+		var json = SerializeAndGetJsonString(request);
+
+		await Verifier.VerifyJson(json);
+	}
+
+	[U]
+	public async Task SerializesDescriptorWithSingularIds()
+	{
+		var request = new MultiGetRequestDescriptor()
+			.Ids("single-value");
+
+		var json = SerializeAndGetJsonString(request);
+
+		await Verifier.VerifyJson(json);
+	}
 }
