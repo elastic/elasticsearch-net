@@ -1,0 +1,2 @@
+{"update":{"_id":"doc-id"}}
+{"script":{"id":"script-id","params":{"param1":"value1","param2":"value2"}}}
