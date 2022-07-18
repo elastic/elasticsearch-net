@@ -98,7 +98,7 @@ public static class BulkUpdateOperationFactory
 
 	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>(Id id, IndexName index, ScriptBase script, TDocument upsert) => new(upsert, id, index, script);
 
-	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>( Id id, ScriptBase script, TDocument upsert) => new(upsert, id, script);
+	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>(Id id, ScriptBase script, TDocument upsert) => new(upsert, id, script);
 
 	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>(ScriptBase script, TDocument upsert) => new(upsert, new Id(upsert), script);
 
