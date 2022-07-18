@@ -13,15 +13,6 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal class CustomizedNamingPolicy : JsonNamingPolicy
-{
-	private readonly Func<string, string> _namingAction;
-
-	public CustomizedNamingPolicy(Func<string, string> namingAction) => _namingAction = namingAction;
-
-	public override string ConvertName(string name) => _namingAction(name);
-}
-
 /// <summary>
 /// The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.
 /// </summary>
@@ -64,6 +55,8 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 				},
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 		};
+
+		ElasticsearchClient.SettingsTable.Add(Options, settings);
 
 		_settings = settings;
 	}
