@@ -41,10 +41,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (value.Field is null)
 				writer.WriteNullValue();
 
-			writer.WriteStartObject();
-			writer.WritePropertyName(value.Field.ToString());
-			WriteInternal(writer, value, options);
-			writer.WriteEndObject();
+			if (options.TryGetClientSettings(out var settings))
+			{
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				WriteInternal(writer, value, options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			throw new JsonException("Unable to retrieve client settings to infer field.");
 		}
 
 		internal abstract T? ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options);
