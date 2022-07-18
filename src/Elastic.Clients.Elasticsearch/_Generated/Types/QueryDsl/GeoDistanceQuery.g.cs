@@ -35,6 +35,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("location")]
+		public Elastic.Clients.Elasticsearch.GeoLocation Location { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("validation_method")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
@@ -53,6 +61,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private string? DistanceValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
@@ -77,6 +89,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoDistanceQueryDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 		{
 			DistanceTypeValue = distanceType;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> Location(Elastic.Clients.Elasticsearch.GeoLocation location)
+		{
+			LocationValue = location;
 			return Self;
 		}
 
@@ -113,6 +143,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, DistanceTypeValue, options);
 			}
 
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			writer.WritePropertyName("location");
+			JsonSerializer.Serialize(writer, LocationValue, options);
 			if (ValidationMethodValue is not null)
 			{
 				writer.WritePropertyName("validation_method");
@@ -138,6 +172,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
 		public GeoDistanceQueryDescriptor QueryName(string? queryName)
@@ -161,6 +199,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoDistanceQueryDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 		{
 			DistanceTypeValue = distanceType;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Location(Elastic.Clients.Elasticsearch.GeoLocation location)
+		{
+			LocationValue = location;
 			return Self;
 		}
 
@@ -197,6 +259,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, DistanceTypeValue, options);
 			}
 
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			writer.WritePropertyName("location");
+			JsonSerializer.Serialize(writer, LocationValue, options);
 			if (ValidationMethodValue is not null)
 			{
 				writer.WritePropertyName("validation_method");

@@ -27,6 +27,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class GeoBoundingBoxQuery : QueryBase, IQueryVariant
 	{
 		[JsonInclude]
+		[JsonPropertyName("bounding_box")]
+		public Elastic.Clients.Elasticsearch.GeoBounds BoundingBox { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
@@ -46,6 +54,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.GeoBounds BoundingBoxValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
 		private bool? IgnoreUnmappedValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
@@ -59,6 +71,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoBoundingBoxQueryDescriptor<TDocument> Boost(float? boost)
 		{
 			BoostValue = boost;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor<TDocument> BoundingBox(Elastic.Clients.Elasticsearch.GeoBounds boundingBox)
+		{
+			BoundingBoxValue = boundingBox;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
 			return Self;
 		}
 
@@ -89,6 +119,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			writer.WritePropertyName("bounding_box");
+			JsonSerializer.Serialize(writer, BoundingBoxValue, options);
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
@@ -116,6 +150,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.GeoBounds BoundingBoxValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
 		private bool? IgnoreUnmappedValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
@@ -129,6 +167,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoBoundingBoxQueryDescriptor Boost(float? boost)
 		{
 			BoostValue = boost;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor BoundingBox(Elastic.Clients.Elasticsearch.GeoBounds boundingBox)
+		{
+			BoundingBoxValue = boundingBox;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
 			return Self;
 		}
 
@@ -159,6 +221,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			writer.WritePropertyName("bounding_box");
+			JsonSerializer.Serialize(writer, BoundingBoxValue, options);
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");

@@ -27,8 +27,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class ShapeQuery : QueryBase, IQueryVariant
 	{
 		[JsonInclude]
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shape")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery Shape { get; set; }
 	}
 
 	public sealed partial class ShapeQueryDescriptor<TDocument> : SerializableDescriptorBase<ShapeQueryDescriptor<TDocument>>
@@ -38,11 +46,43 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
+		private Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery ShapeValue { get; set; }
+
+		private ShapeFieldQueryDescriptor<TDocument> ShapeDescriptor { get; set; }
+
+		private Action<ShapeFieldQueryDescriptor<TDocument>> ShapeDescriptorAction { get; set; }
+
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
 		private bool? IgnoreUnmappedValue { get; set; }
+
+		public ShapeQueryDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery shape)
+		{
+			ShapeDescriptor = null;
+			ShapeDescriptorAction = null;
+			ShapeValue = shape;
+			return Self;
+		}
+
+		public ShapeQueryDescriptor<TDocument> Shape(ShapeFieldQueryDescriptor<TDocument> descriptor)
+		{
+			ShapeValue = null;
+			ShapeDescriptorAction = null;
+			ShapeDescriptor = descriptor;
+			return Self;
+		}
+
+		public ShapeQueryDescriptor<TDocument> Shape(Action<ShapeFieldQueryDescriptor<TDocument>> configure)
+		{
+			ShapeValue = null;
+			ShapeDescriptor = null;
+			ShapeDescriptorAction = configure;
+			return Self;
+		}
 
 		public ShapeQueryDescriptor<TDocument> QueryName(string? queryName)
 		{
@@ -56,6 +96,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
+		public ShapeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public ShapeQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
 		public ShapeQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 		{
 			IgnoreUnmappedValue = ignoreUnmapped;
@@ -65,6 +117,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (ShapeDescriptor is not null)
+			{
+				writer.WritePropertyName("shape");
+				JsonSerializer.Serialize(writer, ShapeDescriptor, options);
+			}
+			else if (ShapeDescriptorAction is not null)
+			{
+				writer.WritePropertyName("shape");
+				JsonSerializer.Serialize(writer, new ShapeFieldQueryDescriptor<TDocument>(ShapeDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("shape");
+				JsonSerializer.Serialize(writer, ShapeValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -77,6 +145,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
@@ -94,11 +164,43 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
+		private Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery ShapeValue { get; set; }
+
+		private ShapeFieldQueryDescriptor ShapeDescriptor { get; set; }
+
+		private Action<ShapeFieldQueryDescriptor> ShapeDescriptorAction { get; set; }
+
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
 		private bool? IgnoreUnmappedValue { get; set; }
+
+		public ShapeQueryDescriptor Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery shape)
+		{
+			ShapeDescriptor = null;
+			ShapeDescriptorAction = null;
+			ShapeValue = shape;
+			return Self;
+		}
+
+		public ShapeQueryDescriptor Shape(ShapeFieldQueryDescriptor descriptor)
+		{
+			ShapeValue = null;
+			ShapeDescriptorAction = null;
+			ShapeDescriptor = descriptor;
+			return Self;
+		}
+
+		public ShapeQueryDescriptor Shape(Action<ShapeFieldQueryDescriptor> configure)
+		{
+			ShapeValue = null;
+			ShapeDescriptor = null;
+			ShapeDescriptorAction = configure;
+			return Self;
+		}
 
 		public ShapeQueryDescriptor QueryName(string? queryName)
 		{
@@ -112,6 +214,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
+		public ShapeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public ShapeQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public ShapeQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
 		public ShapeQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 		{
 			IgnoreUnmappedValue = ignoreUnmapped;
@@ -121,6 +241,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (ShapeDescriptor is not null)
+			{
+				writer.WritePropertyName("shape");
+				JsonSerializer.Serialize(writer, ShapeDescriptor, options);
+			}
+			else if (ShapeDescriptorAction is not null)
+			{
+				writer.WritePropertyName("shape");
+				JsonSerializer.Serialize(writer, new ShapeFieldQueryDescriptor(ShapeDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("shape");
+				JsonSerializer.Serialize(writer, ShapeValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -133,6 +269,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
