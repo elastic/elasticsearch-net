@@ -71,7 +71,10 @@ module Versioning =
         | ("canary", _) ->
             let v = GlobalJsonVersion
             let timestampedVersion = (sprintf "ci%s" (DateTime.UtcNow.ToString("yyyyMMddTHHmmss")))
-            let canaryVersion = parse ((sprintf "%d.%d.0-%s" v.Major (v.Minor + 1u) timestampedVersion).Trim())
+            let canaryVersion = 
+                match v.PreRelease with
+                    | Some _ -> parse ((sprintf "%d.%d.%d-%s" v.Major v.Minor v.Patch timestampedVersion).Trim())
+                    | None -> parse ((sprintf "%d.%d.%d-%s" v.Major v.Minor (v.Patch + 1u) timestampedVersion).Trim())
             Some canaryVersion
         | _ -> None
     
