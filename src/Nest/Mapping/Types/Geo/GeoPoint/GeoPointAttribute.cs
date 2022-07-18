@@ -22,9 +22,23 @@ namespace Nest
 			set => Self.IgnoreZValue = value;
 		}
 
+		public IInlineScript Script
+		{
+			get => Self.Script;
+			set => Self.Script = value;
+		}
+
+		public OnScriptError OnScriptError
+		{
+			get => Self.OnScriptError.GetValueOrDefault();
+			set => Self.OnScriptError = value;
+		}
+
 		bool? IGeoPointProperty.IgnoreMalformed { get; set; }
 		bool? IGeoPointProperty.IgnoreZValue { get; set; }
 		GeoLocation IGeoPointProperty.NullValue { get; set; }
+		IInlineScript IGeoPointProperty.Script { get; set; }
+		OnScriptError? IGeoPointProperty.OnScriptError { get; set; }
 		private IGeoPointProperty Self => this;
 	}
 }
