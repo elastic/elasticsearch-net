@@ -19,7 +19,7 @@ For SDK style projects, you can install the {es} client by running the following
 
 [source,text]
 ----
-dotnet add package Elastic.Clients.Elasticsearch -prerelease
+dotnet add package Elastic.Clients.Elasticsearch --prerelease
 ----
 
 This command adds a package reference to your project (csproj) file for the 
