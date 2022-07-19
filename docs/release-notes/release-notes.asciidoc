@@ -3,13 +3,11 @@
 
 [partintro]
 --
-Review important information about 8.0.x releases.
+Review important information about 8.x releases.
 
-* <<release-notes-8.0.0>>
+* <<breaking-changes-policy>>
 --
 
-
-
-include::release-notes-8.0.0.asciidoc[]
+include::release-notes/breaking-change-policy.asciidoc[]
 
 
