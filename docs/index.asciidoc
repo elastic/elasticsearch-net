@@ -32,4 +32,4 @@ include::aggregations.asciidoc[]
 
 include::redirects.asciidoc[]
 
-include::release-notes.asciidoc[]
+include::release-notes/release-notes.asciidoc[]

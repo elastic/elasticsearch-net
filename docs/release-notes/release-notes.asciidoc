@@ -8,6 +8,4 @@ Review important information about 8.x releases.
 * <<breaking-changes-policy>>
 --
 
-include::release-notes/breaking-change-policy.asciidoc[]
-
-
+include::breaking-change-policy.asciidoc[]

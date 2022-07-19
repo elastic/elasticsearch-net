@@ -3,5 +3,3 @@
 == Release-Notes 8.0.0
 
 Coming soon!
-
-
