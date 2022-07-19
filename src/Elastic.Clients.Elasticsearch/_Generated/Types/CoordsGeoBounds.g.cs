@@ -28,18 +28,72 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("bottom")]
-		public double Bottom { get; init; }
+		public double Bottom { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("left")]
-		public double Left { get; init; }
+		public double Left { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("right")]
-		public double Right { get; init; }
+		public double Right { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("top")]
-		public double Top { get; init; }
+		public double Top { get; set; }
+	}
+
+	public sealed partial class CoordsGeoBoundsDescriptor : SerializableDescriptorBase<CoordsGeoBoundsDescriptor>
+	{
+		internal CoordsGeoBoundsDescriptor(Action<CoordsGeoBoundsDescriptor> configure) => configure.Invoke(this);
+		public CoordsGeoBoundsDescriptor() : base()
+		{
+		}
+
+		private double BottomValue { get; set; }
+
+		private double LeftValue { get; set; }
+
+		private double RightValue { get; set; }
+
+		private double TopValue { get; set; }
+
+		public CoordsGeoBoundsDescriptor Bottom(double bottom)
+		{
+			BottomValue = bottom;
+			return Self;
+		}
+
+		public CoordsGeoBoundsDescriptor Left(double left)
+		{
+			LeftValue = left;
+			return Self;
+		}
+
+		public CoordsGeoBoundsDescriptor Right(double right)
+		{
+			RightValue = right;
+			return Self;
+		}
+
+		public CoordsGeoBoundsDescriptor Top(double top)
+		{
+			TopValue = top;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("bottom");
+			writer.WriteNumberValue(BottomValue);
+			writer.WritePropertyName("left");
+			writer.WriteNumberValue(LeftValue);
+			writer.WritePropertyName("right");
+			writer.WriteNumberValue(RightValue);
+			writer.WritePropertyName("top");
+			writer.WriteNumberValue(TopValue);
+			writer.WriteEndObject();
+		}
 	}
 }
