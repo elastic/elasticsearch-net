@@ -134,8 +134,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 		private bool? IgnoreUnmappedValue { get; set; }
 
 		public GeoShapeQueryDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery shape)
@@ -171,18 +169,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoShapeQueryDescriptor<TDocument> Boost(float? boost)
 		{
 			BoostValue = boost;
-			return Self;
-		}
-
-		public GeoShapeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoShapeQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
 			return Self;
 		}
 
@@ -223,8 +209,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
@@ -251,8 +235,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private bool? IgnoreUnmappedValue { get; set; }
 
@@ -289,24 +271,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoShapeQueryDescriptor Boost(float? boost)
 		{
 			BoostValue = boost;
-			return Self;
-		}
-
-		public GeoShapeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoShapeQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoShapeQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-		{
-			FieldValue = field;
 			return Self;
 		}
 
@@ -347,8 +311,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");

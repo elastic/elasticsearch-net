@@ -166,11 +166,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 		private bool? IgnoreUnmappedValue { get; set; }
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> LocationValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 
@@ -184,27 +180,9 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public GeoDistanceSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
 		public GeoDistanceSortDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 		{
 			IgnoreUnmappedValue = ignoreUnmapped;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor<TDocument> Location(IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> location)
-		{
-			LocationValue = location;
 			return Self;
 		}
 
@@ -235,16 +213,12 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, DistanceTypeValue, options);
 			}
 
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
 				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
 			}
 
-			writer.WritePropertyName("location");
-			JsonSerializer.Serialize(writer, LocationValue, options);
 			if (ModeValue is not null)
 			{
 				writer.WritePropertyName("mode");
@@ -276,11 +250,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 		private bool? IgnoreUnmappedValue { get; set; }
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> LocationValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 
@@ -294,33 +264,9 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public GeoDistanceSortDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
 		public GeoDistanceSortDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 		{
 			IgnoreUnmappedValue = ignoreUnmapped;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor Location(IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> location)
-		{
-			LocationValue = location;
 			return Self;
 		}
 
@@ -351,16 +297,12 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, DistanceTypeValue, options);
 			}
 
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
 				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
 			}
 
-			writer.WritePropertyName("location");
-			JsonSerializer.Serialize(writer, LocationValue, options);
 			if (ModeValue is not null)
 			{
 				writer.WritePropertyName("mode");

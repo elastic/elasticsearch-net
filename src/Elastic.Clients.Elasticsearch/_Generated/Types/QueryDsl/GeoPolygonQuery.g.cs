@@ -144,15 +144,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 		private bool? IgnoreUnmappedValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
-
-		private GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
-
-		private Action<GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
@@ -168,45 +160,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public GeoPolygonQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoPolygonQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
 		public GeoPolygonQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 		{
 			IgnoreUnmappedValue = ignoreUnmapped;
-			return Self;
-		}
-
-		public GeoPolygonQueryDescriptor<TDocument> Polygon(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints polygon)
-		{
-			PolygonDescriptor = null;
-			PolygonDescriptorAction = null;
-			PolygonValue = polygon;
-			return Self;
-		}
-
-		public GeoPolygonQueryDescriptor<TDocument> Polygon(GeoPolygonPointsDescriptor descriptor)
-		{
-			PolygonValue = null;
-			PolygonDescriptorAction = null;
-			PolygonDescriptor = descriptor;
-			return Self;
-		}
-
-		public GeoPolygonQueryDescriptor<TDocument> Polygon(Action<GeoPolygonPointsDescriptor> configure)
-		{
-			PolygonValue = null;
-			PolygonDescriptor = null;
-			PolygonDescriptorAction = configure;
 			return Self;
 		}
 
@@ -231,28 +187,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
 				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-			}
-
-			if (PolygonDescriptor is not null)
-			{
-				writer.WritePropertyName("polygon");
-				JsonSerializer.Serialize(writer, PolygonDescriptor, options);
-			}
-			else if (PolygonDescriptorAction is not null)
-			{
-				writer.WritePropertyName("polygon");
-				JsonSerializer.Serialize(writer, new GeoPolygonPointsDescriptor(PolygonDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("polygon");
-				JsonSerializer.Serialize(writer, PolygonValue, options);
 			}
 
 			if (ValidationMethodValue is not null)
@@ -276,15 +214,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 		private bool? IgnoreUnmappedValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
-
-		private GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
-
-		private Action<GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
@@ -300,51 +230,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public GeoPolygonQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoPolygonQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoPolygonQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
 		public GeoPolygonQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 		{
 			IgnoreUnmappedValue = ignoreUnmapped;
-			return Self;
-		}
-
-		public GeoPolygonQueryDescriptor Polygon(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints polygon)
-		{
-			PolygonDescriptor = null;
-			PolygonDescriptorAction = null;
-			PolygonValue = polygon;
-			return Self;
-		}
-
-		public GeoPolygonQueryDescriptor Polygon(GeoPolygonPointsDescriptor descriptor)
-		{
-			PolygonValue = null;
-			PolygonDescriptorAction = null;
-			PolygonDescriptor = descriptor;
-			return Self;
-		}
-
-		public GeoPolygonQueryDescriptor Polygon(Action<GeoPolygonPointsDescriptor> configure)
-		{
-			PolygonValue = null;
-			PolygonDescriptor = null;
-			PolygonDescriptorAction = configure;
 			return Self;
 		}
 
@@ -369,28 +257,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
 				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-			}
-
-			if (PolygonDescriptor is not null)
-			{
-				writer.WritePropertyName("polygon");
-				JsonSerializer.Serialize(writer, PolygonDescriptor, options);
-			}
-			else if (PolygonDescriptorAction is not null)
-			{
-				writer.WritePropertyName("polygon");
-				JsonSerializer.Serialize(writer, new GeoPolygonPointsDescriptor(PolygonDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("polygon");
-				JsonSerializer.Serialize(writer, PolygonValue, options);
 			}
 
 			if (ValidationMethodValue is not null)

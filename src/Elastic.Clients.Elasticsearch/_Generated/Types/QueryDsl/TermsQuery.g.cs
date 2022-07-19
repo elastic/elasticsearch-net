@@ -112,10 +112,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField TermsValue { get; set; }
-
 		public TermsQueryDescriptor<TDocument> QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -125,24 +121,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public TermsQueryDescriptor<TDocument> Boost(float? boost)
 		{
 			BoostValue = boost;
-			return Self;
-		}
-
-		public TermsQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public TermsQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public TermsQueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField terms)
-		{
-			TermsValue = terms;
 			return Self;
 		}
 
@@ -161,10 +139,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -180,10 +154,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField TermsValue { get; set; }
-
 		public TermsQueryDescriptor QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -193,30 +163,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public TermsQueryDescriptor Boost(float? boost)
 		{
 			BoostValue = boost;
-			return Self;
-		}
-
-		public TermsQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public TermsQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public TermsQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public TermsQueryDescriptor Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField terms)
-		{
-			TermsValue = terms;
 			return Self;
 		}
 
@@ -235,10 +181,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsValue, options);
 			writer.WriteEndObject();
 		}
 	}
