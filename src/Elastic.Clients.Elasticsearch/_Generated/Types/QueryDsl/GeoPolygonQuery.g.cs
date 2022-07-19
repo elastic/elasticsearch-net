@@ -148,6 +148,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
+
+		private GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
+
+		private Action<GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
+
 		public GeoPolygonQueryDescriptor<TDocument> QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -169,6 +177,40 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoPolygonQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 		{
 			ValidationMethodValue = validationMethod;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor<TDocument> Polygon(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints polygon)
+		{
+			PolygonValue = polygon;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor<TDocument> Polygon(GeoPolygonPointsDescriptor descriptor)
+		{
+			PolygonValue = null;
+			PolygonDescriptorAction = null;
+			PolygonDescriptor = descriptor;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor<TDocument> Polygon(Action<GeoPolygonPointsDescriptor> configure)
+		{
+			PolygonValue = null;
+			PolygonDescriptor = null;
+			PolygonDescriptorAction = configure;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
 			return Self;
 		}
 
@@ -218,6 +260,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
+
+		private GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
+
+		private Action<GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
+
 		public GeoPolygonQueryDescriptor QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -239,6 +289,46 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoPolygonQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 		{
 			ValidationMethodValue = validationMethod;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor Polygon(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints polygon)
+		{
+			PolygonValue = polygon;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor Polygon(GeoPolygonPointsDescriptor descriptor)
+		{
+			PolygonValue = null;
+			PolygonDescriptorAction = null;
+			PolygonDescriptor = descriptor;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor Polygon(Action<GeoPolygonPointsDescriptor> configure)
+		{
+			PolygonValue = null;
+			PolygonDescriptor = null;
+			PolygonDescriptorAction = configure;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoPolygonQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
 			return Self;
 		}
 

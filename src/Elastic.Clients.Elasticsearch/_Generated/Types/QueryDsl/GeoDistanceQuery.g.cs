@@ -166,6 +166,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
+
 		public GeoDistanceQueryDescriptor<TDocument> QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -193,6 +197,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoDistanceQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 		{
 			ValidationMethodValue = validationMethod;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> Location(Elastic.Clients.Elasticsearch.GeoLocation location)
+		{
+			LocationValue = location;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
 			return Self;
 		}
 
@@ -250,6 +272,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
+
 		public GeoDistanceQueryDescriptor QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -277,6 +303,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoDistanceQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 		{
 			ValidationMethodValue = validationMethod;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Location(Elastic.Clients.Elasticsearch.GeoLocation location)
+		{
+			LocationValue = location;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
 			return Self;
 		}
 

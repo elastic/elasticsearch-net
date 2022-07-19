@@ -174,6 +174,10 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> LocationValue { get; set; }
+
 		public GeoDistanceSortDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 		{
 			DistanceTypeValue = distanceType;
@@ -201,6 +205,24 @@ namespace Elastic.Clients.Elasticsearch
 		public GeoDistanceSortDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
 		{
 			UnitValue = unit;
+			return Self;
+		}
+
+		public GeoDistanceSortDescriptor<TDocument> Location(IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> location)
+		{
+			LocationValue = location;
+			return Self;
+		}
+
+		public GeoDistanceSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
 			return Self;
 		}
 
@@ -258,6 +280,10 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> LocationValue { get; set; }
+
 		public GeoDistanceSortDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 		{
 			DistanceTypeValue = distanceType;
@@ -285,6 +311,30 @@ namespace Elastic.Clients.Elasticsearch
 		public GeoDistanceSortDescriptor Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
 		{
 			UnitValue = unit;
+			return Self;
+		}
+
+		public GeoDistanceSortDescriptor Location(IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> location)
+		{
+			LocationValue = location;
+			return Self;
+		}
+
+		public GeoDistanceSortDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceSortDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceSortDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
 			return Self;
 		}
 

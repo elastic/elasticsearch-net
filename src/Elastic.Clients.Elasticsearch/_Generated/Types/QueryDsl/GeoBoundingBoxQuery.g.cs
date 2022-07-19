@@ -148,6 +148,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoBounds BoundingBoxValue { get; set; }
+
 		public GeoBoundingBoxQueryDescriptor<TDocument> QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -169,6 +173,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoBoundingBoxQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 		{
 			ValidationMethodValue = validationMethod;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor<TDocument> BoundingBox(Elastic.Clients.Elasticsearch.GeoBounds boundingBox)
+		{
+			BoundingBoxValue = boundingBox;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
 			return Self;
 		}
 
@@ -218,6 +240,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoBounds BoundingBoxValue { get; set; }
+
 		public GeoBoundingBoxQueryDescriptor QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -239,6 +265,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public GeoBoundingBoxQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 		{
 			ValidationMethodValue = validationMethod;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor BoundingBox(Elastic.Clients.Elasticsearch.GeoBounds boundingBox)
+		{
+			BoundingBoxValue = boundingBox;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
 			return Self;
 		}
 

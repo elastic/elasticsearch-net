@@ -40,4 +40,18 @@ public class SearchSerializationTests : SerializerTestBase
 
 		await Verifier.VerifyJson(json);
 	}
+
+	[U]
+	public async Task Search_WithTermsQuery_Serializes_ForDescriptor()
+	{
+		var container = new QueryContainerDescriptor<Project>(q => q.
+			Terms(t => t
+				.Boost(1.2f)
+				.Field(f => f.Description)
+				.Terms(new TermsQueryField(new object[] { "term1", "term2" }))));
+
+		var json = SerializeAndGetJsonString(container);
+
+		await Verifier.VerifyJson(json);
+	}
 }
