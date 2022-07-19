@@ -28,6 +28,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		[JsonInclude]
 		[JsonPropertyName("points")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.GeoLocation> Points { get; init; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> Points { get; set; }
+	}
+
+	public sealed partial class GeoPolygonPointsDescriptor : SerializableDescriptorBase<GeoPolygonPointsDescriptor>
+	{
+		internal GeoPolygonPointsDescriptor(Action<GeoPolygonPointsDescriptor> configure) => configure.Invoke(this);
+		public GeoPolygonPointsDescriptor() : base()
+		{
+		}
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> PointsValue { get; set; }
+
+		public GeoPolygonPointsDescriptor Points(IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> points)
+		{
+			PointsValue = points;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("points");
+			JsonSerializer.Serialize(writer, PointsValue, options);
+			writer.WriteEndObject();
+		}
 	}
 }
