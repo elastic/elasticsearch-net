@@ -25,4 +25,57 @@ public class SearchSerializationTests : SerializerTestBase
 
 		await Verifier.VerifyJson(json);
 	}
+
+	[U]
+	public async Task Search_WithTermsQuery_Serializes_ForObjectInitializer()
+	{
+		var container = QueryContainer.Terms(new TermsQuery
+		{
+			Field = Infer.Field<Project>(d => d.Description),
+			Terms = new TermsQueryField(new object[] { "term1", "term2" }),
+			Boost = 1.2f
+		});
+
+		var json = SerializeAndGetJsonString(container);
+
+		await Verifier.VerifyJson(json);
+	}
+
+	[U]
+	public async Task Search_WithTermsQuery_Serializes_ForDescriptor()
+	{
+		var container = new QueryContainerDescriptor<Project>(q => q.
+			Terms(t => t
+				.Boost(1.2f)
+				.Field(f => f.Description)
+				.Terms(new TermsQueryField(new object[] { "term1", "term2" }))));
+
+		var json = SerializeAndGetJsonString(container);
+
+		await Verifier.VerifyJson(json);
+	}
+
+	[U]
+	public async Task Search_WithShapeQuery_Serializes_ForObjectInitializer()
+	{
+		var container = QueryContainer.Shape(new ShapeQuery
+		{
+			Field = Infer.Field<Project>(d => d.Description),
+			Shape = new ShapeFieldQuery
+			{
+				Relation = GeoShapeRelation.Within,
+				IndexedShape = new FieldLookup
+				{
+					Id = "deu",
+					Path = "location",
+					Index = "shapes"
+				}
+			},
+			Boost = 1.2f
+		});
+
+		var json = SerializeAndGetJsonString(container);
+
+		await Verifier.VerifyJson(json);
+	}
 }
