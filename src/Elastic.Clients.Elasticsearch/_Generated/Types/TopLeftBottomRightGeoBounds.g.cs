@@ -28,10 +28,44 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("bottom_right")]
-		public Elastic.Clients.Elasticsearch.GeoLocation BottomRight { get; init; }
+		public Elastic.Clients.Elasticsearch.GeoLocation BottomRight { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("top_left")]
-		public Elastic.Clients.Elasticsearch.GeoLocation TopLeft { get; init; }
+		public Elastic.Clients.Elasticsearch.GeoLocation TopLeft { get; set; }
+	}
+
+	public sealed partial class TopLeftBottomRightGeoBoundsDescriptor : SerializableDescriptorBase<TopLeftBottomRightGeoBoundsDescriptor>
+	{
+		internal TopLeftBottomRightGeoBoundsDescriptor(Action<TopLeftBottomRightGeoBoundsDescriptor> configure) => configure.Invoke(this);
+		public TopLeftBottomRightGeoBoundsDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.GeoLocation BottomRightValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoLocation TopLeftValue { get; set; }
+
+		public TopLeftBottomRightGeoBoundsDescriptor BottomRight(Elastic.Clients.Elasticsearch.GeoLocation bottomRight)
+		{
+			BottomRightValue = bottomRight;
+			return Self;
+		}
+
+		public TopLeftBottomRightGeoBoundsDescriptor TopLeft(Elastic.Clients.Elasticsearch.GeoLocation topLeft)
+		{
+			TopLeftValue = topLeft;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("bottom_right");
+			JsonSerializer.Serialize(writer, BottomRightValue, options);
+			writer.WritePropertyName("top_left");
+			JsonSerializer.Serialize(writer, TopLeftValue, options);
+			writer.WriteEndObject();
+		}
 	}
 }

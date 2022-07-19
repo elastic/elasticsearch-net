@@ -24,6 +24,108 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class GeoDistanceQueryConverter : JsonConverter<GeoDistanceQuery>
+	{
+		public override GeoDistanceQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new GeoDistanceQuery();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "distance")
+					{
+						variant.Distance = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "distance_type")
+					{
+						variant.DistanceType = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceType?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "validation_method")
+					{
+						variant.ValidationMethod = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
+					variant.Field = property;
+					reader.Read();
+					variant.Location = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoLocation>(ref reader, options);
+				}
+			}
+
+			reader.Read();
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, GeoDistanceQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Field is not null && value.Location is not null)
+			{
+				if (!options.TryGetClientSettings(out var settings))
+				{
+					throw new JsonException("Unable to retrive client settings for JsonSerializerOptions.");
+				}
+
+				var propertyName = settings.Inferrer.Field(value.Field);
+				writer.WritePropertyName(propertyName);
+				JsonSerializer.Serialize(writer, value.Location, options);
+			}
+
+			if (value.Distance is not null)
+			{
+				writer.WritePropertyName("distance");
+				JsonSerializer.Serialize(writer, value.Distance, options);
+			}
+
+			if (value.DistanceType is not null)
+			{
+				writer.WritePropertyName("distance_type");
+				JsonSerializer.Serialize(writer, value.DistanceType, options);
+			}
+
+			if (value.ValidationMethod is not null)
+			{
+				writer.WritePropertyName("validation_method");
+				JsonSerializer.Serialize(writer, value.ValidationMethod, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(GeoDistanceQueryConverter))]
 	public partial class GeoDistanceQuery : QueryBase, IQueryVariant
 	{
 		[JsonInclude]
@@ -33,6 +135,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonInclude]
 		[JsonPropertyName("distance_type")]
 		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("location")]
+		public Elastic.Clients.Elasticsearch.GeoLocation Location { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("validation_method")]
@@ -55,6 +165,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
 
 		public GeoDistanceQueryDescriptor<TDocument> QueryName(string? queryName)
 		{
@@ -86,9 +200,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
+		public GeoDistanceQueryDescriptor<TDocument> Location(Elastic.Clients.Elasticsearch.GeoLocation location)
+		{
+			LocationValue = location;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && LocationValue is not null)
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				JsonSerializer.Serialize(writer, LocationValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -140,6 +279,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
+
 		public GeoDistanceQueryDescriptor QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -170,9 +313,40 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
+		public GeoDistanceQueryDescriptor Location(Elastic.Clients.Elasticsearch.GeoLocation location)
+		{
+			LocationValue = location;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && LocationValue is not null)
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				JsonSerializer.Serialize(writer, LocationValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
