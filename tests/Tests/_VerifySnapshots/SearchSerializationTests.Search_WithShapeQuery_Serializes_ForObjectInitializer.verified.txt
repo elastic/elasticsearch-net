@@ -1,0 +1,13 @@
+{
+  shape: {
+    boost: 1.2,
+    description: {
+      indexed_shape: {
+        id: deu,
+        index: shapes,
+        path: location
+      },
+      relation: within
+    }
+  }
+}

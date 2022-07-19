@@ -28,6 +28,30 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("wkt")]
-		public string Wkt { get; init; }
+		public string Wkt { get; set; }
+	}
+
+	public sealed partial class WktGeoBoundsDescriptor : SerializableDescriptorBase<WktGeoBoundsDescriptor>
+	{
+		internal WktGeoBoundsDescriptor(Action<WktGeoBoundsDescriptor> configure) => configure.Invoke(this);
+		public WktGeoBoundsDescriptor() : base()
+		{
+		}
+
+		private string WktValue { get; set; }
+
+		public WktGeoBoundsDescriptor Wkt(string wkt)
+		{
+			WktValue = wkt;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("wkt");
+			writer.WriteStringValue(WktValue);
+			writer.WriteEndObject();
+		}
 	}
 }

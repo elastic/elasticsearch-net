@@ -24,8 +24,106 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class GeoBoundingBoxQueryConverter : JsonConverter<GeoBoundingBoxQuery>
+	{
+		public override GeoBoundingBoxQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new GeoBoundingBoxQuery();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "ignore_unmapped")
+					{
+						variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "validation_method")
+					{
+						variant.ValidationMethod = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
+					variant.Field = property;
+					reader.Read();
+					variant.BoundingBox = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoBounds>(ref reader, options);
+				}
+			}
+
+			reader.Read();
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, GeoBoundingBoxQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Field is not null && value.BoundingBox is not null)
+			{
+				if (!options.TryGetClientSettings(out var settings))
+				{
+					throw new JsonException("Unable to retrive client settings for JsonSerializerOptions.");
+				}
+
+				var propertyName = settings.Inferrer.Field(value.Field);
+				writer.WritePropertyName(propertyName);
+				JsonSerializer.Serialize(writer, value.BoundingBox, options);
+			}
+
+			if (value.IgnoreUnmapped.HasValue)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
+			}
+
+			if (value.ValidationMethod is not null)
+			{
+				writer.WritePropertyName("validation_method");
+				JsonSerializer.Serialize(writer, value.ValidationMethod, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(GeoBoundingBoxQueryConverter))]
 	public partial class GeoBoundingBoxQuery : QueryBase, IQueryVariant
 	{
+		[JsonInclude]
+		[JsonPropertyName("bounding_box")]
+		public Elastic.Clients.Elasticsearch.GeoBounds BoundingBox { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
@@ -49,6 +147,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private bool? IgnoreUnmappedValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoBounds BoundingBoxValue { get; set; }
 
 		public GeoBoundingBoxQueryDescriptor<TDocument> QueryName(string? queryName)
 		{
@@ -74,9 +176,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
+		public GeoBoundingBoxQueryDescriptor<TDocument> BoundingBox(Elastic.Clients.Elasticsearch.GeoBounds boundingBox)
+		{
+			BoundingBoxValue = boundingBox;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && BoundingBoxValue is not null)
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				JsonSerializer.Serialize(writer, BoundingBoxValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -120,6 +247,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.GeoBounds BoundingBoxValue { get; set; }
+
 		public GeoBoundingBoxQueryDescriptor QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -144,9 +275,40 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
+		public GeoBoundingBoxQueryDescriptor BoundingBox(Elastic.Clients.Elasticsearch.GeoBounds boundingBox)
+		{
+			BoundingBoxValue = boundingBox;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && BoundingBoxValue is not null)
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				JsonSerializer.Serialize(writer, BoundingBoxValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
