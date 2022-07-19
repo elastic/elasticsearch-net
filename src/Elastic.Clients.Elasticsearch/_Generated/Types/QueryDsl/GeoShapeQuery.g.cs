@@ -193,6 +193,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && (ShapeValue is not null || ShapeDescriptor is not null || ShapeDescriptorAction is not null))
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				if (ShapeValue is not null)
+				{
+					JsonSerializer.Serialize(writer, ShapeValue, options);
+				}
+				else if (ShapeDescriptor is not null)
+				{
+					JsonSerializer.Serialize(writer, ShapeDescriptor, options);
+				}
+				else if (ShapeDescriptorAction is not null)
+				{
+					var descriptor = new GeoShapeFieldQueryDescriptor<TDocument>(ShapeDescriptorAction);
+					JsonSerializer.Serialize(writer, descriptor, options);
+				}
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -297,6 +316,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && (ShapeValue is not null || ShapeDescriptor is not null || ShapeDescriptorAction is not null))
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				if (ShapeValue is not null)
+				{
+					JsonSerializer.Serialize(writer, ShapeValue, options);
+				}
+				else if (ShapeDescriptor is not null)
+				{
+					JsonSerializer.Serialize(writer, ShapeDescriptor, options);
+				}
+				else if (ShapeDescriptorAction is not null)
+				{
+					var descriptor = new GeoShapeFieldQueryDescriptor(ShapeDescriptorAction);
+					JsonSerializer.Serialize(writer, descriptor, options);
+				}
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");

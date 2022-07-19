@@ -54,4 +54,28 @@ public class SearchSerializationTests : SerializerTestBase
 
 		await Verifier.VerifyJson(json);
 	}
+
+	[U]
+	public async Task Search_WithShapeQuery_Serializes_ForObjectInitializer()
+	{
+		var container = QueryContainer.Shape(new ShapeQuery
+		{
+			Field = Infer.Field<Project>(d => d.Description),
+			Shape = new ShapeFieldQuery
+			{
+				Relation = GeoShapeRelation.Within,
+				IndexedShape = new FieldLookup
+				{
+					Id = "deu",
+					Path = "location",
+					Index = "shapes"
+				}
+			},
+			Boost = 1.2f
+		});
+
+		var json = SerializeAndGetJsonString(container);
+
+		await Verifier.VerifyJson(json);
+	}
 }

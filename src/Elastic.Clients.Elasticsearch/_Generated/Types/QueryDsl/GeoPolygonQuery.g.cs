@@ -217,6 +217,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && (PolygonValue is not null || PolygonDescriptor is not null || PolygonDescriptorAction is not null))
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				if (PolygonValue is not null)
+				{
+					JsonSerializer.Serialize(writer, PolygonValue, options);
+				}
+				else if (PolygonDescriptor is not null)
+				{
+					JsonSerializer.Serialize(writer, PolygonDescriptor, options);
+				}
+				else if (PolygonDescriptorAction is not null)
+				{
+					var descriptor = new GeoPolygonPointsDescriptor(PolygonDescriptorAction);
+					JsonSerializer.Serialize(writer, descriptor, options);
+				}
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -335,6 +354,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && (PolygonValue is not null || PolygonDescriptor is not null || PolygonDescriptorAction is not null))
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				if (PolygonValue is not null)
+				{
+					JsonSerializer.Serialize(writer, PolygonValue, options);
+				}
+				else if (PolygonDescriptor is not null)
+				{
+					JsonSerializer.Serialize(writer, PolygonDescriptor, options);
+				}
+				else if (PolygonDescriptorAction is not null)
+				{
+					var descriptor = new GeoPolygonPointsDescriptor(PolygonDescriptorAction);
+					JsonSerializer.Serialize(writer, descriptor, options);
+				}
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");

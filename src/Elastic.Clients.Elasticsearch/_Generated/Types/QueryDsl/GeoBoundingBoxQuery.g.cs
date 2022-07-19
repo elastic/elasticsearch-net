@@ -197,6 +197,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && BoundingBoxValue is not null)
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				JsonSerializer.Serialize(writer, BoundingBoxValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -295,6 +302,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && BoundingBoxValue is not null)
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				JsonSerializer.Serialize(writer, BoundingBoxValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");

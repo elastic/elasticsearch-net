@@ -229,6 +229,13 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && LocationValue is not null)
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				JsonSerializer.Serialize(writer, LocationValue, options);
+			}
+
 			if (DistanceTypeValue is not null)
 			{
 				writer.WritePropertyName("distance_type");
@@ -341,6 +348,13 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FieldValue is not null && LocationValue is not null)
+			{
+				var propertyName = settings.Inferrer.Field(FieldValue);
+				writer.WritePropertyName(propertyName);
+				JsonSerializer.Serialize(writer, LocationValue, options);
+			}
+
 			if (DistanceTypeValue is not null)
 			{
 				writer.WritePropertyName("distance_type");
