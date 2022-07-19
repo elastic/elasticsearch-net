@@ -24,6 +24,84 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class GeoShapeQueryConverter : JsonConverter<GeoShapeQuery>
+	{
+		public override GeoShapeQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new GeoShapeQuery();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "ignore_unmapped")
+					{
+						variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
+					variant.Field = property;
+					reader.Read();
+					variant.Shape = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery>(ref reader, options);
+				}
+			}
+
+			reader.Read();
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, GeoShapeQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Field is not null && value.Shape is not null)
+			{
+				if (!options.TryGetClientSettings(out var settings))
+				{
+					throw new JsonException("Unable to retrive client settings for JsonSerializerOptions.");
+				}
+
+				var propertyName = settings.Inferrer.Field(value.Field);
+				writer.WritePropertyName(propertyName);
+				JsonSerializer.Serialize(writer, value.Shape, options);
+			}
+
+			if (value.IgnoreUnmapped.HasValue)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(GeoShapeQueryConverter))]
 	public partial class GeoShapeQuery : QueryBase, IQueryVariant
 	{
 		[JsonInclude]
