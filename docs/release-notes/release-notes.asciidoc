@@ -1,6 +1,6 @@
 [[release-notes]]
 = Release notes
 
-* <<breaking-changes-policy>>
+* <<breaking-changes-policy,Breaking changes policy>>
 
 include::breaking-change-policy.asciidoc[]
