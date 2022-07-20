@@ -1,0 +1,10 @@
+{
+  description: {
+    boost: 1.4,
+    type: text
+  },
+  name: {
+    boost: 1.2,
+    type: text
+  }
+}

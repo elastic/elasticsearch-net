@@ -40,5 +40,16 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 		return DeserializeVariant(type, ref reader, options);
 	}
 
-	public override void Write(Utf8JsonWriter writer, IProperty value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, IProperty value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		var type = value.GetType();
+
+		JsonSerializer.Serialize(writer, value, type, options);
+	}
 }
