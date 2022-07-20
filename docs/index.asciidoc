@@ -3,13 +3,8 @@
 [[elasticsearch-net-reference]]
 = Elasticsearch .NET Client
 
-////
-IMPORTANT NOTE
-==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/index.asciidoc. 
-If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
-please modify the original csharp file found at the link and submit the PR with that change. Thanks!
-////
+:net-client: Elasticsearch .NET Client
+
 
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
@@ -18,6 +13,8 @@ include::intro.asciidoc[]
 include::install.asciidoc[]
 
 include::connecting.asciidoc[]
+
+include::configuration.asciidoc[]
 
 include::breaking-changes.asciidoc[]
 
@@ -32,3 +29,7 @@ include::search.asciidoc[]
 include::query-dsl.asciidoc[]
 
 include::aggregations.asciidoc[]
+
+include::redirects.asciidoc[]
+
+include::release-notes/release-notes.asciidoc[]
