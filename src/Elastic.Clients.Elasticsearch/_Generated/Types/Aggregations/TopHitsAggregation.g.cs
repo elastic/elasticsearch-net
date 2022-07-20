@@ -338,53 +338,29 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("_source")]
 		public Elastic.Clients.Elasticsearch.SourceConfig? Source { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("docvalue_fields")]
 		public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("explain")]
 		public bool? Explain { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("from")]
 		public int? From { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("highlight")]
 		public Elastic.Clients.Elasticsearch.Highlight? Highlight { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("script_fields")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("seq_no_primary_term")]
 		public bool? SeqNoPrimaryTerm { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("sort")]
 		[JsonConverter(typeof(SortConverter))]
 		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("stored_fields")]
 		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("track_scores")]
 		public bool? TrackScores { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("version")]
 		public bool? Version { get; set; }
 	}
 

@@ -116,20 +116,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(GeoBoundingBoxQueryConverter))]
 	public partial class GeoBoundingBoxQuery : QueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("bounding_box")]
 		public Elastic.Clients.Elasticsearch.GeoBounds BoundingBox { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("validation_method")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
 

@@ -24,10 +24,48 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
+	internal sealed class SuggesterConverter : JsonConverter<Suggester>
+	{
+		public override Suggester Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new Suggester();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "text")
+					{
+						variant.Text = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			reader.Read();
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, Suggester value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.Text))
+			{
+				writer.WritePropertyName("text");
+				writer.WriteStringValue(value.Text);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(SuggesterConverter))]
 	public partial class Suggester
 	{
-		[JsonInclude]
-		[JsonPropertyName("text")]
+		public Dictionary<string, Elastic.Clients.Elasticsearch.FieldSuggester> Suggesters { get; set; }
+
 		public string? Text { get; set; }
 	}
 

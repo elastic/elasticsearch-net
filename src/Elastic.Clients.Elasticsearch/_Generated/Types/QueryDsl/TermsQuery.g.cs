@@ -92,12 +92,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(TermsQueryConverter))]
 	public partial class TermsQuery : QueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("terms")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Terms { get; set; }
 	}
 

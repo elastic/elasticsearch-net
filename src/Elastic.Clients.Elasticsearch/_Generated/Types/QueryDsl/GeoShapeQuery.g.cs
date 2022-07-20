@@ -104,16 +104,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(GeoShapeQueryConverter))]
 	public partial class GeoShapeQuery : QueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("shape")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery Shape { get; set; }
 	}
 

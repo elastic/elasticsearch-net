@@ -158,12 +158,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("precision_threshold")]
 		public int? PrecisionThreshold { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("rehash")]
 		public bool? Rehash { get; set; }
 	}
 

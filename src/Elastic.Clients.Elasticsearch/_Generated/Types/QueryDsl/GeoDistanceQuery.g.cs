@@ -128,24 +128,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(GeoDistanceQueryConverter))]
 	public partial class GeoDistanceQuery : QueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("distance")]
 		public string? Distance { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("distance_type")]
 		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("location")]
 		public Elastic.Clients.Elasticsearch.GeoLocation Location { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("validation_method")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
 

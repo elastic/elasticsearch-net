@@ -140,8 +140,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("show_distribution")]
 		public bool? ShowDistribution { get; set; }
 	}
 

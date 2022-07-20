@@ -300,49 +300,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("calendar_interval")]
 		public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarInterval { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("fixed_interval")]
 		public Elastic.Clients.Elasticsearch.Duration? FixedInterval { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("min_doc_count")]
 		public int? MinDocCount { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("missing")]
 		public DateTimeOffset? Missing { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("offset")]
 		public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("order")]
 		[JsonConverter(typeof(AggregateOrderConverter))]
 		public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("params")]
 		public Dictionary<string, object>? Params { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("script")]
 		public ScriptBase? Script { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("time_zone")]
 		public string? TimeZone { get; set; }
 	}
 

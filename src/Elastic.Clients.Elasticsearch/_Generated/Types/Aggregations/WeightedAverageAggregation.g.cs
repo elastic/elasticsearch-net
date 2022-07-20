@@ -157,20 +157,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("value")]
 		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Value { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("value_type")]
 		public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("weight")]
 		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Weight { get; set; }
 	}
 

@@ -139,16 +139,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("a")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("b")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 	}
 

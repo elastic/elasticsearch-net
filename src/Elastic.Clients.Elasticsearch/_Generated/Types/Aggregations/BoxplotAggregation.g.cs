@@ -140,8 +140,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("compression")]
 		public double? Compression { get; set; }
 	}
 

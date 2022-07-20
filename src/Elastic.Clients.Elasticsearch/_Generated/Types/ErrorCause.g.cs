@@ -24,30 +24,110 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
+	internal sealed class ErrorCauseConverter : JsonConverter<ErrorCause>
+	{
+		public override ErrorCause Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new ErrorCause();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "caused_by")
+					{
+						variant.CausedBy = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ErrorCause?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "reason")
+					{
+						variant.Reason = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+
+					if (property == "root_cause")
+					{
+						variant.RootCause = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "stack_trace")
+					{
+						variant.StackTrace = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "suppressed")
+					{
+						variant.Suppressed = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "type")
+					{
+						variant.Type = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			reader.Read();
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, ErrorCause value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.CausedBy is not null)
+			{
+				writer.WritePropertyName("caused_by");
+				JsonSerializer.Serialize(writer, value.CausedBy, options);
+			}
+
+			writer.WritePropertyName("reason");
+			writer.WriteStringValue(value.Reason);
+			if (value.RootCause is not null)
+			{
+				writer.WritePropertyName("root_cause");
+				JsonSerializer.Serialize(writer, value.RootCause, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.StackTrace))
+			{
+				writer.WritePropertyName("stack_trace");
+				writer.WriteStringValue(value.StackTrace);
+			}
+
+			if (value.Suppressed is not null)
+			{
+				writer.WritePropertyName("suppressed");
+				JsonSerializer.Serialize(writer, value.Suppressed, options);
+			}
+
+			writer.WritePropertyName("type");
+			writer.WriteStringValue(value.Type);
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(ErrorCauseConverter))]
 	public partial class ErrorCause
 	{
-		[JsonInclude]
-		[JsonPropertyName("caused_by")]
 		public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("reason")]
+		public Dictionary<string, object> Metadata { get; init; }
+
 		public string Reason { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("root_cause")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? RootCause { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("stack_trace")]
 		public string? StackTrace { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("suppressed")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Suppressed { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
 		public string Type { get; init; }
 	}
 }

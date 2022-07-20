@@ -24,42 +24,128 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
+	internal sealed class ExplainAnalyzeTokenConverter : JsonConverter<ExplainAnalyzeToken>
+	{
+		public override ExplainAnalyzeToken Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new ExplainAnalyzeToken();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "bytes")
+					{
+						variant.Bytes = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+
+					if (property == "end_offset")
+					{
+						variant.EndOffset = JsonSerializer.Deserialize<long>(ref reader, options);
+						continue;
+					}
+
+					if (property == "keyword")
+					{
+						variant.Keyword = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "position")
+					{
+						variant.Position = JsonSerializer.Deserialize<long>(ref reader, options);
+						continue;
+					}
+
+					if (property == "positionLength")
+					{
+						variant.Positionlength = JsonSerializer.Deserialize<long>(ref reader, options);
+						continue;
+					}
+
+					if (property == "start_offset")
+					{
+						variant.StartOffset = JsonSerializer.Deserialize<long>(ref reader, options);
+						continue;
+					}
+
+					if (property == "termFrequency")
+					{
+						variant.Termfrequency = JsonSerializer.Deserialize<long>(ref reader, options);
+						continue;
+					}
+
+					if (property == "token")
+					{
+						variant.Token = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+
+					if (property == "type")
+					{
+						variant.Type = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			reader.Read();
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, ExplainAnalyzeToken value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("bytes");
+			writer.WriteStringValue(value.Bytes);
+			writer.WritePropertyName("end_offset");
+			writer.WriteNumberValue(value.EndOffset);
+			if (value.Keyword.HasValue)
+			{
+				writer.WritePropertyName("keyword");
+				writer.WriteBooleanValue(value.Keyword.Value);
+			}
+
+			writer.WritePropertyName("position");
+			writer.WriteNumberValue(value.Position);
+			writer.WritePropertyName("positionLength");
+			writer.WriteNumberValue(value.Positionlength);
+			writer.WritePropertyName("start_offset");
+			writer.WriteNumberValue(value.StartOffset);
+			writer.WritePropertyName("termFrequency");
+			writer.WriteNumberValue(value.Termfrequency);
+			writer.WritePropertyName("token");
+			writer.WriteStringValue(value.Token);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue(value.Type);
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(ExplainAnalyzeTokenConverter))]
 	public partial class ExplainAnalyzeToken
 	{
-		[JsonInclude]
-		[JsonPropertyName("bytes")]
+		public Dictionary<string, object> Attributes { get; init; }
+
 		public string Bytes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("end_offset")]
 		public long EndOffset { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("keyword")]
 		public bool? Keyword { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("position")]
 		public long Position { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("positionLength")]
 		public long Positionlength { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("start_offset")]
 		public long StartOffset { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("termFrequency")]
 		public long Termfrequency { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("token")]
 		public string Token { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
 		public string Type { get; init; }
 	}
 }

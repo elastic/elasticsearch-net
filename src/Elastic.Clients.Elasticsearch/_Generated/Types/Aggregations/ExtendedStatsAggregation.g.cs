@@ -158,8 +158,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("sigma")]
 		public double? Sigma { get; set; }
 	}
 

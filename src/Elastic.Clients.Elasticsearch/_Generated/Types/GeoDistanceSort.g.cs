@@ -128,32 +128,18 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(GeoDistanceSortConverter))]
 	public partial class GeoDistanceSort : ISortOptionsVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("distance_type")]
 		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("location")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> Location { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("order")]
 		public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("unit")]
 		public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
 	}
 

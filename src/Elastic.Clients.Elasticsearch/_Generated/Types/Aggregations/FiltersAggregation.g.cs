@@ -156,16 +156,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("filters")]
 		public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filters { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("other_bucket")]
 		public bool? OtherBucket { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("other_bucket_key")]
 		public string? OtherBucketKey { get; set; }
 	}
 

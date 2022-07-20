@@ -157,8 +157,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("percents")]
 		public IEnumerable<double>? Percents { get; set; }
 	}
 
