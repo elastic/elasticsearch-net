@@ -1,0 +1,9 @@
+["appendix",role="exclude",id="redirects"]
+= Deleted pages
+
+The following pages have moved or been deleted.
+
+[role="exclude",id="configuration-options"]
+== Configuration options
+
+This page has moved. See <<configuration>>.

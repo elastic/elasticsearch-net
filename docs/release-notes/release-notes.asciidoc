@@ -1,15 +1,6 @@
 [[release-notes]]
 = Release notes
 
-[partintro]
---
-Review important information about 8.0.x releases.
+* <<breaking-changes-policy,Breaking changes policy>>
 
-* <<release-notes-8.0.0>>
---
-
-
-
-include::release-notes-8.0.0.asciidoc[]
-
-
+include::breaking-change-policy.asciidoc[]
