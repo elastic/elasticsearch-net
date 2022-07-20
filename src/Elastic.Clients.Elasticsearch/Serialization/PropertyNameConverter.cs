@@ -5,14 +5,17 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	internal sealed class PropertyNameConverter : JsonConverter<PropertyName?>
+	internal sealed class PropertyNameConverter : SettingsJsonConverter<PropertyName>
 	{
-		private readonly IElasticsearchClientSettings _settings;
+		public override void WriteAsPropertyName(Utf8JsonWriter writer, PropertyName value, JsonSerializerOptions options) =>
+			writer.WritePropertyName(((IUrlParameter)value).GetString(GetSettings(options)));
 
-		public PropertyNameConverter(IElasticsearchClientSettings settings) => _settings = settings;
+		public override PropertyName ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+			reader.GetString();
 
 		public override PropertyName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -33,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch
 				return;
 			}
 
-			var propertyName = _settings.Inferrer.PropertyName(value);
+			var propertyName = GetSettings(options).Inferrer.PropertyName(value);
 			writer.WriteStringValue(propertyName);
 		}
 	}
