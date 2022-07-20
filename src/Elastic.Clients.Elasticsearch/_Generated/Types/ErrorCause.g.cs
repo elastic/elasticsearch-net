@@ -30,7 +30,12 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new ErrorCause();
+			Elastic.Clients.Elasticsearch.ErrorCause? causedBy = default;
+			string reason = default;
+			IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? rootCause = default;
+			string? stackTrace = default;
+			IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? suppressed = default;
+			string type = default;
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -38,78 +43,49 @@ namespace Elastic.Clients.Elasticsearch
 					var property = reader.GetString();
 					if (property == "caused_by")
 					{
-						variant.CausedBy = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ErrorCause?>(ref reader, options);
+						causedBy = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ErrorCause?>(ref reader, options);
 						continue;
 					}
 
 					if (property == "reason")
 					{
-						variant.Reason = JsonSerializer.Deserialize<string>(ref reader, options);
+						reason = JsonSerializer.Deserialize<string>(ref reader, options);
 						continue;
 					}
 
 					if (property == "root_cause")
 					{
-						variant.RootCause = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?>(ref reader, options);
+						rootCause = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?>(ref reader, options);
 						continue;
 					}
 
 					if (property == "stack_trace")
 					{
-						variant.StackTrace = JsonSerializer.Deserialize<string?>(ref reader, options);
+						stackTrace = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 
 					if (property == "suppressed")
 					{
-						variant.Suppressed = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?>(ref reader, options);
+						suppressed = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?>(ref reader, options);
 						continue;
 					}
 
 					if (property == "type")
 					{
-						variant.Type = JsonSerializer.Deserialize<string>(ref reader, options);
+						type = JsonSerializer.Deserialize<string>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
 			reader.Read();
-			return variant;
+			return new ErrorCause { CausedBy = causedBy, Reason = reason, RootCause = rootCause, StackTrace = stackTrace, Suppressed = suppressed, Type = type };
 		}
 
 		public override void Write(Utf8JsonWriter writer, ErrorCause value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (value.CausedBy is not null)
-			{
-				writer.WritePropertyName("caused_by");
-				JsonSerializer.Serialize(writer, value.CausedBy, options);
-			}
-
-			writer.WritePropertyName("reason");
-			writer.WriteStringValue(value.Reason);
-			if (value.RootCause is not null)
-			{
-				writer.WritePropertyName("root_cause");
-				JsonSerializer.Serialize(writer, value.RootCause, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.StackTrace))
-			{
-				writer.WritePropertyName("stack_trace");
-				writer.WriteStringValue(value.StackTrace);
-			}
-
-			if (value.Suppressed is not null)
-			{
-				writer.WritePropertyName("suppressed");
-				JsonSerializer.Serialize(writer, value.Suppressed, options);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue(value.Type);
-			writer.WriteEndObject();
+			throw new NotImplementedException("'ErrorCause' is a readonly type, used only on responses and does not support being written to JSON.");
 		}
 	}
 

@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new Jobs();
+			Elastic.Clients.Elasticsearch.Xpack.AllJobs? all = default;
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -38,26 +38,19 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 					var property = reader.GetString();
 					if (property == "_all")
 					{
-						variant.All = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Xpack.AllJobs?>(ref reader, options);
+						all = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Xpack.AllJobs?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
 			reader.Read();
-			return variant;
+			return new Jobs { All = all };
 		}
 
 		public override void Write(Utf8JsonWriter writer, Jobs value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (value.All is not null)
-			{
-				writer.WritePropertyName("_all");
-				JsonSerializer.Serialize(writer, value.All, options);
-			}
-
-			writer.WriteEndObject();
+			throw new NotImplementedException("'Jobs' is a readonly type, used only on responses and does not support being written to JSON.");
 		}
 	}
 

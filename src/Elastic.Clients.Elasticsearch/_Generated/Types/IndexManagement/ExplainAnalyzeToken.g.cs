@@ -30,7 +30,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new ExplainAnalyzeToken();
+			string bytes = default;
+			long endOffset = default;
+			bool? keyword = default;
+			long position = default;
+			long positionlength = default;
+			long startOffset = default;
+			long termfrequency = default;
+			string token = default;
+			string type = default;
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -38,90 +46,67 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 					var property = reader.GetString();
 					if (property == "bytes")
 					{
-						variant.Bytes = JsonSerializer.Deserialize<string>(ref reader, options);
+						bytes = JsonSerializer.Deserialize<string>(ref reader, options);
 						continue;
 					}
 
 					if (property == "end_offset")
 					{
-						variant.EndOffset = JsonSerializer.Deserialize<long>(ref reader, options);
+						endOffset = JsonSerializer.Deserialize<long>(ref reader, options);
 						continue;
 					}
 
 					if (property == "keyword")
 					{
-						variant.Keyword = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						keyword = JsonSerializer.Deserialize<bool?>(ref reader, options);
 						continue;
 					}
 
 					if (property == "position")
 					{
-						variant.Position = JsonSerializer.Deserialize<long>(ref reader, options);
+						position = JsonSerializer.Deserialize<long>(ref reader, options);
 						continue;
 					}
 
 					if (property == "positionLength")
 					{
-						variant.Positionlength = JsonSerializer.Deserialize<long>(ref reader, options);
+						positionlength = JsonSerializer.Deserialize<long>(ref reader, options);
 						continue;
 					}
 
 					if (property == "start_offset")
 					{
-						variant.StartOffset = JsonSerializer.Deserialize<long>(ref reader, options);
+						startOffset = JsonSerializer.Deserialize<long>(ref reader, options);
 						continue;
 					}
 
 					if (property == "termFrequency")
 					{
-						variant.Termfrequency = JsonSerializer.Deserialize<long>(ref reader, options);
+						termfrequency = JsonSerializer.Deserialize<long>(ref reader, options);
 						continue;
 					}
 
 					if (property == "token")
 					{
-						variant.Token = JsonSerializer.Deserialize<string>(ref reader, options);
+						token = JsonSerializer.Deserialize<string>(ref reader, options);
 						continue;
 					}
 
 					if (property == "type")
 					{
-						variant.Type = JsonSerializer.Deserialize<string>(ref reader, options);
+						type = JsonSerializer.Deserialize<string>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
 			reader.Read();
-			return variant;
+			return new ExplainAnalyzeToken { Bytes = bytes, EndOffset = endOffset, Keyword = keyword, Position = position, Positionlength = positionlength, StartOffset = startOffset, Termfrequency = termfrequency, Token = token, Type = type };
 		}
 
 		public override void Write(Utf8JsonWriter writer, ExplainAnalyzeToken value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("bytes");
-			writer.WriteStringValue(value.Bytes);
-			writer.WritePropertyName("end_offset");
-			writer.WriteNumberValue(value.EndOffset);
-			if (value.Keyword.HasValue)
-			{
-				writer.WritePropertyName("keyword");
-				writer.WriteBooleanValue(value.Keyword.Value);
-			}
-
-			writer.WritePropertyName("position");
-			writer.WriteNumberValue(value.Position);
-			writer.WritePropertyName("positionLength");
-			writer.WriteNumberValue(value.Positionlength);
-			writer.WritePropertyName("start_offset");
-			writer.WriteNumberValue(value.StartOffset);
-			writer.WritePropertyName("termFrequency");
-			writer.WriteNumberValue(value.Termfrequency);
-			writer.WritePropertyName("token");
-			writer.WriteStringValue(value.Token);
-			writer.WritePropertyName("type");
-			writer.WriteStringValue(value.Type);
-			writer.WriteEndObject();
+			throw new NotImplementedException("'ExplainAnalyzeToken' is a readonly type, used only on responses and does not support being written to JSON.");
 		}
 	}
 
