@@ -54,7 +54,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				}
 			}
 
-			reader.Read();
 			return variant;
 		}
 

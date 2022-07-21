@@ -84,7 +84,6 @@ namespace Elastic.Clients.Elasticsearch
 				}
 			}
 
-			reader.Read();
 			return new ErrorCause { CausedBy = causedBy, Reason = reason, RootCause = rootCause, StackTrace = stackTrace, Suppressed = suppressed, Type = type, Metadata = additionalProperties };
 		}
 

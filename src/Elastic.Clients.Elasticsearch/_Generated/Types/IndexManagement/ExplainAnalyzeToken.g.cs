@@ -105,7 +105,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				}
 			}
 
-			reader.Read();
 			return new ExplainAnalyzeToken { Bytes = bytes, EndOffset = endOffset, Keyword = keyword, Position = position, Positionlength = positionlength, StartOffset = startOffset, Termfrequency = termfrequency, Token = token, Type = type, Attributes = additionalProperties };
 		}
 

@@ -72,7 +72,6 @@ namespace Elastic.Clients.Elasticsearch
 				}
 			}
 
-			reader.Read();
 			return variant;
 		}
 

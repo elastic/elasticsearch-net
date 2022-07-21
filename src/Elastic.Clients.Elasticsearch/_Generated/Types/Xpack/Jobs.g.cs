@@ -49,7 +49,6 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 				}
 			}
 
-			reader.Read();
 			return new Jobs { All = all, JobsDictionary = additionalProperties };
 		}
 

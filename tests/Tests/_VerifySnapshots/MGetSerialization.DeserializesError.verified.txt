@@ -1,7 +1,15 @@
 {
+  Metadata: {
+    index: devs,
+    index_uuid: _na_
+  },
   Reason: routing is required for [devs]/[1001],
   RootCause: [
     {
+      Metadata: {
+        index: devs,
+        index_uuid: _na_
+      },
       Reason: routing is required for [devs]/[1001],
       Type: routing_missing_exception
     }

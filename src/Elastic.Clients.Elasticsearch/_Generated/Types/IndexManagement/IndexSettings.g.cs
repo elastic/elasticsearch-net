@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 					if (property == "creation_date")
 					{
-						variant.CreationDate = JsonSerializer.Deserialize<long?>(ref reader, options);
+						variant.CreationDate = StringifiedLongConverter.ReadStringifiedLong(ref reader);
 						continue;
 					}
 
@@ -385,7 +385,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				}
 			}
 
-			reader.Read();
 			variant.OtherSettings = additionalProperties;
 			return variant;
 		}
@@ -2389,6 +2388,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, VersionValue, options);
 			}
 
+			if (OtherSettingsValue != null)
+			{
+				foreach (var additionalProperty in OtherSettingsValue)
+				{
+					writer.WritePropertyName(additionalProperty.Key);
+					JsonSerializer.Serialize(writer, additionalProperty.Value, options);
+				}
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -3911,6 +3919,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("version");
 				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			if (OtherSettingsValue != null)
+			{
+				foreach (var additionalProperty in OtherSettingsValue)
+				{
+					writer.WritePropertyName(additionalProperty.Key);
+					JsonSerializer.Serialize(writer, additionalProperty.Value, options);
+				}
 			}
 
 			writer.WriteEndObject();

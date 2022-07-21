@@ -49,7 +49,6 @@ namespace Elastic.Clients.Elasticsearch
 				}
 			}
 
-			reader.Read();
 			variant.Suggesters = additionalProperties;
 			return variant;
 		}
