@@ -106,7 +106,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -157,20 +156,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("buckets")]
 		public int? Buckets { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("initial_buffer")]
 		public int? InitialBuffer { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
 		public int? ShardSize { get; set; }
 	}
 
