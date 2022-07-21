@@ -91,7 +91,15 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
+		private Dictionary<string, Elastic.Clients.Elasticsearch.FieldSuggester> SuggestersValue { get; set; }
+
 		private string? TextValue { get; set; }
+
+		public SuggesterDescriptor Suggesters(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.FieldSuggester>, FluentDictionary<string, Elastic.Clients.Elasticsearch.FieldSuggester>> selector)
+		{
+			SuggestersValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.FieldSuggester>());
+			return Self;
+		}
 
 		public SuggesterDescriptor Text(string? text)
 		{
@@ -106,6 +114,15 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("text");
 				writer.WriteStringValue(TextValue);
+			}
+
+			if (SuggestersValue != null)
+			{
+				foreach (var additionalProperty in SuggestersValue)
+				{
+					writer.WritePropertyName(additionalProperty.Key);
+					JsonSerializer.Serialize(writer, additionalProperty.Value, options);
+				}
 			}
 
 			writer.WriteEndObject();

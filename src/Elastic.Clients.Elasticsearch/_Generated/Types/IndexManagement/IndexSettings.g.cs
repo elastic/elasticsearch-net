@@ -1000,6 +1000,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Union<int?, string?>? NumberOfShardsValue { get; set; }
 
+		private Dictionary<string, object> OtherSettingsValue { get; set; }
+
 		private Union<int?, string?>? PriorityValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Name? ProvidedNameValue { get; set; }
@@ -1519,6 +1521,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> NumberOfShards(Union<int?, string?>? numberOfShards)
 		{
 			NumberOfShardsValue = numberOfShards;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> OtherSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			OtherSettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
 			return Self;
 		}
 
@@ -2516,6 +2524,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Union<int?, string?>? NumberOfShardsValue { get; set; }
 
+		private Dictionary<string, object> OtherSettingsValue { get; set; }
+
 		private Union<int?, string?>? PriorityValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Name? ProvidedNameValue { get; set; }
@@ -3035,6 +3045,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor NumberOfShards(Union<int?, string?>? numberOfShards)
 		{
 			NumberOfShardsValue = numberOfShards;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor OtherSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			OtherSettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
 			return Self;
 		}
 
