@@ -132,24 +132,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(MatchPhrasePrefixQueryConverter))]
 	public partial class MatchPhrasePrefixQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("max_expansions")]
 		public int? MaxExpansions { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("query")]
 		public string Query { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("slop")]
 		public int? Slop { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("zero_terms_query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 

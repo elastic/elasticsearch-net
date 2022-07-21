@@ -486,6 +486,55 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
+	[JsonConverter(typeof(JobBlockedReasonConverter))]
+	public enum JobBlockedReason
+	{
+		[EnumMember(Value = "revert")]
+		Revert,
+		[EnumMember(Value = "reset")]
+		Reset,
+		[EnumMember(Value = "delete")]
+		Delete
+	}
+
+	internal sealed class JobBlockedReasonConverter : JsonConverter<JobBlockedReason>
+	{
+		public override JobBlockedReason Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "revert":
+					return JobBlockedReason.Revert;
+				case "reset":
+					return JobBlockedReason.Reset;
+				case "delete":
+					return JobBlockedReason.Delete;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, JobBlockedReason value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case JobBlockedReason.Revert:
+					writer.WriteStringValue("revert");
+					return;
+				case JobBlockedReason.Reset:
+					writer.WriteStringValue("reset");
+					return;
+				case JobBlockedReason.Delete:
+					writer.WriteStringValue("delete");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(JobStateConverter))]
 	public enum JobState
 	{
