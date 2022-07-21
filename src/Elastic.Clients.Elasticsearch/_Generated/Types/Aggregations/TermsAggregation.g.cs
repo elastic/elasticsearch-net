@@ -249,7 +249,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -372,66 +371,36 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("collect_mode")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("exclude")]
 		[JsonConverter(typeof(TermsExcludeConverter))]
 		public IEnumerable<string>? Exclude { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("execution_hint")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("include")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("min_doc_count")]
 		public int? MinDocCount { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("missing_bucket")]
 		public bool? MissingBucket { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("missing_order")]
 		public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("order")]
 		[JsonConverter(typeof(AggregateOrderConverter))]
 		public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("script")]
 		public ScriptBase? Script { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
 		public int? ShardSize { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("show_term_doc_count_error")]
 		public bool? ShowTermDocCountError { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("value_type")]
 		public string? ValueType { get; set; }
 	}
 

@@ -81,7 +81,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -120,8 +119,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("path")]
 		public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 	}
 

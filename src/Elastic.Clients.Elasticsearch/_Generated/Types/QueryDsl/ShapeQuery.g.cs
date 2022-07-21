@@ -60,7 +60,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				}
 			}
 
-			reader.Read();
 			return variant;
 		}
 
@@ -104,16 +103,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(ShapeQueryConverter))]
 	public partial class ShapeQuery : QueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("shape")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery Shape { get; set; }
 	}
 

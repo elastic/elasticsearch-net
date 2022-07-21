@@ -24,42 +24,117 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
+	internal sealed class ExplainAnalyzeTokenConverter : JsonConverter<ExplainAnalyzeToken>
+	{
+		public override ExplainAnalyzeToken Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			string bytes = default;
+			long endOffset = default;
+			bool? keyword = default;
+			long position = default;
+			long positionlength = default;
+			long startOffset = default;
+			long termfrequency = default;
+			string token = default;
+			string type = default;
+			Dictionary<string, object> additionalProperties = null;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "bytes")
+					{
+						bytes = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+
+					if (property == "end_offset")
+					{
+						endOffset = JsonSerializer.Deserialize<long>(ref reader, options);
+						continue;
+					}
+
+					if (property == "keyword")
+					{
+						keyword = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "position")
+					{
+						position = JsonSerializer.Deserialize<long>(ref reader, options);
+						continue;
+					}
+
+					if (property == "positionLength")
+					{
+						positionlength = JsonSerializer.Deserialize<long>(ref reader, options);
+						continue;
+					}
+
+					if (property == "start_offset")
+					{
+						startOffset = JsonSerializer.Deserialize<long>(ref reader, options);
+						continue;
+					}
+
+					if (property == "termFrequency")
+					{
+						termfrequency = JsonSerializer.Deserialize<long>(ref reader, options);
+						continue;
+					}
+
+					if (property == "token")
+					{
+						token = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+
+					if (property == "type")
+					{
+						type = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+
+					additionalProperties ??= new Dictionary<string, object>();
+					var value = JsonSerializer.Deserialize<object>(ref reader, options);
+					additionalProperties.Add(property, value);
+				}
+			}
+
+			return new ExplainAnalyzeToken { Bytes = bytes, EndOffset = endOffset, Keyword = keyword, Position = position, Positionlength = positionlength, StartOffset = startOffset, Termfrequency = termfrequency, Token = token, Type = type, Attributes = additionalProperties };
+		}
+
+		public override void Write(Utf8JsonWriter writer, ExplainAnalyzeToken value, JsonSerializerOptions options)
+		{
+			throw new NotImplementedException("'ExplainAnalyzeToken' is a readonly type, used only on responses and does not support being written to JSON.");
+		}
+	}
+
+	[JsonConverter(typeof(ExplainAnalyzeTokenConverter))]
 	public partial class ExplainAnalyzeToken
 	{
-		[JsonInclude]
-		[JsonPropertyName("bytes")]
+		public Dictionary<string, object> Attributes { get; init; }
+
 		public string Bytes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("end_offset")]
 		public long EndOffset { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("keyword")]
 		public bool? Keyword { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("position")]
 		public long Position { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("positionLength")]
 		public long Positionlength { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("start_offset")]
 		public long StartOffset { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("termFrequency")]
 		public long Termfrequency { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("token")]
 		public string Token { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
 		public string Type { get; init; }
 	}
 }

@@ -120,20 +120,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(MatchPhraseQueryConverter))]
 	public partial class MatchPhraseQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("query")]
 		public string Query { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("slop")]
 		public int? Slop { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("zero_terms_query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
