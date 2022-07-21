@@ -118,7 +118,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -176,12 +175,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("unit")]
 		public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? Unit { get; set; }
 	}
 

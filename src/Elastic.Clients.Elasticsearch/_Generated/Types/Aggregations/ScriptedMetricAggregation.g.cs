@@ -142,7 +142,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -212,24 +211,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("combine_script")]
 		public ScriptBase? CombineScript { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("init_script")]
 		public ScriptBase? InitScript { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("map_script")]
 		public ScriptBase? MapScript { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("params")]
 		public Dictionary<string, object>? Params { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("reduce_script")]
 		public ScriptBase? ReduceScript { get; set; }
 	}
 

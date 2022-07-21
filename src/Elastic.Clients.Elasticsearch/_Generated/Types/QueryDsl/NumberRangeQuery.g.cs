@@ -160,32 +160,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(NumberRangeQueryConverter))]
 	public partial class NumberRangeQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("from")]
 		public double? From { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("gt")]
 		public double? Gt { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("gte")]
 		public double? Gte { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("lt")]
 		public double? Lt { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("lte")]
 		public double? Lte { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("to")]
 		public double? To { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("relation")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 	}
 
