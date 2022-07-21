@@ -36,6 +36,7 @@ namespace Elastic.Clients.Elasticsearch
 			string? stackTrace = default;
 			IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? suppressed = default;
 			string type = default;
+			Dictionary<string, object> additionalProperties = null;
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -76,11 +77,15 @@ namespace Elastic.Clients.Elasticsearch
 						type = JsonSerializer.Deserialize<string>(ref reader, options);
 						continue;
 					}
+
+					additionalProperties ??= new Dictionary<string, object>();
+					var value = JsonSerializer.Deserialize<object>(ref reader, options);
+					additionalProperties.Add(property, value);
 				}
 			}
 
 			reader.Read();
-			return new ErrorCause { CausedBy = causedBy, Reason = reason, RootCause = rootCause, StackTrace = stackTrace, Suppressed = suppressed, Type = type };
+			return new ErrorCause { CausedBy = causedBy, Reason = reason, RootCause = rootCause, StackTrace = stackTrace, Suppressed = suppressed, Type = type, Metadata = additionalProperties };
 		}
 
 		public override void Write(Utf8JsonWriter writer, ErrorCause value, JsonSerializerOptions options)

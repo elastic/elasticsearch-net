@@ -31,6 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
 			var variant = new Suggester();
+			Dictionary<string, Elastic.Clients.Elasticsearch.FieldSuggester> additionalProperties = null;
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -41,16 +42,30 @@ namespace Elastic.Clients.Elasticsearch
 						variant.Text = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
+
+					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.FieldSuggester>();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.FieldSuggester>(ref reader, options);
+					additionalProperties.Add(property, value);
 				}
 			}
 
 			reader.Read();
+			variant.Suggesters = additionalProperties;
 			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, Suggester value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			if (value.Suggesters != null)
+			{
+				foreach (var additionalProperty in value.Suggesters)
+				{
+					writer.WritePropertyName(additionalProperty.Key);
+					JsonSerializer.Serialize(writer, additionalProperty.Value, options);
+				}
+			}
+
 			if (!string.IsNullOrEmpty(value.Text))
 			{
 				writer.WritePropertyName("text");

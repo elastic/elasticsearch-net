@@ -31,6 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
 			var variant = new IndexSettings();
+			Dictionary<string, object> additionalProperties = null;
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -377,16 +378,30 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 						variant.Version = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning?>(ref reader, options);
 						continue;
 					}
+
+					additionalProperties ??= new Dictionary<string, object>();
+					var value = JsonSerializer.Deserialize<object>(ref reader, options);
+					additionalProperties.Add(property, value);
 				}
 			}
 
 			reader.Read();
+			variant.OtherSettings = additionalProperties;
 			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, IndexSettings value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			if (value.OtherSettings != null)
+			{
+				foreach (var additionalProperty in value.OtherSettings)
+				{
+					writer.WritePropertyName(additionalProperty.Key);
+					JsonSerializer.Serialize(writer, additionalProperty.Value, options);
+				}
+			}
+
 			if (value.Analysis is not null)
 			{
 				writer.WritePropertyName("analysis");

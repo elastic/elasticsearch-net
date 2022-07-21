@@ -39,6 +39,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			long termfrequency = default;
 			string token = default;
 			string type = default;
+			Dictionary<string, object> additionalProperties = null;
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -97,11 +98,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 						type = JsonSerializer.Deserialize<string>(ref reader, options);
 						continue;
 					}
+
+					additionalProperties ??= new Dictionary<string, object>();
+					var value = JsonSerializer.Deserialize<object>(ref reader, options);
+					additionalProperties.Add(property, value);
 				}
 			}
 
 			reader.Read();
-			return new ExplainAnalyzeToken { Bytes = bytes, EndOffset = endOffset, Keyword = keyword, Position = position, Positionlength = positionlength, StartOffset = startOffset, Termfrequency = termfrequency, Token = token, Type = type };
+			return new ExplainAnalyzeToken { Bytes = bytes, EndOffset = endOffset, Keyword = keyword, Position = position, Positionlength = positionlength, StartOffset = startOffset, Termfrequency = termfrequency, Token = token, Type = type, Attributes = additionalProperties };
 		}
 
 		public override void Write(Utf8JsonWriter writer, ExplainAnalyzeToken value, JsonSerializerOptions options)
