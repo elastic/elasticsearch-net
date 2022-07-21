@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public abstract partial class SingleBucketAggregateBase : AggregateBase
 	{
 		[JsonInclude]
+		[JsonPropertyName("aggregations")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("doc_count")]
 		public long DocCount { get; init; }
 	}

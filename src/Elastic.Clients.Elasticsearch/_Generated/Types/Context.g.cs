@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -24,14 +25,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Context
+	public partial class Context : Union<string, Elastic.Clients.Elasticsearch.GeoLocation>
 	{
-		[JsonInclude]
-		[JsonPropertyName("methods")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ContextMethod> Methods { get; init; }
+		public Context(string context) : base(context)
+		{
+		}
 
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string Name { get; init; }
+		public Context(Elastic.Clients.Elasticsearch.GeoLocation geoLocation) : base(geoLocation)
+		{
+		}
 	}
 }

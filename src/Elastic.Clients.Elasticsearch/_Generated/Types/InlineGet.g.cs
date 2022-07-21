@@ -50,5 +50,9 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("metadata")]
+		public Dictionary<string, object> Metadata { get; init; }
 	}
 }

@@ -184,40 +184,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(DateRangeQueryConverter))]
 	public partial class DateRangeQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("from")]
 		public Elastic.Clients.Elasticsearch.DateMath? From { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("gt")]
 		public Elastic.Clients.Elasticsearch.DateMath? Gt { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("gte")]
 		public Elastic.Clients.Elasticsearch.DateMath? Gte { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("lt")]
 		public Elastic.Clients.Elasticsearch.DateMath? Lt { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("lte")]
 		public Elastic.Clients.Elasticsearch.DateMath? Lte { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("time_zone")]
 		public string? TimeZone { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("to")]
 		public Elastic.Clients.Elasticsearch.DateMath? To { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("relation")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 	}
 

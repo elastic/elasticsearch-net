@@ -96,12 +96,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(TermQueryConverter))]
 	public partial class TermQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("value")]
 		public object Value { get; set; }
 	}
 
