@@ -132,24 +132,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(RegexpQueryConverter))]
 	public partial class RegexpQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("flags")]
 		public string? Flags { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("max_determinized_states")]
 		public int? MaxDeterminizedStates { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("rewrite")]
 		public string? Rewrite { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("value")]
 		public string Value { get; set; }
 	}
 
