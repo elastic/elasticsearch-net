@@ -180,40 +180,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(MatchBoolPrefixQueryConverter))]
 	public partial class MatchBoolPrefixQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("fuzziness")]
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("fuzzy_rewrite")]
 		public string? FuzzyRewrite { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("fuzzy_transpositions")]
 		public bool? FuzzyTranspositions { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("max_expansions")]
 		public int? MaxExpansions { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("minimum_should_match")]
 		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("operator")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("prefix_length")]
 		public int? PrefixLength { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("query")]
 		public string Query { get; set; }
 	}
 

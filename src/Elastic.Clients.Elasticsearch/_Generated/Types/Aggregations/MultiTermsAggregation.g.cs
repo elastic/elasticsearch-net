@@ -165,7 +165,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -242,37 +241,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("collect_mode")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("min_doc_count")]
 		public long? MinDocCount { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("order")]
 		[JsonConverter(typeof(AggregateOrderConverter))]
 		public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("shard_min_doc_count")]
 		public long? ShardMinDocCount { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
 		public int? ShardSize { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("show_term_doc_count_error")]
 		public bool? ShowTermDocCountError { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("terms")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
 	}
 

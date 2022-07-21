@@ -177,7 +177,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -264,40 +263,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("buckets")]
 		public int? Buckets { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("minimum_interval")]
 		public Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("missing")]
 		public DateTimeOffset? Missing { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("offset")]
 		public string? Offset { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("params")]
 		public Dictionary<string, object>? Params { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("script")]
 		public ScriptBase? Script { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("time_zone")]
 		public string? TimeZone { get; set; }
 	}
 

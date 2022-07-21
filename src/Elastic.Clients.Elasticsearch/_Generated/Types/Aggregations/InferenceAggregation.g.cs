@@ -118,7 +118,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -171,12 +170,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("inference_config")]
 		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfig { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("model_id")]
 		public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
 	}
 

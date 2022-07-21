@@ -165,7 +165,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -246,37 +245,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("interval")]
 		public double? Interval { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("min_doc_count")]
 		public int? MinDocCount { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("missing")]
 		public double? Missing { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("offset")]
 		public double? Offset { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("order")]
 		[JsonConverter(typeof(AggregateOrderConverter))]
 		public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("script")]
 		public ScriptBase? Script { get; set; }
 	}
 

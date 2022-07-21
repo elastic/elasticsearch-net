@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class InferenceAggregate : AggregateBase
 	{
 		[JsonInclude]
+		[JsonPropertyName("data")]
+		public Dictionary<string, object> Data { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("feature_importance")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>? FeatureImportance { get; init; }
 

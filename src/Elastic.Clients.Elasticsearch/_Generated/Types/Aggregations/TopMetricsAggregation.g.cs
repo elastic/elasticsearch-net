@@ -118,7 +118,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -176,16 +175,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("metrics")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("sort")]
 		[JsonConverter(typeof(SortConverter))]
 		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 	}

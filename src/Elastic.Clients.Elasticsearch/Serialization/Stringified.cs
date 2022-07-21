@@ -10,8 +10,15 @@ namespace Elastic.Clients.Elasticsearch;
 
 internal sealed class StringifiedLongConverter : JsonConverter<long?>
 {
-	public override long? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override long? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => ReadStringifiedLong(ref reader);
+
+	public override void Write(Utf8JsonWriter writer, long? value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+
+	public static long ReadStringifiedLong(ref Utf8JsonReader reader)
 	{
+		if (reader.TokenType == JsonTokenType.PropertyName)
+			reader.Read();
+
 		if (reader.TokenType == JsonTokenType.String)
 		{
 			var longString = reader.GetString();
@@ -25,8 +32,6 @@ internal sealed class StringifiedLongConverter : JsonConverter<long?>
 		}
 
 		return reader.GetInt64();
+
 	}
-
-
-	public override void Write(Utf8JsonWriter writer, long? value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
 }
