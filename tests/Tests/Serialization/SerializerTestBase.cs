@@ -141,7 +141,7 @@ public abstract class SerializerTestBase
 	{
 		var serialisedJson = await SerializeAndGetJsonStringAsync(data);
 		await Verifier.VerifyJson(serialisedJson);
-		return JsonSerializer.Deserialize<T>(serialisedJson);
+		return DeserializeJsonString<T>(serialisedJson);
 	}
 
 	protected static Stream WrapInStream(string json)

@@ -144,28 +144,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(FuzzyQueryConverter))]
 	public partial class FuzzyQuery : FieldNameQueryBase, IQueryVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("fuzziness")]
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("max_expansions")]
 		public int? MaxExpansions { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("prefix_length")]
 		public int? PrefixLength { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("rewrite")]
 		public string? Rewrite { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("transpositions")]
 		public bool? Transpositions { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("value")]
 		public object Value { get; set; }
 	}
 

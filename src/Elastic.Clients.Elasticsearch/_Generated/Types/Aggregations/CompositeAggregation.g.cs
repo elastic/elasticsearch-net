@@ -105,7 +105,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -156,16 +155,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("after")]
 		public Dictionary<string, object>? After { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("sources")]
 		public IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 	}
 
