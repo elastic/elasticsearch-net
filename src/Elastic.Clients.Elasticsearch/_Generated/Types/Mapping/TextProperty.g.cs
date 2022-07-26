@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class TextProperty : CorePropertyBase, IProperty
+	public sealed partial class TextProperty : IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
@@ -33,6 +33,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("copy_to")]
+		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("dynamic")]
+		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("eager_global_ordinals")]
@@ -45,6 +53,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("fielddata_frequency_filter")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_above")]
+		public int? IgnoreAbove { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -63,6 +79,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("local_metadata")]
+		public Dictionary<string, object>? LocalMetadata { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, string>? Meta { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("norms")]
 		public bool? Norms { get; set; }
 
@@ -71,12 +95,24 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public int? PositionIncrementGap { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("properties")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
 		public string? SearchAnalyzer { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("search_quote_analyzer")]
 		public string? SearchQuoteAnalyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("similarity")]
+		public string? Similarity { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("store")]
+		public bool? Store { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("term_vector")]

@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
 	}
 
-	public partial class ClusterDeleteVotingConfigExclusionsRequest : PlainRequestBase<ClusterDeleteVotingConfigExclusionsRequestParameters>
+	public sealed partial class ClusterDeleteVotingConfigExclusionsRequest : PlainRequestBase<ClusterDeleteVotingConfigExclusionsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteVotingConfigExclusions;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class TranslogStats
+	public sealed partial class TranslogStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("earliest_last_modified_age")]

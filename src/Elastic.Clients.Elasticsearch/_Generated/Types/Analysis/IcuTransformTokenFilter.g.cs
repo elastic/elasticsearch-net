@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class IcuTransformTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class IcuTransformTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("dir")]
@@ -37,6 +37,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "icu_transform";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class IcuTransformTokenFilterDescriptor : SerializableDescriptorBase<IcuTransformTokenFilterDescriptor>, IBuildableDescriptor<IcuTransformTokenFilter>

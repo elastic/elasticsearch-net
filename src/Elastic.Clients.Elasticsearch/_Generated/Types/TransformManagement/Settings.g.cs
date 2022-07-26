@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class Settings
+	public sealed partial class Settings
 	{
 		[JsonInclude]
 		[JsonPropertyName("align_checkpoints")]

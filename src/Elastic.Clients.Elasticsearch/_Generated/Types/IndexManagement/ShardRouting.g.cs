@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class ShardRouting
+	public sealed partial class ShardRouting
 	{
 		[JsonInclude]
 		[JsonPropertyName("node")]

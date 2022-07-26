@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class WatcherWatchTrigger
+	public sealed partial class WatcherWatchTrigger
 	{
 		[JsonInclude]
 		[JsonPropertyName("_all")]

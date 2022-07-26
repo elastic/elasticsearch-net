@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public partial class ShardStats
+	public sealed partial class ShardStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("bytes_read")]

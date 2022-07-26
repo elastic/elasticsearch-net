@@ -24,11 +24,19 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class CompletionSuggester : SuggesterBase, IFieldSuggesterVariant
+	public sealed partial class CompletionSuggester : IFieldSuggesterVariant
 	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("contexts")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.CompletionContext>>? Contexts { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fuzzy")]
@@ -41,6 +49,10 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("regex")]
 		public string? Regex { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("skip_duplicates")]

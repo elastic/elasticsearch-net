@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 	}
 
-	public partial class StatsRequest : PlainRequestBase<StatsRequestParameters>
+	public sealed partial class StatsRequest : PlainRequestBase<StatsRequestParameters>
 	{
 		public StatsRequest()
 		{

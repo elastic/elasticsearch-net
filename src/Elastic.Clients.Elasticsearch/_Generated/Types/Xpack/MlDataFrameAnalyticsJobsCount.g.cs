@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class MlDataFrameAnalyticsJobsCount
+	public sealed partial class MlDataFrameAnalyticsJobsCount
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]

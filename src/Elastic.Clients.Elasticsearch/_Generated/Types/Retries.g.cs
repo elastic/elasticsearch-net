@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Retries
+	public sealed partial class Retries
 	{
 		[JsonInclude]
 		[JsonPropertyName("bulk")]

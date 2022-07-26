@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class PhraseSuggestCollate
+	public sealed partial class PhraseSuggestCollate
 	{
 		[JsonInclude]
 		[JsonPropertyName("params")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class SettingsAnalyze
+	public sealed partial class SettingsAnalyze
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_token_count")]

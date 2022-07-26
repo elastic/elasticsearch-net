@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class TrainedModelStats
+	public sealed partial class TrainedModelStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("deployment_stats")]

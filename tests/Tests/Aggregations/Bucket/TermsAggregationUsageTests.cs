@@ -56,7 +56,7 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 			.ShardSize(100)
 			.ExecutionHint(TermsAggregationExecutionHint.Map)
 			//.Missing("n/a")
-			.Script(ss => ss.Source("'State of Being: '+_value"))
+			.Script(new Script(new InlineScript("'State of Being: '+_value")))
 			.Order(new[]
 			{
 				AggregateOrder.KeyAscending,
@@ -76,7 +76,7 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 			ShardSize = 100,
 			ExecutionHint = TermsAggregationExecutionHint.Map,
 			//Missing = "n/a",
-			Script = new InlineScript("'State of Being: '+_value"),
+			Script = new Script(new InlineScript("'State of Being: '+_value")),
 			Order = new []
 			{
 				AggregateOrder.KeyAscending,
@@ -91,13 +91,16 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var states = response.Aggregations.Terms("states");
+		var states = response.Aggregations.GetStringTerms("states");
 		states.Should().NotBeNull();
 		states.DocCountErrorUpperBound.Should().HaveValue();
 		states.SumOtherDocCount.Should().BeGreaterOrEqualTo(0);
 		states.Buckets.Should().NotBeNull();
-		states.Buckets.Count.Should().BeGreaterThan(0);
-		foreach (var item in states.Buckets)
+
+		var bucketsCollection = states.Buckets.Item2;
+
+		bucketsCollection.Count.Should().BeGreaterThan(0);
+		foreach (var item in bucketsCollection)
 		{
 			item.Key.Should().NotBeNullOrEmpty();
 			item.DocCount.Should().BeGreaterOrEqualTo(1);

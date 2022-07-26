@@ -24,8 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class Vector : Base
+	public sealed partial class Vector
 	{
+		[JsonInclude]
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("dense_vector_dims_avg_count")]
 		public int DenseVectorDimsAvgCount { get; init; }
@@ -33,6 +37,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		[JsonInclude]
 		[JsonPropertyName("dense_vector_fields_count")]
 		public int DenseVectorFieldsCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sparse_vector_fields_count")]

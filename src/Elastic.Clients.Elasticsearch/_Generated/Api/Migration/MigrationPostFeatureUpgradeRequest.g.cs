@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Migration
 	{
 	}
 
-	public partial class MigrationPostFeatureUpgradeRequest : PlainRequestBase<MigrationPostFeatureUpgradeRequestParameters>
+	public sealed partial class MigrationPostFeatureUpgradeRequest : PlainRequestBase<MigrationPostFeatureUpgradeRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MigrationPostFeatureUpgrade;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

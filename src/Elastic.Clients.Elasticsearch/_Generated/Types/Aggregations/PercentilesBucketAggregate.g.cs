@@ -24,7 +24,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class PercentilesBucketAggregate : PercentilesAggregateBase
+	public sealed partial class PercentilesBucketAggregate : Aggregate
 	{
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("values")]
+		public Elastic.Clients.Elasticsearch.Aggregations.Percentiles Values { get; init; }
 	}
 }

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm
 {
-	public partial class ForceMergeConfiguration
+	public sealed partial class ForceMergeConfiguration
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_num_segments")]

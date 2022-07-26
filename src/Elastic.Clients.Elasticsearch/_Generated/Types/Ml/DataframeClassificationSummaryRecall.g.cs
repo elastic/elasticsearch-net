@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeClassificationSummaryRecall
+	public sealed partial class DataframeClassificationSummaryRecall
 	{
 		[JsonInclude]
 		[JsonPropertyName("avg_recall")]

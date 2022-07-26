@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class KuromojiTokenizer : TokenizerBase, ITokenizerDefinition
+	public sealed partial class KuromojiTokenizer : ITokenizerDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("discard_compound_token")]
@@ -56,6 +56,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("user_dictionary_rules")]
 		public IEnumerable<string>? UserDictionaryRules { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class KuromojiTokenizerDescriptor : SerializableDescriptorBase<KuromojiTokenizerDescriptor>, IBuildableDescriptor<KuromojiTokenizer>

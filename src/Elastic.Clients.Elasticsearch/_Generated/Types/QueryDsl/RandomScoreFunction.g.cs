@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class RandomScoreFunction : IFunctionScoreVariant
+	public sealed partial class RandomScoreFunction : IFunctionScoreVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]

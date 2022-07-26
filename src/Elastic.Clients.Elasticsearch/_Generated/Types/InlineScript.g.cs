@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class InlineScript : ScriptBase
+	public sealed partial class InlineScript
 	{
 		[JsonInclude]
 		[JsonPropertyName("lang")]
@@ -33,6 +33,10 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("options")]
 		public Dictionary<string, string>? Options { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("params")]
+		public Dictionary<string, object>? Params { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
@@ -96,7 +100,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (ParamsValue is not null)
 			{
 				writer.WritePropertyName("params");
-				SourceSerialisation.SerializeParams(ParamsValue, writer, settings);
+				JsonSerializer.Serialize(writer, ParamsValue, options);
 			}
 
 			writer.WritePropertyName("source");

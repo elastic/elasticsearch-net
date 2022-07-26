@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	public partial class ReloadSearchAnalyzersRequest : PlainRequestBase<ReloadSearchAnalyzersRequestParameters>
+	public sealed partial class ReloadSearchAnalyzersRequest : PlainRequestBase<ReloadSearchAnalyzersRequestParameters>
 	{
 		public ReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

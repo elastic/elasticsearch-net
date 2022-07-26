@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeOutlierDetectionSummary
+	public sealed partial class DataframeOutlierDetectionSummary
 	{
 		[JsonInclude]
 		[JsonPropertyName("auc_roc")]

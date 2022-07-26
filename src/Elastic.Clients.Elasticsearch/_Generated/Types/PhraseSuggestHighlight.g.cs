@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class PhraseSuggestHighlight
+	public sealed partial class PhraseSuggestHighlight
 	{
 		[JsonInclude]
 		[JsonPropertyName("post_tag")]

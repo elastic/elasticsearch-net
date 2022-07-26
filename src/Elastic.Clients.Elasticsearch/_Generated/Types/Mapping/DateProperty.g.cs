@@ -24,19 +24,39 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class DateProperty : DocValuesPropertyBase, IProperty
+	public sealed partial class DateProperty : IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("copy_to")]
+		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("doc_values")]
+		public bool? DocValues { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("dynamic")]
+		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("fielddata")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_above")]
+		public int? IgnoreAbove { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
@@ -47,8 +67,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool? Index { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("local_metadata")]
+		public Dictionary<string, object>? LocalMetadata { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("locale")]
 		public string? Locale { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, string>? Meta { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
@@ -57,6 +85,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("precision_step")]
 		public int? PrecisionStep { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("properties")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("similarity")]
+		public string? Similarity { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("store")]
+		public bool? Store { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]

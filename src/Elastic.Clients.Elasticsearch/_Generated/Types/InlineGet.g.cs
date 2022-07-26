@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class InlineGet<TDocument>
+	public sealed partial class InlineGet<TDocument>
 	{
 		[JsonInclude]
 		[JsonPropertyName("_primary_term")]

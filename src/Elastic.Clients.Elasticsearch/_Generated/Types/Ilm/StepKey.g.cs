@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm
 {
-	public partial class StepKey
+	public sealed partial class StepKey
 	{
 		[JsonInclude]
 		[JsonPropertyName("action")]

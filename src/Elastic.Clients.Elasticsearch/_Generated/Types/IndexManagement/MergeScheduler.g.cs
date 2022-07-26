@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class MergeScheduler
+	public sealed partial class MergeScheduler
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_merge_count")]

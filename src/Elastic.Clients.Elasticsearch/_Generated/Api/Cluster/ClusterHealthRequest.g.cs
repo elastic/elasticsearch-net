@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.HealthStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.HealthStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
 
-	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>
+	public sealed partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>
 	{
 		public ClusterHealthRequest()
 		{

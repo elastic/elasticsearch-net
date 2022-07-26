@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ElasticsearchVersionInfo
+	public sealed partial class ElasticsearchVersionInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("build_date")]

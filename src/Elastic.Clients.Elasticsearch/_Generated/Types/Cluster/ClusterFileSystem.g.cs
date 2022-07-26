@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterFileSystem
+	public sealed partial class ClusterFileSystem
 	{
 		[JsonInclude]
 		[JsonPropertyName("available_in_bytes")]

@@ -26,9 +26,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	[JsonConverter(typeof(AggregateDictionaryConverter))]
-	public partial class AggregateDictionary : IsAReadOnlyDictionaryBase<string, AggregateBase>
+	public partial class AggregateDictionary : IsAReadOnlyDictionaryBase<string, IAggregate>
 	{
-		public AggregateDictionary(IReadOnlyDictionary<string, AggregateBase> backingDictionary) : base(backingDictionary)
+		public AggregateDictionary(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
 		{
 		}
 
@@ -80,6 +80,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate? GetCumulativeCardinality(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate? GetMatrixStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate?>(key);
 		private TAggregate TryGet<TAggregate>(string key)
-			where TAggregate : AggregateBase => BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
+			where TAggregate : class, IAggregate => BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
 	}
 }

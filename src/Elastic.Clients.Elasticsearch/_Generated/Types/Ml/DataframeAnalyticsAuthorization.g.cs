@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalyticsAuthorization
+	public sealed partial class DataframeAnalyticsAuthorization
 	{
 		[JsonInclude]
 		[JsonPropertyName("api_key")]

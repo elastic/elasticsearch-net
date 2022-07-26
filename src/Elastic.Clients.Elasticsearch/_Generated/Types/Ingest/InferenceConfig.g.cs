@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	}
 
 	[JsonConverter(typeof(InferenceConfigConverter))]
-	public partial class InferenceConfig
+	public sealed partial class InferenceConfig
 	{
 		public InferenceConfig(string variantName, IInferenceConfigVariant variant)
 		{

@@ -24,8 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class DataTiers : Base
+	public sealed partial class DataTiers
 	{
+		[JsonInclude]
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("data_cold")]
 		public Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataCold { get; init; }
@@ -45,5 +49,9 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		[JsonInclude]
 		[JsonPropertyName("data_warm")]
 		public Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataWarm { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
 	}
 }

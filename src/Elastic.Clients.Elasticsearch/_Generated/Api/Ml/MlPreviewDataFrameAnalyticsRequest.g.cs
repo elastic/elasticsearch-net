@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlPreviewDataFrameAnalyticsRequest : PlainRequestBase<MlPreviewDataFrameAnalyticsRequestParameters>
+	public sealed partial class MlPreviewDataFrameAnalyticsRequest : PlainRequestBase<MlPreviewDataFrameAnalyticsRequestParameters>
 	{
 		public MlPreviewDataFrameAnalyticsRequest()
 		{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class PointInTimeReference
+	public sealed partial class PointInTimeReference
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
@@ -62,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("id");
-			writer.WriteStringValue(IdValue);
+			JsonSerializer.Serialize(writer, IdValue, options);
 			if (KeepAliveValue is not null)
 			{
 				writer.WritePropertyName("keep_alive");

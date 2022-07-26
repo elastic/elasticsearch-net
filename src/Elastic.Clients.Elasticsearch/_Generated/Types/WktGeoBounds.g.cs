@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class WktGeoBounds
+	public sealed partial class WktGeoBounds
 	{
 		[JsonInclude]
 		[JsonPropertyName("wkt")]

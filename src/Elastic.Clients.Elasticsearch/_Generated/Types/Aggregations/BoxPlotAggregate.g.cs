@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class BoxPlotAggregate : AggregateBase
+	public sealed partial class BoxPlotAggregate : Aggregate
 	{
 		[JsonInclude]
 		[JsonPropertyName("lower")]
@@ -41,6 +41,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("max_as_string")]
 		public string? MaxAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min")]

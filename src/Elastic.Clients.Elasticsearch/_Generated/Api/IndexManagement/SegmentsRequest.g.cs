@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
 
-	public partial class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>
+	public sealed partial class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>
 	{
 		public SegmentsRequest()
 		{

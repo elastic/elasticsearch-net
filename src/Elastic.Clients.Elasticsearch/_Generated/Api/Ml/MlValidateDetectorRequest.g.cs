@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlValidateDetectorRequest : PlainRequestBase<MlValidateDetectorRequestParameters>
+	public sealed partial class MlValidateDetectorRequest : PlainRequestBase<MlValidateDetectorRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningValidateDetector;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

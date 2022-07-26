@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecurityHasPrivilegesRequest : PlainRequestBase<SecurityHasPrivilegesRequestParameters>
+	public sealed partial class SecurityHasPrivilegesRequest : PlainRequestBase<SecurityHasPrivilegesRequestParameters>
 	{
 		public SecurityHasPrivilegesRequest()
 		{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterJvm
+	public sealed partial class ClusterJvm
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_uptime_in_millis")]

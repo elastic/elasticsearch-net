@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class MinimalLicenseInformation
+	public sealed partial class MinimalLicenseInformation
 	{
 		[JsonInclude]
 		[JsonPropertyName("expiry_date_in_millis")]

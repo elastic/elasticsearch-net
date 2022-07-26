@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlDeleteExpiredDataRequest : PlainRequestBase<MlDeleteExpiredDataRequestParameters>
+	public sealed partial class MlDeleteExpiredDataRequest : PlainRequestBase<MlDeleteExpiredDataRequestParameters>
 	{
 		public MlDeleteExpiredDataRequest()
 		{

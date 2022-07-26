@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeEvaluationRegressionMetricsHuber
+	public sealed partial class DataframeEvaluationRegressionMetricsHuber
 	{
 		[JsonInclude]
 		[JsonPropertyName("delta")]

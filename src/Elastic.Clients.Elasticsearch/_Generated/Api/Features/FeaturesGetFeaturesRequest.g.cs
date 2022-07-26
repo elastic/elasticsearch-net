@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Features
 	{
 	}
 
-	public partial class FeaturesGetFeaturesRequest : PlainRequestBase<FeaturesGetFeaturesRequestParameters>
+	public sealed partial class FeaturesGetFeaturesRequest : PlainRequestBase<FeaturesGetFeaturesRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.FeaturesGetFeatures;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class Transport
+	public sealed partial class Transport
 	{
 		[JsonInclude]
 		[JsonPropertyName("inbound_handling_time_histogram")]

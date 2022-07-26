@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
-	public partial class MigrateToDataStreamRequest : PlainRequestBase<MigrateToDataStreamRequestParameters>
+	public sealed partial class MigrateToDataStreamRequest : PlainRequestBase<MigrateToDataStreamRequestParameters>
 	{
 		public MigrateToDataStreamRequest(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
 		{

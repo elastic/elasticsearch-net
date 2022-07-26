@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
-	public partial class CreateDataStreamRequest : PlainRequestBase<CreateDataStreamRequestParameters>
+	public sealed partial class CreateDataStreamRequest : PlainRequestBase<CreateDataStreamRequestParameters>
 	{
 		public CreateDataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
 		{

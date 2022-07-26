@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 	{
 	}
 
-	public partial class SlmStopRequest : PlainRequestBase<SlmStopRequestParameters>
+	public sealed partial class SlmStopRequest : PlainRequestBase<SlmStopRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStop;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

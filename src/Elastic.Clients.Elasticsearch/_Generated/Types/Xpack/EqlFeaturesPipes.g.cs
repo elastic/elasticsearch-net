@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class EqlFeaturesPipes
+	public sealed partial class EqlFeaturesPipes
 	{
 		[JsonInclude]
 		[JsonPropertyName("pipe_head")]
