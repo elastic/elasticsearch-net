@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
 	}
 
-	public partial class NodesStatsRequest : PlainRequestBase<NodesStatsRequestParameters>
+	public sealed partial class NodesStatsRequest : PlainRequestBase<NodesStatsRequestParameters>
 	{
 		public NodesStatsRequest()
 		{

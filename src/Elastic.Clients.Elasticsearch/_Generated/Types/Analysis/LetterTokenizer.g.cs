@@ -24,11 +24,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class LetterTokenizer : TokenizerBase, ITokenizerDefinition
+	public sealed partial class LetterTokenizer : ITokenizerDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "letter";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class LetterTokenizerDescriptor : SerializableDescriptorBase<LetterTokenizerDescriptor>, IBuildableDescriptor<LetterTokenizer>

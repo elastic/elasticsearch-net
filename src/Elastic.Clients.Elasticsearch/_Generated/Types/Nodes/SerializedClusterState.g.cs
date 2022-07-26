@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class SerializedClusterState
+	public sealed partial class SerializedClusterState
 	{
 		[JsonInclude]
 		[JsonPropertyName("diffs")]

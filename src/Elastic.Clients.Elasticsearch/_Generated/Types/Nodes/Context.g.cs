@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class Context
+	public sealed partial class Context
 	{
 		[JsonInclude]
 		[JsonPropertyName("cache_evictions")]

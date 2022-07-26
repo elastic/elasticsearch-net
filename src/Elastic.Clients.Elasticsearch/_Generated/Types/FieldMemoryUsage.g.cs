@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class FieldMemoryUsage
+	public sealed partial class FieldMemoryUsage
 	{
 		[JsonInclude]
 		[JsonPropertyName("memory_size")]

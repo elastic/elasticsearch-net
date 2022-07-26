@@ -24,15 +24,39 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class AggregateMetricDoubleProperty : PropertyBase, IProperty
+	public sealed partial class AggregateMetricDoubleProperty : IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("default_metric")]
 		public string DefaultMetric { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("dynamic")]
+		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_above")]
+		public int? IgnoreAbove { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("local_metadata")]
+		public Dictionary<string, object>? LocalMetadata { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, string>? Meta { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("metrics")]
 		public IEnumerable<string> Metrics { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("properties")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]

@@ -24,11 +24,27 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class SearchAsYouTypeProperty : CorePropertyBase, IProperty
+	public sealed partial class SearchAsYouTypeProperty : IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("copy_to")]
+		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("dynamic")]
+		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_above")]
+		public int? IgnoreAbove { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -39,12 +55,24 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("local_metadata")]
+		public Dictionary<string, object>? LocalMetadata { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("max_shingle_size")]
 		public int? MaxShingleSize { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, string>? Meta { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("norms")]
 		public bool? Norms { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("properties")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
@@ -53,6 +81,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("search_quote_analyzer")]
 		public string? SearchQuoteAnalyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("similarity")]
+		public string? Similarity { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("store")]
+		public bool? Store { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("term_vector")]

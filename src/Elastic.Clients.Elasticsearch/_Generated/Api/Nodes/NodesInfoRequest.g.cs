@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParameters>
+	public sealed partial class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParameters>
 	{
 		public NodesInfoRequest()
 		{

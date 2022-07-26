@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class TokenDetail
+	public sealed partial class TokenDetail
 	{
 		[JsonInclude]
 		[JsonPropertyName("name")]

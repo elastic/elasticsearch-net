@@ -10,12 +10,21 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
 public partial class AsyncSearch<TDocument>
 {
+	/// <summary>
+	/// Shortcut to the hits returned for this search.
+	/// </summary>
 	[JsonIgnore]
 	public IReadOnlyCollection<Hit<TDocument>> Hits => HitsMetadata.Hits;
 
+	/// <summary>
+	/// The source documents from the matching hits.
+	/// </summary>
 	[JsonIgnore]
 	public IReadOnlyCollection<TDocument> Documents => HitsMetadata.Hits.Select(s => s.Source).ToReadOnlyCollection();
 
+	/// <summary>
+	/// The total number of hits returned for this search.
+	/// </summary>
 	[JsonIgnore]
 	public long Total => HitsMetadata?.Total?.Value ?? -1;
 }

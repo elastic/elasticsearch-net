@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Slm
 {
-	public partial class Statistics
+	public sealed partial class Statistics
 	{
 		[JsonInclude]
 		[JsonPropertyName("policy")]

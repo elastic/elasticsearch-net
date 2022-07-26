@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Reassign { get => Q<bool?>("reassign"); set => Q("reassign", value); }
 	}
 
-	public partial class MlPutTrainedModelAliasRequest : PlainRequestBase<MlPutTrainedModelAliasRequestParameters>
+	public sealed partial class MlPutTrainedModelAliasRequest : PlainRequestBase<MlPutTrainedModelAliasRequestParameters>
 	{
 		public MlPutTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.Id model_id, Elastic.Clients.Elasticsearch.Name model_alias) : base(r => r.Required("model_id", model_id).Required("model_alias", model_alias))
 		{

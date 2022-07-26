@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public partial class ExistsRequest : PlainRequestBase<ExistsRequestParameters>
+	public sealed partial class ExistsRequest : PlainRequestBase<ExistsRequestParameters>
 	{
 		public ExistsRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

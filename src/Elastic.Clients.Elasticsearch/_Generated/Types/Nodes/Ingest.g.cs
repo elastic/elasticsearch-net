@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class Ingest
+	public sealed partial class Ingest
 	{
 		[JsonInclude]
 		[JsonPropertyName("pipelines")]

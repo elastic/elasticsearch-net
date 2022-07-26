@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlRevertModelSnapshotRequest : PlainRequestBase<MlRevertModelSnapshotRequestParameters>
+	public sealed partial class MlRevertModelSnapshotRequest : PlainRequestBase<MlRevertModelSnapshotRequestParameters>
 	{
 		public MlRevertModelSnapshotRequest(Elastic.Clients.Elasticsearch.Id job_id, Elastic.Clients.Elasticsearch.Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
 		{

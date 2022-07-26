@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoDiscover
+	public sealed partial class NodeInfoDiscover
 	{
 		[JsonInclude]
 		[JsonPropertyName("seed_hosts")]

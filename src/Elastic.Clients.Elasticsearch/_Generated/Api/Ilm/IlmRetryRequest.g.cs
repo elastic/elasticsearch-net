@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 	{
 	}
 
-	public partial class IlmRetryRequest : PlainRequestBase<IlmRetryRequestParameters>
+	public sealed partial class IlmRetryRequest : PlainRequestBase<IlmRetryRequestParameters>
 	{
 		public IlmRetryRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{

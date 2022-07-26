@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(FieldSuggesterConverter))]
-	public partial class FieldSuggester
+	public sealed partial class FieldSuggester
 	{
 		public FieldSuggester(string variantName, IFieldSuggesterVariant variant)
 		{

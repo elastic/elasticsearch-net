@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeClassificationSummaryPrecision
+	public sealed partial class DataframeClassificationSummaryPrecision
 	{
 		[JsonInclude]
 		[JsonPropertyName("avg_precision")]

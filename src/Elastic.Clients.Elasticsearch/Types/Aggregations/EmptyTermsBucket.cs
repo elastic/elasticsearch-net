@@ -4,5 +4,5 @@
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public class EmptyTermsBucket { }
+	public sealed class EmptyTermsBucket { }
 }

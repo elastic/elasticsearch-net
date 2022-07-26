@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class MlSetUpgradeModeRequest : PlainRequestBase<MlSetUpgradeModeRequestParameters>
+	public sealed partial class MlSetUpgradeModeRequest : PlainRequestBase<MlSetUpgradeModeRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningSetUpgradeMode;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

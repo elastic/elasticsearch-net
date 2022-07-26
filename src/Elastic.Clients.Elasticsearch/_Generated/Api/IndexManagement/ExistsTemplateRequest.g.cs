@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class ExistsTemplateRequest : PlainRequestBase<ExistsTemplateRequestParameters>
+	public sealed partial class ExistsTemplateRequest : PlainRequestBase<ExistsTemplateRequestParameters>
 	{
 		public ExistsTemplateRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{

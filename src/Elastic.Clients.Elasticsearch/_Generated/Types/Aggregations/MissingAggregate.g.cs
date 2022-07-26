@@ -24,7 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class MissingAggregate : SingleBucketAggregateBase
+	public sealed partial class MissingAggregate : Aggregate
 	{
+		[JsonInclude]
+		[JsonPropertyName("aggregations")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("doc_count")]
+		public long DocCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
 	}
 }

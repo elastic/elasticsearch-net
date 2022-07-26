@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class NestedSortValue
+	public sealed partial class NestedSortValue
 	{
 		[JsonInclude]
 		[JsonPropertyName("filter")]

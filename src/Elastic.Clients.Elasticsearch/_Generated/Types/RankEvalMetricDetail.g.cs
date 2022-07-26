@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RankEvalMetricDetail
+	public sealed partial class RankEvalMetricDetail
 	{
 		[JsonInclude]
 		[JsonPropertyName("hits")]

@@ -150,9 +150,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(VariableWidthHistogramAggregationConverter))]
-	public partial class VariableWidthHistogramAggregation : AggregationBase
+	public sealed partial class VariableWidthHistogramAggregation : Aggregation
 	{
-		public VariableWidthHistogramAggregation(string name) : base(name)
+		public VariableWidthHistogramAggregation(string name) => Name = name;
+		internal VariableWidthHistogramAggregation()
 		{
 		}
 
@@ -161,6 +162,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		public int? InitialBuffer { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
 
 		public int? ShardSize { get; set; }
 	}

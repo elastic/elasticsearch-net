@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class RuleCondition
+	public sealed partial class RuleCondition
 	{
 		[JsonInclude]
 		[JsonPropertyName("applies_to")]

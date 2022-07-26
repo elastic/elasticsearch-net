@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 	{
 	}
 
-	public partial class EqlGetStatusRequest : PlainRequestBase<EqlGetStatusRequestParameters>
+	public sealed partial class EqlGetStatusRequest : PlainRequestBase<EqlGetStatusRequestParameters>
 	{
 		public EqlGetStatusRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

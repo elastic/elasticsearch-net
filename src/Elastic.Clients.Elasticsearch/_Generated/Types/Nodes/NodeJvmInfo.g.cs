@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeJvmInfo
+	public sealed partial class NodeJvmInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("bundled_jdk")]

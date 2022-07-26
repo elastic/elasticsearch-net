@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecurityAuthenticateRequest : PlainRequestBase<SecurityAuthenticateRequestParameters>
+	public sealed partial class SecurityAuthenticateRequest : PlainRequestBase<SecurityAuthenticateRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityAuthenticate;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

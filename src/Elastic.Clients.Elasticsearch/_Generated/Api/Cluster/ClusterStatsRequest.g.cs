@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>
+	public sealed partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>
 	{
 		public ClusterStatsRequest()
 		{

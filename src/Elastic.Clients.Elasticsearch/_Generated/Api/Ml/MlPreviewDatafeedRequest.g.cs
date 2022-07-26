@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlPreviewDatafeedRequest : PlainRequestBase<MlPreviewDatafeedRequestParameters>
+	public sealed partial class MlPreviewDatafeedRequest : PlainRequestBase<MlPreviewDatafeedRequestParameters>
 	{
 		public MlPreviewDatafeedRequest()
 		{

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public partial class TermsEnumRequest : PlainRequestBase<TermsEnumRequestParameters>
+	public sealed partial class TermsEnumRequest : PlainRequestBase<TermsEnumRequestParameters>
 	{
 		public TermsEnumRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{

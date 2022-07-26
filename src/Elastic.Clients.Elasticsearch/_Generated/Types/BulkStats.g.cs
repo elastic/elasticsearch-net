@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class BulkStats
+	public sealed partial class BulkStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("avg_size")]

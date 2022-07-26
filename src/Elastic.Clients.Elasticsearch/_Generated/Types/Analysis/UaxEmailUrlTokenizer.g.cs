@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class UaxEmailUrlTokenizer : TokenizerBase, ITokenizerDefinition
+	public sealed partial class UaxEmailUrlTokenizer : ITokenizerDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
@@ -33,6 +33,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "uax_url_email";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class UaxEmailUrlTokenizerDescriptor : SerializableDescriptorBase<UaxEmailUrlTokenizerDescriptor>, IBuildableDescriptor<UaxEmailUrlTokenizer>

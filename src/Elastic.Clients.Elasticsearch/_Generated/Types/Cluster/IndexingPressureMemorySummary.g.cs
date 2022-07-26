@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class IndexingPressureMemorySummary
+	public sealed partial class IndexingPressureMemorySummary
 	{
 		[JsonInclude]
 		[JsonPropertyName("all_in_bytes")]

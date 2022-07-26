@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class GeoIpNodeDatabases
+	public sealed partial class GeoIpNodeDatabases
 	{
 		[JsonInclude]
 		[JsonPropertyName("databases")]

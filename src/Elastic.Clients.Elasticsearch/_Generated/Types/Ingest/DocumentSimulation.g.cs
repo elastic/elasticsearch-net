@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class DocumentSimulation
+	public sealed partial class DocumentSimulation
 	{
 		[JsonInclude]
 		[JsonPropertyName("_id")]

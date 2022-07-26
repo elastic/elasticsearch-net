@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class IndexPrivilegesCheck
+	public sealed partial class IndexPrivilegesCheck
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_restricted_indices")]

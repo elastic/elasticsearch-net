@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class SnapshotCleanupRepositoryRequest : PlainRequestBase<SnapshotCleanupRepositoryRequestParameters>
+	public sealed partial class SnapshotCleanupRepositoryRequest : PlainRequestBase<SnapshotCleanupRepositoryRequestParameters>
 	{
 		public SnapshotCleanupRepositoryRequest(Elastic.Clients.Elasticsearch.Name repository) : base(r => r.Required("repository", repository))
 		{

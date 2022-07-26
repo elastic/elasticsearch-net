@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
 	}
 
-	public partial class IngestGetPipelineRequest : PlainRequestBase<IngestGetPipelineRequestParameters>
+	public sealed partial class IngestGetPipelineRequest : PlainRequestBase<IngestGetPipelineRequestParameters>
 	{
 		public IngestGetPipelineRequest()
 		{

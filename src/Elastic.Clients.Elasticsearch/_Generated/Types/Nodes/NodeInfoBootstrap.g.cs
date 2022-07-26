@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoBootstrap
+	public sealed partial class NodeInfoBootstrap
 	{
 		[JsonInclude]
 		[JsonPropertyName("memory_lock")]

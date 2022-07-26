@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class IndexSettingsAnalysis
+	public sealed partial class IndexSettingsAnalysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]

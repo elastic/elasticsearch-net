@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterJvmMemory
+	public sealed partial class ClusterJvmMemory
 	{
 		[JsonInclude]
 		[JsonPropertyName("heap_max_in_bytes")]

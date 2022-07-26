@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	public partial class MlPutDatafeedRequest : PlainRequestBase<MlPutDatafeedRequestParameters>
+	public sealed partial class MlPutDatafeedRequest : PlainRequestBase<MlPutDatafeedRequestParameters>
 	{
 		public MlPutDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
 		{

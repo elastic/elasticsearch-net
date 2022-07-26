@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class FetchProfileBreakdown
+	public sealed partial class FetchProfileBreakdown
 	{
 		[JsonInclude]
 		[JsonPropertyName("load_stored_fields")]

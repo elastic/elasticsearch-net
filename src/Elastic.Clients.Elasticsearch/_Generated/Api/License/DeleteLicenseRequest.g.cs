@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.License
 	{
 	}
 
-	public partial class DeleteLicenseRequest : PlainRequestBase<DeleteLicenseRequestParameters>
+	public sealed partial class DeleteLicenseRequest : PlainRequestBase<DeleteLicenseRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseDelete;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
