@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 	{
 	}
 
-	public partial class CcrStatsRequest : PlainRequestBase<CcrStatsRequestParameters>
+	public sealed partial class CcrStatsRequest : PlainRequestBase<CcrStatsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationStats;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

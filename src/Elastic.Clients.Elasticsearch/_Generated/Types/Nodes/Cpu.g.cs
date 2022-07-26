@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class Cpu
+	public sealed partial class Cpu
 	{
 		[JsonInclude]
 		[JsonPropertyName("load_average")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalyticsMemoryEstimation
+	public sealed partial class DataframeAnalyticsMemoryEstimation
 	{
 		[JsonInclude]
 		[JsonPropertyName("expected_memory_with_disk")]

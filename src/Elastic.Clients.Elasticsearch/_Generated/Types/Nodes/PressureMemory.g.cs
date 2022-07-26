@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class PressureMemory
+	public sealed partial class PressureMemory
 	{
 		[JsonInclude]
 		[JsonPropertyName("all_in_bytes")]

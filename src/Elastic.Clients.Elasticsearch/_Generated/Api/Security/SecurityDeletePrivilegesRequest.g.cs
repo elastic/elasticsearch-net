@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 
-	public partial class SecurityDeletePrivilegesRequest : PlainRequestBase<SecurityDeletePrivilegesRequestParameters>
+	public sealed partial class SecurityDeletePrivilegesRequest : PlainRequestBase<SecurityDeletePrivilegesRequestParameters>
 	{
 		public SecurityDeletePrivilegesRequest(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("application", application).Required("name", name))
 		{

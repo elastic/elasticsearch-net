@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class StemmerTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class StemmerTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("language")]
@@ -33,6 +33,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "stemmer";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class StemmerTokenFilterDescriptor : SerializableDescriptorBase<StemmerTokenFilterDescriptor>, IBuildableDescriptor<StemmerTokenFilter>

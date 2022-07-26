@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	}
 
-	public partial class GetEqlRequest : PlainRequestBase<GetEqlRequestParameters>
+	public sealed partial class GetEqlRequest : PlainRequestBase<GetEqlRequestParameters>
 	{
 		public GetEqlRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

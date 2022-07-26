@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 	{
 	}
 
-	public partial class EnrichDeletePolicyRequest : PlainRequestBase<EnrichDeletePolicyRequestParameters>
+	public sealed partial class EnrichDeletePolicyRequest : PlainRequestBase<EnrichDeletePolicyRequestParameters>
 	{
 		public EnrichDeletePolicyRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{

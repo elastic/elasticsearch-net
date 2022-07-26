@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class TrainedModelTree
+	public sealed partial class TrainedModelTree
 	{
 		[JsonInclude]
 		[JsonPropertyName("classification_labels")]

@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class TransformPutTransformRequest : PlainRequestBase<TransformPutTransformRequestParameters>
+	public sealed partial class TransformPutTransformRequest : PlainRequestBase<TransformPutTransformRequestParameters>
 	{
 		public TransformPutTransformRequest(Elastic.Clients.Elasticsearch.Id transform_id) : base(r => r.Required("transform_id", transform_id))
 		{

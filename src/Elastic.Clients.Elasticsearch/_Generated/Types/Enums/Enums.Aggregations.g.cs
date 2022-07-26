@@ -108,6 +108,69 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	[JsonConverter(typeof(CardinalityExecutionModeConverter))]
+	public enum CardinalityExecutionMode
+	{
+		[EnumMember(Value = "segment_ordinals")]
+		SegmentOrdinals,
+		[EnumMember(Value = "save_time_heuristic")]
+		SaveTimeHeuristic,
+		[EnumMember(Value = "save_memory_heuristic")]
+		SaveMemoryHeuristic,
+		[EnumMember(Value = "global_ordinals")]
+		GlobalOrdinals,
+		[EnumMember(Value = "direct")]
+		Direct
+	}
+
+	internal sealed class CardinalityExecutionModeConverter : JsonConverter<CardinalityExecutionMode>
+	{
+		public override CardinalityExecutionMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "segment_ordinals":
+					return CardinalityExecutionMode.SegmentOrdinals;
+				case "save_time_heuristic":
+					return CardinalityExecutionMode.SaveTimeHeuristic;
+				case "save_memory_heuristic":
+					return CardinalityExecutionMode.SaveMemoryHeuristic;
+				case "global_ordinals":
+					return CardinalityExecutionMode.GlobalOrdinals;
+				case "direct":
+					return CardinalityExecutionMode.Direct;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, CardinalityExecutionMode value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case CardinalityExecutionMode.SegmentOrdinals:
+					writer.WriteStringValue("segment_ordinals");
+					return;
+				case CardinalityExecutionMode.SaveTimeHeuristic:
+					writer.WriteStringValue("save_time_heuristic");
+					return;
+				case CardinalityExecutionMode.SaveMemoryHeuristic:
+					writer.WriteStringValue("save_memory_heuristic");
+					return;
+				case CardinalityExecutionMode.GlobalOrdinals:
+					writer.WriteStringValue("global_ordinals");
+					return;
+				case CardinalityExecutionMode.Direct:
+					writer.WriteStringValue("direct");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(GapPolicyConverter))]
 	public enum GapPolicy
 	{

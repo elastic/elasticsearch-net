@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 	}
 
-	public partial class MultiGetRequest : PlainRequestBase<MultiGetRequestParameters>
+	public sealed partial class MultiGetRequest : PlainRequestBase<MultiGetRequestParameters>
 	{
 		public MultiGetRequest()
 		{

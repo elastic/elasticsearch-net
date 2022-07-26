@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 	{
 	}
 
-	public partial class SlmGetStatusRequest : PlainRequestBase<SlmGetStatusRequestParameters>
+	public sealed partial class SlmGetStatusRequest : PlainRequestBase<SlmGetStatusRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetStatus;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

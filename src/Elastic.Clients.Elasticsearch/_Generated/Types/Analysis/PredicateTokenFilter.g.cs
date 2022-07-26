@@ -24,15 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class PredicateTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class PredicateTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public ScriptBase Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "predicate_token_filter";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class PredicateTokenFilterDescriptor : SerializableDescriptorBase<PredicateTokenFilterDescriptor>, IBuildableDescriptor<PredicateTokenFilter>
@@ -42,35 +45,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private ScriptBase ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+		private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public PredicateTokenFilterDescriptor Script(ScriptBase script)
+		public PredicateTokenFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
 			ScriptValue = script;
-			return Self;
-		}
-
-		public PredicateTokenFilterDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public PredicateTokenFilterDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
 			return Self;
 		}
 
@@ -83,22 +64,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("predicate_token_filter");
 			if (VersionValue is not null)
@@ -110,31 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			writer.WriteEndObject();
 		}
 
-		private ScriptBase BuildScript()
-		{
-			if (ScriptValue is not null)
-			{
-				return ScriptValue;
-			}
-
-			if (ScriptDescriptor is IBuildableDescriptor<ScriptBase> buildable)
-			{
-				return buildable.Build();
-			}
-
-			if (ScriptDescriptorAction is not null)
-			{
-				var descriptor = new ScriptDescriptor(ScriptDescriptorAction);
-				if (descriptor is IBuildableDescriptor<ScriptBase> buildableFromAction)
-				{
-					return buildableFromAction.Build();
-				}
-			}
-
-			return null;
-		}
-
 		PredicateTokenFilter IBuildableDescriptor<PredicateTokenFilter>.Build() => new()
-		{ Script = BuildScript(), Version = VersionValue };
+		{ Script = ScriptValue, Version = VersionValue };
 	}
 }

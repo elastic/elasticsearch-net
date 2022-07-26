@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch
 {
-	public partial class AsyncSearch<TDocument>
+	public sealed partial class AsyncSearch<TDocument>
 	{
 		[JsonInclude]
 		[JsonPropertyName("_clusters")]

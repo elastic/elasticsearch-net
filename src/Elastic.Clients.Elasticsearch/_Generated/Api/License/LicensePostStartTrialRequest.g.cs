@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.License
 		public string? TypeQueryString { get => Q<string?>("type_query_string"); set => Q("type_query_string", value); }
 	}
 
-	public partial class LicensePostStartTrialRequest : PlainRequestBase<LicensePostStartTrialRequestParameters>
+	public sealed partial class LicensePostStartTrialRequest : PlainRequestBase<LicensePostStartTrialRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicensePostStartTrial;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

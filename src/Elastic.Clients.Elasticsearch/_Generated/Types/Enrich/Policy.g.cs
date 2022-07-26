@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Enrich
 {
-	public partial class Policy
+	public sealed partial class Policy
 	{
 		[JsonInclude]
 		[JsonPropertyName("enrich_fields")]

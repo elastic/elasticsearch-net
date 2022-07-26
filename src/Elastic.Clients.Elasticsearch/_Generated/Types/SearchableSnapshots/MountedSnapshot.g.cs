@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 {
-	public partial class MountedSnapshot
+	public sealed partial class MountedSnapshot
 	{
 		[JsonInclude]
 		[JsonPropertyName("indices")]

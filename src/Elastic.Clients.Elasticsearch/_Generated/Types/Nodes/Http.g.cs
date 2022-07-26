@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class Http
+	public sealed partial class Http
 	{
 		[JsonInclude]
 		[JsonPropertyName("clients")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class ModelPlotConfig
+	public sealed partial class ModelPlotConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("annotations_enabled")]

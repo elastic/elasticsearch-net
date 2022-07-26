@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class CharFilterTypes
+	public sealed partial class CharFilterTypes
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer_types")]

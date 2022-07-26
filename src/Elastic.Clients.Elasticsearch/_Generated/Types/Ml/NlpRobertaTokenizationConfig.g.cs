@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class NlpRobertaTokenizationConfig : ITokenizationConfigVariant
+	public sealed partial class NlpRobertaTokenizationConfig : ITokenizationConfigVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("add_prefix_space")]

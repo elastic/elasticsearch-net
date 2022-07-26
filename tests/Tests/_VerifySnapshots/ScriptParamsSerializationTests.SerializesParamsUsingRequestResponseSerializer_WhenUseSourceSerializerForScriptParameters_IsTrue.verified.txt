@@ -1,9 +1,6 @@
 {
   params: {
-    person: {
-      forename: has_null_surname,
-      surname: null
-    }
+    fromSourceSerializer: true
   },
   source: source
 }

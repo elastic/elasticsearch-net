@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class BulkIndexByScrollFailure
+	public sealed partial class BulkIndexByScrollFailure
 	{
 		[JsonInclude]
 		[JsonPropertyName("cause")]

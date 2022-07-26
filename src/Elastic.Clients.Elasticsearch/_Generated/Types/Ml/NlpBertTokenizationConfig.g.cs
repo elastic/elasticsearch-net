@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class NlpBertTokenizationConfig : ITokenizationConfigVariant
+	public sealed partial class NlpBertTokenizationConfig : ITokenizationConfigVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("do_lower_case")]

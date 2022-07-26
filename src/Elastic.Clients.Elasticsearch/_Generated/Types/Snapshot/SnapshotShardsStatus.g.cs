@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class SnapshotShardsStatus
+	public sealed partial class SnapshotShardsStatus
 	{
 		[JsonInclude]
 		[JsonPropertyName("stage")]

@@ -112,7 +112,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
-	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>
+	public sealed partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>
 	{
 		public UpdateByQueryRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public ScriptBase? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("slice")]
@@ -280,12 +280,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
 		private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
@@ -295,6 +289,8 @@ namespace Elastic.Clients.Elasticsearch
 		private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
 
 		private long? MaxDocsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		public UpdateByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -317,30 +313,6 @@ namespace Elastic.Clients.Elasticsearch
 			QueryValue = null;
 			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
 			return Self;
 		}
 
@@ -380,6 +352,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public UpdateByQueryRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -397,22 +375,6 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("query");
 				JsonSerializer.Serialize(writer, QueryValue, options);
-			}
-
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (SliceDescriptor is not null)
@@ -441,6 +403,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("max_docs");
 				writer.WriteNumberValue(MaxDocsValue.Value);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -501,12 +469,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
 		private SlicedScrollDescriptor SliceDescriptor { get; set; }
@@ -516,6 +478,8 @@ namespace Elastic.Clients.Elasticsearch
 		private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
 
 		private long? MaxDocsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		public UpdateByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -538,30 +502,6 @@ namespace Elastic.Clients.Elasticsearch
 			QueryValue = null;
 			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
 			return Self;
 		}
 
@@ -601,6 +541,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public UpdateByQueryRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -618,22 +564,6 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("query");
 				JsonSerializer.Serialize(writer, QueryValue, options);
-			}
-
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (SliceDescriptor is not null)
@@ -662,6 +592,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("max_docs");
 				writer.WriteNumberValue(MaxDocsValue.Value);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			writer.WriteEndObject();

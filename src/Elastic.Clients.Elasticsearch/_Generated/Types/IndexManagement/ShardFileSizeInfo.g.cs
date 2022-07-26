@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class ShardFileSizeInfo
+	public sealed partial class ShardFileSizeInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("average_size_in_bytes")]

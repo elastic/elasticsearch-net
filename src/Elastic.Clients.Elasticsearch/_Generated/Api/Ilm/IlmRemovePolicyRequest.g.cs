@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 	{
 	}
 
-	public partial class IlmRemovePolicyRequest : PlainRequestBase<IlmRemovePolicyRequestParameters>
+	public sealed partial class IlmRemovePolicyRequest : PlainRequestBase<IlmRemovePolicyRequestParameters>
 	{
 		public IlmRemovePolicyRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{

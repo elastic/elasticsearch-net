@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoXpackSecurityAuthcToken
+	public sealed partial class NodeInfoXpackSecurityAuthcToken
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]

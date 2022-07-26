@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 	{
 	}
 
-	public partial class CcrUnfollowRequest : PlainRequestBase<CcrUnfollowRequestParameters>
+	public sealed partial class CcrUnfollowRequest : PlainRequestBase<CcrUnfollowRequestParameters>
 	{
 		public CcrUnfollowRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{

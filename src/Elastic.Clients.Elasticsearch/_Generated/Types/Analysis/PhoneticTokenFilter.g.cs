@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class PhoneticTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class PhoneticTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("encoder")]
@@ -53,6 +53,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "phonetic";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class PhoneticTokenFilterDescriptor : SerializableDescriptorBase<PhoneticTokenFilterDescriptor>, IBuildableDescriptor<PhoneticTokenFilter>

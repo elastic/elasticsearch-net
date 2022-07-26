@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoSettingsTransportType
+	public sealed partial class NodeInfoSettingsTransportType
 	{
 		[JsonInclude]
 		[JsonPropertyName("default")]

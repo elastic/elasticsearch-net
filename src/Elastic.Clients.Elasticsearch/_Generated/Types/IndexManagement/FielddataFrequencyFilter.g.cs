@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class FielddataFrequencyFilter
+	public sealed partial class FielddataFrequencyFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("max")]

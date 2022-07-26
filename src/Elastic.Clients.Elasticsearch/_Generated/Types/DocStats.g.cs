@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class DocStats
+	public sealed partial class DocStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]

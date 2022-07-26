@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql
 {
-	public partial class HitsSequence<TEvent>
+	public sealed partial class HitsSequence<TEvent>
 	{
 		[JsonInclude]
 		[JsonPropertyName("events")]

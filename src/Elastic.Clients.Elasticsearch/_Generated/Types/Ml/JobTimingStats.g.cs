@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class JobTimingStats
+	public sealed partial class JobTimingStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("average_bucket_processing_time_ms")]

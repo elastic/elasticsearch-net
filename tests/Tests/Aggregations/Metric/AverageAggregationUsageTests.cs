@@ -44,7 +44,8 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 			)
 			.Field(p => p.NumberOfCommits)
 			//.Missing(10)
-			.Script(ss => ss.Source("_value * 1.2"))
+			//.Script(ss => ss.Source("_value * 1.2"))
+			.Script(new Script(new InlineScript("_value * 1.2")))
 		);
 
 	protected override AggregationDictionary InitializerAggs =>
@@ -55,7 +56,7 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 				{ "foo", "bar" }
 			},
 			//Missing = 10,
-			Script = new InlineScript("_value * 1.2")
+			Script = new Script(new InlineScript("_value * 1.2"))
 		};
 
 	protected override void ExpectResponse(SearchResponse<Project> response)

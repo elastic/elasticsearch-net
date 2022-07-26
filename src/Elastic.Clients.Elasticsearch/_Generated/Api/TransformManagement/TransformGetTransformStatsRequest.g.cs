@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 	}
 
-	public partial class TransformGetTransformStatsRequest : PlainRequestBase<TransformGetTransformStatsRequestParameters>
+	public sealed partial class TransformGetTransformStatsRequest : PlainRequestBase<TransformGetTransformStatsRequestParameters>
 	{
 		public TransformGetTransformStatsRequest(Elastic.Clients.Elasticsearch.Names transform_id) : base(r => r.Required("transform_id", transform_id))
 		{

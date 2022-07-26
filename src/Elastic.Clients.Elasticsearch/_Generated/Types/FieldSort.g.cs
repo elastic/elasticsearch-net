@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class FieldSort : ISortOptionsVariant
+	public sealed partial class FieldSort : ISortOptionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("format")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class GeoHashLocation
+	public sealed partial class GeoHashLocation
 	{
 		[JsonInclude]
 		[JsonPropertyName("geohash")]

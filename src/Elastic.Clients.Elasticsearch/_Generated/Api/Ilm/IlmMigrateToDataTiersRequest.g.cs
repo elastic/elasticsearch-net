@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 	}
 
-	public partial class IlmMigrateToDataTiersRequest : PlainRequestBase<IlmMigrateToDataTiersRequestParameters>
+	public sealed partial class IlmMigrateToDataTiersRequest : PlainRequestBase<IlmMigrateToDataTiersRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementMigrateToDataTiers;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

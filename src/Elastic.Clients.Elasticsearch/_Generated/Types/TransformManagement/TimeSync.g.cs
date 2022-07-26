@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class TimeSync : ISyncVariant
+	public sealed partial class TimeSync : ISyncVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("delay")]

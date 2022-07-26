@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 	{
 	}
 
-	public partial class SlmExecuteLifecycleRequest : PlainRequestBase<SlmExecuteLifecycleRequestParameters>
+	public sealed partial class SlmExecuteLifecycleRequest : PlainRequestBase<SlmExecuteLifecycleRequestParameters>
 	{
 		public SlmExecuteLifecycleRequest(Elastic.Clients.Elasticsearch.Name policy_id) : base(r => r.Required("policy_id", policy_id))
 		{

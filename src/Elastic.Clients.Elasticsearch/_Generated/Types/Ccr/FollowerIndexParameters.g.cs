@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public partial class FollowerIndexParameters
+	public sealed partial class FollowerIndexParameters
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_outstanding_read_requests")]

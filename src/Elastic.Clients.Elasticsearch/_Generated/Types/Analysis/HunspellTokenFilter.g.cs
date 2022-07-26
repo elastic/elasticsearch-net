@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class HunspellTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class HunspellTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("dedup")]
@@ -45,6 +45,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "hunspell";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class HunspellTokenFilterDescriptor : SerializableDescriptorBase<HunspellTokenFilterDescriptor>, IBuildableDescriptor<HunspellTokenFilter>

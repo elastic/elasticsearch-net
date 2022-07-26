@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ShardFailure
+	public sealed partial class ShardFailure
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]

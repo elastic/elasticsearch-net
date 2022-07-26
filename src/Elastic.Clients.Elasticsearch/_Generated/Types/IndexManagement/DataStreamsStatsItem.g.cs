@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class DataStreamsStatsItem
+	public sealed partial class DataStreamsStatsItem
 	{
 		[JsonInclude]
 		[JsonPropertyName("backing_indices")]

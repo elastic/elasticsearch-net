@@ -12,9 +12,13 @@ namespace Elastic.Clients.Elasticsearch;
 
 internal sealed class UnionConverter : JsonConverterFactory
 {
+	// Because converters registered on JsonSerializerOptions take priority over the JsonConverter attribute on the type, we need a way to
+	// mark those types we don't want to use the default union converter. This set is used for that purpose, until a better option can be
+	// found.
 	private static readonly HashSet<Type> TypesToSkip = new()
 	{
-		typeof(SourceConfig)
+		typeof(SourceConfig),
+		typeof(Script)
 	};
 
 	public override bool CanConvert(Type typeToConvert) => !TypesToSkip.Contains(typeToConvert) &&
@@ -67,27 +71,23 @@ internal sealed class UnionConverter : JsonConverterFactory
 		{
 			// TODO - Aggregate Exception if both fail
 
-			//var requiresEndObject = false;
-
 			var readerCopy = reader;
-
-			//if (readerCopy.TokenType == JsonTokenType.StartObject)
-			//{
-			//	requiresEndObject = true;
-			//	readerCopy.Read();
-			//}
 
 			try
 			{
 				var itemOne = JsonSerializer.Deserialize<TItem1>(ref readerCopy, options);
 
-				if (itemOne is not null)
+				if (itemOne is IUnionVerifiable verifiable)
 				{
-					//if (requiresEndObject)
-					//	readerCopy.Read();
-
+					if (verifiable.IsSuccessful)
+					{
+						reader = readerCopy;
+						return (TType)Activator.CreateInstance(typeof(TType), itemOne);
+					}
+				}
+				else if (itemOne is not null)
+				{
 					reader = readerCopy;
-
 					return (TType)Activator.CreateInstance(typeof(TType), itemOne);
 				}
 			}
@@ -108,9 +108,6 @@ internal sealed class UnionConverter : JsonConverterFactory
 
 				if (itemTwo is not null)
 				{
-					//if (requiresEndObject)
-					//	reader.Read();
-
 					return (TType)Activator.CreateInstance(typeof(TType), itemTwo);
 				}
 			}

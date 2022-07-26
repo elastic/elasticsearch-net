@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
-	public partial class EnrichExecutePolicyRequest : PlainRequestBase<EnrichExecutePolicyRequestParameters>
+	public sealed partial class EnrichExecutePolicyRequest : PlainRequestBase<EnrichExecutePolicyRequestParameters>
 	{
 		public EnrichExecutePolicyRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{

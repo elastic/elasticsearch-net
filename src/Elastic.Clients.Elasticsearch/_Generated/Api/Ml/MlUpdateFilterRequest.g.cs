@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlUpdateFilterRequest : PlainRequestBase<MlUpdateFilterRequestParameters>
+	public sealed partial class MlUpdateFilterRequest : PlainRequestBase<MlUpdateFilterRequestParameters>
 	{
 		public MlUpdateFilterRequest(Elastic.Clients.Elasticsearch.Id filter_id) : base(r => r.Required("filter_id", filter_id))
 		{

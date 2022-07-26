@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RemoteSource
+	public sealed partial class RemoteSource
 	{
 		[JsonInclude]
 		[JsonPropertyName("connect_timeout")]

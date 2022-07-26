@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.License
 {
-	public partial class Acknowledgement
+	public sealed partial class Acknowledgement
 	{
 		[JsonInclude]
 		[JsonPropertyName("license")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class Command
+	public sealed partial class Command
 	{
 		[JsonInclude]
 		[JsonPropertyName("allocate_empty_primary")]

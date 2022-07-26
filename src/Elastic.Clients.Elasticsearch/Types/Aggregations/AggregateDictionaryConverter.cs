@@ -13,7 +13,7 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 {
 	public override AggregateDictionary? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		var dictionary = new Dictionary<string, AggregateBase>();
+		var dictionary = new Dictionary<string, IAggregate>();
 
 		if (reader.TokenType != JsonTokenType.StartObject)
 			return new AggregateDictionary(dictionary);
@@ -33,7 +33,7 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 		return new AggregateDictionary(dictionary);
 	}
 
-	public static void ReadAggregate(ref Utf8JsonReader reader, JsonSerializerOptions options, Dictionary<string, AggregateBase> dictionary, string name)
+	public static void ReadAggregate(ref Utf8JsonReader reader, JsonSerializerOptions options, Dictionary<string, IAggregate> dictionary, string name)
 	{
 		var nameParts = name.Split('#');
 

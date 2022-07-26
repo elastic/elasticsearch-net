@@ -10,19 +10,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 /// <summary>
 /// Combines aggregations into a single list of aggregations.
 /// </summary>
-internal class AggregationCombinator : AggregationBase
+internal class AggregationCombinator : Aggregation
 {
-	public AggregationCombinator(string name, AggregationBase left, AggregationBase right) : base(name)
+	public AggregationCombinator(string name, Aggregation left, Aggregation right)
 	{
 		AddAggregation(left);
 		AddAggregation(right);
+		Name = name;
 	}
 
-	internal List<AggregationBase> Aggregations { get; } = new List<AggregationBase>();
+	public override string? Name { get; internal set; }
 
-	//internal override void WrapInContainer(AggregationContainer container) { }
+	internal List<Aggregation> Aggregations { get; } = new List<Aggregation>();
 
-	private void AddAggregation(AggregationBase agg)
+	private void AddAggregation(Aggregation agg)
 	{
 		switch (agg)
 		{

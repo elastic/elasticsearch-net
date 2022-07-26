@@ -36,6 +36,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "distance")
 					{
 						variant.Distance = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -51,18 +63,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 					if (property == "validation_method")
 					{
 						variant.ValidationMethod = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "_name")
-					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
 						continue;
 					}
 
@@ -90,6 +90,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, value.Location, options);
 			}
 
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
+			}
+
 			if (value.Distance is not null)
 			{
 				writer.WritePropertyName("distance");
@@ -108,25 +120,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, value.ValidationMethod, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
 			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(GeoDistanceQueryConverter))]
-	public partial class GeoDistanceQuery : QueryBase, IQueryVariant
+	public sealed partial class GeoDistanceQuery : Query, IQueryVariant
 	{
+		public string? QueryName { get; set; }
+
+		public float? Boost { get; set; }
+
 		public string? Distance { get; set; }
 
 		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }

@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
 
-	public partial class MultiSearchRequest : PlainRequestBase<MultiSearchRequestParameters>, IStreamSerializable
+	public sealed partial class MultiSearchRequest : PlainRequestBase<MultiSearchRequestParameters>, IStreamSerializable
 	{
 		public MultiSearchRequest()
 		{

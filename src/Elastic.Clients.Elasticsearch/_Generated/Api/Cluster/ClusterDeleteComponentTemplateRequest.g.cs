@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterDeleteComponentTemplateRequest : PlainRequestBase<ClusterDeleteComponentTemplateRequestParameters>
+	public sealed partial class ClusterDeleteComponentTemplateRequest : PlainRequestBase<ClusterDeleteComponentTemplateRequestParameters>
 	{
 		public ClusterDeleteComponentTemplateRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 	{
 	}
 
-	public partial class IlmMoveToStepRequest : PlainRequestBase<IlmMoveToStepRequestParameters>
+	public sealed partial class IlmMoveToStepRequest : PlainRequestBase<IlmMoveToStepRequestParameters>
 	{
 		public IlmMoveToStepRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{

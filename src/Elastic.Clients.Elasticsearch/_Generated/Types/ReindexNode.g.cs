@@ -24,10 +24,34 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ReindexNode : SpecUtils.BaseNode
+	public sealed partial class ReindexNode
 	{
+		[JsonInclude]
+		[JsonPropertyName("attributes")]
+		public Dictionary<string, string> Attributes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("host")]
+		public string Host { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("ip")]
+		public string Ip { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public string Name { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("roles")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? Roles { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("tasks")]
 		public Dictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.ReindexTask> Tasks { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("transport_address")]
+		public string TransportAddress { get; init; }
 	}
 }

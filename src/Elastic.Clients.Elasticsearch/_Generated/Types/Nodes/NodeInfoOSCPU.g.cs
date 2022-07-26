@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoOSCPU
+	public sealed partial class NodeInfoOSCPU
 	{
 		[JsonInclude]
 		[JsonPropertyName("cache_size")]

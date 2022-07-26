@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class FrequencyEncodingPreprocessor : IPreprocessorVariant
+	public sealed partial class FrequencyEncodingPreprocessor : IPreprocessorVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("feature_name")]

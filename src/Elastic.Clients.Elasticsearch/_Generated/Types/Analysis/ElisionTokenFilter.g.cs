@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class ElisionTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class ElisionTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("articles")]
@@ -41,6 +41,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "elision";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class ElisionTokenFilterDescriptor : SerializableDescriptorBase<ElisionTokenFilterDescriptor>, IBuildableDescriptor<ElisionTokenFilter>

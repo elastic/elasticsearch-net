@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public abstract partial class ErrorResponseBase : ElasticsearchResponseBase
+	public abstract partial class ErrorResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("error")]

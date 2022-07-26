@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class JvmClasses
+	public sealed partial class JvmClasses
 	{
 		[JsonInclude]
 		[JsonPropertyName("current_loaded_count")]

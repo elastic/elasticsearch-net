@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 	{
 	}
 
-	public partial class SlmExecuteRetentionRequest : PlainRequestBase<SlmExecuteRetentionRequestParameters>
+	public sealed partial class SlmExecuteRetentionRequest : PlainRequestBase<SlmExecuteRetentionRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementExecuteRetention;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

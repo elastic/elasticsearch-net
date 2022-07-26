@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
-	public partial class MlResetJobRequest : PlainRequestBase<MlResetJobRequestParameters>
+	public sealed partial class MlResetJobRequest : PlainRequestBase<MlResetJobRequestParameters>
 	{
 		public MlResetJobRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{

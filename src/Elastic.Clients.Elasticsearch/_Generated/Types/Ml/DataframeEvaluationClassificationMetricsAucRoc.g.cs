@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeEvaluationClassificationMetricsAucRoc
+	public sealed partial class DataframeEvaluationClassificationMetricsAucRoc
 	{
 		[JsonInclude]
 		[JsonPropertyName("class_name")]

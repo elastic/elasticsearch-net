@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
 
-	public partial class MlDeleteTrainedModelRequest : PlainRequestBase<MlDeleteTrainedModelRequestParameters>
+	public sealed partial class MlDeleteTrainedModelRequest : PlainRequestBase<MlDeleteTrainedModelRequestParameters>
 	{
 		public MlDeleteTrainedModelRequest(Elastic.Clients.Elasticsearch.Id model_id) : base(r => r.Required("model_id", model_id))
 		{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoSearch
+	public sealed partial class NodeInfoSearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("remote")]

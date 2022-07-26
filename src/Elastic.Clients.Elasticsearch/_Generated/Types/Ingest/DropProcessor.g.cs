@@ -24,8 +24,23 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class DropProcessor : ProcessorBase, IProcessorVariant
+	public sealed partial class DropProcessor : IProcessorVariant
 	{
+		[JsonInclude]
+		[JsonPropertyName("if")]
+		public string? If { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_failure")]
+		public bool? IgnoreFailure { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("on_failure")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailure { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tag")]
+		public string? Tag { get; set; }
 	}
 
 	public sealed partial class DropProcessorDescriptor<TDocument> : SerializableDescriptorBase<DropProcessorDescriptor<TDocument>>

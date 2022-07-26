@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class StoredScript
+	public sealed partial class StoredScript
 	{
 		[JsonInclude]
 		[JsonPropertyName("lang")]

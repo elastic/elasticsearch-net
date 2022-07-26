@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
 	}
 
-	public partial class XpackInfoRequest : PlainRequestBase<XpackInfoRequestParameters>
+	public sealed partial class XpackInfoRequest : PlainRequestBase<XpackInfoRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.XpackInfo;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

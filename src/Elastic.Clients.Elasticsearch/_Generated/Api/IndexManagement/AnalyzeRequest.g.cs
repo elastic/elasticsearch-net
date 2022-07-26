@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
-	public partial class AnalyzeRequest : PlainRequestBase<AnalyzeRequestParameters>
+	public sealed partial class AnalyzeRequest : PlainRequestBase<AnalyzeRequestParameters>
 	{
 		public AnalyzeRequest()
 		{

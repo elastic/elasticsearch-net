@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class Ilm
+	public sealed partial class Ilm
 	{
 		[JsonInclude]
 		[JsonPropertyName("policy_count")]

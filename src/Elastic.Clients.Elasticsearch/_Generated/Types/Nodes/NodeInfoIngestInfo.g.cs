@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoIngestInfo
+	public sealed partial class NodeInfoIngestInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("downloader")]

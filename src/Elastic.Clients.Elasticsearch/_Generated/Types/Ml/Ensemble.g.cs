@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class Ensemble
+	public sealed partial class Ensemble
 	{
 		[JsonInclude]
 		[JsonPropertyName("aggregate_output")]

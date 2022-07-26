@@ -70,18 +70,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class ResponseBody<TDocument>
-	{
-		[JsonIgnore]
-		public IReadOnlyCollection<Hit<TDocument>> Hits => HitsMetadata.Hits;
-
-		[JsonIgnore]
-		public IReadOnlyCollection<TDocument> Documents => HitsMetadata.Hits.Select(s => s.Source).ToReadOnlyCollection();
-
-		[JsonIgnore]
-		public long Total => HitsMetadata?.Total?.Value ?? -1;
-	}
-
 	public partial class MultiSearchResponse<TDocument>
 	{
 		public override bool IsValid => base.IsValid && (Responses?.All(b => b.Item1 is not null && b.Item1.Status == 200) ?? true);

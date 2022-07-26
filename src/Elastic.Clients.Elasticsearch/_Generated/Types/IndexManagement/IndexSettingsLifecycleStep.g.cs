@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class IndexSettingsLifecycleStep
+	public sealed partial class IndexSettingsLifecycleStep
 	{
 		[JsonInclude]
 		[JsonPropertyName("wait_time_threshold")]

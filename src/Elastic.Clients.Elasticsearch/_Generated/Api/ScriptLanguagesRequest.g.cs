@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public partial class ScriptLanguagesRequest : PlainRequestBase<ScriptLanguagesRequestParameters>
+	public sealed partial class ScriptLanguagesRequest : PlainRequestBase<ScriptLanguagesRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
