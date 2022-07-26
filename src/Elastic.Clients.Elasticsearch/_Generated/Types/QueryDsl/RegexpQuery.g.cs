@@ -30,7 +30,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new RegexpQuery();
+			reader.Read();
+			reader.Read();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new RegexpQuery()
+			{ Field = fieldName };
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -77,67 +83,67 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.Value = JsonSerializer.Deserialize<string>(ref reader, options);
 						continue;
 					}
-
-					if (property == "field")
-					{
-						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						continue;
-					}
 				}
 			}
 
+			reader.Read();
 			reader.Read();
 			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, RegexpQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
+			if (value.Field is null)
+				writer.WriteNullValue();
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				if (value.CaseInsensitive.HasValue)
+				{
+					writer.WritePropertyName("case_insensitive");
+					writer.WriteBooleanValue(value.CaseInsensitive.Value);
+				}
+
+				if (!string.IsNullOrEmpty(value.Flags))
+				{
+					writer.WritePropertyName("flags");
+					writer.WriteStringValue(value.Flags);
+				}
+
+				if (value.MaxDeterminizedStates.HasValue)
+				{
+					writer.WritePropertyName("max_determinized_states");
+					writer.WriteNumberValue(value.MaxDeterminizedStates.Value);
+				}
+
+				if (value.Rewrite is not null)
+				{
+					writer.WritePropertyName("rewrite");
+					JsonSerializer.Serialize(writer, value.Rewrite, options);
+				}
+
+				writer.WritePropertyName("value");
+				writer.WriteStringValue(value.Value);
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.CaseInsensitive.HasValue)
-			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value.CaseInsensitive.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.Flags))
-			{
-				writer.WritePropertyName("flags");
-				writer.WriteStringValue(value.Flags);
-			}
-
-			if (value.MaxDeterminizedStates.HasValue)
-			{
-				writer.WritePropertyName("max_determinized_states");
-				writer.WriteNumberValue(value.MaxDeterminizedStates.Value);
-			}
-
-			if (value.Rewrite is not null)
-			{
-				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value.Rewrite, options);
-			}
-
-			writer.WritePropertyName("value");
-			writer.WriteStringValue(value.Value);
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings to infer field.");
 		}
 	}
 

@@ -30,55 +30,89 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new VariableWidthHistogramAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "variable_width_histogram")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new VariableWidthHistogramAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "buckets")
+					if (reader.ValueTextEquals("buckets"))
 					{
-						variant.Buckets = JsonSerializer.Deserialize<int?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Buckets = value;
+						}
+
 						continue;
 					}
 
-					if (property == "field")
+					if (reader.ValueTextEquals("field"))
 					{
-						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+
 						continue;
 					}
 
-					if (property == "initial_buffer")
+					if (reader.ValueTextEquals("initial_buffer"))
 					{
-						variant.InitialBuffer = JsonSerializer.Deserialize<int?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.InitialBuffer = value;
+						}
+
 						continue;
 					}
 
-					if (property == "meta")
+					if (reader.ValueTextEquals("shard_size"))
 					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
-						continue;
-					}
+						reader.Read();
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ShardSize = value;
+						}
 
-					if (property == "name")
-					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "shard_size")
-					{
-						variant.ShardSize = JsonSerializer.Deserialize<int?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
+						continue;
+					}
+				}
+			}
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, VariableWidthHistogramAggregation value, JsonSerializerOptions options)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("variable_width_histogram");
 			writer.WriteStartObject();
 			if (value.Buckets.HasValue)
 			{
@@ -98,22 +132,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(value.InitialBuffer.Value);
 			}
 
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
-			}
-
 			if (value.ShardSize.HasValue)
 			{
 				writer.WritePropertyName("shard_size");
 				writer.WriteNumberValue(value.ShardSize.Value);
+			}
+
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
 			}
 
 			writer.WriteEndObject();

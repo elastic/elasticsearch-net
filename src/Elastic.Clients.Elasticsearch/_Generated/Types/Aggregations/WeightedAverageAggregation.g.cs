@@ -30,72 +30,94 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new WeightedAverageAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "weighted_avg")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new WeightedAverageAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "format")
+					if (reader.ValueTextEquals("format"))
 					{
-						variant.Format = JsonSerializer.Deserialize<string?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+
 						continue;
 					}
 
-					if (property == "meta")
+					if (reader.ValueTextEquals("value"))
 					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Value = value;
+						}
+
 						continue;
 					}
 
-					if (property == "name")
+					if (reader.ValueTextEquals("value_type"))
 					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ValueType?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ValueType = value;
+						}
+
 						continue;
 					}
 
-					if (property == "value")
+					if (reader.ValueTextEquals("weight"))
 					{
-						variant.Value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue?>(ref reader, options);
-						continue;
-					}
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Weight = value;
+						}
 
-					if (property == "value_type")
-					{
-						variant.ValueType = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ValueType?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "weight")
-					{
-						variant.Weight = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
+						continue;
+					}
+				}
+			}
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, WeightedAverageAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("weighted_avg");
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(value.Format);
-			}
-
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
 			}
 
 			if (value.Value is not null)
@@ -114,6 +136,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("weight");
 				JsonSerializer.Serialize(writer, value.Weight, options);
+			}
+
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
 			}
 
 			writer.WriteEndObject();

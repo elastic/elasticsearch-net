@@ -30,7 +30,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new TermsSetQuery();
+			reader.Read();
+			reader.Read();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new TermsSetQuery()
+			{ Field = fieldName };
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -65,55 +71,55 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.Terms = JsonSerializer.Deserialize<IEnumerable<string>>(ref reader, options);
 						continue;
 					}
-
-					if (property == "field")
-					{
-						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						continue;
-					}
 				}
 			}
 
+			reader.Read();
 			reader.Read();
 			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, TermsSetQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
+			if (value.Field is null)
+				writer.WriteNullValue();
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				if (value.MinimumShouldMatchField is not null)
+				{
+					writer.WritePropertyName("minimum_should_match_field");
+					JsonSerializer.Serialize(writer, value.MinimumShouldMatchField, options);
+				}
+
+				if (value.MinimumShouldMatchScript is not null)
+				{
+					writer.WritePropertyName("minimum_should_match_script");
+					JsonSerializer.Serialize(writer, value.MinimumShouldMatchScript, options);
+				}
+
+				writer.WritePropertyName("terms");
+				JsonSerializer.Serialize(writer, value.Terms, options);
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.MinimumShouldMatchField is not null)
-			{
-				writer.WritePropertyName("minimum_should_match_field");
-				JsonSerializer.Serialize(writer, value.MinimumShouldMatchField, options);
-			}
-
-			if (value.MinimumShouldMatchScript is not null)
-			{
-				writer.WritePropertyName("minimum_should_match_script");
-				JsonSerializer.Serialize(writer, value.MinimumShouldMatchScript, options);
-			}
-
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, value.Terms, options);
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings to infer field.");
 		}
 	}
 

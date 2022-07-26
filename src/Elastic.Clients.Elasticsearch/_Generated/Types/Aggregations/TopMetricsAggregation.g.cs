@@ -30,61 +30,101 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new TopMetricsAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "top_metrics")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new TopMetricsAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "field")
+					if (reader.ValueTextEquals("field"))
 					{
-						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+
 						continue;
 					}
 
-					if (property == "meta")
+					if (reader.ValueTextEquals("metrics"))
 					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Metrics = value;
+						}
+
 						continue;
 					}
 
-					if (property == "metrics")
+					if (reader.ValueTextEquals("script"))
 					{
-						variant.Metrics = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Script = value;
+						}
+
 						continue;
 					}
 
-					if (property == "name")
+					if (reader.ValueTextEquals("size"))
 					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Size = value;
+						}
+
 						continue;
 					}
 
-					if (property == "script")
+					if (reader.ValueTextEquals("sort"))
 					{
-						variant.Script = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-						continue;
-					}
+						reader.Read();
+						var value = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.SortCombinations>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Sort = value;
+						}
 
-					if (property == "size")
-					{
-						variant.Size = JsonSerializer.Deserialize<int?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "sort")
-					{
-						variant.Sort = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
+						continue;
+					}
+				}
+			}
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, TopMetricsAggregation value, JsonSerializerOptions options)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("top_metrics");
 			writer.WriteStartObject();
 			if (value.Field is not null)
 			{
@@ -92,22 +132,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.Metrics is not null)
 			{
 				writer.WritePropertyName("metrics");
 				JsonSerializer.Serialize(writer, value.Metrics, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
 			}
 
 			if (value.Script is not null)
@@ -125,7 +153,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (value.Sort is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, value.Sort, options);
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(value.Sort, writer, options);
+			}
+
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
 			}
 
 			writer.WriteEndObject();
@@ -135,7 +170,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	[JsonConverter(typeof(TopMetricsAggregationConverter))]
 	public sealed partial class TopMetricsAggregation : Aggregation
 	{
-		public TopMetricsAggregation(string name, Field field) => Field = field;
+		public TopMetricsAggregation(string name, Field field) : this(name) => Field = field;
 		public TopMetricsAggregation(string name) => Name = name;
 		internal TopMetricsAggregation()
 		{

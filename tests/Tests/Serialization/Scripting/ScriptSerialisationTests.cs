@@ -14,8 +14,8 @@ public class ScriptSerialisationTests : SerializerTestBase
 		var scriptHolder = _requestResponseSerializer.Deserialize<ScriptHolder>(stream);
 
 		scriptHolder.Should().NotBeNull();
-		var inlineScript = scriptHolder.Script.Should().BeOfType<InlineScript>().Subject;
-		AssertInlineScript(inlineScript);
+		var inlineScript = scriptHolder.Script.Should().BeOfType<Script>().Subject;
+		AssertInlineScript(inlineScript.Item1);
 	}
 
 	[U]
@@ -26,8 +26,8 @@ public class ScriptSerialisationTests : SerializerTestBase
 		var scriptHolder = _requestResponseSerializer.Deserialize<ScriptHolder>(stream);
 
 		scriptHolder.Should().NotBeNull();
-		var inlineScript = scriptHolder.Script.Should().BeOfType<InlineScript>().Subject;
-		AssertInlineScript(inlineScript);
+		var inlineScript = scriptHolder.Script.Should().BeOfType<Script>().Subject;
+		AssertInlineScript(inlineScript.Item1);
 	}
 
 	private static void AssertInlineScript(InlineScript inlineScript)
@@ -50,8 +50,8 @@ public class ScriptSerialisationTests : SerializerTestBase
 		var scriptHolder = _requestResponseSerializer.Deserialize<ScriptHolder>(stream);
 
 		scriptHolder.Should().NotBeNull();
-		var storedScript = scriptHolder.Script.Should().BeOfType<StoredScriptId>().Subject;
-		storedScript.Id.Should().Be("calculate-score");
+		var storedScript = scriptHolder.Script.Should().BeOfType<Script>().Subject;
+		storedScript.Item2.Id.Should().Be("calculate-score");
 	}
 
 	[U]
@@ -62,8 +62,8 @@ public class ScriptSerialisationTests : SerializerTestBase
 		var scriptHolder = _requestResponseSerializer.Deserialize<ScriptHolder>(stream);
 
 		scriptHolder.Should().NotBeNull();
-		var storedScript = scriptHolder.Script.Should().BeOfType<StoredScriptId>().Subject;
-		storedScript.Id.Should().Be("calculate-score");
+		var storedScript = scriptHolder.Script.Should().BeOfType<Script>().Subject;
+		storedScript.Item2.Id.Should().Be("calculate-score");
 	}
 
 	[U]
@@ -74,8 +74,8 @@ public class ScriptSerialisationTests : SerializerTestBase
 		var scriptHolder = _requestResponseSerializer.Deserialize<ScriptHolder>(stream);
 
 		scriptHolder.Should().NotBeNull();
-		var inlineScript = scriptHolder.Script.Should().BeOfType<InlineScript>().Subject;
-		inlineScript.Source.Should().Be("ctx._source.likes++");
+		var inlineScript = scriptHolder.Script.Should().BeOfType<Script>().Subject;
+		inlineScript.Item1.Source.Should().Be("ctx._source.likes++");
 	}
 
 	private class ScriptHolder

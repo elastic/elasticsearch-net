@@ -30,73 +30,125 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new ScriptedMetricAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "scripted_metric")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new ScriptedMetricAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "combine_script")
+					if (reader.ValueTextEquals("combine_script"))
 					{
-						variant.CombineScript = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.CombineScript = value;
+						}
+
 						continue;
 					}
 
-					if (property == "field")
+					if (reader.ValueTextEquals("field"))
 					{
-						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+
 						continue;
 					}
 
-					if (property == "init_script")
+					if (reader.ValueTextEquals("init_script"))
 					{
-						variant.InitScript = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.InitScript = value;
+						}
+
 						continue;
 					}
 
-					if (property == "map_script")
+					if (reader.ValueTextEquals("map_script"))
 					{
-						variant.MapScript = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.MapScript = value;
+						}
+
 						continue;
 					}
 
-					if (property == "meta")
+					if (reader.ValueTextEquals("params"))
 					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Params = value;
+						}
+
 						continue;
 					}
 
-					if (property == "name")
+					if (reader.ValueTextEquals("reduce_script"))
 					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ReduceScript = value;
+						}
+
 						continue;
 					}
 
-					if (property == "params")
+					if (reader.ValueTextEquals("script"))
 					{
-						variant.Params = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
-						continue;
-					}
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Script = value;
+						}
 
-					if (property == "reduce_script")
-					{
-						variant.ReduceScript = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "script")
-					{
-						variant.Script = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
+						continue;
+					}
+				}
+			}
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, ScriptedMetricAggregation value, JsonSerializerOptions options)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("scripted_metric");
 			writer.WriteStartObject();
 			if (value.CombineScript is not null)
 			{
@@ -122,18 +174,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.MapScript, options);
 			}
 
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
-			}
-
 			if (value.Params is not null)
 			{
 				writer.WritePropertyName("params");
@@ -153,13 +193,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(ScriptedMetricAggregationConverter))]
 	public sealed partial class ScriptedMetricAggregation : Aggregation
 	{
-		public ScriptedMetricAggregation(string name, Field field) => Field = field;
+		public ScriptedMetricAggregation(string name, Field field) : this(name) => Field = field;
 		public ScriptedMetricAggregation(string name) => Name = name;
 		internal ScriptedMetricAggregation()
 		{

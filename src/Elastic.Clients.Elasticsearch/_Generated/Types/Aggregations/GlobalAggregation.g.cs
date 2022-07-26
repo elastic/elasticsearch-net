@@ -30,42 +30,48 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new GlobalAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "global")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new GlobalAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "meta")
-					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
-						continue;
-					}
+				}
+			}
 
-					if (property == "name")
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
 					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, GlobalAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("global");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
 			}
 
 			writer.WriteEndObject();

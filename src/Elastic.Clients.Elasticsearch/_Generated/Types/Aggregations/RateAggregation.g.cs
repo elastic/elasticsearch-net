@@ -30,61 +30,101 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new RateAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "rate")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new RateAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "field")
+					if (reader.ValueTextEquals("field"))
 					{
-						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+
 						continue;
 					}
 
-					if (property == "format")
+					if (reader.ValueTextEquals("format"))
 					{
-						variant.Format = JsonSerializer.Deserialize<string?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+
 						continue;
 					}
 
-					if (property == "meta")
+					if (reader.ValueTextEquals("mode"))
 					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RateMode?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Mode = value;
+						}
+
 						continue;
 					}
 
-					if (property == "mode")
+					if (reader.ValueTextEquals("script"))
 					{
-						variant.Mode = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RateMode?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Script = value;
+						}
+
 						continue;
 					}
 
-					if (property == "name")
+					if (reader.ValueTextEquals("unit"))
 					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Unit = value;
+						}
 
-					if (property == "script")
-					{
-						variant.Script = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "unit")
-					{
-						variant.Unit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
+						continue;
+					}
+				}
+			}
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, RateAggregation value, JsonSerializerOptions options)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("rate");
 			writer.WriteStartObject();
 			if (value.Field is not null)
 			{
@@ -98,22 +138,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(value.Format);
 			}
 
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.Mode is not null)
 			{
 				writer.WritePropertyName("mode");
 				JsonSerializer.Serialize(writer, value.Mode, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
 			}
 
 			if (value.Script is not null)
@@ -129,13 +157,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(RateAggregationConverter))]
 	public sealed partial class RateAggregation : Aggregation
 	{
-		public RateAggregation(string name, Field field) => Field = field;
+		public RateAggregation(string name, Field field) : this(name) => Field = field;
 		public RateAggregation(string name) => Name = name;
 		internal RateAggregation()
 		{

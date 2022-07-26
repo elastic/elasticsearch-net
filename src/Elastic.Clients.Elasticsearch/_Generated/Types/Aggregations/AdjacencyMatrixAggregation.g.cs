@@ -30,37 +30,53 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new AdjacencyMatrixAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "adjacency_matrix")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new AdjacencyMatrixAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "filters")
+					if (reader.ValueTextEquals("filters"))
 					{
-						variant.Filters = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?>(ref reader, options);
-						continue;
-					}
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Filters = value;
+						}
 
-					if (property == "meta")
-					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "name")
-					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
+						continue;
+					}
+				}
+			}
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, AdjacencyMatrixAggregation value, JsonSerializerOptions options)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("adjacency_matrix");
 			writer.WriteStartObject();
 			if (value.Filters is not null)
 			{
@@ -68,16 +84,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Filters, options);
 			}
 
+			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
 			}
 
 			writer.WriteEndObject();

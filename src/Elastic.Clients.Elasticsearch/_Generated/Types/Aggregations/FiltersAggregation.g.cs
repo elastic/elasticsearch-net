@@ -30,66 +30,82 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new FiltersAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "filters")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new FiltersAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "filters")
+					if (reader.ValueTextEquals("filters"))
 					{
-						variant.Filters = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Filters = value;
+						}
+
 						continue;
 					}
 
-					if (property == "meta")
+					if (reader.ValueTextEquals("other_bucket"))
 					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.OtherBucket = value;
+						}
+
 						continue;
 					}
 
-					if (property == "name")
+					if (reader.ValueTextEquals("other_bucket_key"))
 					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+						reader.Read();
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.OtherBucketKey = value;
+						}
 
-					if (property == "other_bucket")
-					{
-						variant.OtherBucket = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "other_bucket_key")
-					{
-						variant.OtherBucketKey = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
+						continue;
+					}
+				}
+			}
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, FiltersAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("filters");
+			writer.WriteStartObject();
 			if (value.Filters is not null)
 			{
 				writer.WritePropertyName("filters");
 				JsonSerializer.Serialize(writer, value.Filters, options);
-			}
-
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
 			}
 
 			if (value.OtherBucket.HasValue)
@@ -102,6 +118,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("other_bucket_key");
 				writer.WriteStringValue(value.OtherBucketKey);
+			}
+
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
 			}
 
 			writer.WriteEndObject();

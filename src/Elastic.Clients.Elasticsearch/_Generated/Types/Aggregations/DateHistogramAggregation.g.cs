@@ -30,97 +30,173 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new DateHistogramAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "date_histogram")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new DateHistogramAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "calendar_interval")
+					if (reader.ValueTextEquals("calendar_interval"))
 					{
-						variant.CalendarInterval = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.CalendarInterval = value;
+						}
+
 						continue;
 					}
 
-					if (property == "field")
+					if (reader.ValueTextEquals("field"))
 					{
-						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+
 						continue;
 					}
 
-					if (property == "fixed_interval")
+					if (reader.ValueTextEquals("fixed_interval"))
 					{
-						variant.FixedInterval = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.FixedInterval = value;
+						}
+
 						continue;
 					}
 
-					if (property == "format")
+					if (reader.ValueTextEquals("format"))
 					{
-						variant.Format = JsonSerializer.Deserialize<string?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+
 						continue;
 					}
 
-					if (property == "meta")
+					if (reader.ValueTextEquals("min_doc_count"))
 					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.MinDocCount = value;
+						}
+
 						continue;
 					}
 
-					if (property == "min_doc_count")
+					if (reader.ValueTextEquals("missing"))
 					{
-						variant.MinDocCount = JsonSerializer.Deserialize<int?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+
 						continue;
 					}
 
-					if (property == "missing")
+					if (reader.ValueTextEquals("offset"))
 					{
-						variant.Missing = JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Offset = value;
+						}
+
 						continue;
 					}
 
-					if (property == "name")
+					if (reader.ValueTextEquals("order"))
 					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
+						reader.Read();
+						var value = SingleOrManySerializationHelper.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Order = value;
+						}
+
 						continue;
 					}
 
-					if (property == "offset")
+					if (reader.ValueTextEquals("params"))
 					{
-						variant.Offset = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Params = value;
+						}
+
 						continue;
 					}
 
-					if (property == "order")
+					if (reader.ValueTextEquals("script"))
 					{
-						variant.Order = JsonSerializer.Deserialize<IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Script = value;
+						}
+
 						continue;
 					}
 
-					if (property == "params")
+					if (reader.ValueTextEquals("time_zone"))
 					{
-						variant.Params = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
-						continue;
-					}
+						reader.Read();
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.TimeZone = value;
+						}
 
-					if (property == "script")
-					{
-						variant.Script = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "time_zone")
-					{
-						variant.TimeZone = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
+						continue;
+					}
+				}
+			}
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, DateHistogramAggregation value, JsonSerializerOptions options)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("date_histogram");
 			writer.WriteStartObject();
 			if (value.CalendarInterval is not null)
 			{
@@ -146,12 +222,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(value.Format);
 			}
 
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.MinDocCount.HasValue)
 			{
 				writer.WritePropertyName("min_doc_count");
@@ -164,12 +234,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Missing, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
-			}
-
 			if (value.Offset is not null)
 			{
 				writer.WritePropertyName("offset");
@@ -179,7 +243,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (value.Order is not null)
 			{
 				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, value.Order, options);
+				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(value.Order, writer, options);
 			}
 
 			if (value.Params is not null)
@@ -198,6 +262,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("time_zone");
 				JsonSerializer.Serialize(writer, value.TimeZone, options);
+			}
+
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
 			}
 
 			writer.WriteEndObject();

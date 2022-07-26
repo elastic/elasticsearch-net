@@ -30,7 +30,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new DateRangeQuery();
+			reader.Read();
+			reader.Read();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new DateRangeQuery()
+			{ Field = fieldName };
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -101,95 +107,95 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.To = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DateMath?>(ref reader, options);
 						continue;
 					}
-
-					if (property == "field")
-					{
-						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						continue;
-					}
 				}
 			}
 
+			reader.Read();
 			reader.Read();
 			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, DateRangeQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
+			if (value.Field is null)
+				writer.WriteNullValue();
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				if (value.Format is not null)
+				{
+					writer.WritePropertyName("format");
+					JsonSerializer.Serialize(writer, value.Format, options);
+				}
+
+				if (value.From is not null)
+				{
+					writer.WritePropertyName("from");
+					JsonSerializer.Serialize(writer, value.From, options);
+				}
+
+				if (value.Gt is not null)
+				{
+					writer.WritePropertyName("gt");
+					JsonSerializer.Serialize(writer, value.Gt, options);
+				}
+
+				if (value.Gte is not null)
+				{
+					writer.WritePropertyName("gte");
+					JsonSerializer.Serialize(writer, value.Gte, options);
+				}
+
+				if (value.Lt is not null)
+				{
+					writer.WritePropertyName("lt");
+					JsonSerializer.Serialize(writer, value.Lt, options);
+				}
+
+				if (value.Lte is not null)
+				{
+					writer.WritePropertyName("lte");
+					JsonSerializer.Serialize(writer, value.Lte, options);
+				}
+
+				if (value.Relation is not null)
+				{
+					writer.WritePropertyName("relation");
+					JsonSerializer.Serialize(writer, value.Relation, options);
+				}
+
+				if (value.TimeZone is not null)
+				{
+					writer.WritePropertyName("time_zone");
+					JsonSerializer.Serialize(writer, value.TimeZone, options);
+				}
+
+				if (value.To is not null)
+				{
+					writer.WritePropertyName("to");
+					JsonSerializer.Serialize(writer, value.To, options);
+				}
+
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.Format is not null)
-			{
-				writer.WritePropertyName("format");
-				JsonSerializer.Serialize(writer, value.Format, options);
-			}
-
-			if (value.From is not null)
-			{
-				writer.WritePropertyName("from");
-				JsonSerializer.Serialize(writer, value.From, options);
-			}
-
-			if (value.Gt is not null)
-			{
-				writer.WritePropertyName("gt");
-				JsonSerializer.Serialize(writer, value.Gt, options);
-			}
-
-			if (value.Gte is not null)
-			{
-				writer.WritePropertyName("gte");
-				JsonSerializer.Serialize(writer, value.Gte, options);
-			}
-
-			if (value.Lt is not null)
-			{
-				writer.WritePropertyName("lt");
-				JsonSerializer.Serialize(writer, value.Lt, options);
-			}
-
-			if (value.Lte is not null)
-			{
-				writer.WritePropertyName("lte");
-				JsonSerializer.Serialize(writer, value.Lte, options);
-			}
-
-			if (value.Relation is not null)
-			{
-				writer.WritePropertyName("relation");
-				JsonSerializer.Serialize(writer, value.Relation, options);
-			}
-
-			if (value.TimeZone is not null)
-			{
-				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, value.TimeZone, options);
-			}
-
-			if (value.To is not null)
-			{
-				writer.WritePropertyName("to");
-				JsonSerializer.Serialize(writer, value.To, options);
-			}
-
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings to infer field.");
 		}
 	}
 

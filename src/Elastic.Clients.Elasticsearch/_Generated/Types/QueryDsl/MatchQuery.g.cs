@@ -30,7 +30,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new MatchQuery();
+			reader.Read();
+			reader.Read();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new MatchQuery()
+			{ Field = fieldName };
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -119,109 +125,109 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.ZeroTermsQuery = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery?>(ref reader, options);
 						continue;
 					}
-
-					if (property == "field")
-					{
-						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						continue;
-					}
 				}
 			}
 
+			reader.Read();
 			reader.Read();
 			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, MatchQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
+			if (value.Field is null)
+				writer.WriteNullValue();
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (!string.IsNullOrEmpty(value.Analyzer))
+				{
+					writer.WritePropertyName("analyzer");
+					writer.WriteStringValue(value.Analyzer);
+				}
+
+				if (value.AutoGenerateSynonymsPhraseQuery.HasValue)
+				{
+					writer.WritePropertyName("auto_generate_synonyms_phrase_query");
+					writer.WriteBooleanValue(value.AutoGenerateSynonymsPhraseQuery.Value);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				if (value.Fuzziness is not null)
+				{
+					writer.WritePropertyName("fuzziness");
+					JsonSerializer.Serialize(writer, value.Fuzziness, options);
+				}
+
+				if (value.FuzzyRewrite is not null)
+				{
+					writer.WritePropertyName("fuzzy_rewrite");
+					JsonSerializer.Serialize(writer, value.FuzzyRewrite, options);
+				}
+
+				if (value.FuzzyTranspositions.HasValue)
+				{
+					writer.WritePropertyName("fuzzy_transpositions");
+					writer.WriteBooleanValue(value.FuzzyTranspositions.Value);
+				}
+
+				if (value.Lenient.HasValue)
+				{
+					writer.WritePropertyName("lenient");
+					writer.WriteBooleanValue(value.Lenient.Value);
+				}
+
+				if (value.MaxExpansions.HasValue)
+				{
+					writer.WritePropertyName("max_expansions");
+					writer.WriteNumberValue(value.MaxExpansions.Value);
+				}
+
+				if (value.MinimumShouldMatch is not null)
+				{
+					writer.WritePropertyName("minimum_should_match");
+					JsonSerializer.Serialize(writer, value.MinimumShouldMatch, options);
+				}
+
+				if (value.Operator is not null)
+				{
+					writer.WritePropertyName("operator");
+					JsonSerializer.Serialize(writer, value.Operator, options);
+				}
+
+				if (value.PrefixLength.HasValue)
+				{
+					writer.WritePropertyName("prefix_length");
+					writer.WriteNumberValue(value.PrefixLength.Value);
+				}
+
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.Query, options);
+				if (value.ZeroTermsQuery is not null)
+				{
+					writer.WritePropertyName("zero_terms_query");
+					JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
+				}
+
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			if (!string.IsNullOrEmpty(value.Analyzer))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value.Analyzer);
-			}
-
-			if (value.AutoGenerateSynonymsPhraseQuery.HasValue)
-			{
-				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
-				writer.WriteBooleanValue(value.AutoGenerateSynonymsPhraseQuery.Value);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.Fuzziness is not null)
-			{
-				writer.WritePropertyName("fuzziness");
-				JsonSerializer.Serialize(writer, value.Fuzziness, options);
-			}
-
-			if (value.FuzzyRewrite is not null)
-			{
-				writer.WritePropertyName("fuzzy_rewrite");
-				JsonSerializer.Serialize(writer, value.FuzzyRewrite, options);
-			}
-
-			if (value.FuzzyTranspositions.HasValue)
-			{
-				writer.WritePropertyName("fuzzy_transpositions");
-				writer.WriteBooleanValue(value.FuzzyTranspositions.Value);
-			}
-
-			if (value.Lenient.HasValue)
-			{
-				writer.WritePropertyName("lenient");
-				writer.WriteBooleanValue(value.Lenient.Value);
-			}
-
-			if (value.MaxExpansions.HasValue)
-			{
-				writer.WritePropertyName("max_expansions");
-				writer.WriteNumberValue(value.MaxExpansions.Value);
-			}
-
-			if (value.MinimumShouldMatch is not null)
-			{
-				writer.WritePropertyName("minimum_should_match");
-				JsonSerializer.Serialize(writer, value.MinimumShouldMatch, options);
-			}
-
-			if (value.Operator is not null)
-			{
-				writer.WritePropertyName("operator");
-				JsonSerializer.Serialize(writer, value.Operator, options);
-			}
-
-			if (value.PrefixLength.HasValue)
-			{
-				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(value.PrefixLength.Value);
-			}
-
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value.Query, options);
-			if (value.ZeroTermsQuery is not null)
-			{
-				writer.WritePropertyName("zero_terms_query");
-				JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
-			}
-
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings to infer field.");
 		}
 	}
 

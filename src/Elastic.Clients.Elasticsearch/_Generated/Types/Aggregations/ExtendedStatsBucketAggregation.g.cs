@@ -30,55 +30,89 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new ExtendedStatsBucketAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "extended_stats_bucket")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new ExtendedStatsBucketAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "buckets_path")
+					if (reader.ValueTextEquals("buckets_path"))
 					{
-						variant.BucketsPath = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.BucketsPath = value;
+						}
+
 						continue;
 					}
 
-					if (property == "format")
+					if (reader.ValueTextEquals("format"))
 					{
-						variant.Format = JsonSerializer.Deserialize<string?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+
 						continue;
 					}
 
-					if (property == "gap_policy")
+					if (reader.ValueTextEquals("gap_policy"))
 					{
-						variant.GapPolicy = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.GapPolicy = value;
+						}
+
 						continue;
 					}
 
-					if (property == "meta")
+					if (reader.ValueTextEquals("sigma"))
 					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
-						continue;
-					}
+						reader.Read();
+						var value = JsonSerializer.Deserialize<double?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Sigma = value;
+						}
 
-					if (property == "name")
-					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "sigma")
-					{
-						variant.Sigma = JsonSerializer.Deserialize<double?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
+						continue;
+					}
+				}
+			}
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, ExtendedStatsBucketAggregation value, JsonSerializerOptions options)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("extended_stats_bucket");
 			writer.WriteStartObject();
 			if (value.BucketsPath is not null)
 			{
@@ -98,22 +132,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.GapPolicy, options);
 			}
 
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
-			}
-
 			if (value.Sigma.HasValue)
 			{
 				writer.WritePropertyName("sigma");
 				writer.WriteNumberValue(value.Sigma.Value);
+			}
+
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
 			}
 
 			writer.WriteEndObject();

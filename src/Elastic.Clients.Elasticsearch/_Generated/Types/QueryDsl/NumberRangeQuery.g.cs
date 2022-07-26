@@ -30,7 +30,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new NumberRangeQuery();
+			reader.Read();
+			reader.Read();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new NumberRangeQuery()
+			{ Field = fieldName };
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -89,83 +95,83 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.To = JsonSerializer.Deserialize<double?>(ref reader, options);
 						continue;
 					}
-
-					if (property == "field")
-					{
-						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						continue;
-					}
 				}
 			}
 
+			reader.Read();
 			reader.Read();
 			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, NumberRangeQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
+			if (value.Field is null)
+				writer.WriteNullValue();
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				if (value.From.HasValue)
+				{
+					writer.WritePropertyName("from");
+					writer.WriteNumberValue(value.From.Value);
+				}
+
+				if (value.Gt.HasValue)
+				{
+					writer.WritePropertyName("gt");
+					writer.WriteNumberValue(value.Gt.Value);
+				}
+
+				if (value.Gte.HasValue)
+				{
+					writer.WritePropertyName("gte");
+					writer.WriteNumberValue(value.Gte.Value);
+				}
+
+				if (value.Lt.HasValue)
+				{
+					writer.WritePropertyName("lt");
+					writer.WriteNumberValue(value.Lt.Value);
+				}
+
+				if (value.Lte.HasValue)
+				{
+					writer.WritePropertyName("lte");
+					writer.WriteNumberValue(value.Lte.Value);
+				}
+
+				if (value.Relation is not null)
+				{
+					writer.WritePropertyName("relation");
+					JsonSerializer.Serialize(writer, value.Relation, options);
+				}
+
+				if (value.To.HasValue)
+				{
+					writer.WritePropertyName("to");
+					writer.WriteNumberValue(value.To.Value);
+				}
+
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.From.HasValue)
-			{
-				writer.WritePropertyName("from");
-				writer.WriteNumberValue(value.From.Value);
-			}
-
-			if (value.Gt.HasValue)
-			{
-				writer.WritePropertyName("gt");
-				writer.WriteNumberValue(value.Gt.Value);
-			}
-
-			if (value.Gte.HasValue)
-			{
-				writer.WritePropertyName("gte");
-				writer.WriteNumberValue(value.Gte.Value);
-			}
-
-			if (value.Lt.HasValue)
-			{
-				writer.WritePropertyName("lt");
-				writer.WriteNumberValue(value.Lt.Value);
-			}
-
-			if (value.Lte.HasValue)
-			{
-				writer.WritePropertyName("lte");
-				writer.WriteNumberValue(value.Lte.Value);
-			}
-
-			if (value.Relation is not null)
-			{
-				writer.WritePropertyName("relation");
-				JsonSerializer.Serialize(writer, value.Relation, options);
-			}
-
-			if (value.To.HasValue)
-			{
-				writer.WritePropertyName("to");
-				writer.WriteNumberValue(value.To.Value);
-			}
-
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings to infer field.");
 		}
 	}
 

@@ -30,60 +30,82 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new MatrixStatsAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "matrix_stats")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new MatrixStatsAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "fields")
+					if (reader.ValueTextEquals("fields"))
 					{
-						variant.Fields = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Fields = value;
+						}
+
 						continue;
 					}
 
-					if (property == "meta")
+					if (reader.ValueTextEquals("missing"))
 					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, double>?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+
 						continue;
 					}
 
-					if (property == "missing")
+					if (reader.ValueTextEquals("mode"))
 					{
-						variant.Missing = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, double>?>(ref reader, options);
-						continue;
-					}
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortMode?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Mode = value;
+						}
 
-					if (property == "mode")
-					{
-						variant.Mode = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortMode?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "name")
-					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
+						continue;
+					}
+				}
+			}
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, MatrixStatsAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("matrix_stats");
+			writer.WriteStartObject();
 			if (value.Fields is not null)
 			{
 				writer.WritePropertyName("fields");
 				JsonSerializer.Serialize(writer, value.Fields, options);
-			}
-
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
 			}
 
 			if (value.Missing is not null)
@@ -98,10 +120,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Mode, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.Name))
+			writer.WriteEndObject();
+			if (value.Meta is not null)
 			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
 			}
 
 			writer.WriteEndObject();

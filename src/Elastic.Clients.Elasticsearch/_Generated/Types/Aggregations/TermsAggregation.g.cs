@@ -30,121 +30,221 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new TermsAggregation();
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "terms")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new TermsAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					var property = reader.GetString();
-					if (property == "collect_mode")
+					if (reader.ValueTextEquals("collect_mode"))
 					{
-						variant.CollectMode = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.CollectMode = value;
+						}
+
 						continue;
 					}
 
-					if (property == "exclude")
+					if (reader.ValueTextEquals("exclude"))
 					{
-						variant.Exclude = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
+						reader.Read();
+						var value = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Exclude = value;
+						}
+
 						continue;
 					}
 
-					if (property == "execution_hint")
+					if (reader.ValueTextEquals("execution_hint"))
 					{
-						variant.ExecutionHint = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ExecutionHint = value;
+						}
+
 						continue;
 					}
 
-					if (property == "field")
+					if (reader.ValueTextEquals("field"))
 					{
-						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+
 						continue;
 					}
 
-					if (property == "format")
+					if (reader.ValueTextEquals("format"))
 					{
-						variant.Format = JsonSerializer.Deserialize<string?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+
 						continue;
 					}
 
-					if (property == "include")
+					if (reader.ValueTextEquals("include"))
 					{
-						variant.Include = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Include = value;
+						}
+
 						continue;
 					}
 
-					if (property == "meta")
+					if (reader.ValueTextEquals("min_doc_count"))
 					{
-						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.MinDocCount = value;
+						}
+
 						continue;
 					}
 
-					if (property == "min_doc_count")
+					if (reader.ValueTextEquals("missing_bucket"))
 					{
-						variant.MinDocCount = JsonSerializer.Deserialize<int?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.MissingBucket = value;
+						}
+
 						continue;
 					}
 
-					if (property == "missing_bucket")
+					if (reader.ValueTextEquals("missing_order"))
 					{
-						variant.MissingBucket = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.MissingOrder = value;
+						}
+
 						continue;
 					}
 
-					if (property == "missing_order")
+					if (reader.ValueTextEquals("order"))
 					{
-						variant.MissingOrder = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder?>(ref reader, options);
+						reader.Read();
+						var value = SingleOrManySerializationHelper.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Order = value;
+						}
+
 						continue;
 					}
 
-					if (property == "name")
+					if (reader.ValueTextEquals("script"))
 					{
-						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Script = value;
+						}
+
 						continue;
 					}
 
-					if (property == "order")
+					if (reader.ValueTextEquals("shard_size"))
 					{
-						variant.Order = JsonSerializer.Deserialize<IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ShardSize = value;
+						}
+
 						continue;
 					}
 
-					if (property == "script")
+					if (reader.ValueTextEquals("show_term_doc_count_error"))
 					{
-						variant.Script = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ShowTermDocCountError = value;
+						}
+
 						continue;
 					}
 
-					if (property == "shard_size")
+					if (reader.ValueTextEquals("size"))
 					{
-						variant.ShardSize = JsonSerializer.Deserialize<int?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Size = value;
+						}
+
 						continue;
 					}
 
-					if (property == "show_term_doc_count_error")
+					if (reader.ValueTextEquals("value_type"))
 					{
-						variant.ShowTermDocCountError = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						continue;
-					}
+						reader.Read();
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ValueType = value;
+						}
 
-					if (property == "size")
-					{
-						variant.Size = JsonSerializer.Deserialize<int?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "value_type")
-					{
-						variant.ValueType = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			return variant;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+
+						continue;
+					}
+				}
+			}
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, TermsAggregation value, JsonSerializerOptions options)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("terms");
 			writer.WriteStartObject();
 			if (value.CollectMode is not null)
 			{
@@ -155,7 +255,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (value.Exclude is not null)
 			{
 				writer.WritePropertyName("exclude");
-				JsonSerializer.Serialize(writer, value.Exclude, options);
+				SingleOrManySerializationHelper.Serialize<string>(value.Exclude, writer, options);
 			}
 
 			if (value.ExecutionHint is not null)
@@ -182,12 +282,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Include, options);
 			}
 
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.MinDocCount.HasValue)
 			{
 				writer.WritePropertyName("min_doc_count");
@@ -206,16 +300,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.MissingOrder, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
-			}
-
 			if (value.Order is not null)
 			{
 				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, value.Order, options);
+				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(value.Order, writer, options);
 			}
 
 			if (value.Script is not null)
@@ -246,6 +334,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("value_type");
 				writer.WriteStringValue(value.ValueType);
+			}
+
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
 			}
 
 			writer.WriteEndObject();
