@@ -60,13 +60,14 @@ public class MultiSearchApiTests
 		var firstResults = response.Responses.First().Item1;
 		firstResults.Should().NotBeNull();
 
-
-		firstResults.HitsMetadata.Total.Should().Be(100);
+		firstResults.Total.Should().Be(100);
 		firstResults.HitsMetadata.Hits.Should().HaveCount(10);
+		firstResults.Documents.Should().HaveCount(10);
 
 		var lastResults = response.Responses.Last().Item1;
 		lastResults.Should().NotBeNull();
-		lastResults.HitsMetadata.Total.Should().Be(100);
+		lastResults.Total.Should().Be(100);
 		lastResults.HitsMetadata.Hits.Should().HaveCount(1);
+		lastResults.Documents.Should().HaveCount(1);
 	}
 }
