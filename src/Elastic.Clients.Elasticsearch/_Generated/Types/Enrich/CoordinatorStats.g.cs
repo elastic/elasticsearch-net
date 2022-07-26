@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Enrich
 {
-	public partial class CoordinatorStats
+	public sealed partial class CoordinatorStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("executed_searches_total")]

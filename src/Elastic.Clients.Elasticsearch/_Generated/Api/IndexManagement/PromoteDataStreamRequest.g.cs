@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
-	public partial class PromoteDataStreamRequest : PlainRequestBase<PromoteDataStreamRequestParameters>
+	public sealed partial class PromoteDataStreamRequest : PlainRequestBase<PromoteDataStreamRequestParameters>
 	{
 		public PromoteDataStreamRequest(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
 		{

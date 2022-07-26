@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class NGramTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class NGramTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_gram")]
@@ -41,6 +41,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "ngram";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class NGramTokenFilterDescriptor : SerializableDescriptorBase<NGramTokenFilterDescriptor>, IBuildableDescriptor<NGramTokenFilter>

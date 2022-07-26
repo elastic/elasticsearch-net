@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class SettingsSimilarityDfr
+	public sealed partial class SettingsSimilarityDfr
 	{
 		[JsonInclude]
 		[JsonPropertyName("after_effect")]

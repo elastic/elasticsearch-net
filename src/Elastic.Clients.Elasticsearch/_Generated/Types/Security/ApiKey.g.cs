@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class ApiKey
+	public sealed partial class ApiKey
 	{
 		[JsonInclude]
 		[JsonPropertyName("creation")]

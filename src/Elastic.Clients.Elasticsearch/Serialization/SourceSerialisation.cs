@@ -42,16 +42,16 @@ internal static class SourceSerialisation
 		JsonSerializer.Serialize(writer, toSerialize, options);
 	}
 
-	public static void DeserializeParams<T>(ref Utf8JsonReader reader, IElasticsearchClientSettings settings)
+	public static T DeserializeParams<T>(ref Utf8JsonReader reader, IElasticsearchClientSettings settings)
 	{
 		if (settings.Experimental.UseSourceSerializerForScriptParameters)
 		{
-			Deserialize<T>(ref reader, settings);
-			return;
+			var result = Deserialize<T>(ref reader, settings);
+			return result;
 		}
 
 		_ = settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		JsonSerializer.Deserialize<T>(ref reader, options);
+		return JsonSerializer.Deserialize<T>(ref reader, options);
 	}
 
 	public static void Serialize<T>(T toSerialize, Utf8JsonWriter writer, IElasticsearchClientSettings settings) =>

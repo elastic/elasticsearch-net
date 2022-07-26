@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(InferenceConfigContainerConverter))]
-	public partial class InferenceConfigContainer
+	public sealed partial class InferenceConfigContainer
 	{
 		public InferenceConfigContainer(string variantName, IInferenceConfigVariant variant)
 		{

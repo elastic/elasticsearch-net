@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class DataStreamTimestampField
+	public sealed partial class DataStreamTimestampField
 	{
 		[JsonInclude]
 		[JsonPropertyName("name")]

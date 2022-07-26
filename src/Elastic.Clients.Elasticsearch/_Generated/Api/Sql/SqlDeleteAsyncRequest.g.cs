@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 	{
 	}
 
-	public partial class SqlDeleteAsyncRequest : PlainRequestBase<SqlDeleteAsyncRequestParameters>
+	public sealed partial class SqlDeleteAsyncRequest : PlainRequestBase<SqlDeleteAsyncRequestParameters>
 	{
 		public SqlDeleteAsyncRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

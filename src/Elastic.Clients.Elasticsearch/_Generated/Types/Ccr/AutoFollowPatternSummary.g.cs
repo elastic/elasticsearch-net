@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public partial class AutoFollowPatternSummary
+	public sealed partial class AutoFollowPatternSummary
 	{
 		[JsonInclude]
 		[JsonPropertyName("active")]

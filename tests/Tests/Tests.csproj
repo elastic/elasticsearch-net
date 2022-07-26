@@ -31,7 +31,6 @@
     <PackageReference Update="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ClientConcepts\HighLevel\Mapping\" />
-    <Folder Include="Common\DateTime\DateMath\" />
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

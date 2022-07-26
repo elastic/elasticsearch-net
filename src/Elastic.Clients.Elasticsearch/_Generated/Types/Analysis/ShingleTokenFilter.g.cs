@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class ShingleTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class ShingleTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("filler_token")]
@@ -53,6 +53,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "shingle";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class ShingleTokenFilterDescriptor : SerializableDescriptorBase<ShingleTokenFilterDescriptor>, IBuildableDescriptor<ShingleTokenFilter>

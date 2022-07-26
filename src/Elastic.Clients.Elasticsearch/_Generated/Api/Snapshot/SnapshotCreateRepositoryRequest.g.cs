@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 	}
 
-	public partial class SnapshotCreateRepositoryRequest : PlainRequestBase<SnapshotCreateRepositoryRequestParameters>
+	public sealed partial class SnapshotCreateRepositoryRequest : PlainRequestBase<SnapshotCreateRepositoryRequestParameters>
 	{
 		public SnapshotCreateRepositoryRequest(Elastic.Clients.Elasticsearch.Name repository) : base(r => r.Required("repository", repository))
 		{

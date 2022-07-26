@@ -9,7 +9,7 @@ using System.Linq;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
-/// Describes aggregations that we would like to execute on Elasticsearch.
+/// Describes aggregations to execute as part of a search.
 /// </summary>
 public sealed class AggregationDictionary : IsADictionaryBase<string, AggregationContainer>
 {
@@ -24,9 +24,9 @@ public sealed class AggregationDictionary : IsADictionaryBase<string, Aggregatio
 	public static implicit operator AggregationDictionary(Dictionary<string, AggregationContainer> dictionary) =>
 		new(dictionary);
 
-	public static implicit operator AggregationDictionary(AggregationBase aggregator)
+	public static implicit operator AggregationDictionary(Aggregation aggregator)
 	{
-		AggregationBase b;
+		Aggregation b;
 		if (aggregator is AggregationCombinator combinator)
 		{
 			var dict = new AggregationDictionary();

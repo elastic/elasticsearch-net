@@ -24,11 +24,75 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class ShortNumberProperty : StandardNumberProperty, IProperty
+	public sealed partial class ShortNumberProperty : IProperty
 	{
+		[JsonInclude]
+		[JsonPropertyName("coerce")]
+		public bool? Coerce { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("copy_to")]
+		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("doc_values")]
+		public bool? DocValues { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("dynamic")]
+		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_above")]
+		public int? IgnoreAbove { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_malformed")]
+		public bool? IgnoreMalformed { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("local_metadata")]
+		public Dictionary<string, object>? LocalMetadata { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, string>? Meta { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public double? NullValue { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("on_script_error")]
+		public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("properties")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("similarity")]
+		public string? Similarity { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("store")]
+		public bool? Store { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_series_metric")]
+		public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -41,12 +105,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public ShortNumberPropertyDescriptor() : base()
 		{
 		}
-
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 		private bool? CoerceValue { get; set; }
 
@@ -74,35 +132,13 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
-
-		public ShortNumberPropertyDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public ShortNumberPropertyDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ShortNumberPropertyDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
 
 		public ShortNumberPropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 		{
@@ -216,6 +252,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public ShortNumberPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public ShortNumberPropertyDescriptor<TDocument> Similarity(string? similarity)
 		{
 			SimilarityValue = similarity;
@@ -237,22 +279,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (CoerceValue.HasValue)
 			{
 				writer.WritePropertyName("coerce");
@@ -331,6 +357,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, PropertiesValue, options);
 			}
 
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(SimilarityValue))
 			{
 				writer.WritePropertyName("similarity");
@@ -354,32 +386,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
-		private ScriptBase? BuildScript()
-		{
-			if (ScriptValue is not null)
-			{
-				return ScriptValue;
-			}
-
-			if (ScriptDescriptor is IBuildableDescriptor<ScriptBase?> buildable)
-			{
-				return buildable.Build();
-			}
-
-			if (ScriptDescriptorAction is not null)
-			{
-				var descriptor = new ScriptDescriptor(ScriptDescriptorAction);
-				if (descriptor is IBuildableDescriptor<ScriptBase?> buildableFromAction)
-				{
-					return buildableFromAction.Build();
-				}
-			}
-
-			return null;
-		}
-
 		ShortNumberProperty IBuildableDescriptor<ShortNumberProperty>.Build() => new()
-		{ Script = BuildScript(), Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
 	public sealed partial class ShortNumberPropertyDescriptor : SerializableDescriptorBase<ShortNumberPropertyDescriptor>, IBuildableDescriptor<ShortNumberProperty>
@@ -388,12 +396,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public ShortNumberPropertyDescriptor() : base()
 		{
 		}
-
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 		private bool? CoerceValue { get; set; }
 
@@ -421,35 +423,13 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
-
-		public ShortNumberPropertyDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public ShortNumberPropertyDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ShortNumberPropertyDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
 
 		public ShortNumberPropertyDescriptor Coerce(bool? coerce = true)
 		{
@@ -569,6 +549,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public ShortNumberPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public ShortNumberPropertyDescriptor Similarity(string? similarity)
 		{
 			SimilarityValue = similarity;
@@ -590,22 +576,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (CoerceValue.HasValue)
 			{
 				writer.WritePropertyName("coerce");
@@ -684,6 +654,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, PropertiesValue, options);
 			}
 
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(SimilarityValue))
 			{
 				writer.WritePropertyName("similarity");
@@ -707,31 +683,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
-		private ScriptBase? BuildScript()
-		{
-			if (ScriptValue is not null)
-			{
-				return ScriptValue;
-			}
-
-			if (ScriptDescriptor is IBuildableDescriptor<ScriptBase?> buildable)
-			{
-				return buildable.Build();
-			}
-
-			if (ScriptDescriptorAction is not null)
-			{
-				var descriptor = new ScriptDescriptor(ScriptDescriptorAction);
-				if (descriptor is IBuildableDescriptor<ScriptBase?> buildableFromAction)
-				{
-					return buildableFromAction.Build();
-				}
-			}
-
-			return null;
-		}
-
 		ShortNumberProperty IBuildableDescriptor<ShortNumberProperty>.Build() => new()
-		{ Script = BuildScript(), Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

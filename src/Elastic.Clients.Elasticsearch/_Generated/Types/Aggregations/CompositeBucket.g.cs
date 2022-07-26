@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	[JsonConverter(typeof(CompositeBucketConverter))]
 	public sealed partial class CompositeBucket : AggregateDictionary
 	{
-		public CompositeBucket(IReadOnlyDictionary<string, AggregateBase> backingDictionary) : base(backingDictionary)
+		public CompositeBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
 		{
 		}
 
@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-			var subAggs = new Dictionary<string, AggregateBase>(); // TODO - Optimise this and only create if we need it.
+			var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
 			long docCount = default;
 			Dictionary<string, object> key = default;
 			while (reader.Read())

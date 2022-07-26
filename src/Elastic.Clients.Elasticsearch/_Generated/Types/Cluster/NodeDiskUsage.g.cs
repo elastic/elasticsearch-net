@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class NodeDiskUsage
+	public sealed partial class NodeDiskUsage
 	{
 		[JsonInclude]
 		[JsonPropertyName("least_available")]

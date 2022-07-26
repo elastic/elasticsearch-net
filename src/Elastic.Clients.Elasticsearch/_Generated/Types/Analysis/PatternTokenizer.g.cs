@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class PatternTokenizer : TokenizerBase, ITokenizerDefinition
+	public sealed partial class PatternTokenizer : ITokenizerDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("flags")]
@@ -41,6 +41,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "pattern";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class PatternTokenizerDescriptor : SerializableDescriptorBase<PatternTokenizerDescriptor>, IBuildableDescriptor<PatternTokenizer>

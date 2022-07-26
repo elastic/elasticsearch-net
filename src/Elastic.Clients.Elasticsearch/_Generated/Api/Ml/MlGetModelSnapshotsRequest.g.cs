@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 	}
 
-	public partial class MlGetModelSnapshotsRequest : PlainRequestBase<MlGetModelSnapshotsRequestParameters>
+	public sealed partial class MlGetModelSnapshotsRequest : PlainRequestBase<MlGetModelSnapshotsRequestParameters>
 	{
 		public MlGetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.Id job_id, Elastic.Clients.Elasticsearch.Id? snapshot_id) : base(r => r.Required("job_id", job_id).Optional("snapshot_id", snapshot_id))
 		{

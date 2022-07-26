@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class FetchProfileDebug
+	public sealed partial class FetchProfileDebug
 	{
 		[JsonInclude]
 		[JsonPropertyName("fast_path")]

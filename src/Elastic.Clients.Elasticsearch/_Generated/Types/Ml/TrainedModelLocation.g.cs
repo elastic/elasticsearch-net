@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class TrainedModelLocation
+	public sealed partial class TrainedModelLocation
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]

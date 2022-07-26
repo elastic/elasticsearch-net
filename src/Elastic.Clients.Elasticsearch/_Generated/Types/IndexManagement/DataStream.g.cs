@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class DataStream
+	public sealed partial class DataStream
 	{
 		[JsonInclude]
 		[JsonPropertyName("_meta")]

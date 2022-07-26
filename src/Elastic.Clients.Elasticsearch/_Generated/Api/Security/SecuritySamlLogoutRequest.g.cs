@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecuritySamlLogoutRequest : PlainRequestBase<SecuritySamlLogoutRequestParameters>
+	public sealed partial class SecuritySamlLogoutRequest : PlainRequestBase<SecuritySamlLogoutRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecuritySamlLogout;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

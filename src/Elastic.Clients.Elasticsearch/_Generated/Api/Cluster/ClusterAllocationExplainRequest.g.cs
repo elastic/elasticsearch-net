@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 	}
 
-	public partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>
+	public sealed partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterAllocationExplain;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

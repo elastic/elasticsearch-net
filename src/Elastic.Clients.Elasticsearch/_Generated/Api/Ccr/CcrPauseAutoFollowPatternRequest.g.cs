@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 	{
 	}
 
-	public partial class CcrPauseAutoFollowPatternRequest : PlainRequestBase<CcrPauseAutoFollowPatternRequestParameters>
+	public sealed partial class CcrPauseAutoFollowPatternRequest : PlainRequestBase<CcrPauseAutoFollowPatternRequestParameters>
 	{
 		public CcrPauseAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{

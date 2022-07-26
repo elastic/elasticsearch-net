@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 
-	public partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>
+	public sealed partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceScroll;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

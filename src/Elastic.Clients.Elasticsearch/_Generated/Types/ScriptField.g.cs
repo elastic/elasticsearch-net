@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ScriptField
+	public sealed partial class ScriptField
 	{
 		[JsonInclude]
 		[JsonPropertyName("ignore_failure")]
@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public ScriptBase Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
 
 	public sealed partial class ScriptFieldDescriptor : SerializableDescriptorBase<ScriptFieldDescriptor>
@@ -44,11 +44,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private bool? IgnoreFailureValue { get; set; }
 
-		private ScriptBase ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+		private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
 		public ScriptFieldDescriptor IgnoreFailure(bool? ignoreFailure = true)
 		{
@@ -56,27 +52,9 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ScriptFieldDescriptor Script(ScriptBase script)
+		public ScriptFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
 			ScriptValue = script;
-			return Self;
-		}
-
-		public ScriptFieldDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptFieldDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
 			return Self;
 		}
 
@@ -89,22 +67,8 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteBooleanValue(IgnoreFailureValue.Value);
 			}
 
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 			writer.WriteEndObject();
 		}
 	}

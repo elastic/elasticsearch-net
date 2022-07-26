@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlDeleteCalendarRequest : PlainRequestBase<MlDeleteCalendarRequestParameters>
+	public sealed partial class MlDeleteCalendarRequest : PlainRequestBase<MlDeleteCalendarRequestParameters>
 	{
 		public MlDeleteCalendarRequest(Elastic.Clients.Elasticsearch.Id calendar_id) : base(r => r.Required("calendar_id", calendar_id))
 		{

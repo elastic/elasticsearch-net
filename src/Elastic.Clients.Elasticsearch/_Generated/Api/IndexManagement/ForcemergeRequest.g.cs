@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
-	public partial class ForcemergeRequest : PlainRequestBase<ForcemergeRequestParameters>
+	public sealed partial class ForcemergeRequest : PlainRequestBase<ForcemergeRequestParameters>
 	{
 		public ForcemergeRequest()
 		{

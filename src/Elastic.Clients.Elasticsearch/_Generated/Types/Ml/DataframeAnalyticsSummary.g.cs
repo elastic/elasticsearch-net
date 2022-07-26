@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalyticsSummary
+	public sealed partial class DataframeAnalyticsSummary
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_lazy_start")]

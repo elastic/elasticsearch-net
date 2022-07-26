@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class SecurityRolesDls
+	public sealed partial class SecurityRolesDls
 	{
 		[JsonInclude]
 		[JsonPropertyName("bit_set_cache")]

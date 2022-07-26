@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 	}
 
-	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>
+	public sealed partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>
 	{
 		public ValidateQueryRequest()
 		{

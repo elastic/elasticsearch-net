@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterPostVotingConfigExclusionsRequest : PlainRequestBase<ClusterPostVotingConfigExclusionsRequestParameters>
+	public sealed partial class ClusterPostVotingConfigExclusionsRequest : PlainRequestBase<ClusterPostVotingConfigExclusionsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPostVotingConfigExclusions;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

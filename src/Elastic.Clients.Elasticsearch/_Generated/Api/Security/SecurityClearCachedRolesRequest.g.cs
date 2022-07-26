@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecurityClearCachedRolesRequest : PlainRequestBase<SecurityClearCachedRolesRequestParameters>
+	public sealed partial class SecurityClearCachedRolesRequest : PlainRequestBase<SecurityClearCachedRolesRequestParameters>
 	{
 		public SecurityClearCachedRolesRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{

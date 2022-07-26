@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class KeywordTokenizer : TokenizerBase, ITokenizerDefinition
+	public sealed partial class KeywordTokenizer : ITokenizerDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("buffer_size")]
@@ -33,6 +33,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "keyword";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class KeywordTokenizerDescriptor : SerializableDescriptorBase<KeywordTokenizerDescriptor>, IBuildableDescriptor<KeywordTokenizer>

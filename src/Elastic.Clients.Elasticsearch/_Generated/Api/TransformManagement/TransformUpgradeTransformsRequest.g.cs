@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class TransformUpgradeTransformsRequest : PlainRequestBase<TransformUpgradeTransformsRequestParameters>
+	public sealed partial class TransformUpgradeTransformsRequest : PlainRequestBase<TransformUpgradeTransformsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformManagementUpgradeTransforms;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

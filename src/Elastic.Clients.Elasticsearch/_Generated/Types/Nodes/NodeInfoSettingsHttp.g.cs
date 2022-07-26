@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoSettingsHttp
+	public sealed partial class NodeInfoSettingsHttp
 	{
 		[JsonInclude]
 		[JsonPropertyName("compression")]

@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					if (reader.ValueTextEquals("combine_script"))
 					{
 						reader.Read();
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.CombineScript = value;
@@ -51,10 +51,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("field"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("init_script"))
 					{
 						reader.Read();
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.InitScript = value;
@@ -66,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					if (reader.ValueTextEquals("map_script"))
 					{
 						reader.Read();
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.MapScript = value;
@@ -90,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					if (reader.ValueTextEquals("reduce_script"))
 					{
 						reader.Read();
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.ReduceScript = value;
@@ -99,22 +111,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("field"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("script"))
 					{
 						reader.Read();
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
@@ -156,6 +156,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.CombineScript, options);
 			}
 
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
 			if (value.InitScript is not null)
 			{
 				writer.WritePropertyName("init_script");
@@ -180,12 +186,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.ReduceScript, options);
 			}
 
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
 			if (value.Script is not null)
 			{
 				writer.WritePropertyName("script");
@@ -204,22 +204,31 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(ScriptedMetricAggregationConverter))]
-	public partial class ScriptedMetricAggregation : MetricAggregationBase
+	public sealed partial class ScriptedMetricAggregation : Aggregation
 	{
-		public ScriptedMetricAggregation(string name, Field field) : base(name) => Field = field;
-		public ScriptedMetricAggregation(string name) : base(name)
+		public ScriptedMetricAggregation(string name, Field field) : this(name) => Field = field;
+		public ScriptedMetricAggregation(string name) => Name = name;
+		internal ScriptedMetricAggregation()
 		{
 		}
 
-		public ScriptBase? CombineScript { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }
 
-		public ScriptBase? InitScript { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-		public ScriptBase? MapScript { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? InitScript { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
 
 		public Dictionary<string, object>? Params { get; set; }
 
-		public ScriptBase? ReduceScript { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
 	public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : SerializableDescriptorBase<ScriptedMetricAggregationDescriptor<TDocument>>
@@ -229,159 +238,25 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? CombineScriptValue { get; set; }
-
-		private ScriptDescriptor CombineScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> CombineScriptDescriptorAction { get; set; }
-
-		private ScriptBase? InitScriptValue { get; set; }
-
-		private ScriptDescriptor InitScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> InitScriptDescriptorAction { get; set; }
-
-		private ScriptBase? MapScriptValue { get; set; }
-
-		private ScriptDescriptor MapScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> MapScriptDescriptorAction { get; set; }
-
-		private ScriptBase? ReduceScriptValue { get; set; }
-
-		private ScriptDescriptor ReduceScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ReduceScriptDescriptorAction { get; set; }
-
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+		private Elastic.Clients.Elasticsearch.Script? CombineScriptValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? InitScriptValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
 		private Dictionary<string, object>? ParamsValue { get; set; }
 
-		public ScriptedMetricAggregationDescriptor<TDocument> CombineScript(ScriptBase? combineScript)
+		private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+		public ScriptedMetricAggregationDescriptor<TDocument> CombineScript(Elastic.Clients.Elasticsearch.Script? combineScript)
 		{
-			CombineScriptDescriptor = null;
-			CombineScriptDescriptorAction = null;
 			CombineScriptValue = combineScript;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> CombineScript(ScriptDescriptor descriptor)
-		{
-			CombineScriptValue = null;
-			CombineScriptDescriptorAction = null;
-			CombineScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> CombineScript(Action<ScriptDescriptor> configure)
-		{
-			CombineScriptValue = null;
-			CombineScriptDescriptor = null;
-			CombineScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> InitScript(ScriptBase? initScript)
-		{
-			InitScriptDescriptor = null;
-			InitScriptDescriptorAction = null;
-			InitScriptValue = initScript;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> InitScript(ScriptDescriptor descriptor)
-		{
-			InitScriptValue = null;
-			InitScriptDescriptorAction = null;
-			InitScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> InitScript(Action<ScriptDescriptor> configure)
-		{
-			InitScriptValue = null;
-			InitScriptDescriptor = null;
-			InitScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> MapScript(ScriptBase? mapScript)
-		{
-			MapScriptDescriptor = null;
-			MapScriptDescriptorAction = null;
-			MapScriptValue = mapScript;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> MapScript(ScriptDescriptor descriptor)
-		{
-			MapScriptValue = null;
-			MapScriptDescriptorAction = null;
-			MapScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> MapScript(Action<ScriptDescriptor> configure)
-		{
-			MapScriptValue = null;
-			MapScriptDescriptor = null;
-			MapScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(ScriptBase? reduceScript)
-		{
-			ReduceScriptDescriptor = null;
-			ReduceScriptDescriptorAction = null;
-			ReduceScriptValue = reduceScript;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(ScriptDescriptor descriptor)
-		{
-			ReduceScriptValue = null;
-			ReduceScriptDescriptorAction = null;
-			ReduceScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(Action<ScriptDescriptor> configure)
-		{
-			ReduceScriptValue = null;
-			ReduceScriptDescriptor = null;
-			ReduceScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
 			return Self;
 		}
 
@@ -397,6 +272,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public ScriptedMetricAggregationDescriptor<TDocument> InitScript(Elastic.Clients.Elasticsearch.Script? initScript)
+		{
+			InitScriptValue = initScript;
+			return Self;
+		}
+
+		public ScriptedMetricAggregationDescriptor<TDocument> MapScript(Elastic.Clients.Elasticsearch.Script? mapScript)
+		{
+			MapScriptValue = mapScript;
+			return Self;
+		}
+
 		public ScriptedMetricAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
@@ -409,89 +296,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(Elastic.Clients.Elasticsearch.Script? reduceScript)
+		{
+			ReduceScriptValue = reduceScript;
+			return Self;
+		}
+
+		public ScriptedMetricAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("scripted_metric");
 			writer.WriteStartObject();
-			if (CombineScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("combine_script");
-				JsonSerializer.Serialize(writer, CombineScriptDescriptor, options);
-			}
-			else if (CombineScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("combine_script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(CombineScriptDescriptorAction), options);
-			}
-			else if (CombineScriptValue is not null)
+			if (CombineScriptValue is not null)
 			{
 				writer.WritePropertyName("combine_script");
 				JsonSerializer.Serialize(writer, CombineScriptValue, options);
-			}
-
-			if (InitScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("init_script");
-				JsonSerializer.Serialize(writer, InitScriptDescriptor, options);
-			}
-			else if (InitScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("init_script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(InitScriptDescriptorAction), options);
-			}
-			else if (InitScriptValue is not null)
-			{
-				writer.WritePropertyName("init_script");
-				JsonSerializer.Serialize(writer, InitScriptValue, options);
-			}
-
-			if (MapScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("map_script");
-				JsonSerializer.Serialize(writer, MapScriptDescriptor, options);
-			}
-			else if (MapScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("map_script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(MapScriptDescriptorAction), options);
-			}
-			else if (MapScriptValue is not null)
-			{
-				writer.WritePropertyName("map_script");
-				JsonSerializer.Serialize(writer, MapScriptValue, options);
-			}
-
-			if (ReduceScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("reduce_script");
-				JsonSerializer.Serialize(writer, ReduceScriptDescriptor, options);
-			}
-			else if (ReduceScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("reduce_script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ReduceScriptDescriptorAction), options);
-			}
-			else if (ReduceScriptValue is not null)
-			{
-				writer.WritePropertyName("reduce_script");
-				JsonSerializer.Serialize(writer, ReduceScriptValue, options);
-			}
-
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (FieldValue is not null)
@@ -500,10 +325,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
+			if (InitScriptValue is not null)
+			{
+				writer.WritePropertyName("init_script");
+				JsonSerializer.Serialize(writer, InitScriptValue, options);
+			}
+
+			if (MapScriptValue is not null)
+			{
+				writer.WritePropertyName("map_script");
+				JsonSerializer.Serialize(writer, MapScriptValue, options);
+			}
+
 			if (ParamsValue is not null)
 			{
 				writer.WritePropertyName("params");
 				JsonSerializer.Serialize(writer, ParamsValue, options);
+			}
+
+			if (ReduceScriptValue is not null)
+			{
+				writer.WritePropertyName("reduce_script");
+				JsonSerializer.Serialize(writer, ReduceScriptValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -524,159 +373,25 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? CombineScriptValue { get; set; }
-
-		private ScriptDescriptor CombineScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> CombineScriptDescriptorAction { get; set; }
-
-		private ScriptBase? InitScriptValue { get; set; }
-
-		private ScriptDescriptor InitScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> InitScriptDescriptorAction { get; set; }
-
-		private ScriptBase? MapScriptValue { get; set; }
-
-		private ScriptDescriptor MapScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> MapScriptDescriptorAction { get; set; }
-
-		private ScriptBase? ReduceScriptValue { get; set; }
-
-		private ScriptDescriptor ReduceScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ReduceScriptDescriptorAction { get; set; }
-
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+		private Elastic.Clients.Elasticsearch.Script? CombineScriptValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? InitScriptValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
 		private Dictionary<string, object>? ParamsValue { get; set; }
 
-		public ScriptedMetricAggregationDescriptor CombineScript(ScriptBase? combineScript)
+		private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+		public ScriptedMetricAggregationDescriptor CombineScript(Elastic.Clients.Elasticsearch.Script? combineScript)
 		{
-			CombineScriptDescriptor = null;
-			CombineScriptDescriptorAction = null;
 			CombineScriptValue = combineScript;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor CombineScript(ScriptDescriptor descriptor)
-		{
-			CombineScriptValue = null;
-			CombineScriptDescriptorAction = null;
-			CombineScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor CombineScript(Action<ScriptDescriptor> configure)
-		{
-			CombineScriptValue = null;
-			CombineScriptDescriptor = null;
-			CombineScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor InitScript(ScriptBase? initScript)
-		{
-			InitScriptDescriptor = null;
-			InitScriptDescriptorAction = null;
-			InitScriptValue = initScript;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor InitScript(ScriptDescriptor descriptor)
-		{
-			InitScriptValue = null;
-			InitScriptDescriptorAction = null;
-			InitScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor InitScript(Action<ScriptDescriptor> configure)
-		{
-			InitScriptValue = null;
-			InitScriptDescriptor = null;
-			InitScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor MapScript(ScriptBase? mapScript)
-		{
-			MapScriptDescriptor = null;
-			MapScriptDescriptorAction = null;
-			MapScriptValue = mapScript;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor MapScript(ScriptDescriptor descriptor)
-		{
-			MapScriptValue = null;
-			MapScriptDescriptorAction = null;
-			MapScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor MapScript(Action<ScriptDescriptor> configure)
-		{
-			MapScriptValue = null;
-			MapScriptDescriptor = null;
-			MapScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor ReduceScript(ScriptBase? reduceScript)
-		{
-			ReduceScriptDescriptor = null;
-			ReduceScriptDescriptorAction = null;
-			ReduceScriptValue = reduceScript;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor ReduceScript(ScriptDescriptor descriptor)
-		{
-			ReduceScriptValue = null;
-			ReduceScriptDescriptorAction = null;
-			ReduceScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor ReduceScript(Action<ScriptDescriptor> configure)
-		{
-			ReduceScriptValue = null;
-			ReduceScriptDescriptor = null;
-			ReduceScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptedMetricAggregationDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
 			return Self;
 		}
 
@@ -698,6 +413,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public ScriptedMetricAggregationDescriptor InitScript(Elastic.Clients.Elasticsearch.Script? initScript)
+		{
+			InitScriptValue = initScript;
+			return Self;
+		}
+
+		public ScriptedMetricAggregationDescriptor MapScript(Elastic.Clients.Elasticsearch.Script? mapScript)
+		{
+			MapScriptValue = mapScript;
+			return Self;
+		}
+
 		public ScriptedMetricAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
@@ -710,89 +437,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public ScriptedMetricAggregationDescriptor ReduceScript(Elastic.Clients.Elasticsearch.Script? reduceScript)
+		{
+			ReduceScriptValue = reduceScript;
+			return Self;
+		}
+
+		public ScriptedMetricAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("scripted_metric");
 			writer.WriteStartObject();
-			if (CombineScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("combine_script");
-				JsonSerializer.Serialize(writer, CombineScriptDescriptor, options);
-			}
-			else if (CombineScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("combine_script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(CombineScriptDescriptorAction), options);
-			}
-			else if (CombineScriptValue is not null)
+			if (CombineScriptValue is not null)
 			{
 				writer.WritePropertyName("combine_script");
 				JsonSerializer.Serialize(writer, CombineScriptValue, options);
-			}
-
-			if (InitScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("init_script");
-				JsonSerializer.Serialize(writer, InitScriptDescriptor, options);
-			}
-			else if (InitScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("init_script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(InitScriptDescriptorAction), options);
-			}
-			else if (InitScriptValue is not null)
-			{
-				writer.WritePropertyName("init_script");
-				JsonSerializer.Serialize(writer, InitScriptValue, options);
-			}
-
-			if (MapScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("map_script");
-				JsonSerializer.Serialize(writer, MapScriptDescriptor, options);
-			}
-			else if (MapScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("map_script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(MapScriptDescriptorAction), options);
-			}
-			else if (MapScriptValue is not null)
-			{
-				writer.WritePropertyName("map_script");
-				JsonSerializer.Serialize(writer, MapScriptValue, options);
-			}
-
-			if (ReduceScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("reduce_script");
-				JsonSerializer.Serialize(writer, ReduceScriptDescriptor, options);
-			}
-			else if (ReduceScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("reduce_script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ReduceScriptDescriptorAction), options);
-			}
-			else if (ReduceScriptValue is not null)
-			{
-				writer.WritePropertyName("reduce_script");
-				JsonSerializer.Serialize(writer, ReduceScriptValue, options);
-			}
-
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (FieldValue is not null)
@@ -801,10 +466,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
+			if (InitScriptValue is not null)
+			{
+				writer.WritePropertyName("init_script");
+				JsonSerializer.Serialize(writer, InitScriptValue, options);
+			}
+
+			if (MapScriptValue is not null)
+			{
+				writer.WritePropertyName("map_script");
+				JsonSerializer.Serialize(writer, MapScriptValue, options);
+			}
+
 			if (ParamsValue is not null)
 			{
 				writer.WritePropertyName("params");
 				JsonSerializer.Serialize(writer, ParamsValue, options);
+			}
+
+			if (ReduceScriptValue is not null)
+			{
+				writer.WritePropertyName("reduce_script");
+				JsonSerializer.Serialize(writer, ReduceScriptValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			writer.WriteEndObject();

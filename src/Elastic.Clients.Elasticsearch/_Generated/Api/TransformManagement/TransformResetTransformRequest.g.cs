@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
 
-	public partial class TransformResetTransformRequest : PlainRequestBase<TransformResetTransformRequestParameters>
+	public sealed partial class TransformResetTransformRequest : PlainRequestBase<TransformResetTransformRequestParameters>
 	{
 		public TransformResetTransformRequest(Elastic.Clients.Elasticsearch.Id transform_id) : base(r => r.Required("transform_id", transform_id))
 		{

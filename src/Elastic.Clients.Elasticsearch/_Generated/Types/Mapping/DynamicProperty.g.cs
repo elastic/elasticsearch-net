@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class DynamicProperty : DocValuesPropertyBase, IProperty
+	public sealed partial class DynamicProperty : IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
@@ -39,6 +39,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool? Coerce { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("copy_to")]
+		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("doc_values")]
+		public bool? DocValues { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("dynamic")]
+		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("eager_global_ordinals")]
 		public bool? EagerGlobalOrdinals { get; set; }
 
@@ -47,8 +59,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool? Enabled { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_above")]
+		public int? IgnoreAbove { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
@@ -71,8 +91,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("local_metadata")]
+		public Dictionary<string, object>? LocalMetadata { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("locale")]
 		public string? Locale { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, string>? Meta { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("norms")]
@@ -95,8 +123,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public int? PrecisionStep { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("properties")]
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("script")]
-		public ScriptBase? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
@@ -105,6 +137,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("search_quote_analyzer")]
 		public string? SearchQuoteAnalyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("similarity")]
+		public string? Similarity { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("store")]
+		public bool? Store { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("term_vector")]
@@ -125,12 +165,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public DynamicPropertyDescriptor() : base()
 		{
 		}
-
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 		private string? AnalyzerValue { get; set; }
 
@@ -186,6 +220,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
 		private string? SearchAnalyzerValue { get; set; }
 
 		private string? SearchQuoteAnalyzerValue { get; set; }
@@ -197,30 +233,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
-
-		public DynamicPropertyDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public DynamicPropertyDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public DynamicPropertyDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
 
 		public DynamicPropertyDescriptor<TDocument> Analyzer(string? analyzer)
 		{
@@ -424,6 +436,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public DynamicPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public DynamicPropertyDescriptor<TDocument> SearchAnalyzer(string? searchAnalyzer)
 		{
 			SearchAnalyzerValue = searchAnalyzer;
@@ -463,22 +481,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (!string.IsNullOrEmpty(AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
@@ -639,6 +641,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, PropertiesValue, options);
 			}
 
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(SearchAnalyzerValue))
 			{
 				writer.WritePropertyName("search_analyzer");
@@ -680,30 +688,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
-		private ScriptBase? BuildScript()
-		{
-			if (ScriptValue is not null)
-			{
-				return ScriptValue;
-			}
-
-			if (ScriptDescriptor is IBuildableDescriptor<ScriptBase?> buildable)
-			{
-				return buildable.Build();
-			}
-
-			if (ScriptDescriptorAction is not null)
-			{
-				var descriptor = new ScriptDescriptor(ScriptDescriptorAction);
-				if (descriptor is IBuildableDescriptor<ScriptBase?> buildableFromAction)
-				{
-					return buildableFromAction.Build();
-				}
-			}
-
-			return null;
-		}
-
 		private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? BuildIndexPrefixes()
 		{
 			if (IndexPrefixesValue is not null)
@@ -729,7 +713,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		DynamicProperty IBuildableDescriptor<DynamicProperty>.Build() => new()
-		{ Script = BuildScript(), Analyzer = AnalyzerValue, Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Enabled = EnabledValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, Norms = NormsValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, PositionIncrementGap = PositionIncrementGapValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Analyzer = AnalyzerValue, Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Enabled = EnabledValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, Norms = NormsValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, PositionIncrementGap = PositionIncrementGapValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Script = ScriptValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
 	public sealed partial class DynamicPropertyDescriptor : SerializableDescriptorBase<DynamicPropertyDescriptor>, IBuildableDescriptor<DynamicProperty>
@@ -738,12 +722,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public DynamicPropertyDescriptor() : base()
 		{
 		}
-
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 		private string? AnalyzerValue { get; set; }
 
@@ -799,6 +777,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
 		private string? SearchAnalyzerValue { get; set; }
 
 		private string? SearchQuoteAnalyzerValue { get; set; }
@@ -810,30 +790,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
-
-		public DynamicPropertyDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public DynamicPropertyDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public DynamicPropertyDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
 
 		public DynamicPropertyDescriptor Analyzer(string? analyzer)
 		{
@@ -1043,6 +999,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public DynamicPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public DynamicPropertyDescriptor SearchAnalyzer(string? searchAnalyzer)
 		{
 			SearchAnalyzerValue = searchAnalyzer;
@@ -1082,22 +1044,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (!string.IsNullOrEmpty(AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
@@ -1258,6 +1204,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, PropertiesValue, options);
 			}
 
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(SearchAnalyzerValue))
 			{
 				writer.WritePropertyName("search_analyzer");
@@ -1299,30 +1251,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteEndObject();
 		}
 
-		private ScriptBase? BuildScript()
-		{
-			if (ScriptValue is not null)
-			{
-				return ScriptValue;
-			}
-
-			if (ScriptDescriptor is IBuildableDescriptor<ScriptBase?> buildable)
-			{
-				return buildable.Build();
-			}
-
-			if (ScriptDescriptorAction is not null)
-			{
-				var descriptor = new ScriptDescriptor(ScriptDescriptorAction);
-				if (descriptor is IBuildableDescriptor<ScriptBase?> buildableFromAction)
-				{
-					return buildableFromAction.Build();
-				}
-			}
-
-			return null;
-		}
-
 		private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? BuildIndexPrefixes()
 		{
 			if (IndexPrefixesValue is not null)
@@ -1348,6 +1276,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		DynamicProperty IBuildableDescriptor<DynamicProperty>.Build() => new()
-		{ Script = BuildScript(), Analyzer = AnalyzerValue, Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Enabled = EnabledValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, Norms = NormsValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, PositionIncrementGap = PositionIncrementGapValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Analyzer = AnalyzerValue, Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Enabled = EnabledValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, Norms = NormsValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, PositionIncrementGap = PositionIncrementGapValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Script = ScriptValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

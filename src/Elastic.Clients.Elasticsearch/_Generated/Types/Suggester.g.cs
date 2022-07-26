@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(SuggesterConverter))]
-	public partial class Suggester
+	public sealed partial class Suggester
 	{
 		public Dictionary<string, Elastic.Clients.Elasticsearch.FieldSuggester> Suggesters { get; set; }
 

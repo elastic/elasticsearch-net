@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class AggregationProfileDelegateDebugFilter
+	public sealed partial class AggregationProfileDelegateDebugFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("query")]

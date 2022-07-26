@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	}
 
 	[JsonConverter(typeof(RetentionPolicyContainerConverter))]
-	public partial class RetentionPolicyContainer
+	public sealed partial class RetentionPolicyContainer
 	{
 		public RetentionPolicyContainer(string variantName, IRetentionPolicyVariant variant)
 		{

@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 		public Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel? Level { get => Q<Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel?>("level"); set => Q("level", value); }
 	}
 
-	public partial class SearchableSnapshotsStatsRequest : PlainRequestBase<SearchableSnapshotsStatsRequestParameters>
+	public sealed partial class SearchableSnapshotsStatsRequest : PlainRequestBase<SearchableSnapshotsStatsRequestParameters>
 	{
 		public SearchableSnapshotsStatsRequest()
 		{

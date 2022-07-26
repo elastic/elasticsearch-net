@@ -24,7 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class MaxAggregate : SingleMetricAggregateBase
+	public sealed partial class MaxAggregate : Aggregate
 	{
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public double? Value { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value_as_string")]
+		public string? ValueAsString { get; init; }
 	}
 }

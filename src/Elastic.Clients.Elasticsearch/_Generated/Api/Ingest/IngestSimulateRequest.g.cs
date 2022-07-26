@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
 
-	public partial class IngestSimulateRequest : PlainRequestBase<IngestSimulateRequestParameters>
+	public sealed partial class IngestSimulateRequest : PlainRequestBase<IngestSimulateRequestParameters>
 	{
 		public IngestSimulateRequest()
 		{

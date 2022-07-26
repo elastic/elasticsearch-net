@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class Translog
+	public sealed partial class Translog
 	{
 		[JsonInclude]
 		[JsonPropertyName("durability")]

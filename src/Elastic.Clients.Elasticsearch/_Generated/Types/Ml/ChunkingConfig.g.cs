@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class ChunkingConfig
+	public sealed partial class ChunkingConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("mode")]

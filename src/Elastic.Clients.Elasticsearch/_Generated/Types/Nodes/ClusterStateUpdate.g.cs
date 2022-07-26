@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class ClusterStateUpdate
+	public sealed partial class ClusterStateUpdate
 	{
 		[JsonInclude]
 		[JsonPropertyName("commit_time")]

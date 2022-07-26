@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	}
 
 	[JsonConverter(typeof(DataframeAnalysisContainerConverter))]
-	public partial class DataframeAnalysisContainer
+	public sealed partial class DataframeAnalysisContainer
 	{
 		public DataframeAnalysisContainer(string variantName, IDataframeAnalysisVariant variant)
 		{

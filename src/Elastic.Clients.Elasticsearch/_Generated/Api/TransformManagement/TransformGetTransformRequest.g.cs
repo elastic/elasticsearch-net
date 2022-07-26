@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 	}
 
-	public partial class TransformGetTransformRequest : PlainRequestBase<TransformGetTransformRequestParameters>
+	public sealed partial class TransformGetTransformRequest : PlainRequestBase<TransformGetTransformRequestParameters>
 	{
 		public TransformGetTransformRequest()
 		{
