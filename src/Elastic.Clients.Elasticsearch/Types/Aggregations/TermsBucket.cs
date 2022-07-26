@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public class TermsBucket<TKey>
+public sealed class TermsBucket<TKey>
 {
 	public TKey Key { get; init; }
 	public string? KeyAsString { get; init; }

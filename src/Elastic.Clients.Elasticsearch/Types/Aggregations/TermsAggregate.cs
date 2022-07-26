@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public class TermsAggregate<TKey> : IAggregate
+	public sealed class TermsAggregate<TKey> : IAggregate
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count_error_upper_bound")]
