@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlEvaluateDataFrameRequest : PlainRequestBase<MlEvaluateDataFrameRequestParameters>
+	public sealed partial class MlEvaluateDataFrameRequest : PlainRequestBase<MlEvaluateDataFrameRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningEvaluateDataFrame;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

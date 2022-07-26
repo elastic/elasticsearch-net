@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public partial class ClusterExistsComponentTemplateRequest : PlainRequestBase<ClusterExistsComponentTemplateRequestParameters>
+	public sealed partial class ClusterExistsComponentTemplateRequest : PlainRequestBase<ClusterExistsComponentTemplateRequestParameters>
 	{
 		public ClusterExistsComponentTemplateRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{

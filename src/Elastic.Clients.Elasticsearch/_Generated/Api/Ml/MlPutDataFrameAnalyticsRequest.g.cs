@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlPutDataFrameAnalyticsRequest : PlainRequestBase<MlPutDataFrameAnalyticsRequestParameters>
+	public sealed partial class MlPutDataFrameAnalyticsRequest : PlainRequestBase<MlPutDataFrameAnalyticsRequestParameters>
 	{
 		public MlPutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

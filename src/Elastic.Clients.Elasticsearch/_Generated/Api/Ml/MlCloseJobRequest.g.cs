@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlCloseJobRequest : PlainRequestBase<MlCloseJobRequestParameters>
+	public sealed partial class MlCloseJobRequest : PlainRequestBase<MlCloseJobRequestParameters>
 	{
 		public MlCloseJobRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{

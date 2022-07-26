@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlDeleteFilterRequest : PlainRequestBase<MlDeleteFilterRequestParameters>
+	public sealed partial class MlDeleteFilterRequest : PlainRequestBase<MlDeleteFilterRequestParameters>
 	{
 		public MlDeleteFilterRequest(Elastic.Clients.Elasticsearch.Id filter_id) : base(r => r.Required("filter_id", filter_id))
 		{

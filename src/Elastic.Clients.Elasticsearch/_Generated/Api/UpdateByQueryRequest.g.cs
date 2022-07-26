@@ -112,7 +112,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
-	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>
+	public sealed partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>
 	{
 		public UpdateByQueryRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlValidateRequest : PlainRequestBase<MlValidateRequestParameters>
+	public sealed partial class MlValidateRequest : PlainRequestBase<MlValidateRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningValidate;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

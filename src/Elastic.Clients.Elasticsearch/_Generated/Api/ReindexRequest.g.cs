@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 	}
 
-	public partial class ReindexRequest : PlainRequestBase<ReindexRequestParameters>
+	public sealed partial class ReindexRequest : PlainRequestBase<ReindexRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

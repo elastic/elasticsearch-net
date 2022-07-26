@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? Status { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>?>("status"); set => Q("status", value); }
 	}
 
-	public partial class ShardStoresRequest : PlainRequestBase<ShardStoresRequestParameters>
+	public sealed partial class ShardStoresRequest : PlainRequestBase<ShardStoresRequestParameters>
 	{
 		public ShardStoresRequest()
 		{

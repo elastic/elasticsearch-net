@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlExplainDataFrameAnalyticsRequest : PlainRequestBase<MlExplainDataFrameAnalyticsRequestParameters>
+	public sealed partial class MlExplainDataFrameAnalyticsRequest : PlainRequestBase<MlExplainDataFrameAnalyticsRequestParameters>
 	{
 		public MlExplainDataFrameAnalyticsRequest()
 		{

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public partial class ScriptContextRequest : PlainRequestBase<ScriptContextRequestParameters>
+	public sealed partial class ScriptContextRequest : PlainRequestBase<ScriptContextRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptContext;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

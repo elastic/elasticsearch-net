@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	public partial class RefreshRequest : PlainRequestBase<RefreshRequestParameters>
+	public sealed partial class RefreshRequest : PlainRequestBase<RefreshRequestParameters>
 	{
 		public RefreshRequest()
 		{

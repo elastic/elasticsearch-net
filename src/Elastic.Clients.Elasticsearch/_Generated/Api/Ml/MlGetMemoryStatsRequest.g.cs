@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class MlGetMemoryStatsRequest : PlainRequestBase<MlGetMemoryStatsRequestParameters>
+	public sealed partial class MlGetMemoryStatsRequest : PlainRequestBase<MlGetMemoryStatsRequestParameters>
 	{
 		public MlGetMemoryStatsRequest()
 		{

@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public partial class ExistsAliasRequest : PlainRequestBase<ExistsAliasRequestParameters>
+	public sealed partial class ExistsAliasRequest : PlainRequestBase<ExistsAliasRequestParameters>
 	{
 		public ExistsAliasRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{

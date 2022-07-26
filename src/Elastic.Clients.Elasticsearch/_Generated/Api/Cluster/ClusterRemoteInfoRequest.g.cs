@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	{
 	}
 
-	public partial class ClusterRemoteInfoRequest : PlainRequestBase<ClusterRemoteInfoRequestParameters>
+	public sealed partial class ClusterRemoteInfoRequest : PlainRequestBase<ClusterRemoteInfoRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterRemoteInfo;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

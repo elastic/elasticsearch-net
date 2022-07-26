@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices
 	{
 	}
 
-	public partial class DanglingIndicesListDanglingIndicesRequest : PlainRequestBase<DanglingIndicesListDanglingIndicesRequestParameters>
+	public sealed partial class DanglingIndicesListDanglingIndicesRequest : PlainRequestBase<DanglingIndicesListDanglingIndicesRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.DanglingIndicesListDanglingIndices;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

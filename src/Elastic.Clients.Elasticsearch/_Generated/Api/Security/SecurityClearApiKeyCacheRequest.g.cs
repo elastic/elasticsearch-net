@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecurityClearApiKeyCacheRequest : PlainRequestBase<SecurityClearApiKeyCacheRequestParameters>
+	public sealed partial class SecurityClearApiKeyCacheRequest : PlainRequestBase<SecurityClearApiKeyCacheRequestParameters>
 	{
 		public SecurityClearApiKeyCacheRequest(Elastic.Clients.Elasticsearch.Ids ids) : base(r => r.Required("ids", ids))
 		{
