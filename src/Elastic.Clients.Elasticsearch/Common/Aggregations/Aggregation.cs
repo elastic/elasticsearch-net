@@ -2,8 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
-
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public interface IAggregation
@@ -26,11 +24,4 @@ public abstract class Aggregation : IAggregation
 
 	public static Aggregation operator &(Aggregation left, Aggregation right) =>
 		new AggregationCombinator(null, left, right);
-}
-
-/// <summary>
-/// Base class for all aggregates.
-/// </summary>
-public abstract class Aggregate : IAggregate
-{
 }

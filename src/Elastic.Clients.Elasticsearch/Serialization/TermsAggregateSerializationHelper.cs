@@ -9,8 +9,6 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public interface IAggregate { }
-
 	internal static class TermsAggregateSerializationHelper
 	{
 		private static readonly byte[] s_buckets = Encoding.UTF8.GetBytes("buckets");

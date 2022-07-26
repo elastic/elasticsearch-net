@@ -7,12 +7,6 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal abstract class FieldNameQueryBase
-	{
-		[JsonIgnore]
-		public Field Field { get; set; }
-	}
-
 	public interface IQuery
 	{
 		/// <summary>
@@ -47,8 +41,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		/// <summary>
 		///     Whether the query should be treated as writable. Used when determining how to combine queries.
 		/// </summary>
-		[JsonIgnore]
-		bool IsWritable { get; }
+		//[JsonIgnore]
+		//bool IsWritable { get; }
 
 		/// <summary>
 		///     The name of the query. Allows you to retrieve for each document what part of the query it matched on.
@@ -56,10 +50,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		//string Name { get; set; }
 	}
 
-	public abstract partial class QueryBase : IQuery
+	public abstract partial class Query : IQuery
 	{
-		[JsonIgnore]
-		public bool IsWritable => throw new NotImplementedException();
+		//[JsonIgnore]
+		//public bool IsWritable => throw new NotImplementedException();
 
 		////protected abstract bool Conditionless { get; }
 		//[JsonIgnore]
@@ -74,10 +68,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		//bool IQuery.Conditionless => Conditionless;
 
 		//always evaluate to false so that each side of && equation is evaluated
-		public static bool operator false(QueryBase a) => false;
+		public static bool operator false(Query a) => false;
 
 		//always evaluate to false so that each side of && equation is evaluated
-		public static bool operator true(QueryBase a) => false;
+		public static bool operator true(Query a) => false;
 
 		//public static QueryBase operator &(QueryBase leftQuery, QueryBase rightQuery) => Combine(leftQuery, rightQuery, (l, r) => l && r);
 
