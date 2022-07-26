@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(GeoShapeQueryConverter))]
-	public sealed partial class GeoShapeQuery : IQueryVariant
+	public sealed partial class GeoShapeQuery : Query, IQueryVariant
 	{
 		public string? QueryName { get; set; }
 

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public sealed partial class DisMaxQuery : IQueryVariant
+	public sealed partial class DisMaxQuery : Query, IQueryVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("_name")]

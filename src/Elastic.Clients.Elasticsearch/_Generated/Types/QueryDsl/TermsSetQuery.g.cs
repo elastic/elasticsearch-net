@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(TermsSetQueryConverter))]
-	public sealed partial class TermsSetQuery : IQueryVariant
+	public sealed partial class TermsSetQuery : Query, IQueryVariant
 	{
 		public string? QueryName { get; set; }
 

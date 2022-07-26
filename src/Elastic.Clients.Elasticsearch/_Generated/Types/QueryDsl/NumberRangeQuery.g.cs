@@ -176,7 +176,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(NumberRangeQueryConverter))]
-	public sealed partial class NumberRangeQuery : IQueryVariant
+	public sealed partial class NumberRangeQuery : Query, IQueryVariant
 	{
 		public string? QueryName { get; set; }
 

@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MatchPhraseQueryConverter))]
-	public sealed partial class MatchPhraseQuery : IQueryVariant
+	public sealed partial class MatchPhraseQuery : Query, IQueryVariant
 	{
 		public string? QueryName { get; set; }
 

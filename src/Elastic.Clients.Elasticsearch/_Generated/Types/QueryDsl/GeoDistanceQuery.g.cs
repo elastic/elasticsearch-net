@@ -125,7 +125,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(GeoDistanceQueryConverter))]
-	public sealed partial class GeoDistanceQuery : IQueryVariant
+	public sealed partial class GeoDistanceQuery : Query, IQueryVariant
 	{
 		public string? QueryName { get; set; }
 

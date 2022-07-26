@@ -100,7 +100,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanTermQueryConverter))]
-	public sealed partial class SpanTermQuery : IQueryVariant, ISpanQueryVariant
+	public sealed partial class SpanTermQuery : Query, IQueryVariant, ISpanQueryVariant
 	{
 		public string? QueryName { get; set; }
 

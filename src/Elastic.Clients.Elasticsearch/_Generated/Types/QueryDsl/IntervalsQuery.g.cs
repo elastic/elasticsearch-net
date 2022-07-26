@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IntervalsQueryConverter))]
-	public sealed partial class IntervalsQuery : IQueryVariant
+	public sealed partial class IntervalsQuery : Query, IQueryVariant
 	{
 		public IntervalsQuery(string variantName, IIntervalsQueryVariant variant)
 		{

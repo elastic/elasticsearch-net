@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(PrefixQueryConverter))]
-	public sealed partial class PrefixQuery : IQueryVariant
+	public sealed partial class PrefixQuery : Query, IQueryVariant
 	{
 		public string? QueryName { get; set; }
 

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public sealed partial class GeoShapeFieldQuery
+	public sealed partial class GeoShapeFieldQuery : Query
 	{
 		[JsonInclude]
 		[JsonPropertyName("indexed_shape")]

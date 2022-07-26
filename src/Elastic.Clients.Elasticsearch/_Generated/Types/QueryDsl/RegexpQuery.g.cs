@@ -148,7 +148,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(RegexpQueryConverter))]
-	public sealed partial class RegexpQuery : IQueryVariant
+	public sealed partial class RegexpQuery : Query, IQueryVariant
 	{
 		public string? QueryName { get; set; }
 
