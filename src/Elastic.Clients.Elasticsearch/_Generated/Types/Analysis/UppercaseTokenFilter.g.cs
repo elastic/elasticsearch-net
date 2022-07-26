@@ -24,11 +24,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class UppercaseTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class UppercaseTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "uppercase";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class UppercaseTokenFilterDescriptor : SerializableDescriptorBase<UppercaseTokenFilterDescriptor>, IBuildableDescriptor<UppercaseTokenFilter>

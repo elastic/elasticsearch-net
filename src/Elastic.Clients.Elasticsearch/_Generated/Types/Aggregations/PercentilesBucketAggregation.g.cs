@@ -30,94 +30,60 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "percentiles_bucket")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new PercentilesBucketAggregation(aggName);
+			var variant = new PercentilesBucketAggregation();
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("percents"))
+					var property = reader.GetString();
+					if (property == "buckets_path")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<IEnumerable<double>?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Percents = value;
-						}
-
+						variant.BucketsPath = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("format"))
+					if (property == "format")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
-
+						variant.Format = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("gap_policy"))
+					if (property == "gap_policy")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.GapPolicy = value;
-						}
-
+						variant.GapPolicy = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("buckets_path"))
+					if (property == "meta")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.BucketsPath = value;
-						}
+						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						continue;
+					}
 
+					if (property == "name")
+					{
+						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "percents")
+					{
+						variant.Percents = JsonSerializer.Deserialize<IEnumerable<double>?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
-				{
-					if (reader.ValueTextEquals("meta"))
-					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
-					}
-				}
-			}
-
-			return agg;
+			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, PercentilesBucketAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("percentiles_bucket");
-			writer.WriteStartObject();
-			if (value.Percents is not null)
+			if (value.BucketsPath is not null)
 			{
-				writer.WritePropertyName("percents");
-				JsonSerializer.Serialize(writer, value.Percents, options);
+				writer.WritePropertyName("buckets_path");
+				JsonSerializer.Serialize(writer, value.BucketsPath, options);
 			}
 
 			if (!string.IsNullOrEmpty(value.Format))
@@ -132,17 +98,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.GapPolicy, options);
 			}
 
-			if (value.BucketsPath is not null)
-			{
-				writer.WritePropertyName("buckets_path");
-				JsonSerializer.Serialize(writer, value.BucketsPath, options);
-			}
-
-			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Name))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(value.Name);
+			}
+
+			if (value.Percents is not null)
+			{
+				writer.WritePropertyName("percents");
+				JsonSerializer.Serialize(writer, value.Percents, options);
 			}
 
 			writer.WriteEndObject();
@@ -150,11 +121,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(PercentilesBucketAggregationConverter))]
-	public partial class PercentilesBucketAggregation : PipelineAggregationBase
+	public sealed partial class PercentilesBucketAggregation : Aggregation
 	{
-		public PercentilesBucketAggregation(string name) : base(name)
+		public PercentilesBucketAggregation(string name) => Name = name;
+		internal PercentilesBucketAggregation()
 		{
 		}
+
+		public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
+
+		public string? Format { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
 
 		public IEnumerable<double>? Percents { get; set; }
 	}

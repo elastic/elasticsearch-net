@@ -24,10 +24,58 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Tasks
 {
-	public partial class ParentTaskInfo : TaskInfo
+	public sealed partial class ParentTaskInfo
 	{
+		[JsonInclude]
+		[JsonPropertyName("action")]
+		public string Action { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("cancellable")]
+		public bool Cancellable { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("children")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>? Children { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("description")]
+		public string? Description { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("headers")]
+		public Dictionary<string, string> Headers { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("id")]
+		public long Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("node")]
+		public string Node { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("parent_task_id")]
+		public Elastic.Clients.Elasticsearch.TaskId? ParentTaskId { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("running_time")]
+		public Elastic.Clients.Elasticsearch.Duration? RunningTime { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("running_time_in_nanos")]
+		public long RunningTimeInNanos { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("start_time_in_millis")]
+		public long StartTimeInMillis { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("status")]
+		public Elastic.Clients.Elasticsearch.Tasks.TaskStatus? Status { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type { get; init; }
 	}
 }

@@ -7,13 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	// TODO: FieldNameQueryConvertor (see FieldNameQueryFormatter)
-	public interface IFieldNameQuery
-	{
-		Field Field { get; set; }
-	}
-
-	public abstract class FieldNameQueryBase : QueryBase, IFieldNameQuery
+	internal abstract class FieldNameQueryBase
 	{
 		[JsonIgnore]
 		public Field Field { get; set; }

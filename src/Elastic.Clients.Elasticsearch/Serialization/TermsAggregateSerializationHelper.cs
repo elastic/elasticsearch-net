@@ -9,13 +9,15 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	public interface IAggregate { }
+
 	internal static class TermsAggregateSerializationHelper
 	{
 		private static readonly byte[] s_buckets = Encoding.UTF8.GetBytes("buckets");
 		private static readonly byte[] s_key = Encoding.UTF8.GetBytes("key");
 		private static readonly byte s_period = (byte)'.';
 
-		public static bool TryDeserialiseTermsAggregate(ref Utf8JsonReader reader, JsonSerializerOptions options, out AggregateBase? aggregate)
+		public static bool TryDeserialiseTermsAggregate(ref Utf8JsonReader reader, JsonSerializerOptions options, out IAggregate? aggregate)
 		{
 			aggregate = null;
 

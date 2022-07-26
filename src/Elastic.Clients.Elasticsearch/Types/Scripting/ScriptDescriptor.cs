@@ -7,47 +7,47 @@ using System.Text.Json;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public sealed partial class ScriptDescriptor : SerializableDescriptorBase<ScriptDescriptor>, IBuildableDescriptor<ScriptBase>
-	{
-		internal ScriptDescriptor(Action<ScriptDescriptor> configure) => configure.Invoke(this);
+	//public sealed partial class ScriptDescriptor : SerializableDescriptorBase<ScriptDescriptor>, IBuildableDescriptor<IScript>
+	//{
+	//	internal ScriptDescriptor(Action<ScriptDescriptor> configure) => configure.Invoke(this);
 
-		internal InlineScriptDescriptor InlineScriptDescriptor { get; private set; }
+	//	internal InlineScriptDescriptor InlineScriptDescriptor { get; private set; }
 
-		internal StoredScriptId StoredScriptId { get; private set; }
+	//	internal StoredScriptId StoredScriptId { get; private set; }
 
-		ScriptBase IBuildableDescriptor<ScriptBase>.Build()
-		{
-			if (InlineScriptDescriptor is IBuildableDescriptor<InlineScript> buildable)
-			{
-				return buildable.Build();
-			}
+	//	IScript IBuildableDescriptor<IScript>.Build()
+	//	{
+	//		if (InlineScriptDescriptor is IBuildableDescriptor<InlineScript> buildable)
+	//		{
+	//			return buildable.Build();
+	//		}
 
-			return StoredScriptId;
-		}
+	//		return StoredScriptId;
+	//	}
 
-		/// <summary>
-		/// A script that has been stored in Elasticsearch with the specified <paramref name="id"/>.
-		/// </summary>
-		public ScriptDescriptor Id(string id) => Assign(id, (a, v) => a.StoredScriptId = new StoredScriptId(v));
+	//	/// <summary>
+	//	/// A script that has been stored in Elasticsearch with the specified <paramref name="id"/>.
+	//	/// </summary>
+	//	public ScriptDescriptor Id(string id) => Assign(id, (a, v) => a.StoredScriptId = new StoredScriptId(v));
 
-		/// <summary>
-		/// An inline script to execute.
-		/// </summary>
-		public ScriptDescriptor Source(string script) => Assign(script, (a, v) => a.InlineScriptDescriptor = new InlineScriptDescriptor(v));
+	//	/// <summary>
+	//	/// An inline script to execute.
+	//	/// </summary>
+	//	public ScriptDescriptor Source(string script) => Assign(script, (a, v) => a.InlineScriptDescriptor = new InlineScriptDescriptor(v));
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (InlineScriptDescriptor is not null)
-			{
-				JsonSerializer.Serialize(writer, InlineScriptDescriptor, options);
-				return;
-			}
+	//	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	//	{
+	//		if (InlineScriptDescriptor is not null)
+	//		{
+	//			JsonSerializer.Serialize(writer, InlineScriptDescriptor, options);
+	//			return;
+	//		}
 
-			if (StoredScriptId is not null)
-			{
-				JsonSerializer.Serialize(writer, StoredScriptId, options);
-				return;
-			}
-		}
-	}
+	//		if (StoredScriptId is not null)
+	//		{
+	//			JsonSerializer.Serialize(writer, StoredScriptId, options);
+	//			return;
+	//		}
+	//	}
+	//}
 }

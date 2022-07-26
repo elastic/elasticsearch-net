@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class MatrixStatsFields
+	public sealed partial class MatrixStatsFields
 	{
 		[JsonInclude]
 		[JsonPropertyName("correlation")]

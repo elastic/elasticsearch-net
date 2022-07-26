@@ -80,6 +80,6 @@ public class ScriptSerialisationTests : SerializerTestBase
 
 	private class ScriptHolder
 	{
-		public ScriptBase Script { get; set; }
+		public Script Script { get; set; }
 	}
 }

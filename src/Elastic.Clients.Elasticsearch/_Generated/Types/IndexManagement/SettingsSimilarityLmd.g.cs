@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class SettingsSimilarityLmd
+	public sealed partial class SettingsSimilarityLmd
 	{
 		[JsonInclude]
 		[JsonPropertyName("mu")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoScript
+	public sealed partial class NodeInfoScript
 	{
 		[JsonInclude]
 		[JsonPropertyName("allowed_types")]

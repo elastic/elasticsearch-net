@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Migration
 {
-	public partial class Deprecation
+	public sealed partial class Deprecation
 	{
 		[JsonInclude]
 		[JsonPropertyName("details")]

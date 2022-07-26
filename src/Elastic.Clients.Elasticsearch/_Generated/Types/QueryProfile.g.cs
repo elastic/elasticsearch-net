@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class QueryProfile
+	public sealed partial class QueryProfile
 	{
 		[JsonInclude]
 		[JsonPropertyName("breakdown")]

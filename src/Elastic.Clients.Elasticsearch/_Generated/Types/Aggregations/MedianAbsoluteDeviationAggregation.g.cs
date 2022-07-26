@@ -30,94 +30,66 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "median_absolute_deviation")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new MedianAbsoluteDeviationAggregation(aggName);
+			var variant = new MedianAbsoluteDeviationAggregation();
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("compression"))
+					var property = reader.GetString();
+					if (property == "compression")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<double?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Compression = value;
-						}
-
+						variant.Compression = JsonSerializer.Deserialize<double?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("format"))
+					if (property == "field")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
-
+						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("field"))
+					if (property == "format")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
-
+						variant.Format = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("script"))
+					if (property == "meta")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Script = value;
-						}
+						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						continue;
+					}
 
+					if (property == "name")
+					{
+						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "script")
+					{
+						variant.Script = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
-				{
-					if (reader.ValueTextEquals("meta"))
-					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
-					}
-				}
-			}
-
-			return agg;
+			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, MedianAbsoluteDeviationAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("median_absolute_deviation");
-			writer.WriteStartObject();
 			if (value.Compression.HasValue)
 			{
 				writer.WritePropertyName("compression");
 				writer.WriteNumberValue(value.Compression.Value);
+			}
+
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
 			if (!string.IsNullOrEmpty(value.Format))
@@ -126,10 +98,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(value.Format);
 			}
 
-			if (value.Field is not null)
+			if (value.Meta is not null)
 			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Name))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(value.Name);
 			}
 
 			if (value.Script is not null)
@@ -139,25 +117,29 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(MedianAbsoluteDeviationAggregationConverter))]
-	public partial class MedianAbsoluteDeviationAggregation : FormatMetricAggregationBase
+	public sealed partial class MedianAbsoluteDeviationAggregation : Aggregation
 	{
-		public MedianAbsoluteDeviationAggregation(string name, Field field) : base(name) => Field = field;
-		public MedianAbsoluteDeviationAggregation(string name) : base(name)
+		public MedianAbsoluteDeviationAggregation(string name, Field field) => Field = field;
+		public MedianAbsoluteDeviationAggregation(string name) => Name = name;
+		internal MedianAbsoluteDeviationAggregation()
 		{
 		}
 
 		public double? Compression { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+		public string? Format { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
 	public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocument> : SerializableDescriptorBase<MedianAbsoluteDeviationAggregationDescriptor<TDocument>>
@@ -167,12 +149,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private double? CompressionValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
@@ -181,29 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
-		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Compression(double? compression)
 		{
@@ -235,27 +189,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("median_absolute_deviation");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (CompressionValue.HasValue)
 			{
 				writer.WritePropertyName("compression");
@@ -272,6 +216,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -292,12 +242,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private double? CompressionValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
@@ -306,29 +250,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
-		public MedianAbsoluteDeviationAggregationDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public MedianAbsoluteDeviationAggregationDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public MedianAbsoluteDeviationAggregationDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		public MedianAbsoluteDeviationAggregationDescriptor Compression(double? compression)
 		{
@@ -366,27 +288,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public MedianAbsoluteDeviationAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("median_absolute_deviation");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (CompressionValue.HasValue)
 			{
 				writer.WritePropertyName("compression");
@@ -403,6 +315,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			writer.WriteEndObject();

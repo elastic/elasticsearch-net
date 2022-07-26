@@ -24,8 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class FrozenIndices : Base
+	public sealed partial class FrozenIndices
 	{
+		[JsonInclude]
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("indices_count")]
 		public long IndicesCount { get; init; }

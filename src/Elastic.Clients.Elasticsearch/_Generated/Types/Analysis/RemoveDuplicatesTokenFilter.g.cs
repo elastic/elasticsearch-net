@@ -24,11 +24,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class RemoveDuplicatesTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class RemoveDuplicatesTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "remove_duplicates";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class RemoveDuplicatesTokenFilterDescriptor : SerializableDescriptorBase<RemoveDuplicatesTokenFilterDescriptor>, IBuildableDescriptor<RemoveDuplicatesTokenFilter>

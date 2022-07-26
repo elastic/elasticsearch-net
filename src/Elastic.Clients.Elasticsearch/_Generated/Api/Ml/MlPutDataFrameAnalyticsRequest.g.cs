@@ -99,6 +99,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
+		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer AnalysisValue { get; set; }
+
+		private DataframeAnalysisContainerDescriptor<TDocument> AnalysisDescriptor { get; set; }
+
+		private Action<DataframeAnalysisContainerDescriptor<TDocument>> AnalysisDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination DestValue { get; set; }
 
 		private DataframeAnalyticsDestinationDescriptor<TDocument> DestDescriptor { get; set; }
@@ -112,12 +118,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private Action<DataframeAnalyticsSourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
 
 		private bool? AllowLazyStartValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer AnalysisValue { get; set; }
-
-		private DataframeAnalysisContainerDescriptor AnalysisDescriptor { get; set; }
-
-		private Action<DataframeAnalysisContainerDescriptor> AnalysisDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFieldsValue { get; set; }
 
@@ -134,6 +134,30 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private string? ModelMemoryLimitValue { get; set; }
 
 		private string? VersionValue { get; set; }
+
+		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer analysis)
+		{
+			AnalysisDescriptor = null;
+			AnalysisDescriptorAction = null;
+			AnalysisValue = analysis;
+			return Self;
+		}
+
+		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(DataframeAnalysisContainerDescriptor<TDocument> descriptor)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = descriptor;
+			return Self;
+		}
+
+		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Action<DataframeAnalysisContainerDescriptor<TDocument>> configure)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptor = null;
+			AnalysisDescriptorAction = configure;
+			return Self;
+		}
 
 		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination dest)
 		{
@@ -186,30 +210,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> AllowLazyStart(bool? allowLazyStart = true)
 		{
 			AllowLazyStartValue = allowLazyStart;
-			return Self;
-		}
-
-		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer analysis)
-		{
-			AnalysisDescriptor = null;
-			AnalysisDescriptorAction = null;
-			AnalysisValue = analysis;
-			return Self;
-		}
-
-		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(DataframeAnalysisContainerDescriptor descriptor)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
-			AnalysisDescriptor = descriptor;
-			return Self;
-		}
-
-		public MlPutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Action<DataframeAnalysisContainerDescriptor> configure)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptor = null;
-			AnalysisDescriptorAction = configure;
 			return Self;
 		}
 
@@ -270,6 +270,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (AnalysisDescriptor is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
+			}
+			else if (AnalysisDescriptorAction is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, new DataframeAnalysisContainerDescriptor<TDocument>(AnalysisDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisValue, options);
+			}
+
 			if (DestDescriptor is not null)
 			{
 				writer.WritePropertyName("dest");
@@ -306,22 +322,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			{
 				writer.WritePropertyName("allow_lazy_start");
 				writer.WriteBooleanValue(AllowLazyStartValue.Value);
-			}
-
-			if (AnalysisDescriptor is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
-			}
-			else if (AnalysisDescriptorAction is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, new DataframeAnalysisContainerDescriptor(AnalysisDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, AnalysisValue, options);
 			}
 
 			if (AnalyzedFieldsDescriptor is not null)
@@ -394,6 +394,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
+		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer AnalysisValue { get; set; }
+
+		private DataframeAnalysisContainerDescriptor AnalysisDescriptor { get; set; }
+
+		private Action<DataframeAnalysisContainerDescriptor> AnalysisDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination DestValue { get; set; }
 
 		private DataframeAnalyticsDestinationDescriptor DestDescriptor { get; set; }
@@ -407,12 +413,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private Action<DataframeAnalyticsSourceDescriptor> SourceDescriptorAction { get; set; }
 
 		private bool? AllowLazyStartValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer AnalysisValue { get; set; }
-
-		private DataframeAnalysisContainerDescriptor AnalysisDescriptor { get; set; }
-
-		private Action<DataframeAnalysisContainerDescriptor> AnalysisDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFieldsValue { get; set; }
 
@@ -429,6 +429,30 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private string? ModelMemoryLimitValue { get; set; }
 
 		private string? VersionValue { get; set; }
+
+		public MlPutDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer analysis)
+		{
+			AnalysisDescriptor = null;
+			AnalysisDescriptorAction = null;
+			AnalysisValue = analysis;
+			return Self;
+		}
+
+		public MlPutDataFrameAnalyticsRequestDescriptor Analysis(DataframeAnalysisContainerDescriptor descriptor)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = descriptor;
+			return Self;
+		}
+
+		public MlPutDataFrameAnalyticsRequestDescriptor Analysis(Action<DataframeAnalysisContainerDescriptor> configure)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptor = null;
+			AnalysisDescriptorAction = configure;
+			return Self;
+		}
 
 		public MlPutDataFrameAnalyticsRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination dest)
 		{
@@ -481,30 +505,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public MlPutDataFrameAnalyticsRequestDescriptor AllowLazyStart(bool? allowLazyStart = true)
 		{
 			AllowLazyStartValue = allowLazyStart;
-			return Self;
-		}
-
-		public MlPutDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer analysis)
-		{
-			AnalysisDescriptor = null;
-			AnalysisDescriptorAction = null;
-			AnalysisValue = analysis;
-			return Self;
-		}
-
-		public MlPutDataFrameAnalyticsRequestDescriptor Analysis(DataframeAnalysisContainerDescriptor descriptor)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
-			AnalysisDescriptor = descriptor;
-			return Self;
-		}
-
-		public MlPutDataFrameAnalyticsRequestDescriptor Analysis(Action<DataframeAnalysisContainerDescriptor> configure)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptor = null;
-			AnalysisDescriptorAction = configure;
 			return Self;
 		}
 
@@ -565,6 +565,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (AnalysisDescriptor is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
+			}
+			else if (AnalysisDescriptorAction is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, new DataframeAnalysisContainerDescriptor(AnalysisDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisValue, options);
+			}
+
 			if (DestDescriptor is not null)
 			{
 				writer.WritePropertyName("dest");
@@ -601,22 +617,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			{
 				writer.WritePropertyName("allow_lazy_start");
 				writer.WriteBooleanValue(AllowLazyStartValue.Value);
-			}
-
-			if (AnalysisDescriptor is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
-			}
-			else if (AnalysisDescriptorAction is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, new DataframeAnalysisContainerDescriptor(AnalysisDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, AnalysisValue, options);
 			}
 
 			if (AnalyzedFieldsDescriptor is not null)

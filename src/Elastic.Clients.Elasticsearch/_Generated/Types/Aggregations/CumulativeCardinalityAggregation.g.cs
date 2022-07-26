@@ -30,78 +30,56 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "cumulative_cardinality")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new CumulativeCardinalityAggregation(aggName);
+			var variant = new CumulativeCardinalityAggregation();
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("format"))
+					var property = reader.GetString();
+					if (property == "buckets_path")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
-
+						variant.BucketsPath = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("gap_policy"))
+					if (property == "format")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.GapPolicy = value;
-						}
-
+						variant.Format = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("buckets_path"))
+					if (property == "gap_policy")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.BucketsPath = value;
-						}
+						variant.GapPolicy = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
+						continue;
+					}
 
+					if (property == "meta")
+					{
+						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "name")
+					{
+						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
-				{
-					if (reader.ValueTextEquals("meta"))
-					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
-					}
-				}
-			}
-
-			return agg;
+			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, CumulativeCardinalityAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("cumulative_cardinality");
-			writer.WriteStartObject();
+			if (value.BucketsPath is not null)
+			{
+				writer.WritePropertyName("buckets_path");
+				JsonSerializer.Serialize(writer, value.BucketsPath, options);
+			}
+
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -114,17 +92,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.GapPolicy, options);
 			}
 
-			if (value.BucketsPath is not null)
-			{
-				writer.WritePropertyName("buckets_path");
-				JsonSerializer.Serialize(writer, value.BucketsPath, options);
-			}
-
-			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Name))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(value.Name);
 			}
 
 			writer.WriteEndObject();
@@ -132,11 +109,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(CumulativeCardinalityAggregationConverter))]
-	public partial class CumulativeCardinalityAggregation : PipelineAggregationBase
+	public sealed partial class CumulativeCardinalityAggregation : Aggregation
 	{
-		public CumulativeCardinalityAggregation(string name) : base(name)
+		public CumulativeCardinalityAggregation(string name) => Name = name;
+		internal CumulativeCardinalityAggregation()
 		{
 		}
+
+		public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
+
+		public string? Format { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
 	}
 
 	public sealed partial class CumulativeCardinalityAggregationDescriptor : SerializableDescriptorBase<CumulativeCardinalityAggregationDescriptor>

@@ -13,73 +13,77 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public bool IsEmptyTerms(string key) => !BackingDictionary.TryGetValue(key, out var agg) || agg is EmptyTermsAggregate;
 
-		public bool TryGetStringTerms(string key, out StringTermsAggregate? aggregate)
-		{
-			aggregate = null;
+		//public bool TryGetStringTerms(string key, out StringTermsAggregate? aggregate)
+		//{
+		//	aggregate = null;
 
-			if (BackingDictionary.TryGetValue(key, out var agg) && agg is StringTermsAggregate stringTermsAgg)
-			{
-				aggregate = stringTermsAgg;
-				return true;
-			}
+		//	if (BackingDictionary.TryGetValue(key, out var agg) && agg is StringTermsAggregate stringTermsAgg)
+		//	{
+		//		aggregate = stringTermsAgg;
+		//		return true;
+		//	}
 
-			return false;
-		}
+		//	return false;
+		//}
 
 		public AvgAggregate? Average(string key) => TryGet<AvgAggregate?>(key);
 
-		public TermsAggregate<string> Terms(string key) => Terms<string>(key);
+		//public TermsAggregate<string> Terms(string key) => Terms<string>(key);
 
-		public TermsAggregate<TKey> Terms<TKey>(string key)
-		{
-			if (!BackingDictionary.TryGetValue(key, out var agg))
-			{
-				return null;
-			}
+		//public TermsAggregate<TKey> Terms<TKey>(string key)
+		//{
+		//	if (!BackingDictionary.TryGetValue(key, out var agg))
+		//	{
+		//		return null;
+		//	}
 
-			switch (agg)
-			{
-				case EmptyTermsAggregate empty:
-					return new TermsAggregate<TKey>
-					{
-						Buckets = Array.Empty<TermsBucket<TKey>>().ToReadOnlyCollection(),
-						Meta = empty.Meta,
-						DocCountErrorUpperBound = empty.DocCountErrorUpperBound,
-						SumOtherDocCount = empty.SumOtherDocCount
-					};
-				case StringTermsAggregate stringTerms:
-					var buckets = stringTerms.Buckets.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = GetKeyFromBucketKey<TKey>(b.Key), KeyAsString = b.Key }).ToReadOnlyCollection();
-					return new TermsAggregate<TKey>
-					{
-						Buckets = buckets,
-						Meta = stringTerms.Meta,
-						DocCountErrorUpperBound = stringTerms.DocCountErrorUpperBound,
-						SumOtherDocCount = stringTerms.SumOtherDocCount
-					};
-				case DoubleTermsAggregate doubleTerms:
-					var doubleTermsBuckets = doubleTerms.Buckets.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = GetKeyFromBucketKey<TKey>(b.Key), KeyAsString = b.KeyAsString }).ToReadOnlyCollection();
-					return new TermsAggregate<TKey>
-					{
-						Buckets = doubleTermsBuckets,
-						Meta = doubleTerms.Meta,
-						DocCountErrorUpperBound = doubleTerms.DocCountErrorUpperBound,
-						SumOtherDocCount = doubleTerms.SumOtherDocCount
-					};
-				case LongTermsAggregate longTerms:
-					var longTermsBuckets = longTerms.Buckets.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = GetKeyFromBucketKey<TKey>(b.Key), KeyAsString = b.KeyAsString }).ToReadOnlyCollection();
-					return new TermsAggregate<TKey>
-					{
-						Buckets = longTermsBuckets,
-						Meta = longTerms.Meta,
-						DocCountErrorUpperBound = longTerms.DocCountErrorUpperBound,
-						SumOtherDocCount = longTerms.SumOtherDocCount
-					};
+		//	switch (agg)
+		//	{
+		//		case EmptyTermsAggregate empty:
+		//			return new TermsAggregate<TKey>
+		//			{
+		//				Buckets = new Buckets<TermsBucket<TKey>>(Array.Empty<TermsBucket<TKey>>()),
+		//				Meta = empty.Meta,
+		//				DocCountErrorUpperBound = empty.DocCountErrorUpperBound,
+		//				SumOtherDocCount = empty.SumOtherDocCount
+		//			};
+		//		case StringTermsAggregate stringTerms:
+		//			var buckets = stringTerms.Buckets.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = GetKeyFromBucketKey<TKey>(b.Key), KeyAsString = b.Key }).ToReadOnlyCollection();
 
-					// TODO - Multi-terms
-			}
+		//			Buckets<TermsBucket<TKey>> buckets;
+		//			stringTerms.Buckets.Match(a => a.)
 
-			return null;
-		}
+		//			return new TermsAggregate<TKey>
+		//			{
+		//				Buckets = buckets,
+		//				Meta = stringTerms.Meta,
+		//				DocCountErrorUpperBound = stringTerms.DocCountErrorUpperBound,
+		//				SumOtherDocCount = stringTerms.SumOtherDocCount
+		//			};
+		//		case DoubleTermsAggregate doubleTerms:
+		//			var doubleTermsBuckets = doubleTerms.Buckets.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = GetKeyFromBucketKey<TKey>(b.Key), KeyAsString = b.KeyAsString }).ToReadOnlyCollection();
+		//			return new TermsAggregate<TKey>
+		//			{
+		//				Buckets = doubleTermsBuckets,
+		//				Meta = doubleTerms.Meta,
+		//				DocCountErrorUpperBound = doubleTerms.DocCountErrorUpperBound,
+		//				SumOtherDocCount = doubleTerms.SumOtherDocCount
+		//			};
+		//		case LongTermsAggregate longTerms:
+		//			var longTermsBuckets = longTerms.Buckets.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = GetKeyFromBucketKey<TKey>(b.Key), KeyAsString = b.KeyAsString }).ToReadOnlyCollection();
+		//			return new TermsAggregate<TKey>
+		//			{
+		//				Buckets = longTermsBuckets,
+		//				Meta = longTerms.Meta,
+		//				DocCountErrorUpperBound = longTerms.DocCountErrorUpperBound,
+		//				SumOtherDocCount = longTerms.SumOtherDocCount
+		//			};
+
+		//			// TODO - Multi-terms
+		//	}
+
+		//	return null;
+		//}
 
 		private static TKey GetKeyFromBucketKey<TKey>(object key) =>
 			typeof(TKey).IsEnum

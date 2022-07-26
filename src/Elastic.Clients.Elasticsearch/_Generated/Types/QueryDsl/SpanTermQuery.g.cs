@@ -24,9 +24,9 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class SpanTermQueryConverter : FieldNameQueryConverterBase<SpanTermQuery>
+	internal sealed class SpanTermQueryConverter : JsonConverter<SpanTermQuery>
 	{
-		internal override SpanTermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override SpanTermQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
@@ -36,12 +36,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
-					if (property == "value")
-					{
-						variant.Value = JsonSerializer.Deserialize<string>(ref reader, options);
-						continue;
-					}
-
 					if (property == "_name")
 					{
 						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -53,6 +47,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
 						continue;
 					}
+
+					if (property == "value")
+					{
+						variant.Value = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+
+					if (property == "field")
+					{
+						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						continue;
+					}
 				}
 			}
 
@@ -60,11 +66,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, SpanTermQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, SpanTermQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("value");
-			writer.WriteStringValue(value.Value);
 			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
@@ -77,14 +81,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(value.Boost.Value);
 			}
 
+			writer.WritePropertyName("value");
+			writer.WriteStringValue(value.Value);
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(SpanTermQueryConverter))]
-	public partial class SpanTermQuery : FieldNameQueryBase, IQueryVariant, ISpanQueryVariant
+	public sealed partial class SpanTermQuery : IQueryVariant, ISpanQueryVariant
 	{
+		public string? QueryName { get; set; }
+
+		public float? Boost { get; set; }
+
 		public string Value { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	}
 
 	public sealed partial class SpanTermQueryDescriptor<TDocument> : SerializableDescriptorBase<SpanTermQueryDescriptor<TDocument>>

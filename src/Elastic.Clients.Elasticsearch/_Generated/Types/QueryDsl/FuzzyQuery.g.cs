@@ -24,9 +24,9 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class FuzzyQueryConverter : FieldNameQueryConverterBase<FuzzyQuery>
+	internal sealed class FuzzyQueryConverter : JsonConverter<FuzzyQuery>
 	{
-		internal override FuzzyQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override FuzzyQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
@@ -36,6 +36,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "fuzziness")
 					{
 						variant.Fuzziness = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fuzziness?>(ref reader, options);
@@ -72,15 +84,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						continue;
 					}
 
-					if (property == "_name")
+					if (property == "field")
 					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						continue;
 					}
 				}
@@ -90,9 +96,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, FuzzyQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, FuzzyQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
+			}
+
 			if (value.Fuzziness is not null)
 			{
 				writer.WritePropertyName("fuzziness");
@@ -125,16 +143,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			writer.WritePropertyName("value");
 			JsonSerializer.Serialize(writer, value.Value, options);
-			if (!string.IsNullOrEmpty(value.QueryName))
+			if (value.Field is not null)
 			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
 			writer.WriteEndObject();
@@ -142,8 +154,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(FuzzyQueryConverter))]
-	public partial class FuzzyQuery : FieldNameQueryBase, IQueryVariant
+	public sealed partial class FuzzyQuery : IQueryVariant
 	{
+		public string? QueryName { get; set; }
+
+		public float? Boost { get; set; }
+
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
 		public int? MaxExpansions { get; set; }
@@ -155,6 +171,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? Transpositions { get; set; }
 
 		public object Value { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	}
 
 	public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescriptorBase<FuzzyQueryDescriptor<TDocument>>

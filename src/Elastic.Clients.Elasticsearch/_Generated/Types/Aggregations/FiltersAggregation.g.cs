@@ -30,93 +30,66 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "filters")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new FiltersAggregation(aggName);
+			var variant = new FiltersAggregation();
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("filters"))
+					var property = reader.GetString();
+					if (property == "filters")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Filters = value;
-						}
-
+						variant.Filters = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("other_bucket"))
+					if (property == "meta")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.OtherBucket = value;
-						}
-
+						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("other_bucket_key"))
+					if (property == "name")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.OtherBucketKey = value;
-						}
+						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
 
+					if (property == "other_bucket")
+					{
+						variant.OtherBucket = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "other_bucket_key")
+					{
+						variant.OtherBucketKey = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
-				{
-					if (reader.ValueTextEquals("meta"))
-					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-					{
-						var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Aggregations = value;
-						}
-
-						continue;
-					}
-				}
-			}
-
-			return agg;
+			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, FiltersAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("filters");
-			writer.WriteStartObject();
 			if (value.Filters is not null)
 			{
 				writer.WritePropertyName("filters");
 				JsonSerializer.Serialize(writer, value.Filters, options);
+			}
+
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Name))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(value.Name);
 			}
 
 			if (value.OtherBucket.HasValue)
@@ -132,153 +105,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (value.Aggregations is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, value.Aggregations, options);
-			}
-
-			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(FiltersAggregationConverter))]
-	public partial class FiltersAggregation : BucketAggregationBase
+	public sealed partial class FiltersAggregation : Aggregation
 	{
-		public FiltersAggregation(string name) : base(name)
+		public FiltersAggregation(string name) => Name = name;
+		internal FiltersAggregation()
 		{
 		}
 
 		public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filters { get; set; }
 
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
 		public bool? OtherBucket { get; set; }
 
 		public string? OtherBucketKey { get; set; }
-	}
-
-	public sealed partial class FiltersAggregationDescriptor<TDocument> : SerializableDescriptorBase<FiltersAggregationDescriptor<TDocument>>
-	{
-		internal FiltersAggregationDescriptor(Action<FiltersAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public FiltersAggregationDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
-		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FiltersValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private bool? OtherBucketValue { get; set; }
-
-		private string? OtherBucketKeyValue { get; set; }
-
-		public FiltersAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-		{
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = null;
-			AggregationsValue = aggregations;
-			return Self;
-		}
-
-		public FiltersAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
-		{
-			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
-			AggregationsDescriptor = descriptor;
-			return Self;
-		}
-
-		public FiltersAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
-		{
-			AggregationsValue = null;
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = configure;
-			return Self;
-		}
-
-		public FiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filters)
-		{
-			FiltersValue = filters;
-			return Self;
-		}
-
-		public FiltersAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public FiltersAggregationDescriptor<TDocument> OtherBucket(bool? otherBucket = true)
-		{
-			OtherBucketValue = otherBucket;
-			return Self;
-		}
-
-		public FiltersAggregationDescriptor<TDocument> OtherBucketKey(string? otherBucketKey)
-		{
-			OtherBucketKeyValue = otherBucketKey;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("filters");
-			writer.WriteStartObject();
-			if (FiltersValue is not null)
-			{
-				writer.WritePropertyName("filters");
-				JsonSerializer.Serialize(writer, FiltersValue, options);
-			}
-
-			if (OtherBucketValue.HasValue)
-			{
-				writer.WritePropertyName("other_bucket");
-				writer.WriteBooleanValue(OtherBucketValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(OtherBucketKeyValue))
-			{
-				writer.WritePropertyName("other_bucket_key");
-				writer.WriteStringValue(OtherBucketKeyValue);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (AggregationsDescriptor is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-			}
-			else if (AggregationsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
-			}
-			else if (AggregationsValue is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public sealed partial class FiltersAggregationDescriptor : SerializableDescriptorBase<FiltersAggregationDescriptor>
@@ -288,12 +134,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
-
-		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FiltersValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
@@ -301,30 +141,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private bool? OtherBucketValue { get; set; }
 
 		private string? OtherBucketKeyValue { get; set; }
-
-		public FiltersAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-		{
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = null;
-			AggregationsValue = aggregations;
-			return Self;
-		}
-
-		public FiltersAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
-		{
-			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
-			AggregationsDescriptor = descriptor;
-			return Self;
-		}
-
-		public FiltersAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
-		{
-			AggregationsValue = null;
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = configure;
-			return Self;
-		}
 
 		public FiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filters)
 		{
@@ -378,22 +194,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (AggregationsDescriptor is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-			}
-			else if (AggregationsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
-			}
-			else if (AggregationsValue is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsValue, options);
 			}
 
 			writer.WriteEndObject();

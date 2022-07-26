@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RefreshStats
+	public sealed partial class RefreshStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("external_total")]

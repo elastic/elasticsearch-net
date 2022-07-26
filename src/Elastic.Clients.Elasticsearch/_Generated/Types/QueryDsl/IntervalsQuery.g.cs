@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IntervalsQueryConverter))]
-	public partial class IntervalsQuery : FieldNameQueryBase, IQueryVariant
+	public sealed partial class IntervalsQuery : IQueryVariant
 	{
 		public IntervalsQuery(string variantName, IIntervalsQueryVariant variant)
 		{
@@ -53,6 +53,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public static IntervalsQuery Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => new IntervalsQuery("match", intervalsMatch);
 		public static IntervalsQuery Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => new IntervalsQuery("prefix", intervalsPrefix);
 		public static IntervalsQuery Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => new IntervalsQuery("wildcard", intervalsWildcard);
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	}
 
 	internal sealed class IntervalsQueryConverter : JsonConverter<IntervalsQuery>

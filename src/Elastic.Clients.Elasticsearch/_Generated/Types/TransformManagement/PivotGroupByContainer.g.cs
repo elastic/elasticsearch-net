@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	}
 
 	[JsonConverter(typeof(PivotGroupByContainerConverter))]
-	public partial class PivotGroupByContainer
+	public sealed partial class PivotGroupByContainer
 	{
 		public PivotGroupByContainer(string variantName, IPivotGroupByVariant variant)
 		{

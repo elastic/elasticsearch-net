@@ -24,9 +24,9 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class MatchPhrasePrefixQueryConverter : FieldNameQueryConverterBase<MatchPhrasePrefixQuery>
+	internal sealed class MatchPhrasePrefixQueryConverter : JsonConverter<MatchPhrasePrefixQuery>
 	{
-		internal override MatchPhrasePrefixQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override MatchPhrasePrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
@@ -36,9 +36,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "analyzer")
 					{
 						variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
 						continue;
 					}
 
@@ -66,15 +78,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						continue;
 					}
 
-					if (property == "_name")
+					if (property == "field")
 					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						continue;
 					}
 				}
@@ -84,13 +90,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, MatchPhrasePrefixQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, MatchPhrasePrefixQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
 			if (!string.IsNullOrEmpty(value.Analyzer))
 			{
 				writer.WritePropertyName("analyzer");
 				writer.WriteStringValue(value.Analyzer);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
 			}
 
 			if (value.MaxExpansions.HasValue)
@@ -113,16 +131,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.QueryName))
+			if (value.Field is not null)
 			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
 			writer.WriteEndObject();
@@ -130,9 +142,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MatchPhrasePrefixQueryConverter))]
-	public partial class MatchPhrasePrefixQuery : FieldNameQueryBase, IQueryVariant
+	public sealed partial class MatchPhrasePrefixQuery : IQueryVariant
 	{
+		public string? QueryName { get; set; }
+
 		public string? Analyzer { get; set; }
+
+		public float? Boost { get; set; }
 
 		public int? MaxExpansions { get; set; }
 
@@ -141,6 +157,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public int? Slop { get; set; }
 
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	}
 
 	public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : SerializableDescriptorBase<MatchPhrasePrefixQueryDescriptor<TDocument>>

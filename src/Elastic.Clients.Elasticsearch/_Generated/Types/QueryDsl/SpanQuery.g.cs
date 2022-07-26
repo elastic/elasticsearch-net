@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanQueryConverter))]
-	public partial class SpanQuery
+	public sealed partial class SpanQuery
 	{
 		public SpanQuery(string variantName, ISpanQueryVariant variant)
 		{

@@ -24,9 +24,9 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class TermQueryConverter : FieldNameQueryConverterBase<TermQuery>
+	internal sealed class TermQueryConverter : JsonConverter<TermQuery>
 	{
-		internal override TermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override TermQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
@@ -36,6 +36,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "case_insensitive")
 					{
 						variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
@@ -48,15 +60,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						continue;
 					}
 
-					if (property == "_name")
+					if (property == "field")
 					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						continue;
 					}
 				}
@@ -66,17 +72,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, TermQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, TermQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.CaseInsensitive.HasValue)
-			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value.CaseInsensitive.Value);
-			}
-
-			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, value.Value, options);
 			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
@@ -89,16 +87,36 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(value.Boost.Value);
 			}
 
+			if (value.CaseInsensitive.HasValue)
+			{
+				writer.WritePropertyName("case_insensitive");
+				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+			}
+
+			writer.WritePropertyName("value");
+			JsonSerializer.Serialize(writer, value.Value, options);
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(TermQueryConverter))]
-	public partial class TermQuery : FieldNameQueryBase, IQueryVariant
+	public sealed partial class TermQuery : IQueryVariant
 	{
+		public string? QueryName { get; set; }
+
+		public float? Boost { get; set; }
+
 		public bool? CaseInsensitive { get; set; }
 
 		public object Value { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	}
 
 	public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescriptorBase<TermQueryDescriptor<TDocument>>

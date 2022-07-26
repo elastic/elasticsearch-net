@@ -24,9 +24,9 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class WildcardQueryConverter : FieldNameQueryConverterBase<WildcardQuery>
+	internal sealed class WildcardQueryConverter : JsonConverter<WildcardQuery>
 	{
-		internal override WildcardQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override WildcardQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
@@ -36,6 +36,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "case_insensitive")
 					{
 						variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
@@ -60,15 +72,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						continue;
 					}
 
-					if (property == "_name")
+					if (property == "field")
 					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						continue;
 					}
 				}
@@ -78,9 +84,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, WildcardQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, WildcardQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
+			}
+
 			if (value.CaseInsensitive.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
@@ -105,16 +123,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteStringValue(value.Wildcard);
 			}
 
-			if (!string.IsNullOrEmpty(value.QueryName))
+			if (value.Field is not null)
 			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
 			writer.WriteEndObject();
@@ -122,8 +134,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(WildcardQueryConverter))]
-	public partial class WildcardQuery : FieldNameQueryBase, IQueryVariant
+	public sealed partial class WildcardQuery : IQueryVariant
 	{
+		public string? QueryName { get; set; }
+
+		public float? Boost { get; set; }
+
 		public bool? CaseInsensitive { get; set; }
 
 		public string? Rewrite { get; set; }
@@ -131,6 +147,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string? Value { get; set; }
 
 		public string? Wildcard { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	}
 
 	public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDescriptorBase<WildcardQueryDescriptor<TDocument>>

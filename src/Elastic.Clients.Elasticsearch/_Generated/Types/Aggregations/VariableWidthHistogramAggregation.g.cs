@@ -30,89 +30,55 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "variable_width_histogram")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new VariableWidthHistogramAggregation(aggName);
+			var variant = new VariableWidthHistogramAggregation();
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("buckets"))
+					var property = reader.GetString();
+					if (property == "buckets")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Buckets = value;
-						}
-
+						variant.Buckets = JsonSerializer.Deserialize<int?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("field"))
+					if (property == "field")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
-
+						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("initial_buffer"))
+					if (property == "initial_buffer")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.InitialBuffer = value;
-						}
-
+						variant.InitialBuffer = JsonSerializer.Deserialize<int?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("shard_size"))
+					if (property == "meta")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.ShardSize = value;
-						}
+						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						continue;
+					}
 
+					if (property == "name")
+					{
+						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "shard_size")
+					{
+						variant.ShardSize = JsonSerializer.Deserialize<int?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
-				{
-					if (reader.ValueTextEquals("meta"))
-					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
-					}
-				}
-			}
-
-			return agg;
+			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, VariableWidthHistogramAggregation value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("variable_width_histogram");
 			writer.WriteStartObject();
 			if (value.Buckets.HasValue)
 			{
@@ -132,6 +98,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(value.InitialBuffer.Value);
 			}
 
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Name))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(value.Name);
+			}
+
 			if (value.ShardSize.HasValue)
 			{
 				writer.WritePropertyName("shard_size");
@@ -139,20 +117,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(VariableWidthHistogramAggregationConverter))]
-	public partial class VariableWidthHistogramAggregation : AggregationBase
+	public sealed partial class VariableWidthHistogramAggregation : Aggregation
 	{
-		public VariableWidthHistogramAggregation(string name) : base(name)
+		public VariableWidthHistogramAggregation(string name) => Name = name;
+		internal VariableWidthHistogramAggregation()
 		{
 		}
 
@@ -161,6 +133,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		public int? InitialBuffer { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
 
 		public int? ShardSize { get; set; }
 	}

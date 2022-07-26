@@ -36,18 +36,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
-					if (property == "ignore_unmapped")
-					{
-						variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "validation_method")
-					{
-						variant.ValidationMethod = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?>(ref reader, options);
-						continue;
-					}
-
 					if (property == "_name")
 					{
 						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -57,6 +45,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 					if (property == "boost")
 					{
 						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "ignore_unmapped")
+					{
+						variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "validation_method")
+					{
+						variant.ValidationMethod = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?>(ref reader, options);
 						continue;
 					}
 
@@ -84,18 +84,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, value.BoundingBox, options);
 			}
 
-			if (value.IgnoreUnmapped.HasValue)
-			{
-				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
-			}
-
-			if (value.ValidationMethod is not null)
-			{
-				writer.WritePropertyName("validation_method");
-				JsonSerializer.Serialize(writer, value.ValidationMethod, options);
-			}
-
 			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
@@ -108,13 +96,29 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(value.Boost.Value);
 			}
 
+			if (value.IgnoreUnmapped.HasValue)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
+			}
+
+			if (value.ValidationMethod is not null)
+			{
+				writer.WritePropertyName("validation_method");
+				JsonSerializer.Serialize(writer, value.ValidationMethod, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(GeoBoundingBoxQueryConverter))]
-	public partial class GeoBoundingBoxQuery : QueryBase, IQueryVariant
+	public sealed partial class GeoBoundingBoxQuery : IQueryVariant
 	{
+		public string? QueryName { get; set; }
+
+		public float? Boost { get; set; }
+
 		public Elastic.Clients.Elasticsearch.GeoBounds BoundingBox { get; set; }
 
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }

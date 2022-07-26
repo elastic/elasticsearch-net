@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Slm
 {
-	public partial class Retention
+	public sealed partial class Retention
 	{
 		[JsonInclude]
 		[JsonPropertyName("expire_after")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class StemmerOverrideTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class StemmerOverrideTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("rules")]
@@ -37,6 +37,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "stemmer_override";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class StemmerOverrideTokenFilterDescriptor : SerializableDescriptorBase<StemmerOverrideTokenFilterDescriptor>, IBuildableDescriptor<StemmerOverrideTokenFilter>

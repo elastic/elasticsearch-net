@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ShardProfile
+	public sealed partial class ShardProfile
 	{
 		[JsonInclude]
 		[JsonPropertyName("aggregations")]

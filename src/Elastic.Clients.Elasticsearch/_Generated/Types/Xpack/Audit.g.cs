@@ -24,8 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class Audit : FeatureToggle
+	public sealed partial class Audit
 	{
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("outputs")]
 		public IReadOnlyCollection<string>? Outputs { get; init; }

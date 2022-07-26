@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public partial class AutoFollowedCluster
+	public sealed partial class AutoFollowedCluster
 	{
 		[JsonInclude]
 		[JsonPropertyName("cluster_name")]

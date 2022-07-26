@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class EqlFeaturesSequences
+	public sealed partial class EqlFeaturesSequences
 	{
 		[JsonInclude]
 		[JsonPropertyName("sequence_maxspan")]

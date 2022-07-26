@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class JobBlocked
+	public sealed partial class JobBlocked
 	{
 		[JsonInclude]
 		[JsonPropertyName("reason")]

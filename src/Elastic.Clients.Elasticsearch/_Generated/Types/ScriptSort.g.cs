@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ScriptSort : ISortOptionsVariant
+	public sealed partial class ScriptSort : ISortOptionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("mode")]
@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public ScriptBase Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -60,15 +60,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
 
-		private ScriptBase ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
 
@@ -96,30 +92,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ScriptSortDescriptor<TDocument> Script(ScriptBase script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public ScriptSortDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptSortDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
-
 		public ScriptSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
 		{
 			ModeValue = mode;
@@ -129,6 +101,12 @@ namespace Elastic.Clients.Elasticsearch
 		public ScriptSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
 		{
 			OrderValue = order;
+			return Self;
+		}
+
+		public ScriptSortDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script script)
+		{
+			ScriptValue = script;
 			return Self;
 		}
 
@@ -157,22 +135,6 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, NestedValue, options);
 			}
 
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (ModeValue is not null)
 			{
 				writer.WritePropertyName("mode");
@@ -185,6 +147,8 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, OrderValue, options);
 			}
 
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 			if (TypeValue is not null)
 			{
 				writer.WritePropertyName("type");
@@ -208,15 +172,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
 
-		private ScriptBase ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
 
@@ -244,30 +204,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ScriptSortDescriptor Script(ScriptBase script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public ScriptSortDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptSortDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
-
 		public ScriptSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
 		{
 			ModeValue = mode;
@@ -277,6 +213,12 @@ namespace Elastic.Clients.Elasticsearch
 		public ScriptSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
 		{
 			OrderValue = order;
+			return Self;
+		}
+
+		public ScriptSortDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
+		{
+			ScriptValue = script;
 			return Self;
 		}
 
@@ -305,22 +247,6 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, NestedValue, options);
 			}
 
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (ModeValue is not null)
 			{
 				writer.WritePropertyName("mode");
@@ -333,6 +259,8 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, OrderValue, options);
 			}
 
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 			if (TypeValue is not null)
 			{
 				writer.WritePropertyName("type");

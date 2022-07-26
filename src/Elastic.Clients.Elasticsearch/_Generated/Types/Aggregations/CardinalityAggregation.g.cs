@@ -30,90 +30,86 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "cardinality")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new CardinalityAggregation(aggName);
+			var variant = new CardinalityAggregation();
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("precision_threshold"))
+					var property = reader.GetString();
+					if (property == "execution_hint")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.PrecisionThreshold = value;
-						}
-
+						variant.ExecutionHint = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("rehash"))
+					if (property == "field")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Rehash = value;
-						}
-
+						variant.Field = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("field"))
+					if (property == "meta")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
-
+						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("script"))
+					if (property == "name")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Script = value;
-						}
+						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
 
+					if (property == "precision_threshold")
+					{
+						variant.PrecisionThreshold = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "rehash")
+					{
+						variant.Rehash = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "script")
+					{
+						variant.Script = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
-				{
-					if (reader.ValueTextEquals("meta"))
-					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
-					}
-				}
-			}
-
-			return agg;
+			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, CardinalityAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("cardinality");
-			writer.WriteStartObject();
+			if (value.ExecutionHint is not null)
+			{
+				writer.WritePropertyName("execution_hint");
+				JsonSerializer.Serialize(writer, value.ExecutionHint, options);
+			}
+
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Name))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(value.Name);
+			}
+
 			if (value.PrecisionThreshold.HasValue)
 			{
 				writer.WritePropertyName("precision_threshold");
@@ -126,12 +122,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteBooleanValue(value.Rehash.Value);
 			}
 
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
 			if (value.Script is not null)
 			{
 				writer.WritePropertyName("script");
@@ -139,27 +129,31 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(CardinalityAggregationConverter))]
-	public partial class CardinalityAggregation : MetricAggregationBase
+	public sealed partial class CardinalityAggregation : Aggregation
 	{
-		public CardinalityAggregation(string name, Field field) : base(name) => Field = field;
-		public CardinalityAggregation(string name) : base(name)
+		public CardinalityAggregation(string name, Field field) => Field = field;
+		public CardinalityAggregation(string name) => Name = name;
+		internal CardinalityAggregation()
 		{
 		}
+
+		public Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHint { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
 
 		public int? PrecisionThreshold { get; set; }
 
 		public bool? Rehash { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
 	public sealed partial class CardinalityAggregationDescriptor<TDocument> : SerializableDescriptorBase<CardinalityAggregationDescriptor<TDocument>>
@@ -169,11 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+		private Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHintValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
@@ -183,27 +173,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private bool? RehashValue { get; set; }
 
-		public CardinalityAggregationDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
-		public CardinalityAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
+		public CardinalityAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? executionHint)
 		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public CardinalityAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
+			ExecutionHintValue = executionHint;
 			return Self;
 		}
 
@@ -237,25 +211,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public CardinalityAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("cardinality");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
+			if (ExecutionHintValue is not null)
 			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
+				writer.WritePropertyName("execution_hint");
+				JsonSerializer.Serialize(writer, ExecutionHintValue, options);
 			}
 
 			if (FieldValue is not null)
@@ -276,6 +246,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteBooleanValue(RehashValue.Value);
 			}
 
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			writer.WriteEndObject();
 			if (MetaValue is not null)
 			{
@@ -294,11 +270,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+		private Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHintValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
@@ -308,27 +280,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private bool? RehashValue { get; set; }
 
-		public CardinalityAggregationDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
-		public CardinalityAggregationDescriptor Script(ScriptDescriptor descriptor)
+		public CardinalityAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? executionHint)
 		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public CardinalityAggregationDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
+			ExecutionHintValue = executionHint;
 			return Self;
 		}
 
@@ -368,25 +324,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public CardinalityAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("cardinality");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
+			if (ExecutionHintValue is not null)
 			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
+				writer.WritePropertyName("execution_hint");
+				JsonSerializer.Serialize(writer, ExecutionHintValue, options);
 			}
 
 			if (FieldValue is not null)
@@ -405,6 +357,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("rehash");
 				writer.WriteBooleanValue(RehashValue.Value);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			writer.WriteEndObject();

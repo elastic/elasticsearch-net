@@ -30,110 +30,68 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "inference")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new InferenceAggregation(aggName);
+			var variant = new InferenceAggregation();
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("inference_config"))
+					var property = reader.GetString();
+					if (property == "buckets_path")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.InferenceConfig = value;
-						}
-
+						variant.BucketsPath = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("model_id"))
+					if (property == "format")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Name>(ref reader, options);
-						if (value is not null)
-						{
-							agg.ModelId = value;
-						}
-
+						variant.Format = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("format"))
+					if (property == "gap_policy")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
-
+						variant.GapPolicy = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("gap_policy"))
+					if (property == "inference_config")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.GapPolicy = value;
-						}
-
+						variant.InferenceConfig = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer?>(ref reader, options);
 						continue;
 					}
 
-					if (reader.ValueTextEquals("buckets_path"))
+					if (property == "meta")
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.BucketsPath = value;
-						}
+						variant.Meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						continue;
+					}
 
+					if (property == "model_id")
+					{
+						variant.ModelId = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Name>(ref reader, options);
+						continue;
+					}
+
+					if (property == "name")
+					{
+						variant.Name = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 				}
 			}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
-				{
-					if (reader.ValueTextEquals("meta"))
-					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
-					}
-				}
-			}
-
-			return agg;
+			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, InferenceAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("inference");
-			writer.WriteStartObject();
-			if (value.InferenceConfig is not null)
+			if (value.BucketsPath is not null)
 			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, value.InferenceConfig, options);
+				writer.WritePropertyName("buckets_path");
+				JsonSerializer.Serialize(writer, value.BucketsPath, options);
 			}
 
-			writer.WritePropertyName("model_id");
-			JsonSerializer.Serialize(writer, value.ModelId, options);
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -146,17 +104,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.GapPolicy, options);
 			}
 
-			if (value.BucketsPath is not null)
+			if (value.InferenceConfig is not null)
 			{
-				writer.WritePropertyName("buckets_path");
-				JsonSerializer.Serialize(writer, value.BucketsPath, options);
+				writer.WritePropertyName("inference_config");
+				JsonSerializer.Serialize(writer, value.InferenceConfig, options);
 			}
 
-			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WritePropertyName("model_id");
+			JsonSerializer.Serialize(writer, value.ModelId, options);
+			if (!string.IsNullOrEmpty(value.Name))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(value.Name);
 			}
 
 			writer.WriteEndObject();
@@ -164,15 +129,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(InferenceAggregationConverter))]
-	public partial class InferenceAggregation : PipelineAggregationBase
+	public sealed partial class InferenceAggregation : Aggregation
 	{
-		public InferenceAggregation(string name) : base(name)
+		public InferenceAggregation(string name) => Name = name;
+		internal InferenceAggregation()
 		{
 		}
 
+		public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
+
+		public string? Format { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+
 		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfig { get; set; }
 
+		public Dictionary<string, object>? Meta { get; set; }
+
 		public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
+
+		public override string? Name { get; internal set; }
 	}
 
 	public sealed partial class InferenceAggregationDescriptor<TDocument> : SerializableDescriptorBase<InferenceAggregationDescriptor<TDocument>>

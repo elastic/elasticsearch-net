@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class StupidBackoffSmoothingModel : ISmoothingModelVariant
+	public sealed partial class StupidBackoffSmoothingModel : ISmoothingModelVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("discount")]
