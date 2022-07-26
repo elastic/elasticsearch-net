@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
 
-	public partial class MlDeleteDatafeedRequest : PlainRequestBase<MlDeleteDatafeedRequestParameters>
+	public sealed partial class MlDeleteDatafeedRequest : PlainRequestBase<MlDeleteDatafeedRequestParameters>
 	{
 		public MlDeleteDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
 		{

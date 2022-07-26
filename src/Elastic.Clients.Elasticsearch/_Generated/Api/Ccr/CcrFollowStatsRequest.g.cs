@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 	{
 	}
 
-	public partial class CcrFollowStatsRequest : PlainRequestBase<CcrFollowStatsRequestParameters>
+	public sealed partial class CcrFollowStatsRequest : PlainRequestBase<CcrFollowStatsRequestParameters>
 	{
 		public CcrFollowStatsRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

@@ -7,7 +7,7 @@ using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class CountRequest<TDocument> : CountRequest
+	public sealed partial class CountRequest<TDocument> : CountRequest
 	{
 		//protected CountRequest<TDocument> TypedSelf => this;
 

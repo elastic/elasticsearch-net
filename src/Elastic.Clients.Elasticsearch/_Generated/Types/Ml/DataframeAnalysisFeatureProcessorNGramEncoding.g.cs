@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalysisFeatureProcessorNGramEncoding : IDataframeAnalysisFeatureProcessorVariant
+	public sealed partial class DataframeAnalysisFeatureProcessorNGramEncoding : IDataframeAnalysisFeatureProcessorVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("custom")]

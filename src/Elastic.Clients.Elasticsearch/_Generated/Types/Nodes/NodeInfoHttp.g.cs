@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoHttp
+	public sealed partial class NodeInfoHttp
 	{
 		[JsonInclude]
 		[JsonPropertyName("bound_address")]

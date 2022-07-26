@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MultisearchBody
+	public sealed partial class MultisearchBody
 	{
 		[JsonInclude]
 		[JsonPropertyName("_source")]

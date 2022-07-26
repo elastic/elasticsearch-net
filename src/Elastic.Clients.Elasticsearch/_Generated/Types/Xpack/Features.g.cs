@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class Features
+	public sealed partial class Features
 	{
 		[JsonInclude]
 		[JsonPropertyName("aggregate_metric")]

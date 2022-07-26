@@ -24,8 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class DerivativeAggregate : SingleMetricAggregateBase
+	public sealed partial class DerivativeAggregate : Aggregate
 	{
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("normalized_value")]
 		public double? NormalizedValue { get; init; }
@@ -33,5 +37,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("normalized_value_as_string")]
 		public string? NormalizedValueAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public double? Value { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value_as_string")]
+		public string? ValueAsString { get; init; }
 	}
 }

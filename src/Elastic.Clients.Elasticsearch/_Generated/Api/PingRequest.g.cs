@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public partial class PingRequest : PlainRequestBase<PingRequestParameters>
+	public sealed partial class PingRequest : PlainRequestBase<PingRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;

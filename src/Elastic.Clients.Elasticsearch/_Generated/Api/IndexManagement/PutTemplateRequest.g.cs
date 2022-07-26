@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class PutTemplateRequest : PlainRequestBase<PutTemplateRequestParameters>
+	public sealed partial class PutTemplateRequest : PlainRequestBase<PutTemplateRequestParameters>
 	{
 		public PutTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{

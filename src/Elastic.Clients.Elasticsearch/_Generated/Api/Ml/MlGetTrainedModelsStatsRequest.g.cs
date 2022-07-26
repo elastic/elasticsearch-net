@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 	}
 
-	public partial class MlGetTrainedModelsStatsRequest : PlainRequestBase<MlGetTrainedModelsStatsRequestParameters>
+	public sealed partial class MlGetTrainedModelsStatsRequest : PlainRequestBase<MlGetTrainedModelsStatsRequestParameters>
 	{
 		public MlGetTrainedModelsStatsRequest()
 		{

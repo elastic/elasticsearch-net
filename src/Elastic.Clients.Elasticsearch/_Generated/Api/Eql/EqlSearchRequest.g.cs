@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	public partial class EqlSearchRequest : PlainRequestBase<EqlSearchRequestParameters>
+	public sealed partial class EqlSearchRequest : PlainRequestBase<EqlSearchRequestParameters>
 	{
 		public EqlSearchRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

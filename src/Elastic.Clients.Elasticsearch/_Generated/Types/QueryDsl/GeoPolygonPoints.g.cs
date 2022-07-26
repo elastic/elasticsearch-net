@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class GeoPolygonPoints
+	public sealed partial class GeoPolygonPoints
 	{
 		[JsonInclude]
 		[JsonPropertyName("points")]

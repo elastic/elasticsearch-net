@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ContextMethodParam
+	public sealed partial class ContextMethodParam
 	{
 		[JsonInclude]
 		[JsonPropertyName("name")]

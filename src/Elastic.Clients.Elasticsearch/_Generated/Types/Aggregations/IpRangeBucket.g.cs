@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	[JsonConverter(typeof(IpRangeBucketConverter))]
 	public sealed partial class IpRangeBucket : AggregateDictionary
 	{
-		public IpRangeBucket(IReadOnlyDictionary<string, AggregateBase> backingDictionary) : base(backingDictionary)
+		public IpRangeBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
 		{
 		}
 
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-			var subAggs = new Dictionary<string, AggregateBase>(); // TODO - Optimise this and only create if we need it.
+			var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
 			long docCount = default;
 			string? from = default;
 			string? to = default;

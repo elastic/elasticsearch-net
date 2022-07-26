@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class KuromojiReadingFormTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class KuromojiReadingFormTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -32,6 +32,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("use_romaji")]
 		public bool UseRomaji { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class KuromojiReadingFormTokenFilterDescriptor : SerializableDescriptorBase<KuromojiReadingFormTokenFilterDescriptor>, IBuildableDescriptor<KuromojiReadingFormTokenFilter>

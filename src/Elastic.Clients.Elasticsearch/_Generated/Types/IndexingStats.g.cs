@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class IndexingStats
+	public sealed partial class IndexingStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("delete_current")]

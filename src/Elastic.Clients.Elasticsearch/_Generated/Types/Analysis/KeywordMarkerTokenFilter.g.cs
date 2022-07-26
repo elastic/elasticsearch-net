@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class KeywordMarkerTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class KeywordMarkerTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("ignore_case")]
@@ -45,6 +45,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "keyword_marker";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class KeywordMarkerTokenFilterDescriptor : SerializableDescriptorBase<KeywordMarkerTokenFilterDescriptor>, IBuildableDescriptor<KeywordMarkerTokenFilter>

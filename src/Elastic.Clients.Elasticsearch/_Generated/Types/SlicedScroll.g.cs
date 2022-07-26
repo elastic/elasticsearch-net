@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class SlicedScroll
+	public sealed partial class SlicedScroll
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlStopDatafeedRequest : PlainRequestBase<MlStopDatafeedRequestParameters>
+	public sealed partial class MlStopDatafeedRequest : PlainRequestBase<MlStopDatafeedRequestParameters>
 	{
 		public MlStopDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
 		{

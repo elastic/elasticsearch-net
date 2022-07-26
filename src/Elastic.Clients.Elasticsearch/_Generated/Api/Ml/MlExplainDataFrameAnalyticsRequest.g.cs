@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlExplainDataFrameAnalyticsRequest : PlainRequestBase<MlExplainDataFrameAnalyticsRequestParameters>
+	public sealed partial class MlExplainDataFrameAnalyticsRequest : PlainRequestBase<MlExplainDataFrameAnalyticsRequestParameters>
 	{
 		public MlExplainDataFrameAnalyticsRequest()
 		{
@@ -91,6 +91,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
+		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer? AnalysisValue { get; set; }
+
+		private DataframeAnalysisContainerDescriptor<TDocument> AnalysisDescriptor { get; set; }
+
+		private Action<DataframeAnalysisContainerDescriptor<TDocument>> AnalysisDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination? DestValue { get; set; }
 
 		private DataframeAnalyticsDestinationDescriptor<TDocument> DestDescriptor { get; set; }
@@ -105,12 +111,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private bool? AllowLazyStartValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer? AnalysisValue { get; set; }
-
-		private DataframeAnalysisContainerDescriptor AnalysisDescriptor { get; set; }
-
-		private Action<DataframeAnalysisContainerDescriptor> AnalysisDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFieldsValue { get; set; }
 
 		private DataframeAnalysisAnalyzedFieldsDescriptor AnalyzedFieldsDescriptor { get; set; }
@@ -122,6 +122,30 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private int? MaxNumThreadsValue { get; set; }
 
 		private string? ModelMemoryLimitValue { get; set; }
+
+		public MlExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer? analysis)
+		{
+			AnalysisDescriptor = null;
+			AnalysisDescriptorAction = null;
+			AnalysisValue = analysis;
+			return Self;
+		}
+
+		public MlExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(DataframeAnalysisContainerDescriptor<TDocument> descriptor)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = descriptor;
+			return Self;
+		}
+
+		public MlExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Action<DataframeAnalysisContainerDescriptor<TDocument>> configure)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptor = null;
+			AnalysisDescriptorAction = configure;
+			return Self;
+		}
 
 		public MlExplainDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination? dest)
 		{
@@ -177,30 +201,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer? analysis)
-		{
-			AnalysisDescriptor = null;
-			AnalysisDescriptorAction = null;
-			AnalysisValue = analysis;
-			return Self;
-		}
-
-		public MlExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(DataframeAnalysisContainerDescriptor descriptor)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
-			AnalysisDescriptor = descriptor;
-			return Self;
-		}
-
-		public MlExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Action<DataframeAnalysisContainerDescriptor> configure)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptor = null;
-			AnalysisDescriptorAction = configure;
-			return Self;
-		}
-
 		public MlExplainDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? analyzedFields)
 		{
 			AnalyzedFieldsDescriptor = null;
@@ -246,6 +246,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (AnalysisDescriptor is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
+			}
+			else if (AnalysisDescriptorAction is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, new DataframeAnalysisContainerDescriptor<TDocument>(AnalysisDescriptorAction), options);
+			}
+			else if (AnalysisValue is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisValue, options);
+			}
+
 			if (DestDescriptor is not null)
 			{
 				writer.WritePropertyName("dest");
@@ -282,22 +298,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			{
 				writer.WritePropertyName("allow_lazy_start");
 				writer.WriteBooleanValue(AllowLazyStartValue.Value);
-			}
-
-			if (AnalysisDescriptor is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
-			}
-			else if (AnalysisDescriptorAction is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, new DataframeAnalysisContainerDescriptor(AnalysisDescriptorAction), options);
-			}
-			else if (AnalysisValue is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, AnalysisValue, options);
 			}
 
 			if (AnalyzedFieldsDescriptor is not null)
@@ -354,6 +354,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
+		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer? AnalysisValue { get; set; }
+
+		private DataframeAnalysisContainerDescriptor AnalysisDescriptor { get; set; }
+
+		private Action<DataframeAnalysisContainerDescriptor> AnalysisDescriptorAction { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination? DestValue { get; set; }
 
 		private DataframeAnalyticsDestinationDescriptor DestDescriptor { get; set; }
@@ -368,12 +374,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private bool? AllowLazyStartValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer? AnalysisValue { get; set; }
-
-		private DataframeAnalysisContainerDescriptor AnalysisDescriptor { get; set; }
-
-		private Action<DataframeAnalysisContainerDescriptor> AnalysisDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFieldsValue { get; set; }
 
 		private DataframeAnalysisAnalyzedFieldsDescriptor AnalyzedFieldsDescriptor { get; set; }
@@ -385,6 +385,30 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private int? MaxNumThreadsValue { get; set; }
 
 		private string? ModelMemoryLimitValue { get; set; }
+
+		public MlExplainDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer? analysis)
+		{
+			AnalysisDescriptor = null;
+			AnalysisDescriptorAction = null;
+			AnalysisValue = analysis;
+			return Self;
+		}
+
+		public MlExplainDataFrameAnalyticsRequestDescriptor Analysis(DataframeAnalysisContainerDescriptor descriptor)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = descriptor;
+			return Self;
+		}
+
+		public MlExplainDataFrameAnalyticsRequestDescriptor Analysis(Action<DataframeAnalysisContainerDescriptor> configure)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptor = null;
+			AnalysisDescriptorAction = configure;
+			return Self;
+		}
 
 		public MlExplainDataFrameAnalyticsRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination? dest)
 		{
@@ -440,30 +464,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlExplainDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer? analysis)
-		{
-			AnalysisDescriptor = null;
-			AnalysisDescriptorAction = null;
-			AnalysisValue = analysis;
-			return Self;
-		}
-
-		public MlExplainDataFrameAnalyticsRequestDescriptor Analysis(DataframeAnalysisContainerDescriptor descriptor)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
-			AnalysisDescriptor = descriptor;
-			return Self;
-		}
-
-		public MlExplainDataFrameAnalyticsRequestDescriptor Analysis(Action<DataframeAnalysisContainerDescriptor> configure)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptor = null;
-			AnalysisDescriptorAction = configure;
-			return Self;
-		}
-
 		public MlExplainDataFrameAnalyticsRequestDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? analyzedFields)
 		{
 			AnalyzedFieldsDescriptor = null;
@@ -509,6 +509,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (AnalysisDescriptor is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
+			}
+			else if (AnalysisDescriptorAction is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, new DataframeAnalysisContainerDescriptor(AnalysisDescriptorAction), options);
+			}
+			else if (AnalysisValue is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisValue, options);
+			}
+
 			if (DestDescriptor is not null)
 			{
 				writer.WritePropertyName("dest");
@@ -545,22 +561,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			{
 				writer.WritePropertyName("allow_lazy_start");
 				writer.WriteBooleanValue(AllowLazyStartValue.Value);
-			}
-
-			if (AnalysisDescriptor is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
-			}
-			else if (AnalysisDescriptorAction is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, new DataframeAnalysisContainerDescriptor(AnalysisDescriptorAction), options);
-			}
-			else if (AnalysisValue is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, AnalysisValue, options);
 			}
 
 			if (AnalyzedFieldsDescriptor is not null)

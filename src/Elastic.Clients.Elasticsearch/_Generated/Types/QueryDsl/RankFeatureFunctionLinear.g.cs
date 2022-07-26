@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class RankFeatureFunctionLinear : RankFeatureFunction
+	public sealed partial class RankFeatureFunctionLinear
 	{
 	}
 

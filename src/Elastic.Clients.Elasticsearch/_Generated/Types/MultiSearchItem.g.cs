@@ -24,10 +24,62 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MultiSearchItem<TDocument> : ResponseBody<TDocument>
+	public sealed partial class MultiSearchItem<TDocument>
 	{
+		[JsonInclude]
+		[JsonPropertyName("_clusters")]
+		public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_scroll_id")]
+		public Elastic.Clients.Elasticsearch.ScrollId? ScrollId { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_shards")]
+		public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("aggregations")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("hits")]
+		public Elastic.Clients.Elasticsearch.HitsMetadata<TDocument> HitsMetadata { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_score")]
+		public double? MaxScore { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("num_reduce_phases")]
+		public long? NumReducePhases { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("pit_id")]
+		public string? PitId { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("profile")]
+		public Elastic.Clients.Elasticsearch.Profile? Profile { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("status")]
 		public int? Status { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("terminated_early")]
+		public bool? TerminatedEarly { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("timed_out")]
+		public bool TimedOut { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("took")]
+		public long Took { get; init; }
 	}
 }

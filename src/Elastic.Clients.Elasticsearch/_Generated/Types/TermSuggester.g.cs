@@ -24,8 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class TermSuggester : SuggesterBase, IFieldSuggesterVariant
+	public sealed partial class TermSuggester : IFieldSuggesterVariant
 	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("lowercase_terms")]
 		public bool? LowercaseTerms { get; set; }
@@ -57,6 +65,10 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("shard_size")]
 		public int? ShardSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]

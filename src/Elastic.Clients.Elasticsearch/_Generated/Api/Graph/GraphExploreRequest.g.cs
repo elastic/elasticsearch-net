@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>
+	public sealed partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>
 	{
 		public GraphExploreRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

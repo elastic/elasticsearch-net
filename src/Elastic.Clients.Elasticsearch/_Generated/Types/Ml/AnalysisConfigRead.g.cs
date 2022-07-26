@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class AnalysisConfigRead
+	public sealed partial class AnalysisConfigRead
 	{
 		[JsonInclude]
 		[JsonPropertyName("bucket_span")]

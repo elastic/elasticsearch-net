@@ -150,13 +150,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(WeightedAverageAggregationConverter))]
-	public partial class WeightedAverageAggregation : AggregationBase
+	public sealed partial class WeightedAverageAggregation : Aggregation
 	{
-		public WeightedAverageAggregation(string name) : base(name)
+		public WeightedAverageAggregation(string name) => Name = name;
+		internal WeightedAverageAggregation()
 		{
 		}
 
 		public string? Format { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
 
 		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Value { get; set; }
 

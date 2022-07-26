@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Migration
 	{
 	}
 
-	public partial class MigrationDeprecationsRequest : PlainRequestBase<MigrationDeprecationsRequestParameters>
+	public sealed partial class MigrationDeprecationsRequest : PlainRequestBase<MigrationDeprecationsRequestParameters>
 	{
 		public MigrationDeprecationsRequest()
 		{

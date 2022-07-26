@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class StopTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class StopTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("ignore_case")]
@@ -46,6 +46,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "stop";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class StopTokenFilterDescriptor : SerializableDescriptorBase<StopTokenFilterDescriptor>, IBuildableDescriptor<StopTokenFilter>

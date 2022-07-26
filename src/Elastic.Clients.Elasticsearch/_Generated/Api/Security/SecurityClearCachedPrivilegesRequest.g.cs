@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecurityClearCachedPrivilegesRequest : PlainRequestBase<SecurityClearCachedPrivilegesRequestParameters>
+	public sealed partial class SecurityClearCachedPrivilegesRequest : PlainRequestBase<SecurityClearCachedPrivilegesRequestParameters>
 	{
 		public SecurityClearCachedPrivilegesRequest(Elastic.Clients.Elasticsearch.Name application) : base(r => r.Required("application", application))
 		{

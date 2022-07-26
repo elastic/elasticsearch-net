@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 	}
 
-	public partial class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>
+	public sealed partial class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>
 	{
 		public IndexRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
 		{

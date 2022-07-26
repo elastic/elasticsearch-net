@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class CommandAllocatePrimaryAction
+	public sealed partial class CommandAllocatePrimaryAction
 	{
 		[JsonInclude]
 		[JsonPropertyName("accept_data_loss")]

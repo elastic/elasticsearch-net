@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					JsonSerializer.Serialize(writer, descriptor, options);
 				};
 
-		public static implicit operator AggregationContainer(AggregationBase aggregator)
+		public static implicit operator AggregationContainer(Aggregation aggregator)
 		{
 			if (aggregator == null)
 				return null;
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 			//aggregator.WrapInContainer(container);
 
-			var bucket = aggregator as BucketAggregationBase;
+			//var bucket = aggregator as BucketAggregationBase;
 
 			//container.Aggregations = bucket?.Aggregations;
 

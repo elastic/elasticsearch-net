@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 
-	public partial class SecurityPutUserRequest : PlainRequestBase<SecurityPutUserRequestParameters>
+	public sealed partial class SecurityPutUserRequest : PlainRequestBase<SecurityPutUserRequestParameters>
 	{
 		public SecurityPutUserRequest(Elastic.Clients.Elasticsearch.Username username) : base(r => r.Required("username", username))
 		{

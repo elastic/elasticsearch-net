@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class TransformProgress
+	public sealed partial class TransformProgress
 	{
 		[JsonInclude]
 		[JsonPropertyName("docs_indexed")]

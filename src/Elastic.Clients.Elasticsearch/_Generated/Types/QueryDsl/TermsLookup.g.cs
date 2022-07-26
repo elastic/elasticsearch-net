@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class TermsLookup
+	public sealed partial class TermsLookup
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]

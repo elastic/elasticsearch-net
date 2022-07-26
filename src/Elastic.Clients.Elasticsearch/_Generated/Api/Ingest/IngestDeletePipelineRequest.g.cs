@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class IngestDeletePipelineRequest : PlainRequestBase<IngestDeletePipelineRequestParameters>
+	public sealed partial class IngestDeletePipelineRequest : PlainRequestBase<IngestDeletePipelineRequestParameters>
 	{
 		public IngestDeletePipelineRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

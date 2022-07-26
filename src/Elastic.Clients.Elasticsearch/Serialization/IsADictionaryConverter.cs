@@ -54,3 +54,7 @@ internal sealed class IsADictionaryConverter : JsonConverterFactory
 }
 
 
+internal interface IUnionVerifiable
+{
+	bool IsSuccessful { get; }
+}

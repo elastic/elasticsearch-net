@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeBufferPool
+	public sealed partial class NodeBufferPool
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 	{
 	}
 
-	public partial class SqlClearCursorRequest : PlainRequestBase<SqlClearCursorRequestParameters>
+	public sealed partial class SqlClearCursorRequest : PlainRequestBase<SqlClearCursorRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Name? SlmPolicyFilter { get => Q<Elastic.Clients.Elasticsearch.Name?>("slm_policy_filter"); set => Q("slm_policy_filter", value); }
 	}
 
-	public partial class GetSnapshotRequest : PlainRequestBase<GetSnapshotRequestParameters>
+	public sealed partial class GetSnapshotRequest : PlainRequestBase<GetSnapshotRequestParameters>
 	{
 		public GetSnapshotRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class TrainedModelDeploymentNodesStats
+	public sealed partial class TrainedModelDeploymentNodesStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("average_inference_time_ms")]

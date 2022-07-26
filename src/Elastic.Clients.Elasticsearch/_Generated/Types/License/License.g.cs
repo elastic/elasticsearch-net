@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.License
 {
-	public partial class License
+	public sealed partial class License
 	{
 		[JsonInclude]
 		[JsonPropertyName("expiry_date_in_millis")]

@@ -24,8 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class ScriptedMetricAggregate : AggregateBase
+	public sealed partial class ScriptedMetricAggregate : Aggregate
 	{
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("value")]
 		public object Value { get; init; }

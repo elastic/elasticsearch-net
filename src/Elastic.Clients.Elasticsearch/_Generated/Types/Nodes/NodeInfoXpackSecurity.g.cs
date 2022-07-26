@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoXpackSecurity
+	public sealed partial class NodeInfoXpackSecurity
 	{
 		[JsonInclude]
 		[JsonPropertyName("authc")]

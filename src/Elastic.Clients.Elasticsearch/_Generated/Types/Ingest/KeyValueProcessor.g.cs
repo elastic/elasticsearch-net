@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class KeyValueProcessor : ProcessorBase, IProcessorVariant
+	public sealed partial class KeyValueProcessor : IProcessorVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("exclude_keys")]
@@ -39,6 +39,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string FieldSplit { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("if")]
+		public string? If { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_failure")]
+		public bool? IgnoreFailure { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("ignore_missing")]
 		public bool? IgnoreMissing { get; set; }
 
@@ -47,12 +55,20 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IEnumerable<string>? IncludeKeys { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("on_failure")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailure { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("prefix")]
 		public string? Prefix { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("strip_brackets")]
 		public bool? StripBrackets { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tag")]
+		public string? Tag { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("target_field")]

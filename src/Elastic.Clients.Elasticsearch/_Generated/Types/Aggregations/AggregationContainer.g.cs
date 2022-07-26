@@ -25,10 +25,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	[JsonConverter(typeof(AggregationContainerConverter))]
-	public partial class AggregationContainer
+	public sealed partial class AggregationContainer
 	{
-		public AggregationContainer(AggregationBase variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal AggregationBase Variant { get; }
+		public AggregationContainer(IAggregation variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal IAggregation Variant { get; }
 	}
 
 	internal sealed class AggregationContainerConverter : JsonConverter<AggregationContainer>
@@ -290,7 +290,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		public AggregationContainerDescriptor<TDocument> AdjacencyMatrix(string name, Action<AdjacencyMatrixAggregationDescriptor<TDocument>> configure)
+		public AggregationContainerDescriptor<TDocument> AdjacencyMatrix(string name, Action<AdjacencyMatrixAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("adjacency_matrix", configure));
 		}
@@ -315,12 +315,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("cardinality", configure));
 		}
 
-		public AggregationContainerDescriptor<TDocument> Children(string name, Action<ChildrenAggregationDescriptor<TDocument>> configure)
+		public AggregationContainerDescriptor<TDocument> Children(string name, Action<ChildrenAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("children", configure));
 		}
 
-		public AggregationContainerDescriptor<TDocument> Composite(string name, Action<CompositeAggregationDescriptor<TDocument>> configure)
+		public AggregationContainerDescriptor<TDocument> Composite(string name, Action<CompositeAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("composite", configure));
 		}
@@ -355,12 +355,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats_bucket", configure));
 		}
 
-		public AggregationContainerDescriptor<TDocument> Filters(string name, Action<FiltersAggregationDescriptor<TDocument>> configure)
+		public AggregationContainerDescriptor<TDocument> Filters(string name, Action<FiltersAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
 		}
 
-		public AggregationContainerDescriptor<TDocument> Global(string name, Action<GlobalAggregationDescriptor<TDocument>> configure)
+		public AggregationContainerDescriptor<TDocument> Global(string name, Action<GlobalAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("global", configure));
 		}
@@ -415,7 +415,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("nested", configure));
 		}
 
-		public AggregationContainerDescriptor<TDocument> Parent(string name, Action<ParentAggregationDescriptor<TDocument>> configure)
+		public AggregationContainerDescriptor<TDocument> Parent(string name, Action<ParentAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("parent", configure));
 		}
@@ -440,7 +440,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("reverse_nested", configure));
 		}
 
-		public AggregationContainerDescriptor<TDocument> Sampler(string name, Action<SamplerAggregationDescriptor<TDocument>> configure)
+		public AggregationContainerDescriptor<TDocument> Sampler(string name, Action<SamplerAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("sampler", configure));
 		}
@@ -518,11 +518,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("adjacency_matrix", configure));
 		}
 
-		public AggregationContainerDescriptor AdjacencyMatrix<TDocument>(string name, Action<AdjacencyMatrixAggregationDescriptor<TDocument>> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("adjacency_matrix", configure));
-		}
-
 		public AggregationContainerDescriptor AutoDateHistogram(string name, Action<AutoDateHistogramAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("auto_date_histogram", configure));
@@ -568,17 +563,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("children", configure));
 		}
 
-		public AggregationContainerDescriptor Children<TDocument>(string name, Action<ChildrenAggregationDescriptor<TDocument>> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("children", configure));
-		}
-
 		public AggregationContainerDescriptor Composite(string name, Action<CompositeAggregationDescriptor> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("composite", configure));
-		}
-
-		public AggregationContainerDescriptor Composite<TDocument>(string name, Action<CompositeAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("composite", configure));
 		}
@@ -633,17 +618,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
 		}
 
-		public AggregationContainerDescriptor Filters<TDocument>(string name, Action<FiltersAggregationDescriptor<TDocument>> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
-		}
-
 		public AggregationContainerDescriptor Global(string name, Action<GlobalAggregationDescriptor> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("global", configure));
-		}
-
-		public AggregationContainerDescriptor Global<TDocument>(string name, Action<GlobalAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("global", configure));
 		}
@@ -753,11 +728,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("parent", configure));
 		}
 
-		public AggregationContainerDescriptor Parent<TDocument>(string name, Action<ParentAggregationDescriptor<TDocument>> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("parent", configure));
-		}
-
 		public AggregationContainerDescriptor PercentilesBucket(string name, Action<PercentilesBucketAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("percentiles_bucket", configure));
@@ -794,11 +764,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		public AggregationContainerDescriptor Sampler(string name, Action<SamplerAggregationDescriptor> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("sampler", configure));
-		}
-
-		public AggregationContainerDescriptor Sampler<TDocument>(string name, Action<SamplerAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("sampler", configure));
 		}

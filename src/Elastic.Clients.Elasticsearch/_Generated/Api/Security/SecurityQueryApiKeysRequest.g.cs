@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecurityQueryApiKeysRequest : PlainRequestBase<SecurityQueryApiKeysRequestParameters>
+	public sealed partial class SecurityQueryApiKeysRequest : PlainRequestBase<SecurityQueryApiKeysRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityQueryApiKeys;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

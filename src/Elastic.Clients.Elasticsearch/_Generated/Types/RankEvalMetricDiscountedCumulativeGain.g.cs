@@ -24,8 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RankEvalMetricDiscountedCumulativeGain : RankEvalMetricBase
+	public sealed partial class RankEvalMetricDiscountedCumulativeGain
 	{
+		[JsonInclude]
+		[JsonPropertyName("k")]
+		public int? k { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("normalize")]
 		public bool? Normalize { get; set; }

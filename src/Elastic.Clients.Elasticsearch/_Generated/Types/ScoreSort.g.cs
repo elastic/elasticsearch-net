@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ScoreSort : ISortOptionsVariant
+	public sealed partial class ScoreSort : ISortOptionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("order")]
