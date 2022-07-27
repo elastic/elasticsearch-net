@@ -137,7 +137,7 @@ public abstract class SerializerTestBase
 		return serialisedJson;
 	}
 
-	public static async Task<T> RoundTripAndVerifyJson<T>(T data)
+	public static async Task<T> RoundTripAndVerifyJsonAsync<T>(T data)
 	{
 		var serialisedJson = await SerializeAndGetJsonStringAsync(data);
 		await Verifier.VerifyJson(serialisedJson);
