@@ -6,7 +6,7 @@ using Tests.Domain;
 
 namespace Tests.Serialization;
 
-public class SearchRequestWithAggsSerializationTests : SerializerTestBase
+public class SearchRequestDewscriptorWithAggregationsSerializationTests : SerializerTestBase
 {
 	private const string SearchJson = @"{""aggregations"":{""my-terms-agg"":{""terms"":{""field"":""name""}}}}";
 

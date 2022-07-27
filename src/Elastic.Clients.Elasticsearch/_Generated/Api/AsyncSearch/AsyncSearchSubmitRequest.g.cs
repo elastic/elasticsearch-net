@@ -124,6 +124,391 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 	}
 
+	internal sealed class AsyncSearchSubmitRequestConverter : JsonConverter<AsyncSearchSubmitRequest>
+	{
+		public override AsyncSearchSubmitRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new AsyncSearchSubmitRequest();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "aggregations" || property == "aggs")
+					{
+						variant.Aggregations = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "collapse")
+					{
+						variant.Collapse = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.FieldCollapse?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "explain")
+					{
+						variant.Explain = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "from")
+					{
+						variant.From = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "highlight")
+					{
+						variant.Highlight = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Highlight?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "track_total_hits")
+					{
+						variant.TrackTotalHits = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TrackHits?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "indices_boost")
+					{
+						variant.IndicesBoost = JsonSerializer.Deserialize<IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "docvalue_fields")
+					{
+						variant.DocvalueFields = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "min_score")
+					{
+						variant.MinScore = JsonSerializer.Deserialize<double?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "post_filter")
+					{
+						variant.PostFilter = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "profile")
+					{
+						variant.Profile = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "query")
+					{
+						variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "rescore")
+					{
+						variant.Rescore = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Rescore>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "script_fields")
+					{
+						variant.ScriptFields = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "search_after")
+					{
+						variant.SearchAfter = JsonSerializer.Deserialize<IEnumerable<object>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "size")
+					{
+						variant.Size = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "slice")
+					{
+						variant.Slice = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SlicedScroll?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "sort")
+					{
+						variant.Sort = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "_source")
+					{
+						variant.Source = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SourceConfig?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "fields")
+					{
+						variant.Fields = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "suggest")
+					{
+						variant.Suggest = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Suggester?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "terminate_after")
+					{
+						variant.TerminateAfter = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "timeout")
+					{
+						variant.Timeout = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "track_scores")
+					{
+						variant.TrackScores = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "version")
+					{
+						variant.Version = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "seq_no_primary_term")
+					{
+						variant.SeqNoPrimaryTerm = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "stored_fields")
+					{
+						variant.StoredFields = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "pit")
+					{
+						variant.Pit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.PointInTimeReference?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "runtime_mappings")
+					{
+						variant.RuntimeMappings = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "stats")
+					{
+						variant.Stats = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, AsyncSearchSubmitRequest value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Aggregations is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, value.Aggregations, options);
+			}
+
+			if (value.Collapse is not null)
+			{
+				writer.WritePropertyName("collapse");
+				JsonSerializer.Serialize(writer, value.Collapse, options);
+			}
+
+			if (value.Explain.HasValue)
+			{
+				writer.WritePropertyName("explain");
+				writer.WriteBooleanValue(value.Explain.Value);
+			}
+
+			if (value.From.HasValue)
+			{
+				writer.WritePropertyName("from");
+				writer.WriteNumberValue(value.From.Value);
+			}
+
+			if (value.Highlight is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, value.Highlight, options);
+			}
+
+			if (value.TrackTotalHits is not null)
+			{
+				writer.WritePropertyName("track_total_hits");
+				JsonSerializer.Serialize(writer, value.TrackTotalHits, options);
+			}
+
+			if (value.IndicesBoost is not null)
+			{
+				writer.WritePropertyName("indices_boost");
+				JsonSerializer.Serialize(writer, value.IndicesBoost, options);
+			}
+
+			if (value.DocvalueFields is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, value.DocvalueFields, options);
+			}
+
+			if (value.MinScore.HasValue)
+			{
+				writer.WritePropertyName("min_score");
+				writer.WriteNumberValue(value.MinScore.Value);
+			}
+
+			if (value.PostFilter is not null)
+			{
+				writer.WritePropertyName("post_filter");
+				JsonSerializer.Serialize(writer, value.PostFilter, options);
+			}
+
+			if (value.Profile.HasValue)
+			{
+				writer.WritePropertyName("profile");
+				writer.WriteBooleanValue(value.Profile.Value);
+			}
+
+			if (value.Query is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.Query, options);
+			}
+
+			if (value.Rescore is not null)
+			{
+				writer.WritePropertyName("rescore");
+				JsonSerializer.Serialize(writer, value.Rescore, options);
+			}
+
+			if (value.ScriptFields is not null)
+			{
+				writer.WritePropertyName("script_fields");
+				JsonSerializer.Serialize(writer, value.ScriptFields, options);
+			}
+
+			if (value.SearchAfter is not null)
+			{
+				writer.WritePropertyName("search_after");
+				JsonSerializer.Serialize(writer, value.SearchAfter, options);
+			}
+
+			if (value.Size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value.Size.Value);
+			}
+
+			if (value.Slice is not null)
+			{
+				writer.WritePropertyName("slice");
+				JsonSerializer.Serialize(writer, value.Slice, options);
+			}
+
+			if (value.Sort is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, value.Sort, options);
+			}
+
+			if (value.Source is not null)
+			{
+				writer.WritePropertyName("_source");
+				JsonSerializer.Serialize(writer, value.Source, options);
+			}
+
+			if (value.Fields is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, value.Fields, options);
+			}
+
+			if (value.Suggest is not null)
+			{
+				writer.WritePropertyName("suggest");
+				JsonSerializer.Serialize(writer, value.Suggest, options);
+			}
+
+			if (value.TerminateAfter.HasValue)
+			{
+				writer.WritePropertyName("terminate_after");
+				writer.WriteNumberValue(value.TerminateAfter.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.Timeout))
+			{
+				writer.WritePropertyName("timeout");
+				writer.WriteStringValue(value.Timeout);
+			}
+
+			if (value.TrackScores.HasValue)
+			{
+				writer.WritePropertyName("track_scores");
+				writer.WriteBooleanValue(value.TrackScores.Value);
+			}
+
+			if (value.Version.HasValue)
+			{
+				writer.WritePropertyName("version");
+				writer.WriteBooleanValue(value.Version.Value);
+			}
+
+			if (value.SeqNoPrimaryTerm.HasValue)
+			{
+				writer.WritePropertyName("seq_no_primary_term");
+				writer.WriteBooleanValue(value.SeqNoPrimaryTerm.Value);
+			}
+
+			if (value.StoredFields is not null)
+			{
+				writer.WritePropertyName("stored_fields");
+				JsonSerializer.Serialize(writer, value.StoredFields, options);
+			}
+
+			if (value.Pit is not null)
+			{
+				writer.WritePropertyName("pit");
+				JsonSerializer.Serialize(writer, value.Pit, options);
+			}
+
+			if (value.RuntimeMappings is not null)
+			{
+				writer.WritePropertyName("runtime_mappings");
+				JsonSerializer.Serialize(writer, value.RuntimeMappings, options);
+			}
+
+			if (value.Stats is not null)
+			{
+				writer.WritePropertyName("stats");
+				JsonSerializer.Serialize(writer, value.Stats, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(AsyncSearchSubmitRequestConverter))]
 	public partial class AsyncSearchSubmitRequest : PlainRequestBase<AsyncSearchSubmitRequestParameters>
 	{
 		public AsyncSearchSubmitRequest()
