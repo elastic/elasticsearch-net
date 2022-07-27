@@ -91,6 +91,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 						continue;
 					}
+
+					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
+					{
+						var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Aggregations = value;
+						}
+
+						continue;
+					}
 				}
 			}
 
@@ -127,6 +138,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Meta, options);
 			}
 
+			if (value.Aggregations is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, value.Aggregations, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -141,6 +158,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public Dictionary<string, object>? After { get; set; }
 
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
 		public Dictionary<string, object>? Meta { get; set; }
 
 		public override string? Name { get; internal set; }
@@ -150,12 +169,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 	}
 
-	public sealed partial class CompositeAggregationDescriptor : SerializableDescriptorBase<CompositeAggregationDescriptor>
+	public sealed partial class CompositeAggregationDescriptor<TDocument> : SerializableDescriptorBase<CompositeAggregationDescriptor<TDocument>>
 	{
-		internal CompositeAggregationDescriptor(Action<CompositeAggregationDescriptor> configure) => configure.Invoke(this);
+		internal CompositeAggregationDescriptor(Action<CompositeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public CompositeAggregationDescriptor() : base()
 		{
 		}
+
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
+
+		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
 		private Dictionary<string, object>? AfterValue { get; set; }
 
@@ -164,6 +189,149 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private int? SizeValue { get; set; }
 
 		private IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
+
+		public CompositeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		{
+			AggregationsDescriptor = null;
+			AggregationsDescriptorAction = null;
+			AggregationsValue = aggregations;
+			return Self;
+		}
+
+		public CompositeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = descriptor;
+			return Self;
+		}
+
+		public CompositeAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptor = null;
+			AggregationsDescriptorAction = configure;
+			return Self;
+		}
+
+		public CompositeAggregationDescriptor<TDocument> After(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			AfterValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public CompositeAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public CompositeAggregationDescriptor<TDocument> Size(int? size)
+		{
+			SizeValue = size;
+			return Self;
+		}
+
+		public CompositeAggregationDescriptor<TDocument> Sources(IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources)
+		{
+			SourcesValue = sources;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("composite");
+			writer.WriteStartObject();
+			if (AfterValue is not null)
+			{
+				writer.WritePropertyName("after");
+				JsonSerializer.Serialize(writer, AfterValue, options);
+			}
+
+			if (SizeValue.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SourcesValue is not null)
+			{
+				writer.WritePropertyName("sources");
+				JsonSerializer.Serialize(writer, SourcesValue, options);
+			}
+
+			writer.WriteEndObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (AggregationsDescriptor is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			}
+			else if (AggregationsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+			}
+			else if (AggregationsValue is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class CompositeAggregationDescriptor : SerializableDescriptorBase<CompositeAggregationDescriptor>
+	{
+		internal CompositeAggregationDescriptor(Action<CompositeAggregationDescriptor> configure) => configure.Invoke(this);
+		public CompositeAggregationDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
+
+		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
+
+		private Dictionary<string, object>? AfterValue { get; set; }
+
+		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private int? SizeValue { get; set; }
+
+		private IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
+
+		public CompositeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		{
+			AggregationsDescriptor = null;
+			AggregationsDescriptorAction = null;
+			AggregationsValue = aggregations;
+			return Self;
+		}
+
+		public CompositeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = descriptor;
+			return Self;
+		}
+
+		public CompositeAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptor = null;
+			AggregationsDescriptorAction = configure;
+			return Self;
+		}
 
 		public CompositeAggregationDescriptor After(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
@@ -217,6 +385,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (AggregationsDescriptor is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			}
+			else if (AggregationsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
+			}
+			else if (AggregationsValue is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsValue, options);
 			}
 
 			writer.WriteEndObject();
