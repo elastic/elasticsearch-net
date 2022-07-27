@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class ShardsStatsSummary
+	public sealed partial class ShardsStatsSummary
 	{
 		[JsonInclude]
 		[JsonPropertyName("incremental")]

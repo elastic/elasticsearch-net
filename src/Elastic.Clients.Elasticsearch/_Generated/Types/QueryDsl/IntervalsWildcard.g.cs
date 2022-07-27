@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class IntervalsWildcard : IIntervalsVariant, IIntervalsQueryVariant
+	public sealed partial class IntervalsWildcard : IIntervalsVariant, IIntervalsQueryVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]

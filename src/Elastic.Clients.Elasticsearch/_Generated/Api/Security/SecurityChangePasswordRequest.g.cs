@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 
-	public partial class SecurityChangePasswordRequest : PlainRequestBase<SecurityChangePasswordRequestParameters>
+	public sealed partial class SecurityChangePasswordRequest : PlainRequestBase<SecurityChangePasswordRequestParameters>
 	{
 		public SecurityChangePasswordRequest()
 		{

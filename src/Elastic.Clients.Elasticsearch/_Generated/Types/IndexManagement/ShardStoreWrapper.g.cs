@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class ShardStoreWrapper
+	public sealed partial class ShardStoreWrapper
 	{
 		[JsonInclude]
 		[JsonPropertyName("stores")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class CategorizationAnalyzerDefinition
+	public sealed partial class CategorizationAnalyzerDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("char_filter")]

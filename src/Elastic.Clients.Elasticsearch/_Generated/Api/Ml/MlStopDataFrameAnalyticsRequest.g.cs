@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class MlStopDataFrameAnalyticsRequest : PlainRequestBase<MlStopDataFrameAnalyticsRequestParameters>
+	public sealed partial class MlStopDataFrameAnalyticsRequest : PlainRequestBase<MlStopDataFrameAnalyticsRequestParameters>
 	{
 		public MlStopDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

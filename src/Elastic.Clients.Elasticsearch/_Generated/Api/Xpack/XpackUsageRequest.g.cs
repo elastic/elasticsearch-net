@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class XpackUsageRequest : PlainRequestBase<XpackUsageRequestParameters>
+	public sealed partial class XpackUsageRequest : PlainRequestBase<XpackUsageRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.XpackUsage;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

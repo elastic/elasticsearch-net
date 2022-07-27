@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class DirectGenerator
+	public sealed partial class DirectGenerator
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]

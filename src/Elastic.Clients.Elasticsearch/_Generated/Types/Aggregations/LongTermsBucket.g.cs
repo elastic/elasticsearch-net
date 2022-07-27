@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	[JsonConverter(typeof(LongTermsBucketConverter))]
 	public sealed partial class LongTermsBucket : AggregateDictionary
 	{
-		public LongTermsBucket(IReadOnlyDictionary<string, AggregateBase> backingDictionary) : base(backingDictionary)
+		public LongTermsBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
 		{
 		}
 
@@ -54,7 +54,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-			var subAggs = new Dictionary<string, AggregateBase>(); // TODO - Optimise this and only create if we need it.
+			var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
 			long docCount = default;
 			long? docCountError = default;
 			long key = default;

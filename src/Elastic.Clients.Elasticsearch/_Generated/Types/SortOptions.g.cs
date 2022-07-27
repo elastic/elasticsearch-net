@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(SortOptionsConverter))]
-	public partial class SortOptions
+	public sealed partial class SortOptions
 	{
 		public SortOptions(string variantName, ISortOptionsVariant variant)
 		{

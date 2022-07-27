@@ -44,7 +44,7 @@ public class WeightedAverageAggregationUsageTests : AggregationUsageTestBase<Rea
 		.WeightedAvg("weighted_avg_commits", avg => avg
 			.Value(v => v.Field(p => p.NumberOfCommits).Missing(0))
 			//.Weight(w => w.Script("(doc['numberOfContributors']?.value ?: 0) + 1"))
-			.Weight(s => s.Script(new InlineScript("(doc['numberOfContributors']?.value ?: 0) + 1")))
+			.Weight(s => s.Script(new Script(new InlineScript("(doc['numberOfContributors']?.value ?: 0) + 1"))))
 			.ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType.Long)
 		);
 
@@ -58,7 +58,7 @@ public class WeightedAverageAggregationUsageTests : AggregationUsageTestBase<Rea
 			},
 			Weight = new WeightedAverageValue()
 			{
-				Script = new InlineScript("(doc['numberOfContributors']?.value ?: 0) + 1")
+				Script = new Script(new InlineScript("(doc['numberOfContributors']?.value ?: 0) + 1"))
 			},
 			ValueType = Elastic.Clients.Elasticsearch.Aggregations.ValueType.Long
 		};

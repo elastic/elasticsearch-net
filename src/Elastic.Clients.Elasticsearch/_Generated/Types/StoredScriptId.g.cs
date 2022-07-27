@@ -24,11 +24,15 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class StoredScriptId : ScriptBase
+	public sealed partial class StoredScriptId
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("params")]
+		public Dictionary<string, object>? Params { get; set; }
 	}
 
 	public sealed partial class StoredScriptIdDescriptor : SerializableDescriptorBase<StoredScriptIdDescriptor>
@@ -62,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (ParamsValue is not null)
 			{
 				writer.WritePropertyName("params");
-				SourceSerialisation.SerializeParams(ParamsValue, writer, settings);
+				JsonSerializer.Serialize(writer, ParamsValue, options);
 			}
 
 			writer.WriteEndObject();

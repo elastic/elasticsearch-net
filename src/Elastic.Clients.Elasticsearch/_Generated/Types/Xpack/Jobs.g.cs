@@ -59,7 +59,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 	}
 
 	[JsonConverter(typeof(JobsConverter))]
-	public partial class Jobs
+	public sealed partial class Jobs
 	{
 		public Elastic.Clients.Elasticsearch.Xpack.AllJobs? All { get; init; }
 

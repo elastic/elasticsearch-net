@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>
+	public sealed partial class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>
 	{
 		public DeleteAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("index", indices).Required("name", name))
 		{

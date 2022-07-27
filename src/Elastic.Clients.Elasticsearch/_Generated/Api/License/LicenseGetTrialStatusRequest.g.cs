@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.License
 	{
 	}
 
-	public partial class LicenseGetTrialStatusRequest : PlainRequestBase<LicenseGetTrialStatusRequestParameters>
+	public sealed partial class LicenseGetTrialStatusRequest : PlainRequestBase<LicenseGetTrialStatusRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseGetTrialStatus;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

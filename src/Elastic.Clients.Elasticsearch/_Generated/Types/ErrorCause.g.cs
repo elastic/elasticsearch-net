@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(ErrorCauseConverter))]
-	public partial class ErrorCause
+	public sealed partial class ErrorCause
 	{
 		public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; init; }
 

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class StandardDeviationBounds
+	public sealed partial class StandardDeviationBounds
 	{
 		[JsonInclude]
 		[JsonPropertyName("lower")]

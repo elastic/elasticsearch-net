@@ -24,11 +24,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class PorterStemTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class PorterStemTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "porter_stem";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class PorterStemTokenFilterDescriptor : SerializableDescriptorBase<PorterStemTokenFilterDescriptor>, IBuildableDescriptor<PorterStemTokenFilter>

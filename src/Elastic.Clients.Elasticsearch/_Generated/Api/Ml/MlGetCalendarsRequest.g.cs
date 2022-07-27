@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 	}
 
-	public partial class MlGetCalendarsRequest : PlainRequestBase<MlGetCalendarsRequestParameters>
+	public sealed partial class MlGetCalendarsRequest : PlainRequestBase<MlGetCalendarsRequestParameters>
 	{
 		public MlGetCalendarsRequest()
 		{

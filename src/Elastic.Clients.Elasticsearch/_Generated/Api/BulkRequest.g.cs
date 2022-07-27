@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 	}
 
-	public partial class BulkRequest : PlainRequestBase<BulkRequestParameters>
+	public sealed partial class BulkRequest : PlainRequestBase<BulkRequestParameters>
 	{
 		public BulkRequest()
 		{

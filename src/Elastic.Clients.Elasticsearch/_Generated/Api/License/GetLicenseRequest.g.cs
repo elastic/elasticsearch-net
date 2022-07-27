@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.License
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public partial class GetLicenseRequest : PlainRequestBase<GetLicenseRequestParameters>
+	public sealed partial class GetLicenseRequest : PlainRequestBase<GetLicenseRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseGet;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

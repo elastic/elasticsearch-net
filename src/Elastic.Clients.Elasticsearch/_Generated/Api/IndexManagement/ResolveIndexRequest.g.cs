@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 
-	public partial class ResolveIndexRequest : PlainRequestBase<ResolveIndexRequestParameters>
+	public sealed partial class ResolveIndexRequest : PlainRequestBase<ResolveIndexRequestParameters>
 	{
 		public ResolveIndexRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{

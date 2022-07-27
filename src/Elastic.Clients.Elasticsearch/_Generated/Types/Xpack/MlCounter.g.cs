@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class MlCounter
+	public sealed partial class MlCounter
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]

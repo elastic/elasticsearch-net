@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 
-	public partial class ExistsRequest : PlainRequestBase<ExistsRequestParameters>
+	public sealed partial class ExistsRequest : PlainRequestBase<ExistsRequestParameters>
 	{
 		public ExistsRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 		{

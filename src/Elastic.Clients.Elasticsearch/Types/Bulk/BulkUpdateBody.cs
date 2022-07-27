@@ -12,7 +12,7 @@ namespace Elastic.Clients.Elasticsearch
 				
 		public TPartialUpdate PartialUpdate { get; set; }
 
-		public ScriptBase Script { get; set; }
+		public Script Script { get; set; }
 
 		public bool? ScriptedUpsert { get; set; }
 

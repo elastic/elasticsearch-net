@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class AggregationBreakdown
+	public sealed partial class AggregationBreakdown
 	{
 		[JsonInclude]
 		[JsonPropertyName("build_aggregation")]

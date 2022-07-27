@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
-	public partial class MlDeleteJobRequest : PlainRequestBase<MlDeleteJobRequestParameters>
+	public sealed partial class MlDeleteJobRequest : PlainRequestBase<MlDeleteJobRequestParameters>
 	{
 		public MlDeleteJobRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{

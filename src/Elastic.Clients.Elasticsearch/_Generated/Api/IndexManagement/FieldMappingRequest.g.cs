@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public partial class FieldMappingRequest : PlainRequestBase<FieldMappingRequestParameters>
+	public sealed partial class FieldMappingRequest : PlainRequestBase<FieldMappingRequestParameters>
 	{
 		public FieldMappingRequest(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
 		{

@@ -2,13 +2,21 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class InlineScript : ISelfTwoWaySerializable
+public sealed partial class InlineScript : ISelfTwoWaySerializable
 {
+	// This type is ISelfTwoWaySerializable because it potentially uses the source serialiser for params serialisation
+
+	public InlineScript(string source) => Source = source;
+
+	public InlineScript() { }
+
 	void ISelfTwoWaySerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -80,7 +88,7 @@ public partial class InlineScript : ISelfTwoWaySerializable
 
 				if (reader.ValueTextEquals("params"))
 				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					var value = SourceSerialisation.DeserializeParams<Dictionary<string, object>>(ref reader, settings);
 					if (value is not null)
 					{
 						Params = value;
@@ -91,8 +99,4 @@ public partial class InlineScript : ISelfTwoWaySerializable
 			}
 		}
 	}
-
-	public InlineScript(string source) => Source = source;
-
-	internal InlineScript() { }
 }

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 	{
 	}
 
-	public partial class EnrichPutPolicyRequest : PlainRequestBase<EnrichPutPolicyRequestParameters>
+	public sealed partial class EnrichPutPolicyRequest : PlainRequestBase<EnrichPutPolicyRequestParameters>
 	{
 		public EnrichPutPolicyRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{

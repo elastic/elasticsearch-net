@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class SnowballAnalyzer : IAnalyzer
+	public sealed partial class SnowballAnalyzer : IAnalyzer
 	{
 		[JsonInclude]
 		[JsonPropertyName("language")]

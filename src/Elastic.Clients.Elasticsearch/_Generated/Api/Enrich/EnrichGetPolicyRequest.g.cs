@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 	{
 	}
 
-	public partial class EnrichGetPolicyRequest : PlainRequestBase<EnrichGetPolicyRequestParameters>
+	public sealed partial class EnrichGetPolicyRequest : PlainRequestBase<EnrichGetPolicyRequestParameters>
 	{
 		public EnrichGetPolicyRequest()
 		{

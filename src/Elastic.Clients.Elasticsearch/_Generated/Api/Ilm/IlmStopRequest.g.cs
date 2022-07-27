@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class IlmStopRequest : PlainRequestBase<IlmStopRequestParameters>
+	public sealed partial class IlmStopRequest : PlainRequestBase<IlmStopRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementStop;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

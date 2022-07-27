@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 	}
 
-	public partial class MlGetJobStatsRequest : PlainRequestBase<MlGetJobStatsRequestParameters>
+	public sealed partial class MlGetJobStatsRequest : PlainRequestBase<MlGetJobStatsRequestParameters>
 	{
 		public MlGetJobStatsRequest()
 		{

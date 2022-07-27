@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>
+	public sealed partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutSettings;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;

@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public long? IfVersion { get => Q<long?>("if_version"); set => Q("if_version", value); }
 	}
 
-	public partial class IngestPutPipelineRequest : PlainRequestBase<IngestPutPipelineRequestParameters>
+	public sealed partial class IngestPutPipelineRequest : PlainRequestBase<IngestPutPipelineRequestParameters>
 	{
 		public IngestPutPipelineRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

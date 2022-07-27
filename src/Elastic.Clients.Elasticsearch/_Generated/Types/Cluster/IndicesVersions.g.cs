@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class IndicesVersions
+	public sealed partial class IndicesVersions
 	{
 		[JsonInclude]
 		[JsonPropertyName("index_count")]

@@ -35,7 +35,7 @@ public class BulkUpdateManyTests : NdJsonApiIntegrationTestBase<WritableCluster,
 	protected override BulkRequest Initializer => new(Infer.Index<Project>())
 	{
 		Operations = _updates
-			.Select(u => new BulkUpdateOperation<Project, Project>(u) { Script = new InlineScript("ctx._source.numberOfContributors++") })
+			.Select(u => new BulkUpdateOperation<Project, Project>(u) { Script = new Script(new InlineScript("ctx._source.numberOfContributors++")) })
 			.ToList<IBulkOperation>()
 	};
 

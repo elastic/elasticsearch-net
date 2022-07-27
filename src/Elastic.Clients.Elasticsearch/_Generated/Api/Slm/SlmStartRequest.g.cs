@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 	{
 	}
 
-	public partial class SlmStartRequest : PlainRequestBase<SlmStartRequestParameters>
+	public sealed partial class SlmStartRequest : PlainRequestBase<SlmStartRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStart;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

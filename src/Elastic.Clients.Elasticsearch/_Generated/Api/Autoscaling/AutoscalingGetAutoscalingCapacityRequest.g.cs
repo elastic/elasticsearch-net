@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling
 	{
 	}
 
-	public partial class AutoscalingGetAutoscalingCapacityRequest : PlainRequestBase<AutoscalingGetAutoscalingCapacityRequestParameters>
+	public sealed partial class AutoscalingGetAutoscalingCapacityRequest : PlainRequestBase<AutoscalingGetAutoscalingCapacityRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.AutoscalingGetAutoscalingCapacity;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

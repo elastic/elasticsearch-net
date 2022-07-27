@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class IndicesOptions
+	public sealed partial class IndicesOptions
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_no_indices")]

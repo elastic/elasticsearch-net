@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecurityGetBuiltinPrivilegesRequest : PlainRequestBase<SecurityGetBuiltinPrivilegesRequestParameters>
+	public sealed partial class SecurityGetBuiltinPrivilegesRequest : PlainRequestBase<SecurityGetBuiltinPrivilegesRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetBuiltinPrivileges;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

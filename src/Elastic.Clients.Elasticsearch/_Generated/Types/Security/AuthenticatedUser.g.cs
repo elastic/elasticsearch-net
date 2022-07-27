@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class AuthenticatedUser : User
+	public sealed partial class AuthenticatedUser
 	{
 		[JsonInclude]
 		[JsonPropertyName("authentication_provider")]
@@ -39,7 +39,31 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public string AuthenticationType { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("email")]
+		public string? Email { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("full_name")]
+		public string? FullName { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("lookup_realm")]
 		public Elastic.Clients.Elasticsearch.Security.UserRealm LookupRealm { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("metadata")]
+		public Dictionary<string, object> Metadata { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("roles")]
+		public IReadOnlyCollection<string> Roles { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("username")]
+		public string Username { get; init; }
 	}
 }

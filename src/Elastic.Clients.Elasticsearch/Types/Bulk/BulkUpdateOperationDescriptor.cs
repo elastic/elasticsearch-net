@@ -26,7 +26,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 	private bool? _docAsUpsert;
 	private bool? _scriptedUpsert;
 	private int? _retriesOnConflict;
-	private ScriptBase _script;
+	private Script _script;
 	private Union<bool, SourceFilter> _source;
 
 	private Action<InlineScriptDescriptor> _inlineScriptAction;
@@ -66,7 +66,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 		return Assign(configure, (a, v) => a._storedScriptIdAction = v);
 	}
 
-	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Script(ScriptBase script)
+	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Script(Script script)
 	{
 		_inlineScriptAction = null;
 		_storedScriptIdAction = null;

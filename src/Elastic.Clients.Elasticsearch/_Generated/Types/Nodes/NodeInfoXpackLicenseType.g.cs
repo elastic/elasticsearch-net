@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoXpackLicenseType
+	public sealed partial class NodeInfoXpackLicenseType
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]

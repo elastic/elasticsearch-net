@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class HitsMetadata<T>
+	public sealed partial class HitsMetadata<T>
 	{
 		[JsonInclude]
 		[JsonPropertyName("hits")]

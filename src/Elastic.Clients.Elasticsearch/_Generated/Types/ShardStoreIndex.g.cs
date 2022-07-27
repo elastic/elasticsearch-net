@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ShardStoreIndex
+	public sealed partial class ShardStoreIndex
 	{
 		[JsonInclude]
 		[JsonPropertyName("aliases")]

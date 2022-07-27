@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class CurrentNode
+	public sealed partial class CurrentNode
 	{
 		[JsonInclude]
 		[JsonPropertyName("attributes")]

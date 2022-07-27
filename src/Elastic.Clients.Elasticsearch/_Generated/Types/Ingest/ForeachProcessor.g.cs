@@ -24,19 +24,35 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class ForeachProcessor : ProcessorBase, IProcessorVariant
+	public sealed partial class ForeachProcessor : IProcessorVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("if")]
+		public string? If { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_failure")]
+		public bool? IgnoreFailure { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("ignore_missing")]
 		public bool? IgnoreMissing { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("on_failure")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailure { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("processor")]
 		public Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer Processor { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tag")]
+		public string? Tag { get; set; }
 	}
 
 	public sealed partial class ForeachProcessorDescriptor<TDocument> : SerializableDescriptorBase<ForeachProcessorDescriptor<TDocument>>

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class OperatingSystemMemoryInfo
+	public sealed partial class OperatingSystemMemoryInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("adjusted_total_in_bytes")]

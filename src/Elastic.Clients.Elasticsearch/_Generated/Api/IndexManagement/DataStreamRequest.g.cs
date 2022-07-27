@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 
-	public partial class DataStreamRequest : PlainRequestBase<DataStreamRequestParameters>
+	public sealed partial class DataStreamRequest : PlainRequestBase<DataStreamRequestParameters>
 	{
 		public DataStreamRequest()
 		{
