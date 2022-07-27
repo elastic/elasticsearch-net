@@ -24,7 +24,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class HistogramAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.HistogramBucket>
+	public sealed partial class HistogramAggregate : Aggregate
 	{
+		[JsonInclude]
+		[JsonPropertyName("buckets")]
+		public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Aggregations.HistogramBucket> Buckets { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
 	}
 }

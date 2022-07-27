@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class KeepTypesTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class KeepTypesTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("mode")]
@@ -36,6 +36,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("types")]
 		public IEnumerable<string>? Types { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class KeepTypesTokenFilterDescriptor : SerializableDescriptorBase<KeepTypesTokenFilterDescriptor>, IBuildableDescriptor<KeepTypesTokenFilter>

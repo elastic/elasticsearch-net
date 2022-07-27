@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ClusterStatistics
+	public sealed partial class ClusterStatistics
 	{
 		[JsonInclude]
 		[JsonPropertyName("skipped")]

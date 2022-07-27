@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class AnalysisLimits
+	public sealed partial class AnalysisLimits
 	{
 		[JsonInclude]
 		[JsonPropertyName("categorization_examples_limit")]

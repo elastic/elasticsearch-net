@@ -24,18 +24,36 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class PrefixQueryConverter : FieldNameQueryConverterBase<PrefixQuery>
+	internal sealed class PrefixQueryConverter : JsonConverter<PrefixQuery>
 	{
-		internal override PrefixQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override PrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new PrefixQuery();
+			reader.Read();
+			reader.Read();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new PrefixQuery()
+			{ Field = fieldName };
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "case_insensitive")
 					{
 						variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
@@ -53,66 +71,72 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.Value = JsonSerializer.Deserialize<string>(ref reader, options);
 						continue;
 					}
-
-					if (property == "_name")
-					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
 				}
 			}
 
 			reader.Read();
+			reader.Read();
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, PrefixQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, PrefixQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (value.CaseInsensitive.HasValue)
+			if (value.Field is null)
+				writer.WriteNullValue();
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				if (value.CaseInsensitive.HasValue)
+				{
+					writer.WritePropertyName("case_insensitive");
+					writer.WriteBooleanValue(value.CaseInsensitive.Value);
+				}
+
+				if (value.Rewrite is not null)
+				{
+					writer.WritePropertyName("rewrite");
+					JsonSerializer.Serialize(writer, value.Rewrite, options);
+				}
+
+				writer.WritePropertyName("value");
+				writer.WriteStringValue(value.Value);
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			if (value.Rewrite is not null)
-			{
-				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value.Rewrite, options);
-			}
-
-			writer.WritePropertyName("value");
-			writer.WriteStringValue(value.Value);
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings to infer field.");
 		}
 	}
 
 	[JsonConverter(typeof(PrefixQueryConverter))]
-	public partial class PrefixQuery : FieldNameQueryBase, IQueryVariant
+	public sealed partial class PrefixQuery : Query, IQueryVariant
 	{
+		public string? QueryName { get; set; }
+
+		public float? Boost { get; set; }
+
 		public bool? CaseInsensitive { get; set; }
 
 		public string? Rewrite { get; set; }
 
 		public string Value { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	}
 
 	public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescriptorBase<PrefixQueryDescriptor<TDocument>>

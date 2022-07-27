@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 	}
 
-	public partial class RecoveryRequest : PlainRequestBase<RecoveryRequestParameters>
+	public sealed partial class RecoveryRequest : PlainRequestBase<RecoveryRequestParameters>
 	{
 		public RecoveryRequest()
 		{

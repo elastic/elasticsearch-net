@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 
-	public partial class SecurityDeleteRoleMappingRequest : PlainRequestBase<SecurityDeleteRoleMappingRequestParameters>
+	public sealed partial class SecurityDeleteRoleMappingRequest : PlainRequestBase<SecurityDeleteRoleMappingRequestParameters>
 	{
 		public SecurityDeleteRoleMappingRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{

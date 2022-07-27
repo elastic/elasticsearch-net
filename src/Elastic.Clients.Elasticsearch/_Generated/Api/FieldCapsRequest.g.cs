@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<string>? Types { get => Q<IEnumerable<string>?>("types"); set => Q("types", value); }
 	}
 
-	public partial class FieldCapsRequest : PlainRequestBase<FieldCapsRequestParameters>
+	public sealed partial class FieldCapsRequest : PlainRequestBase<FieldCapsRequestParameters>
 	{
 		public FieldCapsRequest()
 		{

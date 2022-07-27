@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class CircleProcessor : ProcessorBase, IProcessorVariant
+	public sealed partial class CircleProcessor : IProcessorVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("error_distance")]
@@ -35,12 +35,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("if")]
+		public string? If { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_failure")]
+		public bool? IgnoreFailure { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("ignore_missing")]
 		public bool IgnoreMissing { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("on_failure")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailure { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("shape_type")]
 		public Elastic.Clients.Elasticsearch.Ingest.ShapeType ShapeType { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tag")]
+		public string? Tag { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("target_field")]

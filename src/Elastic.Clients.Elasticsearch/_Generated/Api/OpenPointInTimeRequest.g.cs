@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	public partial class OpenPointInTimeRequest : PlainRequestBase<OpenPointInTimeRequestParameters>
+	public sealed partial class OpenPointInTimeRequest : PlainRequestBase<OpenPointInTimeRequestParameters>
 	{
 		public OpenPointInTimeRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

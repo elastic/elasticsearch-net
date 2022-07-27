@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class CalendarEvent
+	public sealed partial class CalendarEvent
 	{
 		[JsonInclude]
 		[JsonPropertyName("calendar_id")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class Security : Base
+	public sealed partial class Security
 	{
 		[JsonInclude]
 		[JsonPropertyName("anonymous")]
@@ -37,6 +37,14 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		[JsonInclude]
 		[JsonPropertyName("audit")]
 		public Elastic.Clients.Elasticsearch.Xpack.Audit Audit { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("fips_140")]

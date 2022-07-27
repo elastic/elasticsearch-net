@@ -24,8 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RankEvalMetricExpectedReciprocalRank : RankEvalMetricBase
+	public sealed partial class RankEvalMetricExpectedReciprocalRank
 	{
+		[JsonInclude]
+		[JsonPropertyName("k")]
+		public int? k { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("maximum_relevance")]
 		public int MaximumRelevance { get; set; }

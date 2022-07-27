@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class Status
+	public sealed partial class Status
 	{
 		[JsonInclude]
 		[JsonPropertyName("include_global_state")]

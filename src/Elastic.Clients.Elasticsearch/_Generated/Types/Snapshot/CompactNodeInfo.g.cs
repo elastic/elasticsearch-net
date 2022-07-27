@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class CompactNodeInfo
+	public sealed partial class CompactNodeInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("name")]

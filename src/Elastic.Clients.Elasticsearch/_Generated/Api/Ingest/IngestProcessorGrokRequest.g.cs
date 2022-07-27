@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	{
 	}
 
-	public partial class IngestProcessorGrokRequest : PlainRequestBase<IngestProcessorGrokRequestParameters>
+	public sealed partial class IngestProcessorGrokRequest : PlainRequestBase<IngestProcessorGrokRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestProcessorGrok;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>
+	public sealed partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>
 	{
 		public PutScriptRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 	{
 	}
 
-	public partial class SlmGetLifecycleRequest : PlainRequestBase<SlmGetLifecycleRequestParameters>
+	public sealed partial class SlmGetLifecycleRequest : PlainRequestBase<SlmGetLifecycleRequestParameters>
 	{
 		public SlmGetLifecycleRequest()
 		{

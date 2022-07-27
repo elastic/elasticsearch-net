@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class TypeMapping
+	public sealed partial class TypeMapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("_data_stream_timestamp")]

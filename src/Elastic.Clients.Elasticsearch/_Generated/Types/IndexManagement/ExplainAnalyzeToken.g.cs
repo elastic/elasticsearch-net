@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(ExplainAnalyzeTokenConverter))]
-	public partial class ExplainAnalyzeToken
+	public sealed partial class ExplainAnalyzeToken
 	{
 		public Dictionary<string, object> Attributes { get; init; }
 

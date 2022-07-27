@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class SynonymGraphTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class SynonymGraphTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("expand")]
@@ -56,6 +56,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("updateable")]
 		public bool? Updateable { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class SynonymGraphTokenFilterDescriptor : SerializableDescriptorBase<SynonymGraphTokenFilterDescriptor>, IBuildableDescriptor<SynonymGraphTokenFilter>

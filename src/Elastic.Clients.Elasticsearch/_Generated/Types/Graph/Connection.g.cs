@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Graph
 {
-	public partial class Connection
+	public sealed partial class Connection
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]

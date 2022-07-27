@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
 	}
 
-	public partial class MlGetInfluencersRequest : PlainRequestBase<MlGetInfluencersRequestParameters>
+	public sealed partial class MlGetInfluencersRequest : PlainRequestBase<MlGetInfluencersRequestParameters>
 	{
 		public MlGetInfluencersRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{

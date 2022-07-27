@@ -355,7 +355,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public IEnumerable<string>? Stats { get; set; }
 	}
 
-	public partial class AsyncSearchSubmitRequest<TInferDocument> : AsyncSearchSubmitRequest
+	public sealed partial class AsyncSearchSubmitRequest<TInferDocument> : AsyncSearchSubmitRequest
 	{
 		public AsyncSearchSubmitRequest() : base(typeof(TInferDocument))
 		{

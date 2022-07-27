@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class DeleteTemplateRequest : PlainRequestBase<DeleteTemplateRequestParameters>
+	public sealed partial class DeleteTemplateRequest : PlainRequestBase<DeleteTemplateRequestParameters>
 	{
 		public DeleteTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{

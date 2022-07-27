@@ -24,18 +24,36 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class DateRangeQueryConverter : FieldNameQueryConverterBase<DateRangeQuery>
+	internal sealed class DateRangeQueryConverter : JsonConverter<DateRangeQuery>
 	{
-		internal override DateRangeQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override DateRangeQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new DateRangeQuery();
+			reader.Read();
+			reader.Read();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new DateRangeQuery()
+			{ Field = fieldName };
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "format")
 					{
 						variant.Format = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -72,6 +90,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						continue;
 					}
 
+					if (property == "relation")
+					{
+						variant.Relation = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "time_zone")
 					{
 						variant.TimeZone = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -83,107 +107,105 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.To = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DateMath?>(ref reader, options);
 						continue;
 					}
-
-					if (property == "relation")
-					{
-						variant.Relation = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "_name")
-					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
 				}
 			}
 
 			reader.Read();
+			reader.Read();
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, DateRangeQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, DateRangeQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (value.Format is not null)
+			if (value.Field is null)
+				writer.WriteNullValue();
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("format");
-				JsonSerializer.Serialize(writer, value.Format, options);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				if (value.Format is not null)
+				{
+					writer.WritePropertyName("format");
+					JsonSerializer.Serialize(writer, value.Format, options);
+				}
+
+				if (value.From is not null)
+				{
+					writer.WritePropertyName("from");
+					JsonSerializer.Serialize(writer, value.From, options);
+				}
+
+				if (value.Gt is not null)
+				{
+					writer.WritePropertyName("gt");
+					JsonSerializer.Serialize(writer, value.Gt, options);
+				}
+
+				if (value.Gte is not null)
+				{
+					writer.WritePropertyName("gte");
+					JsonSerializer.Serialize(writer, value.Gte, options);
+				}
+
+				if (value.Lt is not null)
+				{
+					writer.WritePropertyName("lt");
+					JsonSerializer.Serialize(writer, value.Lt, options);
+				}
+
+				if (value.Lte is not null)
+				{
+					writer.WritePropertyName("lte");
+					JsonSerializer.Serialize(writer, value.Lte, options);
+				}
+
+				if (value.Relation is not null)
+				{
+					writer.WritePropertyName("relation");
+					JsonSerializer.Serialize(writer, value.Relation, options);
+				}
+
+				if (value.TimeZone is not null)
+				{
+					writer.WritePropertyName("time_zone");
+					JsonSerializer.Serialize(writer, value.TimeZone, options);
+				}
+
+				if (value.To is not null)
+				{
+					writer.WritePropertyName("to");
+					JsonSerializer.Serialize(writer, value.To, options);
+				}
+
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			if (value.From is not null)
-			{
-				writer.WritePropertyName("from");
-				JsonSerializer.Serialize(writer, value.From, options);
-			}
-
-			if (value.Gt is not null)
-			{
-				writer.WritePropertyName("gt");
-				JsonSerializer.Serialize(writer, value.Gt, options);
-			}
-
-			if (value.Gte is not null)
-			{
-				writer.WritePropertyName("gte");
-				JsonSerializer.Serialize(writer, value.Gte, options);
-			}
-
-			if (value.Lt is not null)
-			{
-				writer.WritePropertyName("lt");
-				JsonSerializer.Serialize(writer, value.Lt, options);
-			}
-
-			if (value.Lte is not null)
-			{
-				writer.WritePropertyName("lte");
-				JsonSerializer.Serialize(writer, value.Lte, options);
-			}
-
-			if (value.TimeZone is not null)
-			{
-				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, value.TimeZone, options);
-			}
-
-			if (value.To is not null)
-			{
-				writer.WritePropertyName("to");
-				JsonSerializer.Serialize(writer, value.To, options);
-			}
-
-			if (value.Relation is not null)
-			{
-				writer.WritePropertyName("relation");
-				JsonSerializer.Serialize(writer, value.Relation, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings to infer field.");
 		}
 	}
 
 	[JsonConverter(typeof(DateRangeQueryConverter))]
-	public partial class DateRangeQuery : FieldNameQueryBase, IQueryVariant
+	public sealed partial class DateRangeQuery : Query, IQueryVariant
 	{
+		public string? QueryName { get; set; }
+
+		public float? Boost { get; set; }
+
 		public string? Format { get; set; }
 
 		public Elastic.Clients.Elasticsearch.DateMath? From { get; set; }
@@ -196,11 +218,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public Elastic.Clients.Elasticsearch.DateMath? Lte { get; set; }
 
+		public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
+
 		public string? TimeZone { get; set; }
 
 		public Elastic.Clients.Elasticsearch.DateMath? To { get; set; }
 
-		public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	}
 
 	public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDescriptorBase<DateRangeQueryDescriptor<TDocument>>

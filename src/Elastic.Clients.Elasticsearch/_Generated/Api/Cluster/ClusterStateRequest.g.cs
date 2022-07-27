@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Duration? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
 
-	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>
+	public sealed partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>
 	{
 		public ClusterStateRequest()
 		{

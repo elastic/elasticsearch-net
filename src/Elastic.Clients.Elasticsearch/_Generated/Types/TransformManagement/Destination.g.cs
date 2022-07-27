@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class Destination
+	public sealed partial class Destination
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]

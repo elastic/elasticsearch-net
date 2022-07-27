@@ -24,11 +24,19 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class Watcher : Base
+	public sealed partial class Watcher
 	{
+		[JsonInclude]
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("count")]
 		public Elastic.Clients.Elasticsearch.Xpack.Counter Count { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("execution")]

@@ -13,7 +13,7 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public partial class BulkRequest : IStreamSerializable
 	{
-		protected IRequest Self => this;
+		internal IRequest Self => this;
 
 		public BulkOperationsCollection Operations { get; set; }
 

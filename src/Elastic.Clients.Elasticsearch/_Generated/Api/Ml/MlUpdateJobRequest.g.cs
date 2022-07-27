@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlUpdateJobRequest : PlainRequestBase<MlUpdateJobRequestParameters>
+	public sealed partial class MlUpdateJobRequest : PlainRequestBase<MlUpdateJobRequestParameters>
 	{
 		public MlUpdateJobRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{

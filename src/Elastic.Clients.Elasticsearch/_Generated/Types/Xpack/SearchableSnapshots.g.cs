@@ -24,8 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class SearchableSnapshots : Base
+	public sealed partial class SearchableSnapshots
 	{
+		[JsonInclude]
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("full_copy_indices_count")]
 		public int? FullCopyIndicesCount { get; init; }

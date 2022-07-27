@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class MappingCharFilter : CharFilterBase, ICharFilterDefinition
+	public sealed partial class MappingCharFilter : ICharFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
@@ -37,6 +37,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "mapping";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class MappingCharFilterDescriptor : SerializableDescriptorBase<MappingCharFilterDescriptor>, IBuildableDescriptor<MappingCharFilter>

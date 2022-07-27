@@ -15,7 +15,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private static readonly byte[] s_key = Encoding.UTF8.GetBytes("key");
 		private static readonly byte s_period = (byte)'.';
 
-		public static bool TryDeserialiseTermsAggregate(ref Utf8JsonReader reader, JsonSerializerOptions options, out AggregateBase? aggregate)
+		public static bool TryDeserialiseTermsAggregate(ref Utf8JsonReader reader, JsonSerializerOptions options, out IAggregate? aggregate)
 		{
 			aggregate = null;
 

@@ -132,15 +132,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(TTestAggregationConverter))]
-	public partial class TTestAggregation : AggregationBase
+	public sealed partial class TTestAggregation : Aggregation
 	{
-		public TTestAggregation(string name) : base(name)
+		public TTestAggregation(string name) => Name = name;
+		internal TTestAggregation()
 		{
 		}
 
 		public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a { get; set; }
 
 		public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
 
 		public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 	}

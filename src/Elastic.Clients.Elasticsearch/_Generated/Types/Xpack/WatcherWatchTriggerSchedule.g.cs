@@ -24,14 +24,22 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class WatcherWatchTriggerSchedule : Counter
+	public sealed partial class WatcherWatchTriggerSchedule
 	{
 		[JsonInclude]
 		[JsonPropertyName("_all")]
 		public Elastic.Clients.Elasticsearch.Xpack.Counter All { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("active")]
+		public long Active { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("cron")]
 		public Elastic.Clients.Elasticsearch.Xpack.Counter Cron { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total")]
+		public long Total { get; init; }
 	}
 }

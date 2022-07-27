@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlForecastRequest : PlainRequestBase<MlForecastRequestParameters>
+	public sealed partial class MlForecastRequest : PlainRequestBase<MlForecastRequestParameters>
 	{
 		public MlForecastRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{

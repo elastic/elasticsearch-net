@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 	}
 
-	public partial class MlGetRecordsRequest : PlainRequestBase<MlGetRecordsRequestParameters>
+	public sealed partial class MlGetRecordsRequest : PlainRequestBase<MlGetRecordsRequestParameters>
 	{
 		public MlGetRecordsRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{

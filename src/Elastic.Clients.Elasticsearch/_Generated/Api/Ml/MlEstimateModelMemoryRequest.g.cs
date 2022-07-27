@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlEstimateModelMemoryRequest : PlainRequestBase<MlEstimateModelMemoryRequestParameters>
+	public sealed partial class MlEstimateModelMemoryRequest : PlainRequestBase<MlEstimateModelMemoryRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningEstimateModelMemory;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

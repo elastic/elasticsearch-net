@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 	{
 	}
 
-	public partial class EnrichStatsRequest : PlainRequestBase<EnrichStatsRequestParameters>
+	public sealed partial class EnrichStatsRequest : PlainRequestBase<EnrichStatsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EnrichStats;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

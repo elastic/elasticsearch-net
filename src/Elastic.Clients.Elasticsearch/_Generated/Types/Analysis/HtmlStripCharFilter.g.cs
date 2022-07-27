@@ -24,11 +24,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class HtmlStripCharFilter : CharFilterBase, ICharFilterDefinition
+	public sealed partial class HtmlStripCharFilter : ICharFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "html_strip";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class HtmlStripCharFilterDescriptor : SerializableDescriptorBase<HtmlStripCharFilterDescriptor>, IBuildableDescriptor<HtmlStripCharFilter>

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class FillMaskInferenceUpdateOptions : IInferenceConfigUpdateVariant
+	public sealed partial class FillMaskInferenceUpdateOptions : IInferenceConfigUpdateVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("num_top_classes")]
