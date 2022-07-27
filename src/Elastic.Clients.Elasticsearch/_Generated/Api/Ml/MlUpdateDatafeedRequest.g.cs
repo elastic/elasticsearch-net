@@ -40,9 +40,182 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
+	internal sealed class MlUpdateDatafeedRequestConverter : JsonConverter<MlUpdateDatafeedRequest>
+	{
+		public override MlUpdateDatafeedRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new MlUpdateDatafeedRequest();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "aggregations")
+					{
+						variant.Aggregations = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "chunking_config")
+					{
+						variant.ChunkingConfig = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.ChunkingConfig?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "delayed_data_check_config")
+					{
+						variant.DelayedDataCheckConfig = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "frequency")
+					{
+						variant.Frequency = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "indices" || property == "indexes")
+					{
+						variant.Indices = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "indices_options")
+					{
+						variant.IndicesOptions = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndicesOptions?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "max_empty_searches")
+					{
+						variant.MaxEmptySearches = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "query")
+					{
+						variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "query_delay")
+					{
+						variant.QueryDelay = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "runtime_mappings")
+					{
+						variant.RuntimeMappings = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "script_fields")
+					{
+						variant.ScriptFields = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "scroll_size")
+					{
+						variant.ScrollSize = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, MlUpdateDatafeedRequest value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Aggregations is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, value.Aggregations, options);
+			}
+
+			if (value.ChunkingConfig is not null)
+			{
+				writer.WritePropertyName("chunking_config");
+				JsonSerializer.Serialize(writer, value.ChunkingConfig, options);
+			}
+
+			if (value.DelayedDataCheckConfig is not null)
+			{
+				writer.WritePropertyName("delayed_data_check_config");
+				JsonSerializer.Serialize(writer, value.DelayedDataCheckConfig, options);
+			}
+
+			if (value.Frequency is not null)
+			{
+				writer.WritePropertyName("frequency");
+				JsonSerializer.Serialize(writer, value.Frequency, options);
+			}
+
+			if (value.Indices is not null)
+			{
+				writer.WritePropertyName("indices");
+				JsonSerializer.Serialize(writer, value.Indices, options);
+			}
+
+			if (value.IndicesOptions is not null)
+			{
+				writer.WritePropertyName("indices_options");
+				JsonSerializer.Serialize(writer, value.IndicesOptions, options);
+			}
+
+			if (value.MaxEmptySearches.HasValue)
+			{
+				writer.WritePropertyName("max_empty_searches");
+				writer.WriteNumberValue(value.MaxEmptySearches.Value);
+			}
+
+			if (value.Query is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.Query, options);
+			}
+
+			if (value.QueryDelay is not null)
+			{
+				writer.WritePropertyName("query_delay");
+				JsonSerializer.Serialize(writer, value.QueryDelay, options);
+			}
+
+			if (value.RuntimeMappings is not null)
+			{
+				writer.WritePropertyName("runtime_mappings");
+				JsonSerializer.Serialize(writer, value.RuntimeMappings, options);
+			}
+
+			if (value.ScriptFields is not null)
+			{
+				writer.WritePropertyName("script_fields");
+				JsonSerializer.Serialize(writer, value.ScriptFields, options);
+			}
+
+			if (value.ScrollSize.HasValue)
+			{
+				writer.WritePropertyName("scroll_size");
+				writer.WriteNumberValue(value.ScrollSize.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(MlUpdateDatafeedRequestConverter))]
 	public sealed partial class MlUpdateDatafeedRequest : PlainRequestBase<MlUpdateDatafeedRequestParameters>
 	{
 		public MlUpdateDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
+		{
+		}
+
+		internal MlUpdateDatafeedRequest()
 		{
 		}
 
