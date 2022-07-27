@@ -24,14 +24,59 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
+	internal sealed class PivotConverter : JsonConverter<Pivot>
+	{
+		public override Pivot Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new Pivot();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "aggregations" || property == "aggs")
+					{
+						variant.Aggregations = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "group_by")
+					{
+						variant.GroupBy = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByContainer>?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, Pivot value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Aggregations is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, value.Aggregations, options);
+			}
+
+			if (value.GroupBy is not null)
+			{
+				writer.WritePropertyName("group_by");
+				JsonSerializer.Serialize(writer, value.GroupBy, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(PivotConverter))]
 	public sealed partial class Pivot
 	{
-		[JsonInclude]
-		[JsonPropertyName("aggregations")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("group_by")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByContainer>? GroupBy { get; set; }
 	}
 

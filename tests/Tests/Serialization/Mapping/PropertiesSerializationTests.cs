@@ -15,7 +15,7 @@ public class PropertiesSerializationTests : SerializerTestBase
 	[U]
 	public async Task CanSerialize_Properties_WithPropertyNameExpression()
 	{
-		var result = await RoundTripAndVerifyJson(new Properties<Project>
+		var result = await RoundTripAndVerifyJsonAsync(new Properties<Project>
 		{
 			{ p => p.Name, new TextProperty { Boost = 1.2 } }
 		});
@@ -27,7 +27,7 @@ public class PropertiesSerializationTests : SerializerTestBase
 	[U]
 	public async Task CanSerialize_MultipleProperties_WithPropertyNameExpression()
 	{
-		var result = await RoundTripAndVerifyJson(new Properties<Project>
+		var result = await RoundTripAndVerifyJsonAsync(new Properties<Project>
 		{
 			{ p => p.Name, new TextProperty { Boost = 1.2 } },
 			{ p => p.Description, new TextProperty { Boost = 1.4 } }

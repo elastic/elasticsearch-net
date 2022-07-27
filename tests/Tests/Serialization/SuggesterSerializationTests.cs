@@ -24,7 +24,7 @@ public class SuggesterSerializationTests : SerializerTestBase
 			}
 		};
 
-		var result = await RoundTripAndVerifyJson(suggester);
+		var result = await RoundTripAndVerifyJsonAsync(suggester);
 
 		result.Text.Should().Be(suggester.Text);
 		result.Suggesters.Should().HaveCount(2);
