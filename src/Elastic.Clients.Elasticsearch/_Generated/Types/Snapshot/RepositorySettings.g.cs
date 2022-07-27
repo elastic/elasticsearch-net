@@ -24,26 +24,97 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
+	internal sealed class RepositorySettingsConverter : JsonConverter<RepositorySettings>
+	{
+		public override RepositorySettings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new RepositorySettings();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "chunk_size")
+					{
+						variant.ChunkSize = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "compress")
+					{
+						variant.Compress = JsonSerializer.Deserialize<Union<string?, bool?>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "concurrent_streams")
+					{
+						variant.ConcurrentStreams = JsonSerializer.Deserialize<Union<string?, int?>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "location")
+					{
+						variant.Location = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+
+					if (property == "read_only" || property == "readonly")
+					{
+						variant.ReadOnly = JsonSerializer.Deserialize<Union<string?, bool?>?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, RepositorySettings value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.ChunkSize))
+			{
+				writer.WritePropertyName("chunk_size");
+				writer.WriteStringValue(value.ChunkSize);
+			}
+
+			if (value.Compress is not null)
+			{
+				writer.WritePropertyName("compress");
+				JsonSerializer.Serialize(writer, value.Compress, options);
+			}
+
+			if (value.ConcurrentStreams is not null)
+			{
+				writer.WritePropertyName("concurrent_streams");
+				JsonSerializer.Serialize(writer, value.ConcurrentStreams, options);
+			}
+
+			writer.WritePropertyName("location");
+			writer.WriteStringValue(value.Location);
+			if (value.ReadOnly is not null)
+			{
+				writer.WritePropertyName("read_only");
+				JsonSerializer.Serialize(writer, value.ReadOnly, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(RepositorySettingsConverter))]
 	public sealed partial class RepositorySettings
 	{
-		[JsonInclude]
-		[JsonPropertyName("chunk_size")]
 		public string? ChunkSize { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("compress")]
 		public Union<string?, bool?>? Compress { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("concurrent_streams")]
 		public Union<string?, int?>? ConcurrentStreams { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("location")]
 		public string Location { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("read_only")]
 		public Union<string?, bool?>? ReadOnly { get; set; }
 	}
 
