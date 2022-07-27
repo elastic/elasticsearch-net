@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
-	public partial class TransformStopTransformRequest : PlainRequestBase<TransformStopTransformRequestParameters>
+	public sealed partial class TransformStopTransformRequest : PlainRequestBase<TransformStopTransformRequestParameters>
 	{
 		public TransformStopTransformRequest(Elastic.Clients.Elasticsearch.Name transform_id) : base(r => r.Required("transform_id", transform_id))
 		{

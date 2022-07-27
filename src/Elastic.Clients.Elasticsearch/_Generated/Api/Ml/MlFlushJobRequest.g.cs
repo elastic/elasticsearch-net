@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlFlushJobRequest : PlainRequestBase<MlFlushJobRequestParameters>
+	public sealed partial class MlFlushJobRequest : PlainRequestBase<MlFlushJobRequestParameters>
 	{
 		public MlFlushJobRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{

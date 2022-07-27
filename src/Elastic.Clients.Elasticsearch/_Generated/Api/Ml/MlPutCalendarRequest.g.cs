@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlPutCalendarRequest : PlainRequestBase<MlPutCalendarRequestParameters>
+	public sealed partial class MlPutCalendarRequest : PlainRequestBase<MlPutCalendarRequestParameters>
 	{
 		public MlPutCalendarRequest(Elastic.Clients.Elasticsearch.Id calendar_id) : base(r => r.Required("calendar_id", calendar_id))
 		{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class RankFeatureFunctionSaturation : RankFeatureFunction
+	public sealed partial class RankFeatureFunctionSaturation
 	{
 		[JsonInclude]
 		[JsonPropertyName("pivot")]

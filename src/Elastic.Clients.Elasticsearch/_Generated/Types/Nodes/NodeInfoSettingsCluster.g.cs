@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoSettingsCluster
+	public sealed partial class NodeInfoSettingsCluster
 	{
 		[JsonInclude]
 		[JsonPropertyName("deprecation_indexing")]

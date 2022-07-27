@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Migration
 {
-	public partial class MigrationFeature
+	public sealed partial class MigrationFeature
 	{
 		[JsonInclude]
 		[JsonPropertyName("feature_name")]

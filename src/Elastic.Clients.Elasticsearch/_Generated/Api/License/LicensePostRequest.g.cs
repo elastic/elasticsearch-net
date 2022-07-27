@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.License
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
 
-	public partial class LicensePostRequest : PlainRequestBase<LicensePostRequestParameters>
+	public sealed partial class LicensePostRequest : PlainRequestBase<LicensePostRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicensePost;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;

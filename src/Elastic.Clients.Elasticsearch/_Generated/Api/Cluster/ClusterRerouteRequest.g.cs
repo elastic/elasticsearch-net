@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>
+	public sealed partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterReroute;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class FieldCollapse
+	public sealed partial class FieldCollapse
 	{
 		[JsonInclude]
 		[JsonPropertyName("collapse")]

@@ -208,28 +208,28 @@ public class BulkRequestOperationsSerializationTests
 		{
 			Operations = new BulkOperationsCollection
 			{
-				BulkUpdateOperationFactory.WithScript("123", "test-index", new StoredScriptId("my-script-id")
+				BulkUpdateOperationFactory.WithScript("123", "test-index", new Script(new StoredScriptId("my-script-id")
 				{
 					Params = new Dictionary<string, object> { { "param1", "paramvalue1" } }
-				}),
-				BulkUpdateOperationFactory.WithScript("123", new InlineScript("ctx._source.counter += params.param1")
+				})),
+				BulkUpdateOperationFactory.WithScript("123", new Script(new InlineScript("ctx._source.counter += params.param1")
 				{
 					Language = ScriptLanguage.Painless,
 					Params = new Dictionary<string, object>{ { "param1", 1 } },
 					Options = new Dictionary<string, string>{ { "option1", "optionvalue1" } }
-				}),
-				BulkUpdateOperationFactory.WithScript("123", new InlineScript("ctx._source.counter += params.param1")
+				})),
+				BulkUpdateOperationFactory.WithScript("123", new Script(new InlineScript("ctx._source.counter += params.param1")
 				{
 					Language = ScriptLanguage.Painless,
 					Params = new Dictionary<string, object>{ { "param1", 1 } },
 					Options = new Dictionary<string, string>{ { "option1", "optionvalue1" } }
-				}, Inferrable.Instance),
-				BulkUpdateOperationFactory.WithScript("123", "configured-index", new InlineScript("ctx._source.counter += params.param1")
+				}), Inferrable.Instance),
+				BulkUpdateOperationFactory.WithScript("123", "configured-index", new Script(new InlineScript("ctx._source.counter += params.param1")
 				{
 					Language = ScriptLanguage.Painless,
 					Params = new Dictionary<string, object>{ { "param1", 1 } },
 					Options = new Dictionary<string, string>{ { "option1", "optionvalue1" } }
-				}, Inferrable.Instance),
+				}), Inferrable.Instance),
 				// TODO - Partial
 				// TODO - Full operation
 			}

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	}
 
 	[JsonConverter(typeof(PreprocessorConverter))]
-	public partial class Preprocessor
+	public sealed partial class Preprocessor
 	{
 		public Preprocessor(string variantName, IPreprocessorVariant variant)
 		{

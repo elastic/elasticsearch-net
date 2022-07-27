@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(PinnedQueryConverter))]
-	public partial class PinnedQuery : QueryBase, IQueryVariant
+	public sealed partial class PinnedQuery : Query, IQueryVariant
 	{
 		public PinnedQuery(string variantName, IPinnedQueryVariant variant)
 		{
@@ -46,6 +46,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal IPinnedQueryVariant Variant { get; }
 
 		internal string VariantName { get; }
+
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("organic")]

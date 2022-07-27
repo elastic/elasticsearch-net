@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlUpdateModelSnapshotRequest : PlainRequestBase<MlUpdateModelSnapshotRequestParameters>
+	public sealed partial class MlUpdateModelSnapshotRequest : PlainRequestBase<MlUpdateModelSnapshotRequestParameters>
 	{
 		public MlUpdateModelSnapshotRequest(Elastic.Clients.Elasticsearch.Id job_id, Elastic.Clients.Elasticsearch.Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
 		{

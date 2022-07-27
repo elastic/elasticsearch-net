@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class Jvm
+	public sealed partial class Jvm
 	{
 		[JsonInclude]
 		[JsonPropertyName("buffer_pools")]

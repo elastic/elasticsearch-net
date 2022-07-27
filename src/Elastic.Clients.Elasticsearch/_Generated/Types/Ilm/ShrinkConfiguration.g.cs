@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm
 {
-	public partial class ShrinkConfiguration
+	public sealed partial class ShrinkConfiguration
 	{
 		[JsonInclude]
 		[JsonPropertyName("number_of_shards")]

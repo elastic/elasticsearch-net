@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class ApplicationPrivilegesCheck
+	public sealed partial class ApplicationPrivilegesCheck
 	{
 		[JsonInclude]
 		[JsonPropertyName("application")]

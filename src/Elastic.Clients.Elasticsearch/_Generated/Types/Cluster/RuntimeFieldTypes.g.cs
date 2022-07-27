@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class RuntimeFieldTypes
+	public sealed partial class RuntimeFieldTypes
 	{
 		[JsonInclude]
 		[JsonPropertyName("chars_max")]

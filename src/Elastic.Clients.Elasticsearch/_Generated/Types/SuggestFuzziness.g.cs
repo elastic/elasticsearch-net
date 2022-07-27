@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class SuggestFuzziness
+	public sealed partial class SuggestFuzziness
 	{
 		[JsonInclude]
 		[JsonPropertyName("fuzziness")]

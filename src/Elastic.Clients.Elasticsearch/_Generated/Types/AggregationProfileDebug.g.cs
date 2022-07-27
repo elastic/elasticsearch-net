@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class AggregationProfileDebug
+	public sealed partial class AggregationProfileDebug
 	{
 		[JsonInclude]
 		[JsonPropertyName("built_buckets")]

@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class DeleteRequest : PlainRequestBase<DeleteRequestParameters>
+	public sealed partial class DeleteRequest : PlainRequestBase<DeleteRequestParameters>
 	{
 		public DeleteRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

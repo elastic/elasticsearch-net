@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class IndexRoutingRebalance
+	public sealed partial class IndexRoutingRebalance
 	{
 		[JsonInclude]
 		[JsonPropertyName("enable")]

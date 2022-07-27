@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MergesStats
+	public sealed partial class MergesStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("current")]

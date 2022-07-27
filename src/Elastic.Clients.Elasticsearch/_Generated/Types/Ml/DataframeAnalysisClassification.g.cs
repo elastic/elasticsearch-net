@@ -24,15 +24,87 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalysisClassification : DataframeAnalysis, IDataframeAnalysisVariant
+	public sealed partial class DataframeAnalysisClassification : IDataframeAnalysisVariant
 	{
+		[JsonInclude]
+		[JsonPropertyName("alpha")]
+		public double? Alpha { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("class_assignment_objective")]
 		public string? ClassAssignmentObjective { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("dependent_variable")]
+		public string DependentVariable { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("downsample_factor")]
+		public double? DownsampleFactor { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("early_stopping_enabled")]
+		public bool? EarlyStoppingEnabled { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("eta")]
+		public double? Eta { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("eta_growth_rate_per_tree")]
+		public double? EtaGrowthRatePerTree { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("feature_bag_fraction")]
+		public double? FeatureBagFraction { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("feature_processors")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessor>? FeatureProcessors { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("gamma")]
+		public double? Gamma { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("lambda")]
+		public double? Lambda { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_optimization_rounds_per_hyperparameter")]
+		public int? MaxOptimizationRoundsPerHyperparameter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_trees")]
+		public int? MaxTrees { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("num_top_classes")]
 		public int? NumTopClasses { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("num_top_feature_importance_values")]
+		public int? NumTopFeatureImportanceValues { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("prediction_field_name")]
+		public Elastic.Clients.Elasticsearch.Field? PredictionFieldName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("randomize_seed")]
+		public double? RandomizeSeed { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("soft_tree_depth_limit")]
+		public int? SoftTreeDepthLimit { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("soft_tree_depth_tolerance")]
+		public double? SoftTreeDepthTolerance { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("training_percent")]
+		public Elastic.Clients.Elasticsearch.Percentage? TrainingPercent { get; set; }
 	}
 
 	public sealed partial class DataframeAnalysisClassificationDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalysisClassificationDescriptor<TDocument>>

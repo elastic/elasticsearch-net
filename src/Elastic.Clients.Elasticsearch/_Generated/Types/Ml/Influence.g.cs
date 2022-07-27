@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class Influence
+	public sealed partial class Influence
 	{
 		[JsonInclude]
 		[JsonPropertyName("influencer_field_name")]

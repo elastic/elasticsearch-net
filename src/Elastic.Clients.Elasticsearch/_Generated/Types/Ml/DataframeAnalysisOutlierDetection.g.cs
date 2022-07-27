@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalysisOutlierDetection : IDataframeAnalysisVariant
+	public sealed partial class DataframeAnalysisOutlierDetection : IDataframeAnalysisVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("compute_feature_influence")]

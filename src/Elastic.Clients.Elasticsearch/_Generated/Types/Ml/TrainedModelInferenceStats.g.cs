@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class TrainedModelInferenceStats
+	public sealed partial class TrainedModelInferenceStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("cache_miss_count")]

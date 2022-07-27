@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
-	public partial class CreateSnapshotRequest : PlainRequestBase<CreateSnapshotRequestParameters>
+	public sealed partial class CreateSnapshotRequest : PlainRequestBase<CreateSnapshotRequestParameters>
 	{
 		public CreateSnapshotRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{

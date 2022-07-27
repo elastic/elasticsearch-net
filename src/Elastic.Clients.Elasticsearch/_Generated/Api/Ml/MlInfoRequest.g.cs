@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlInfoRequest : PlainRequestBase<MlInfoRequestParameters>
+	public sealed partial class MlInfoRequest : PlainRequestBase<MlInfoRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningInfo;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

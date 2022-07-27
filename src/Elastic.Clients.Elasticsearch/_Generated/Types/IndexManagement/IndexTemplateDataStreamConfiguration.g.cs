@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class IndexTemplateDataStreamConfiguration
+	public sealed partial class IndexTemplateDataStreamConfiguration
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_custom_routing")]

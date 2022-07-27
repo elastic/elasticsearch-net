@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	public partial class CreateRequest : PlainRequestBase<CreateRequestParameters>
+	public sealed partial class CreateRequest : PlainRequestBase<CreateRequestParameters>
 	{
 		public CreateRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{

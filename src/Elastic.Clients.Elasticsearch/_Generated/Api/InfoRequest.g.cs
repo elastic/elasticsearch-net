@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public partial class InfoRequest : PlainRequestBase<InfoRequestParameters>
+	public sealed partial class InfoRequest : PlainRequestBase<InfoRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

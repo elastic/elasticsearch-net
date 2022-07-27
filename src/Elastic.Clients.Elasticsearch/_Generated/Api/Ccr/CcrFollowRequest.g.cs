@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	public partial class CcrFollowRequest : PlainRequestBase<CcrFollowRequestParameters>
+	public sealed partial class CcrFollowRequest : PlainRequestBase<CcrFollowRequestParameters>
 	{
 		public CcrFollowRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{

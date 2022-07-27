@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Tasks
 {
-	public partial class TaskStatus
+	public sealed partial class TaskStatus
 	{
 		[JsonInclude]
 		[JsonPropertyName("batches")]

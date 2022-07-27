@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(SmoothingModelContainerConverter))]
-	public partial class SmoothingModelContainer
+	public sealed partial class SmoothingModelContainer
 	{
 		public SmoothingModelContainer(string variantName, ISmoothingModelVariant variant)
 		{

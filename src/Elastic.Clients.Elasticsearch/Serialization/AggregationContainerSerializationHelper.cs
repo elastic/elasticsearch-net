@@ -10,7 +10,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	internal static class AggregationContainerSerializationHelper
 	{
-		public static AggregationContainer ReadContainer<T>(ref Utf8JsonReader reader, JsonSerializerOptions options) where T : AggregationBase
+		public static AggregationContainer ReadContainer<T>(ref Utf8JsonReader reader, JsonSerializerOptions options) where T : Aggregation
 		{
 			var variant = JsonSerializer.Deserialize<T?>(ref reader, options);
 
@@ -19,7 +19,7 @@ namespace Elastic.Clients.Elasticsearch
 			return container;
 		}
 
-		public static AggregationContainer ReadContainer<T>(string variantName, ref Utf8JsonReader reader, JsonSerializerOptions options) where T : AggregationBase
+		public static AggregationContainer ReadContainer<T>(string variantName, ref Utf8JsonReader reader, JsonSerializerOptions options) where T : Aggregation
 		{
 			var variant = JsonSerializer.Deserialize<T?>(ref reader, options);
 

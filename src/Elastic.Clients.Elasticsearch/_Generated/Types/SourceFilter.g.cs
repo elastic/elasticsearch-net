@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class SourceFilter
+	public sealed partial class SourceFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("excludes")]

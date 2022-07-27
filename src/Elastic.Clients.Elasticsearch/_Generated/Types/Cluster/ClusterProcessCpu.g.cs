@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterProcessCpu
+	public sealed partial class ClusterProcessCpu
 	{
 		[JsonInclude]
 		[JsonPropertyName("percent")]

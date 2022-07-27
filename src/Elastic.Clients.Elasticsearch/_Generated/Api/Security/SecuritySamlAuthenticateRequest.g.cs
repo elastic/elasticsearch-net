@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecuritySamlAuthenticateRequest : PlainRequestBase<SecuritySamlAuthenticateRequestParameters>
+	public sealed partial class SecuritySamlAuthenticateRequest : PlainRequestBase<SecuritySamlAuthenticateRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecuritySamlAuthenticate;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

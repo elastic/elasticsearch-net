@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 	{
 	}
 
-	public partial class CcrForgetFollowerRequest : PlainRequestBase<CcrForgetFollowerRequestParameters>
+	public sealed partial class CcrForgetFollowerRequest : PlainRequestBase<CcrForgetFollowerRequestParameters>
 	{
 		public CcrForgetFollowerRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{

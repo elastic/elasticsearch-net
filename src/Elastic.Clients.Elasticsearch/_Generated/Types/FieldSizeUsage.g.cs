@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class FieldSizeUsage
+	public sealed partial class FieldSizeUsage
 	{
 		[JsonInclude]
 		[JsonPropertyName("size")]

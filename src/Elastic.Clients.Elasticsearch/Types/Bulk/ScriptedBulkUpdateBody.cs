@@ -8,7 +8,7 @@ namespace Elastic.Clients.Elasticsearch
 {
 	internal class ScriptedBulkUpdateBody : BulkUpdateBodyBase
 	{
-		public ScriptBase Script { get; set; }
+		public Script Script { get; set; }
 
 		protected override void SerializeProperties(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

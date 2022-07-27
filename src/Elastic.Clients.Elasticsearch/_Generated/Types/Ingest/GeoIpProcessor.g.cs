@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class GeoIpProcessor : ProcessorBase, IProcessorVariant
+	public sealed partial class GeoIpProcessor : IProcessorVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("database_file")]
@@ -39,12 +39,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool FirstOnly { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("if")]
+		public string? If { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_failure")]
+		public bool? IgnoreFailure { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("ignore_missing")]
 		public bool IgnoreMissing { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("on_failure")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailure { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("properties")]
 		public IEnumerable<string> Properties { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tag")]
+		public string? Tag { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("target_field")]

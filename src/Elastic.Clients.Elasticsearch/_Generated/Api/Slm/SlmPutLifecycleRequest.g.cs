@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class SlmPutLifecycleRequest : PlainRequestBase<SlmPutLifecycleRequestParameters>
+	public sealed partial class SlmPutLifecycleRequest : PlainRequestBase<SlmPutLifecycleRequestParameters>
 	{
 		public SlmPutLifecycleRequest(Elastic.Clients.Elasticsearch.Name policy_id) : base(r => r.Required("policy_id", policy_id))
 		{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class RerouteExplanation
+	public sealed partial class RerouteExplanation
 	{
 		[JsonInclude]
 		[JsonPropertyName("command")]

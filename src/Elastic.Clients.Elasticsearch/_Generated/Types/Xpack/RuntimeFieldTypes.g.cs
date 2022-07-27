@@ -24,8 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class RuntimeFieldTypes : Base
+	public sealed partial class RuntimeFieldTypes
 	{
+		[JsonInclude]
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("field_types")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldsType> FieldTypes { get; init; }

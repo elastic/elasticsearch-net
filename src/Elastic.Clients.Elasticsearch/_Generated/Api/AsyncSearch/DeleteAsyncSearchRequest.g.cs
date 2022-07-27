@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 	{
 	}
 
-	public partial class DeleteAsyncSearchRequest : PlainRequestBase<DeleteAsyncSearchRequestParameters>
+	public sealed partial class DeleteAsyncSearchRequest : PlainRequestBase<DeleteAsyncSearchRequestParameters>
 	{
 		public DeleteAsyncSearchRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

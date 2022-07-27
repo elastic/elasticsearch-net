@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class NoriPartOfSpeechTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class NoriPartOfSpeechTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("stoptags")]
@@ -33,6 +33,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "nori_part_of_speech";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class NoriPartOfSpeechTokenFilterDescriptor : SerializableDescriptorBase<NoriPartOfSpeechTokenFilterDescriptor>, IBuildableDescriptor<NoriPartOfSpeechTokenFilter>

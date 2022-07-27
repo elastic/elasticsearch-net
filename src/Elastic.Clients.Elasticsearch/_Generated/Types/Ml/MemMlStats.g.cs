@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class MemMlStats
+	public sealed partial class MemMlStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("anomaly_detectors")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class InnerHits
+	public sealed partial class InnerHits
 	{
 		[JsonInclude]
 		[JsonPropertyName("_source")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Graph
 {
-	public partial class ExploreControls
+	public sealed partial class ExploreControls
 	{
 		[JsonInclude]
 		[JsonPropertyName("sample_diversity")]

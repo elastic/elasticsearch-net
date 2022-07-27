@@ -748,7 +748,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexSettingsConverter))]
-	public partial class IndexSettings
+	public sealed partial class IndexSettings
 	{
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? Analysis { get; set; }
 

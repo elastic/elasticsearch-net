@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 	}
 
-	public partial class SearchShardsRequest : PlainRequestBase<SearchShardsRequestParameters>
+	public sealed partial class SearchShardsRequest : PlainRequestBase<SearchShardsRequestParameters>
 	{
 		public SearchShardsRequest()
 		{

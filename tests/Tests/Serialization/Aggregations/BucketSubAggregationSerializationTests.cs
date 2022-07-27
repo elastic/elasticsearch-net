@@ -19,9 +19,11 @@ public class BucketSubAggregationSerializationTests : SerializerTestBase
 		var dateHistogramAgg = searchResponse.Aggregations.GetDateHistogram("by-month");
 
 		dateHistogramAgg.Should().NotBeNull();
-		dateHistogramAgg.Buckets.Should().HaveCount(1);
 
-		var dateBucket = dateHistogramAgg.Buckets.First();
+		var bucketsCollection = dateHistogramAgg.Buckets.Item2;
+		bucketsCollection.Should().HaveCount(1);
+
+		var dateBucket = bucketsCollection.First();
 
 		dateBucket.Key.Should().Be(1517443200000);
 		dateBucket.KeyAsString.Should().Be("2018-02-01T00:00:00.000Z");

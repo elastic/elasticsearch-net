@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class SnapshotInfo
+	public sealed partial class SnapshotInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("data_streams")]

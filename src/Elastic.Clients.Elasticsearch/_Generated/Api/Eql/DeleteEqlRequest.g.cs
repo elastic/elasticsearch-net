@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 	{
 	}
 
-	public partial class DeleteEqlRequest : PlainRequestBase<DeleteEqlRequestParameters>
+	public sealed partial class DeleteEqlRequest : PlainRequestBase<DeleteEqlRequestParameters>
 	{
 		public DeleteEqlRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

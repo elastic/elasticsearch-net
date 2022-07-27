@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class CoordsGeoBounds
+	public sealed partial class CoordsGeoBounds
 	{
 		[JsonInclude]
 		[JsonPropertyName("bottom")]

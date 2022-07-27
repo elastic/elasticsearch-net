@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 	{
 	}
 
-	public partial class SqlQueryRequest : PlainRequestBase<SqlQueryRequestParameters>
+	public sealed partial class SqlQueryRequest : PlainRequestBase<SqlQueryRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

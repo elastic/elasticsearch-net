@@ -24,15 +24,27 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeEvaluationClassificationMetrics : DataframeEvaluationMetrics
+	public sealed partial class DataframeEvaluationClassificationMetrics
 	{
 		[JsonInclude]
 		[JsonPropertyName("accuracy")]
 		public Dictionary<string, object>? Accuracy { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("auc_roc")]
+		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationClassificationMetricsAucRoc? AucRoc { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("multiclass_confusion_matrix")]
 		public Dictionary<string, object>? MulticlassConfusionMatrix { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("precision")]
+		public Dictionary<string, object>? Precision { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("recall")]
+		public Dictionary<string, object>? Recall { get; set; }
 	}
 
 	public sealed partial class DataframeEvaluationClassificationMetricsDescriptor : SerializableDescriptorBase<DataframeEvaluationClassificationMetricsDescriptor>

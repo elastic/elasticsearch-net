@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 	}
 
-	public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>
+	public sealed partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>
 	{
 		public PutMappingRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

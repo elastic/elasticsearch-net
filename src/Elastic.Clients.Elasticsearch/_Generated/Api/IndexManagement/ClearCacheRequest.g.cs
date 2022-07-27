@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 	}
 
-	public partial class ClearCacheRequest : PlainRequestBase<ClearCacheRequestParameters>
+	public sealed partial class ClearCacheRequest : PlainRequestBase<ClearCacheRequestParameters>
 	{
 		public ClearCacheRequest()
 		{

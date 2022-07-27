@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public Elastic.Clients.Elasticsearch.ThreadType? Sort { get => Q<Elastic.Clients.Elasticsearch.ThreadType?>("sort"); set => Q("sort", value); }
 	}
 
-	public partial class NodesHotThreadsRequest : PlainRequestBase<NodesHotThreadsRequestParameters>
+	public sealed partial class NodesHotThreadsRequest : PlainRequestBase<NodesHotThreadsRequestParameters>
 	{
 		public NodesHotThreadsRequest()
 		{

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Logstash
 	{
 	}
 
-	public partial class LogstashPutPipelineRequest : PlainRequestBase<LogstashPutPipelineRequestParameters>
+	public sealed partial class LogstashPutPipelineRequest : PlainRequestBase<LogstashPutPipelineRequestParameters>
 	{
 		public LogstashPutPipelineRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

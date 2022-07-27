@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
 	}
 
-	public partial class MlGetCalendarEventsRequest : PlainRequestBase<MlGetCalendarEventsRequestParameters>
+	public sealed partial class MlGetCalendarEventsRequest : PlainRequestBase<MlGetCalendarEventsRequestParameters>
 	{
 		public MlGetCalendarEventsRequest(Elastic.Clients.Elasticsearch.Id calendar_id) : base(r => r.Required("calendar_id", calendar_id))
 		{

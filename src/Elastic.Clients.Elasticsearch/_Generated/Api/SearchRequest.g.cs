@@ -337,7 +337,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<string>? Stats { get; set; }
 	}
 
-	public partial class SearchRequest<TInferDocument> : SearchRequest
+	public sealed partial class SearchRequest<TInferDocument> : SearchRequest
 	{
 		public SearchRequest() : base(typeof(TInferDocument))
 		{
