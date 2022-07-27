@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class ScriptRequest : PlainRequestBase<ScriptRequestParameters>
+	public sealed partial class ScriptRequest : PlainRequestBase<ScriptRequestParameters>
 	{
 		public ScriptRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

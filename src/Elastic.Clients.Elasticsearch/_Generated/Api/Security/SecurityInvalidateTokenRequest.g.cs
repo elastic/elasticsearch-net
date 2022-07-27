@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecurityInvalidateTokenRequest : PlainRequestBase<SecurityInvalidateTokenRequestParameters>
+	public sealed partial class SecurityInvalidateTokenRequest : PlainRequestBase<SecurityInvalidateTokenRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityInvalidateToken;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;

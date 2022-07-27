@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RescoreQuery
+	public sealed partial class RescoreQuery
 	{
 		[JsonInclude]
 		[JsonPropertyName("query_weight")]

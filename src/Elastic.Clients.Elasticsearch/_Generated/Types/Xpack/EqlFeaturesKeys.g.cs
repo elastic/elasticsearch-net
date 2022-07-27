@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class EqlFeaturesKeys
+	public sealed partial class EqlFeaturesKeys
 	{
 		[JsonInclude]
 		[JsonPropertyName("join_keys_five_or_more")]

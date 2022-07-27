@@ -24,8 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class Sql : Base
+	public sealed partial class Sql
 	{
+		[JsonInclude]
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("features")]
 		public Dictionary<string, int> Features { get; init; }

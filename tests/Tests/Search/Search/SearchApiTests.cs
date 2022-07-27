@@ -263,7 +263,7 @@ namespace Tests.Search.Search
 			//response.Hits.First().Fields.ValueOf<Project, string>(p => p.Name).Should().NotBeNullOrEmpty();
 			//response.Hits.First().Fields.ValueOf<Project, int?>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
 			response.Aggregations.Count.Should().BeGreaterThan(0);
-			var startDates = response.Aggregations.Terms("startDates");
+			var startDates = response.Aggregations.GetLongTerms("startDates");
 			startDates.Should().NotBeNull();
 		}
 	}

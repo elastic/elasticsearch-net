@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class MlUpgradeJobSnapshotRequest : PlainRequestBase<MlUpgradeJobSnapshotRequestParameters>
+	public sealed partial class MlUpgradeJobSnapshotRequest : PlainRequestBase<MlUpgradeJobSnapshotRequestParameters>
 	{
 		public MlUpgradeJobSnapshotRequest(Elastic.Clients.Elasticsearch.Id job_id, Elastic.Clients.Elasticsearch.Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
 		{

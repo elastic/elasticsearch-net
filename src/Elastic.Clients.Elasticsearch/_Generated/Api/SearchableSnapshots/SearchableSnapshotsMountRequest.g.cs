@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 		public string? Storage { get => Q<string?>("storage"); set => Q("storage", value); }
 	}
 
-	public partial class SearchableSnapshotsMountRequest : PlainRequestBase<SearchableSnapshotsMountRequestParameters>
+	public sealed partial class SearchableSnapshotsMountRequest : PlainRequestBase<SearchableSnapshotsMountRequestParameters>
 	{
 		public SearchableSnapshotsMountRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{

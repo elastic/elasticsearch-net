@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class Breaker
+	public sealed partial class Breaker
 	{
 		[JsonInclude]
 		[JsonPropertyName("estimated_size")]

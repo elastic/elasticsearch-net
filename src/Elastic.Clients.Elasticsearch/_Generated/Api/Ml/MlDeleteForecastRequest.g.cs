@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class MlDeleteForecastRequest : PlainRequestBase<MlDeleteForecastRequestParameters>
+	public sealed partial class MlDeleteForecastRequest : PlainRequestBase<MlDeleteForecastRequestParameters>
 	{
 		public MlDeleteForecastRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class PatternReplaceCharFilter : CharFilterBase, ICharFilterDefinition
+	public sealed partial class PatternReplaceCharFilter : ICharFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("flags")]
@@ -41,6 +41,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "pattern_replace";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class PatternReplaceCharFilterDescriptor : SerializableDescriptorBase<PatternReplaceCharFilterDescriptor>, IBuildableDescriptor<PatternReplaceCharFilter>

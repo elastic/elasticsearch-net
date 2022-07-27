@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoRepositoriesUrl
+	public sealed partial class NodeInfoRepositoriesUrl
 	{
 		[JsonInclude]
 		[JsonPropertyName("allowed_urls")]

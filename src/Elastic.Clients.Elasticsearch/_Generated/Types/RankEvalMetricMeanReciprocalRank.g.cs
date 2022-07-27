@@ -24,8 +24,15 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RankEvalMetricMeanReciprocalRank : RankEvalMetricRatingTreshold
+	public sealed partial class RankEvalMetricMeanReciprocalRank
 	{
+		[JsonInclude]
+		[JsonPropertyName("k")]
+		public int? k { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("relevant_rating_threshold")]
+		public int? RelevantRatingThreshold { get; set; }
 	}
 
 	public sealed partial class RankEvalMetricMeanReciprocalRankDescriptor : SerializableDescriptorBase<RankEvalMetricMeanReciprocalRankDescriptor>

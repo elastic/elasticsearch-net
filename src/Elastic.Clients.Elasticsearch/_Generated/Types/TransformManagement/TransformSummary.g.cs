@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class TransformSummary
+	public sealed partial class TransformSummary
 	{
 		[JsonInclude]
 		[JsonPropertyName("_meta")]

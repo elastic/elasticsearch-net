@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class RerouteDecision
+	public sealed partial class RerouteDecision
 	{
 		[JsonInclude]
 		[JsonPropertyName("decider")]

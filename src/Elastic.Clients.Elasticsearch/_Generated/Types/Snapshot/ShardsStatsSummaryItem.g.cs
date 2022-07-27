@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class ShardsStatsSummaryItem
+	public sealed partial class ShardsStatsSummaryItem
 	{
 		[JsonInclude]
 		[JsonPropertyName("file_count")]

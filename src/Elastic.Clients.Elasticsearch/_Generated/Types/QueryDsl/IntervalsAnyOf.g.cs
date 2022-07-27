@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class IntervalsAnyOf : IIntervalsVariant, IIntervalsQueryVariant
+	public sealed partial class IntervalsAnyOf : IIntervalsVariant, IIntervalsQueryVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("filter")]

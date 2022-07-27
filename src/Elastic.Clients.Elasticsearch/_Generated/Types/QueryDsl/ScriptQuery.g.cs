@@ -24,11 +24,19 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class ScriptQuery : QueryBase, IQueryVariant
+	public sealed partial class ScriptQuery : Query, IQueryVariant
 	{
 		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("script")]
-		public ScriptBase Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
 
 	public sealed partial class ScriptQueryDescriptor : SerializableDescriptorBase<ScriptQueryDescriptor>
@@ -42,11 +50,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private ScriptBase ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+		private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
 		public ScriptQueryDescriptor QueryName(string? queryName)
 		{
@@ -60,27 +64,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScriptQueryDescriptor Script(ScriptBase script)
+		public ScriptQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
 			ScriptValue = script;
-			return Self;
-		}
-
-		public ScriptQueryDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptQueryDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
 			return Self;
 		}
 
@@ -99,22 +85,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 			writer.WriteEndObject();
 		}
 	}

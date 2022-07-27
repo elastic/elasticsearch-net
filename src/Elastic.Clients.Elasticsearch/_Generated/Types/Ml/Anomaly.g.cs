@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class Anomaly
+	public sealed partial class Anomaly
 	{
 		[JsonInclude]
 		[JsonPropertyName("actual")]

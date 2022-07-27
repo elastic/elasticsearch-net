@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecuritySamlInvalidateRequest : PlainRequestBase<SecuritySamlInvalidateRequestParameters>
+	public sealed partial class SecuritySamlInvalidateRequest : PlainRequestBase<SecuritySamlInvalidateRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecuritySamlInvalidate;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

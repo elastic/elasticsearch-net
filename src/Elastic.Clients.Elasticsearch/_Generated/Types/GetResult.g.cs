@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class GetResult<TDocument>
+	public sealed partial class GetResult<TDocument>
 	{
 		[JsonInclude]
 		[JsonPropertyName("_id")]

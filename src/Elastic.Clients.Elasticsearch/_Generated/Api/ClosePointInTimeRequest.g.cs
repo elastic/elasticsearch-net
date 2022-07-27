@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public partial class ClosePointInTimeRequest : PlainRequestBase<ClosePointInTimeRequestParameters>
+	public sealed partial class ClosePointInTimeRequest : PlainRequestBase<ClosePointInTimeRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;

@@ -39,18 +39,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("format"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("field"))
 					{
 						reader.Read();
@@ -63,10 +51,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("format"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("script"))
 					{
 						reader.Read();
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
@@ -102,16 +102,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("stats");
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.Format))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
-			}
-
 			if (value.Field is not null)
 			{
 				writer.WritePropertyName("field");
 				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
 			}
 
 			if (value.Script is not null)
@@ -132,12 +132,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(StatsAggregationConverter))]
-	public partial class StatsAggregation : FormatMetricAggregationBase
+	public sealed partial class StatsAggregation : Aggregation
 	{
-		public StatsAggregation(string name, Field field) : base(name) => Field = field;
-		public StatsAggregation(string name) : base(name)
+		public StatsAggregation(string name, Field field) : this(name) => Field = field;
+		public StatsAggregation(string name) => Name = name;
+		internal StatsAggregation()
 		{
 		}
+
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+		public string? Format { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
 	public sealed partial class StatsAggregationDescriptor<TDocument> : SerializableDescriptorBase<StatsAggregationDescriptor<TDocument>>
@@ -147,41 +158,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private string? FormatValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
-		public StatsAggregationDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public StatsAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public StatsAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		public StatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 		{
@@ -207,27 +190,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public StatsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("stats");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
@@ -238,6 +211,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -258,41 +237,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private string? FormatValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
-		public StatsAggregationDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public StatsAggregationDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public StatsAggregationDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		public StatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 		{
@@ -324,27 +275,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public StatsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("stats");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
@@ -355,6 +296,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			writer.WriteEndObject();

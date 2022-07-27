@@ -24,10 +24,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeEvaluationSummaryAucRoc : DataframeEvaluationValue
+	public sealed partial class DataframeEvaluationSummaryAucRoc
 	{
 		[JsonInclude]
 		[JsonPropertyName("curve")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationSummaryAucRocCurveItem>? Curve { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public double Value { get; init; }
 	}
 }

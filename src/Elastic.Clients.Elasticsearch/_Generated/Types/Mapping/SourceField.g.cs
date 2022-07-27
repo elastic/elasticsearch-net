@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class SourceField
+	public sealed partial class SourceField
 	{
 		[JsonInclude]
 		[JsonPropertyName("compress")]

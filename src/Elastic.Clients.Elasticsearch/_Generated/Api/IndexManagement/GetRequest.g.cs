@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? Features { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.Feature>?>("features"); set => Q("features", value); }
 	}
 
-	public partial class GetRequest : PlainRequestBase<GetRequestParameters>
+	public sealed partial class GetRequest : PlainRequestBase<GetRequestParameters>
 	{
 		public GetRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

@@ -24,11 +24,19 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class Realm : Base
+	public sealed partial class Realm
 	{
+		[JsonInclude]
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("cache")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.RealmCache>? Cache { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("has_authorization_realms")]

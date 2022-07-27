@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 	{
 	}
 
-	public partial class CcrPauseFollowRequest : PlainRequestBase<CcrPauseFollowRequestParameters>
+	public sealed partial class CcrPauseFollowRequest : PlainRequestBase<CcrPauseFollowRequestParameters>
 	{
 		public CcrPauseFollowRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{

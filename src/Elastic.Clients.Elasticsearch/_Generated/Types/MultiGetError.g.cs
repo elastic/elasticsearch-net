@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MultiGetError
+	public sealed partial class MultiGetError
 	{
 		[JsonInclude]
 		[JsonPropertyName("_id")]

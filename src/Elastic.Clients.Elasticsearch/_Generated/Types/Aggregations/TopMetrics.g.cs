@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class TopMetrics
+	public sealed partial class TopMetrics
 	{
 		[JsonInclude]
 		[JsonPropertyName("metrics")]

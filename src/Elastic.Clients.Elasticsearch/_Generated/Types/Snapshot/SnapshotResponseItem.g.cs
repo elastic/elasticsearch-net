@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class SnapshotResponseItem
+	public sealed partial class SnapshotResponseItem
 	{
 		[JsonInclude]
 		[JsonPropertyName("error")]

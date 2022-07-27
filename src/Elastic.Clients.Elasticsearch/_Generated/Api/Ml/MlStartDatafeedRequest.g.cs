@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlStartDatafeedRequest : PlainRequestBase<MlStartDatafeedRequestParameters>
+	public sealed partial class MlStartDatafeedRequest : PlainRequestBase<MlStartDatafeedRequestParameters>
 	{
 		public MlStartDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
 		{

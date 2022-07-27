@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	}
 
 	[JsonConverter(typeof(InferenceConfigUpdateContainerConverter))]
-	public partial class InferenceConfigUpdateContainer
+	public sealed partial class InferenceConfigUpdateContainer
 	{
 		public InferenceConfigUpdateContainer(string variantName, IInferenceConfigUpdateVariant variant)
 		{

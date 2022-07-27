@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>
+	public sealed partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClearScroll;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;

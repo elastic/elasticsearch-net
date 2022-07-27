@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
 
-	public partial class ReindexRethrottleRequest : PlainRequestBase<ReindexRethrottleRequestParameters>
+	public sealed partial class ReindexRethrottleRequest : PlainRequestBase<ReindexRethrottleRequestParameters>
 	{
 		public ReindexRethrottleRequest(Elastic.Clients.Elasticsearch.Id task_id) : base(r => r.Required("task_id", task_id))
 		{

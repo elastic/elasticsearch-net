@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class PathHierarchyTokenizer : TokenizerBase, ITokenizerDefinition
+	public sealed partial class PathHierarchyTokenizer : ITokenizerDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("buffer_size")]
@@ -49,6 +49,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "path_hierarchy";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class PathHierarchyTokenizerDescriptor : SerializableDescriptorBase<PathHierarchyTokenizerDescriptor>, IBuildableDescriptor<PathHierarchyTokenizer>

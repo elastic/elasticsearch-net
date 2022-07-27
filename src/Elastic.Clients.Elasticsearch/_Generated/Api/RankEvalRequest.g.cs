@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 	}
 
-	public partial class RankEvalRequest : PlainRequestBase<RankEvalRequestParameters>
+	public sealed partial class RankEvalRequest : PlainRequestBase<RankEvalRequestParameters>
 	{
 		public RankEvalRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

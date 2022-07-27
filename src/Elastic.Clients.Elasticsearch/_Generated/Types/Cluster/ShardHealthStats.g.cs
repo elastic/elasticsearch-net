@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ShardHealthStats
+	public sealed partial class ShardHealthStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("active_shards")]

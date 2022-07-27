@@ -24,8 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class TTestAggregate : AggregateBase
+	public sealed partial class TTestAggregate : Aggregate
 	{
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("value")]
 		public double? Value { get; init; }

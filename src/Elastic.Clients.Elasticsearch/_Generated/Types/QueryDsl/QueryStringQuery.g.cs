@@ -24,8 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class QueryStringQuery : QueryBase, IQueryVariant
+	public sealed partial class QueryStringQuery : Query, IQueryVariant
 	{
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("allow_leading_wildcard")]
 		public bool? AllowLeadingWildcard { get; set; }
@@ -41,6 +45,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonInclude]
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
 		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("default_field")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class RoleMapping
+	public sealed partial class RoleMapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]

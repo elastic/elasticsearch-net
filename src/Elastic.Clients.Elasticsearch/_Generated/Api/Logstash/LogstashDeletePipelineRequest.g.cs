@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Logstash
 	{
 	}
 
-	public partial class LogstashDeletePipelineRequest : PlainRequestBase<LogstashDeletePipelineRequestParameters>
+	public sealed partial class LogstashDeletePipelineRequest : PlainRequestBase<LogstashDeletePipelineRequestParameters>
 	{
 		public LogstashDeletePipelineRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

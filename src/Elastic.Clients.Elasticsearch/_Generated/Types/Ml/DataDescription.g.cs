@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataDescription
+	public sealed partial class DataDescription
 	{
 		[JsonInclude]
 		[JsonPropertyName("field_delimiter")]

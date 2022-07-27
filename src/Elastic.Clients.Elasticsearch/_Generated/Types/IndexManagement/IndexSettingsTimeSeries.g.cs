@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class IndexSettingsTimeSeries
+	public sealed partial class IndexSettingsTimeSeries
 	{
 		[JsonInclude]
 		[JsonPropertyName("end_time")]

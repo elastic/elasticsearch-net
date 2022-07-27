@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Slm
 {
-	public partial class Configuration
+	public sealed partial class Configuration
 	{
 		[JsonInclude]
 		[JsonPropertyName("feature_states")]

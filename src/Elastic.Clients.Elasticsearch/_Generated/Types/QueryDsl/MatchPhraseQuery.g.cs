@@ -24,21 +24,39 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class MatchPhraseQueryConverter : FieldNameQueryConverterBase<MatchPhraseQuery>
+	internal sealed class MatchPhraseQueryConverter : JsonConverter<MatchPhraseQuery>
 	{
-		internal override MatchPhraseQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override MatchPhraseQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new MatchPhraseQuery();
+			reader.Read();
+			reader.Read();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new MatchPhraseQuery()
+			{ Field = fieldName };
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "analyzer")
 					{
 						variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
 						continue;
 					}
 
@@ -59,74 +77,80 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.ZeroTermsQuery = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery?>(ref reader, options);
 						continue;
 					}
-
-					if (property == "_name")
-					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
 				}
 			}
 
 			reader.Read();
+			reader.Read();
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, MatchPhraseQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, MatchPhraseQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.Analyzer))
+			if (value.Field is null)
+				writer.WriteNullValue();
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value.Analyzer);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (!string.IsNullOrEmpty(value.Analyzer))
+				{
+					writer.WritePropertyName("analyzer");
+					writer.WriteStringValue(value.Analyzer);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				writer.WritePropertyName("query");
+				writer.WriteStringValue(value.Query);
+				if (value.Slop.HasValue)
+				{
+					writer.WritePropertyName("slop");
+					writer.WriteNumberValue(value.Slop.Value);
+				}
+
+				if (value.ZeroTermsQuery is not null)
+				{
+					writer.WritePropertyName("zero_terms_query");
+					JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
+				}
+
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(value.Query);
-			if (value.Slop.HasValue)
-			{
-				writer.WritePropertyName("slop");
-				writer.WriteNumberValue(value.Slop.Value);
-			}
-
-			if (value.ZeroTermsQuery is not null)
-			{
-				writer.WritePropertyName("zero_terms_query");
-				JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings to infer field.");
 		}
 	}
 
 	[JsonConverter(typeof(MatchPhraseQueryConverter))]
-	public partial class MatchPhraseQuery : FieldNameQueryBase, IQueryVariant
+	public sealed partial class MatchPhraseQuery : Query, IQueryVariant
 	{
+		public string? QueryName { get; set; }
+
 		public string? Analyzer { get; set; }
+
+		public float? Boost { get; set; }
 
 		public string Query { get; set; }
 
 		public int? Slop { get; set; }
 
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	}
 
 	public sealed partial class MatchPhraseQueryDescriptor<TDocument> : SerializableDescriptorBase<MatchPhraseQueryDescriptor<TDocument>>

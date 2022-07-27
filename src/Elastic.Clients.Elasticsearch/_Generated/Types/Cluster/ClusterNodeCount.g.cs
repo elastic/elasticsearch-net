@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterNodeCount
+	public sealed partial class ClusterNodeCount
 	{
 		[JsonInclude]
 		[JsonPropertyName("coordinating_only")]

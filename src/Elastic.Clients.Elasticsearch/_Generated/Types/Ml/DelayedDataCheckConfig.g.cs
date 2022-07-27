@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DelayedDataCheckConfig
+	public sealed partial class DelayedDataCheckConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("check_window")]

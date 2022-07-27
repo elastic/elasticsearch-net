@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class IoStatDevice
+	public sealed partial class IoStatDevice
 	{
 		[JsonInclude]
 		[JsonPropertyName("device_name")]

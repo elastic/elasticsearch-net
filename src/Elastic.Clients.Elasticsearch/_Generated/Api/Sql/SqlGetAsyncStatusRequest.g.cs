@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 	{
 	}
 
-	public partial class SqlGetAsyncStatusRequest : PlainRequestBase<SqlGetAsyncStatusRequestParameters>
+	public sealed partial class SqlGetAsyncStatusRequest : PlainRequestBase<SqlGetAsyncStatusRequestParameters>
 	{
 		public SqlGetAsyncStatusRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

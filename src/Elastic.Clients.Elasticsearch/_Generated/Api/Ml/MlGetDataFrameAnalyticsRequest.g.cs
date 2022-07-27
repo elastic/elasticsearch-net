@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 	}
 
-	public partial class MlGetDataFrameAnalyticsRequest : PlainRequestBase<MlGetDataFrameAnalyticsRequestParameters>
+	public sealed partial class MlGetDataFrameAnalyticsRequest : PlainRequestBase<MlGetDataFrameAnalyticsRequestParameters>
 	{
 		public MlGetDataFrameAnalyticsRequest()
 		{

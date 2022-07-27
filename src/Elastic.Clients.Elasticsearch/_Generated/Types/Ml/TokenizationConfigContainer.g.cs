@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	}
 
 	[JsonConverter(typeof(TokenizationConfigContainerConverter))]
-	public partial class TokenizationConfigContainer
+	public sealed partial class TokenizationConfigContainer
 	{
 		public TokenizationConfigContainer(string variantName, ITokenizationConfigVariant variant)
 		{

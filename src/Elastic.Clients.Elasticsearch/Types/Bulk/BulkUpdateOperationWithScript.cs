@@ -10,13 +10,13 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public class BulkUpdateOperationWithScript : BulkUpdateOperationBase
 	{
-		public BulkUpdateOperationWithScript(Id id, ScriptBase script)
+		public BulkUpdateOperationWithScript(Id id, Script script)
 		{
 			Id = id;
 			Script = script;
 		}
 
-		public BulkUpdateOperationWithScript(Id id, IndexName index, ScriptBase script)
+		public BulkUpdateOperationWithScript(Id id, IndexName index, Script script)
 		{
 			Id = id;
 			Index = index;
@@ -24,7 +24,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		[JsonIgnore]
-		public ScriptBase Script { get; set; }
+		public Script Script { get; set; }
 
 		protected override string Operation => "update";
 
@@ -41,9 +41,9 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed class BulkUpdateOperationWithScript<TDocument> : BulkUpdateOperationWithScript
 	{
-		public BulkUpdateOperationWithScript(TDocument upsert, Id id, ScriptBase script) : base(id, script) => Upsert = upsert;
+		public BulkUpdateOperationWithScript(TDocument upsert, Id id, Script script) : base(id, script) => Upsert = upsert;
 
-		public BulkUpdateOperationWithScript(TDocument upsert, Id id, IndexName index, ScriptBase script) : base(id, index, script) => Upsert = upsert;
+		public BulkUpdateOperationWithScript(TDocument upsert, Id id, IndexName index, Script script) : base(id, index, script) => Upsert = upsert;
 
 		[JsonIgnore]
 		public TDocument Upsert { get; set; }

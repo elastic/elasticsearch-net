@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class NodeShard
+	public sealed partial class NodeShard
 	{
 		[JsonInclude]
 		[JsonPropertyName("allocation_id")]

@@ -24,8 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class Slm : Base
+	public sealed partial class Slm
 	{
+		[JsonInclude]
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("policy_count")]
 		public int? PolicyCount { get; init; }

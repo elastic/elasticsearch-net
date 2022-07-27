@@ -96,11 +96,11 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 				new BulkUpdateOperation<Project, object>(Project.Instance.Name + "2")
 				{
 					Routing = Project.Instance.Name,
-					Script = new InlineScript("ctx._source.numberOfCommits = params.commits")
+					Script = new Script(new InlineScript("ctx._source.numberOfCommits = params.commits")
 					{
 						Params = new Dictionary<string, object> { { "commits", 30 } },
 						Language = "painless"
-					}
+					})
 				}
 			}
 		};

@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
 	}
 
-	public partial class FlushRequest : PlainRequestBase<FlushRequestParameters>
+	public sealed partial class FlushRequest : PlainRequestBase<FlushRequestParameters>
 	{
 		public FlushRequest()
 		{

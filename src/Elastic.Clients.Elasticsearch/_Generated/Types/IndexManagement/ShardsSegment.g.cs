@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class ShardsSegment
+	public sealed partial class ShardsSegment
 	{
 		[JsonInclude]
 		[JsonPropertyName("num_committed_segments")]

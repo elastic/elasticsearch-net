@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Username? Username { get => Q<Elastic.Clients.Elasticsearch.Username?>("username"); set => Q("username", value); }
 	}
 
-	public partial class SecurityGetApiKeyRequest : PlainRequestBase<SecurityGetApiKeyRequestParameters>
+	public sealed partial class SecurityGetApiKeyRequest : PlainRequestBase<SecurityGetApiKeyRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetApiKey;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

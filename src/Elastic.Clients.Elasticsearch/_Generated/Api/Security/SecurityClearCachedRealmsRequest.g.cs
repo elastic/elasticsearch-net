@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IEnumerable<string>? Usernames { get => Q<IEnumerable<string>?>("usernames"); set => Q("usernames", value); }
 	}
 
-	public partial class SecurityClearCachedRealmsRequest : PlainRequestBase<SecurityClearCachedRealmsRequestParameters>
+	public sealed partial class SecurityClearCachedRealmsRequest : PlainRequestBase<SecurityClearCachedRealmsRequestParameters>
 	{
 		public SecurityClearCachedRealmsRequest(Elastic.Clients.Elasticsearch.Names realms) : base(r => r.Required("realms", realms))
 		{

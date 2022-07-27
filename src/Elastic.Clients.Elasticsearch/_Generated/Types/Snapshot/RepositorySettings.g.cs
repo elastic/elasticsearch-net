@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class RepositorySettings
+	public sealed partial class RepositorySettings
 	{
 		[JsonInclude]
 		[JsonPropertyName("chunk_size")]

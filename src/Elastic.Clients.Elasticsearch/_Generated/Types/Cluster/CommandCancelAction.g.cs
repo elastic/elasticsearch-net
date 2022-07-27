@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class CommandCancelAction
+	public sealed partial class CommandCancelAction
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_primary")]

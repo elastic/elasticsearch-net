@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Enrich
 {
-	public partial class CacheStats
+	public sealed partial class CacheStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]

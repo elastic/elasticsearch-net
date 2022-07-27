@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 	{
 	}
 
-	public partial class IlmGetStatusRequest : PlainRequestBase<IlmGetStatusRequestParameters>
+	public sealed partial class IlmGetStatusRequest : PlainRequestBase<IlmGetStatusRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementGetStatus;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

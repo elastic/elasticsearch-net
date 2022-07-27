@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -24,18 +25,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public abstract partial class SuggesterBase
+	public partial class Script : Union<Elastic.Clients.Elasticsearch.InlineScript, Elastic.Clients.Elasticsearch.StoredScriptId>
 	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
+		public Script(Elastic.Clients.Elasticsearch.InlineScript inlineScript) : base(inlineScript)
+		{
+		}
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
+		public Script(Elastic.Clients.Elasticsearch.StoredScriptId storedScriptId) : base(storedScriptId)
+		{
+		}
 	}
 }

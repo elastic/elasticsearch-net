@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class Latest
+	public sealed partial class Latest
 	{
 		[JsonInclude]
 		[JsonPropertyName("sort")]

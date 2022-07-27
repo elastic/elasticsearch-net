@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class CommonGramsTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class CommonGramsTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("common_words")]
@@ -45,6 +45,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "common_grams";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class CommonGramsTokenFilterDescriptor : SerializableDescriptorBase<CommonGramsTokenFilterDescriptor>, IBuildableDescriptor<CommonGramsTokenFilter>

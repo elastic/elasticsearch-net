@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>
+	public sealed partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>
 	{
 		public PutAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
 		{

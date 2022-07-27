@@ -125,7 +125,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(GeoDistanceSortConverter))]
-	public partial class GeoDistanceSort : ISortOptionsVariant
+	public sealed partial class GeoDistanceSort : ISortOptionsVariant
 	{
 		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 

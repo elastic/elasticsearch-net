@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class IndexDetails
+	public sealed partial class IndexDetails
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_segments_per_shard")]

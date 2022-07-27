@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class OverallBucketJob
+	public sealed partial class OverallBucketJob
 	{
 		[JsonInclude]
 		[JsonPropertyName("job_id")]
