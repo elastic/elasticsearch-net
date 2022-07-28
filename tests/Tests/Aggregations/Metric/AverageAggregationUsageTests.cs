@@ -62,7 +62,7 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var commitsAvg = response.Aggregations.Average("average_commits");
+		var commitsAvg = response.Aggregations.GetAverage("average_commits");
 		commitsAvg.Should().NotBeNull();
 		commitsAvg.Value.Should().BeGreaterThan(0);
 		commitsAvg.Meta.Should().NotBeNull().And.HaveCount(1);
