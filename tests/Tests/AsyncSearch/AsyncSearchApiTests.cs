@@ -158,7 +158,7 @@ namespace Tests.AsyncSearch
 			r.Response.Should().NotBeNull();
 			r.Response.Took.Should().BeGreaterOrEqualTo(0);
 			r.Response.Hits.Should().HaveCount(10);
-			var terms = r.Response.Aggregations.Terms("states");
+			var terms = r.Response.Aggregations.GetTerms("states");
 			terms.Should().NotBeNull();
 		});
 
