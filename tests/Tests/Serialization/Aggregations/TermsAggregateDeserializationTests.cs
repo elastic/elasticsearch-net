@@ -193,16 +193,15 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		}
 	}
 
-	//[U]
-	//public void TryGetStringTermsAggregate()
-	//{
-	//	var stream = WrapInStream(@"{""aggregations"":{""terms#my-agg-name"":{""doc_count_error_upper_bound"":10,""sum_other_doc_count"":200,""buckets"":[]}}}");
+	[U]
+	public void CanDeserialize_TermsAggregate_WithSubAggregation()
+	{
+		var json = @"{""aggregations"":{""terms#my-agg-name"":{""doc_count_error_upper_bound"":0,""sum_other_doc_count"":0,""buckets"":[{""key"":""foo"",""doc_count"":5,""avg#my-sub-agg-name"":{""value"":75.0}}]}}}";
 
-	//	var search = _requestResponseSerializer.Deserialize<BasicSearchResponse>(stream);
+		var response = DeserializeJsonString<SearchResponse<object>>(json);
 
-	//	search.Aggregations.Should().HaveCount(1);
-
-	//	search.Aggregations.TryGetStringTerms("my-agg-name", out var stringTermsAggregate).Should().BeFalse();
-	//	stringTermsAggregate.Should().BeNull();
-	//}
+		var termsAgg = response.Aggregations.GetTerms("my-agg-name");
+		var avgAgg = termsAgg.Buckets.Item2.Single().GetAverage("my-sub-agg-name");
+		avgAgg.Value.Should().Be(75.0);
+	}
 }
