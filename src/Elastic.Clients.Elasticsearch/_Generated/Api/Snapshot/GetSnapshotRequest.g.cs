@@ -40,6 +40,9 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool? IndexDetails { get => Q<bool?>("index_details"); set => Q("index_details", value); }
 
 		[JsonIgnore]
+		public bool? IndexNames { get => Q<bool?>("index_names"); set => Q("index_names", value); }
+
+		[JsonIgnore]
 		public bool? IncludeRepository { get => Q<bool?>("include_repository"); set => Q("include_repository", value); }
 
 		[JsonIgnore]
@@ -86,6 +89,9 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool? IndexDetails { get => Q<bool?>("index_details"); set => Q("index_details", value); }
 
 		[JsonIgnore]
+		public bool? IndexNames { get => Q<bool?>("index_names"); set => Q("index_names", value); }
+
+		[JsonIgnore]
 		public bool? IncludeRepository { get => Q<bool?>("include_repository"); set => Q("include_repository", value); }
 
 		[JsonIgnore]
@@ -129,6 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public GetSnapshotRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public GetSnapshotRequestDescriptor IncludeRepository(bool? includeRepository = true) => Qs("include_repository", includeRepository);
 		public GetSnapshotRequestDescriptor IndexDetails(bool? indexDetails = true) => Qs("index_details", indexDetails);
+		public GetSnapshotRequestDescriptor IndexNames(bool? indexNames = true) => Qs("index_names", indexNames);
 		public GetSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public GetSnapshotRequestDescriptor Offset(int? offset) => Qs("offset", offset);
 		public GetSnapshotRequestDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order) => Qs("order", order);

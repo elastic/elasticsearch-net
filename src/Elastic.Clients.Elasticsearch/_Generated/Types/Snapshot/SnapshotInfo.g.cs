@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName> Indices { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName>? Indices { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("metadata")]
