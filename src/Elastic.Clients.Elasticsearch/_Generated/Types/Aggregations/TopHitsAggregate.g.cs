@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public sealed partial class TopHitsAggregate : Aggregate
+	public sealed partial class TopHitsAggregate : IAggregate
 	{
 		[JsonInclude]
 		[JsonPropertyName("hits")]
