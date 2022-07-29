@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public sealed partial class MatrixStatsAggregate : Aggregate
+	public sealed partial class MatrixStatsAggregate : IAggregate
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
