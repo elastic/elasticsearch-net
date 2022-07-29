@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public sealed partial class RangeAggregate : Aggregate
+	public sealed partial class RangeAggregate : IAggregate
 	{
 		[JsonInclude]
 		[JsonPropertyName("buckets")]
