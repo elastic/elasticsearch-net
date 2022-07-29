@@ -20,7 +20,7 @@ public class BucketSubAggregationSerializationTests : SerializerTestBase
 
 		dateHistogramAgg.Should().NotBeNull();
 
-		var bucketsCollection = dateHistogramAgg.Buckets.Item2;
+		var bucketsCollection = dateHistogramAgg.Buckets;
 		bucketsCollection.Should().HaveCount(1);
 
 		var dateBucket = bucketsCollection.First();

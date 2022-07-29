@@ -19,7 +19,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("buckets")]
-		public Buckets<TermsBucket<TKey>> Buckets { get; init; }
+		public IReadOnlyCollection<TermsBucket<TKey>> Buckets { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("meta")]

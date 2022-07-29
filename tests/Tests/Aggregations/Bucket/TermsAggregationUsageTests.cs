@@ -97,7 +97,7 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 		states.SumOtherDocCount.Should().BeGreaterOrEqualTo(0);
 		states.Buckets.Should().NotBeNull();
 
-		var bucketsCollection = states.Buckets.Item2;
+		var bucketsCollection = states.Buckets;
 
 		bucketsCollection.Count.Should().BeGreaterThan(0);
 		foreach (var item in bucketsCollection)
