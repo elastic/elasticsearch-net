@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("buckets")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramBucket> Buckets { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramBucket> Buckets { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("interval")]
