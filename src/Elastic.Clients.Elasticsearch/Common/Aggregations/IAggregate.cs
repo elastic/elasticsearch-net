@@ -5,12 +5,3 @@
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public interface IAggregate { }
-
-/// <summary>
-/// Base class for all aggregates.
-/// </summary>
-public abstract class Aggregate : IAggregate
-{
-}
-
-
