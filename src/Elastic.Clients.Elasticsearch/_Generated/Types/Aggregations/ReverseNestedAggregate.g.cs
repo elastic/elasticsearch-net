@@ -24,11 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public sealed partial class ReverseNestedAggregate : Aggregate
+	[JsonConverter(typeof(ReverseNestedAggregateConverter))]
+	public sealed partial class ReverseNestedAggregate : AggregateDictionary, IAggregate
 	{
-		[JsonInclude]
-		[JsonPropertyName("aggregations")]
-		public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
+		public ReverseNestedAggregate(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
+		{
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
@@ -37,5 +38,50 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("meta")]
 		public Dictionary<string, object>? Meta { get; init; }
+	}
+
+	internal sealed class ReverseNestedAggregateConverter : JsonConverter<ReverseNestedAggregate>
+	{
+		public override ReverseNestedAggregate? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
+			var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
+			long docCount = default;
+			Dictionary<string, object>? meta = default;
+			while (reader.Read())
+			{
+				if (reader.TokenType == JsonTokenType.EndObject)
+					break;
+				if (reader.TokenType != JsonTokenType.PropertyName)
+					throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
+				var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+				reader.Read();
+				if (name.Equals("doc_count", StringComparison.Ordinal))
+				{
+					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+					continue;
+				}
+
+				if (name.Equals("meta", StringComparison.Ordinal))
+				{
+					meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+					continue;
+				}
+
+				if (name.Contains("#"))
+				{
+					AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
+					continue;
+				}
+
+				throw new JsonException("Unknown property read from JSON.");
+			}
+
+			return new ReverseNestedAggregate(subAggs)
+			{ DocCount = docCount, Meta = meta };
+		}
+
+		public override void Write(Utf8JsonWriter writer, ReverseNestedAggregate value, JsonSerializerOptions options) => throw new NotImplementedException();
 	}
 }

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public sealed partial class AvgAggregate : Aggregate
+	public sealed partial class AvgAggregate : IAggregate
 	{
 		[JsonInclude]
 		[JsonPropertyName("meta")]
