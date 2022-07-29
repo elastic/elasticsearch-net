@@ -16,10 +16,10 @@ public class ChildrenAggregateSerializationTests : SerializerTestBase
 		var searchResponse = DeserializeJsonString<SearchResponse<object>>(json);
 
 		var topTagsTermsAggregate = searchResponse.Aggregations.GetTerms("top-tags");
-		var firstTopTagsBucket = topTagsTermsAggregate.Buckets.Item2.Single();
+		var firstTopTagsBucket = topTagsTermsAggregate.Buckets.Single();
 		var childrenAggregate = firstTopTagsBucket.GetChildren("to-answers");
 		var topNamesAggregate = childrenAggregate.GetTerms("top-names");
-		var firstTopNameBucket = topNamesAggregate.Buckets.Item2.First();
+		var firstTopNameBucket = topNamesAggregate.Buckets.First();
 		firstTopNameBucket.Key.Should().Be("Sam");
 	}
 }

@@ -24,7 +24,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		var termsAgg = search.Aggregations.GetStringTerms("my-agg-name");
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
-		var bucketCollection = termsAgg.Buckets.Item2;
+		var bucketCollection = termsAgg.Buckets;
 		bucketCollection.Should().HaveCount(2);
 
 		var firstBucket = bucketCollection.First();
@@ -54,7 +54,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
 
-		var bucketCollection = termsAgg.Buckets.Item2;
+		var bucketCollection = termsAgg.Buckets;
 		bucketCollection.Should().HaveCount(2);
 
 		var firstBucket = bucketCollection.First();
@@ -86,7 +86,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
 
-		var bucketCollection = termsAgg.Buckets.Item2;
+		var bucketCollection = termsAgg.Buckets;
 		bucketCollection.Should().HaveCount(2);
 
 		var firstBucket = bucketCollection.First();
@@ -119,7 +119,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
 
-		var bucketCollection = termsAgg.Buckets.Item2;
+		var bucketCollection = termsAgg.Buckets;
 
 		var firstBucket = bucketCollection.First();
 		firstBucket.Key.Should().HaveCount(2);
@@ -154,7 +154,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
 
-		var bucketCollection = termsAgg.Buckets.Item2;
+		var bucketCollection = termsAgg.Buckets;
 
 		bucketCollection.Should().HaveCount(2);
 
@@ -201,7 +201,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		var response = DeserializeJsonString<SearchResponse<object>>(json);
 
 		var termsAgg = response.Aggregations.GetTerms("my-agg-name");
-		var avgAgg = termsAgg.Buckets.Item2.Single().GetAverage("my-sub-agg-name");
+		var avgAgg = termsAgg.Buckets.Single().GetAverage("my-sub-agg-name");
 		avgAgg.Value.Should().Be(75.0);
 	}
 }
