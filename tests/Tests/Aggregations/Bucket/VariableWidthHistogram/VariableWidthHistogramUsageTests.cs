@@ -83,4 +83,72 @@ namespace Tests.Aggregations.Bucket.VariableWidthHistogram
 			counts.Meta["foo"].Should().Be("bar");
 		}
 	}
+
+	// hide
+	[SkipVersion("<7.11.0", "Variable width aggregation added in 7.11.0")]
+	public class VariableWidthHistogramWithScriptUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
+	{
+		public VariableWidthHistogramWithScriptUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		private const string Script = "Math.min(_value, -1)"; // use inline script to force the number of commits to be -1 for all documents
+
+		protected override object AggregationJson => new
+		{
+			commits = new
+			{
+				meta = new
+				{
+					foo = "bar"
+				},
+				variable_width_histogram = new
+				{
+					field = "numberOfCommits",
+					buckets = 2,
+					initial_buffer = 2,
+					shard_size = 100,
+					script = Script
+				}
+			}
+		};
+
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.VariableWidthHistogram("commits", v => v
+				.Field(f => f.NumberOfCommits)
+				.Buckets(2)
+				.InitialBuffer(2)
+				.ShardSize(100)
+				.Script(Script)
+				.Meta(m => m
+					.Add("foo", "bar")
+				));
+
+		protected override AggregationDictionary InitializerAggs =>
+			new VariableWidthHistogramAggregation("commits")
+			{
+				Field = Field<Project>(f => f.NumberOfCommits),
+				Buckets = 2,
+				InitialBuffer = 2,
+				ShardSize = 100,
+				Script = Script,
+				Meta = new Dictionary<string, object>
+				{
+					{ "foo", "bar" }
+				}
+			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+			var counts = response.Aggregations.VariableWidthHistogram("commits");
+			counts.Should().NotBeNull();
+			counts.Buckets.Should().HaveCount(1);
+			var firstBucket = counts.Buckets.First();
+			firstBucket.Key.Should().Be(-1);
+			firstBucket.Minimum.Should().Be(-1);
+			firstBucket.Maximum.Should().Be(-1);
+			firstBucket.DocCount.Should().BeGreaterOrEqualTo(1);
+			counts.Meta.Should().NotBeNull().And.HaveCount(1);
+			counts.Meta["foo"].Should().Be("bar");
+		}
+	}
 }
