@@ -24,9 +24,12 @@ namespace Nest
 
 		[DataMember(Name = "initial_buffer")]
 		int? InitialBuffer { get; set; }
-		
+
 		[DataMember(Name = "shard_size")]
 		int? ShardSize { get; set; }
+
+		[DataMember(Name = "script")]
+		string Script { get; set; }
 	}
 
 	public class VariableWidthHistogramAggregation : BucketAggregationBase, IVariableWidthHistogramAggregation
@@ -42,6 +45,8 @@ namespace Nest
 		/// <inheritdoc />
 		public int? ShardSize { get; set; }
 
+		public string Script { get; set; }
+
 		internal override void WrapInContainer(AggregationContainer c) => c.VariableWidthHistogram = this;
 	}
 
@@ -53,6 +58,7 @@ namespace Nest
 		int? IVariableWidthHistogramAggregation.Buckets { get; set; }
 		int? IVariableWidthHistogramAggregation.InitialBuffer { get; set; }
 		int? IVariableWidthHistogramAggregation.ShardSize { get; set; }
+		string IVariableWidthHistogramAggregation.Script { get; set; }
 
 		/// <inheritdoc cref="IVariableWidthHistogramAggregation.Field" />
 		public VariableWidthHistogramAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
@@ -68,5 +74,8 @@ namespace Nest
 
 		/// <inheritdoc cref="IVariableWidthHistogramAggregation.ShardSize" />
 		public VariableWidthHistogramAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSize = v);
+
+		/// <inheritdoc cref="IVariableWidthHistogramAggregation.Script" />
+		public VariableWidthHistogramAggregationDescriptor<T> Script(string script) => Assign(script, (a, v) => a.Script = v);
 	}
 }
