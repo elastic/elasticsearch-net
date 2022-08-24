@@ -106,7 +106,9 @@ namespace Tests.Aggregations.Bucket.VariableWidthHistogram
 					buckets = 2,
 					initial_buffer = 2,
 					shard_size = 100,
-					script = Script
+					script = new {
+						source = Script
+					}
 				}
 			}
 		};
@@ -129,7 +131,7 @@ namespace Tests.Aggregations.Bucket.VariableWidthHistogram
 				Buckets = 2,
 				InitialBuffer = 2,
 				ShardSize = 100,
-				Script = Script,
+				Script = new InlineScript(Script),
 				Meta = new Dictionary<string, object>
 				{
 					{ "foo", "bar" }
