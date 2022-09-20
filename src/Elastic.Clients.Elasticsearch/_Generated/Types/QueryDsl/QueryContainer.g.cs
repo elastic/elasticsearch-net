@@ -64,7 +64,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public static QueryContainer HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery hasParentQuery) => new QueryContainer("has_parent", hasParentQuery);
 		public static QueryContainer Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => new QueryContainer("ids", idsQuery);
 		public static QueryContainer Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery intervalsQuery) => new QueryContainer("intervals", intervalsQuery);
-		public static QueryContainer Knn(Elastic.Clients.Elasticsearch.QueryDsl.KnnQuery knnQuery) => new QueryContainer("knn", knnQuery);
 		public static QueryContainer Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery matchQuery) => new QueryContainer("match", matchQuery);
 		public static QueryContainer MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery matchAllQuery) => new QueryContainer("match_all", matchAllQuery);
 		public static QueryContainer MatchBoolPrefix(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery matchBoolPrefixQuery) => new QueryContainer("match_bool_prefix", matchBoolPrefixQuery);
@@ -212,12 +211,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (propertyName == "intervals")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery?>(ref reader, options);
-				return new QueryContainer(propertyName, variant);
-			}
-
-			if (propertyName == "knn")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.KnnQuery?>(ref reader, options);
 				return new QueryContainer(propertyName, variant);
 			}
 
@@ -485,9 +478,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				case "intervals":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery)value.Variant, options);
 					break;
-				case "knn":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.KnnQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.KnnQuery)value.Variant, options);
-					break;
 				case "match":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)value.Variant, options);
 					break;
@@ -689,8 +679,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Ids(Action<IdsQueryDescriptor> configure) => Set(configure, "ids");
 		public void Intervals(IntervalsQuery query) => Set(query, "intervals");
 		public void Intervals(Action<IntervalsQueryDescriptor<TDocument>> configure) => Set(configure, "intervals");
-		public void Knn(KnnQuery query) => Set(query, "knn");
-		public void Knn(Action<KnnQueryDescriptor<TDocument>> configure) => Set(configure, "knn");
 		public void Match(MatchQuery query) => Set(query, "match");
 		public void Match(Action<MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");
 		public void MatchAll(MatchAllQuery query) => Set(query, "match_all");
@@ -869,9 +857,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Intervals(IntervalsQuery query) => Set(query, "intervals");
 		public void Intervals(Action<IntervalsQueryDescriptor> configure) => Set(configure, "intervals");
 		public void Intervals<TDocument>(Action<IntervalsQueryDescriptor<TDocument>> configure) => Set(configure, "intervals");
-		public void Knn(KnnQuery query) => Set(query, "knn");
-		public void Knn(Action<KnnQueryDescriptor> configure) => Set(configure, "knn");
-		public void Knn<TDocument>(Action<KnnQueryDescriptor<TDocument>> configure) => Set(configure, "knn");
 		public void Match(MatchQuery query) => Set(query, "match");
 		public void Match(Action<MatchQueryDescriptor> configure) => Set(configure, "match");
 		public void Match<TDocument>(Action<MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");

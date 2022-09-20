@@ -24,8 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public sealed partial class TrainedModelAllocationRoutingTable
+	public sealed partial class TrainedModelAssignmentRoutingTable
 	{
+		[JsonInclude]
+		[JsonPropertyName("current_allocations")]
+		public int CurrentAllocations { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string Reason { get; init; }
@@ -33,5 +37,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonInclude]
 		[JsonPropertyName("routing_state")]
 		public Elastic.Clients.Elasticsearch.Ml.RoutingState RoutingState { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("target_allocations")]
+		public int TargetAllocations { get; init; }
 	}
 }

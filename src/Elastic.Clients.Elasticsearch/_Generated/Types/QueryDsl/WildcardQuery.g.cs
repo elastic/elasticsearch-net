@@ -35,8 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			reader.Read();
 			var fieldName = reader.GetString();
 			reader.Read();
-			var variant = new WildcardQuery()
-			{ Field = fieldName };
+			var variant = new WildcardQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -142,6 +141,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(WildcardQueryConverter))]
 	public sealed partial class WildcardQuery : Query, IQueryVariant
 	{
+		public WildcardQuery(Field field) => Field = field;
 		public string? QueryName { get; set; }
 
 		public float? Boost { get; set; }
@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public string? Wildcard { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
 	}
 
 	public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDescriptorBase<WildcardQueryDescriptor<TDocument>>
@@ -170,7 +170,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private bool? CaseInsensitiveValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? RewriteValue { get; set; }
 
@@ -196,7 +196,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public WildcardQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public WildcardQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -285,7 +285,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private bool? CaseInsensitiveValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? RewriteValue { get; set; }
 
@@ -311,7 +311,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public WildcardQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public WildcardQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;

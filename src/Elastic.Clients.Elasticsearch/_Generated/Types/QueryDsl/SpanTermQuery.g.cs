@@ -35,8 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			reader.Read();
 			var fieldName = reader.GetString();
 			reader.Read();
-			var variant = new SpanTermQuery()
-			{ Field = fieldName };
+			var variant = new SpanTermQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -108,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public string Value { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
 	}
 
 	public sealed partial class SpanTermQueryDescriptor<TDocument> : SerializableDescriptorBase<SpanTermQueryDescriptor<TDocument>>
@@ -122,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string ValueValue { get; set; }
 
@@ -138,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanTermQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public SpanTermQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -191,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string ValueValue { get; set; }
 
@@ -207,7 +206,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanTermQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public SpanTermQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;

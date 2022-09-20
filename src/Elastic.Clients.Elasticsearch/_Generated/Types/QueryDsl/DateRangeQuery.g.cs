@@ -35,8 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			reader.Read();
 			var fieldName = reader.GetString();
 			reader.Read();
-			var variant = new DateRangeQuery()
-			{ Field = fieldName };
+			var variant = new DateRangeQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -202,6 +201,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(DateRangeQueryConverter))]
 	public sealed partial class DateRangeQuery : Query, IQueryVariant
 	{
+		public DateRangeQuery(Field field) => Field = field;
 		public string? QueryName { get; set; }
 
 		public float? Boost { get; set; }
@@ -224,7 +224,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public Elastic.Clients.Elasticsearch.DateMath? To { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
 	}
 
 	public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDescriptorBase<DateRangeQueryDescriptor<TDocument>>
@@ -238,7 +238,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? FormatValue { get; set; }
 
@@ -270,7 +270,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public DateRangeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public DateRangeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -423,7 +423,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? FormatValue { get; set; }
 
@@ -455,7 +455,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public DateRangeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public DateRangeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;

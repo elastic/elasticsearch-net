@@ -35,8 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			reader.Read();
 			var fieldName = reader.GetString();
 			reader.Read();
-			var variant = new NumberRangeQuery()
-			{ Field = fieldName };
+			var variant = new NumberRangeQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -178,6 +177,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(NumberRangeQueryConverter))]
 	public sealed partial class NumberRangeQuery : Query, IQueryVariant
 	{
+		public NumberRangeQuery(Field field) => Field = field;
 		public string? QueryName { get; set; }
 
 		public float? Boost { get; set; }
@@ -196,7 +196,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public double? To { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
 	}
 
 	public sealed partial class NumberRangeQueryDescriptor<TDocument> : SerializableDescriptorBase<NumberRangeQueryDescriptor<TDocument>>
@@ -210,7 +210,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private double? FromValue { get; set; }
 
@@ -238,7 +238,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public NumberRangeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public NumberRangeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -367,7 +367,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private double? FromValue { get; set; }
 
@@ -395,7 +395,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public NumberRangeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public NumberRangeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;

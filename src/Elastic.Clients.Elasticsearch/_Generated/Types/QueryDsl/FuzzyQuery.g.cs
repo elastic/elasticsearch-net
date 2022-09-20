@@ -35,8 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			reader.Read();
 			var fieldName = reader.GetString();
 			reader.Read();
-			var variant = new FuzzyQuery()
-			{ Field = fieldName };
+			var variant = new FuzzyQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -162,6 +161,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(FuzzyQueryConverter))]
 	public sealed partial class FuzzyQuery : Query, IQueryVariant
 	{
+		public FuzzyQuery(Field field) => Field = field;
 		public string? QueryName { get; set; }
 
 		public float? Boost { get; set; }
@@ -178,7 +178,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public object Value { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
 	}
 
 	public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescriptorBase<FuzzyQueryDescriptor<TDocument>>
@@ -192,7 +192,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -218,7 +218,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FuzzyQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public FuzzyQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -331,7 +331,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -357,7 +357,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FuzzyQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public FuzzyQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;

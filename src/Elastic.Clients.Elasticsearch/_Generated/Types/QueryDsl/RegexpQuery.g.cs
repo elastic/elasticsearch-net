@@ -35,8 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			reader.Read();
 			var fieldName = reader.GetString();
 			reader.Read();
-			var variant = new RegexpQuery()
-			{ Field = fieldName };
+			var variant = new RegexpQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -150,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(RegexpQueryConverter))]
 	public sealed partial class RegexpQuery : Query, IQueryVariant
 	{
+		public RegexpQuery(Field field) => Field = field;
 		public string? QueryName { get; set; }
 
 		public float? Boost { get; set; }
@@ -164,7 +164,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public string Value { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
 	}
 
 	public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescriptorBase<RegexpQueryDescriptor<TDocument>>
@@ -180,7 +180,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private bool? CaseInsensitiveValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? FlagsValue { get; set; }
 
@@ -208,7 +208,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public RegexpQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public RegexpQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -305,7 +305,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private bool? CaseInsensitiveValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? FlagsValue { get; set; }
 
@@ -333,7 +333,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public RegexpQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public RegexpQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;

@@ -35,8 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			reader.Read();
 			var fieldName = reader.GetString();
 			reader.Read();
-			var variant = new MatchBoolPrefixQuery()
-			{ Field = fieldName };
+			var variant = new MatchBoolPrefixQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -198,6 +197,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(MatchBoolPrefixQueryConverter))]
 	public sealed partial class MatchBoolPrefixQuery : Query, IQueryVariant
 	{
+		public MatchBoolPrefixQuery(Field field) => Field = field;
 		public string? QueryName { get; set; }
 
 		public string? Analyzer { get; set; }
@@ -220,7 +220,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public string Query { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
 	}
 
 	public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : SerializableDescriptorBase<MatchBoolPrefixQueryDescriptor<TDocument>>
@@ -236,7 +236,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -272,7 +272,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public MatchBoolPrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public MatchBoolPrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -417,7 +417,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -453,7 +453,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public MatchBoolPrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public MatchBoolPrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;

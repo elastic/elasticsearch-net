@@ -35,8 +35,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			reader.Read();
 			var fieldName = reader.GetString();
 			reader.Read();
-			var variant = new PrefixQuery()
-			{ Field = fieldName };
+			var variant = new PrefixQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -126,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(PrefixQueryConverter))]
 	public sealed partial class PrefixQuery : Query, IQueryVariant
 	{
+		public PrefixQuery(Field field) => Field = field;
 		public string? QueryName { get; set; }
 
 		public float? Boost { get; set; }
@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public string Value { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
 	}
 
 	public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescriptorBase<PrefixQueryDescriptor<TDocument>>
@@ -152,7 +152,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private bool? CaseInsensitiveValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? RewriteValue { get; set; }
 
@@ -176,7 +176,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public PrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public PrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -249,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private bool? CaseInsensitiveValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? RewriteValue { get; set; }
 
@@ -273,7 +273,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public PrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public PrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
