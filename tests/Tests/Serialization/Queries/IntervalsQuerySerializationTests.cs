@@ -12,7 +12,7 @@ namespace Tests.Serialization;
 public class IntervalsQuerySerializationTests : SerializerTestBase
 {
 	[U]
-	public async Task CanSerialize_MultipleFilters()
+	public async Task CanSerialize()
 	{
 		var search = new SearchRequestDescriptor<Project>(search => search
 			.Query(q => q
@@ -20,7 +20,10 @@ public class IntervalsQuerySerializationTests : SerializerTestBase
 					.Field(f => f.Name)
 					.Boost(2.0f)
 					.QueryName("testing-intervals")
-					.Match(m => m.Query("Steve")))));
+					.Match(m => m
+						.Query("Steve")
+						.MaxGaps(0)
+						.Ordered()))));
 
 		var serialisedJson = await SerializeAndGetJsonStringAsync(search);
 
