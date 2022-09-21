@@ -164,6 +164,12 @@ namespace Elastic.Clients.Elasticsearch
 			ContainsVariant = true;
 		}
 
+		private string? PrefixValue { get; set; }
+
+		private string? RegexValue { get; set; }
+
+		private string? TextValue { get; set; }
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -230,6 +236,12 @@ namespace Elastic.Clients.Elasticsearch
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
+
+		private string? PrefixValue { get; set; }
+
+		private string? RegexValue { get; set; }
+
+		private string? TextValue { get; set; }
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

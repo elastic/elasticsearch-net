@@ -127,6 +127,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			ContainsVariant = true;
 		}
 
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer OrganicValue { get; set; }
+
+		private QueryContainerDescriptor<TDocument> OrganicDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>> OrganicDescriptorAction { get; set; }
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -186,6 +196,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer OrganicValue { get; set; }
+
+		private QueryContainerDescriptor OrganicDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> OrganicDescriptorAction { get; set; }
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

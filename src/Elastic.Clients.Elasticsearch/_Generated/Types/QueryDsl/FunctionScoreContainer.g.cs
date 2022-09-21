@@ -160,6 +160,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			ContainsVariant = true;
 		}
 
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+
+		private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+
+		private double? WeightValue { get; set; }
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -226,6 +234,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+
+		private QueryContainerDescriptor FilterDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+
+		private double? WeightValue { get; set; }
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
