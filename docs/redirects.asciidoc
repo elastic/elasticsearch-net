@@ -7,3 +7,8 @@ The following pages have moved or been deleted.
 == Configuration options
 
 This page has moved. See <<configuration>>.
+
+[role="exclude",id="nest"]
+== NEST - High level client
+
+This page has been deleted.

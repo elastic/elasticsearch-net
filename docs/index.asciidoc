@@ -18,17 +18,7 @@ include::configuration.asciidoc[]
 
 include::breaking-changes.asciidoc[]
 
-include::conventions.asciidoc[]
-
-include::high-level.asciidoc[]
-
 include::troubleshooting.asciidoc[]
-
-include::search.asciidoc[]
-
-include::query-dsl.asciidoc[]
-
-include::aggregations.asciidoc[]
 
 include::redirects.asciidoc[]
 
