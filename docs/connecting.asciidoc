@@ -71,12 +71,11 @@ disk which is used to sign the certificates for the HTTP layer of the {es}
 cluster.
 
 In order for the client to establish a connection with the cluster over HTTPS, 
-the CA certificate must be trusted by the client application. There are several 
-mechanisms for <<working-with-certificates, working with certificates>>, but the 
-simplest choice is to use the hex-encoded SHA-256 fingerprint of the CA 
-certificate. The CA fingerprint is output to the terminal when you start {es} 
-for the first time. You'll see a distinct block like the one 
-below in the output from {es} (you may have to scroll up if it's been a while):
+the CA certificate must be trusted by the client application. The simplest 
+choice is to use the hex-encoded SHA-256 fingerprint of the CA certificate. The 
+CA fingerprint is output to the terminal when you start {es} for the first time. 
+You'll see a distinct block like the one below in the output from {es} (you may 
+have to scroll up if it's been a while):
 
 ```sh
 ----------------------------------------------------------------
