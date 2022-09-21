@@ -170,6 +170,24 @@ namespace Elastic.Clients.Elasticsearch
 
 		private string? TextValue { get; set; }
 
+		public FieldSuggesterDescriptor<TDocument> Prefix(string? prefix)
+		{
+			PrefixValue = prefix;
+			return Self;
+		}
+
+		public FieldSuggesterDescriptor<TDocument> Regex(string? regex)
+		{
+			RegexValue = regex;
+			return Self;
+		}
+
+		public FieldSuggesterDescriptor<TDocument> Text(string? text)
+		{
+			TextValue = text;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -242,6 +260,24 @@ namespace Elastic.Clients.Elasticsearch
 		private string? RegexValue { get; set; }
 
 		private string? TextValue { get; set; }
+
+		public FieldSuggesterDescriptor Prefix(string? prefix)
+		{
+			PrefixValue = prefix;
+			return Self;
+		}
+
+		public FieldSuggesterDescriptor Regex(string? regex)
+		{
+			RegexValue = regex;
+			return Self;
+		}
+
+		public FieldSuggesterDescriptor Text(string? text)
+		{
+			TextValue = text;
+			return Self;
+		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

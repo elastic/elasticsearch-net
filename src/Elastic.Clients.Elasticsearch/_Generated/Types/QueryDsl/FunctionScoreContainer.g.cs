@@ -168,6 +168,36 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private double? WeightValue { get; set; }
 
+		public FunctionScoreContainerDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterValue = filter;
+			return Self;
+		}
+
+		public FunctionScoreContainerDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptor = descriptor;
+			return Self;
+		}
+
+		public FunctionScoreContainerDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
+		{
+			FilterValue = null;
+			FilterDescriptor = null;
+			FilterDescriptorAction = configure;
+			return Self;
+		}
+
+		public FunctionScoreContainerDescriptor<TDocument> Weight(double? weight)
+		{
+			WeightValue = weight;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -242,6 +272,36 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
 
 		private double? WeightValue { get; set; }
+
+		public FunctionScoreContainerDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterValue = filter;
+			return Self;
+		}
+
+		public FunctionScoreContainerDescriptor Filter(QueryContainerDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptor = descriptor;
+			return Self;
+		}
+
+		public FunctionScoreContainerDescriptor Filter(Action<QueryContainerDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptor = null;
+			FilterDescriptorAction = configure;
+			return Self;
+		}
+
+		public FunctionScoreContainerDescriptor Weight(double? weight)
+		{
+			WeightValue = weight;
+			return Self;
+		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

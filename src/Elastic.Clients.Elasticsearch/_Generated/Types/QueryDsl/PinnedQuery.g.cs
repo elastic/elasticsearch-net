@@ -137,6 +137,42 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
+		public PinnedQueryDescriptor<TDocument> Organic(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer organic)
+		{
+			OrganicDescriptor = null;
+			OrganicDescriptorAction = null;
+			OrganicValue = organic;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor<TDocument> Organic(QueryContainerDescriptor<TDocument> descriptor)
+		{
+			OrganicValue = null;
+			OrganicDescriptorAction = null;
+			OrganicDescriptor = descriptor;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor<TDocument> Organic(Action<QueryContainerDescriptor<TDocument>> configure)
+		{
+			OrganicValue = null;
+			OrganicDescriptor = null;
+			OrganicDescriptorAction = configure;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -206,6 +242,42 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
+
+		public PinnedQueryDescriptor Organic(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer organic)
+		{
+			OrganicDescriptor = null;
+			OrganicDescriptorAction = null;
+			OrganicValue = organic;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor Organic(QueryContainerDescriptor descriptor)
+		{
+			OrganicValue = null;
+			OrganicDescriptorAction = null;
+			OrganicDescriptor = descriptor;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor Organic(Action<QueryContainerDescriptor> configure)
+		{
+			OrganicValue = null;
+			OrganicDescriptor = null;
+			OrganicDescriptorAction = configure;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
