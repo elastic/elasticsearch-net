@@ -197,7 +197,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(MatchBoolPrefixQueryConverter))]
 	public sealed partial class MatchBoolPrefixQuery : Query, IQueryVariant
 	{
-		public MatchBoolPrefixQuery(Field field) => Field = field;
+		public MatchBoolPrefixQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
 		public string? QueryName { get; set; }
 
 		public string? Analyzer { get; set; }
@@ -226,8 +232,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : SerializableDescriptorBase<MatchBoolPrefixQueryDescriptor<TDocument>>
 	{
 		internal MatchBoolPrefixQueryDescriptor(Action<MatchBoolPrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public MatchBoolPrefixQueryDescriptor() : base()
+		internal MatchBoolPrefixQueryDescriptor() : base()
 		{
+		}
+
+		public MatchBoolPrefixQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
+		}
+
+		public MatchBoolPrefixQueryDescriptor(Expression<Func<TDocument, object>> field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -334,6 +354,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
@@ -407,8 +429,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescriptorBase<MatchBoolPrefixQueryDescriptor>
 	{
 		internal MatchBoolPrefixQueryDescriptor(Action<MatchBoolPrefixQueryDescriptor> configure) => configure.Invoke(this);
-		public MatchBoolPrefixQueryDescriptor() : base()
+		internal MatchBoolPrefixQueryDescriptor() : base()
 		{
+		}
+
+		public MatchBoolPrefixQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -521,6 +550,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();

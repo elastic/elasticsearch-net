@@ -53,7 +53,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public static IntervalsQuery Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => new IntervalsQuery("match", intervalsMatch);
 		public static IntervalsQuery Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => new IntervalsQuery("prefix", intervalsPrefix);
 		public static IntervalsQuery Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => new IntervalsQuery("wildcard", intervalsWildcard);
-		public IntervalsQuery(Field field) => Field = field;
+		public IntervalsQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
 		[JsonInclude]
 		[JsonPropertyName("_name")]
 		public string? QueryName { get; set; }
@@ -162,8 +168,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDescriptorBase<IntervalsQueryDescriptor<TDocument>>
 	{
 		internal IntervalsQueryDescriptor(Action<IntervalsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public IntervalsQueryDescriptor() : base()
+		internal IntervalsQueryDescriptor() : base()
 		{
+		}
+
+		public IntervalsQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		internal bool ContainsVariant { get; private set; }
@@ -177,14 +190,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
@@ -235,8 +248,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class IntervalsQueryDescriptor : SerializableDescriptorBase<IntervalsQueryDescriptor>
 	{
 		internal IntervalsQueryDescriptor(Action<IntervalsQueryDescriptor> configure) => configure.Invoke(this);
-		public IntervalsQueryDescriptor() : base()
+		internal IntervalsQueryDescriptor() : base()
 		{
+		}
+
+		public IntervalsQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		internal bool ContainsVariant { get; private set; }
@@ -250,14 +270,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}

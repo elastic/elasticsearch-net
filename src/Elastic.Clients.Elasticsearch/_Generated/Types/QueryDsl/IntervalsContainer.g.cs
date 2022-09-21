@@ -165,14 +165,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
@@ -238,14 +238,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal Type DescriptorType { get; private set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}

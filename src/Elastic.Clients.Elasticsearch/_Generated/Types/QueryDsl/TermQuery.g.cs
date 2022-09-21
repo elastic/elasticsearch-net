@@ -113,7 +113,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(TermQueryConverter))]
 	public sealed partial class TermQuery : Query, IQueryVariant
 	{
-		public TermQuery(Field field) => Field = field;
+		public TermQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
 		public string? QueryName { get; set; }
 
 		public float? Boost { get; set; }
@@ -128,8 +134,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescriptorBase<TermQueryDescriptor<TDocument>>
 	{
 		internal TermQueryDescriptor(Action<TermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public TermQueryDescriptor() : base()
+		internal TermQueryDescriptor() : base()
 		{
+		}
+
+		public TermQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
+		}
+
+		public TermQueryDescriptor(Expression<Func<TDocument, object>> field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -180,6 +200,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
@@ -211,8 +233,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class TermQueryDescriptor : SerializableDescriptorBase<TermQueryDescriptor>
 	{
 		internal TermQueryDescriptor(Action<TermQueryDescriptor> configure) => configure.Invoke(this);
-		public TermQueryDescriptor() : base()
+		internal TermQueryDescriptor() : base()
 		{
+		}
+
+		public TermQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -269,6 +298,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();

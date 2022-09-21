@@ -161,7 +161,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(FuzzyQueryConverter))]
 	public sealed partial class FuzzyQuery : Query, IQueryVariant
 	{
-		public FuzzyQuery(Field field) => Field = field;
+		public FuzzyQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
 		public string? QueryName { get; set; }
 
 		public float? Boost { get; set; }
@@ -184,8 +190,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescriptorBase<FuzzyQueryDescriptor<TDocument>>
 	{
 		internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public FuzzyQueryDescriptor() : base()
+		internal FuzzyQueryDescriptor() : base()
 		{
+		}
+
+		public FuzzyQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
+		}
+
+		public FuzzyQueryDescriptor(Expression<Func<TDocument, object>> field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -268,6 +288,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
@@ -323,8 +345,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class FuzzyQueryDescriptor : SerializableDescriptorBase<FuzzyQueryDescriptor>
 	{
 		internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor> configure) => configure.Invoke(this);
-		public FuzzyQueryDescriptor() : base()
+		internal FuzzyQueryDescriptor() : base()
 		{
+		}
+
+		public FuzzyQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -413,6 +442,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();

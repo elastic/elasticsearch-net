@@ -233,7 +233,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(MatchQueryConverter))]
 	public sealed partial class MatchQuery : Query, IQueryVariant
 	{
-		public MatchQuery(Field field) => Field = field;
+		public MatchQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
 		public string? QueryName { get; set; }
 
 		public string? Analyzer { get; set; }
@@ -268,8 +274,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescriptorBase<MatchQueryDescriptor<TDocument>>
 	{
 		internal MatchQueryDescriptor(Action<MatchQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public MatchQueryDescriptor() : base()
+		internal MatchQueryDescriptor() : base()
 		{
+		}
+
+		public MatchQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
+		}
+
+		public MatchQueryDescriptor(Expression<Func<TDocument, object>> field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -400,6 +420,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
@@ -491,8 +513,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class MatchQueryDescriptor : SerializableDescriptorBase<MatchQueryDescriptor>
 	{
 		internal MatchQueryDescriptor(Action<MatchQueryDescriptor> configure) => configure.Invoke(this);
-		public MatchQueryDescriptor() : base()
+		internal MatchQueryDescriptor() : base()
 		{
+		}
+
+		public MatchQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -629,6 +658,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();

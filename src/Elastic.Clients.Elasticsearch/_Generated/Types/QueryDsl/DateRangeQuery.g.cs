@@ -201,7 +201,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(DateRangeQueryConverter))]
 	public sealed partial class DateRangeQuery : Query, IQueryVariant
 	{
-		public DateRangeQuery(Field field) => Field = field;
+		public DateRangeQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
 		public string? QueryName { get; set; }
 
 		public float? Boost { get; set; }
@@ -230,8 +236,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDescriptorBase<DateRangeQueryDescriptor<TDocument>>
 	{
 		internal DateRangeQueryDescriptor(Action<DateRangeQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public DateRangeQueryDescriptor() : base()
+		internal DateRangeQueryDescriptor() : base()
 		{
+		}
+
+		public DateRangeQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
+		}
+
+		public DateRangeQueryDescriptor(Expression<Func<TDocument, object>> field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -338,6 +358,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
@@ -415,8 +437,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class DateRangeQueryDescriptor : SerializableDescriptorBase<DateRangeQueryDescriptor>
 	{
 		internal DateRangeQueryDescriptor(Action<DateRangeQueryDescriptor> configure) => configure.Invoke(this);
-		public DateRangeQueryDescriptor() : base()
+		internal DateRangeQueryDescriptor() : base()
 		{
+		}
+
+		public DateRangeQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -529,6 +558,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();

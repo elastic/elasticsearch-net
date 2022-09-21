@@ -7,50 +7,85 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public interface IQuery
-	{
-		/// <summary>
-		///     Provides a boost to this query to influence its relevance score.
-		///     For example, a query with a boost of 2 is twice as important as a query with a boost of 1,
-		///     although the actual boost value that is applied undergoes normalization and internal optimization.
-		/// </summary>
-		//float? Boost { get; set; } // Was defined as a double before the code gen work
+	//public interface IQuery
+	//{
+	//	/// <summary>
+	//	///     Provides a boost to this query to influence its relevance score.
+	//	///     For example, a query with a boost of 2 is twice as important as a query with a boost of 1,
+	//	///     although the actual boost value that is applied undergoes normalization and internal optimization.
+	//	/// </summary>
+	//	//float? Boost { get; set; } // Was defined as a double before the code gen work
 
-		///// <summary>
-		/////     Whether the query is conditionless. A conditionless query is not serialized as part of the request
-		/////     sent to Elasticsearch.
-		///// </summary>
-		//[JsonIgnore]
-		//bool Conditionless { get; }
+	//	///// <summary>
+	//	/////     Whether the query is conditionless. A conditionless query is not serialized as part of the request
+	//	/////     sent to Elasticsearch.
+	//	///// </summary>
+	//	//[JsonIgnore]
+	//	//bool Conditionless { get; }
 
-		///// <summary>
-		/////     Whether the query should be treated as strict. A strict query will throw an exception when serialized
-		/////     if it is <see cref="Conditionless" />.
-		///// </summary>
-		//[JsonIgnore]
-		//bool IsStrict { get; set; }
+	//	///// <summary>
+	//	/////     Whether the query should be treated as strict. A strict query will throw an exception when serialized
+	//	/////     if it is <see cref="Conditionless" />.
+	//	///// </summary>
+	//	//[JsonIgnore]
+	//	//bool IsStrict { get; set; }
 
-		///// <summary>
-		/////     Whether the query should be treated as verbatim. A verbatim query will be serialized as part of the request,
-		/////     irrespective
-		/////     of whether it is <see cref="Conditionless" /> or not.
-		///// </summary>
-		//[JsonIgnore]
-		//bool IsVerbatim { get; set; }
+	//	///// <summary>
+	//	/////     Whether the query should be treated as verbatim. A verbatim query will be serialized as part of the request,
+	//	/////     irrespective
+	//	/////     of whether it is <see cref="Conditionless" /> or not.
+	//	///// </summary>
+	//	//[JsonIgnore]
+	//	//bool IsVerbatim { get; set; }
 
-		/// <summary>
-		///     Whether the query should be treated as writable. Used when determining how to combine queries.
-		/// </summary>
-		//[JsonIgnore]
-		//bool IsWritable { get; }
+	//	/// <summary>
+	//	///     Whether the query should be treated as writable. Used when determining how to combine queries.
+	//	/// </summary>
+	//	//[JsonIgnore]
+	//	//bool IsWritable { get; }
 
-		/// <summary>
-		///     The name of the query. Allows you to retrieve for each document what part of the query it matched on.
-		/// </summary>
-		//string Name { get; set; }
-	}
+	//	/// <summary>
+	//	///     The name of the query. Allows you to retrieve for each document what part of the query it matched on.
+	//	/// </summary>
+	//	//string Name { get; set; }
+	//}
 
-	public abstract partial class Query : IQuery
+	//internal interface IFieldNameQueryDescriptor<T> where T : Descriptor
+	//{
+	//	T Field(Field field);
+	//}
+
+	//public partial class QueryContainerDescriptor
+	//{
+	//	private void Set<T>(Action<IFieldNameQueryDescriptor<T>> descriptorAction, string variantName)
+	//		where T : Descriptor, IFieldNameQueryDescriptor<T>
+	//	{
+	//		if (ContainsVariant)
+	//			throw new Exception("TODO");
+	//		ContainedVariantName = variantName;
+	//		ContainsVariant = true;
+	//		DescriptorType = typeof(T);
+	//		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+	//		descriptorAction?.Invoke(descriptor);
+	//		Descriptor = descriptor;
+	//	}
+
+	//	private void Set<T>(Field field, Action<IFieldNameQueryDescriptor<T>> descriptorAction, string variantName)
+	//		where T : Descriptor, IFieldNameQueryDescriptor<T>
+	//	{
+	//		if (ContainsVariant)
+	//			throw new Exception("TODO");
+	//		ContainedVariantName = variantName;
+	//		ContainsVariant = true;
+	//		DescriptorType = typeof(T);
+	//		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+	//		descriptor.Field(field);
+	//		descriptorAction?.Invoke(descriptor);
+	//		Descriptor = descriptor;
+	//	}
+	//}
+
+	public abstract partial class Query //: IQuery
 	{
 		//[JsonIgnore]
 		//public bool IsWritable => throw new NotImplementedException();
