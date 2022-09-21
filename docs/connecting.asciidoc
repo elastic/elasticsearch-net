@@ -143,9 +143,7 @@ nodes for each request in a round robin fashion. The client also tracks
 unhealthy nodes and avoids sending requests to them until they become healthy.
 
 This configuration is best suited to connect to a known small sized cluster, 
-where you do not require sniffing to detect the cluster topology. Refer to the 
-<<connection-pooling,node pool documentation>> for more information about the 
-types of node pool available in the {es} .NET client.
+where you do not require sniffing to detect the cluster topology.
 
 The following snippet shows you how to connect to multiple nodes by using a 
 static node pool:
