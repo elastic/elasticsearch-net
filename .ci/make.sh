@@ -42,7 +42,7 @@ OUTPUT_DIR="$repo/${output_folder}"
 REPO_BINDING="${OUTPUT_DIR}:/sln/${output_folder}"
 mkdir -p "$OUTPUT_DIR"
 
-DOTNET_VERSION=${DOTNET_VERSION-6.0.300}
+DOTNET_VERSION=${DOTNET_VERSION-6.0.401}
 
 echo -e "\033[34;1mINFO:\033[0m PRODUCT ${product}\033[0m"
 echo -e "\033[34;1mINFO:\033[0m VERSION ${STACK_VERSION}\033[0m"
