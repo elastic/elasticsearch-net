@@ -18,7 +18,7 @@ This page has been deleted.
 
 This page has been deleted.
 
-[role="exclude",id="bulkall-observable"]
+[role="exclude",id="indexing-documents.html#bulkall-observable"]
 == Multiple documents with `BulkAllObservable` helper
 
 This page has been deleted.
