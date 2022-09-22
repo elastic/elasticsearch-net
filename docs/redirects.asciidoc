@@ -17,3 +17,8 @@ This page has been deleted.
 == Indexing documents
 
 This page has been deleted.
+
+[role="exclude",id="bulkall-observable"]
+== Multiple documents with `BulkAllObservable` helper
+
+This page has been deleted.
