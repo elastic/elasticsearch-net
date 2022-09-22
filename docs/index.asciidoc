@@ -4,6 +4,7 @@
 = Elasticsearch .NET Client
 
 :net-client: Elasticsearch .NET Client
+:ref-branch: main
 
 
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
