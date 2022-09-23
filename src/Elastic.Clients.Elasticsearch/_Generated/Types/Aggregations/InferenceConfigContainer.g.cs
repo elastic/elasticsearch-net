@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	[JsonConverter(typeof(InferenceConfigContainerConverter))]
 	public sealed partial class InferenceConfigContainer
 	{
-		public InferenceConfigContainer(string variantName, IInferenceConfigVariant variant)
+		internal InferenceConfigContainer(string variantName, IInferenceConfigVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -142,6 +142,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			ContainsVariant = true;
 		}
 
+		public void Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
+		public void Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
+		public void Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
+		public void Regression(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -161,11 +165,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
-		public void Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-		public void Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
-		public void Regression(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 	}
 
 	public sealed partial class InferenceConfigContainerDescriptor : SerializableDescriptorBase<InferenceConfigContainerDescriptor>
@@ -207,6 +206,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			ContainsVariant = true;
 		}
 
+		public void Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
+		public void Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
+		public void Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
+		public void Regression(Action<Ml.RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
+		public void Regression<TDocument>(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -226,11 +230,5 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
-		public void Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-		public void Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
-		public void Regression(Action<Ml.RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
-		public void Regression<TDocument>(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 	}
 }

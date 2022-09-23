@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(PinnedQueryConverter))]
 	public sealed partial class PinnedQuery : Query, IQueryVariant
 	{
-		public PinnedQuery(string variantName, IPinnedQueryVariant variant)
+		internal PinnedQuery(string variantName, IPinnedQueryVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));

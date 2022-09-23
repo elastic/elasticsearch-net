@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	[JsonConverter(typeof(SyncContainerConverter))]
 	public sealed partial class SyncContainer
 	{
-		public SyncContainer(string variantName, ISyncVariant variant)
+		internal SyncContainer(string variantName, ISyncVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -131,6 +131,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			ContainsVariant = true;
 		}
 
+		public void Time(TimeSync variant) => Set(variant, "time");
+		public void Time(Action<TimeSyncDescriptor<TDocument>> configure) => Set(configure, "time");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -150,9 +152,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Time(TimeSync variant) => Set(variant, "time");
-		public void Time(Action<TimeSyncDescriptor<TDocument>> configure) => Set(configure, "time");
 	}
 
 	public sealed partial class SyncContainerDescriptor : SerializableDescriptorBase<SyncContainerDescriptor>
@@ -194,6 +193,9 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			ContainsVariant = true;
 		}
 
+		public void Time(TimeSync variant) => Set(variant, "time");
+		public void Time(Action<TimeSyncDescriptor> configure) => Set(configure, "time");
+		public void Time<TDocument>(Action<TimeSyncDescriptor<TDocument>> configure) => Set(configure, "time");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -213,9 +215,5 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Time(TimeSync variant) => Set(variant, "time");
-		public void Time(Action<TimeSyncDescriptor> configure) => Set(configure, "time");
-		public void Time<TDocument>(Action<TimeSyncDescriptor<TDocument>> configure) => Set(configure, "time");
 	}
 }

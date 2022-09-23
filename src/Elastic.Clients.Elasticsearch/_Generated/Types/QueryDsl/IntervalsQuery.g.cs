@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(IntervalsQueryConverter))]
 	public sealed partial class IntervalsQuery : Query, IQueryVariant
 	{
-		public IntervalsQuery(string variantName, IIntervalsQueryVariant variant)
+		internal IntervalsQuery(string variantName, IIntervalsQueryVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,23 +43,31 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Variant = variant;
 		}
 
+		internal IntervalsQuery(Field field, string variantName, IIntervalsQueryVariant variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			VariantName = variantName;
+			Variant = variant;
+			Field = field;
+		}
+
 		internal IIntervalsQueryVariant Variant { get; }
 
 		internal string VariantName { get; }
 
-		public static IntervalsQuery AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf intervalsAllOf) => new IntervalsQuery("all_of", intervalsAllOf);
-		public static IntervalsQuery AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf intervalsAnyOf) => new IntervalsQuery("any_of", intervalsAnyOf);
-		public static IntervalsQuery Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy intervalsFuzzy) => new IntervalsQuery("fuzzy", intervalsFuzzy);
-		public static IntervalsQuery Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => new IntervalsQuery("match", intervalsMatch);
-		public static IntervalsQuery Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => new IntervalsQuery("prefix", intervalsPrefix);
-		public static IntervalsQuery Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => new IntervalsQuery("wildcard", intervalsWildcard);
-		public IntervalsQuery(Field field)
-		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			Field = field;
-		}
-
+		public static IntervalsQuery AllOf(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf intervalsAllOf) => new IntervalsQuery(field, "all_of", intervalsAllOf);
+		public static IntervalsQuery AnyOf(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf intervalsAnyOf) => new IntervalsQuery(field, "any_of", intervalsAnyOf);
+		public static IntervalsQuery Fuzzy(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy intervalsFuzzy) => new IntervalsQuery(field, "fuzzy", intervalsFuzzy);
+		public static IntervalsQuery Match(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => new IntervalsQuery(field, "match", intervalsMatch);
+		public static IntervalsQuery Prefix(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => new IntervalsQuery(field, "prefix", intervalsPrefix);
+		public static IntervalsQuery Wildcard(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => new IntervalsQuery(field, "wildcard", intervalsWildcard);
 		[JsonInclude]
 		[JsonPropertyName("_name")]
 		public string? QueryName { get; set; }
@@ -70,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
 	internal sealed class IntervalsQueryConverter : JsonConverter<IntervalsQuery>
@@ -241,6 +249,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
+		public void AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
+		public void AllOf(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
+		public void AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
+		public void AnyOf(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
+		public void Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
+		public void Fuzzy(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
+		public void Match(IntervalsMatch variant) => Set(variant, "match");
+		public void Match(Action<IntervalsMatchDescriptor<TDocument>> configure) => Set(configure, "match");
+		public void Prefix(IntervalsPrefix variant) => Set(variant, "prefix");
+		public void Prefix(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
+		public void Wildcard(IntervalsWildcard variant) => Set(variant, "wildcard");
+		public void Wildcard(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -260,19 +280,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
-		public void AllOf(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
-		public void AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
-		public void AnyOf(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
-		public void Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
-		public void Fuzzy(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
-		public void Match(IntervalsMatch variant) => Set(variant, "match");
-		public void Match(Action<IntervalsMatchDescriptor<TDocument>> configure) => Set(configure, "match");
-		public void Prefix(IntervalsPrefix variant) => Set(variant, "prefix");
-		public void Prefix(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
-		public void Wildcard(IntervalsWildcard variant) => Set(variant, "wildcard");
-		public void Wildcard(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 	}
 
 	public sealed partial class IntervalsQueryDescriptor : SerializableDescriptorBase<IntervalsQueryDescriptor>
@@ -357,6 +364,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
+		public void AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
+		public void AllOf(Action<IntervalsAllOfDescriptor> configure) => Set(configure, "all_of");
+		public void AllOf<TDocument>(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
+		public void AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
+		public void AnyOf(Action<IntervalsAnyOfDescriptor> configure) => Set(configure, "any_of");
+		public void AnyOf<TDocument>(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
+		public void Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
+		public void Fuzzy(Action<IntervalsFuzzyDescriptor> configure) => Set(configure, "fuzzy");
+		public void Fuzzy<TDocument>(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
+		public void Match(IntervalsMatch variant) => Set(variant, "match");
+		public void Match(Action<IntervalsMatchDescriptor> configure) => Set(configure, "match");
+		public void Match<TDocument>(Action<IntervalsMatchDescriptor<TDocument>> configure) => Set(configure, "match");
+		public void Prefix(IntervalsPrefix variant) => Set(variant, "prefix");
+		public void Prefix(Action<IntervalsPrefixDescriptor> configure) => Set(configure, "prefix");
+		public void Prefix<TDocument>(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
+		public void Wildcard(IntervalsWildcard variant) => Set(variant, "wildcard");
+		public void Wildcard(Action<IntervalsWildcardDescriptor> configure) => Set(configure, "wildcard");
+		public void Wildcard<TDocument>(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -376,24 +401,5 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
-		public void AllOf(Action<IntervalsAllOfDescriptor> configure) => Set(configure, "all_of");
-		public void AllOf<TDocument>(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
-		public void AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
-		public void AnyOf(Action<IntervalsAnyOfDescriptor> configure) => Set(configure, "any_of");
-		public void AnyOf<TDocument>(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
-		public void Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
-		public void Fuzzy(Action<IntervalsFuzzyDescriptor> configure) => Set(configure, "fuzzy");
-		public void Fuzzy<TDocument>(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
-		public void Match(IntervalsMatch variant) => Set(variant, "match");
-		public void Match(Action<IntervalsMatchDescriptor> configure) => Set(configure, "match");
-		public void Match<TDocument>(Action<IntervalsMatchDescriptor<TDocument>> configure) => Set(configure, "match");
-		public void Prefix(IntervalsPrefix variant) => Set(variant, "prefix");
-		public void Prefix(Action<IntervalsPrefixDescriptor> configure) => Set(configure, "prefix");
-		public void Prefix<TDocument>(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
-		public void Wildcard(IntervalsWildcard variant) => Set(variant, "wildcard");
-		public void Wildcard(Action<IntervalsWildcardDescriptor> configure) => Set(configure, "wildcard");
-		public void Wildcard<TDocument>(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 	}
 }

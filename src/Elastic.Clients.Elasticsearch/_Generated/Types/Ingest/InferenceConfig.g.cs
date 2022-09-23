@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	[JsonConverter(typeof(InferenceConfigConverter))]
 	public sealed partial class InferenceConfig
 	{
-		public InferenceConfig(string variantName, IInferenceConfigVariant variant)
+		internal InferenceConfig(string variantName, IInferenceConfigVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -142,6 +142,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			ContainsVariant = true;
 		}
 
+		public void Classification(InferenceConfigClassification variant) => Set(variant, "classification");
+		public void Classification(Action<InferenceConfigClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
+		public void Regression(InferenceConfigRegression variant) => Set(variant, "regression");
+		public void Regression(Action<InferenceConfigRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -161,11 +165,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Classification(InferenceConfigClassification variant) => Set(variant, "classification");
-		public void Classification(Action<InferenceConfigClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
-		public void Regression(InferenceConfigRegression variant) => Set(variant, "regression");
-		public void Regression(Action<InferenceConfigRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
 	}
 
 	public sealed partial class InferenceConfigDescriptor : SerializableDescriptorBase<InferenceConfigDescriptor>
@@ -207,6 +206,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			ContainsVariant = true;
 		}
 
+		public void Classification(InferenceConfigClassification variant) => Set(variant, "classification");
+		public void Classification(Action<InferenceConfigClassificationDescriptor> configure) => Set(configure, "classification");
+		public void Classification<TDocument>(Action<InferenceConfigClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
+		public void Regression(InferenceConfigRegression variant) => Set(variant, "regression");
+		public void Regression(Action<InferenceConfigRegressionDescriptor> configure) => Set(configure, "regression");
+		public void Regression<TDocument>(Action<InferenceConfigRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -226,12 +231,5 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Classification(InferenceConfigClassification variant) => Set(variant, "classification");
-		public void Classification(Action<InferenceConfigClassificationDescriptor> configure) => Set(configure, "classification");
-		public void Classification<TDocument>(Action<InferenceConfigClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
-		public void Regression(InferenceConfigRegression variant) => Set(variant, "regression");
-		public void Regression(Action<InferenceConfigRegressionDescriptor> configure) => Set(configure, "regression");
-		public void Regression<TDocument>(Action<InferenceConfigRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
 	}
 }

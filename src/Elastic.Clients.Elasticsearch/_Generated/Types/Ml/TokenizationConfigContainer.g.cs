@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	[JsonConverter(typeof(TokenizationConfigContainerConverter))]
 	public sealed partial class TokenizationConfigContainer
 	{
-		public TokenizationConfigContainer(string variantName, ITokenizationConfigVariant variant)
+		internal TokenizationConfigContainer(string variantName, ITokenizationConfigVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -153,6 +153,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			ContainsVariant = true;
 		}
 
+		public void Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
+		public void Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
+		public void Mpnet(NlpBertTokenizationConfig variant) => Set(variant, "mpnet");
+		public void Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
+		public void Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
+		public void Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -172,13 +178,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
-		public void Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-		public void Mpnet(NlpBertTokenizationConfig variant) => Set(variant, "mpnet");
-		public void Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
-		public void Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
-		public void Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 	}
 
 	public sealed partial class TokenizationConfigContainerDescriptor : SerializableDescriptorBase<TokenizationConfigContainerDescriptor>
@@ -220,6 +219,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			ContainsVariant = true;
 		}
 
+		public void Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
+		public void Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
+		public void Mpnet(NlpBertTokenizationConfig variant) => Set(variant, "mpnet");
+		public void Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
+		public void Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
+		public void Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -239,12 +244,5 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
-		public void Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-		public void Mpnet(NlpBertTokenizationConfig variant) => Set(variant, "mpnet");
-		public void Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
-		public void Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
-		public void Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 	}
 }

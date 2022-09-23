@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	[JsonConverter(typeof(PivotGroupByContainerConverter))]
 	public sealed partial class PivotGroupByContainer
 	{
-		public PivotGroupByContainer(string variantName, IPivotGroupByVariant variant)
+		internal PivotGroupByContainer(string variantName, IPivotGroupByVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -153,6 +153,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			ContainsVariant = true;
 		}
 
+		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
+		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+		public void Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
+		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
+		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
+		public void Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -172,13 +178,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
-		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-		public void Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
-		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
-		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
-		public void Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 	}
 
 	public sealed partial class PivotGroupByContainerDescriptor : SerializableDescriptorBase<PivotGroupByContainerDescriptor>
@@ -220,6 +219,15 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			ContainsVariant = true;
 		}
 
+		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
+		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
+		public void DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+		public void Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
+		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
+		public void Histogram<TDocument>(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
+		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
+		public void Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
+		public void Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -239,15 +247,5 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
-		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
-		public void DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-		public void Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
-		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
-		public void Histogram<TDocument>(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
-		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
-		public void Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
-		public void Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 	}
 }

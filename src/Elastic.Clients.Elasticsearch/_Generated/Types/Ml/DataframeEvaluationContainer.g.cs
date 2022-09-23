@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	[JsonConverter(typeof(DataframeEvaluationContainerConverter))]
 	public sealed partial class DataframeEvaluationContainer
 	{
-		public DataframeEvaluationContainer(string variantName, IDataframeEvaluationVariant variant)
+		internal DataframeEvaluationContainer(string variantName, IDataframeEvaluationVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -153,6 +153,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			ContainsVariant = true;
 		}
 
+		public void Classification(DataframeEvaluationClassification variant) => Set(variant, "classification");
+		public void Classification(Action<DataframeEvaluationClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
+		public void OutlierDetection(DataframeEvaluationOutlierDetection variant) => Set(variant, "outlier_detection");
+		public void OutlierDetection(Action<DataframeEvaluationOutlierDetectionDescriptor<TDocument>> configure) => Set(configure, "outlier_detection");
+		public void Regression(DataframeEvaluationRegression variant) => Set(variant, "regression");
+		public void Regression(Action<DataframeEvaluationRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -172,13 +178,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Classification(DataframeEvaluationClassification variant) => Set(variant, "classification");
-		public void Classification(Action<DataframeEvaluationClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
-		public void OutlierDetection(DataframeEvaluationOutlierDetection variant) => Set(variant, "outlier_detection");
-		public void OutlierDetection(Action<DataframeEvaluationOutlierDetectionDescriptor<TDocument>> configure) => Set(configure, "outlier_detection");
-		public void Regression(DataframeEvaluationRegression variant) => Set(variant, "regression");
-		public void Regression(Action<DataframeEvaluationRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
 	}
 
 	public sealed partial class DataframeEvaluationContainerDescriptor : SerializableDescriptorBase<DataframeEvaluationContainerDescriptor>
@@ -220,6 +219,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			ContainsVariant = true;
 		}
 
+		public void Classification(DataframeEvaluationClassification variant) => Set(variant, "classification");
+		public void Classification(Action<DataframeEvaluationClassificationDescriptor> configure) => Set(configure, "classification");
+		public void Classification<TDocument>(Action<DataframeEvaluationClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
+		public void OutlierDetection(DataframeEvaluationOutlierDetection variant) => Set(variant, "outlier_detection");
+		public void OutlierDetection(Action<DataframeEvaluationOutlierDetectionDescriptor> configure) => Set(configure, "outlier_detection");
+		public void OutlierDetection<TDocument>(Action<DataframeEvaluationOutlierDetectionDescriptor<TDocument>> configure) => Set(configure, "outlier_detection");
+		public void Regression(DataframeEvaluationRegression variant) => Set(variant, "regression");
+		public void Regression(Action<DataframeEvaluationRegressionDescriptor> configure) => Set(configure, "regression");
+		public void Regression<TDocument>(Action<DataframeEvaluationRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -239,15 +247,5 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Classification(DataframeEvaluationClassification variant) => Set(variant, "classification");
-		public void Classification(Action<DataframeEvaluationClassificationDescriptor> configure) => Set(configure, "classification");
-		public void Classification<TDocument>(Action<DataframeEvaluationClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
-		public void OutlierDetection(DataframeEvaluationOutlierDetection variant) => Set(variant, "outlier_detection");
-		public void OutlierDetection(Action<DataframeEvaluationOutlierDetectionDescriptor> configure) => Set(configure, "outlier_detection");
-		public void OutlierDetection<TDocument>(Action<DataframeEvaluationOutlierDetectionDescriptor<TDocument>> configure) => Set(configure, "outlier_detection");
-		public void Regression(DataframeEvaluationRegression variant) => Set(variant, "regression");
-		public void Regression(Action<DataframeEvaluationRegressionDescriptor> configure) => Set(configure, "regression");
-		public void Regression<TDocument>(Action<DataframeEvaluationRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
 	}
 }

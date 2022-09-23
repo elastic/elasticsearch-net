@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	[JsonConverter(typeof(PreprocessorConverter))]
 	public sealed partial class Preprocessor
 	{
-		public Preprocessor(string variantName, IPreprocessorVariant variant)
+		internal Preprocessor(string variantName, IPreprocessorVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -153,6 +153,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			ContainsVariant = true;
 		}
 
+		public void FrequencyEncoding(FrequencyEncodingPreprocessor variant) => Set(variant, "frequency_encoding");
+		public void FrequencyEncoding(Action<FrequencyEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "frequency_encoding");
+		public void OneHotEncoding(OneHotEncodingPreprocessor variant) => Set(variant, "one_hot_encoding");
+		public void OneHotEncoding(Action<OneHotEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "one_hot_encoding");
+		public void TargetMeanEncoding(TargetMeanEncodingPreprocessor variant) => Set(variant, "target_mean_encoding");
+		public void TargetMeanEncoding(Action<TargetMeanEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -172,13 +178,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void FrequencyEncoding(FrequencyEncodingPreprocessor variant) => Set(variant, "frequency_encoding");
-		public void FrequencyEncoding(Action<FrequencyEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "frequency_encoding");
-		public void OneHotEncoding(OneHotEncodingPreprocessor variant) => Set(variant, "one_hot_encoding");
-		public void OneHotEncoding(Action<OneHotEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "one_hot_encoding");
-		public void TargetMeanEncoding(TargetMeanEncodingPreprocessor variant) => Set(variant, "target_mean_encoding");
-		public void TargetMeanEncoding(Action<TargetMeanEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
 	}
 
 	public sealed partial class PreprocessorDescriptor : SerializableDescriptorBase<PreprocessorDescriptor>
@@ -220,6 +219,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			ContainsVariant = true;
 		}
 
+		public void FrequencyEncoding(FrequencyEncodingPreprocessor variant) => Set(variant, "frequency_encoding");
+		public void FrequencyEncoding(Action<FrequencyEncodingPreprocessorDescriptor> configure) => Set(configure, "frequency_encoding");
+		public void FrequencyEncoding<TDocument>(Action<FrequencyEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "frequency_encoding");
+		public void OneHotEncoding(OneHotEncodingPreprocessor variant) => Set(variant, "one_hot_encoding");
+		public void OneHotEncoding(Action<OneHotEncodingPreprocessorDescriptor> configure) => Set(configure, "one_hot_encoding");
+		public void OneHotEncoding<TDocument>(Action<OneHotEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "one_hot_encoding");
+		public void TargetMeanEncoding(TargetMeanEncodingPreprocessor variant) => Set(variant, "target_mean_encoding");
+		public void TargetMeanEncoding(Action<TargetMeanEncodingPreprocessorDescriptor> configure) => Set(configure, "target_mean_encoding");
+		public void TargetMeanEncoding<TDocument>(Action<TargetMeanEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -239,15 +247,5 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void FrequencyEncoding(FrequencyEncodingPreprocessor variant) => Set(variant, "frequency_encoding");
-		public void FrequencyEncoding(Action<FrequencyEncodingPreprocessorDescriptor> configure) => Set(configure, "frequency_encoding");
-		public void FrequencyEncoding<TDocument>(Action<FrequencyEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "frequency_encoding");
-		public void OneHotEncoding(OneHotEncodingPreprocessor variant) => Set(variant, "one_hot_encoding");
-		public void OneHotEncoding(Action<OneHotEncodingPreprocessorDescriptor> configure) => Set(configure, "one_hot_encoding");
-		public void OneHotEncoding<TDocument>(Action<OneHotEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "one_hot_encoding");
-		public void TargetMeanEncoding(TargetMeanEncodingPreprocessor variant) => Set(variant, "target_mean_encoding");
-		public void TargetMeanEncoding(Action<TargetMeanEncodingPreprocessorDescriptor> configure) => Set(configure, "target_mean_encoding");
-		public void TargetMeanEncoding<TDocument>(Action<TargetMeanEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
 	}
 }

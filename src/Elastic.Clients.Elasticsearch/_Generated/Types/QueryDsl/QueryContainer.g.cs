@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(QueryContainerConverter))]
 	public sealed partial class QueryContainer
 	{
-		public QueryContainer(string variantName, IQueryVariant variant)
+		internal QueryContainer(string variantName, IQueryVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -625,26 +625,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			ContainsVariant = true;
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
-			writer.WriteEndObject();
-		}
-
 		public void Bool(BoolQuery query) => Set(query, "bool");
 		public void Bool(Action<BoolQueryDescriptor<TDocument>> configure) => Set(configure, "bool");
 		public void Boosting(BoostingQuery query) => Set(query, "boosting");
@@ -746,6 +726,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Wildcard(Action<WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 		public void Wrapper(WrapperQuery query) => Set(query, "wrapper");
 		public void Wrapper(Action<WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			writer.WriteEndObject();
+		}
 	}
 
 	public sealed partial class QueryContainerDescriptor : SerializableDescriptorBase<QueryContainerDescriptor>
@@ -785,26 +784,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Container = new QueryContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
-			writer.WriteEndObject();
 		}
 
 		public void Bool(BoolQuery query) => Set(query, "bool");
@@ -952,5 +931,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Wildcard<TDocument>(Action<WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 		public void Wrapper(WrapperQuery query) => Set(query, "wrapper");
 		public void Wrapper(Action<WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			writer.WriteEndObject();
+		}
 	}
 }

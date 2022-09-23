@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(FieldSuggesterConverter))]
 	public sealed partial class FieldSuggester
 	{
-		public FieldSuggester(string variantName, IFieldSuggesterVariant variant)
+		internal FieldSuggester(string variantName, IFieldSuggesterVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -188,6 +188,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public void Completion(CompletionSuggester variant) => Set(variant, "completion");
+		public void Completion(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
+		public void Phrase(PhraseSuggester variant) => Set(variant, "phrase");
+		public void Phrase(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
+		public void Term(TermSuggester variant) => Set(variant, "term");
+		public void Term(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -207,13 +213,6 @@ namespace Elastic.Clients.Elasticsearch
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Completion(CompletionSuggester variant) => Set(variant, "completion");
-		public void Completion(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
-		public void Phrase(PhraseSuggester variant) => Set(variant, "phrase");
-		public void Phrase(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
-		public void Term(TermSuggester variant) => Set(variant, "term");
-		public void Term(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
 	}
 
 	public sealed partial class FieldSuggesterDescriptor : SerializableDescriptorBase<FieldSuggesterDescriptor>
@@ -279,6 +278,15 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public void Completion(CompletionSuggester variant) => Set(variant, "completion");
+		public void Completion(Action<CompletionSuggesterDescriptor> configure) => Set(configure, "completion");
+		public void Completion<TDocument>(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
+		public void Phrase(PhraseSuggester variant) => Set(variant, "phrase");
+		public void Phrase(Action<PhraseSuggesterDescriptor> configure) => Set(configure, "phrase");
+		public void Phrase<TDocument>(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
+		public void Term(TermSuggester variant) => Set(variant, "term");
+		public void Term(Action<TermSuggesterDescriptor> configure) => Set(configure, "term");
+		public void Term<TDocument>(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -298,15 +306,5 @@ namespace Elastic.Clients.Elasticsearch
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Completion(CompletionSuggester variant) => Set(variant, "completion");
-		public void Completion(Action<CompletionSuggesterDescriptor> configure) => Set(configure, "completion");
-		public void Completion<TDocument>(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
-		public void Phrase(PhraseSuggester variant) => Set(variant, "phrase");
-		public void Phrase(Action<PhraseSuggesterDescriptor> configure) => Set(configure, "phrase");
-		public void Phrase<TDocument>(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
-		public void Term(TermSuggester variant) => Set(variant, "term");
-		public void Term(Action<TermSuggesterDescriptor> configure) => Set(configure, "term");
-		public void Term<TDocument>(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
 	}
 }

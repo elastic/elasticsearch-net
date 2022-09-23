@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(SmoothingModelContainerConverter))]
 	public sealed partial class SmoothingModelContainer
 	{
-		public SmoothingModelContainer(string variantName, ISmoothingModelVariant variant)
+		internal SmoothingModelContainer(string variantName, ISmoothingModelVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -153,6 +153,12 @@ namespace Elastic.Clients.Elasticsearch
 			ContainsVariant = true;
 		}
 
+		public void Laplace(LaplaceSmoothingModel variant) => Set(variant, "laplace");
+		public void Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
+		public void LinearInterpolation(LinearInterpolationSmoothingModel variant) => Set(variant, "linear_interpolation");
+		public void LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
+		public void StupidBackoff(StupidBackoffSmoothingModel variant) => Set(variant, "stupid_backoff");
+		public void StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -172,13 +178,6 @@ namespace Elastic.Clients.Elasticsearch
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Laplace(LaplaceSmoothingModel variant) => Set(variant, "laplace");
-		public void Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-		public void LinearInterpolation(LinearInterpolationSmoothingModel variant) => Set(variant, "linear_interpolation");
-		public void LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-		public void StupidBackoff(StupidBackoffSmoothingModel variant) => Set(variant, "stupid_backoff");
-		public void StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 	}
 
 	public sealed partial class SmoothingModelContainerDescriptor : SerializableDescriptorBase<SmoothingModelContainerDescriptor>
@@ -220,6 +219,12 @@ namespace Elastic.Clients.Elasticsearch
 			ContainsVariant = true;
 		}
 
+		public void Laplace(LaplaceSmoothingModel variant) => Set(variant, "laplace");
+		public void Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
+		public void LinearInterpolation(LinearInterpolationSmoothingModel variant) => Set(variant, "linear_interpolation");
+		public void LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
+		public void StupidBackoff(StupidBackoffSmoothingModel variant) => Set(variant, "stupid_backoff");
+		public void StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -239,12 +244,5 @@ namespace Elastic.Clients.Elasticsearch
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Laplace(LaplaceSmoothingModel variant) => Set(variant, "laplace");
-		public void Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-		public void LinearInterpolation(LinearInterpolationSmoothingModel variant) => Set(variant, "linear_interpolation");
-		public void LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-		public void StupidBackoff(StupidBackoffSmoothingModel variant) => Set(variant, "stupid_backoff");
-		public void StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 	}
 }

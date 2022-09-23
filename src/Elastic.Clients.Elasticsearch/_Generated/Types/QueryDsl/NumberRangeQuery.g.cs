@@ -202,7 +202,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public double? To { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
 	public sealed partial class NumberRangeQueryDescriptor<TDocument> : SerializableDescriptorBase<NumberRangeQueryDescriptor<TDocument>>

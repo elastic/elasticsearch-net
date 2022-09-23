@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(SortOptionsConverter))]
 	public sealed partial class SortOptions
 	{
-		public SortOptions(string variantName, ISortOptionsVariant variant)
+		internal SortOptions(string variantName, ISortOptionsVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -197,6 +197,14 @@ namespace Elastic.Clients.Elasticsearch
 			ContainsVariant = true;
 		}
 
+		public void Doc(ScoreSort variant) => Set(variant, "_doc");
+		public void Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
+		public void GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
+		public void GeoDistance(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
+		public void Score(ScoreSort variant) => Set(variant, "_score");
+		public void Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
+		public void Script(ScriptSort variant) => Set(variant, "_script");
+		public void Script(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -216,15 +224,6 @@ namespace Elastic.Clients.Elasticsearch
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Doc(ScoreSort variant) => Set(variant, "_doc");
-		public void Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
-		public void GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
-		public void GeoDistance(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
-		public void Score(ScoreSort variant) => Set(variant, "_score");
-		public void Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
-		public void Script(ScriptSort variant) => Set(variant, "_script");
-		public void Script(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
 	}
 
 	public sealed partial class SortOptionsDescriptor : SerializableDescriptorBase<SortOptionsDescriptor>
@@ -266,6 +265,16 @@ namespace Elastic.Clients.Elasticsearch
 			ContainsVariant = true;
 		}
 
+		public void Doc(ScoreSort variant) => Set(variant, "_doc");
+		public void Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
+		public void GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
+		public void GeoDistance(Action<GeoDistanceSortDescriptor> configure) => Set(configure, "_geo_distance");
+		public void GeoDistance<TDocument>(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
+		public void Score(ScoreSort variant) => Set(variant, "_score");
+		public void Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
+		public void Script(ScriptSort variant) => Set(variant, "_script");
+		public void Script(Action<ScriptSortDescriptor> configure) => Set(configure, "_script");
+		public void Script<TDocument>(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -285,16 +294,5 @@ namespace Elastic.Clients.Elasticsearch
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Doc(ScoreSort variant) => Set(variant, "_doc");
-		public void Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
-		public void GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
-		public void GeoDistance(Action<GeoDistanceSortDescriptor> configure) => Set(configure, "_geo_distance");
-		public void GeoDistance<TDocument>(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
-		public void Score(ScoreSort variant) => Set(variant, "_score");
-		public void Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
-		public void Script(ScriptSort variant) => Set(variant, "_script");
-		public void Script(Action<ScriptSortDescriptor> configure) => Set(configure, "_script");
-		public void Script<TDocument>(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
 	}
 }

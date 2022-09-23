@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	[JsonConverter(typeof(RetentionPolicyContainerConverter))]
 	public sealed partial class RetentionPolicyContainer
 	{
-		public RetentionPolicyContainer(string variantName, IRetentionPolicyVariant variant)
+		internal RetentionPolicyContainer(string variantName, IRetentionPolicyVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -131,6 +131,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			ContainsVariant = true;
 		}
 
+		public void Time(RetentionPolicy variant) => Set(variant, "time");
+		public void Time(Action<RetentionPolicyDescriptor<TDocument>> configure) => Set(configure, "time");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -150,9 +152,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Time(RetentionPolicy variant) => Set(variant, "time");
-		public void Time(Action<RetentionPolicyDescriptor<TDocument>> configure) => Set(configure, "time");
 	}
 
 	public sealed partial class RetentionPolicyContainerDescriptor : SerializableDescriptorBase<RetentionPolicyContainerDescriptor>
@@ -194,6 +193,9 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			ContainsVariant = true;
 		}
 
+		public void Time(RetentionPolicy variant) => Set(variant, "time");
+		public void Time(Action<RetentionPolicyDescriptor> configure) => Set(configure, "time");
+		public void Time<TDocument>(Action<RetentionPolicyDescriptor<TDocument>> configure) => Set(configure, "time");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -213,9 +215,5 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Time(RetentionPolicy variant) => Set(variant, "time");
-		public void Time(Action<RetentionPolicyDescriptor> configure) => Set(configure, "time");
-		public void Time<TDocument>(Action<RetentionPolicyDescriptor<TDocument>> configure) => Set(configure, "time");
 	}
 }

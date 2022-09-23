@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	[JsonConverter(typeof(InferenceConfigUpdateContainerConverter))]
 	public sealed partial class InferenceConfigUpdateContainer
 	{
-		public InferenceConfigUpdateContainer(string variantName, IInferenceConfigUpdateVariant variant)
+		internal InferenceConfigUpdateContainer(string variantName, IInferenceConfigUpdateVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -219,6 +219,24 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			ContainsVariant = true;
 		}
 
+		public void Classification(ClassificationInferenceOptions variant) => Set(variant, "classification");
+		public void Classification(Action<ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
+		public void FillMask(FillMaskInferenceUpdateOptions variant) => Set(variant, "fill_mask");
+		public void FillMask(Action<FillMaskInferenceUpdateOptionsDescriptor> configure) => Set(configure, "fill_mask");
+		public void Ner(NerInferenceUpdateOptions variant) => Set(variant, "ner");
+		public void Ner(Action<NerInferenceUpdateOptionsDescriptor> configure) => Set(configure, "ner");
+		public void PassThrough(PassThroughInferenceUpdateOptions variant) => Set(variant, "pass_through");
+		public void PassThrough(Action<PassThroughInferenceUpdateOptionsDescriptor> configure) => Set(configure, "pass_through");
+		public void QuestionAnswering(QuestionAnsweringInferenceUpdateOptions variant) => Set(variant, "question_answering");
+		public void QuestionAnswering(Action<QuestionAnsweringInferenceUpdateOptionsDescriptor> configure) => Set(configure, "question_answering");
+		public void Regression(RegressionInferenceOptions variant) => Set(variant, "regression");
+		public void Regression(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
+		public void TextClassification(TextClassificationInferenceUpdateOptions variant) => Set(variant, "text_classification");
+		public void TextClassification(Action<TextClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_classification");
+		public void TextEmbedding(TextEmbeddingInferenceUpdateOptions variant) => Set(variant, "text_embedding");
+		public void TextEmbedding(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_embedding");
+		public void ZeroShotClassification(ZeroShotClassificationInferenceUpdateOptions variant) => Set(variant, "zero_shot_classification");
+		public void ZeroShotClassification(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -238,25 +256,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void Classification(ClassificationInferenceOptions variant) => Set(variant, "classification");
-		public void Classification(Action<ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-		public void FillMask(FillMaskInferenceUpdateOptions variant) => Set(variant, "fill_mask");
-		public void FillMask(Action<FillMaskInferenceUpdateOptionsDescriptor> configure) => Set(configure, "fill_mask");
-		public void Ner(NerInferenceUpdateOptions variant) => Set(variant, "ner");
-		public void Ner(Action<NerInferenceUpdateOptionsDescriptor> configure) => Set(configure, "ner");
-		public void PassThrough(PassThroughInferenceUpdateOptions variant) => Set(variant, "pass_through");
-		public void PassThrough(Action<PassThroughInferenceUpdateOptionsDescriptor> configure) => Set(configure, "pass_through");
-		public void QuestionAnswering(QuestionAnsweringInferenceUpdateOptions variant) => Set(variant, "question_answering");
-		public void QuestionAnswering(Action<QuestionAnsweringInferenceUpdateOptionsDescriptor> configure) => Set(configure, "question_answering");
-		public void Regression(RegressionInferenceOptions variant) => Set(variant, "regression");
-		public void Regression(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
-		public void TextClassification(TextClassificationInferenceUpdateOptions variant) => Set(variant, "text_classification");
-		public void TextClassification(Action<TextClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_classification");
-		public void TextEmbedding(TextEmbeddingInferenceUpdateOptions variant) => Set(variant, "text_embedding");
-		public void TextEmbedding(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_embedding");
-		public void ZeroShotClassification(ZeroShotClassificationInferenceUpdateOptions variant) => Set(variant, "zero_shot_classification");
-		public void ZeroShotClassification(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
 	}
 
 	public sealed partial class InferenceConfigUpdateContainerDescriptor : SerializableDescriptorBase<InferenceConfigUpdateContainerDescriptor>
@@ -298,26 +297,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			ContainsVariant = true;
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
-			writer.WriteEndObject();
-		}
-
 		public void Classification(ClassificationInferenceOptions variant) => Set(variant, "classification");
 		public void Classification(Action<ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
 		public void FillMask(FillMaskInferenceUpdateOptions variant) => Set(variant, "fill_mask");
@@ -337,5 +316,24 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public void TextEmbedding(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_embedding");
 		public void ZeroShotClassification(ZeroShotClassificationInferenceUpdateOptions variant) => Set(variant, "zero_shot_classification");
 		public void ZeroShotClassification(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			writer.WriteEndObject();
+		}
 	}
 }

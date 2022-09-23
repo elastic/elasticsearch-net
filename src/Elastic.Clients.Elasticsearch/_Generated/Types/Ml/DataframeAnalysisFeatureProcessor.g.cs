@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	[JsonConverter(typeof(DataframeAnalysisFeatureProcessorConverter))]
 	public sealed partial class DataframeAnalysisFeatureProcessor
 	{
-		public DataframeAnalysisFeatureProcessor(string variantName, IDataframeAnalysisFeatureProcessorVariant variant)
+		internal DataframeAnalysisFeatureProcessor(string variantName, IDataframeAnalysisFeatureProcessorVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -175,6 +175,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			ContainsVariant = true;
 		}
 
+		public void FrequencyEncoding(DataframeAnalysisFeatureProcessorFrequencyEncoding variant) => Set(variant, "frequency_encoding");
+		public void FrequencyEncoding(Action<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>> configure) => Set(configure, "frequency_encoding");
+		public void MultiEncoding(DataframeAnalysisFeatureProcessorMultiEncoding variant) => Set(variant, "multi_encoding");
+		public void MultiEncoding(Action<DataframeAnalysisFeatureProcessorMultiEncodingDescriptor> configure) => Set(configure, "multi_encoding");
+		public void NGramEncoding(DataframeAnalysisFeatureProcessorNGramEncoding variant) => Set(variant, "n_gram_encoding");
+		public void NGramEncoding(Action<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>> configure) => Set(configure, "n_gram_encoding");
+		public void OneHotEncoding(DataframeAnalysisFeatureProcessorOneHotEncoding variant) => Set(variant, "one_hot_encoding");
+		public void OneHotEncoding(Action<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>> configure) => Set(configure, "one_hot_encoding");
+		public void TargetMeanEncoding(DataframeAnalysisFeatureProcessorTargetMeanEncoding variant) => Set(variant, "target_mean_encoding");
+		public void TargetMeanEncoding(Action<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -194,17 +204,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void FrequencyEncoding(DataframeAnalysisFeatureProcessorFrequencyEncoding variant) => Set(variant, "frequency_encoding");
-		public void FrequencyEncoding(Action<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>> configure) => Set(configure, "frequency_encoding");
-		public void MultiEncoding(DataframeAnalysisFeatureProcessorMultiEncoding variant) => Set(variant, "multi_encoding");
-		public void MultiEncoding(Action<DataframeAnalysisFeatureProcessorMultiEncodingDescriptor> configure) => Set(configure, "multi_encoding");
-		public void NGramEncoding(DataframeAnalysisFeatureProcessorNGramEncoding variant) => Set(variant, "n_gram_encoding");
-		public void NGramEncoding(Action<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>> configure) => Set(configure, "n_gram_encoding");
-		public void OneHotEncoding(DataframeAnalysisFeatureProcessorOneHotEncoding variant) => Set(variant, "one_hot_encoding");
-		public void OneHotEncoding(Action<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>> configure) => Set(configure, "one_hot_encoding");
-		public void TargetMeanEncoding(DataframeAnalysisFeatureProcessorTargetMeanEncoding variant) => Set(variant, "target_mean_encoding");
-		public void TargetMeanEncoding(Action<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
 	}
 
 	public sealed partial class DataframeAnalysisFeatureProcessorDescriptor : SerializableDescriptorBase<DataframeAnalysisFeatureProcessorDescriptor>
@@ -246,6 +245,20 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			ContainsVariant = true;
 		}
 
+		public void FrequencyEncoding(DataframeAnalysisFeatureProcessorFrequencyEncoding variant) => Set(variant, "frequency_encoding");
+		public void FrequencyEncoding(Action<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor> configure) => Set(configure, "frequency_encoding");
+		public void FrequencyEncoding<TDocument>(Action<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>> configure) => Set(configure, "frequency_encoding");
+		public void MultiEncoding(DataframeAnalysisFeatureProcessorMultiEncoding variant) => Set(variant, "multi_encoding");
+		public void MultiEncoding(Action<DataframeAnalysisFeatureProcessorMultiEncodingDescriptor> configure) => Set(configure, "multi_encoding");
+		public void NGramEncoding(DataframeAnalysisFeatureProcessorNGramEncoding variant) => Set(variant, "n_gram_encoding");
+		public void NGramEncoding(Action<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor> configure) => Set(configure, "n_gram_encoding");
+		public void NGramEncoding<TDocument>(Action<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>> configure) => Set(configure, "n_gram_encoding");
+		public void OneHotEncoding(DataframeAnalysisFeatureProcessorOneHotEncoding variant) => Set(variant, "one_hot_encoding");
+		public void OneHotEncoding(Action<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor> configure) => Set(configure, "one_hot_encoding");
+		public void OneHotEncoding<TDocument>(Action<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>> configure) => Set(configure, "one_hot_encoding");
+		public void TargetMeanEncoding(DataframeAnalysisFeatureProcessorTargetMeanEncoding variant) => Set(variant, "target_mean_encoding");
+		public void TargetMeanEncoding(Action<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor> configure) => Set(configure, "target_mean_encoding");
+		public void TargetMeanEncoding<TDocument>(Action<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -265,20 +278,5 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void FrequencyEncoding(DataframeAnalysisFeatureProcessorFrequencyEncoding variant) => Set(variant, "frequency_encoding");
-		public void FrequencyEncoding(Action<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor> configure) => Set(configure, "frequency_encoding");
-		public void FrequencyEncoding<TDocument>(Action<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>> configure) => Set(configure, "frequency_encoding");
-		public void MultiEncoding(DataframeAnalysisFeatureProcessorMultiEncoding variant) => Set(variant, "multi_encoding");
-		public void MultiEncoding(Action<DataframeAnalysisFeatureProcessorMultiEncodingDescriptor> configure) => Set(configure, "multi_encoding");
-		public void NGramEncoding(DataframeAnalysisFeatureProcessorNGramEncoding variant) => Set(variant, "n_gram_encoding");
-		public void NGramEncoding(Action<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor> configure) => Set(configure, "n_gram_encoding");
-		public void NGramEncoding<TDocument>(Action<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>> configure) => Set(configure, "n_gram_encoding");
-		public void OneHotEncoding(DataframeAnalysisFeatureProcessorOneHotEncoding variant) => Set(variant, "one_hot_encoding");
-		public void OneHotEncoding(Action<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor> configure) => Set(configure, "one_hot_encoding");
-		public void OneHotEncoding<TDocument>(Action<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>> configure) => Set(configure, "one_hot_encoding");
-		public void TargetMeanEncoding(DataframeAnalysisFeatureProcessorTargetMeanEncoding variant) => Set(variant, "target_mean_encoding");
-		public void TargetMeanEncoding(Action<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor> configure) => Set(configure, "target_mean_encoding");
-		public void TargetMeanEncoding<TDocument>(Action<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
 	}
 }

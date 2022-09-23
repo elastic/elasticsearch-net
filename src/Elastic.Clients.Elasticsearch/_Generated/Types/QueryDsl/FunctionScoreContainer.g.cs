@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(FunctionScoreContainerConverter))]
 	public sealed partial class FunctionScoreContainer
 	{
-		public FunctionScoreContainer(string variantName, IFunctionScoreVariant variant)
+		internal FunctionScoreContainer(string variantName, IFunctionScoreVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -198,6 +198,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
+		public void FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
+		public void FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
+		public void RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
+		public void RandomScore(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
+		public void ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
+		public void ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -217,13 +223,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
-		public void FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
-		public void RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
-		public void RandomScore(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
-		public void ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
-		public void ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
 	}
 
 	public sealed partial class FunctionScoreContainerDescriptor : SerializableDescriptorBase<FunctionScoreContainerDescriptor>
@@ -303,6 +302,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
+		public void FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
+		public void FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => Set(configure, "field_value_factor");
+		public void FieldValueFactor<TDocument>(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
+		public void RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
+		public void RandomScore(Action<RandomScoreFunctionDescriptor> configure) => Set(configure, "random_score");
+		public void RandomScore<TDocument>(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
+		public void ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
+		public void ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -322,14 +329,5 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
-
-		public void FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
-		public void FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => Set(configure, "field_value_factor");
-		public void FieldValueFactor<TDocument>(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
-		public void RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
-		public void RandomScore(Action<RandomScoreFunctionDescriptor> configure) => Set(configure, "random_score");
-		public void RandomScore<TDocument>(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
-		public void ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
-		public void ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
 	}
 }

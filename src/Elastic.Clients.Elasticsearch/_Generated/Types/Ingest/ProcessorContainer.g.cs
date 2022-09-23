@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	[JsonConverter(typeof(ProcessorContainerConverter))]
 	public sealed partial class ProcessorContainer
 	{
-		public ProcessorContainer(string variantName, IProcessorVariant variant)
+		internal ProcessorContainer(string variantName, IProcessorVariant variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -483,26 +483,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			ContainsVariant = true;
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
-			writer.WriteEndObject();
-		}
-
 		public void Append(AppendProcessor variant) => Set(variant, "append");
 		public void Append(Action<AppendProcessorDescriptor<TDocument>> configure) => Set(configure, "append");
 		public void Attachment(AttachmentProcessor variant) => Set(variant, "attachment");
@@ -569,6 +549,25 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public void Urldecode(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
 		public void UserAgent(UserAgentProcessor variant) => Set(variant, "user_agent");
 		public void UserAgent(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			writer.WriteEndObject();
+		}
 	}
 
 	public sealed partial class ProcessorContainerDescriptor : SerializableDescriptorBase<ProcessorContainerDescriptor>
@@ -608,26 +607,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			Container = new ProcessorContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
-			writer.WriteEndObject();
 		}
 
 		public void Append(AppendProcessor variant) => Set(variant, "append");
@@ -729,5 +708,24 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public void UserAgent(UserAgentProcessor variant) => Set(variant, "user_agent");
 		public void UserAgent(Action<UserAgentProcessorDescriptor> configure) => Set(configure, "user_agent");
 		public void UserAgent<TDocument>(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			writer.WriteEndObject();
+		}
 	}
 }

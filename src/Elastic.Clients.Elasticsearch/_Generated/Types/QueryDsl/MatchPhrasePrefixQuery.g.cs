@@ -170,7 +170,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
 	public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : SerializableDescriptorBase<MatchPhrasePrefixQueryDescriptor<TDocument>>
