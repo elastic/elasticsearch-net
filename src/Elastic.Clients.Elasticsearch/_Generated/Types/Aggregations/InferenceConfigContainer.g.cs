@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the InferenceConfigContainerDescriptor. Only a single InferenceConfigContainer can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private void Set(IInferenceConfigVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the InferenceConfigContainerDescriptor. Only a single InferenceConfigContainer can be added to this container type.");
 			Container = new InferenceConfigContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
@@ -188,7 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the InferenceConfigContainerDescriptor. Only a single InferenceConfigContainer can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -200,7 +200,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private void Set(IInferenceConfigVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the InferenceConfigContainerDescriptor. Only a single InferenceConfigContainer can be added to this container type.");
 			Container = new InferenceConfigContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;

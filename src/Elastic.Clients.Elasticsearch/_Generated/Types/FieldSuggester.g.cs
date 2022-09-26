@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -158,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch
 		private void Set(IFieldSuggesterVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester can be added to this container type.");
 			Container = new FieldSuggester(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
@@ -236,7 +236,7 @@ namespace Elastic.Clients.Elasticsearch
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -248,7 +248,7 @@ namespace Elastic.Clients.Elasticsearch
 		private void Set(IFieldSuggesterVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester can be added to this container type.");
 			Container = new FieldSuggester(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;

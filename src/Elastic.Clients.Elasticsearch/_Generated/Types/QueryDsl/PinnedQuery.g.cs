@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private void Set(IPinnedQueryVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery can be added to this container type.");
 			Container = new PinnedQuery(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -227,7 +227,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private void Set(IPinnedQueryVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery can be added to this container type.");
 			Container = new PinnedQuery(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;

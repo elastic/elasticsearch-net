@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the SmoothingModelContainerDescriptor. Only a single SmoothingModelContainer can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch
 		private void Set(ISmoothingModelVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the SmoothingModelContainerDescriptor. Only a single SmoothingModelContainer can be added to this container type.");
 			Container = new SmoothingModelContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the SmoothingModelContainerDescriptor. Only a single SmoothingModelContainer can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -213,7 +213,7 @@ namespace Elastic.Clients.Elasticsearch
 		private void Set(ISmoothingModelVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the SmoothingModelContainerDescriptor. Only a single SmoothingModelContainer can be added to this container type.");
 			Container = new SmoothingModelContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;

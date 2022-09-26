@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the DataframeAnalysisContainerDescriptor. Only a single DataframeAnalysisContainer can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private void Set(IDataframeAnalysisVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the DataframeAnalysisContainerDescriptor. Only a single DataframeAnalysisContainer can be added to this container type.");
 			Container = new DataframeAnalysisContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the DataframeAnalysisContainerDescriptor. Only a single DataframeAnalysisContainer can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -213,7 +213,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		private void Set(IDataframeAnalysisVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the DataframeAnalysisContainerDescriptor. Only a single DataframeAnalysisContainer can be added to this container type.");
 			Container = new DataframeAnalysisContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;

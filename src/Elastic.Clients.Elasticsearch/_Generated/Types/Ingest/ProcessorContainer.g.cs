@@ -465,7 +465,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the ProcessorContainerDescriptor. Only a single ProcessorContainer can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -477,7 +477,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		private void Set(IProcessorVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the ProcessorContainerDescriptor. Only a single ProcessorContainer can be added to this container type.");
 			Container = new ProcessorContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
@@ -591,7 +591,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the ProcessorContainerDescriptor. Only a single ProcessorContainer can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -603,7 +603,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		private void Set(IProcessorVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the ProcessorContainerDescriptor. Only a single ProcessorContainer can be added to this container type.");
 			Container = new ProcessorContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;

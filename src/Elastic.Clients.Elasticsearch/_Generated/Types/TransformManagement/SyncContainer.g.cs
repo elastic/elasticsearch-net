@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the SyncContainerDescriptor. Only a single SyncContainer can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -125,7 +125,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		private void Set(ISyncVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the SyncContainerDescriptor. Only a single SyncContainer can be added to this container type.");
 			Container = new SyncContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
@@ -175,7 +175,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the SyncContainerDescriptor. Only a single SyncContainer can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		private void Set(ISyncVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the SyncContainerDescriptor. Only a single SyncContainer can be added to this container type.");
 			Container = new SyncContainer(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;

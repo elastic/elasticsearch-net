@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the SortOptionsDescriptor. Only a single SortOptions can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -191,7 +191,7 @@ namespace Elastic.Clients.Elasticsearch
 		private void Set(ISortOptionsVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the SortOptionsDescriptor. Only a single SortOptions can be added to this container type.");
 			Container = new SortOptions(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
@@ -247,7 +247,7 @@ namespace Elastic.Clients.Elasticsearch
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the SortOptionsDescriptor. Only a single SortOptions can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			DescriptorType = typeof(T);
@@ -259,7 +259,7 @@ namespace Elastic.Clients.Elasticsearch
 		private void Set(ISortOptionsVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new Exception("A variant has already been assigned to the SortOptionsDescriptor. Only a single SortOptions can be added to this container type.");
 			Container = new SortOptions(variantName, variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
