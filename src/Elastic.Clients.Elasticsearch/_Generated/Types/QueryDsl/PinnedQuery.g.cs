@@ -83,6 +83,20 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, PinnedQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
+			}
+
+			writer.WritePropertyName("organic");
+			JsonSerializer.Serialize(writer, value.Organic, options);
 			writer.WritePropertyName(value.VariantName);
 			writer.WriteEndObject();
 		}
@@ -95,24 +109,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal PinnedQuery Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery can be added to this container type.");
+				throw new InvalidOperationException("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
@@ -121,8 +132,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private void Set(IPinnedQueryVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery can be added to this container type.");
-			Container = new PinnedQuery(variantName, variant);
+				throw new Exception("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -181,12 +192,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			if (OrganicDescriptor is not null)
 			{
@@ -217,7 +222,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -229,24 +242,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal PinnedQuery Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery can be added to this container type.");
+				throw new InvalidOperationException("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
@@ -255,8 +265,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private void Set(IPinnedQueryVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery can be added to this container type.");
-			Container = new PinnedQuery(variantName, variant);
+				throw new Exception("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -315,12 +325,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			if (OrganicDescriptor is not null)
 			{
@@ -351,7 +355,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

@@ -593,24 +593,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal QueryContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer can be added to this container type.");
+				throw new InvalidOperationException("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
@@ -619,8 +616,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private void Set(IQueryVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer can be added to this container type.");
-			Container = new QueryContainer(variantName, variant);
+				throw new Exception("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -734,15 +731,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -754,24 +753,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal QueryContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer can be added to this container type.");
+				throw new InvalidOperationException("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
@@ -780,8 +776,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private void Set(IQueryVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer can be added to this container type.");
-			Container = new QueryContainer(variantName, variant);
+				throw new Exception("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -939,15 +935,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

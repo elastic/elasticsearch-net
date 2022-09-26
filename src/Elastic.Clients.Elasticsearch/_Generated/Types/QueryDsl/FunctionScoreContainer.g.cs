@@ -103,6 +103,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, FunctionScoreContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			if (value.Filter is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.Filter, options);
+			}
+
+			if (value.Weight.HasValue)
+			{
+				writer.WritePropertyName("weight");
+				writer.WriteNumberValue(value.Weight.Value);
+			}
+
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
@@ -128,24 +140,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal FunctionScoreContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer can be added to this container type.");
+				throw new InvalidOperationException("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
@@ -154,8 +163,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private void Set(IFunctionScoreVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer can be added to this container type.");
-			Container = new FunctionScoreContainer(variantName, variant);
+				throw new Exception("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -212,12 +221,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			if (FilterDescriptor is not null)
 			{
@@ -242,7 +245,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -254,24 +265,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal FunctionScoreContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer can be added to this container type.");
+				throw new InvalidOperationException("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
@@ -280,8 +288,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private void Set(IFunctionScoreVariant variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer can be added to this container type.");
-			Container = new FunctionScoreContainer(variantName, variant);
+				throw new Exception("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
@@ -340,12 +348,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			if (FilterDescriptor is not null)
 			{
@@ -370,7 +372,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

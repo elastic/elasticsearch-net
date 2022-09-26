@@ -2,7 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Tests.Domain;
@@ -21,7 +20,7 @@ public class IntervalsQuerySerializationTests : SerializerTestBase
 	};
 
 	[U]
-	public async Task Descriptor_CanSerialize()
+	public async Task IntervalsQueryDescriptor_CanSerialize()
 	{
 		var search = new SearchRequestDescriptor<Project>(search => search
 			.Query(q => q
@@ -40,7 +39,7 @@ public class IntervalsQuerySerializationTests : SerializerTestBase
 	}
 
 	[U]
-	public async Task Descriptor_CanSerialize_WithObjectVariant()
+	public async Task IntervalsQueryDescriptor_CanSerialize_WithObjectVariant()
 	{
 		var search = new SearchRequestDescriptor<Project>(search => search
 			.Query(q => q
@@ -56,7 +55,7 @@ public class IntervalsQuerySerializationTests : SerializerTestBase
 	}
 
 	[U]
-	public async Task Object_CanSerialize()
+	public async Task IntervalsQuery_CanSerialize()
 	{
 		var query = IntervalsQuery.Match(Infer.Field<Project>(f => f.Name), _intervalsMatch);
 		query.QueryName = "testing-intervals";
@@ -68,5 +67,15 @@ public class IntervalsQuerySerializationTests : SerializerTestBase
 		var serialisedJson = await SerializeAndGetJsonStringAsync(search);
 
 		await Verifier.VerifyJson(serialisedJson);
+	}
+
+	public async Task IntervalsQuery_CanDeserialize()
+	{
+		var stream = WrapInStream("{\"\"query\"\":{\"\"intervals\"\":{\"\"name\"\":{\"\"boost\"\":2,\"\"match\"\":" +
+			"{\"\"max_gaps\"\":0,\"\"ordered\"\":true,\"\"query\"\":\"\"Steve\"\"},\"\"_name\"\":\"\"testing-intervals\"\"}}}}");
+
+		var queryContainer = _requestResponseSerializer.Deserialize<QueryContainer>(stream);
+		var intervalsQuery = queryContainer.Variant.Should().BeOfType<IntervalsQuery>().Subject;
+		await Verifier.Verify(intervalsQuery);
 	}
 }
