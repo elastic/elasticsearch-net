@@ -13,6 +13,13 @@ namespace Tests.Serialization;
 [UsesVerify]
 public class IntervalsQuerySerializationTests : SerializerTestBase
 {
+	private readonly IntervalsMatch _intervalsMatch = new()
+	{
+		Query = "Steve",
+		MaxGaps = 0,
+		Ordered = true
+	};
+
 	[U]
 	public async Task Descriptor_CanSerialize()
 	{
@@ -33,16 +40,25 @@ public class IntervalsQuerySerializationTests : SerializerTestBase
 	}
 
 	[U]
+	public async Task Descriptor_CanSerialize_WithObjectVariant()
+	{
+		var search = new SearchRequestDescriptor<Project>(search => search
+			.Query(q => q
+				.Intervals(i => i
+					.Field(f => f.Name)
+					.Boost(2.0f)
+					.QueryName("testing-intervals")
+					.Match(_intervalsMatch))));
+
+		var serialisedJson = await SerializeAndGetJsonStringAsync(search);
+
+		await Verifier.VerifyJson(serialisedJson);
+	}
+
+	[U]
 	public async Task Object_CanSerialize()
 	{
-		var intervalsMatch = new IntervalsMatch
-		{
-			Query = "Steve",
-			MaxGaps = 0,
-			Ordered = true
-		};
-
-		var query = IntervalsQuery.Match(Infer.Field<Project>(f => f.Name), intervalsMatch);
+		var query = IntervalsQuery.Match(Infer.Field<Project>(f => f.Name), _intervalsMatch);
 		query.QueryName = "testing-intervals";
 		query.Boost = 2.0f;
 
