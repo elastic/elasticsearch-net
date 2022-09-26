@@ -113,7 +113,7 @@ SHA256 Fingerprint=<FINGERPRINT>
 ----
 
 Visit the 
-https://www.elastic.co/guide/en/elasticsearch/reference/master/configuring-stack-security.html[Connect clients to {es}] documentation for more information.
+{ref-current}/configuring-stack-security.html[Connect clients to {es}] documentation for more information.
 
 The following snippet shows you how to create a client instance that connects to 
 your {es} cluster via a single node, using the CA fingerprint:
