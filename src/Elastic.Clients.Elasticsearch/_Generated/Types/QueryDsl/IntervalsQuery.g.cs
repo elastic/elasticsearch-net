@@ -276,8 +276,23 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			writer.WritePropertyName(ContainedVariantName);
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}
@@ -397,8 +412,23 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			writer.WritePropertyName(ContainedVariantName);
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

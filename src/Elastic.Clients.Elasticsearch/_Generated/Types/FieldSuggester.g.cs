@@ -209,6 +209,24 @@ namespace Elastic.Clients.Elasticsearch
 			}
 
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(PrefixValue))
+			{
+				writer.WritePropertyName("prefix");
+				writer.WriteStringValue(PrefixValue);
+			}
+
+			if (!string.IsNullOrEmpty(RegexValue))
+			{
+				writer.WritePropertyName("regex");
+				writer.WriteStringValue(RegexValue);
+			}
+
+			if (!string.IsNullOrEmpty(TextValue))
+			{
+				writer.WritePropertyName("text");
+				writer.WriteStringValue(TextValue);
+			}
+
 			writer.WritePropertyName(ContainedVariantName);
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
@@ -302,6 +320,24 @@ namespace Elastic.Clients.Elasticsearch
 			}
 
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(PrefixValue))
+			{
+				writer.WritePropertyName("prefix");
+				writer.WriteStringValue(PrefixValue);
+			}
+
+			if (!string.IsNullOrEmpty(RegexValue))
+			{
+				writer.WritePropertyName("regex");
+				writer.WriteStringValue(RegexValue);
+			}
+
+			if (!string.IsNullOrEmpty(TextValue))
+			{
+				writer.WritePropertyName("text");
+				writer.WriteStringValue(TextValue);
+			}
+
 			writer.WritePropertyName(ContainedVariantName);
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();

@@ -219,6 +219,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			writer.WriteStartObject();
+			if (FilterDescriptor is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+			}
+			else if (FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			}
+			else if (FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			if (WeightValue.HasValue)
+			{
+				writer.WritePropertyName("weight");
+				writer.WriteNumberValue(WeightValue.Value);
+			}
+
 			writer.WritePropertyName(ContainedVariantName);
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
@@ -325,6 +347,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			writer.WriteStartObject();
+			if (FilterDescriptor is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+			}
+			else if (FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
+			}
+			else if (FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			if (WeightValue.HasValue)
+			{
+				writer.WritePropertyName("weight");
+				writer.WriteNumberValue(WeightValue.Value);
+			}
+
 			writer.WritePropertyName(ContainedVariantName);
 			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
