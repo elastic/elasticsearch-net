@@ -12,3 +12,13 @@ This page has moved. See <<configuration>>.
 == NEST - High level client
 
 This page has been deleted.
+
+[role="exclude",id="indexing-documents"]
+== Indexing documents
+
+This page has been deleted.
+
+[role="exclude",id="bulkall-observable"]
+== Multiple documents with `BulkAllObservable` helper
+
+This page has been deleted.
