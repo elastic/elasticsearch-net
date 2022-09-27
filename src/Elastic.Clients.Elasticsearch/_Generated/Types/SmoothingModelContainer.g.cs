@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch
 			reader.Read();
 			if (reader.TokenType != JsonTokenType.PropertyName)
 			{
-				throw new JsonException("Expected a property name token representing the variant help within this container.");
+				throw new JsonException("Expected a property name token representing the variant held within this container.");
 			}
 
 			var propertyName = reader.GetString();

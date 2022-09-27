@@ -31,8 +31,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
 			reader.Read();
-			reader.Read();
-			reader.Read();
 			var fieldName = reader.GetString();
 			reader.Read();
 			var variant = new MatchPhraseQuery(fieldName);
@@ -79,7 +77,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				}
 			}
 
-			reader.Read();
 			reader.Read();
 			return variant;
 		}
