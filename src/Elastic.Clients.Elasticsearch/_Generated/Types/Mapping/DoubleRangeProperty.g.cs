@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public sealed partial class DoubleRangeProperty : IProperty
+	public sealed partial class DoubleRangeProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]

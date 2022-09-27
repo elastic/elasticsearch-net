@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public interface IPinnedQueryVariant
-	{
-	}
-
 	[JsonConverter(typeof(PinnedQueryConverter))]
-	public sealed partial class PinnedQuery : Query, IQueryVariant
+	public sealed partial class PinnedQuery : Query
 	{
-		internal PinnedQuery(string variantName, IPinnedQueryVariant variant)
+		internal PinnedQuery(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,10 +39,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Variant = variant;
 		}
 
-		internal IPinnedQueryVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
+		public static PinnedQuery Docs(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> variant) => new PinnedQuery("docs", variant);
+		public static PinnedQuery Ids(IEnumerable<Elastic.Clients.Elasticsearch.Id> variant) => new PinnedQuery("ids", variant);
 		[JsonInclude]
 		[JsonPropertyName("_name")]
 		public string? QueryName { get; set; }
@@ -69,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				throw new JsonException("Expected start token.");
 			}
 
-			IPinnedQueryVariant? variantValue = default;
+			object? variantValue = default;
 			string? variantNameValue = default;
 			string? nameValue = default;
 			float? boostValue = default;
@@ -106,6 +104,20 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 					continue;
 				}
 
+				if (propertyName == "docs")
+				{
+					variantValue = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "ids")
+				{
+					variantValue = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Id>?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
 				throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'PinnedQuery' from the response.");
 			}
 
@@ -135,6 +147,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			writer.WritePropertyName("organic");
 			JsonSerializer.Serialize(writer, value.Organic, options);
 			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
+			{
+				case "docs":
+					JsonSerializer.Serialize<IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>>(writer, (IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>)value.Variant, options);
+					break;
+				case "ids":
+					JsonSerializer.Serialize<IEnumerable<Elastic.Clients.Elasticsearch.Id>>(writer, (IEnumerable<Elastic.Clients.Elasticsearch.Id>)value.Variant, options);
+					break;
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -166,7 +188,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Descriptor = descriptor;
 		}
 
-		private void Set(IPinnedQueryVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery variant can be added to this container type.");
@@ -299,7 +321,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Descriptor = descriptor;
 		}
 
-		private void Set(IPinnedQueryVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery variant can be added to this container type.");

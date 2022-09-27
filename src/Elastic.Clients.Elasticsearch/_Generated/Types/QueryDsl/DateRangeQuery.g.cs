@@ -196,7 +196,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(DateRangeQueryConverter))]
-	public sealed partial class DateRangeQuery : Query, IQueryVariant
+	public sealed partial class DateRangeQuery : Query
 	{
 		public DateRangeQuery(Field field)
 		{

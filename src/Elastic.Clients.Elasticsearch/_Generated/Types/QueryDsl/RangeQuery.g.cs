@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class RangeQuery : Union<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery, Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery>, IQueryVariant
+	public partial class RangeQuery : Union<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery, Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery>
 	{
 		public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery dateRangeQuery) : base(dateRangeQuery)
 		{

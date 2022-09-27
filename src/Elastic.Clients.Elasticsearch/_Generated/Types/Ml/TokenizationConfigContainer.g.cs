@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public interface ITokenizationConfigVariant
-	{
-	}
-
 	[JsonConverter(typeof(TokenizationConfigContainerConverter))]
 	public sealed partial class TokenizationConfigContainer
 	{
-		internal TokenizationConfigContainer(string variantName, ITokenizationConfigVariant variant)
+		internal TokenizationConfigContainer(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Variant = variant;
 		}
 
-		internal ITokenizationConfigVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -141,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(ITokenizationConfigVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the TokenizationConfigContainerDescriptor. Only a single TokenizationConfigContainer variant can be added to this container type.");
@@ -206,7 +202,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(ITokenizationConfigVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the TokenizationConfigContainerDescriptor. Only a single TokenizationConfigContainer variant can be added to this container type.");

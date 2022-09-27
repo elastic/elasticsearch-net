@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public sealed partial class WordDelimiterTokenFilter : ITokenFilterDefinition
+	public sealed partial class WordDelimiterTokenFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("catenate_all")]

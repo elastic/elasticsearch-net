@@ -29,17 +29,5 @@ namespace Elastic.Clients.Elasticsearch.Migration
 		[JsonInclude]
 		[JsonPropertyName("feature_name")]
 		public string FeatureName { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.MigrationFeatureIndexInfo> Indices { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("migration_status")]
-		public Elastic.Clients.Elasticsearch.Migration.MigrationStatus MigrationStatus { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("minimum_index_version")]
-		public string MinimumIndexVersion { get; init; }
 	}
 }

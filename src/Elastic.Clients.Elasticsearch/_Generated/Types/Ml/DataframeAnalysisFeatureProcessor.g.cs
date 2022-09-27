@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public interface IDataframeAnalysisFeatureProcessorVariant
-	{
-	}
-
 	[JsonConverter(typeof(DataframeAnalysisFeatureProcessorConverter))]
 	public sealed partial class DataframeAnalysisFeatureProcessor
 	{
-		internal DataframeAnalysisFeatureProcessor(string variantName, IDataframeAnalysisFeatureProcessorVariant variant)
+		internal DataframeAnalysisFeatureProcessor(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Variant = variant;
 		}
 
-		internal IDataframeAnalysisFeatureProcessorVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -163,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IDataframeAnalysisFeatureProcessorVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the DataframeAnalysisFeatureProcessorDescriptor. Only a single DataframeAnalysisFeatureProcessor variant can be added to this container type.");
@@ -232,7 +228,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IDataframeAnalysisFeatureProcessorVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the DataframeAnalysisFeatureProcessorDescriptor. Only a single DataframeAnalysisFeatureProcessor variant can be added to this container type.");

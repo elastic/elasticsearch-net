@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public interface IQueryVariant
-	{
-	}
-
 	[JsonConverter(typeof(QueryContainerConverter))]
 	public sealed partial class QueryContainer
 	{
-		internal QueryContainer(string variantName, IQueryVariant variant)
+		internal QueryContainer(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Variant = variant;
 		}
 
-		internal IQueryVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -669,7 +665,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Descriptor = descriptor;
 		}
 
-		private void Set(IQueryVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer variant can be added to this container type.");
@@ -829,7 +825,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Descriptor = descriptor;
 		}
 
-		private void Set(IQueryVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer variant can be added to this container type.");

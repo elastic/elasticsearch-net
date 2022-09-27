@@ -120,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(TermsSetQueryConverter))]
-	public sealed partial class TermsSetQuery : Query, IQueryVariant
+	public sealed partial class TermsSetQuery : Query
 	{
 		public TermsSetQuery(Field field)
 		{

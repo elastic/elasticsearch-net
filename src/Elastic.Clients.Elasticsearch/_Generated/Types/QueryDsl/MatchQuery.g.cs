@@ -228,7 +228,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MatchQueryConverter))]
-	public sealed partial class MatchQuery : Query, IQueryVariant
+	public sealed partial class MatchQuery : Query
 	{
 		public MatchQuery(Field field)
 		{

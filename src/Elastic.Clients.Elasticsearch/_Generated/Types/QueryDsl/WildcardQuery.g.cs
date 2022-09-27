@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(WildcardQueryConverter))]
-	public sealed partial class WildcardQuery : Query, IQueryVariant
+	public sealed partial class WildcardQuery : Query
 	{
 		public WildcardQuery(Field field)
 		{

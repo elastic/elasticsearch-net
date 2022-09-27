@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public interface IDataframeEvaluationVariant
-	{
-	}
-
 	[JsonConverter(typeof(DataframeEvaluationContainerConverter))]
 	public sealed partial class DataframeEvaluationContainer
 	{
-		internal DataframeEvaluationContainer(string variantName, IDataframeEvaluationVariant variant)
+		internal DataframeEvaluationContainer(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Variant = variant;
 		}
 
-		internal IDataframeEvaluationVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -141,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IDataframeEvaluationVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the DataframeEvaluationContainerDescriptor. Only a single DataframeEvaluationContainer variant can be added to this container type.");
@@ -206,7 +202,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Descriptor = descriptor;
 		}
 
-		private void Set(IDataframeEvaluationVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the DataframeEvaluationContainerDescriptor. Only a single DataframeEvaluationContainer variant can be added to this container type.");

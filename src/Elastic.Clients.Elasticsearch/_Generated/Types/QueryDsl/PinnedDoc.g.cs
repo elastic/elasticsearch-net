@@ -24,55 +24,47 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public sealed partial class MatchNoneQuery : Query
+	public sealed partial class PinnedDoc
 	{
 		[JsonInclude]
-		[JsonPropertyName("_name")]
-		public string? QueryName { get; set; }
+		[JsonPropertyName("_id")]
+		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("boost")]
-		public float? Boost { get; set; }
+		[JsonPropertyName("_index")]
+		public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 	}
 
-	public sealed partial class MatchNoneQueryDescriptor : SerializableDescriptorBase<MatchNoneQueryDescriptor>
+	public sealed partial class PinnedDocDescriptor : SerializableDescriptorBase<PinnedDocDescriptor>
 	{
-		internal MatchNoneQueryDescriptor(Action<MatchNoneQueryDescriptor> configure) => configure.Invoke(this);
-		public MatchNoneQueryDescriptor() : base()
+		internal PinnedDocDescriptor(Action<PinnedDocDescriptor> configure) => configure.Invoke(this);
+		public PinnedDocDescriptor() : base()
 		{
 		}
 
-		private string? QueryNameValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 
-		private float? BoostValue { get; set; }
+		private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
 
-		public MatchNoneQueryDescriptor QueryName(string? queryName)
+		public PinnedDocDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 		{
-			QueryNameValue = queryName;
+			IdValue = id;
 			return Self;
 		}
 
-		public MatchNoneQueryDescriptor Boost(float? boost)
+		public PinnedDocDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 		{
-			BoostValue = boost;
+			IndexValue = index;
 			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
+			writer.WritePropertyName("_id");
+			JsonSerializer.Serialize(writer, IdValue, options);
+			writer.WritePropertyName("_index");
+			JsonSerializer.Serialize(writer, IndexValue, options);
 			writer.WriteEndObject();
 		}
 	}

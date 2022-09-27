@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public interface IInferenceConfigVariant
-	{
-	}
-
 	[JsonConverter(typeof(InferenceConfigConverter))]
 	public sealed partial class InferenceConfig
 	{
-		internal InferenceConfig(string variantName, IInferenceConfigVariant variant)
+		internal InferenceConfig(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			Variant = variant;
 		}
 
-		internal IInferenceConfigVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -130,7 +126,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the InferenceConfigDescriptor. Only a single InferenceConfig variant can be added to this container type.");
@@ -193,7 +189,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the InferenceConfigDescriptor. Only a single InferenceConfig variant can be added to this container type.");

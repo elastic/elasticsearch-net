@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public sealed partial class IcuTokenizer : ITokenFilterDefinition, ITokenizerDefinition
+	public sealed partial class IcuTokenizer
 	{
 		[JsonInclude]
 		[JsonPropertyName("rule_files")]

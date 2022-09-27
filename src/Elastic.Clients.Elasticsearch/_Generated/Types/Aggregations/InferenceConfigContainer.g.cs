@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public interface IInferenceConfigVariant
-	{
-	}
-
 	[JsonConverter(typeof(InferenceConfigContainerConverter))]
 	public sealed partial class InferenceConfigContainer
 	{
-		internal InferenceConfigContainer(string variantName, IInferenceConfigVariant variant)
+		internal InferenceConfigContainer(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			Variant = variant;
 		}
 
-		internal IInferenceConfigVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -130,7 +126,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the InferenceConfigContainerDescriptor. Only a single InferenceConfigContainer variant can be added to this container type.");
@@ -193,7 +189,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the InferenceConfigContainerDescriptor. Only a single InferenceConfigContainer variant can be added to this container type.");

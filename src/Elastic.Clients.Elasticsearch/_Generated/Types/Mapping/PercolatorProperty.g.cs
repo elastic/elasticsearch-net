@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public sealed partial class PercolatorProperty : IProperty
+	public sealed partial class PercolatorProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("dynamic")]

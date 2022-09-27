@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public sealed partial class DictionaryDecompounderTokenFilter : ITokenFilterDefinition
+	public sealed partial class DictionaryDecompounderTokenFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("hyphenation_patterns_path")]

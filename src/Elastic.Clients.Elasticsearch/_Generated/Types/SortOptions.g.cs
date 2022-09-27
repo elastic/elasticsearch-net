@@ -25,14 +25,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public interface ISortOptionsVariant
-	{
-	}
-
 	[JsonConverter(typeof(SortOptionsConverter))]
 	public sealed partial class SortOptions
 	{
-		internal SortOptions(string variantName, ISortOptionsVariant variant)
+		internal SortOptions(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -54,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch
 			Variant = variant;
 		}
 
-		internal ISortOptionsVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -185,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISortOptionsVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the SortOptionsDescriptor. Only a single SortOptions variant can be added to this container type.");
@@ -252,7 +248,7 @@ namespace Elastic.Clients.Elasticsearch
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISortOptionsVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the SortOptionsDescriptor. Only a single SortOptions variant can be added to this container type.");

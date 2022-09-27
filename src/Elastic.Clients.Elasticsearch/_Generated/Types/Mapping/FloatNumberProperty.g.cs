@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public sealed partial class FloatNumberProperty : IProperty
+	public sealed partial class FloatNumberProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("coerce")]

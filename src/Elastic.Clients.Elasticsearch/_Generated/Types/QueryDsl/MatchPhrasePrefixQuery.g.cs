@@ -144,7 +144,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MatchPhrasePrefixQueryConverter))]
-	public sealed partial class MatchPhrasePrefixQuery : Query, IQueryVariant
+	public sealed partial class MatchPhrasePrefixQuery : Query
 	{
 		public MatchPhrasePrefixQuery(Field field)
 		{

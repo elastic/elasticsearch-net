@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public interface IFieldSuggesterVariant
-	{
-	}
-
 	[JsonConverter(typeof(FieldSuggesterConverter))]
 	public sealed partial class FieldSuggester
 	{
-		internal FieldSuggester(string variantName, IFieldSuggesterVariant variant)
+		internal FieldSuggester(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch
 			Variant = variant;
 		}
 
-		internal IFieldSuggesterVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -72,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch
 				throw new JsonException("Expected start token.");
 			}
 
-			IFieldSuggesterVariant? variantValue = default;
+			object? variantValue = default;
 			string? variantNameValue = default;
 			string? prefixValue = default;
 			string? regexValue = default;
@@ -207,7 +203,7 @@ namespace Elastic.Clients.Elasticsearch
 			Descriptor = descriptor;
 		}
 
-		private void Set(IFieldSuggesterVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester variant can be added to this container type.");
@@ -314,7 +310,7 @@ namespace Elastic.Clients.Elasticsearch
 			Descriptor = descriptor;
 		}
 
-		private void Set(IFieldSuggesterVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester variant can be added to this container type.");

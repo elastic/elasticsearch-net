@@ -172,7 +172,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(NumberRangeQueryConverter))]
-	public sealed partial class NumberRangeQuery : Query, IQueryVariant
+	public sealed partial class NumberRangeQuery : Query
 	{
 		public NumberRangeQuery(Field field)
 		{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public sealed partial class FingerprintTokenFilter : ITokenFilterDefinition
+	public sealed partial class FingerprintTokenFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_output_size")]

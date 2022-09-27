@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public sealed partial class WordDelimiterGraphTokenFilter : ITokenFilterDefinition
+	public sealed partial class WordDelimiterGraphTokenFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("adjust_offsets")]

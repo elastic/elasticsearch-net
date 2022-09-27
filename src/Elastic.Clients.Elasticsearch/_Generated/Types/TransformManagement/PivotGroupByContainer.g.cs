@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public interface IPivotGroupByVariant
-	{
-	}
-
 	[JsonConverter(typeof(PivotGroupByContainerConverter))]
 	public sealed partial class PivotGroupByContainer
 	{
-		internal PivotGroupByContainer(string variantName, IPivotGroupByVariant variant)
+		internal PivotGroupByContainer(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Variant = variant;
 		}
 
-		internal IPivotGroupByVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -141,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(IPivotGroupByVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the PivotGroupByContainerDescriptor. Only a single PivotGroupByContainer variant can be added to this container type.");
@@ -206,7 +202,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(IPivotGroupByVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the PivotGroupByContainerDescriptor. Only a single PivotGroupByContainer variant can be added to this container type.");

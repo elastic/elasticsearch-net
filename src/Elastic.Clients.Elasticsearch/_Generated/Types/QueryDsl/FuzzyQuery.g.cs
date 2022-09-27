@@ -156,7 +156,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(FuzzyQueryConverter))]
-	public sealed partial class FuzzyQuery : Query, IQueryVariant
+	public sealed partial class FuzzyQuery : Query
 	{
 		public FuzzyQuery(Field field)
 		{

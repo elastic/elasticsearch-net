@@ -24,26 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public interface IIntervalsQueryVariant
-	{
-	}
-
 	[JsonConverter(typeof(IntervalsQueryConverter))]
-	public sealed partial class IntervalsQuery : Query, IQueryVariant
+	public sealed partial class IntervalsQuery : Query
 	{
-		internal IntervalsQuery(string variantName, IIntervalsQueryVariant variant)
-		{
-			if (variantName is null)
-				throw new ArgumentNullException(nameof(variantName));
-			if (variant is null)
-				throw new ArgumentNullException(nameof(variant));
-			if (string.IsNullOrWhiteSpace(variantName))
-				throw new ArgumentException("Variant name must not be empty or whitespace.");
-			VariantName = variantName;
-			Variant = variant;
-		}
+		internal object Variant { get; }
 
-		internal IntervalsQuery(Field field, string variantName, IIntervalsQueryVariant variant)
+		internal IntervalsQuery(Field field, string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -57,8 +43,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Variant = variant;
 			Field = field;
 		}
-
-		internal IIntervalsQueryVariant Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -98,7 +82,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			var fieldName = reader.GetString();
 			reader.Read();
-			IIntervalsQueryVariant? variantValue = default;
+			object? variantValue = default;
 			string? variantNameValue = default;
 			string? nameValue = default;
 			float? boostValue = default;
@@ -267,7 +251,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Descriptor = descriptor;
 		}
 
-		private void Set(IIntervalsQueryVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the IntervalsQueryDescriptor. Only a single IntervalsQuery variant can be added to this container type.");
@@ -390,7 +374,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Descriptor = descriptor;
 		}
 
-		private void Set(IIntervalsQueryVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the IntervalsQueryDescriptor. Only a single IntervalsQuery variant can be added to this container type.");

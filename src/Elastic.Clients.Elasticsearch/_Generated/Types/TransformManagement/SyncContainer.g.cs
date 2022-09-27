@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public interface ISyncVariant
-	{
-	}
-
 	[JsonConverter(typeof(SyncContainerConverter))]
 	public sealed partial class SyncContainer
 	{
-		internal SyncContainer(string variantName, ISyncVariant variant)
+		internal SyncContainer(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Variant = variant;
 		}
 
-		internal ISyncVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -119,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISyncVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the SyncContainerDescriptor. Only a single SyncContainer variant can be added to this container type.");
@@ -180,7 +176,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISyncVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the SyncContainerDescriptor. Only a single SyncContainer variant can be added to this container type.");

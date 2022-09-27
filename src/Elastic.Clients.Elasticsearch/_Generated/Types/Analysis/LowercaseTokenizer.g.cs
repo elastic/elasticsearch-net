@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public sealed partial class LowercaseTokenizer : ITokenizerDefinition
+	public sealed partial class LowercaseTokenizer
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]

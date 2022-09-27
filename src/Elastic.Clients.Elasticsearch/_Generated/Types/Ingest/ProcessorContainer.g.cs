@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public interface IProcessorVariant
-	{
-	}
-
 	[JsonConverter(typeof(ProcessorContainerConverter))]
 	public sealed partial class ProcessorContainer
 	{
-		internal ProcessorContainer(string variantName, IProcessorVariant variant)
+		internal ProcessorContainer(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			Variant = variant;
 		}
 
-		internal IProcessorVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -471,7 +467,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			Descriptor = descriptor;
 		}
 
-		private void Set(IProcessorVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the ProcessorContainerDescriptor. Only a single ProcessorContainer variant can be added to this container type.");
@@ -596,7 +592,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			Descriptor = descriptor;
 		}
 
-		private void Set(IProcessorVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the ProcessorContainerDescriptor. Only a single ProcessorContainer variant can be added to this container type.");

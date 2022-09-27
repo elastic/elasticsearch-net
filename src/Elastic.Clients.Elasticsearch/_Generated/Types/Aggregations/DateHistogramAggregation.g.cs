@@ -293,7 +293,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(DateHistogramAggregationConverter))]
-	public sealed partial class DateHistogramAggregation : Aggregation, TransformManagement.IPivotGroupByVariant
+	public sealed partial class DateHistogramAggregation : Aggregation
 	{
 		public DateHistogramAggregation(string name) => Name = name;
 		internal DateHistogramAggregation()

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public sealed partial class StandardAnalyzer : IAnalyzer
+	public sealed partial class StandardAnalyzer
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_token_length")]

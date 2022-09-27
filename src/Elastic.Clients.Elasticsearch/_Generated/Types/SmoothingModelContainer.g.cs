@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public interface ISmoothingModelVariant
-	{
-	}
-
 	[JsonConverter(typeof(SmoothingModelContainerConverter))]
 	public sealed partial class SmoothingModelContainer
 	{
-		internal SmoothingModelContainer(string variantName, ISmoothingModelVariant variant)
+		internal SmoothingModelContainer(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch
 			Variant = variant;
 		}
 
-		internal ISmoothingModelVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -141,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISmoothingModelVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the SmoothingModelContainerDescriptor. Only a single SmoothingModelContainer variant can be added to this container type.");
@@ -206,7 +202,7 @@ namespace Elastic.Clients.Elasticsearch
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISmoothingModelVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the SmoothingModelContainerDescriptor. Only a single SmoothingModelContainer variant can be added to this container type.");

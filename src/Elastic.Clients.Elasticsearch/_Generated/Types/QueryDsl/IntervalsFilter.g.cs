@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public interface IIntervalsFilterVariant
-	{
-	}
-
 	[JsonConverter(typeof(IntervalsFilterConverter))]
 	public sealed partial class IntervalsFilter
 	{
-		internal IntervalsFilter(string variantName, IIntervalsFilterVariant variant)
+		internal IntervalsFilter(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Variant = variant;
 		}
 
-		internal IIntervalsFilterVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 	}
@@ -103,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Descriptor = descriptor;
 		}
 
-		private void Set(IIntervalsFilterVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the IntervalsFilterDescriptor. Only a single IntervalsFilter variant can be added to this container type.");
@@ -162,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Descriptor = descriptor;
 		}
 
-		private void Set(IIntervalsFilterVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
 				throw new Exception("A variant has already been assigned to the IntervalsFilterDescriptor. Only a single IntervalsFilter variant can be added to this container type.");

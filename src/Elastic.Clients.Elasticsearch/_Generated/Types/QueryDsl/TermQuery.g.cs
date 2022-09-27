@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(TermQueryConverter))]
-	public sealed partial class TermQuery : Query, IQueryVariant
+	public sealed partial class TermQuery : Query
 	{
 		public TermQuery(Field field)
 		{
