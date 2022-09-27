@@ -98,12 +98,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			var fieldName = reader.GetString();
 			reader.Read();
-
+			IIntervalsQueryVariant? variantValue = default;
+			string? variantNameValue = default;
+			string? nameValue = default;
 			float? boostValue = default;
-			string? queryNameValue = default;
-			IIntervalsQueryVariant variantValue = default;
-			string variantNameValue = string.Empty;
-
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType != JsonTokenType.PropertyName)
@@ -111,18 +109,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 					throw new JsonException("Expected a property name token.");
 				}
 
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+				}
+
 				var propertyName = reader.GetString();
 				reader.Read();
-
-				if (propertyName == "boost")
+				if (propertyName == "_name")
 				{
-					boostValue = reader.GetSingle();
+					nameValue = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
 
-				if (propertyName == "_name")
+				if (propertyName == "boost")
 				{
-					queryNameValue = reader.GetString();
+					boostValue = JsonSerializer.Deserialize<float?>(ref reader, options);
 					continue;
 				}
 
@@ -172,11 +174,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			reader.Read();
-
 			var result = new IntervalsQuery(fieldName, variantNameValue, variantValue);
+			result.QueryName = nameValue;
 			result.Boost = boostValue;
-			result.QueryName = queryNameValue;
-
 			return result;
 		}
 

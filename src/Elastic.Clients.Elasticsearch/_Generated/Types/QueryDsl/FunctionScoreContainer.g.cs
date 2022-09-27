@@ -68,36 +68,65 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				throw new JsonException("Expected start token.");
 			}
 
+			IFunctionScoreVariant? variantValue = default;
+			string? variantNameValue = default;
+			Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filterValue = default;
+			double? weightValue = default;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token.");
+				}
+
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+				}
+
+				var propertyName = reader.GetString();
+				reader.Read();
+				if (propertyName == "filter")
+				{
+					filterValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "weight")
+				{
+					weightValue = JsonSerializer.Deserialize<double?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "field_value_factor")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "random_score")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "script_score")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'FunctionScoreContainer' from the response.");
+			}
+
 			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the variant held within this container.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "field_value_factor")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(ref reader, options);
-				reader.Read();
-				return new FunctionScoreContainer(propertyName, variant);
-			}
-
-			if (propertyName == "random_score")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?>(ref reader, options);
-				reader.Read();
-				return new FunctionScoreContainer(propertyName, variant);
-			}
-
-			if (propertyName == "script_score")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?>(ref reader, options);
-				reader.Read();
-				return new FunctionScoreContainer(propertyName, variant);
-			}
-
-			throw new JsonException();
+			var result = new FunctionScoreContainer(variantNameValue, variantValue);
+			result.Filter = filterValue;
+			result.Weight = weightValue;
+			return result;
 		}
 
 		public override void Write(Utf8JsonWriter writer, FunctionScoreContainer value, JsonSerializerOptions options)

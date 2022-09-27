@@ -69,15 +69,52 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				throw new JsonException("Expected start token.");
 			}
 
-			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			IPinnedQueryVariant? variantValue = default;
+			string? variantNameValue = default;
+			string? nameValue = default;
+			float? boostValue = default;
+			Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer organicValue = default;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
-				throw new JsonException("Expected a property name token representing the variant held within this container.");
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token.");
+				}
+
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+				}
+
+				var propertyName = reader.GetString();
+				reader.Read();
+				if (propertyName == "_name")
+				{
+					nameValue = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "boost")
+				{
+					boostValue = JsonSerializer.Deserialize<float?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "organic")
+				{
+					organicValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>(ref reader, options);
+					continue;
+				}
+
+				throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'PinnedQuery' from the response.");
 			}
 
-			var propertyName = reader.GetString();
 			reader.Read();
-			throw new JsonException();
+			var result = new PinnedQuery(variantNameValue, variantValue);
+			result.QueryName = nameValue;
+			result.Boost = boostValue;
+			result.Organic = organicValue;
+			return result;
 		}
 
 		public override void Write(Utf8JsonWriter writer, PinnedQuery value, JsonSerializerOptions options)

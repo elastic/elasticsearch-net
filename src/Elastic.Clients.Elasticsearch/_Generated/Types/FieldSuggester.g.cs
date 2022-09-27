@@ -72,36 +72,73 @@ namespace Elastic.Clients.Elasticsearch
 				throw new JsonException("Expected start token.");
 			}
 
+			IFieldSuggesterVariant? variantValue = default;
+			string? variantNameValue = default;
+			string? prefixValue = default;
+			string? regexValue = default;
+			string? textValue = default;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token.");
+				}
+
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+				}
+
+				var propertyName = reader.GetString();
+				reader.Read();
+				if (propertyName == "prefix")
+				{
+					prefixValue = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "regex")
+				{
+					regexValue = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "text")
+				{
+					textValue = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "completion")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.CompletionSuggester?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "phrase")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.PhraseSuggester?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "term")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TermSuggester?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'FieldSuggester' from the response.");
+			}
+
 			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the variant held within this container.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "completion")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.CompletionSuggester?>(ref reader, options);
-				reader.Read();
-				return new FieldSuggester(propertyName, variant);
-			}
-
-			if (propertyName == "phrase")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.PhraseSuggester?>(ref reader, options);
-				reader.Read();
-				return new FieldSuggester(propertyName, variant);
-			}
-
-			if (propertyName == "term")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TermSuggester?>(ref reader, options);
-				reader.Read();
-				return new FieldSuggester(propertyName, variant);
-			}
-
-			throw new JsonException();
+			var result = new FieldSuggester(variantNameValue, variantValue);
+			result.Prefix = prefixValue;
+			result.Regex = regexValue;
+			result.Text = textValue;
+			return result;
 		}
 
 		public override void Write(Utf8JsonWriter writer, FieldSuggester value, JsonSerializerOptions options)
