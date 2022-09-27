@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public sealed partial class HistogramProperty
+	public sealed partial class HistogramProperty : IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("dynamic")]

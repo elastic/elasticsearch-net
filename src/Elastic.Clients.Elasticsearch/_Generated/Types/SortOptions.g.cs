@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 			Variant = variant;
 		}
 
-		public SortOptions(Elastic.Clients.Elasticsearch.Field field, ISortOptionsVariant variant)
+		internal SortOptions(Elastic.Clients.Elasticsearch.Field field, object variant)
 		{
 			if (field is null)
 				throw new ArgumentNullException(nameof(field));

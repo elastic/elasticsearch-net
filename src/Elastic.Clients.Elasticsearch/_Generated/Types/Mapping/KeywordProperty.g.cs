@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public sealed partial class KeywordProperty
+	public sealed partial class KeywordProperty : IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public sealed partial class DateRangeProperty
+	public sealed partial class DateRangeProperty : IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]

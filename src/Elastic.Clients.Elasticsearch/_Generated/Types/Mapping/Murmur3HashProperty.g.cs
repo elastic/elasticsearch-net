@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public sealed partial class Murmur3HashProperty
+	public sealed partial class Murmur3HashProperty : IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("copy_to")]

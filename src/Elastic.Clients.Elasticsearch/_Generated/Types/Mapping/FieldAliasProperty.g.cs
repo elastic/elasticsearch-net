@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public sealed partial class FieldAliasProperty
+	public sealed partial class FieldAliasProperty : IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("dynamic")]
