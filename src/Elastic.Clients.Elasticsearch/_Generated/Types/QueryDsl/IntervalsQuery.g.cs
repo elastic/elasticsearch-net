@@ -93,54 +93,91 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			reader.Read();
 			if (reader.TokenType != JsonTokenType.PropertyName)
 			{
-				throw new JsonException("Expected property name token.");
+				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
 			}
 
-			var propertyName = reader.GetString();
+			var fieldName = reader.GetString();
 			reader.Read();
-			if (propertyName == "all_of")
+
+			float? boostValue = default;
+			string? queryNameValue = default;
+			IIntervalsQueryVariant variantValue = default;
+			string variantNameValue = string.Empty;
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(ref reader, options);
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token.");
+				}
+
+				var propertyName = reader.GetString();
 				reader.Read();
-				return new IntervalsQuery(propertyName, variant);
+
+				if (propertyName == "boost")
+				{
+					boostValue = reader.GetSingle();
+					continue;
+				}
+
+				if (propertyName == "_name")
+				{
+					queryNameValue = reader.GetString();
+					continue;
+				}
+
+				if (propertyName == "all_of")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "any_of")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "fuzzy")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "match")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "prefix")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "wildcard")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IntervalsQuery' from the response.");
 			}
 
-			if (propertyName == "any_of")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(ref reader, options);
-				reader.Read();
-				return new IntervalsQuery(propertyName, variant);
-			}
+			reader.Read();
 
-			if (propertyName == "fuzzy")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(ref reader, options);
-				reader.Read();
-				return new IntervalsQuery(propertyName, variant);
-			}
+			var result = new IntervalsQuery(fieldName, variantNameValue, variantValue);
+			result.Boost = boostValue;
+			result.QueryName = queryNameValue;
 
-			if (propertyName == "match")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(ref reader, options);
-				reader.Read();
-				return new IntervalsQuery(propertyName, variant);
-			}
-
-			if (propertyName == "prefix")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(ref reader, options);
-				reader.Read();
-				return new IntervalsQuery(propertyName, variant);
-			}
-
-			if (propertyName == "wildcard")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(ref reader, options);
-				reader.Read();
-				return new IntervalsQuery(propertyName, variant);
-			}
-
-			throw new JsonException();
+			return result;
 		}
 
 		public override void Write(Utf8JsonWriter writer, IntervalsQuery value, JsonSerializerOptions options)

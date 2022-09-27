@@ -69,13 +69,19 @@ public class IntervalsQuerySerializationTests : SerializerTestBase
 		await Verifier.VerifyJson(serialisedJson);
 	}
 
-	public async Task IntervalsQuery_CanDeserialize()
+	[U]
+	public void IntervalsQuery_CanDeserialize()
 	{
-		var stream = WrapInStream("{\"\"query\"\":{\"\"intervals\"\":{\"\"name\"\":{\"\"boost\"\":2,\"\"match\"\":" +
-			"{\"\"max_gaps\"\":0,\"\"ordered\"\":true,\"\"query\"\":\"\"Steve\"\"},\"\"_name\"\":\"\"testing-intervals\"\"}}}}");
+		var stream = WrapInStream(@"{""intervals"":{""name"":{""boost"":2,""match"":{""max_gaps"":1,""ordered"":true,""query"":""Steve""},""_name"":""testing-intervals""}}}");
 
 		var queryContainer = _requestResponseSerializer.Deserialize<QueryContainer>(stream);
 		var intervalsQuery = queryContainer.Variant.Should().BeOfType<IntervalsQuery>().Subject;
-		await Verifier.Verify(intervalsQuery);
+
+		intervalsQuery.Boost.Should().Be(2.0f);
+		intervalsQuery.QueryName.Should().Be("testing-intervals");
+		var intervalsMatch = intervalsQuery.Variant.Should().BeOfType<IntervalsMatch>().Subject;
+		intervalsMatch.Query.Should().Be("Steve");
+		intervalsMatch.Ordered.Should().BeTrue();
+		intervalsMatch.MaxGaps.Should().Be(1);
 	}
 }

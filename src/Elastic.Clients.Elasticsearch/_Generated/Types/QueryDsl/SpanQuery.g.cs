@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			reader.Read();
 			if (reader.TokenType != JsonTokenType.PropertyName)
 			{
-				throw new JsonException("Expected property name token.");
+				throw new JsonException("Expected a property name token representing the variant help within this container.");
 			}
 
 			var propertyName = reader.GetString();
