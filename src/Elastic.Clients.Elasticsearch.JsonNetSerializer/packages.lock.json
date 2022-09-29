@@ -105,7 +105,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "0.3.2"
+          "Elastic.Transport": "[0.3.2, )"
         }
       }
     },
@@ -256,7 +256,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "0.3.2"
+          "Elastic.Transport": "[0.3.2, )"
         }
       }
     },
@@ -516,9 +516,9 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "0.3.2",
-          "System.Reflection.Emit": "4.3.0",
-          "System.Reflection.Emit.Lightweight": "4.3.0"
+          "Elastic.Transport": "[0.3.2, )",
+          "System.Reflection.Emit": "[4.3.0, )",
+          "System.Reflection.Emit.Lightweight": "[4.3.0, )"
         }
       }
     },
@@ -660,7 +660,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "0.3.2"
+          "Elastic.Transport": "[0.3.2, )"
         }
       }
     },
@@ -762,7 +762,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "0.3.2"
+          "Elastic.Transport": "[0.3.2, )"
         }
       }
     },
@@ -864,7 +864,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "0.3.2"
+          "Elastic.Transport": "[0.3.2, )"
         }
       }
     }

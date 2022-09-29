@@ -365,7 +365,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(TermsAggregationConverter))]
-	public sealed partial class TermsAggregation : Aggregation, TransformManagement.IPivotGroupByVariant
+	public sealed partial class TermsAggregation : Aggregation
 	{
 		public TermsAggregation(string name) => Name = name;
 		internal TermsAggregation()

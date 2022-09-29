@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]

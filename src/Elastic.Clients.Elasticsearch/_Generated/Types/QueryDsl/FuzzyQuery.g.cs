@@ -31,12 +31,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
 			reader.Read();
-			reader.Read();
-			reader.Read();
 			var fieldName = reader.GetString();
 			reader.Read();
-			var variant = new FuzzyQuery()
-			{ Field = fieldName };
+			var variant = new FuzzyQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -93,14 +90,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			reader.Read();
-			reader.Read();
 			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, FuzzyQuery value, JsonSerializerOptions options)
 		{
 			if (value.Field is null)
-				writer.WriteNullValue();
+				throw new JsonException("Unable to serialize FuzzyQuery because the `Field` property is not set. Field name queries must include a valid field name.");
 			if (options.TryGetClientSettings(out var settings))
 			{
 				writer.WriteStartObject();
@@ -155,13 +151,20 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			throw new JsonException("Unable to retrieve client settings to infer field.");
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		}
 	}
 
 	[JsonConverter(typeof(FuzzyQueryConverter))]
-	public sealed partial class FuzzyQuery : Query, IQueryVariant
+	public sealed partial class FuzzyQuery : Query
 	{
+		public FuzzyQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
 		public string? QueryName { get; set; }
 
 		public float? Boost { get; set; }
@@ -178,21 +181,35 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public object Value { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
 	public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescriptorBase<FuzzyQueryDescriptor<TDocument>>
 	{
 		internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public FuzzyQueryDescriptor() : base()
+		internal FuzzyQueryDescriptor() : base()
 		{
+		}
+
+		public FuzzyQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
+		}
+
+		public FuzzyQueryDescriptor(Expression<Func<TDocument, object>> field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -218,7 +235,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FuzzyQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public FuzzyQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -268,6 +285,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
@@ -323,15 +342,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class FuzzyQueryDescriptor : SerializableDescriptorBase<FuzzyQueryDescriptor>
 	{
 		internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor> configure) => configure.Invoke(this);
-		public FuzzyQueryDescriptor() : base()
+		internal FuzzyQueryDescriptor() : base()
 		{
+		}
+
+		public FuzzyQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -357,7 +383,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FuzzyQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public FuzzyQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -413,6 +439,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
