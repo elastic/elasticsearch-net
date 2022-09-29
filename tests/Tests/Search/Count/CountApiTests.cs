@@ -23,9 +23,8 @@ namespace Tests.Search.Count
 		protected override int ExpectStatusCode => 200;
 
 		protected override Action<CountRequestDescriptor<Project>> Fluent => c => c
-			.Query(QueryContainer.Match(new MatchQuery
+			.Query(QueryContainer.Match(new MatchQuery("name")
 			{
-				Field = "name",
 				Query = "NEST"
 			}));
 
@@ -33,9 +32,8 @@ namespace Tests.Search.Count
 
 		protected override CountRequest<Project> Initializer => new()
 		{
-			Query = QueryContainer.Match(new MatchQuery
+			Query = QueryContainer.Match(new MatchQuery("name")
 			{
-				Field = "name",
 				Query = "NEST"
 			})
 		};
@@ -65,9 +63,8 @@ namespace Tests.Search.Count
 
 		protected override Action<CountRequestDescriptor> Fluent => c => c
 			.Indices("project")
-			.Query(QueryContainer.Match(new MatchQuery
+			.Query(QueryContainer.Match(new MatchQuery("name")
 			{
-				Field = "name",
 				Query = "NEST"
 			}));
 
@@ -75,9 +72,8 @@ namespace Tests.Search.Count
 
 		protected override CountRequest<Project> Initializer => new()
 		{
-			Query = QueryContainer.Match(new MatchQuery
+			Query = QueryContainer.Match(new MatchQuery("name")
 			{
-				Field = "name",
 				Query = "NEST"
 			})
 		};
@@ -115,9 +111,8 @@ namespace Tests.Search.Count
 
 		protected override CountRequest<Project> Initializer => new()
 		{
-			Query = QueryContainer.Match(new MatchQuery
+			Query = QueryContainer.Match(new MatchQuery("name")
 			{
-				Field = "name",
 				Query = "NEST"
 			})
 		};

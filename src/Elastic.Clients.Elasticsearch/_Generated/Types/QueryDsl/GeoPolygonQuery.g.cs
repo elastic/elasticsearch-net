@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(GeoPolygonQueryConverter))]
-	public sealed partial class GeoPolygonQuery : Query, IQueryVariant
+	public sealed partial class GeoPolygonQuery : Query
 	{
 		public string? QueryName { get; set; }
 

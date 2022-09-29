@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public sealed partial class DataframeEvaluationOutlierDetection : IDataframeEvaluationVariant
+	public sealed partial class DataframeEvaluationOutlierDetection
 	{
 		[JsonInclude]
 		[JsonPropertyName("actual_field")]

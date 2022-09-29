@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(GeoBoundingBoxQueryConverter))]
-	public sealed partial class GeoBoundingBoxQuery : Query, IQueryVariant
+	public sealed partial class GeoBoundingBoxQuery : Query
 	{
 		public string? QueryName { get; set; }
 
