@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public sealed partial class PassThroughInferenceUpdateOptions : IInferenceConfigUpdateVariant
+	public sealed partial class PassThroughInferenceUpdateOptions
 	{
 		[JsonInclude]
 		[JsonPropertyName("results_field")]

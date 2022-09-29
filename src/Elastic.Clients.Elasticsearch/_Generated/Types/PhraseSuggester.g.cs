@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public sealed partial class PhraseSuggester : IFieldSuggesterVariant
+	public sealed partial class PhraseSuggester
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]

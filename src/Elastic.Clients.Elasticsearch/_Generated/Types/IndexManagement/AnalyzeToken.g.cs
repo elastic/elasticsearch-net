@@ -35,8 +35,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public long Position { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("position_length")]
-		public long? PositionLength { get; init; }
+		[JsonPropertyName("positionLength")]
+		public long? Positionlength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("start_offset")]

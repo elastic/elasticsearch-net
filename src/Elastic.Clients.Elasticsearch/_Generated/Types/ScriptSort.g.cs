@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public sealed partial class ScriptSort : ISortOptionsVariant
+	public sealed partial class ScriptSort
 	{
 		[JsonInclude]
 		[JsonPropertyName("mode")]

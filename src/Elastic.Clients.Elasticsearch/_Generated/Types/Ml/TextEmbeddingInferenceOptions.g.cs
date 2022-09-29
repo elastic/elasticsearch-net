@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public sealed partial class TextEmbeddingInferenceOptions : IInferenceConfigCreateVariant
+	public sealed partial class TextEmbeddingInferenceOptions
 	{
 		[JsonInclude]
 		[JsonPropertyName("results_field")]

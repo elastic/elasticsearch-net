@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		[JsonInclude]
 		[JsonPropertyName("refresh_token")]
-		public string RefreshToken { get; init; }
+		public string? RefreshToken { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("scope")]

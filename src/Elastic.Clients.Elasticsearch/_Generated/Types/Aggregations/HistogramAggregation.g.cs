@@ -239,7 +239,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(HistogramAggregationConverter))]
-	public sealed partial class HistogramAggregation : Aggregation, TransformManagement.IPivotGroupByVariant
+	public sealed partial class HistogramAggregation : Aggregation
 	{
 		public HistogramAggregation(string name) => Name = name;
 		internal HistogramAggregation()

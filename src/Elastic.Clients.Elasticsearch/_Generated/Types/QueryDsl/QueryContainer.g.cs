@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public interface IQueryVariant
-	{
-	}
-
 	[JsonConverter(typeof(QueryContainerConverter))]
 	public sealed partial class QueryContainer
 	{
-		public QueryContainer(string variantName, IQueryVariant variant)
+		internal QueryContainer(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Variant = variant;
 		}
 
-		internal IQueryVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -64,7 +60,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public static QueryContainer HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery hasParentQuery) => new QueryContainer("has_parent", hasParentQuery);
 		public static QueryContainer Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => new QueryContainer("ids", idsQuery);
 		public static QueryContainer Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery intervalsQuery) => new QueryContainer("intervals", intervalsQuery);
-		public static QueryContainer Knn(Elastic.Clients.Elasticsearch.QueryDsl.KnnQuery knnQuery) => new QueryContainer("knn", knnQuery);
 		public static QueryContainer Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery matchQuery) => new QueryContainer("match", matchQuery);
 		public static QueryContainer MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery matchAllQuery) => new QueryContainer("match_all", matchAllQuery);
 		public static QueryContainer MatchBoolPrefix(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery matchBoolPrefixQuery) => new QueryContainer("match_bool_prefix", matchBoolPrefixQuery);
@@ -105,323 +100,373 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		public override QueryContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the variant held within this container.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "bool")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "boosting")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "combined_fields")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "constant_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "dis_max")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "exists")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "field_masking_span")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "function_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "fuzzy")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "geo_bounding_box")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "geo_distance")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "geo_polygon")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "geo_shape")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "has_child")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "has_parent")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "ids")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "intervals")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery?>(ref reader, options);
-				return new QueryContainer(propertyName, variant);
-			}
-
-			if (propertyName == "knn")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.KnnQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match_all")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match_bool_prefix")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match_none")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match_phrase")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "match_phrase_prefix")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "more_like_this")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "multi_match")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "nested")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "parent_id")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "percolate")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "pinned")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "prefix")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "query_string")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "range")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "rank_feature")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "regexp")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "script")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "script_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "shape")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "simple_query_string")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_containing")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_first")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_multi")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_near")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_not")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_or")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_term")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "span_within")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "term")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "terms")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "terms_set")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "wildcard")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
 			if (propertyName == "wrapper")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery?>(ref reader, options);
+				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
 
@@ -484,9 +529,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 					break;
 				case "intervals":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery)value.Variant, options);
-					break;
-				case "knn":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.KnnQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.KnnQuery)value.Variant, options);
 					break;
 				case "match":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)value.Variant, options);
@@ -603,56 +645,33 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal QueryContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IQueryVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new QueryContainer(variantName, variant);
+				throw new Exception("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
-			writer.WriteEndObject();
 		}
 
 		public void Bool(BoolQuery query) => Set(query, "bool");
@@ -689,8 +708,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Ids(Action<IdsQueryDescriptor> configure) => Set(configure, "ids");
 		public void Intervals(IntervalsQuery query) => Set(query, "intervals");
 		public void Intervals(Action<IntervalsQueryDescriptor<TDocument>> configure) => Set(configure, "intervals");
-		public void Knn(KnnQuery query) => Set(query, "knn");
-		public void Knn(Action<KnnQueryDescriptor<TDocument>> configure) => Set(configure, "knn");
 		public void Match(MatchQuery query) => Set(query, "match");
 		public void Match(Action<MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");
 		public void MatchAll(MatchAllQuery query) => Set(query, "match_all");
@@ -758,6 +775,27 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Wildcard(Action<WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 		public void Wrapper(WrapperQuery query) => Set(query, "wrapper");
 		public void Wrapper(Action<WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public sealed partial class QueryContainerDescriptor : SerializableDescriptorBase<QueryContainerDescriptor>
@@ -767,56 +805,33 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal QueryContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IQueryVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new QueryContainer(variantName, variant);
+				throw new Exception("A variant has already been assigned to the QueryContainerDescriptor. Only a single QueryContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
-			writer.WriteEndObject();
 		}
 
 		public void Bool(BoolQuery query) => Set(query, "bool");
@@ -869,9 +884,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Intervals(IntervalsQuery query) => Set(query, "intervals");
 		public void Intervals(Action<IntervalsQueryDescriptor> configure) => Set(configure, "intervals");
 		public void Intervals<TDocument>(Action<IntervalsQueryDescriptor<TDocument>> configure) => Set(configure, "intervals");
-		public void Knn(KnnQuery query) => Set(query, "knn");
-		public void Knn(Action<KnnQueryDescriptor> configure) => Set(configure, "knn");
-		public void Knn<TDocument>(Action<KnnQueryDescriptor<TDocument>> configure) => Set(configure, "knn");
 		public void Match(MatchQuery query) => Set(query, "match");
 		public void Match(Action<MatchQueryDescriptor> configure) => Set(configure, "match");
 		public void Match<TDocument>(Action<MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");
@@ -967,5 +979,26 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Wildcard<TDocument>(Action<WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 		public void Wrapper(WrapperQuery query) => Set(query, "wrapper");
 		public void Wrapper(Action<WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }
