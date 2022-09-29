@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
 			Elastic.Clients.Elasticsearch.ErrorCause? causedBy = default;
-			string reason = default;
+			string? reason = default;
 			IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? rootCause = default;
 			string? stackTrace = default;
 			IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? suppressed = default;
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch
 
 					if (property == "reason")
 					{
-						reason = JsonSerializer.Deserialize<string>(ref reader, options);
+						reason = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 
@@ -100,7 +100,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public Dictionary<string, object> Metadata { get; init; }
 
-		public string Reason { get; init; }
+		public string? Reason { get; init; }
 
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? RootCause { get; init; }
 
