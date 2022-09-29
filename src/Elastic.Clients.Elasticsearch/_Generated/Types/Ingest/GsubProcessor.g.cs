@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public sealed partial class GsubProcessor : IProcessorVariant
+	public sealed partial class GsubProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]

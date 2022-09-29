@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public interface IFieldSuggesterVariant
-	{
-	}
-
 	[JsonConverter(typeof(FieldSuggesterConverter))]
 	public sealed partial class FieldSuggester
 	{
-		public FieldSuggester(string variantName, IFieldSuggesterVariant variant)
+		internal FieldSuggester(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch
 			Variant = variant;
 		}
 
-		internal IFieldSuggesterVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -72,41 +68,96 @@ namespace Elastic.Clients.Elasticsearch
 				throw new JsonException("Expected start token.");
 			}
 
+			object? variantValue = default;
+			string? variantNameValue = default;
+			string? prefixValue = default;
+			string? regexValue = default;
+			string? textValue = default;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token.");
+				}
+
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+				}
+
+				var propertyName = reader.GetString();
+				reader.Read();
+				if (propertyName == "prefix")
+				{
+					prefixValue = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "regex")
+				{
+					regexValue = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "text")
+				{
+					textValue = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "completion")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.CompletionSuggester?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "phrase")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.PhraseSuggester?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "term")
+				{
+					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TermSuggester?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'FieldSuggester' from the response.");
+			}
+
 			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected property name token.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "completion")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.CompletionSuggester?>(ref reader, options);
-				reader.Read();
-				return new FieldSuggester(propertyName, variant);
-			}
-
-			if (propertyName == "phrase")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.PhraseSuggester?>(ref reader, options);
-				reader.Read();
-				return new FieldSuggester(propertyName, variant);
-			}
-
-			if (propertyName == "term")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TermSuggester?>(ref reader, options);
-				reader.Read();
-				return new FieldSuggester(propertyName, variant);
-			}
-
-			throw new JsonException();
+			var result = new FieldSuggester(variantNameValue, variantValue);
+			result.Prefix = prefixValue;
+			result.Regex = regexValue;
+			result.Text = textValue;
+			return result;
 		}
 
 		public override void Write(Utf8JsonWriter writer, FieldSuggester value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.Prefix))
+			{
+				writer.WritePropertyName("prefix");
+				writer.WriteStringValue(value.Prefix);
+			}
+
+			if (!string.IsNullOrEmpty(value.Regex))
+			{
+				writer.WritePropertyName("regex");
+				writer.WriteStringValue(value.Regex);
+			}
+
+			if (!string.IsNullOrEmpty(value.Text))
+			{
+				writer.WritePropertyName("text");
+				writer.WriteStringValue(value.Text);
+			}
+
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
@@ -132,56 +183,57 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal FieldSuggester Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IFieldSuggesterVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new FieldSuggester(variantName, variant);
+				throw new Exception("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		private string? PrefixValue { get; set; }
+
+		private string? RegexValue { get; set; }
+
+		private string? TextValue { get; set; }
+
+		public FieldSuggesterDescriptor<TDocument> Prefix(string? prefix)
 		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
+			PrefixValue = prefix;
+			return Self;
+		}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
+		public FieldSuggesterDescriptor<TDocument> Regex(string? regex)
+		{
+			RegexValue = regex;
+			return Self;
+		}
 
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
-			writer.WriteEndObject();
+		public FieldSuggesterDescriptor<TDocument> Text(string? text)
+		{
+			TextValue = text;
+			return Self;
 		}
 
 		public void Completion(CompletionSuggester variant) => Set(variant, "completion");
@@ -190,6 +242,45 @@ namespace Elastic.Clients.Elasticsearch
 		public void Phrase(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
 		public void Term(TermSuggester variant) => Set(variant, "term");
 		public void Term(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(PrefixValue))
+			{
+				writer.WritePropertyName("prefix");
+				writer.WriteStringValue(PrefixValue);
+			}
+
+			if (!string.IsNullOrEmpty(RegexValue))
+			{
+				writer.WritePropertyName("regex");
+				writer.WriteStringValue(RegexValue);
+			}
+
+			if (!string.IsNullOrEmpty(TextValue))
+			{
+				writer.WritePropertyName("text");
+				writer.WriteStringValue(TextValue);
+			}
+
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public sealed partial class FieldSuggesterDescriptor : SerializableDescriptorBase<FieldSuggesterDescriptor>
@@ -199,56 +290,57 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal FieldSuggester Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IFieldSuggesterVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new FieldSuggester(variantName, variant);
+				throw new Exception("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		private string? PrefixValue { get; set; }
+
+		private string? RegexValue { get; set; }
+
+		private string? TextValue { get; set; }
+
+		public FieldSuggesterDescriptor Prefix(string? prefix)
 		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
+			PrefixValue = prefix;
+			return Self;
+		}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
+		public FieldSuggesterDescriptor Regex(string? regex)
+		{
+			RegexValue = regex;
+			return Self;
+		}
 
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
-			writer.WriteEndObject();
+		public FieldSuggesterDescriptor Text(string? text)
+		{
+			TextValue = text;
+			return Self;
 		}
 
 		public void Completion(CompletionSuggester variant) => Set(variant, "completion");
@@ -260,5 +352,44 @@ namespace Elastic.Clients.Elasticsearch
 		public void Term(TermSuggester variant) => Set(variant, "term");
 		public void Term(Action<TermSuggesterDescriptor> configure) => Set(configure, "term");
 		public void Term<TDocument>(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(PrefixValue))
+			{
+				writer.WritePropertyName("prefix");
+				writer.WriteStringValue(PrefixValue);
+			}
+
+			if (!string.IsNullOrEmpty(RegexValue))
+			{
+				writer.WritePropertyName("regex");
+				writer.WriteStringValue(RegexValue);
+			}
+
+			if (!string.IsNullOrEmpty(TextValue))
+			{
+				writer.WritePropertyName("text");
+				writer.WriteStringValue(TextValue);
+			}
+
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }
