@@ -1303,5 +1303,63 @@ namespace Elastic.Clients.Elasticsearch.Security
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SecuritySamlServiceProviderMetadataRequestDescriptor, SecuritySamlServiceProviderMetadataResponse>(descriptor);
 		}
+
+		public SecurityUpdateApiKeyResponse UpdateApiKey(SecurityUpdateApiKeyRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<SecurityUpdateApiKeyRequest, SecurityUpdateApiKeyResponse>(request);
+		}
+
+		public Task<SecurityUpdateApiKeyResponse> UpdateApiKeyAsync(SecurityUpdateApiKeyRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<SecurityUpdateApiKeyRequest, SecurityUpdateApiKeyResponse>(request, cancellationToken);
+		}
+
+		public SecurityUpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor(id);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityUpdateApiKeyRequestDescriptor, SecurityUpdateApiKeyResponse>(descriptor);
+		}
+
+		public SecurityUpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id, Action<SecurityUpdateApiKeyRequestDescriptor> configureRequest)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityUpdateApiKeyRequestDescriptor, SecurityUpdateApiKeyResponse>(descriptor);
+		}
+
+		public SecurityUpdateApiKeyResponse UpdateApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SecurityUpdateApiKeyRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityUpdateApiKeyRequestDescriptor<TDocument>, SecurityUpdateApiKeyResponse>(descriptor);
+		}
+
+		public Task<SecurityUpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor(id);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityUpdateApiKeyRequestDescriptor, SecurityUpdateApiKeyResponse>(descriptor);
+		}
+
+		public Task<SecurityUpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, Action<SecurityUpdateApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityUpdateApiKeyRequestDescriptor, SecurityUpdateApiKeyResponse>(descriptor);
+		}
+
+		public Task<SecurityUpdateApiKeyResponse> UpdateApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SecurityUpdateApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityUpdateApiKeyRequestDescriptor<TDocument>, SecurityUpdateApiKeyResponse>(descriptor);
+		}
 	}
 }
