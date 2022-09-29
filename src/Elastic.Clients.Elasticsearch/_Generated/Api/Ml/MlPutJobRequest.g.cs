@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlPutJobRequest : PlainRequestBase<MlPutJobRequestParameters>
+	public sealed partial class MlPutJobRequest : PlainRequestBase<MlPutJobRequestParameters>
 	{
 		public MlPutJobRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
-		public Elastic.Clients.Elasticsearch.Time BackgroundPersistInterval { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<AnalysisLimitsDescriptor> AnalysisLimitsDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time BackgroundPersistIntervalValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? BackgroundPersistIntervalValue { get; set; }
 
 		private object? CustomSettingsValue { get; set; }
 
@@ -295,7 +295,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutJobRequestDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Time backgroundPersistInterval)
+		public MlPutJobRequestDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? backgroundPersistInterval)
 		{
 			BackgroundPersistIntervalValue = backgroundPersistInterval;
 			return Self;
@@ -438,8 +438,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				JsonSerializer.Serialize(writer, AnalysisLimitsValue, options);
 			}
 
-			writer.WritePropertyName("background_persist_interval");
-			JsonSerializer.Serialize(writer, BackgroundPersistIntervalValue, options);
+			if (BackgroundPersistIntervalValue is not null)
+			{
+				writer.WritePropertyName("background_persist_interval");
+				JsonSerializer.Serialize(writer, BackgroundPersistIntervalValue, options);
+			}
+
 			if (CustomSettingsValue is not null)
 			{
 				writer.WritePropertyName("custom_settings");
@@ -544,7 +548,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<AnalysisLimitsDescriptor> AnalysisLimitsDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time BackgroundPersistIntervalValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? BackgroundPersistIntervalValue { get; set; }
 
 		private object? CustomSettingsValue { get; set; }
 
@@ -688,7 +692,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutJobRequestDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Time backgroundPersistInterval)
+		public MlPutJobRequestDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? backgroundPersistInterval)
 		{
 			BackgroundPersistIntervalValue = backgroundPersistInterval;
 			return Self;
@@ -831,8 +835,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				JsonSerializer.Serialize(writer, AnalysisLimitsValue, options);
 			}
 
-			writer.WritePropertyName("background_persist_interval");
-			JsonSerializer.Serialize(writer, BackgroundPersistIntervalValue, options);
+			if (BackgroundPersistIntervalValue is not null)
+			{
+				writer.WritePropertyName("background_persist_interval");
+				JsonSerializer.Serialize(writer, BackgroundPersistIntervalValue, options);
+			}
+
 			if (CustomSettingsValue is not null)
 			{
 				writer.WritePropertyName("custom_settings");

@@ -24,11 +24,15 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class PatternReplaceTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class PatternReplaceTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
+		[JsonPropertyName("all")]
+		public bool? All { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("flags")]
-		public string Flags { get; set; }
+		public string? Flags { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("pattern")]
@@ -36,11 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		[JsonInclude]
 		[JsonPropertyName("replacement")]
-		public string Replacement { get; set; }
+		public string? Replacement { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "pattern_replace";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class PatternReplaceTokenFilterDescriptor : SerializableDescriptorBase<PatternReplaceTokenFilterDescriptor>, IBuildableDescriptor<PatternReplaceTokenFilter>
@@ -50,15 +57,23 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private string FlagsValue { get; set; }
+		private bool? AllValue { get; set; }
+
+		private string? FlagsValue { get; set; }
 
 		private string PatternValue { get; set; }
 
-		private string ReplacementValue { get; set; }
+		private string? ReplacementValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public PatternReplaceTokenFilterDescriptor Flags(string flags)
+		public PatternReplaceTokenFilterDescriptor All(bool? all = true)
+		{
+			AllValue = all;
+			return Self;
+		}
+
+		public PatternReplaceTokenFilterDescriptor Flags(string? flags)
 		{
 			FlagsValue = flags;
 			return Self;
@@ -70,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			return Self;
 		}
 
-		public PatternReplaceTokenFilterDescriptor Replacement(string replacement)
+		public PatternReplaceTokenFilterDescriptor Replacement(string? replacement)
 		{
 			ReplacementValue = replacement;
 			return Self;
@@ -85,12 +100,26 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("flags");
-			writer.WriteStringValue(FlagsValue);
+			if (AllValue.HasValue)
+			{
+				writer.WritePropertyName("all");
+				writer.WriteBooleanValue(AllValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(FlagsValue))
+			{
+				writer.WritePropertyName("flags");
+				writer.WriteStringValue(FlagsValue);
+			}
+
 			writer.WritePropertyName("pattern");
 			writer.WriteStringValue(PatternValue);
-			writer.WritePropertyName("replacement");
-			writer.WriteStringValue(ReplacementValue);
+			if (!string.IsNullOrEmpty(ReplacementValue))
+			{
+				writer.WritePropertyName("replacement");
+				writer.WriteStringValue(ReplacementValue);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("pattern_replace");
 			if (VersionValue is not null)
@@ -103,6 +132,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 
 		PatternReplaceTokenFilter IBuildableDescriptor<PatternReplaceTokenFilter>.Build() => new()
-		{ Flags = FlagsValue, Pattern = PatternValue, Replacement = ReplacementValue, Version = VersionValue };
+		{ All = AllValue, Flags = FlagsValue, Pattern = PatternValue, Replacement = ReplacementValue, Version = VersionValue };
 	}
 }

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class Recording
+	public sealed partial class Recording
 	{
 		[JsonInclude]
 		[JsonPropertyName("cumulative_execution_count")]
@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("cumulative_execution_time")]
-		public string? CumulativeExecutionTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? CumulativeExecutionTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("cumulative_execution_time_millis")]

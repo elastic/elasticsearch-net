@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class ModelSizeStats
+	public sealed partial class ModelSizeStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("assignment_memory_basis")]
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("log_time")]
-		public Elastic.Clients.Elasticsearch.Time LogTime { get; init; }
+		public DateTimeOffset LogTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("memory_status")]

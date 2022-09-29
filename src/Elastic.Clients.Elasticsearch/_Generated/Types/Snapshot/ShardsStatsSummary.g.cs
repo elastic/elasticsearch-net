@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class ShardsStatsSummary
+	public sealed partial class ShardsStatsSummary
 	{
 		[JsonInclude]
 		[JsonPropertyName("incremental")]
@@ -33,6 +33,10 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
 		public long StartTimeInMillis { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("time")]
+		public Elastic.Clients.Elasticsearch.Duration? Time { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_in_millis")]

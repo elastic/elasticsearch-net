@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.Helpers;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Transport;
 using Tests.Core.Client;
@@ -270,8 +269,6 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			{
 				mappings = new
 				{
-					_routing = new { required = true },
-
 					properties = new Dictionary<string, object>
 					{
 						{ "onlineHandle", new { type = "keyword" } }
@@ -417,7 +414,8 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		{
 			var tasks = new Task[]
 			{
-				Client.IndexManyAsync(Project.Projects)
+				Client.IndexManyAsync(Project.Projects),
+				Client.IndexManyAsync(Developer.Developers)
 			};
 
 			await Task.WhenAll(tasks).ConfigureAwait(false);

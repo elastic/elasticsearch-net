@@ -24,15 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class IndexVersioning
+	public sealed partial class IndexVersioning
 	{
 		[JsonInclude]
 		[JsonPropertyName("created")]
-		public string Created { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("created_string")]
-		public string? CreatedString { get; set; }
+		public string? Created { get; set; }
 	}
 
 	public sealed partial class IndexVersioningDescriptor : SerializableDescriptorBase<IndexVersioningDescriptor>
@@ -42,31 +38,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private string CreatedValue { get; set; }
+		private string? CreatedValue { get; set; }
 
-		private string? CreatedStringValue { get; set; }
-
-		public IndexVersioningDescriptor Created(string created)
+		public IndexVersioningDescriptor Created(string? created)
 		{
 			CreatedValue = created;
-			return Self;
-		}
-
-		public IndexVersioningDescriptor CreatedString(string? createdString)
-		{
-			CreatedStringValue = createdString;
 			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("created");
-			JsonSerializer.Serialize(writer, CreatedValue, options);
-			if (CreatedStringValue is not null)
+			if (CreatedValue is not null)
 			{
-				writer.WritePropertyName("created_string");
-				JsonSerializer.Serialize(writer, CreatedStringValue, options);
+				writer.WritePropertyName("created");
+				JsonSerializer.Serialize(writer, CreatedValue, options);
 			}
 
 			writer.WriteEndObject();

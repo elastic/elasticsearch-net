@@ -68,8 +68,9 @@ namespace Tests.Configuration
 
 	public class RandomConfiguration
 	{
-		/// <summary> Run tests with a custom source serializer rather than the build in one </summary>
-		public bool SourceSerializer { get; set; }
+		/// <summary> Run tests with a custom source serializer rather than the built in one </summary>
+		public bool SourceSerializer => false; // Disabling this until we have properly reviewed the Newtonsoft.JSON serializer.
+		// When reenabling, ensure setters in YamlConfiguration and EnvironmentConfiguration are also enabled.
 
 		/// <summary> Randomly enable compression on the http requests</summary>
 		public bool HttpCompression { get; set; }

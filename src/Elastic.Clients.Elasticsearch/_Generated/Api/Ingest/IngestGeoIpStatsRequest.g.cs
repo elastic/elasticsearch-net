@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	{
 	}
 
-	public partial class IngestGeoIpStatsRequest : PlainRequestBase<IngestGeoIpStatsRequestParameters>
+	public sealed partial class IngestGeoIpStatsRequest : PlainRequestBase<IngestGeoIpStatsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGeoIpStats;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class MergesStats
+	public sealed partial class MergesStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("current")]
@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_stopped_time")]
-		public string? TotalStoppedTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? TotalStoppedTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_stopped_time_in_millis")]
@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_throttled_time")]
-		public string? TotalThrottledTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? TotalThrottledTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_throttled_time_in_millis")]
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_time")]
-		public string? TotalTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]

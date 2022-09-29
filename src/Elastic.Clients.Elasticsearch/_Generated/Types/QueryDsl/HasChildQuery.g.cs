@@ -24,10 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class HasChildQuery : QueryBase, IQueryContainerVariant
+	public sealed partial class HasChildQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "has_child";
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }

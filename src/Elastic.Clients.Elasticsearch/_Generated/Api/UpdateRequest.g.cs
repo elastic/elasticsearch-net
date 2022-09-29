@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 	}
 
-	public partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequestBase<UpdateRequestParameters>
+	public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequestBase<UpdateRequestParameters>
 	{
 		public UpdateRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 		{
@@ -95,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public ScriptBase? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("scripted_upsert")]
@@ -167,7 +167,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> RetryOnConflict(int? retryOnConflict) => Qs("retry_on_conflict", retryOnConflict);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 		{
@@ -181,12 +181,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
 		private bool? DetectNoopValue { get; set; }
@@ -195,35 +189,13 @@ namespace Elastic.Clients.Elasticsearch
 
 		private bool? DocAsUpsertValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
 		private bool? ScriptedUpsertValue { get; set; }
 
 		private TDocument? UpsertValue { get; set; }
 
 		private TDocument DocumentValue { get; set; }
-
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
 
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
 		{
@@ -249,6 +221,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true)
 		{
 			ScriptedUpsertValue = scriptedUpsert;
@@ -264,22 +242,6 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -302,6 +264,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("doc_as_upsert");
 				writer.WriteBooleanValue(DocAsUpsertValue.Value);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (ScriptedUpsertValue.HasValue)

@@ -24,24 +24,21 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class SpanTermQueryConverter : FieldNameQueryConverterBase<SpanTermQuery>
+	internal sealed class SpanTermQueryConverter : JsonConverter<SpanTermQuery>
 	{
-		internal override SpanTermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override SpanTermQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new SpanTermQuery();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new SpanTermQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
-					if (property == "value")
-					{
-						variant.Value = JsonSerializer.Deserialize<string>(ref reader, options);
-						continue;
-					}
-
 					if (property == "_name")
 					{
 						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -53,6 +50,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
 						continue;
 					}
+
+					if (property == "value")
+					{
+						variant.Value = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
 				}
 			}
 
@@ -60,51 +63,83 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, SpanTermQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, SpanTermQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("value");
-			writer.WriteStringValue(value.Value);
-			if (!string.IsNullOrEmpty(value.QueryName))
+			if (value.Field is null)
+				throw new JsonException("Unable to serialize SpanTermQuery because the `Field` property is not set. Field name queries must include a valid field name.");
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				writer.WritePropertyName("value");
+				writer.WriteStringValue(value.Value);
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		}
 	}
 
 	[JsonConverter(typeof(SpanTermQueryConverter))]
-	public partial class SpanTermQuery : FieldNameQueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public sealed partial class SpanTermQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "span_term";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "span_term";
-		[JsonInclude]
-		[JsonPropertyName("value")]
+		public SpanTermQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
+		public string? QueryName { get; set; }
+
+		public float? Boost { get; set; }
+
 		public string Value { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
 	public sealed partial class SpanTermQueryDescriptor<TDocument> : SerializableDescriptorBase<SpanTermQueryDescriptor<TDocument>>
 	{
 		internal SpanTermQueryDescriptor(Action<SpanTermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public SpanTermQueryDescriptor() : base()
+		internal SpanTermQueryDescriptor() : base()
 		{
+		}
+
+		public SpanTermQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
+		}
+
+		public SpanTermQueryDescriptor(Expression<Func<TDocument, object>> field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string ValueValue { get; set; }
 
@@ -120,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanTermQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public SpanTermQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -140,6 +175,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
@@ -165,15 +202,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class SpanTermQueryDescriptor : SerializableDescriptorBase<SpanTermQueryDescriptor>
 	{
 		internal SpanTermQueryDescriptor(Action<SpanTermQueryDescriptor> configure) => configure.Invoke(this);
-		public SpanTermQueryDescriptor() : base()
+		internal SpanTermQueryDescriptor() : base()
 		{
+		}
+
+		public SpanTermQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string ValueValue { get; set; }
 
@@ -189,7 +233,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanTermQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public SpanTermQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -215,6 +259,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();

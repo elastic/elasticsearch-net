@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DelayedDataCheckConfig
+	public sealed partial class DelayedDataCheckConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("check_window")]
-		public Elastic.Clients.Elasticsearch.Time? CheckWindow { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? CheckWindow { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
@@ -42,11 +42,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? CheckWindowValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? CheckWindowValue { get; set; }
 
 		private bool EnabledValue { get; set; }
 
-		public DelayedDataCheckConfigDescriptor CheckWindow(Elastic.Clients.Elasticsearch.Time? checkWindow)
+		public DelayedDataCheckConfigDescriptor CheckWindow(Elastic.Clients.Elasticsearch.Duration? checkWindow)
 		{
 			CheckWindowValue = checkWindow;
 			return Self;

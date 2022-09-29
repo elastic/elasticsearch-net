@@ -40,13 +40,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>
+	public sealed partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterReroute;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -64,10 +64,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("commands")]
@@ -86,10 +86,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override bool SupportsBody => true;
 		public ClusterRerouteRequestDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
 		public ClusterRerouteRequestDescriptor Explain(bool? explain = true) => Qs("explain", explain);
-		public ClusterRerouteRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterRerouteRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterRerouteRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? metric) => Qs("metric", metric);
 		public ClusterRerouteRequestDescriptor RetryFailed(bool? retryFailed = true) => Qs("retry_failed", retryFailed);
-		public ClusterRerouteRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public ClusterRerouteRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		private IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Command>? CommandsValue { get; set; }
 
 		private CommandDescriptor CommandsDescriptor { get; set; }
@@ -140,12 +140,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			if (CommandsDescriptor is not null)
 			{
 				writer.WritePropertyName("commands");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, CommandsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (CommandsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("commands");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new CommandDescriptor(CommandsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (CommandsDescriptorActions is not null)
 			{

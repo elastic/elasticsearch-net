@@ -24,34 +24,50 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public interface IRetentionPolicyContainerVariant
-	{
-		string RetentionPolicyContainerVariantName { get; }
-	}
-
 	[JsonConverter(typeof(RetentionPolicyContainerConverter))]
-	public partial class RetentionPolicyContainer : IContainer
+	public sealed partial class RetentionPolicyContainer
 	{
-		public RetentionPolicyContainer(IRetentionPolicyContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IRetentionPolicyContainerVariant Variant { get; }
+		internal RetentionPolicyContainer(string variantName, object variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
+		internal object Variant { get; }
+
+		internal string VariantName { get; }
+
+		public static RetentionPolicyContainer Time(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy retentionPolicy) => new RetentionPolicyContainer("time", retentionPolicy);
 	}
 
 	internal sealed class RetentionPolicyContainerConverter : JsonConverter<RetentionPolicyContainer>
 	{
 		public override RetentionPolicyContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the variant held within this container.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "time")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy?>(ref reader, options);
-				return new RetentionPolicyContainer(variant);
+				reader.Read();
+				return new RetentionPolicyContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -60,11 +76,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public override void Write(Utf8JsonWriter writer, RetentionPolicyContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.RetentionPolicyContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "time":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy>(writer, (Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy)value.Variant, options);
 					break;
 			}
 
@@ -79,38 +95,37 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal RetentionPolicyContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the RetentionPolicyContainerDescriptor. Only a single RetentionPolicyContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IRetentionPolicyContainerVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new RetentionPolicyContainer(variant);
+				throw new Exception("A variant has already been assigned to the RetentionPolicyContainerDescriptor. Only a single RetentionPolicyContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
 
+		public void Time(RetentionPolicy variant) => Set(variant, "time");
+		public void Time(Action<RetentionPolicyDescriptor<TDocument>> configure) => Set(configure, "time");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -119,20 +134,19 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
-
-		public void Time(RetentionPolicy variant) => Set(variant, "time");
-		public void Time(Action<RetentionPolicyDescriptor<TDocument>> configure) => Set(configure, "time");
 	}
 
 	public sealed partial class RetentionPolicyContainerDescriptor : SerializableDescriptorBase<RetentionPolicyContainerDescriptor>
@@ -142,38 +156,38 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal RetentionPolicyContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the RetentionPolicyContainerDescriptor. Only a single RetentionPolicyContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IRetentionPolicyContainerVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new RetentionPolicyContainer(variant);
+				throw new Exception("A variant has already been assigned to the RetentionPolicyContainerDescriptor. Only a single RetentionPolicyContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
 
+		public void Time(RetentionPolicy variant) => Set(variant, "time");
+		public void Time(Action<RetentionPolicyDescriptor> configure) => Set(configure, "time");
+		public void Time<TDocument>(Action<RetentionPolicyDescriptor<TDocument>> configure) => Set(configure, "time");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -182,20 +196,18 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
-
-		public void Time(RetentionPolicy variant) => Set(variant, "time");
-		public void Time(Action<RetentionPolicyDescriptor> configure) => Set(configure, "time");
-		public void Time<TDocument>(Action<RetentionPolicyDescriptor<TDocument>> configure) => Set(configure, "time");
 	}
 }

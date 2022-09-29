@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("filters"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?>(ref reader, options);
 						if (value is not null)
 						{
@@ -52,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("other_bucket"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("other_bucket_key"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -102,7 +105,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -147,22 +149,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(FiltersAggregationConverter))]
-	public partial class FiltersAggregation : BucketAggregationBase
+	public sealed partial class FiltersAggregation : Aggregation
 	{
-		public FiltersAggregation(string name) : base(name)
+		public FiltersAggregation(string name) => Name = name;
+		internal FiltersAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("filters")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
 		public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filters { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("other_bucket")]
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
 		public bool? OtherBucket { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("other_bucket_key")]
 		public string? OtherBucketKey { get; set; }
 	}
 

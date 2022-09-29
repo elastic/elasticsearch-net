@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("path"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						if (value is not null)
 						{
@@ -80,7 +81,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -113,14 +113,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(ReverseNestedAggregationConverter))]
-	public partial class ReverseNestedAggregation : BucketAggregationBase
+	public sealed partial class ReverseNestedAggregation : Aggregation
 	{
-		public ReverseNestedAggregation(string name) : base(name)
+		public ReverseNestedAggregation(string name) => Name = name;
+		internal ReverseNestedAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("path")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
 		public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 	}
 

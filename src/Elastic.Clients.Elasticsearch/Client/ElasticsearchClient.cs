@@ -4,6 +4,8 @@
 
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
@@ -14,6 +16,8 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ElasticsearchClient
 {
 	private readonly ITransport<IElasticsearchClientSettings> _transport;
+
+	internal static ConditionalWeakTable<JsonSerializerOptions, IElasticsearchClientSettings> SettingsTable { get; } = new();
 
 	/// <summary>
 	///     Creates a client configured to connect to localhost:9200.

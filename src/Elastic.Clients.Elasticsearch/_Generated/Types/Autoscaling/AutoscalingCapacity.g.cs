@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Autoscaling
 {
-	public partial class AutoscalingCapacity
+	public sealed partial class AutoscalingCapacity
 	{
 		[JsonInclude]
 		[JsonPropertyName("node")]

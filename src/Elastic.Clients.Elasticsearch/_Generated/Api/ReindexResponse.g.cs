@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("requests_per_second")]
-		public long? RequestsPerSecond { get; init; }
+		public float? RequestsPerSecond { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("retries")]
@@ -62,11 +62,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("throttled_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? ThrottledMillis { get; init; }
+		public long? ThrottledMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("throttled_until_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? ThrottledUntilMillis { get; init; }
+		public long? ThrottledUntilMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timed_out")]
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("took")]
-		public Elastic.Clients.Elasticsearch.Time? Took { get; init; }
+		public long? Took { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total")]

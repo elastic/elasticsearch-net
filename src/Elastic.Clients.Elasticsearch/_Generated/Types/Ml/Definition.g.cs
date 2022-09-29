@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class Definition
+	public sealed partial class Definition
 	{
 		[JsonInclude]
 		[JsonPropertyName("preprocessors")]
@@ -122,12 +122,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (PreprocessorsDescriptor is not null)
 			{
 				writer.WritePropertyName("preprocessors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, PreprocessorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (PreprocessorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("preprocessors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new PreprocessorDescriptor<TDocument>(PreprocessorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (PreprocessorsDescriptorActions is not null)
 			{
@@ -253,12 +257,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (PreprocessorsDescriptor is not null)
 			{
 				writer.WritePropertyName("preprocessors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, PreprocessorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (PreprocessorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("preprocessors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new PreprocessorDescriptor(PreprocessorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (PreprocessorsDescriptorActions is not null)
 			{

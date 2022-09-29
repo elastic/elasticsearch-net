@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlFlushJobRequest : PlainRequestBase<MlFlushJobRequestParameters>
+	public sealed partial class MlFlushJobRequest : PlainRequestBase<MlFlushJobRequestParameters>
 	{
 		public MlFlushJobRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override bool SupportsBody => true;
 		[JsonInclude]
 		[JsonPropertyName("advance_time")]
-		public string? AdvanceTime { get; set; }
+		public DateTimeOffset? AdvanceTime { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("calc_interim")]
@@ -48,15 +48,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("end")]
-		public string? End { get; set; }
+		public DateTimeOffset? End { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("skip_time")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? SkipTime { get; set; }
+		public DateTimeOffset? SkipTime { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("start")]
-		public string? Start { get; set; }
+		public DateTimeOffset? Start { get; set; }
 	}
 
 	public sealed partial class MlFlushJobRequestDescriptor<TDocument> : RequestDescriptorBase<MlFlushJobRequestDescriptor<TDocument>, MlFlushJobRequestParameters>
@@ -79,17 +79,17 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		private string? AdvanceTimeValue { get; set; }
+		private DateTimeOffset? AdvanceTimeValue { get; set; }
 
 		private bool? CalcInterimValue { get; set; }
 
-		private string? EndValue { get; set; }
+		private DateTimeOffset? EndValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.EpochMillis? SkipTimeValue { get; set; }
+		private DateTimeOffset? SkipTimeValue { get; set; }
 
-		private string? StartValue { get; set; }
+		private DateTimeOffset? StartValue { get; set; }
 
-		public MlFlushJobRequestDescriptor<TDocument> AdvanceTime(string? advanceTime)
+		public MlFlushJobRequestDescriptor<TDocument> AdvanceTime(DateTimeOffset? advanceTime)
 		{
 			AdvanceTimeValue = advanceTime;
 			return Self;
@@ -101,19 +101,19 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlFlushJobRequestDescriptor<TDocument> End(string? end)
+		public MlFlushJobRequestDescriptor<TDocument> End(DateTimeOffset? end)
 		{
 			EndValue = end;
 			return Self;
 		}
 
-		public MlFlushJobRequestDescriptor<TDocument> SkipTime(Elastic.Clients.Elasticsearch.EpochMillis? skipTime)
+		public MlFlushJobRequestDescriptor<TDocument> SkipTime(DateTimeOffset? skipTime)
 		{
 			SkipTimeValue = skipTime;
 			return Self;
 		}
 
-		public MlFlushJobRequestDescriptor<TDocument> Start(string? start)
+		public MlFlushJobRequestDescriptor<TDocument> Start(DateTimeOffset? start)
 		{
 			StartValue = start;
 			return Self;
@@ -176,17 +176,17 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		private string? AdvanceTimeValue { get; set; }
+		private DateTimeOffset? AdvanceTimeValue { get; set; }
 
 		private bool? CalcInterimValue { get; set; }
 
-		private string? EndValue { get; set; }
+		private DateTimeOffset? EndValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.EpochMillis? SkipTimeValue { get; set; }
+		private DateTimeOffset? SkipTimeValue { get; set; }
 
-		private string? StartValue { get; set; }
+		private DateTimeOffset? StartValue { get; set; }
 
-		public MlFlushJobRequestDescriptor AdvanceTime(string? advanceTime)
+		public MlFlushJobRequestDescriptor AdvanceTime(DateTimeOffset? advanceTime)
 		{
 			AdvanceTimeValue = advanceTime;
 			return Self;
@@ -198,19 +198,19 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlFlushJobRequestDescriptor End(string? end)
+		public MlFlushJobRequestDescriptor End(DateTimeOffset? end)
 		{
 			EndValue = end;
 			return Self;
 		}
 
-		public MlFlushJobRequestDescriptor SkipTime(Elastic.Clients.Elasticsearch.EpochMillis? skipTime)
+		public MlFlushJobRequestDescriptor SkipTime(DateTimeOffset? skipTime)
 		{
 			SkipTimeValue = skipTime;
 			return Self;
 		}
 
-		public MlFlushJobRequestDescriptor Start(string? start)
+		public MlFlushJobRequestDescriptor Start(DateTimeOffset? start)
 		{
 			StartValue = start;
 			return Self;

@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
@@ -43,16 +43,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
 
-	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>
+	public sealed partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>
 	{
 		public ClusterStateRequest()
 		{
@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
@@ -85,13 +85,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
 
 	public sealed partial class ClusterStateRequestDescriptor<TDocument> : RequestDescriptorBase<ClusterStateRequestDescriptor<TDocument>, ClusterStateRequestParameters>
@@ -109,13 +109,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public ClusterStateRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public ClusterStateRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ClusterStateRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public ClusterStateRequestDescriptor<TDocument> FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		public ClusterStateRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public ClusterStateRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
-		public ClusterStateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterStateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterStateRequestDescriptor<TDocument> WaitForMetadataVersion(long? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
-		public ClusterStateRequestDescriptor<TDocument> WaitForTimeout(Elastic.Clients.Elasticsearch.Time? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
+		public ClusterStateRequestDescriptor<TDocument> WaitForTimeout(Elastic.Clients.Elasticsearch.Duration? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
 		public ClusterStateRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Metrics? metric)
 		{
 			RouteValues.Optional("metric", metric);
@@ -148,13 +148,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public ClusterStateRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public ClusterStateRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ClusterStateRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public ClusterStateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		public ClusterStateRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public ClusterStateRequestDescriptor Local(bool? local = true) => Qs("local", local);
-		public ClusterStateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterStateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterStateRequestDescriptor WaitForMetadataVersion(long? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
-		public ClusterStateRequestDescriptor WaitForTimeout(Elastic.Clients.Elasticsearch.Time? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
+		public ClusterStateRequestDescriptor WaitForTimeout(Elastic.Clients.Elasticsearch.Duration? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
 		public ClusterStateRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? metric)
 		{
 			RouteValues.Optional("metric", metric);

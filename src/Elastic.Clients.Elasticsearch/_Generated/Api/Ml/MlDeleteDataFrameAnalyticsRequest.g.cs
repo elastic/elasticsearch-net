@@ -31,10 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class MlDeleteDataFrameAnalyticsRequest : PlainRequestBase<MlDeleteDataFrameAnalyticsRequestParameters>
+	public sealed partial class MlDeleteDataFrameAnalyticsRequest : PlainRequestBase<MlDeleteDataFrameAnalyticsRequestParameters>
 	{
 		public MlDeleteDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class MlDeleteDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptorBase<MlDeleteDataFrameAnalyticsRequestDescriptor<TDocument>, MlDeleteDataFrameAnalyticsRequestParameters>
@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		public MlDeleteDataFrameAnalyticsRequestDescriptor<TDocument> Force(bool? force = true) => Qs("force", force);
-		public MlDeleteDataFrameAnalyticsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public MlDeleteDataFrameAnalyticsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public MlDeleteDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);
@@ -92,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		public MlDeleteDataFrameAnalyticsRequestDescriptor Force(bool? force = true) => Qs("force", force);
-		public MlDeleteDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public MlDeleteDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public MlDeleteDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);

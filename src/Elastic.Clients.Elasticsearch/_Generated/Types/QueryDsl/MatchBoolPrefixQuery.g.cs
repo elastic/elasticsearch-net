@@ -24,21 +24,36 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class MatchBoolPrefixQueryConverter : FieldNameQueryConverterBase<MatchBoolPrefixQuery>
+	internal sealed class MatchBoolPrefixQueryConverter : JsonConverter<MatchBoolPrefixQuery>
 	{
-		internal override MatchBoolPrefixQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override MatchBoolPrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new MatchBoolPrefixQuery();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new MatchBoolPrefixQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "analyzer")
 					{
 						variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
 						continue;
 					}
 
@@ -89,18 +104,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.Query = JsonSerializer.Deserialize<string>(ref reader, options);
 						continue;
 					}
-
-					if (property == "_name")
-					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
 				}
 			}
 
@@ -108,122 +111,140 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, MatchBoolPrefixQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, MatchBoolPrefixQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.Analyzer))
+			if (value.Field is null)
+				throw new JsonException("Unable to serialize MatchBoolPrefixQuery because the `Field` property is not set. Field name queries must include a valid field name.");
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value.Analyzer);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (!string.IsNullOrEmpty(value.Analyzer))
+				{
+					writer.WritePropertyName("analyzer");
+					writer.WriteStringValue(value.Analyzer);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				if (value.Fuzziness is not null)
+				{
+					writer.WritePropertyName("fuzziness");
+					JsonSerializer.Serialize(writer, value.Fuzziness, options);
+				}
+
+				if (value.FuzzyRewrite is not null)
+				{
+					writer.WritePropertyName("fuzzy_rewrite");
+					JsonSerializer.Serialize(writer, value.FuzzyRewrite, options);
+				}
+
+				if (value.FuzzyTranspositions.HasValue)
+				{
+					writer.WritePropertyName("fuzzy_transpositions");
+					writer.WriteBooleanValue(value.FuzzyTranspositions.Value);
+				}
+
+				if (value.MaxExpansions.HasValue)
+				{
+					writer.WritePropertyName("max_expansions");
+					writer.WriteNumberValue(value.MaxExpansions.Value);
+				}
+
+				if (value.MinimumShouldMatch is not null)
+				{
+					writer.WritePropertyName("minimum_should_match");
+					JsonSerializer.Serialize(writer, value.MinimumShouldMatch, options);
+				}
+
+				if (value.Operator is not null)
+				{
+					writer.WritePropertyName("operator");
+					JsonSerializer.Serialize(writer, value.Operator, options);
+				}
+
+				if (value.PrefixLength.HasValue)
+				{
+					writer.WritePropertyName("prefix_length");
+					writer.WriteNumberValue(value.PrefixLength.Value);
+				}
+
+				writer.WritePropertyName("query");
+				writer.WriteStringValue(value.Query);
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			if (value.Fuzziness is not null)
-			{
-				writer.WritePropertyName("fuzziness");
-				JsonSerializer.Serialize(writer, value.Fuzziness, options);
-			}
-
-			if (value.FuzzyRewrite is not null)
-			{
-				writer.WritePropertyName("fuzzy_rewrite");
-				JsonSerializer.Serialize(writer, value.FuzzyRewrite, options);
-			}
-
-			if (value.FuzzyTranspositions.HasValue)
-			{
-				writer.WritePropertyName("fuzzy_transpositions");
-				writer.WriteBooleanValue(value.FuzzyTranspositions.Value);
-			}
-
-			if (value.MaxExpansions.HasValue)
-			{
-				writer.WritePropertyName("max_expansions");
-				writer.WriteNumberValue(value.MaxExpansions.Value);
-			}
-
-			if (value.MinimumShouldMatch is not null)
-			{
-				writer.WritePropertyName("minimum_should_match");
-				JsonSerializer.Serialize(writer, value.MinimumShouldMatch, options);
-			}
-
-			if (value.Operator is not null)
-			{
-				writer.WritePropertyName("operator");
-				JsonSerializer.Serialize(writer, value.Operator, options);
-			}
-
-			if (value.PrefixLength.HasValue)
-			{
-				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(value.PrefixLength.Value);
-			}
-
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(value.Query);
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		}
 	}
 
 	[JsonConverter(typeof(MatchBoolPrefixQueryConverter))]
-	public partial class MatchBoolPrefixQuery : FieldNameQueryBase, IQueryContainerVariant
+	public sealed partial class MatchBoolPrefixQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "match_bool_prefix";
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
+		public MatchBoolPrefixQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
+		public string? QueryName { get; set; }
+
 		public string? Analyzer { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("fuzziness")]
+		public float? Boost { get; set; }
+
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("fuzzy_rewrite")]
 		public string? FuzzyRewrite { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("fuzzy_transpositions")]
 		public bool? FuzzyTranspositions { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("max_expansions")]
 		public int? MaxExpansions { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("minimum_should_match")]
 		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("operator")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("prefix_length")]
 		public int? PrefixLength { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("query")]
 		public string Query { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
 	public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : SerializableDescriptorBase<MatchBoolPrefixQueryDescriptor<TDocument>>
 	{
 		internal MatchBoolPrefixQueryDescriptor(Action<MatchBoolPrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public MatchBoolPrefixQueryDescriptor() : base()
+		internal MatchBoolPrefixQueryDescriptor() : base()
 		{
+		}
+
+		public MatchBoolPrefixQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
+		}
+
+		public MatchBoolPrefixQueryDescriptor(Expression<Func<TDocument, object>> field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -232,7 +253,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -268,7 +289,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public MatchBoolPrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public MatchBoolPrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -330,6 +351,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
@@ -403,8 +426,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescriptorBase<MatchBoolPrefixQueryDescriptor>
 	{
 		internal MatchBoolPrefixQueryDescriptor(Action<MatchBoolPrefixQueryDescriptor> configure) => configure.Invoke(this);
-		public MatchBoolPrefixQueryDescriptor() : base()
+		internal MatchBoolPrefixQueryDescriptor() : base()
 		{
+		}
+
+		public MatchBoolPrefixQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -413,7 +443,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -449,7 +479,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public MatchBoolPrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public MatchBoolPrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -517,6 +547,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();

@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 	}
 
-	public partial class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>
+	public sealed partial class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>
 	{
 		public PutIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{

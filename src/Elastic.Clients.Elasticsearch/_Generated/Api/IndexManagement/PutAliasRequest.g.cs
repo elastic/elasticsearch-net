@@ -28,13 +28,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public sealed class PutAliasRequestParameters : RequestParameters<PutAliasRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>
+	public sealed partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>
 	{
 		public PutAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
 		{
@@ -44,10 +44,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
@@ -84,8 +84,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutAlias;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		public PutAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public PutAliasRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public PutAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public PutAliasRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public PutAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 		{
 			RouteValues.Required("index", indices);
@@ -221,8 +221,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutAlias;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		public PutAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public PutAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public PutAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public PutAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public PutAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 		{
 			RouteValues.Required("index", indices);

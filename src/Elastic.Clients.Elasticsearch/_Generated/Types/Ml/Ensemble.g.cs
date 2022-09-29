@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class Ensemble
+	public sealed partial class Ensemble
 	{
 		[JsonInclude]
 		[JsonPropertyName("aggregate_output")]
@@ -192,12 +192,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (TrainedModelsDescriptor is not null)
 			{
 				writer.WritePropertyName("trained_models");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, TrainedModelsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (TrainedModelsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("trained_models");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new TrainedModelDescriptor(TrainedModelsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (TrainedModelsDescriptorActions is not null)
 			{

@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("shard_size"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -80,7 +81,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -113,14 +113,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(SamplerAggregationConverter))]
-	public partial class SamplerAggregation : BucketAggregationBase
+	public sealed partial class SamplerAggregation : Aggregation
 	{
-		public SamplerAggregation(string name) : base(name)
+		public SamplerAggregation(string name) => Name = name;
+		internal SamplerAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
 		public int? ShardSize { get; set; }
 	}
 

@@ -24,15 +24,15 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class RolloverConditions
+	public sealed partial class RolloverConditions
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_age")]
-		public Elastic.Clients.Elasticsearch.Time? MaxAge { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? MaxAge { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_age_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? MaxAgeMillis { get; set; }
+		public long? MaxAgeMillis { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_docs")]
@@ -62,9 +62,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? MaxAgeValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? MaxAgeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.EpochMillis? MaxAgeMillisValue { get; set; }
+		private long? MaxAgeMillisValue { get; set; }
 
 		private long? MaxDocsValue { get; set; }
 
@@ -76,13 +76,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Elastic.Clients.Elasticsearch.ByteSize? MaxSizeBytesValue { get; set; }
 
-		public RolloverConditionsDescriptor MaxAge(Elastic.Clients.Elasticsearch.Time? maxAge)
+		public RolloverConditionsDescriptor MaxAge(Elastic.Clients.Elasticsearch.Duration? maxAge)
 		{
 			MaxAgeValue = maxAge;
 			return Self;
 		}
 
-		public RolloverConditionsDescriptor MaxAgeMillis(Elastic.Clients.Elasticsearch.EpochMillis? maxAgeMillis)
+		public RolloverConditionsDescriptor MaxAgeMillis(long? maxAgeMillis)
 		{
 			MaxAgeMillisValue = maxAgeMillis;
 			return Self;

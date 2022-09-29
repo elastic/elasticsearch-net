@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class RetentionLease
+	public sealed partial class RetentionLease
 	{
 		[JsonInclude]
 		[JsonPropertyName("period")]
-		public Elastic.Clients.Elasticsearch.Time Period { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration Period { get; set; }
 	}
 
 	public sealed partial class RetentionLeaseDescriptor : SerializableDescriptorBase<RetentionLeaseDescriptor>
@@ -38,9 +38,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time PeriodValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration PeriodValue { get; set; }
 
-		public RetentionLeaseDescriptor Period(Elastic.Clients.Elasticsearch.Time period)
+		public RetentionLeaseDescriptor Period(Elastic.Clients.Elasticsearch.Duration period)
 		{
 			PeriodValue = period;
 			return Self;

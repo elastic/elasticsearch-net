@@ -24,19 +24,22 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class FingerprintTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class FingerprintTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_output_size")]
-		public int MaxOutputSize { get; set; }
+		public int? MaxOutputSize { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("separator")]
-		public string Separator { get; set; }
+		public string? Separator { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "fingerprint";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class FingerprintTokenFilterDescriptor : SerializableDescriptorBase<FingerprintTokenFilterDescriptor>, IBuildableDescriptor<FingerprintTokenFilter>
@@ -46,19 +49,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private int MaxOutputSizeValue { get; set; }
+		private int? MaxOutputSizeValue { get; set; }
 
-		private string SeparatorValue { get; set; }
+		private string? SeparatorValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public FingerprintTokenFilterDescriptor MaxOutputSize(int maxOutputSize)
+		public FingerprintTokenFilterDescriptor MaxOutputSize(int? maxOutputSize)
 		{
 			MaxOutputSizeValue = maxOutputSize;
 			return Self;
 		}
 
-		public FingerprintTokenFilterDescriptor Separator(string separator)
+		public FingerprintTokenFilterDescriptor Separator(string? separator)
 		{
 			SeparatorValue = separator;
 			return Self;
@@ -73,10 +76,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("max_output_size");
-			writer.WriteNumberValue(MaxOutputSizeValue);
-			writer.WritePropertyName("separator");
-			writer.WriteStringValue(SeparatorValue);
+			if (MaxOutputSizeValue.HasValue)
+			{
+				writer.WritePropertyName("max_output_size");
+				writer.WriteNumberValue(MaxOutputSizeValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(SeparatorValue))
+			{
+				writer.WritePropertyName("separator");
+				writer.WriteStringValue(SeparatorValue);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("fingerprint");
 			if (VersionValue is not null)

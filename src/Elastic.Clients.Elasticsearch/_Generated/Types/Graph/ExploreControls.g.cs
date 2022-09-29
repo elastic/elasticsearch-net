@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Graph
 {
-	public partial class ExploreControls
+	public sealed partial class ExploreControls
 	{
 		[JsonInclude]
 		[JsonPropertyName("sample_diversity")]
@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		[JsonInclude]
 		[JsonPropertyName("timeout")]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("use_significance")]
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		private int? SampleSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? TimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 		private bool UseSignificanceValue { get; set; }
 
@@ -92,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public ExploreControlsDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout)
+		public ExploreControlsDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 		{
 			TimeoutValue = timeout;
 			return Self;
@@ -156,7 +156,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		private int? SampleSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? TimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 		private bool UseSignificanceValue { get; set; }
 
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public ExploreControlsDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout)
+		public ExploreControlsDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 		{
 			TimeoutValue = timeout;
 			return Self;

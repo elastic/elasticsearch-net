@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("after"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
 						if (value is not null)
 						{
@@ -52,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("size"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("sources"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>?>(ref reader, options);
 						if (value is not null)
 						{
@@ -102,7 +105,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -147,22 +149,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(CompositeAggregationConverter))]
-	public partial class CompositeAggregation : BucketAggregationBase
+	public sealed partial class CompositeAggregation : Aggregation
 	{
-		public CompositeAggregation(string name) : base(name)
+		public CompositeAggregation(string name) => Name = name;
+		internal CompositeAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("after")]
 		public Dictionary<string, object>? After { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("size")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
 		public int? Size { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("sources")]
 		public IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 	}
 

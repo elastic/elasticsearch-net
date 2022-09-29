@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Tests.Domain.Extensions;
 using VerifyXunit;
@@ -128,6 +129,20 @@ public abstract class SerializerTestBase
 	}
 
 	protected static Inferrer Inferrer => _settings.Inferrer;
+
+	public static async Task<string> SerializeAndVerifyJson<T>(T data)
+	{
+		var serialisedJson = await SerializeAndGetJsonStringAsync(data);
+		await Verifier.VerifyJson(serialisedJson);
+		return serialisedJson;
+	}
+
+	public static async Task<T> RoundTripAndVerifyJsonAsync<T>(T data)
+	{
+		var serialisedJson = await SerializeAndGetJsonStringAsync(data);
+		await Verifier.VerifyJson(serialisedJson);
+		return DeserializeJsonString<T>(serialisedJson);
+	}
 
 	protected static Stream WrapInStream(string json)
 	{

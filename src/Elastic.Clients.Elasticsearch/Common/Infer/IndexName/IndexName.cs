@@ -35,9 +35,9 @@ public class IndexName : IEquatable<IndexName>, IUrlParameter
 		Cluster = cluster;
 	}
 
-	public string Cluster { get; }
-	public string Name { get; }
-	public Type Type { get; }
+	internal string Cluster { get; }
+	internal string Name { get; }
+	internal Type Type { get; }
 
 	internal string DebugDisplay => Type == null ? Name : $"{nameof(IndexName)} for typeof: {Type?.Name}";
 

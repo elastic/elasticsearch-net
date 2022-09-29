@@ -24,11 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class DutchAnalyzer : IAnalyzer
+	public sealed partial class DutchAnalyzer : IAnalyzer
 	{
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
+		[JsonConverter(typeof(StopWordsConverter))]
+		public IEnumerable<string>? Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -42,9 +43,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
+		private IEnumerable<string>? StopwordsValue { get; set; }
 
-		public DutchAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
+		public DutchAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
 		{
 			StopwordsValue = stopwords;
 			return Self;
@@ -56,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			if (StopwordsValue is not null)
 			{
 				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, StopwordsValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
 			}
 
 			writer.WritePropertyName("type");

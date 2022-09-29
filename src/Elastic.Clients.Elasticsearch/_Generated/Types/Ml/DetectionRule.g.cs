@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DetectionRule
+	public sealed partial class DetectionRule
 	{
 		[JsonInclude]
 		[JsonPropertyName("actions")]
@@ -118,12 +118,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (ConditionsDescriptor is not null)
 			{
 				writer.WritePropertyName("conditions");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, ConditionsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (ConditionsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("conditions");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new RuleConditionDescriptor(ConditionsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (ConditionsDescriptorActions is not null)
 			{

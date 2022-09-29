@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class GeoIpDownloadStatistics
+	public sealed partial class GeoIpDownloadStatistics
 	{
 		[JsonInclude]
 		[JsonPropertyName("database_count")]
@@ -44,6 +44,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("total_download_time")]
-		public int TotalDownloadTime { get; init; }
+		public long TotalDownloadTime { get; init; }
 	}
 }

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class AnalysisMemoryLimit
+	public sealed partial class AnalysisMemoryLimit
 	{
 		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]

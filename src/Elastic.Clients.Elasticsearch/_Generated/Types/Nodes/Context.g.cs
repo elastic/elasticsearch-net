@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class Context
+	public sealed partial class Context
 	{
 		[JsonInclude]
 		[JsonPropertyName("cache_evictions")]
@@ -37,9 +37,5 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		[JsonInclude]
 		[JsonPropertyName("compilations")]
 		public long? Compilations { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("context")]
-		public string? ContextTemp { get; init; }
 	}
 }

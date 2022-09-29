@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RefreshStats
+	public sealed partial class RefreshStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("external_total")]
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_time")]
-		public string? TotalTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]

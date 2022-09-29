@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("format"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -52,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("value"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("value_type"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ValueType?>(ref reader, options);
 						if (value is not null)
 						{
@@ -74,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("weight"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue?>(ref reader, options);
 						if (value is not null)
 						{
@@ -102,7 +106,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -147,26 +150,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(WeightedAverageAggregationConverter))]
-	public partial class WeightedAverageAggregation : AggregationBase
+	public sealed partial class WeightedAverageAggregation : Aggregation
 	{
-		public WeightedAverageAggregation(string name) : base(name)
+		public WeightedAverageAggregation(string name) => Name = name;
+		internal WeightedAverageAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("value")]
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
 		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Value { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("value_type")]
 		public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("weight")]
 		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Weight { get; set; }
 	}
 

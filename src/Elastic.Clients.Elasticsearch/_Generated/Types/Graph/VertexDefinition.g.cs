@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Graph
 {
-	public partial class VertexDefinition
+	public sealed partial class VertexDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("exclude")]
@@ -162,12 +162,16 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			if (IncludeDescriptor is not null)
 			{
 				writer.WritePropertyName("include");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, IncludeDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (IncludeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("include");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new VertexIncludeDescriptor(IncludeDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (IncludeDescriptorActions is not null)
 			{
@@ -325,12 +329,16 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			if (IncludeDescriptor is not null)
 			{
 				writer.WritePropertyName("include");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, IncludeDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (IncludeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("include");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new VertexIncludeDescriptor(IncludeDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (IncludeDescriptorActions is not null)
 			{

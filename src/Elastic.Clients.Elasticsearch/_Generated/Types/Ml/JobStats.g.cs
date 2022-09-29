@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class JobStats
+	public sealed partial class JobStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("assignment_explanation")]
@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("open_time")]
-		public string? OpenTime { get; init; }
+		public DateTimeOffset? OpenTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("state")]

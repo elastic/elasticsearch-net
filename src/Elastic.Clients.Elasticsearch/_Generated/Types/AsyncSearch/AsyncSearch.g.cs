@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch
 {
-	public partial class AsyncSearch<TDocument>
+	public sealed partial class AsyncSearch<TDocument>
 	{
 		[JsonInclude]
 		[JsonPropertyName("_clusters")]
@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("_scroll_id")]
-		public string? ScrollId { get; init; }
+		public Elastic.Clients.Elasticsearch.ScrollId? ScrollId { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_shards")]

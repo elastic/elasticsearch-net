@@ -39,8 +39,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
+					if (reader.ValueTextEquals("buckets_path"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.BucketsPath = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("format"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -52,21 +65,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("gap_policy"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.GapPolicy = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("buckets_path"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.BucketsPath = value;
 						}
 
 						continue;
@@ -91,7 +94,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -100,6 +102,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("derivative");
 			writer.WriteStartObject();
+			if (value.BucketsPath is not null)
+			{
+				writer.WritePropertyName("buckets_path");
+				JsonSerializer.Serialize(writer, value.BucketsPath, options);
+			}
+
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -110,12 +118,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("gap_policy");
 				JsonSerializer.Serialize(writer, value.GapPolicy, options);
-			}
-
-			if (value.BucketsPath is not null)
-			{
-				writer.WritePropertyName("buckets_path");
-				JsonSerializer.Serialize(writer, value.BucketsPath, options);
 			}
 
 			writer.WriteEndObject();
@@ -130,11 +132,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(DerivativeAggregationConverter))]
-	public partial class DerivativeAggregation : PipelineAggregationBase
+	public sealed partial class DerivativeAggregation : Aggregation
 	{
-		public DerivativeAggregation(string name) : base(name)
+		public DerivativeAggregation(string name) => Name = name;
+		internal DerivativeAggregation()
 		{
 		}
+
+		public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
+
+		public string? Format { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
 	}
 
 	public sealed partial class DerivativeAggregationDescriptor : SerializableDescriptorBase<DerivativeAggregationDescriptor>

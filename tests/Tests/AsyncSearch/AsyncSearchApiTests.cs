@@ -32,7 +32,7 @@ namespace Tests.AsyncSearch
 					{
 						Query = new MatchAllQuery(),
 						KeepOnCompletion = true,
-						WaitForCompletionTimeout = Time.MinusOne,
+						WaitForCompletionTimeout = Duration.MinusOne,
 						Aggregations = new TermsAggregation("states")
 						{
 							Field = Infer.Field<Project>(p => p.State.Suffix("keyword")),
@@ -40,10 +40,14 @@ namespace Tests.AsyncSearch
 							Size = 5,
 							ShardSize = 100,
 							ExecutionHint = TermsAggregationExecutionHint.Map,
-							Missing = "n/a",
+							//Missing = "n/a",
 							// TODO - Review terms agg and fix this
 							//Include = new TermsInclude(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() }),
-							Order = new List<TermsOrder> { TermsOrder.KeyAscending, TermsOrder.CountDescending },
+							Order =new []
+							{
+								AggregateOrder.KeyAscending,
+								AggregateOrder.CountDescending
+							},
 							Meta = new Dictionary<string, object> { { "foo", "bar" } }
 						}
 					},
@@ -58,13 +62,14 @@ namespace Tests.AsyncSearch
 								.Size(5)
 								.ShardSize(100)
 								.ExecutionHint(TermsAggregationExecutionHint.Map)
-								.Missing("n/a")
+								//.Missing("n/a")
 								// TODO - Review terms agg and fix this
 								//.Include(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() })
-								.Order(o => o
-									.KeyAscending()
-									.CountDescending()
-								)
+								.Order(new []
+								{
+									AggregateOrder.KeyAscending,
+									AggregateOrder.CountDescending
+								})
 								.Meta(m => m
 									.Add("foo", "bar")
 								)
@@ -94,8 +99,8 @@ namespace Tests.AsyncSearch
 				u.Calls<GetAsyncSearchRequestDescriptor<Project>, GetAsyncSearchRequest, GetAsyncSearchResponse<Project>>(
 					v => new GetAsyncSearchRequest(v),
 					(v, d) => d,
-					(v, c, f) => c.AsyncSearch.Get<Project>(v, f),
-					(v, c, f) => c.AsyncSearch.GetAsync<Project>(v, f),
+					(v, c, f) => c.AsyncSearch.Get(v, f),
+					(v, c, f) => c.AsyncSearch.GetAsync(v, f),
 					(v, c, r) => c.AsyncSearch.Get<Project>(r),
 					(v, c, r) => c.AsyncSearch.GetAsync<Project>(r),
 					uniqueValueSelector: values => values.ExtendedValue<string>("id")
@@ -120,6 +125,8 @@ namespace Tests.AsyncSearch
 		public async Task AsyncSearchSubmitResponse() => await Assert<AsyncSearchSubmitResponse<Project>>(SubmitStep, r =>
 		{
 			r.ShouldBeValid();
+			r.Id.Should().NotBeNullOrEmpty();
+			// TODO - MORE ASSERTIONS
 			r.Response.Should().NotBeNull();
 			r.Response.Took.Should().BeGreaterOrEqualTo(0);
 		});
@@ -128,8 +135,9 @@ namespace Tests.AsyncSearch
 		public async Task AsyncSearchStatusResponse() => await Assert<AsyncSearchStatusResponse>(StatusStep, r =>
 		{
 			r.ShouldBeValid();
-			r.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);
-			r.ExpirationTime.Should().BeOnOrAfter(DateTimeOffset.Now);
+			r.StartTimeInMillis.Should().BeGreaterThan(DateTimeOffset.UtcNow.AddMinutes(-10).ToUnixTimeMilliseconds());
+			r.StartTimeInMillis.Should().BeLessOrEqualTo(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+			r.ExpirationTimeInMillis.Should().BeGreaterOrEqualTo(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
 			if (r.IsRunning)
 				r.CompletionStatus.HasValue.Should().BeFalse();
@@ -144,12 +152,13 @@ namespace Tests.AsyncSearch
 		{
 			r.ShouldBeValid();
 			r.Id.Should().NotBeNullOrEmpty();
-			r.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);
-			r.ExpirationTime.Should().BeOnOrAfter(DateTimeOffset.Now);
+			r.StartTimeInMillis.Should().BeGreaterThan(DateTimeOffset.UtcNow.AddMinutes(-10).ToUnixTimeMilliseconds());
+			r.StartTimeInMillis.Should().BeLessOrEqualTo(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+			r.ExpirationTimeInMillis.Should().BeGreaterOrEqualTo(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 			r.Response.Should().NotBeNull();
 			r.Response.Took.Should().BeGreaterOrEqualTo(0);
 			r.Response.Hits.Should().HaveCount(10);
-			var terms = r.Response.Aggregations.Terms("states");
+			var terms = r.Response.Aggregations.GetTerms("states");
 			terms.Should().NotBeNull();
 		});
 

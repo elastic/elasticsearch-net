@@ -28,13 +28,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	public sealed class IngestGetPipelineRequestParameters : RequestParameters<IngestGetPipelineRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
 	}
 
-	public partial class IngestGetPipelineRequest : PlainRequestBase<IngestGetPipelineRequestParameters>
+	public sealed partial class IngestGetPipelineRequest : PlainRequestBase<IngestGetPipelineRequestParameters>
 	{
 		public IngestGetPipelineRequest()
 		{
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGetPipeline;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public IngestGetPipelineRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IngestGetPipelineRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IngestGetPipelineRequestDescriptor<TDocument> Summary(bool? summary = true) => Qs("summary", summary);
 		public IngestGetPipelineRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
 		{
@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGetPipeline;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public IngestGetPipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IngestGetPipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IngestGetPipelineRequestDescriptor Summary(bool? summary = true) => Qs("summary", summary);
 		public IngestGetPipelineRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 		{

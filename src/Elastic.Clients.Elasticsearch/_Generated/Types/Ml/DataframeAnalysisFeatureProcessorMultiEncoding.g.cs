@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalysisFeatureProcessorMultiEncoding : IDataframeAnalysisFeatureProcessorVariant
+	public sealed partial class DataframeAnalysisFeatureProcessorMultiEncoding
 	{
-		[JsonIgnore]
-		string IDataframeAnalysisFeatureProcessorVariant.DataframeAnalysisFeatureProcessorVariantName => "multi_encoding";
 		[JsonInclude]
 		[JsonPropertyName("processors")]
 		public IEnumerable<int> Processors { get; set; }

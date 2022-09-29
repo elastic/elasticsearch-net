@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Enrich
 {
-	public partial class Configuration
+	public sealed partial class Configuration
 	{
 		[JsonInclude]
 		[JsonPropertyName("geo_match")]
@@ -33,5 +33,9 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.Enrich.Policy Match { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("range")]
+		public Elastic.Clients.Elasticsearch.Enrich.Policy Range { get; init; }
 	}
 }

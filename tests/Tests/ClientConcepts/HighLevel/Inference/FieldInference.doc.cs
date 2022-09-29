@@ -20,15 +20,9 @@ using Tests.Core.Xunit;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {
-
 	[SystemTextJsonOnly]
 	public class FieldInference_STJ
 	{
-		///**[[field-name-attribute]]
-		//* ==== Attribute based naming
-		//*
-		//* Using NEST's property attributes you can specify a new name for the properties
-		//*/
 		public class SystemTextJsonAttribute
 		{
 			[JsonPropertyName("naam")]
@@ -48,19 +42,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 	public class FieldInference
 	{
-		/**[[field-inference]]
-		 * === Field inference
-		 *
-		 * Several places in the Elasticsearch API expect the path to a field from your original source document, as a string value.
-		 * NEST allows you to use C# expressions to strongly type these field path strings.
-		 *
-		 * These expressions are assigned to a type called `Field`, and there are several ways to create an instance of one
-		 */
-
-		/**
-		* ==== Constructor
-		* Using the constructor directly is possible _but_ can get rather involved when resolving from a member access lambda expression
-		*/
 		[U]
 		public void UsingConstructors()
 		{
@@ -80,12 +61,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U]
 		public void UsingConstructorAlsoSetsComparisonValue()
 		{
-			/** When using the constructor and passing a value for `Name`, `Property` or `Expression`,
-			* `ComparisonValue` is also set on the `Field` instance; this is used when
-			*
-			* - determining `Field` equality
-			* - getting the hash code for a `Field` instance
-			*/
 			var fieldStringWithBoostTwo = new Field("name^2");
 			var fieldStringWithBoostThree = new Field("name^3");
 
@@ -99,23 +74,15 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldExpression.GetHashCode().Should().NotBe(0);
 			fieldProperty.GetHashCode().Should().NotBe(0);
 
-			fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostTwo); //<1> <<field-name-with-boost,Fields can constructed with a name that contains a boost>>
+			fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostTwo);
 		}
 
-		/**
-		* [[field-name-with-boost]]
-		*==== Field Names with Boost
-		*
-		* When specifying a `Field` name, the name can include a boost value; NEST will split the name and boost
-		* value and set the `Boost` property; a boost value as part of the string takes precedence over a boost
-		* value that may also be passed as the second constructor argument
-		*/
 		[U]
 		public void NameCanSpecifyBoost()
 		{
 			Field fieldString = "name^2";
 			var fieldStringConstructor = new Field("name^2");
-			var fieldStringCreate = new Field("name^2", 3); //<1> NEST will take the boost from the name
+			var fieldStringCreate = new Field("name^2", 3);
 
 			fieldString.Name.Should().Be("name");
 			fieldStringConstructor.Name.Should().Be("name");
@@ -125,12 +92,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldStringCreate.Boost.Should().Be(2);
 		}
 
-		/**
-		* ==== Implicit Conversion
-		* As well as using the constructor, you can also implicitly convert `string`, `PropertyInfo` and member access lambda expressions to a `Field`.
-		* For expressions however, this is _still_ rather involved as the expression first needs to be assigned to a variable that explicitly specifies
-		* the expression delegate type.
-		*/
 		[U]
 		public void ImplicitConversion()
 		{
@@ -147,37 +108,18 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				.WhenSerializing(fieldExpression);
 		}
 
-		/**
-		* [[nest-infer]]
-		* ==== Using Nest.Infer methods
-		* To ease creating a `Field` instance from expressions, there is a static `Infer` class you can use
-		*
-		* [TIP]
-		* ====
-		* This example uses the https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import] `using static Nest.Infer;`
-		 * in the using directives to shorthand `Nest.Infer.Field<T>()`
-		* to simply `Field<T>()`. Be sure to include this static import if copying any of these examples.
-		* ====
-		*
-		*/
 		[U]
 		public void UsingStaticPropertyField()
 		{
 			Field fieldString = "name";
 
-			/** but for expressions this is still rather involved */
 			var fieldExpression = Field<Project>(p => p.Name);
-
-			/** this can be even shortened even further using a static import.
-			* Now that is much terser than our first example using the constructor!
-			*/
 			fieldExpression = Field<Project>(p => p.Name);
 
 			Expect("name")
 				.WhenSerializing(fieldString)
 				.WhenSerializing(fieldExpression);
 
-			/** You can specify boosts in the field using a string, as well as using `Nest.Infer.Field` */
 			fieldString = "name^2.1";
 			fieldString.Boost.Should().Be(2.1);
 

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Snapshot
 {
-	public partial class SnapshotInfo
+	public sealed partial class SnapshotInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("data_streams")]
@@ -32,19 +32,19 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 		[JsonInclude]
 		[JsonPropertyName("duration")]
-		public Elastic.Clients.Elasticsearch.Time? Duration { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? Duration { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("duration_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? DurationInMillis { get; init; }
+		public long? DurationInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("end_time")]
-		public Elastic.Clients.Elasticsearch.Time? EndTime { get; init; }
+		public DateTimeOffset? EndTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("end_time_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? EndTimeInMillis { get; init; }
+		public long? EndTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("failures")]
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName> Indices { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName>? Indices { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("metadata")]
@@ -88,11 +88,11 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 		[JsonInclude]
 		[JsonPropertyName("start_time")]
-		public Elastic.Clients.Elasticsearch.Time? StartTime { get; init; }
+		public DateTimeOffset? StartTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? StartTimeInMillis { get; init; }
+		public long? StartTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("state")]

@@ -24,11 +24,15 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class DataStreams : Base
+	public sealed partial class DataStreams
 	{
 		[JsonInclude]
-		[JsonPropertyName("data_streams")]
-		public long DataStreamsTemp { get; init; }
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("indices_count")]

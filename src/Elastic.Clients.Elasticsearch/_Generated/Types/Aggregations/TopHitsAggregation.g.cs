@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("_source"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SourceConfig?>(ref reader, options);
 						if (value is not null)
 						{
@@ -52,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("docvalue_fields"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("explain"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
 						if (value is not null)
 						{
@@ -72,8 +75,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("field"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("from"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -85,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("highlight"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Highlight?>(ref reader, options);
 						if (value is not null)
 						{
@@ -94,8 +111,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("script"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Script = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("script_fields"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
 						if (value is not null)
 						{
@@ -107,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("seq_no_primary_term"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
 						if (value is not null)
 						{
@@ -118,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("size"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -129,7 +161,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("sort"))
 					{
-						var value = JsonSerializer.Deserialize<SortCollection?>(ref reader, options);
+						reader.Read();
+						var value = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.SortCombinations>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Sort = value;
@@ -140,6 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("stored_fields"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
 						if (value is not null)
 						{
@@ -151,6 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("track_scores"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
 						if (value is not null)
 						{
@@ -162,32 +197,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("version"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Version = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("field"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("script"))
-					{
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Script = value;
 						}
 
 						continue;
@@ -212,7 +226,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -239,6 +252,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteBooleanValue(value.Explain.Value);
 			}
 
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
 			if (value.From.HasValue)
 			{
 				writer.WritePropertyName("from");
@@ -249,6 +268,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("highlight");
 				JsonSerializer.Serialize(writer, value.Highlight, options);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
 			}
 
 			if (value.ScriptFields is not null)
@@ -272,7 +297,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (value.Sort is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, value.Sort, options);
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(value.Sort, writer, options);
 			}
 
 			if (value.StoredFields is not null)
@@ -293,18 +318,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteBooleanValue(value.Version.Value);
 			}
 
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			if (value.Script is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, value.Script, options);
-			}
-
 			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
@@ -317,59 +330,45 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(TopHitsAggregationConverter))]
-	public partial class TopHitsAggregation : MetricAggregationBase
+	public sealed partial class TopHitsAggregation : Aggregation
 	{
-		public TopHitsAggregation(string name, Field field) : base(name) => Field = field;
-		public TopHitsAggregation(string name) : base(name)
+		public TopHitsAggregation(string name, Field field) : this(name) => Field = field;
+		public TopHitsAggregation(string name) => Name = name;
+		internal TopHitsAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("_source")]
 		public Elastic.Clients.Elasticsearch.SourceConfig? Source { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("docvalue_fields")]
 		public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("explain")]
 		public bool? Explain { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("from")]
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
 		public int? From { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("highlight")]
 		public Elastic.Clients.Elasticsearch.Highlight? Highlight { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("script_fields")]
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
 		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("seq_no_primary_term")]
 		public bool? SeqNoPrimaryTerm { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("sort")]
-		public SortCollection? Sort { get; set; }
+		[JsonConverter(typeof(SortConverter))]
+		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("stored_fields")]
 		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("track_scores")]
 		public bool? TrackScores { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("version")]
 		public bool? Version { get; set; }
 	}
 
@@ -386,18 +385,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor<TDocument> SortDescriptor { get; set; }
-
-		private Action<SortDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
@@ -410,11 +397,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
 		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -443,54 +434,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			HighlightValue = null;
 			HighlightDescriptor = null;
 			HighlightDescriptorAction = configure;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor<TDocument> Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor<TDocument> Sort(SortDescriptor<TDocument> descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
 			return Self;
 		}
 
@@ -542,6 +485,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public TopHitsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public TopHitsAggregationDescriptor<TDocument> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector)
 		{
 			ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>());
@@ -557,6 +506,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopHitsAggregationDescriptor<TDocument> Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public TopHitsAggregationDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -605,38 +560,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, HighlightValue, options);
 			}
 
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor<TDocument>(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -667,6 +590,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(FromValue.Value);
 			}
 
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			if (ScriptFieldsValue is not null)
 			{
 				writer.WritePropertyName("script_fields");
@@ -683,6 +612,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			if (StoredFieldsValue is not null)
@@ -727,18 +662,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<HighlightDescriptor> HighlightDescriptorAction { get; set; }
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor SortDescriptor { get; set; }
-
-		private Action<SortDescriptor> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
@@ -751,11 +674,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
 		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -784,54 +711,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			HighlightValue = null;
 			HighlightDescriptor = null;
 			HighlightDescriptorAction = configure;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor Sort(SortDescriptor descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor Sort(Action<SortDescriptor> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
 			return Self;
 		}
 
@@ -895,6 +774,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public TopHitsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public TopHitsAggregationDescriptor ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector)
 		{
 			ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>());
@@ -910,6 +795,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopHitsAggregationDescriptor Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public TopHitsAggregationDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -964,38 +855,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, HighlightValue, options);
 			}
 
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -1026,6 +885,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(FromValue.Value);
 			}
 
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			if (ScriptFieldsValue is not null)
 			{
 				writer.WritePropertyName("script_fields");
@@ -1042,6 +907,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			if (StoredFieldsValue is not null)

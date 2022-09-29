@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.Helpers;
 using Elastic.Transport;
 using JetBrains.Profiler.Api;
 

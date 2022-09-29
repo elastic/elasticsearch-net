@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm
 {
-	public partial class Phase
+	public sealed partial class Phase
 	{
 		[JsonInclude]
 		[JsonPropertyName("actions")]
@@ -36,6 +36,6 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 		[JsonInclude]
 		[JsonPropertyName("min_age")]
-		public Elastic.Clients.Elasticsearch.Time? MinAge { get; init; }
+		public Union<Elastic.Clients.Elasticsearch.Duration?, long?>? MinAge { get; init; }
 	}
 }

@@ -24,17 +24,15 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class RetentionPolicy : IRetentionPolicyContainerVariant
+	public sealed partial class RetentionPolicy
 	{
-		[JsonIgnore]
-		string IRetentionPolicyContainerVariant.RetentionPolicyContainerVariantName => "time";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_age")]
-		public Elastic.Clients.Elasticsearch.Time MaxAge { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration MaxAge { get; set; }
 	}
 
 	public sealed partial class RetentionPolicyDescriptor<TDocument> : SerializableDescriptorBase<RetentionPolicyDescriptor<TDocument>>
@@ -46,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time MaxAgeValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration MaxAgeValue { get; set; }
 
 		public RetentionPolicyDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
@@ -60,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			return Self;
 		}
 
-		public RetentionPolicyDescriptor<TDocument> MaxAge(Elastic.Clients.Elasticsearch.Time maxAge)
+		public RetentionPolicyDescriptor<TDocument> MaxAge(Elastic.Clients.Elasticsearch.Duration maxAge)
 		{
 			MaxAgeValue = maxAge;
 			return Self;
@@ -86,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time MaxAgeValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration MaxAgeValue { get; set; }
 
 		public RetentionPolicyDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
@@ -106,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			return Self;
 		}
 
-		public RetentionPolicyDescriptor MaxAge(Elastic.Clients.Elasticsearch.Time maxAge)
+		public RetentionPolicyDescriptor MaxAge(Elastic.Clients.Elasticsearch.Duration maxAge)
 		{
 			MaxAgeValue = maxAge;
 			return Self;

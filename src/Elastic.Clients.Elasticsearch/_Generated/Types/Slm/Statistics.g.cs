@@ -24,46 +24,119 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Slm
 {
-	public partial class Statistics
+	internal sealed class StatisticsConverter : JsonConverter<Statistics>
 	{
-		[JsonInclude]
-		[JsonPropertyName("policy")]
+		public override Statistics Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			string? policy = default;
+			Elastic.Clients.Elasticsearch.Duration? retentionDeletionTime = default;
+			long? retentionDeletionTimeMillis = default;
+			long? retentionFailed = default;
+			long? retentionRuns = default;
+			long? retentionTimedOut = default;
+			long? totalSnapshotDeletionFailures = default;
+			long? totalSnapshotsDeleted = default;
+			long? totalSnapshotsFailed = default;
+			long? totalSnapshotsTaken = default;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "policy")
+					{
+						policy = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "retention_deletion_time")
+					{
+						retentionDeletionTime = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "retention_deletion_time_millis")
+					{
+						retentionDeletionTimeMillis = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "retention_failed")
+					{
+						retentionFailed = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "retention_runs")
+					{
+						retentionRuns = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "retention_timed_out")
+					{
+						retentionTimedOut = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "total_snapshot_deletion_failures")
+					{
+						totalSnapshotDeletionFailures = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "total_snapshots_deleted")
+					{
+						totalSnapshotsDeleted = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "total_snapshots_failed")
+					{
+						totalSnapshotsFailed = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "total_snapshots_taken")
+					{
+						totalSnapshotsTaken = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			return new Statistics { Policy = policy, RetentionDeletionTime = retentionDeletionTime, RetentionDeletionTimeMillis = retentionDeletionTimeMillis, RetentionFailed = retentionFailed, RetentionRuns = retentionRuns, RetentionTimedOut = retentionTimedOut, TotalSnapshotDeletionFailures = totalSnapshotDeletionFailures, TotalSnapshotsDeleted = totalSnapshotsDeleted, TotalSnapshotsFailed = totalSnapshotsFailed, TotalSnapshotsTaken = totalSnapshotsTaken };
+		}
+
+		public override void Write(Utf8JsonWriter writer, Statistics value, JsonSerializerOptions options)
+		{
+			throw new NotImplementedException("'Statistics' is a readonly type, used only on responses and does not support being written to JSON.");
+		}
+	}
+
+	[JsonConverter(typeof(StatisticsConverter))]
+	public sealed partial class Statistics
+	{
 		public string? Policy { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("retention_deletion_time")]
-		public string? RetentionDeletionTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? RetentionDeletionTime { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("retention_deletion_time_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? RetentionDeletionTimeMillis { get; init; }
+		public long? RetentionDeletionTimeMillis { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("retention_failed")]
 		public long? RetentionFailed { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("retention_runs")]
 		public long? RetentionRuns { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("retention_timed_out")]
 		public long? RetentionTimedOut { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_snapshot_deletion_failures")]
 		public long? TotalSnapshotDeletionFailures { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_snapshots_deleted")]
 		public long? TotalSnapshotsDeleted { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_snapshots_failed")]
 		public long? TotalSnapshotsFailed { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_snapshots_taken")]
 		public long? TotalSnapshotsTaken { get; init; }
 	}
 }

@@ -24,15 +24,15 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.License
 {
-	public partial class License
+	public sealed partial class License
 	{
 		[JsonInclude]
 		[JsonPropertyName("expiry_date_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis ExpiryDateInMillis { get; set; }
+		public long ExpiryDateInMillis { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("issue_date_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis IssueDateInMillis { get; set; }
+		public long IssueDateInMillis { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("issued_to")]
@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.License
 
 		[JsonInclude]
 		[JsonPropertyName("start_date_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? StartDateInMillis { get; set; }
+		public long? StartDateInMillis { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -74,9 +74,9 @@ namespace Elastic.Clients.Elasticsearch.License
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.EpochMillis ExpiryDateInMillisValue { get; set; }
+		private long ExpiryDateInMillisValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.EpochMillis IssueDateInMillisValue { get; set; }
+		private long IssueDateInMillisValue { get; set; }
 
 		private string IssuedToValue { get; set; }
 
@@ -88,19 +88,19 @@ namespace Elastic.Clients.Elasticsearch.License
 
 		private string SignatureValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.EpochMillis? StartDateInMillisValue { get; set; }
+		private long? StartDateInMillisValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.License.LicenseType TypeValue { get; set; }
 
 		private string UidValue { get; set; }
 
-		public LicenseDescriptor ExpiryDateInMillis(Elastic.Clients.Elasticsearch.EpochMillis expiryDateInMillis)
+		public LicenseDescriptor ExpiryDateInMillis(long expiryDateInMillis)
 		{
 			ExpiryDateInMillisValue = expiryDateInMillis;
 			return Self;
 		}
 
-		public LicenseDescriptor IssueDateInMillis(Elastic.Clients.Elasticsearch.EpochMillis issueDateInMillis)
+		public LicenseDescriptor IssueDateInMillis(long issueDateInMillis)
 		{
 			IssueDateInMillisValue = issueDateInMillis;
 			return Self;
@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch.License
 			return Self;
 		}
 
-		public LicenseDescriptor StartDateInMillis(Elastic.Clients.Elasticsearch.EpochMillis? startDateInMillis)
+		public LicenseDescriptor StartDateInMillis(long? startDateInMillis)
 		{
 			StartDateInMillisValue = startDateInMillis;
 			return Self;

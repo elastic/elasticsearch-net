@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class PendingTask
+	public sealed partial class PendingTask
 	{
 		[JsonInclude]
 		[JsonPropertyName("executing")]
@@ -44,10 +44,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("time_in_queue")]
-		public string TimeInQueue { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? TimeInQueue { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_in_queue_millis")]
-		public int TimeInQueueMillis { get; init; }
+		public long TimeInQueueMillis { get; init; }
 	}
 }

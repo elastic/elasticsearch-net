@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Collector
+	public sealed partial class Collector
 	{
 		[JsonInclude]
 		[JsonPropertyName("children")]

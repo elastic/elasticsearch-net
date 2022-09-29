@@ -44,7 +44,7 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdat
 	public TDocument IdFrom { get; set; }
 
 	[JsonIgnore]
-	public ScriptBase Script { get; set; }
+	public Script Script { get; set; }
 
 	[JsonIgnore]
 	public bool? ScriptedUpsert { get; set; }
@@ -94,13 +94,13 @@ public static class BulkUpdateOperationFactory
 
 	public static BulkUpdateOperationWithPartial<TPartial> WithPartial<TPartial>(Id id, IndexName index, TPartial partialDocument) => new(id, index, partialDocument);
 
-	public static BulkUpdateOperationWithScript WithScript(Id id, IndexName index, ScriptBase script) => new(id, index, script);
+	public static BulkUpdateOperationWithScript WithScript(Id id, IndexName index, Script script) => new(id, index, script);
 
-	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>(Id id, IndexName index, ScriptBase script, TDocument upsert) => new(upsert, id, index, script);
+	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>(Id id, IndexName index, Script script, TDocument upsert) => new(upsert, id, index, script);
 
-	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>( Id id, ScriptBase script, TDocument upsert) => new(upsert, id, script);
+	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>(Id id, Script script, TDocument upsert) => new(upsert, id, script);
 
-	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>(ScriptBase script, TDocument upsert) => new(upsert, new Id(upsert), script);
+	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>(Script script, TDocument upsert) => new(upsert, new Id(upsert), script);
 
-	public static BulkUpdateOperationWithScript WithScript(Id id, ScriptBase script) => new(id, script);
+	public static BulkUpdateOperationWithScript WithScript(Id id, Script script) => new(id, script);
 }

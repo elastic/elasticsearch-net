@@ -28,13 +28,13 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 	public sealed class IlmGetLifecycleRequestParameters : RequestParameters<IlmGetLifecycleRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class IlmGetLifecycleRequest : PlainRequestBase<IlmGetLifecycleRequestParameters>
+	public sealed partial class IlmGetLifecycleRequest : PlainRequestBase<IlmGetLifecycleRequestParameters>
 	{
 		public IlmGetLifecycleRequest()
 		{
@@ -48,10 +48,10 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class IlmGetLifecycleRequestDescriptor : RequestDescriptorBase<IlmGetLifecycleRequestDescriptor, IlmGetLifecycleRequestParameters>
@@ -64,8 +64,8 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementGetLifecycle;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public IlmGetLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public IlmGetLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public IlmGetLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IlmGetLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public IlmGetLifecycleRequestDescriptor Policy(Elastic.Clients.Elasticsearch.Name? policy)
 		{
 			RouteValues.Optional("policy", policy);

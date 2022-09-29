@@ -24,34 +24,50 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public interface ISyncContainerVariant
-	{
-		string SyncContainerVariantName { get; }
-	}
-
 	[JsonConverter(typeof(SyncContainerConverter))]
-	public partial class SyncContainer : IContainer
+	public sealed partial class SyncContainer
 	{
-		public SyncContainer(ISyncContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal ISyncContainerVariant Variant { get; }
+		internal SyncContainer(string variantName, object variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
+		internal object Variant { get; }
+
+		internal string VariantName { get; }
+
+		public static SyncContainer Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync timeSync) => new SyncContainer("time", timeSync);
 	}
 
 	internal sealed class SyncContainerConverter : JsonConverter<SyncContainer>
 	{
 		public override SyncContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the variant held within this container.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "time")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync?>(ref reader, options);
-				return new SyncContainer(variant);
+				reader.Read();
+				return new SyncContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -60,11 +76,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public override void Write(Utf8JsonWriter writer, SyncContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.SyncContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.TransformManagement.TimeSync variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "time":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync>(writer, (Elastic.Clients.Elasticsearch.TransformManagement.TimeSync)value.Variant, options);
 					break;
 			}
 
@@ -79,38 +95,37 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal SyncContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the SyncContainerDescriptor. Only a single SyncContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISyncContainerVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new SyncContainer(variant);
+				throw new Exception("A variant has already been assigned to the SyncContainerDescriptor. Only a single SyncContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
 
+		public void Time(TimeSync variant) => Set(variant, "time");
+		public void Time(Action<TimeSyncDescriptor<TDocument>> configure) => Set(configure, "time");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -119,20 +134,19 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
-
-		public void Time(TimeSync variant) => Set(variant, "time");
-		public void Time(Action<TimeSyncDescriptor<TDocument>> configure) => Set(configure, "time");
 	}
 
 	public sealed partial class SyncContainerDescriptor : SerializableDescriptorBase<SyncContainerDescriptor>
@@ -142,38 +156,38 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal SyncContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the SyncContainerDescriptor. Only a single SyncContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(ISyncContainerVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new SyncContainer(variant);
+				throw new Exception("A variant has already been assigned to the SyncContainerDescriptor. Only a single SyncContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
 
+		public void Time(TimeSync variant) => Set(variant, "time");
+		public void Time(Action<TimeSyncDescriptor> configure) => Set(configure, "time");
+		public void Time<TDocument>(Action<TimeSyncDescriptor<TDocument>> configure) => Set(configure, "time");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -182,20 +196,18 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
-
-		public void Time(TimeSync variant) => Set(variant, "time");
-		public void Time(Action<TimeSyncDescriptor> configure) => Set(configure, "time");
-		public void Time<TDocument>(Action<TimeSyncDescriptor<TDocument>> configure) => Set(configure, "time");
 	}
 }

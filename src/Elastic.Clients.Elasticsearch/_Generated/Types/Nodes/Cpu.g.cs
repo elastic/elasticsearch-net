@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class Cpu
+	public sealed partial class Cpu
 	{
 		[JsonInclude]
 		[JsonPropertyName("load_average")]
@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("sys")]
-		public string? Sys { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? Sys { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sys_in_millis")]
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public string? Total { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_in_millis")]
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("user")]
-		public string? User { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? User { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("user_in_millis")]

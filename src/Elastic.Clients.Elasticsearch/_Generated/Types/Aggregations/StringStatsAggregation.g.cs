@@ -39,19 +39,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("show_distribution"))
-					{
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.ShowDistribution = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("field"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,10 +53,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("show_distribution"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ShowDistribution = value;
 						}
 
 						continue;
@@ -91,7 +94,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -100,12 +102,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("string_stats");
 			writer.WriteStartObject();
-			if (value.ShowDistribution.HasValue)
-			{
-				writer.WritePropertyName("show_distribution");
-				writer.WriteBooleanValue(value.ShowDistribution.Value);
-			}
-
 			if (value.Field is not null)
 			{
 				writer.WritePropertyName("field");
@@ -116,6 +112,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			if (value.ShowDistribution.HasValue)
+			{
+				writer.WritePropertyName("show_distribution");
+				writer.WriteBooleanValue(value.ShowDistribution.Value);
 			}
 
 			writer.WriteEndObject();
@@ -130,15 +132,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(StringStatsAggregationConverter))]
-	public partial class StringStatsAggregation : MetricAggregationBase
+	public sealed partial class StringStatsAggregation : Aggregation
 	{
-		public StringStatsAggregation(string name, Field field) : base(name) => Field = field;
-		public StringStatsAggregation(string name) : base(name)
+		public StringStatsAggregation(string name, Field field) : this(name) => Field = field;
+		public StringStatsAggregation(string name) => Name = name;
+		internal StringStatsAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("show_distribution")]
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
 		public bool? ShowDistribution { get; set; }
 	}
 
@@ -149,41 +158,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
 		private bool? ShowDistributionValue { get; set; }
-
-		public StringStatsAggregationDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public StringStatsAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public StringStatsAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
 
 		public StringStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 		{
@@ -203,6 +184,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public StringStatsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public StringStatsAggregationDescriptor<TDocument> ShowDistribution(bool? showDistribution = true)
 		{
 			ShowDistributionValue = showDistribution;
@@ -214,26 +201,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("string_stats");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
 				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (ShowDistributionValue.HasValue)
@@ -260,41 +237,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
 		private bool? ShowDistributionValue { get; set; }
-
-		public StringStatsAggregationDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public StringStatsAggregationDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public StringStatsAggregationDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
 
 		public StringStatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 		{
@@ -320,6 +269,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public StringStatsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public StringStatsAggregationDescriptor ShowDistribution(bool? showDistribution = true)
 		{
 			ShowDistributionValue = showDistribution;
@@ -331,26 +286,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("string_stats");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
 				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (ShowDistributionValue.HasValue)

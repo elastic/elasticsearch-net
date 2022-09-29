@@ -34,7 +34,7 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 				size = 5,
 				shard_size = 100,
 				execution_hint = "map",
-				missing = "n/a",
+				//missing = "n/a",
 				script = new
 				{
 					source = "'State of Being: '+_value",
@@ -55,12 +55,13 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 			.Size(5)
 			.ShardSize(100)
 			.ExecutionHint(TermsAggregationExecutionHint.Map)
-			.Missing("n/a")
-			.Script(ss => ss.Source("'State of Being: '+_value"))
-			.Order(o => o
-				.KeyAscending()
-				.CountDescending()
-			)
+			//.Missing("n/a")
+			.Script(new Script(new InlineScript("'State of Being: '+_value")))
+			.Order(new[]
+			{
+				AggregateOrder.KeyAscending,
+				AggregateOrder.CountDescending
+			})
 			.Meta(m => m
 				.Add("foo", "bar")
 			)
@@ -74,12 +75,12 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 			Size = 5,
 			ShardSize = 100,
 			ExecutionHint = TermsAggregationExecutionHint.Map,
-			Missing = "n/a",
-			Script = new InlineScript("'State of Being: '+_value"),
-			Order = new List<TermsOrder>
+			//Missing = "n/a",
+			Script = new Script(new InlineScript("'State of Being: '+_value")),
+			Order = new []
 			{
-				TermsOrder.KeyAscending,
-				TermsOrder.CountDescending
+				AggregateOrder.KeyAscending,
+				AggregateOrder.CountDescending
 			},
 			Meta = new Dictionary<string, object>
 			{
@@ -90,13 +91,16 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var states = response.Aggregations.Terms("states");
+		var states = response.Aggregations.GetStringTerms("states");
 		states.Should().NotBeNull();
 		states.DocCountErrorUpperBound.Should().HaveValue();
 		states.SumOtherDocCount.Should().BeGreaterOrEqualTo(0);
 		states.Buckets.Should().NotBeNull();
-		states.Buckets.Count.Should().BeGreaterThan(0);
-		foreach (var item in states.Buckets)
+
+		var bucketsCollection = states.Buckets;
+
+		bucketsCollection.Count.Should().BeGreaterThan(0);
+		foreach (var item in bucketsCollection)
 		{
 			item.Key.Should().NotBeNullOrEmpty();
 			item.DocCount.Should().BeGreaterOrEqualTo(1);

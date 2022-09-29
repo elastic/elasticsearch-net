@@ -28,13 +28,13 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed class PutScriptRequestParameters : RequestParameters<PutScriptRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>
+	public sealed partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>
 	{
 		public PutScriptRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
@@ -48,10 +48,10 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
@@ -76,8 +76,8 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePutScript;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		public PutScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public PutScriptRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public PutScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public PutScriptRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public PutScriptRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);
@@ -161,8 +161,8 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePutScript;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		public PutScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public PutScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public PutScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public PutScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public PutScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);

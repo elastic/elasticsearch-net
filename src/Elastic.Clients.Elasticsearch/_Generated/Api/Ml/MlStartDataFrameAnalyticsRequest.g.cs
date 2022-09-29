@@ -28,10 +28,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	public sealed class MlStartDataFrameAnalyticsRequestParameters : RequestParameters<MlStartDataFrameAnalyticsRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class MlStartDataFrameAnalyticsRequest : PlainRequestBase<MlStartDataFrameAnalyticsRequestParameters>
+	public sealed partial class MlStartDataFrameAnalyticsRequest : PlainRequestBase<MlStartDataFrameAnalyticsRequestParameters>
 	{
 		public MlStartDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class MlStartDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptorBase<MlStartDataFrameAnalyticsRequestDescriptor<TDocument>, MlStartDataFrameAnalyticsRequestParameters>
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningStartDataFrameAnalytics;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
-		public MlStartDataFrameAnalyticsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public MlStartDataFrameAnalyticsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public MlStartDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningStartDataFrameAnalytics;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
-		public MlStartDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public MlStartDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public MlStartDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);

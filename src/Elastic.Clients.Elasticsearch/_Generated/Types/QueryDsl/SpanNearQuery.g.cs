@@ -24,12 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SpanNearQuery : QueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public sealed partial class SpanNearQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "span_near";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "span_near";
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("clauses")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
@@ -132,12 +136,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (ClausesDescriptor is not null)
 			{
 				writer.WritePropertyName("clauses");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, ClausesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (ClausesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("clauses");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<TDocument>(ClausesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (ClausesDescriptorActions is not null)
 			{
@@ -273,12 +281,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (ClausesDescriptor is not null)
 			{
 				writer.WritePropertyName("clauses");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, ClausesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (ClausesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("clauses");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(ClausesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (ClausesDescriptorActions is not null)
 			{

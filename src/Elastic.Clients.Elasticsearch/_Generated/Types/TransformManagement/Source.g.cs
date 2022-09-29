@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class Source
+	public sealed partial class Source
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 	}
 
 	public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptorBase<SourceDescriptor<TDocument>>
@@ -54,7 +54,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -86,9 +86,9 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			return Self;
 		}
 
-		public SourceDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public SourceDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 
@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -170,9 +170,9 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			return Self;
 		}
 
-		public SourceDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public SourceDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 

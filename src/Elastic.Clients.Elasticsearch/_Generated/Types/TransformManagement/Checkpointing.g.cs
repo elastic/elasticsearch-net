@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class Checkpointing
+	public sealed partial class Checkpointing
 	{
 		[JsonInclude]
 		[JsonPropertyName("changes_last_detected_at")]
@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("changes_last_detected_at_date_time")]
-		public string? ChangesLastDetectedAtDateTime { get; init; }
+		public DateTimeOffset? ChangesLastDetectedAtDateTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("last")]

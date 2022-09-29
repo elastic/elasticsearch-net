@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Tasks
 {
-	public partial class TaskStatus
+	public sealed partial class TaskStatus
 	{
 		[JsonInclude]
 		[JsonPropertyName("batches")]
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 
 		[JsonInclude]
 		[JsonPropertyName("throttled")]
-		public Elastic.Clients.Elasticsearch.Time? Throttled { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? Throttled { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("throttled_millis")]
@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 
 		[JsonInclude]
 		[JsonPropertyName("throttled_until")]
-		public Elastic.Clients.Elasticsearch.Time? ThrottledUntil { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? ThrottledUntil { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("throttled_until_millis")]

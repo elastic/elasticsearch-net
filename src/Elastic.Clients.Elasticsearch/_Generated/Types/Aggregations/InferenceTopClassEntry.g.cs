@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class InferenceTopClassEntry
+	public sealed partial class InferenceTopClassEntry
 	{
 		[JsonInclude]
 		[JsonPropertyName("class_name")]

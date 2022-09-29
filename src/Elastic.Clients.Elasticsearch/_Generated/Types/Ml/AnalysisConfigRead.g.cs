@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class AnalysisConfigRead
+	public sealed partial class AnalysisConfigRead
 	{
 		[JsonInclude]
 		[JsonPropertyName("bucket_span")]
-		public string BucketSpan { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration BucketSpan { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("categorization_analyzer")]
@@ -52,11 +52,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("latency")]
-		public Elastic.Clients.Elasticsearch.Time? Latency { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? Latency { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("model_prune_window")]
-		public Elastic.Clients.Elasticsearch.Time? ModelPruneWindow { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? ModelPruneWindow { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("multivariate_by_fields")]

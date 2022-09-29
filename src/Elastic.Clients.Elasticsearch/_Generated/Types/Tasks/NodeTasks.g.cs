@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Tasks
 {
-	public partial class NodeTasks
+	public sealed partial class NodeTasks
 	{
 		[JsonInclude]
 		[JsonPropertyName("attributes")]

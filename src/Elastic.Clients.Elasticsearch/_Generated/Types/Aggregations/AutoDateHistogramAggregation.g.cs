@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("buckets"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -52,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("field"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("format"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -74,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("minimum_interval"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval?>(ref reader, options);
 						if (value is not null)
 						{
@@ -85,7 +89,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("missing"))
 					{
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Missing = value;
@@ -96,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("offset"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -107,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("params"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
 						if (value is not null)
 						{
@@ -118,7 +125,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
@@ -129,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("time_zone"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -168,7 +177,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -225,10 +233,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Script, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.TimeZone))
+			if (value.TimeZone is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(value.TimeZone);
+				JsonSerializer.Serialize(writer, value.TimeZone, options);
 			}
 
 			writer.WriteEndObject();
@@ -249,46 +257,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(AutoDateHistogramAggregationConverter))]
-	public partial class AutoDateHistogramAggregation : BucketAggregationBase
+	public sealed partial class AutoDateHistogramAggregation : Aggregation
 	{
-		public AutoDateHistogramAggregation(string name) : base(name)
+		public AutoDateHistogramAggregation(string name) => Name = name;
+		internal AutoDateHistogramAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("buckets")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
 		public int? Buckets { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("minimum_interval")]
+		public Dictionary<string, object>? Meta { get; set; }
+
 		public Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public string? Missing { get; set; }
+		public DateTimeOffset? Missing { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("offset")]
+		public override string? Name { get; internal set; }
+
 		public string? Offset { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("params")]
 		public Dictionary<string, object>? Params { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public ScriptBase? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("time_zone")]
 		public string? TimeZone { get; set; }
 	}
 
@@ -305,12 +302,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private int? BucketsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
@@ -321,11 +312,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumIntervalValue { get; set; }
 
-		private string? MissingValue { get; set; }
+		private DateTimeOffset? MissingValue { get; set; }
 
 		private string? OffsetValue { get; set; }
 
 		private Dictionary<string, object>? ParamsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		private string? TimeZoneValue { get; set; }
 
@@ -350,30 +343,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			AggregationsValue = null;
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
-			return Self;
-		}
-
-		public AutoDateHistogramAggregationDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public AutoDateHistogramAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public AutoDateHistogramAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
 			return Self;
 		}
 
@@ -413,7 +382,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public AutoDateHistogramAggregationDescriptor<TDocument> Missing(string? missing)
+		public AutoDateHistogramAggregationDescriptor<TDocument> Missing(DateTimeOffset? missing)
 		{
 			MissingValue = missing;
 			return Self;
@@ -431,6 +400,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public AutoDateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public AutoDateHistogramAggregationDescriptor<TDocument> TimeZone(string? timeZone)
 		{
 			TimeZoneValue = timeZone;
@@ -442,22 +417,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("auto_date_histogram");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (BucketsValue.HasValue)
 			{
 				writer.WritePropertyName("buckets");
@@ -500,10 +459,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ParamsValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -546,12 +511,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private int? BucketsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
@@ -562,11 +521,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumIntervalValue { get; set; }
 
-		private string? MissingValue { get; set; }
+		private DateTimeOffset? MissingValue { get; set; }
 
 		private string? OffsetValue { get; set; }
 
 		private Dictionary<string, object>? ParamsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		private string? TimeZoneValue { get; set; }
 
@@ -591,30 +552,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			AggregationsValue = null;
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = configure;
-			return Self;
-		}
-
-		public AutoDateHistogramAggregationDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public AutoDateHistogramAggregationDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public AutoDateHistogramAggregationDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
 			return Self;
 		}
 
@@ -660,7 +597,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public AutoDateHistogramAggregationDescriptor Missing(string? missing)
+		public AutoDateHistogramAggregationDescriptor Missing(DateTimeOffset? missing)
 		{
 			MissingValue = missing;
 			return Self;
@@ -678,6 +615,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public AutoDateHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public AutoDateHistogramAggregationDescriptor TimeZone(string? timeZone)
 		{
 			TimeZoneValue = timeZone;
@@ -689,22 +632,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("auto_date_histogram");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (BucketsValue.HasValue)
 			{
 				writer.WritePropertyName("buckets");
@@ -747,10 +674,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ParamsValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			writer.WriteEndObject();

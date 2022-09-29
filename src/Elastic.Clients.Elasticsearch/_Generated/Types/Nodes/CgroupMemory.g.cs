@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class CgroupMemory
+	public sealed partial class CgroupMemory
 	{
 		[JsonInclude]
 		[JsonPropertyName("control_group")]

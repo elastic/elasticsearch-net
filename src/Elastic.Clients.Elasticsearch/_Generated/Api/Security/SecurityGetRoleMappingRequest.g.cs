@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecurityGetRoleMappingRequest : PlainRequestBase<SecurityGetRoleMappingRequestParameters>
+	public sealed partial class SecurityGetRoleMappingRequest : PlainRequestBase<SecurityGetRoleMappingRequestParameters>
 	{
 		public SecurityGetRoleMappingRequest()
 		{

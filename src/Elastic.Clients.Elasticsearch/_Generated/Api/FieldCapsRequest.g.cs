@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields Fields { get => Q<Elastic.Clients.Elasticsearch.Fields>("fields"); set => Q("fields", value); }
@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<string>? Types { get => Q<IEnumerable<string>?>("types"); set => Q("types", value); }
 	}
 
-	public partial class FieldCapsRequest : PlainRequestBase<FieldCapsRequestParameters>
+	public sealed partial class FieldCapsRequest : PlainRequestBase<FieldCapsRequestParameters>
 	{
 		public FieldCapsRequest()
 		{
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields Fields { get => Q<Elastic.Clients.Elasticsearch.Fields>("fields"); set => Q("fields", value); }
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 	}
 
 	public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescriptorBase<FieldCapsRequestDescriptor<TDocument>, FieldCapsRequestParameters>
@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public FieldCapsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public FieldCapsRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public FieldCapsRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields fields) => Qs("fields", fields);
 		public FieldCapsRequestDescriptor<TDocument> Filters(string? filters) => Qs("filters", filters);
 		public FieldCapsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		public FieldCapsRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? indexFilter)
 		{
@@ -147,9 +147,9 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public FieldCapsRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public FieldCapsRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public FieldCapsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public FieldCapsRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public FieldCapsRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields fields) => Qs("fields", fields);
 		public FieldCapsRequestDescriptor Filters(string? filters) => Qs("filters", filters);
 		public FieldCapsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
@@ -211,7 +211,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<QueryDsl.QueryContainerDescriptor> IndexFilterDescriptorAction { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		public FieldCapsRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? indexFilter)
 		{
@@ -237,9 +237,9 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public FieldCapsRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public FieldCapsRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 

@@ -24,13 +24,19 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class CombinedFieldsQuery : QueryBase, IQueryContainerVariant
+	public sealed partial class CombinedFieldsQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "combined_fields";
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
 		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]

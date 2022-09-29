@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class TrainedModelDeploymentNodesStats
+	public sealed partial class TrainedModelDeploymentNodesStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("average_inference_time_ms")]
@@ -39,20 +39,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int InferenceCount { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("inference_threads")]
-		public int InferenceThreads { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("last_access")]
 		public long LastAccess { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("model_threads")]
-		public int ModelThreads { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("node")]
 		public Elastic.Clients.Elasticsearch.Ml.DiscoveryNode Node { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("number_of_allocations")]
+		public int NumberOfAllocations { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("number_of_pending_requests")]
@@ -64,11 +60,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("routing_state")]
-		public Elastic.Clients.Elasticsearch.Ml.TrainedModelAllocationRoutingTable RoutingState { get; init; }
+		public Elastic.Clients.Elasticsearch.Ml.TrainedModelAssignmentRoutingTable RoutingState { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("start_time")]
 		public long StartTime { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("threads_per_allocation")]
+		public int ThreadsPerAllocation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timeout_count")]

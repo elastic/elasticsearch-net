@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeClassificationSummaryMulticlassConfusionMatrix
+	public sealed partial class DataframeClassificationSummaryMulticlassConfusionMatrix
 	{
 		[JsonInclude]
 		[JsonPropertyName("confusion_matrix")]

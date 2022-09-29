@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeInfoJvmMemory
+	public sealed partial class NodeInfoJvmMemory
 	{
 		[JsonInclude]
 		[JsonPropertyName("direct_max")]

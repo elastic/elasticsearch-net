@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class NodeOperatingSystemInfo
+	public sealed partial class NodeOperatingSystemInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("allocated_processors")]
@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("refresh_interval_in_millis")]
-		public int RefreshIntervalInMillis { get; init; }
+		public long RefreshIntervalInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("swap")]

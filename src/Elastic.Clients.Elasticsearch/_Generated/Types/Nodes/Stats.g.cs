@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class Stats
+	public sealed partial class Stats
 	{
 		[JsonInclude]
 		[JsonPropertyName("adaptive_selection")]

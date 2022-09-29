@@ -24,11 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class Weights
+	public sealed partial class Weights
 	{
-		[JsonInclude]
-		[JsonPropertyName("weights")]
-		public double WeightsTemp { get; set; }
 	}
 
 	public sealed partial class WeightsDescriptor : SerializableDescriptorBase<WeightsDescriptor>
@@ -38,20 +35,8 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		private double WeightsTempValue { get; set; }
-
-		public WeightsDescriptor WeightsTemp(double weightsTemp)
-		{
-			WeightsTempValue = weightsTemp;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("weights");
-			writer.WriteNumberValue(WeightsTempValue);
-			writer.WriteEndObject();
 		}
 	}
 }

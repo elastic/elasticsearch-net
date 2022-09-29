@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public partial class ReadException
+	public sealed partial class ReadException
 	{
 		[JsonInclude]
 		[JsonPropertyName("exception")]

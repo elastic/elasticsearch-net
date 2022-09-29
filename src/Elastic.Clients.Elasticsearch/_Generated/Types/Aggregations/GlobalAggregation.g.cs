@@ -70,7 +70,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -97,11 +96,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(GlobalAggregationConverter))]
-	public partial class GlobalAggregation : BucketAggregationBase
+	public sealed partial class GlobalAggregation : Aggregation
 	{
-		public GlobalAggregation(string name) : base(name)
+		public GlobalAggregation(string name) => Name = name;
+		internal GlobalAggregation()
 		{
 		}
+
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
 	}
 
 	public sealed partial class GlobalAggregationDescriptor<TDocument> : SerializableDescriptorBase<GlobalAggregationDescriptor<TDocument>>

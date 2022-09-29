@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class MinimalLicenseInformation
+	public sealed partial class MinimalLicenseInformation
 	{
 		[JsonInclude]
 		[JsonPropertyName("expiry_date_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis ExpiryDateInMillis { get; init; }
+		public long ExpiryDateInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("mode")]

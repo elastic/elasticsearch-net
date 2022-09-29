@@ -24,66 +24,233 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DatafeedConfig
+	internal sealed class DatafeedConfigConverter : JsonConverter<DatafeedConfig>
 	{
-		[JsonInclude]
-		[JsonPropertyName("aggregations")]
+		public override DatafeedConfig Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new DatafeedConfig();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "aggregations" || property == "aggs")
+					{
+						variant.Aggregations = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "chunking_config")
+					{
+						variant.ChunkingConfig = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.ChunkingConfig?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "datafeed_id")
+					{
+						variant.DatafeedId = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Id?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "delayed_data_check_config")
+					{
+						variant.DelayedDataCheckConfig = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "frequency")
+					{
+						variant.Frequency = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "indexes")
+					{
+						variant.Indexes = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "indices")
+					{
+						variant.Indices = JsonSerializer.Deserialize<IEnumerable<string>>(ref reader, options);
+						continue;
+					}
+
+					if (property == "indices_options")
+					{
+						variant.IndicesOptions = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndicesOptions?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "job_id")
+					{
+						variant.JobId = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Id?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "max_empty_searches")
+					{
+						variant.MaxEmptySearches = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "query")
+					{
+						variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>(ref reader, options);
+						continue;
+					}
+
+					if (property == "query_delay")
+					{
+						variant.QueryDelay = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "runtime_mappings")
+					{
+						variant.RuntimeMappings = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "script_fields")
+					{
+						variant.ScriptFields = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "scroll_size")
+					{
+						variant.ScrollSize = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, DatafeedConfig value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Aggregations is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, value.Aggregations, options);
+			}
+
+			if (value.ChunkingConfig is not null)
+			{
+				writer.WritePropertyName("chunking_config");
+				JsonSerializer.Serialize(writer, value.ChunkingConfig, options);
+			}
+
+			if (value.DatafeedId is not null)
+			{
+				writer.WritePropertyName("datafeed_id");
+				JsonSerializer.Serialize(writer, value.DatafeedId, options);
+			}
+
+			if (value.DelayedDataCheckConfig is not null)
+			{
+				writer.WritePropertyName("delayed_data_check_config");
+				JsonSerializer.Serialize(writer, value.DelayedDataCheckConfig, options);
+			}
+
+			if (value.Frequency is not null)
+			{
+				writer.WritePropertyName("frequency");
+				JsonSerializer.Serialize(writer, value.Frequency, options);
+			}
+
+			if (value.Indexes is not null)
+			{
+				writer.WritePropertyName("indexes");
+				JsonSerializer.Serialize(writer, value.Indexes, options);
+			}
+
+			writer.WritePropertyName("indices");
+			JsonSerializer.Serialize(writer, value.Indices, options);
+			if (value.IndicesOptions is not null)
+			{
+				writer.WritePropertyName("indices_options");
+				JsonSerializer.Serialize(writer, value.IndicesOptions, options);
+			}
+
+			if (value.JobId is not null)
+			{
+				writer.WritePropertyName("job_id");
+				JsonSerializer.Serialize(writer, value.JobId, options);
+			}
+
+			if (value.MaxEmptySearches.HasValue)
+			{
+				writer.WritePropertyName("max_empty_searches");
+				writer.WriteNumberValue(value.MaxEmptySearches.Value);
+			}
+
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, value.Query, options);
+			if (value.QueryDelay is not null)
+			{
+				writer.WritePropertyName("query_delay");
+				JsonSerializer.Serialize(writer, value.QueryDelay, options);
+			}
+
+			if (value.RuntimeMappings is not null)
+			{
+				writer.WritePropertyName("runtime_mappings");
+				JsonSerializer.Serialize(writer, value.RuntimeMappings, options);
+			}
+
+			if (value.ScriptFields is not null)
+			{
+				writer.WritePropertyName("script_fields");
+				JsonSerializer.Serialize(writer, value.ScriptFields, options);
+			}
+
+			if (value.ScrollSize.HasValue)
+			{
+				writer.WritePropertyName("scroll_size");
+				writer.WriteNumberValue(value.ScrollSize.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(DatafeedConfigConverter))]
+	public sealed partial class DatafeedConfig
+	{
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("chunking_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig? ChunkingConfig { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("datafeed_id")]
 		public Elastic.Clients.Elasticsearch.Id? DatafeedId { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("delayed_data_check_config")]
 		public Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("frequency")]
-		public string? Frequency { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("indexes")]
 		public IEnumerable<string>? Indexes { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("indices")]
 		public IEnumerable<string> Indices { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("indices_options")]
 		public Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptions { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("max_empty_searches")]
 		public int? MaxEmptySearches { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("query_delay")]
-		public string? QueryDelay { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? QueryDelay { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("script_fields")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("scroll_size")]
 		public int? ScrollSize { get; set; }
 	}
 
@@ -116,7 +283,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<DelayedDataCheckConfigDescriptor> DelayedDataCheckConfigDescriptorAction { get; set; }
 
-		private string? FrequencyValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
 
 		private IEnumerable<string>? IndexesValue { get; set; }
 
@@ -132,9 +299,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private int? MaxEmptySearchesValue { get; set; }
 
-		private string? QueryDelayValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? QueryDelayValue { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
@@ -224,7 +391,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public DatafeedConfigDescriptor<TDocument> Frequency(string? frequency)
+		public DatafeedConfigDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 		{
 			FrequencyValue = frequency;
 			return Self;
@@ -278,15 +445,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public DatafeedConfigDescriptor<TDocument> QueryDelay(string? queryDelay)
+		public DatafeedConfigDescriptor<TDocument> QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
 		{
 			QueryDelayValue = queryDelay;
 			return Self;
 		}
 
-		public DatafeedConfigDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public DatafeedConfigDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 
@@ -464,7 +631,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<DelayedDataCheckConfigDescriptor> DelayedDataCheckConfigDescriptorAction { get; set; }
 
-		private string? FrequencyValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
 
 		private IEnumerable<string>? IndexesValue { get; set; }
 
@@ -480,9 +647,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private int? MaxEmptySearchesValue { get; set; }
 
-		private string? QueryDelayValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? QueryDelayValue { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
@@ -572,7 +739,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public DatafeedConfigDescriptor Frequency(string? frequency)
+		public DatafeedConfigDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 		{
 			FrequencyValue = frequency;
 			return Self;
@@ -626,15 +793,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public DatafeedConfigDescriptor QueryDelay(string? queryDelay)
+		public DatafeedConfigDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
 		{
 			QueryDelayValue = queryDelay;
 			return Self;
 		}
 
-		public DatafeedConfigDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public DatafeedConfigDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 

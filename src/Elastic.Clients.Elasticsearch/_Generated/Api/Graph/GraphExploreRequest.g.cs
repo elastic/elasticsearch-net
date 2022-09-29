@@ -31,10 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>
+	public sealed partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>
 	{
 		public GraphExploreRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("connections")]
@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public GraphExploreRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public GraphExploreRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public GraphExploreRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public GraphExploreRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 		{
 			RouteValues.Required("index", indices);
@@ -276,12 +276,16 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			if (VerticesDescriptor is not null)
 			{
 				writer.WritePropertyName("vertices");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, VerticesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (VerticesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("vertices");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor<TDocument>(VerticesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (VerticesDescriptorActions is not null)
 			{
@@ -319,7 +323,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public GraphExploreRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public GraphExploreRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public GraphExploreRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public GraphExploreRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 		{
 			RouteValues.Required("index", indices);
@@ -514,12 +518,16 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			if (VerticesDescriptor is not null)
 			{
 				writer.WritePropertyName("vertices");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, VerticesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (VerticesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("vertices");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor(VerticesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (VerticesDescriptorActions is not null)
 			{

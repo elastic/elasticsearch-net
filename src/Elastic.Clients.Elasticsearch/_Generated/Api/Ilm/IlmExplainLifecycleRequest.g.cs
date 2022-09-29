@@ -34,13 +34,13 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public bool? OnlyManaged { get => Q<bool?>("only_managed"); set => Q("only_managed", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class IlmExplainLifecycleRequest : PlainRequestBase<IlmExplainLifecycleRequestParameters>
+	public sealed partial class IlmExplainLifecycleRequest : PlainRequestBase<IlmExplainLifecycleRequestParameters>
 	{
 		public IlmExplainLifecycleRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{
@@ -56,10 +56,10 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public bool? OnlyManaged { get => Q<bool?>("only_managed"); set => Q("only_managed", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class IlmExplainLifecycleRequestDescriptor<TDocument> : RequestDescriptorBase<IlmExplainLifecycleRequestDescriptor<TDocument>, IlmExplainLifecycleRequestParameters>
@@ -80,10 +80,10 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementExplainLifecycle;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public IlmExplainLifecycleRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IlmExplainLifecycleRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IlmExplainLifecycleRequestDescriptor<TDocument> OnlyErrors(bool? onlyErrors = true) => Qs("only_errors", onlyErrors);
 		public IlmExplainLifecycleRequestDescriptor<TDocument> OnlyManaged(bool? onlyManaged = true) => Qs("only_managed", onlyManaged);
-		public IlmExplainLifecycleRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public IlmExplainLifecycleRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public IlmExplainLifecycleRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 		{
 			RouteValues.Required("index", index);
@@ -109,10 +109,10 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementExplainLifecycle;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public IlmExplainLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IlmExplainLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IlmExplainLifecycleRequestDescriptor OnlyErrors(bool? onlyErrors = true) => Qs("only_errors", onlyErrors);
 		public IlmExplainLifecycleRequestDescriptor OnlyManaged(bool? onlyManaged = true) => Qs("only_managed", onlyManaged);
-		public IlmExplainLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public IlmExplainLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public IlmExplainLifecycleRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 		{
 			RouteValues.Required("index", index);

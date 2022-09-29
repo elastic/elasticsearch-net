@@ -31,13 +31,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>
+	public sealed partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutSettings;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
@@ -46,10 +46,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("persistent")]
@@ -71,8 +71,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public ClusterPutSettingsRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-		public ClusterPutSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ClusterPutSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public ClusterPutSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterPutSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		private Dictionary<string, object>? PersistentValue { get; set; }
 
 		private Dictionary<string, object>? TransientValue { get; set; }

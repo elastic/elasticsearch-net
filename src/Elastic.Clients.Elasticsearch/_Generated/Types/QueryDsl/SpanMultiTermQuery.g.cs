@@ -24,12 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SpanMultiTermQuery : QueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public sealed partial class SpanMultiTermQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "span_multi";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "span_multi";
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Match { get; set; }

@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class WatcherActionTotals
+	public sealed partial class WatcherActionTotals
 	{
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public long Total { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_ms")]

@@ -40,7 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityAuthenticateRequest, SecurityAuthenticateResponse>(request, cancellationToken);
 		}
 
-		public SecurityAuthenticateResponse Authenticate(Action<SecurityAuthenticateRequestDescriptor> configureRequest = null)
+		public SecurityAuthenticateResponse Authenticate()
+		{
+			var descriptor = new SecurityAuthenticateRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityAuthenticateRequestDescriptor, SecurityAuthenticateResponse>(descriptor);
+		}
+
+		public SecurityAuthenticateResponse Authenticate(Action<SecurityAuthenticateRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityAuthenticateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +55,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityAuthenticateRequestDescriptor, SecurityAuthenticateResponse>(descriptor);
 		}
 
-		public Task<SecurityAuthenticateResponse> AuthenticateAsync(Action<SecurityAuthenticateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityAuthenticateResponse> AuthenticateAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityAuthenticateRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityAuthenticateRequestDescriptor, SecurityAuthenticateResponse>(descriptor);
+		}
+
+		public Task<SecurityAuthenticateResponse> AuthenticateAsync(Action<SecurityAuthenticateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityAuthenticateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -68,7 +82,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityChangePasswordRequest, SecurityChangePasswordResponse>(request, cancellationToken);
 		}
 
-		public SecurityChangePasswordResponse ChangePassword(Action<SecurityChangePasswordRequestDescriptor> configureRequest = null)
+		public SecurityChangePasswordResponse ChangePassword()
+		{
+			var descriptor = new SecurityChangePasswordRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityChangePasswordRequestDescriptor, SecurityChangePasswordResponse>(descriptor);
+		}
+
+		public SecurityChangePasswordResponse ChangePassword(Action<SecurityChangePasswordRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityChangePasswordRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -76,7 +97,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityChangePasswordRequestDescriptor, SecurityChangePasswordResponse>(descriptor);
 		}
 
-		public Task<SecurityChangePasswordResponse> ChangePasswordAsync(Action<SecurityChangePasswordRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityChangePasswordResponse> ChangePasswordAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityChangePasswordRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityChangePasswordRequestDescriptor, SecurityChangePasswordResponse>(descriptor);
+		}
+
+		public Task<SecurityChangePasswordResponse> ChangePasswordAsync(Action<SecurityChangePasswordRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityChangePasswordRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -96,7 +124,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityClearApiKeyCacheRequest, SecurityClearApiKeyCacheResponse>(request, cancellationToken);
 		}
 
-		public SecurityClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Ids ids, Action<SecurityClearApiKeyCacheRequestDescriptor> configureRequest = null)
+		public SecurityClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Ids ids)
+		{
+			var descriptor = new SecurityClearApiKeyCacheRequestDescriptor(ids);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityClearApiKeyCacheRequestDescriptor, SecurityClearApiKeyCacheResponse>(descriptor);
+		}
+
+		public SecurityClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Ids ids, Action<SecurityClearApiKeyCacheRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityClearApiKeyCacheRequestDescriptor(ids);
 			configureRequest?.Invoke(descriptor);
@@ -104,7 +139,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityClearApiKeyCacheRequestDescriptor, SecurityClearApiKeyCacheResponse>(descriptor);
 		}
 
-		public Task<SecurityClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Ids ids, Action<SecurityClearApiKeyCacheRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Ids ids, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityClearApiKeyCacheRequestDescriptor(ids);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityClearApiKeyCacheRequestDescriptor, SecurityClearApiKeyCacheResponse>(descriptor);
+		}
+
+		public Task<SecurityClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Ids ids, Action<SecurityClearApiKeyCacheRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityClearApiKeyCacheRequestDescriptor(ids);
 			configureRequest?.Invoke(descriptor);
@@ -124,7 +166,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityClearCachedPrivilegesRequest, SecurityClearCachedPrivilegesResponse>(request, cancellationToken);
 		}
 
-		public SecurityClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Name application, Action<SecurityClearCachedPrivilegesRequestDescriptor> configureRequest = null)
+		public SecurityClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Name application)
+		{
+			var descriptor = new SecurityClearCachedPrivilegesRequestDescriptor(application);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityClearCachedPrivilegesRequestDescriptor, SecurityClearCachedPrivilegesResponse>(descriptor);
+		}
+
+		public SecurityClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Name application, Action<SecurityClearCachedPrivilegesRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityClearCachedPrivilegesRequestDescriptor(application);
 			configureRequest?.Invoke(descriptor);
@@ -132,7 +181,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityClearCachedPrivilegesRequestDescriptor, SecurityClearCachedPrivilegesResponse>(descriptor);
 		}
 
-		public Task<SecurityClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Action<SecurityClearCachedPrivilegesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityClearCachedPrivilegesRequestDescriptor(application);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityClearCachedPrivilegesRequestDescriptor, SecurityClearCachedPrivilegesResponse>(descriptor);
+		}
+
+		public Task<SecurityClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Action<SecurityClearCachedPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityClearCachedPrivilegesRequestDescriptor(application);
 			configureRequest?.Invoke(descriptor);
@@ -152,7 +208,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityClearCachedRealmsRequest, SecurityClearCachedRealmsResponse>(request, cancellationToken);
 		}
 
-		public SecurityClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Names realms, Action<SecurityClearCachedRealmsRequestDescriptor> configureRequest = null)
+		public SecurityClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Names realms)
+		{
+			var descriptor = new SecurityClearCachedRealmsRequestDescriptor(realms);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityClearCachedRealmsRequestDescriptor, SecurityClearCachedRealmsResponse>(descriptor);
+		}
+
+		public SecurityClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Names realms, Action<SecurityClearCachedRealmsRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityClearCachedRealmsRequestDescriptor(realms);
 			configureRequest?.Invoke(descriptor);
@@ -160,7 +223,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityClearCachedRealmsRequestDescriptor, SecurityClearCachedRealmsResponse>(descriptor);
 		}
 
-		public Task<SecurityClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Names realms, Action<SecurityClearCachedRealmsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Names realms, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityClearCachedRealmsRequestDescriptor(realms);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityClearCachedRealmsRequestDescriptor, SecurityClearCachedRealmsResponse>(descriptor);
+		}
+
+		public Task<SecurityClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Names realms, Action<SecurityClearCachedRealmsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityClearCachedRealmsRequestDescriptor(realms);
 			configureRequest?.Invoke(descriptor);
@@ -180,7 +250,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityClearCachedRolesRequest, SecurityClearCachedRolesResponse>(request, cancellationToken);
 		}
 
-		public SecurityClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Names name, Action<SecurityClearCachedRolesRequestDescriptor> configureRequest = null)
+		public SecurityClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Names name)
+		{
+			var descriptor = new SecurityClearCachedRolesRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityClearCachedRolesRequestDescriptor, SecurityClearCachedRolesResponse>(descriptor);
+		}
+
+		public SecurityClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Names name, Action<SecurityClearCachedRolesRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityClearCachedRolesRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -188,40 +265,19 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityClearCachedRolesRequestDescriptor, SecurityClearCachedRolesResponse>(descriptor);
 		}
 
-		public Task<SecurityClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Names name, Action<SecurityClearCachedRolesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityClearCachedRolesRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityClearCachedRolesRequestDescriptor, SecurityClearCachedRolesResponse>(descriptor);
+		}
+
+		public Task<SecurityClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Names name, Action<SecurityClearCachedRolesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityClearCachedRolesRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SecurityClearCachedRolesRequestDescriptor, SecurityClearCachedRolesResponse>(descriptor);
-		}
-
-		public SecurityCreateApiKeyResponse CreateApiKey(SecurityCreateApiKeyRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<SecurityCreateApiKeyRequest, SecurityCreateApiKeyResponse>(request);
-		}
-
-		public Task<SecurityCreateApiKeyResponse> CreateApiKeyAsync(SecurityCreateApiKeyRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<SecurityCreateApiKeyRequest, SecurityCreateApiKeyResponse>(request, cancellationToken);
-		}
-
-		public SecurityCreateApiKeyResponse CreateApiKey(Action<SecurityCreateApiKeyRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new SecurityCreateApiKeyRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SecurityCreateApiKeyRequestDescriptor, SecurityCreateApiKeyResponse>(descriptor);
-		}
-
-		public Task<SecurityCreateApiKeyResponse> CreateApiKeyAsync(Action<SecurityCreateApiKeyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SecurityCreateApiKeyRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SecurityCreateApiKeyRequestDescriptor, SecurityCreateApiKeyResponse>(descriptor);
 		}
 
 		public SecurityDeletePrivilegesResponse DeletePrivileges(SecurityDeletePrivilegesRequest request)
@@ -236,7 +292,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityDeletePrivilegesRequest, SecurityDeletePrivilegesResponse>(request, cancellationToken);
 		}
 
-		public SecurityDeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, Action<SecurityDeletePrivilegesRequestDescriptor> configureRequest = null)
+		public SecurityDeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name)
+		{
+			var descriptor = new SecurityDeletePrivilegesRequestDescriptor(application, name);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityDeletePrivilegesRequestDescriptor, SecurityDeletePrivilegesResponse>(descriptor);
+		}
+
+		public SecurityDeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, Action<SecurityDeletePrivilegesRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityDeletePrivilegesRequestDescriptor(application, name);
 			configureRequest?.Invoke(descriptor);
@@ -244,7 +307,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityDeletePrivilegesRequestDescriptor, SecurityDeletePrivilegesResponse>(descriptor);
 		}
 
-		public Task<SecurityDeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, Action<SecurityDeletePrivilegesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityDeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityDeletePrivilegesRequestDescriptor(application, name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityDeletePrivilegesRequestDescriptor, SecurityDeletePrivilegesResponse>(descriptor);
+		}
+
+		public Task<SecurityDeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, Action<SecurityDeletePrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityDeletePrivilegesRequestDescriptor(application, name);
 			configureRequest?.Invoke(descriptor);
@@ -264,7 +334,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityDeleteRoleMappingRequest, SecurityDeleteRoleMappingResponse>(request, cancellationToken);
 		}
 
-		public SecurityDeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Name name, Action<SecurityDeleteRoleMappingRequestDescriptor> configureRequest = null)
+		public SecurityDeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new SecurityDeleteRoleMappingRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityDeleteRoleMappingRequestDescriptor, SecurityDeleteRoleMappingResponse>(descriptor);
+		}
+
+		public SecurityDeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Name name, Action<SecurityDeleteRoleMappingRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityDeleteRoleMappingRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -272,7 +349,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityDeleteRoleMappingRequestDescriptor, SecurityDeleteRoleMappingResponse>(descriptor);
 		}
 
-		public Task<SecurityDeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, Action<SecurityDeleteRoleMappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityDeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityDeleteRoleMappingRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityDeleteRoleMappingRequestDescriptor, SecurityDeleteRoleMappingResponse>(descriptor);
+		}
+
+		public Task<SecurityDeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, Action<SecurityDeleteRoleMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityDeleteRoleMappingRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -292,7 +376,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityDeleteRoleRequest, SecurityDeleteRoleResponse>(request, cancellationToken);
 		}
 
-		public SecurityDeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Name name, Action<SecurityDeleteRoleRequestDescriptor> configureRequest = null)
+		public SecurityDeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Name name)
+		{
+			var descriptor = new SecurityDeleteRoleRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityDeleteRoleRequestDescriptor, SecurityDeleteRoleResponse>(descriptor);
+		}
+
+		public SecurityDeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Name name, Action<SecurityDeleteRoleRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityDeleteRoleRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -300,7 +391,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityDeleteRoleRequestDescriptor, SecurityDeleteRoleResponse>(descriptor);
 		}
 
-		public Task<SecurityDeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Name name, Action<SecurityDeleteRoleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityDeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityDeleteRoleRequestDescriptor(name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityDeleteRoleRequestDescriptor, SecurityDeleteRoleResponse>(descriptor);
+		}
+
+		public Task<SecurityDeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Name name, Action<SecurityDeleteRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityDeleteRoleRequestDescriptor(name);
 			configureRequest?.Invoke(descriptor);
@@ -320,7 +418,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityDeleteUserRequest, SecurityDeleteUserResponse>(request, cancellationToken);
 		}
 
-		public SecurityDeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Username username, Action<SecurityDeleteUserRequestDescriptor> configureRequest = null)
+		public SecurityDeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Username username)
+		{
+			var descriptor = new SecurityDeleteUserRequestDescriptor(username);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityDeleteUserRequestDescriptor, SecurityDeleteUserResponse>(descriptor);
+		}
+
+		public SecurityDeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Username username, Action<SecurityDeleteUserRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityDeleteUserRequestDescriptor(username);
 			configureRequest?.Invoke(descriptor);
@@ -328,7 +433,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityDeleteUserRequestDescriptor, SecurityDeleteUserResponse>(descriptor);
 		}
 
-		public Task<SecurityDeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<SecurityDeleteUserRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityDeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Username username, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityDeleteUserRequestDescriptor(username);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityDeleteUserRequestDescriptor, SecurityDeleteUserResponse>(descriptor);
+		}
+
+		public Task<SecurityDeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<SecurityDeleteUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityDeleteUserRequestDescriptor(username);
 			configureRequest?.Invoke(descriptor);
@@ -348,7 +460,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityDisableUserRequest, SecurityDisableUserResponse>(request, cancellationToken);
 		}
 
-		public SecurityDisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Username username, Action<SecurityDisableUserRequestDescriptor> configureRequest = null)
+		public SecurityDisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Username username)
+		{
+			var descriptor = new SecurityDisableUserRequestDescriptor(username);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityDisableUserRequestDescriptor, SecurityDisableUserResponse>(descriptor);
+		}
+
+		public SecurityDisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Username username, Action<SecurityDisableUserRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityDisableUserRequestDescriptor(username);
 			configureRequest?.Invoke(descriptor);
@@ -356,7 +475,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityDisableUserRequestDescriptor, SecurityDisableUserResponse>(descriptor);
 		}
 
-		public Task<SecurityDisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<SecurityDisableUserRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityDisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Username username, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityDisableUserRequestDescriptor(username);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityDisableUserRequestDescriptor, SecurityDisableUserResponse>(descriptor);
+		}
+
+		public Task<SecurityDisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<SecurityDisableUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityDisableUserRequestDescriptor(username);
 			configureRequest?.Invoke(descriptor);
@@ -376,7 +502,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityEnableUserRequest, SecurityEnableUserResponse>(request, cancellationToken);
 		}
 
-		public SecurityEnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Username username, Action<SecurityEnableUserRequestDescriptor> configureRequest = null)
+		public SecurityEnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Username username)
+		{
+			var descriptor = new SecurityEnableUserRequestDescriptor(username);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityEnableUserRequestDescriptor, SecurityEnableUserResponse>(descriptor);
+		}
+
+		public SecurityEnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Username username, Action<SecurityEnableUserRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityEnableUserRequestDescriptor(username);
 			configureRequest?.Invoke(descriptor);
@@ -384,7 +517,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityEnableUserRequestDescriptor, SecurityEnableUserResponse>(descriptor);
 		}
 
-		public Task<SecurityEnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<SecurityEnableUserRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityEnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Username username, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityEnableUserRequestDescriptor(username);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityEnableUserRequestDescriptor, SecurityEnableUserResponse>(descriptor);
+		}
+
+		public Task<SecurityEnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<SecurityEnableUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityEnableUserRequestDescriptor(username);
 			configureRequest?.Invoke(descriptor);
@@ -404,7 +544,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityGetApiKeyRequest, SecurityGetApiKeyResponse>(request, cancellationToken);
 		}
 
-		public SecurityGetApiKeyResponse GetApiKey(Action<SecurityGetApiKeyRequestDescriptor> configureRequest = null)
+		public SecurityGetApiKeyResponse GetApiKey()
+		{
+			var descriptor = new SecurityGetApiKeyRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityGetApiKeyRequestDescriptor, SecurityGetApiKeyResponse>(descriptor);
+		}
+
+		public SecurityGetApiKeyResponse GetApiKey(Action<SecurityGetApiKeyRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityGetApiKeyRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -412,7 +559,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityGetApiKeyRequestDescriptor, SecurityGetApiKeyResponse>(descriptor);
 		}
 
-		public Task<SecurityGetApiKeyResponse> GetApiKeyAsync(Action<SecurityGetApiKeyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityGetApiKeyResponse> GetApiKeyAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityGetApiKeyRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityGetApiKeyRequestDescriptor, SecurityGetApiKeyResponse>(descriptor);
+		}
+
+		public Task<SecurityGetApiKeyResponse> GetApiKeyAsync(Action<SecurityGetApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityGetApiKeyRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -432,7 +586,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityGetBuiltinPrivilegesRequest, SecurityGetBuiltinPrivilegesResponse>(request, cancellationToken);
 		}
 
-		public SecurityGetBuiltinPrivilegesResponse GetBuiltinPrivileges(Action<SecurityGetBuiltinPrivilegesRequestDescriptor> configureRequest = null)
+		public SecurityGetBuiltinPrivilegesResponse GetBuiltinPrivileges()
+		{
+			var descriptor = new SecurityGetBuiltinPrivilegesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityGetBuiltinPrivilegesRequestDescriptor, SecurityGetBuiltinPrivilegesResponse>(descriptor);
+		}
+
+		public SecurityGetBuiltinPrivilegesResponse GetBuiltinPrivileges(Action<SecurityGetBuiltinPrivilegesRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityGetBuiltinPrivilegesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -440,7 +601,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityGetBuiltinPrivilegesRequestDescriptor, SecurityGetBuiltinPrivilegesResponse>(descriptor);
 		}
 
-		public Task<SecurityGetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(Action<SecurityGetBuiltinPrivilegesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityGetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityGetBuiltinPrivilegesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityGetBuiltinPrivilegesRequestDescriptor, SecurityGetBuiltinPrivilegesResponse>(descriptor);
+		}
+
+		public Task<SecurityGetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(Action<SecurityGetBuiltinPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityGetBuiltinPrivilegesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -460,7 +628,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityGetPrivilegesRequest, SecurityGetPrivilegesResponse>(request, cancellationToken);
 		}
 
-		public SecurityGetPrivilegesResponse GetPrivileges(Action<SecurityGetPrivilegesRequestDescriptor> configureRequest = null)
+		public SecurityGetPrivilegesResponse GetPrivileges()
+		{
+			var descriptor = new SecurityGetPrivilegesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityGetPrivilegesRequestDescriptor, SecurityGetPrivilegesResponse>(descriptor);
+		}
+
+		public SecurityGetPrivilegesResponse GetPrivileges(Action<SecurityGetPrivilegesRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityGetPrivilegesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -468,7 +643,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityGetPrivilegesRequestDescriptor, SecurityGetPrivilegesResponse>(descriptor);
 		}
 
-		public Task<SecurityGetPrivilegesResponse> GetPrivilegesAsync(Action<SecurityGetPrivilegesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityGetPrivilegesResponse> GetPrivilegesAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityGetPrivilegesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityGetPrivilegesRequestDescriptor, SecurityGetPrivilegesResponse>(descriptor);
+		}
+
+		public Task<SecurityGetPrivilegesResponse> GetPrivilegesAsync(Action<SecurityGetPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityGetPrivilegesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -488,7 +670,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityGetRoleMappingRequest, SecurityGetRoleMappingResponse>(request, cancellationToken);
 		}
 
-		public SecurityGetRoleMappingResponse GetRoleMapping(Action<SecurityGetRoleMappingRequestDescriptor> configureRequest = null)
+		public SecurityGetRoleMappingResponse GetRoleMapping()
+		{
+			var descriptor = new SecurityGetRoleMappingRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityGetRoleMappingRequestDescriptor, SecurityGetRoleMappingResponse>(descriptor);
+		}
+
+		public SecurityGetRoleMappingResponse GetRoleMapping(Action<SecurityGetRoleMappingRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityGetRoleMappingRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -496,7 +685,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityGetRoleMappingRequestDescriptor, SecurityGetRoleMappingResponse>(descriptor);
 		}
 
-		public Task<SecurityGetRoleMappingResponse> GetRoleMappingAsync(Action<SecurityGetRoleMappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityGetRoleMappingResponse> GetRoleMappingAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityGetRoleMappingRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityGetRoleMappingRequestDescriptor, SecurityGetRoleMappingResponse>(descriptor);
+		}
+
+		public Task<SecurityGetRoleMappingResponse> GetRoleMappingAsync(Action<SecurityGetRoleMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityGetRoleMappingRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -516,7 +712,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityGetRoleRequest, SecurityGetRoleResponse>(request, cancellationToken);
 		}
 
-		public SecurityGetRoleResponse GetRole(Action<SecurityGetRoleRequestDescriptor> configureRequest = null)
+		public SecurityGetRoleResponse GetRole()
+		{
+			var descriptor = new SecurityGetRoleRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityGetRoleRequestDescriptor, SecurityGetRoleResponse>(descriptor);
+		}
+
+		public SecurityGetRoleResponse GetRole(Action<SecurityGetRoleRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityGetRoleRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -524,7 +727,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityGetRoleRequestDescriptor, SecurityGetRoleResponse>(descriptor);
 		}
 
-		public Task<SecurityGetRoleResponse> GetRoleAsync(Action<SecurityGetRoleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityGetRoleResponse> GetRoleAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityGetRoleRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityGetRoleRequestDescriptor, SecurityGetRoleResponse>(descriptor);
+		}
+
+		public Task<SecurityGetRoleResponse> GetRoleAsync(Action<SecurityGetRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityGetRoleRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -544,7 +754,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityGetTokenRequest, SecurityGetTokenResponse>(request, cancellationToken);
 		}
 
-		public SecurityGetTokenResponse GetToken(Action<SecurityGetTokenRequestDescriptor> configureRequest = null)
+		public SecurityGetTokenResponse GetToken()
+		{
+			var descriptor = new SecurityGetTokenRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityGetTokenRequestDescriptor, SecurityGetTokenResponse>(descriptor);
+		}
+
+		public SecurityGetTokenResponse GetToken(Action<SecurityGetTokenRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityGetTokenRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -552,7 +769,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityGetTokenRequestDescriptor, SecurityGetTokenResponse>(descriptor);
 		}
 
-		public Task<SecurityGetTokenResponse> GetTokenAsync(Action<SecurityGetTokenRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityGetTokenResponse> GetTokenAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityGetTokenRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityGetTokenRequestDescriptor, SecurityGetTokenResponse>(descriptor);
+		}
+
+		public Task<SecurityGetTokenResponse> GetTokenAsync(Action<SecurityGetTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityGetTokenRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -572,7 +796,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityGrantApiKeyRequest, SecurityGrantApiKeyResponse>(request, cancellationToken);
 		}
 
-		public SecurityGrantApiKeyResponse GrantApiKey(Action<SecurityGrantApiKeyRequestDescriptor> configureRequest = null)
+		public SecurityGrantApiKeyResponse GrantApiKey()
+		{
+			var descriptor = new SecurityGrantApiKeyRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityGrantApiKeyRequestDescriptor, SecurityGrantApiKeyResponse>(descriptor);
+		}
+
+		public SecurityGrantApiKeyResponse GrantApiKey(Action<SecurityGrantApiKeyRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityGrantApiKeyRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -580,7 +811,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityGrantApiKeyRequestDescriptor, SecurityGrantApiKeyResponse>(descriptor);
 		}
 
-		public Task<SecurityGrantApiKeyResponse> GrantApiKeyAsync(Action<SecurityGrantApiKeyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityGrantApiKeyResponse> GrantApiKeyAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityGrantApiKeyRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityGrantApiKeyRequestDescriptor, SecurityGrantApiKeyResponse>(descriptor);
+		}
+
+		public Task<SecurityGrantApiKeyResponse> GrantApiKeyAsync(Action<SecurityGrantApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityGrantApiKeyRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -600,7 +838,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityHasPrivilegesRequest, SecurityHasPrivilegesResponse>(request, cancellationToken);
 		}
 
-		public SecurityHasPrivilegesResponse HasPrivileges(Action<SecurityHasPrivilegesRequestDescriptor> configureRequest = null)
+		public SecurityHasPrivilegesResponse HasPrivileges()
+		{
+			var descriptor = new SecurityHasPrivilegesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityHasPrivilegesRequestDescriptor, SecurityHasPrivilegesResponse>(descriptor);
+		}
+
+		public SecurityHasPrivilegesResponse HasPrivileges(Action<SecurityHasPrivilegesRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityHasPrivilegesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -608,7 +853,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityHasPrivilegesRequestDescriptor, SecurityHasPrivilegesResponse>(descriptor);
 		}
 
-		public Task<SecurityHasPrivilegesResponse> HasPrivilegesAsync(Action<SecurityHasPrivilegesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityHasPrivilegesResponse> HasPrivilegesAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityHasPrivilegesRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityHasPrivilegesRequestDescriptor, SecurityHasPrivilegesResponse>(descriptor);
+		}
+
+		public Task<SecurityHasPrivilegesResponse> HasPrivilegesAsync(Action<SecurityHasPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityHasPrivilegesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -628,7 +880,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityInvalidateApiKeyRequest, SecurityInvalidateApiKeyResponse>(request, cancellationToken);
 		}
 
-		public SecurityInvalidateApiKeyResponse InvalidateApiKey(Action<SecurityInvalidateApiKeyRequestDescriptor> configureRequest = null)
+		public SecurityInvalidateApiKeyResponse InvalidateApiKey()
+		{
+			var descriptor = new SecurityInvalidateApiKeyRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityInvalidateApiKeyRequestDescriptor, SecurityInvalidateApiKeyResponse>(descriptor);
+		}
+
+		public SecurityInvalidateApiKeyResponse InvalidateApiKey(Action<SecurityInvalidateApiKeyRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityInvalidateApiKeyRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -636,7 +895,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityInvalidateApiKeyRequestDescriptor, SecurityInvalidateApiKeyResponse>(descriptor);
 		}
 
-		public Task<SecurityInvalidateApiKeyResponse> InvalidateApiKeyAsync(Action<SecurityInvalidateApiKeyRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityInvalidateApiKeyResponse> InvalidateApiKeyAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityInvalidateApiKeyRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityInvalidateApiKeyRequestDescriptor, SecurityInvalidateApiKeyResponse>(descriptor);
+		}
+
+		public Task<SecurityInvalidateApiKeyResponse> InvalidateApiKeyAsync(Action<SecurityInvalidateApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityInvalidateApiKeyRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -656,7 +922,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityInvalidateTokenRequest, SecurityInvalidateTokenResponse>(request, cancellationToken);
 		}
 
-		public SecurityInvalidateTokenResponse InvalidateToken(Action<SecurityInvalidateTokenRequestDescriptor> configureRequest = null)
+		public SecurityInvalidateTokenResponse InvalidateToken()
+		{
+			var descriptor = new SecurityInvalidateTokenRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityInvalidateTokenRequestDescriptor, SecurityInvalidateTokenResponse>(descriptor);
+		}
+
+		public SecurityInvalidateTokenResponse InvalidateToken(Action<SecurityInvalidateTokenRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityInvalidateTokenRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -664,7 +937,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityInvalidateTokenRequestDescriptor, SecurityInvalidateTokenResponse>(descriptor);
 		}
 
-		public Task<SecurityInvalidateTokenResponse> InvalidateTokenAsync(Action<SecurityInvalidateTokenRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityInvalidateTokenResponse> InvalidateTokenAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityInvalidateTokenRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityInvalidateTokenRequestDescriptor, SecurityInvalidateTokenResponse>(descriptor);
+		}
+
+		public Task<SecurityInvalidateTokenResponse> InvalidateTokenAsync(Action<SecurityInvalidateTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityInvalidateTokenRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -684,7 +964,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityPutUserRequest, SecurityPutUserResponse>(request, cancellationToken);
 		}
 
-		public SecurityPutUserResponse PutUser(Elastic.Clients.Elasticsearch.Username username, Action<SecurityPutUserRequestDescriptor> configureRequest = null)
+		public SecurityPutUserResponse PutUser(Elastic.Clients.Elasticsearch.Username username)
+		{
+			var descriptor = new SecurityPutUserRequestDescriptor(username);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityPutUserRequestDescriptor, SecurityPutUserResponse>(descriptor);
+		}
+
+		public SecurityPutUserResponse PutUser(Elastic.Clients.Elasticsearch.Username username, Action<SecurityPutUserRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityPutUserRequestDescriptor(username);
 			configureRequest?.Invoke(descriptor);
@@ -692,7 +979,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityPutUserRequestDescriptor, SecurityPutUserResponse>(descriptor);
 		}
 
-		public Task<SecurityPutUserResponse> PutUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<SecurityPutUserRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecurityPutUserResponse> PutUserAsync(Elastic.Clients.Elasticsearch.Username username, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityPutUserRequestDescriptor(username);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityPutUserRequestDescriptor, SecurityPutUserResponse>(descriptor);
+		}
+
+		public Task<SecurityPutUserResponse> PutUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<SecurityPutUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityPutUserRequestDescriptor(username);
 			configureRequest?.Invoke(descriptor);
@@ -712,7 +1006,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecurityQueryApiKeysRequest, SecurityQueryApiKeysResponse>(request, cancellationToken);
 		}
 
-		public SecurityQueryApiKeysResponse QueryApiKeys(Action<SecurityQueryApiKeysRequestDescriptor> configureRequest = null)
+		public SecurityQueryApiKeysResponse QueryApiKeys()
+		{
+			var descriptor = new SecurityQueryApiKeysRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityQueryApiKeysRequestDescriptor, SecurityQueryApiKeysResponse>(descriptor);
+		}
+
+		public SecurityQueryApiKeysResponse QueryApiKeys(Action<SecurityQueryApiKeysRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecurityQueryApiKeysRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -720,12 +1021,35 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecurityQueryApiKeysRequestDescriptor, SecurityQueryApiKeysResponse>(descriptor);
 		}
 
-		public Task<SecurityQueryApiKeysResponse> QueryApiKeysAsync(Action<SecurityQueryApiKeysRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public SecurityQueryApiKeysResponse QueryApiKeys<TDocument>(Action<SecurityQueryApiKeysRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new SecurityQueryApiKeysRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityQueryApiKeysRequestDescriptor<TDocument>, SecurityQueryApiKeysResponse>(descriptor);
+		}
+
+		public Task<SecurityQueryApiKeysResponse> QueryApiKeysAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityQueryApiKeysRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityQueryApiKeysRequestDescriptor, SecurityQueryApiKeysResponse>(descriptor);
+		}
+
+		public Task<SecurityQueryApiKeysResponse> QueryApiKeysAsync(Action<SecurityQueryApiKeysRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecurityQueryApiKeysRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SecurityQueryApiKeysRequestDescriptor, SecurityQueryApiKeysResponse>(descriptor);
+		}
+
+		public Task<SecurityQueryApiKeysResponse> QueryApiKeysAsync<TDocument>(Action<SecurityQueryApiKeysRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityQueryApiKeysRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityQueryApiKeysRequestDescriptor<TDocument>, SecurityQueryApiKeysResponse>(descriptor);
 		}
 
 		public SecuritySamlAuthenticateResponse SamlAuthenticate(SecuritySamlAuthenticateRequest request)
@@ -740,7 +1064,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecuritySamlAuthenticateRequest, SecuritySamlAuthenticateResponse>(request, cancellationToken);
 		}
 
-		public SecuritySamlAuthenticateResponse SamlAuthenticate(Action<SecuritySamlAuthenticateRequestDescriptor> configureRequest = null)
+		public SecuritySamlAuthenticateResponse SamlAuthenticate()
+		{
+			var descriptor = new SecuritySamlAuthenticateRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecuritySamlAuthenticateRequestDescriptor, SecuritySamlAuthenticateResponse>(descriptor);
+		}
+
+		public SecuritySamlAuthenticateResponse SamlAuthenticate(Action<SecuritySamlAuthenticateRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecuritySamlAuthenticateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -748,7 +1079,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecuritySamlAuthenticateRequestDescriptor, SecuritySamlAuthenticateResponse>(descriptor);
 		}
 
-		public Task<SecuritySamlAuthenticateResponse> SamlAuthenticateAsync(Action<SecuritySamlAuthenticateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecuritySamlAuthenticateResponse> SamlAuthenticateAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecuritySamlAuthenticateRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecuritySamlAuthenticateRequestDescriptor, SecuritySamlAuthenticateResponse>(descriptor);
+		}
+
+		public Task<SecuritySamlAuthenticateResponse> SamlAuthenticateAsync(Action<SecuritySamlAuthenticateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecuritySamlAuthenticateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -768,7 +1106,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecuritySamlCompleteLogoutRequest, SecuritySamlCompleteLogoutResponse>(request, cancellationToken);
 		}
 
-		public SecuritySamlCompleteLogoutResponse SamlCompleteLogout(Action<SecuritySamlCompleteLogoutRequestDescriptor> configureRequest = null)
+		public SecuritySamlCompleteLogoutResponse SamlCompleteLogout()
+		{
+			var descriptor = new SecuritySamlCompleteLogoutRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecuritySamlCompleteLogoutRequestDescriptor, SecuritySamlCompleteLogoutResponse>(descriptor);
+		}
+
+		public SecuritySamlCompleteLogoutResponse SamlCompleteLogout(Action<SecuritySamlCompleteLogoutRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecuritySamlCompleteLogoutRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -776,7 +1121,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecuritySamlCompleteLogoutRequestDescriptor, SecuritySamlCompleteLogoutResponse>(descriptor);
 		}
 
-		public Task<SecuritySamlCompleteLogoutResponse> SamlCompleteLogoutAsync(Action<SecuritySamlCompleteLogoutRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecuritySamlCompleteLogoutResponse> SamlCompleteLogoutAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecuritySamlCompleteLogoutRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecuritySamlCompleteLogoutRequestDescriptor, SecuritySamlCompleteLogoutResponse>(descriptor);
+		}
+
+		public Task<SecuritySamlCompleteLogoutResponse> SamlCompleteLogoutAsync(Action<SecuritySamlCompleteLogoutRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecuritySamlCompleteLogoutRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -796,7 +1148,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecuritySamlInvalidateRequest, SecuritySamlInvalidateResponse>(request, cancellationToken);
 		}
 
-		public SecuritySamlInvalidateResponse SamlInvalidate(Action<SecuritySamlInvalidateRequestDescriptor> configureRequest = null)
+		public SecuritySamlInvalidateResponse SamlInvalidate()
+		{
+			var descriptor = new SecuritySamlInvalidateRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecuritySamlInvalidateRequestDescriptor, SecuritySamlInvalidateResponse>(descriptor);
+		}
+
+		public SecuritySamlInvalidateResponse SamlInvalidate(Action<SecuritySamlInvalidateRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecuritySamlInvalidateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -804,7 +1163,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecuritySamlInvalidateRequestDescriptor, SecuritySamlInvalidateResponse>(descriptor);
 		}
 
-		public Task<SecuritySamlInvalidateResponse> SamlInvalidateAsync(Action<SecuritySamlInvalidateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecuritySamlInvalidateResponse> SamlInvalidateAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecuritySamlInvalidateRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecuritySamlInvalidateRequestDescriptor, SecuritySamlInvalidateResponse>(descriptor);
+		}
+
+		public Task<SecuritySamlInvalidateResponse> SamlInvalidateAsync(Action<SecuritySamlInvalidateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecuritySamlInvalidateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -824,7 +1190,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecuritySamlLogoutRequest, SecuritySamlLogoutResponse>(request, cancellationToken);
 		}
 
-		public SecuritySamlLogoutResponse SamlLogout(Action<SecuritySamlLogoutRequestDescriptor> configureRequest = null)
+		public SecuritySamlLogoutResponse SamlLogout()
+		{
+			var descriptor = new SecuritySamlLogoutRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecuritySamlLogoutRequestDescriptor, SecuritySamlLogoutResponse>(descriptor);
+		}
+
+		public SecuritySamlLogoutResponse SamlLogout(Action<SecuritySamlLogoutRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecuritySamlLogoutRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -832,7 +1205,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecuritySamlLogoutRequestDescriptor, SecuritySamlLogoutResponse>(descriptor);
 		}
 
-		public Task<SecuritySamlLogoutResponse> SamlLogoutAsync(Action<SecuritySamlLogoutRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecuritySamlLogoutResponse> SamlLogoutAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecuritySamlLogoutRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecuritySamlLogoutRequestDescriptor, SecuritySamlLogoutResponse>(descriptor);
+		}
+
+		public Task<SecuritySamlLogoutResponse> SamlLogoutAsync(Action<SecuritySamlLogoutRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecuritySamlLogoutRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -852,7 +1232,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecuritySamlPrepareAuthenticationRequest, SecuritySamlPrepareAuthenticationResponse>(request, cancellationToken);
 		}
 
-		public SecuritySamlPrepareAuthenticationResponse SamlPrepareAuthentication(Action<SecuritySamlPrepareAuthenticationRequestDescriptor> configureRequest = null)
+		public SecuritySamlPrepareAuthenticationResponse SamlPrepareAuthentication()
+		{
+			var descriptor = new SecuritySamlPrepareAuthenticationRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequest<SecuritySamlPrepareAuthenticationRequestDescriptor, SecuritySamlPrepareAuthenticationResponse>(descriptor);
+		}
+
+		public SecuritySamlPrepareAuthenticationResponse SamlPrepareAuthentication(Action<SecuritySamlPrepareAuthenticationRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecuritySamlPrepareAuthenticationRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -860,7 +1247,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecuritySamlPrepareAuthenticationRequestDescriptor, SecuritySamlPrepareAuthenticationResponse>(descriptor);
 		}
 
-		public Task<SecuritySamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(Action<SecuritySamlPrepareAuthenticationRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecuritySamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecuritySamlPrepareAuthenticationRequestDescriptor();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecuritySamlPrepareAuthenticationRequestDescriptor, SecuritySamlPrepareAuthenticationResponse>(descriptor);
+		}
+
+		public Task<SecuritySamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(Action<SecuritySamlPrepareAuthenticationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecuritySamlPrepareAuthenticationRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -880,7 +1274,14 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequestAsync<SecuritySamlServiceProviderMetadataRequest, SecuritySamlServiceProviderMetadataResponse>(request, cancellationToken);
 		}
 
-		public SecuritySamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Name realm_name, Action<SecuritySamlServiceProviderMetadataRequestDescriptor> configureRequest = null)
+		public SecuritySamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Name realm_name)
+		{
+			var descriptor = new SecuritySamlServiceProviderMetadataRequestDescriptor(realm_name);
+			descriptor.BeforeRequest();
+			return DoRequest<SecuritySamlServiceProviderMetadataRequestDescriptor, SecuritySamlServiceProviderMetadataResponse>(descriptor);
+		}
+
+		public SecuritySamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Name realm_name, Action<SecuritySamlServiceProviderMetadataRequestDescriptor> configureRequest)
 		{
 			var descriptor = new SecuritySamlServiceProviderMetadataRequestDescriptor(realm_name);
 			configureRequest?.Invoke(descriptor);
@@ -888,12 +1289,77 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return DoRequest<SecuritySamlServiceProviderMetadataRequestDescriptor, SecuritySamlServiceProviderMetadataResponse>(descriptor);
 		}
 
-		public Task<SecuritySamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Name realm_name, Action<SecuritySamlServiceProviderMetadataRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SecuritySamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Name realm_name, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecuritySamlServiceProviderMetadataRequestDescriptor(realm_name);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecuritySamlServiceProviderMetadataRequestDescriptor, SecuritySamlServiceProviderMetadataResponse>(descriptor);
+		}
+
+		public Task<SecuritySamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Name realm_name, Action<SecuritySamlServiceProviderMetadataRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SecuritySamlServiceProviderMetadataRequestDescriptor(realm_name);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SecuritySamlServiceProviderMetadataRequestDescriptor, SecuritySamlServiceProviderMetadataResponse>(descriptor);
+		}
+
+		public SecurityUpdateApiKeyResponse UpdateApiKey(SecurityUpdateApiKeyRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<SecurityUpdateApiKeyRequest, SecurityUpdateApiKeyResponse>(request);
+		}
+
+		public Task<SecurityUpdateApiKeyResponse> UpdateApiKeyAsync(SecurityUpdateApiKeyRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<SecurityUpdateApiKeyRequest, SecurityUpdateApiKeyResponse>(request, cancellationToken);
+		}
+
+		public SecurityUpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor(id);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityUpdateApiKeyRequestDescriptor, SecurityUpdateApiKeyResponse>(descriptor);
+		}
+
+		public SecurityUpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id, Action<SecurityUpdateApiKeyRequestDescriptor> configureRequest)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityUpdateApiKeyRequestDescriptor, SecurityUpdateApiKeyResponse>(descriptor);
+		}
+
+		public SecurityUpdateApiKeyResponse UpdateApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SecurityUpdateApiKeyRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SecurityUpdateApiKeyRequestDescriptor<TDocument>, SecurityUpdateApiKeyResponse>(descriptor);
+		}
+
+		public Task<SecurityUpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor(id);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityUpdateApiKeyRequestDescriptor, SecurityUpdateApiKeyResponse>(descriptor);
+		}
+
+		public Task<SecurityUpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, Action<SecurityUpdateApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityUpdateApiKeyRequestDescriptor, SecurityUpdateApiKeyResponse>(descriptor);
+		}
+
+		public Task<SecurityUpdateApiKeyResponse> UpdateApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SecurityUpdateApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SecurityUpdateApiKeyRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SecurityUpdateApiKeyRequestDescriptor<TDocument>, SecurityUpdateApiKeyResponse>(descriptor);
 		}
 	}
 }

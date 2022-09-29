@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class PatternCaptureTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class PatternCaptureTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("patterns")]
@@ -32,11 +32,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
-		public bool PreserveOriginal { get; set; }
+		public bool? PreserveOriginal { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "pattern_capture";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class PatternCaptureTokenFilterDescriptor : SerializableDescriptorBase<PatternCaptureTokenFilterDescriptor>, IBuildableDescriptor<PatternCaptureTokenFilter>
@@ -48,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		private IEnumerable<string> PatternsValue { get; set; }
 
-		private bool PreserveOriginalValue { get; set; }
+		private bool? PreserveOriginalValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
@@ -58,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			return Self;
 		}
 
-		public PatternCaptureTokenFilterDescriptor PreserveOriginal(bool preserveOriginal = true)
+		public PatternCaptureTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
 		{
 			PreserveOriginalValue = preserveOriginal;
 			return Self;
@@ -75,8 +78,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			writer.WriteStartObject();
 			writer.WritePropertyName("patterns");
 			JsonSerializer.Serialize(writer, PatternsValue, options);
-			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(PreserveOriginalValue);
+			if (PreserveOriginalValue.HasValue)
+			{
+				writer.WritePropertyName("preserve_original");
+				writer.WriteBooleanValue(PreserveOriginalValue.Value);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("pattern_capture");
 			if (VersionValue is not null)

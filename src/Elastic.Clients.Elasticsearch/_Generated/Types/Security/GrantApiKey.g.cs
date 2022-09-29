@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class GrantApiKey
+	public sealed partial class GrantApiKey
 	{
 		[JsonInclude]
 		[JsonPropertyName("expiration")]
-		public Elastic.Clients.Elasticsearch.Time? Expiration { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Expiration { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("name")]
@@ -46,13 +46,13 @@ namespace Elastic.Clients.Elasticsearch.Security
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? ExpirationValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? ExpirationValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
 
 		private IEnumerable<Dictionary<string, object>>? RoleDescriptorsValue { get; set; }
 
-		public GrantApiKeyDescriptor Expiration(Elastic.Clients.Elasticsearch.Time? expiration)
+		public GrantApiKeyDescriptor Expiration(Elastic.Clients.Elasticsearch.Duration? expiration)
 		{
 			ExpirationValue = expiration;
 			return Self;

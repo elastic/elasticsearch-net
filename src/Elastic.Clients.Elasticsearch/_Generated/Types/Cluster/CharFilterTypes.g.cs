@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class CharFilterTypes
+	public sealed partial class CharFilterTypes
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer_types")]
@@ -45,10 +45,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		[JsonInclude]
 		[JsonPropertyName("built_in_tokenizers")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInTokenizers { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("char_filter_types")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> CharFilterTypesTemp { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter_types")]

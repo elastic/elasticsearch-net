@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class AnalysisConfig
+	public sealed partial class AnalysisConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("bucket_span")]
-		public string BucketSpan { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration BucketSpan { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("categorization_analyzer")]
@@ -52,11 +52,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("latency")]
-		public Elastic.Clients.Elasticsearch.Time? Latency { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Latency { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("model_prune_window")]
-		public Elastic.Clients.Elasticsearch.Time? ModelPruneWindow { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? ModelPruneWindow { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("multivariate_by_fields")]
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<DetectorDescriptor<TDocument>>[] DetectorsDescriptorActions { get; set; }
 
-		private string BucketSpanValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration BucketSpanValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzer? CategorizationAnalyzerValue { get; set; }
 
@@ -96,9 +96,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Field>? InfluencersValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? LatencyValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? LatencyValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? ModelPruneWindowValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? ModelPruneWindowValue { get; set; }
 
 		private bool? MultivariateByFieldsValue { get; set; }
 
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public AnalysisConfigDescriptor<TDocument> BucketSpan(string bucketSpan)
+		public AnalysisConfigDescriptor<TDocument> BucketSpan(Elastic.Clients.Elasticsearch.Duration bucketSpan)
 		{
 			BucketSpanValue = bucketSpan;
 			return Self;
@@ -182,13 +182,13 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public AnalysisConfigDescriptor<TDocument> Latency(Elastic.Clients.Elasticsearch.Time? latency)
+		public AnalysisConfigDescriptor<TDocument> Latency(Elastic.Clients.Elasticsearch.Duration? latency)
 		{
 			LatencyValue = latency;
 			return Self;
 		}
 
-		public AnalysisConfigDescriptor<TDocument> ModelPruneWindow(Elastic.Clients.Elasticsearch.Time? modelPruneWindow)
+		public AnalysisConfigDescriptor<TDocument> ModelPruneWindow(Elastic.Clients.Elasticsearch.Duration? modelPruneWindow)
 		{
 			ModelPruneWindowValue = modelPruneWindow;
 			return Self;
@@ -242,12 +242,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (DetectorsDescriptor is not null)
 			{
 				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (DetectorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DetectorDescriptor<TDocument>(DetectorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (DetectorsDescriptorActions is not null)
 			{
@@ -351,7 +355,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<DetectorDescriptor>[] DetectorsDescriptorActions { get; set; }
 
-		private string BucketSpanValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration BucketSpanValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzer? CategorizationAnalyzerValue { get; set; }
 
@@ -361,9 +365,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.Field>? InfluencersValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? LatencyValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? LatencyValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? ModelPruneWindowValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? ModelPruneWindowValue { get; set; }
 
 		private bool? MultivariateByFieldsValue { get; set; }
 
@@ -411,7 +415,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public AnalysisConfigDescriptor BucketSpan(string bucketSpan)
+		public AnalysisConfigDescriptor BucketSpan(Elastic.Clients.Elasticsearch.Duration bucketSpan)
 		{
 			BucketSpanValue = bucketSpan;
 			return Self;
@@ -453,13 +457,13 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public AnalysisConfigDescriptor Latency(Elastic.Clients.Elasticsearch.Time? latency)
+		public AnalysisConfigDescriptor Latency(Elastic.Clients.Elasticsearch.Duration? latency)
 		{
 			LatencyValue = latency;
 			return Self;
 		}
 
-		public AnalysisConfigDescriptor ModelPruneWindow(Elastic.Clients.Elasticsearch.Time? modelPruneWindow)
+		public AnalysisConfigDescriptor ModelPruneWindow(Elastic.Clients.Elasticsearch.Duration? modelPruneWindow)
 		{
 			ModelPruneWindowValue = modelPruneWindow;
 			return Self;
@@ -519,12 +523,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (DetectorsDescriptor is not null)
 			{
 				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (DetectorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("detectors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DetectorDescriptor(DetectorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (DetectorsDescriptorActions is not null)
 			{

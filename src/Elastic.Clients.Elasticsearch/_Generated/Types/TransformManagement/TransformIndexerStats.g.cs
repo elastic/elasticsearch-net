@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class TransformIndexerStats
+	public sealed partial class TransformIndexerStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("delete_time_in_ms")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? DeleteTimeInMs { get; init; }
+		public long? DeleteTimeInMs { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("documents_deleted")]

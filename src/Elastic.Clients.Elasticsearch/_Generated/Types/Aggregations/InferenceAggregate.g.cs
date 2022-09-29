@@ -24,11 +24,19 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class InferenceAggregate : AggregateBase
+	public sealed partial class InferenceAggregate : IAggregate
 	{
+		[JsonInclude]
+		[JsonPropertyName("data")]
+		public Dictionary<string, object> Data { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("feature_importance")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>? FeatureImportance { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("top_classes")]

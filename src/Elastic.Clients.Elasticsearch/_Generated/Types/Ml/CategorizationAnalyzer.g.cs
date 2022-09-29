@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class CategorizationAnalyzer : Union<string?, Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzerDefinition?>
+	public partial class CategorizationAnalyzer : Union<string, Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzerDefinition>
 	{
-		public CategorizationAnalyzer(string? item) : base(item)
+		public CategorizationAnalyzer(string categorizationAnalyzer) : base(categorizationAnalyzer)
 		{
 		}
 
-		public CategorizationAnalyzer(Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzerDefinition? item) : base(item)
+		public CategorizationAnalyzer(Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzerDefinition categorizationAnalyzerDefinition) : base(categorizationAnalyzerDefinition)
 		{
 		}
 	}

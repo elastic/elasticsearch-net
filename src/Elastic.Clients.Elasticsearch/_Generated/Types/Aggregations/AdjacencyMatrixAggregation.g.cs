@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("filters"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?>(ref reader, options);
 						if (value is not null)
 						{
@@ -80,7 +81,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -113,15 +113,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(AdjacencyMatrixAggregationConverter))]
-	public partial class AdjacencyMatrixAggregation : BucketAggregationBase
+	public sealed partial class AdjacencyMatrixAggregation : Aggregation
 	{
-		public AdjacencyMatrixAggregation(string name) : base(name)
+		public AdjacencyMatrixAggregation(string name) => Name = name;
+		internal AdjacencyMatrixAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("filters")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
 		public Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filters { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
 	}
 
 	public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : SerializableDescriptorBase<AdjacencyMatrixAggregationDescriptor<TDocument>>

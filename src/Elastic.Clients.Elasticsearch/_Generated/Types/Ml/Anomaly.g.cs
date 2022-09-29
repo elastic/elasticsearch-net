@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class Anomaly
+	public sealed partial class Anomaly
 	{
 		[JsonInclude]
 		[JsonPropertyName("actual")]
@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("bucket_span")]
-		public Elastic.Clients.Elasticsearch.Time BucketSpan { get; init; }
+		public long BucketSpan { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("by_field_name")]
@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]
-		public Elastic.Clients.Elasticsearch.EpochMillis Timestamp { get; init; }
+		public long Timestamp { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("typical")]

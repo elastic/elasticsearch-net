@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("type"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -80,7 +81,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -113,14 +113,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(ChildrenAggregationConverter))]
-	public partial class ChildrenAggregation : BucketAggregationBase
+	public sealed partial class ChildrenAggregation : Aggregation
 	{
-		public ChildrenAggregation(string name) : base(name)
+		public ChildrenAggregation(string name) => Name = name;
+		internal ChildrenAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
 		public string? Type { get; set; }
 	}
 

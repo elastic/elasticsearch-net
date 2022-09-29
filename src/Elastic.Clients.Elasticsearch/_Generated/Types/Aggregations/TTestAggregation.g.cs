@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("a"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TestPopulation?>(ref reader, options);
 						if (value is not null)
 						{
@@ -52,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("b"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TestPopulation?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("type"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TTestType?>(ref reader, options);
 						if (value is not null)
 						{
@@ -91,7 +94,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -130,22 +132,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(TTestAggregationConverter))]
-	public partial class TTestAggregation : AggregationBase
+	public sealed partial class TTestAggregation : Aggregation
 	{
-		public TTestAggregation(string name) : base(name)
+		public TTestAggregation(string name) => Name = name;
+		internal TTestAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("a")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("b")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
 		public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 	}
 

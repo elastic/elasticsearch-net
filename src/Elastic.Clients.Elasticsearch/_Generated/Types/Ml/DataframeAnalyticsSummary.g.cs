@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalyticsSummary
+	public sealed partial class DataframeAnalyticsSummary
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_lazy_start")]
@@ -37,6 +37,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonInclude]
 		[JsonPropertyName("analyzed_fields")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("authorization")]
+		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsAuthorization? Authorization { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("create_time")]

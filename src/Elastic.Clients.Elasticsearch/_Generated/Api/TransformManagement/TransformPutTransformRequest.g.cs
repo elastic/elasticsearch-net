@@ -31,10 +31,10 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class TransformPutTransformRequest : PlainRequestBase<TransformPutTransformRequestParameters>
+	public sealed partial class TransformPutTransformRequest : PlainRequestBase<TransformPutTransformRequestParameters>
 	{
 		public TransformPutTransformRequest(Elastic.Clients.Elasticsearch.Id transform_id) : base(r => r.Required("transform_id", transform_id))
 		{
@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("dest")]
@@ -59,7 +59,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("frequency")]
-		public Elastic.Clients.Elasticsearch.Time? Frequency { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("latest")]
@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public TransformPutTransformRequestDescriptor<TDocument> DeferValidation(bool? deferValidation = true) => Qs("defer_validation", deferValidation);
-		public TransformPutTransformRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public TransformPutTransformRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public TransformPutTransformRequestDescriptor<TDocument> TransformId(Elastic.Clients.Elasticsearch.Id transform_id)
 		{
 			RouteValues.Required("transform_id", transform_id);
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		private Action<DestinationDescriptor> DestDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? FrequencyValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.TransformManagement.Pivot? PivotValue { get; set; }
 
@@ -292,7 +292,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			return Self;
 		}
 
-		public TransformPutTransformRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Time? frequency)
+		public TransformPutTransformRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 		{
 			FrequencyValue = frequency;
 			return Self;
@@ -498,7 +498,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public TransformPutTransformRequestDescriptor DeferValidation(bool? deferValidation = true) => Qs("defer_validation", deferValidation);
-		public TransformPutTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public TransformPutTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public TransformPutTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id transform_id)
 		{
 			RouteValues.Required("transform_id", transform_id);
@@ -539,7 +539,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		private Action<DestinationDescriptor> DestDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? FrequencyValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.TransformManagement.Pivot? PivotValue { get; set; }
 
@@ -685,7 +685,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			return Self;
 		}
 
-		public TransformPutTransformRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Time? frequency)
+		public TransformPutTransformRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 		{
 			FrequencyValue = frequency;
 			return Self;

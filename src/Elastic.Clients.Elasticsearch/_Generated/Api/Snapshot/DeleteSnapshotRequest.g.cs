@@ -28,10 +28,10 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 	public sealed class DeleteSnapshotRequestParameters : RequestParameters<DeleteSnapshotRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class DeleteSnapshotRequest : PlainRequestBase<DeleteSnapshotRequestParameters>
+	public sealed partial class DeleteSnapshotRequest : PlainRequestBase<DeleteSnapshotRequestParameters>
 	{
 		public DeleteSnapshotRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public sealed partial class DeleteSnapshotRequestDescriptor : RequestDescriptorBase<DeleteSnapshotRequestDescriptor, DeleteSnapshotRequestParameters>
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotDelete;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
-		public DeleteSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public DeleteSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public DeleteSnapshotRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name repository)
 		{
 			RouteValues.Required("repository", repository);

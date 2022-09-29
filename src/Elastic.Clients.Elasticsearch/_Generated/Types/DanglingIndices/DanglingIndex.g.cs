@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.DanglingIndices
 {
-	public partial class DanglingIndex
+	public sealed partial class DanglingIndex
 	{
 		[JsonInclude]
 		[JsonPropertyName("creation_date_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis CreationDateMillis { get; init; }
+		public long CreationDateMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_name")]

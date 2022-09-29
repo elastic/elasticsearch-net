@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class NlpRobertaTokenizationConfig : ITokenizationConfigContainerVariant
+	public sealed partial class NlpRobertaTokenizationConfig
 	{
-		[JsonIgnore]
-		string ITokenizationConfigContainerVariant.TokenizationConfigContainerVariantName => "roberta";
 		[JsonInclude]
 		[JsonPropertyName("add_prefix_space")]
 		public bool? AddPrefixSpace { get; set; }

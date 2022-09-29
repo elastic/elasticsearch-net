@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Tasks
 {
-	public partial class TaskInfo
+	public sealed partial class TaskInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("action")]
@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 
 		[JsonInclude]
 		[JsonPropertyName("running_time")]
-		public string? RunningTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? RunningTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("running_time_in_nanos")]

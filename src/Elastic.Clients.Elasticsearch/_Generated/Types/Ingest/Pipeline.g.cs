@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class Pipeline
+	public sealed partial class Pipeline
 	{
 		[JsonInclude]
 		[JsonPropertyName("description")]
@@ -160,12 +160,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (OnFailureDescriptor is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorAction is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(OnFailureDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorActions is not null)
 			{
@@ -187,12 +191,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (ProcessorsDescriptor is not null)
 			{
 				writer.WritePropertyName("processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, ProcessorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (ProcessorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(ProcessorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (ProcessorsDescriptorActions is not null)
 			{
@@ -344,12 +352,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (OnFailureDescriptor is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorAction is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(OnFailureDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorActions is not null)
 			{
@@ -371,12 +383,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (ProcessorsDescriptor is not null)
 			{
 				writer.WritePropertyName("processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, ProcessorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (ProcessorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(ProcessorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (ProcessorsDescriptorActions is not null)
 			{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class CheckpointStats
+	public sealed partial class CheckpointStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("checkpoint")]
@@ -36,18 +36,18 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("time_upper_bound")]
-		public string? TimeUpperBound { get; init; }
+		public DateTimeOffset? TimeUpperBound { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_upper_bound_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? TimeUpperBoundMillis { get; init; }
+		public long? TimeUpperBoundMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]
-		public string? Timestamp { get; init; }
+		public DateTimeOffset? Timestamp { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? TimestampMillis { get; init; }
+		public long? TimestampMillis { get; init; }
 	}
 }

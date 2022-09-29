@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class JobForecastStatistics
+	public sealed partial class JobForecastStatistics
 	{
 		[JsonInclude]
 		[JsonPropertyName("forecasted_jobs")]

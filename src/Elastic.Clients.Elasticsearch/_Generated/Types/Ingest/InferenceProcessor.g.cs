@@ -24,13 +24,19 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class InferenceProcessor : ProcessorBase, IProcessorContainerVariant
+	public sealed partial class InferenceProcessor
 	{
-		[JsonIgnore]
-		string IProcessorContainerVariant.ProcessorContainerVariantName => "inference";
 		[JsonInclude]
 		[JsonPropertyName("field_map")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMap { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("if")]
+		public string? If { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_failure")]
+		public bool? IgnoreFailure { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("inference_config")]
@@ -39,6 +45,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		[JsonInclude]
 		[JsonPropertyName("model_id")]
 		public Elastic.Clients.Elasticsearch.Id ModelId { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("on_failure")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailure { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tag")]
+		public string? Tag { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("target_field")]
@@ -202,12 +216,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (OnFailureDescriptor is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorAction is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(OnFailureDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorActions is not null)
 			{
@@ -421,12 +439,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (OnFailureDescriptor is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorAction is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(OnFailureDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorActions is not null)
 			{

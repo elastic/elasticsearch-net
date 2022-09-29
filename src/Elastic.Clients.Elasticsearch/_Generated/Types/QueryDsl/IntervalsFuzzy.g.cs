@@ -24,12 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class IntervalsFuzzy : IIntervalsContainerVariant, IIntervalsQueryVariant
+	public sealed partial class IntervalsFuzzy
 	{
-		[JsonIgnore]
-		string IIntervalsContainerVariant.IntervalsContainerVariantName => "fuzzy";
-		[JsonIgnore]
-		string IIntervalsQueryVariant.IntervalsQueryVariantName => "fuzzy";
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }

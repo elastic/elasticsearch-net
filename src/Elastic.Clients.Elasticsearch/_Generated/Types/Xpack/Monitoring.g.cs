@@ -24,11 +24,19 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class Monitoring : Base
+	public sealed partial class Monitoring
 	{
+		[JsonInclude]
+		[JsonPropertyName("available")]
+		public bool Available { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("collection_enabled")]
 		public bool CollectionEnabled { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("enabled_exporters")]

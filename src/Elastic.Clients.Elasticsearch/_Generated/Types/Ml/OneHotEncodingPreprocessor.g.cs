@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class OneHotEncodingPreprocessor : IPreprocessorVariant
+	public sealed partial class OneHotEncodingPreprocessor
 	{
-		[JsonIgnore]
-		string IPreprocessorVariant.PreprocessorVariantName => "one_hot_encoding";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public string Field { get; set; }

@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class CircleProcessor : ProcessorBase, IProcessorContainerVariant
+	public sealed partial class CircleProcessor
 	{
-		[JsonIgnore]
-		string IProcessorContainerVariant.ProcessorContainerVariantName => "circle";
 		[JsonInclude]
 		[JsonPropertyName("error_distance")]
 		public double ErrorDistance { get; set; }
@@ -37,12 +35,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("if")]
+		public string? If { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_failure")]
+		public bool? IgnoreFailure { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("ignore_missing")]
 		public bool IgnoreMissing { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("on_failure")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailure { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("shape_type")]
 		public Elastic.Clients.Elasticsearch.Ingest.ShapeType ShapeType { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tag")]
+		public string? Tag { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("target_field")]
@@ -182,12 +196,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (OnFailureDescriptor is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorAction is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<TDocument>(OnFailureDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorActions is not null)
 			{
@@ -383,12 +401,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (OnFailureDescriptor is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorAction is not null)
 			{
 				writer.WritePropertyName("on_failure");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(OnFailureDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (OnFailureDescriptorActions is not null)
 			{

@@ -156,9 +156,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls LicensePostStartTrial = new ApiUrls(new[] { "/_license/start_trial" });
 		internal static ApiUrls LogstashDeletePipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
 		internal static ApiUrls LogstashPutPipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
-		internal static ApiUrls MigrationDeprecations = new ApiUrls(new[] { "/_migration/deprecations", "/{index}/_migration/deprecations" });
-		internal static ApiUrls MigrationGetFeatureUpgradeStatus = new ApiUrls(new[] { "/_migration/system_features" });
-		internal static ApiUrls MigrationPostFeatureUpgrade = new ApiUrls(new[] { "/_migration/system_features" });
 		internal static ApiUrls MachineLearningCloseJob = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/_close" });
 		internal static ApiUrls MachineLearningDeleteCalendarEvent = new ApiUrls(new[] { "/_ml/calendars/{calendar_id}/events/{event_id}" });
 		internal static ApiUrls MachineLearningDeleteCalendar = new ApiUrls(new[] { "/_ml/calendars/{calendar_id}" });
@@ -215,6 +212,8 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls MachineLearningUpgradeJobSnapshot = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_upgrade" });
 		internal static ApiUrls MachineLearningValidateDetector = new ApiUrls(new[] { "/_ml/anomaly_detectors/_validate/detector" });
 		internal static ApiUrls MachineLearningValidate = new ApiUrls(new[] { "/_ml/anomaly_detectors/_validate" });
+		internal static ApiUrls NoNamespaceMget = new ApiUrls(new[] { "/_mget", "/{index}/_mget" });
+		internal static ApiUrls NoNamespaceMsearch = new ApiUrls(new[] { "/_msearch", "/{index}/_msearch" });
 		internal static ApiUrls NodesHotThreads = new ApiUrls(new[] { "/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads" });
 		internal static ApiUrls NodesInfo = new ApiUrls(new[] { "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}" });
 		internal static ApiUrls NodesReloadSecureSettings = new ApiUrls(new[] { "/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings" });
@@ -240,7 +239,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls SecurityClearCachedPrivileges = new ApiUrls(new[] { "/_security/privilege/{application}/_clear_cache" });
 		internal static ApiUrls SecurityClearCachedRealms = new ApiUrls(new[] { "/_security/realm/{realms}/_clear_cache" });
 		internal static ApiUrls SecurityClearCachedRoles = new ApiUrls(new[] { "/_security/role/{name}/_clear_cache" });
-		internal static ApiUrls SecurityCreateApiKey = new ApiUrls(new[] { "/_security/api_key" });
 		internal static ApiUrls SecurityDeletePrivileges = new ApiUrls(new[] { "/_security/privilege/{application}/{name}" });
 		internal static ApiUrls SecurityDeleteRoleMapping = new ApiUrls(new[] { "/_security/role_mapping/{name}" });
 		internal static ApiUrls SecurityDeleteRole = new ApiUrls(new[] { "/_security/role/{name}" });
@@ -265,6 +263,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls SecuritySamlLogout = new ApiUrls(new[] { "/_security/saml/logout" });
 		internal static ApiUrls SecuritySamlPrepareAuthentication = new ApiUrls(new[] { "/_security/saml/prepare" });
 		internal static ApiUrls SecuritySamlServiceProviderMetadata = new ApiUrls(new[] { "/_security/saml/metadata/{realm_name}" });
+		internal static ApiUrls SecurityUpdateApiKey = new ApiUrls(new[] { "/_security/api_key/{id}" });
 		internal static ApiUrls SnapshotLifecycleManagementDeleteLifecycle = new ApiUrls(new[] { "/_slm/policy/{policy_id}" });
 		internal static ApiUrls SnapshotLifecycleManagementExecuteLifecycle = new ApiUrls(new[] { "/_slm/policy/{policy_id}/_execute" });
 		internal static ApiUrls SnapshotLifecycleManagementExecuteRetention = new ApiUrls(new[] { "/_slm/_execute_retention" });

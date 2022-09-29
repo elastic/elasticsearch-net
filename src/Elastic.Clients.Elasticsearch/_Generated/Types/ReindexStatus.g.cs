@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ReindexStatus
+	public sealed partial class ReindexStatus
 	{
 		[JsonInclude]
 		[JsonPropertyName("batches")]
@@ -51,8 +51,16 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Retries Retries { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("throttled")]
+		public Elastic.Clients.Elasticsearch.Duration? Throttled { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("throttled_millis")]
 		public long ThrottledMillis { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("throttled_until")]
+		public Elastic.Clients.Elasticsearch.Duration? ThrottledUntil { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("throttled_until_millis")]

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class IndexingStats
+	public sealed partial class IndexingStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("delete_current")]
@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("delete_time")]
-		public string? DeleteTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? DeleteTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("delete_time_in_millis")]
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("index_time")]
-		public string? IndexTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? IndexTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_time_in_millis")]
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("throttle_time")]
-		public string? ThrottleTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? ThrottleTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("throttle_time_in_millis")]

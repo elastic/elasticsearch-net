@@ -24,23 +24,23 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.License
 {
-	public partial class LicenseInformation
+	public sealed partial class LicenseInformation
 	{
 		[JsonInclude]
 		[JsonPropertyName("expiry_date")]
-		public string? ExpiryDate { get; init; }
+		public DateTimeOffset? ExpiryDate { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("expiry_date_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? ExpiryDateInMillis { get; init; }
+		public long? ExpiryDateInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("issue_date")]
-		public string IssueDate { get; init; }
+		public DateTimeOffset IssueDate { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("issue_date_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis IssueDateInMillis { get; init; }
+		public long IssueDateInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("issued_to")]
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.License
 
 		[JsonInclude]
 		[JsonPropertyName("start_date_in_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis StartDateInMillis { get; init; }
+		public long StartDateInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("status")]

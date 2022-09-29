@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 	}
 
-	public partial class MlGetModelSnapshotsRequest : PlainRequestBase<MlGetModelSnapshotsRequestParameters>
+	public sealed partial class MlGetModelSnapshotsRequest : PlainRequestBase<MlGetModelSnapshotsRequestParameters>
 	{
 		public MlGetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.Id job_id, Elastic.Clients.Elasticsearch.Id? snapshot_id) : base(r => r.Required("job_id", job_id).Optional("snapshot_id", snapshot_id))
 		{
@@ -59,7 +59,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("end")]
-		public Elastic.Clients.Elasticsearch.Time? End { get; set; }
+		public DateTimeOffset? End { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("page")]
@@ -71,7 +71,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("start")]
-		public Elastic.Clients.Elasticsearch.Time? Start { get; set; }
+		public DateTimeOffset? Start { get; set; }
 	}
 
 	public sealed partial class MlGetModelSnapshotsRequestDescriptor<TDocument> : RequestDescriptorBase<MlGetModelSnapshotsRequestDescriptor<TDocument>, MlGetModelSnapshotsRequestParameters>
@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private bool? DescValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? EndValue { get; set; }
+		private DateTimeOffset? EndValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ml.Page? PageValue { get; set; }
 
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Elastic.Clients.Elasticsearch.Field? SortValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? StartValue { get; set; }
+		private DateTimeOffset? StartValue { get; set; }
 
 		public MlGetModelSnapshotsRequestDescriptor<TDocument> Desc(bool? desc = true)
 		{
@@ -126,7 +126,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlGetModelSnapshotsRequestDescriptor<TDocument> End(Elastic.Clients.Elasticsearch.Time? end)
+		public MlGetModelSnapshotsRequestDescriptor<TDocument> End(DateTimeOffset? end)
 		{
 			EndValue = end;
 			return Self;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlGetModelSnapshotsRequestDescriptor<TDocument> Start(Elastic.Clients.Elasticsearch.Time? start)
+		public MlGetModelSnapshotsRequestDescriptor<TDocument> Start(DateTimeOffset? start)
 		{
 			StartValue = start;
 			return Self;
@@ -255,7 +255,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private bool? DescValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? EndValue { get; set; }
+		private DateTimeOffset? EndValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ml.Page? PageValue { get; set; }
 
@@ -265,7 +265,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Elastic.Clients.Elasticsearch.Field? SortValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? StartValue { get; set; }
+		private DateTimeOffset? StartValue { get; set; }
 
 		public MlGetModelSnapshotsRequestDescriptor Desc(bool? desc = true)
 		{
@@ -273,7 +273,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlGetModelSnapshotsRequestDescriptor End(Elastic.Clients.Elasticsearch.Time? end)
+		public MlGetModelSnapshotsRequestDescriptor End(DateTimeOffset? end)
 		{
 			EndValue = end;
 			return Self;
@@ -321,7 +321,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlGetModelSnapshotsRequestDescriptor Start(Elastic.Clients.Elasticsearch.Time? start)
+		public MlGetModelSnapshotsRequestDescriptor Start(DateTimeOffset? start)
 		{
 			StartValue = start;
 			return Self;

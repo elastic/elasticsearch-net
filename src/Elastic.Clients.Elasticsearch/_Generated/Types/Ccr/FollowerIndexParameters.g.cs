@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public partial class FollowerIndexParameters
+	public sealed partial class FollowerIndexParameters
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_outstanding_read_requests")]
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		[JsonInclude]
 		[JsonPropertyName("max_retry_delay")]
-		public Elastic.Clients.Elasticsearch.Time MaxRetryDelay { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration MaxRetryDelay { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_write_buffer_count")]
@@ -64,6 +64,6 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		[JsonInclude]
 		[JsonPropertyName("read_poll_timeout")]
-		public Elastic.Clients.Elasticsearch.Time ReadPollTimeout { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration ReadPollTimeout { get; init; }
 	}
 }

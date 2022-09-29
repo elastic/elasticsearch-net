@@ -28,10 +28,10 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed class ScriptRequestParameters : RequestParameters<ScriptRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class ScriptRequest : PlainRequestBase<ScriptRequestParameters>
+	public sealed partial class ScriptRequest : PlainRequestBase<ScriptRequestParameters>
 	{
 		public ScriptRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public sealed partial class ScriptRequestDescriptor<TDocument> : RequestDescriptorBase<ScriptRequestDescriptor<TDocument>, ScriptRequestParameters>
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public ScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ScriptRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public ScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);

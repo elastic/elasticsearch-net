@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class CgroupCpu
+	public sealed partial class CgroupCpu
 	{
 		[JsonInclude]
 		[JsonPropertyName("cfs_period_micros")]

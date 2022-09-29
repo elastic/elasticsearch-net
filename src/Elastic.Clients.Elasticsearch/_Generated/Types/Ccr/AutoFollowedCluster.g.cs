@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public partial class AutoFollowedCluster
+	public sealed partial class AutoFollowedCluster
 	{
 		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
@@ -36,6 +36,6 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		[JsonInclude]
 		[JsonPropertyName("time_since_last_check_millis")]
-		public string TimeSinceLastCheckMillis { get; init; }
+		public long TimeSinceLastCheckMillis { get; init; }
 	}
 }

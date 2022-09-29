@@ -24,12 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class IntervalsAllOf : IIntervalsContainerVariant, IIntervalsQueryVariant
+	public sealed partial class IntervalsAllOf
 	{
-		[JsonIgnore]
-		string IIntervalsContainerVariant.IntervalsContainerVariantName => "all_of";
-		[JsonIgnore]
-		string IIntervalsQueryVariant.IntervalsQueryVariantName => "all_of";
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
@@ -150,12 +146,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (IntervalsDescriptor is not null)
 			{
 				writer.WritePropertyName("intervals");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, IntervalsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (IntervalsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("intervals");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor<TDocument>(IntervalsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (IntervalsDescriptorActions is not null)
 			{
@@ -309,12 +309,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (IntervalsDescriptor is not null)
 			{
 				writer.WritePropertyName("intervals");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, IntervalsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (IntervalsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("intervals");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor(IntervalsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (IntervalsDescriptorActions is not null)
 			{

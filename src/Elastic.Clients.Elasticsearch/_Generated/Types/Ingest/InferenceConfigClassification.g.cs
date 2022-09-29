@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class InferenceConfigClassification : IInferenceConfigVariant
+	public sealed partial class InferenceConfigClassification
 	{
-		[JsonIgnore]
-		string IInferenceConfigVariant.InferenceConfigVariantName => "classification";
 		[JsonInclude]
 		[JsonPropertyName("num_top_classes")]
 		public int? NumTopClasses { get; set; }

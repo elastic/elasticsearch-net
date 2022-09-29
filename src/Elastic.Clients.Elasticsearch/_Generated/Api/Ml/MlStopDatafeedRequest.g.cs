@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlStopDatafeedRequest : PlainRequestBase<MlStopDatafeedRequestParameters>
+	public sealed partial class MlStopDatafeedRequest : PlainRequestBase<MlStopDatafeedRequestParameters>
 	{
 		public MlStopDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
 		{
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("timeout")]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 	}
 
 	public sealed partial class MlStopDatafeedRequestDescriptor : RequestDescriptorBase<MlStopDatafeedRequestDescriptor, MlStopDatafeedRequestParameters>
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private bool? ForceValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? TimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 		public MlStopDatafeedRequestDescriptor AllowNoMatch(bool? allowNoMatch = true)
 		{
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlStopDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout)
+		public MlStopDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 		{
 			TimeoutValue = timeout;
 			return Self;

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class FieldCollapse
+	public sealed partial class FieldCollapse
 	{
 		[JsonInclude]
 		[JsonPropertyName("collapse")]
@@ -168,12 +168,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (InnerHitsDescriptor is not null)
 			{
 				writer.WritePropertyName("inner_hits");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (InnerHitsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inner_hits");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (InnerHitsDescriptorActions is not null)
 			{
@@ -335,12 +339,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (InnerHitsDescriptor is not null)
 			{
 				writer.WritePropertyName("inner_hits");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (InnerHitsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inner_hits");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new InnerHitsDescriptor(InnerHitsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (InnerHitsDescriptorActions is not null)
 			{

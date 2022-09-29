@@ -24,15 +24,18 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class TruncateTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class TruncateTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("length")]
-		public int Length { get; set; }
+		public int? Length { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "truncate";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class TruncateTokenFilterDescriptor : SerializableDescriptorBase<TruncateTokenFilterDescriptor>, IBuildableDescriptor<TruncateTokenFilter>
@@ -42,11 +45,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private int LengthValue { get; set; }
+		private int? LengthValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public TruncateTokenFilterDescriptor Length(int length)
+		public TruncateTokenFilterDescriptor Length(int? length)
 		{
 			LengthValue = length;
 			return Self;
@@ -61,8 +64,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("length");
-			writer.WriteNumberValue(LengthValue);
+			if (LengthValue.HasValue)
+			{
+				writer.WritePropertyName("length");
+				writer.WriteNumberValue(LengthValue.Value);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("truncate");
 			if (VersionValue is not null)

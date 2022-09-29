@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Source
+	public sealed partial class Source
 	{
 		[JsonInclude]
 		[JsonPropertyName("_source")]
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -56,7 +56,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public SortCollection? Sort { get; set; }
+		[JsonConverter(typeof(SortConverter))]
+		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 	}
 
 	public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptorBase<SourceDescriptor<TDocument>>
@@ -78,12 +79,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor<TDocument> SortDescriptor { get; set; }
-
-		private Action<SortDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
@@ -94,9 +89,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<RemoteSourceDescriptor> RemoteDescriptorAction { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -146,30 +143,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SourceDescriptor<TDocument> Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public SourceDescriptor<TDocument> Sort(SortDescriptor<TDocument> descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public SourceDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
-			return Self;
-		}
-
 		public SourceDescriptor<TDocument> SourceFields(Elastic.Clients.Elasticsearch.Fields? sourceFields)
 		{
 			SourceFieldsValue = sourceFields;
@@ -212,15 +185,21 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SourceDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public SourceDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 
 		public SourceDescriptor<TDocument> Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public SourceDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -259,22 +238,6 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, SliceValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor<TDocument>(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceFieldsValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -311,6 +274,12 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteNumberValue(SizeValue.Value);
 			}
 
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -334,12 +303,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
 
-		private SortCollection? SortValue { get; set; }
-
-		private SortDescriptor SortDescriptor { get; set; }
-
-		private Action<SortDescriptor> SortDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
@@ -350,9 +313,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<RemoteSourceDescriptor> RemoteDescriptorAction { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		private int? SizeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 		public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -399,30 +364,6 @@ namespace Elastic.Clients.Elasticsearch
 			SliceValue = null;
 			SliceDescriptor = null;
 			SliceDescriptorAction = configure;
-			return Self;
-		}
-
-		public SourceDescriptor Sort(SortCollection? sort)
-		{
-			SortDescriptor = null;
-			SortDescriptorAction = null;
-			SortValue = sort;
-			return Self;
-		}
-
-		public SourceDescriptor Sort(SortDescriptor descriptor)
-		{
-			SortValue = null;
-			SortDescriptorAction = null;
-			SortDescriptor = descriptor;
-			return Self;
-		}
-
-		public SourceDescriptor Sort(Action<SortDescriptor> configure)
-		{
-			SortValue = null;
-			SortDescriptor = null;
-			SortDescriptorAction = configure;
 			return Self;
 		}
 
@@ -474,15 +415,21 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SourceDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public SourceDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 
 		public SourceDescriptor Size(int? size)
 		{
 			SizeValue = size;
+			return Self;
+		}
+
+		public SourceDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+		{
+			SortValue = sort;
 			return Self;
 		}
 
@@ -521,22 +468,6 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, SliceValue, options);
 			}
 
-			if (SortDescriptor is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortDescriptor, options);
-			}
-			else if (SortDescriptorAction is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor(SortDescriptorAction), options);
-			}
-			else if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, SortValue, options);
-			}
-
 			if (SourceFieldsValue is not null)
 			{
 				writer.WritePropertyName("_source");
@@ -571,6 +502,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 			}
 
 			writer.WriteEndObject();

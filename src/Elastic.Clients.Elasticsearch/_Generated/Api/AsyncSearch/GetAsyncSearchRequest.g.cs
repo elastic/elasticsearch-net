@@ -28,16 +28,16 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 	public sealed class GetAsyncSearchRequestParameters : RequestParameters<GetAsyncSearchRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Time?>("keep_alive"); set => Q("keep_alive", value); }
+		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	}
 
-	public partial class GetAsyncSearchRequest : PlainRequestBase<GetAsyncSearchRequestParameters>
+	public sealed partial class GetAsyncSearchRequest : PlainRequestBase<GetAsyncSearchRequestParameters>
 	{
 		public GetAsyncSearchRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
@@ -47,13 +47,13 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Time?>("keep_alive"); set => Q("keep_alive", value); }
+		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	}
 
 	public sealed partial class GetAsyncSearchRequestDescriptor<TDocument> : RequestDescriptorBase<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchRequestParameters>
@@ -70,9 +70,9 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchGet;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public GetAsyncSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
+		public GetAsyncSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 		public GetAsyncSearchRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-		public GetAsyncSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+		public GetAsyncSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
 		public GetAsyncSearchRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);
@@ -98,9 +98,9 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchGet;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public GetAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
+		public GetAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 		public GetAsyncSearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-		public GetAsyncSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+		public GetAsyncSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
 		public GetAsyncSearchRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);

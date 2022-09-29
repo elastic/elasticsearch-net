@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterNetworkTypes
+	public sealed partial class ClusterNetworkTypes
 	{
 		[JsonInclude]
 		[JsonPropertyName("http_types")]

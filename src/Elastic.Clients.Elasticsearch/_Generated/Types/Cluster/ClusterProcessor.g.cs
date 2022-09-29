@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterProcessor
+	public sealed partial class ClusterProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]
@@ -37,6 +37,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		[JsonInclude]
 		[JsonPropertyName("failed")]
 		public long Failed { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("time")]
+		public Elastic.Clients.Elasticsearch.Duration? Time { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_in_millis")]

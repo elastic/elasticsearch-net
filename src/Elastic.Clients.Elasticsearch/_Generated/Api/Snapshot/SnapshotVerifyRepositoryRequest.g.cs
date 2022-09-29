@@ -28,13 +28,13 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 	public sealed class SnapshotVerifyRepositoryRequestParameters : RequestParameters<SnapshotVerifyRepositoryRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class SnapshotVerifyRepositoryRequest : PlainRequestBase<SnapshotVerifyRepositoryRequestParameters>
+	public sealed partial class SnapshotVerifyRepositoryRequest : PlainRequestBase<SnapshotVerifyRepositoryRequestParameters>
 	{
 		public SnapshotVerifyRepositoryRequest(Elastic.Clients.Elasticsearch.Name repository) : base(r => r.Required("repository", repository))
 		{
@@ -44,10 +44,10 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class SnapshotVerifyRepositoryRequestDescriptor : RequestDescriptorBase<SnapshotVerifyRepositoryRequestDescriptor, SnapshotVerifyRepositoryRequestParameters>
@@ -64,8 +64,8 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotVerifyRepository;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
-		public SnapshotVerifyRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public SnapshotVerifyRepositoryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public SnapshotVerifyRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public SnapshotVerifyRepositoryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public SnapshotVerifyRepositoryRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name repository)
 		{
 			RouteValues.Required("repository", repository);

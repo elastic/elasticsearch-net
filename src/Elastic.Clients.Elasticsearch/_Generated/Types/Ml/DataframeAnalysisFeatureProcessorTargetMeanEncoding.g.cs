@@ -24,10 +24,8 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding : IDataframeAnalysisFeatureProcessorVariant
+	public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding
 	{
-		[JsonIgnore]
-		string IDataframeAnalysisFeatureProcessorVariant.DataframeAnalysisFeatureProcessorVariantName => "target_mean_encoding";
 		[JsonInclude]
 		[JsonPropertyName("default_value")]
 		public int DefaultValue { get; set; }

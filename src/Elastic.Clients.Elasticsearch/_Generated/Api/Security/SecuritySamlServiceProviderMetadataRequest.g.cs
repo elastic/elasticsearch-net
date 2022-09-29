@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 	}
 
-	public partial class SecuritySamlServiceProviderMetadataRequest : PlainRequestBase<SecuritySamlServiceProviderMetadataRequestParameters>
+	public sealed partial class SecuritySamlServiceProviderMetadataRequest : PlainRequestBase<SecuritySamlServiceProviderMetadataRequestParameters>
 	{
 		public SecuritySamlServiceProviderMetadataRequest(Elastic.Clients.Elasticsearch.Name realm_name) : base(r => r.Required("realm_name", realm_name))
 		{

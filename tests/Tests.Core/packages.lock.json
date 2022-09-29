@@ -13,11 +13,11 @@
       },
       "Elastic.Elasticsearch.Xunit": {
         "type": "Direct",
-        "requested": "[0.3.1, )",
-        "resolved": "0.3.1",
-        "contentHash": "DuTpxy14mOL02e7D24caI/Kq1Dum3+GCFJNefzT7xMvLgMCE2lRl5kQMxt9uFow0tQ/qa88MJmf5l9Llk7yOaw==",
+        "requested": "[0.3.5, )",
+        "resolved": "0.3.5",
+        "contentHash": "gSnvLb6Uv8N1e0hrQK2msoD+F4nZg47Iru8XY8bdi/J3rntflEb93dnYiTSQEeLQ17Y3QFlpdo08U3AH618YPg==",
         "dependencies": {
-          "Elastic.Elasticsearch.Ephemeral": "0.3.1",
+          "Elastic.Elasticsearch.Ephemeral": "0.3.5",
           "xunit": "2.4.1"
         }
       },
@@ -44,11 +44,11 @@
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
-        "requested": "[17.0.0, )",
-        "resolved": "17.0.0",
-        "contentHash": "fJcnMY3jX1MzJvhGvUWauRhU5eQsOaHdwlrcnI3NabBhbi8WLAkMFI8d0YnewA/+b9q/U7vbhp8Xmh1vJ05FYQ==",
+        "requested": "[17.2.0, )",
+        "resolved": "17.2.0",
+        "contentHash": "kYmkDYbcDd+jNvmMH4TMtgHjsUYbIsWENM2VcjB0X7TawXbehL5I8OIsu2TgFS/nQCgZE94InrqMxrm7WDy+Lw==",
         "dependencies": {
-          "Microsoft.CodeCoverage": "17.0.0"
+          "Microsoft.CodeCoverage": "17.2.0"
         }
       },
       "Microsoft.NETFramework.ReferenceAssemblies": {
@@ -81,13 +81,13 @@
       },
       "xunit": {
         "type": "Direct",
-        "requested": "[2.4.1, )",
-        "resolved": "2.4.1",
-        "contentHash": "XNR3Yz9QTtec16O0aKcO6+baVNpXmOnPUxDkCY97J+8krUYxPvXT1szYYEUdKk4sB8GOI2YbAjRIOm8ZnXRfzQ==",
+        "requested": "[2.4.2, )",
+        "resolved": "2.4.2",
+        "contentHash": "6Mj73Ont3zj2CJuoykVJfE0ZmRwn7C+pTuRP8c4bnaaTFjwNG6tGe0prJ1yIbMe9AHrpDys63ctWacSsFJWK/w==",
         "dependencies": {
-          "xunit.analyzers": "0.10.0",
-          "xunit.assert": "[2.4.1]",
-          "xunit.core": "[2.4.1]"
+          "xunit.analyzers": "1.0.0",
+          "xunit.assert": "2.4.2",
+          "xunit.core": "[2.4.2]"
         }
       },
       "Bogus": {
@@ -97,27 +97,27 @@
       },
       "Elastic.Elasticsearch.Ephemeral": {
         "type": "Transitive",
-        "resolved": "0.3.1",
-        "contentHash": "n7QRXJsCqKznk0HhH+ayAByh3Z6FiBra2kGW6Llm7IuFU8s1aub9ynsLjOPF+Kt6oF41uGtlgH16e2BKlaKbNw==",
+        "resolved": "0.3.5",
+        "contentHash": "X5nGiegs1pDAAG96gF1ELlrinNqgIIUE0LzAhHDcSbjyRzS9Apo01x+MTdvVvYJzGo/oRQZZn/tN/AVx2s72nA==",
         "dependencies": {
-          "Elastic.Elasticsearch.Managed": "0.3.1",
+          "Elastic.Elasticsearch.Managed": "0.3.5",
           "SharpZipLib.NETStandard": "1.0.7"
         }
       },
       "Elastic.Elasticsearch.Managed": {
         "type": "Transitive",
-        "resolved": "0.3.1",
-        "contentHash": "kEQe4lJdY6iInC487RLXFl3hKJhnVkvZActfYefDvEZpxz8k9+41R3vvLD2ouO1LEpj9INOZHt5VG92axizXvA==",
+        "resolved": "0.3.5",
+        "contentHash": "fA1pZoh3J88i2C+oWMsMugivVnD+1B1LvY89njwAJneptBNopQr9c8prgQj/de5+iYSpyIC9tjoQ99wFLZHdVQ==",
         "dependencies": {
-          "Elastic.Stack.ArtifactsApi": "0.3.1",
+          "Elastic.Stack.ArtifactsApi": "0.3.5",
           "Proc": "0.6.1",
           "System.Net.Http": "4.3.1"
         }
       },
       "Elastic.Stack.ArtifactsApi": {
         "type": "Transitive",
-        "resolved": "0.3.1",
-        "contentHash": "/zrZNOCCk6Nach1gAk8FkRqgNxlx9BFHchSGOZLQWdU3FwQ80uV+06oXCu4klX07Wma8P3AHBHrpb1LByn62XQ==",
+        "resolved": "0.3.5",
+        "contentHash": "cJiTtjJOYZJpGgaMOCfrrpxcWieqDK+CobXNeTISczq8orqhWF16wVCZT6iNvtho+Y0pU9C80qEgOPkzKYlPKA==",
         "dependencies": {
           "SemanticVersioning": "0.8.0",
           "System.Text.Json": "4.6.0"
@@ -142,8 +142,8 @@
       },
       "Microsoft.CodeCoverage": {
         "type": "Transitive",
-        "resolved": "17.0.0",
-        "contentHash": "+B+09FPYBtf+cXfZOPIgpnP5mzLq5QdlBo+JEFy9CdqBaWHWE/YMY0Mos9uDsZhcgFegJm9GigAgMyqBZyfq+Q=="
+        "resolved": "17.2.0",
+        "contentHash": "MsKhJmwIfHxNDbTIlgQy29UpWSWPpbZOQPhQ7xalRy+ABnl8/neFHZGzSP3XlpW2dKAXHTFrtIcKzW/kopY2Bg=="
       },
       "Microsoft.CSharp": {
         "type": "Transitive",
@@ -264,8 +264,8 @@
       },
       "Newtonsoft.Json": {
         "type": "Transitive",
-        "resolved": "12.0.1",
-        "contentHash": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg=="
+        "resolved": "13.0.1",
+        "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl": {
         "type": "Transitive",
@@ -1490,30 +1490,30 @@
       },
       "xunit.analyzers": {
         "type": "Transitive",
-        "resolved": "0.10.0",
-        "contentHash": "4/IDFCJfIeg6bix9apmUtIMwvOsiwqdEexeO/R2D4GReIGPLIRODTpId/l4LRSrAJk9lEO3Zx1H0Zx6uohJDNg=="
+        "resolved": "1.0.0",
+        "contentHash": "BeO8hEgs/c8Ls2647fPfieMngncvf0D0xYNDfIO59MolxtCtVjFRd6SRc+7tj8VMqkVOuJcnc9eh4ngI2cAmLQ=="
       },
       "xunit.assert": {
         "type": "Transitive",
-        "resolved": "2.4.1",
-        "contentHash": "O/Oe0BS5RmSsM+LQOb041TzuPo5MdH2Rov+qXGS37X+KFG1Hxz7kopYklM5+1Y+tRGeXrOx5+Xne1RuqLFQoyQ==",
+        "resolved": "2.4.2",
+        "contentHash": "pxJISOFjn2XTTi1mcDCkRZrTFb9OtRRCtx2kZFNF51GdReLr1ls2rnyxvAS4JO247K3aNtflvh5Q0346K5BROA==",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
         }
       },
       "xunit.core": {
         "type": "Transitive",
-        "resolved": "2.4.1",
-        "contentHash": "Zsj5OMU6JasNGERXZy8s72+pcheG6Q15atS5XpZXqAtULuyQiQ6XNnUsp1gyfC6WgqScqMvySiEHmHcOG6Eg0Q==",
+        "resolved": "2.4.2",
+        "contentHash": "KB4yGCxNqIVyekhJLXtKSEq6BaXVp/JO3mbGVE1hxypZTLEe7h+sTbAhpA+yZW2dPtXTuiW+C1B2oxxHEkrmOw==",
         "dependencies": {
-          "xunit.extensibility.core": "[2.4.1]",
-          "xunit.extensibility.execution": "[2.4.1]"
+          "xunit.extensibility.core": "[2.4.2]",
+          "xunit.extensibility.execution": "[2.4.2]"
         }
       },
       "xunit.extensibility.core": {
         "type": "Transitive",
-        "resolved": "2.4.1",
-        "contentHash": "yKZKm/8QNZnBnGZFD9SewkllHBiK0DThybQD/G4PiAmQjKtEZyHi6ET70QPU9KtSMJGRYS6Syk7EyR2EVDU4Kg==",
+        "resolved": "2.4.2",
+        "contentHash": "W1BoXTIN1C6kpVSMw25huSet25ky6IAQUNovu3zGOGN/jWnbgSoTyCrlIhmXSg0tH5nEf8q7h3OjNHOjyu5PfA==",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "xunit.abstractions": "2.0.3"
@@ -1521,40 +1521,40 @@
       },
       "xunit.extensibility.execution": {
         "type": "Transitive",
-        "resolved": "2.4.1",
-        "contentHash": "7e/1jqBpcb7frLkB6XDrHCGXAbKN4Rtdb88epYxCSRQuZDRW8UtTfdTEVpdTl8s4T56e07hOBVd4G0OdCxIY2A==",
+        "resolved": "2.4.2",
+        "contentHash": "CZmgcKkwpyo8FlupZdWpJCryrAOWLh1FBPG6gmVZuPQkGQsim/oL4PcP4nfrC2hHgXUFtluvaJ0Sp9PQKUMNpg==",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "xunit.extensibility.core": "[2.4.1]"
+          "xunit.extensibility.core": "[2.4.2]"
         }
       },
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "0.3.2"
+          "Elastic.Transport": "[0.3.2, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Clients.Elasticsearch": "8.0.0",
-          "Newtonsoft.Json": "12.0.1"
+          "Elastic.Clients.Elasticsearch": "[8.0.0, )",
+          "Newtonsoft.Json": "[13.0.1, )"
         }
       },
       "tests.configuration": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Elasticsearch.Managed": "0.3.1"
+          "Elastic.Elasticsearch.Managed": "[0.3.5, )"
         }
       },
       "tests.domain": {
         "type": "Project",
         "dependencies": {
-          "Bogus": "22.1.2",
-          "Elastic.Clients.Elasticsearch": "8.0.0",
-          "Elastic.Elasticsearch.Managed": "0.3.1",
-          "Newtonsoft.Json": "12.0.1",
-          "Tests.Configuration": "8.0.0"
+          "Bogus": "[22.1.2, )",
+          "Elastic.Clients.Elasticsearch": "[8.0.0, )",
+          "Elastic.Elasticsearch.Managed": "[0.3.5, )",
+          "Newtonsoft.Json": "[13.0.1, )",
+          "Tests.Configuration": "[8.0.0, )"
         }
       }
     }

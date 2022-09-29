@@ -24,11 +24,15 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RemoteSource
+	public sealed partial class RemoteSource
 	{
 		[JsonInclude]
 		[JsonPropertyName("connect_timeout")]
-		public Elastic.Clients.Elasticsearch.Time ConnectTimeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? ConnectTimeout { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("headers")]
+		public Dictionary<string, string>? Headers { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("host")]
@@ -36,15 +40,15 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("password")]
-		public string Password { get; set; }
+		public string? Password { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("socket_timeout")]
-		public Elastic.Clients.Elasticsearch.Time SocketTimeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? SocketTimeout { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("username")]
-		public Elastic.Clients.Elasticsearch.Username Username { get; set; }
+		public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 	}
 
 	public sealed partial class RemoteSourceDescriptor : SerializableDescriptorBase<RemoteSourceDescriptor>
@@ -54,19 +58,27 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time ConnectTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? ConnectTimeoutValue { get; set; }
+
+		private Dictionary<string, string>? HeadersValue { get; set; }
 
 		private string HostValue { get; set; }
 
-		private string PasswordValue { get; set; }
+		private string? PasswordValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time SocketTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? SocketTimeoutValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Username UsernameValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
 
-		public RemoteSourceDescriptor ConnectTimeout(Elastic.Clients.Elasticsearch.Time connectTimeout)
+		public RemoteSourceDescriptor ConnectTimeout(Elastic.Clients.Elasticsearch.Duration? connectTimeout)
 		{
 			ConnectTimeoutValue = connectTimeout;
+			return Self;
+		}
+
+		public RemoteSourceDescriptor Headers(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			HeadersValue = selector?.Invoke(new FluentDictionary<string, string>());
 			return Self;
 		}
 
@@ -76,19 +88,19 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public RemoteSourceDescriptor Password(string password)
+		public RemoteSourceDescriptor Password(string? password)
 		{
 			PasswordValue = password;
 			return Self;
 		}
 
-		public RemoteSourceDescriptor SocketTimeout(Elastic.Clients.Elasticsearch.Time socketTimeout)
+		public RemoteSourceDescriptor SocketTimeout(Elastic.Clients.Elasticsearch.Duration? socketTimeout)
 		{
 			SocketTimeoutValue = socketTimeout;
 			return Self;
 		}
 
-		public RemoteSourceDescriptor Username(Elastic.Clients.Elasticsearch.Username username)
+		public RemoteSourceDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
 		{
 			UsernameValue = username;
 			return Self;
@@ -97,16 +109,38 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("connect_timeout");
-			JsonSerializer.Serialize(writer, ConnectTimeoutValue, options);
+			if (ConnectTimeoutValue is not null)
+			{
+				writer.WritePropertyName("connect_timeout");
+				JsonSerializer.Serialize(writer, ConnectTimeoutValue, options);
+			}
+
+			if (HeadersValue is not null)
+			{
+				writer.WritePropertyName("headers");
+				JsonSerializer.Serialize(writer, HeadersValue, options);
+			}
+
 			writer.WritePropertyName("host");
 			JsonSerializer.Serialize(writer, HostValue, options);
-			writer.WritePropertyName("password");
-			JsonSerializer.Serialize(writer, PasswordValue, options);
-			writer.WritePropertyName("socket_timeout");
-			JsonSerializer.Serialize(writer, SocketTimeoutValue, options);
-			writer.WritePropertyName("username");
-			JsonSerializer.Serialize(writer, UsernameValue, options);
+			if (PasswordValue is not null)
+			{
+				writer.WritePropertyName("password");
+				JsonSerializer.Serialize(writer, PasswordValue, options);
+			}
+
+			if (SocketTimeoutValue is not null)
+			{
+				writer.WritePropertyName("socket_timeout");
+				JsonSerializer.Serialize(writer, SocketTimeoutValue, options);
+			}
+
+			if (UsernameValue is not null)
+			{
+				writer.WritePropertyName("username");
+				JsonSerializer.Serialize(writer, UsernameValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

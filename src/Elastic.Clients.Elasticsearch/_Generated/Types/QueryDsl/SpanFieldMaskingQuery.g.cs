@@ -24,12 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SpanFieldMaskingQuery : QueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public sealed partial class SpanFieldMaskingQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "field_masking_span";
-		[JsonIgnore]
-		string ISpanQueryVariant.SpanQueryVariantName => "field_masking_span";
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }

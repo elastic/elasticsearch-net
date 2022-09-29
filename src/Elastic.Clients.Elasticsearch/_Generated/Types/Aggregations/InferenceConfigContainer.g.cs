@@ -24,40 +24,58 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public interface IInferenceConfigContainerVariant
-	{
-		string InferenceConfigContainerVariantName { get; }
-	}
-
 	[JsonConverter(typeof(InferenceConfigContainerConverter))]
-	public partial class InferenceConfigContainer : IContainer
+	public sealed partial class InferenceConfigContainer
 	{
-		public InferenceConfigContainer(IInferenceConfigContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IInferenceConfigContainerVariant Variant { get; }
+		internal InferenceConfigContainer(string variantName, object variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
+		internal object Variant { get; }
+
+		internal string VariantName { get; }
+
+		public static InferenceConfigContainer Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions classificationInferenceOptions) => new InferenceConfigContainer("classification", classificationInferenceOptions);
+		public static InferenceConfigContainer Regression(Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions regressionInferenceOptions) => new InferenceConfigContainer("regression", regressionInferenceOptions);
 	}
 
 	internal sealed class InferenceConfigContainerConverter : JsonConverter<InferenceConfigContainer>
 	{
 		public override InferenceConfigContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the variant held within this container.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "classification")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions?>(ref reader, options);
-				return new InferenceConfigContainer(variant);
+				reader.Read();
+				return new InferenceConfigContainer(propertyName, variant);
 			}
 
 			if (propertyName == "regression")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions?>(ref reader, options);
-				return new InferenceConfigContainer(variant);
+				reader.Read();
+				return new InferenceConfigContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -66,14 +84,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public override void Write(Utf8JsonWriter writer, InferenceConfigContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.InferenceConfigContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "regression":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions)value.Variant, options);
 					break;
 			}
 
@@ -88,38 +106,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal InferenceConfigContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the InferenceConfigContainerDescriptor. Only a single InferenceConfigContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigContainerVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new InferenceConfigContainer(variant);
+				throw new Exception("A variant has already been assigned to the InferenceConfigContainerDescriptor. Only a single InferenceConfigContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
 
+		public void Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
+		public void Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
+		public void Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
+		public void Regression(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -128,22 +147,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
-
-		public void Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
-		public void Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-		public void Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
-		public void Regression(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 	}
 
 	public sealed partial class InferenceConfigContainerDescriptor : SerializableDescriptorBase<InferenceConfigContainerDescriptor>
@@ -153,38 +169,40 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal InferenceConfigContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the InferenceConfigContainerDescriptor. Only a single InferenceConfigContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IInferenceConfigContainerVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new InferenceConfigContainer(variant);
+				throw new Exception("A variant has already been assigned to the InferenceConfigContainerDescriptor. Only a single InferenceConfigContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
 
+		public void Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
+		public void Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
+		public void Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
+		public void Regression(Action<Ml.RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
+		public void Regression<TDocument>(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -193,22 +211,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
-
-		public void Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
-		public void Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-		public void Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
-		public void Regression(Action<Ml.RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
-		public void Regression<TDocument>(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 	}
 }

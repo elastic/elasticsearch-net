@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class Storage
+	public sealed partial class Storage
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_mmap")]

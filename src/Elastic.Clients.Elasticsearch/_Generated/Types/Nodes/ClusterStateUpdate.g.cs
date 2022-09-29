@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class ClusterStateUpdate
+	public sealed partial class ClusterStateUpdate
 	{
 		[JsonInclude]
 		[JsonPropertyName("commit_time")]
-		public string? CommitTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? CommitTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("commit_time_millis")]
@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("completion_time")]
-		public string? CompletionTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? CompletionTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("completion_time_millis")]
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("computation_time")]
-		public string? ComputationTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? ComputationTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("computation_time_millis")]
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("context_construction_time")]
-		public string? ContextConstructionTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? ContextConstructionTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("context_construction_time_millis")]
@@ -60,11 +60,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public long? Count { get; init; }
+		public long Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("master_apply_time")]
-		public string? MasterApplyTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? MasterApplyTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("master_apply_time_millis")]
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("notification_time")]
-		public string? NotificationTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? NotificationTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("notification_time_millis")]
@@ -80,7 +80,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("publication_time")]
-		public string? PublicationTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? PublicationTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("publication_time_millis")]

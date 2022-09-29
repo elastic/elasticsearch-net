@@ -24,10 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class DisMaxQuery : QueryBase, IQueryContainerVariant
+	public sealed partial class DisMaxQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "dis_max";
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("queries")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> Queries { get; set; }
@@ -118,12 +124,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (QueriesDescriptor is not null)
 			{
 				writer.WritePropertyName("queries");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, QueriesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (QueriesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("queries");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(QueriesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (QueriesDescriptorActions is not null)
 			{
@@ -245,12 +255,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (QueriesDescriptor is not null)
 			{
 				writer.WritePropertyName("queries");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, QueriesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (QueriesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("queries");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(QueriesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (QueriesDescriptorActions is not null)
 			{

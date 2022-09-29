@@ -31,10 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>
+	public sealed partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>
 	{
 		public ClusterStatsRequest()
 		{
@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class ClusterStatsRequestDescriptor : RequestDescriptorBase<ClusterStatsRequestDescriptor, ClusterStatsRequestParameters>
@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public ClusterStatsRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-		public ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public ClusterStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? node_id)
 		{
 			RouteValues.Optional("node_id", node_id);

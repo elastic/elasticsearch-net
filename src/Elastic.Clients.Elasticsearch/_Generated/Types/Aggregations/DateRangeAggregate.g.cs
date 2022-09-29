@@ -24,7 +24,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class DateRangeAggregate : RangeAggregate
+	public sealed partial class DateRangeAggregate : IAggregate
 	{
+		[JsonInclude]
+		[JsonPropertyName("buckets")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.RangeBucket> Buckets { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
 	}
 }

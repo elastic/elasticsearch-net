@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -11,15 +12,15 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(SourceConfigConverter))]
 	public partial class SourceConfig
 	{
-		public bool HasBoolValue => Item1.HasValue;
+		public bool HasBoolValue => Tag == 0;
 
-		public bool HasSourceFilterValue => Item2 is not null;
+		public bool HasSourceFilterValue => Tag == 1;
 
-		public bool TryGetBool(out bool? value)
+		public bool TryGetBool([NotNullWhen(returnValue: true)] out bool? value)
 		{
-			if (Item1.HasValue)
+			if (Tag == 0)
 			{
-				value = Item1.Value;
+				value = Item1;
 				return true;
 			}
 
@@ -27,9 +28,9 @@ namespace Elastic.Clients.Elasticsearch
 			return false;
 		}
 
-		public bool TryGetSourceFilter(out SourceFilter? value)
+		public bool TryGetSourceFilter([NotNullWhen(returnValue: true)] out SourceFilter? value)
 		{
-			if (Item2 is not null)
+			if (Tag == 1)
 			{
 				value = Item2;
 				return true;

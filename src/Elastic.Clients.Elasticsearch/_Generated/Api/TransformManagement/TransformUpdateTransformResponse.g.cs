@@ -25,6 +25,10 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	public sealed partial class TransformUpdateTransformResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
+		[JsonPropertyName("authorization")]
+		public Elastic.Clients.Elasticsearch.Ml.TransformAuthorization? Authorization { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
 		public long CreateTime { get; init; }
 
@@ -38,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("frequency")]
-		public Elastic.Clients.Elasticsearch.Time? Frequency { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? Frequency { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("id")]

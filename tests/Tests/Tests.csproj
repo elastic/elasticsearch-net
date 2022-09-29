@@ -10,7 +10,7 @@
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />
     <ProjectReference Include="$(SolutionRoot)\src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.ClusterLauncher\Tests.ClusterLauncher.csproj" />
-    <PackageReference Include="Elastic.Transport.VirtualizedCluster" Version="0.3.1" />
+    <PackageReference Include="Elastic.Transport.VirtualizedCluster" Version="0.3.2" />
     <PackageReference Include="FSharp.Core" Version="6.0.3" />
     <PackageReference Include="Bogus" Version="22.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -18,19 +18,19 @@
     <PackageReference Include="SharpZipLib" Version="1.3.3" />
     <PackageReference Include="System.Diagnostics.FileVersionInfo" Version="4.3.0" />
     <PackageReference Include="SemanticVersioning" Version="0.8.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
-    <PackageReference Include="Verify.Xunit" Version="14.11.4" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.1" />
+    <PackageReference Include="Verify.Xunit" Version="17.10.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="xunit.extensibility.execution" Version="2.4.1" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.4.2" />
     <PackageReference Include="Ben.Demystifier" Version="0.1.4" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ClientConcepts\HighLevel\Mapping\" />
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

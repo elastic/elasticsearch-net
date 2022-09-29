@@ -24,18 +24,33 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class FuzzyQueryConverter : FieldNameQueryConverterBase<FuzzyQuery>
+	internal sealed class FuzzyQueryConverter : JsonConverter<FuzzyQuery>
 	{
-		internal override FuzzyQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override FuzzyQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new FuzzyQuery();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new FuzzyQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "fuzziness")
 					{
 						variant.Fuzziness = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fuzziness?>(ref reader, options);
@@ -71,18 +86,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.Value = JsonSerializer.Deserialize<object>(ref reader, options);
 						continue;
 					}
-
-					if (property == "_name")
-					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
 				}
 			}
 
@@ -90,99 +93,123 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, FuzzyQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, FuzzyQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (value.Fuzziness is not null)
+			if (value.Field is null)
+				throw new JsonException("Unable to serialize FuzzyQuery because the `Field` property is not set. Field name queries must include a valid field name.");
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("fuzziness");
-				JsonSerializer.Serialize(writer, value.Fuzziness, options);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				if (value.Fuzziness is not null)
+				{
+					writer.WritePropertyName("fuzziness");
+					JsonSerializer.Serialize(writer, value.Fuzziness, options);
+				}
+
+				if (value.MaxExpansions.HasValue)
+				{
+					writer.WritePropertyName("max_expansions");
+					writer.WriteNumberValue(value.MaxExpansions.Value);
+				}
+
+				if (value.PrefixLength.HasValue)
+				{
+					writer.WritePropertyName("prefix_length");
+					writer.WriteNumberValue(value.PrefixLength.Value);
+				}
+
+				if (value.Rewrite is not null)
+				{
+					writer.WritePropertyName("rewrite");
+					JsonSerializer.Serialize(writer, value.Rewrite, options);
+				}
+
+				if (value.Transpositions.HasValue)
+				{
+					writer.WritePropertyName("transpositions");
+					writer.WriteBooleanValue(value.Transpositions.Value);
+				}
+
+				writer.WritePropertyName("value");
+				JsonSerializer.Serialize(writer, value.Value, options);
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			if (value.MaxExpansions.HasValue)
-			{
-				writer.WritePropertyName("max_expansions");
-				writer.WriteNumberValue(value.MaxExpansions.Value);
-			}
-
-			if (value.PrefixLength.HasValue)
-			{
-				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(value.PrefixLength.Value);
-			}
-
-			if (value.Rewrite is not null)
-			{
-				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value.Rewrite, options);
-			}
-
-			if (value.Transpositions.HasValue)
-			{
-				writer.WritePropertyName("transpositions");
-				writer.WriteBooleanValue(value.Transpositions.Value);
-			}
-
-			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, value.Value, options);
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		}
 	}
 
 	[JsonConverter(typeof(FuzzyQueryConverter))]
-	public partial class FuzzyQuery : FieldNameQueryBase, IQueryContainerVariant
+	public sealed partial class FuzzyQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "fuzzy";
-		[JsonInclude]
-		[JsonPropertyName("fuzziness")]
+		public FuzzyQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
+		public string? QueryName { get; set; }
+
+		public float? Boost { get; set; }
+
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("max_expansions")]
 		public int? MaxExpansions { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("prefix_length")]
 		public int? PrefixLength { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("rewrite")]
 		public string? Rewrite { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("transpositions")]
 		public bool? Transpositions { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("value")]
 		public object Value { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
 	public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescriptorBase<FuzzyQueryDescriptor<TDocument>>
 	{
 		internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public FuzzyQueryDescriptor() : base()
+		internal FuzzyQueryDescriptor() : base()
 		{
+		}
+
+		public FuzzyQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
+		}
+
+		public FuzzyQueryDescriptor(Expression<Func<TDocument, object>> field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -208,7 +235,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FuzzyQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public FuzzyQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -258,6 +285,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
@@ -313,15 +342,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class FuzzyQueryDescriptor : SerializableDescriptorBase<FuzzyQueryDescriptor>
 	{
 		internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor> configure) => configure.Invoke(this);
-		public FuzzyQueryDescriptor() : base()
+		internal FuzzyQueryDescriptor() : base()
 		{
+		}
+
+		public FuzzyQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -347,7 +383,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FuzzyQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public FuzzyQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -403,6 +439,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();

@@ -28,13 +28,13 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 	public sealed class CreateSnapshotRequestParameters : RequestParameters<CreateSnapshotRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
-	public partial class CreateSnapshotRequest : PlainRequestBase<CreateSnapshotRequestParameters>
+	public sealed partial class CreateSnapshotRequest : PlainRequestBase<CreateSnapshotRequestParameters>
 	{
 		public CreateSnapshotRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotCreate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		public CreateSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CreateSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public CreateSnapshotRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		public CreateSnapshotRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name repository)
 		{

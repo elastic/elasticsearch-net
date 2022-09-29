@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlPostCalendarEventsRequest : PlainRequestBase<MlPostCalendarEventsRequestParameters>
+	public sealed partial class MlPostCalendarEventsRequest : PlainRequestBase<MlPostCalendarEventsRequestParameters>
 	{
 		public MlPostCalendarEventsRequest(Elastic.Clients.Elasticsearch.Id calendar_id) : base(r => r.Required("calendar_id", calendar_id))
 		{
@@ -113,12 +113,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (EventsDescriptor is not null)
 			{
 				writer.WritePropertyName("events");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, EventsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (EventsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("events");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new CalendarEventDescriptor(EventsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (EventsDescriptorActions is not null)
 			{

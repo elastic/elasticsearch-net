@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class MappingCharFilter : CharFilterBase, ICharFilterDefinition
+	public sealed partial class MappingCharFilter : ICharFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public IEnumerable<string> Mappings { get; set; }
+		public IEnumerable<string>? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings_path")]
@@ -37,6 +37,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "mapping";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class MappingCharFilterDescriptor : SerializableDescriptorBase<MappingCharFilterDescriptor>, IBuildableDescriptor<MappingCharFilter>
@@ -46,13 +49,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private IEnumerable<string> MappingsValue { get; set; }
+		private IEnumerable<string>? MappingsValue { get; set; }
 
 		private string? MappingsPathValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public MappingCharFilterDescriptor Mappings(IEnumerable<string> mappings)
+		public MappingCharFilterDescriptor Mappings(IEnumerable<string>? mappings)
 		{
 			MappingsValue = mappings;
 			return Self;
@@ -73,8 +76,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, MappingsValue, options);
+			if (MappingsValue is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsValue, options);
+			}
+
 			if (!string.IsNullOrEmpty(MappingsPathValue))
 			{
 				writer.WritePropertyName("mappings_path");

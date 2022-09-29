@@ -31,13 +31,13 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	public partial class EqlSearchRequest : PlainRequestBase<EqlSearchRequestParameters>
+	public sealed partial class EqlSearchRequest : PlainRequestBase<EqlSearchRequestParameters>
 	{
 		public EqlSearchRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		[JsonInclude]
 		[JsonPropertyName("keep_alive")]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("keep_on_completion")]
@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		[JsonInclude]
 		[JsonPropertyName("wait_for_completion_timeout")]
-		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 	}
 
 	public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescriptorBase<EqlSearchRequestDescriptor<TDocument>, EqlSearchRequestParameters>
@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public EqlSearchRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public EqlSearchRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public EqlSearchRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public EqlSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public EqlSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 		{
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private int? FetchSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? KeepAliveValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 
 		private bool? KeepOnCompletionValue { get; set; }
 
@@ -165,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		private int? SizeValue { get; set; }
 
@@ -173,7 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 		public EqlSearchRequestDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 		{
@@ -271,7 +271,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive)
+		public EqlSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
 		{
 			KeepAliveValue = keepAlive;
 			return Self;
@@ -295,9 +295,9 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public EqlSearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 
@@ -331,7 +331,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout)
+		public EqlSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
 		{
 			WaitForCompletionTimeoutValue = waitForCompletionTimeout;
 			return Self;
@@ -343,12 +343,16 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			if (FieldsDescriptor is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorActions is not null)
 			{
@@ -370,12 +374,16 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			if (FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorActions is not null)
 			{
@@ -481,7 +489,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public EqlSearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public EqlSearchRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public EqlSearchRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public EqlSearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public EqlSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 		{
@@ -511,7 +519,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private int? FetchSizeValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? KeepAliveValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 
 		private bool? KeepOnCompletionValue { get; set; }
 
@@ -519,7 +527,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		private int? SizeValue { get; set; }
 
@@ -527,7 +535,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 		public EqlSearchRequestDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 		{
@@ -631,7 +639,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive)
+		public EqlSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
 		{
 			KeepAliveValue = keepAlive;
 			return Self;
@@ -655,9 +663,9 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public EqlSearchRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 
@@ -703,7 +711,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return Self;
 		}
 
-		public EqlSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout)
+		public EqlSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
 		{
 			WaitForCompletionTimeoutValue = waitForCompletionTimeout;
 			return Self;
@@ -715,12 +723,16 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			if (FieldsDescriptor is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("fields");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FieldsDescriptorActions is not null)
 			{
@@ -742,12 +754,16 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			if (FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorActions is not null)
 			{

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RecoveryStats
+	public sealed partial class RecoveryStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("current_as_source")]
@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("throttle_time")]
-		public string? ThrottleTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? ThrottleTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("throttle_time_in_millis")]

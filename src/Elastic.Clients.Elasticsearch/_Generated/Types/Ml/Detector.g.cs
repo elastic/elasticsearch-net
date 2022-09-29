@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class Detector
+	public sealed partial class Detector
 	{
 		[JsonInclude]
 		[JsonPropertyName("by_field_name")]
@@ -226,12 +226,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (CustomRulesDescriptor is not null)
 			{
 				writer.WritePropertyName("custom_rules");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, CustomRulesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (CustomRulesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("custom_rules");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DetectionRuleDescriptor(CustomRulesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (CustomRulesDescriptorActions is not null)
 			{
@@ -481,12 +485,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (CustomRulesDescriptor is not null)
 			{
 				writer.WritePropertyName("custom_rules");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, CustomRulesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (CustomRulesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("custom_rules");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DetectionRuleDescriptor(CustomRulesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (CustomRulesDescriptorActions is not null)
 			{

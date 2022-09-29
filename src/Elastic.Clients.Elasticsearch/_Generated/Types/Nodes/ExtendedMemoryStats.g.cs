@@ -24,11 +24,51 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class ExtendedMemoryStats : MemoryStats
+	public sealed partial class ExtendedMemoryStats
 	{
+		[JsonInclude]
+		[JsonPropertyName("adjusted_total_in_bytes")]
+		public long? AdjustedTotalInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("free_in_bytes")]
+		public long? FreeInBytes { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("free_percent")]
 		public int? FreePercent { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("resident")]
+		public string? Resident { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("resident_in_bytes")]
+		public long? ResidentInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("share")]
+		public string? Share { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("share_in_bytes")]
+		public long? ShareInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total_in_bytes")]
+		public long? TotalInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total_virtual")]
+		public string? TotalVirtual { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total_virtual_in_bytes")]
+		public long? TotalVirtualInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("used_in_bytes")]
+		public long? UsedInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("used_percent")]

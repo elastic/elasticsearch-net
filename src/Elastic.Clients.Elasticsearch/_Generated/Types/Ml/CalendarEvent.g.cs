@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class CalendarEvent
+	public sealed partial class CalendarEvent
 	{
 		[JsonInclude]
 		[JsonPropertyName("calendar_id")]
@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("end_time")]
-		public Elastic.Clients.Elasticsearch.EpochMillis EndTime { get; set; }
+		public DateTimeOffset EndTime { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("event_id")]
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("start_time")]
-		public Elastic.Clients.Elasticsearch.EpochMillis StartTime { get; set; }
+		public DateTimeOffset StartTime { get; set; }
 	}
 
 	public sealed partial class CalendarEventDescriptor : SerializableDescriptorBase<CalendarEventDescriptor>
@@ -58,11 +58,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private string DescriptionValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.EpochMillis EndTimeValue { get; set; }
+		private DateTimeOffset EndTimeValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Id? EventIdValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.EpochMillis StartTimeValue { get; set; }
+		private DateTimeOffset StartTimeValue { get; set; }
 
 		public CalendarEventDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id? calendarId)
 		{
@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public CalendarEventDescriptor EndTime(Elastic.Clients.Elasticsearch.EpochMillis endTime)
+		public CalendarEventDescriptor EndTime(DateTimeOffset endTime)
 		{
 			EndTimeValue = endTime;
 			return Self;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public CalendarEventDescriptor StartTime(Elastic.Clients.Elasticsearch.EpochMillis startTime)
+		public CalendarEventDescriptor StartTime(DateTimeOffset startTime)
 		{
 			StartTimeValue = startTime;
 			return Self;

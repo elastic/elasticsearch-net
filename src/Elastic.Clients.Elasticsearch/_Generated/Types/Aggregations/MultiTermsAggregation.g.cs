@@ -39,8 +39,93 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
+					if (reader.ValueTextEquals("collect_mode"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.CollectMode = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("min_doc_count"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<long?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.MinDocCount = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("order"))
+					{
+						reader.Read();
+						var value = SingleOrManySerializationHelper.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Order = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("shard_min_doc_count"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<long?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ShardMinDocCount = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("shard_size"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ShardSize = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("show_term_doc_count_error"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ShowTermDocCountError = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("size"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Size = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("terms"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>>(ref reader, options);
 						if (value is not null)
 						{
@@ -80,7 +165,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -89,6 +173,48 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("multi_terms");
 			writer.WriteStartObject();
+			if (value.CollectMode is not null)
+			{
+				writer.WritePropertyName("collect_mode");
+				JsonSerializer.Serialize(writer, value.CollectMode, options);
+			}
+
+			if (value.MinDocCount.HasValue)
+			{
+				writer.WritePropertyName("min_doc_count");
+				writer.WriteNumberValue(value.MinDocCount.Value);
+			}
+
+			if (value.Order is not null)
+			{
+				writer.WritePropertyName("order");
+				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(value.Order, writer, options);
+			}
+
+			if (value.ShardMinDocCount.HasValue)
+			{
+				writer.WritePropertyName("shard_min_doc_count");
+				writer.WriteNumberValue(value.ShardMinDocCount.Value);
+			}
+
+			if (value.ShardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value.ShardSize.Value);
+			}
+
+			if (value.ShowTermDocCountError.HasValue)
+			{
+				writer.WritePropertyName("show_term_doc_count_error");
+				writer.WriteBooleanValue(value.ShowTermDocCountError.Value);
+			}
+
+			if (value.Size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value.Size.Value);
+			}
+
 			writer.WritePropertyName("terms");
 			JsonSerializer.Serialize(writer, value.Terms, options);
 			writer.WriteEndObject();
@@ -109,14 +235,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(MultiTermsAggregationConverter))]
-	public partial class MultiTermsAggregation : BucketAggregationBase
+	public sealed partial class MultiTermsAggregation : Aggregation
 	{
-		public MultiTermsAggregation(string name) : base(name)
+		public MultiTermsAggregation(string name) => Name = name;
+		internal MultiTermsAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("terms")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public long? MinDocCount { get; set; }
+
+		public override string? Name { get; internal set; }
+
+		[JsonConverter(typeof(AggregateOrderConverter))]
+		public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+
+		public long? ShardMinDocCount { get; set; }
+
+		public int? ShardSize { get; set; }
+
+		public bool? ShowTermDocCountError { get; set; }
+
+		public int? Size { get; set; }
+
 		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
 	}
 
@@ -141,7 +287,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<MultiTermLookupDescriptor<TDocument>>[] TermsDescriptorActions { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
+
 		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private long? MinDocCountValue { get; set; }
+
+		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+
+		private long? ShardMinDocCountValue { get; set; }
+
+		private int? ShardSizeValue { get; set; }
+
+		private bool? ShowTermDocCountErrorValue { get; set; }
+
+		private int? SizeValue { get; set; }
 
 		public MultiTermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
@@ -203,9 +363,51 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public MultiTermsAggregationDescriptor<TDocument> CollectMode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? collectMode)
+		{
+			CollectModeValue = collectMode;
+			return Self;
+		}
+
 		public MultiTermsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor<TDocument> MinDocCount(long? minDocCount)
+		{
+			MinDocCountValue = minDocCount;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor<TDocument> Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+		{
+			OrderValue = order;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor<TDocument> ShardMinDocCount(long? shardMinDocCount)
+		{
+			ShardMinDocCountValue = shardMinDocCount;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor<TDocument> ShardSize(int? shardSize)
+		{
+			ShardSizeValue = shardSize;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor<TDocument> ShowTermDocCountError(bool? showTermDocCountError = true)
+		{
+			ShowTermDocCountErrorValue = showTermDocCountError;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor<TDocument> Size(int? size)
+		{
+			SizeValue = size;
 			return Self;
 		}
 
@@ -217,12 +419,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (TermsDescriptor is not null)
 			{
 				writer.WritePropertyName("terms");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, TermsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (TermsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("terms");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor<TDocument>(TermsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (TermsDescriptorActions is not null)
 			{
@@ -239,6 +445,48 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("terms");
 				JsonSerializer.Serialize(writer, TermsValue, options);
+			}
+
+			if (CollectModeValue is not null)
+			{
+				writer.WritePropertyName("collect_mode");
+				JsonSerializer.Serialize(writer, CollectModeValue, options);
+			}
+
+			if (MinDocCountValue.HasValue)
+			{
+				writer.WritePropertyName("min_doc_count");
+				writer.WriteNumberValue(MinDocCountValue.Value);
+			}
+
+			if (OrderValue is not null)
+			{
+				writer.WritePropertyName("order");
+				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
+			}
+
+			if (ShardMinDocCountValue.HasValue)
+			{
+				writer.WritePropertyName("shard_min_doc_count");
+				writer.WriteNumberValue(ShardMinDocCountValue.Value);
+			}
+
+			if (ShardSizeValue.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(ShardSizeValue.Value);
+			}
+
+			if (ShowTermDocCountErrorValue.HasValue)
+			{
+				writer.WritePropertyName("show_term_doc_count_error");
+				writer.WriteBooleanValue(ShowTermDocCountErrorValue.Value);
+			}
+
+			if (SizeValue.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(SizeValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -289,7 +537,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<MultiTermLookupDescriptor>[] TermsDescriptorActions { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
+
 		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private long? MinDocCountValue { get; set; }
+
+		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+
+		private long? ShardMinDocCountValue { get; set; }
+
+		private int? ShardSizeValue { get; set; }
+
+		private bool? ShowTermDocCountErrorValue { get; set; }
+
+		private int? SizeValue { get; set; }
 
 		public MultiTermsAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
@@ -351,9 +613,51 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public MultiTermsAggregationDescriptor CollectMode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? collectMode)
+		{
+			CollectModeValue = collectMode;
+			return Self;
+		}
+
 		public MultiTermsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor MinDocCount(long? minDocCount)
+		{
+			MinDocCountValue = minDocCount;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+		{
+			OrderValue = order;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor ShardMinDocCount(long? shardMinDocCount)
+		{
+			ShardMinDocCountValue = shardMinDocCount;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor ShardSize(int? shardSize)
+		{
+			ShardSizeValue = shardSize;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor ShowTermDocCountError(bool? showTermDocCountError = true)
+		{
+			ShowTermDocCountErrorValue = showTermDocCountError;
+			return Self;
+		}
+
+		public MultiTermsAggregationDescriptor Size(int? size)
+		{
+			SizeValue = size;
 			return Self;
 		}
 
@@ -365,12 +669,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (TermsDescriptor is not null)
 			{
 				writer.WritePropertyName("terms");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, TermsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (TermsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("terms");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor(TermsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (TermsDescriptorActions is not null)
 			{
@@ -387,6 +695,48 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("terms");
 				JsonSerializer.Serialize(writer, TermsValue, options);
+			}
+
+			if (CollectModeValue is not null)
+			{
+				writer.WritePropertyName("collect_mode");
+				JsonSerializer.Serialize(writer, CollectModeValue, options);
+			}
+
+			if (MinDocCountValue.HasValue)
+			{
+				writer.WritePropertyName("min_doc_count");
+				writer.WriteNumberValue(MinDocCountValue.Value);
+			}
+
+			if (OrderValue is not null)
+			{
+				writer.WritePropertyName("order");
+				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
+			}
+
+			if (ShardMinDocCountValue.HasValue)
+			{
+				writer.WritePropertyName("shard_min_doc_count");
+				writer.WriteNumberValue(ShardMinDocCountValue.Value);
+			}
+
+			if (ShardSizeValue.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(ShardSizeValue.Value);
+			}
+
+			if (ShowTermDocCountErrorValue.HasValue)
+			{
+				writer.WritePropertyName("show_term_doc_count_error");
+				writer.WriteBooleanValue(ShowTermDocCountErrorValue.Value);
+			}
+
+			if (SizeValue.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(SizeValue.Value);
 			}
 
 			writer.WriteEndObject();

@@ -24,15 +24,19 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class TransformSummary
+	public sealed partial class TransformSummary
 	{
 		[JsonInclude]
 		[JsonPropertyName("_meta")]
 		public Dictionary<string, object>? Meta { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("authorization")]
+		public Elastic.Clients.Elasticsearch.Ml.TransformAuthorization? Authorization { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? CreateTime { get; init; }
+		public long? CreateTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("description")]
@@ -44,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("frequency")]
-		public Elastic.Clients.Elasticsearch.Time? Frequency { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? Frequency { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
@@ -57,6 +61,10 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		[JsonInclude]
 		[JsonPropertyName("pivot")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("retention_policy")]
+		public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyContainer? RetentionPolicy { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]

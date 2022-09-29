@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
 
 		[JsonIgnore]
-		public string? End { get => Q<string?>("end"); set => Q("end", value); }
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 
 		[JsonIgnore]
 		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
@@ -49,10 +49,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Field? Sort { get => Q<Elastic.Clients.Elasticsearch.Field?>("sort"); set => Q("sort", value); }
 
 		[JsonIgnore]
-		public string? Start { get => Q<string?>("start"); set => Q("start", value); }
+		public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
 	}
 
-	public partial class MlGetInfluencersRequest : PlainRequestBase<MlGetInfluencersRequestParameters>
+	public sealed partial class MlGetInfluencersRequest : PlainRequestBase<MlGetInfluencersRequestParameters>
 	{
 		public MlGetInfluencersRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
 
 		[JsonIgnore]
-		public string? End { get => Q<string?>("end"); set => Q("end", value); }
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 
 		[JsonIgnore]
 		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Field? Sort { get => Q<Elastic.Clients.Elasticsearch.Field?>("sort"); set => Q("sort", value); }
 
 		[JsonIgnore]
-		public string? Start { get => Q<string?>("start"); set => Q("start", value); }
+		public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("page")]
@@ -105,13 +105,13 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public MlGetInfluencersRequestDescriptor<TDocument> Desc(bool? desc = true) => Qs("desc", desc);
-		public MlGetInfluencersRequestDescriptor<TDocument> End(string? end) => Qs("end", end);
+		public MlGetInfluencersRequestDescriptor<TDocument> End(DateTimeOffset? end) => Qs("end", end);
 		public MlGetInfluencersRequestDescriptor<TDocument> ExcludeInterim(bool? excludeInterim = true) => Qs("exclude_interim", excludeInterim);
 		public MlGetInfluencersRequestDescriptor<TDocument> From(int? from) => Qs("from", from);
 		public MlGetInfluencersRequestDescriptor<TDocument> InfluencerScore(double? influencerScore) => Qs("influencer_score", influencerScore);
 		public MlGetInfluencersRequestDescriptor<TDocument> Size(int? size) => Qs("size", size);
 		public MlGetInfluencersRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field? sort) => Qs("sort", sort);
-		public MlGetInfluencersRequestDescriptor<TDocument> Start(string? start) => Qs("start", start);
+		public MlGetInfluencersRequestDescriptor<TDocument> Start(DateTimeOffset? start) => Qs("start", start);
 		public MlGetInfluencersRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id job_id)
 		{
 			RouteValues.Required("job_id", job_id);
@@ -186,13 +186,13 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public MlGetInfluencersRequestDescriptor Desc(bool? desc = true) => Qs("desc", desc);
-		public MlGetInfluencersRequestDescriptor End(string? end) => Qs("end", end);
+		public MlGetInfluencersRequestDescriptor End(DateTimeOffset? end) => Qs("end", end);
 		public MlGetInfluencersRequestDescriptor ExcludeInterim(bool? excludeInterim = true) => Qs("exclude_interim", excludeInterim);
 		public MlGetInfluencersRequestDescriptor From(int? from) => Qs("from", from);
 		public MlGetInfluencersRequestDescriptor InfluencerScore(double? influencerScore) => Qs("influencer_score", influencerScore);
 		public MlGetInfluencersRequestDescriptor Size(int? size) => Qs("size", size);
 		public MlGetInfluencersRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Field? sort) => Qs("sort", sort);
-		public MlGetInfluencersRequestDescriptor Start(string? start) => Qs("start", start);
+		public MlGetInfluencersRequestDescriptor Start(DateTimeOffset? start) => Qs("start", start);
 		public MlGetInfluencersRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id job_id)
 		{
 			RouteValues.Required("job_id", job_id);

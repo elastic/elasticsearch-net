@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class TranslogRetention
+	public sealed partial class TranslogRetention
 	{
 		[JsonInclude]
 		[JsonPropertyName("age")]
-		public Elastic.Clients.Elasticsearch.Time? Age { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Age { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -42,11 +42,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? AgeValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? AgeValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.ByteSize? SizeValue { get; set; }
 
-		public TranslogRetentionDescriptor Age(Elastic.Clients.Elasticsearch.Time? age)
+		public TranslogRetentionDescriptor Age(Elastic.Clients.Elasticsearch.Duration? age)
 		{
 			AgeValue = age;
 			return Self;

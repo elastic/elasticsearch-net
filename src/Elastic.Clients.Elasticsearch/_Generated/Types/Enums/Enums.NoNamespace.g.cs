@@ -444,6 +444,62 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(FieldSortNumericTypeConverter))]
+	public enum FieldSortNumericType
+	{
+		[EnumMember(Value = "long")]
+		Long,
+		[EnumMember(Value = "double")]
+		Double,
+		[EnumMember(Value = "date_nanos")]
+		DateNanos,
+		[EnumMember(Value = "date")]
+		Date
+	}
+
+	internal sealed class FieldSortNumericTypeConverter : JsonConverter<FieldSortNumericType>
+	{
+		public override FieldSortNumericType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "long":
+					return FieldSortNumericType.Long;
+				case "double":
+					return FieldSortNumericType.Double;
+				case "date_nanos":
+					return FieldSortNumericType.DateNanos;
+				case "date":
+					return FieldSortNumericType.Date;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, FieldSortNumericType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case FieldSortNumericType.Long:
+					writer.WriteStringValue("long");
+					return;
+				case FieldSortNumericType.Double:
+					writer.WriteStringValue("double");
+					return;
+				case FieldSortNumericType.DateNanos:
+					writer.WriteStringValue("date_nanos");
+					return;
+				case FieldSortNumericType.Date:
+					writer.WriteStringValue("date");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(GeoDistanceTypeConverter))]
 	public enum GeoDistanceType
 	{
@@ -1341,6 +1397,41 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(SlicesCalculationConverter))]
+	public enum SlicesCalculation
+	{
+		[EnumMember(Value = "auto")]
+		Auto
+	}
+
+	internal sealed class SlicesCalculationConverter : JsonConverter<SlicesCalculation>
+	{
+		public override SlicesCalculation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "auto":
+					return SlicesCalculation.Auto;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SlicesCalculation value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case SlicesCalculation.Auto:
+					writer.WriteStringValue("auto");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(SortModeConverter))]
 	public enum SortMode
 	{
@@ -1446,6 +1537,69 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(StringDistanceConverter))]
+	public enum StringDistance
+	{
+		[EnumMember(Value = "ngram")]
+		Ngram,
+		[EnumMember(Value = "levenshtein")]
+		Levenshtein,
+		[EnumMember(Value = "jaro_winkler")]
+		JaroWinkler,
+		[EnumMember(Value = "internal")]
+		Internal,
+		[EnumMember(Value = "damerau_levenshtein")]
+		DamerauLevenshtein
+	}
+
+	internal sealed class StringDistanceConverter : JsonConverter<StringDistance>
+	{
+		public override StringDistance Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "ngram":
+					return StringDistance.Ngram;
+				case "levenshtein":
+					return StringDistance.Levenshtein;
+				case "jaro_winkler":
+					return StringDistance.JaroWinkler;
+				case "internal":
+					return StringDistance.Internal;
+				case "damerau_levenshtein":
+					return StringDistance.DamerauLevenshtein;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, StringDistance value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case StringDistance.Ngram:
+					writer.WriteStringValue("ngram");
+					return;
+				case StringDistance.Levenshtein:
+					writer.WriteStringValue("levenshtein");
+					return;
+				case StringDistance.JaroWinkler:
+					writer.WriteStringValue("jaro_winkler");
+					return;
+				case StringDistance.Internal:
+					writer.WriteStringValue("internal");
+					return;
+				case StringDistance.DamerauLevenshtein:
+					writer.WriteStringValue("damerau_levenshtein");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(SuggestModeConverter))]
 	public enum SuggestMode
 	{
@@ -1488,6 +1642,48 @@ namespace Elastic.Clients.Elasticsearch
 					return;
 				case SuggestMode.Always:
 					writer.WriteStringValue("always");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(SuggestSortConverter))]
+	public enum SuggestSort
+	{
+		[EnumMember(Value = "score")]
+		Score,
+		[EnumMember(Value = "frequency")]
+		Frequency
+	}
+
+	internal sealed class SuggestSortConverter : JsonConverter<SuggestSort>
+	{
+		public override SuggestSort Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "score":
+					return SuggestSort.Score;
+				case "frequency":
+					return SuggestSort.Frequency;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SuggestSort value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case SuggestSort.Score:
+					writer.WriteStringValue("score");
+					return;
+				case SuggestSort.Frequency:
+					writer.WriteStringValue("frequency");
 					return;
 			}
 

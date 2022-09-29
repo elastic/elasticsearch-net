@@ -24,10 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class BoolQuery : QueryBase, IQueryContainerVariant
+	public sealed partial class BoolQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "bool";
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filter { get; set; }
@@ -262,12 +268,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorActions is not null)
 			{
@@ -289,12 +299,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (MustDescriptor is not null)
 			{
 				writer.WritePropertyName("must");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, MustDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (MustDescriptorAction is not null)
 			{
 				writer.WritePropertyName("must");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(MustDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (MustDescriptorActions is not null)
 			{
@@ -316,12 +330,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (MustNotDescriptor is not null)
 			{
 				writer.WritePropertyName("must_not");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, MustNotDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (MustNotDescriptorAction is not null)
 			{
 				writer.WritePropertyName("must_not");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(MustNotDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (MustNotDescriptorActions is not null)
 			{
@@ -343,12 +361,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (ShouldDescriptor is not null)
 			{
 				writer.WritePropertyName("should");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, ShouldDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (ShouldDescriptorAction is not null)
 			{
 				writer.WritePropertyName("should");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(ShouldDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (ShouldDescriptorActions is not null)
 			{
@@ -602,12 +624,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FilterDescriptorActions is not null)
 			{
@@ -629,12 +655,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (MustDescriptor is not null)
 			{
 				writer.WritePropertyName("must");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, MustDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (MustDescriptorAction is not null)
 			{
 				writer.WritePropertyName("must");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(MustDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (MustDescriptorActions is not null)
 			{
@@ -656,12 +686,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (MustNotDescriptor is not null)
 			{
 				writer.WritePropertyName("must_not");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, MustNotDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (MustNotDescriptorAction is not null)
 			{
 				writer.WritePropertyName("must_not");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(MustNotDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (MustNotDescriptorActions is not null)
 			{
@@ -683,12 +717,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (ShouldDescriptor is not null)
 			{
 				writer.WritePropertyName("should");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, ShouldDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (ShouldDescriptorAction is not null)
 			{
 				writer.WritePropertyName("should");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(ShouldDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (ShouldDescriptorActions is not null)
 			{

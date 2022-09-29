@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 	{
 	}
 
-	public partial class SslCertificatesRequest : PlainRequestBase<SslCertificatesRequestParameters>
+	public sealed partial class SslCertificatesRequest : PlainRequestBase<SslCertificatesRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityCertificates;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

@@ -24,17 +24,308 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalysisRegression : DataframeAnalysis, IDataframeAnalysisContainerVariant
+	internal sealed class DataframeAnalysisRegressionConverter : JsonConverter<DataframeAnalysisRegression>
 	{
-		[JsonIgnore]
-		string IDataframeAnalysisContainerVariant.DataframeAnalysisContainerVariantName => "regression";
-		[JsonInclude]
-		[JsonPropertyName("loss_function")]
+		public override DataframeAnalysisRegression Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new DataframeAnalysisRegression();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "alpha")
+					{
+						variant.Alpha = JsonSerializer.Deserialize<double?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "dependent_variable")
+					{
+						variant.DependentVariable = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+
+					if (property == "downsample_factor")
+					{
+						variant.DownsampleFactor = JsonSerializer.Deserialize<double?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "early_stopping_enabled")
+					{
+						variant.EarlyStoppingEnabled = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "eta")
+					{
+						variant.Eta = JsonSerializer.Deserialize<double?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "eta_growth_rate_per_tree")
+					{
+						variant.EtaGrowthRatePerTree = JsonSerializer.Deserialize<double?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "feature_bag_fraction")
+					{
+						variant.FeatureBagFraction = JsonSerializer.Deserialize<double?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "feature_processors")
+					{
+						variant.FeatureProcessors = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessor>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "gamma")
+					{
+						variant.Gamma = JsonSerializer.Deserialize<double?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "lambda")
+					{
+						variant.Lambda = JsonSerializer.Deserialize<double?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "loss_function")
+					{
+						variant.LossFunction = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "loss_function_parameter")
+					{
+						variant.LossFunctionParameter = JsonSerializer.Deserialize<double?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "max_optimization_rounds_per_hyperparameter")
+					{
+						variant.MaxOptimizationRoundsPerHyperparameter = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "max_trees" || property == "maximum_number_trees")
+					{
+						variant.MaxTrees = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "num_top_feature_importance_values")
+					{
+						variant.NumTopFeatureImportanceValues = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "prediction_field_name")
+					{
+						variant.PredictionFieldName = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "randomize_seed")
+					{
+						variant.RandomizeSeed = JsonSerializer.Deserialize<double?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "soft_tree_depth_limit")
+					{
+						variant.SoftTreeDepthLimit = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "soft_tree_depth_tolerance")
+					{
+						variant.SoftTreeDepthTolerance = JsonSerializer.Deserialize<double?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "training_percent")
+					{
+						variant.TrainingPercent = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Percentage?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, DataframeAnalysisRegression value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Alpha.HasValue)
+			{
+				writer.WritePropertyName("alpha");
+				writer.WriteNumberValue(value.Alpha.Value);
+			}
+
+			writer.WritePropertyName("dependent_variable");
+			writer.WriteStringValue(value.DependentVariable);
+			if (value.DownsampleFactor.HasValue)
+			{
+				writer.WritePropertyName("downsample_factor");
+				writer.WriteNumberValue(value.DownsampleFactor.Value);
+			}
+
+			if (value.EarlyStoppingEnabled.HasValue)
+			{
+				writer.WritePropertyName("early_stopping_enabled");
+				writer.WriteBooleanValue(value.EarlyStoppingEnabled.Value);
+			}
+
+			if (value.Eta.HasValue)
+			{
+				writer.WritePropertyName("eta");
+				writer.WriteNumberValue(value.Eta.Value);
+			}
+
+			if (value.EtaGrowthRatePerTree.HasValue)
+			{
+				writer.WritePropertyName("eta_growth_rate_per_tree");
+				writer.WriteNumberValue(value.EtaGrowthRatePerTree.Value);
+			}
+
+			if (value.FeatureBagFraction.HasValue)
+			{
+				writer.WritePropertyName("feature_bag_fraction");
+				writer.WriteNumberValue(value.FeatureBagFraction.Value);
+			}
+
+			if (value.FeatureProcessors is not null)
+			{
+				writer.WritePropertyName("feature_processors");
+				JsonSerializer.Serialize(writer, value.FeatureProcessors, options);
+			}
+
+			if (value.Gamma.HasValue)
+			{
+				writer.WritePropertyName("gamma");
+				writer.WriteNumberValue(value.Gamma.Value);
+			}
+
+			if (value.Lambda.HasValue)
+			{
+				writer.WritePropertyName("lambda");
+				writer.WriteNumberValue(value.Lambda.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.LossFunction))
+			{
+				writer.WritePropertyName("loss_function");
+				writer.WriteStringValue(value.LossFunction);
+			}
+
+			if (value.LossFunctionParameter.HasValue)
+			{
+				writer.WritePropertyName("loss_function_parameter");
+				writer.WriteNumberValue(value.LossFunctionParameter.Value);
+			}
+
+			if (value.MaxOptimizationRoundsPerHyperparameter.HasValue)
+			{
+				writer.WritePropertyName("max_optimization_rounds_per_hyperparameter");
+				writer.WriteNumberValue(value.MaxOptimizationRoundsPerHyperparameter.Value);
+			}
+
+			if (value.MaxTrees.HasValue)
+			{
+				writer.WritePropertyName("max_trees");
+				writer.WriteNumberValue(value.MaxTrees.Value);
+			}
+
+			if (value.NumTopFeatureImportanceValues.HasValue)
+			{
+				writer.WritePropertyName("num_top_feature_importance_values");
+				writer.WriteNumberValue(value.NumTopFeatureImportanceValues.Value);
+			}
+
+			if (value.PredictionFieldName is not null)
+			{
+				writer.WritePropertyName("prediction_field_name");
+				JsonSerializer.Serialize(writer, value.PredictionFieldName, options);
+			}
+
+			if (value.RandomizeSeed.HasValue)
+			{
+				writer.WritePropertyName("randomize_seed");
+				writer.WriteNumberValue(value.RandomizeSeed.Value);
+			}
+
+			if (value.SoftTreeDepthLimit.HasValue)
+			{
+				writer.WritePropertyName("soft_tree_depth_limit");
+				writer.WriteNumberValue(value.SoftTreeDepthLimit.Value);
+			}
+
+			if (value.SoftTreeDepthTolerance.HasValue)
+			{
+				writer.WritePropertyName("soft_tree_depth_tolerance");
+				writer.WriteNumberValue(value.SoftTreeDepthTolerance.Value);
+			}
+
+			if (value.TrainingPercent is not null)
+			{
+				writer.WritePropertyName("training_percent");
+				JsonSerializer.Serialize(writer, value.TrainingPercent, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(DataframeAnalysisRegressionConverter))]
+	public sealed partial class DataframeAnalysisRegression
+	{
+		public double? Alpha { get; set; }
+
+		public string DependentVariable { get; set; }
+
+		public double? DownsampleFactor { get; set; }
+
+		public bool? EarlyStoppingEnabled { get; set; }
+
+		public double? Eta { get; set; }
+
+		public double? EtaGrowthRatePerTree { get; set; }
+
+		public double? FeatureBagFraction { get; set; }
+
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessor>? FeatureProcessors { get; set; }
+
+		public double? Gamma { get; set; }
+
+		public double? Lambda { get; set; }
+
 		public string? LossFunction { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("loss_function_parameter")]
 		public double? LossFunctionParameter { get; set; }
+
+		public int? MaxOptimizationRoundsPerHyperparameter { get; set; }
+
+		public int? MaxTrees { get; set; }
+
+		public int? NumTopFeatureImportanceValues { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field? PredictionFieldName { get; set; }
+
+		public double? RandomizeSeed { get; set; }
+
+		public int? SoftTreeDepthLimit { get; set; }
+
+		public double? SoftTreeDepthTolerance { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Percentage? TrainingPercent { get; set; }
 	}
 
 	public sealed partial class DataframeAnalysisRegressionDescriptor<TDocument> : SerializableDescriptorBase<DataframeAnalysisRegressionDescriptor<TDocument>>
@@ -252,12 +543,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (FeatureProcessorsDescriptor is not null)
 			{
 				writer.WritePropertyName("feature_processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FeatureProcessorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FeatureProcessorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("feature_processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DataframeAnalysisFeatureProcessorDescriptor<TDocument>(FeatureProcessorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FeatureProcessorsDescriptorActions is not null)
 			{
@@ -611,12 +906,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			if (FeatureProcessorsDescriptor is not null)
 			{
 				writer.WritePropertyName("feature_processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, FeatureProcessorsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (FeatureProcessorsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("feature_processors");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DataframeAnalysisFeatureProcessorDescriptor(FeatureProcessorsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (FeatureProcessorsDescriptorActions is not null)
 			{

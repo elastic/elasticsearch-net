@@ -31,10 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class MlDeleteForecastRequest : PlainRequestBase<MlDeleteForecastRequestParameters>
+	public sealed partial class MlDeleteForecastRequest : PlainRequestBase<MlDeleteForecastRequestParameters>
 	{
 		public MlDeleteForecastRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class MlDeleteForecastRequestDescriptor : RequestDescriptorBase<MlDeleteForecastRequestDescriptor, MlDeleteForecastRequestParameters>
@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		public MlDeleteForecastRequestDescriptor AllowNoForecasts(bool? allowNoForecasts = true) => Qs("allow_no_forecasts", allowNoForecasts);
-		public MlDeleteForecastRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public MlDeleteForecastRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public MlDeleteForecastRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id job_id)
 		{
 			RouteValues.Required("job_id", job_id);

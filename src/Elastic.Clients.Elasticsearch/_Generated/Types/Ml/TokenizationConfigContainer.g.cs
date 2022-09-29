@@ -24,40 +24,66 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public interface ITokenizationConfigContainerVariant
-	{
-		string TokenizationConfigContainerVariantName { get; }
-	}
-
 	[JsonConverter(typeof(TokenizationConfigContainerConverter))]
-	public partial class TokenizationConfigContainer : IContainer
+	public sealed partial class TokenizationConfigContainer
 	{
-		public TokenizationConfigContainer(ITokenizationConfigContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal ITokenizationConfigContainerVariant Variant { get; }
+		internal TokenizationConfigContainer(string variantName, object variant)
+		{
+			if (variantName is null)
+				throw new ArgumentNullException(nameof(variantName));
+			if (variant is null)
+				throw new ArgumentNullException(nameof(variant));
+			if (string.IsNullOrWhiteSpace(variantName))
+				throw new ArgumentException("Variant name must not be empty or whitespace.");
+			VariantName = variantName;
+			Variant = variant;
+		}
+
+		internal object Variant { get; }
+
+		internal string VariantName { get; }
+
+		public static TokenizationConfigContainer Bert(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfigContainer("bert", nlpBertTokenizationConfig);
+		public static TokenizationConfigContainer Mpnet(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfigContainer("mpnet", nlpBertTokenizationConfig);
+		public static TokenizationConfigContainer Roberta(Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => new TokenizationConfigContainer("roberta", nlpRobertaTokenizationConfig);
 	}
 
 	internal sealed class TokenizationConfigContainerConverter : JsonConverter<TokenizationConfigContainer>
 	{
 		public override TokenizationConfigContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var readerCopy = reader;
-			readerCopy.Read();
-			if (readerCopy.TokenType != JsonTokenType.PropertyName)
+			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException();
+				throw new JsonException("Expected start token.");
 			}
 
-			var propertyName = readerCopy.GetString();
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the variant held within this container.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
 			if (propertyName == "bert")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig?>(ref reader, options);
-				return new TokenizationConfigContainer(variant);
+				reader.Read();
+				return new TokenizationConfigContainer(propertyName, variant);
+			}
+
+			if (propertyName == "mpnet")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig?>(ref reader, options);
+				reader.Read();
+				return new TokenizationConfigContainer(propertyName, variant);
 			}
 
 			if (propertyName == "roberta")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig?>(ref reader, options);
-				return new TokenizationConfigContainer(variant);
+				reader.Read();
+				return new TokenizationConfigContainer(propertyName, variant);
 			}
 
 			throw new JsonException();
@@ -66,14 +92,17 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public override void Write(Utf8JsonWriter writer, TokenizationConfigContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.TokenizationConfigContainerVariantName);
-			switch (value.Variant)
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
 			{
-				case Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "bert":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig)value.Variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig variant:
-					JsonSerializer.Serialize(writer, variant, options);
+				case "mpnet":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig)value.Variant, options);
+					break;
+				case "roberta":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig)value.Variant, options);
 					break;
 			}
 
@@ -88,38 +117,41 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal TokenizationConfigContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the TokenizationConfigContainerDescriptor. Only a single TokenizationConfigContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(ITokenizationConfigContainerVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new TokenizationConfigContainer(variant);
+				throw new Exception("A variant has already been assigned to the TokenizationConfigContainerDescriptor. Only a single TokenizationConfigContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
 
+		public void Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
+		public void Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
+		public void Mpnet(NlpBertTokenizationConfig variant) => Set(variant, "mpnet");
+		public void Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
+		public void Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
+		public void Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -128,22 +160,19 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
-
-		public void Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
-		public void Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-		public void Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
-		public void Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 	}
 
 	public sealed partial class TokenizationConfigContainerDescriptor : SerializableDescriptorBase<TokenizationConfigContainerDescriptor>
@@ -153,38 +182,41 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal TokenizationConfigContainer Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the TokenizationConfigContainerDescriptor. Only a single TokenizationConfigContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(ITokenizationConfigContainerVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new TokenizationConfigContainer(variant);
+				throw new Exception("A variant has already been assigned to the TokenizationConfigContainerDescriptor. Only a single TokenizationConfigContainer variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 		}
 
+		public void Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
+		public void Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
+		public void Mpnet(NlpBertTokenizationConfig variant) => Set(variant, "mpnet");
+		public void Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
+		public void Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
+		public void Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -193,21 +225,18 @@ namespace Elastic.Clients.Elasticsearch.Ml
 				return;
 			}
 
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
-
-		public void Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
-		public void Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-		public void Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
-		public void Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 	}
 }

@@ -19,6 +19,13 @@ public sealed class Field : IEquatable<Field>, IUrlParameter
 	private readonly object _comparisonValue;
 	private readonly Type _type;
 
+	// Pseudo and metadata fields
+
+	public static Field IdField = new("_id");
+	public static Field ScoreField = new("_score");
+	public static Field KeyField = new("_key");
+	public static Field CountField = new("_count");
+
 	public Field(string name) : this(name, null, null) { }
 
 	public Field(string name, double boost) : this(name, boost, null) { }
@@ -67,7 +74,7 @@ public sealed class Field : IEquatable<Field>, IUrlParameter
 	public string? Format { get; set; }
 
 	[JsonIgnore]
-	public bool CachableExpression { get; }
+	internal bool CachableExpression { get; }
 
 	/// <summary>
 	///     An expression from which the name of the field can be inferred
@@ -95,15 +102,26 @@ public sealed class Field : IEquatable<Field>, IUrlParameter
 		? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
 		: other != null && _comparisonValue.Equals(other._comparisonValue);
 
-	string IUrlParameter.GetString(ITransportConfiguration? settings)
+	string IUrlParameter.GetString(ITransportConfiguration settings)
 	{
-		if (!(settings is IElasticsearchClientSettings ElasticsearchSettings))
+		if (settings is not IElasticsearchClientSettings elasticsearchSettings)
 		{
 			throw new ArgumentNullException(nameof(settings),
 				$"Can not resolve {nameof(Field)} if no {nameof(IElasticsearchClientSettings)} is provided");
 		}
 
-		return ElasticsearchSettings.Inferrer.Field(this);
+		return GetStringCore(elasticsearchSettings);
+	}
+
+	private string GetStringCore(IElasticsearchClientSettings settings)
+	{
+		if (settings is null)
+		{
+			throw new ArgumentNullException(nameof(settings),
+				$"Can not resolve {nameof(Field)} if no {nameof(IElasticsearchClientSettings)} is provided");
+		}
+
+		return settings.Inferrer.Field(this);
 	}
 
 	public override string ToString() => DebugDisplay;

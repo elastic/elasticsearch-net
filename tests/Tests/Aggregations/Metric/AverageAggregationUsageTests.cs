@@ -28,7 +28,7 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 			avg = new
 			{
 				field = "numberOfCommits",
-				missing = 10.0,
+				//missing = 10.0,
 				script = new
 				{
 					source = "_value * 1.2",
@@ -43,8 +43,9 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 				.Add("foo", "bar")
 			)
 			.Field(p => p.NumberOfCommits)
-			.Missing(10)
-			.Script(ss => ss.Source("_value * 1.2"))
+			//.Missing(10)
+			//.Script(ss => ss.Source("_value * 1.2"))
+			.Script(new Script(new InlineScript("_value * 1.2")))
 		);
 
 	protected override AggregationDictionary InitializerAggs =>
@@ -54,14 +55,14 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 			{
 				{ "foo", "bar" }
 			},
-			Missing = 10,
-			Script = new InlineScript("_value * 1.2")
+			//Missing = 10,
+			Script = new Script(new InlineScript("_value * 1.2"))
 		};
 
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var commitsAvg = response.Aggregations.Average("average_commits");
+		var commitsAvg = response.Aggregations.GetAverage("average_commits");
 		commitsAvg.Should().NotBeNull();
 		commitsAvg.Value.Should().BeGreaterThan(0);
 		commitsAvg.Meta.Should().NotBeNull().And.HaveCount(1);

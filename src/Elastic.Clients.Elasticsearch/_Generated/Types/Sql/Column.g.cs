@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql
 {
-	public partial class Column
+	public sealed partial class Column
 	{
 		[JsonInclude]
 		[JsonPropertyName("name")]

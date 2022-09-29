@@ -5,12 +5,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace Elastic.Clients.Elasticsearch.Helpers
+namespace Elastic.Clients.Elasticsearch
 {
 	public interface IBulkAllRequest<T>
 	{
 		int? BackOffRetries { get; }
-		Time? BackOffTime { get; }
+		Duration? BackOffTime { get; }
 		ProducerConsumerBackPressure? BackPressure { get; }
 		Action<BulkRequestDescriptor, IList<T>>? BufferToBulk { get; }
 		Action<BulkResponse>? BulkResponseCallback { get; }
@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Helpers
 		Func<BulkResponseItemBase, T, bool>? RetryDocumentPredicate { get; }
 		Routing? Routing { get; }
 		int? Size { get; }
-		Time? Timeout { get; }
+		Duration? Timeout { get; }
 		WaitForActiveShards? WaitForActiveShards { get; }
 	}
 }

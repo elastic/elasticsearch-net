@@ -24,7 +24,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class FiltersAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.FiltersBucket>
+	public sealed partial class FiltersAggregate : IAggregate
 	{
+		[JsonInclude]
+		[JsonPropertyName("buckets")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.FiltersBucket> Buckets { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
 	}
 }

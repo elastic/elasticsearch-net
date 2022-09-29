@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlGetOverallBucketsRequest : PlainRequestBase<MlGetOverallBucketsRequestParameters>
+	public sealed partial class MlGetOverallBucketsRequest : PlainRequestBase<MlGetOverallBucketsRequestParameters>
 	{
 		public MlGetOverallBucketsRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
@@ -44,11 +44,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("bucket_span")]
-		public Elastic.Clients.Elasticsearch.Time? BucketSpan { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? BucketSpan { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("end")]
-		public Elastic.Clients.Elasticsearch.Time? End { get; set; }
+		public DateTimeOffset? End { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("exclude_interim")]
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("start")]
-		public Elastic.Clients.Elasticsearch.Time? Start { get; set; }
+		public DateTimeOffset? Start { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("top_n")]
@@ -89,15 +89,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private bool? AllowNoMatchValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? BucketSpanValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? BucketSpanValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? EndValue { get; set; }
+		private DateTimeOffset? EndValue { get; set; }
 
 		private bool? ExcludeInterimValue { get; set; }
 
 		private Union<double?, string?>? OverallScoreValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? StartValue { get; set; }
+		private DateTimeOffset? StartValue { get; set; }
 
 		private int? TopNValue { get; set; }
 
@@ -107,13 +107,13 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlGetOverallBucketsRequestDescriptor BucketSpan(Elastic.Clients.Elasticsearch.Time? bucketSpan)
+		public MlGetOverallBucketsRequestDescriptor BucketSpan(Elastic.Clients.Elasticsearch.Duration? bucketSpan)
 		{
 			BucketSpanValue = bucketSpan;
 			return Self;
 		}
 
-		public MlGetOverallBucketsRequestDescriptor End(Elastic.Clients.Elasticsearch.Time? end)
+		public MlGetOverallBucketsRequestDescriptor End(DateTimeOffset? end)
 		{
 			EndValue = end;
 			return Self;
@@ -131,7 +131,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlGetOverallBucketsRequestDescriptor Start(Elastic.Clients.Elasticsearch.Time? start)
+		public MlGetOverallBucketsRequestDescriptor Start(DateTimeOffset? start)
 		{
 			StartValue = start;
 			return Self;

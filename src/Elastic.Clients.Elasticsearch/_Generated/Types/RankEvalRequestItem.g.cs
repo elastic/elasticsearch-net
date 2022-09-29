@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class RankEvalRequestItem
+	public sealed partial class RankEvalRequestItem
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
@@ -182,12 +182,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (RatingsDescriptor is not null)
 			{
 				writer.WritePropertyName("ratings");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RatingsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RatingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("ratings");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DocumentRatingDescriptor(RatingsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RatingsDescriptorActions is not null)
 			{
@@ -351,12 +355,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (RatingsDescriptor is not null)
 			{
 				writer.WritePropertyName("ratings");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RatingsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RatingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("ratings");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DocumentRatingDescriptor(RatingsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RatingsDescriptorActions is not null)
 			{

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling
 	{
 	}
 
-	public partial class AutoscalingPutAutoscalingPolicyRequest : PlainRequestBase<AutoscalingPutAutoscalingPolicyRequestParameters>
+	public sealed partial class AutoscalingPutAutoscalingPolicyRequest : PlainRequestBase<AutoscalingPutAutoscalingPolicyRequestParameters>
 	{
 		public AutoscalingPutAutoscalingPolicyRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{

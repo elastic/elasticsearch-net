@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class InlineGet<TDocument>
+	public sealed partial class InlineGet<TDocument>
 	{
 		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
@@ -50,5 +50,9 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("metadata")]
+		public Dictionary<string, object> Metadata { get; init; }
 	}
 }

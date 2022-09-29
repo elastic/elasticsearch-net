@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class StringStatsAggregate : AggregateBase
+	public sealed partial class StringStatsAggregate : IAggregate
 	{
 		[JsonInclude]
 		[JsonPropertyName("avg_length")]
@@ -53,6 +53,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("max_length_as_string")]
 		public string? MaxLengthAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_length")]

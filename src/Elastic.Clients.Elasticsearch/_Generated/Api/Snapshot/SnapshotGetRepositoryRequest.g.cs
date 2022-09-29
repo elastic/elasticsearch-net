@@ -31,10 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class SnapshotGetRepositoryRequest : PlainRequestBase<SnapshotGetRepositoryRequestParameters>
+	public sealed partial class SnapshotGetRepositoryRequest : PlainRequestBase<SnapshotGetRepositoryRequestParameters>
 	{
 		public SnapshotGetRepositoryRequest()
 		{
@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public sealed partial class SnapshotGetRepositoryRequestDescriptor : RequestDescriptorBase<SnapshotGetRepositoryRequestDescriptor, SnapshotGetRepositoryRequestParameters>
@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public SnapshotGetRepositoryRequestDescriptor Local(bool? local = true) => Qs("local", local);
-		public SnapshotGetRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public SnapshotGetRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public SnapshotGetRepositoryRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Names? repository)
 		{
 			RouteValues.Optional("repository", repository);

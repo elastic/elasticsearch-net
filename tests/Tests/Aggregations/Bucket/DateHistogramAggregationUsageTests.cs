@@ -27,13 +27,13 @@ public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTe
 				calendar_interval = "month",
 				min_doc_count = 2,
 				format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", // <1> Note the inclusion of `date_optional_time` to `format`
-				order = new { _count = "asc" },
+				order = new { _key = "asc" },
 				//extended_bounds = new
 				//{
 				//	min = FixedDate.AddYears(-1),
 				//	max = FixedDate.AddYears(1)
 				//},
-				missing = "2015-06-06T12:01:02.1230000"
+				missing = "2015-06-06T12:01:02.123+00:00"
 			},
 			aggregations = new
 			{
@@ -62,8 +62,8 @@ public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTe
 			.MinDocCount(2)
 			.Format("yyyy-MM-dd'T'HH:mm:ss||date_optional_time")
 			//.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
-			.Order(new HistogramOrder { Count = SortOrder.Asc })
-			.Missing("2015-06-06T12:01:02.1230000")
+			.Order(new[] { AggregateOrder.KeyAscending })
+			.Missing(DateTimeOffset.Parse("2015-06-06T12:01:02.1230000", styles: System.Globalization.DateTimeStyles.AssumeUniversal))
 			.Aggregations(childAggs => childAggs
 				.Nested("project_tags", n => n
 					.Path(p => p.Tags)
@@ -86,8 +86,8 @@ public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTe
 			//	Minimum = FixedDate.AddYears(-1),
 			//	Maximum = FixedDate.AddYears(1),
 			//},
-			Order = new HistogramOrder { Count = SortOrder.Asc }, // TODO: Not compatible with existiing NEST
-			Missing = "2015-06-06T12:01:02.1230000", // TODO: Implement Missing accepting a date!
+			Order = new[] { AggregateOrder.KeyAscending },
+			Missing = DateTimeOffset.Parse("2015-06-06T12:01:02.1230000", styles: System.Globalization.DateTimeStyles.AssumeUniversal),
 			Aggregations = new NestedAggregation("project_tags")
 			{
 				Path = Field<Project>(p => p.Tags),

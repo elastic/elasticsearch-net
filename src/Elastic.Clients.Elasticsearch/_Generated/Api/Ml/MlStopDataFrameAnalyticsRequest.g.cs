@@ -34,10 +34,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class MlStopDataFrameAnalyticsRequest : PlainRequestBase<MlStopDataFrameAnalyticsRequestParameters>
+	public sealed partial class MlStopDataFrameAnalyticsRequest : PlainRequestBase<MlStopDataFrameAnalyticsRequestParameters>
 	{
 		public MlStopDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class MlStopDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptorBase<MlStopDataFrameAnalyticsRequestDescriptor<TDocument>, MlStopDataFrameAnalyticsRequestParameters>
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override bool SupportsBody => false;
 		public MlStopDataFrameAnalyticsRequestDescriptor<TDocument> AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
 		public MlStopDataFrameAnalyticsRequestDescriptor<TDocument> Force(bool? force = true) => Qs("force", force);
-		public MlStopDataFrameAnalyticsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public MlStopDataFrameAnalyticsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public MlStopDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);
@@ -100,7 +100,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override bool SupportsBody => false;
 		public MlStopDataFrameAnalyticsRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
 		public MlStopDataFrameAnalyticsRequestDescriptor Force(bool? force = true) => Qs("force", force);
-		public MlStopDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public MlStopDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public MlStopDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			RouteValues.Required("id", id);

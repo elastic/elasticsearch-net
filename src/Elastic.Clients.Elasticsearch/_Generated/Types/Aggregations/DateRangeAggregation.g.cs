@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("field"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						if (value is not null)
 						{
@@ -52,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("format"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("ranges"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>?>(ref reader, options);
 						if (value is not null)
 						{
@@ -74,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("time_zone"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
@@ -113,7 +117,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -140,10 +143,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Ranges, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.TimeZone))
+			if (value.TimeZone is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(value.TimeZone);
+				JsonSerializer.Serialize(writer, value.TimeZone, options);
 			}
 
 			writer.WriteEndObject();
@@ -164,26 +167,25 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(DateRangeAggregationConverter))]
-	public partial class DateRangeAggregation : BucketAggregationBase
+	public sealed partial class DateRangeAggregation : Aggregation
 	{
-		public DateRangeAggregation(string name) : base(name)
+		public DateRangeAggregation(string name) => Name = name;
+		internal DateRangeAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("ranges")]
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
 		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("time_zone")]
 		public string? TimeZone { get; set; }
 	}
 
@@ -326,12 +328,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (RangesDescriptor is not null)
 			{
 				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RangesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RangesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(RangesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RangesDescriptorActions is not null)
 			{
@@ -350,10 +356,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, RangesValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -528,12 +534,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (RangesDescriptor is not null)
 			{
 				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RangesDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RangesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("ranges");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(RangesDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RangesDescriptorActions is not null)
 			{
@@ -552,10 +562,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, RangesValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TimeZoneValue))
+			if (TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				writer.WriteStringValue(TimeZoneValue);
+				JsonSerializer.Serialize(writer, TimeZoneValue, options);
 			}
 
 			writer.WriteEndObject();

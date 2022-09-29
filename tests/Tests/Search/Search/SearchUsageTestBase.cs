@@ -14,9 +14,8 @@ namespace Tests.Search.Search
 	public abstract class SearchUsageTestBase
 		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, SearchRequestDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected TermQuery ProjectFilter = new()
+		protected TermQuery ProjectFilter = new(Field<Project>(p => p.Type))
 		{
-			Field = Field<Project>(p => p.Type),
 			Value = Project.TypeName
 		};
 

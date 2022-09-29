@@ -31,10 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Enabled { get => Q<bool?>("enabled"); set => Q("enabled", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class MlSetUpgradeModeRequest : PlainRequestBase<MlSetUpgradeModeRequestParameters>
+	public sealed partial class MlSetUpgradeModeRequest : PlainRequestBase<MlSetUpgradeModeRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningSetUpgradeMode;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Enabled { get => Q<bool?>("enabled"); set => Q("enabled", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class MlSetUpgradeModeRequestDescriptor : RequestDescriptorBase<MlSetUpgradeModeRequestDescriptor, MlSetUpgradeModeRequestParameters>
@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		public MlSetUpgradeModeRequestDescriptor Enabled(bool? enabled = true) => Qs("enabled", enabled);
-		public MlSetUpgradeModeRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public MlSetUpgradeModeRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

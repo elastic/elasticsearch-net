@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class SettingsSimilarityDfi
+	public sealed partial class SettingsSimilarityDfi
 	{
 		[JsonInclude]
 		[JsonPropertyName("independence_measure")]

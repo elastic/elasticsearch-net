@@ -24,19 +24,22 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class LengthTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class LengthTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("max")]
-		public int Max { get; set; }
+		public int? Max { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min")]
-		public int Min { get; set; }
+		public int? Min { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "length";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class LengthTokenFilterDescriptor : SerializableDescriptorBase<LengthTokenFilterDescriptor>, IBuildableDescriptor<LengthTokenFilter>
@@ -46,19 +49,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private int MaxValue { get; set; }
+		private int? MaxValue { get; set; }
 
-		private int MinValue { get; set; }
+		private int? MinValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public LengthTokenFilterDescriptor Max(int max)
+		public LengthTokenFilterDescriptor Max(int? max)
 		{
 			MaxValue = max;
 			return Self;
 		}
 
-		public LengthTokenFilterDescriptor Min(int min)
+		public LengthTokenFilterDescriptor Min(int? min)
 		{
 			MinValue = min;
 			return Self;
@@ -73,10 +76,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("max");
-			writer.WriteNumberValue(MaxValue);
-			writer.WritePropertyName("min");
-			writer.WriteNumberValue(MinValue);
+			if (MaxValue.HasValue)
+			{
+				writer.WritePropertyName("max");
+				writer.WriteNumberValue(MaxValue.Value);
+			}
+
+			if (MinValue.HasValue)
+			{
+				writer.WritePropertyName("min");
+				writer.WriteNumberValue(MinValue.Value);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("length");
 			if (VersionValue is not null)

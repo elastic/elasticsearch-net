@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlDeleteExpiredDataRequest : PlainRequestBase<MlDeleteExpiredDataRequestParameters>
+	public sealed partial class MlDeleteExpiredDataRequest : PlainRequestBase<MlDeleteExpiredDataRequestParameters>
 	{
 		public MlDeleteExpiredDataRequest()
 		{
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("timeout")]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 	}
 
 	public sealed partial class MlDeleteExpiredDataRequestDescriptor : RequestDescriptorBase<MlDeleteExpiredDataRequestDescriptor, MlDeleteExpiredDataRequestParameters>
@@ -69,7 +69,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private float? RequestsPerSecondValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? TimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 		public MlDeleteExpiredDataRequestDescriptor RequestsPerSecond(float? requestsPerSecond)
 		{
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlDeleteExpiredDataRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout)
+		public MlDeleteExpiredDataRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 		{
 			TimeoutValue = timeout;
 			return Self;

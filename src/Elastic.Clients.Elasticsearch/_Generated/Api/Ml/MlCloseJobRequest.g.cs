@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlCloseJobRequest : PlainRequestBase<MlCloseJobRequestParameters>
+	public sealed partial class MlCloseJobRequest : PlainRequestBase<MlCloseJobRequestParameters>
 	{
 		public MlCloseJobRequest(Elastic.Clients.Elasticsearch.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("timeout")]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 	}
 
 	public sealed partial class MlCloseJobRequestDescriptor : RequestDescriptorBase<MlCloseJobRequestDescriptor, MlCloseJobRequestParameters>
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private bool? ForceValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? TimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 		public MlCloseJobRequestDescriptor AllowNoMatch(bool? allowNoMatch = true)
 		{
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlCloseJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout)
+		public MlCloseJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 		{
 			TimeoutValue = timeout;
 			return Self;

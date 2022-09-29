@@ -34,10 +34,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class ExistsTemplateRequest : PlainRequestBase<ExistsTemplateRequestParameters>
+	public sealed partial class ExistsTemplateRequest : PlainRequestBase<ExistsTemplateRequestParameters>
 	{
 		public ExistsTemplateRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public sealed partial class ExistsTemplateRequestDescriptor : RequestDescriptorBase<ExistsTemplateRequestDescriptor, ExistsTemplateRequestParameters>
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 		public ExistsTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		public ExistsTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
-		public ExistsTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ExistsTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ExistsTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
 		{
 			RouteValues.Required("name", name);

@@ -22,9 +22,25 @@ public static class IndexManyExtensions
 	/// <param name="client"></param>
 	/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 	/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
+	/// <param name="type">Override the inferred typename for T</param>
+	public static BulkResponse IndexMany<T>(this ElasticsearchClient client, IEnumerable<T> @objects)
+		where T : class
+	{
+		var bulkRequest = CreateIndexBulkRequest(objects, null);
+		return client.Bulk(bulkRequest);
+	}
+
+	/// <summary>
+	/// Shortcut into the Bulk call that indexes the specified objects
+	/// <para> </para>
+	/// https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+	/// </summary>
+	/// <param name="client"></param>
+	/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+	/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
 	/// <param name="index">Override the inferred indexname for T</param>
 	/// <param name="type">Override the inferred typename for T</param>
-	public static BulkResponse IndexMany<T>(this ElasticsearchClient client, IEnumerable<T> @objects, IndexName index = null)
+	public static BulkResponse IndexMany<T>(this ElasticsearchClient client, IEnumerable<T> @objects, IndexName index)
 		where T : class
 	{
 		var bulkRequest = CreateIndexBulkRequest(objects, index);
@@ -39,9 +55,27 @@ public static class IndexManyExtensions
 	/// <param name="client"></param>
 	/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 	/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
+	/// <param name="type">Override the inferred typename for T</param>
+	public static Task<BulkResponse> IndexManyAsync<T>(this ElasticsearchClient client, IEnumerable<T> objects,
+		CancellationToken cancellationToken = default
+	)
+		where T : class
+	{
+		var bulkRequest = CreateIndexBulkRequest(objects, null);
+		return client.BulkAsync(bulkRequest, cancellationToken);
+	}
+
+	/// <summary>
+	/// Shortcut into the Bulk call that indexes the specified objects
+	/// <para> </para>
+	/// https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+	/// </summary>
+	/// <param name="client"></param>
+	/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+	/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
 	/// <param name="index">Override the inferred indexname for T</param>
 	/// <param name="type">Override the inferred typename for T</param>
-	public static Task<BulkResponse> IndexManyAsync<T>(this ElasticsearchClient client, IEnumerable<T> objects, IndexName index = null,
+	public static Task<BulkResponse> IndexManyAsync<T>(this ElasticsearchClient client, IEnumerable<T> objects, IndexName index,
 		CancellationToken cancellationToken = default
 	)
 		where T : class

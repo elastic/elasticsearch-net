@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
 
-	public partial class MlGetDataFrameAnalyticsStatsRequest : PlainRequestBase<MlGetDataFrameAnalyticsStatsRequestParameters>
+	public sealed partial class MlGetDataFrameAnalyticsStatsRequest : PlainRequestBase<MlGetDataFrameAnalyticsStatsRequestParameters>
 	{
 		public MlGetDataFrameAnalyticsStatsRequest()
 		{

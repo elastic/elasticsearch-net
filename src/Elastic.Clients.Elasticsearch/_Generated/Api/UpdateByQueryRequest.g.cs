@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public long? From { get => Q<long?>("from"); set => Q("from", value); }
@@ -67,25 +67,25 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 		[JsonIgnore]
-		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Scroll { get => Q<Elastic.Clients.Elasticsearch.Time?>("scroll"); set => Q("scroll", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 		[JsonIgnore]
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("search_timeout"); set => Q("search_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+		public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 		[JsonIgnore]
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
@@ -112,7 +112,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
-	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>
+	public sealed partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>
 	{
 		public UpdateByQueryRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
@@ -137,7 +137,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public long? From { get => Q<long?>("from"); set => Q("from", value); }
@@ -161,25 +161,25 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 		[JsonIgnore]
-		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Scroll { get => Q<Elastic.Clients.Elasticsearch.Time?>("scroll"); set => Q("scroll", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 		[JsonIgnore]
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("search_timeout"); set => Q("search_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+		public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 		[JsonIgnore]
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
@@ -191,7 +191,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public ScriptBase? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("slice")]
@@ -245,7 +245,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 		public UpdateByQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 		public UpdateByQueryRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
-		public UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public UpdateByQueryRequestDescriptor<TDocument> From(long? from) => Qs("from", from);
 		public UpdateByQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public UpdateByQueryRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
@@ -253,17 +253,17 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 		public UpdateByQueryRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		public UpdateByQueryRequestDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
-		public UpdateByQueryRequestDescriptor<TDocument> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+		public UpdateByQueryRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		public UpdateByQueryRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public UpdateByQueryRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
+		public UpdateByQueryRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
 		public UpdateByQueryRequestDescriptor<TDocument> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
-		public UpdateByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Time? searchTimeout) => Qs("search_timeout", searchTimeout);
+		public UpdateByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Duration? searchTimeout) => Qs("search_timeout", searchTimeout);
 		public UpdateByQueryRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public UpdateByQueryRequestDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
+		public UpdateByQueryRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
 		public UpdateByQueryRequestDescriptor<TDocument> Sort(IEnumerable<string>? sort) => Qs("sort", sort);
 		public UpdateByQueryRequestDescriptor<TDocument> Stats(IEnumerable<string>? stats) => Qs("stats", stats);
 		public UpdateByQueryRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
-		public UpdateByQueryRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public UpdateByQueryRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public UpdateByQueryRequestDescriptor<TDocument> Version(bool? version = true) => Qs("version", version);
 		public UpdateByQueryRequestDescriptor<TDocument> VersionType(bool? versionType = true) => Qs("version_type", versionType);
 		public UpdateByQueryRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
@@ -280,12 +280,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
 		private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
@@ -295,6 +289,8 @@ namespace Elastic.Clients.Elasticsearch
 		private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
 
 		private long? MaxDocsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		public UpdateByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -317,30 +313,6 @@ namespace Elastic.Clients.Elasticsearch
 			QueryValue = null;
 			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
 			return Self;
 		}
 
@@ -380,6 +352,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public UpdateByQueryRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -397,22 +375,6 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("query");
 				JsonSerializer.Serialize(writer, QueryValue, options);
-			}
-
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (SliceDescriptor is not null)
@@ -443,6 +405,12 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteNumberValue(MaxDocsValue.Value);
 			}
 
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -466,7 +434,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 		public UpdateByQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 		public UpdateByQueryRequestDescriptor Df(string? df) => Qs("df", df);
-		public UpdateByQueryRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public UpdateByQueryRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public UpdateByQueryRequestDescriptor From(long? from) => Qs("from", from);
 		public UpdateByQueryRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public UpdateByQueryRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
@@ -474,17 +442,17 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryRequestDescriptor Preference(string? preference) => Qs("preference", preference);
 		public UpdateByQueryRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		public UpdateByQueryRequestDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
-		public UpdateByQueryRequestDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+		public UpdateByQueryRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		public UpdateByQueryRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public UpdateByQueryRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
+		public UpdateByQueryRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
 		public UpdateByQueryRequestDescriptor ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
-		public UpdateByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Time? searchTimeout) => Qs("search_timeout", searchTimeout);
+		public UpdateByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Duration? searchTimeout) => Qs("search_timeout", searchTimeout);
 		public UpdateByQueryRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public UpdateByQueryRequestDescriptor Slices(long? slices) => Qs("slices", slices);
+		public UpdateByQueryRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
 		public UpdateByQueryRequestDescriptor Sort(IEnumerable<string>? sort) => Qs("sort", sort);
 		public UpdateByQueryRequestDescriptor Stats(IEnumerable<string>? stats) => Qs("stats", stats);
 		public UpdateByQueryRequestDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
-		public UpdateByQueryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public UpdateByQueryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public UpdateByQueryRequestDescriptor Version(bool? version = true) => Qs("version", version);
 		public UpdateByQueryRequestDescriptor VersionType(bool? versionType = true) => Qs("version_type", versionType);
 		public UpdateByQueryRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
@@ -501,12 +469,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
 		private SlicedScrollDescriptor SliceDescriptor { get; set; }
@@ -516,6 +478,8 @@ namespace Elastic.Clients.Elasticsearch
 		private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
 
 		private long? MaxDocsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		public UpdateByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
@@ -538,30 +502,6 @@ namespace Elastic.Clients.Elasticsearch
 			QueryValue = null;
 			QueryDescriptor = null;
 			QueryDescriptorAction = configure;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public UpdateByQueryRequestDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
 			return Self;
 		}
 
@@ -601,6 +541,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public UpdateByQueryRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -618,22 +564,6 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("query");
 				JsonSerializer.Serialize(writer, QueryValue, options);
-			}
-
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (SliceDescriptor is not null)
@@ -662,6 +592,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("max_docs");
 				writer.WriteNumberValue(MaxDocsValue.Value);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			writer.WriteEndObject();

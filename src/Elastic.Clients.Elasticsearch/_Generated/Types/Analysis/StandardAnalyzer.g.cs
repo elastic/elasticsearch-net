@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class StandardAnalyzer : IAnalyzer
+	public sealed partial class StandardAnalyzer : IAnalyzer
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
@@ -32,7 +32,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
+		[JsonConverter(typeof(StopWordsConverter))]
+		public IEnumerable<string>? Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -48,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		private int? MaxTokenLengthValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
+		private IEnumerable<string>? StopwordsValue { get; set; }
 
 		public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength)
 		{
@@ -56,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			return Self;
 		}
 
-		public StandardAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
+		public StandardAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
 		{
 			StopwordsValue = stopwords;
 			return Self;
@@ -74,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			if (StopwordsValue is not null)
 			{
 				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, StopwordsValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
 			}
 
 			writer.WritePropertyName("type");

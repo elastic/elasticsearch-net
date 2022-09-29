@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 	}
 
-	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>
+	public sealed partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>
 	{
 		public ValidateQueryRequest()
 		{
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
@@ -134,7 +134,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public ValidateQueryRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 		public ValidateQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 		public ValidateQueryRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
-		public ValidateQueryRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ValidateQueryRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public ValidateQueryRequestDescriptor<TDocument> Explain(bool? explain = true) => Qs("explain", explain);
 		public ValidateQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public ValidateQueryRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public ValidateQueryRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 		public ValidateQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 		public ValidateQueryRequestDescriptor Df(string? df) => Qs("df", df);
-		public ValidateQueryRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ValidateQueryRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public ValidateQueryRequestDescriptor Explain(bool? explain = true) => Qs("explain", explain);
 		public ValidateQueryRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public ValidateQueryRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);

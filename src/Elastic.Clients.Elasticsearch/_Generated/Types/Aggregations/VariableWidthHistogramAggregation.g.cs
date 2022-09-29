@@ -41,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("buckets"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -52,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("field"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("initial_buffer"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -74,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("shard_size"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
@@ -102,7 +106,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -147,26 +150,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(VariableWidthHistogramAggregationConverter))]
-	public partial class VariableWidthHistogramAggregation : AggregationBase
+	public sealed partial class VariableWidthHistogramAggregation : Aggregation
 	{
-		public VariableWidthHistogramAggregation(string name) : base(name)
+		public VariableWidthHistogramAggregation(string name) => Name = name;
+		internal VariableWidthHistogramAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("buckets")]
 		public int? Buckets { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("initial_buffer")]
 		public int? InitialBuffer { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public override string? Name { get; internal set; }
+
 		public int? ShardSize { get; set; }
 	}
 

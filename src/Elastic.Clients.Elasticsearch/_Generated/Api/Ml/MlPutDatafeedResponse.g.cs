@@ -29,6 +29,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer> Aggregations { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("authorization")]
+		public Elastic.Clients.Elasticsearch.Ml.DatafeedAuthorization? Authorization { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("chunking_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig ChunkingConfig { get; init; }
 
@@ -42,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("frequency")]
-		public Elastic.Clients.Elasticsearch.Time Frequency { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration Frequency { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
@@ -66,11 +70,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("query_delay")]
-		public Elastic.Clients.Elasticsearch.Time QueryDelay { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration QueryDelay { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]

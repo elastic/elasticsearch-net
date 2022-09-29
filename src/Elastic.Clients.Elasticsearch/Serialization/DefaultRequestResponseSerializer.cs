@@ -13,19 +13,10 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal class CustomizedNamingPolicy : JsonNamingPolicy
-{
-	private readonly Func<string, string> _namingAction;
-
-	public CustomizedNamingPolicy(Func<string, string> namingAction) => _namingAction = namingAction;
-
-	public override string ConvertName(string name) => _namingAction(name);
-}
-
 /// <summary>
 /// The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.
 /// </summary>
-internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
+internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 {
 	private readonly IElasticsearchClientSettings _settings;
 
@@ -37,6 +28,7 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 			IncludeFields = true,
 			Converters =
 				{
+					new KeyValuePairConverterFactory(settings),
 					new SourceConverterFactory(settings),
 					new ReadOnlyIndexNameDictionaryConverterFactory(settings),
 					new CalendarIntervalConverter(),
@@ -45,7 +37,6 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 					new IdConverter(settings),
 					new FieldConverter(settings),
 					new FieldValuesConverter(settings),
-					new SortCollectionConverter(settings),
 					new LazyDocumentConverter(settings),
 					new RelationNameConverter(settings),
 					new JoinFieldConverter(settings),
@@ -55,13 +46,16 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 					new SelfDeserializableConverterFactory(settings),
 					new SelfTwoWaySerializableConverterFactory(settings),
 					new IndicesJsonConverter(settings),
-					new DictionaryConverter(settings),
-					new PropertyNameConverter(settings),
+					new IdsConverter(settings),
 					new IsADictionaryConverter(),
-					new UnionConverter()
+					new ResponseItemConverterFactory(),
+					new UnionConverter(),
+					new ExtraSerializationData(settings)
 				},
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 		};
+
+		ElasticsearchClient.SettingsTable.Add(Options, settings);
 
 		_settings = settings;
 	}

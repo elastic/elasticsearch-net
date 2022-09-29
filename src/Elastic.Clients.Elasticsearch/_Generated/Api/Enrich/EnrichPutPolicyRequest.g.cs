@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 	{
 	}
 
-	public partial class EnrichPutPolicyRequest : PlainRequestBase<EnrichPutPolicyRequestParameters>
+	public sealed partial class EnrichPutPolicyRequest : PlainRequestBase<EnrichPutPolicyRequestParameters>
 	{
 		public EnrichPutPolicyRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
@@ -45,6 +45,10 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.Enrich.Policy? Match { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("range")]
+		public Elastic.Clients.Elasticsearch.Enrich.Policy? Range { get; set; }
 	}
 
 	public sealed partial class EnrichPutPolicyRequestDescriptor<TDocument> : RequestDescriptorBase<EnrichPutPolicyRequestDescriptor<TDocument>, EnrichPutPolicyRequestParameters>
@@ -78,6 +82,12 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		private PolicyDescriptor<TDocument> MatchDescriptor { get; set; }
 
 		private Action<PolicyDescriptor<TDocument>> MatchDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Enrich.Policy? RangeValue { get; set; }
+
+		private PolicyDescriptor<TDocument> RangeDescriptor { get; set; }
+
+		private Action<PolicyDescriptor<TDocument>> RangeDescriptorAction { get; set; }
 
 		public EnrichPutPolicyRequestDescriptor<TDocument> GeoMatch(Elastic.Clients.Elasticsearch.Enrich.Policy? geoMatch)
 		{
@@ -127,6 +137,30 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return Self;
 		}
 
+		public EnrichPutPolicyRequestDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Enrich.Policy? range)
+		{
+			RangeDescriptor = null;
+			RangeDescriptorAction = null;
+			RangeValue = range;
+			return Self;
+		}
+
+		public EnrichPutPolicyRequestDescriptor<TDocument> Range(PolicyDescriptor<TDocument> descriptor)
+		{
+			RangeValue = null;
+			RangeDescriptorAction = null;
+			RangeDescriptor = descriptor;
+			return Self;
+		}
+
+		public EnrichPutPolicyRequestDescriptor<TDocument> Range(Action<PolicyDescriptor<TDocument>> configure)
+		{
+			RangeValue = null;
+			RangeDescriptor = null;
+			RangeDescriptorAction = configure;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -160,6 +194,22 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			{
 				writer.WritePropertyName("match");
 				JsonSerializer.Serialize(writer, MatchValue, options);
+			}
+
+			if (RangeDescriptor is not null)
+			{
+				writer.WritePropertyName("range");
+				JsonSerializer.Serialize(writer, RangeDescriptor, options);
+			}
+			else if (RangeDescriptorAction is not null)
+			{
+				writer.WritePropertyName("range");
+				JsonSerializer.Serialize(writer, new PolicyDescriptor<TDocument>(RangeDescriptorAction), options);
+			}
+			else if (RangeValue is not null)
+			{
+				writer.WritePropertyName("range");
+				JsonSerializer.Serialize(writer, RangeValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -197,6 +247,12 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		private PolicyDescriptor MatchDescriptor { get; set; }
 
 		private Action<PolicyDescriptor> MatchDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Enrich.Policy? RangeValue { get; set; }
+
+		private PolicyDescriptor RangeDescriptor { get; set; }
+
+		private Action<PolicyDescriptor> RangeDescriptorAction { get; set; }
 
 		public EnrichPutPolicyRequestDescriptor GeoMatch(Elastic.Clients.Elasticsearch.Enrich.Policy? geoMatch)
 		{
@@ -246,6 +302,30 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return Self;
 		}
 
+		public EnrichPutPolicyRequestDescriptor Range(Elastic.Clients.Elasticsearch.Enrich.Policy? range)
+		{
+			RangeDescriptor = null;
+			RangeDescriptorAction = null;
+			RangeValue = range;
+			return Self;
+		}
+
+		public EnrichPutPolicyRequestDescriptor Range(PolicyDescriptor descriptor)
+		{
+			RangeValue = null;
+			RangeDescriptorAction = null;
+			RangeDescriptor = descriptor;
+			return Self;
+		}
+
+		public EnrichPutPolicyRequestDescriptor Range(Action<PolicyDescriptor> configure)
+		{
+			RangeValue = null;
+			RangeDescriptor = null;
+			RangeDescriptorAction = configure;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -279,6 +359,22 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			{
 				writer.WritePropertyName("match");
 				JsonSerializer.Serialize(writer, MatchValue, options);
+			}
+
+			if (RangeDescriptor is not null)
+			{
+				writer.WritePropertyName("range");
+				JsonSerializer.Serialize(writer, RangeDescriptor, options);
+			}
+			else if (RangeDescriptorAction is not null)
+			{
+				writer.WritePropertyName("range");
+				JsonSerializer.Serialize(writer, new PolicyDescriptor(RangeDescriptorAction), options);
+			}
+			else if (RangeValue is not null)
+			{
+				writer.WritePropertyName("range");
+				JsonSerializer.Serialize(writer, RangeValue, options);
 			}
 
 			writer.WriteEndObject();

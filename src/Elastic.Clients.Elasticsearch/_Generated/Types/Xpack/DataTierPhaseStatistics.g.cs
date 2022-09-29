@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class DataTierPhaseStatistics
+	public sealed partial class DataTierPhaseStatistics
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]

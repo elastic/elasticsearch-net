@@ -24,30 +24,21 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	internal sealed class TermQueryConverter : FieldNameQueryConverterBase<TermQuery>
+	internal sealed class TermQueryConverter : JsonConverter<TermQuery>
 	{
-		internal override TermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override TermQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var variant = new TermQuery();
+			reader.Read();
+			var fieldName = reader.GetString();
+			reader.Read();
+			var variant = new TermQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
-					if (property == "case_insensitive")
-					{
-						variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "value")
-					{
-						variant.Value = JsonSerializer.Deserialize<object>(ref reader, options);
-						continue;
-					}
-
 					if (property == "_name")
 					{
 						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -59,6 +50,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
 						continue;
 					}
+
+					if (property == "case_insensitive")
+					{
+						variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "value")
+					{
+						variant.Value = JsonSerializer.Deserialize<object>(ref reader, options);
+						continue;
+					}
 				}
 			}
 
@@ -66,52 +69,84 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return variant;
 		}
 
-		internal override void WriteInternal(Utf8JsonWriter writer, TermQuery value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, TermQuery value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
-			if (value.CaseInsensitive.HasValue)
+			if (value.Field is null)
+				throw new JsonException("Unable to serialize TermQuery because the `Field` property is not set. Field name queries must include a valid field name.");
+			if (options.TryGetClientSettings(out var settings))
 			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+				writer.WriteStartObject();
+				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+				writer.WriteStartObject();
+				if (!string.IsNullOrEmpty(value.QueryName))
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteStringValue(value.QueryName);
+				}
+
+				if (value.Boost.HasValue)
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteNumberValue(value.Boost.Value);
+				}
+
+				if (value.CaseInsensitive.HasValue)
+				{
+					writer.WritePropertyName("case_insensitive");
+					writer.WriteBooleanValue(value.CaseInsensitive.Value);
+				}
+
+				writer.WritePropertyName("value");
+				JsonSerializer.Serialize(writer, value.Value, options);
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+				return;
 			}
 
-			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, value.Value, options);
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			writer.WriteEndObject();
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		}
 	}
 
 	[JsonConverter(typeof(TermQueryConverter))]
-	public partial class TermQuery : FieldNameQueryBase, IQueryContainerVariant
+	public sealed partial class TermQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "term";
-		[JsonInclude]
-		[JsonPropertyName("case_insensitive")]
+		public TermQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
+		public string? QueryName { get; set; }
+
+		public float? Boost { get; set; }
+
 		public bool? CaseInsensitive { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("value")]
 		public object Value { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
 	public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescriptorBase<TermQueryDescriptor<TDocument>>
 	{
 		internal TermQueryDescriptor(Action<TermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public TermQueryDescriptor() : base()
+		internal TermQueryDescriptor() : base()
 		{
+		}
+
+		public TermQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
+		}
+
+		public TermQueryDescriptor(Expression<Func<TDocument, object>> field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -120,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private bool? CaseInsensitiveValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private object ValueValue { get; set; }
 
@@ -142,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public TermQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public TermQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -162,6 +197,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
@@ -193,8 +230,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class TermQueryDescriptor : SerializableDescriptorBase<TermQueryDescriptor>
 	{
 		internal TermQueryDescriptor(Action<TermQueryDescriptor> configure) => configure.Invoke(this);
-		public TermQueryDescriptor() : base()
+		internal TermQueryDescriptor() : base()
 		{
+		}
+
+		public TermQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -203,7 +247,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private bool? CaseInsensitiveValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private object ValueValue { get; set; }
 
@@ -225,7 +269,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public TermQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public TermQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -251,6 +295,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();

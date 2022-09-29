@@ -39,19 +39,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("mode"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortMode?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Mode = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("fields"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
 						if (value is not null)
 						{
@@ -63,10 +53,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("missing"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, double>?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Missing = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("mode"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortMode?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Mode = value;
 						}
 
 						continue;
@@ -91,7 +94,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -100,12 +102,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("matrix_stats");
 			writer.WriteStartObject();
-			if (value.Mode is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, value.Mode, options);
-			}
-
 			if (value.Fields is not null)
 			{
 				writer.WritePropertyName("fields");
@@ -116,6 +112,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("missing");
 				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
+			if (value.Mode is not null)
+			{
+				writer.WritePropertyName("mode");
+				JsonSerializer.Serialize(writer, value.Mode, options);
 			}
 
 			writer.WriteEndObject();
@@ -130,15 +132,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(MatrixStatsAggregationConverter))]
-	public partial class MatrixStatsAggregation : MatrixAggregationBase
+	public sealed partial class MatrixStatsAggregation : Aggregation
 	{
-		public MatrixStatsAggregation(string name) : base(name)
+		public MatrixStatsAggregation(string name) => Name = name;
+		internal MatrixStatsAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("mode")]
+		public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
+
 		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
+
+		public override string? Name { get; internal set; }
 	}
 
 	public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : SerializableDescriptorBase<MatrixStatsAggregationDescriptor<TDocument>>

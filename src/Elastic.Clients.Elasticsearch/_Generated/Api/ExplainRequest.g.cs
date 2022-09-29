@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 	}
 
-	public partial class ExplainRequest : PlainRequestBase<ExplainRequestParameters>
+	public sealed partial class ExplainRequest : PlainRequestBase<ExplainRequestParameters>
 	{
 		public ExplainRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 		{

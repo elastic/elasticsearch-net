@@ -57,12 +57,20 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.TaskId? Task { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("throttled")]
+		public Elastic.Clients.Elasticsearch.Duration? Throttled { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("throttled_millis")]
-		public long? ThrottledMillis { get; init; }
+		public long ThrottledMillis { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("throttled_until")]
+		public Elastic.Clients.Elasticsearch.Duration? ThrottledUntil { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("throttled_until_millis")]
-		public long? ThrottledUntilMillis { get; init; }
+		public long ThrottledUntilMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timed_out")]

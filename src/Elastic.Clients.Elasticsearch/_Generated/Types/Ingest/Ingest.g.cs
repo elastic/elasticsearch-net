@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class Ingest
+	public sealed partial class Ingest
 	{
 		[JsonInclude]
 		[JsonPropertyName("pipeline")]
@@ -32,6 +32,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]
-		public string Timestamp { get; init; }
+		public DateTimeOffset Timestamp { get; init; }
 	}
 }

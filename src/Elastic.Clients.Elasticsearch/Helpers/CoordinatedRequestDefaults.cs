@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Elastic.Clients.Elasticsearch.Helpers;
+namespace Elastic.Clients.Elasticsearch;
 
 internal static class CoordinatedRequestDefaults
 {

@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 	}
 
-	public partial class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>
+	public sealed partial class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>
 	{
 		public IndexRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
 		{
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
@@ -114,15 +114,22 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed partial class IndexRequestDescriptor<TDocument> : RequestDescriptorBase<IndexRequestDescriptor<TDocument>, IndexRequestParameters>
 	{
 		internal IndexRequestDescriptor(Action<IndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
+		internal IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
 		{
 		}
 
-		internal IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+		public IndexRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document)) => DocumentValue = document;
+		public IndexRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id) => DocumentValue = document;
+		public IndexRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document)) => DocumentValue = document;
+		public IndexRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id) => DocumentValue = document;
+		public IndexRequestDescriptor(Id id) : this(typeof(TDocument), id)
 		{
 		}
 
-		public IndexRequestDescriptor(TDocument document) : this(typeof(TDocument)) => DocumentValue = document;
+		public IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+		{
+		}
+
 		internal IndexRequestDescriptor()
 		{
 		}
@@ -137,7 +144,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IndexRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
 		public IndexRequestDescriptor<TDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
 		public IndexRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public IndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public IndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public IndexRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		public IndexRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 		public IndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);

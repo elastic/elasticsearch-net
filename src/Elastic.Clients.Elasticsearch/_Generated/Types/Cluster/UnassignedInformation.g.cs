@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class UnassignedInformation
+	public sealed partial class UnassignedInformation
 	{
 		[JsonInclude]
 		[JsonPropertyName("allocation_status")]
@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("at")]
-		public string At { get; init; }
+		public DateTimeOffset At { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("delayed")]

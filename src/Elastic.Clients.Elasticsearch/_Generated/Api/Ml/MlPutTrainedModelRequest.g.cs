@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? DeferDefinitionDecompression { get => Q<bool?>("defer_definition_decompression"); set => Q("defer_definition_decompression", value); }
 	}
 
-	public partial class MlPutTrainedModelRequest : PlainRequestBase<MlPutTrainedModelRequestParameters>
+	public sealed partial class MlPutTrainedModelRequest : PlainRequestBase<MlPutTrainedModelRequestParameters>
 	{
 		public MlPutTrainedModelRequest(Elastic.Clients.Elasticsearch.Id model_id) : base(r => r.Required("model_id", model_id))
 		{

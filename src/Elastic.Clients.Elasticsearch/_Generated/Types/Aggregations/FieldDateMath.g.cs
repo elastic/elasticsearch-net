@@ -25,13 +25,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class FieldDateMath : Union<string?, double?>
+	public partial class FieldDateMath : Union<Elastic.Clients.Elasticsearch.DateMath, double>
 	{
-		public FieldDateMath(string? item) : base(item)
+		public FieldDateMath(Elastic.Clients.Elasticsearch.DateMath dateMath) : base(dateMath)
 		{
 		}
 
-		public FieldDateMath(double? item) : base(item)
+		public FieldDateMath(double fieldDateMath) : base(fieldDateMath)
 		{
 		}
 	}

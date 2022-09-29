@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 	}
 
-	public partial class RankEvalRequest : PlainRequestBase<RankEvalRequestParameters>
+	public sealed partial class RankEvalRequest : PlainRequestBase<RankEvalRequestParameters>
 	{
 		public RankEvalRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public RankEvalRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public RankEvalRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public RankEvalRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public RankEvalRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public RankEvalRequestDescriptor<TDocument> SearchType(string? searchType) => Qs("search_type", searchType);
 		public RankEvalRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
@@ -174,12 +174,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (RequestsDescriptor is not null)
 			{
 				writer.WritePropertyName("requests");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RequestsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RequestsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("requests");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new RankEvalRequestItemDescriptor<TDocument>(RequestsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RequestsDescriptorActions is not null)
 			{
@@ -233,7 +237,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public RankEvalRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public RankEvalRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public RankEvalRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public RankEvalRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public RankEvalRequestDescriptor SearchType(string? searchType) => Qs("search_type", searchType);
 		public RankEvalRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
@@ -322,12 +326,16 @@ namespace Elastic.Clients.Elasticsearch
 			if (RequestsDescriptor is not null)
 			{
 				writer.WritePropertyName("requests");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, RequestsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (RequestsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("requests");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new RankEvalRequestItemDescriptor(RequestsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (RequestsDescriptorActions is not null)
 			{

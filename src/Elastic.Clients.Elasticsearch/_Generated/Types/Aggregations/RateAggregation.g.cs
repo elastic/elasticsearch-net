@@ -39,41 +39,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("mode"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RateMode?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Mode = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("unit"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Unit = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("format"))
-					{
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("field"))
 					{
+						reader.Read();
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						if (value is not null)
 						{
@@ -83,12 +51,49 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("format"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("mode"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RateMode?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Mode = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("script"))
 					{
-						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("unit"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Unit = value;
 						}
 
 						continue;
@@ -113,7 +118,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				}
 			}
 
-			reader.Read();
 			return agg;
 		}
 
@@ -122,16 +126,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("rate");
 			writer.WriteStartObject();
-			if (value.Mode is not null)
+			if (value.Field is not null)
 			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, value.Mode, options);
-			}
-
-			if (value.Unit is not null)
-			{
-				writer.WritePropertyName("unit");
-				JsonSerializer.Serialize(writer, value.Unit, options);
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
 			if (!string.IsNullOrEmpty(value.Format))
@@ -140,16 +138,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(value.Format);
 			}
 
-			if (value.Field is not null)
+			if (value.Mode is not null)
 			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
+				writer.WritePropertyName("mode");
+				JsonSerializer.Serialize(writer, value.Mode, options);
 			}
 
 			if (value.Script is not null)
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			if (value.Unit is not null)
+			{
+				writer.WritePropertyName("unit");
+				JsonSerializer.Serialize(writer, value.Unit, options);
 			}
 
 			writer.WriteEndObject();
@@ -164,19 +168,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(RateAggregationConverter))]
-	public partial class RateAggregation : FormatMetricAggregationBase
+	public sealed partial class RateAggregation : Aggregation
 	{
-		public RateAggregation(string name, Field field) : base(name) => Field = field;
-		public RateAggregation(string name) : base(name)
+		public RateAggregation(string name, Field field) : this(name) => Field = field;
+		public RateAggregation(string name) => Name = name;
+		internal RateAggregation()
 		{
 		}
 
-		[JsonInclude]
-		[JsonPropertyName("mode")]
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+		public string? Format { get; set; }
+
+		public Dictionary<string, object>? Meta { get; set; }
+
 		public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("unit")]
+		public override string? Name { get; internal set; }
+
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
 		public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? Unit { get; set; }
 	}
 
@@ -187,12 +198,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private string? FormatValue { get; set; }
@@ -201,31 +206,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Aggregations.RateMode? ModeValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? UnitValue { get; set; }
-
-		public RateAggregationDescriptor<TDocument> Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public RateAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public RateAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
 
 		public RateAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 		{
@@ -257,6 +240,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public RateAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public RateAggregationDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit)
 		{
 			UnitValue = unit;
@@ -268,22 +257,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("rate");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
@@ -300,6 +273,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("mode");
 				JsonSerializer.Serialize(writer, ModeValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (UnitValue is not null)
@@ -326,12 +305,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private ScriptBase? ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private string? FormatValue { get; set; }
@@ -340,31 +313,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Elastic.Clients.Elasticsearch.Aggregations.RateMode? ModeValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? UnitValue { get; set; }
-
-		public RateAggregationDescriptor Script(ScriptBase? script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public RateAggregationDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public RateAggregationDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
 
 		public RateAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 		{
@@ -402,6 +353,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public RateAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public RateAggregationDescriptor Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit)
 		{
 			UnitValue = unit;
@@ -413,22 +370,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("rate");
 			writer.WriteStartObject();
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
@@ -445,6 +386,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("mode");
 				JsonSerializer.Serialize(writer, ModeValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (UnitValue is not null)

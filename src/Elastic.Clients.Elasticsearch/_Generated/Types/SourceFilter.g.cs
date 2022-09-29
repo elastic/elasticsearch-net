@@ -24,14 +24,59 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class SourceFilter
+	internal sealed class SourceFilterConverter : JsonConverter<SourceFilter>
 	{
-		[JsonInclude]
-		[JsonPropertyName("excludes")]
+		public override SourceFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new SourceFilter();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "excludes" || property == "exclude")
+					{
+						variant.Excludes = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "includes" || property == "include")
+					{
+						variant.Includes = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SourceFilter value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Excludes is not null)
+			{
+				writer.WritePropertyName("excludes");
+				JsonSerializer.Serialize(writer, value.Excludes, options);
+			}
+
+			if (value.Includes is not null)
+			{
+				writer.WritePropertyName("includes");
+				JsonSerializer.Serialize(writer, value.Includes, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(SourceFilterConverter))]
+	public sealed partial class SourceFilter
+	{
 		public Elastic.Clients.Elasticsearch.Fields? Excludes { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("includes")]
 		public Elastic.Clients.Elasticsearch.Fields? Includes { get; set; }
 	}
 

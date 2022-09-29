@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class TaskFailure
+	public sealed partial class TaskFailure
 	{
 		[JsonInclude]
 		[JsonPropertyName("node_id")]

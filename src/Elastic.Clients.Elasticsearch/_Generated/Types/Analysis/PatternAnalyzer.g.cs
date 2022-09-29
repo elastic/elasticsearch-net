@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class PatternAnalyzer : IAnalyzer
+	public sealed partial class PatternAnalyzer : IAnalyzer
 	{
 		[JsonInclude]
 		[JsonPropertyName("flags")]
@@ -40,7 +40,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
-		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
+		[JsonConverter(typeof(StopWordsConverter))]
+		public IEnumerable<string>? Stopwords { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -63,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		private string PatternValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
+		private IEnumerable<string>? StopwordsValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
@@ -85,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			return Self;
 		}
 
-		public PatternAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
+		public PatternAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
 		{
 			StopwordsValue = stopwords;
 			return Self;
@@ -117,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			if (StopwordsValue is not null)
 			{
 				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, StopwordsValue, options);
+				SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
 			}
 
 			writer.WritePropertyName("type");

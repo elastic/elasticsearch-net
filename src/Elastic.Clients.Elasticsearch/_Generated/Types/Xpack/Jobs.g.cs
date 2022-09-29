@@ -24,10 +24,45 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class Jobs
+	internal sealed class JobsConverter : JsonConverter<Jobs>
 	{
-		[JsonInclude]
-		[JsonPropertyName("_all")]
+		public override Jobs Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			Elastic.Clients.Elasticsearch.Xpack.AllJobs? all = default;
+			Dictionary<string, Elastic.Clients.Elasticsearch.Ml.Job> additionalProperties = null;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "_all")
+					{
+						all = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Xpack.AllJobs?>(ref reader, options);
+						continue;
+					}
+
+					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Ml.Job>();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.Job>(ref reader, options);
+					additionalProperties.Add(property, value);
+				}
+			}
+
+			return new Jobs { All = all, JobsDictionary = additionalProperties };
+		}
+
+		public override void Write(Utf8JsonWriter writer, Jobs value, JsonSerializerOptions options)
+		{
+			throw new NotImplementedException("'Jobs' is a readonly type, used only on responses and does not support being written to JSON.");
+		}
+	}
+
+	[JsonConverter(typeof(JobsConverter))]
+	public sealed partial class Jobs
+	{
 		public Elastic.Clients.Elasticsearch.Xpack.AllJobs? All { get; init; }
+
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Ml.Job> JobsDictionary { get; init; }
 	}
 }

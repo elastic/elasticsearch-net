@@ -28,13 +28,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	public sealed class ClusterExistsComponentTemplateRequestParameters : RequestParameters<ClusterExistsComponentTemplateRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public partial class ClusterExistsComponentTemplateRequest : PlainRequestBase<ClusterExistsComponentTemplateRequestParameters>
+	public sealed partial class ClusterExistsComponentTemplateRequest : PlainRequestBase<ClusterExistsComponentTemplateRequestParameters>
 	{
 		public ClusterExistsComponentTemplateRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
 		public ClusterExistsComponentTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
-		public ClusterExistsComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterExistsComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterExistsComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
 		{
 			RouteValues.Required("name", name);

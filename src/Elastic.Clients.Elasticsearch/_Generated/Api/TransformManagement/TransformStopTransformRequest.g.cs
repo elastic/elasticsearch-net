@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public bool? WaitForCheckpoint { get => Q<bool?>("wait_for_checkpoint"); set => Q("wait_for_checkpoint", value); }
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
-	public partial class TransformStopTransformRequest : PlainRequestBase<TransformStopTransformRequestParameters>
+	public sealed partial class TransformStopTransformRequest : PlainRequestBase<TransformStopTransformRequestParameters>
 	{
 		public TransformStopTransformRequest(Elastic.Clients.Elasticsearch.Name transform_id) : base(r => r.Required("transform_id", transform_id))
 		{
@@ -59,7 +59,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public bool? WaitForCheckpoint { get => Q<bool?>("wait_for_checkpoint"); set => Q("wait_for_checkpoint", value); }
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		protected override bool SupportsBody => false;
 		public TransformStopTransformRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
 		public TransformStopTransformRequestDescriptor Force(bool? force = true) => Qs("force", force);
-		public TransformStopTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public TransformStopTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public TransformStopTransformRequestDescriptor WaitForCheckpoint(bool? waitForCheckpoint = true) => Qs("wait_for_checkpoint", waitForCheckpoint);
 		public TransformStopTransformRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		public TransformStopTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Name transform_id)

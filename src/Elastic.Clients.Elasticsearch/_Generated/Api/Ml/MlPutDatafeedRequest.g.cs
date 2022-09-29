@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
@@ -40,9 +40,206 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	public partial class MlPutDatafeedRequest : PlainRequestBase<MlPutDatafeedRequestParameters>
+	internal sealed class MlPutDatafeedRequestConverter : JsonConverter<MlPutDatafeedRequest>
+	{
+		public override MlPutDatafeedRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new MlPutDatafeedRequest();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "aggregations")
+					{
+						variant.Aggregations = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "chunking_config")
+					{
+						variant.ChunkingConfig = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.ChunkingConfig?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "delayed_data_check_config")
+					{
+						variant.DelayedDataCheckConfig = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "frequency")
+					{
+						variant.Frequency = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "indices" || property == "indexes")
+					{
+						variant.Indices = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Indices?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "indices_options")
+					{
+						variant.IndicesOptions = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndicesOptions?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "job_id")
+					{
+						variant.JobId = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Id?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "max_empty_searches")
+					{
+						variant.MaxEmptySearches = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "query")
+					{
+						variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "query_delay")
+					{
+						variant.QueryDelay = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "runtime_mappings")
+					{
+						variant.RuntimeMappings = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "script_fields")
+					{
+						variant.ScriptFields = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "scroll_size")
+					{
+						variant.ScrollSize = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "headers")
+					{
+						variant.Headers = JsonSerializer.Deserialize<Dictionary<string, IEnumerable<string>>?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, MlPutDatafeedRequest value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Aggregations is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, value.Aggregations, options);
+			}
+
+			if (value.ChunkingConfig is not null)
+			{
+				writer.WritePropertyName("chunking_config");
+				JsonSerializer.Serialize(writer, value.ChunkingConfig, options);
+			}
+
+			if (value.DelayedDataCheckConfig is not null)
+			{
+				writer.WritePropertyName("delayed_data_check_config");
+				JsonSerializer.Serialize(writer, value.DelayedDataCheckConfig, options);
+			}
+
+			if (value.Frequency is not null)
+			{
+				writer.WritePropertyName("frequency");
+				JsonSerializer.Serialize(writer, value.Frequency, options);
+			}
+
+			if (value.Indices is not null)
+			{
+				writer.WritePropertyName("indices");
+				JsonSerializer.Serialize(writer, value.Indices, options);
+			}
+
+			if (value.IndicesOptions is not null)
+			{
+				writer.WritePropertyName("indices_options");
+				JsonSerializer.Serialize(writer, value.IndicesOptions, options);
+			}
+
+			if (value.JobId is not null)
+			{
+				writer.WritePropertyName("job_id");
+				JsonSerializer.Serialize(writer, value.JobId, options);
+			}
+
+			if (value.MaxEmptySearches.HasValue)
+			{
+				writer.WritePropertyName("max_empty_searches");
+				writer.WriteNumberValue(value.MaxEmptySearches.Value);
+			}
+
+			if (value.Query is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.Query, options);
+			}
+
+			if (value.QueryDelay is not null)
+			{
+				writer.WritePropertyName("query_delay");
+				JsonSerializer.Serialize(writer, value.QueryDelay, options);
+			}
+
+			if (value.RuntimeMappings is not null)
+			{
+				writer.WritePropertyName("runtime_mappings");
+				JsonSerializer.Serialize(writer, value.RuntimeMappings, options);
+			}
+
+			if (value.ScriptFields is not null)
+			{
+				writer.WritePropertyName("script_fields");
+				JsonSerializer.Serialize(writer, value.ScriptFields, options);
+			}
+
+			if (value.ScrollSize.HasValue)
+			{
+				writer.WritePropertyName("scroll_size");
+				writer.WriteNumberValue(value.ScrollSize.Value);
+			}
+
+			if (value.Headers is not null)
+			{
+				writer.WritePropertyName("headers");
+				JsonSerializer.Serialize(writer, value.Headers, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(MlPutDatafeedRequestConverter))]
+	public sealed partial class MlPutDatafeedRequest : PlainRequestBase<MlPutDatafeedRequestParameters>
 	{
 		public MlPutDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
+		{
+		}
+
+		internal MlPutDatafeedRequest()
 		{
 		}
 
@@ -53,7 +250,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
 		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
@@ -75,7 +272,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("frequency")]
-		public Elastic.Clients.Elasticsearch.Time? Frequency { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
@@ -99,11 +296,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("query_delay")]
-		public Elastic.Clients.Elasticsearch.Time? QueryDelay { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? QueryDelay { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
@@ -133,7 +330,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public MlPutDatafeedRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public MlPutDatafeedRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public MlPutDatafeedRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public MlPutDatafeedRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		public MlPutDatafeedRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public MlPutDatafeedRequestDescriptor<TDocument> DatafeedId(Elastic.Clients.Elasticsearch.Id datafeed_id)
@@ -162,7 +359,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<DelayedDataCheckConfigDescriptor> DelayedDataCheckConfigDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? FrequencyValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
 
 		private Dictionary<string, IEnumerable<string>>? HeadersValue { get; set; }
 
@@ -178,9 +375,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private int? MaxEmptySearchesValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? QueryDelayValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? QueryDelayValue { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
@@ -264,7 +461,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutDatafeedRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Time? frequency)
+		public MlPutDatafeedRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 		{
 			FrequencyValue = frequency;
 			return Self;
@@ -318,15 +515,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutDatafeedRequestDescriptor<TDocument> QueryDelay(Elastic.Clients.Elasticsearch.Time? queryDelay)
+		public MlPutDatafeedRequestDescriptor<TDocument> QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
 		{
 			QueryDelayValue = queryDelay;
 			return Self;
 		}
 
-		public MlPutDatafeedRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public MlPutDatafeedRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 
@@ -488,7 +685,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public MlPutDatafeedRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public MlPutDatafeedRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public MlPutDatafeedRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public MlPutDatafeedRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		public MlPutDatafeedRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public MlPutDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id datafeed_id)
@@ -517,7 +714,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Action<DelayedDataCheckConfigDescriptor> DelayedDataCheckConfigDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? FrequencyValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
 
 		private Dictionary<string, IEnumerable<string>>? HeadersValue { get; set; }
 
@@ -533,9 +730,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private int? MaxEmptySearchesValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? QueryDelayValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? QueryDelayValue { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
@@ -619,7 +816,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutDatafeedRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Time? frequency)
+		public MlPutDatafeedRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 		{
 			FrequencyValue = frequency;
 			return Self;
@@ -673,15 +870,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		public MlPutDatafeedRequestDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Time? queryDelay)
+		public MlPutDatafeedRequestDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
 		{
 			QueryDelayValue = queryDelay;
 			return Self;
 		}
 
-		public MlPutDatafeedRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public MlPutDatafeedRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 

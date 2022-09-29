@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class OverallBucket
+	public sealed partial class OverallBucket
 	{
 		[JsonInclude]
 		[JsonPropertyName("bucket_span")]
@@ -48,6 +48,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]
-		public Elastic.Clients.Elasticsearch.Time Timestamp { get; init; }
+		public long Timestamp { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("timestamp_string")]
+		public DateTimeOffset TimestampString { get; init; }
 	}
 }

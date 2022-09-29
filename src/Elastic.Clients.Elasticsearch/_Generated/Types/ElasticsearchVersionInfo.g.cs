@@ -24,11 +24,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ElasticsearchVersionInfo
+	public sealed partial class ElasticsearchVersionInfo
 	{
 		[JsonInclude]
 		[JsonPropertyName("build_date")]
-		public string BuildDate { get; init; }
+		public DateTimeOffset BuildDate { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("build_flavor")]

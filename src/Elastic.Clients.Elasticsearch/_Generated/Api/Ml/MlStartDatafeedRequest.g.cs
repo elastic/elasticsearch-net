@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class MlStartDatafeedRequest : PlainRequestBase<MlStartDatafeedRequestParameters>
+	public sealed partial class MlStartDatafeedRequest : PlainRequestBase<MlStartDatafeedRequestParameters>
 	{
 		public MlStartDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
 		{
@@ -40,15 +40,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		protected override bool SupportsBody => true;
 		[JsonInclude]
 		[JsonPropertyName("end")]
-		public Elastic.Clients.Elasticsearch.Time? End { get; set; }
+		public DateTimeOffset? End { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("start")]
-		public Elastic.Clients.Elasticsearch.Time? Start { get; set; }
+		public DateTimeOffset? Start { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("timeout")]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 	}
 
 	public sealed partial class MlStartDatafeedRequestDescriptor : RequestDescriptorBase<MlStartDatafeedRequestDescriptor, MlStartDatafeedRequestParameters>
@@ -71,25 +71,25 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			return Self;
 		}
 
-		private Elastic.Clients.Elasticsearch.Time? EndValue { get; set; }
+		private DateTimeOffset? EndValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? StartValue { get; set; }
+		private DateTimeOffset? StartValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? TimeoutValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
-		public MlStartDatafeedRequestDescriptor End(Elastic.Clients.Elasticsearch.Time? end)
+		public MlStartDatafeedRequestDescriptor End(DateTimeOffset? end)
 		{
 			EndValue = end;
 			return Self;
 		}
 
-		public MlStartDatafeedRequestDescriptor Start(Elastic.Clients.Elasticsearch.Time? start)
+		public MlStartDatafeedRequestDescriptor Start(DateTimeOffset? start)
 		{
 			StartValue = start;
 			return Self;
 		}
 
-		public MlStartDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout)
+		public MlStartDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 		{
 			TimeoutValue = timeout;
 			return Self;

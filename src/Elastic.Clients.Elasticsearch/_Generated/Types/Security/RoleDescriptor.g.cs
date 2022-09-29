@@ -24,19 +24,130 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security
 {
-	public partial class RoleDescriptor
+	internal sealed class RoleDescriptorConverter : JsonConverter<RoleDescriptor>
 	{
-		[JsonInclude]
-		[JsonPropertyName("applications")]
+		public override RoleDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new RoleDescriptor();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "applications")
+					{
+						variant.Applications = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "cluster")
+					{
+						variant.Cluster = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "global")
+					{
+						variant.Global = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "indices" || property == "index")
+					{
+						variant.Indices = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "metadata")
+					{
+						variant.Metadata = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "run_as")
+					{
+						variant.RunAs = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "transient_metadata")
+					{
+						variant.TransientMetadata = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.TransientMetadataConfig?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			return variant;
+		}
+
+		public override void Write(Utf8JsonWriter writer, RoleDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Applications is not null)
+			{
+				writer.WritePropertyName("applications");
+				JsonSerializer.Serialize(writer, value.Applications, options);
+			}
+
+			if (value.Cluster is not null)
+			{
+				writer.WritePropertyName("cluster");
+				JsonSerializer.Serialize(writer, value.Cluster, options);
+			}
+
+			if (value.Global is not null)
+			{
+				writer.WritePropertyName("global");
+				JsonSerializer.Serialize(writer, value.Global, options);
+			}
+
+			if (value.Indices is not null)
+			{
+				writer.WritePropertyName("indices");
+				JsonSerializer.Serialize(writer, value.Indices, options);
+			}
+
+			if (value.Metadata is not null)
+			{
+				writer.WritePropertyName("metadata");
+				JsonSerializer.Serialize(writer, value.Metadata, options);
+			}
+
+			if (value.RunAs is not null)
+			{
+				writer.WritePropertyName("run_as");
+				JsonSerializer.Serialize(writer, value.RunAs, options);
+			}
+
+			if (value.TransientMetadata is not null)
+			{
+				writer.WritePropertyName("transient_metadata");
+				JsonSerializer.Serialize(writer, value.TransientMetadata, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(RoleDescriptorConverter))]
+	public sealed partial class RoleDescriptor
+	{
 		public IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("cluster")]
-		public IEnumerable<string> Cluster { get; set; }
+		public IEnumerable<string>? Cluster { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("index")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivileges> Index { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global { get; set; }
+
+		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? Indices { get; set; }
+
+		public Dictionary<string, object>? Metadata { get; set; }
+
+		public IEnumerable<string>? RunAs { get; set; }
+
+		public Elastic.Clients.Elasticsearch.Security.TransientMetadataConfig? TransientMetadata { get; set; }
 	}
 
 	public sealed partial class RoleDescriptorDescriptor : SerializableDescriptorBase<RoleDescriptorDescriptor>
@@ -54,15 +165,33 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		private Action<ApplicationPrivilegesDescriptor>[] ApplicationsDescriptorActions { get; set; }
 
-		private IEnumerable<string> ClusterValue { get; set; }
+		private IEnumerable<string>? ClusterValue { get; set; }
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivileges> IndexValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? GlobalValue { get; set; }
 
-		private IndexPrivilegesDescriptor IndexDescriptor { get; set; }
+		private GlobalPrivilegeDescriptor GlobalDescriptor { get; set; }
 
-		private Action<IndexPrivilegesDescriptor> IndexDescriptorAction { get; set; }
+		private Action<GlobalPrivilegeDescriptor> GlobalDescriptorAction { get; set; }
 
-		private Action<IndexPrivilegesDescriptor>[] IndexDescriptorActions { get; set; }
+		private Action<GlobalPrivilegeDescriptor>[] GlobalDescriptorActions { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? IndicesValue { get; set; }
+
+		private IndicesPrivilegesDescriptor IndicesDescriptor { get; set; }
+
+		private Action<IndicesPrivilegesDescriptor> IndicesDescriptorAction { get; set; }
+
+		private Action<IndicesPrivilegesDescriptor>[] IndicesDescriptorActions { get; set; }
+
+		private Dictionary<string, object>? MetadataValue { get; set; }
+
+		private IEnumerable<string>? RunAsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Security.TransientMetadataConfig? TransientMetadataValue { get; set; }
+
+		private TransientMetadataConfigDescriptor TransientMetadataDescriptor { get; set; }
+
+		private Action<TransientMetadataConfigDescriptor> TransientMetadataDescriptorAction { get; set; }
 
 		public RoleDescriptorDescriptor Applications(IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? applications)
 		{
@@ -100,45 +229,117 @@ namespace Elastic.Clients.Elasticsearch.Security
 			return Self;
 		}
 
-		public RoleDescriptorDescriptor Cluster(IEnumerable<string> cluster)
+		public RoleDescriptorDescriptor Cluster(IEnumerable<string>? cluster)
 		{
 			ClusterValue = cluster;
 			return Self;
 		}
 
-		public RoleDescriptorDescriptor Index(IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivileges> index)
+		public RoleDescriptorDescriptor Global(IEnumerable<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? global)
 		{
-			IndexDescriptor = null;
-			IndexDescriptorAction = null;
-			IndexDescriptorActions = null;
-			IndexValue = index;
+			GlobalDescriptor = null;
+			GlobalDescriptorAction = null;
+			GlobalDescriptorActions = null;
+			GlobalValue = global;
 			return Self;
 		}
 
-		public RoleDescriptorDescriptor Index(IndexPrivilegesDescriptor descriptor)
+		public RoleDescriptorDescriptor Global(GlobalPrivilegeDescriptor descriptor)
 		{
-			IndexValue = null;
-			IndexDescriptorAction = null;
-			IndexDescriptorActions = null;
-			IndexDescriptor = descriptor;
+			GlobalValue = null;
+			GlobalDescriptorAction = null;
+			GlobalDescriptorActions = null;
+			GlobalDescriptor = descriptor;
 			return Self;
 		}
 
-		public RoleDescriptorDescriptor Index(Action<IndexPrivilegesDescriptor> configure)
+		public RoleDescriptorDescriptor Global(Action<GlobalPrivilegeDescriptor> configure)
 		{
-			IndexValue = null;
-			IndexDescriptor = null;
-			IndexDescriptorActions = null;
-			IndexDescriptorAction = configure;
+			GlobalValue = null;
+			GlobalDescriptor = null;
+			GlobalDescriptorActions = null;
+			GlobalDescriptorAction = configure;
 			return Self;
 		}
 
-		public RoleDescriptorDescriptor Index(params Action<IndexPrivilegesDescriptor>[] configure)
+		public RoleDescriptorDescriptor Global(params Action<GlobalPrivilegeDescriptor>[] configure)
 		{
-			IndexValue = null;
-			IndexDescriptor = null;
-			IndexDescriptorAction = null;
-			IndexDescriptorActions = configure;
+			GlobalValue = null;
+			GlobalDescriptor = null;
+			GlobalDescriptorAction = null;
+			GlobalDescriptorActions = configure;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor Indices(IEnumerable<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? indices)
+		{
+			IndicesDescriptor = null;
+			IndicesDescriptorAction = null;
+			IndicesDescriptorActions = null;
+			IndicesValue = indices;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor Indices(IndicesPrivilegesDescriptor descriptor)
+		{
+			IndicesValue = null;
+			IndicesDescriptorAction = null;
+			IndicesDescriptorActions = null;
+			IndicesDescriptor = descriptor;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor Indices(Action<IndicesPrivilegesDescriptor> configure)
+		{
+			IndicesValue = null;
+			IndicesDescriptor = null;
+			IndicesDescriptorActions = null;
+			IndicesDescriptorAction = configure;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor Indices(params Action<IndicesPrivilegesDescriptor>[] configure)
+		{
+			IndicesValue = null;
+			IndicesDescriptor = null;
+			IndicesDescriptorAction = null;
+			IndicesDescriptorActions = configure;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor RunAs(IEnumerable<string>? runAs)
+		{
+			RunAsValue = runAs;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor TransientMetadata(Elastic.Clients.Elasticsearch.Security.TransientMetadataConfig? transientMetadata)
+		{
+			TransientMetadataDescriptor = null;
+			TransientMetadataDescriptorAction = null;
+			TransientMetadataValue = transientMetadata;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor TransientMetadata(TransientMetadataConfigDescriptor descriptor)
+		{
+			TransientMetadataValue = null;
+			TransientMetadataDescriptorAction = null;
+			TransientMetadataDescriptor = descriptor;
+			return Self;
+		}
+
+		public RoleDescriptorDescriptor TransientMetadata(Action<TransientMetadataConfigDescriptor> configure)
+		{
+			TransientMetadataValue = null;
+			TransientMetadataDescriptor = null;
+			TransientMetadataDescriptorAction = configure;
 			return Self;
 		}
 
@@ -148,12 +349,16 @@ namespace Elastic.Clients.Elasticsearch.Security
 			if (ApplicationsDescriptor is not null)
 			{
 				writer.WritePropertyName("applications");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, ApplicationsDescriptor, options);
+				writer.WriteEndArray();
 			}
 			else if (ApplicationsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("applications");
+				writer.WriteStartArray();
 				JsonSerializer.Serialize(writer, new ApplicationPrivilegesDescriptor(ApplicationsDescriptorAction), options);
+				writer.WriteEndArray();
 			}
 			else if (ApplicationsDescriptorActions is not null)
 			{
@@ -172,33 +377,100 @@ namespace Elastic.Clients.Elasticsearch.Security
 				JsonSerializer.Serialize(writer, ApplicationsValue, options);
 			}
 
-			writer.WritePropertyName("cluster");
-			JsonSerializer.Serialize(writer, ClusterValue, options);
-			if (IndexDescriptor is not null)
+			if (ClusterValue is not null)
 			{
-				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, IndexDescriptor, options);
+				writer.WritePropertyName("cluster");
+				JsonSerializer.Serialize(writer, ClusterValue, options);
 			}
-			else if (IndexDescriptorAction is not null)
+
+			if (GlobalDescriptor is not null)
 			{
-				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, new IndexPrivilegesDescriptor(IndexDescriptorAction), options);
-			}
-			else if (IndexDescriptorActions is not null)
-			{
-				writer.WritePropertyName("index");
+				writer.WritePropertyName("global");
 				writer.WriteStartArray();
-				foreach (var action in IndexDescriptorActions)
+				JsonSerializer.Serialize(writer, GlobalDescriptor, options);
+				writer.WriteEndArray();
+			}
+			else if (GlobalDescriptorAction is not null)
+			{
+				writer.WritePropertyName("global");
+				writer.WriteStartArray();
+				JsonSerializer.Serialize(writer, new GlobalPrivilegeDescriptor(GlobalDescriptorAction), options);
+				writer.WriteEndArray();
+			}
+			else if (GlobalDescriptorActions is not null)
+			{
+				writer.WritePropertyName("global");
+				writer.WriteStartArray();
+				foreach (var action in GlobalDescriptorActions)
 				{
-					JsonSerializer.Serialize(writer, new IndexPrivilegesDescriptor(action), options);
+					JsonSerializer.Serialize(writer, new GlobalPrivilegeDescriptor(action), options);
 				}
 
 				writer.WriteEndArray();
 			}
-			else
+			else if (GlobalValue is not null)
 			{
-				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, IndexValue, options);
+				writer.WritePropertyName("global");
+				JsonSerializer.Serialize(writer, GlobalValue, options);
+			}
+
+			if (IndicesDescriptor is not null)
+			{
+				writer.WritePropertyName("indices");
+				writer.WriteStartArray();
+				JsonSerializer.Serialize(writer, IndicesDescriptor, options);
+				writer.WriteEndArray();
+			}
+			else if (IndicesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("indices");
+				writer.WriteStartArray();
+				JsonSerializer.Serialize(writer, new IndicesPrivilegesDescriptor(IndicesDescriptorAction), options);
+				writer.WriteEndArray();
+			}
+			else if (IndicesDescriptorActions is not null)
+			{
+				writer.WritePropertyName("indices");
+				writer.WriteStartArray();
+				foreach (var action in IndicesDescriptorActions)
+				{
+					JsonSerializer.Serialize(writer, new IndicesPrivilegesDescriptor(action), options);
+				}
+
+				writer.WriteEndArray();
+			}
+			else if (IndicesValue is not null)
+			{
+				writer.WritePropertyName("indices");
+				JsonSerializer.Serialize(writer, IndicesValue, options);
+			}
+
+			if (MetadataValue is not null)
+			{
+				writer.WritePropertyName("metadata");
+				JsonSerializer.Serialize(writer, MetadataValue, options);
+			}
+
+			if (RunAsValue is not null)
+			{
+				writer.WritePropertyName("run_as");
+				JsonSerializer.Serialize(writer, RunAsValue, options);
+			}
+
+			if (TransientMetadataDescriptor is not null)
+			{
+				writer.WritePropertyName("transient_metadata");
+				JsonSerializer.Serialize(writer, TransientMetadataDescriptor, options);
+			}
+			else if (TransientMetadataDescriptorAction is not null)
+			{
+				writer.WritePropertyName("transient_metadata");
+				JsonSerializer.Serialize(writer, new TransientMetadataConfigDescriptor(TransientMetadataDescriptorAction), options);
+			}
+			else if (TransientMetadataValue is not null)
+			{
+				writer.WritePropertyName("transient_metadata");
+				JsonSerializer.Serialize(writer, TransientMetadataValue, options);
 			}
 
 			writer.WriteEndObject();

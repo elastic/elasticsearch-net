@@ -151,6 +151,8 @@ namespace Elastic.Clients.Elasticsearch.Security
 		Monitor,
 		[EnumMember(Value = "manage_watcher")]
 		ManageWatcher,
+		[EnumMember(Value = "manage_user_profile")]
+		ManageUserProfile,
 		[EnumMember(Value = "manage_transform")]
 		ManageTransform,
 		[EnumMember(Value = "manage_token")]
@@ -181,6 +183,8 @@ namespace Elastic.Clients.Elasticsearch.Security
 		ManageIndexTemplates,
 		[EnumMember(Value = "manage_ilm")]
 		ManageIlm,
+		[EnumMember(Value = "manage_enrich")]
+		ManageEnrich,
 		[EnumMember(Value = "manage_ccr")]
 		ManageCcr,
 		[EnumMember(Value = "manage_api_key")]
@@ -230,6 +234,8 @@ namespace Elastic.Clients.Elasticsearch.Security
 					return ClusterPrivilege.Monitor;
 				case "manage_watcher":
 					return ClusterPrivilege.ManageWatcher;
+				case "manage_user_profile":
+					return ClusterPrivilege.ManageUserProfile;
 				case "manage_transform":
 					return ClusterPrivilege.ManageTransform;
 				case "manage_token":
@@ -260,6 +266,8 @@ namespace Elastic.Clients.Elasticsearch.Security
 					return ClusterPrivilege.ManageIndexTemplates;
 				case "manage_ilm":
 					return ClusterPrivilege.ManageIlm;
+				case "manage_enrich":
+					return ClusterPrivilege.ManageEnrich;
 				case "manage_ccr":
 					return ClusterPrivilege.ManageCcr;
 				case "manage_api_key":
@@ -323,6 +331,9 @@ namespace Elastic.Clients.Elasticsearch.Security
 				case ClusterPrivilege.ManageWatcher:
 					writer.WriteStringValue("manage_watcher");
 					return;
+				case ClusterPrivilege.ManageUserProfile:
+					writer.WriteStringValue("manage_user_profile");
+					return;
 				case ClusterPrivilege.ManageTransform:
 					writer.WriteStringValue("manage_transform");
 					return;
@@ -367,6 +378,9 @@ namespace Elastic.Clients.Elasticsearch.Security
 					return;
 				case ClusterPrivilege.ManageIlm:
 					writer.WriteStringValue("manage_ilm");
+					return;
+				case ClusterPrivilege.ManageEnrich:
+					writer.WriteStringValue("manage_enrich");
 					return;
 				case ClusterPrivilege.ManageCcr:
 					writer.WriteStringValue("manage_ccr");

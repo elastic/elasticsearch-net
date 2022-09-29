@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Elastic.Clients.Elasticsearch.Helpers;
 using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Multiple;

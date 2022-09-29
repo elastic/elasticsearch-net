@@ -34,10 +34,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Ids? NodeIds { get => Q<Elastic.Clients.Elasticsearch.Ids?>("node_ids"); set => Q("node_ids", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterPostVotingConfigExclusionsRequest : PlainRequestBase<ClusterPostVotingConfigExclusionsRequestParameters>
+	public sealed partial class ClusterPostVotingConfigExclusionsRequest : PlainRequestBase<ClusterPostVotingConfigExclusionsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPostVotingConfigExclusions;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Ids? NodeIds { get => Q<Elastic.Clients.Elasticsearch.Ids?>("node_ids"); set => Q("node_ids", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public sealed partial class ClusterPostVotingConfigExclusionsRequestDescriptor : RequestDescriptorBase<ClusterPostVotingConfigExclusionsRequestDescriptor, ClusterPostVotingConfigExclusionsRequestParameters>
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override bool SupportsBody => false;
 		public ClusterPostVotingConfigExclusionsRequestDescriptor NodeIds(Elastic.Clients.Elasticsearch.Ids? nodeIds) => Qs("node_ids", nodeIds);
 		public ClusterPostVotingConfigExclusionsRequestDescriptor NodeNames(Elastic.Clients.Elasticsearch.Names? nodeNames) => Qs("node_names", nodeNames);
-		public ClusterPostVotingConfigExclusionsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public ClusterPostVotingConfigExclusionsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

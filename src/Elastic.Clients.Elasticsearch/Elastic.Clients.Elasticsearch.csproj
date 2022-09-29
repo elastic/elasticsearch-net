@@ -28,6 +28,7 @@
   <ItemGroup>
     <InternalsVisibleTo Include="Tests" Key="$(ExposedPublicKey)" />
     <InternalsVisibleTo Include="Tests.Domain" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Benchmarks" Key="$(ExposedPublicKey)" />
   </ItemGroup>
   <ItemGroup>
     <AssemblyAttribute Include="CLSCompliantAttribute">

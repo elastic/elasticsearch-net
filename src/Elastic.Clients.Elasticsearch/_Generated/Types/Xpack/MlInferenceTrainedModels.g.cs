@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Xpack
 {
-	public partial class MlInferenceTrainedModels
+	public sealed partial class MlInferenceTrainedModels
 	{
 		[JsonInclude]
 		[JsonPropertyName("_all")]

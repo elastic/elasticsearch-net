@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class WhitespaceTokenizer : TokenizerBase, ITokenizerDefinition
+	public sealed partial class WhitespaceTokenizer : ITokenizerDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
@@ -33,6 +33,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "whitespace";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class WhitespaceTokenizerDescriptor : SerializableDescriptorBase<WhitespaceTokenizerDescriptor>, IBuildableDescriptor<WhitespaceTokenizer>

@@ -38,11 +38,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
-		public Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval { get; init; }
+		public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("create_time")]
-		public Elastic.Clients.Elasticsearch.EpochMillis CreateTime { get; init; }
+		public long CreateTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("finished_time")]
-		public Elastic.Clients.Elasticsearch.EpochMillis? FinishedTime { get; init; }
+		public long? FinishedTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("groups")]

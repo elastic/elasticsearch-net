@@ -24,10 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class ScriptScoreQuery : QueryBase, IQueryContainerVariant
+	public sealed partial class ScriptScoreQuery : Query
 	{
-		[JsonIgnore]
-		string IQueryContainerVariant.QueryContainerVariantName => "script_score";
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? QueryName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("min_score")]
 		public float? MinScore { get; set; }
@@ -38,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public ScriptBase Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
 
 	public sealed partial class ScriptScoreQueryDescriptor<TDocument> : SerializableDescriptorBase<ScriptScoreQueryDescriptor<TDocument>>
@@ -54,17 +60,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Action<QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-		private ScriptBase ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
 
 		private float? MinScoreValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
 		public ScriptScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
 		{
@@ -90,30 +92,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScriptScoreQueryDescriptor<TDocument> Script(ScriptBase script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public ScriptScoreQueryDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptScoreQueryDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
-
 		public ScriptScoreQueryDescriptor<TDocument> QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -129,6 +107,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public ScriptScoreQueryDescriptor<TDocument> MinScore(float? minScore)
 		{
 			MinScoreValue = minScore;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script script)
+		{
+			ScriptValue = script;
 			return Self;
 		}
 
@@ -151,22 +135,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -185,6 +153,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(MinScoreValue.Value);
 			}
 
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -202,17 +172,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Action<QueryContainerDescriptor> QueryDescriptorAction { get; set; }
 
-		private ScriptBase ScriptValue { get; set; }
-
-		private ScriptDescriptor ScriptDescriptor { get; set; }
-
-		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
 		private string? QueryNameValue { get; set; }
 
 		private float? BoostValue { get; set; }
 
 		private float? MinScoreValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
 		public ScriptScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
 		{
@@ -238,30 +204,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScriptScoreQueryDescriptor Script(ScriptBase script)
-		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			ScriptValue = script;
-			return Self;
-		}
-
-		public ScriptScoreQueryDescriptor Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			ScriptDescriptor = descriptor;
-			return Self;
-		}
-
-		public ScriptScoreQueryDescriptor Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = configure;
-			return Self;
-		}
-
 		public ScriptScoreQueryDescriptor QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -277,6 +219,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public ScriptScoreQueryDescriptor MinScore(float? minScore)
 		{
 			MinScoreValue = minScore;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
+		{
+			ScriptValue = script;
 			return Self;
 		}
 
@@ -299,22 +247,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -333,6 +265,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(MinScoreValue.Value);
 			}
 
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 			writer.WriteEndObject();
 		}
 	}

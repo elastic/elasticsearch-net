@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class IndexRoutingAllocationDisk
+	public sealed partial class IndexRoutingAllocationDisk
 	{
 		[JsonInclude]
 		[JsonPropertyName("threshold_enabled")]

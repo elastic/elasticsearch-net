@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	public partial class ShardStats
+	public sealed partial class ShardStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("bytes_read")]
@@ -119,20 +119,36 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public long SuccessfulWriteRequests { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("time_since_last_read")]
+		public Elastic.Clients.Elasticsearch.Duration? TimeSinceLastRead { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("time_since_last_read_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis TimeSinceLastReadMillis { get; init; }
+		public long TimeSinceLastReadMillis { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total_read_remote_exec_time")]
+		public Elastic.Clients.Elasticsearch.Duration? TotalReadRemoteExecTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_read_remote_exec_time_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis TotalReadRemoteExecTimeMillis { get; init; }
+		public long TotalReadRemoteExecTimeMillis { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total_read_time")]
+		public Elastic.Clients.Elasticsearch.Duration? TotalReadTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_read_time_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis TotalReadTimeMillis { get; init; }
+		public long TotalReadTimeMillis { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total_write_time")]
+		public Elastic.Clients.Elasticsearch.Duration? TotalWriteTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_write_time_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis TotalWriteTimeMillis { get; init; }
+		public long TotalWriteTimeMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("write_buffer_operation_count")]

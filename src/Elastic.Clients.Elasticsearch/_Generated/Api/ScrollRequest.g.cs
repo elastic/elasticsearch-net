@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 
-	public partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>
+	public sealed partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceScroll;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -41,7 +41,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("scroll")]
-		public Elastic.Clients.Elasticsearch.Time? Scroll { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? Scroll { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("scroll_id")]
+		public Elastic.Clients.Elasticsearch.ScrollId ScrollId { get; set; }
 	}
 
 	public sealed partial class ScrollRequestDescriptor : RequestDescriptorBase<ScrollRequestDescriptor, ScrollRequestParameters>
@@ -55,11 +59,19 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public ScrollRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-		private Elastic.Clients.Elasticsearch.Time? ScrollValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? ScrollValue { get; set; }
 
-		public ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Time? scroll)
+		private Elastic.Clients.Elasticsearch.ScrollId ScrollIdValue { get; set; }
+
+		public ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll)
 		{
 			ScrollValue = scroll;
+			return Self;
+		}
+
+		public ScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollId scrollId)
+		{
+			ScrollIdValue = scrollId;
 			return Self;
 		}
 
@@ -72,6 +84,8 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, ScrollValue, options);
 			}
 
+			writer.WritePropertyName("scroll_id");
+			JsonSerializer.Serialize(writer, ScrollIdValue, options);
 			writer.WriteEndObject();
 		}
 	}

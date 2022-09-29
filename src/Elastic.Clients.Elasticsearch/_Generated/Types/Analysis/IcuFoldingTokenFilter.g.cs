@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class IcuFoldingTokenFilter : TokenFilterBase, ITokenFilterDefinition
+	public sealed partial class IcuFoldingTokenFilter : ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -32,6 +32,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("unicode_set_filter")]
 		public string UnicodeSetFilter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
 	}
 
 	public sealed partial class IcuFoldingTokenFilterDescriptor : SerializableDescriptorBase<IcuFoldingTokenFilterDescriptor>, IBuildableDescriptor<IcuFoldingTokenFilter>

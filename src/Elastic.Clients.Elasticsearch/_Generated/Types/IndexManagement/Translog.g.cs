@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class Translog
+	public sealed partial class Translog
 	{
 		[JsonInclude]
 		[JsonPropertyName("durability")]
@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("sync_interval")]
-		public Elastic.Clients.Elasticsearch.Time? SyncInterval { get; set; }
+		public Elastic.Clients.Elasticsearch.Duration? SyncInterval { get; set; }
 	}
 
 	public sealed partial class TranslogDescriptor : SerializableDescriptorBase<TranslogDescriptor>
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private Action<TranslogRetentionDescriptor> RetentionDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Time? SyncIntervalValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Duration? SyncIntervalValue { get; set; }
 
 		public TranslogDescriptor Durability(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? durability)
 		{
@@ -98,7 +98,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public TranslogDescriptor SyncInterval(Elastic.Clients.Elasticsearch.Time? syncInterval)
+		public TranslogDescriptor SyncInterval(Elastic.Clients.Elasticsearch.Duration? syncInterval)
 		{
 			SyncIntervalValue = syncInterval;
 			return Self;
