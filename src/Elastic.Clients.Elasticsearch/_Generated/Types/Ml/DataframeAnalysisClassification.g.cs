@@ -285,7 +285,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	}
 
 	[JsonConverter(typeof(DataframeAnalysisClassificationConverter))]
-	public sealed partial class DataframeAnalysisClassification : IDataframeAnalysisVariant
+	public sealed partial class DataframeAnalysisClassification
 	{
 		public double? Alpha { get; set; }
 
