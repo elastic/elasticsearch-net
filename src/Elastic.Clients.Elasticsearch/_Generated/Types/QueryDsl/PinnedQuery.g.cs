@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public interface IPinnedQueryVariant
-	{
-	}
-
 	[JsonConverter(typeof(PinnedQueryConverter))]
-	public sealed partial class PinnedQuery : Query, IQueryVariant
+	public sealed partial class PinnedQuery : Query
 	{
-		public PinnedQuery(string variantName, IPinnedQueryVariant variant)
+		internal PinnedQuery(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,10 +39,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Variant = variant;
 		}
 
-		internal IPinnedQueryVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
+		public static PinnedQuery Docs(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> variant) => new PinnedQuery("docs", variant);
+		public static PinnedQuery Ids(IEnumerable<Elastic.Clients.Elasticsearch.Id> variant) => new PinnedQuery("ids", variant);
 		[JsonInclude]
 		[JsonPropertyName("_name")]
 		public string? QueryName { get; set; }
@@ -69,21 +67,96 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				throw new JsonException("Expected start token.");
 			}
 
-			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			object? variantValue = default;
+			string? variantNameValue = default;
+			string? nameValue = default;
+			float? boostValue = default;
+			Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer organicValue = default;
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
-				throw new JsonException("Expected property name token.");
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token.");
+				}
+
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+				}
+
+				var propertyName = reader.GetString();
+				reader.Read();
+				if (propertyName == "_name")
+				{
+					nameValue = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "boost")
+				{
+					boostValue = JsonSerializer.Deserialize<float?>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "organic")
+				{
+					organicValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>(ref reader, options);
+					continue;
+				}
+
+				if (propertyName == "docs")
+				{
+					variantValue = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				if (propertyName == "ids")
+				{
+					variantValue = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Id>?>(ref reader, options);
+					variantNameValue = propertyName;
+					continue;
+				}
+
+				throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'PinnedQuery' from the response.");
 			}
 
-			var propertyName = reader.GetString();
 			reader.Read();
-			throw new JsonException();
+			var result = new PinnedQuery(variantNameValue, variantValue);
+			result.QueryName = nameValue;
+			result.Boost = boostValue;
+			result.Organic = organicValue;
+			return result;
 		}
 
 		public override void Write(Utf8JsonWriter writer, PinnedQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
+			}
+
+			writer.WritePropertyName("organic");
+			JsonSerializer.Serialize(writer, value.Organic, options);
 			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
+			{
+				case "docs":
+					JsonSerializer.Serialize<IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>>(writer, (IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>)value.Variant, options);
+					break;
+				case "ids":
+					JsonSerializer.Serialize<IEnumerable<Elastic.Clients.Elasticsearch.Id>>(writer, (IEnumerable<Elastic.Clients.Elasticsearch.Id>)value.Variant, options);
+					break;
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -95,36 +168,79 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal PinnedQuery Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IPinnedQueryVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new PinnedQuery(variantName, variant);
+				throw new Exception("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+		}
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer OrganicValue { get; set; }
+
+		private QueryContainerDescriptor<TDocument> OrganicDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>> OrganicDescriptorAction { get; set; }
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		public PinnedQueryDescriptor<TDocument> Organic(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer organic)
+		{
+			OrganicDescriptor = null;
+			OrganicDescriptorAction = null;
+			OrganicValue = organic;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor<TDocument> Organic(QueryContainerDescriptor<TDocument> descriptor)
+		{
+			OrganicValue = null;
+			OrganicDescriptorAction = null;
+			OrganicDescriptor = descriptor;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor<TDocument> Organic(Action<QueryContainerDescriptor<TDocument>> configure)
+		{
+			OrganicValue = null;
+			OrganicDescriptor = null;
+			OrganicDescriptorAction = configure;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -135,15 +251,45 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			if (Container is not null)
+			writer.WriteStartObject();
+			if (OrganicDescriptor is not null)
 			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
+				writer.WritePropertyName("organic");
+				JsonSerializer.Serialize(writer, OrganicDescriptor, options);
+			}
+			else if (OrganicDescriptorAction is not null)
+			{
+				writer.WritePropertyName("organic");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(OrganicDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("organic");
+				JsonSerializer.Serialize(writer, OrganicValue, options);
 			}
 
-			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -155,36 +301,79 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal PinnedQuery Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IPinnedQueryVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new PinnedQuery(variantName, variant);
+				throw new Exception("A variant has already been assigned to the PinnedQueryDescriptor. Only a single PinnedQuery variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+		}
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer OrganicValue { get; set; }
+
+		private QueryContainerDescriptor OrganicDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> OrganicDescriptorAction { get; set; }
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		public PinnedQueryDescriptor Organic(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer organic)
+		{
+			OrganicDescriptor = null;
+			OrganicDescriptorAction = null;
+			OrganicValue = organic;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor Organic(QueryContainerDescriptor descriptor)
+		{
+			OrganicValue = null;
+			OrganicDescriptorAction = null;
+			OrganicDescriptor = descriptor;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor Organic(Action<QueryContainerDescriptor> configure)
+		{
+			OrganicValue = null;
+			OrganicDescriptor = null;
+			OrganicDescriptorAction = configure;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public PinnedQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -195,15 +384,45 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			if (Container is not null)
+			writer.WriteStartObject();
+			if (OrganicDescriptor is not null)
 			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
+				writer.WritePropertyName("organic");
+				JsonSerializer.Serialize(writer, OrganicDescriptor, options);
+			}
+			else if (OrganicDescriptorAction is not null)
+			{
+				writer.WritePropertyName("organic");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(OrganicDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("organic");
+				JsonSerializer.Serialize(writer, OrganicValue, options);
 			}
 
-			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

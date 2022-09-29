@@ -51,7 +51,7 @@ public abstract class AggregationUsageTestBase<TCluster>
 
 	protected abstract AggregationDictionary InitializerAggs { get; }
 
-	protected virtual QueryContainer QueryScope { get; } = new TermQuery { Field = "type", Value = Project.TypeName };
+	protected virtual QueryContainer QueryScope { get; } = new TermQuery("type") { Value = Project.TypeName };
 
 	protected virtual object QueryScopeJson { get; } = new { term = new { type = new { value = Project.TypeName } } };
 

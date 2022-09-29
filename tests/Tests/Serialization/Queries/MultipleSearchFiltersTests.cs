@@ -35,7 +35,7 @@ public class MultipleSearchFiltersTests : SerializerTestBase
 			.Query(q => q
 				.Bool(b => b
 					.Filter( // TODO - Update once we have fluent unions
-						f => f.Range(new RangeQuery(new DateRangeQuery { Gte = "now-1d/d", Lt = "now/d", Field = Infer.Field<Project>(f => f.LastActivity) }))
+						f => f.Range(new RangeQuery(new DateRangeQuery(Infer.Field<Project>(f => f.LastActivity)) { Gte = "now-1d/d", Lt = "now/d" }))
 					))));
 
 		var serialisedJson = await SerializeAndGetJsonStringAsync(search);
