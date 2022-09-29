@@ -263,6 +263,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls SecuritySamlLogout = new ApiUrls(new[] { "/_security/saml/logout" });
 		internal static ApiUrls SecuritySamlPrepareAuthentication = new ApiUrls(new[] { "/_security/saml/prepare" });
 		internal static ApiUrls SecuritySamlServiceProviderMetadata = new ApiUrls(new[] { "/_security/saml/metadata/{realm_name}" });
+		internal static ApiUrls SecurityUpdateApiKey = new ApiUrls(new[] { "/_security/api_key/{id}" });
 		internal static ApiUrls SnapshotLifecycleManagementDeleteLifecycle = new ApiUrls(new[] { "/_slm/policy/{policy_id}" });
 		internal static ApiUrls SnapshotLifecycleManagementExecuteLifecycle = new ApiUrls(new[] { "/_slm/policy/{policy_id}/_execute" });
 		internal static ApiUrls SnapshotLifecycleManagementExecuteRetention = new ApiUrls(new[] { "/_slm/_execute_retention" });
