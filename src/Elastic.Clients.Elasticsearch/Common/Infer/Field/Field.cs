@@ -74,7 +74,7 @@ public sealed class Field : IEquatable<Field>, IUrlParameter
 	public string? Format { get; set; }
 
 	[JsonIgnore]
-	public bool CachableExpression { get; }
+	internal bool CachableExpression { get; }
 
 	/// <summary>
 	///     An expression from which the name of the field can be inferred

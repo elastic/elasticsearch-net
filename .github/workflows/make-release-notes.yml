@@ -51,7 +51,7 @@ jobs:
           
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.300'
+          dotnet-version: '6.0.401'
       - name: Install dotnet-script
         run: dotnet tool install release-notes --tool-path dotnet-tool
 

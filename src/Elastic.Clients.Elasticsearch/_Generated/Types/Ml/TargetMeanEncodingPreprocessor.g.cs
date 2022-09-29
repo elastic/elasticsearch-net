@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public sealed partial class TargetMeanEncodingPreprocessor : IPreprocessorVariant
+	public sealed partial class TargetMeanEncodingPreprocessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("default_value")]
