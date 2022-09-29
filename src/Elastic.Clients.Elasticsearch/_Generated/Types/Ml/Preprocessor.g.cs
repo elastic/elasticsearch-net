@@ -24,14 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public interface IPreprocessorVariant
-	{
-	}
-
 	[JsonConverter(typeof(PreprocessorConverter))]
 	public sealed partial class Preprocessor
 	{
-		public Preprocessor(string variantName, IPreprocessorVariant variant)
+		internal Preprocessor(string variantName, object variant)
 		{
 			if (variantName is null)
 				throw new ArgumentNullException(nameof(variantName));
@@ -43,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			Variant = variant;
 		}
 
-		internal IPreprocessorVariant Variant { get; }
+		internal object Variant { get; }
 
 		internal string VariantName { get; }
 
@@ -64,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			reader.Read();
 			if (reader.TokenType != JsonTokenType.PropertyName)
 			{
-				throw new JsonException("Expected property name token.");
+				throw new JsonException("Expected a property name token representing the variant held within this container.");
 			}
 
 			var propertyName = reader.GetString();
@@ -121,56 +117,33 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal Preprocessor Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the PreprocessorDescriptor. Only a single Preprocessor variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IPreprocessorVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new Preprocessor(variantName, variant);
+				throw new Exception("A variant has already been assigned to the PreprocessorDescriptor. Only a single Preprocessor variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
-			writer.WriteEndObject();
 		}
 
 		public void FrequencyEncoding(FrequencyEncodingPreprocessor variant) => Set(variant, "frequency_encoding");
@@ -179,6 +152,27 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public void OneHotEncoding(Action<OneHotEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "one_hot_encoding");
 		public void TargetMeanEncoding(TargetMeanEncodingPreprocessor variant) => Set(variant, "target_mean_encoding");
 		public void TargetMeanEncoding(Action<TargetMeanEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public sealed partial class PreprocessorDescriptor : SerializableDescriptorBase<PreprocessorDescriptor>
@@ -188,56 +182,33 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		internal bool ContainsVariant { get; private set; }
+		private bool ContainsVariant { get; set; }
 
-		internal string ContainedVariantName { get; private set; }
+		private string ContainedVariantName { get; set; }
 
-		internal Preprocessor Container { get; private set; }
+		private object Variant { get; set; }
 
-		internal Descriptor Descriptor { get; private set; }
-
-		internal Type DescriptorType { get; private set; }
+		private Descriptor Descriptor { get; set; }
 
 		private void Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor, new()
+			where T : Descriptor
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
+				throw new InvalidOperationException("A variant has already been assigned to the PreprocessorDescriptor. Only a single Preprocessor variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-			DescriptorType = typeof(T);
-			var descriptor = new T();
+			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
 		}
 
-		private void Set(IPreprocessorVariant variant, string variantName)
+		private void Set(object variant, string variantName)
 		{
 			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new Preprocessor(variantName, variant);
+				throw new Exception("A variant has already been assigned to the PreprocessorDescriptor. Only a single Preprocessor variant can be added to this container type.");
+			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
-			writer.WriteEndObject();
 		}
 
 		public void FrequencyEncoding(FrequencyEncodingPreprocessor variant) => Set(variant, "frequency_encoding");
@@ -249,5 +220,26 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public void TargetMeanEncoding(TargetMeanEncodingPreprocessor variant) => Set(variant, "target_mean_encoding");
 		public void TargetMeanEncoding(Action<TargetMeanEncodingPreprocessorDescriptor> configure) => Set(configure, "target_mean_encoding");
 		public void TargetMeanEncoding<TDocument>(Action<TargetMeanEncodingPreprocessorDescriptor<TDocument>> configure) => Set(configure, "target_mean_encoding");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+			}
+			else
+			{
+				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

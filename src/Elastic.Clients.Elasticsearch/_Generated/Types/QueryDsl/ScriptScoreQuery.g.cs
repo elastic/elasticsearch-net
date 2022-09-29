@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public sealed partial class ScriptScoreQuery : Query, IQueryVariant
+	public sealed partial class ScriptScoreQuery : Query
 	{
 		[JsonInclude]
 		[JsonPropertyName("_name")]
