@@ -156,9 +156,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls LicensePostStartTrial = new ApiUrls(new[] { "/_license/start_trial" });
 		internal static ApiUrls LogstashDeletePipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
 		internal static ApiUrls LogstashPutPipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
-		internal static ApiUrls MigrationDeprecations = new ApiUrls(new[] { "/_migration/deprecations", "/{index}/_migration/deprecations" });
-		internal static ApiUrls MigrationGetFeatureUpgradeStatus = new ApiUrls(new[] { "/_migration/system_features" });
-		internal static ApiUrls MigrationPostFeatureUpgrade = new ApiUrls(new[] { "/_migration/system_features" });
 		internal static ApiUrls MachineLearningCloseJob = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/_close" });
 		internal static ApiUrls MachineLearningDeleteCalendarEvent = new ApiUrls(new[] { "/_ml/calendars/{calendar_id}/events/{event_id}" });
 		internal static ApiUrls MachineLearningDeleteCalendar = new ApiUrls(new[] { "/_ml/calendars/{calendar_id}" });

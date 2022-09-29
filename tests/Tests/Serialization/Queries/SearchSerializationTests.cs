@@ -15,9 +15,8 @@ public class SearchSerializationTests : SerializerTestBase
 	[U]
 	public async Task Search_WithMatchQuery_SerializesInferredField_ForObjectInitializer()
 	{
-		var container = QueryContainer.Match(new MatchQuery
+		var container = QueryContainer.Match(new MatchQuery(Infer.Field<Project>(d => d.Description))
 		{
-			Field = Infer.Field<Project>(d => d.Description),
 			Query = "testing"
 		});
 

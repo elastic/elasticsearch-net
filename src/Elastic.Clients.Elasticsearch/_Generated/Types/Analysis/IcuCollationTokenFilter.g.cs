@@ -28,39 +28,43 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("alternate")]
-		public Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate Alternate { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? Alternate { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("caseFirst")]
-		public Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst Casefirst { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? Casefirst { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("caseLevel")]
-		public bool Caselevel { get; set; }
+		public bool? Caselevel { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("country")]
-		public string Country { get; set; }
+		public string? Country { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("decomposition")]
-		public Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition Decomposition { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? Decomposition { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("hiraganaQuaternaryMode")]
-		public bool Hiraganaquaternarymode { get; set; }
+		public bool? Hiraganaquaternarymode { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("language")]
-		public string Language { get; set; }
+		public string? Language { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("numeric")]
-		public bool Numeric { get; set; }
+		public bool? Numeric { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("rules")]
+		public string? Rules { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("strength")]
-		public Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength Strength { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? Strength { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -71,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		[JsonInclude]
 		[JsonPropertyName("variant")]
-		public string Variant { get; set; }
+		public string? Variant { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
@@ -85,79 +89,87 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate AlternateValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? AlternateValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst CasefirstValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? CasefirstValue { get; set; }
 
-		private bool CaselevelValue { get; set; }
+		private bool? CaselevelValue { get; set; }
 
-		private string CountryValue { get; set; }
+		private string? CountryValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition DecompositionValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? DecompositionValue { get; set; }
 
-		private bool HiraganaquaternarymodeValue { get; set; }
+		private bool? HiraganaquaternarymodeValue { get; set; }
 
-		private string LanguageValue { get; set; }
+		private string? LanguageValue { get; set; }
 
-		private bool NumericValue { get; set; }
+		private bool? NumericValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength StrengthValue { get; set; }
+		private string? RulesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? StrengthValue { get; set; }
 
 		private string? VariabletopValue { get; set; }
 
-		private string VariantValue { get; set; }
+		private string? VariantValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public IcuCollationTokenFilterDescriptor Alternate(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate alternate)
+		public IcuCollationTokenFilterDescriptor Alternate(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? alternate)
 		{
 			AlternateValue = alternate;
 			return Self;
 		}
 
-		public IcuCollationTokenFilterDescriptor Casefirst(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst casefirst)
+		public IcuCollationTokenFilterDescriptor Casefirst(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? casefirst)
 		{
 			CasefirstValue = casefirst;
 			return Self;
 		}
 
-		public IcuCollationTokenFilterDescriptor Caselevel(bool caselevel = true)
+		public IcuCollationTokenFilterDescriptor Caselevel(bool? caselevel = true)
 		{
 			CaselevelValue = caselevel;
 			return Self;
 		}
 
-		public IcuCollationTokenFilterDescriptor Country(string country)
+		public IcuCollationTokenFilterDescriptor Country(string? country)
 		{
 			CountryValue = country;
 			return Self;
 		}
 
-		public IcuCollationTokenFilterDescriptor Decomposition(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition decomposition)
+		public IcuCollationTokenFilterDescriptor Decomposition(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? decomposition)
 		{
 			DecompositionValue = decomposition;
 			return Self;
 		}
 
-		public IcuCollationTokenFilterDescriptor Hiraganaquaternarymode(bool hiraganaquaternarymode = true)
+		public IcuCollationTokenFilterDescriptor Hiraganaquaternarymode(bool? hiraganaquaternarymode = true)
 		{
 			HiraganaquaternarymodeValue = hiraganaquaternarymode;
 			return Self;
 		}
 
-		public IcuCollationTokenFilterDescriptor Language(string language)
+		public IcuCollationTokenFilterDescriptor Language(string? language)
 		{
 			LanguageValue = language;
 			return Self;
 		}
 
-		public IcuCollationTokenFilterDescriptor Numeric(bool numeric = true)
+		public IcuCollationTokenFilterDescriptor Numeric(bool? numeric = true)
 		{
 			NumericValue = numeric;
 			return Self;
 		}
 
-		public IcuCollationTokenFilterDescriptor Strength(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength strength)
+		public IcuCollationTokenFilterDescriptor Rules(string? rules)
+		{
+			RulesValue = rules;
+			return Self;
+		}
+
+		public IcuCollationTokenFilterDescriptor Strength(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? strength)
 		{
 			StrengthValue = strength;
 			return Self;
@@ -169,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			return Self;
 		}
 
-		public IcuCollationTokenFilterDescriptor Variant(string variant)
+		public IcuCollationTokenFilterDescriptor Variant(string? variant)
 		{
 			VariantValue = variant;
 			return Self;
@@ -184,24 +196,66 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("alternate");
-			JsonSerializer.Serialize(writer, AlternateValue, options);
-			writer.WritePropertyName("caseFirst");
-			JsonSerializer.Serialize(writer, CasefirstValue, options);
-			writer.WritePropertyName("caseLevel");
-			writer.WriteBooleanValue(CaselevelValue);
-			writer.WritePropertyName("country");
-			writer.WriteStringValue(CountryValue);
-			writer.WritePropertyName("decomposition");
-			JsonSerializer.Serialize(writer, DecompositionValue, options);
-			writer.WritePropertyName("hiraganaQuaternaryMode");
-			writer.WriteBooleanValue(HiraganaquaternarymodeValue);
-			writer.WritePropertyName("language");
-			writer.WriteStringValue(LanguageValue);
-			writer.WritePropertyName("numeric");
-			writer.WriteBooleanValue(NumericValue);
-			writer.WritePropertyName("strength");
-			JsonSerializer.Serialize(writer, StrengthValue, options);
+			if (AlternateValue is not null)
+			{
+				writer.WritePropertyName("alternate");
+				JsonSerializer.Serialize(writer, AlternateValue, options);
+			}
+
+			if (CasefirstValue is not null)
+			{
+				writer.WritePropertyName("caseFirst");
+				JsonSerializer.Serialize(writer, CasefirstValue, options);
+			}
+
+			if (CaselevelValue.HasValue)
+			{
+				writer.WritePropertyName("caseLevel");
+				writer.WriteBooleanValue(CaselevelValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(CountryValue))
+			{
+				writer.WritePropertyName("country");
+				writer.WriteStringValue(CountryValue);
+			}
+
+			if (DecompositionValue is not null)
+			{
+				writer.WritePropertyName("decomposition");
+				JsonSerializer.Serialize(writer, DecompositionValue, options);
+			}
+
+			if (HiraganaquaternarymodeValue.HasValue)
+			{
+				writer.WritePropertyName("hiraganaQuaternaryMode");
+				writer.WriteBooleanValue(HiraganaquaternarymodeValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(LanguageValue))
+			{
+				writer.WritePropertyName("language");
+				writer.WriteStringValue(LanguageValue);
+			}
+
+			if (NumericValue.HasValue)
+			{
+				writer.WritePropertyName("numeric");
+				writer.WriteBooleanValue(NumericValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(RulesValue))
+			{
+				writer.WritePropertyName("rules");
+				writer.WriteStringValue(RulesValue);
+			}
+
+			if (StrengthValue is not null)
+			{
+				writer.WritePropertyName("strength");
+				JsonSerializer.Serialize(writer, StrengthValue, options);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("icu_collation");
 			if (!string.IsNullOrEmpty(VariabletopValue))
@@ -210,8 +264,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 				writer.WriteStringValue(VariabletopValue);
 			}
 
-			writer.WritePropertyName("variant");
-			writer.WriteStringValue(VariantValue);
+			if (!string.IsNullOrEmpty(VariantValue))
+			{
+				writer.WritePropertyName("variant");
+				writer.WriteStringValue(VariantValue);
+			}
+
 			if (VersionValue is not null)
 			{
 				writer.WritePropertyName("version");
@@ -222,6 +280,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 
 		IcuCollationTokenFilter IBuildableDescriptor<IcuCollationTokenFilter>.Build() => new()
-		{ Alternate = AlternateValue, Casefirst = CasefirstValue, Caselevel = CaselevelValue, Country = CountryValue, Decomposition = DecompositionValue, Hiraganaquaternarymode = HiraganaquaternarymodeValue, Language = LanguageValue, Numeric = NumericValue, Strength = StrengthValue, Variabletop = VariabletopValue, Variant = VariantValue, Version = VersionValue };
+		{ Alternate = AlternateValue, Casefirst = CasefirstValue, Caselevel = CaselevelValue, Country = CountryValue, Decomposition = DecompositionValue, Hiraganaquaternarymode = HiraganaquaternarymodeValue, Language = LanguageValue, Numeric = NumericValue, Rules = RulesValue, Strength = StrengthValue, Variabletop = VariabletopValue, Variant = VariantValue, Version = VersionValue };
 	}
 }

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public sealed partial class CombinedFieldsQuery : Query, IQueryVariant
+	public sealed partial class CombinedFieldsQuery : Query
 	{
 		[JsonInclude]
 		[JsonPropertyName("_name")]

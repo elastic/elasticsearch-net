@@ -145,6 +145,12 @@ namespace Elastic.Clients.Elasticsearch
 						continue;
 					}
 
+					if (property == "ext")
+					{
+						variant.Ext = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "from")
 					{
 						variant.From = JsonSerializer.Deserialize<int?>(ref reader, options);
@@ -297,7 +303,7 @@ namespace Elastic.Clients.Elasticsearch
 
 					if (property == "runtime_mappings")
 					{
-						variant.RuntimeMappings = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>?>(ref reader, options);
+						variant.RuntimeMappings = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
 						continue;
 					}
 
@@ -331,6 +337,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("explain");
 				writer.WriteBooleanValue(value.Explain.Value);
+			}
+
+			if (value.Ext is not null)
+			{
+				writer.WritePropertyName("ext");
+				JsonSerializer.Serialize(writer, value.Ext, options);
 			}
 
 			if (value.From.HasValue)
@@ -613,6 +625,10 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? Explain { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("ext")]
+		public Dictionary<string, object>? Ext { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("from")]
 		public int? From { get; set; }
 
@@ -715,7 +731,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stats")]
@@ -842,6 +858,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		private bool? ExplainValue { get; set; }
 
+		private Dictionary<string, object>? ExtValue { get; set; }
+
 		private int? FromValue { get; set; }
 
 		private IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
@@ -856,7 +874,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private bool? ProfileValue { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
@@ -1152,6 +1170,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public SearchRequestDescriptor<TDocument> Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
 		public SearchRequestDescriptor<TDocument> From(int? from)
 		{
 			FromValue = from;
@@ -1200,9 +1224,9 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public SearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 
@@ -1512,6 +1536,12 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteBooleanValue(ExplainValue.Value);
 			}
 
+			if (ExtValue is not null)
+			{
+				writer.WritePropertyName("ext");
+				JsonSerializer.Serialize(writer, ExtValue, options);
+			}
+
 			if (FromValue.HasValue)
 			{
 				writer.WritePropertyName("from");
@@ -1763,6 +1793,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		private bool? ExplainValue { get; set; }
 
+		private Dictionary<string, object>? ExtValue { get; set; }
+
 		private int? FromValue { get; set; }
 
 		private IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
@@ -1777,7 +1809,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private bool? ProfileValue { get; set; }
 
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
@@ -2073,6 +2105,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public SearchRequestDescriptor Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
 		public SearchRequestDescriptor From(int? from)
 		{
 			FromValue = from;
@@ -2121,9 +2159,9 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SearchRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		public SearchRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 			return Self;
 		}
 
@@ -2437,6 +2475,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("explain");
 				writer.WriteBooleanValue(ExplainValue.Value);
+			}
+
+			if (ExtValue is not null)
+			{
+				writer.WritePropertyName("ext");
+				JsonSerializer.Serialize(writer, ExtValue, options);
 			}
 
 			if (FromValue.HasValue)
