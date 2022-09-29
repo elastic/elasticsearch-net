@@ -7,7 +7,7 @@ using Elastic.Clients.Elasticsearch.QueryDsl;
 using Tests.Domain;
 using VerifyXunit;
 
-namespace Tests.Serialization;
+namespace Tests.Serialization.Queries;
 
 [UsesVerify]
 public class QueryContainer_WithFieldNameQuery_SerializationTests : SerializerTestBase

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public sealed partial class LinearInterpolationSmoothingModel : ISmoothingModelVariant
+	public sealed partial class LinearInterpolationSmoothingModel
 	{
 		[JsonInclude]
 		[JsonPropertyName("bigram_lambda")]

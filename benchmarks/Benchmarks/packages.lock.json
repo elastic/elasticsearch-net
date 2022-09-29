@@ -1137,7 +1137,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "0.3.2"
+          "Elastic.Transport": "[0.3.2, )"
         }
       }
     }

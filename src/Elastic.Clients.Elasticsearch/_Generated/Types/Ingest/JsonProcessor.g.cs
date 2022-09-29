@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public sealed partial class JsonProcessor : IProcessorVariant
+	public sealed partial class JsonProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("add_to_root")]
