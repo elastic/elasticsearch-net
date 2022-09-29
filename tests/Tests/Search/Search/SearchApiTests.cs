@@ -83,9 +83,8 @@ namespace Tests.Search.Search
 			{
 				Field = "startedOn"
 			},
-			PostFilter = new TermQuery
+			PostFilter = new TermQuery("state")
 			{
-				Field = "state",
 				Value = "Stable"
 			}
 		};
@@ -248,9 +247,8 @@ namespace Tests.Search.Search
 			{
 				Field = "startedOn"
 			},
-			PostFilter = new TermQuery
+			PostFilter = new TermQuery("state")
 			{
-				Field = "state",
 				Value = "Stable"
 			},
 			StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)

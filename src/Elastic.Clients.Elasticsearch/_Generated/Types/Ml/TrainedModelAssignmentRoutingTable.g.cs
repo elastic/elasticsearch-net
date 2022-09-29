@@ -15,21 +15,31 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Migration
+namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public sealed partial class MigrationGetFeatureUpgradeStatusResponse : ElasticsearchResponseBase
+	public sealed partial class TrainedModelAssignmentRoutingTable
 	{
 		[JsonInclude]
-		[JsonPropertyName("features")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.MigrationFeature> Features { get; init; }
+		[JsonPropertyName("current_allocations")]
+		public int CurrentAllocations { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("migration_status")]
-		public Elastic.Clients.Elasticsearch.Migration.MigrationStatus MigrationStatus { get; init; }
+		[JsonPropertyName("reason")]
+		public string Reason { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("routing_state")]
+		public Elastic.Clients.Elasticsearch.Ml.RoutingState RoutingState { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("target_allocations")]
+		public int TargetAllocations { get; init; }
 	}
 }

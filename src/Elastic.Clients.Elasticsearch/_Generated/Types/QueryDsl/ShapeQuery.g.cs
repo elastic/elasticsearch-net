@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(ShapeQueryConverter))]
-	public sealed partial class ShapeQuery : Query, IQueryVariant
+	public sealed partial class ShapeQuery : Query
 	{
 		public string? QueryName { get; set; }
 

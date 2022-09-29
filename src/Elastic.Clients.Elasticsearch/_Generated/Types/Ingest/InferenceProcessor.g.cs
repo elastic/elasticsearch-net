@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public sealed partial class InferenceProcessor : IProcessorVariant
+	public sealed partial class InferenceProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field_map")]

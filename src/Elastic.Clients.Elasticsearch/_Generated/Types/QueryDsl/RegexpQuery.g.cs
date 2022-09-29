@@ -31,12 +31,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
 			reader.Read();
-			reader.Read();
-			reader.Read();
 			var fieldName = reader.GetString();
 			reader.Read();
-			var variant = new RegexpQuery()
-			{ Field = fieldName };
+			var variant = new RegexpQuery(fieldName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
@@ -87,14 +84,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			reader.Read();
-			reader.Read();
 			return variant;
 		}
 
 		public override void Write(Utf8JsonWriter writer, RegexpQuery value, JsonSerializerOptions options)
 		{
 			if (value.Field is null)
-				writer.WriteNullValue();
+				throw new JsonException("Unable to serialize RegexpQuery because the `Field` property is not set. Field name queries must include a valid field name.");
 			if (options.TryGetClientSettings(out var settings))
 			{
 				writer.WriteStartObject();
@@ -143,13 +139,20 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			throw new JsonException("Unable to retrieve client settings to infer field.");
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		}
 	}
 
 	[JsonConverter(typeof(RegexpQueryConverter))]
-	public sealed partial class RegexpQuery : Query, IQueryVariant
+	public sealed partial class RegexpQuery : Query
 	{
+		public RegexpQuery(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			Field = field;
+		}
+
 		public string? QueryName { get; set; }
 
 		public float? Boost { get; set; }
@@ -164,14 +167,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public string Value { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
 	public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescriptorBase<RegexpQueryDescriptor<TDocument>>
 	{
 		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public RegexpQueryDescriptor() : base()
+		internal RegexpQueryDescriptor() : base()
 		{
+		}
+
+		public RegexpQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
+		}
+
+		public RegexpQueryDescriptor(Expression<Func<TDocument, object>> field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -180,7 +197,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private bool? CaseInsensitiveValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? FlagsValue { get; set; }
 
@@ -208,7 +225,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public RegexpQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		public RegexpQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -246,6 +263,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
@@ -295,8 +314,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class RegexpQueryDescriptor : SerializableDescriptorBase<RegexpQueryDescriptor>
 	{
 		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor> configure) => configure.Invoke(this);
-		public RegexpQueryDescriptor() : base()
+		internal RegexpQueryDescriptor() : base()
 		{
+		}
+
+		public RegexpQueryDescriptor(Field field)
+		{
+			if (field is null)
+				throw new ArgumentNullException(nameof(field));
+			FieldValue = field;
 		}
 
 		private string? QueryNameValue { get; set; }
@@ -305,7 +331,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private bool? CaseInsensitiveValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 		private string? FlagsValue { get; set; }
 
@@ -333,7 +359,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public RegexpQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		public RegexpQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 		{
 			FieldValue = field;
 			return Self;
@@ -377,6 +403,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			if (FieldValue is null)
+				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 			writer.WriteStartObject();
