@@ -3,7 +3,7 @@
 
 This page helps you to understand how to perform various basic {es} CRUD operations 
 using the .NET client. It demonstrates how to create a document by indexing an object
-into {es}, read the document back by retrieving it by ID or performing a search, update
+into {es}, read a document back, retrieving it by ID or performing a search, update
 one of the fields in a document and delete a specific document.
 
 These examples assume you have an instance of the `ElasticsearchClient` accessible via a
