@@ -1,0 +1,15 @@
+{
+  query: {
+    intervals: {
+      name: {
+        boost: 2,
+        match: {
+          max_gaps: 0,
+          ordered: true,
+          query: Steve
+        },
+        _name: testing-intervals
+      }
+    }
+  }
+}

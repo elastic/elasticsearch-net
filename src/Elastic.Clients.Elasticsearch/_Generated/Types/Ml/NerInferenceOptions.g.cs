@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public sealed partial class NerInferenceOptions : IInferenceConfigCreateVariant
+	public sealed partial class NerInferenceOptions
 	{
 		[JsonInclude]
 		[JsonPropertyName("classification_labels")]

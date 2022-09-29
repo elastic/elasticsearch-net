@@ -73,14 +73,14 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "0.3.2"
+          "Elastic.Transport": "[0.3.2, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Clients.Elasticsearch": "8.0.0",
-          "Newtonsoft.Json": "13.0.1"
+          "Elastic.Clients.Elasticsearch": "[8.0.0, )",
+          "Newtonsoft.Json": "[13.0.1, )"
         }
       }
     }
