@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("routing_state")]
-		public Elastic.Clients.Elasticsearch.Ml.TrainedModelAllocationRoutingTable RoutingState { get; init; }
+		public Elastic.Clients.Elasticsearch.Ml.TrainedModelAssignmentRoutingTable RoutingState { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("start_time")]

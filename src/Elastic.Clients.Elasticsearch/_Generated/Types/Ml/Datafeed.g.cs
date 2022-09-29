@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 			int? maxEmptySearches = default;
 			Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query = default;
 			Elastic.Clients.Elasticsearch.Duration? queryDelay = default;
-			Dictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? runtimeMappings = default;
+			Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? runtimeMappings = default;
 			Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? scriptFields = default;
 			int? scrollSize = default;
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
@@ -131,7 +131,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 					if (property == "runtime_mappings")
 					{
-						runtimeMappings = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>?>(ref reader, options);
+						runtimeMappings = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
 						continue;
 					}
 
@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		public Elastic.Clients.Elasticsearch.Duration? QueryDelay { get; init; }
 
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; init; }
 
 		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; init; }
 

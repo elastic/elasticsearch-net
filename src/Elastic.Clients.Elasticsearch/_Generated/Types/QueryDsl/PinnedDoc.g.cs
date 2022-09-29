@@ -22,16 +22,50 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ml
+namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public sealed partial class TrainedModelAllocationRoutingTable
+	public sealed partial class PinnedDoc
 	{
 		[JsonInclude]
-		[JsonPropertyName("reason")]
-		public string Reason { get; init; }
+		[JsonPropertyName("_id")]
+		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("routing_state")]
-		public Elastic.Clients.Elasticsearch.Ml.RoutingState RoutingState { get; init; }
+		[JsonPropertyName("_index")]
+		public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+	}
+
+	public sealed partial class PinnedDocDescriptor : SerializableDescriptorBase<PinnedDocDescriptor>
+	{
+		internal PinnedDocDescriptor(Action<PinnedDocDescriptor> configure) => configure.Invoke(this);
+		public PinnedDocDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
+
+		public PinnedDocDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			IdValue = id;
+			return Self;
+		}
+
+		public PinnedDocDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			IndexValue = index;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("_id");
+			JsonSerializer.Serialize(writer, IdValue, options);
+			writer.WritePropertyName("_index");
+			JsonSerializer.Serialize(writer, IndexValue, options);
+			writer.WriteEndObject();
+		}
 	}
 }
