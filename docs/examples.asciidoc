@@ -69,7 +69,7 @@ if (response.IsValid) <3>
 }
 
 ----
-<1> Create an instance of the Tweet class with relevant properties set.
+<1> Create an instance of the `Tweet` class with relevant properties set.
 <2> Prefer the async APIs, which require awaiting the response.
 <3> Check the `IsValid` property on the response to confirm that the request and 
 operation succeeded.
@@ -111,7 +111,7 @@ if (response.IsValid)
     var tweet = response.Documents.FirstOrDefault(); <4>
 }
 ----
-<1> The generic type argument specifies the tweet class, which is used when 
+<1> The generic type argument specifies the `Tweet` class, which is used when 
 deserialising the hits from the response.
 <2> The index can be omitted if a `DefaultIndex` has been configured on 
 `ElasticsearchClientSettings``, or a specific index was configured when mapping 
