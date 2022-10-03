@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("lang")]
-		public string? Language { get; set; }
+		public Elastic.Clients.Elasticsearch.ScriptLanguage? Language { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("options")]
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		private string? LanguageValue { get; set; }
+		private Elastic.Clients.Elasticsearch.ScriptLanguage? LanguageValue { get; set; }
 
 		private Dictionary<string, string>? OptionsValue { get; set; }
 
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private string SourceValue { get; set; }
 
-		public InlineScriptDescriptor Language(string? language)
+		public InlineScriptDescriptor Language(Elastic.Clients.Elasticsearch.ScriptLanguage? language)
 		{
 			LanguageValue = language;
 			return Self;

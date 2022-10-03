@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 	{
 		[JsonInclude]
 		[JsonPropertyName("lang")]
-		public string? Lang { get; set; }
+		public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("options")]
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		{
 		}
 
-		private string? LangValue { get; set; }
+		private Elastic.Clients.Elasticsearch.ScriptLanguage? LangValue { get; set; }
 
 		private Dictionary<string, string>? OptionsValue { get; set; }
 
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		private Union<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> SourceValue { get; set; }
 
-		public RoleTemplateInlineScriptDescriptor Lang(string? lang)
+		public RoleTemplateInlineScriptDescriptor Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? lang)
 		{
 			LangValue = lang;
 			return Self;
