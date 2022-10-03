@@ -32,6 +32,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("language")]
-		public string Language { get; init; }
+		public Elastic.Clients.Elasticsearch.ScriptLanguage Language { get; init; }
 	}
 }
