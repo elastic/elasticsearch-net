@@ -2,63 +2,65 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using Elastic.Clients.Elasticsearch.Cluster;
-using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.EndpointTests;
-using Tests.Framework.EndpointTests.TestState;
+// TODO: Re-enable once cluster state APIs are generated.
 
-namespace Tests.Cluster.ClusterState;
+//using Elastic.Clients.Elasticsearch.Cluster;
+//using Tests.Core.ManagedElasticsearch.Clusters;
+//using Tests.Framework.EndpointTests;
+//using Tests.Framework.EndpointTests.TestState;
 
-public class ClusterStateApiTests
-	: ApiIntegrationTestBase<ReadOnlyCluster, ClusterStateResponse, ClusterStateRequestDescriptor, ClusterStateRequest>
-{
-	public ClusterStateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+//namespace Tests.Cluster.ClusterState;
 
-	protected override bool ExpectIsValid => true;
-	protected override int ExpectStatusCode => 200;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override string ExpectedUrlPathAndQuery => "/_cluster/state";
+//public class ClusterStateApiTests
+//	: ApiIntegrationTestBase<ReadOnlyCluster, ClusterStateResponse, ClusterStateRequestDescriptor, ClusterStateRequest>
+//{
+//	public ClusterStateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	protected override LazyResponses ClientUsage() => Calls(
-		(client, f) => client.Cluster.State(),
-		(client, f) => client.Cluster.StateAsync(),
-		(client, r) => client.Cluster.State(r),
-		(client, r) => client.Cluster.StateAsync(r)
-	);
+//	protected override bool ExpectIsValid => true;
+//	protected override int ExpectStatusCode => 200;
+//	protected override HttpMethod HttpMethod => HttpMethod.GET;
+//	protected override string ExpectedUrlPathAndQuery => "/_cluster/state";
 
-	protected override void ExpectResponse(ClusterStateResponse response)
-	{
-		// TODO: Fix response
+//	protected override LazyResponses ClientUsage() => Calls(
+//		(client, f) => client.Cluster.State(),
+//		(client, f) => client.Cluster.StateAsync(),
+//		(client, r) => client.Cluster.State(r),
+//		(client, r) => client.Cluster.StateAsync(r)
+//	);
 
-		//response.ClusterName.Should().NotBeNullOrWhiteSpace();
-		//response.MasterNode.Should().NotBeNullOrWhiteSpace();
-		//response.StateUUID.Should().NotBeNullOrWhiteSpace();
-		//response.Version.Should().BeGreaterThan(0);
+//	protected override void ExpectResponse(ClusterStateResponse response)
+//	{
+//		// TODO: Fix response
 
-		//var masterNode = response.State["nodes"][response.MasterNode];
-		//var masterNodeName = masterNode["name"].Value as string;
-		//var transportAddress = masterNode["transport_address"].Value as string;
-		//masterNodeName.Should().NotBeNullOrWhiteSpace();
-		//transportAddress.Should().NotBeNullOrWhiteSpace();
+//		//response.ClusterName.Should().NotBeNullOrWhiteSpace();
+//		//response.MasterNode.Should().NotBeNullOrWhiteSpace();
+//		//response.StateUUID.Should().NotBeNullOrWhiteSpace();
+//		//response.Version.Should().BeGreaterThan(0);
 
-		//var getSyntax = response.Get<string>($"nodes.{response.MasterNode}.transport_address");
-		//getSyntax.Should().NotBeNullOrWhiteSpace().And.Be(transportAddress);
+//		//var masterNode = response.State["nodes"][response.MasterNode];
+//		//var masterNodeName = masterNode["name"].Value as string;
+//		//var transportAddress = masterNode["transport_address"].Value as string;
+//		//masterNodeName.Should().NotBeNullOrWhiteSpace();
+//		//transportAddress.Should().NotBeNullOrWhiteSpace();
 
-		//var badPath = response.Get<string>($"this.is.not.a.path.into.the.response.structure");
-		//badPath.Should().BeNull();
+//		//var getSyntax = response.Get<string>($"nodes.{response.MasterNode}.transport_address");
+//		//getSyntax.Should().NotBeNullOrWhiteSpace().And.Be(transportAddress);
 
-		//var dict = response.Get<DynamicDictionary>($"nodes");
+//		//var badPath = response.Get<string>($"this.is.not.a.path.into.the.response.structure");
+//		//badPath.Should().BeNull();
 
-		//dict.Count.Should().BeGreaterThan(0);
-		//var node = dict[response.MasterNode].ToDictionary();
-		//node.Should().NotBeNull().And.ContainKey("name");
+//		//var dict = response.Get<DynamicDictionary>($"nodes");
 
-		//object dictDoesNotExist = response.Get<DynamicDictionary>("nodes2");
-		//dictDoesNotExist.Should().BeNull();
+//		//dict.Count.Should().BeGreaterThan(0);
+//		//var node = dict[response.MasterNode].ToDictionary();
+//		//node.Should().NotBeNull().And.ContainKey("name");
 
-		//dynamic r = response.State;
+//		//object dictDoesNotExist = response.Get<DynamicDictionary>("nodes2");
+//		//dictDoesNotExist.Should().BeNull();
 
-		//string lastCommittedConfig = r.metadata.cluster_coordination.last_committed_config[0];
-		//lastCommittedConfig.Should().NotBeNullOrWhiteSpace();
-	}
-}
+//		//dynamic r = response.State;
+
+//		//string lastCommittedConfig = r.metadata.cluster_coordination.last_committed_config[0];
+//		//lastCommittedConfig.Should().NotBeNullOrWhiteSpace();
+//	}
+//}
