@@ -19,7 +19,6 @@ using Elastic.Clients.Elasticsearch.AsyncSearch;
 using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.Eql;
 using Elastic.Clients.Elasticsearch.IndexManagement;
-using Elastic.Clients.Elasticsearch.Logstash;
 using Elastic.Clients.Elasticsearch.Sql;
 using System;
 using System.Threading;
@@ -38,8 +37,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		public IndicesNamespace Indices { get; private set; }
 
-		public LogstashNamespace Logstash { get; private set; }
-
 		public SqlNamespace Sql { get; private set; }
 
 		private partial void SetupNamespaces()
@@ -48,7 +45,6 @@ namespace Elastic.Clients.Elasticsearch
 			Cluster = new ClusterNamespace(this);
 			Eql = new EqlNamespace(this);
 			Indices = new IndicesNamespace(this);
-			Logstash = new LogstashNamespace(this);
 			Sql = new SqlNamespace(this);
 		}
 
@@ -1144,6 +1140,48 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
+		}
+
+		public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(MultiSearchTemplateRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<MultiSearchTemplateRequest, MultiSearchTemplateResponse<TDocument>>(request);
+		}
+
+		public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(MultiSearchTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<MultiSearchTemplateRequest, MultiSearchTemplateResponse<TDocument>>(request, cancellationToken);
+		}
+
+		public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>()
+		{
+			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+			descriptor.BeforeRequest();
+			return DoRequest<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
+		}
+
+		public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
+		}
+
+		public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
+		}
+
+		public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
 		}
 
 		public OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)

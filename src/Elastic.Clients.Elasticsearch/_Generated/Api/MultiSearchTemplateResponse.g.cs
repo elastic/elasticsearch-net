@@ -20,9 +20,16 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Logstash
+namespace Elastic.Clients.Elasticsearch
 {
-	public sealed partial class LogstashDeletePipelineResponse : ElasticsearchResponseBase
+	public sealed partial class MultiSearchTemplateResponse<TDocument> : ElasticsearchResponseBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("responses")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchResponseItem<TDocument>> Responses { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("took")]
+		public long Took { get; init; }
 	}
 }

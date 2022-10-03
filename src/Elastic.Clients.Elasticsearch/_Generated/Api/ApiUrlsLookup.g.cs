@@ -91,10 +91,9 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IndexManagementValidateQuery = new ApiUrls(new[] { "/_validate/query", "/{index}/_validate/query" });
 		internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[] { "/{index}/_doc/{id}", "/{index}/_doc" });
 		internal static ApiUrls NoNamespaceInfo = new ApiUrls(new[] { "/" });
-		internal static ApiUrls LogstashDeletePipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
-		internal static ApiUrls LogstashPutPipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
 		internal static ApiUrls NoNamespaceMget = new ApiUrls(new[] { "/_mget", "/{index}/_mget" });
 		internal static ApiUrls NoNamespaceMsearch = new ApiUrls(new[] { "/_msearch", "/{index}/_msearch" });
+		internal static ApiUrls NoNamespaceMsearchTemplate = new ApiUrls(new[] { "/_msearch/template", "/{index}/_msearch/template" });
 		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
 		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
 		internal static ApiUrls NoNamespacePutScript = new ApiUrls(new[] { "/_scripts/{id}", "/_scripts/{id}/{context}" });

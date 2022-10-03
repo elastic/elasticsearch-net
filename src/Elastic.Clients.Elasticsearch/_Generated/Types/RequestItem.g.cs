@@ -15,14 +15,24 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport.Products.Elasticsearch;
+using Elastic.Transport;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Logstash
+namespace Elastic.Clients.Elasticsearch
 {
-	public sealed partial class LogstashPutPipelineResponse : ElasticsearchResponseBase
+	public partial class RequestItem : Union<Elastic.Clients.Elasticsearch.MultisearchHeader, Elastic.Clients.Elasticsearch.TemplateConfig>
 	{
+		public RequestItem(Elastic.Clients.Elasticsearch.MultisearchHeader multisearchHeader) : base(multisearchHeader)
+		{
+		}
+
+		public RequestItem(Elastic.Clients.Elasticsearch.TemplateConfig templateConfig) : base(templateConfig)
+		{
+		}
 	}
 }
