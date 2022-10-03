@@ -2,31 +2,33 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using Elastic.Clients.Elasticsearch.Cluster;
-using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.EndpointTests;
-using Tests.Framework.EndpointTests.TestState;
+// TODO: Re-enable once cluster APIs are generated.
 
-namespace Tests.Cluster.ClusterPendingTasks
-{
-	public class ClusterPendingTasksApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterPendingTasksResponse, ClusterPendingTasksRequestDescriptor,
-			ClusterPendingTasksRequest>
-	{
-		public ClusterPendingTasksApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+//using Elastic.Clients.Elasticsearch.Cluster;
+//using Tests.Core.ManagedElasticsearch.Clusters;
+//using Tests.Framework.EndpointTests;
+//using Tests.Framework.EndpointTests.TestState;
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string ExpectedUrlPathAndQuery => "/_cluster/pending_tasks";
+//namespace Tests.Cluster.ClusterPendingTasks
+//{
+//	public class ClusterPendingTasksApiTests
+//		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterPendingTasksResponse, ClusterPendingTasksRequestDescriptor,
+//			ClusterPendingTasksRequest>
+//	{
+//		public ClusterPendingTasksApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Cluster.PendingTasks(),
-			(client, f) => client.Cluster.PendingTasksAsync(),
-			(client, r) => client.Cluster.PendingTasks(r),
-			(client, r) => client.Cluster.PendingTasksAsync(r)
-		);
+//		protected override bool ExpectIsValid => true;
+//		protected override int ExpectStatusCode => 200;
+//		protected override HttpMethod HttpMethod => HttpMethod.GET;
+//		protected override string ExpectedUrlPathAndQuery => "/_cluster/pending_tasks";
 
-		protected override void ExpectResponse(ClusterPendingTasksResponse response) => response.Tasks.Should().NotBeNull();
-	}
-}
+//		protected override LazyResponses ClientUsage() => Calls(
+//			(client, f) => client.Cluster.PendingTasks(),
+//			(client, f) => client.Cluster.PendingTasksAsync(),
+//			(client, r) => client.Cluster.PendingTasks(r),
+//			(client, r) => client.Cluster.PendingTasksAsync(r)
+//		);
+
+//		protected override void ExpectResponse(ClusterPendingTasksResponse response) => response.Tasks.Should().NotBeNull();
+//	}
+//}
