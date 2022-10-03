@@ -130,6 +130,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("upsert")]
+		[SourceConverter]
 		public TDocument? Upsert { get; set; }
 	}
 
@@ -288,7 +289,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (UpsertValue is not null)
 			{
 				writer.WritePropertyName("upsert");
-				JsonSerializer.Serialize(writer, UpsertValue, options);
+				SourceSerialisation.Serialize(UpsertValue, writer, settings);
 			}
 
 			writer.WriteEndObject();
