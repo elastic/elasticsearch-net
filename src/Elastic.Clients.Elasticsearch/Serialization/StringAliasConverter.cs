@@ -38,11 +38,8 @@ internal sealed class StringAliasConverter<T> : JsonConverter<T>
 	}
 }
 
-
-internal sealed class EnumStructConverter<T> : JsonConverter<T>
+internal sealed class EnumStructConverter<T> : JsonConverter<T> where T : new()
 {
-	// TODO: Rename if not valid
-
 	public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		var value = reader.GetString();
@@ -50,7 +47,7 @@ internal sealed class EnumStructConverter<T> : JsonConverter<T>
 		var instance = (T)Activator.CreateInstance(
 			typeof(T),
 			BindingFlags.Instance | BindingFlags.NonPublic,
-			args: new object[] { value },
+			args: new object[] { value }, // TODO: Perf - Review use of ArrayPool
 			binder: null,
 			culture: null)!;
 
