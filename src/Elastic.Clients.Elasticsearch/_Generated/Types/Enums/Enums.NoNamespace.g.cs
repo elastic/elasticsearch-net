@@ -953,55 +953,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(LifecycleOperationModeConverter))]
-	public enum LifecycleOperationMode
-	{
-		[EnumMember(Value = "STOPPING")]
-		Stopping,
-		[EnumMember(Value = "STOPPED")]
-		Stopped,
-		[EnumMember(Value = "RUNNING")]
-		Running
-	}
-
-	internal sealed class LifecycleOperationModeConverter : JsonConverter<LifecycleOperationMode>
-	{
-		public override LifecycleOperationMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "STOPPING":
-					return LifecycleOperationMode.Stopping;
-				case "STOPPED":
-					return LifecycleOperationMode.Stopped;
-				case "RUNNING":
-					return LifecycleOperationMode.Running;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, LifecycleOperationMode value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case LifecycleOperationMode.Stopping:
-					writer.WriteStringValue("STOPPING");
-					return;
-				case LifecycleOperationMode.Stopped:
-					writer.WriteStringValue("STOPPED");
-					return;
-				case LifecycleOperationMode.Running:
-					writer.WriteStringValue("RUNNING");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(NodeRoleConverter))]
 	public enum NodeRole
 	{
@@ -1708,69 +1659,6 @@ namespace Elastic.Clients.Elasticsearch
 					return;
 				case SuggestSort.Frequency:
 					writer.WriteStringValue("frequency");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(ThreadTypeConverter))]
-	public enum ThreadType
-	{
-		[EnumMember(Value = "wait")]
-		Wait,
-		[EnumMember(Value = "mem")]
-		Mem,
-		[EnumMember(Value = "gpu")]
-		Gpu,
-		[EnumMember(Value = "cpu")]
-		Cpu,
-		[EnumMember(Value = "block")]
-		Block
-	}
-
-	internal sealed class ThreadTypeConverter : JsonConverter<ThreadType>
-	{
-		public override ThreadType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "wait":
-					return ThreadType.Wait;
-				case "mem":
-					return ThreadType.Mem;
-				case "gpu":
-					return ThreadType.Gpu;
-				case "cpu":
-					return ThreadType.Cpu;
-				case "block":
-					return ThreadType.Block;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, ThreadType value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case ThreadType.Wait:
-					writer.WriteStringValue("wait");
-					return;
-				case ThreadType.Mem:
-					writer.WriteStringValue("mem");
-					return;
-				case ThreadType.Gpu:
-					writer.WriteStringValue("gpu");
-					return;
-				case ThreadType.Cpu:
-					writer.WriteStringValue("cpu");
-					return;
-				case ThreadType.Block:
-					writer.WriteStringValue("block");
 					return;
 			}
 

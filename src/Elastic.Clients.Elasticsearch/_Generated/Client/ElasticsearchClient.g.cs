@@ -16,29 +16,10 @@
 // ------------------------------------------------
 
 using Elastic.Clients.Elasticsearch.AsyncSearch;
-using Elastic.Clients.Elasticsearch.Autoscaling;
-using Elastic.Clients.Elasticsearch.Ccr;
 using Elastic.Clients.Elasticsearch.Cluster;
-using Elastic.Clients.Elasticsearch.DanglingIndices;
-using Elastic.Clients.Elasticsearch.Enrich;
 using Elastic.Clients.Elasticsearch.Eql;
-using Elastic.Clients.Elasticsearch.Features;
-using Elastic.Clients.Elasticsearch.Graph;
-using Elastic.Clients.Elasticsearch.Ilm;
 using Elastic.Clients.Elasticsearch.IndexManagement;
-using Elastic.Clients.Elasticsearch.Ingest;
-using Elastic.Clients.Elasticsearch.License;
-using Elastic.Clients.Elasticsearch.Logstash;
-using Elastic.Clients.Elasticsearch.Ml;
-using Elastic.Clients.Elasticsearch.Nodes;
-using Elastic.Clients.Elasticsearch.SearchableSnapshots;
-using Elastic.Clients.Elasticsearch.Security;
-using Elastic.Clients.Elasticsearch.Slm;
-using Elastic.Clients.Elasticsearch.Snapshot;
 using Elastic.Clients.Elasticsearch.Sql;
-using Elastic.Clients.Elasticsearch.Ssl;
-using Elastic.Clients.Elasticsearch.TransformManagement;
-using Elastic.Clients.Elasticsearch.Xpack;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -50,78 +31,21 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		public AsyncSearchNamespace AsyncSearch { get; private set; }
 
-		public AutoscalingNamespace Autoscaling { get; private set; }
-
-		public CcrNamespace Ccr { get; private set; }
-
 		public ClusterNamespace Cluster { get; private set; }
-
-		public DanglingIndicesNamespace DanglingIndices { get; private set; }
-
-		public EnrichNamespace Enrich { get; private set; }
 
 		public EqlNamespace Eql { get; private set; }
 
-		public FeaturesNamespace Features { get; private set; }
-
-		public GraphNamespace Graph { get; private set; }
-
-		public IlmNamespace Ilm { get; private set; }
-
 		public IndicesNamespace Indices { get; private set; }
 
-		public IngestNamespace Ingest { get; private set; }
-
-		public LicenseNamespace License { get; private set; }
-
-		public LogstashNamespace Logstash { get; private set; }
-
-		public MlNamespace Ml { get; private set; }
-
-		public NodesNamespace Nodes { get; private set; }
-
-		public SearchableSnapshotsNamespace SearchableSnapshots { get; private set; }
-
-		public SecurityNamespace Security { get; private set; }
-
-		public SlmNamespace Slm { get; private set; }
-
-		public SnapshotNamespace Snapshot { get; private set; }
-
 		public SqlNamespace Sql { get; private set; }
-
-		public SslNamespace Ssl { get; private set; }
-
-		public TransformManagementNamespace TransformManagement { get; private set; }
-
-		public XpackNamespace Xpack { get; private set; }
 
 		private partial void SetupNamespaces()
 		{
 			AsyncSearch = new AsyncSearchNamespace(this);
-			Autoscaling = new AutoscalingNamespace(this);
-			Ccr = new CcrNamespace(this);
 			Cluster = new ClusterNamespace(this);
-			DanglingIndices = new DanglingIndicesNamespace(this);
-			Enrich = new EnrichNamespace(this);
 			Eql = new EqlNamespace(this);
-			Features = new FeaturesNamespace(this);
-			Graph = new GraphNamespace(this);
-			Ilm = new IlmNamespace(this);
 			Indices = new IndicesNamespace(this);
-			Ingest = new IngestNamespace(this);
-			License = new LicenseNamespace(this);
-			Logstash = new LogstashNamespace(this);
-			Ml = new MlNamespace(this);
-			Nodes = new NodesNamespace(this);
-			SearchableSnapshots = new SearchableSnapshotsNamespace(this);
-			Security = new SecurityNamespace(this);
-			Slm = new SlmNamespace(this);
-			Snapshot = new SnapshotNamespace(this);
 			Sql = new SqlNamespace(this);
-			Ssl = new SslNamespace(this);
-			TransformManagement = new TransformManagementNamespace(this);
-			Xpack = new XpackNamespace(this);
 		}
 
 		public BulkResponse Bulk(BulkRequest request)
@@ -1216,6 +1140,48 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
+		}
+
+		public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(MultiSearchTemplateRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<MultiSearchTemplateRequest, MultiSearchTemplateResponse<TDocument>>(request);
+		}
+
+		public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(MultiSearchTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<MultiSearchTemplateRequest, MultiSearchTemplateResponse<TDocument>>(request, cancellationToken);
+		}
+
+		public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>()
+		{
+			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+			descriptor.BeforeRequest();
+			return DoRequest<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
+		}
+
+		public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
+		}
+
+		public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
+		}
+
+		public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
 		}
 
 		public OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
