@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public string? Type { get; set; }
+		public Elastic.Clients.Elasticsearch.HighlighterType? Type { get; set; }
 	}
 
 	public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDescriptorBase<HighlightFieldDescriptor<TDocument>>
@@ -174,7 +174,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.HighlighterTagsSchema? TagsSchemaValue { get; set; }
 
-		private string? TypeValue { get; set; }
+		private Elastic.Clients.Elasticsearch.HighlighterType? TypeValue { get; set; }
 
 		public HighlightFieldDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery)
 		{
@@ -332,7 +332,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public HighlightFieldDescriptor<TDocument> Type(string? type)
+		public HighlightFieldDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.HighlighterType? type)
 		{
 			TypeValue = type;
 			return Self;
@@ -548,7 +548,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.HighlighterTagsSchema? TagsSchemaValue { get; set; }
 
-		private string? TypeValue { get; set; }
+		private Elastic.Clients.Elasticsearch.HighlighterType? TypeValue { get; set; }
 
 		public HighlightFieldDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery)
 		{
@@ -712,7 +712,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public HighlightFieldDescriptor Type(string? type)
+		public HighlightFieldDescriptor Type(Elastic.Clients.Elasticsearch.HighlighterType? type)
 		{
 			TypeValue = type;
 			return Self;
