@@ -801,11 +801,23 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial struct HighlighterType
+	[JsonConverter(typeof(EnumStructConverter<HighlighterType>))]
+	public readonly partial struct HighlighterType
 	{
-		public const string Unified = "unified";
-		public const string Plain = "plain";
-		public const string FastVector = "fvh";
+		public HighlighterType(string value) => Value = value;
+		public readonly string Value { get; }
+
+		public static HighlighterType Unified { get; } = new HighlighterType("unified");
+		public static HighlighterType Plain { get; } = new HighlighterType("plain");
+		public static HighlighterType FastVector { get; } = new HighlighterType("fvh");
+		public override string ToString() => Value ?? string.Empty;
+		public static implicit operator string(HighlighterType highlighterType) => highlighterType.Value;
+		public static implicit operator HighlighterType(string value) => new(value);
+		public override int GetHashCode() => Value.GetHashCode();
+		public override bool Equals(object obj) => obj is HighlighterType other && this.Equals(other);
+		public bool Equals(HighlighterType other) => Value == other.Value;
+		public static bool operator ==(HighlighterType a, HighlighterType b) => a.Equals(b);
+		public static bool operator !=(HighlighterType a, HighlighterType b) => !(a == b);
 	}
 
 	[JsonConverter(typeof(IBDistributionConverter))]
@@ -1305,12 +1317,24 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial struct ScriptLanguage
+	[JsonConverter(typeof(EnumStructConverter<ScriptLanguage>))]
+	public readonly partial struct ScriptLanguage
 	{
-		public const string Painless = "painless";
-		public const string Mustache = "mustache";
-		public const string Java = "java";
-		public const string Expression = "expression";
+		public ScriptLanguage(string value) => Value = value;
+		public readonly string Value { get; }
+
+		public static ScriptLanguage Painless { get; } = new ScriptLanguage("painless");
+		public static ScriptLanguage Mustache { get; } = new ScriptLanguage("mustache");
+		public static ScriptLanguage Java { get; } = new ScriptLanguage("java");
+		public static ScriptLanguage Expression { get; } = new ScriptLanguage("expression");
+		public override string ToString() => Value ?? string.Empty;
+		public static implicit operator string(ScriptLanguage scriptLanguage) => scriptLanguage.Value;
+		public static implicit operator ScriptLanguage(string value) => new(value);
+		public override int GetHashCode() => Value.GetHashCode();
+		public override bool Equals(object obj) => obj is ScriptLanguage other && this.Equals(other);
+		public bool Equals(ScriptLanguage other) => Value == other.Value;
+		public static bool operator ==(ScriptLanguage a, ScriptLanguage b) => a.Equals(b);
+		public static bool operator !=(ScriptLanguage a, ScriptLanguage b) => !(a == b);
 	}
 
 	[JsonConverter(typeof(ScriptSortTypeConverter))]
