@@ -8,13 +8,10 @@ using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.Enrich;
-using Elastic.Clients.Elasticsearch.QueryDsl;
 using Elastic.Transport;
 using Nest;
 using System.Globalization;
 using System.Text;
-using Policy = Elastic.Clients.Elasticsearch.Enrich.Policy;
 
 var config = ManualConfig.Create(DefaultConfig.Instance);
 config.SummaryStyle = new SummaryStyle(CultureInfo.CurrentCulture, true, BenchmarkDotNet.Columns.SizeUnit.B, null);
