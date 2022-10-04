@@ -1,4 +1,6 @@
 <Project>
+  <Sdk Name="DotNet.ReproducibleBuilds.Isolated" Version="1.1.1" />
+
   <!-- Default Version numbers -->
   <PropertyGroup>
     <CurrentVersion>8.0.0</CurrentVersion>
@@ -46,7 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Include unconditionally due to difference in how dotnet cli and design time builds generate package.lock.json -->
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.2"/>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.3"/>
   </ItemGroup>
 
   <ItemGroup>
