@@ -27,6 +27,7 @@ module Build =
                 "CurrentVersion", (version.Full.ToString());
                 "CurrentAssemblyVersion", (version.Assembly.ToString());
                 "CurrentAssemblyFileVersion", (version.AssemblyFile.ToString());
+                "ContinuousIntegrationBuild", "true";
             ] 
             |> List.map (fun (p,v) -> sprintf "%s=%s" p v)
             |> String.concat ";"

@@ -9,7 +9,6 @@
     <NoWarn>1591,1572,1571,1573,1587,1570,NU5048,</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
 
     <!-- we need to referenced assemblies during the command line build so that ILRepack can pick them up -->
     <CopyLocalLockFileAssemblies Condition="'$(TargetFramework)'=='netstandard2.0'">true</CopyLocalLockFileAssemblies>
