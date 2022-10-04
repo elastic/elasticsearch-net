@@ -71,9 +71,6 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		[JsonIgnore]
-		public TDocument Document { get; set; }
-
-		[JsonIgnore]
 		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
 		[JsonIgnore]
@@ -133,20 +130,33 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("upsert")]
+		[SourceConverter]
 		public TDocument? Upsert { get; set; }
 	}
 
 	public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument> : RequestDescriptorBase<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters>
 	{
 		internal UpdateRequestDescriptor(Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configure) => configure.Invoke(this);
-		internal UpdateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+		public UpdateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 		{
 		}
 
-		public UpdateRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document)) => DocumentValue = document;
-		public UpdateRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id) => DocumentValue = document;
-		public UpdateRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document)) => DocumentValue = document;
-		public UpdateRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id) => DocumentValue = document;
+		public UpdateRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document))
+		{
+		}
+
+		public UpdateRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id)
+		{
+		}
+
+		public UpdateRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document))
+		{
+		}
+
+		public UpdateRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id)
+		{
+		}
+
 		public UpdateRequestDescriptor(Id id) : this(typeof(TDocument), id)
 		{
 		}
@@ -194,8 +204,6 @@ namespace Elastic.Clients.Elasticsearch
 		private bool? ScriptedUpsertValue { get; set; }
 
 		private TDocument? UpsertValue { get; set; }
-
-		private TDocument DocumentValue { get; set; }
 
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
 		{
@@ -281,7 +289,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (UpsertValue is not null)
 			{
 				writer.WritePropertyName("upsert");
-				JsonSerializer.Serialize(writer, UpsertValue, options);
+				SourceSerialisation.Serialize(UpsertValue, writer, settings);
 			}
 
 			writer.WriteEndObject();
