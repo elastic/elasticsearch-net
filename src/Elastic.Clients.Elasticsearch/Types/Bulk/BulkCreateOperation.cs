@@ -76,11 +76,14 @@ namespace Elastic.Clients.Elasticsearch
 		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings)
 		{
 			SetValues(settings);
-			await using var writer = new Utf8JsonWriter(stream);
-			SerializeOperationAction(settings, writer);
-			await writer.FlushAsync().ConfigureAwait(false);
-			stream.WriteByte(SerializationConstants.Newline);
-			await settings.SourceSerializer.SerializeAsync(Document, stream).ConfigureAwait(false);
+			var writer = new Utf8JsonWriter(stream);
+			await using (writer.ConfigureAwait(false))
+			{
+				SerializeOperationAction(settings, writer);
+				await writer.FlushAsync().ConfigureAwait(false);
+				stream.WriteByte(SerializationConstants.Newline);
+				await settings.SourceSerializer.SerializeAsync(Document, stream).ConfigureAwait(false);
+			}
 		}
 
 		private void SetValues(IElasticsearchClientSettings settings)
