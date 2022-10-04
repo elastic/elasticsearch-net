@@ -1,4 +1,6 @@
 <Project>
+  <Sdk Name="DotNet.ReproducibleBuilds.Isolated" Version="1.1.1" />
+
   <!-- Default Version numbers -->
   <PropertyGroup>
     <CurrentVersion>8.0.0</CurrentVersion>
@@ -14,6 +16,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <MajorVersion>$(Version.Split('.')[0])</MajorVersion>
   </PropertyGroup>
+  
   <!-- Common Nuget metadata-->
   <PropertyGroup>
     <Authors>Elastic and contributors</Authors>
@@ -32,7 +35,6 @@
     <EnablePackageValidation>true</EnablePackageValidation>
     <OutputPath Condition="'$(OutputPathBaseDir)' != ''">$(OutputPathBaseDir)\$(MSBuildProjectName)\</OutputPath>
     <SolutionRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))</SolutionRoot>
-    
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <RestoreLockedMode>true</RestoreLockedMode>
@@ -46,7 +48,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Include unconditionally due to difference in how dotnet cli and design time builds generate package.lock.json -->
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.2"/>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.3"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1" PrivateAssets="All"/>
+  </ItemGroup>
 </Project>
