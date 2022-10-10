@@ -5,6 +5,7 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Runtime;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
@@ -71,6 +72,19 @@ public sealed class TaskId : IUrlParameter, IEquatable<TaskId>
 
 internal sealed class TaskIdConverter : JsonConverter<TaskId>
 {
+	public override void WriteAsPropertyName(Utf8JsonWriter writer, TaskId value, JsonSerializerOptions options)
+	{
+		if (options.TryGetClientSettings(out var settings))
+		{
+			writer.WritePropertyName(value.GetString(settings));
+			return;
+		}
+
+		throw new JsonException("Unable to retrive client settings during property name serialization.");
+	}
+
+	public override TaskId ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.GetString();
+
 	public override TaskId? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType == JsonTokenType.Null)
