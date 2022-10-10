@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("key")]
-		public string Key { get; init; }
+		public object Key { get; init; }
 	}
 
 	internal sealed class StringTermsBucketConverter : JsonConverter<StringTermsBucket>
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
 			long docCount = default;
 			long? docCountError = default;
-			string key = default;
+			object key = default;
 			while (reader.Read())
 			{
 				if (reader.TokenType == JsonTokenType.EndObject)
@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 				if (name.Equals("key", StringComparison.Ordinal))
 				{
-					key = JsonSerializer.Deserialize<string>(ref reader, options);
+					key = JsonSerializer.Deserialize<object>(ref reader, options);
 					continue;
 				}
 

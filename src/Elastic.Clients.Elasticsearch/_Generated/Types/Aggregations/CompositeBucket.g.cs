@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("key")]
-		public Dictionary<string, object> Key { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, object> Key { get; init; }
 	}
 
 	internal sealed class CompositeBucketConverter : JsonConverter<CompositeBucket>
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
 			var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
 			long docCount = default;
-			Dictionary<string, object> key = default;
+			Dictionary<Elastic.Clients.Elasticsearch.Field, object> key = default;
 			while (reader.Read())
 			{
 				if (reader.TokenType == JsonTokenType.EndObject)
@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 				if (name.Equals("key", StringComparison.Ordinal))
 				{
-					key = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					key = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, object>>(ref reader, options);
 					continue;
 				}
 

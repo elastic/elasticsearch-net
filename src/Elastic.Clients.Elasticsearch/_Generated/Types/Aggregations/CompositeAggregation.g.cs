@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					if (reader.ValueTextEquals("after"))
 					{
 						reader.Read();
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, object>?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.After = value;
@@ -156,7 +156,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		public Dictionary<string, object>? After { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, object>? After { get; set; }
 
 		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 
@@ -182,7 +182,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
-		private Dictionary<string, object>? AfterValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, object>? AfterValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
@@ -214,9 +214,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public CompositeAggregationDescriptor<TDocument> After(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		public CompositeAggregationDescriptor<TDocument> After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>> selector)
 		{
-			AfterValue = selector?.Invoke(new FluentDictionary<string, object>());
+			AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>());
 			return Self;
 		}
 
@@ -301,7 +301,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
 
-		private Dictionary<string, object>? AfterValue { get; set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, object>? AfterValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
@@ -333,9 +333,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public CompositeAggregationDescriptor After(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		public CompositeAggregationDescriptor After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>> selector)
 		{
-			AfterValue = selector?.Invoke(new FluentDictionary<string, object>());
+			AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>());
 			return Self;
 		}
 

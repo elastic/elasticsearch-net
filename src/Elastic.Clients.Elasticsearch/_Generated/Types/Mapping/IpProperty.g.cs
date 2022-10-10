@@ -71,8 +71,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string? NullValue { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("on_script_error")]
+		public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("properties")]
 		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("similarity")]
@@ -81,6 +89,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("store")]
 		public bool? Store { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_series_dimension")]
+		public bool? TimeSeriesDimension { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -116,11 +128,17 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private string? NullValueValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private bool? TimeSeriesDimensionValue { get; set; }
 
 		public IpPropertyDescriptor<TDocument> Boost(double? boost)
 		{
@@ -208,6 +226,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public IpPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+		{
+			OnScriptErrorValue = onScriptError;
+			return Self;
+		}
+
 		public IpPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
@@ -228,6 +252,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public IpPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public IpPropertyDescriptor<TDocument> Similarity(string? similarity)
 		{
 			SimilarityValue = similarity;
@@ -237,6 +267,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public IpPropertyDescriptor<TDocument> Store(bool? store = true)
 		{
 			StoreValue = store;
+			return Self;
+		}
+
+		public IpPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
 			return Self;
 		}
 
@@ -309,10 +345,22 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteStringValue(NullValueValue);
 			}
 
+			if (OnScriptErrorValue is not null)
+			{
+				writer.WritePropertyName("on_script_error");
+				JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+			}
+
 			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
 				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(SimilarityValue))
@@ -327,13 +375,19 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteBooleanValue(StoreValue.Value);
 			}
 
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("ip");
 			writer.WriteEndObject();
 		}
 
 		IpProperty IBuildableDescriptor<IpProperty>.Build() => new()
-		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
 	}
 
 	public sealed partial class IpPropertyDescriptor : SerializableDescriptorBase<IpPropertyDescriptor>, IBuildableDescriptor<IpProperty>
@@ -365,11 +419,17 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private string? NullValueValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
+
+		private bool? TimeSeriesDimensionValue { get; set; }
 
 		public IpPropertyDescriptor Boost(double? boost)
 		{
@@ -463,6 +523,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public IpPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+		{
+			OnScriptErrorValue = onScriptError;
+			return Self;
+		}
+
 		public IpPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
@@ -483,6 +549,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public IpPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public IpPropertyDescriptor Similarity(string? similarity)
 		{
 			SimilarityValue = similarity;
@@ -492,6 +564,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public IpPropertyDescriptor Store(bool? store = true)
 		{
 			StoreValue = store;
+			return Self;
+		}
+
+		public IpPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
 			return Self;
 		}
 
@@ -564,10 +642,22 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteStringValue(NullValueValue);
 			}
 
+			if (OnScriptErrorValue is not null)
+			{
+				writer.WritePropertyName("on_script_error");
+				JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+			}
+
 			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
 				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(SimilarityValue))
@@ -582,12 +672,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteBooleanValue(StoreValue.Value);
 			}
 
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("ip");
 			writer.WriteEndObject();
 		}
 
 		IpProperty IBuildableDescriptor<IpProperty>.Build() => new()
-		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
 	}
 }

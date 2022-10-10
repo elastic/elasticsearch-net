@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	public sealed partial class DoubleNumberProperty : IProperty
 	{
 		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("coerce")]
 		public bool? Coerce { get; set; }
 
@@ -91,6 +95,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool? Store { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("time_series_dimension")]
+		public bool? TimeSeriesDimension { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("time_series_metric")]
 		public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
@@ -105,6 +113,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public DoubleNumberPropertyDescriptor() : base()
 		{
 		}
+
+		private double? BoostValue { get; set; }
 
 		private bool? CoerceValue { get; set; }
 
@@ -138,7 +148,15 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? StoreValue { get; set; }
 
+		private bool? TimeSeriesDimensionValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		public DoubleNumberPropertyDescriptor<TDocument> Boost(double? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
 
 		public DoubleNumberPropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 		{
@@ -270,6 +288,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public DoubleNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
+			return Self;
+		}
+
 		public DoubleNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 		{
 			TimeSeriesMetricValue = timeSeriesMetric;
@@ -279,6 +303,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (CoerceValue.HasValue)
 			{
 				writer.WritePropertyName("coerce");
@@ -375,6 +405,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteBooleanValue(StoreValue.Value);
 			}
 
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
 			if (TimeSeriesMetricValue is not null)
 			{
 				writer.WritePropertyName("time_series_metric");
@@ -387,7 +423,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		DoubleNumberProperty IBuildableDescriptor<DoubleNumberProperty>.Build() => new()
-		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
 	public sealed partial class DoubleNumberPropertyDescriptor : SerializableDescriptorBase<DoubleNumberPropertyDescriptor>, IBuildableDescriptor<DoubleNumberProperty>
@@ -396,6 +432,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public DoubleNumberPropertyDescriptor() : base()
 		{
 		}
+
+		private double? BoostValue { get; set; }
 
 		private bool? CoerceValue { get; set; }
 
@@ -429,7 +467,15 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? StoreValue { get; set; }
 
+		private bool? TimeSeriesDimensionValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		public DoubleNumberPropertyDescriptor Boost(double? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
 
 		public DoubleNumberPropertyDescriptor Coerce(bool? coerce = true)
 		{
@@ -567,6 +613,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public DoubleNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
+			return Self;
+		}
+
 		public DoubleNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 		{
 			TimeSeriesMetricValue = timeSeriesMetric;
@@ -576,6 +628,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (CoerceValue.HasValue)
 			{
 				writer.WritePropertyName("coerce");
@@ -672,6 +730,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteBooleanValue(StoreValue.Value);
 			}
 
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
 			if (TimeSeriesMetricValue is not null)
 			{
 				writer.WritePropertyName("time_series_metric");
@@ -684,6 +748,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		DoubleNumberProperty IBuildableDescriptor<DoubleNumberProperty>.Build() => new()
-		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }
