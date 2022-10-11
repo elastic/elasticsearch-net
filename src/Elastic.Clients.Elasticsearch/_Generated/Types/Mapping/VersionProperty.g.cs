@@ -104,12 +104,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
-		public VersionPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
 		public VersionPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
 		{
 			DocValuesValue = docValues;
@@ -292,18 +286,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private bool? StoreValue { get; set; }
 
 		public VersionPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public VersionPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public VersionPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;

@@ -63,6 +63,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("missing"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("script"))
 					{
 						reader.Read();
@@ -138,6 +150,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Metrics, options);
 			}
 
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
 			if (value.Script is not null)
 			{
 				writer.WritePropertyName("script");
@@ -182,6 +200,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
 
+		public FieldValue? Missing { get; set; }
+
 		public override string? Name { get; internal set; }
 
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
@@ -210,6 +230,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private FieldValue? MissingValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
@@ -268,6 +290,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopMetricsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public TopMetricsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
 			return Self;
 		}
 
@@ -331,6 +359,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
+			}
+
 			if (ScriptValue is not null)
 			{
 				writer.WritePropertyName("script");
@@ -378,6 +412,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private FieldValue? MissingValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
@@ -445,6 +481,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public TopMetricsAggregationDescriptor Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
 		public TopMetricsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 		{
 			ScriptValue = script;
@@ -503,6 +545,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("field");
 				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (ScriptValue is not null)

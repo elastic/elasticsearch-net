@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	public sealed partial class ScaledFloatNumberProperty : IProperty
 	{
 		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("coerce")]
 		public bool? Coerce { get; set; }
 
@@ -71,6 +75,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public double? NullValue { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("on_script_error")]
+		public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("properties")]
 		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
@@ -79,12 +87,20 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public double? ScalingFactor { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("similarity")]
 		public string? Similarity { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("store")]
 		public bool? Store { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_series_dimension")]
+		public bool? TimeSeriesDimension { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_series_metric")]
@@ -101,6 +117,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public ScaledFloatNumberPropertyDescriptor() : base()
 		{
 		}
+
+		private double? BoostValue { get; set; }
 
 		private bool? CoerceValue { get; set; }
 
@@ -124,15 +142,27 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private double? NullValueValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private double? ScalingFactorValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
 
+		private bool? TimeSeriesDimensionValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		public ScaledFloatNumberPropertyDescriptor<TDocument> Boost(double? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
 
 		public ScaledFloatNumberPropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 		{
@@ -141,12 +171,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		public ScaledFloatNumberPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public ScaledFloatNumberPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;
@@ -220,6 +244,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public ScaledFloatNumberPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+		{
+			OnScriptErrorValue = onScriptError;
+			return Self;
+		}
+
 		public ScaledFloatNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
@@ -246,6 +276,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public ScaledFloatNumberPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public ScaledFloatNumberPropertyDescriptor<TDocument> Similarity(string? similarity)
 		{
 			SimilarityValue = similarity;
@@ -258,6 +294,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public ScaledFloatNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
+			return Self;
+		}
+
 		public ScaledFloatNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 		{
 			TimeSeriesMetricValue = timeSeriesMetric;
@@ -267,6 +309,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (CoerceValue.HasValue)
 			{
 				writer.WritePropertyName("coerce");
@@ -333,6 +381,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteNumberValue(NullValueValue.Value);
 			}
 
+			if (OnScriptErrorValue is not null)
+			{
+				writer.WritePropertyName("on_script_error");
+				JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+			}
+
 			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
@@ -343,6 +397,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			{
 				writer.WritePropertyName("scaling_factor");
 				writer.WriteNumberValue(ScalingFactorValue.Value);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(SimilarityValue))
@@ -357,6 +417,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteBooleanValue(StoreValue.Value);
 			}
 
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
 			if (TimeSeriesMetricValue is not null)
 			{
 				writer.WritePropertyName("time_series_metric");
@@ -369,7 +435,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		ScaledFloatNumberProperty IBuildableDescriptor<ScaledFloatNumberProperty>.Build() => new()
-		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, ScalingFactor = ScalingFactorValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, ScalingFactor = ScalingFactorValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
 	public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDescriptorBase<ScaledFloatNumberPropertyDescriptor>, IBuildableDescriptor<ScaledFloatNumberProperty>
@@ -378,6 +444,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public ScaledFloatNumberPropertyDescriptor() : base()
 		{
 		}
+
+		private double? BoostValue { get; set; }
 
 		private bool? CoerceValue { get; set; }
 
@@ -401,15 +469,27 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private double? NullValueValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 		private double? ScalingFactorValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
 
+		private bool? TimeSeriesDimensionValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		public ScaledFloatNumberPropertyDescriptor Boost(double? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
 
 		public ScaledFloatNumberPropertyDescriptor Coerce(bool? coerce = true)
 		{
@@ -418,18 +498,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		public ScaledFloatNumberPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public ScaledFloatNumberPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public ScaledFloatNumberPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;
@@ -503,6 +571,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public ScaledFloatNumberPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+		{
+			OnScriptErrorValue = onScriptError;
+			return Self;
+		}
+
 		public ScaledFloatNumberPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
@@ -529,6 +603,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public ScaledFloatNumberPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public ScaledFloatNumberPropertyDescriptor Similarity(string? similarity)
 		{
 			SimilarityValue = similarity;
@@ -541,6 +621,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public ScaledFloatNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
+			return Self;
+		}
+
 		public ScaledFloatNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 		{
 			TimeSeriesMetricValue = timeSeriesMetric;
@@ -550,6 +636,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (CoerceValue.HasValue)
 			{
 				writer.WritePropertyName("coerce");
@@ -616,6 +708,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteNumberValue(NullValueValue.Value);
 			}
 
+			if (OnScriptErrorValue is not null)
+			{
+				writer.WritePropertyName("on_script_error");
+				JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+			}
+
 			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
@@ -626,6 +724,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			{
 				writer.WritePropertyName("scaling_factor");
 				writer.WriteNumberValue(ScalingFactorValue.Value);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(SimilarityValue))
@@ -640,6 +744,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteBooleanValue(StoreValue.Value);
 			}
 
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
 			if (TimeSeriesMetricValue is not null)
 			{
 				writer.WritePropertyName("time_series_metric");
@@ -652,6 +762,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		ScaledFloatNumberProperty IBuildableDescriptor<ScaledFloatNumberProperty>.Build() => new()
-		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, ScalingFactor = ScalingFactorValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, ScalingFactor = ScalingFactorValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

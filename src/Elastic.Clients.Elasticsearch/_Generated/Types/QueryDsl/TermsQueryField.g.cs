@@ -25,9 +25,9 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class TermsQueryField : Union<IReadOnlyCollection<object>, Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>
+	public partial class TermsQueryField : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>
 	{
-		public TermsQueryField(IReadOnlyCollection<object> termsQueryField) : base(termsQueryField)
+		public TermsQueryField(IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> termsQueryField) : base(termsQueryField)
 		{
 		}
 

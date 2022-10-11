@@ -12,7 +12,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch
 {
 	[JsonConverter(typeof(FieldValuesConverter))]
-	public sealed class FieldValues : IsADictionaryBase<string, LazyDocument>
+	public sealed class FieldValues : IsADictionaryBase<string, LazyJson>
 	{
 		public static readonly FieldValues Empty = new();
 
@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private FieldValues() { }
 
-		internal FieldValues(Inferrer inferrer, IDictionary<string, LazyDocument> container)
+		internal FieldValues(Inferrer inferrer, IDictionary<string, LazyJson> container)
 			: base(container) => _inferrer = inferrer;
 
 		public TValue Value<TValue>(Field field)
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch
 				return null;
 			}
 
-			var fields = new Dictionary<string, LazyDocument>();
+			var fields = new Dictionary<string, LazyJson>();
 
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch
 
 				var propertyName = reader.GetString();
 				reader.Read();
-				var lazyDocument = JsonSerializer.Deserialize<LazyDocument>(ref reader, options);
+				var lazyDocument = JsonSerializer.Deserialize<LazyJson>(ref reader, options);
 				fields[propertyName] = lazyDocument;
 			}
 
