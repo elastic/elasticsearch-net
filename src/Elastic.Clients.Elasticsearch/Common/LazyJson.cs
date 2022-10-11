@@ -9,13 +9,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch
 {
 	/// <summary>
-	/// <para>A lazily deserialized document.</para>
-	/// <para>Holds raw JSON bytes which can be lazily converted to a specific <see cref="Type"/> at a later time.</para>
+	/// <para>Lazily deserializable JSON.</para>
+	/// <para>Holds raw JSON bytes which can be lazily deserialized to a specific <see cref="Type"/> using the source serializer at a later time.</para>
 	/// </summary>
-	[JsonConverter(typeof(LazyDocumentConverter))]
-	public readonly struct LazyDocument
+	[JsonConverter(typeof(LazyJsonConverter))]
+	public readonly struct LazyJson
 	{
-		internal LazyDocument(byte[] bytes, IElasticsearchClientSettings settings)
+		internal LazyJson(byte[] bytes, IElasticsearchClientSettings settings)
 		{
 			Bytes = bytes;
 			Settings = settings;
@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		/// <summary>
 		/// Creates an instance of <typeparamref name="T" /> from this
-		/// <see cref="LazyDocument" /> instance.
+		/// <see cref="LazyJson" /> instance.
 		/// </summary>
 		/// <typeparam name="T">The type</typeparam>
 		public T? As<T>()
@@ -39,13 +39,13 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	internal sealed class LazyDocumentConverter : JsonConverter<LazyDocument>
+	internal sealed class LazyJsonConverter : JsonConverter<LazyJson>
 	{
 		private readonly IElasticsearchClientSettings _settings;
 
-		public LazyDocumentConverter(IElasticsearchClientSettings settings) => _settings = settings;
+		public LazyJsonConverter(IElasticsearchClientSettings settings) => _settings = settings;
 
-		public override LazyDocument Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override LazyJson Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			using var jsonDoc = JsonSerializer.Deserialize<JsonDocument>(ref reader);
 			using var stream = _settings.MemoryStreamFactory.Create();
@@ -54,9 +54,9 @@ namespace Elastic.Clients.Elasticsearch
 			jsonDoc.WriteTo(writer);
 			writer.Flush();
 
-			return new LazyDocument(stream.ToArray(), _settings);
+			return new LazyJson(stream.ToArray(), _settings);
 		}
 
-		public override void Write(Utf8JsonWriter writer, LazyDocument value, JsonSerializerOptions options) => throw new NotImplementedException("We only ever expect to deserialize a LazyDocument on responses.");
+		public override void Write(Utf8JsonWriter writer, LazyJson value, JsonSerializerOptions options) => throw new NotImplementedException("We only ever expect to deserialize LazyJson on responses.");
 	}
 }

@@ -13,6 +13,7 @@ using Tests.Core.Extensions;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 using System;
+using Elastic.Clients.Elasticsearch.Experimental;
 
 namespace Tests.AsyncSearch;
 
@@ -40,7 +41,7 @@ public class AsyncSearchApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 						Size = 5,
 						ShardSize = 100,
 						ExecutionHint = TermsAggregationExecutionHint.Map,
-						//Missing = "n/a",
+						Missing = "n/a",
 						// TODO - Review terms agg and fix this
 						//Include = new TermsInclude(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() }),
 						Order =new []
@@ -62,7 +63,7 @@ public class AsyncSearchApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 							.Size(5)
 							.ShardSize(100)
 							.ExecutionHint(TermsAggregationExecutionHint.Map)
-							//.Missing("n/a")
+							.Missing("n/a")
 							// TODO - Review terms agg and fix this
 							//.Include(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() })
 							.Order(new []
@@ -159,6 +160,9 @@ public class AsyncSearchApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 		r.Response.Hits.Should().HaveCount(10);
 		var terms = r.Response.Aggregations.GetTerms("states");
 		terms.Should().NotBeNull();
+		var stringTerms = r.Response.Aggregations.GetStringTerms("states");
+		stringTerms.Should().NotBeNull();
+		terms.Should().BeEquivalentTo(stringTerms);
 	});
 
 	[I]

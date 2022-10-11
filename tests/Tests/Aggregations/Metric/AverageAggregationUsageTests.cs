@@ -28,7 +28,7 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 			avg = new
 			{
 				field = "numberOfCommits",
-				//missing = 10.0,
+				missing = 10.0,
 				script = new
 				{
 					source = "_value * 1.2",
@@ -43,8 +43,8 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 				.Add("foo", "bar")
 			)
 			.Field(p => p.NumberOfCommits)
-			//.Missing(10)
-			//.Script(ss => ss.Source("_value * 1.2"))
+			.Missing(10)
+			//.Script(ss => ss.Source("_value * 1.2")) // TODO: {Usability} Support this cleaner fluent syntax for scripts
 			.Script(new Script(new InlineScript("_value * 1.2")))
 		);
 
@@ -55,7 +55,7 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 			{
 				{ "foo", "bar" }
 			},
-			//Missing = 10,
+			Missing = 10,
 			Script = new Script(new InlineScript("_value * 1.2"))
 		};
 

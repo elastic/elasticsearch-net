@@ -69,7 +69,7 @@ namespace Tests.Search.Search
 				)
 			)
 			.PostFilter(f => f
-				.Term(p => p.State, StateOfBeing.Stable) // TODO - REVIEW THIS
+				.Term(p => p.State, StateOfBeing.Stable)
 			);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

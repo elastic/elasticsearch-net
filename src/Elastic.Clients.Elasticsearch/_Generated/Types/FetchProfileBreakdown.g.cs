@@ -27,6 +27,14 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed partial class FetchProfileBreakdown
 	{
 		[JsonInclude]
+		[JsonPropertyName("load_source")]
+		public int? LoadSource { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("load_source_count")]
+		public int? LoadSourceCount { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("load_stored_fields")]
 		public int? LoadStoredFields { get; init; }
 

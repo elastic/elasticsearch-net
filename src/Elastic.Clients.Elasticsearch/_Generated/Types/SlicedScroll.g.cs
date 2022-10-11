@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public int Id { get; set; }
+		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max")]
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		private int IdValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 
 		private int MaxValue { get; set; }
 
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SlicedScrollDescriptor<TDocument> Id(int id)
+		public SlicedScrollDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			IdValue = id;
 			return Self;
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch
 			}
 
 			writer.WritePropertyName("id");
-			writer.WriteNumberValue(IdValue);
+			JsonSerializer.Serialize(writer, IdValue, options);
 			writer.WritePropertyName("max");
 			writer.WriteNumberValue(MaxValue);
 			writer.WriteEndObject();
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		private int IdValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 
 		private int MaxValue { get; set; }
 
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SlicedScrollDescriptor Id(int id)
+		public SlicedScrollDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 		{
 			IdValue = id;
 			return Self;
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch
 			}
 
 			writer.WritePropertyName("id");
-			writer.WriteNumberValue(IdValue);
+			JsonSerializer.Serialize(writer, IdValue, options);
 			writer.WritePropertyName("max");
 			writer.WriteNumberValue(MaxValue);
 			writer.WriteEndObject();

@@ -13,7 +13,7 @@ public sealed partial class QueryContainerDescriptor<TDocument>
 		Set<MatchAllQueryDescriptor>(_ => { }, "match_all");
 
 	public void Term<TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null) =>
-		Term(t => t.Field(field).Value(value).Boost(boost));
+		Term(t => t.Field(field).Value(FieldValue.Composite(value)).Boost(boost));
 }
 
 public sealed partial class QueryContainerDescriptor/*<TDocument>*/
@@ -27,5 +27,5 @@ public sealed partial class QueryContainerDescriptor/*<TDocument>*/
 	//	Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
 
 	public void Term<TDocument, TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null) =>
-			Term(t => t.Field(field).Value(value).Boost(boost));
+			Term(t => t.Field(field).Value(FieldValue.Composite(value)).Boost(boost));
 }
