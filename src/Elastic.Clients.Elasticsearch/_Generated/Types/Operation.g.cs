@@ -106,18 +106,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public OperationDescriptor StoredFields<TDocument, TValue>(Expression<Func<TDocument, TValue>> storedFields)
-		{
-			StoredFieldsValue = storedFields;
-			return Self;
-		}
-
-		public OperationDescriptor StoredFields<TDocument>(Expression<Func<TDocument, object>> storedFields)
-		{
-			StoredFieldsValue = storedFields;
-			return Self;
-		}
-
 		public OperationDescriptor Version(long? version)
 		{
 			VersionValue = version;

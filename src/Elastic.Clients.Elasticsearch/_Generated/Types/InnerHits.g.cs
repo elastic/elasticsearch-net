@@ -247,12 +247,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public InnerHitsDescriptor<TDocument> Fields<TValue>(Expression<Func<TDocument, TValue>> fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
 		public InnerHitsDescriptor<TDocument> From(int? from)
 		{
 			FromValue = from;
@@ -296,12 +290,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public InnerHitsDescriptor<TDocument> StoredField(Elastic.Clients.Elasticsearch.Fields? storedField)
-		{
-			StoredFieldValue = storedField;
-			return Self;
-		}
-
-		public InnerHitsDescriptor<TDocument> StoredField<TValue>(Expression<Func<TDocument, TValue>> storedField)
 		{
 			StoredFieldValue = storedField;
 			return Self;
@@ -622,18 +610,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public InnerHitsDescriptor Fields<TDocument, TValue>(Expression<Func<TDocument, TValue>> fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public InnerHitsDescriptor Fields<TDocument>(Expression<Func<TDocument, object>> fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
 		public InnerHitsDescriptor From(int? from)
 		{
 			FromValue = from;
@@ -677,18 +653,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public InnerHitsDescriptor StoredField(Elastic.Clients.Elasticsearch.Fields? storedField)
-		{
-			StoredFieldValue = storedField;
-			return Self;
-		}
-
-		public InnerHitsDescriptor StoredField<TDocument, TValue>(Expression<Func<TDocument, TValue>> storedField)
-		{
-			StoredFieldValue = storedField;
-			return Self;
-		}
-
-		public InnerHitsDescriptor StoredField<TDocument>(Expression<Func<TDocument, object>> storedField)
 		{
 			StoredFieldValue = storedField;
 			return Self;

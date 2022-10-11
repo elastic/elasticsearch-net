@@ -40,6 +40,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("sum_other_doc_count")]
-		public long SumOtherDocCount { get; init; }
+		public long? SumOtherDocCount { get; init; }
 	}
 }

@@ -59,7 +59,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 					if (property == "value")
 					{
-						variant.Value = JsonSerializer.Deserialize<object>(ref reader, options);
+						variant.Value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.FieldValue>(ref reader, options);
 						continue;
 					}
 				}
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public bool? CaseInsensitive { get; set; }
 
-		public object Value { get; set; }
+		public Elastic.Clients.Elasticsearch.FieldValue Value { get; set; }
 
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		private object ValueValue { get; set; }
+		private Elastic.Clients.Elasticsearch.FieldValue ValueValue { get; set; }
 
 		public TermQueryDescriptor<TDocument> QueryName(string? queryName)
 		{
@@ -189,7 +189,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public TermQueryDescriptor<TDocument> Value(object value)
+		public TermQueryDescriptor<TDocument> Value(Elastic.Clients.Elasticsearch.FieldValue value)
 		{
 			ValueValue = value;
 			return Self;
@@ -249,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		private object ValueValue { get; set; }
+		private Elastic.Clients.Elasticsearch.FieldValue ValueValue { get; set; }
 
 		public TermQueryDescriptor QueryName(string? queryName)
 		{
@@ -287,7 +287,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public TermQueryDescriptor Value(object value)
+		public TermQueryDescriptor Value(Elastic.Clients.Elasticsearch.FieldValue value)
 		{
 			ValueValue = value;
 			return Self;

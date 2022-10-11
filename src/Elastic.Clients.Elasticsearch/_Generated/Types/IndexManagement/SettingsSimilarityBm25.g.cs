@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("b")]
-		public int b { get; set; }
+		public double b { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("discount_overlaps")]
@@ -50,13 +50,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		private int bValue { get; set; }
+		private double bValue { get; set; }
 
 		private bool DiscountOverlapsValue { get; set; }
 
 		private double K1Value { get; set; }
 
-		public SettingsSimilarityBm25Descriptor b(int b)
+		public SettingsSimilarityBm25Descriptor b(double b)
 		{
 			bValue = b;
 			return Self;

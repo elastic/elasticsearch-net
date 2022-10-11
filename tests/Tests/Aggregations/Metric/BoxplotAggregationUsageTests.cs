@@ -28,7 +28,7 @@ public class BoxplotAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 			boxplot = new
 			{
 				field = "numberOfCommits",
-				//missing = 10.0,
+				missing = 10.0,
 				compression = 100.0
 			}
 		}
@@ -40,7 +40,7 @@ public class BoxplotAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 				.Add("foo", "bar")
 			)
 			.Field(p => p.NumberOfCommits)
-			//.Missing(10)
+			.Missing(10)
 			.Compression(100)
 		);
 
@@ -51,7 +51,7 @@ public class BoxplotAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 			{
 				{ "foo", "bar" }
 			},
-			//Missing = 10,
+			Missing = 10,
 			Compression = 100
 		};
 
