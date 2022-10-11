@@ -87,6 +87,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("missing"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("params"))
 					{
 						reader.Read();
@@ -174,6 +186,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.MapScript, options);
 			}
 
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
 			if (value.Params is not null)
 			{
 				writer.WritePropertyName("params");
@@ -222,6 +240,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public Dictionary<string, object>? Meta { get; set; }
 
+		public FieldValue? Missing { get; set; }
+
 		public override string? Name { get; internal set; }
 
 		public Dictionary<string, object>? Params { get; set; }
@@ -247,6 +267,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private FieldValue? MissingValue { get; set; }
 
 		private Dictionary<string, object>? ParamsValue { get; set; }
 
@@ -287,6 +309,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public ScriptedMetricAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
 			return Self;
 		}
 
@@ -337,6 +365,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, MapScriptValue, options);
 			}
 
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
+			}
+
 			if (ParamsValue is not null)
 			{
 				writer.WritePropertyName("params");
@@ -382,6 +416,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private FieldValue? MissingValue { get; set; }
 
 		private Dictionary<string, object>? ParamsValue { get; set; }
 
@@ -431,6 +467,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public ScriptedMetricAggregationDescriptor Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
 		public ScriptedMetricAggregationDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
@@ -476,6 +518,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("map_script");
 				JsonSerializer.Serialize(writer, MapScriptValue, options);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (ParamsValue is not null)

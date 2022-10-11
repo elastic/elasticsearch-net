@@ -123,6 +123,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("missing"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("missing_bucket"))
 					{
 						reader.Read();
@@ -299,6 +311,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(value.MinDocCount.Value);
 			}
 
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
 			if (value.MissingBucket.HasValue)
 			{
 				writer.WritePropertyName("missing_bucket");
@@ -391,6 +409,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public int? MinDocCount { get; set; }
 
+		public FieldValue? Missing { get; set; }
+
 		public bool? MissingBucket { get; set; }
 
 		public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
@@ -439,6 +459,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private Dictionary<string, object>? MetaValue { get; set; }
 
 		private int? MinDocCountValue { get; set; }
+
+		private FieldValue? MissingValue { get; set; }
 
 		private bool? MissingBucketValue { get; set; }
 
@@ -531,6 +553,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TermsAggregationDescriptor<TDocument> MinDocCount(int? minDocCount)
 		{
 			MinDocCountValue = minDocCount;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
 			return Self;
 		}
 
@@ -627,6 +655,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("min_doc_count");
 				writer.WriteNumberValue(MinDocCountValue.Value);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (MissingBucketValue.HasValue)
@@ -733,6 +767,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private int? MinDocCountValue { get; set; }
 
+		private FieldValue? MissingValue { get; set; }
+
 		private bool? MissingBucketValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
@@ -833,6 +869,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public TermsAggregationDescriptor Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
 		public TermsAggregationDescriptor MissingBucket(bool? missingBucket = true)
 		{
 			MissingBucketValue = missingBucket;
@@ -926,6 +968,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("min_doc_count");
 				writer.WriteNumberValue(MinDocCountValue.Value);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (MissingBucketValue.HasValue)

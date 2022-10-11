@@ -171,12 +171,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public MatrixStatsAggregationDescriptor<TDocument> Fields<TValue>(Expression<Func<TDocument, TValue>> fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
 		public MatrixStatsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
@@ -245,18 +239,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 
 		public MatrixStatsAggregationDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public MatrixStatsAggregationDescriptor Fields<TDocument, TValue>(Expression<Func<TDocument, TValue>> fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public MatrixStatsAggregationDescriptor Fields<TDocument>(Expression<Func<TDocument, object>> fields)
 		{
 			FieldsValue = fields;
 			return Self;

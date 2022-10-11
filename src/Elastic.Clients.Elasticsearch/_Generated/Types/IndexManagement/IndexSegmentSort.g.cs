@@ -64,12 +64,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public IndexSegmentSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
 		public IndexSegmentSortDescriptor<TDocument> Missing(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? missing)
 		{
 			MissingValue = missing;
@@ -135,18 +129,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? OrderValue { get; set; }
 
 		public IndexSegmentSortDescriptor Field(Elastic.Clients.Elasticsearch.Fields? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public IndexSegmentSortDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public IndexSegmentSortDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 		{
 			FieldValue = field;
 			return Self;

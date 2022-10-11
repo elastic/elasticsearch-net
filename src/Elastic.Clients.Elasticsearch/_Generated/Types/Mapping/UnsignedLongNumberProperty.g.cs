@@ -27,6 +27,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	public sealed partial class UnsignedLongNumberProperty : IProperty
 	{
 		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("coerce")]
+		public bool? Coerce { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("copy_to")]
 		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 
@@ -67,8 +75,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public long? NullValue { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("on_script_error")]
+		public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("properties")]
 		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("similarity")]
@@ -77,6 +93,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("store")]
 		public bool? Store { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_series_dimension")]
+		public bool? TimeSeriesDimension { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_series_metric")]
@@ -93,6 +113,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public UnsignedLongNumberPropertyDescriptor() : base()
 		{
 		}
+
+		private double? BoostValue { get; set; }
+
+		private bool? CoerceValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
 
@@ -114,21 +138,33 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private long? NullValueValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
 
+		private bool? TimeSeriesDimensionValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
-		public UnsignedLongNumberPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+		public UnsignedLongNumberPropertyDescriptor<TDocument> Boost(double? boost)
 		{
-			CopyToValue = copyTo;
+			BoostValue = boost;
 			return Self;
 		}
 
-		public UnsignedLongNumberPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
+		public UnsignedLongNumberPropertyDescriptor<TDocument> Coerce(bool? coerce = true)
+		{
+			CoerceValue = coerce;
+			return Self;
+		}
+
+		public UnsignedLongNumberPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;
@@ -202,6 +238,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public UnsignedLongNumberPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+		{
+			OnScriptErrorValue = onScriptError;
+			return Self;
+		}
+
 		public UnsignedLongNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
@@ -222,6 +264,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public UnsignedLongNumberPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public UnsignedLongNumberPropertyDescriptor<TDocument> Similarity(string? similarity)
 		{
 			SimilarityValue = similarity;
@@ -234,6 +282,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public UnsignedLongNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
+			return Self;
+		}
+
 		public UnsignedLongNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 		{
 			TimeSeriesMetricValue = timeSeriesMetric;
@@ -243,6 +297,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (CoerceValue.HasValue)
+			{
+				writer.WritePropertyName("coerce");
+				writer.WriteBooleanValue(CoerceValue.Value);
+			}
+
 			if (CopyToValue is not null)
 			{
 				writer.WritePropertyName("copy_to");
@@ -303,10 +369,22 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteNumberValue(NullValueValue.Value);
 			}
 
+			if (OnScriptErrorValue is not null)
+			{
+				writer.WritePropertyName("on_script_error");
+				JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+			}
+
 			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
 				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(SimilarityValue))
@@ -321,6 +399,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteBooleanValue(StoreValue.Value);
 			}
 
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
 			if (TimeSeriesMetricValue is not null)
 			{
 				writer.WritePropertyName("time_series_metric");
@@ -333,7 +417,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		UnsignedLongNumberProperty IBuildableDescriptor<UnsignedLongNumberProperty>.Build() => new()
-		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
 	public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableDescriptorBase<UnsignedLongNumberPropertyDescriptor>, IBuildableDescriptor<UnsignedLongNumberProperty>
@@ -342,6 +426,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public UnsignedLongNumberPropertyDescriptor() : base()
 		{
 		}
+
+		private double? BoostValue { get; set; }
+
+		private bool? CoerceValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
 
@@ -363,27 +451,33 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private long? NullValueValue { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		private string? SimilarityValue { get; set; }
 
 		private bool? StoreValue { get; set; }
 
+		private bool? TimeSeriesDimensionValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
+		public UnsignedLongNumberPropertyDescriptor Boost(double? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public UnsignedLongNumberPropertyDescriptor Coerce(bool? coerce = true)
+		{
+			CoerceValue = coerce;
+			return Self;
+		}
+
 		public UnsignedLongNumberPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public UnsignedLongNumberPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public UnsignedLongNumberPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;
@@ -457,6 +551,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public UnsignedLongNumberPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+		{
+			OnScriptErrorValue = onScriptError;
+			return Self;
+		}
+
 		public UnsignedLongNumberPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 		{
 			PropertiesValue = properties;
@@ -477,6 +577,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public UnsignedLongNumberPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		{
+			ScriptValue = script;
+			return Self;
+		}
+
 		public UnsignedLongNumberPropertyDescriptor Similarity(string? similarity)
 		{
 			SimilarityValue = similarity;
@@ -489,6 +595,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public UnsignedLongNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
+			return Self;
+		}
+
 		public UnsignedLongNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 		{
 			TimeSeriesMetricValue = timeSeriesMetric;
@@ -498,6 +610,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (CoerceValue.HasValue)
+			{
+				writer.WritePropertyName("coerce");
+				writer.WriteBooleanValue(CoerceValue.Value);
+			}
+
 			if (CopyToValue is not null)
 			{
 				writer.WritePropertyName("copy_to");
@@ -558,10 +682,22 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteNumberValue(NullValueValue.Value);
 			}
 
+			if (OnScriptErrorValue is not null)
+			{
+				writer.WritePropertyName("on_script_error");
+				JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+			}
+
 			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
 				JsonSerializer.Serialize(writer, PropertiesValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(SimilarityValue))
@@ -576,6 +712,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteBooleanValue(StoreValue.Value);
 			}
 
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
 			if (TimeSeriesMetricValue is not null)
 			{
 				writer.WritePropertyName("time_series_metric");
@@ -588,6 +730,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		UnsignedLongNumberProperty IBuildableDescriptor<UnsignedLongNumberProperty>.Build() => new()
-		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }
