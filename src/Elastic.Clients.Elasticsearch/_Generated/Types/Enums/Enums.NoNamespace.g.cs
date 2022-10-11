@@ -1291,6 +1291,8 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(ScriptSortTypeConverter))]
 	public enum ScriptSortType
 	{
+		[EnumMember(Value = "version")]
+		Version,
 		[EnumMember(Value = "string")]
 		String,
 		[EnumMember(Value = "number")]
@@ -1304,6 +1306,8 @@ namespace Elastic.Clients.Elasticsearch
 			var enumString = reader.GetString();
 			switch (enumString)
 			{
+				case "version":
+					return ScriptSortType.Version;
 				case "string":
 					return ScriptSortType.String;
 				case "number":
@@ -1318,6 +1322,9 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			switch (value)
 			{
+				case ScriptSortType.Version:
+					writer.WriteStringValue("version");
+					return;
 				case ScriptSortType.String:
 					writer.WriteStringValue("string");
 					return;

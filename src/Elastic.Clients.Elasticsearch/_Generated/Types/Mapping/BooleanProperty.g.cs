@@ -138,12 +138,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
-		public BooleanPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
 		public BooleanPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
 		{
 			DocValuesValue = docValues;
@@ -438,18 +432,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		public BooleanPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public BooleanPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public BooleanPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;

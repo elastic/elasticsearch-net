@@ -75,6 +75,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("missing"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("script"))
 					{
 						reader.Read();
@@ -132,6 +144,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(value.Format);
 			}
 
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
 			if (value.Script is not null)
 			{
 				writer.WritePropertyName("script");
@@ -166,6 +184,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public Dictionary<string, object>? Meta { get; set; }
 
+		public FieldValue? Missing { get; set; }
+
 		public override string? Name { get; internal set; }
 
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
@@ -185,6 +205,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private string? FormatValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private FieldValue? MissingValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
@@ -218,6 +240,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
 		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 		{
 			ScriptValue = script;
@@ -245,6 +273,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (ScriptValue is not null)
@@ -278,6 +312,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private string? FormatValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private FieldValue? MissingValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
@@ -317,6 +353,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public MedianAbsoluteDeviationAggregationDescriptor Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
 		public MedianAbsoluteDeviationAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 		{
 			ScriptValue = script;
@@ -344,6 +386,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (ScriptValue is not null)

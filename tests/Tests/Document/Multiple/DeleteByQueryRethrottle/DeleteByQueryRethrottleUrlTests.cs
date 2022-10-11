@@ -10,7 +10,7 @@ namespace Tests.Document.Multiple.DeleteByQueryRethrottle
 {
 	public class DeleteByQueryRethrottleUrlTests : UrlTestsBase
 	{
-		private readonly Id _taskId = "rhtoNesNR4aXVIY2bRR4GQ:13056";
+		private readonly TaskId _taskId = "rhtoNesNR4aXVIY2bRR4GQ:13056";
 
 		[U] public override async Task Urls() =>
 			await POST($"/_delete_by_query/{EscapeUriString(_taskId.ToString())}/_rethrottle")
