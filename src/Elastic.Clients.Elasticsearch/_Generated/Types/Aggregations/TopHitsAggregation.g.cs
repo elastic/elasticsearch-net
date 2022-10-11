@@ -111,6 +111,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("missing"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("script"))
 					{
 						reader.Read();
@@ -270,6 +282,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Highlight, options);
 			}
 
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
 			if (value.Script is not null)
 			{
 				writer.WritePropertyName("script");
@@ -352,6 +370,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public Dictionary<string, object>? Meta { get; set; }
 
+		public FieldValue? Missing { get; set; }
+
 		public override string? Name { get; internal set; }
 
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
@@ -396,6 +416,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private int? FromValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private FieldValue? MissingValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
@@ -449,12 +471,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TopHitsAggregationDescriptor<TDocument> DocvalueFields<TValue>(Expression<Func<TDocument, TValue>> docvalueFields)
-		{
-			DocvalueFieldsValue = docvalueFields;
-			return Self;
-		}
-
 		public TopHitsAggregationDescriptor<TDocument> Explain(bool? explain = true)
 		{
 			ExplainValue = explain;
@@ -482,6 +498,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TopHitsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public TopHitsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
 			return Self;
 		}
 
@@ -516,12 +538,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		public TopHitsAggregationDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
-		{
-			StoredFieldsValue = storedFields;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor<TDocument> StoredFields<TValue>(Expression<Func<TDocument, TValue>> storedFields)
 		{
 			StoredFieldsValue = storedFields;
 			return Self;
@@ -588,6 +604,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("from");
 				writer.WriteNumberValue(FromValue.Value);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (ScriptValue is not null)
@@ -674,6 +696,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
+		private FieldValue? MissingValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
@@ -726,18 +750,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TopHitsAggregationDescriptor DocvalueFields<TDocument, TValue>(Expression<Func<TDocument, TValue>> docvalueFields)
-		{
-			DocvalueFieldsValue = docvalueFields;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor DocvalueFields<TDocument>(Expression<Func<TDocument, object>> docvalueFields)
-		{
-			DocvalueFieldsValue = docvalueFields;
-			return Self;
-		}
-
 		public TopHitsAggregationDescriptor Explain(bool? explain = true)
 		{
 			ExplainValue = explain;
@@ -774,6 +786,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public TopHitsAggregationDescriptor Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
 		public TopHitsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 		{
 			ScriptValue = script;
@@ -805,18 +823,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		public TopHitsAggregationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
-		{
-			StoredFieldsValue = storedFields;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor StoredFields<TDocument, TValue>(Expression<Func<TDocument, TValue>> storedFields)
-		{
-			StoredFieldsValue = storedFields;
-			return Self;
-		}
-
-		public TopHitsAggregationDescriptor StoredFields<TDocument>(Expression<Func<TDocument, object>> storedFields)
 		{
 			StoredFieldsValue = storedFields;
 			return Self;
@@ -883,6 +889,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("from");
 				writer.WriteNumberValue(FromValue.Value);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (ScriptValue is not null)

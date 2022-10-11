@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("class_name")]
-		public object ClassName { get; init; }
+		public Elastic.Clients.Elasticsearch.FieldValue ClassName { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("class_probability")]

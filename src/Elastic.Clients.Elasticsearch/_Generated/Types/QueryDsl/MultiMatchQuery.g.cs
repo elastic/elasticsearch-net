@@ -172,12 +172,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public MultiMatchQueryDescriptor<TDocument> Fields<TValue>(Expression<Func<TDocument, TValue>> fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
 		public MultiMatchQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
 		{
 			FuzzinessValue = fuzziness;
@@ -435,18 +429,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		public MultiMatchQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public MultiMatchQueryDescriptor Fields<TDocument, TValue>(Expression<Func<TDocument, TValue>> fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public MultiMatchQueryDescriptor Fields<TDocument>(Expression<Func<TDocument, object>> fields)
 		{
 			FieldsValue = fields;
 			return Self;

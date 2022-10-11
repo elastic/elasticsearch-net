@@ -41,7 +41,7 @@ public class DeleteByQueryRethrottleApiTests
 	protected override bool SupportsDeserialization => false;
 	protected TaskId TaskId => RanIntegrationSetup ? ExtendedValue<TaskId>(TaskIdKey) : "foo:1";
 
-	protected override string ExpectedUrlPathAndQuery => RanIntegrationSetup ? $"/_delete_by_query/{TaskId}/_rethrottle?requests_per_second=-1" : $"/_delete_by_query/foo%3A1/_rethrottle?requests_per_second=-1";
+	protected override string ExpectedUrlPathAndQuery => $"/_delete_by_query/{TaskId.NodeId}%3A{TaskId.TaskNumber}/_rethrottle?requests_per_second=-1";
 
 	protected override void IntegrationSetup(ElasticsearchClient client, CallUniqueValues values)
 	{

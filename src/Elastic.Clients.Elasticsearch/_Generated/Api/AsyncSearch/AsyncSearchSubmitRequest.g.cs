@@ -234,7 +234,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 					if (property == "search_after")
 					{
-						variant.SearchAfter = JsonSerializer.Deserialize<IEnumerable<object>?>(ref reader, options);
+						variant.SearchAfter = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
 						continue;
 					}
 
@@ -708,7 +708,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("search_after")]
-		public IEnumerable<object>? SearchAfter { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -917,7 +917,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
-		private IEnumerable<object>? SearchAfterValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
@@ -1299,7 +1299,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> SearchAfter(IEnumerable<object>? searchAfter)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> SearchAfter(IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
 		{
 			SearchAfterValue = searchAfter;
 			return Self;
@@ -1330,12 +1330,6 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		}
 
 		public AsyncSearchSubmitRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
-		{
-			StoredFieldsValue = storedFields;
-			return Self;
-		}
-
-		public AsyncSearchSubmitRequestDescriptor<TDocument> StoredFields<TValue>(Expression<Func<TDocument, TValue>> storedFields)
 		{
 			StoredFieldsValue = storedFields;
 			return Self;
@@ -1897,7 +1891,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
-		private IEnumerable<object>? SearchAfterValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
 		private bool? SeqNoPrimaryTermValue { get; set; }
 
@@ -2279,7 +2273,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor SearchAfter(IEnumerable<object>? searchAfter)
+		public AsyncSearchSubmitRequestDescriptor SearchAfter(IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
 		{
 			SearchAfterValue = searchAfter;
 			return Self;
@@ -2310,18 +2304,6 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		}
 
 		public AsyncSearchSubmitRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
-		{
-			StoredFieldsValue = storedFields;
-			return Self;
-		}
-
-		public AsyncSearchSubmitRequestDescriptor StoredFields<TDocument, TValue>(Expression<Func<TDocument, TValue>> storedFields)
-		{
-			StoredFieldsValue = storedFields;
-			return Self;
-		}
-
-		public AsyncSearchSubmitRequestDescriptor StoredFields<TDocument>(Expression<Func<TDocument, object>> storedFields)
 		{
 			StoredFieldsValue = storedFields;
 			return Self;

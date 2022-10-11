@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public object? NullValue { get; set; }
+		public Elastic.Clients.Elasticsearch.FieldValue? NullValue { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("on_script_error")]
@@ -210,7 +210,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? NormsValue { get; set; }
 
-		private object? NullValueValue { get; set; }
+		private Elastic.Clients.Elasticsearch.FieldValue? NullValueValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 
@@ -253,12 +253,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		public DynamicPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public DynamicPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;
@@ -392,7 +386,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
-		public DynamicPropertyDescriptor<TDocument> NullValue(object? nullValue)
+		public DynamicPropertyDescriptor<TDocument> NullValue(Elastic.Clients.Elasticsearch.FieldValue? nullValue)
 		{
 			NullValueValue = nullValue;
 			return Self;
@@ -767,7 +761,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? NormsValue { get; set; }
 
-		private object? NullValueValue { get; set; }
+		private Elastic.Clients.Elasticsearch.FieldValue? NullValueValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 
@@ -810,18 +804,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		public DynamicPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public DynamicPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public DynamicPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;
@@ -955,7 +937,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
-		public DynamicPropertyDescriptor NullValue(object? nullValue)
+		public DynamicPropertyDescriptor NullValue(Elastic.Clients.Elasticsearch.FieldValue? nullValue)
 		{
 			NullValueValue = nullValue;
 			return Self;
