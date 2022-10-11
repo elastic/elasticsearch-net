@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("after_key")]
-		public Dictionary<string, object>? AfterKey { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? AfterKey { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("buckets")]

@@ -31,6 +31,10 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Format { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("missing")]
+		public FieldValue? Missing { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; init; }
 

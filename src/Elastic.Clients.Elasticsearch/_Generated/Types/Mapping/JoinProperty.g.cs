@@ -31,6 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("eager_global_ordinals")]
+		public bool? EagerGlobalOrdinals { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
@@ -68,6 +72,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
 
+		private bool? EagerGlobalOrdinalsValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 		private int? IgnoreAboveValue { get; set; }
@@ -83,6 +89,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public JoinPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
 			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public JoinPropertyDescriptor<TDocument> EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true)
+		{
+			EagerGlobalOrdinalsValue = eagerGlobalOrdinals;
 			return Self;
 		}
 
@@ -159,6 +171,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, DynamicValue, options);
 			}
 
+			if (EagerGlobalOrdinalsValue.HasValue)
+			{
+				writer.WritePropertyName("eager_global_ordinals");
+				writer.WriteBooleanValue(EagerGlobalOrdinalsValue.Value);
+			}
+
 			if (FieldsValue is not null)
 			{
 				writer.WritePropertyName("fields");
@@ -201,7 +219,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		JoinProperty IBuildableDescriptor<JoinProperty>.Build() => new()
-		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
+		{ Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
 	}
 
 	public sealed partial class JoinPropertyDescriptor : SerializableDescriptorBase<JoinPropertyDescriptor>, IBuildableDescriptor<JoinProperty>
@@ -212,6 +230,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+		private bool? EagerGlobalOrdinalsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
@@ -228,6 +248,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public JoinPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
 			DynamicValue = dynamic;
+			return Self;
+		}
+
+		public JoinPropertyDescriptor EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true)
+		{
+			EagerGlobalOrdinalsValue = eagerGlobalOrdinals;
 			return Self;
 		}
 
@@ -304,6 +330,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, DynamicValue, options);
 			}
 
+			if (EagerGlobalOrdinalsValue.HasValue)
+			{
+				writer.WritePropertyName("eager_global_ordinals");
+				writer.WriteBooleanValue(EagerGlobalOrdinalsValue.Value);
+			}
+
 			if (FieldsValue is not null)
 			{
 				writer.WritePropertyName("fields");
@@ -346,6 +378,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		JoinProperty IBuildableDescriptor<JoinProperty>.Build() => new()
-		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
+		{ Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
 	}
 }
