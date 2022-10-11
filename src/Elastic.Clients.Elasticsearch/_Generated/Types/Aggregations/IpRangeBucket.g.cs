@@ -40,6 +40,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? From { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("key")]
+		public string? Key { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("to")]
 		public string? To { get; init; }
 	}
@@ -53,6 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
 			long docCount = default;
 			string? from = default;
+			string? key = default;
 			string? to = default;
 			while (reader.Read())
 			{
@@ -74,6 +79,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					continue;
 				}
 
+				if (name.Equals("key", StringComparison.Ordinal))
+				{
+					key = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
 				if (name.Equals("to", StringComparison.Ordinal))
 				{
 					to = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -90,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			return new IpRangeBucket(subAggs)
-			{ DocCount = docCount, From = from, To = to };
+			{ DocCount = docCount, From = from, Key = key, To = to };
 		}
 
 		public override void Write(Utf8JsonWriter writer, IpRangeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

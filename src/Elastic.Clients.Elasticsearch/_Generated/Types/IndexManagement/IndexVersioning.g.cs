@@ -29,6 +29,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonInclude]
 		[JsonPropertyName("created")]
 		public string? Created { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("created_string")]
+		public string? CreatedString { get; set; }
 	}
 
 	public sealed partial class IndexVersioningDescriptor : SerializableDescriptorBase<IndexVersioningDescriptor>
@@ -40,9 +44,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		private string? CreatedValue { get; set; }
 
+		private string? CreatedStringValue { get; set; }
+
 		public IndexVersioningDescriptor Created(string? created)
 		{
 			CreatedValue = created;
+			return Self;
+		}
+
+		public IndexVersioningDescriptor CreatedString(string? createdString)
+		{
+			CreatedStringValue = createdString;
 			return Self;
 		}
 
@@ -53,6 +65,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("created");
 				JsonSerializer.Serialize(writer, CreatedValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(CreatedStringValue))
+			{
+				writer.WritePropertyName("created_string");
+				writer.WriteStringValue(CreatedStringValue);
 			}
 
 			writer.WriteEndObject();

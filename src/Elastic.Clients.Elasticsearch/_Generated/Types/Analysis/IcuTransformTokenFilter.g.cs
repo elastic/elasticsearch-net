@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("dir")]
-		public Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection Dir { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? Dir { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
@@ -49,13 +49,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection DirValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? DirValue { get; set; }
 
 		private string IdValue { get; set; }
 
 		private string? VersionValue { get; set; }
 
-		public IcuTransformTokenFilterDescriptor Dir(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection dir)
+		public IcuTransformTokenFilterDescriptor Dir(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? dir)
 		{
 			DirValue = dir;
 			return Self;
@@ -76,8 +76,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("dir");
-			JsonSerializer.Serialize(writer, DirValue, options);
+			if (DirValue is not null)
+			{
+				writer.WritePropertyName("dir");
+				JsonSerializer.Serialize(writer, DirValue, options);
+			}
+
 			writer.WritePropertyName("id");
 			writer.WriteStringValue(IdValue);
 			writer.WritePropertyName("type");
