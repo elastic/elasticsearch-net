@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("value")]
-		public object? Value { get; init; }
+		public Elastic.Clients.Elasticsearch.FieldValue? Value { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("warning")]

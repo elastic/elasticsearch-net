@@ -35,6 +35,10 @@ namespace Elastic.Clients.Elasticsearch
 		public int? ResultsFromMetadata { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("segments_counted_in_constant_time")]
+		public int? SegmentsCountedInConstantTime { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("specialized_for")]
 		public string? SpecializedFor { get; init; }
 	}

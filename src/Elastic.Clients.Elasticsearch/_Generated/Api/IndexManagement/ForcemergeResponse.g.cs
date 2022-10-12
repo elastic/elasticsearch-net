@@ -27,5 +27,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("task")]
+		public string? Task { get; init; }
 	}
 }

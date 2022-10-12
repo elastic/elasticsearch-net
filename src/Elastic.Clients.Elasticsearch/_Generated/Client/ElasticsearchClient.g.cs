@@ -390,14 +390,14 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<DeleteByQueryRethrottleRequest, DeleteByQueryRethrottleResponse>(request, cancellationToken);
 		}
 
-		public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.Id task_id)
+		public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.TaskId task_id)
 		{
 			var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
 			descriptor.BeforeRequest();
 			return DoRequest<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
 		}
 
-		public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.Id task_id, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest)
+		public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.TaskId task_id, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest)
 		{
 			var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
 			configureRequest?.Invoke(descriptor);
@@ -405,14 +405,14 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
 		}
 
-		public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, CancellationToken cancellationToken = default)
+		public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.TaskId task_id, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
 		}
 
-		public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+		public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.TaskId task_id, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
 			configureRequest?.Invoke(descriptor);

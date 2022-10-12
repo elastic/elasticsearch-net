@@ -63,6 +63,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("missing"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("precision_threshold"))
 					{
 						reader.Read();
@@ -138,6 +150,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
 			if (value.PrecisionThreshold.HasValue)
 			{
 				writer.WritePropertyName("precision_threshold");
@@ -182,6 +200,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public Dictionary<string, object>? Meta { get; set; }
 
+		public FieldValue? Missing { get; set; }
+
 		public override string? Name { get; internal set; }
 
 		public int? PrecisionThreshold { get; set; }
@@ -203,6 +223,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private FieldValue? MissingValue { get; set; }
 
 		private int? PrecisionThresholdValue { get; set; }
 
@@ -231,6 +253,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public CardinalityAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
 			return Self;
 		}
 
@@ -267,6 +295,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("field");
 				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (PrecisionThresholdValue.HasValue)
@@ -311,6 +345,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
+		private FieldValue? MissingValue { get; set; }
+
 		private int? PrecisionThresholdValue { get; set; }
 
 		private bool? RehashValue { get; set; }
@@ -347,6 +383,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public CardinalityAggregationDescriptor Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
 		public CardinalityAggregationDescriptor PrecisionThreshold(int? precisionThreshold)
 		{
 			PrecisionThresholdValue = precisionThreshold;
@@ -380,6 +422,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("field");
 				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (PrecisionThresholdValue.HasValue)

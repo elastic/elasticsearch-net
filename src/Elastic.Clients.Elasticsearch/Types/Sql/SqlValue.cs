@@ -11,9 +11,9 @@ namespace Elastic.Clients.Elasticsearch.Sql;
 [JsonConverter(typeof(SqlValueConverter))]
 public readonly struct SqlValue
 {
-	private readonly LazyDocument _lazyDocument;
+	private readonly LazyJson _lazyDocument;
 
-	internal SqlValue(LazyDocument lazyDocument) => _lazyDocument = lazyDocument;
+	internal SqlValue(LazyJson lazyDocument) => _lazyDocument = lazyDocument;
 
 	public T? As<T>() => _lazyDocument.As<T>();
 }
@@ -28,7 +28,7 @@ internal sealed class SqlValueConverter : JsonConverter<SqlValue>
 			return default;
 		}
 
-		var lazyDoc = JsonSerializer.Deserialize<LazyDocument>(ref reader, options);
+		var lazyDoc = JsonSerializer.Deserialize<LazyJson>(ref reader, options);
 		return new SqlValue(lazyDoc);
 	}
 
