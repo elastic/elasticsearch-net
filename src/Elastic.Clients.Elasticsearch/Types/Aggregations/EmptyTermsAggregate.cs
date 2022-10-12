@@ -7,22 +7,22 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public sealed class EmptyTermsAggregate : IAggregate
-	{
-		[JsonInclude]
-		[JsonPropertyName("doc_count_error_upper_bound")]
-		public long? DocCountErrorUpperBound { get; init; }
+	//public sealed class EmptyTermsAggregate : IAggregate
+	//{
+	//	[JsonInclude]
+	//	[JsonPropertyName("doc_count_error_upper_bound")]
+	//	public long? DocCountErrorUpperBound { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("sum_other_doc_count")]
-		public long SumOtherDocCount { get; init; }
+	//	[JsonInclude]
+	//	[JsonPropertyName("sum_other_doc_count")]
+	//	public long SumOtherDocCount { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("buckets")]
-		public Buckets<TermsBucket<EmptyTermsBucket>> Buckets { get; init; }
+	//	[JsonInclude]
+	//	[JsonPropertyName("buckets")]
+	//	public Buckets<TermsBucket<EmptyTermsBucket>> Buckets { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, object>? Meta { get; init; }
-	}
+	//	[JsonInclude]
+	//	[JsonPropertyName("meta")]
+	//	public Dictionary<string, object>? Meta { get; init; }
+	//}
 }

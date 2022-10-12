@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class DeleteByQueryRethrottleRequest : PlainRequestBase<DeleteByQueryRethrottleRequestParameters>
 	{
-		public DeleteByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.Id task_id) : base(r => r.Required("task_id", task_id))
+		public DeleteByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.TaskId task_id) : base(r => r.Required("task_id", task_id))
 		{
 		}
 
@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed partial class DeleteByQueryRethrottleRequestDescriptor : RequestDescriptorBase<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleRequestParameters>
 	{
 		internal DeleteByQueryRethrottleRequestDescriptor(Action<DeleteByQueryRethrottleRequestDescriptor> configure) => configure.Invoke(this);
-		public DeleteByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.Id task_id) : base(r => r.Required("task_id", task_id))
+		public DeleteByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.TaskId task_id) : base(r => r.Required("task_id", task_id))
 		{
 		}
 
@@ -59,7 +59,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		public DeleteByQueryRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-		public DeleteByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id task_id)
+		public DeleteByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId task_id)
 		{
 			RouteValues.Required("task_id", task_id);
 			return Self;

@@ -35,6 +35,10 @@ namespace Elastic.Clients.Elasticsearch
 		public string EphemeralId { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("external_id")]
+		public string ExternalId { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public string? Id { get; init; }
 

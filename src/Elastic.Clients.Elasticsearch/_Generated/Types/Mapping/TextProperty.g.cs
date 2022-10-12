@@ -202,12 +202,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
-		public TextPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
 		public TextPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 		{
 			DynamicValue = dynamic;
@@ -684,18 +678,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		public TextPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public TextPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public TextPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;

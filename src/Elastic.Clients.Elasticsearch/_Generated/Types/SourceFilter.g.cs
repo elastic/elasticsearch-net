@@ -97,31 +97,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SourceFilterDescriptor Excludes<TDocument, TValue>(Expression<Func<TDocument, TValue>> excludes)
-		{
-			ExcludesValue = excludes;
-			return Self;
-		}
-
-		public SourceFilterDescriptor Excludes<TDocument>(Expression<Func<TDocument, object>> excludes)
-		{
-			ExcludesValue = excludes;
-			return Self;
-		}
-
 		public SourceFilterDescriptor Includes(Elastic.Clients.Elasticsearch.Fields? includes)
-		{
-			IncludesValue = includes;
-			return Self;
-		}
-
-		public SourceFilterDescriptor Includes<TDocument, TValue>(Expression<Func<TDocument, TValue>> includes)
-		{
-			IncludesValue = includes;
-			return Self;
-		}
-
-		public SourceFilterDescriptor Includes<TDocument>(Expression<Func<TDocument, object>> includes)
 		{
 			IncludesValue = includes;
 			return Self;

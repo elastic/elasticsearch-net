@@ -21,7 +21,7 @@ namespace Elastic.Clients.JsonNetSerializer.Converters
 			typeof(QueryContainer),
 			//typeof(CompletionField),
 			//typeof(Attachment),
-			typeof(LazyDocument),
+			typeof(LazyJson),
 			//typeof(GeoCoordinate),
 			typeof(GeoLocation),
 			//typeof(CartesianPoint),
