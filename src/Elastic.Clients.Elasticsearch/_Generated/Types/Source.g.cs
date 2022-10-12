@@ -149,12 +149,6 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SourceDescriptor<TDocument> SourceFields<TValue>(Expression<Func<TDocument, TValue>> sourceFields)
-		{
-			SourceFieldsValue = sourceFields;
-			return Self;
-		}
-
 		public SourceDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Indices index)
 		{
 			IndexValue = index;
@@ -368,18 +362,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public SourceDescriptor SourceFields(Elastic.Clients.Elasticsearch.Fields? sourceFields)
-		{
-			SourceFieldsValue = sourceFields;
-			return Self;
-		}
-
-		public SourceDescriptor SourceFields<TDocument, TValue>(Expression<Func<TDocument, TValue>> sourceFields)
-		{
-			SourceFieldsValue = sourceFields;
-			return Self;
-		}
-
-		public SourceDescriptor SourceFields<TDocument>(Expression<Func<TDocument, object>> sourceFields)
 		{
 			SourceFieldsValue = sourceFields;
 			return Self;

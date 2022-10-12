@@ -45,6 +45,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("includes")]
 		public IEnumerable<string>? Includes { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("mode")]
+		public Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? Mode { get; set; }
 	}
 
 	public sealed partial class SourceFieldDescriptor : SerializableDescriptorBase<SourceFieldDescriptor>
@@ -63,6 +67,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private IEnumerable<string>? ExcludesValue { get; set; }
 
 		private IEnumerable<string>? IncludesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? ModeValue { get; set; }
 
 		public SourceFieldDescriptor Compress(bool? compress = true)
 		{
@@ -91,6 +97,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public SourceFieldDescriptor Includes(IEnumerable<string>? includes)
 		{
 			IncludesValue = includes;
+			return Self;
+		}
+
+		public SourceFieldDescriptor Mode(Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? mode)
+		{
+			ModeValue = mode;
 			return Self;
 		}
 
@@ -125,6 +137,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			{
 				writer.WritePropertyName("includes");
 				JsonSerializer.Serialize(writer, IncludesValue, options);
+			}
+
+			if (ModeValue is not null)
+			{
+				writer.WritePropertyName("mode");
+				JsonSerializer.Serialize(writer, ModeValue, options);
 			}
 
 			writer.WriteEndObject();

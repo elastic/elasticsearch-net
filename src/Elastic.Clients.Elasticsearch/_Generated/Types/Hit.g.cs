@@ -101,6 +101,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public IReadOnlyCollection<object>? Sort { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; init; }
 	}
 }

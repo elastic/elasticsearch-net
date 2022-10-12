@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Linq;
+using Elastic.Clients.Elasticsearch.Experimental;
 
 namespace Tests.Serialization;
 
@@ -15,11 +16,19 @@ public class ChildrenAggregateSerializationTests : SerializerTestBase
 
 		var searchResponse = DeserializeJsonString<SearchResponse<object>>(json);
 
-		var topTagsTermsAggregate = searchResponse.Aggregations.GetTerms("top-tags");
-		var firstTopTagsBucket = topTagsTermsAggregate.Buckets.Single();
-		var childrenAggregate = firstTopTagsBucket.GetChildren("to-answers");
+		var topTagsStringTermsAggregate = searchResponse.Aggregations.GetStringTerms("top-tags");
+		var firstTopTagsStringTermsBucket = topTagsStringTermsAggregate.Buckets.Single();
+		var childrenAggregate = firstTopTagsStringTermsBucket.GetChildren("to-answers");
 		var topNamesAggregate = childrenAggregate.GetTerms("top-names");
 		var firstTopNameBucket = topNamesAggregate.Buckets.First();
+		firstTopNameBucket.Key.Should().Be("Sam");
+
+		// This tests the experiental GetTerms extension method as an easier way to access the same terms.
+		var topTagsTermsAggregate = searchResponse.Aggregations.GetTerms("top-tags");
+		var firstTopTagsBucket = topTagsTermsAggregate.Buckets.Single();
+		childrenAggregate = firstTopTagsBucket.GetChildren("to-answers");
+		topNamesAggregate = childrenAggregate.GetTerms("top-names");
+		firstTopNameBucket = topNamesAggregate.Buckets.First();
 		firstTopNameBucket.Key.Should().Be("Sam");
 	}
 }

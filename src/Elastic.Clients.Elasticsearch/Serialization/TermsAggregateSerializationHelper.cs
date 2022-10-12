@@ -15,7 +15,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private static readonly byte[] s_key = Encoding.UTF8.GetBytes("key");
 		private static readonly byte s_period = (byte)'.';
 
-		public static bool TryDeserialiseTermsAggregate(ref Utf8JsonReader reader, JsonSerializerOptions options, out IAggregate? aggregate)
+		public static bool TryDeserialiseTermsAggregate(string aggregateName, ref Utf8JsonReader reader, JsonSerializerOptions options, out IAggregate? aggregate)
 		{
 			aggregate = null;
 
@@ -31,9 +31,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 				if (readerCopy.TokenType == JsonTokenType.EndArray) // We have no buckets
 				{
-					var agg = JsonSerializer.Deserialize<EmptyTermsAggregate>(ref reader, options);
-					aggregate = agg;
-					return true;
+					if (aggregateName.Equals("sterms", StringComparison.Ordinal))
+					{
+						var agg = JsonSerializer.Deserialize<StringTermsAggregate>(ref reader, options);
+						aggregate = agg;
+						return true;
+					}
+
+					if (aggregateName.Equals("lterms", StringComparison.Ordinal))
+					{
+						var agg = JsonSerializer.Deserialize<LongTermsAggregate>(ref reader, options);
+						aggregate = agg;
+						return true;
+					}
+
+					if (aggregateName.Equals("dterms", StringComparison.Ordinal))
+					{
+						var agg = JsonSerializer.Deserialize<DoubleTermsAggregate>(ref reader, options);
+						aggregate = agg;
+						return true;
+					}
+
+					if (aggregateName.Equals("multi_terms", StringComparison.Ordinal))
+					{
+						var agg = JsonSerializer.Deserialize<DoubleTermsAggregate>(ref reader, options);
+						aggregate = agg;
+						return true;
+					}
+
+					throw new JsonException($"Unable to deserialize empty terms aggregate for '{aggregateName}'.");
 				}
 				else
 				{

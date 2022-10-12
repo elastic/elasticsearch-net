@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Aggregations;
+using Elastic.Clients.Elasticsearch.Experimental;
 
 namespace Tests.Serialization;
 
@@ -28,12 +28,12 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		bucketCollection.Should().HaveCount(2);
 
 		var firstBucket = bucketCollection.First();
-		firstBucket.Key.Should().Be("electronic");
+		firstBucket.Key.ToString().Should().Be("electronic");
 		firstBucket.DocCount.Should().Be(5);
 		firstBucket.DocCountError.Should().Be(2);
 
 		var secondBucket = bucketCollection.Last();
-		secondBucket.Key.Should().Be("rock");
+		secondBucket.Key.ToString().Should().Be("rock");
 		secondBucket.DocCount.Should().Be(3);
 		secondBucket.DocCountError.Should().BeNull();
 	}
@@ -123,16 +123,16 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 
 		var firstBucket = bucketCollection.First();
 		firstBucket.Key.Should().HaveCount(2);
-		firstBucket.Key.First().Should().BeOfType<string>().Subject.Should().Be("key-1");
-		firstBucket.Key.Last().Should().BeOfType<string>().Subject.Should().Be("key-2");
+		firstBucket.Key.First().Should().BeOfType<FieldValue>().Subject.ToString().Should().Be("key-1");
+		firstBucket.Key.Last().Should().BeOfType<FieldValue>().Subject.ToString().Should().Be("key-2");
 		firstBucket.KeyAsString.Should().Be("key-1|key-2");
 		firstBucket.DocCount.Should().Be(5);
 		firstBucket.DocCountErrorUpperBound.Should().Be(2);
 
 		var secondBucket = bucketCollection.Last();
 		secondBucket.Key.Should().HaveCount(2);
-		secondBucket.Key.First().Should().BeOfType<string>().Subject.Should().Be("key-3");
-		secondBucket.Key.Last().Should().BeOfType<string>().Subject.Should().Be("key-4");
+		secondBucket.Key.First().Should().BeOfType<FieldValue>().Subject.ToString().Should().Be("key-3");
+		secondBucket.Key.Last().Should().BeOfType<FieldValue>().Subject.ToString().Should().Be("key-4");
 		secondBucket.KeyAsString.Should().Be("key-3|key-4");
 		secondBucket.DocCount.Should().Be(3);
 		secondBucket.DocCountErrorUpperBound.Should().BeNull();
@@ -172,36 +172,31 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 	}
 
 	[U]
-	public void CanDeserialize_BasicEmptyTermsAggregate()
-	{
-		var stream = WrapInStream(@"{""aggregations"":{""terms#my-agg-name"":{""doc_count_error_upper_bound"":10,""sum_other_doc_count"":200,""buckets"":[]}}}");
-
-		var search = _requestResponseSerializer.Deserialize<BasicSearchResponse>(stream);
-
-		search.Aggregations.Should().HaveCount(1);
-
-		var isEmpty = search.Aggregations.IsEmptyTerms("my-agg-name");
-
-		isEmpty.Should().BeTrue();
-
-		if (isEmpty)
-		{
-			var agg = search.Aggregations.EmptyTerms("my-agg-name");
-			agg.DocCountErrorUpperBound.Should().Be(10);
-			agg.SumOtherDocCount.Should().Be(200);
-			agg.Buckets.Item2.Should().HaveCount(0);
-		}
-	}
-
-	[U]
 	public void CanDeserialize_TermsAggregate_WithSubAggregation()
 	{
 		var json = @"{""aggregations"":{""terms#my-agg-name"":{""doc_count_error_upper_bound"":0,""sum_other_doc_count"":0,""buckets"":[{""key"":""foo"",""doc_count"":5,""avg#my-sub-agg-name"":{""value"":75.0}}]}}}";
 
 		var response = DeserializeJsonString<SearchResponse<object>>(json);
 
-		var termsAgg = response.Aggregations.GetTerms("my-agg-name");
-		var avgAgg = termsAgg.Buckets.Single().GetAverage("my-sub-agg-name");
+		var stringTermsAgg = response.Aggregations.GetStringTerms("my-agg-name");
+		var avgAgg = stringTermsAgg.Buckets.Single().GetAverage("my-sub-agg-name");
 		avgAgg.Value.Should().Be(75.0);
+
+		// This tests the experiental GetTerms extension method as an easier way to access the same terms.
+		var termsAgg = response.Aggregations.GetTerms("my-agg-name");
+		avgAgg = termsAgg.Buckets.Single().GetAverage("my-sub-agg-name");
+		avgAgg.Value.Should().Be(75.0);
+	}
+
+	[U]
+	public void CanDeserialize_StringTermsAggregate()
+	{
+		var json = @"{""aggregations"":{""sterms#states"":{""meta"":{""foo"":""bar""},""doc_count_error_upper_bound"":0,""sum_other_doc_count"":0,""buckets"":[]}}}";
+
+		var response = DeserializeJsonString<SearchResponse<object>>(json);
+
+		var stringTermsAgg = response.Aggregations.GetStringTerms("states");
+		stringTermsAgg.Should().NotBeNull();
+		stringTermsAgg.Meta.ContainsKey("foo").Should().BeTrue();
 	}
 }

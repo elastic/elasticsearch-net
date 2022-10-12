@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NEST" Version="7.13.0" />
+    <PackageReference Include="NEST" Version="7.17.4" />
   </ItemGroup>
 
 </Project>
