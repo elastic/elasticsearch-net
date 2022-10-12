@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	public sealed partial class HalfFloatNumberProperty : IProperty
 	{
 		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("coerce")]
 		public bool? Coerce { get; set; }
 
@@ -91,6 +95,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool? Store { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("time_series_dimension")]
+		public bool? TimeSeriesDimension { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("time_series_metric")]
 		public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
@@ -105,6 +113,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public HalfFloatNumberPropertyDescriptor() : base()
 		{
 		}
+
+		private double? BoostValue { get; set; }
 
 		private bool? CoerceValue { get; set; }
 
@@ -138,7 +148,15 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? StoreValue { get; set; }
 
+		private bool? TimeSeriesDimensionValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		public HalfFloatNumberPropertyDescriptor<TDocument> Boost(double? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
 
 		public HalfFloatNumberPropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 		{
@@ -147,12 +165,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		public HalfFloatNumberPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public HalfFloatNumberPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;
@@ -270,6 +282,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public HalfFloatNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
+			return Self;
+		}
+
 		public HalfFloatNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 		{
 			TimeSeriesMetricValue = timeSeriesMetric;
@@ -279,6 +297,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (CoerceValue.HasValue)
 			{
 				writer.WritePropertyName("coerce");
@@ -375,6 +399,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteBooleanValue(StoreValue.Value);
 			}
 
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
 			if (TimeSeriesMetricValue is not null)
 			{
 				writer.WritePropertyName("time_series_metric");
@@ -387,7 +417,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		HalfFloatNumberProperty IBuildableDescriptor<HalfFloatNumberProperty>.Build() => new()
-		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
 	public sealed partial class HalfFloatNumberPropertyDescriptor : SerializableDescriptorBase<HalfFloatNumberPropertyDescriptor>, IBuildableDescriptor<HalfFloatNumberProperty>
@@ -396,6 +426,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public HalfFloatNumberPropertyDescriptor() : base()
 		{
 		}
+
+		private double? BoostValue { get; set; }
 
 		private bool? CoerceValue { get; set; }
 
@@ -429,7 +461,15 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		private bool? StoreValue { get; set; }
 
+		private bool? TimeSeriesDimensionValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
+
+		public HalfFloatNumberPropertyDescriptor Boost(double? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
 
 		public HalfFloatNumberPropertyDescriptor Coerce(bool? coerce = true)
 		{
@@ -438,18 +478,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		public HalfFloatNumberPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public HalfFloatNumberPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public HalfFloatNumberPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;
@@ -567,6 +595,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public HalfFloatNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
+		{
+			TimeSeriesDimensionValue = timeSeriesDimension;
+			return Self;
+		}
+
 		public HalfFloatNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 		{
 			TimeSeriesMetricValue = timeSeriesMetric;
@@ -576,6 +610,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (CoerceValue.HasValue)
 			{
 				writer.WritePropertyName("coerce");
@@ -672,6 +712,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				writer.WriteBooleanValue(StoreValue.Value);
 			}
 
+			if (TimeSeriesDimensionValue.HasValue)
+			{
+				writer.WritePropertyName("time_series_dimension");
+				writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
+			}
+
 			if (TimeSeriesMetricValue is not null)
 			{
 				writer.WritePropertyName("time_series_metric");
@@ -684,6 +730,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		HalfFloatNumberProperty IBuildableDescriptor<HalfFloatNumberProperty>.Build() => new()
-		{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesMetric = TimeSeriesMetricValue };
+		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

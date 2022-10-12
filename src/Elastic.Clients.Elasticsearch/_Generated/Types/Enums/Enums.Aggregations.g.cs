@@ -176,6 +176,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[EnumMember(Value = "skip")]
 		Skip,
+		[EnumMember(Value = "keep_values")]
+		KeepValues,
 		[EnumMember(Value = "insert_zeros")]
 		InsertZeros
 	}
@@ -189,6 +191,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				case "skip":
 					return GapPolicy.Skip;
+				case "keep_values":
+					return GapPolicy.KeepValues;
 				case "insert_zeros":
 					return GapPolicy.InsertZeros;
 			}
@@ -203,6 +207,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				case GapPolicy.Skip:
 					writer.WriteStringValue("skip");
+					return;
+				case GapPolicy.KeepValues:
+					writer.WriteStringValue("keep_values");
 					return;
 				case GapPolicy.InsertZeros:
 					writer.WriteStringValue("insert_zeros");

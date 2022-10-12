@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields Fields { get => Q<Elastic.Clients.Elasticsearch.Fields>("fields"); set => Q("fields", value); }
+		public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 		[JsonIgnore]
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -69,7 +69,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields Fields { get => Q<Elastic.Clients.Elasticsearch.Fields>("fields"); set => Q("fields", value); }
+		public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 		[JsonIgnore]
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -104,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override bool SupportsBody => true;
 		public FieldCapsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public FieldCapsRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields fields) => Qs("fields", fields);
+		public FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
 		public FieldCapsRequestDescriptor<TDocument> Filters(string? filters) => Qs("filters", filters);
 		public FieldCapsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public FieldCapsRequestDescriptor<TDocument> IncludeUnmapped(bool? includeUnmapped = true) => Qs("include_unmapped", includeUnmapped);
@@ -194,7 +194,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override bool SupportsBody => true;
 		public FieldCapsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public FieldCapsRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields fields) => Qs("fields", fields);
+		public FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
 		public FieldCapsRequestDescriptor Filters(string? filters) => Qs("filters", filters);
 		public FieldCapsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public FieldCapsRequestDescriptor IncludeUnmapped(bool? includeUnmapped = true) => Qs("include_unmapped", includeUnmapped);

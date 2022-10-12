@@ -188,12 +188,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
-		public CompletionPropertyDescriptor<TDocument> CopyTo<TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
 		public CompletionPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
 		{
 			DocValuesValue = docValues;
@@ -521,18 +515,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		public CompletionPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public CompletionPropertyDescriptor CopyTo<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public CompletionPropertyDescriptor CopyTo<TDocument>(Expression<Func<TDocument, object>> copyTo)
 		{
 			CopyToValue = copyTo;
 			return Self;

@@ -75,6 +75,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString? StdDeviationBoundsAsString { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("std_deviation_population")]
+		public double? StdDeviationPopulation { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("std_deviation_sampling")]
+		public double? StdDeviationSampling { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("sum")]
 		public double Sum { get; init; }
 

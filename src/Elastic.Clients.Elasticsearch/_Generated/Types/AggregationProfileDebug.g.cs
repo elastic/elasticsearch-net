@@ -79,6 +79,10 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? HasFilter { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("map_reducer")]
+		public string? MapReducer { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("numeric_collectors_used")]
 		public int? NumericCollectorsUsed { get; init; }
 
