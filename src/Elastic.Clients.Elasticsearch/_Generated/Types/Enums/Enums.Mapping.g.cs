@@ -703,6 +703,55 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 	}
 
+	[JsonConverter(typeof(SourceFieldModeConverter))]
+	public enum SourceFieldMode
+	{
+		[EnumMember(Value = "synthetic")]
+		Synthetic,
+		[EnumMember(Value = "stored")]
+		Stored,
+		[EnumMember(Value = "disabled")]
+		Disabled
+	}
+
+	internal sealed class SourceFieldModeConverter : JsonConverter<SourceFieldMode>
+	{
+		public override SourceFieldMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "synthetic":
+					return SourceFieldMode.Synthetic;
+				case "stored":
+					return SourceFieldMode.Stored;
+				case "disabled":
+					return SourceFieldMode.Disabled;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SourceFieldMode value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case SourceFieldMode.Synthetic:
+					writer.WriteStringValue("synthetic");
+					return;
+				case SourceFieldMode.Stored:
+					writer.WriteStringValue("stored");
+					return;
+				case SourceFieldMode.Disabled:
+					writer.WriteStringValue("disabled");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(TermVectorOptionConverter))]
 	public enum TermVectorOption
 	{

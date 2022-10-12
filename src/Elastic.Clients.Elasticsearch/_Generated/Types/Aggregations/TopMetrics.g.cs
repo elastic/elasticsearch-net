@@ -28,10 +28,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("metrics")]
-		public Dictionary<string, object>? Metrics { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.FieldValue>? Metrics { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public IReadOnlyCollection<object>? Sort { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; init; }
 	}
 }

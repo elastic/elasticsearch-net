@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed partial class HighlightField
 	{
 		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzer { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("boundary_chars")]
 		public string? BoundaryChars { get; set; }
 
@@ -132,6 +136,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> HighlightQueryDescriptorAction { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzerValue { get; set; }
+
 		private string? BoundaryCharsValue { get; set; }
 
 		private int? BoundaryMaxScanValue { get; set; }
@@ -200,6 +206,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public HighlightFieldDescriptor<TDocument> Analyzer(Elastic.Clients.Elasticsearch.Analysis.Analyzers? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
 		public HighlightFieldDescriptor<TDocument> BoundaryChars(string? boundaryChars)
 		{
 			BoundaryCharsValue = boundaryChars;
@@ -255,12 +267,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public HighlightFieldDescriptor<TDocument> MatchedFields(Elastic.Clients.Elasticsearch.Fields? matchedFields)
-		{
-			MatchedFieldsValue = matchedFields;
-			return Self;
-		}
-
-		public HighlightFieldDescriptor<TDocument> MatchedFields<TValue>(Expression<Func<TDocument, TValue>> matchedFields)
 		{
 			MatchedFieldsValue = matchedFields;
 			return Self;
@@ -355,6 +361,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("highlight_query");
 				JsonSerializer.Serialize(writer, HighlightQueryValue, options);
+			}
+
+			if (AnalyzerValue is not null)
+			{
+				writer.WritePropertyName("analyzer");
+				JsonSerializer.Serialize(writer, AnalyzerValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(BoundaryCharsValue))
@@ -506,6 +518,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Action<QueryDsl.QueryContainerDescriptor> HighlightQueryDescriptorAction { get; set; }
 
+		private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzerValue { get; set; }
+
 		private string? BoundaryCharsValue { get; set; }
 
 		private int? BoundaryMaxScanValue { get; set; }
@@ -574,6 +588,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		public HighlightFieldDescriptor Analyzer(Elastic.Clients.Elasticsearch.Analysis.Analyzers? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
 		public HighlightFieldDescriptor BoundaryChars(string? boundaryChars)
 		{
 			BoundaryCharsValue = boundaryChars;
@@ -629,18 +649,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public HighlightFieldDescriptor MatchedFields(Elastic.Clients.Elasticsearch.Fields? matchedFields)
-		{
-			MatchedFieldsValue = matchedFields;
-			return Self;
-		}
-
-		public HighlightFieldDescriptor MatchedFields<TDocument, TValue>(Expression<Func<TDocument, TValue>> matchedFields)
-		{
-			MatchedFieldsValue = matchedFields;
-			return Self;
-		}
-
-		public HighlightFieldDescriptor MatchedFields<TDocument>(Expression<Func<TDocument, object>> matchedFields)
 		{
 			MatchedFieldsValue = matchedFields;
 			return Self;
@@ -735,6 +743,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("highlight_query");
 				JsonSerializer.Serialize(writer, HighlightQueryValue, options);
+			}
+
+			if (AnalyzerValue is not null)
+			{
+				writer.WritePropertyName("analyzer");
+				JsonSerializer.Serialize(writer, AnalyzerValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(BoundaryCharsValue))

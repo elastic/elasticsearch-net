@@ -264,7 +264,8 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		};
 
 		protected override string ExpectedUrlPathAndQuery => $"/{CallIsolatedValue}/_delete_by_query";
-		private static List<string> FirstTenProjectNames => Project.Projects.Take(10).Select(p => p.Name).ToList();
+
+		private static List<FieldValue> FirstTenProjectNames => Project.Projects.Take(10).Select(p => FieldValue.String(p.Name)).ToList();
 
 		protected override DeleteByQueryRequestDescriptor<Project> NewDescriptor() => new(CallIsolatedValue);
 

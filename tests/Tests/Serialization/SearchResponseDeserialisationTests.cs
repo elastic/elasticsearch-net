@@ -12,7 +12,7 @@ public class SearchResponseDeserialisationTests : SerializerTestBase
 	[U]
 	public void Should_HandleTsdbSortRoundTrip()
 	{
-		// Sorts against a time series required changes to the sort field in the response to support `Map` as an acceptable instance.
+		// Sorts against a time series required changes to the sort field in the response to support a `Map` as an acceptable instance.
 		// This test validates that we can roundtrip such values using the current model and serialiser.
 		// See https://github.com/elastic/elasticsearch/pull/81583
 
@@ -23,25 +23,25 @@ public class SearchResponseDeserialisationTests : SerializerTestBase
 
 		var stream = WrapInStream(json);
 
-		var search = _requestResponseSerializer.Deserialize<Hit<Metric>>(stream);
+		var searchHit = _requestResponseSerializer.Deserialize<Hit<Metric>>(stream);
 
-		search.Sort.Count.Should().Be(2);
+		searchHit.Sort.Count.Should().Be(2);
 
-		var roundTripExample = new SearchExample { Sort = search.Sort };
+		var roundTripExample = new SearchExample { Sort = searchHit.Sort };
 
 		var serialisedJson = SerializeAndGetJsonString(roundTripExample);
 		serialisedJson.Should().Be(@"{""sort"":[{""k8s.pod.uid"":""df3145b3-0563-4d3b-a0f7-897eb2876ea9"",""metricset"":""pod""},1619635863142]}");
 
 		var objectExample = new SearchExample
 		{
-			Sort = new object[]
+			Sort = new FieldValue[]
 			{
-				new Dictionary<string, string>
+				FieldValue.Composite(new Dictionary<string, string>
 				{
 					{ "k8s.pod.uid", "df3145b3-0563-4d3b-a0f7-897eb2876ea9" },
 					{ "metricset", "pod" }
-				},
-				1619635863142
+				}),
+				FieldValue.Long(1619635863142)
 			}
 		};
 
@@ -56,6 +56,6 @@ public class SearchResponseDeserialisationTests : SerializerTestBase
 
 	private class SearchExample
 	{
-		public IReadOnlyCollection<object> Sort { get; init; }
+		public IReadOnlyCollection<FieldValue> Sort { get; init; }
 	}
 }

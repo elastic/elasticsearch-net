@@ -63,6 +63,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("missing"))
+					{
+						reader.Read();
+						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("mode"))
 					{
 						reader.Read();
@@ -138,6 +150,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(value.Format);
 			}
 
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
 			if (value.Mode is not null)
 			{
 				writer.WritePropertyName("mode");
@@ -182,6 +200,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public Dictionary<string, object>? Meta { get; set; }
 
+		public FieldValue? Missing { get; set; }
+
 		public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
 
 		public override string? Name { get; internal set; }
@@ -203,6 +223,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private string? FormatValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private FieldValue? MissingValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Aggregations.RateMode? ModeValue { get; set; }
 
@@ -231,6 +253,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public RateAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public RateAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
 			return Self;
 		}
 
@@ -267,6 +295,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (ModeValue is not null)
@@ -311,6 +345,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
+		private FieldValue? MissingValue { get; set; }
+
 		private Elastic.Clients.Elasticsearch.Aggregations.RateMode? ModeValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
@@ -347,6 +383,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
+		public RateAggregationDescriptor Missing(FieldValue? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
 		public RateAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode)
 		{
 			ModeValue = mode;
@@ -380,6 +422,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (ModeValue is not null)
