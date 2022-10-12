@@ -59,6 +59,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("time_series_metric")]
+		public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "aggregate_metric_double";
 	}
@@ -85,6 +89,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private IEnumerable<string> MetricsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 		public AggregateMetricDoublePropertyDescriptor<TDocument> DefaultMetric(string defaultMetric)
 		{
@@ -162,6 +168,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public AggregateMetricDoublePropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
+		{
+			TimeSeriesMetricValue = timeSeriesMetric;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -205,13 +217,19 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, PropertiesValue, options);
 			}
 
+			if (TimeSeriesMetricValue is not null)
+			{
+				writer.WritePropertyName("time_series_metric");
+				JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("aggregate_metric_double");
 			writer.WriteEndObject();
 		}
 
 		AggregateMetricDoubleProperty IBuildableDescriptor<AggregateMetricDoubleProperty>.Build() => new()
-		{ DefaultMetric = DefaultMetricValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Metrics = MetricsValue, Properties = PropertiesValue };
+		{ DefaultMetric = DefaultMetricValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Metrics = MetricsValue, Properties = PropertiesValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 
 	public sealed partial class AggregateMetricDoublePropertyDescriptor : SerializableDescriptorBase<AggregateMetricDoublePropertyDescriptor>, IBuildableDescriptor<AggregateMetricDoubleProperty>
@@ -236,6 +254,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private IEnumerable<string> MetricsValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 		public AggregateMetricDoublePropertyDescriptor DefaultMetric(string defaultMetric)
 		{
@@ -313,6 +333,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Self;
 		}
 
+		public AggregateMetricDoublePropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
+		{
+			TimeSeriesMetricValue = timeSeriesMetric;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -356,12 +382,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, PropertiesValue, options);
 			}
 
+			if (TimeSeriesMetricValue is not null)
+			{
+				writer.WritePropertyName("time_series_metric");
+				JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
+			}
+
 			writer.WritePropertyName("type");
 			writer.WriteStringValue("aggregate_metric_double");
 			writer.WriteEndObject();
 		}
 
 		AggregateMetricDoubleProperty IBuildableDescriptor<AggregateMetricDoubleProperty>.Build() => new()
-		{ DefaultMetric = DefaultMetricValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Metrics = MetricsValue, Properties = PropertiesValue };
+		{ DefaultMetric = DefaultMetricValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Metrics = MetricsValue, Properties = PropertiesValue, TimeSeriesMetric = TimeSeriesMetricValue };
 	}
 }

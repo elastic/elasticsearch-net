@@ -34,6 +34,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
 		public long DocCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public string Key { get; init; }
 	}
 
 	internal sealed class AdjacencyMatrixBucketConverter : JsonConverter<AdjacencyMatrixBucket>
@@ -44,6 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
 			var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
 			long docCount = default;
+			string key = default;
 			while (reader.Read())
 			{
 				if (reader.TokenType == JsonTokenType.EndObject)
@@ -58,6 +63,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					continue;
 				}
 
+				if (name.Equals("key", StringComparison.Ordinal))
+				{
+					key = JsonSerializer.Deserialize<string>(ref reader, options);
+					continue;
+				}
+
 				if (name.Contains("#"))
 				{
 					AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
@@ -68,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			return new AdjacencyMatrixBucket(subAggs)
-			{ DocCount = docCount };
+			{ DocCount = docCount, Key = key };
 		}
 
 		public override void Write(Utf8JsonWriter writer, AdjacencyMatrixBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

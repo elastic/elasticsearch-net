@@ -34,7 +34,7 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 				size = 5,
 				shard_size = 100,
 				execution_hint = "map",
-				//missing = "n/a",
+				missing = "n/a",
 				script = new
 				{
 					source = "'State of Being: '+_value",
@@ -55,7 +55,7 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 			.Size(5)
 			.ShardSize(100)
 			.ExecutionHint(TermsAggregationExecutionHint.Map)
-			//.Missing("n/a")
+			.Missing("n/a")
 			.Script(new Script(new InlineScript("'State of Being: '+_value")))
 			.Order(new[]
 			{
@@ -75,7 +75,7 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 			Size = 5,
 			ShardSize = 100,
 			ExecutionHint = TermsAggregationExecutionHint.Map,
-			//Missing = "n/a",
+			Missing = "n/a",
 			Script = new Script(new InlineScript("'State of Being: '+_value")),
 			Order = new []
 			{
@@ -102,7 +102,7 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 		bucketsCollection.Count.Should().BeGreaterThan(0);
 		foreach (var item in bucketsCollection)
 		{
-			item.Key.Should().NotBeNullOrEmpty();
+			item.Key.ToString().Should().NotBeNullOrEmpty();
 			item.DocCount.Should().BeGreaterOrEqualTo(1);
 		}
 		states.Meta.Should().NotBeNull().And.HaveCount(1);

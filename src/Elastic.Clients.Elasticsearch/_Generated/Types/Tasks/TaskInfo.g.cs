@@ -35,6 +35,10 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public bool Cancellable { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("cancelled")]
+		public bool? Cancelled { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; init; }
 
