@@ -65,10 +65,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						variant.ValidationMethod = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?>(ref reader, options);
 						continue;
 					}
-
-					variant.Field = property;
-					reader.Read();
-					variant.Location = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoLocation>(ref reader, options);
 				}
 			}
 
@@ -78,18 +74,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, GeoDistanceQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Field is not null && value.Location is not null)
-			{
-				if (!options.TryGetClientSettings(out var settings))
-				{
-					throw new JsonException("Unable to retrive client settings for JsonSerializerOptions.");
-				}
-
-				var propertyName = settings.Inferrer.Field(value.Field);
-				writer.WritePropertyName(propertyName);
-				JsonSerializer.Serialize(writer, value.Location, options);
-			}
-
 			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
@@ -137,8 +121,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-		public Elastic.Clients.Elasticsearch.GeoLocation Location { get; set; }
-
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
 
@@ -160,8 +142,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
 
 		public GeoDistanceQueryDescriptor<TDocument> QueryName(string? queryName)
 		{
@@ -193,34 +173,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public GeoDistanceQueryDescriptor<TDocument> Location(Elastic.Clients.Elasticsearch.GeoLocation location)
-		{
-			LocationValue = location;
-			return Self;
-		}
-
-		public GeoDistanceQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoDistanceQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FieldValue is not null && LocationValue is not null)
-			{
-				var propertyName = settings.Inferrer.Field(FieldValue);
-				writer.WritePropertyName(propertyName);
-				JsonSerializer.Serialize(writer, LocationValue, options);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -274,8 +229,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
-
 		public GeoDistanceQueryDescriptor QueryName(string? queryName)
 		{
 			QueryNameValue = queryName;
@@ -306,40 +259,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public GeoDistanceQueryDescriptor Location(Elastic.Clients.Elasticsearch.GeoLocation location)
-		{
-			LocationValue = location;
-			return Self;
-		}
-
-		public GeoDistanceQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoDistanceQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoDistanceQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FieldValue is not null && LocationValue is not null)
-			{
-				var propertyName = settings.Inferrer.Field(FieldValue);
-				writer.WritePropertyName(propertyName);
-				JsonSerializer.Serialize(writer, LocationValue, options);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");

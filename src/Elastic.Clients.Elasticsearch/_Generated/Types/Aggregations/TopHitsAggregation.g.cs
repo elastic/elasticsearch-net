@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					if (reader.ValueTextEquals("_source"))
 					{
 						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SourceConfig?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Source = value;
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					if (reader.ValueTextEquals("highlight"))
 					{
 						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Highlight?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.Highlight?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Highlight = value;
@@ -356,7 +356,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		public Elastic.Clients.Elasticsearch.SourceConfig? Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
 		public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
 
@@ -366,7 +366,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public int? From { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Highlight? Highlight { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
 		public Dictionary<string, object>? Meta { get; set; }
 
@@ -399,13 +399,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 
-		private HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
+		private Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
 
-		private Action<HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
+		private Action<Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
 
@@ -435,7 +435,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private bool? VersionValue { get; set; }
 
-		public TopHitsAggregationDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight)
+		public TopHitsAggregationDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)
 		{
 			HighlightDescriptor = null;
 			HighlightDescriptorAction = null;
@@ -443,7 +443,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TopHitsAggregationDescriptor<TDocument> Highlight(HighlightDescriptor<TDocument> descriptor)
+		public TopHitsAggregationDescriptor<TDocument> Highlight(Core.Search.HighlightDescriptor<TDocument> descriptor)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
@@ -451,7 +451,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TopHitsAggregationDescriptor<TDocument> Highlight(Action<HighlightDescriptor<TDocument>> configure)
+		public TopHitsAggregationDescriptor<TDocument> Highlight(Action<Core.Search.HighlightDescriptor<TDocument>> configure)
 		{
 			HighlightValue = null;
 			HighlightDescriptor = null;
@@ -459,7 +459,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TopHitsAggregationDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
+		public TopHitsAggregationDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 		{
 			SourceValue = source;
 			return Self;
@@ -568,7 +568,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (HighlightDescriptorAction is not null)
 			{
 				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, new HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
 			}
 			else if (HighlightValue is not null)
 			{
@@ -678,13 +678,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 
-		private HighlightDescriptor HighlightDescriptor { get; set; }
+		private Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
 
-		private Action<HighlightDescriptor> HighlightDescriptorAction { get; set; }
+		private Action<Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
 
@@ -714,7 +714,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private bool? VersionValue { get; set; }
 
-		public TopHitsAggregationDescriptor Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight)
+		public TopHitsAggregationDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)
 		{
 			HighlightDescriptor = null;
 			HighlightDescriptorAction = null;
@@ -722,7 +722,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TopHitsAggregationDescriptor Highlight(HighlightDescriptor descriptor)
+		public TopHitsAggregationDescriptor Highlight(Core.Search.HighlightDescriptor descriptor)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
@@ -730,7 +730,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TopHitsAggregationDescriptor Highlight(Action<HighlightDescriptor> configure)
+		public TopHitsAggregationDescriptor Highlight(Action<Core.Search.HighlightDescriptor> configure)
 		{
 			HighlightValue = null;
 			HighlightDescriptor = null;
@@ -738,7 +738,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public TopHitsAggregationDescriptor Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
+		public TopHitsAggregationDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 		{
 			SourceValue = source;
 			return Self;
@@ -853,7 +853,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (HighlightDescriptorAction is not null)
 			{
 				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, new HighlightDescriptor(HighlightDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.HighlightDescriptor(HighlightDescriptorAction), options);
 			}
 			else if (HighlightValue is not null)
 			{

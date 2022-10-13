@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Aggregations;
+using Elastic.Clients.Elasticsearch.Core.Search;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
