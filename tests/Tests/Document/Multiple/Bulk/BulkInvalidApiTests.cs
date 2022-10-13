@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using Elastic.Clients.Elasticsearch.Core.Bulk;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;

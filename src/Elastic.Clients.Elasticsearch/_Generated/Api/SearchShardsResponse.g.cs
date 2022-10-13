@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.ShardStoreIndex> Indices { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex> Indices { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("nodes")]

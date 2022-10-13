@@ -144,7 +144,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 					if (property == "collapse")
 					{
-						variant.Collapse = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.FieldCollapse?>(ref reader, options);
+						variant.Collapse = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?>(ref reader, options);
 						continue;
 					}
 
@@ -168,13 +168,13 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 					if (property == "highlight")
 					{
-						variant.Highlight = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Highlight?>(ref reader, options);
+						variant.Highlight = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.Highlight?>(ref reader, options);
 						continue;
 					}
 
 					if (property == "track_total_hits")
 					{
-						variant.TrackTotalHits = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TrackHits?>(ref reader, options);
+						variant.TrackTotalHits = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.TrackHits?>(ref reader, options);
 						continue;
 					}
 
@@ -222,7 +222,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 					if (property == "rescore")
 					{
-						variant.Rescore = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Rescore>?>(ref reader, options);
+						variant.Rescore = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?>(ref reader, options);
 						continue;
 					}
 
@@ -258,7 +258,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 					if (property == "_source")
 					{
-						variant.Source = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SourceConfig?>(ref reader, options);
+						variant.Source = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?>(ref reader, options);
 						continue;
 					}
 
@@ -270,7 +270,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 					if (property == "suggest")
 					{
-						variant.Suggest = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Suggester?>(ref reader, options);
+						variant.Suggest = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.Suggester?>(ref reader, options);
 						continue;
 					}
 
@@ -312,7 +312,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 					if (property == "pit")
 					{
-						variant.Pit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.PointInTimeReference?>(ref reader, options);
+						variant.Pit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference?>(ref reader, options);
 						continue;
 					}
 
@@ -648,7 +648,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("collapse")]
-		public Elastic.Clients.Elasticsearch.FieldCollapse? Collapse { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("explain")]
@@ -664,11 +664,11 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("highlight")]
-		public Elastic.Clients.Elasticsearch.Highlight? Highlight { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("track_total_hits")]
-		public Elastic.Clients.Elasticsearch.TrackHits? TrackTotalHits { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("indices_boost")]
@@ -700,7 +700,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("rescore")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? Rescore { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
@@ -725,7 +725,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
-		public Elastic.Clients.Elasticsearch.SourceConfig? Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
@@ -733,7 +733,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("suggest")]
-		public Elastic.Clients.Elasticsearch.Suggester? Suggest { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Search.Suggester? Suggest { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("terminate_after")]
@@ -761,7 +761,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("pit")]
-		public Elastic.Clients.Elasticsearch.PointInTimeReference? Pit { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? Pit { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
@@ -833,11 +833,11 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
 
-		private FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
+		private Core.Search.FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
 
-		private Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
+		private Action<Core.Search.FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
@@ -855,11 +855,11 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 
-		private HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
+		private Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
 
-		private Action<HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
+		private Action<Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.KnnQuery? KnnValue { get; set; }
 
@@ -879,13 +879,13 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? RescoreValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
 
-		private RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
+		private Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
 
-		private Action<RescoreDescriptor<TDocument>> RescoreDescriptorAction { get; set; }
+		private Action<Core.Search.RescoreDescriptor<TDocument>> RescoreDescriptorAction { get; set; }
 
-		private Action<RescoreDescriptor<TDocument>>[] RescoreDescriptorActions { get; set; }
+		private Action<Core.Search.RescoreDescriptor<TDocument>>[] RescoreDescriptorActions { get; set; }
 
 		private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
@@ -893,7 +893,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
 
 		private bool? ExplainValue { get; set; }
 
@@ -905,11 +905,11 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private double? MinScoreValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.PointInTimeReference? PitValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? PitValue { get; set; }
 
-		private PointInTimeReferenceDescriptor PitDescriptor { get; set; }
+		private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
 
-		private Action<PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
+		private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
 
 		private bool? ProfileValue { get; set; }
 
@@ -929,11 +929,11 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Suggester? SuggestValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.Suggester? SuggestValue { get; set; }
 
-		private SuggesterDescriptor SuggestDescriptor { get; set; }
+		private Core.Search.SuggesterDescriptor SuggestDescriptor { get; set; }
 
-		private Action<SuggesterDescriptor> SuggestDescriptorAction { get; set; }
+		private Action<Core.Search.SuggesterDescriptor> SuggestDescriptorAction { get; set; }
 
 		private long? TerminateAfterValue { get; set; }
 
@@ -941,7 +941,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private bool? TrackScoresValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.TrackHits? TrackTotalHitsValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHitsValue { get; set; }
 
 		private bool? VersionValue { get; set; }
 
@@ -969,7 +969,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
 		{
 			CollapseDescriptor = null;
 			CollapseDescriptorAction = null;
@@ -977,7 +977,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Collapse(FieldCollapseDescriptor<TDocument> descriptor)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Collapse(Core.Search.FieldCollapseDescriptor<TDocument> descriptor)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
@@ -985,7 +985,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Collapse(Action<FieldCollapseDescriptor<TDocument>> configure)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Collapse(Action<Core.Search.FieldCollapseDescriptor<TDocument>> configure)
 		{
 			CollapseValue = null;
 			CollapseDescriptor = null;
@@ -1065,7 +1065,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)
 		{
 			HighlightDescriptor = null;
 			HighlightDescriptorAction = null;
@@ -1073,7 +1073,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Highlight(HighlightDescriptor<TDocument> descriptor)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Highlight(Core.Search.HighlightDescriptor<TDocument> descriptor)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
@@ -1081,7 +1081,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Highlight(Action<HighlightDescriptor<TDocument>> configure)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Highlight(Action<Core.Search.HighlightDescriptor<TDocument>> configure)
 		{
 			HighlightValue = null;
 			HighlightDescriptor = null;
@@ -1161,7 +1161,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? rescore)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
 		{
 			RescoreDescriptor = null;
 			RescoreDescriptorAction = null;
@@ -1170,7 +1170,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Rescore(RescoreDescriptor<TDocument> descriptor)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Rescore(Core.Search.RescoreDescriptor<TDocument> descriptor)
 		{
 			RescoreValue = null;
 			RescoreDescriptorAction = null;
@@ -1179,7 +1179,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Rescore(Action<RescoreDescriptor<TDocument>> configure)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Rescore(Action<Core.Search.RescoreDescriptor<TDocument>> configure)
 		{
 			RescoreValue = null;
 			RescoreDescriptor = null;
@@ -1188,7 +1188,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Rescore(params Action<RescoreDescriptor<TDocument>>[] configure)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Rescore(params Action<Core.Search.RescoreDescriptor<TDocument>>[] configure)
 		{
 			RescoreValue = null;
 			RescoreDescriptor = null;
@@ -1221,7 +1221,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 		{
 			SourceValue = source;
 			return Self;
@@ -1257,7 +1257,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.PointInTimeReference? pit)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? pit)
 		{
 			PitDescriptor = null;
 			PitDescriptorAction = null;
@@ -1265,7 +1265,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Pit(PointInTimeReferenceDescriptor descriptor)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
 		{
 			PitValue = null;
 			PitDescriptorAction = null;
@@ -1273,7 +1273,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Pit(Action<PointInTimeReferenceDescriptor> configure)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
 		{
 			PitValue = null;
 			PitDescriptor = null;
@@ -1335,7 +1335,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Suggester? suggest)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? suggest)
 		{
 			SuggestDescriptor = null;
 			SuggestDescriptorAction = null;
@@ -1343,7 +1343,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Suggest(SuggesterDescriptor descriptor)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Suggest(Core.Search.SuggesterDescriptor descriptor)
 		{
 			SuggestValue = null;
 			SuggestDescriptorAction = null;
@@ -1351,7 +1351,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Suggest(Action<SuggesterDescriptor> configure)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Suggest(Action<Core.Search.SuggesterDescriptor> configure)
 		{
 			SuggestValue = null;
 			SuggestDescriptor = null;
@@ -1377,7 +1377,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.TrackHits? trackTotalHits)
+		public AsyncSearchSubmitRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
 		{
 			TrackTotalHitsValue = trackTotalHits;
 			return Self;
@@ -1416,7 +1416,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			else if (CollapseDescriptorAction is not null)
 			{
 				writer.WritePropertyName("collapse");
-				JsonSerializer.Serialize(writer, new FieldCollapseDescriptor<TDocument>(CollapseDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.FieldCollapseDescriptor<TDocument>(CollapseDescriptorAction), options);
 			}
 			else if (CollapseValue is not null)
 			{
@@ -1494,7 +1494,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			else if (HighlightDescriptorAction is not null)
 			{
 				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, new HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
 			}
 			else if (HighlightValue is not null)
 			{
@@ -1561,7 +1561,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			{
 				writer.WritePropertyName("rescore");
 				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new RescoreDescriptor<TDocument>(RescoreDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor<TDocument>(RescoreDescriptorAction), options);
 				writer.WriteEndArray();
 			}
 			else if (RescoreDescriptorActions is not null)
@@ -1570,7 +1570,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 				writer.WriteStartArray();
 				foreach (var action in RescoreDescriptorActions)
 				{
-					JsonSerializer.Serialize(writer, new RescoreDescriptor<TDocument>(action), options);
+					JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor<TDocument>(action), options);
 				}
 
 				writer.WriteEndArray();
@@ -1641,7 +1641,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			else if (PitDescriptorAction is not null)
 			{
 				writer.WritePropertyName("pit");
-				JsonSerializer.Serialize(writer, new PointInTimeReferenceDescriptor(PitDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
 			}
 			else if (PitValue is not null)
 			{
@@ -1711,7 +1711,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			else if (SuggestDescriptorAction is not null)
 			{
 				writer.WritePropertyName("suggest");
-				JsonSerializer.Serialize(writer, new SuggesterDescriptor(SuggestDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.SuggesterDescriptor(SuggestDescriptorAction), options);
 			}
 			else if (SuggestValue is not null)
 			{
@@ -1807,11 +1807,11 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
 
-		private FieldCollapseDescriptor CollapseDescriptor { get; set; }
+		private Core.Search.FieldCollapseDescriptor CollapseDescriptor { get; set; }
 
-		private Action<FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
+		private Action<Core.Search.FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
 
 		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
@@ -1829,11 +1829,11 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Action<QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 
-		private HighlightDescriptor HighlightDescriptor { get; set; }
+		private Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
 
-		private Action<HighlightDescriptor> HighlightDescriptorAction { get; set; }
+		private Action<Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.KnnQuery? KnnValue { get; set; }
 
@@ -1853,13 +1853,13 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? RescoreValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
 
-		private RescoreDescriptor RescoreDescriptor { get; set; }
+		private Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
 
-		private Action<RescoreDescriptor> RescoreDescriptorAction { get; set; }
+		private Action<Core.Search.RescoreDescriptor> RescoreDescriptorAction { get; set; }
 
-		private Action<RescoreDescriptor>[] RescoreDescriptorActions { get; set; }
+		private Action<Core.Search.RescoreDescriptor>[] RescoreDescriptorActions { get; set; }
 
 		private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
@@ -1867,7 +1867,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
 
-		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
 
 		private bool? ExplainValue { get; set; }
 
@@ -1879,11 +1879,11 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private double? MinScoreValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.PointInTimeReference? PitValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? PitValue { get; set; }
 
-		private PointInTimeReferenceDescriptor PitDescriptor { get; set; }
+		private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
 
-		private Action<PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
+		private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
 
 		private bool? ProfileValue { get; set; }
 
@@ -1903,11 +1903,11 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Suggester? SuggestValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.Suggester? SuggestValue { get; set; }
 
-		private SuggesterDescriptor SuggestDescriptor { get; set; }
+		private Core.Search.SuggesterDescriptor SuggestDescriptor { get; set; }
 
-		private Action<SuggesterDescriptor> SuggestDescriptorAction { get; set; }
+		private Action<Core.Search.SuggesterDescriptor> SuggestDescriptorAction { get; set; }
 
 		private long? TerminateAfterValue { get; set; }
 
@@ -1915,7 +1915,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		private bool? TrackScoresValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.TrackHits? TrackTotalHitsValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHitsValue { get; set; }
 
 		private bool? VersionValue { get; set; }
 
@@ -1943,7 +1943,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
+		public AsyncSearchSubmitRequestDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
 		{
 			CollapseDescriptor = null;
 			CollapseDescriptorAction = null;
@@ -1951,7 +1951,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Collapse(FieldCollapseDescriptor descriptor)
+		public AsyncSearchSubmitRequestDescriptor Collapse(Core.Search.FieldCollapseDescriptor descriptor)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
@@ -1959,7 +1959,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Collapse(Action<FieldCollapseDescriptor> configure)
+		public AsyncSearchSubmitRequestDescriptor Collapse(Action<Core.Search.FieldCollapseDescriptor> configure)
 		{
 			CollapseValue = null;
 			CollapseDescriptor = null;
@@ -2039,7 +2039,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight)
+		public AsyncSearchSubmitRequestDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)
 		{
 			HighlightDescriptor = null;
 			HighlightDescriptorAction = null;
@@ -2047,7 +2047,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Highlight(HighlightDescriptor descriptor)
+		public AsyncSearchSubmitRequestDescriptor Highlight(Core.Search.HighlightDescriptor descriptor)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
@@ -2055,7 +2055,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Highlight(Action<HighlightDescriptor> configure)
+		public AsyncSearchSubmitRequestDescriptor Highlight(Action<Core.Search.HighlightDescriptor> configure)
 		{
 			HighlightValue = null;
 			HighlightDescriptor = null;
@@ -2135,7 +2135,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? rescore)
+		public AsyncSearchSubmitRequestDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
 		{
 			RescoreDescriptor = null;
 			RescoreDescriptorAction = null;
@@ -2144,7 +2144,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Rescore(RescoreDescriptor descriptor)
+		public AsyncSearchSubmitRequestDescriptor Rescore(Core.Search.RescoreDescriptor descriptor)
 		{
 			RescoreValue = null;
 			RescoreDescriptorAction = null;
@@ -2153,7 +2153,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Rescore(Action<RescoreDescriptor> configure)
+		public AsyncSearchSubmitRequestDescriptor Rescore(Action<Core.Search.RescoreDescriptor> configure)
 		{
 			RescoreValue = null;
 			RescoreDescriptor = null;
@@ -2162,7 +2162,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Rescore(params Action<RescoreDescriptor>[] configure)
+		public AsyncSearchSubmitRequestDescriptor Rescore(params Action<Core.Search.RescoreDescriptor>[] configure)
 		{
 			RescoreValue = null;
 			RescoreDescriptor = null;
@@ -2195,7 +2195,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
+		public AsyncSearchSubmitRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 		{
 			SourceValue = source;
 			return Self;
@@ -2231,7 +2231,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Pit(Elastic.Clients.Elasticsearch.PointInTimeReference? pit)
+		public AsyncSearchSubmitRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? pit)
 		{
 			PitDescriptor = null;
 			PitDescriptorAction = null;
@@ -2239,7 +2239,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Pit(PointInTimeReferenceDescriptor descriptor)
+		public AsyncSearchSubmitRequestDescriptor Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
 		{
 			PitValue = null;
 			PitDescriptorAction = null;
@@ -2247,7 +2247,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Pit(Action<PointInTimeReferenceDescriptor> configure)
+		public AsyncSearchSubmitRequestDescriptor Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
 		{
 			PitValue = null;
 			PitDescriptor = null;
@@ -2309,7 +2309,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Suggest(Elastic.Clients.Elasticsearch.Suggester? suggest)
+		public AsyncSearchSubmitRequestDescriptor Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? suggest)
 		{
 			SuggestDescriptor = null;
 			SuggestDescriptorAction = null;
@@ -2317,7 +2317,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Suggest(SuggesterDescriptor descriptor)
+		public AsyncSearchSubmitRequestDescriptor Suggest(Core.Search.SuggesterDescriptor descriptor)
 		{
 			SuggestValue = null;
 			SuggestDescriptorAction = null;
@@ -2325,7 +2325,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor Suggest(Action<SuggesterDescriptor> configure)
+		public AsyncSearchSubmitRequestDescriptor Suggest(Action<Core.Search.SuggesterDescriptor> configure)
 		{
 			SuggestValue = null;
 			SuggestDescriptor = null;
@@ -2351,7 +2351,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			return Self;
 		}
 
-		public AsyncSearchSubmitRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.TrackHits? trackTotalHits)
+		public AsyncSearchSubmitRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
 		{
 			TrackTotalHitsValue = trackTotalHits;
 			return Self;
@@ -2390,7 +2390,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			else if (CollapseDescriptorAction is not null)
 			{
 				writer.WritePropertyName("collapse");
-				JsonSerializer.Serialize(writer, new FieldCollapseDescriptor(CollapseDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.FieldCollapseDescriptor(CollapseDescriptorAction), options);
 			}
 			else if (CollapseValue is not null)
 			{
@@ -2468,7 +2468,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			else if (HighlightDescriptorAction is not null)
 			{
 				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, new HighlightDescriptor(HighlightDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.HighlightDescriptor(HighlightDescriptorAction), options);
 			}
 			else if (HighlightValue is not null)
 			{
@@ -2535,7 +2535,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			{
 				writer.WritePropertyName("rescore");
 				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new RescoreDescriptor(RescoreDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor(RescoreDescriptorAction), options);
 				writer.WriteEndArray();
 			}
 			else if (RescoreDescriptorActions is not null)
@@ -2544,7 +2544,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 				writer.WriteStartArray();
 				foreach (var action in RescoreDescriptorActions)
 				{
-					JsonSerializer.Serialize(writer, new RescoreDescriptor(action), options);
+					JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor(action), options);
 				}
 
 				writer.WriteEndArray();
@@ -2615,7 +2615,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			else if (PitDescriptorAction is not null)
 			{
 				writer.WritePropertyName("pit");
-				JsonSerializer.Serialize(writer, new PointInTimeReferenceDescriptor(PitDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
 			}
 			else if (PitValue is not null)
 			{
@@ -2685,7 +2685,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			else if (SuggestDescriptorAction is not null)
 			{
 				writer.WritePropertyName("suggest");
-				JsonSerializer.Serialize(writer, new SuggesterDescriptor(SuggestDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.SuggesterDescriptor(SuggestDescriptorAction), options);
 			}
 			else if (SuggestValue is not null)
 			{

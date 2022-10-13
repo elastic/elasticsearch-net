@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("contexts")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Context> Contexts { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context> Contexts { get; init; }
 	}
 }

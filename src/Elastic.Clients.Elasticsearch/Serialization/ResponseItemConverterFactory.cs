@@ -5,6 +5,8 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Core.Get;
+using Elastic.Clients.Elasticsearch.Core.MGet;
 
 namespace Elastic.Clients.Elasticsearch
 {

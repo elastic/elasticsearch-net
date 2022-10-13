@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Core.Search;
 using Tests.Domain;
 using VerifyXunit;
 

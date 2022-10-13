@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
 public partial class MultiSearchItem<TDocument>
 {
 	[JsonIgnore]
-	public IReadOnlyCollection<Hit<TDocument>> Hits => HitsMetadata.Hits;
+	public IReadOnlyCollection<Search.Hit<TDocument>> Hits => HitsMetadata.Hits;
 
 	[JsonIgnore]
 	public IReadOnlyCollection<TDocument> Documents => HitsMetadata.Hits.Select(s => s.Source).ToReadOnlyCollection();
