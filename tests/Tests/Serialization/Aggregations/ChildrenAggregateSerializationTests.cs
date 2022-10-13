@@ -4,9 +4,11 @@
 
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Experimental;
+using VerifyXunit;
 
 namespace Tests.Serialization;
 
+[UsesVerify]
 public class ChildrenAggregateSerializationTests : SerializerTestBase
 {
 	[U]

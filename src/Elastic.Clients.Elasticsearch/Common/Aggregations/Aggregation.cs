@@ -4,7 +4,8 @@
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public interface IAggregation
+// This is marked as internal for now, until we are ready to support plugin aggregations.
+internal interface IAggregation
 {
 	string? Name { get; }
 }
