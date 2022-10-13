@@ -36,7 +36,7 @@ public sealed class AggregationDictionary : IsADictionaryBase<string, Aggregatio
 				if (b.Name.IsNullOrEmpty())
 					throw new ArgumentException($"{aggregator.GetType().Name}.Name is not set!");
 
-				dict.Add(b.Name, agg);
+				dict.Add(agg);
 			}
 			return dict;
 		}
@@ -46,8 +46,16 @@ public sealed class AggregationDictionary : IsADictionaryBase<string, Aggregatio
 		if (b.Name.IsNullOrEmpty())
 			throw new ArgumentException($"{aggregator.GetType().Name}.Name is not set!");
 
-		return new AggregationDictionary { { b.Name, aggregator } };
+		return new AggregationDictionary { { aggregator } };
 	}
 
 	public void Add(string key, AggregationContainer value) => BackingDictionary.Add(ValidateKey(key), value);
+
+	public void Add(AggregationContainer value)
+	{
+		if (value.Variant.Name.IsNullOrEmpty())
+			throw new ArgumentException($"{value.GetType().Name}.Name is not set!");
+
+		BackingDictionary.Add(ValidateKey(value.Variant.Name), value);
+	}
 }
