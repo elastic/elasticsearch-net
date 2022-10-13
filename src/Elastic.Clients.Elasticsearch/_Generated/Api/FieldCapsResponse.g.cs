@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, Dictionary<string, Elastic.Clients.Elasticsearch.FieldCapability>> Fields { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Dictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>> Fields { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]

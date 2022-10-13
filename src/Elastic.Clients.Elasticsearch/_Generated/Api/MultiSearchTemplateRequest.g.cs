@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-		public List<RequestItem> SearchTemplates { get; set; }
+		public List<Core.MSearchTemplate.RequestItem> SearchTemplates { get; set; }
 
 		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		List<RequestItem> _items = new();
+		List<Core.MSearchTemplate.RequestItem> _items = new();
 		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
 			if (_items is null)
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch
 			}
 		}
 
-		public MultiSearchTemplateRequestDescriptor<TDocument> Add(RequestItem item)
+		public MultiSearchTemplateRequestDescriptor<TDocument> Add(Core.MSearchTemplate.RequestItem item)
 		{
 			_items.Add(item);
 			return this;
@@ -178,7 +178,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		List<RequestItem> _items = new();
+		List<Core.MSearchTemplate.RequestItem> _items = new();
 		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
 			if (_items is null)
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch
 			}
 		}
 
-		public MultiSearchTemplateRequestDescriptor Add(RequestItem item)
+		public MultiSearchTemplateRequestDescriptor Add(Core.MSearchTemplate.RequestItem item)
 		{
 			_items.Add(item);
 			return this;
