@@ -36,6 +36,6 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public Elastic.Clients.Elasticsearch.TotalHits? Total { get; init; }
+		public Elastic.Clients.Elasticsearch.Core.Search.TotalHits? Total { get; init; }
 	}
 }

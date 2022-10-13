@@ -38,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("hits")]
-		public Elastic.Clients.Elasticsearch.HitsMetadata<TDocument> HitsMetadata { get; init; }
+		public Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_score")]
@@ -54,7 +54,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("profile")]
-		public Elastic.Clients.Elasticsearch.Profile? Profile { get; init; }
+		public Elastic.Clients.Elasticsearch.Core.Search.Profile? Profile { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_scroll_id")]

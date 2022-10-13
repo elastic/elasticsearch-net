@@ -23,7 +23,7 @@ namespace Elastic.Clients.JsonNetSerializer.Converters
 			//typeof(Attachment),
 			typeof(LazyJson),
 			//typeof(GeoCoordinate),
-			typeof(GeoLocation),
+			//typeof(GeoLocation),
 			//typeof(CartesianPoint),
 		};
 
