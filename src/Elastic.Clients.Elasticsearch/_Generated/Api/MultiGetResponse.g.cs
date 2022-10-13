@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("docs")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ResponseItem<TDocument>> Docs { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.ResponseItem<TDocument>> Docs { get; init; }
 	}
 }

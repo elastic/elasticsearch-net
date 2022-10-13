@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("nodes")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleNode> Nodes { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Core.UpdateByQueryRethrottle.UpdateByQueryRethrottleNode> Nodes { get; init; }
 	}
 }
