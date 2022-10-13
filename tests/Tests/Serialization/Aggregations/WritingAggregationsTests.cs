@@ -37,14 +37,14 @@ public class WritingAggregationsTests : SerializerTestBase
 		var aggs = new AggregationDictionary
 		{
 			{
-				"name_of_child_agg", new ChildrenAggregation("name_of_child_agg")
+				new ChildrenAggregation("name_of_child_agg")
 				{
 					Type = "commits",
 					Aggregations = new AggregationDictionary
 					{
-						{"average_per_child", new AverageAggregation("average_per_child", "confidenceFactor")},
-						{"max_per_child", new MaxAggregation("max_per_child", "confidenceFactor")},
-						{"min_per_child", new MinAggregation("min_per_child", "confidenceFactor")},
+						{new AverageAggregation("average_per_child", "confidenceFactor")},
+						{new MaxAggregation("max_per_child", "confidenceFactor")},
+						{new MinAggregation("min_per_child", "confidenceFactor")},
 					}
 				}
 			}
