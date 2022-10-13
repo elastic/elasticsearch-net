@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	[JsonConverter(typeof(AggregationContainerConverter))]
 	public sealed partial class AggregationContainer
 	{
-		public AggregationContainer(IAggregation variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal AggregationContainer(IAggregation variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IAggregation Variant { get; }
 	}
 
