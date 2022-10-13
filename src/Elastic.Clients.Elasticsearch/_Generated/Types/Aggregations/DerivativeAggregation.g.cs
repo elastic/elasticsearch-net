@@ -39,18 +39,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("buckets_path"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.BucketsPath = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("format"))
 					{
 						reader.Read();
@@ -102,12 +90,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("derivative");
 			writer.WriteStartObject();
-			if (value.BucketsPath is not null)
-			{
-				writer.WritePropertyName("buckets_path");
-				JsonSerializer.Serialize(writer, value.BucketsPath, options);
-			}
-
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -139,8 +121,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
-
 		public string? Format { get; set; }
 
 		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
@@ -157,19 +137,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; set; }
-
 		private string? FormatValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
-
-		public DerivativeAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
-		{
-			BucketsPathValue = bucketsPath;
-			return Self;
-		}
 
 		public DerivativeAggregationDescriptor Format(string? format)
 		{
@@ -194,12 +166,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("derivative");
 			writer.WriteStartObject();
-			if (BucketsPathValue is not null)
-			{
-				writer.WritePropertyName("buckets_path");
-				JsonSerializer.Serialize(writer, BucketsPathValue, options);
-			}
-
 			if (!string.IsNullOrEmpty(FormatValue))
 			{
 				writer.WritePropertyName("format");

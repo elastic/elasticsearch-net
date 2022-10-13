@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
-		public Elastic.Clients.Elasticsearch.InnerHits? InnerHits { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_children")]
@@ -70,11 +70,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
 
-		private InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
+		private Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
 
-		private Action<InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
+		private Action<Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; set; }
 
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private string TypeValue { get; set; }
 
-		public HasChildQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
+		public HasChildQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
 		{
 			InnerHitsDescriptor = null;
 			InnerHitsDescriptorAction = null;
@@ -104,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public HasChildQueryDescriptor<TDocument> InnerHits(InnerHitsDescriptor<TDocument> descriptor)
+		public HasChildQueryDescriptor<TDocument> InnerHits(Core.Search.InnerHitsDescriptor<TDocument> descriptor)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;
@@ -112,7 +112,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public HasChildQueryDescriptor<TDocument> InnerHits(Action<InnerHitsDescriptor<TDocument>> configure)
+		public HasChildQueryDescriptor<TDocument> InnerHits(Action<Core.Search.InnerHitsDescriptor<TDocument>> configure)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptor = null;
@@ -197,7 +197,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (InnerHitsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, new InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
 			}
 			else if (InnerHitsValue is not null)
 			{
@@ -270,11 +270,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		private Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
 
-		private InnerHitsDescriptor InnerHitsDescriptor { get; set; }
+		private Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
 
-		private Action<InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
+		private Action<Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; set; }
 
@@ -296,7 +296,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private string TypeValue { get; set; }
 
-		public HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
+		public HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
 		{
 			InnerHitsDescriptor = null;
 			InnerHitsDescriptorAction = null;
@@ -304,7 +304,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public HasChildQueryDescriptor InnerHits(InnerHitsDescriptor descriptor)
+		public HasChildQueryDescriptor InnerHits(Core.Search.InnerHitsDescriptor descriptor)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;
@@ -312,7 +312,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public HasChildQueryDescriptor InnerHits(Action<InnerHitsDescriptor> configure)
+		public HasChildQueryDescriptor InnerHits(Action<Core.Search.InnerHitsDescriptor> configure)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptor = null;
@@ -397,7 +397,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (InnerHitsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, new InnerHitsDescriptor(InnerHitsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Search.InnerHitsDescriptor(InnerHitsDescriptorAction), options);
 			}
 			else if (InnerHitsValue is not null)
 			{

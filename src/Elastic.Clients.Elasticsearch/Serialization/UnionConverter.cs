@@ -17,7 +17,7 @@ internal sealed class UnionConverter : JsonConverterFactory
 	// found.
 	private static readonly HashSet<Type> TypesToSkip = new()
 	{
-		typeof(SourceConfig),
+		typeof(Core.Search.SourceConfig),
 		typeof(Script)
 	};
 

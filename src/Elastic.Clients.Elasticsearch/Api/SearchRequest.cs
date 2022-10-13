@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public SearchRequestDescriptor<TDocument> Pit(string id, Action<PointInTimeReferenceDescriptor> configure)
+		public SearchRequestDescriptor<TDocument> Pit(string id, Action<Core.Search.PointInTimeReferenceDescriptor> configure)
 		{
 			PitValue = null;
 			PitDescriptorAction = null;
