@@ -30,34 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					JsonSerializer.Serialize(writer, descriptor, options);
 				};
 
-		public static implicit operator AggregationContainer(Aggregation aggregator)
-		{
-			if (aggregator == null)
-				return null;
-
-			// TODO: Reimplement this fully - as neccesary!
-
-			var container = new AggregationContainer(aggregator)
-			{
-				//Meta = aggregator.Meta
-			};
-
-			//aggregator.WrapInContainer(container);
-
-			//var bucket = aggregator as BucketAggregationBase;
-
-			//container.Aggregations = bucket?.Aggregations;
-
-			var combinator = aggregator as AggregationCombinator;
-			if (combinator?.Aggregations != null)
-			{
-				var dict = new AggregationDictionary();
-				//	foreach (var agg in combinator.Aggregations)
-				//		dict.Add(((IAggregation)agg).Name, agg);
-				//	container.Aggregations = dict;
-			}
-
-			return container;
-		}
+		public static implicit operator AggregationContainer(Aggregation aggregator) =>
+			aggregator == null ? null : new AggregationContainer(aggregator);
 	}
 }
