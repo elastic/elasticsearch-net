@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("details")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.RankEvalMetricDetail> Details { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> Details { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("failures")]
