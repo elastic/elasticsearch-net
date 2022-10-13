@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public sealed partial class MappingLimitSettings
 	{
 		[JsonInclude]
+		[JsonPropertyName("coerce")]
+		public bool? Coerce { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("depth")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth? Depth { get; set; }
 
@@ -61,6 +65,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public MappingLimitSettingsDescriptor() : base()
 		{
 		}
+
+		private bool? CoerceValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth? DepthValue { get; set; }
 
@@ -99,6 +105,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		private MappingLimitSettingsTotalFieldsDescriptor TotalFieldsDescriptor { get; set; }
 
 		private Action<MappingLimitSettingsTotalFieldsDescriptor> TotalFieldsDescriptorAction { get; set; }
+
+		public MappingLimitSettingsDescriptor Coerce(bool? coerce = true)
+		{
+			CoerceValue = coerce;
+			return Self;
+		}
 
 		public MappingLimitSettingsDescriptor Depth(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth? depth)
 		{
@@ -253,6 +265,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (CoerceValue.HasValue)
+			{
+				writer.WritePropertyName("coerce");
+				writer.WriteBooleanValue(CoerceValue.Value);
+			}
+
 			if (DepthDescriptor is not null)
 			{
 				writer.WritePropertyName("depth");
