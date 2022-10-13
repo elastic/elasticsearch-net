@@ -3,11 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Transport;
 using Playground;
 
 // const string IndexName = "stock-demo-v1";
+
+AggregationContainer a = new TermsAggregation("test");
 
 var settings = new ElasticsearchClientSettings(new InMemoryConnection())
 	.DefaultIndex("default-index")
