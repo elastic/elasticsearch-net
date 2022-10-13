@@ -25,14 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Context : Union<string, Elastic.Clients.Elasticsearch.GeoLocation>
+	public partial class Context
 	{
-		public Context(string context) : base(context)
-		{
-		}
-
-		public Context(Elastic.Clients.Elasticsearch.GeoLocation geoLocation) : base(geoLocation)
-		{
-		}
 	}
 }
