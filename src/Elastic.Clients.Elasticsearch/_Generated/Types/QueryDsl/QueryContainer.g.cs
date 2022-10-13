@@ -71,7 +71,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public static QueryContainer Nested(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery nestedQuery) => new QueryContainer("nested", nestedQuery);
 		public static QueryContainer ParentId(Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery parentIdQuery) => new QueryContainer("parent_id", parentIdQuery);
 		public static QueryContainer Percolate(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery percolateQuery) => new QueryContainer("percolate", percolateQuery);
-		public static QueryContainer Pinned(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery pinnedQuery) => new QueryContainer("pinned", pinnedQuery);
 		public static QueryContainer Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery prefixQuery) => new QueryContainer("prefix", prefixQuery);
 		public static QueryContainer QueryString(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery queryStringQuery) => new QueryContainer("query_string", queryStringQuery);
 		public static QueryContainer Range(Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery rangeQuery) => new QueryContainer("range", rangeQuery);
@@ -305,13 +304,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (propertyName == "percolate")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery?>(ref reader, options);
-				reader.Read();
-				return new QueryContainer(propertyName, variant);
-			}
-
-			if (propertyName == "pinned")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery?>(ref reader, options);
 				reader.Read();
 				return new QueryContainer(propertyName, variant);
 			}
@@ -563,9 +555,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				case "percolate":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery)value.Variant, options);
 					break;
-				case "pinned":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery)value.Variant, options);
-					break;
 				case "prefix":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery)value.Variant, options);
 					break;
@@ -730,8 +719,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void ParentId(Action<ParentIdQueryDescriptor> configure) => Set(configure, "parent_id");
 		public void Percolate(PercolateQuery query) => Set(query, "percolate");
 		public void Percolate(Action<PercolateQueryDescriptor<TDocument>> configure) => Set(configure, "percolate");
-		public void Pinned(PinnedQuery query) => Set(query, "pinned");
-		public void Pinned(Action<PinnedQueryDescriptor<TDocument>> configure) => Set(configure, "pinned");
 		public void Prefix(PrefixQuery query) => Set(query, "prefix");
 		public void Prefix(Action<PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
 		public void QueryString(QueryStringQuery query) => Set(query, "query_string");
@@ -914,9 +901,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Percolate(PercolateQuery query) => Set(query, "percolate");
 		public void Percolate(Action<PercolateQueryDescriptor> configure) => Set(configure, "percolate");
 		public void Percolate<TDocument>(Action<PercolateQueryDescriptor<TDocument>> configure) => Set(configure, "percolate");
-		public void Pinned(PinnedQuery query) => Set(query, "pinned");
-		public void Pinned(Action<PinnedQueryDescriptor> configure) => Set(configure, "pinned");
-		public void Pinned<TDocument>(Action<PinnedQueryDescriptor<TDocument>> configure) => Set(configure, "pinned");
 		public void Prefix(PrefixQuery query) => Set(query, "prefix");
 		public void Prefix(Action<PrefixQueryDescriptor> configure) => Set(configure, "prefix");
 		public void Prefix<TDocument>(Action<PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");

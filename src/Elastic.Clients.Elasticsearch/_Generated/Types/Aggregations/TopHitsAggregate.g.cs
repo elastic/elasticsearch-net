@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("hits")]
-		public Elastic.Clients.Elasticsearch.HitsMetadata<object> Hits { get; init; }
+		public Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<object> Hits { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("meta")]

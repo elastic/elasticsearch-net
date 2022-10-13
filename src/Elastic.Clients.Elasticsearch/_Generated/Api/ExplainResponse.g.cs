@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("explanation")]
-		public Elastic.Clients.Elasticsearch.ExplanationDetail? Explanation { get; init; }
+		public Elastic.Clients.Elasticsearch.Core.Explain.ExplanationDetail? Explanation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("get")]
