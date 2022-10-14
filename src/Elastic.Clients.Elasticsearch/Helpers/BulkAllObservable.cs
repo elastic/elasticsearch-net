@@ -12,6 +12,7 @@ using Elastic.Transport;
 using Elastic.Transport.Diagnostics.Auditing;
 using Elastic.Transport.Extensions;
 using Elastic.Transport.Products.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Core.Bulk;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -176,7 +177,7 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 			return await RetryDocumentsAsync(page, ++backOffRetries, retryableDocuments).ConfigureAwait(false);
 
 		if (retryableDocuments.Count > 0)
-			throw ThrowOnBadBulk(response, $"Bulk indexing failed and after retrying {backOffRetries} times");
+			throw ThrowOnBadBulk(response, $"Bulk indexing failed and after retrying {backOffRetries} times.");
 
 		request.BackPressure?.Release();
 

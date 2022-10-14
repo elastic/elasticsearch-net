@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
+		public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
+		public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("docs")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Operation>? Docs { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? Docs { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ids")]
@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMget;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public MultiGetRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
+		public MultiGetRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 		public MultiGetRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public MultiGetRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		public MultiGetRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
@@ -122,17 +122,17 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.Operation>? DocsValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? DocsValue { get; set; }
 
-		private OperationDescriptor DocsDescriptor { get; set; }
+		private Core.MGet.OperationDescriptor DocsDescriptor { get; set; }
 
-		private Action<OperationDescriptor> DocsDescriptorAction { get; set; }
+		private Action<Core.MGet.OperationDescriptor> DocsDescriptorAction { get; set; }
 
-		private Action<OperationDescriptor>[] DocsDescriptorActions { get; set; }
+		private Action<Core.MGet.OperationDescriptor>[] DocsDescriptorActions { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ids? IdsValue { get; set; }
 
-		public MultiGetRequestDescriptor<TDocument> Docs(IEnumerable<Elastic.Clients.Elasticsearch.Operation>? docs)
+		public MultiGetRequestDescriptor<TDocument> Docs(IEnumerable<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? docs)
 		{
 			DocsDescriptor = null;
 			DocsDescriptorAction = null;
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public MultiGetRequestDescriptor<TDocument> Docs(OperationDescriptor descriptor)
+		public MultiGetRequestDescriptor<TDocument> Docs(Core.MGet.OperationDescriptor descriptor)
 		{
 			DocsValue = null;
 			DocsDescriptorAction = null;
@@ -150,7 +150,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public MultiGetRequestDescriptor<TDocument> Docs(Action<OperationDescriptor> configure)
+		public MultiGetRequestDescriptor<TDocument> Docs(Action<Core.MGet.OperationDescriptor> configure)
 		{
 			DocsValue = null;
 			DocsDescriptor = null;
@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public MultiGetRequestDescriptor<TDocument> Docs(params Action<OperationDescriptor>[] configure)
+		public MultiGetRequestDescriptor<TDocument> Docs(params Action<Core.MGet.OperationDescriptor>[] configure)
 		{
 			DocsValue = null;
 			DocsDescriptor = null;
@@ -188,7 +188,7 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("docs");
 				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new OperationDescriptor(DocsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.MGet.OperationDescriptor(DocsDescriptorAction), options);
 				writer.WriteEndArray();
 			}
 			else if (DocsDescriptorActions is not null)
@@ -197,7 +197,7 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteStartArray();
 				foreach (var action in DocsDescriptorActions)
 				{
-					JsonSerializer.Serialize(writer, new OperationDescriptor(action), options);
+					JsonSerializer.Serialize(writer, new Core.MGet.OperationDescriptor(action), options);
 				}
 
 				writer.WriteEndArray();
@@ -228,7 +228,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMget;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public MultiGetRequestDescriptor Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
+		public MultiGetRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 		public MultiGetRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public MultiGetRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		public MultiGetRequestDescriptor Preference(string? preference) => Qs("preference", preference);
@@ -242,17 +242,17 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.Operation>? DocsValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? DocsValue { get; set; }
 
-		private OperationDescriptor DocsDescriptor { get; set; }
+		private Core.MGet.OperationDescriptor DocsDescriptor { get; set; }
 
-		private Action<OperationDescriptor> DocsDescriptorAction { get; set; }
+		private Action<Core.MGet.OperationDescriptor> DocsDescriptorAction { get; set; }
 
-		private Action<OperationDescriptor>[] DocsDescriptorActions { get; set; }
+		private Action<Core.MGet.OperationDescriptor>[] DocsDescriptorActions { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Ids? IdsValue { get; set; }
 
-		public MultiGetRequestDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Operation>? docs)
+		public MultiGetRequestDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? docs)
 		{
 			DocsDescriptor = null;
 			DocsDescriptorAction = null;
@@ -261,7 +261,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public MultiGetRequestDescriptor Docs(OperationDescriptor descriptor)
+		public MultiGetRequestDescriptor Docs(Core.MGet.OperationDescriptor descriptor)
 		{
 			DocsValue = null;
 			DocsDescriptorAction = null;
@@ -270,7 +270,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public MultiGetRequestDescriptor Docs(Action<OperationDescriptor> configure)
+		public MultiGetRequestDescriptor Docs(Action<Core.MGet.OperationDescriptor> configure)
 		{
 			DocsValue = null;
 			DocsDescriptor = null;
@@ -279,7 +279,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public MultiGetRequestDescriptor Docs(params Action<OperationDescriptor>[] configure)
+		public MultiGetRequestDescriptor Docs(params Action<Core.MGet.OperationDescriptor>[] configure)
 		{
 			DocsValue = null;
 			DocsDescriptor = null;
@@ -308,7 +308,7 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("docs");
 				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new OperationDescriptor(DocsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.MGet.OperationDescriptor(DocsDescriptorAction), options);
 				writer.WriteEndArray();
 			}
 			else if (DocsDescriptorActions is not null)
@@ -317,7 +317,7 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteStartArray();
 				foreach (var action in DocsDescriptorActions)
 				{
-					JsonSerializer.Serialize(writer, new OperationDescriptor(action), options);
+					JsonSerializer.Serialize(writer, new Core.MGet.OperationDescriptor(action), options);
 				}
 
 				writer.WriteEndArray();

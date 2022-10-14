@@ -126,7 +126,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
-		public Elastic.Clients.Elasticsearch.SourceConfig? Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("upsert")]
@@ -191,7 +191,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
 
 		private bool? DetectNoopValue { get; set; }
 
@@ -205,7 +205,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private TDocument? UpsertValue { get; set; }
 
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 		{
 			SourceValue = source;
 			return Self;
