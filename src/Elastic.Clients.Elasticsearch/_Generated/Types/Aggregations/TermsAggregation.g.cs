@@ -99,18 +99,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("include"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Include = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("min_doc_count"))
 					{
 						reader.Read();
@@ -299,12 +287,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(value.Format);
 			}
 
-			if (value.Include is not null)
-			{
-				writer.WritePropertyName("include");
-				JsonSerializer.Serialize(writer, value.Include, options);
-			}
-
 			if (value.MinDocCount.HasValue)
 			{
 				writer.WritePropertyName("min_doc_count");
@@ -403,8 +385,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public string? Format { get; set; }
 
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
-
 		public Dictionary<string, object>? Meta { get; set; }
 
 		public int? MinDocCount { get; set; }
@@ -453,8 +433,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 		private string? FormatValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 
 		private Dictionary<string, object>? MetaValue { get; set; }
 
@@ -535,12 +513,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TermsAggregationDescriptor<TDocument> Format(string? format)
 		{
 			FormatValue = format;
-			return Self;
-		}
-
-		public TermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
-		{
-			IncludeValue = include;
 			return Self;
 		}
 
@@ -643,12 +615,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
-			}
-
-			if (IncludeValue is not null)
-			{
-				writer.WritePropertyName("include");
-				JsonSerializer.Serialize(writer, IncludeValue, options);
 			}
 
 			if (MinDocCountValue.HasValue)
@@ -761,8 +727,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private string? FormatValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
-
 		private Dictionary<string, object>? MetaValue { get; set; }
 
 		private int? MinDocCountValue { get; set; }
@@ -848,12 +812,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TermsAggregationDescriptor Format(string? format)
 		{
 			FormatValue = format;
-			return Self;
-		}
-
-		public TermsAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
-		{
-			IncludeValue = include;
 			return Self;
 		}
 
@@ -956,12 +914,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
-			}
-
-			if (IncludeValue is not null)
-			{
-				writer.WritePropertyName("include");
-				JsonSerializer.Serialize(writer, IncludeValue, options);
 			}
 
 			if (MinDocCountValue.HasValue)

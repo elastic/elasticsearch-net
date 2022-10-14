@@ -26,9 +26,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public sealed partial class GeoPolygonPoints
 	{
-		[JsonInclude]
-		[JsonPropertyName("points")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> Points { get; set; }
 	}
 
 	public sealed partial class GeoPolygonPointsDescriptor : SerializableDescriptorBase<GeoPolygonPointsDescriptor>
@@ -38,20 +35,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 		}
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> PointsValue { get; set; }
-
-		public GeoPolygonPointsDescriptor Points(IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> points)
-		{
-			PointsValue = points;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("points");
-			JsonSerializer.Serialize(writer, PointsValue, options);
-			writer.WriteEndObject();
 		}
 	}
 }

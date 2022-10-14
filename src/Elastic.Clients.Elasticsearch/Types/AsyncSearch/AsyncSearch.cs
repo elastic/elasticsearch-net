@@ -14,7 +14,7 @@ public partial class AsyncSearch<TDocument>
 	/// Shortcut to the hits returned for this search.
 	/// </summary>
 	[JsonIgnore]
-	public IReadOnlyCollection<Hit<TDocument>> Hits => HitsMetadata.Hits;
+	public IReadOnlyCollection<Core.Search.Hit<TDocument>> Hits => HitsMetadata.Hits;
 
 	/// <summary>
 	/// The source documents from the matching hits.

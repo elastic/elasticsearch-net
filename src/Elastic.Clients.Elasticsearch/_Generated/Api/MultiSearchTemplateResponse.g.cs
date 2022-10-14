@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("responses")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchResponseItem<TDocument>> Responses { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchResponseItem<TDocument>> Responses { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("took")]
