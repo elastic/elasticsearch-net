@@ -8,6 +8,7 @@ using Elastic.Transport;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using Elastic.Clients.Elasticsearch.Core.Bulk;
 
 namespace Elastic.Clients.Elasticsearch
 {
