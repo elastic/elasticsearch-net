@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,277 +24,275 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+internal sealed class MatrixStatsAggregationConverter : JsonConverter<MatrixStatsAggregation>
 {
-	internal sealed class MatrixStatsAggregationConverter : JsonConverter<MatrixStatsAggregation>
+	public override MatrixStatsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override MatrixStatsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var aggName = reader.GetString();
+		if (aggName != "matrix_stats")
+			throw new JsonException("Unexpected JSON detected.");
+		var agg = new MatrixStatsAggregation(aggName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "matrix_stats")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new MatrixStatsAggregation(aggName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("fields"))
 				{
-					if (reader.ValueTextEquals("fields"))
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
+					if (value is not null)
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Fields = value;
-						}
-
-						continue;
+						agg.Fields = value;
 					}
 
-					if (reader.ValueTextEquals("missing"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, double>?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("missing"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, double>?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Missing = value;
 					}
 
-					if (reader.ValueTextEquals("mode"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortMode?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Mode = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("mode"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortMode?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Mode = value;
 					}
+
+					continue;
 				}
 			}
+		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("meta"))
 				{
-					if (reader.ValueTextEquals("meta"))
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					if (value is not null)
 					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
+						agg.Meta = value;
 					}
+
+					continue;
 				}
 			}
-
-			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, MatrixStatsAggregation value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("matrix_stats");
-			writer.WriteStartObject();
-			if (value.Fields is not null)
-			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, value.Fields, options);
-			}
-
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
-			}
-
-			if (value.Mode is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, value.Mode, options);
-			}
-
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return agg;
 	}
 
-	[JsonConverter(typeof(MatrixStatsAggregationConverter))]
-	public sealed partial class MatrixStatsAggregation : Aggregation
+	public override void Write(Utf8JsonWriter writer, MatrixStatsAggregation value, JsonSerializerOptions options)
 	{
-		public MatrixStatsAggregation(string name) => Name = name;
-		internal MatrixStatsAggregation()
+		writer.WriteStartObject();
+		writer.WritePropertyName("matrix_stats");
+		writer.WriteStartObject();
+		if (value.Fields is not null)
 		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, value.Fields, options);
 		}
 
-		public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+		if (value.Missing is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, value.Missing, options);
+		}
 
-		public Dictionary<string, object>? Meta { get; set; }
+		if (value.Mode is not null)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, value.Mode, options);
+		}
 
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
+		writer.WriteEndObject();
+		if (value.Meta is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		public override string? Name { get; internal set; }
+[JsonConverter(typeof(MatrixStatsAggregationConverter))]
+public sealed partial class MatrixStatsAggregation : Aggregation
+{
+	public MatrixStatsAggregation(string name) => Name = name;
+	internal MatrixStatsAggregation()
+	{
 	}
 
-	public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : SerializableDescriptorBase<MatrixStatsAggregationDescriptor<TDocument>>
+	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+
+	public Dictionary<string, object>? Meta { get; set; }
+
+	public Dictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
+
+	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
+
+	public override string? Name { get; internal set; }
+}
+
+public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : SerializableDescriptor<MatrixStatsAggregationDescriptor<TDocument>>
+{
+	internal MatrixStatsAggregationDescriptor(Action<MatrixStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public MatrixStatsAggregationDescriptor() : base()
 	{
-		internal MatrixStatsAggregationDescriptor(Action<MatrixStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public MatrixStatsAggregationDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-
-		public MatrixStatsAggregationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public MatrixStatsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public MatrixStatsAggregationDescriptor<TDocument> Missing(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>> selector)
-		{
-			MissingValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>());
-			return Self;
-		}
-
-		public MatrixStatsAggregationDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
-		{
-			ModeValue = mode;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("matrix_stats");
-			writer.WriteStartObject();
-			if (FieldsValue is not null)
-			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, FieldsValue, options);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (ModeValue is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, ModeValue, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class MatrixStatsAggregationDescriptor : SerializableDescriptorBase<MatrixStatsAggregationDescriptor>
+	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private Dictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
+
+	public MatrixStatsAggregationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
 	{
-		internal MatrixStatsAggregationDescriptor(Action<MatrixStatsAggregationDescriptor> configure) => configure.Invoke(this);
-		public MatrixStatsAggregationDescriptor() : base()
+		FieldsValue = fields;
+		return Self;
+	}
+
+	public MatrixStatsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public MatrixStatsAggregationDescriptor<TDocument> Missing(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>> selector)
+	{
+		MissingValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>());
+		return Self;
+	}
+
+	public MatrixStatsAggregationDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	{
+		ModeValue = mode;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("matrix_stats");
+		writer.WriteStartObject();
+		if (FieldsValue is not null)
 		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-
-		public MatrixStatsAggregationDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+		if (MissingValue is not null)
 		{
-			FieldsValue = fields;
-			return Self;
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
 		}
 
-		public MatrixStatsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		if (ModeValue is not null)
 		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
 		}
 
-		public MatrixStatsAggregationDescriptor Missing(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>> selector)
+		writer.WriteEndObject();
+		if (MetaValue is not null)
 		{
-			MissingValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>());
-			return Self;
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		public MatrixStatsAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class MatrixStatsAggregationDescriptor : SerializableDescriptor<MatrixStatsAggregationDescriptor>
+{
+	internal MatrixStatsAggregationDescriptor(Action<MatrixStatsAggregationDescriptor> configure) => configure.Invoke(this);
+	public MatrixStatsAggregationDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private Dictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
+
+	public MatrixStatsAggregationDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
+
+	public MatrixStatsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public MatrixStatsAggregationDescriptor Missing(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>> selector)
+	{
+		MissingValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>());
+		return Self;
+	}
+
+	public MatrixStatsAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	{
+		ModeValue = mode;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("matrix_stats");
+		writer.WriteStartObject();
+		if (FieldsValue is not null)
 		{
-			ModeValue = mode;
-			return Self;
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		if (MissingValue is not null)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("matrix_stats");
-			writer.WriteStartObject();
-			if (FieldsValue is not null)
-			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, FieldsValue, options);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (ModeValue is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, ModeValue, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
 		}
+
+		if (ModeValue is not null)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
+		}
+
+		writer.WriteEndObject();
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

@@ -4,7 +4,7 @@
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public sealed class BulkDeleteResponseItem : BulkResponseItemBase
+public sealed class BulkDeleteResponseItem : ResponseItem
 {
 	public override string Operation => "delete";
 }

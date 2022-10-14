@@ -7,22 +7,21 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Serialization;
+
+internal sealed class IntermediateConverter<TValue> : JsonConverter<IReadOnlyDictionary<IndexName, TValue>>
 {
-	internal sealed class IntermediateConverter<TValue> : JsonConverter<IReadOnlyDictionary<IndexName, TValue>>
+	public override IReadOnlyDictionary<IndexName, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override IReadOnlyDictionary<IndexName, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		var converter = options.GetConverter(typeof(ReadOnlyIndexNameDictionary<>).MakeGenericType(typeof(TValue)));
+
+		if (converter is ReadOnlyIndexNameDictionaryConverter<TValue> specialisedConverter)
 		{
-			var converter = options.GetConverter(typeof(ReadOnlyIndexNameDictionary<>).MakeGenericType(typeof(TValue)));
-
-			if (converter is ReadOnlyIndexNameDictionaryConverter<TValue> specialisedConverter)
-			{
-				return specialisedConverter.Read(ref reader, typeToConvert, options);
-			}
-
-			return null;
+			return specialisedConverter.Read(ref reader, typeToConvert, options);
 		}
 
-		public override void Write(Utf8JsonWriter writer, IReadOnlyDictionary<IndexName, TValue> value, JsonSerializerOptions options) => throw new NotImplementedException();
+		return null;
 	}
+
+	public override void Write(Utf8JsonWriter writer, IReadOnlyDictionary<IndexName, TValue> value, JsonSerializerOptions options) => throw new NotImplementedException();
 }

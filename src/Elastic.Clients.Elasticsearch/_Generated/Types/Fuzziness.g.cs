@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public partial class Fuzziness : Union<string, int>
 {
-	public partial class Fuzziness : Union<string, int>
+	public Fuzziness(string fuzziness) : base(fuzziness)
 	{
-		public Fuzziness(string fuzziness) : base(fuzziness)
-		{
-		}
+	}
 
-		public Fuzziness(int fuzziness) : base(fuzziness)
-		{
-		}
+	public Fuzziness(int fuzziness) : base(fuzziness)
+	{
 	}
 }

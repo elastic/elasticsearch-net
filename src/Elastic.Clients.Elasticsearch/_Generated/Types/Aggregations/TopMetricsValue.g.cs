@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,78 +24,76 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public sealed partial class TopMetricsValue
 {
-	public sealed partial class TopMetricsValue
+	[JsonInclude]
+	[JsonPropertyName("field")]
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+}
+
+public sealed partial class TopMetricsValueDescriptor<TDocument> : SerializableDescriptor<TopMetricsValueDescriptor<TDocument>>
+{
+	internal TopMetricsValueDescriptor(Action<TopMetricsValueDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public TopMetricsValueDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
-	public sealed partial class TopMetricsValueDescriptor<TDocument> : SerializableDescriptorBase<TopMetricsValueDescriptor<TDocument>>
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	public TopMetricsValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
-		internal TopMetricsValueDescriptor(Action<TopMetricsValueDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public TopMetricsValueDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		public TopMetricsValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public TopMetricsValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-			writer.WriteEndObject();
-		}
+		FieldValue = field;
+		return Self;
 	}
 
-	public sealed partial class TopMetricsValueDescriptor : SerializableDescriptorBase<TopMetricsValueDescriptor>
+	public TopMetricsValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
-		internal TopMetricsValueDescriptor(Action<TopMetricsValueDescriptor> configure) => configure.Invoke(this);
-		public TopMetricsValueDescriptor() : base()
-		{
-		}
+		FieldValue = field;
+		return Self;
+	}
 
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
+		writer.WriteEndObject();
+	}
+}
 
-		public TopMetricsValueDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
+public sealed partial class TopMetricsValueDescriptor : SerializableDescriptor<TopMetricsValueDescriptor>
+{
+	internal TopMetricsValueDescriptor(Action<TopMetricsValueDescriptor> configure) => configure.Invoke(this);
+	public TopMetricsValueDescriptor() : base()
+	{
+	}
 
-		public TopMetricsValueDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		public TopMetricsValueDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
+	public TopMetricsValueDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-			writer.WriteEndObject();
-		}
+	public TopMetricsValueDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TopMetricsValueDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
+		writer.WriteEndObject();
 	}
 }

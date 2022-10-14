@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,330 +24,328 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Mapping
+namespace Elastic.Clients.Elasticsearch.Mapping;
+public sealed partial class HistogramProperty : IProperty
 {
-	public sealed partial class HistogramProperty : IProperty
+	[JsonInclude]
+	[JsonPropertyName("dynamic")]
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("fields")]
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("ignore_above")]
+	public int? IgnoreAbove { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("ignore_malformed")]
+	public bool? IgnoreMalformed { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("local_metadata")]
+	public Dictionary<string, object>? LocalMetadata { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("meta")]
+	public Dictionary<string, string>? Meta { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("properties")]
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "histogram";
+}
+
+public sealed partial class HistogramPropertyDescriptor<TDocument> : SerializableDescriptor<HistogramPropertyDescriptor<TDocument>>, IBuildableDescriptor<HistogramProperty>
+{
+	internal HistogramPropertyDescriptor(Action<HistogramPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public HistogramPropertyDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("dynamic")]
-		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ignore_above")]
-		public int? IgnoreAbove { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ignore_malformed")]
-		public bool? IgnoreMalformed { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("local_metadata")]
-		public Dictionary<string, object>? LocalMetadata { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, string>? Meta { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("properties")]
-		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "histogram";
 	}
 
-	public sealed partial class HistogramPropertyDescriptor<TDocument> : SerializableDescriptorBase<HistogramPropertyDescriptor<TDocument>>, IBuildableDescriptor<HistogramProperty>
+	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+	private int? IgnoreAboveValue { get; set; }
+
+	private bool? IgnoreMalformedValue { get; set; }
+
+	private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+	private Dictionary<string, string>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+	public HistogramPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
-		internal HistogramPropertyDescriptor(Action<HistogramPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public HistogramPropertyDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
-		private int? IgnoreAboveValue { get; set; }
-
-		private bool? IgnoreMalformedValue { get; set; }
-
-		private Dictionary<string, object>? LocalMetadataValue { get; set; }
-
-		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		public HistogramPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
-		{
-			DynamicValue = dynamic;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
-		{
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
-		{
-			IgnoreAboveValue = ignoreAbove;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor<TDocument> IgnoreMalformed(bool? ignoreMalformed = true)
-		{
-			IgnoreMalformedValue = ignoreMalformed;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
-		{
-			PropertiesValue = properties;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
-		{
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (DynamicValue is not null)
-			{
-				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, DynamicValue, options);
-			}
-
-			if (FieldsValue is not null)
-			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, FieldsValue, options);
-			}
-
-			if (IgnoreAboveValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_above");
-				writer.WriteNumberValue(IgnoreAboveValue.Value);
-			}
-
-			if (IgnoreMalformedValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_malformed");
-				writer.WriteBooleanValue(IgnoreMalformedValue.Value);
-			}
-
-			if (LocalMetadataValue is not null)
-			{
-				writer.WritePropertyName("local_metadata");
-				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (PropertiesValue is not null)
-			{
-				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, PropertiesValue, options);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("histogram");
-			writer.WriteEndObject();
-		}
-
-		HistogramProperty IBuildableDescriptor<HistogramProperty>.Build() => new()
-		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
+		DynamicValue = dynamic;
+		return Self;
 	}
 
-	public sealed partial class HistogramPropertyDescriptor : SerializableDescriptorBase<HistogramPropertyDescriptor>, IBuildableDescriptor<HistogramProperty>
+	public HistogramPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
 	{
-		internal HistogramPropertyDescriptor(Action<HistogramPropertyDescriptor> configure) => configure.Invoke(this);
-		public HistogramPropertyDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
-		private int? IgnoreAboveValue { get; set; }
-
-		private bool? IgnoreMalformedValue { get; set; }
-
-		private Dictionary<string, object>? LocalMetadataValue { get; set; }
-
-		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		public HistogramPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
-		{
-			DynamicValue = dynamic;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
-		{
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor IgnoreAbove(int? ignoreAbove)
-		{
-			IgnoreAboveValue = ignoreAbove;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
-		{
-			IgnoreMalformedValue = ignoreMalformed;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
-		{
-			PropertiesValue = properties;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
-		{
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public HistogramPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (DynamicValue is not null)
-			{
-				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, DynamicValue, options);
-			}
-
-			if (FieldsValue is not null)
-			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, FieldsValue, options);
-			}
-
-			if (IgnoreAboveValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_above");
-				writer.WriteNumberValue(IgnoreAboveValue.Value);
-			}
-
-			if (IgnoreMalformedValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_malformed");
-				writer.WriteBooleanValue(IgnoreMalformedValue.Value);
-			}
-
-			if (LocalMetadataValue is not null)
-			{
-				writer.WritePropertyName("local_metadata");
-				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (PropertiesValue is not null)
-			{
-				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, PropertiesValue, options);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("histogram");
-			writer.WriteEndObject();
-		}
-
-		HistogramProperty IBuildableDescriptor<HistogramProperty>.Build() => new()
-		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
+		FieldsValue = fields;
+		return Self;
 	}
+
+	public HistogramPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	{
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	{
+		IgnoreAboveValue = ignoreAbove;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor<TDocument> IgnoreMalformed(bool? ignoreMalformed = true)
+	{
+		IgnoreMalformedValue = ignoreMalformed;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	{
+		PropertiesValue = properties;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	{
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DynamicValue is not null)
+		{
+			writer.WritePropertyName("dynamic");
+			JsonSerializer.Serialize(writer, DynamicValue, options);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (IgnoreAboveValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_above");
+			writer.WriteNumberValue(IgnoreAboveValue.Value);
+		}
+
+		if (IgnoreMalformedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_malformed");
+			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
+		}
+
+		if (LocalMetadataValue is not null)
+		{
+			writer.WritePropertyName("local_metadata");
+			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (PropertiesValue is not null)
+		{
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("histogram");
+		writer.WriteEndObject();
+	}
+
+	HistogramProperty IBuildableDescriptor<HistogramProperty>.Build() => new()
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
+}
+
+public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor<HistogramPropertyDescriptor>, IBuildableDescriptor<HistogramProperty>
+{
+	internal HistogramPropertyDescriptor(Action<HistogramPropertyDescriptor> configure) => configure.Invoke(this);
+	public HistogramPropertyDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+	private int? IgnoreAboveValue { get; set; }
+
+	private bool? IgnoreMalformedValue { get; set; }
+
+	private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+	private Dictionary<string, string>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+	public HistogramPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	{
+		DynamicValue = dynamic;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	{
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	{
+		IgnoreAboveValue = ignoreAbove;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
+	{
+		IgnoreMalformedValue = ignoreMalformed;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	{
+		PropertiesValue = properties;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	{
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public HistogramPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DynamicValue is not null)
+		{
+			writer.WritePropertyName("dynamic");
+			JsonSerializer.Serialize(writer, DynamicValue, options);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (IgnoreAboveValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_above");
+			writer.WriteNumberValue(IgnoreAboveValue.Value);
+		}
+
+		if (IgnoreMalformedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_malformed");
+			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
+		}
+
+		if (LocalMetadataValue is not null)
+		{
+			writer.WritePropertyName("local_metadata");
+			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (PropertiesValue is not null)
+		{
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("histogram");
+		writer.WriteEndObject();
+	}
+
+	HistogramProperty IBuildableDescriptor<HistogramProperty>.Build() => new()
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
 }

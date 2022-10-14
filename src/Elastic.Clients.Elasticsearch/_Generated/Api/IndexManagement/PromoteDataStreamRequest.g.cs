@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,45 +26,43 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class PromoteDataStreamRequestParameters : RequestParameters<PromoteDataStreamRequestParameters>
 {
-	public sealed class PromoteDataStreamRequestParameters : RequestParameters<PromoteDataStreamRequestParameters>
+}
+
+public sealed partial class PromoteDataStreamRequest : PlainRequest<PromoteDataStreamRequestParameters>
+{
+	public PromoteDataStreamRequest(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
 	{
 	}
 
-	public sealed partial class PromoteDataStreamRequest : PlainRequestBase<PromoteDataStreamRequestParameters>
-	{
-		public PromoteDataStreamRequest(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPromoteDataStream;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => false;
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPromoteDataStream;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
+public sealed partial class PromoteDataStreamRequestDescriptor : RequestDescriptor<PromoteDataStreamRequestDescriptor, PromoteDataStreamRequestParameters>
+{
+	internal PromoteDataStreamRequestDescriptor(Action<PromoteDataStreamRequestDescriptor> configure) => configure.Invoke(this);
+	public PromoteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
+	{
 	}
 
-	public sealed partial class PromoteDataStreamRequestDescriptor : RequestDescriptorBase<PromoteDataStreamRequestDescriptor, PromoteDataStreamRequestParameters>
+	internal PromoteDataStreamRequestDescriptor()
 	{
-		internal PromoteDataStreamRequestDescriptor(Action<PromoteDataStreamRequestDescriptor> configure) => configure.Invoke(this);
-		public PromoteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
-		{
-		}
+	}
 
-		internal PromoteDataStreamRequestDescriptor()
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPromoteDataStream;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => false;
+	public PromoteDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName name)
+	{
+		RouteValues.Required("name", name);
+		return Self;
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPromoteDataStream;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		public PromoteDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName name)
-		{
-			RouteValues.Required("name", name);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

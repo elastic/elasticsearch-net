@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,348 +24,346 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+internal sealed class PrefixQueryConverter : JsonConverter<PrefixQuery>
 {
-	internal sealed class PrefixQueryConverter : JsonConverter<PrefixQuery>
+	public override PrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override PrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var fieldName = reader.GetString();
+		reader.Read();
+		var variant = new PrefixQuery(fieldName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var fieldName = reader.GetString();
-			reader.Read();
-			var variant = new PrefixQuery(fieldName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				var property = reader.GetString();
+				if (property == "_name")
 				{
-					var property = reader.GetString();
-					if (property == "_name")
-					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
+				if (property == "boost")
+				{
+					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "case_insensitive")
-					{
-						variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						continue;
-					}
+				if (property == "case_insensitive")
+				{
+					variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "rewrite")
-					{
-						variant.Rewrite = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+				if (property == "rewrite")
+				{
+					variant.Rewrite = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "value")
-					{
-						variant.Value = JsonSerializer.Deserialize<string>(ref reader, options);
-						continue;
-					}
+				if (property == "value")
+				{
+					variant.Value = JsonSerializer.Deserialize<string>(ref reader, options);
+					continue;
 				}
 			}
-
-			reader.Read();
-			return variant;
 		}
 
-		public override void Write(Utf8JsonWriter writer, PrefixQuery value, JsonSerializerOptions options)
-		{
-			if (value.Field is null)
-				throw new JsonException("Unable to serialize PrefixQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-			if (options.TryGetClientSettings(out var settings))
-			{
-				writer.WriteStartObject();
-				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-				writer.WriteStartObject();
-				if (!string.IsNullOrEmpty(value.QueryName))
-				{
-					writer.WritePropertyName("_name");
-					writer.WriteStringValue(value.QueryName);
-				}
-
-				if (value.Boost.HasValue)
-				{
-					writer.WritePropertyName("boost");
-					writer.WriteNumberValue(value.Boost.Value);
-				}
-
-				if (value.CaseInsensitive.HasValue)
-				{
-					writer.WritePropertyName("case_insensitive");
-					writer.WriteBooleanValue(value.CaseInsensitive.Value);
-				}
-
-				if (value.Rewrite is not null)
-				{
-					writer.WritePropertyName("rewrite");
-					JsonSerializer.Serialize(writer, value.Rewrite, options);
-				}
-
-				writer.WritePropertyName("value");
-				writer.WriteStringValue(value.Value);
-				writer.WriteEndObject();
-				writer.WriteEndObject();
-				return;
-			}
-
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
-		}
+		reader.Read();
+		return variant;
 	}
 
-	[JsonConverter(typeof(PrefixQueryConverter))]
-	public sealed partial class PrefixQuery : Query
+	public override void Write(Utf8JsonWriter writer, PrefixQuery value, JsonSerializerOptions options)
 	{
-		public PrefixQuery(Field field)
+		if (value.Field is null)
+			throw new JsonException("Unable to serialize PrefixQuery because the `Field` property is not set. Field name queries must include a valid field name.");
+		if (options.TryGetClientSettings(out var settings))
 		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			Field = field;
-		}
-
-		public string? QueryName { get; set; }
-
-		public float? Boost { get; set; }
-
-		public bool? CaseInsensitive { get; set; }
-
-		public string? Rewrite { get; set; }
-
-		public string Value { get; set; }
-
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	}
-
-	public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescriptorBase<PrefixQueryDescriptor<TDocument>>
-	{
-		internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal PrefixQueryDescriptor() : base()
-		{
-		}
-
-		public PrefixQueryDescriptor(Field field)
-		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
-		}
-
-		public PrefixQueryDescriptor(Expression<Func<TDocument, object>> field)
-		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
-		}
-
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		private bool? CaseInsensitiveValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private string? RewriteValue { get; set; }
-
-		private string ValueValue { get; set; }
-
-		public PrefixQueryDescriptor<TDocument> QueryName(string? queryName)
-		{
-			QueryNameValue = queryName;
-			return Self;
-		}
-
-		public PrefixQueryDescriptor<TDocument> Boost(float? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		public PrefixQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
-		{
-			CaseInsensitiveValue = caseInsensitive;
-			return Self;
-		}
-
-		public PrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public PrefixQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public PrefixQueryDescriptor<TDocument> Rewrite(string? rewrite)
-		{
-			RewriteValue = rewrite;
-			return Self;
-		}
-
-		public PrefixQueryDescriptor<TDocument> Value(string value)
-		{
-			ValueValue = value;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (FieldValue is null)
-				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
+			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
+				writer.WriteStringValue(value.QueryName);
 			}
 
-			if (BoostValue.HasValue)
+			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
+				writer.WriteNumberValue(value.Boost.Value);
 			}
 
-			if (CaseInsensitiveValue.HasValue)
+			if (value.CaseInsensitive.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+				writer.WriteBooleanValue(value.CaseInsensitive.Value);
 			}
 
-			if (RewriteValue is not null)
+			if (value.Rewrite is not null)
 			{
 				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, RewriteValue, options);
+				JsonSerializer.Serialize(writer, value.Rewrite, options);
 			}
 
 			writer.WritePropertyName("value");
-			writer.WriteStringValue(ValueValue);
+			writer.WriteStringValue(value.Value);
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			return;
 		}
+
+		throw new JsonException("Unable to retrieve client settings required to infer field.");
+	}
+}
+
+[JsonConverter(typeof(PrefixQueryConverter))]
+public sealed partial class PrefixQuery : Query
+{
+	public PrefixQuery(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		Field = field;
 	}
 
-	public sealed partial class PrefixQueryDescriptor : SerializableDescriptorBase<PrefixQueryDescriptor>
+	public string? QueryName { get; set; }
+
+	public float? Boost { get; set; }
+
+	public bool? CaseInsensitive { get; set; }
+
+	public string? Rewrite { get; set; }
+
+	public string Value { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+}
+
+public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescriptor<PrefixQueryDescriptor<TDocument>>
+{
+	internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal PrefixQueryDescriptor() : base()
 	{
-		internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor> configure) => configure.Invoke(this);
-		internal PrefixQueryDescriptor() : base()
+	}
+
+	public PrefixQueryDescriptor(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	public PrefixQueryDescriptor(Expression<Func<TDocument, object>> field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	private bool? CaseInsensitiveValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private string? RewriteValue { get; set; }
+
+	private string ValueValue { get; set; }
+
+	public PrefixQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
+	{
+		CaseInsensitiveValue = caseInsensitive;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor<TDocument> Rewrite(string? rewrite)
+	{
+		RewriteValue = rewrite;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor<TDocument> Value(string value)
+	{
+		ValueValue = value;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		public PrefixQueryDescriptor(Field field)
+		if (BoostValue.HasValue)
 		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		private bool? CaseInsensitiveValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private string? RewriteValue { get; set; }
-
-		private string ValueValue { get; set; }
-
-		public PrefixQueryDescriptor QueryName(string? queryName)
+		if (CaseInsensitiveValue.HasValue)
 		{
-			QueryNameValue = queryName;
-			return Self;
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
 		}
 
-		public PrefixQueryDescriptor Boost(float? boost)
+		if (RewriteValue is not null)
 		{
-			BoostValue = boost;
-			return Self;
+			writer.WritePropertyName("rewrite");
+			JsonSerializer.Serialize(writer, RewriteValue, options);
 		}
 
-		public PrefixQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
+		writer.WritePropertyName("value");
+		writer.WriteStringValue(ValueValue);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<PrefixQueryDescriptor>
+{
+	internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor> configure) => configure.Invoke(this);
+	internal PrefixQueryDescriptor() : base()
+	{
+	}
+
+	public PrefixQueryDescriptor(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	private bool? CaseInsensitiveValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private string? RewriteValue { get; set; }
+
+	private string ValueValue { get; set; }
+
+	public PrefixQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
+	{
+		CaseInsensitiveValue = caseInsensitive;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor Rewrite(string? rewrite)
+	{
+		RewriteValue = rewrite;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor Value(string value)
+	{
+		ValueValue = value;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
-			CaseInsensitiveValue = caseInsensitive;
-			return Self;
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		public PrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		if (BoostValue.HasValue)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		public PrefixQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		if (CaseInsensitiveValue.HasValue)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
 		}
 
-		public PrefixQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		if (RewriteValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("rewrite");
+			JsonSerializer.Serialize(writer, RewriteValue, options);
 		}
 
-		public PrefixQueryDescriptor Rewrite(string? rewrite)
-		{
-			RewriteValue = rewrite;
-			return Self;
-		}
-
-		public PrefixQueryDescriptor Value(string value)
-		{
-			ValueValue = value;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (FieldValue is null)
-				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			if (CaseInsensitiveValue.HasValue)
-			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
-			}
-
-			if (RewriteValue is not null)
-			{
-				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, RewriteValue, options);
-			}
-
-			writer.WritePropertyName("value");
-			writer.WriteStringValue(ValueValue);
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-		}
+		writer.WritePropertyName("value");
+		writer.WriteStringValue(ValueValue);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }

@@ -15,21 +15,21 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class FieldCapsResponse : ElasticsearchResponseBase
 {
-	public sealed partial class FieldCapsResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, Dictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>> Fields { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("fields")]
+	public Dictionary<Elastic.Clients.Elasticsearch.Field, Dictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>> Fields { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName> Indices { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("indices")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName> Indices { get; init; }
 }

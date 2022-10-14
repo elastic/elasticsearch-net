@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,70 +26,68 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Eql
+namespace Elastic.Clients.Elasticsearch.Eql;
+public sealed class EqlGetStatusRequestParameters : RequestParameters<EqlGetStatusRequestParameters>
 {
-	public sealed class EqlGetStatusRequestParameters : RequestParameters<EqlGetStatusRequestParameters>
+}
+
+public sealed partial class EqlGetStatusRequest : PlainRequest<EqlGetStatusRequestParameters>
+{
+	public EqlGetStatusRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
-	public sealed partial class EqlGetStatusRequest : PlainRequestBase<EqlGetStatusRequestParameters>
-	{
-		public EqlGetStatusRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
+public sealed partial class EqlGetStatusRequestDescriptor<TDocument> : RequestDescriptor<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusRequestParameters>
+{
+	internal EqlGetStatusRequestDescriptor(Action<EqlGetStatusRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public EqlGetStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	{
 	}
 
-	public sealed partial class EqlGetStatusRequestDescriptor<TDocument> : RequestDescriptorBase<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusRequestParameters>
+	internal EqlGetStatusRequestDescriptor()
 	{
-		internal EqlGetStatusRequestDescriptor(Action<EqlGetStatusRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public EqlGetStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
-
-		internal EqlGetStatusRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public EqlGetStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 
-	public sealed partial class EqlGetStatusRequestDescriptor : RequestDescriptorBase<EqlGetStatusRequestDescriptor, EqlGetStatusRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public EqlGetStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
-		internal EqlGetStatusRequestDescriptor(Action<EqlGetStatusRequestDescriptor> configure) => configure.Invoke(this);
-		public EqlGetStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
+		RouteValues.Required("id", id);
+		return Self;
+	}
 
-		internal EqlGetStatusRequestDescriptor()
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public EqlGetStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
+public sealed partial class EqlGetStatusRequestDescriptor : RequestDescriptor<EqlGetStatusRequestDescriptor, EqlGetStatusRequestParameters>
+{
+	internal EqlGetStatusRequestDescriptor(Action<EqlGetStatusRequestDescriptor> configure) => configure.Invoke(this);
+	public EqlGetStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	{
+	}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	internal EqlGetStatusRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public EqlGetStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		RouteValues.Required("id", id);
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

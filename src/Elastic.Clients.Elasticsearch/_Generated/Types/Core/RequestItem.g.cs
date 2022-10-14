@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate
+namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
+public partial class RequestItem : Union<Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader, Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig>
 {
-	public partial class RequestItem : Union<Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader, Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig>
+	public RequestItem(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader multisearchHeader) : base(multisearchHeader)
 	{
-		public RequestItem(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader multisearchHeader) : base(multisearchHeader)
-		{
-		}
+	}
 
-		public RequestItem(Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig templateConfig) : base(templateConfig)
-		{
-		}
+	public RequestItem(Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig templateConfig) : base(templateConfig)
+	{
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,70 +24,68 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class SettingsSimilarityBm25
 {
-	public sealed partial class SettingsSimilarityBm25
+	[JsonInclude]
+	[JsonPropertyName("b")]
+	public double b { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("discount_overlaps")]
+	public bool DiscountOverlaps { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("k1")]
+	public double K1 { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "BM25";
+}
+
+public sealed partial class SettingsSimilarityBm25Descriptor : SerializableDescriptor<SettingsSimilarityBm25Descriptor>
+{
+	internal SettingsSimilarityBm25Descriptor(Action<SettingsSimilarityBm25Descriptor> configure) => configure.Invoke(this);
+	public SettingsSimilarityBm25Descriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("b")]
-		public double b { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("discount_overlaps")]
-		public bool DiscountOverlaps { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("k1")]
-		public double K1 { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "BM25";
 	}
 
-	public sealed partial class SettingsSimilarityBm25Descriptor : SerializableDescriptorBase<SettingsSimilarityBm25Descriptor>
+	private double bValue { get; set; }
+
+	private bool DiscountOverlapsValue { get; set; }
+
+	private double K1Value { get; set; }
+
+	public SettingsSimilarityBm25Descriptor b(double b)
 	{
-		internal SettingsSimilarityBm25Descriptor(Action<SettingsSimilarityBm25Descriptor> configure) => configure.Invoke(this);
-		public SettingsSimilarityBm25Descriptor() : base()
-		{
-		}
+		bValue = b;
+		return Self;
+	}
 
-		private double bValue { get; set; }
+	public SettingsSimilarityBm25Descriptor DiscountOverlaps(bool discountOverlaps = true)
+	{
+		DiscountOverlapsValue = discountOverlaps;
+		return Self;
+	}
 
-		private bool DiscountOverlapsValue { get; set; }
+	public SettingsSimilarityBm25Descriptor K1(double k1)
+	{
+		K1Value = k1;
+		return Self;
+	}
 
-		private double K1Value { get; set; }
-
-		public SettingsSimilarityBm25Descriptor b(double b)
-		{
-			bValue = b;
-			return Self;
-		}
-
-		public SettingsSimilarityBm25Descriptor DiscountOverlaps(bool discountOverlaps = true)
-		{
-			DiscountOverlapsValue = discountOverlaps;
-			return Self;
-		}
-
-		public SettingsSimilarityBm25Descriptor K1(double k1)
-		{
-			K1Value = k1;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("b");
-			writer.WriteNumberValue(bValue);
-			writer.WritePropertyName("discount_overlaps");
-			writer.WriteBooleanValue(DiscountOverlapsValue);
-			writer.WritePropertyName("k1");
-			writer.WriteNumberValue(K1Value);
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("BM25");
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("b");
+		writer.WriteNumberValue(bValue);
+		writer.WritePropertyName("discount_overlaps");
+		writer.WriteBooleanValue(DiscountOverlapsValue);
+		writer.WritePropertyName("k1");
+		writer.WriteNumberValue(K1Value);
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("BM25");
+		writer.WriteEndObject();
 	}
 }

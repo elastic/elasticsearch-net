@@ -7,7 +7,7 @@ using Elastic.Transport;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Elastic.Clients.JsonNetSerializer
+namespace Elastic.Clients.Elasticsearch.JsonNetSerializer
 {
 	internal static class JTokenExtensions
 	{

@@ -12,7 +12,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch
 {
 	[JsonConverter(typeof(FieldValuesConverter))]
-	public sealed class FieldValues : IsADictionaryBase<string, LazyJson>
+	public sealed class FieldValues : IsADictionary<string, LazyJson>
 	{
 		public static readonly FieldValues Empty = new();
 

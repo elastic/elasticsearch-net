@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,50 +24,48 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class RankFeatureFunctionSigmoid
 {
-	public sealed partial class RankFeatureFunctionSigmoid
-	{
-		[JsonInclude]
-		[JsonPropertyName("exponent")]
-		public float Exponent { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("exponent")]
+	public float Exponent { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("pivot")]
-		public float Pivot { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("pivot")]
+	public float Pivot { get; set; }
+}
+
+public sealed partial class RankFeatureFunctionSigmoidDescriptor : SerializableDescriptor<RankFeatureFunctionSigmoidDescriptor>
+{
+	internal RankFeatureFunctionSigmoidDescriptor(Action<RankFeatureFunctionSigmoidDescriptor> configure) => configure.Invoke(this);
+	public RankFeatureFunctionSigmoidDescriptor() : base()
+	{
 	}
 
-	public sealed partial class RankFeatureFunctionSigmoidDescriptor : SerializableDescriptorBase<RankFeatureFunctionSigmoidDescriptor>
+	private float ExponentValue { get; set; }
+
+	private float PivotValue { get; set; }
+
+	public RankFeatureFunctionSigmoidDescriptor Exponent(float exponent)
 	{
-		internal RankFeatureFunctionSigmoidDescriptor(Action<RankFeatureFunctionSigmoidDescriptor> configure) => configure.Invoke(this);
-		public RankFeatureFunctionSigmoidDescriptor() : base()
-		{
-		}
+		ExponentValue = exponent;
+		return Self;
+	}
 
-		private float ExponentValue { get; set; }
+	public RankFeatureFunctionSigmoidDescriptor Pivot(float pivot)
+	{
+		PivotValue = pivot;
+		return Self;
+	}
 
-		private float PivotValue { get; set; }
-
-		public RankFeatureFunctionSigmoidDescriptor Exponent(float exponent)
-		{
-			ExponentValue = exponent;
-			return Self;
-		}
-
-		public RankFeatureFunctionSigmoidDescriptor Pivot(float pivot)
-		{
-			PivotValue = pivot;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("exponent");
-			writer.WriteNumberValue(ExponentValue);
-			writer.WritePropertyName("pivot");
-			writer.WriteNumberValue(PivotValue);
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("exponent");
+		writer.WriteNumberValue(ExponentValue);
+		writer.WritePropertyName("pivot");
+		writer.WriteNumberValue(PivotValue);
+		writer.WriteEndObject();
 	}
 }

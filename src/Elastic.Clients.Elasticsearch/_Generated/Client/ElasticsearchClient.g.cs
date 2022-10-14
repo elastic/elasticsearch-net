@@ -25,2141 +25,2139 @@ using System.Threading;
 using System.Threading.Tasks;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public partial class ElasticsearchClient
 {
-	public partial class ElasticsearchClient
+	public AsyncSearchNamespace AsyncSearch { get; private set; }
+
+	public ClusterNamespace Cluster { get; private set; }
+
+	public EqlNamespace Eql { get; private set; }
+
+	public IndicesNamespace Indices { get; private set; }
+
+	public SqlNamespace Sql { get; private set; }
+
+	private partial void SetupNamespaces()
 	{
-		public AsyncSearchNamespace AsyncSearch { get; private set; }
-
-		public ClusterNamespace Cluster { get; private set; }
-
-		public EqlNamespace Eql { get; private set; }
-
-		public IndicesNamespace Indices { get; private set; }
-
-		public SqlNamespace Sql { get; private set; }
-
-		private partial void SetupNamespaces()
-		{
-			AsyncSearch = new AsyncSearchNamespace(this);
-			Cluster = new ClusterNamespace(this);
-			Eql = new EqlNamespace(this);
-			Indices = new IndicesNamespace(this);
-			Sql = new SqlNamespace(this);
-		}
-
-		public BulkResponse Bulk(BulkRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<BulkRequest, BulkResponse>(request);
-		}
-
-		public Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<BulkRequest, BulkResponse>(request, cancellationToken);
-		}
-
-		public BulkResponse Bulk()
-		{
-			var descriptor = new BulkRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<BulkRequestDescriptor, BulkResponse>(descriptor);
-		}
-
-		public BulkResponse Bulk(Action<BulkRequestDescriptor> configureRequest)
-		{
-			var descriptor = new BulkRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<BulkRequestDescriptor, BulkResponse>(descriptor);
-		}
-
-		public BulkResponse Bulk<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new BulkRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<BulkRequestDescriptor<TDocument>, BulkResponse>(descriptor);
-		}
-
-		public Task<BulkResponse> BulkAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new BulkRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<BulkRequestDescriptor, BulkResponse>(descriptor);
-		}
-
-		public Task<BulkResponse> BulkAsync(Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new BulkRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<BulkRequestDescriptor, BulkResponse>(descriptor);
-		}
-
-		public Task<BulkResponse> BulkAsync<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new BulkRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<BulkRequestDescriptor<TDocument>, BulkResponse>(descriptor);
-		}
-
-		public ClearScrollResponse ClearScroll(ClearScrollRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ClearScrollRequest, ClearScrollResponse>(request);
-		}
-
-		public Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ClearScrollRequest, ClearScrollResponse>(request, cancellationToken);
-		}
-
-		public ClearScrollResponse ClearScroll()
-		{
-			var descriptor = new ClearScrollRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<ClearScrollRequestDescriptor, ClearScrollResponse>(descriptor);
-		}
-
-		public ClearScrollResponse ClearScroll(Action<ClearScrollRequestDescriptor> configureRequest)
-		{
-			var descriptor = new ClearScrollRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ClearScrollRequestDescriptor, ClearScrollResponse>(descriptor);
-		}
-
-		public Task<ClearScrollResponse> ClearScrollAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ClearScrollRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ClearScrollRequestDescriptor, ClearScrollResponse>(descriptor);
-		}
-
-		public Task<ClearScrollResponse> ClearScrollAsync(Action<ClearScrollRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ClearScrollRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ClearScrollRequestDescriptor, ClearScrollResponse>(descriptor);
-		}
-
-		public ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ClosePointInTimeRequest, ClosePointInTimeResponse>(request);
-		}
-
-		public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ClosePointInTimeRequest, ClosePointInTimeResponse>(request, cancellationToken);
-		}
-
-		public ClosePointInTimeResponse ClosePointInTime()
-		{
-			var descriptor = new ClosePointInTimeRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<ClosePointInTimeRequestDescriptor, ClosePointInTimeResponse>(descriptor);
-		}
-
-		public ClosePointInTimeResponse ClosePointInTime(Action<ClosePointInTimeRequestDescriptor> configureRequest)
-		{
-			var descriptor = new ClosePointInTimeRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ClosePointInTimeRequestDescriptor, ClosePointInTimeResponse>(descriptor);
-		}
-
-		public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ClosePointInTimeRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ClosePointInTimeRequestDescriptor, ClosePointInTimeResponse>(descriptor);
-		}
-
-		public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Action<ClosePointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ClosePointInTimeRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ClosePointInTimeRequestDescriptor, ClosePointInTimeResponse>(descriptor);
-		}
-
-		public CountResponse Count(CountRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<CountRequest, CountResponse>(request);
-		}
-
-		public Task<CountResponse> CountAsync(CountRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<CountRequest, CountResponse>(request, cancellationToken);
-		}
-
-		public CountResponse Count()
-		{
-			var descriptor = new CountRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<CountRequestDescriptor, CountResponse>(descriptor);
-		}
-
-		public CountResponse Count(Action<CountRequestDescriptor> configureRequest)
-		{
-			var descriptor = new CountRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<CountRequestDescriptor, CountResponse>(descriptor);
-		}
-
-		public CountResponse Count<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new CountRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<CountRequestDescriptor<TDocument>, CountResponse>(descriptor);
-		}
-
-		public Task<CountResponse> CountAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new CountRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<CountRequestDescriptor, CountResponse>(descriptor);
-		}
-
-		public Task<CountResponse> CountAsync(Action<CountRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new CountRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<CountRequestDescriptor, CountResponse>(descriptor);
-		}
-
-		public Task<CountResponse> CountAsync<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new CountRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<CountRequestDescriptor<TDocument>, CountResponse>(descriptor);
-		}
-
-		public CreateResponse Create<TDocument>(CreateRequest<TDocument> request)
-		{
-			request.BeforeRequest();
-			return DoRequest<CreateRequest<TDocument>, CreateResponse>(request);
-		}
-
-		public Task<CreateResponse> CreateAsync<TDocument>(CreateRequest<TDocument> request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<CreateRequest<TDocument>, CreateResponse>(request, cancellationToken);
-		}
-
-		public CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(document, index, id);
-			descriptor.BeforeRequest();
-			return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
-		}
-
-		public CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(document, index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
-		}
-
-		public CreateResponse Create<TDocument>(TDocument document)
-		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(document);
-			descriptor.BeforeRequest();
-			return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
-		}
-
-		public CreateResponse Create<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(document);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
-		}
-
-		public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(document, index, id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
-		}
-
-		public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(document, index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
-		}
-
-		public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(document);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
-		}
-
-		public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(document);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
-		}
-
-		public DeleteByQueryResponse DeleteByQuery(DeleteByQueryRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<DeleteByQueryRequest, DeleteByQueryResponse>(request);
-		}
-
-		public Task<DeleteByQueryResponse> DeleteByQueryAsync(DeleteByQueryRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<DeleteByQueryRequest, DeleteByQueryResponse>(request, cancellationToken);
-		}
-
-		public DeleteByQueryResponse DeleteByQuery(Elastic.Clients.Elasticsearch.Indices indices)
-		{
-			var descriptor = new DeleteByQueryRequestDescriptor(indices);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteByQueryRequestDescriptor, DeleteByQueryResponse>(descriptor);
-		}
-
-		public DeleteByQueryResponse DeleteByQuery(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor> configureRequest)
-		{
-			var descriptor = new DeleteByQueryRequestDescriptor(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteByQueryRequestDescriptor, DeleteByQueryResponse>(descriptor);
-		}
-
-		public DeleteByQueryResponse DeleteByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new DeleteByQueryRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryResponse>(descriptor);
-		}
-
-		public Task<DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteByQueryRequestDescriptor(indices);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteByQueryRequestDescriptor, DeleteByQueryResponse>(descriptor);
-		}
-
-		public Task<DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteByQueryRequestDescriptor(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteByQueryRequestDescriptor, DeleteByQueryResponse>(descriptor);
-		}
-
-		public Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteByQueryRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryResponse>(descriptor);
-		}
-
-		public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(DeleteByQueryRethrottleRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<DeleteByQueryRethrottleRequest, DeleteByQueryRethrottleResponse>(request);
-		}
-
-		public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(DeleteByQueryRethrottleRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<DeleteByQueryRethrottleRequest, DeleteByQueryRethrottleResponse>(request, cancellationToken);
-		}
-
-		public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.TaskId task_id)
-		{
-			var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
-		}
-
-		public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.TaskId task_id, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest)
-		{
-			var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
-		}
-
-		public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.TaskId task_id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
-		}
-
-		public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.TaskId task_id, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
-		}
-
-		public DeleteResponse Delete(DeleteRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<DeleteRequest, DeleteResponse>(request);
-		}
-
-		public Task<DeleteResponse> DeleteAsync(DeleteRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<DeleteRequest, DeleteResponse>(request, cancellationToken);
-		}
-
-		public DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new DeleteRequestDescriptor(index, id);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteRequestDescriptor, DeleteResponse>(descriptor);
-		}
-
-		public DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest)
-		{
-			var descriptor = new DeleteRequestDescriptor(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteRequestDescriptor, DeleteResponse>(descriptor);
-		}
-
-		public DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new DeleteRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
-		}
-
-		public DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new DeleteRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
-		}
-
-		public DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new DeleteRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
-		}
-
-		public Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteRequestDescriptor(index, id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse>(descriptor);
-		}
-
-		public Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteRequestDescriptor(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse>(descriptor);
-		}
-
-		public Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
-		}
-
-		public Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
-		}
-
-		public Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
-		}
-
-		public DeleteScriptResponse DeleteScript(DeleteScriptRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<DeleteScriptRequest, DeleteScriptResponse>(request);
-		}
-
-		public Task<DeleteScriptResponse> DeleteScriptAsync(DeleteScriptRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<DeleteScriptRequest, DeleteScriptResponse>(request, cancellationToken);
-		}
-
-		public DeleteScriptResponse DeleteScript(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new DeleteScriptRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteScriptRequestDescriptor, DeleteScriptResponse>(descriptor);
-		}
-
-		public DeleteScriptResponse DeleteScript(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor> configureRequest)
-		{
-			var descriptor = new DeleteScriptRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteScriptRequestDescriptor, DeleteScriptResponse>(descriptor);
-		}
-
-		public DeleteScriptResponse DeleteScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new DeleteScriptRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<DeleteScriptRequestDescriptor<TDocument>, DeleteScriptResponse>(descriptor);
-		}
-
-		public Task<DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteScriptRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteScriptRequestDescriptor, DeleteScriptResponse>(descriptor);
-		}
-
-		public Task<DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteScriptRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteScriptRequestDescriptor, DeleteScriptResponse>(descriptor);
-		}
-
-		public Task<DeleteScriptResponse> DeleteScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteScriptRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<DeleteScriptRequestDescriptor<TDocument>, DeleteScriptResponse>(descriptor);
-		}
-
-		public ExistsResponse Exists(ExistsRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ExistsRequest, ExistsResponse>(request);
-		}
-
-		public Task<ExistsResponse> ExistsAsync(ExistsRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ExistsRequest, ExistsResponse>(request, cancellationToken);
-		}
-
-		public ExistsResponse Exists(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new ExistsRequestDescriptor(index, id);
-			descriptor.BeforeRequest();
-			return DoRequest<ExistsRequestDescriptor, ExistsResponse>(descriptor);
-		}
-
-		public ExistsResponse Exists(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor> configureRequest)
-		{
-			var descriptor = new ExistsRequestDescriptor(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ExistsRequestDescriptor, ExistsResponse>(descriptor);
-		}
-
-		public ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new ExistsRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
-		}
-
-		public ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new ExistsRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
-		}
-
-		public ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new ExistsRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
-		}
-
-		public Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExistsRequestDescriptor(index, id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse>(descriptor);
-		}
-
-		public Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExistsRequestDescriptor(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse>(descriptor);
-		}
-
-		public Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExistsRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
-		}
-
-		public Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExistsRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
-		}
-
-		public Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExistsRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
-		}
-
-		public ExistsSourceResponse ExistsSource(ExistsSourceRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ExistsSourceRequest, ExistsSourceResponse>(request);
-		}
-
-		public Task<ExistsSourceResponse> ExistsSourceAsync(ExistsSourceRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ExistsSourceRequest, ExistsSourceResponse>(request, cancellationToken);
-		}
-
-		public ExistsSourceResponse ExistsSource(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new ExistsSourceRequestDescriptor(index, id);
-			descriptor.BeforeRequest();
-			return DoRequest<ExistsSourceRequestDescriptor, ExistsSourceResponse>(descriptor);
-		}
-
-		public ExistsSourceResponse ExistsSource(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor> configureRequest)
-		{
-			var descriptor = new ExistsSourceRequestDescriptor(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ExistsSourceRequestDescriptor, ExistsSourceResponse>(descriptor);
-		}
-
-		public ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new ExistsSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequest<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
-		}
-
-		public ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new ExistsSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
-		}
-
-		public ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new ExistsSourceRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
-		}
-
-		public Task<ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExistsSourceRequestDescriptor(index, id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExistsSourceRequestDescriptor, ExistsSourceResponse>(descriptor);
-		}
-
-		public Task<ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExistsSourceRequestDescriptor(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExistsSourceRequestDescriptor, ExistsSourceResponse>(descriptor);
-		}
-
-		public Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExistsSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
-		}
-
-		public Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExistsSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
-		}
-
-		public Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExistsSourceRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
-		}
-
-		public ExplainResponse<TDocument> Explain<TDocument>(ExplainRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ExplainRequest, ExplainResponse<TDocument>>(request);
-		}
-
-		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(ExplainRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ExplainRequest, ExplainResponse<TDocument>>(request, cancellationToken);
-		}
-
-		public ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new ExplainRequestDescriptor<TDocument>(index, id);
-			descriptor.BeforeRequest();
-			return DoRequest<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
-		}
-
-		public ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new ExplainRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
-		}
-
-		public ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new ExplainRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequest<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
-		}
-
-		public ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new ExplainRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
-		}
-
-		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExplainRequestDescriptor<TDocument>(index, id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
-		}
-
-		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExplainRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
-		}
-
-		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExplainRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
-		}
-
-		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ExplainRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
-		}
-
-		public FieldCapsResponse FieldCaps(FieldCapsRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<FieldCapsRequest, FieldCapsResponse>(request);
-		}
-
-		public Task<FieldCapsResponse> FieldCapsAsync(FieldCapsRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<FieldCapsRequest, FieldCapsResponse>(request, cancellationToken);
-		}
-
-		public FieldCapsResponse FieldCaps()
-		{
-			var descriptor = new FieldCapsRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
-		}
-
-		public FieldCapsResponse FieldCaps(Action<FieldCapsRequestDescriptor> configureRequest)
-		{
-			var descriptor = new FieldCapsRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
-		}
-
-		public FieldCapsResponse FieldCaps<TDocument>(Action<FieldCapsRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new FieldCapsRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<FieldCapsRequestDescriptor<TDocument>, FieldCapsResponse>(descriptor);
-		}
-
-		public Task<FieldCapsResponse> FieldCapsAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new FieldCapsRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
-		}
-
-		public Task<FieldCapsResponse> FieldCapsAsync(Action<FieldCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new FieldCapsRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
-		}
-
-		public Task<FieldCapsResponse> FieldCapsAsync<TDocument>(Action<FieldCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new FieldCapsRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<FieldCapsRequestDescriptor<TDocument>, FieldCapsResponse>(descriptor);
-		}
-
-		public GetResponse<TDocument> Get<TDocument>(GetRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<GetRequest, GetResponse<TDocument>>(request);
-		}
-
-		public Task<GetResponse<TDocument>> GetAsync<TDocument>(GetRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<GetRequest, GetResponse<TDocument>>(request, cancellationToken);
-		}
-
-		public GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new GetRequestDescriptor<TDocument>(index, id);
-			descriptor.BeforeRequest();
-			return DoRequest<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
-		}
-
-		public GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new GetRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
-		}
-
-		public GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new GetRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequest<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
-		}
-
-		public GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new GetRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
-		}
-
-		public Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new GetRequestDescriptor<TDocument>(index, id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
-		}
-
-		public Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new GetRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
-		}
-
-		public Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new GetRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
-		}
-
-		public Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new GetRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
-		}
-
-		public IndexResponse Index<TDocument>(IndexRequest<TDocument> request)
-		{
-			request.BeforeRequest();
-			return DoRequest<IndexRequest<TDocument>, IndexResponse>(request);
-		}
-
-		public Task<IndexResponse> IndexAsync<TDocument>(IndexRequest<TDocument> request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<IndexRequest<TDocument>, IndexResponse>(request, cancellationToken);
-		}
-
-		public IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
-		{
-			var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
-			descriptor.BeforeRequest();
-			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
-		}
-
-		public IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
-		}
-
-		public IndexResponse Index<TDocument>(TDocument document)
-		{
-			var descriptor = new IndexRequestDescriptor<TDocument>(document);
-			descriptor.BeforeRequest();
-			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
-		}
-
-		public IndexResponse Index<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new IndexRequestDescriptor<TDocument>(document);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
-		}
-
-		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
-		}
-
-		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
-		}
-
-		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new IndexRequestDescriptor<TDocument>(document);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
-		}
-
-		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new IndexRequestDescriptor<TDocument>(document);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
-		}
-
-		public InfoResponse Info(InfoRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<InfoRequest, InfoResponse>(request);
-		}
-
-		public Task<InfoResponse> InfoAsync(InfoRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<InfoRequest, InfoResponse>(request, cancellationToken);
-		}
-
-		public InfoResponse Info()
-		{
-			var descriptor = new InfoRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<InfoRequestDescriptor, InfoResponse>(descriptor);
-		}
-
-		public InfoResponse Info(Action<InfoRequestDescriptor> configureRequest)
-		{
-			var descriptor = new InfoRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<InfoRequestDescriptor, InfoResponse>(descriptor);
-		}
-
-		public Task<InfoResponse> InfoAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new InfoRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<InfoRequestDescriptor, InfoResponse>(descriptor);
-		}
-
-		public Task<InfoResponse> InfoAsync(Action<InfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new InfoRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<InfoRequestDescriptor, InfoResponse>(descriptor);
-		}
-
-		public MultiGetResponse<TDocument> MultiGet<TDocument>(MultiGetRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<MultiGetRequest, MultiGetResponse<TDocument>>(request);
-		}
-
-		public Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(MultiGetRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<MultiGetRequest, MultiGetResponse<TDocument>>(request, cancellationToken);
-		}
-
-		public MultiGetResponse<TDocument> MultiGet<TDocument>()
-		{
-			var descriptor = new MultiGetRequestDescriptor<TDocument>();
-			descriptor.BeforeRequest();
-			return DoRequest<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
-		}
-
-		public MultiGetResponse<TDocument> MultiGet<TDocument>(Action<MultiGetRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new MultiGetRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
-		}
-
-		public Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new MultiGetRequestDescriptor<TDocument>();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
-		}
-
-		public Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(Action<MultiGetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new MultiGetRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
-		}
-
-		public MultiSearchResponse<TDocument> MultiSearch<TDocument>(MultiSearchRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<MultiSearchRequest, MultiSearchResponse<TDocument>>(request);
-		}
-
-		public Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(MultiSearchRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<MultiSearchRequest, MultiSearchResponse<TDocument>>(request, cancellationToken);
-		}
-
-		public MultiSearchResponse<TDocument> MultiSearch<TDocument>()
-		{
-			var descriptor = new MultiSearchRequestDescriptor<TDocument>();
-			descriptor.BeforeRequest();
-			return DoRequest<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
-		}
-
-		public MultiSearchResponse<TDocument> MultiSearch<TDocument>(Action<MultiSearchRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new MultiSearchRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
-		}
-
-		public Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new MultiSearchRequestDescriptor<TDocument>();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
-		}
-
-		public Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(Action<MultiSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new MultiSearchRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
-		}
-
-		public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(MultiSearchTemplateRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<MultiSearchTemplateRequest, MultiSearchTemplateResponse<TDocument>>(request);
-		}
-
-		public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(MultiSearchTemplateRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<MultiSearchTemplateRequest, MultiSearchTemplateResponse<TDocument>>(request, cancellationToken);
-		}
-
-		public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>()
-		{
-			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
-			descriptor.BeforeRequest();
-			return DoRequest<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
-		}
-
-		public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
-		}
-
-		public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
-		}
-
-		public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
-		}
-
-		public OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<OpenPointInTimeRequest, OpenPointInTimeResponse>(request);
-		}
-
-		public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<OpenPointInTimeRequest, OpenPointInTimeResponse>(request, cancellationToken);
-		}
-
-		public OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices)
-		{
-			var descriptor = new OpenPointInTimeRequestDescriptor(indices);
-			descriptor.BeforeRequest();
-			return DoRequest<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse>(descriptor);
-		}
-
-		public OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest)
-		{
-			var descriptor = new OpenPointInTimeRequestDescriptor(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse>(descriptor);
-		}
-
-		public OpenPointInTimeResponse OpenPointInTime<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new OpenPointInTimeRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<OpenPointInTimeRequestDescriptor<TDocument>, OpenPointInTimeResponse>(descriptor);
-		}
-
-		public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new OpenPointInTimeRequestDescriptor(indices);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse>(descriptor);
-		}
-
-		public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new OpenPointInTimeRequestDescriptor(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse>(descriptor);
-		}
-
-		public Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new OpenPointInTimeRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<OpenPointInTimeRequestDescriptor<TDocument>, OpenPointInTimeResponse>(descriptor);
-		}
-
-		public PingResponse Ping(PingRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<PingRequest, PingResponse>(request);
-		}
-
-		public Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<PingRequest, PingResponse>(request, cancellationToken);
-		}
-
-		public PingResponse Ping()
-		{
-			var descriptor = new PingRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<PingRequestDescriptor, PingResponse>(descriptor);
-		}
-
-		public PingResponse Ping(Action<PingRequestDescriptor> configureRequest)
-		{
-			var descriptor = new PingRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<PingRequestDescriptor, PingResponse>(descriptor);
-		}
-
-		public Task<PingResponse> PingAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new PingRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<PingRequestDescriptor, PingResponse>(descriptor);
-		}
-
-		public Task<PingResponse> PingAsync(Action<PingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new PingRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<PingRequestDescriptor, PingResponse>(descriptor);
-		}
-
-		public PutScriptResponse PutScript(PutScriptRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<PutScriptRequest, PutScriptResponse>(request);
-		}
-
-		public Task<PutScriptResponse> PutScriptAsync(PutScriptRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<PutScriptRequest, PutScriptResponse>(request, cancellationToken);
-		}
-
-		public PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new PutScriptRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequest<PutScriptRequestDescriptor, PutScriptResponse>(descriptor);
-		}
-
-		public PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor> configureRequest)
-		{
-			var descriptor = new PutScriptRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<PutScriptRequestDescriptor, PutScriptResponse>(descriptor);
-		}
-
-		public PutScriptResponse PutScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new PutScriptRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<PutScriptRequestDescriptor<TDocument>, PutScriptResponse>(descriptor);
-		}
-
-		public Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new PutScriptRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<PutScriptRequestDescriptor, PutScriptResponse>(descriptor);
-		}
-
-		public Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new PutScriptRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<PutScriptRequestDescriptor, PutScriptResponse>(descriptor);
-		}
-
-		public Task<PutScriptResponse> PutScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new PutScriptRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<PutScriptRequestDescriptor<TDocument>, PutScriptResponse>(descriptor);
-		}
-
-		public RankEvalResponse RankEval(RankEvalRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<RankEvalRequest, RankEvalResponse>(request);
-		}
-
-		public Task<RankEvalResponse> RankEvalAsync(RankEvalRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<RankEvalRequest, RankEvalResponse>(request, cancellationToken);
-		}
-
-		public RankEvalResponse RankEval()
-		{
-			var descriptor = new RankEvalRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-		}
-
-		public RankEvalResponse RankEval(Action<RankEvalRequestDescriptor> configureRequest)
-		{
-			var descriptor = new RankEvalRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-		}
-
-		public RankEvalResponse RankEval<TDocument>(Action<RankEvalRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new RankEvalRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
-		}
-
-		public RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices indices)
-		{
-			var descriptor = new RankEvalRequestDescriptor(indices);
-			descriptor.BeforeRequest();
-			return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-		}
-
-		public RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor> configureRequest)
-		{
-			var descriptor = new RankEvalRequestDescriptor(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-		}
-
-		public RankEvalResponse RankEval<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new RankEvalRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
-		}
-
-		public Task<RankEvalResponse> RankEvalAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new RankEvalRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-		}
-
-		public Task<RankEvalResponse> RankEvalAsync(Action<RankEvalRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new RankEvalRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-		}
-
-		public Task<RankEvalResponse> RankEvalAsync<TDocument>(Action<RankEvalRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new RankEvalRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
-		}
-
-		public Task<RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new RankEvalRequestDescriptor(indices);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-		}
-
-		public Task<RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new RankEvalRequestDescriptor(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-		}
-
-		public Task<RankEvalResponse> RankEvalAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new RankEvalRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
-		}
-
-		public ReindexResponse Reindex(ReindexRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ReindexRequest, ReindexResponse>(request);
-		}
-
-		public Task<ReindexResponse> ReindexAsync(ReindexRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ReindexRequest, ReindexResponse>(request, cancellationToken);
-		}
-
-		public ReindexResponse Reindex()
-		{
-			var descriptor = new ReindexRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<ReindexRequestDescriptor, ReindexResponse>(descriptor);
-		}
-
-		public ReindexResponse Reindex(Action<ReindexRequestDescriptor> configureRequest)
-		{
-			var descriptor = new ReindexRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ReindexRequestDescriptor, ReindexResponse>(descriptor);
-		}
-
-		public ReindexResponse Reindex<TDocument>(Action<ReindexRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new ReindexRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ReindexRequestDescriptor<TDocument>, ReindexResponse>(descriptor);
-		}
-
-		public Task<ReindexResponse> ReindexAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ReindexRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ReindexRequestDescriptor, ReindexResponse>(descriptor);
-		}
-
-		public Task<ReindexResponse> ReindexAsync(Action<ReindexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ReindexRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ReindexRequestDescriptor, ReindexResponse>(descriptor);
-		}
-
-		public Task<ReindexResponse> ReindexAsync<TDocument>(Action<ReindexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ReindexRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ReindexRequestDescriptor<TDocument>, ReindexResponse>(descriptor);
-		}
-
-		public ReindexRethrottleResponse ReindexRethrottle(ReindexRethrottleRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ReindexRethrottleRequest, ReindexRethrottleResponse>(request);
-		}
-
-		public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(ReindexRethrottleRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ReindexRethrottleRequest, ReindexRethrottleResponse>(request, cancellationToken);
-		}
-
-		public ReindexRethrottleResponse ReindexRethrottle(Elastic.Clients.Elasticsearch.Id task_id)
-		{
-			var descriptor = new ReindexRethrottleRequestDescriptor(task_id);
-			descriptor.BeforeRequest();
-			return DoRequest<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
-		}
-
-		public ReindexRethrottleResponse ReindexRethrottle(Elastic.Clients.Elasticsearch.Id task_id, Action<ReindexRethrottleRequestDescriptor> configureRequest)
-		{
-			var descriptor = new ReindexRethrottleRequestDescriptor(task_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
-		}
-
-		public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ReindexRethrottleRequestDescriptor(task_id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
-		}
-
-		public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, Action<ReindexRethrottleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ReindexRethrottleRequestDescriptor(task_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
-		}
-
-		public ScriptContextResponse GetScriptContext(ScriptContextRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ScriptContextRequest, ScriptContextResponse>(request);
-		}
-
-		public Task<ScriptContextResponse> GetScriptContextAsync(ScriptContextRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ScriptContextRequest, ScriptContextResponse>(request, cancellationToken);
-		}
-
-		public ScriptContextResponse GetScriptContext()
-		{
-			var descriptor = new ScriptContextRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
-		}
-
-		public ScriptContextResponse GetScriptContext(Action<ScriptContextRequestDescriptor> configureRequest)
-		{
-			var descriptor = new ScriptContextRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
-		}
-
-		public Task<ScriptContextResponse> GetScriptContextAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ScriptContextRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
-		}
-
-		public Task<ScriptContextResponse> GetScriptContextAsync(Action<ScriptContextRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ScriptContextRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
-		}
-
-		public ScriptLanguagesResponse GetScriptLanguages(ScriptLanguagesRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ScriptLanguagesRequest, ScriptLanguagesResponse>(request);
-		}
-
-		public Task<ScriptLanguagesResponse> GetScriptLanguagesAsync(ScriptLanguagesRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ScriptLanguagesRequest, ScriptLanguagesResponse>(request, cancellationToken);
-		}
-
-		public ScriptLanguagesResponse GetScriptLanguages()
-		{
-			var descriptor = new ScriptLanguagesRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
-		}
-
-		public ScriptLanguagesResponse GetScriptLanguages(Action<ScriptLanguagesRequestDescriptor> configureRequest)
-		{
-			var descriptor = new ScriptLanguagesRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
-		}
-
-		public Task<ScriptLanguagesResponse> GetScriptLanguagesAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ScriptLanguagesRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
-		}
-
-		public Task<ScriptLanguagesResponse> GetScriptLanguagesAsync(Action<ScriptLanguagesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ScriptLanguagesRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
-		}
-
-		public ScriptResponse GetScript(ScriptRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ScriptRequest, ScriptResponse>(request);
-		}
-
-		public Task<ScriptResponse> GetScriptAsync(ScriptRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ScriptRequest, ScriptResponse>(request, cancellationToken);
-		}
-
-		public ScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new ScriptRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequest<ScriptRequestDescriptor, ScriptResponse>(descriptor);
-		}
-
-		public ScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor> configureRequest)
-		{
-			var descriptor = new ScriptRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ScriptRequestDescriptor, ScriptResponse>(descriptor);
-		}
-
-		public ScriptResponse GetScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new ScriptRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ScriptRequestDescriptor<TDocument>, ScriptResponse>(descriptor);
-		}
-
-		public Task<ScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ScriptRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ScriptRequestDescriptor, ScriptResponse>(descriptor);
-		}
-
-		public Task<ScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ScriptRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ScriptRequestDescriptor, ScriptResponse>(descriptor);
-		}
-
-		public Task<ScriptResponse> GetScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ScriptRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ScriptRequestDescriptor<TDocument>, ScriptResponse>(descriptor);
-		}
-
-		public ScrollResponse<TDocument> Scroll<TDocument>(ScrollRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ScrollRequest, ScrollResponse<TDocument>>(request);
-		}
-
-		public Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(ScrollRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ScrollRequest, ScrollResponse<TDocument>>(request, cancellationToken);
-		}
-
-		public ScrollResponse<TDocument> Scroll<TDocument>()
-		{
-			var descriptor = new ScrollRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<ScrollRequestDescriptor, ScrollResponse<TDocument>>(descriptor);
-		}
-
-		public ScrollResponse<TDocument> Scroll<TDocument>(Action<ScrollRequestDescriptor> configureRequest)
-		{
-			var descriptor = new ScrollRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ScrollRequestDescriptor, ScrollResponse<TDocument>>(descriptor);
-		}
-
-		public Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ScrollRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ScrollRequestDescriptor, ScrollResponse<TDocument>>(descriptor);
-		}
-
-		public Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(Action<ScrollRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ScrollRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ScrollRequestDescriptor, ScrollResponse<TDocument>>(descriptor);
-		}
-
-		public SearchResponse<TDocument> Search<TDocument>(SearchRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<SearchRequest, SearchResponse<TDocument>>(request);
-		}
-
-		public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(SearchRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<SearchRequest, SearchResponse<TDocument>>(request, cancellationToken);
-		}
-
-		public SearchResponse<TDocument> Search<TDocument>()
-		{
-			var descriptor = new SearchRequestDescriptor<TDocument>();
-			descriptor.BeforeRequest();
-			return DoRequest<SearchRequestDescriptor<TDocument>, SearchResponse<TDocument>>(descriptor);
-		}
-
-		public SearchResponse<TDocument> Search<TDocument>(Action<SearchRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new SearchRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SearchRequestDescriptor<TDocument>, SearchResponse<TDocument>>(descriptor);
-		}
-
-		public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SearchRequestDescriptor<TDocument>();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SearchRequestDescriptor<TDocument>, SearchResponse<TDocument>>(descriptor);
-		}
-
-		public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Action<SearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SearchRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SearchRequestDescriptor<TDocument>, SearchResponse<TDocument>>(descriptor);
-		}
-
-		public SearchShardsResponse SearchShards(SearchShardsRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<SearchShardsRequest, SearchShardsResponse>(request);
-		}
-
-		public Task<SearchShardsResponse> SearchShardsAsync(SearchShardsRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<SearchShardsRequest, SearchShardsResponse>(request, cancellationToken);
-		}
-
-		public SearchShardsResponse SearchShards()
-		{
-			var descriptor = new SearchShardsRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
-		}
-
-		public SearchShardsResponse SearchShards(Action<SearchShardsRequestDescriptor> configureRequest)
-		{
-			var descriptor = new SearchShardsRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
-		}
-
-		public SearchShardsResponse SearchShards<TDocument>(Action<SearchShardsRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new SearchShardsRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SearchShardsRequestDescriptor<TDocument>, SearchShardsResponse>(descriptor);
-		}
-
-		public Task<SearchShardsResponse> SearchShardsAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SearchShardsRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
-		}
-
-		public Task<SearchShardsResponse> SearchShardsAsync(Action<SearchShardsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SearchShardsRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
-		}
-
-		public Task<SearchShardsResponse> SearchShardsAsync<TDocument>(Action<SearchShardsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SearchShardsRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SearchShardsRequestDescriptor<TDocument>, SearchShardsResponse>(descriptor);
-		}
-
-		public SourceResponse<TDocument> GetSource<TDocument>(SourceRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<SourceRequest, SourceResponse<TDocument>>(request);
-		}
-
-		public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(SourceRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<SourceRequest, SourceResponse<TDocument>>(request, cancellationToken);
-		}
-
-		public SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
-			descriptor.BeforeRequest();
-			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
-		}
-
-		public SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
-		}
-
-		public SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
-		}
-
-		public SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
-		}
-
-		public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
-		}
-
-		public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
-		}
-
-		public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
-		}
-
-		public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
-		}
-
-		public TermsEnumResponse TermsEnum(TermsEnumRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<TermsEnumRequest, TermsEnumResponse>(request);
-		}
-
-		public Task<TermsEnumResponse> TermsEnumAsync(TermsEnumRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<TermsEnumRequest, TermsEnumResponse>(request, cancellationToken);
-		}
-
-		public TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.IndexName index)
-		{
-			var descriptor = new TermsEnumRequestDescriptor(index);
-			descriptor.BeforeRequest();
-			return DoRequest<TermsEnumRequestDescriptor, TermsEnumResponse>(descriptor);
-		}
-
-		public TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor> configureRequest)
-		{
-			var descriptor = new TermsEnumRequestDescriptor(index);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<TermsEnumRequestDescriptor, TermsEnumResponse>(descriptor);
-		}
-
-		public TermsEnumResponse TermsEnum<TDocument>()
-		{
-			var descriptor = new TermsEnumRequestDescriptor<TDocument>(typeof(TDocument));
-			descriptor.BeforeRequest();
-			return DoRequest<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
-		}
-
-		public TermsEnumResponse TermsEnum<TDocument>(Action<TermsEnumRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new TermsEnumRequestDescriptor<TDocument>(typeof(TDocument));
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
-		}
-
-		public TermsEnumResponse TermsEnum<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new TermsEnumRequestDescriptor<TDocument>(index);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
-		}
-
-		public Task<TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new TermsEnumRequestDescriptor(index);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<TermsEnumRequestDescriptor, TermsEnumResponse>(descriptor);
-		}
-
-		public Task<TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new TermsEnumRequestDescriptor(index);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<TermsEnumRequestDescriptor, TermsEnumResponse>(descriptor);
-		}
-
-		public Task<TermsEnumResponse> TermsEnumAsync<TDocument>(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new TermsEnumRequestDescriptor<TDocument>(typeof(TDocument));
-			descriptor.BeforeRequest();
-			return DoRequestAsync<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
-		}
-
-		public Task<TermsEnumResponse> TermsEnumAsync<TDocument>(Action<TermsEnumRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new TermsEnumRequestDescriptor<TDocument>(typeof(TDocument));
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
-		}
-
-		public Task<TermsEnumResponse> TermsEnumAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new TermsEnumRequestDescriptor<TDocument>(index);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
-		}
-
-		public UpdateByQueryResponse UpdateByQuery(UpdateByQueryRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<UpdateByQueryRequest, UpdateByQueryResponse>(request);
-		}
-
-		public Task<UpdateByQueryResponse> UpdateByQueryAsync(UpdateByQueryRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<UpdateByQueryRequest, UpdateByQueryResponse>(request, cancellationToken);
-		}
-
-		public UpdateByQueryResponse UpdateByQuery(Elastic.Clients.Elasticsearch.Indices indices)
-		{
-			var descriptor = new UpdateByQueryRequestDescriptor(indices);
-			descriptor.BeforeRequest();
-			return DoRequest<UpdateByQueryRequestDescriptor, UpdateByQueryResponse>(descriptor);
-		}
-
-		public UpdateByQueryResponse UpdateByQuery(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor> configureRequest)
-		{
-			var descriptor = new UpdateByQueryRequestDescriptor(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<UpdateByQueryRequestDescriptor, UpdateByQueryResponse>(descriptor);
-		}
-
-		public UpdateByQueryResponse UpdateByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new UpdateByQueryRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<UpdateByQueryRequestDescriptor<TDocument>, UpdateByQueryResponse>(descriptor);
-		}
-
-		public Task<UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new UpdateByQueryRequestDescriptor(indices);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<UpdateByQueryRequestDescriptor, UpdateByQueryResponse>(descriptor);
-		}
-
-		public Task<UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new UpdateByQueryRequestDescriptor(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<UpdateByQueryRequestDescriptor, UpdateByQueryResponse>(descriptor);
-		}
-
-		public Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new UpdateByQueryRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<UpdateByQueryRequestDescriptor<TDocument>, UpdateByQueryResponse>(descriptor);
-		}
-
-		public UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(UpdateByQueryRethrottleRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<UpdateByQueryRethrottleRequest, UpdateByQueryRethrottleResponse>(request);
-		}
-
-		public Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(UpdateByQueryRethrottleRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<UpdateByQueryRethrottleRequest, UpdateByQueryRethrottleResponse>(request, cancellationToken);
-		}
-
-		public UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(Elastic.Clients.Elasticsearch.Id task_id)
-		{
-			var descriptor = new UpdateByQueryRethrottleRequestDescriptor(task_id);
-			descriptor.BeforeRequest();
-			return DoRequest<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleResponse>(descriptor);
-		}
-
-		public UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(Elastic.Clients.Elasticsearch.Id task_id, Action<UpdateByQueryRethrottleRequestDescriptor> configureRequest)
-		{
-			var descriptor = new UpdateByQueryRethrottleRequestDescriptor(task_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleResponse>(descriptor);
-		}
-
-		public Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new UpdateByQueryRethrottleRequestDescriptor(task_id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleResponse>(descriptor);
-		}
-
-		public Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, Action<UpdateByQueryRethrottleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new UpdateByQueryRethrottleRequestDescriptor(task_id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleResponse>(descriptor);
-		}
-
-		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request)
-		{
-			request.BeforeRequest();
-			return DoRequest<UpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request);
-		}
-
-		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<UpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request, cancellationToken);
-		}
-
-		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
-			descriptor.BeforeRequest();
-			return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
-		}
-
-		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest)
-		{
-			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
-		}
-
-		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument)
-		{
-			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document);
-			descriptor.BeforeRequest();
-			return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
-		}
-
-		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest)
-		{
-			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
-		}
-
-		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
-		}
-
-		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
-		}
-
-		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
-		}
-
-		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
-		}
+		AsyncSearch = new AsyncSearchNamespace(this);
+		Cluster = new ClusterNamespace(this);
+		Eql = new EqlNamespace(this);
+		Indices = new IndicesNamespace(this);
+		Sql = new SqlNamespace(this);
+	}
+
+	public BulkResponse Bulk(BulkRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<BulkRequest, BulkResponse>(request);
+	}
+
+	public Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<BulkRequest, BulkResponse>(request, cancellationToken);
+	}
+
+	public BulkResponse Bulk()
+	{
+		var descriptor = new BulkRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<BulkRequestDescriptor, BulkResponse>(descriptor);
+	}
+
+	public BulkResponse Bulk(Action<BulkRequestDescriptor> configureRequest)
+	{
+		var descriptor = new BulkRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<BulkRequestDescriptor, BulkResponse>(descriptor);
+	}
+
+	public BulkResponse Bulk<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new BulkRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<BulkRequestDescriptor<TDocument>, BulkResponse>(descriptor);
+	}
+
+	public Task<BulkResponse> BulkAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new BulkRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkRequestDescriptor, BulkResponse>(descriptor);
+	}
+
+	public Task<BulkResponse> BulkAsync(Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new BulkRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkRequestDescriptor, BulkResponse>(descriptor);
+	}
+
+	public Task<BulkResponse> BulkAsync<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new BulkRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkRequestDescriptor<TDocument>, BulkResponse>(descriptor);
+	}
+
+	public ClearScrollResponse ClearScroll(ClearScrollRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ClearScrollRequest, ClearScrollResponse>(request);
+	}
+
+	public Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ClearScrollRequest, ClearScrollResponse>(request, cancellationToken);
+	}
+
+	public ClearScrollResponse ClearScroll()
+	{
+		var descriptor = new ClearScrollRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<ClearScrollRequestDescriptor, ClearScrollResponse>(descriptor);
+	}
+
+	public ClearScrollResponse ClearScroll(Action<ClearScrollRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ClearScrollRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ClearScrollRequestDescriptor, ClearScrollResponse>(descriptor);
+	}
+
+	public Task<ClearScrollResponse> ClearScrollAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ClearScrollRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ClearScrollRequestDescriptor, ClearScrollResponse>(descriptor);
+	}
+
+	public Task<ClearScrollResponse> ClearScrollAsync(Action<ClearScrollRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ClearScrollRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ClearScrollRequestDescriptor, ClearScrollResponse>(descriptor);
+	}
+
+	public ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ClosePointInTimeRequest, ClosePointInTimeResponse>(request);
+	}
+
+	public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ClosePointInTimeRequest, ClosePointInTimeResponse>(request, cancellationToken);
+	}
+
+	public ClosePointInTimeResponse ClosePointInTime()
+	{
+		var descriptor = new ClosePointInTimeRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<ClosePointInTimeRequestDescriptor, ClosePointInTimeResponse>(descriptor);
+	}
+
+	public ClosePointInTimeResponse ClosePointInTime(Action<ClosePointInTimeRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ClosePointInTimeRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ClosePointInTimeRequestDescriptor, ClosePointInTimeResponse>(descriptor);
+	}
+
+	public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ClosePointInTimeRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ClosePointInTimeRequestDescriptor, ClosePointInTimeResponse>(descriptor);
+	}
+
+	public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Action<ClosePointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ClosePointInTimeRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ClosePointInTimeRequestDescriptor, ClosePointInTimeResponse>(descriptor);
+	}
+
+	public CountResponse Count(CountRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<CountRequest, CountResponse>(request);
+	}
+
+	public Task<CountResponse> CountAsync(CountRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<CountRequest, CountResponse>(request, cancellationToken);
+	}
+
+	public CountResponse Count()
+	{
+		var descriptor = new CountRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<CountRequestDescriptor, CountResponse>(descriptor);
+	}
+
+	public CountResponse Count(Action<CountRequestDescriptor> configureRequest)
+	{
+		var descriptor = new CountRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CountRequestDescriptor, CountResponse>(descriptor);
+	}
+
+	public CountResponse Count<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new CountRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CountRequestDescriptor<TDocument>, CountResponse>(descriptor);
+	}
+
+	public Task<CountResponse> CountAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CountRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CountRequestDescriptor, CountResponse>(descriptor);
+	}
+
+	public Task<CountResponse> CountAsync(Action<CountRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CountRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CountRequestDescriptor, CountResponse>(descriptor);
+	}
+
+	public Task<CountResponse> CountAsync<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CountRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CountRequestDescriptor<TDocument>, CountResponse>(descriptor);
+	}
+
+	public CreateResponse Create<TDocument>(CreateRequest<TDocument> request)
+	{
+		request.BeforeRequest();
+		return DoRequest<CreateRequest<TDocument>, CreateResponse>(request);
+	}
+
+	public Task<CreateResponse> CreateAsync<TDocument>(CreateRequest<TDocument> request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<CreateRequest<TDocument>, CreateResponse>(request, cancellationToken);
+	}
+
+	public CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new CreateRequestDescriptor<TDocument>(document, index, id);
+		descriptor.BeforeRequest();
+		return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+	}
+
+	public CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new CreateRequestDescriptor<TDocument>(document, index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+	}
+
+	public CreateResponse Create<TDocument>(TDocument document)
+	{
+		var descriptor = new CreateRequestDescriptor<TDocument>(document);
+		descriptor.BeforeRequest();
+		return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+	}
+
+	public CreateResponse Create<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new CreateRequestDescriptor<TDocument>(document);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+	}
+
+	public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateRequestDescriptor<TDocument>(document, index, id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+	}
+
+	public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateRequestDescriptor<TDocument>(document, index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+	}
+
+	public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateRequestDescriptor<TDocument>(document);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+	}
+
+	public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateRequestDescriptor<TDocument>(document);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+	}
+
+	public DeleteByQueryResponse DeleteByQuery(DeleteByQueryRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<DeleteByQueryRequest, DeleteByQueryResponse>(request);
+	}
+
+	public Task<DeleteByQueryResponse> DeleteByQueryAsync(DeleteByQueryRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<DeleteByQueryRequest, DeleteByQueryResponse>(request, cancellationToken);
+	}
+
+	public DeleteByQueryResponse DeleteByQuery(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var descriptor = new DeleteByQueryRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteByQueryRequestDescriptor, DeleteByQueryResponse>(descriptor);
+	}
+
+	public DeleteByQueryResponse DeleteByQuery(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor> configureRequest)
+	{
+		var descriptor = new DeleteByQueryRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteByQueryRequestDescriptor, DeleteByQueryResponse>(descriptor);
+	}
+
+	public DeleteByQueryResponse DeleteByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new DeleteByQueryRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryResponse>(descriptor);
+	}
+
+	public Task<DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteByQueryRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteByQueryRequestDescriptor, DeleteByQueryResponse>(descriptor);
+	}
+
+	public Task<DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteByQueryRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteByQueryRequestDescriptor, DeleteByQueryResponse>(descriptor);
+	}
+
+	public Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteByQueryRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryResponse>(descriptor);
+	}
+
+	public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(DeleteByQueryRethrottleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<DeleteByQueryRethrottleRequest, DeleteByQueryRethrottleResponse>(request);
+	}
+
+	public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(DeleteByQueryRethrottleRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<DeleteByQueryRethrottleRequest, DeleteByQueryRethrottleResponse>(request, cancellationToken);
+	}
+
+	public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.TaskId task_id)
+	{
+		var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
+	}
+
+	public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.TaskId task_id, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest)
+	{
+		var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
+	}
+
+	public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.TaskId task_id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
+	}
+
+	public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.TaskId task_id, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
+	}
+
+	public DeleteResponse Delete(DeleteRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<DeleteRequest, DeleteResponse>(request);
+	}
+
+	public Task<DeleteResponse> DeleteAsync(DeleteRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<DeleteRequest, DeleteResponse>(request, cancellationToken);
+	}
+
+	public DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new DeleteRequestDescriptor(index, id);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteRequestDescriptor, DeleteResponse>(descriptor);
+	}
+
+	public DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest)
+	{
+		var descriptor = new DeleteRequestDescriptor(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteRequestDescriptor, DeleteResponse>(descriptor);
+	}
+
+	public DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new DeleteRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
+	}
+
+	public DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new DeleteRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
+	}
+
+	public DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new DeleteRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
+	}
+
+	public Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteRequestDescriptor(index, id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse>(descriptor);
+	}
+
+	public Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteRequestDescriptor(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse>(descriptor);
+	}
+
+	public Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
+	}
+
+	public Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
+	}
+
+	public Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
+	}
+
+	public DeleteScriptResponse DeleteScript(DeleteScriptRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<DeleteScriptRequest, DeleteScriptResponse>(request);
+	}
+
+	public Task<DeleteScriptResponse> DeleteScriptAsync(DeleteScriptRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<DeleteScriptRequest, DeleteScriptResponse>(request, cancellationToken);
+	}
+
+	public DeleteScriptResponse DeleteScript(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new DeleteScriptRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteScriptRequestDescriptor, DeleteScriptResponse>(descriptor);
+	}
+
+	public DeleteScriptResponse DeleteScript(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor> configureRequest)
+	{
+		var descriptor = new DeleteScriptRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteScriptRequestDescriptor, DeleteScriptResponse>(descriptor);
+	}
+
+	public DeleteScriptResponse DeleteScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new DeleteScriptRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteScriptRequestDescriptor<TDocument>, DeleteScriptResponse>(descriptor);
+	}
+
+	public Task<DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteScriptRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteScriptRequestDescriptor, DeleteScriptResponse>(descriptor);
+	}
+
+	public Task<DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteScriptRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteScriptRequestDescriptor, DeleteScriptResponse>(descriptor);
+	}
+
+	public Task<DeleteScriptResponse> DeleteScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteScriptRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteScriptRequestDescriptor<TDocument>, DeleteScriptResponse>(descriptor);
+	}
+
+	public ExistsResponse Exists(ExistsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ExistsRequest, ExistsResponse>(request);
+	}
+
+	public Task<ExistsResponse> ExistsAsync(ExistsRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ExistsRequest, ExistsResponse>(request, cancellationToken);
+	}
+
+	public ExistsResponse Exists(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new ExistsRequestDescriptor(index, id);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsRequestDescriptor, ExistsResponse>(descriptor);
+	}
+
+	public ExistsResponse Exists(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ExistsRequestDescriptor(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsRequestDescriptor, ExistsResponse>(descriptor);
+	}
+
+	public ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new ExistsRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
+	}
+
+	public ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ExistsRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
+	}
+
+	public ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ExistsRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
+	}
+
+	public Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsRequestDescriptor(index, id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse>(descriptor);
+	}
+
+	public Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsRequestDescriptor(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse>(descriptor);
+	}
+
+	public Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
+	}
+
+	public Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
+	}
+
+	public Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
+	}
+
+	public ExistsSourceResponse ExistsSource(ExistsSourceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ExistsSourceRequest, ExistsSourceResponse>(request);
+	}
+
+	public Task<ExistsSourceResponse> ExistsSourceAsync(ExistsSourceRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ExistsSourceRequest, ExistsSourceResponse>(request, cancellationToken);
+	}
+
+	public ExistsSourceResponse ExistsSource(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new ExistsSourceRequestDescriptor(index, id);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsSourceRequestDescriptor, ExistsSourceResponse>(descriptor);
+	}
+
+	public ExistsSourceResponse ExistsSource(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ExistsSourceRequestDescriptor(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsSourceRequestDescriptor, ExistsSourceResponse>(descriptor);
+	}
+
+	public ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new ExistsSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
+	}
+
+	public ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ExistsSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
+	}
+
+	public ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ExistsSourceRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
+	}
+
+	public Task<ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsSourceRequestDescriptor(index, id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsSourceRequestDescriptor, ExistsSourceResponse>(descriptor);
+	}
+
+	public Task<ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsSourceRequestDescriptor(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsSourceRequestDescriptor, ExistsSourceResponse>(descriptor);
+	}
+
+	public Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
+	}
+
+	public Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
+	}
+
+	public Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsSourceRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse>(descriptor);
+	}
+
+	public ExplainResponse<TDocument> Explain<TDocument>(ExplainRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ExplainRequest, ExplainResponse<TDocument>>(request);
+	}
+
+	public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(ExplainRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ExplainRequest, ExplainResponse<TDocument>>(request, cancellationToken);
+	}
+
+	public ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new ExplainRequestDescriptor<TDocument>(index, id);
+		descriptor.BeforeRequest();
+		return DoRequest<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
+	}
+
+	public ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ExplainRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
+	}
+
+	public ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new ExplainRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequest<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
+	}
+
+	public ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ExplainRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
+	}
+
+	public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExplainRequestDescriptor<TDocument>(index, id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
+	}
+
+	public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExplainRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
+	}
+
+	public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExplainRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
+	}
+
+	public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExplainRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>>(descriptor);
+	}
+
+	public FieldCapsResponse FieldCaps(FieldCapsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<FieldCapsRequest, FieldCapsResponse>(request);
+	}
+
+	public Task<FieldCapsResponse> FieldCapsAsync(FieldCapsRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<FieldCapsRequest, FieldCapsResponse>(request, cancellationToken);
+	}
+
+	public FieldCapsResponse FieldCaps()
+	{
+		var descriptor = new FieldCapsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
+	}
+
+	public FieldCapsResponse FieldCaps(Action<FieldCapsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new FieldCapsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
+	}
+
+	public FieldCapsResponse FieldCaps<TDocument>(Action<FieldCapsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new FieldCapsRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<FieldCapsRequestDescriptor<TDocument>, FieldCapsResponse>(descriptor);
+	}
+
+	public Task<FieldCapsResponse> FieldCapsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FieldCapsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
+	}
+
+	public Task<FieldCapsResponse> FieldCapsAsync(Action<FieldCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FieldCapsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
+	}
+
+	public Task<FieldCapsResponse> FieldCapsAsync<TDocument>(Action<FieldCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FieldCapsRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FieldCapsRequestDescriptor<TDocument>, FieldCapsResponse>(descriptor);
+	}
+
+	public GetResponse<TDocument> Get<TDocument>(GetRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<GetRequest, GetResponse<TDocument>>(request);
+	}
+
+	public Task<GetResponse<TDocument>> GetAsync<TDocument>(GetRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<GetRequest, GetResponse<TDocument>>(request, cancellationToken);
+	}
+
+	public GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new GetRequestDescriptor<TDocument>(index, id);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
+	}
+
+	public GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new GetRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
+	}
+
+	public GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new GetRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
+	}
+
+	public GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new GetRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
+	}
+
+	public Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRequestDescriptor<TDocument>(index, id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
+	}
+
+	public Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
+	}
+
+	public Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
+	}
+
+	public Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
+	}
+
+	public IndexResponse Index<TDocument>(IndexRequest<TDocument> request)
+	{
+		request.BeforeRequest();
+		return DoRequest<IndexRequest<TDocument>, IndexResponse>(request);
+	}
+
+	public Task<IndexResponse> IndexAsync<TDocument>(IndexRequest<TDocument> request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<IndexRequest<TDocument>, IndexResponse>(request, cancellationToken);
+	}
+
+	public IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
+		descriptor.BeforeRequest();
+		return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+	}
+
+	public IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+	}
+
+	public IndexResponse Index<TDocument>(TDocument document)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document);
+		descriptor.BeforeRequest();
+		return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+	}
+
+	public IndexResponse Index<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+	}
+
+	public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+	}
+
+	public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+	}
+
+	public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+	}
+
+	public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+	}
+
+	public InfoResponse Info(InfoRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<InfoRequest, InfoResponse>(request);
+	}
+
+	public Task<InfoResponse> InfoAsync(InfoRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<InfoRequest, InfoResponse>(request, cancellationToken);
+	}
+
+	public InfoResponse Info()
+	{
+		var descriptor = new InfoRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<InfoRequestDescriptor, InfoResponse>(descriptor);
+	}
+
+	public InfoResponse Info(Action<InfoRequestDescriptor> configureRequest)
+	{
+		var descriptor = new InfoRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<InfoRequestDescriptor, InfoResponse>(descriptor);
+	}
+
+	public Task<InfoResponse> InfoAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new InfoRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<InfoRequestDescriptor, InfoResponse>(descriptor);
+	}
+
+	public Task<InfoResponse> InfoAsync(Action<InfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new InfoRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<InfoRequestDescriptor, InfoResponse>(descriptor);
+	}
+
+	public MultiGetResponse<TDocument> MultiGet<TDocument>(MultiGetRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<MultiGetRequest, MultiGetResponse<TDocument>>(request);
+	}
+
+	public Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(MultiGetRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<MultiGetRequest, MultiGetResponse<TDocument>>(request, cancellationToken);
+	}
+
+	public MultiGetResponse<TDocument> MultiGet<TDocument>()
+	{
+		var descriptor = new MultiGetRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
+	}
+
+	public MultiGetResponse<TDocument> MultiGet<TDocument>(Action<MultiGetRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new MultiGetRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
+	}
+
+	public Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new MultiGetRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
+	}
+
+	public Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(Action<MultiGetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new MultiGetRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>>(descriptor);
+	}
+
+	public MultiSearchResponse<TDocument> MultiSearch<TDocument>(MultiSearchRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<MultiSearchRequest, MultiSearchResponse<TDocument>>(request);
+	}
+
+	public Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(MultiSearchRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<MultiSearchRequest, MultiSearchResponse<TDocument>>(request, cancellationToken);
+	}
+
+	public MultiSearchResponse<TDocument> MultiSearch<TDocument>()
+	{
+		var descriptor = new MultiSearchRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
+	}
+
+	public MultiSearchResponse<TDocument> MultiSearch<TDocument>(Action<MultiSearchRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new MultiSearchRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
+	}
+
+	public Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new MultiSearchRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
+	}
+
+	public Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(Action<MultiSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new MultiSearchRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MultiSearchRequestDescriptor<TDocument>, MultiSearchResponse<TDocument>>(descriptor);
+	}
+
+	public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(MultiSearchTemplateRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<MultiSearchTemplateRequest, MultiSearchTemplateResponse<TDocument>>(request);
+	}
+
+	public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(MultiSearchTemplateRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<MultiSearchTemplateRequest, MultiSearchTemplateResponse<TDocument>>(request, cancellationToken);
+	}
+
+	public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>()
+	{
+		var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
+	}
+
+	public MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
+	}
+
+	public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
+	}
+
+	public Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new MultiSearchTemplateRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateResponse<TDocument>>(descriptor);
+	}
+
+	public OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<OpenPointInTimeRequest, OpenPointInTimeResponse>(request);
+	}
+
+	public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<OpenPointInTimeRequest, OpenPointInTimeResponse>(request, cancellationToken);
+	}
+
+	public OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var descriptor = new OpenPointInTimeRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequest<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse>(descriptor);
+	}
+
+	public OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest)
+	{
+		var descriptor = new OpenPointInTimeRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse>(descriptor);
+	}
+
+	public OpenPointInTimeResponse OpenPointInTime<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new OpenPointInTimeRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<OpenPointInTimeRequestDescriptor<TDocument>, OpenPointInTimeResponse>(descriptor);
+	}
+
+	public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new OpenPointInTimeRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse>(descriptor);
+	}
+
+	public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new OpenPointInTimeRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse>(descriptor);
+	}
+
+	public Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new OpenPointInTimeRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<OpenPointInTimeRequestDescriptor<TDocument>, OpenPointInTimeResponse>(descriptor);
+	}
+
+	public PingResponse Ping(PingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PingRequest, PingResponse>(request);
+	}
+
+	public Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PingRequest, PingResponse>(request, cancellationToken);
+	}
+
+	public PingResponse Ping()
+	{
+		var descriptor = new PingRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<PingRequestDescriptor, PingResponse>(descriptor);
+	}
+
+	public PingResponse Ping(Action<PingRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PingRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PingRequestDescriptor, PingResponse>(descriptor);
+	}
+
+	public Task<PingResponse> PingAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PingRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PingRequestDescriptor, PingResponse>(descriptor);
+	}
+
+	public Task<PingResponse> PingAsync(Action<PingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PingRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PingRequestDescriptor, PingResponse>(descriptor);
+	}
+
+	public PutScriptResponse PutScript(PutScriptRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutScriptRequest, PutScriptResponse>(request);
+	}
+
+	public Task<PutScriptResponse> PutScriptAsync(PutScriptRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutScriptRequest, PutScriptResponse>(request, cancellationToken);
+	}
+
+	public PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new PutScriptRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<PutScriptRequestDescriptor, PutScriptResponse>(descriptor);
+	}
+
+	public PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutScriptRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutScriptRequestDescriptor, PutScriptResponse>(descriptor);
+	}
+
+	public PutScriptResponse PutScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new PutScriptRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutScriptRequestDescriptor<TDocument>, PutScriptResponse>(descriptor);
+	}
+
+	public Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutScriptRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutScriptRequestDescriptor, PutScriptResponse>(descriptor);
+	}
+
+	public Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutScriptRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutScriptRequestDescriptor, PutScriptResponse>(descriptor);
+	}
+
+	public Task<PutScriptResponse> PutScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutScriptRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutScriptRequestDescriptor<TDocument>, PutScriptResponse>(descriptor);
+	}
+
+	public RankEvalResponse RankEval(RankEvalRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<RankEvalRequest, RankEvalResponse>(request);
+	}
+
+	public Task<RankEvalResponse> RankEvalAsync(RankEvalRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<RankEvalRequest, RankEvalResponse>(request, cancellationToken);
+	}
+
+	public RankEvalResponse RankEval()
+	{
+		var descriptor = new RankEvalRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+	}
+
+	public RankEvalResponse RankEval(Action<RankEvalRequestDescriptor> configureRequest)
+	{
+		var descriptor = new RankEvalRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+	}
+
+	public RankEvalResponse RankEval<TDocument>(Action<RankEvalRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new RankEvalRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
+	}
+
+	public RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var descriptor = new RankEvalRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+	}
+
+	public RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor> configureRequest)
+	{
+		var descriptor = new RankEvalRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+	}
+
+	public RankEvalResponse RankEval<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new RankEvalRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
+	}
+
+	public Task<RankEvalResponse> RankEvalAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RankEvalRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+	}
+
+	public Task<RankEvalResponse> RankEvalAsync(Action<RankEvalRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RankEvalRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+	}
+
+	public Task<RankEvalResponse> RankEvalAsync<TDocument>(Action<RankEvalRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RankEvalRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
+	}
+
+	public Task<RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RankEvalRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+	}
+
+	public Task<RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RankEvalRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+	}
+
+	public Task<RankEvalResponse> RankEvalAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RankEvalRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
+	}
+
+	public ReindexResponse Reindex(ReindexRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ReindexRequest, ReindexResponse>(request);
+	}
+
+	public Task<ReindexResponse> ReindexAsync(ReindexRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ReindexRequest, ReindexResponse>(request, cancellationToken);
+	}
+
+	public ReindexResponse Reindex()
+	{
+		var descriptor = new ReindexRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<ReindexRequestDescriptor, ReindexResponse>(descriptor);
+	}
+
+	public ReindexResponse Reindex(Action<ReindexRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ReindexRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ReindexRequestDescriptor, ReindexResponse>(descriptor);
+	}
+
+	public ReindexResponse Reindex<TDocument>(Action<ReindexRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ReindexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ReindexRequestDescriptor<TDocument>, ReindexResponse>(descriptor);
+	}
+
+	public Task<ReindexResponse> ReindexAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ReindexRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ReindexRequestDescriptor, ReindexResponse>(descriptor);
+	}
+
+	public Task<ReindexResponse> ReindexAsync(Action<ReindexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ReindexRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ReindexRequestDescriptor, ReindexResponse>(descriptor);
+	}
+
+	public Task<ReindexResponse> ReindexAsync<TDocument>(Action<ReindexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ReindexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ReindexRequestDescriptor<TDocument>, ReindexResponse>(descriptor);
+	}
+
+	public ReindexRethrottleResponse ReindexRethrottle(ReindexRethrottleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ReindexRethrottleRequest, ReindexRethrottleResponse>(request);
+	}
+
+	public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(ReindexRethrottleRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ReindexRethrottleRequest, ReindexRethrottleResponse>(request, cancellationToken);
+	}
+
+	public ReindexRethrottleResponse ReindexRethrottle(Elastic.Clients.Elasticsearch.Id task_id)
+	{
+		var descriptor = new ReindexRethrottleRequestDescriptor(task_id);
+		descriptor.BeforeRequest();
+		return DoRequest<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
+	}
+
+	public ReindexRethrottleResponse ReindexRethrottle(Elastic.Clients.Elasticsearch.Id task_id, Action<ReindexRethrottleRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ReindexRethrottleRequestDescriptor(task_id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
+	}
+
+	public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ReindexRethrottleRequestDescriptor(task_id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
+	}
+
+	public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, Action<ReindexRethrottleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ReindexRethrottleRequestDescriptor(task_id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
+	}
+
+	public ScriptContextResponse GetScriptContext(ScriptContextRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ScriptContextRequest, ScriptContextResponse>(request);
+	}
+
+	public Task<ScriptContextResponse> GetScriptContextAsync(ScriptContextRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ScriptContextRequest, ScriptContextResponse>(request, cancellationToken);
+	}
+
+	public ScriptContextResponse GetScriptContext()
+	{
+		var descriptor = new ScriptContextRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
+	}
+
+	public ScriptContextResponse GetScriptContext(Action<ScriptContextRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ScriptContextRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
+	}
+
+	public Task<ScriptContextResponse> GetScriptContextAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ScriptContextRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
+	}
+
+	public Task<ScriptContextResponse> GetScriptContextAsync(Action<ScriptContextRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ScriptContextRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
+	}
+
+	public ScriptLanguagesResponse GetScriptLanguages(ScriptLanguagesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ScriptLanguagesRequest, ScriptLanguagesResponse>(request);
+	}
+
+	public Task<ScriptLanguagesResponse> GetScriptLanguagesAsync(ScriptLanguagesRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ScriptLanguagesRequest, ScriptLanguagesResponse>(request, cancellationToken);
+	}
+
+	public ScriptLanguagesResponse GetScriptLanguages()
+	{
+		var descriptor = new ScriptLanguagesRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
+	}
+
+	public ScriptLanguagesResponse GetScriptLanguages(Action<ScriptLanguagesRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ScriptLanguagesRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
+	}
+
+	public Task<ScriptLanguagesResponse> GetScriptLanguagesAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ScriptLanguagesRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
+	}
+
+	public Task<ScriptLanguagesResponse> GetScriptLanguagesAsync(Action<ScriptLanguagesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ScriptLanguagesRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
+	}
+
+	public ScriptResponse GetScript(ScriptRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ScriptRequest, ScriptResponse>(request);
+	}
+
+	public Task<ScriptResponse> GetScriptAsync(ScriptRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ScriptRequest, ScriptResponse>(request, cancellationToken);
+	}
+
+	public ScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new ScriptRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<ScriptRequestDescriptor, ScriptResponse>(descriptor);
+	}
+
+	public ScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ScriptRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ScriptRequestDescriptor, ScriptResponse>(descriptor);
+	}
+
+	public ScriptResponse GetScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ScriptRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ScriptRequestDescriptor<TDocument>, ScriptResponse>(descriptor);
+	}
+
+	public Task<ScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ScriptRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ScriptRequestDescriptor, ScriptResponse>(descriptor);
+	}
+
+	public Task<ScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ScriptRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ScriptRequestDescriptor, ScriptResponse>(descriptor);
+	}
+
+	public Task<ScriptResponse> GetScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ScriptRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ScriptRequestDescriptor<TDocument>, ScriptResponse>(descriptor);
+	}
+
+	public ScrollResponse<TDocument> Scroll<TDocument>(ScrollRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ScrollRequest, ScrollResponse<TDocument>>(request);
+	}
+
+	public Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(ScrollRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ScrollRequest, ScrollResponse<TDocument>>(request, cancellationToken);
+	}
+
+	public ScrollResponse<TDocument> Scroll<TDocument>()
+	{
+		var descriptor = new ScrollRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<ScrollRequestDescriptor, ScrollResponse<TDocument>>(descriptor);
+	}
+
+	public ScrollResponse<TDocument> Scroll<TDocument>(Action<ScrollRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ScrollRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ScrollRequestDescriptor, ScrollResponse<TDocument>>(descriptor);
+	}
+
+	public Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ScrollRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ScrollRequestDescriptor, ScrollResponse<TDocument>>(descriptor);
+	}
+
+	public Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(Action<ScrollRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ScrollRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ScrollRequestDescriptor, ScrollResponse<TDocument>>(descriptor);
+	}
+
+	public SearchResponse<TDocument> Search<TDocument>(SearchRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<SearchRequest, SearchResponse<TDocument>>(request);
+	}
+
+	public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(SearchRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<SearchRequest, SearchResponse<TDocument>>(request, cancellationToken);
+	}
+
+	public SearchResponse<TDocument> Search<TDocument>()
+	{
+		var descriptor = new SearchRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<SearchRequestDescriptor<TDocument>, SearchResponse<TDocument>>(descriptor);
+	}
+
+	public SearchResponse<TDocument> Search<TDocument>(Action<SearchRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new SearchRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SearchRequestDescriptor<TDocument>, SearchResponse<TDocument>>(descriptor);
+	}
+
+	public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SearchRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SearchRequestDescriptor<TDocument>, SearchResponse<TDocument>>(descriptor);
+	}
+
+	public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Action<SearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SearchRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SearchRequestDescriptor<TDocument>, SearchResponse<TDocument>>(descriptor);
+	}
+
+	public SearchShardsResponse SearchShards(SearchShardsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<SearchShardsRequest, SearchShardsResponse>(request);
+	}
+
+	public Task<SearchShardsResponse> SearchShardsAsync(SearchShardsRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<SearchShardsRequest, SearchShardsResponse>(request, cancellationToken);
+	}
+
+	public SearchShardsResponse SearchShards()
+	{
+		var descriptor = new SearchShardsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
+	}
+
+	public SearchShardsResponse SearchShards(Action<SearchShardsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new SearchShardsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
+	}
+
+	public SearchShardsResponse SearchShards<TDocument>(Action<SearchShardsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new SearchShardsRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SearchShardsRequestDescriptor<TDocument>, SearchShardsResponse>(descriptor);
+	}
+
+	public Task<SearchShardsResponse> SearchShardsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SearchShardsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
+	}
+
+	public Task<SearchShardsResponse> SearchShardsAsync(Action<SearchShardsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SearchShardsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
+	}
+
+	public Task<SearchShardsResponse> SearchShardsAsync<TDocument>(Action<SearchShardsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SearchShardsRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SearchShardsRequestDescriptor<TDocument>, SearchShardsResponse>(descriptor);
+	}
+
+	public SourceResponse<TDocument> GetSource<TDocument>(SourceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<SourceRequest, SourceResponse<TDocument>>(request);
+	}
+
+	public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(SourceRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<SourceRequest, SourceResponse<TDocument>>(request, cancellationToken);
+	}
+
+	public SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
+		descriptor.BeforeRequest();
+		return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+	}
+
+	public SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+	}
+
+	public SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+	}
+
+	public SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+	}
+
+	public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+	}
+
+	public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+	}
+
+	public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+	}
+
+	public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+	}
+
+	public TermsEnumResponse TermsEnum(TermsEnumRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<TermsEnumRequest, TermsEnumResponse>(request);
+	}
+
+	public Task<TermsEnumResponse> TermsEnumAsync(TermsEnumRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<TermsEnumRequest, TermsEnumResponse>(request, cancellationToken);
+	}
+
+	public TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		var descriptor = new TermsEnumRequestDescriptor(index);
+		descriptor.BeforeRequest();
+		return DoRequest<TermsEnumRequestDescriptor, TermsEnumResponse>(descriptor);
+	}
+
+	public TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor> configureRequest)
+	{
+		var descriptor = new TermsEnumRequestDescriptor(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<TermsEnumRequestDescriptor, TermsEnumResponse>(descriptor);
+	}
+
+	public TermsEnumResponse TermsEnum<TDocument>()
+	{
+		var descriptor = new TermsEnumRequestDescriptor<TDocument>(typeof(TDocument));
+		descriptor.BeforeRequest();
+		return DoRequest<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
+	}
+
+	public TermsEnumResponse TermsEnum<TDocument>(Action<TermsEnumRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new TermsEnumRequestDescriptor<TDocument>(typeof(TDocument));
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
+	}
+
+	public TermsEnumResponse TermsEnum<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new TermsEnumRequestDescriptor<TDocument>(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
+	}
+
+	public Task<TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TermsEnumRequestDescriptor(index);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TermsEnumRequestDescriptor, TermsEnumResponse>(descriptor);
+	}
+
+	public Task<TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TermsEnumRequestDescriptor(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TermsEnumRequestDescriptor, TermsEnumResponse>(descriptor);
+	}
+
+	public Task<TermsEnumResponse> TermsEnumAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TermsEnumRequestDescriptor<TDocument>(typeof(TDocument));
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
+	}
+
+	public Task<TermsEnumResponse> TermsEnumAsync<TDocument>(Action<TermsEnumRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TermsEnumRequestDescriptor<TDocument>(typeof(TDocument));
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
+	}
+
+	public Task<TermsEnumResponse> TermsEnumAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TermsEnumRequestDescriptor<TDocument>(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse>(descriptor);
+	}
+
+	public UpdateByQueryResponse UpdateByQuery(UpdateByQueryRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<UpdateByQueryRequest, UpdateByQueryResponse>(request);
+	}
+
+	public Task<UpdateByQueryResponse> UpdateByQueryAsync(UpdateByQueryRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<UpdateByQueryRequest, UpdateByQueryResponse>(request, cancellationToken);
+	}
+
+	public UpdateByQueryResponse UpdateByQuery(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var descriptor = new UpdateByQueryRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateByQueryRequestDescriptor, UpdateByQueryResponse>(descriptor);
+	}
+
+	public UpdateByQueryResponse UpdateByQuery(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor> configureRequest)
+	{
+		var descriptor = new UpdateByQueryRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateByQueryRequestDescriptor, UpdateByQueryResponse>(descriptor);
+	}
+
+	public UpdateByQueryResponse UpdateByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new UpdateByQueryRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateByQueryRequestDescriptor<TDocument>, UpdateByQueryResponse>(descriptor);
+	}
+
+	public Task<UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateByQueryRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateByQueryRequestDescriptor, UpdateByQueryResponse>(descriptor);
+	}
+
+	public Task<UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateByQueryRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateByQueryRequestDescriptor, UpdateByQueryResponse>(descriptor);
+	}
+
+	public Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateByQueryRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateByQueryRequestDescriptor<TDocument>, UpdateByQueryResponse>(descriptor);
+	}
+
+	public UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(UpdateByQueryRethrottleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<UpdateByQueryRethrottleRequest, UpdateByQueryRethrottleResponse>(request);
+	}
+
+	public Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(UpdateByQueryRethrottleRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<UpdateByQueryRethrottleRequest, UpdateByQueryRethrottleResponse>(request, cancellationToken);
+	}
+
+	public UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(Elastic.Clients.Elasticsearch.Id task_id)
+	{
+		var descriptor = new UpdateByQueryRethrottleRequestDescriptor(task_id);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleResponse>(descriptor);
+	}
+
+	public UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(Elastic.Clients.Elasticsearch.Id task_id, Action<UpdateByQueryRethrottleRequestDescriptor> configureRequest)
+	{
+		var descriptor = new UpdateByQueryRethrottleRequestDescriptor(task_id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleResponse>(descriptor);
+	}
+
+	public Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateByQueryRethrottleRequestDescriptor(task_id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleResponse>(descriptor);
+	}
+
+	public Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, Action<UpdateByQueryRethrottleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateByQueryRethrottleRequestDescriptor(task_id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleResponse>(descriptor);
+	}
+
+	public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request)
+	{
+		request.BeforeRequest();
+		return DoRequest<UpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request);
+	}
+
+	public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<UpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request, cancellationToken);
+	}
+
+	public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
+	}
+
+	public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest)
+	{
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
+	}
+
+	public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument)
+	{
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
+	}
+
+	public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest)
+	{
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
+	}
+
+	public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
+	}
+
+	public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
+	}
+
+	public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
+	}
+
+	public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,85 +24,83 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class StopAnalyzer : IAnalyzer
 {
-	public sealed partial class StopAnalyzer : IAnalyzer
+	[JsonInclude]
+	[JsonPropertyName("stopwords")]
+	[JsonConverter(typeof(StopWordsConverter))]
+	public IEnumerable<string>? Stopwords { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("stopwords_path")]
+	public string? StopwordsPath { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "stop";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class StopAnalyzerDescriptor : SerializableDescriptor<StopAnalyzerDescriptor>, IBuildableDescriptor<StopAnalyzer>
+{
+	internal StopAnalyzerDescriptor(Action<StopAnalyzerDescriptor> configure) => configure.Invoke(this);
+	public StopAnalyzerDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("stopwords")]
-		[JsonConverter(typeof(StopWordsConverter))]
-		public IEnumerable<string>? Stopwords { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("stopwords_path")]
-		public string? StopwordsPath { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "stop";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class StopAnalyzerDescriptor : SerializableDescriptorBase<StopAnalyzerDescriptor>, IBuildableDescriptor<StopAnalyzer>
+	private IEnumerable<string>? StopwordsValue { get; set; }
+
+	private string? StopwordsPathValue { get; set; }
+
+	private string? VersionValue { get; set; }
+
+	public StopAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
 	{
-		internal StopAnalyzerDescriptor(Action<StopAnalyzerDescriptor> configure) => configure.Invoke(this);
-		public StopAnalyzerDescriptor() : base()
-		{
-		}
-
-		private IEnumerable<string>? StopwordsValue { get; set; }
-
-		private string? StopwordsPathValue { get; set; }
-
-		private string? VersionValue { get; set; }
-
-		public StopAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
-		{
-			StopwordsValue = stopwords;
-			return Self;
-		}
-
-		public StopAnalyzerDescriptor StopwordsPath(string? stopwordsPath)
-		{
-			StopwordsPathValue = stopwordsPath;
-			return Self;
-		}
-
-		public StopAnalyzerDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (StopwordsValue is not null)
-			{
-				writer.WritePropertyName("stopwords");
-				SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
-			}
-
-			if (!string.IsNullOrEmpty(StopwordsPathValue))
-			{
-				writer.WritePropertyName("stopwords_path");
-				writer.WriteStringValue(StopwordsPathValue);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("stop");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		StopAnalyzer IBuildableDescriptor<StopAnalyzer>.Build() => new()
-		{ Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
+		StopwordsValue = stopwords;
+		return Self;
 	}
+
+	public StopAnalyzerDescriptor StopwordsPath(string? stopwordsPath)
+	{
+		StopwordsPathValue = stopwordsPath;
+		return Self;
+	}
+
+	public StopAnalyzerDescriptor Version(string? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (StopwordsValue is not null)
+		{
+			writer.WritePropertyName("stopwords");
+			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+		}
+
+		if (!string.IsNullOrEmpty(StopwordsPathValue))
+		{
+			writer.WritePropertyName("stopwords_path");
+			writer.WriteStringValue(StopwordsPathValue);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("stop");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	StopAnalyzer IBuildableDescriptor<StopAnalyzer>.Build() => new()
+	{ Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
 }

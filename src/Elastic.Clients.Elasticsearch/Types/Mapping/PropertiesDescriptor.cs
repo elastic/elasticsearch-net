@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Elastic.Clients.Elasticsearch.Fluent;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 

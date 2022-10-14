@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,20 +24,18 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class ResolveIndexDataStreamsItem
 {
-	public sealed partial class ResolveIndexDataStreamsItem
-	{
-		[JsonInclude]
-		[JsonPropertyName("backing_indices")]
-		public Elastic.Clients.Elasticsearch.Indices BackingIndices { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("backing_indices")]
+	public Elastic.Clients.Elasticsearch.Indices BackingIndices { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string Name { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("name")]
+	public string Name { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("timestamp_field")]
-		public string TimestampField { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("timestamp_field")]
+	public string TimestampField { get; init; }
 }

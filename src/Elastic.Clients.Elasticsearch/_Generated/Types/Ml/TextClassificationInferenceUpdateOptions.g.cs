@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,126 +24,124 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ml
+namespace Elastic.Clients.Elasticsearch.Ml;
+public sealed partial class TextClassificationInferenceUpdateOptions
 {
-	public sealed partial class TextClassificationInferenceUpdateOptions
+	[JsonInclude]
+	[JsonPropertyName("classification_labels")]
+	public IEnumerable<string>? ClassificationLabels { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("num_top_classes")]
+	public int? NumTopClasses { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("results_field")]
+	public string? ResultsField { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("tokenization")]
+	public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
+}
+
+public sealed partial class TextClassificationInferenceUpdateOptionsDescriptor : SerializableDescriptor<TextClassificationInferenceUpdateOptionsDescriptor>
+{
+	internal TextClassificationInferenceUpdateOptionsDescriptor(Action<TextClassificationInferenceUpdateOptionsDescriptor> configure) => configure.Invoke(this);
+	public TextClassificationInferenceUpdateOptionsDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("classification_labels")]
-		public IEnumerable<string>? ClassificationLabels { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("num_top_classes")]
-		public int? NumTopClasses { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("results_field")]
-		public string? ResultsField { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("tokenization")]
-		public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 	}
 
-	public sealed partial class TextClassificationInferenceUpdateOptionsDescriptor : SerializableDescriptorBase<TextClassificationInferenceUpdateOptionsDescriptor>
+	private IEnumerable<string>? ClassificationLabelsValue { get; set; }
+
+	private int? NumTopClassesValue { get; set; }
+
+	private string? ResultsFieldValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? TokenizationValue { get; set; }
+
+	private NlpTokenizationUpdateOptionsDescriptor TokenizationDescriptor { get; set; }
+
+	private Action<NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
+
+	public TextClassificationInferenceUpdateOptionsDescriptor ClassificationLabels(IEnumerable<string>? classificationLabels)
 	{
-		internal TextClassificationInferenceUpdateOptionsDescriptor(Action<TextClassificationInferenceUpdateOptionsDescriptor> configure) => configure.Invoke(this);
-		public TextClassificationInferenceUpdateOptionsDescriptor() : base()
+		ClassificationLabelsValue = classificationLabels;
+		return Self;
+	}
+
+	public TextClassificationInferenceUpdateOptionsDescriptor NumTopClasses(int? numTopClasses)
+	{
+		NumTopClassesValue = numTopClasses;
+		return Self;
+	}
+
+	public TextClassificationInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)
+	{
+		ResultsFieldValue = resultsField;
+		return Self;
+	}
+
+	public TextClassificationInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? tokenization)
+	{
+		TokenizationDescriptor = null;
+		TokenizationDescriptorAction = null;
+		TokenizationValue = tokenization;
+		return Self;
+	}
+
+	public TextClassificationInferenceUpdateOptionsDescriptor Tokenization(NlpTokenizationUpdateOptionsDescriptor descriptor)
+	{
+		TokenizationValue = null;
+		TokenizationDescriptorAction = null;
+		TokenizationDescriptor = descriptor;
+		return Self;
+	}
+
+	public TextClassificationInferenceUpdateOptionsDescriptor Tokenization(Action<NlpTokenizationUpdateOptionsDescriptor> configure)
+	{
+		TokenizationValue = null;
+		TokenizationDescriptor = null;
+		TokenizationDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (ClassificationLabelsValue is not null)
 		{
+			writer.WritePropertyName("classification_labels");
+			JsonSerializer.Serialize(writer, ClassificationLabelsValue, options);
 		}
 
-		private IEnumerable<string>? ClassificationLabelsValue { get; set; }
-
-		private int? NumTopClassesValue { get; set; }
-
-		private string? ResultsFieldValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? TokenizationValue { get; set; }
-
-		private NlpTokenizationUpdateOptionsDescriptor TokenizationDescriptor { get; set; }
-
-		private Action<NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
-
-		public TextClassificationInferenceUpdateOptionsDescriptor ClassificationLabels(IEnumerable<string>? classificationLabels)
+		if (NumTopClassesValue.HasValue)
 		{
-			ClassificationLabelsValue = classificationLabels;
-			return Self;
+			writer.WritePropertyName("num_top_classes");
+			writer.WriteNumberValue(NumTopClassesValue.Value);
 		}
 
-		public TextClassificationInferenceUpdateOptionsDescriptor NumTopClasses(int? numTopClasses)
+		if (!string.IsNullOrEmpty(ResultsFieldValue))
 		{
-			NumTopClassesValue = numTopClasses;
-			return Self;
+			writer.WritePropertyName("results_field");
+			writer.WriteStringValue(ResultsFieldValue);
 		}
 
-		public TextClassificationInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)
+		if (TokenizationDescriptor is not null)
 		{
-			ResultsFieldValue = resultsField;
-			return Self;
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
+		}
+		else if (TokenizationDescriptorAction is not null)
+		{
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, new NlpTokenizationUpdateOptionsDescriptor(TokenizationDescriptorAction), options);
+		}
+		else if (TokenizationValue is not null)
+		{
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, TokenizationValue, options);
 		}
 
-		public TextClassificationInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? tokenization)
-		{
-			TokenizationDescriptor = null;
-			TokenizationDescriptorAction = null;
-			TokenizationValue = tokenization;
-			return Self;
-		}
-
-		public TextClassificationInferenceUpdateOptionsDescriptor Tokenization(NlpTokenizationUpdateOptionsDescriptor descriptor)
-		{
-			TokenizationValue = null;
-			TokenizationDescriptorAction = null;
-			TokenizationDescriptor = descriptor;
-			return Self;
-		}
-
-		public TextClassificationInferenceUpdateOptionsDescriptor Tokenization(Action<NlpTokenizationUpdateOptionsDescriptor> configure)
-		{
-			TokenizationValue = null;
-			TokenizationDescriptor = null;
-			TokenizationDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (ClassificationLabelsValue is not null)
-			{
-				writer.WritePropertyName("classification_labels");
-				JsonSerializer.Serialize(writer, ClassificationLabelsValue, options);
-			}
-
-			if (NumTopClassesValue.HasValue)
-			{
-				writer.WritePropertyName("num_top_classes");
-				writer.WriteNumberValue(NumTopClassesValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(ResultsFieldValue))
-			{
-				writer.WritePropertyName("results_field");
-				writer.WriteStringValue(ResultsFieldValue);
-			}
-
-			if (TokenizationDescriptor is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
-			}
-			else if (TokenizationDescriptorAction is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, new NlpTokenizationUpdateOptionsDescriptor(TokenizationDescriptorAction), options);
-			}
-			else if (TokenizationValue is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, TokenizationValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

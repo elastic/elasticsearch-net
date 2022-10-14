@@ -5,13 +5,13 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Fluent;
 
-internal static class Fluent
+internal static class FluentAssign
 {
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	internal static TDescriptor Assign<TDescriptor, TValue>(TDescriptor self, TValue value, Action<TDescriptor, TValue> assign)
-		where TDescriptor : DescriptorBase<TDescriptor>
+		where TDescriptor : Descriptor<TDescriptor>
 	{
 		assign(self, value);
 		return self;

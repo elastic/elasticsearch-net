@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,16 +24,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class FieldMemoryUsage
 {
-	public sealed partial class FieldMemoryUsage
-	{
-		[JsonInclude]
-		[JsonPropertyName("memory_size")]
-		public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("memory_size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("memory_size_in_bytes")]
-		public long MemorySizeInBytes { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("memory_size_in_bytes")]
+	public long MemorySizeInBytes { get; init; }
 }

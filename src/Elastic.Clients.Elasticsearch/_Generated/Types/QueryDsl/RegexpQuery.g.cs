@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,432 +24,430 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+internal sealed class RegexpQueryConverter : JsonConverter<RegexpQuery>
 {
-	internal sealed class RegexpQueryConverter : JsonConverter<RegexpQuery>
+	public override RegexpQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override RegexpQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var fieldName = reader.GetString();
+		reader.Read();
+		var variant = new RegexpQuery(fieldName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var fieldName = reader.GetString();
-			reader.Read();
-			var variant = new RegexpQuery(fieldName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				var property = reader.GetString();
+				if (property == "_name")
 				{
-					var property = reader.GetString();
-					if (property == "_name")
-					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
+				if (property == "boost")
+				{
+					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "case_insensitive")
-					{
-						variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						continue;
-					}
+				if (property == "case_insensitive")
+				{
+					variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "flags")
-					{
-						variant.Flags = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+				if (property == "flags")
+				{
+					variant.Flags = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "max_determinized_states")
-					{
-						variant.MaxDeterminizedStates = JsonSerializer.Deserialize<int?>(ref reader, options);
-						continue;
-					}
+				if (property == "max_determinized_states")
+				{
+					variant.MaxDeterminizedStates = JsonSerializer.Deserialize<int?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "rewrite")
-					{
-						variant.Rewrite = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+				if (property == "rewrite")
+				{
+					variant.Rewrite = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "value")
-					{
-						variant.Value = JsonSerializer.Deserialize<string>(ref reader, options);
-						continue;
-					}
+				if (property == "value")
+				{
+					variant.Value = JsonSerializer.Deserialize<string>(ref reader, options);
+					continue;
 				}
 			}
-
-			reader.Read();
-			return variant;
 		}
 
-		public override void Write(Utf8JsonWriter writer, RegexpQuery value, JsonSerializerOptions options)
-		{
-			if (value.Field is null)
-				throw new JsonException("Unable to serialize RegexpQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-			if (options.TryGetClientSettings(out var settings))
-			{
-				writer.WriteStartObject();
-				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-				writer.WriteStartObject();
-				if (!string.IsNullOrEmpty(value.QueryName))
-				{
-					writer.WritePropertyName("_name");
-					writer.WriteStringValue(value.QueryName);
-				}
-
-				if (value.Boost.HasValue)
-				{
-					writer.WritePropertyName("boost");
-					writer.WriteNumberValue(value.Boost.Value);
-				}
-
-				if (value.CaseInsensitive.HasValue)
-				{
-					writer.WritePropertyName("case_insensitive");
-					writer.WriteBooleanValue(value.CaseInsensitive.Value);
-				}
-
-				if (!string.IsNullOrEmpty(value.Flags))
-				{
-					writer.WritePropertyName("flags");
-					writer.WriteStringValue(value.Flags);
-				}
-
-				if (value.MaxDeterminizedStates.HasValue)
-				{
-					writer.WritePropertyName("max_determinized_states");
-					writer.WriteNumberValue(value.MaxDeterminizedStates.Value);
-				}
-
-				if (value.Rewrite is not null)
-				{
-					writer.WritePropertyName("rewrite");
-					JsonSerializer.Serialize(writer, value.Rewrite, options);
-				}
-
-				writer.WritePropertyName("value");
-				writer.WriteStringValue(value.Value);
-				writer.WriteEndObject();
-				writer.WriteEndObject();
-				return;
-			}
-
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
-		}
+		reader.Read();
+		return variant;
 	}
 
-	[JsonConverter(typeof(RegexpQueryConverter))]
-	public sealed partial class RegexpQuery : Query
+	public override void Write(Utf8JsonWriter writer, RegexpQuery value, JsonSerializerOptions options)
 	{
-		public RegexpQuery(Field field)
+		if (value.Field is null)
+			throw new JsonException("Unable to serialize RegexpQuery because the `Field` property is not set. Field name queries must include a valid field name.");
+		if (options.TryGetClientSettings(out var settings))
 		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			Field = field;
-		}
-
-		public string? QueryName { get; set; }
-
-		public float? Boost { get; set; }
-
-		public bool? CaseInsensitive { get; set; }
-
-		public string? Flags { get; set; }
-
-		public int? MaxDeterminizedStates { get; set; }
-
-		public string? Rewrite { get; set; }
-
-		public string Value { get; set; }
-
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	}
-
-	public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescriptorBase<RegexpQueryDescriptor<TDocument>>
-	{
-		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal RegexpQueryDescriptor() : base()
-		{
-		}
-
-		public RegexpQueryDescriptor(Field field)
-		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
-		}
-
-		public RegexpQueryDescriptor(Expression<Func<TDocument, object>> field)
-		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
-		}
-
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		private bool? CaseInsensitiveValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private string? FlagsValue { get; set; }
-
-		private int? MaxDeterminizedStatesValue { get; set; }
-
-		private string? RewriteValue { get; set; }
-
-		private string ValueValue { get; set; }
-
-		public RegexpQueryDescriptor<TDocument> QueryName(string? queryName)
-		{
-			QueryNameValue = queryName;
-			return Self;
-		}
-
-		public RegexpQueryDescriptor<TDocument> Boost(float? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		public RegexpQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
-		{
-			CaseInsensitiveValue = caseInsensitive;
-			return Self;
-		}
-
-		public RegexpQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public RegexpQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public RegexpQueryDescriptor<TDocument> Flags(string? flags)
-		{
-			FlagsValue = flags;
-			return Self;
-		}
-
-		public RegexpQueryDescriptor<TDocument> MaxDeterminizedStates(int? maxDeterminizedStates)
-		{
-			MaxDeterminizedStatesValue = maxDeterminizedStates;
-			return Self;
-		}
-
-		public RegexpQueryDescriptor<TDocument> Rewrite(string? rewrite)
-		{
-			RewriteValue = rewrite;
-			return Self;
-		}
-
-		public RegexpQueryDescriptor<TDocument> Value(string value)
-		{
-			ValueValue = value;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (FieldValue is null)
-				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
+			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
+				writer.WriteStringValue(value.QueryName);
 			}
 
-			if (BoostValue.HasValue)
+			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
+				writer.WriteNumberValue(value.Boost.Value);
 			}
 
-			if (CaseInsensitiveValue.HasValue)
+			if (value.CaseInsensitive.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+				writer.WriteBooleanValue(value.CaseInsensitive.Value);
 			}
 
-			if (!string.IsNullOrEmpty(FlagsValue))
+			if (!string.IsNullOrEmpty(value.Flags))
 			{
 				writer.WritePropertyName("flags");
-				writer.WriteStringValue(FlagsValue);
+				writer.WriteStringValue(value.Flags);
 			}
 
-			if (MaxDeterminizedStatesValue.HasValue)
+			if (value.MaxDeterminizedStates.HasValue)
 			{
 				writer.WritePropertyName("max_determinized_states");
-				writer.WriteNumberValue(MaxDeterminizedStatesValue.Value);
+				writer.WriteNumberValue(value.MaxDeterminizedStates.Value);
 			}
 
-			if (RewriteValue is not null)
+			if (value.Rewrite is not null)
 			{
 				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, RewriteValue, options);
+				JsonSerializer.Serialize(writer, value.Rewrite, options);
 			}
 
 			writer.WritePropertyName("value");
-			writer.WriteStringValue(ValueValue);
+			writer.WriteStringValue(value.Value);
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			return;
 		}
+
+		throw new JsonException("Unable to retrieve client settings required to infer field.");
+	}
+}
+
+[JsonConverter(typeof(RegexpQueryConverter))]
+public sealed partial class RegexpQuery : Query
+{
+	public RegexpQuery(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		Field = field;
 	}
 
-	public sealed partial class RegexpQueryDescriptor : SerializableDescriptorBase<RegexpQueryDescriptor>
+	public string? QueryName { get; set; }
+
+	public float? Boost { get; set; }
+
+	public bool? CaseInsensitive { get; set; }
+
+	public string? Flags { get; set; }
+
+	public int? MaxDeterminizedStates { get; set; }
+
+	public string? Rewrite { get; set; }
+
+	public string Value { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+}
+
+public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescriptor<RegexpQueryDescriptor<TDocument>>
+{
+	internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal RegexpQueryDescriptor() : base()
 	{
-		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor> configure) => configure.Invoke(this);
-		internal RegexpQueryDescriptor() : base()
+	}
+
+	public RegexpQueryDescriptor(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	public RegexpQueryDescriptor(Expression<Func<TDocument, object>> field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	private bool? CaseInsensitiveValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private string? FlagsValue { get; set; }
+
+	private int? MaxDeterminizedStatesValue { get; set; }
+
+	private string? RewriteValue { get; set; }
+
+	private string ValueValue { get; set; }
+
+	public RegexpQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
+	{
+		CaseInsensitiveValue = caseInsensitive;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor<TDocument> Flags(string? flags)
+	{
+		FlagsValue = flags;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor<TDocument> MaxDeterminizedStates(int? maxDeterminizedStates)
+	{
+		MaxDeterminizedStatesValue = maxDeterminizedStates;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor<TDocument> Rewrite(string? rewrite)
+	{
+		RewriteValue = rewrite;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor<TDocument> Value(string value)
+	{
+		ValueValue = value;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		public RegexpQueryDescriptor(Field field)
+		if (BoostValue.HasValue)
 		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		private bool? CaseInsensitiveValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private string? FlagsValue { get; set; }
-
-		private int? MaxDeterminizedStatesValue { get; set; }
-
-		private string? RewriteValue { get; set; }
-
-		private string ValueValue { get; set; }
-
-		public RegexpQueryDescriptor QueryName(string? queryName)
+		if (CaseInsensitiveValue.HasValue)
 		{
-			QueryNameValue = queryName;
-			return Self;
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
 		}
 
-		public RegexpQueryDescriptor Boost(float? boost)
+		if (!string.IsNullOrEmpty(FlagsValue))
 		{
-			BoostValue = boost;
-			return Self;
+			writer.WritePropertyName("flags");
+			writer.WriteStringValue(FlagsValue);
 		}
 
-		public RegexpQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
+		if (MaxDeterminizedStatesValue.HasValue)
 		{
-			CaseInsensitiveValue = caseInsensitive;
-			return Self;
+			writer.WritePropertyName("max_determinized_states");
+			writer.WriteNumberValue(MaxDeterminizedStatesValue.Value);
 		}
 
-		public RegexpQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		if (RewriteValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("rewrite");
+			JsonSerializer.Serialize(writer, RewriteValue, options);
 		}
 
-		public RegexpQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		writer.WritePropertyName("value");
+		writer.WriteStringValue(ValueValue);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<RegexpQueryDescriptor>
+{
+	internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor> configure) => configure.Invoke(this);
+	internal RegexpQueryDescriptor() : base()
+	{
+	}
+
+	public RegexpQueryDescriptor(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	private bool? CaseInsensitiveValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private string? FlagsValue { get; set; }
+
+	private int? MaxDeterminizedStatesValue { get; set; }
+
+	private string? RewriteValue { get; set; }
+
+	private string ValueValue { get; set; }
+
+	public RegexpQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
+	{
+		CaseInsensitiveValue = caseInsensitive;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor Flags(string? flags)
+	{
+		FlagsValue = flags;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor MaxDeterminizedStates(int? maxDeterminizedStates)
+	{
+		MaxDeterminizedStatesValue = maxDeterminizedStates;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor Rewrite(string? rewrite)
+	{
+		RewriteValue = rewrite;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor Value(string value)
+	{
+		ValueValue = value;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		public RegexpQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		if (BoostValue.HasValue)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		public RegexpQueryDescriptor Flags(string? flags)
+		if (CaseInsensitiveValue.HasValue)
 		{
-			FlagsValue = flags;
-			return Self;
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
 		}
 
-		public RegexpQueryDescriptor MaxDeterminizedStates(int? maxDeterminizedStates)
+		if (!string.IsNullOrEmpty(FlagsValue))
 		{
-			MaxDeterminizedStatesValue = maxDeterminizedStates;
-			return Self;
+			writer.WritePropertyName("flags");
+			writer.WriteStringValue(FlagsValue);
 		}
 
-		public RegexpQueryDescriptor Rewrite(string? rewrite)
+		if (MaxDeterminizedStatesValue.HasValue)
 		{
-			RewriteValue = rewrite;
-			return Self;
+			writer.WritePropertyName("max_determinized_states");
+			writer.WriteNumberValue(MaxDeterminizedStatesValue.Value);
 		}
 
-		public RegexpQueryDescriptor Value(string value)
+		if (RewriteValue is not null)
 		{
-			ValueValue = value;
-			return Self;
+			writer.WritePropertyName("rewrite");
+			JsonSerializer.Serialize(writer, RewriteValue, options);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (FieldValue is null)
-				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			if (CaseInsensitiveValue.HasValue)
-			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(FlagsValue))
-			{
-				writer.WritePropertyName("flags");
-				writer.WriteStringValue(FlagsValue);
-			}
-
-			if (MaxDeterminizedStatesValue.HasValue)
-			{
-				writer.WritePropertyName("max_determinized_states");
-				writer.WriteNumberValue(MaxDeterminizedStatesValue.Value);
-			}
-
-			if (RewriteValue is not null)
-			{
-				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, RewriteValue, options);
-			}
-
-			writer.WritePropertyName("value");
-			writer.WriteStringValue(ValueValue);
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-		}
+		writer.WritePropertyName("value");
+		writer.WriteStringValue(ValueValue);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }

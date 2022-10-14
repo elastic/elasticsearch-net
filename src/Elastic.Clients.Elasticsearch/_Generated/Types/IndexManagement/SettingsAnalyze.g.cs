@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,40 +24,38 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class SettingsAnalyze
 {
-	public sealed partial class SettingsAnalyze
+	[JsonInclude]
+	[JsonPropertyName("max_token_count")]
+	public int? MaxTokenCount { get; set; }
+}
+
+public sealed partial class SettingsAnalyzeDescriptor : SerializableDescriptor<SettingsAnalyzeDescriptor>
+{
+	internal SettingsAnalyzeDescriptor(Action<SettingsAnalyzeDescriptor> configure) => configure.Invoke(this);
+	public SettingsAnalyzeDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("max_token_count")]
-		public int? MaxTokenCount { get; set; }
 	}
 
-	public sealed partial class SettingsAnalyzeDescriptor : SerializableDescriptorBase<SettingsAnalyzeDescriptor>
+	private int? MaxTokenCountValue { get; set; }
+
+	public SettingsAnalyzeDescriptor MaxTokenCount(int? maxTokenCount)
 	{
-		internal SettingsAnalyzeDescriptor(Action<SettingsAnalyzeDescriptor> configure) => configure.Invoke(this);
-		public SettingsAnalyzeDescriptor() : base()
+		MaxTokenCountValue = maxTokenCount;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (MaxTokenCountValue.HasValue)
 		{
+			writer.WritePropertyName("max_token_count");
+			writer.WriteNumberValue(MaxTokenCountValue.Value);
 		}
 
-		private int? MaxTokenCountValue { get; set; }
-
-		public SettingsAnalyzeDescriptor MaxTokenCount(int? maxTokenCount)
-		{
-			MaxTokenCountValue = maxTokenCount;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (MaxTokenCountValue.HasValue)
-			{
-				writer.WritePropertyName("max_token_count");
-				writer.WriteNumberValue(MaxTokenCountValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,20 +24,18 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class Template
 {
-	public sealed partial class Template
-	{
-		[JsonInclude]
-		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("aliases")]
+	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("mappings")]
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("settings")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; init; }
 }

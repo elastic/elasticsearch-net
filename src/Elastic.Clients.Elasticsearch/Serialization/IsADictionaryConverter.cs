@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Serialization;
 
 // TODO : We need to handle these cases https://github.com/elastic/elasticsearch-specification/pull/1589
 
@@ -16,7 +16,7 @@ internal sealed class IsADictionaryConverter : JsonConverterFactory
 	public override bool CanConvert(Type typeToConvert) =>
 		typeToConvert.BaseType is not null &&
 		typeToConvert.BaseType.IsGenericType &&
-		typeToConvert.BaseType.GetGenericTypeDefinition() == typeof(IsADictionaryBase<,>);
+		typeToConvert.BaseType.GetGenericTypeDefinition() == typeof(IsADictionary<,>);
 
 	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
 	{
@@ -36,7 +36,7 @@ internal sealed class IsADictionaryConverter : JsonConverterFactory
 
 	private class IsADictionaryConverterInner<TType, TKey, TValue> : JsonConverter<TType>
 		where TKey : class
-		where TType : IsADictionaryBase<TKey, TValue>, new()
+		where TType : IsADictionary<TKey, TValue>, new()
 	{
 		public override TType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

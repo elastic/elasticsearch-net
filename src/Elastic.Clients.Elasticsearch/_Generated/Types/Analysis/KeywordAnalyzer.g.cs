@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,48 +24,46 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class KeywordAnalyzer : IAnalyzer
 {
-	public sealed partial class KeywordAnalyzer : IAnalyzer
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "keyword";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class KeywordAnalyzerDescriptor : SerializableDescriptor<KeywordAnalyzerDescriptor>, IBuildableDescriptor<KeywordAnalyzer>
+{
+	internal KeywordAnalyzerDescriptor(Action<KeywordAnalyzerDescriptor> configure) => configure.Invoke(this);
+	public KeywordAnalyzerDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "keyword";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class KeywordAnalyzerDescriptor : SerializableDescriptorBase<KeywordAnalyzerDescriptor>, IBuildableDescriptor<KeywordAnalyzer>
+	private string? VersionValue { get; set; }
+
+	public KeywordAnalyzerDescriptor Version(string? version)
 	{
-		internal KeywordAnalyzerDescriptor(Action<KeywordAnalyzerDescriptor> configure) => configure.Invoke(this);
-		public KeywordAnalyzerDescriptor() : base()
-		{
-		}
-
-		private string? VersionValue { get; set; }
-
-		public KeywordAnalyzerDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("keyword");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		KeywordAnalyzer IBuildableDescriptor<KeywordAnalyzer>.Build() => new()
-		{ Version = VersionValue };
+		VersionValue = version;
+		return Self;
 	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("keyword");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	KeywordAnalyzer IBuildableDescriptor<KeywordAnalyzer>.Build() => new()
+	{ Version = VersionValue };
 }
