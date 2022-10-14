@@ -191,25 +191,23 @@ namespace Elastic.Clients.Elasticsearch.Core.Search
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private FieldSuggesterDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private FieldSuggesterDescriptor<TDocument> Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
 		private string? PrefixValue { get; set; }
@@ -236,12 +234,12 @@ namespace Elastic.Clients.Elasticsearch.Core.Search
 			return Self;
 		}
 
-		public void Completion(CompletionSuggester variant) => Set(variant, "completion");
-		public void Completion(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
-		public void Phrase(PhraseSuggester variant) => Set(variant, "phrase");
-		public void Phrase(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
-		public void Term(TermSuggester variant) => Set(variant, "term");
-		public void Term(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
+		public FieldSuggesterDescriptor<TDocument> Completion(CompletionSuggester variant) => Set(variant, "completion");
+		public FieldSuggesterDescriptor<TDocument> Completion(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
+		public FieldSuggesterDescriptor<TDocument> Phrase(PhraseSuggester variant) => Set(variant, "phrase");
+		public FieldSuggesterDescriptor<TDocument> Phrase(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
+		public FieldSuggesterDescriptor<TDocument> Term(TermSuggester variant) => Set(variant, "term");
+		public FieldSuggesterDescriptor<TDocument> Term(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -298,25 +296,23 @@ namespace Elastic.Clients.Elasticsearch.Core.Search
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private FieldSuggesterDescriptor Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private FieldSuggesterDescriptor Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the FieldSuggesterDescriptor. Only a single FieldSuggester variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
 		private string? PrefixValue { get; set; }
@@ -343,15 +339,15 @@ namespace Elastic.Clients.Elasticsearch.Core.Search
 			return Self;
 		}
 
-		public void Completion(CompletionSuggester variant) => Set(variant, "completion");
-		public void Completion(Action<CompletionSuggesterDescriptor> configure) => Set(configure, "completion");
-		public void Completion<TDocument>(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
-		public void Phrase(PhraseSuggester variant) => Set(variant, "phrase");
-		public void Phrase(Action<PhraseSuggesterDescriptor> configure) => Set(configure, "phrase");
-		public void Phrase<TDocument>(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
-		public void Term(TermSuggester variant) => Set(variant, "term");
-		public void Term(Action<TermSuggesterDescriptor> configure) => Set(configure, "term");
-		public void Term<TDocument>(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
+		public FieldSuggesterDescriptor Completion(CompletionSuggester variant) => Set(variant, "completion");
+		public FieldSuggesterDescriptor Completion(Action<CompletionSuggesterDescriptor> configure) => Set(configure, "completion");
+		public FieldSuggesterDescriptor Completion<TDocument>(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
+		public FieldSuggesterDescriptor Phrase(PhraseSuggester variant) => Set(variant, "phrase");
+		public FieldSuggesterDescriptor Phrase(Action<PhraseSuggesterDescriptor> configure) => Set(configure, "phrase");
+		public FieldSuggesterDescriptor Phrase<TDocument>(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
+		public FieldSuggesterDescriptor Term(TermSuggester variant) => Set(variant, "term");
+		public FieldSuggesterDescriptor Term(Action<TermSuggesterDescriptor> configure) => Set(configure, "term");
+		public FieldSuggesterDescriptor Term<TDocument>(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
