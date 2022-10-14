@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,302 +24,300 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class IntervalsMatch
 {
-	public sealed partial class IntervalsMatch
+	[JsonInclude]
+	[JsonPropertyName("analyzer")]
+	public string? Analyzer { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("filter")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("max_gaps")]
+	public int? MaxGaps { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("ordered")]
+	public bool? Ordered { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("query")]
+	public string Query { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("use_field")]
+	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
+}
+
+public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDescriptor<IntervalsMatchDescriptor<TDocument>>
+{
+	internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public IntervalsMatchDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_gaps")]
-		public int? MaxGaps { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ordered")]
-		public bool? Ordered { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("query")]
-		public string Query { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("use_field")]
-		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDescriptorBase<IntervalsMatchDescriptor<TDocument>>
+	private string? AnalyzerValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
+
+	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
+
+	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
+
+	private int? MaxGapsValue { get; set; }
+
+	private bool? OrderedValue { get; set; }
+
+	private string QueryValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+
+	public IntervalsMatchDescriptor<TDocument> Analyzer(string? analyzer)
 	{
-		internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public IntervalsMatchDescriptor() : base()
-		{
-		}
-
-		private string? AnalyzerValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-
-		private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-
-		private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
-
-		private int? MaxGapsValue { get; set; }
-
-		private bool? OrderedValue { get; set; }
-
-		private string QueryValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
-
-		public IntervalsMatchDescriptor<TDocument> Analyzer(string? analyzer)
-		{
-			AnalyzerValue = analyzer;
-			return Self;
-		}
-
-		public IntervalsMatchDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
-		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
-		}
-
-		public IntervalsMatchDescriptor<TDocument> Filter(IntervalsFilterDescriptor descriptor)
-		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
-		}
-
-		public IntervalsMatchDescriptor<TDocument> Filter(Action<IntervalsFilterDescriptor> configure)
-		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
-		}
-
-		public IntervalsMatchDescriptor<TDocument> MaxGaps(int? maxGaps)
-		{
-			MaxGapsValue = maxGaps;
-			return Self;
-		}
-
-		public IntervalsMatchDescriptor<TDocument> Ordered(bool? ordered = true)
-		{
-			OrderedValue = ordered;
-			return Self;
-		}
-
-		public IntervalsMatchDescriptor<TDocument> Query(string query)
-		{
-			QueryValue = query;
-			return Self;
-		}
-
-		public IntervalsMatchDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
-		{
-			UseFieldValue = useField;
-			return Self;
-		}
-
-		public IntervalsMatchDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
-		{
-			UseFieldValue = useField;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
-			}
-
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			if (MaxGapsValue.HasValue)
-			{
-				writer.WritePropertyName("max_gaps");
-				writer.WriteNumberValue(MaxGapsValue.Value);
-			}
-
-			if (OrderedValue.HasValue)
-			{
-				writer.WritePropertyName("ordered");
-				writer.WriteBooleanValue(OrderedValue.Value);
-			}
-
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
-			if (UseFieldValue is not null)
-			{
-				writer.WritePropertyName("use_field");
-				JsonSerializer.Serialize(writer, UseFieldValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		AnalyzerValue = analyzer;
+		return Self;
 	}
 
-	public sealed partial class IntervalsMatchDescriptor : SerializableDescriptorBase<IntervalsMatchDescriptor>
+	public IntervalsMatchDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
 	{
-		internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor> configure) => configure.Invoke(this);
-		public IntervalsMatchDescriptor() : base()
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor<TDocument> Filter(IntervalsFilterDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor<TDocument> Filter(Action<IntervalsFilterDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor<TDocument> MaxGaps(int? maxGaps)
+	{
+		MaxGapsValue = maxGaps;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor<TDocument> Ordered(bool? ordered = true)
+	{
+		OrderedValue = ordered;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor<TDocument> Query(string query)
+	{
+		QueryValue = query;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
 		}
 
-		private string? AnalyzerValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-
-		private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-
-		private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
-
-		private int? MaxGapsValue { get; set; }
-
-		private bool? OrderedValue { get; set; }
-
-		private string QueryValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
-
-		public IntervalsMatchDescriptor Analyzer(string? analyzer)
+		if (FilterDescriptor is not null)
 		{
-			AnalyzerValue = analyzer;
-			return Self;
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		public IntervalsMatchDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+		if (MaxGapsValue.HasValue)
 		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
+			writer.WritePropertyName("max_gaps");
+			writer.WriteNumberValue(MaxGapsValue.Value);
 		}
 
-		public IntervalsMatchDescriptor Filter(IntervalsFilterDescriptor descriptor)
+		if (OrderedValue.HasValue)
 		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("ordered");
+			writer.WriteBooleanValue(OrderedValue.Value);
 		}
 
-		public IntervalsMatchDescriptor Filter(Action<IntervalsFilterDescriptor> configure)
+		writer.WritePropertyName("query");
+		writer.WriteStringValue(QueryValue);
+		if (UseFieldValue is not null)
 		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("use_field");
+			JsonSerializer.Serialize(writer, UseFieldValue, options);
 		}
 
-		public IntervalsMatchDescriptor MaxGaps(int? maxGaps)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class IntervalsMatchDescriptor : SerializableDescriptor<IntervalsMatchDescriptor>
+{
+	internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor> configure) => configure.Invoke(this);
+	public IntervalsMatchDescriptor() : base()
+	{
+	}
+
+	private string? AnalyzerValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
+
+	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
+
+	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
+
+	private int? MaxGapsValue { get; set; }
+
+	private bool? OrderedValue { get; set; }
+
+	private string QueryValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+
+	public IntervalsMatchDescriptor Analyzer(string? analyzer)
+	{
+		AnalyzerValue = analyzer;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor Filter(IntervalsFilterDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor Filter(Action<IntervalsFilterDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor MaxGaps(int? maxGaps)
+	{
+		MaxGapsValue = maxGaps;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor Ordered(bool? ordered = true)
+	{
+		OrderedValue = ordered;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor Query(string query)
+	{
+		QueryValue = query;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	public IntervalsMatchDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
-			MaxGapsValue = maxGaps;
-			return Self;
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
 		}
 
-		public IntervalsMatchDescriptor Ordered(bool? ordered = true)
+		if (FilterDescriptor is not null)
 		{
-			OrderedValue = ordered;
-			return Self;
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		public IntervalsMatchDescriptor Query(string query)
+		if (MaxGapsValue.HasValue)
 		{
-			QueryValue = query;
-			return Self;
+			writer.WritePropertyName("max_gaps");
+			writer.WriteNumberValue(MaxGapsValue.Value);
 		}
 
-		public IntervalsMatchDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
+		if (OrderedValue.HasValue)
 		{
-			UseFieldValue = useField;
-			return Self;
+			writer.WritePropertyName("ordered");
+			writer.WriteBooleanValue(OrderedValue.Value);
 		}
 
-		public IntervalsMatchDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
+		writer.WritePropertyName("query");
+		writer.WriteStringValue(QueryValue);
+		if (UseFieldValue is not null)
 		{
-			UseFieldValue = useField;
-			return Self;
+			writer.WritePropertyName("use_field");
+			JsonSerializer.Serialize(writer, UseFieldValue, options);
 		}
 
-		public IntervalsMatchDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
-		{
-			UseFieldValue = useField;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
-			}
-
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			if (MaxGapsValue.HasValue)
-			{
-				writer.WritePropertyName("max_gaps");
-				writer.WriteNumberValue(MaxGapsValue.Value);
-			}
-
-			if (OrderedValue.HasValue)
-			{
-				writer.WritePropertyName("ordered");
-				writer.WriteBooleanValue(OrderedValue.Value);
-			}
-
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
-			if (UseFieldValue is not null)
-			{
-				writer.WritePropertyName("use_field");
-				JsonSerializer.Serialize(writer, UseFieldValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,12 +24,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class ShardsTotalStats
 {
-	public sealed partial class ShardsTotalStats
-	{
-		[JsonInclude]
-		[JsonPropertyName("total_count")]
-		public long TotalCount { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("total_count")]
+	public long TotalCount { get; init; }
 }

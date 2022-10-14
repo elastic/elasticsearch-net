@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.JsonNetSerializer;
+using Elastic.Clients.Elasticsearch.JsonNetSerializer;
 using Elastic.Transport;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

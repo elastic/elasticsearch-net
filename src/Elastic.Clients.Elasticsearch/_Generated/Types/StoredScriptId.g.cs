@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,54 +24,52 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class StoredScriptId
 {
-	public sealed partial class StoredScriptId
-	{
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("id")]
+	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("params")]
-		public Dictionary<string, object>? Params { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("params")]
+	public Dictionary<string, object>? Params { get; set; }
+}
+
+public sealed partial class StoredScriptIdDescriptor : SerializableDescriptor<StoredScriptIdDescriptor>
+{
+	internal StoredScriptIdDescriptor(Action<StoredScriptIdDescriptor> configure) => configure.Invoke(this);
+	public StoredScriptIdDescriptor() : base()
+	{
 	}
 
-	public sealed partial class StoredScriptIdDescriptor : SerializableDescriptorBase<StoredScriptIdDescriptor>
+	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
+
+	private Dictionary<string, object>? ParamsValue { get; set; }
+
+	public StoredScriptIdDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
-		internal StoredScriptIdDescriptor(Action<StoredScriptIdDescriptor> configure) => configure.Invoke(this);
-		public StoredScriptIdDescriptor() : base()
+		IdValue = id;
+		return Self;
+	}
+
+	public StoredScriptIdDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("id");
+		JsonSerializer.Serialize(writer, IdValue, options);
+		if (ParamsValue is not null)
 		{
+			writer.WritePropertyName("params");
+			JsonSerializer.Serialize(writer, ParamsValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-
-		private Dictionary<string, object>? ParamsValue { get; set; }
-
-		public StoredScriptIdDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			IdValue = id;
-			return Self;
-		}
-
-		public StoredScriptIdDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-			if (ParamsValue is not null)
-			{
-				writer.WritePropertyName("params");
-				JsonSerializer.Serialize(writer, ParamsValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

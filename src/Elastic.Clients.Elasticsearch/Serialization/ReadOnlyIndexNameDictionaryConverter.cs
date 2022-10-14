@@ -7,32 +7,31 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Serialization;
+
+internal sealed class ReadOnlyIndexNameDictionaryConverter : JsonConverterAttribute
 {
-	internal sealed class ReadOnlyIndexNameDictionaryConverter : JsonConverterAttribute
+	public ReadOnlyIndexNameDictionaryConverter(Type valueType) => ValueType = valueType;
+
+	public Type ValueType { get; }
+
+	public override JsonConverter? CreateConverter(Type typeToConvert) => (JsonConverter)Activator.CreateInstance(typeof(IntermediateConverter<>).MakeGenericType(ValueType));
+}
+
+internal sealed class ReadOnlyIndexNameDictionaryConverter<TValue> : JsonConverter<IReadOnlyDictionary<IndexName, TValue>>
+{
+	private readonly IElasticsearchClientSettings _settings;
+
+	public ReadOnlyIndexNameDictionaryConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+	public override IReadOnlyDictionary<IndexName, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public ReadOnlyIndexNameDictionaryConverter(Type valueType) => ValueType = valueType;
+		var initialDictionary = JsonSerializer.Deserialize<Dictionary<IndexName, TValue>>(ref reader, options);
 
-		public Type ValueType { get; }
+		var readOnlyDictionary = new ReadOnlyIndexNameDictionary<TValue>(initialDictionary, _settings);
 
-		public override JsonConverter? CreateConverter(Type typeToConvert) => (JsonConverter)Activator.CreateInstance(typeof(IntermediateConverter<>).MakeGenericType(ValueType));
+		return readOnlyDictionary;
 	}
 
-	internal sealed class ReadOnlyIndexNameDictionaryConverter<TValue> : JsonConverter<IReadOnlyDictionary<IndexName, TValue>>
-	{
-		private readonly IElasticsearchClientSettings _settings;
-
-		public ReadOnlyIndexNameDictionaryConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
-		public override IReadOnlyDictionary<IndexName, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var initialDictionary = JsonSerializer.Deserialize<Dictionary<IndexName, TValue>>(ref reader, options);
-
-			var readOnlyDictionary = new ReadOnlyIndexNameDictionary<TValue>(initialDictionary, _settings);
-
-			return readOnlyDictionary;
-		}
-
-		public override void Write(Utf8JsonWriter writer, IReadOnlyDictionary<IndexName, TValue> value, JsonSerializerOptions options) => throw new NotImplementedException();
-	}
+	public override void Write(Utf8JsonWriter writer, IReadOnlyDictionary<IndexName, TValue> value, JsonSerializerOptions options) => throw new NotImplementedException();
 }

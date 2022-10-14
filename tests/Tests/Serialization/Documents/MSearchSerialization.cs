@@ -10,6 +10,7 @@ using VerifyTests;
 using VerifyXunit;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Elastic.Clients.Elasticsearch.Core.MSearch;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Tests.Serialization.Documents;
 

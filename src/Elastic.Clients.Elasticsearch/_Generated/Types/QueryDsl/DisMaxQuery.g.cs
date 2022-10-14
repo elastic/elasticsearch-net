@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,286 +24,284 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class DisMaxQuery : Query
 {
-	public sealed partial class DisMaxQuery : Query
+	[JsonInclude]
+	[JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("boost")]
+	public float? Boost { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("queries")]
+	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> Queries { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("tie_breaker")]
+	public double? TieBreaker { get; set; }
+}
+
+public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescriptor<DisMaxQueryDescriptor<TDocument>>
+{
+	internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public DisMaxQueryDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("_name")]
-		public string? QueryName { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("boost")]
-		public float? Boost { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("queries")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> Queries { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("tie_breaker")]
-		public double? TieBreaker { get; set; }
 	}
 
-	public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescriptorBase<DisMaxQueryDescriptor<TDocument>>
+	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; set; }
+
+	private QueryContainerDescriptor<TDocument> QueriesDescriptor { get; set; }
+
+	private Action<QueryContainerDescriptor<TDocument>> QueriesDescriptorAction { get; set; }
+
+	private Action<QueryContainerDescriptor<TDocument>>[] QueriesDescriptorActions { get; set; }
+
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	private double? TieBreakerValue { get; set; }
+
+	public DisMaxQueryDescriptor<TDocument> Queries(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries)
 	{
-		internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public DisMaxQueryDescriptor() : base()
-		{
-		}
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; set; }
-
-		private QueryContainerDescriptor<TDocument> QueriesDescriptor { get; set; }
-
-		private Action<QueryContainerDescriptor<TDocument>> QueriesDescriptorAction { get; set; }
-
-		private Action<QueryContainerDescriptor<TDocument>>[] QueriesDescriptorActions { get; set; }
-
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		private double? TieBreakerValue { get; set; }
-
-		public DisMaxQueryDescriptor<TDocument> Queries(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries)
-		{
-			QueriesDescriptor = null;
-			QueriesDescriptorAction = null;
-			QueriesDescriptorActions = null;
-			QueriesValue = queries;
-			return Self;
-		}
-
-		public DisMaxQueryDescriptor<TDocument> Queries(QueryContainerDescriptor<TDocument> descriptor)
-		{
-			QueriesValue = null;
-			QueriesDescriptorAction = null;
-			QueriesDescriptorActions = null;
-			QueriesDescriptor = descriptor;
-			return Self;
-		}
-
-		public DisMaxQueryDescriptor<TDocument> Queries(Action<QueryContainerDescriptor<TDocument>> configure)
-		{
-			QueriesValue = null;
-			QueriesDescriptor = null;
-			QueriesDescriptorActions = null;
-			QueriesDescriptorAction = configure;
-			return Self;
-		}
-
-		public DisMaxQueryDescriptor<TDocument> Queries(params Action<QueryContainerDescriptor<TDocument>>[] configure)
-		{
-			QueriesValue = null;
-			QueriesDescriptor = null;
-			QueriesDescriptorAction = null;
-			QueriesDescriptorActions = configure;
-			return Self;
-		}
-
-		public DisMaxQueryDescriptor<TDocument> QueryName(string? queryName)
-		{
-			QueryNameValue = queryName;
-			return Self;
-		}
-
-		public DisMaxQueryDescriptor<TDocument> Boost(float? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		public DisMaxQueryDescriptor<TDocument> TieBreaker(double? tieBreaker)
-		{
-			TieBreakerValue = tieBreaker;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (QueriesDescriptor is not null)
-			{
-				writer.WritePropertyName("queries");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, QueriesDescriptor, options);
-				writer.WriteEndArray();
-			}
-			else if (QueriesDescriptorAction is not null)
-			{
-				writer.WritePropertyName("queries");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(QueriesDescriptorAction), options);
-				writer.WriteEndArray();
-			}
-			else if (QueriesDescriptorActions is not null)
-			{
-				writer.WritePropertyName("queries");
-				writer.WriteStartArray();
-				foreach (var action in QueriesDescriptorActions)
-				{
-					JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(action), options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else
-			{
-				writer.WritePropertyName("queries");
-				JsonSerializer.Serialize(writer, QueriesValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			if (TieBreakerValue.HasValue)
-			{
-				writer.WritePropertyName("tie_breaker");
-				writer.WriteNumberValue(TieBreakerValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		QueriesDescriptor = null;
+		QueriesDescriptorAction = null;
+		QueriesDescriptorActions = null;
+		QueriesValue = queries;
+		return Self;
 	}
 
-	public sealed partial class DisMaxQueryDescriptor : SerializableDescriptorBase<DisMaxQueryDescriptor>
+	public DisMaxQueryDescriptor<TDocument> Queries(QueryContainerDescriptor<TDocument> descriptor)
 	{
-		internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor> configure) => configure.Invoke(this);
-		public DisMaxQueryDescriptor() : base()
+		QueriesValue = null;
+		QueriesDescriptorAction = null;
+		QueriesDescriptorActions = null;
+		QueriesDescriptor = descriptor;
+		return Self;
+	}
+
+	public DisMaxQueryDescriptor<TDocument> Queries(Action<QueryContainerDescriptor<TDocument>> configure)
+	{
+		QueriesValue = null;
+		QueriesDescriptor = null;
+		QueriesDescriptorActions = null;
+		QueriesDescriptorAction = configure;
+		return Self;
+	}
+
+	public DisMaxQueryDescriptor<TDocument> Queries(params Action<QueryContainerDescriptor<TDocument>>[] configure)
+	{
+		QueriesValue = null;
+		QueriesDescriptor = null;
+		QueriesDescriptorAction = null;
+		QueriesDescriptorActions = configure;
+		return Self;
+	}
+
+	public DisMaxQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public DisMaxQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public DisMaxQueryDescriptor<TDocument> TieBreaker(double? tieBreaker)
+	{
+		TieBreakerValue = tieBreaker;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (QueriesDescriptor is not null)
 		{
+			writer.WritePropertyName("queries");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, QueriesDescriptor, options);
+			writer.WriteEndArray();
 		}
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; set; }
-
-		private QueryContainerDescriptor QueriesDescriptor { get; set; }
-
-		private Action<QueryContainerDescriptor> QueriesDescriptorAction { get; set; }
-
-		private Action<QueryContainerDescriptor>[] QueriesDescriptorActions { get; set; }
-
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		private double? TieBreakerValue { get; set; }
-
-		public DisMaxQueryDescriptor Queries(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries)
+		else if (QueriesDescriptorAction is not null)
 		{
-			QueriesDescriptor = null;
-			QueriesDescriptorAction = null;
-			QueriesDescriptorActions = null;
-			QueriesValue = queries;
-			return Self;
+			writer.WritePropertyName("queries");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(QueriesDescriptorAction), options);
+			writer.WriteEndArray();
 		}
-
-		public DisMaxQueryDescriptor Queries(QueryContainerDescriptor descriptor)
+		else if (QueriesDescriptorActions is not null)
 		{
-			QueriesValue = null;
-			QueriesDescriptorAction = null;
-			QueriesDescriptorActions = null;
-			QueriesDescriptor = descriptor;
-			return Self;
-		}
-
-		public DisMaxQueryDescriptor Queries(Action<QueryContainerDescriptor> configure)
-		{
-			QueriesValue = null;
-			QueriesDescriptor = null;
-			QueriesDescriptorActions = null;
-			QueriesDescriptorAction = configure;
-			return Self;
-		}
-
-		public DisMaxQueryDescriptor Queries(params Action<QueryContainerDescriptor>[] configure)
-		{
-			QueriesValue = null;
-			QueriesDescriptor = null;
-			QueriesDescriptorAction = null;
-			QueriesDescriptorActions = configure;
-			return Self;
-		}
-
-		public DisMaxQueryDescriptor QueryName(string? queryName)
-		{
-			QueryNameValue = queryName;
-			return Self;
-		}
-
-		public DisMaxQueryDescriptor Boost(float? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		public DisMaxQueryDescriptor TieBreaker(double? tieBreaker)
-		{
-			TieBreakerValue = tieBreaker;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (QueriesDescriptor is not null)
+			writer.WritePropertyName("queries");
+			writer.WriteStartArray();
+			foreach (var action in QueriesDescriptorActions)
 			{
-				writer.WritePropertyName("queries");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, QueriesDescriptor, options);
-				writer.WriteEndArray();
-			}
-			else if (QueriesDescriptorAction is not null)
-			{
-				writer.WritePropertyName("queries");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(QueriesDescriptorAction), options);
-				writer.WriteEndArray();
-			}
-			else if (QueriesDescriptorActions is not null)
-			{
-				writer.WritePropertyName("queries");
-				writer.WriteStartArray();
-				foreach (var action in QueriesDescriptorActions)
-				{
-					JsonSerializer.Serialize(writer, new QueryContainerDescriptor(action), options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else
-			{
-				writer.WritePropertyName("queries");
-				JsonSerializer.Serialize(writer, QueriesValue, options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(action), options);
 			}
 
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			if (TieBreakerValue.HasValue)
-			{
-				writer.WritePropertyName("tie_breaker");
-				writer.WriteNumberValue(TieBreakerValue.Value);
-			}
-
-			writer.WriteEndObject();
+			writer.WriteEndArray();
 		}
+		else
+		{
+			writer.WritePropertyName("queries");
+			JsonSerializer.Serialize(writer, QueriesValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (TieBreakerValue.HasValue)
+		{
+			writer.WritePropertyName("tie_breaker");
+			writer.WriteNumberValue(TieBreakerValue.Value);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMaxQueryDescriptor>
+{
+	internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor> configure) => configure.Invoke(this);
+	public DisMaxQueryDescriptor() : base()
+	{
+	}
+
+	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; set; }
+
+	private QueryContainerDescriptor QueriesDescriptor { get; set; }
+
+	private Action<QueryContainerDescriptor> QueriesDescriptorAction { get; set; }
+
+	private Action<QueryContainerDescriptor>[] QueriesDescriptorActions { get; set; }
+
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	private double? TieBreakerValue { get; set; }
+
+	public DisMaxQueryDescriptor Queries(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries)
+	{
+		QueriesDescriptor = null;
+		QueriesDescriptorAction = null;
+		QueriesDescriptorActions = null;
+		QueriesValue = queries;
+		return Self;
+	}
+
+	public DisMaxQueryDescriptor Queries(QueryContainerDescriptor descriptor)
+	{
+		QueriesValue = null;
+		QueriesDescriptorAction = null;
+		QueriesDescriptorActions = null;
+		QueriesDescriptor = descriptor;
+		return Self;
+	}
+
+	public DisMaxQueryDescriptor Queries(Action<QueryContainerDescriptor> configure)
+	{
+		QueriesValue = null;
+		QueriesDescriptor = null;
+		QueriesDescriptorActions = null;
+		QueriesDescriptorAction = configure;
+		return Self;
+	}
+
+	public DisMaxQueryDescriptor Queries(params Action<QueryContainerDescriptor>[] configure)
+	{
+		QueriesValue = null;
+		QueriesDescriptor = null;
+		QueriesDescriptorAction = null;
+		QueriesDescriptorActions = configure;
+		return Self;
+	}
+
+	public DisMaxQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public DisMaxQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public DisMaxQueryDescriptor TieBreaker(double? tieBreaker)
+	{
+		TieBreakerValue = tieBreaker;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (QueriesDescriptor is not null)
+		{
+			writer.WritePropertyName("queries");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, QueriesDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (QueriesDescriptorAction is not null)
+		{
+			writer.WritePropertyName("queries");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new QueryContainerDescriptor(QueriesDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (QueriesDescriptorActions is not null)
+		{
+			writer.WritePropertyName("queries");
+			writer.WriteStartArray();
+			foreach (var action in QueriesDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else
+		{
+			writer.WritePropertyName("queries");
+			JsonSerializer.Serialize(writer, QueriesValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (TieBreakerValue.HasValue)
+		{
+			writer.WritePropertyName("tie_breaker");
+			writer.WriteNumberValue(TieBreakerValue.Value);
+		}
+
+		writer.WriteEndObject();
 	}
 }

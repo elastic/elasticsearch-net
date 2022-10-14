@@ -13,11 +13,11 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class BulkResponse
 	{
 		[JsonConverter(typeof(BulkResponseItemConverter)), JsonPropertyName("items")]
-		public IReadOnlyList<BulkResponseItemBase> Items { get; init; }
+		public IReadOnlyList<ResponseItem> Items { get; init; }
 
 		[JsonIgnore]
-		public IEnumerable<BulkResponseItemBase> ItemsWithErrors => !Items.HasAny()
-			? Enumerable.Empty<BulkResponseItemBase>()
+		public IEnumerable<ResponseItem> ItemsWithErrors => !Items.HasAny()
+			? Enumerable.Empty<ResponseItem>()
 			: Items.Where(i => !i.IsValid);
 
 		public override bool IsValid => base.IsValid && !Errors && !ItemsWithErrors.HasAny();

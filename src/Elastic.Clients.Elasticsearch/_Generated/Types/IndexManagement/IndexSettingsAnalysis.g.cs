@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,140 +24,138 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class IndexSettingsAnalysis
 {
-	public sealed partial class IndexSettingsAnalysis
+	[JsonInclude]
+	[JsonPropertyName("analyzer")]
+	public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzer { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("char_filter")]
+	public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilter { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("filter")]
+	public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? Filter { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("normalizer")]
+	public Elastic.Clients.Elasticsearch.Analysis.Normalizers? Normalizer { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("tokenizer")]
+	public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? Tokenizer { get; set; }
+}
+
+public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescriptor<IndexSettingsAnalysisDescriptor>
+{
+	internal IndexSettingsAnalysisDescriptor(Action<IndexSettingsAnalysisDescriptor> configure) => configure.Invoke(this);
+	public IndexSettingsAnalysisDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("char_filter")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? Filter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("normalizer")]
-		public Elastic.Clients.Elasticsearch.Analysis.Normalizers? Normalizer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("tokenizer")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? Tokenizer { get; set; }
 	}
 
-	public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescriptorBase<IndexSettingsAnalysisDescriptor>
+	private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzerValue { get; set; }
+
+	private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilterValue { get; set; }
+
+	private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Analysis.Normalizers? NormalizerValue { get; set; }
+
+	private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? TokenizerValue { get; set; }
+
+	public IndexSettingsAnalysisDescriptor Analyzer(Elastic.Clients.Elasticsearch.Analysis.Analyzers? analyzer)
 	{
-		internal IndexSettingsAnalysisDescriptor(Action<IndexSettingsAnalysisDescriptor> configure) => configure.Invoke(this);
-		public IndexSettingsAnalysisDescriptor() : base()
+		AnalyzerValue = analyzer;
+		return Self;
+	}
+
+	public IndexSettingsAnalysisDescriptor Analyzer(Analysis.AnalyzersDescriptor descriptor)
+	{
+		AnalyzerValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public IndexSettingsAnalysisDescriptor Analyzer(Action<Analysis.AnalyzersDescriptor> configure)
+	{
+		var descriptor = new Analysis.AnalyzersDescriptor();
+		configure?.Invoke(descriptor);
+		AnalyzerValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public IndexSettingsAnalysisDescriptor CharFilter(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>> selector)
+	{
+		CharFilterValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>());
+		return Self;
+	}
+
+	public IndexSettingsAnalysisDescriptor Filter(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>> selector)
+	{
+		FilterValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>());
+		return Self;
+	}
+
+	public IndexSettingsAnalysisDescriptor Normalizer(Elastic.Clients.Elasticsearch.Analysis.Normalizers? normalizer)
+	{
+		NormalizerValue = normalizer;
+		return Self;
+	}
+
+	public IndexSettingsAnalysisDescriptor Normalizer(Analysis.NormalizersDescriptor descriptor)
+	{
+		NormalizerValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public IndexSettingsAnalysisDescriptor Normalizer(Action<Analysis.NormalizersDescriptor> configure)
+	{
+		var descriptor = new Analysis.NormalizersDescriptor();
+		configure?.Invoke(descriptor);
+		NormalizerValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public IndexSettingsAnalysisDescriptor Tokenizer(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>> selector)
+	{
+		TokenizerValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>());
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AnalyzerValue is not null)
 		{
+			writer.WritePropertyName("analyzer");
+			JsonSerializer.Serialize(writer, AnalyzerValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzerValue { get; set; }
-
-		private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilterValue { get; set; }
-
-		private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Analysis.Normalizers? NormalizerValue { get; set; }
-
-		private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? TokenizerValue { get; set; }
-
-		public IndexSettingsAnalysisDescriptor Analyzer(Elastic.Clients.Elasticsearch.Analysis.Analyzers? analyzer)
+		if (CharFilterValue is not null)
 		{
-			AnalyzerValue = analyzer;
-			return Self;
+			writer.WritePropertyName("char_filter");
+			JsonSerializer.Serialize(writer, CharFilterValue, options);
 		}
 
-		public IndexSettingsAnalysisDescriptor Analyzer(Analysis.AnalyzersDescriptor descriptor)
+		if (FilterValue is not null)
 		{
-			AnalyzerValue = descriptor.PromisedValue;
-			return Self;
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		public IndexSettingsAnalysisDescriptor Analyzer(Action<Analysis.AnalyzersDescriptor> configure)
+		if (NormalizerValue is not null)
 		{
-			var descriptor = new Analysis.AnalyzersDescriptor();
-			configure?.Invoke(descriptor);
-			AnalyzerValue = descriptor.PromisedValue;
-			return Self;
+			writer.WritePropertyName("normalizer");
+			JsonSerializer.Serialize(writer, NormalizerValue, options);
 		}
 
-		public IndexSettingsAnalysisDescriptor CharFilter(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>> selector)
+		if (TokenizerValue is not null)
 		{
-			CharFilterValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>());
-			return Self;
+			writer.WritePropertyName("tokenizer");
+			JsonSerializer.Serialize(writer, TokenizerValue, options);
 		}
 
-		public IndexSettingsAnalysisDescriptor Filter(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>> selector)
-		{
-			FilterValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>());
-			return Self;
-		}
-
-		public IndexSettingsAnalysisDescriptor Normalizer(Elastic.Clients.Elasticsearch.Analysis.Normalizers? normalizer)
-		{
-			NormalizerValue = normalizer;
-			return Self;
-		}
-
-		public IndexSettingsAnalysisDescriptor Normalizer(Analysis.NormalizersDescriptor descriptor)
-		{
-			NormalizerValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public IndexSettingsAnalysisDescriptor Normalizer(Action<Analysis.NormalizersDescriptor> configure)
-		{
-			var descriptor = new Analysis.NormalizersDescriptor();
-			configure?.Invoke(descriptor);
-			NormalizerValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public IndexSettingsAnalysisDescriptor Tokenizer(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>> selector)
-		{
-			TokenizerValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>());
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (AnalyzerValue is not null)
-			{
-				writer.WritePropertyName("analyzer");
-				JsonSerializer.Serialize(writer, AnalyzerValue, options);
-			}
-
-			if (CharFilterValue is not null)
-			{
-				writer.WritePropertyName("char_filter");
-				JsonSerializer.Serialize(writer, CharFilterValue, options);
-			}
-
-			if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			if (NormalizerValue is not null)
-			{
-				writer.WritePropertyName("normalizer");
-				JsonSerializer.Serialize(writer, NormalizerValue, options);
-			}
-
-			if (TokenizerValue is not null)
-			{
-				writer.WritePropertyName("tokenizer");
-				JsonSerializer.Serialize(writer, TokenizerValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

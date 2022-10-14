@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;

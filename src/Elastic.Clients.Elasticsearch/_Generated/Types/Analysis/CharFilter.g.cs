@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public partial class CharFilter : Union<string, Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions>
 {
-	public partial class CharFilter : Union<string, Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions>
+	public CharFilter(string charFilter) : base(charFilter)
 	{
-		public CharFilter(string charFilter) : base(charFilter)
-		{
-		}
+	}
 
-		public CharFilter(Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions charFilterDefinitions) : base(charFilterDefinitions)
-		{
-		}
+	public CharFilter(Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions charFilterDefinitions) : base(charFilterDefinitions)
+	{
 	}
 }

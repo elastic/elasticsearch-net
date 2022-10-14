@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,122 +24,120 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class IndexRouting
 {
-	public sealed partial class IndexRouting
-	{
-		[JsonInclude]
-		[JsonPropertyName("allocation")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? Allocation { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("allocation")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? Allocation { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("rebalance")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? Rebalance { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("rebalance")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? Rebalance { get; set; }
+}
+
+public sealed partial class IndexRoutingDescriptor : SerializableDescriptor<IndexRoutingDescriptor>
+{
+	internal IndexRoutingDescriptor(Action<IndexRoutingDescriptor> configure) => configure.Invoke(this);
+	public IndexRoutingDescriptor() : base()
+	{
 	}
 
-	public sealed partial class IndexRoutingDescriptor : SerializableDescriptorBase<IndexRoutingDescriptor>
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? AllocationValue { get; set; }
+
+	private IndexRoutingAllocationDescriptor AllocationDescriptor { get; set; }
+
+	private Action<IndexRoutingAllocationDescriptor> AllocationDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? RebalanceValue { get; set; }
+
+	private IndexRoutingRebalanceDescriptor RebalanceDescriptor { get; set; }
+
+	private Action<IndexRoutingRebalanceDescriptor> RebalanceDescriptorAction { get; set; }
+
+	public IndexRoutingDescriptor Allocation(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? allocation)
 	{
-		internal IndexRoutingDescriptor(Action<IndexRoutingDescriptor> configure) => configure.Invoke(this);
-		public IndexRoutingDescriptor() : base()
+		AllocationDescriptor = null;
+		AllocationDescriptorAction = null;
+		AllocationValue = allocation;
+		return Self;
+	}
+
+	public IndexRoutingDescriptor Allocation(IndexRoutingAllocationDescriptor descriptor)
+	{
+		AllocationValue = null;
+		AllocationDescriptorAction = null;
+		AllocationDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexRoutingDescriptor Allocation(Action<IndexRoutingAllocationDescriptor> configure)
+	{
+		AllocationValue = null;
+		AllocationDescriptor = null;
+		AllocationDescriptorAction = configure;
+		return Self;
+	}
+
+	public IndexRoutingDescriptor Rebalance(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? rebalance)
+	{
+		RebalanceDescriptor = null;
+		RebalanceDescriptorAction = null;
+		RebalanceValue = rebalance;
+		return Self;
+	}
+
+	public IndexRoutingDescriptor Rebalance(IndexRoutingRebalanceDescriptor descriptor)
+	{
+		RebalanceValue = null;
+		RebalanceDescriptorAction = null;
+		RebalanceDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexRoutingDescriptor Rebalance(Action<IndexRoutingRebalanceDescriptor> configure)
+	{
+		RebalanceValue = null;
+		RebalanceDescriptor = null;
+		RebalanceDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AllocationDescriptor is not null)
 		{
+			writer.WritePropertyName("allocation");
+			JsonSerializer.Serialize(writer, AllocationDescriptor, options);
+		}
+		else if (AllocationDescriptorAction is not null)
+		{
+			writer.WritePropertyName("allocation");
+			JsonSerializer.Serialize(writer, new IndexRoutingAllocationDescriptor(AllocationDescriptorAction), options);
+		}
+		else if (AllocationValue is not null)
+		{
+			writer.WritePropertyName("allocation");
+			JsonSerializer.Serialize(writer, AllocationValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? AllocationValue { get; set; }
-
-		private IndexRoutingAllocationDescriptor AllocationDescriptor { get; set; }
-
-		private Action<IndexRoutingAllocationDescriptor> AllocationDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? RebalanceValue { get; set; }
-
-		private IndexRoutingRebalanceDescriptor RebalanceDescriptor { get; set; }
-
-		private Action<IndexRoutingRebalanceDescriptor> RebalanceDescriptorAction { get; set; }
-
-		public IndexRoutingDescriptor Allocation(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? allocation)
+		if (RebalanceDescriptor is not null)
 		{
-			AllocationDescriptor = null;
-			AllocationDescriptorAction = null;
-			AllocationValue = allocation;
-			return Self;
+			writer.WritePropertyName("rebalance");
+			JsonSerializer.Serialize(writer, RebalanceDescriptor, options);
+		}
+		else if (RebalanceDescriptorAction is not null)
+		{
+			writer.WritePropertyName("rebalance");
+			JsonSerializer.Serialize(writer, new IndexRoutingRebalanceDescriptor(RebalanceDescriptorAction), options);
+		}
+		else if (RebalanceValue is not null)
+		{
+			writer.WritePropertyName("rebalance");
+			JsonSerializer.Serialize(writer, RebalanceValue, options);
 		}
 
-		public IndexRoutingDescriptor Allocation(IndexRoutingAllocationDescriptor descriptor)
-		{
-			AllocationValue = null;
-			AllocationDescriptorAction = null;
-			AllocationDescriptor = descriptor;
-			return Self;
-		}
-
-		public IndexRoutingDescriptor Allocation(Action<IndexRoutingAllocationDescriptor> configure)
-		{
-			AllocationValue = null;
-			AllocationDescriptor = null;
-			AllocationDescriptorAction = configure;
-			return Self;
-		}
-
-		public IndexRoutingDescriptor Rebalance(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? rebalance)
-		{
-			RebalanceDescriptor = null;
-			RebalanceDescriptorAction = null;
-			RebalanceValue = rebalance;
-			return Self;
-		}
-
-		public IndexRoutingDescriptor Rebalance(IndexRoutingRebalanceDescriptor descriptor)
-		{
-			RebalanceValue = null;
-			RebalanceDescriptorAction = null;
-			RebalanceDescriptor = descriptor;
-			return Self;
-		}
-
-		public IndexRoutingDescriptor Rebalance(Action<IndexRoutingRebalanceDescriptor> configure)
-		{
-			RebalanceValue = null;
-			RebalanceDescriptor = null;
-			RebalanceDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (AllocationDescriptor is not null)
-			{
-				writer.WritePropertyName("allocation");
-				JsonSerializer.Serialize(writer, AllocationDescriptor, options);
-			}
-			else if (AllocationDescriptorAction is not null)
-			{
-				writer.WritePropertyName("allocation");
-				JsonSerializer.Serialize(writer, new IndexRoutingAllocationDescriptor(AllocationDescriptorAction), options);
-			}
-			else if (AllocationValue is not null)
-			{
-				writer.WritePropertyName("allocation");
-				JsonSerializer.Serialize(writer, AllocationValue, options);
-			}
-
-			if (RebalanceDescriptor is not null)
-			{
-				writer.WritePropertyName("rebalance");
-				JsonSerializer.Serialize(writer, RebalanceDescriptor, options);
-			}
-			else if (RebalanceDescriptorAction is not null)
-			{
-				writer.WritePropertyName("rebalance");
-				JsonSerializer.Serialize(writer, new IndexRoutingRebalanceDescriptor(RebalanceDescriptorAction), options);
-			}
-			else if (RebalanceValue is not null)
-			{
-				writer.WritePropertyName("rebalance");
-				JsonSerializer.Serialize(writer, RebalanceValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

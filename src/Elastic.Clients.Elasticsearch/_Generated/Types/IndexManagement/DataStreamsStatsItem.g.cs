@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,28 +24,26 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class DataStreamsStatsItem
 {
-	public sealed partial class DataStreamsStatsItem
-	{
-		[JsonInclude]
-		[JsonPropertyName("backing_indices")]
-		public int BackingIndices { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("backing_indices")]
+	public int BackingIndices { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("data_stream")]
-		public string DataStream { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("data_stream")]
+	public string DataStream { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("maximum_timestamp")]
-		public long MaximumTimestamp { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("maximum_timestamp")]
+	public long MaximumTimestamp { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("store_size")]
-		public Elastic.Clients.Elasticsearch.ByteSize? StoreSize { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("store_size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? StoreSize { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("store_size_bytes")]
-		public int StoreSizeBytes { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("store_size_bytes")]
+	public int StoreSizeBytes { get; init; }
 }

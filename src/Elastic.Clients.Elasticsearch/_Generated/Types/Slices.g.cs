@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public partial class Slices : Union<int, Elastic.Clients.Elasticsearch.SlicesCalculation>
 {
-	public partial class Slices : Union<int, Elastic.Clients.Elasticsearch.SlicesCalculation>
+	public Slices(int slices) : base(slices)
 	{
-		public Slices(int slices) : base(slices)
-		{
-		}
+	}
 
-		public Slices(Elastic.Clients.Elasticsearch.SlicesCalculation slicesCalculation) : base(slicesCalculation)
-		{
-		}
+	public Slices(Elastic.Clients.Elasticsearch.SlicesCalculation slicesCalculation) : base(slicesCalculation)
+	{
 	}
 }

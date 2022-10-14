@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,36 +24,34 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Mapping
+namespace Elastic.Clients.Elasticsearch.Mapping;
+public sealed partial class SizeField
 {
-	public sealed partial class SizeField
+	[JsonInclude]
+	[JsonPropertyName("enabled")]
+	public bool Enabled { get; set; }
+}
+
+public sealed partial class SizeFieldDescriptor : SerializableDescriptor<SizeFieldDescriptor>
+{
+	internal SizeFieldDescriptor(Action<SizeFieldDescriptor> configure) => configure.Invoke(this);
+	public SizeFieldDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("enabled")]
-		public bool Enabled { get; set; }
 	}
 
-	public sealed partial class SizeFieldDescriptor : SerializableDescriptorBase<SizeFieldDescriptor>
+	private bool EnabledValue { get; set; }
+
+	public SizeFieldDescriptor Enabled(bool enabled = true)
 	{
-		internal SizeFieldDescriptor(Action<SizeFieldDescriptor> configure) => configure.Invoke(this);
-		public SizeFieldDescriptor() : base()
-		{
-		}
+		EnabledValue = enabled;
+		return Self;
+	}
 
-		private bool EnabledValue { get; set; }
-
-		public SizeFieldDescriptor Enabled(bool enabled = true)
-		{
-			EnabledValue = enabled;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue);
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("enabled");
+		writer.WriteBooleanValue(EnabledValue);
+		writer.WriteEndObject();
 	}
 }

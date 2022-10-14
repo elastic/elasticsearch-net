@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,245 +24,243 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+internal sealed class GlobalAggregationConverter : JsonConverter<GlobalAggregation>
 {
-	internal sealed class GlobalAggregationConverter : JsonConverter<GlobalAggregation>
+	public override GlobalAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override GlobalAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var aggName = reader.GetString();
+		if (aggName != "global")
+			throw new JsonException("Unexpected JSON detected.");
+		var agg = new GlobalAggregation(aggName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "global")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new GlobalAggregation(aggName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
-				{
-				}
 			}
+		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("meta"))
 				{
-					if (reader.ValueTextEquals("meta"))
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					if (value is not null)
 					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
+						agg.Meta = value;
 					}
 
-					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-					{
-						var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Aggregations = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
+				{
+					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Aggregations = value;
 					}
+
+					continue;
 				}
 			}
-
-			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, GlobalAggregation value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("global");
-			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (value.Aggregations is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, value.Aggregations, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return agg;
 	}
 
-	[JsonConverter(typeof(GlobalAggregationConverter))]
-	public sealed partial class GlobalAggregation : Aggregation
+	public override void Write(Utf8JsonWriter writer, GlobalAggregation value, JsonSerializerOptions options)
 	{
-		public GlobalAggregation(string name) => Name = name;
-		internal GlobalAggregation()
+		writer.WriteStartObject();
+		writer.WritePropertyName("global");
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+		if (value.Meta is not null)
 		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
 		}
 
-		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+		if (value.Aggregations is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, value.Aggregations, options);
+		}
 
-		public Dictionary<string, object>? Meta { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		public override string? Name { get; internal set; }
+[JsonConverter(typeof(GlobalAggregationConverter))]
+public sealed partial class GlobalAggregation : Aggregation
+{
+	public GlobalAggregation(string name) => Name = name;
+	internal GlobalAggregation()
+	{
 	}
 
-	public sealed partial class GlobalAggregationDescriptor<TDocument> : SerializableDescriptorBase<GlobalAggregationDescriptor<TDocument>>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	public Dictionary<string, object>? Meta { get; set; }
+
+	public override string? Name { get; internal set; }
+}
+
+public sealed partial class GlobalAggregationDescriptor<TDocument> : SerializableDescriptor<GlobalAggregationDescriptor<TDocument>>
+{
+	internal GlobalAggregationDescriptor(Action<GlobalAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public GlobalAggregationDescriptor() : base()
 	{
-		internal GlobalAggregationDescriptor(Action<GlobalAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public GlobalAggregationDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
-		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		public GlobalAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-		{
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = null;
-			AggregationsValue = aggregations;
-			return Self;
-		}
-
-		public GlobalAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
-		{
-			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
-			AggregationsDescriptor = descriptor;
-			return Self;
-		}
-
-		public GlobalAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
-		{
-			AggregationsValue = null;
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = configure;
-			return Self;
-		}
-
-		public GlobalAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("global");
-			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (AggregationsDescriptor is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-			}
-			else if (AggregationsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
-			}
-			else if (AggregationsValue is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class GlobalAggregationDescriptor : SerializableDescriptorBase<GlobalAggregationDescriptor>
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
+
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	public GlobalAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 	{
-		internal GlobalAggregationDescriptor(Action<GlobalAggregationDescriptor> configure) => configure.Invoke(this);
-		public GlobalAggregationDescriptor() : base()
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = null;
+		AggregationsValue = aggregations;
+		return Self;
+	}
+
+	public GlobalAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptorAction = null;
+		AggregationsDescriptor = descriptor;
+		return Self;
+	}
+
+	public GlobalAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = configure;
+		return Self;
+	}
+
+	public GlobalAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("global");
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+		if (MetaValue is not null)
 		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
-
-		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		public GlobalAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		if (AggregationsDescriptor is not null)
 		{
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = null;
-			AggregationsValue = aggregations;
-			return Self;
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+		}
+		else if (AggregationsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+		}
+		else if (AggregationsValue is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsValue, options);
 		}
 
-		public GlobalAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class GlobalAggregationDescriptor : SerializableDescriptor<GlobalAggregationDescriptor>
+{
+	internal GlobalAggregationDescriptor(Action<GlobalAggregationDescriptor> configure) => configure.Invoke(this);
+	public GlobalAggregationDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
+
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	public GlobalAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+	{
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = null;
+		AggregationsValue = aggregations;
+		return Self;
+	}
+
+	public GlobalAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptorAction = null;
+		AggregationsDescriptor = descriptor;
+		return Self;
+	}
+
+	public GlobalAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = configure;
+		return Self;
+	}
+
+	public GlobalAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("global");
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+		if (MetaValue is not null)
 		{
-			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
-			AggregationsDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		public GlobalAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+		if (AggregationsDescriptor is not null)
 		{
-			AggregationsValue = null;
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+		}
+		else if (AggregationsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
+		}
+		else if (AggregationsValue is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsValue, options);
 		}
 
-		public GlobalAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("global");
-			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (AggregationsDescriptor is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-			}
-			else if (AggregationsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
-			}
-			else if (AggregationsValue is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

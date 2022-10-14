@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,48 +24,46 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class LetterTokenizer : ITokenizerDefinition
 {
-	public sealed partial class LetterTokenizer : ITokenizerDefinition
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "letter";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class LetterTokenizerDescriptor : SerializableDescriptor<LetterTokenizerDescriptor>, IBuildableDescriptor<LetterTokenizer>
+{
+	internal LetterTokenizerDescriptor(Action<LetterTokenizerDescriptor> configure) => configure.Invoke(this);
+	public LetterTokenizerDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "letter";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class LetterTokenizerDescriptor : SerializableDescriptorBase<LetterTokenizerDescriptor>, IBuildableDescriptor<LetterTokenizer>
+	private string? VersionValue { get; set; }
+
+	public LetterTokenizerDescriptor Version(string? version)
 	{
-		internal LetterTokenizerDescriptor(Action<LetterTokenizerDescriptor> configure) => configure.Invoke(this);
-		public LetterTokenizerDescriptor() : base()
-		{
-		}
-
-		private string? VersionValue { get; set; }
-
-		public LetterTokenizerDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("letter");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		LetterTokenizer IBuildableDescriptor<LetterTokenizer>.Build() => new()
-		{ Version = VersionValue };
+		VersionValue = version;
+		return Self;
 	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("letter");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	LetterTokenizer IBuildableDescriptor<LetterTokenizer>.Build() => new()
+	{ Version = VersionValue };
 }

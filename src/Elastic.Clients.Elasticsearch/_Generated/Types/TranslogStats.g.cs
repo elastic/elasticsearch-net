@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,36 +24,34 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class TranslogStats
 {
-	public sealed partial class TranslogStats
-	{
-		[JsonInclude]
-		[JsonPropertyName("earliest_last_modified_age")]
-		public long EarliestLastModifiedAge { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("earliest_last_modified_age")]
+	public long EarliestLastModifiedAge { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("operations")]
-		public long Operations { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("operations")]
+	public long Operations { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public string? Size { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("size")]
+	public string? Size { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("size_in_bytes")]
-		public long SizeInBytes { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("size_in_bytes")]
+	public long SizeInBytes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("uncommitted_operations")]
-		public int UncommittedOperations { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("uncommitted_operations")]
+	public int UncommittedOperations { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("uncommitted_size")]
-		public string? UncommittedSize { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("uncommitted_size")]
+	public string? UncommittedSize { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("uncommitted_size_in_bytes")]
-		public long UncommittedSizeInBytes { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("uncommitted_size_in_bytes")]
+	public long UncommittedSizeInBytes { get; init; }
 }
