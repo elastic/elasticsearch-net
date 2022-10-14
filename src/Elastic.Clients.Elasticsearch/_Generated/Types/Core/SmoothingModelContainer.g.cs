@@ -125,33 +125,31 @@ namespace Elastic.Clients.Elasticsearch.Core.Search
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private SmoothingModelContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the SmoothingModelContainerDescriptor. Only a single SmoothingModelContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private SmoothingModelContainerDescriptor<TDocument> Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the SmoothingModelContainerDescriptor. Only a single SmoothingModelContainer variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
-		public void Laplace(LaplaceSmoothingModel variant) => Set(variant, "laplace");
-		public void Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-		public void LinearInterpolation(LinearInterpolationSmoothingModel variant) => Set(variant, "linear_interpolation");
-		public void LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-		public void StupidBackoff(StupidBackoffSmoothingModel variant) => Set(variant, "stupid_backoff");
-		public void StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
+		public SmoothingModelContainerDescriptor<TDocument> Laplace(LaplaceSmoothingModel variant) => Set(variant, "laplace");
+		public SmoothingModelContainerDescriptor<TDocument> Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
+		public SmoothingModelContainerDescriptor<TDocument> LinearInterpolation(LinearInterpolationSmoothingModel variant) => Set(variant, "linear_interpolation");
+		public SmoothingModelContainerDescriptor<TDocument> LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
+		public SmoothingModelContainerDescriptor<TDocument> StupidBackoff(StupidBackoffSmoothingModel variant) => Set(variant, "stupid_backoff");
+		public SmoothingModelContainerDescriptor<TDocument> StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -190,33 +188,31 @@ namespace Elastic.Clients.Elasticsearch.Core.Search
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private SmoothingModelContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the SmoothingModelContainerDescriptor. Only a single SmoothingModelContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private SmoothingModelContainerDescriptor Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the SmoothingModelContainerDescriptor. Only a single SmoothingModelContainer variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
-		public void Laplace(LaplaceSmoothingModel variant) => Set(variant, "laplace");
-		public void Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-		public void LinearInterpolation(LinearInterpolationSmoothingModel variant) => Set(variant, "linear_interpolation");
-		public void LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-		public void StupidBackoff(StupidBackoffSmoothingModel variant) => Set(variant, "stupid_backoff");
-		public void StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
+		public SmoothingModelContainerDescriptor Laplace(LaplaceSmoothingModel variant) => Set(variant, "laplace");
+		public SmoothingModelContainerDescriptor Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
+		public SmoothingModelContainerDescriptor LinearInterpolation(LinearInterpolationSmoothingModel variant) => Set(variant, "linear_interpolation");
+		public SmoothingModelContainerDescriptor LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
+		public SmoothingModelContainerDescriptor StupidBackoff(StupidBackoffSmoothingModel variant) => Set(variant, "stupid_backoff");
+		public SmoothingModelContainerDescriptor StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
