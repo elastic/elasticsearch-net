@@ -173,25 +173,23 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private FunctionScoreContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private FunctionScoreContainerDescriptor<TDocument> Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
@@ -232,12 +230,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public void FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
-		public void FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
-		public void RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
-		public void RandomScore(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
-		public void ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
-		public void ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
+		public FunctionScoreContainerDescriptor<TDocument> FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
+		public FunctionScoreContainerDescriptor<TDocument> FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
+		public FunctionScoreContainerDescriptor<TDocument> RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
+		public FunctionScoreContainerDescriptor<TDocument> RandomScore(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
+		public FunctionScoreContainerDescriptor<TDocument> ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
+		public FunctionScoreContainerDescriptor<TDocument> ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -298,25 +296,23 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private FunctionScoreContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private FunctionScoreContainerDescriptor Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the FunctionScoreContainerDescriptor. Only a single FunctionScoreContainer variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
 		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
@@ -357,14 +353,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public void FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
-		public void FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => Set(configure, "field_value_factor");
-		public void FieldValueFactor<TDocument>(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
-		public void RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
-		public void RandomScore(Action<RandomScoreFunctionDescriptor> configure) => Set(configure, "random_score");
-		public void RandomScore<TDocument>(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
-		public void ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
-		public void ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
+		public FunctionScoreContainerDescriptor FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
+		public FunctionScoreContainerDescriptor FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => Set(configure, "field_value_factor");
+		public FunctionScoreContainerDescriptor FieldValueFactor<TDocument>(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
+		public FunctionScoreContainerDescriptor RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
+		public FunctionScoreContainerDescriptor RandomScore(Action<RandomScoreFunctionDescriptor> configure) => Set(configure, "random_score");
+		public FunctionScoreContainerDescriptor RandomScore<TDocument>(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
+		public FunctionScoreContainerDescriptor ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
+		public FunctionScoreContainerDescriptor ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
