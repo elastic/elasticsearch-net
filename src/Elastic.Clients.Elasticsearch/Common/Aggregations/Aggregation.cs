@@ -15,6 +15,8 @@ internal interface IAggregation
 /// </summary>
 public abstract class Aggregation : IAggregation
 {
+	internal Aggregation() { }
+
 	public abstract string? Name { get; internal set; }
 
 	//always evaluate to false so that each side of && equation is evaluated

@@ -15,17 +15,17 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class DataStreamResponse : ElasticsearchResponseBase
 {
-	public sealed partial class DataStreamResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("data_streams")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStream> DataStreams { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("data_streams")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStream> DataStreams { get; init; }
 }

@@ -4,10 +4,9 @@
 
 using Elastic.Transport.Products.Elasticsearch;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+public abstract class ExistsResponseBase : ElasticsearchResponseBase
 {
-	public abstract class ExistsResponseBase : ElasticsearchResponseBase
-	{
-		public bool Exists => ApiCall is {Success: true, HttpStatusCode: 200};
-	}
+	public bool Exists => ApiCall is {Success: true, HttpStatusCode: 200};
 }

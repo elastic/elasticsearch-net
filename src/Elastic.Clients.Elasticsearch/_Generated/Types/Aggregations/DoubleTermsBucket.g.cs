@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,88 +24,86 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+[JsonConverter(typeof(DoubleTermsBucketConverter))]
+public sealed partial class DoubleTermsBucket : AggregateDictionary
 {
-	[JsonConverter(typeof(DoubleTermsBucketConverter))]
-	public sealed partial class DoubleTermsBucket : AggregateDictionary
+	public DoubleTermsBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
 	{
-		public DoubleTermsBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
-		{
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long DocCount { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("doc_count_error")]
-		public long? DocCountError { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("key")]
-		public double Key { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("key_as_string")]
-		public string? KeyAsString { get; init; }
 	}
 
-	internal sealed class DoubleTermsBucketConverter : JsonConverter<DoubleTermsBucket>
+	[JsonInclude]
+	[JsonPropertyName("doc_count")]
+	public long DocCount { get; init; }
+
+	[JsonInclude]
+	[JsonPropertyName("doc_count_error")]
+	public long? DocCountError { get; init; }
+
+	[JsonInclude]
+	[JsonPropertyName("key")]
+	public double Key { get; init; }
+
+	[JsonInclude]
+	[JsonPropertyName("key_as_string")]
+	public string? KeyAsString { get; init; }
+}
+
+internal sealed class DoubleTermsBucketConverter : JsonConverter<DoubleTermsBucket>
+{
+	public override DoubleTermsBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override DoubleTermsBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
+		var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
+		long docCount = default;
+		long? docCountError = default;
+		double key = default;
+		string? keyAsString = default;
+		while (reader.Read())
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-			var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
-			long docCount = default;
-			long? docCountError = default;
-			double key = default;
-			string? keyAsString = default;
-			while (reader.Read())
+			if (reader.TokenType == JsonTokenType.EndObject)
+				break;
+			if (reader.TokenType != JsonTokenType.PropertyName)
+				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
+			var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+			reader.Read();
+			if (name.Equals("doc_count", StringComparison.Ordinal))
 			{
-				if (reader.TokenType == JsonTokenType.EndObject)
-					break;
-				if (reader.TokenType != JsonTokenType.PropertyName)
-					throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-				var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
-				reader.Read();
-				if (name.Equals("doc_count", StringComparison.Ordinal))
-				{
-					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
-
-				if (name.Equals("doc_count_error", StringComparison.Ordinal))
-				{
-					docCountError = JsonSerializer.Deserialize<long?>(ref reader, options);
-					continue;
-				}
-
-				if (name.Equals("key", StringComparison.Ordinal))
-				{
-					key = JsonSerializer.Deserialize<double>(ref reader, options);
-					continue;
-				}
-
-				if (name.Equals("key_as_string", StringComparison.Ordinal))
-				{
-					keyAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (name.Contains("#"))
-				{
-					AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
-					continue;
-				}
-
-				throw new JsonException("Unknown property read from JSON.");
+				docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+				continue;
 			}
 
-			return new DoubleTermsBucket(subAggs)
-			{ DocCount = docCount, DocCountError = docCountError, Key = key, KeyAsString = keyAsString };
+			if (name.Equals("doc_count_error", StringComparison.Ordinal))
+			{
+				docCountError = JsonSerializer.Deserialize<long?>(ref reader, options);
+				continue;
+			}
+
+			if (name.Equals("key", StringComparison.Ordinal))
+			{
+				key = JsonSerializer.Deserialize<double>(ref reader, options);
+				continue;
+			}
+
+			if (name.Equals("key_as_string", StringComparison.Ordinal))
+			{
+				keyAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
+				continue;
+			}
+
+			if (name.Contains("#"))
+			{
+				AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
+				continue;
+			}
+
+			throw new JsonException("Unknown property read from JSON.");
 		}
 
-		public override void Write(Utf8JsonWriter writer, DoubleTermsBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
+		return new DoubleTermsBucket(subAggs)
+		{ DocCount = docCount, DocCountError = docCountError, Key = key, KeyAsString = keyAsString };
 	}
+
+	public override void Write(Utf8JsonWriter writer, DoubleTermsBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
 }

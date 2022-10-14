@@ -4,7 +4,7 @@
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public sealed class CreateResponseItem : BulkResponseItemBase
+public sealed class CreateResponseItem : ResponseItem
 {
 	public override string Operation => "create";
 }

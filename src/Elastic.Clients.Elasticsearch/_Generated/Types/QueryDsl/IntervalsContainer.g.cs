@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,268 +24,266 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+[JsonConverter(typeof(IntervalsContainerConverter))]
+public sealed partial class IntervalsContainer
 {
-	[JsonConverter(typeof(IntervalsContainerConverter))]
-	public sealed partial class IntervalsContainer
+	internal IntervalsContainer(string variantName, object variant)
 	{
-		internal IntervalsContainer(string variantName, object variant)
-		{
-			if (variantName is null)
-				throw new ArgumentNullException(nameof(variantName));
-			if (variant is null)
-				throw new ArgumentNullException(nameof(variant));
-			if (string.IsNullOrWhiteSpace(variantName))
-				throw new ArgumentException("Variant name must not be empty or whitespace.");
-			VariantName = variantName;
-			Variant = variant;
-		}
-
-		internal object Variant { get; }
-
-		internal string VariantName { get; }
-
-		public static IntervalsContainer AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf intervalsAllOf) => new IntervalsContainer("all_of", intervalsAllOf);
-		public static IntervalsContainer AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf intervalsAnyOf) => new IntervalsContainer("any_of", intervalsAnyOf);
-		public static IntervalsContainer Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy intervalsFuzzy) => new IntervalsContainer("fuzzy", intervalsFuzzy);
-		public static IntervalsContainer Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => new IntervalsContainer("match", intervalsMatch);
-		public static IntervalsContainer Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => new IntervalsContainer("prefix", intervalsPrefix);
-		public static IntervalsContainer Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => new IntervalsContainer("wildcard", intervalsWildcard);
+		if (variantName is null)
+			throw new ArgumentNullException(nameof(variantName));
+		if (variant is null)
+			throw new ArgumentNullException(nameof(variant));
+		if (string.IsNullOrWhiteSpace(variantName))
+			throw new ArgumentException("Variant name must not be empty or whitespace.");
+		VariantName = variantName;
+		Variant = variant;
 	}
 
-	internal sealed class IntervalsContainerConverter : JsonConverter<IntervalsContainer>
-	{
-		public override IntervalsContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-			{
-				throw new JsonException("Expected start token.");
-			}
+	internal object Variant { get; }
 
+	internal string VariantName { get; }
+
+	public static IntervalsContainer AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf intervalsAllOf) => new IntervalsContainer("all_of", intervalsAllOf);
+	public static IntervalsContainer AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf intervalsAnyOf) => new IntervalsContainer("any_of", intervalsAnyOf);
+	public static IntervalsContainer Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy intervalsFuzzy) => new IntervalsContainer("fuzzy", intervalsFuzzy);
+	public static IntervalsContainer Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => new IntervalsContainer("match", intervalsMatch);
+	public static IntervalsContainer Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => new IntervalsContainer("prefix", intervalsPrefix);
+	public static IntervalsContainer Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => new IntervalsContainer("wildcard", intervalsWildcard);
+}
+
+internal sealed class IntervalsContainerConverter : JsonConverter<IntervalsContainer>
+{
+	public override IntervalsContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		if (reader.TokenType != JsonTokenType.StartObject)
+		{
+			throw new JsonException("Expected start token.");
+		}
+
+		reader.Read();
+		if (reader.TokenType != JsonTokenType.PropertyName)
+		{
+			throw new JsonException("Expected a property name token representing the variant held within this container.");
+		}
+
+		var propertyName = reader.GetString();
+		reader.Read();
+		if (propertyName == "all_of")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(ref reader, options);
 			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the variant held within this container.");
-			}
+			return new IntervalsContainer(propertyName, variant);
+		}
 
-			var propertyName = reader.GetString();
+		if (propertyName == "any_of")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(ref reader, options);
 			reader.Read();
-			if (propertyName == "all_of")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(ref reader, options);
-				reader.Read();
-				return new IntervalsContainer(propertyName, variant);
-			}
-
-			if (propertyName == "any_of")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(ref reader, options);
-				reader.Read();
-				return new IntervalsContainer(propertyName, variant);
-			}
-
-			if (propertyName == "fuzzy")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(ref reader, options);
-				reader.Read();
-				return new IntervalsContainer(propertyName, variant);
-			}
-
-			if (propertyName == "match")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(ref reader, options);
-				reader.Read();
-				return new IntervalsContainer(propertyName, variant);
-			}
-
-			if (propertyName == "prefix")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(ref reader, options);
-				reader.Read();
-				return new IntervalsContainer(propertyName, variant);
-			}
-
-			if (propertyName == "wildcard")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(ref reader, options);
-				reader.Read();
-				return new IntervalsContainer(propertyName, variant);
-			}
-
-			throw new JsonException();
+			return new IntervalsContainer(propertyName, variant);
 		}
 
-		public override void Write(Utf8JsonWriter writer, IntervalsContainer value, JsonSerializerOptions options)
+		if (propertyName == "fuzzy")
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "all_of":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf)value.Variant, options);
-					break;
-				case "any_of":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf)value.Variant, options);
-					break;
-				case "fuzzy":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy)value.Variant, options);
-					break;
-				case "match":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch)value.Variant, options);
-					break;
-				case "prefix":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix)value.Variant, options);
-					break;
-				case "wildcard":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard)value.Variant, options);
-					break;
-			}
-
-			writer.WriteEndObject();
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(ref reader, options);
+			reader.Read();
+			return new IntervalsContainer(propertyName, variant);
 		}
+
+		if (propertyName == "match")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(ref reader, options);
+			reader.Read();
+			return new IntervalsContainer(propertyName, variant);
+		}
+
+		if (propertyName == "prefix")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(ref reader, options);
+			reader.Read();
+			return new IntervalsContainer(propertyName, variant);
+		}
+
+		if (propertyName == "wildcard")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(ref reader, options);
+			reader.Read();
+			return new IntervalsContainer(propertyName, variant);
+		}
+
+		throw new JsonException();
 	}
 
-	public sealed partial class IntervalsContainerDescriptor<TDocument> : SerializableDescriptorBase<IntervalsContainerDescriptor<TDocument>>
+	public override void Write(Utf8JsonWriter writer, IntervalsContainer value, JsonSerializerOptions options)
 	{
-		internal IntervalsContainerDescriptor(Action<IntervalsContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public IntervalsContainerDescriptor() : base()
+		writer.WriteStartObject();
+		writer.WritePropertyName(value.VariantName);
+		switch (value.VariantName)
 		{
+			case "all_of":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf)value.Variant, options);
+				break;
+			case "any_of":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf)value.Variant, options);
+				break;
+			case "fuzzy":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy)value.Variant, options);
+				break;
+			case "match":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch)value.Variant, options);
+				break;
+			case "prefix":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix)value.Variant, options);
+				break;
+			case "wildcard":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard)value.Variant, options);
+				break;
 		}
 
-		private bool ContainsVariant { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		private string ContainedVariantName { get; set; }
-
-		private object Variant { get; set; }
-
-		private Descriptor Descriptor { get; set; }
-
-		private IntervalsContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor
-		{
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-			descriptorAction?.Invoke(descriptor);
-			Descriptor = descriptor;
-			return Self;
-		}
-
-		private IntervalsContainerDescriptor<TDocument> Set(object variant, string variantName)
-		{
-			Variant = variant;
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			return Self;
-		}
-
-		public IntervalsContainerDescriptor<TDocument> AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
-		public IntervalsContainerDescriptor<TDocument> AllOf(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
-		public IntervalsContainerDescriptor<TDocument> AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
-		public IntervalsContainerDescriptor<TDocument> AnyOf(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
-		public IntervalsContainerDescriptor<TDocument> Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
-		public IntervalsContainerDescriptor<TDocument> Fuzzy(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
-		public IntervalsContainerDescriptor<TDocument> Match(IntervalsMatch variant) => Set(variant, "match");
-		public IntervalsContainerDescriptor<TDocument> Match(Action<IntervalsMatchDescriptor<TDocument>> configure) => Set(configure, "match");
-		public IntervalsContainerDescriptor<TDocument> Prefix(IntervalsPrefix variant) => Set(variant, "prefix");
-		public IntervalsContainerDescriptor<TDocument> Prefix(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
-		public IntervalsContainerDescriptor<TDocument> Wildcard(IntervalsWildcard variant) => Set(variant, "wildcard");
-		public IntervalsContainerDescriptor<TDocument> Wildcard(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			}
-			else
-			{
-				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-			}
-
-			writer.WriteEndObject();
-		}
+public sealed partial class IntervalsContainerDescriptor<TDocument> : SerializableDescriptor<IntervalsContainerDescriptor<TDocument>>
+{
+	internal IntervalsContainerDescriptor(Action<IntervalsContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public IntervalsContainerDescriptor() : base()
+	{
 	}
 
-	public sealed partial class IntervalsContainerDescriptor : SerializableDescriptorBase<IntervalsContainerDescriptor>
+	private bool ContainsVariant { get; set; }
+
+	private string ContainedVariantName { get; set; }
+
+	private object Variant { get; set; }
+
+	private Descriptor Descriptor { get; set; }
+
+	private IntervalsContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
+		where T : Descriptor
 	{
-		internal IntervalsContainerDescriptor(Action<IntervalsContainerDescriptor> configure) => configure.Invoke(this);
-		public IntervalsContainerDescriptor() : base()
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		return Self;
+	}
+
+	private IntervalsContainerDescriptor<TDocument> Set(object variant, string variantName)
+	{
+		Variant = variant;
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	public IntervalsContainerDescriptor<TDocument> AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
+	public IntervalsContainerDescriptor<TDocument> AllOf(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
+	public IntervalsContainerDescriptor<TDocument> AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
+	public IntervalsContainerDescriptor<TDocument> AnyOf(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
+	public IntervalsContainerDescriptor<TDocument> Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
+	public IntervalsContainerDescriptor<TDocument> Fuzzy(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
+	public IntervalsContainerDescriptor<TDocument> Match(IntervalsMatch variant) => Set(variant, "match");
+	public IntervalsContainerDescriptor<TDocument> Match(Action<IntervalsMatchDescriptor<TDocument>> configure) => Set(configure, "match");
+	public IntervalsContainerDescriptor<TDocument> Prefix(IntervalsPrefix variant) => Set(variant, "prefix");
+	public IntervalsContainerDescriptor<TDocument> Prefix(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
+	public IntervalsContainerDescriptor<TDocument> Wildcard(IntervalsWildcard variant) => Set(variant, "wildcard");
+	public IntervalsContainerDescriptor<TDocument> Wildcard(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (!ContainsVariant)
 		{
+			writer.WriteNullValue();
+			return;
 		}
 
-		private bool ContainsVariant { get; set; }
-
-		private string ContainedVariantName { get; set; }
-
-		private object Variant { get; set; }
-
-		private Descriptor Descriptor { get; set; }
-
-		private IntervalsContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor
+		writer.WriteStartObject();
+		writer.WritePropertyName(ContainedVariantName);
+		if (Variant is not null)
 		{
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-			descriptorAction?.Invoke(descriptor);
-			Descriptor = descriptor;
-			return Self;
+			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+		}
+		else
+		{
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		private IntervalsContainerDescriptor Set(object variant, string variantName)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class IntervalsContainerDescriptor : SerializableDescriptor<IntervalsContainerDescriptor>
+{
+	internal IntervalsContainerDescriptor(Action<IntervalsContainerDescriptor> configure) => configure.Invoke(this);
+	public IntervalsContainerDescriptor() : base()
+	{
+	}
+
+	private bool ContainsVariant { get; set; }
+
+	private string ContainedVariantName { get; set; }
+
+	private object Variant { get; set; }
+
+	private Descriptor Descriptor { get; set; }
+
+	private IntervalsContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
+		where T : Descriptor
+	{
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		return Self;
+	}
+
+	private IntervalsContainerDescriptor Set(object variant, string variantName)
+	{
+		Variant = variant;
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	public IntervalsContainerDescriptor AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
+	public IntervalsContainerDescriptor AllOf(Action<IntervalsAllOfDescriptor> configure) => Set(configure, "all_of");
+	public IntervalsContainerDescriptor AllOf<TDocument>(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
+	public IntervalsContainerDescriptor AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
+	public IntervalsContainerDescriptor AnyOf(Action<IntervalsAnyOfDescriptor> configure) => Set(configure, "any_of");
+	public IntervalsContainerDescriptor AnyOf<TDocument>(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
+	public IntervalsContainerDescriptor Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
+	public IntervalsContainerDescriptor Fuzzy(Action<IntervalsFuzzyDescriptor> configure) => Set(configure, "fuzzy");
+	public IntervalsContainerDescriptor Fuzzy<TDocument>(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
+	public IntervalsContainerDescriptor Match(IntervalsMatch variant) => Set(variant, "match");
+	public IntervalsContainerDescriptor Match(Action<IntervalsMatchDescriptor> configure) => Set(configure, "match");
+	public IntervalsContainerDescriptor Match<TDocument>(Action<IntervalsMatchDescriptor<TDocument>> configure) => Set(configure, "match");
+	public IntervalsContainerDescriptor Prefix(IntervalsPrefix variant) => Set(variant, "prefix");
+	public IntervalsContainerDescriptor Prefix(Action<IntervalsPrefixDescriptor> configure) => Set(configure, "prefix");
+	public IntervalsContainerDescriptor Prefix<TDocument>(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
+	public IntervalsContainerDescriptor Wildcard(IntervalsWildcard variant) => Set(variant, "wildcard");
+	public IntervalsContainerDescriptor Wildcard(Action<IntervalsWildcardDescriptor> configure) => Set(configure, "wildcard");
+	public IntervalsContainerDescriptor Wildcard<TDocument>(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (!ContainsVariant)
 		{
-			Variant = variant;
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			return Self;
+			writer.WriteNullValue();
+			return;
 		}
 
-		public IntervalsContainerDescriptor AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
-		public IntervalsContainerDescriptor AllOf(Action<IntervalsAllOfDescriptor> configure) => Set(configure, "all_of");
-		public IntervalsContainerDescriptor AllOf<TDocument>(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
-		public IntervalsContainerDescriptor AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
-		public IntervalsContainerDescriptor AnyOf(Action<IntervalsAnyOfDescriptor> configure) => Set(configure, "any_of");
-		public IntervalsContainerDescriptor AnyOf<TDocument>(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
-		public IntervalsContainerDescriptor Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
-		public IntervalsContainerDescriptor Fuzzy(Action<IntervalsFuzzyDescriptor> configure) => Set(configure, "fuzzy");
-		public IntervalsContainerDescriptor Fuzzy<TDocument>(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
-		public IntervalsContainerDescriptor Match(IntervalsMatch variant) => Set(variant, "match");
-		public IntervalsContainerDescriptor Match(Action<IntervalsMatchDescriptor> configure) => Set(configure, "match");
-		public IntervalsContainerDescriptor Match<TDocument>(Action<IntervalsMatchDescriptor<TDocument>> configure) => Set(configure, "match");
-		public IntervalsContainerDescriptor Prefix(IntervalsPrefix variant) => Set(variant, "prefix");
-		public IntervalsContainerDescriptor Prefix(Action<IntervalsPrefixDescriptor> configure) => Set(configure, "prefix");
-		public IntervalsContainerDescriptor Prefix<TDocument>(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
-		public IntervalsContainerDescriptor Wildcard(IntervalsWildcard variant) => Set(variant, "wildcard");
-		public IntervalsContainerDescriptor Wildcard(Action<IntervalsWildcardDescriptor> configure) => Set(configure, "wildcard");
-		public IntervalsContainerDescriptor Wildcard<TDocument>(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		writer.WriteStartObject();
+		writer.WritePropertyName(ContainedVariantName);
+		if (Variant is not null)
 		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			}
-			else
-			{
-				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-			}
-
-			writer.WriteEndObject();
+			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
 		}
+		else
+		{
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

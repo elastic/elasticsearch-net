@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public partial class SimpleQueryStringFlags : Union<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag, string>
 {
-	public partial class SimpleQueryStringFlags : Union<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag, string>
+	public SimpleQueryStringFlags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag simpleQueryStringFlag) : base(simpleQueryStringFlag)
 	{
-		public SimpleQueryStringFlags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag simpleQueryStringFlag) : base(simpleQueryStringFlag)
-		{
-		}
+	}
 
-		public SimpleQueryStringFlags(string simpleQueryStringFlags) : base(simpleQueryStringFlags)
-		{
-		}
+	public SimpleQueryStringFlags(string simpleQueryStringFlags) : base(simpleQueryStringFlags)
+	{
 	}
 }

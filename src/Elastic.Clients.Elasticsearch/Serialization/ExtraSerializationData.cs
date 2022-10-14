@@ -6,7 +6,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Serialization;
 
 /// <summary>
 /// This actually does not ever get used as a converter. It's just an ugly hack to provide a way to

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,50 +24,48 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class DutchAnalyzer : IAnalyzer
 {
-	public sealed partial class DutchAnalyzer : IAnalyzer
-	{
-		[JsonInclude]
-		[JsonPropertyName("stopwords")]
-		[JsonConverter(typeof(StopWordsConverter))]
-		public IEnumerable<string>? Stopwords { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("stopwords")]
+	[JsonConverter(typeof(StopWordsConverter))]
+	public IEnumerable<string>? Stopwords { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "dutch";
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "dutch";
+}
+
+public sealed partial class DutchAnalyzerDescriptor : SerializableDescriptor<DutchAnalyzerDescriptor>, IBuildableDescriptor<DutchAnalyzer>
+{
+	internal DutchAnalyzerDescriptor(Action<DutchAnalyzerDescriptor> configure) => configure.Invoke(this);
+	public DutchAnalyzerDescriptor() : base()
+	{
 	}
 
-	public sealed partial class DutchAnalyzerDescriptor : SerializableDescriptorBase<DutchAnalyzerDescriptor>, IBuildableDescriptor<DutchAnalyzer>
+	private IEnumerable<string>? StopwordsValue { get; set; }
+
+	public DutchAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
 	{
-		internal DutchAnalyzerDescriptor(Action<DutchAnalyzerDescriptor> configure) => configure.Invoke(this);
-		public DutchAnalyzerDescriptor() : base()
-		{
-		}
-
-		private IEnumerable<string>? StopwordsValue { get; set; }
-
-		public DutchAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
-		{
-			StopwordsValue = stopwords;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (StopwordsValue is not null)
-			{
-				writer.WritePropertyName("stopwords");
-				SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("dutch");
-			writer.WriteEndObject();
-		}
-
-		DutchAnalyzer IBuildableDescriptor<DutchAnalyzer>.Build() => new()
-		{ Stopwords = StopwordsValue };
+		StopwordsValue = stopwords;
+		return Self;
 	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (StopwordsValue is not null)
+		{
+			writer.WritePropertyName("stopwords");
+			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("dutch");
+		writer.WriteEndObject();
+	}
+
+	DutchAnalyzer IBuildableDescriptor<DutchAnalyzer>.Build() => new()
+	{ Stopwords = StopwordsValue };
 }

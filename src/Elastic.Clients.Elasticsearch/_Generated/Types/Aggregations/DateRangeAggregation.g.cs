@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,624 +24,622 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+internal sealed class DateRangeAggregationConverter : JsonConverter<DateRangeAggregation>
 {
-	internal sealed class DateRangeAggregationConverter : JsonConverter<DateRangeAggregation>
+	public override DateRangeAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override DateRangeAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var aggName = reader.GetString();
+		if (aggName != "date_range")
+			throw new JsonException("Unexpected JSON detected.");
+		var agg = new DateRangeAggregation(aggName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "date_range")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new DateRangeAggregation(aggName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("field"))
 				{
-					if (reader.ValueTextEquals("field"))
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+					if (value is not null)
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
-
-						continue;
+						agg.Field = value;
 					}
 
-					if (reader.ValueTextEquals("format"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("format"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Format = value;
 					}
 
-					if (reader.ValueTextEquals("missing"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("missing"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Missing = value;
 					}
 
-					if (reader.ValueTextEquals("ranges"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Ranges = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("ranges"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Ranges = value;
 					}
 
-					if (reader.ValueTextEquals("time_zone"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.TimeZone = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("time_zone"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.TimeZone = value;
 					}
+
+					continue;
 				}
 			}
+		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("meta"))
 				{
-					if (reader.ValueTextEquals("meta"))
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					if (value is not null)
 					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
+						agg.Meta = value;
 					}
 
-					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-					{
-						var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Aggregations = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
+				{
+					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Aggregations = value;
 					}
+
+					continue;
 				}
 			}
-
-			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, DateRangeAggregation value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("date_range");
-			writer.WriteStartObject();
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Format))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
-			}
-
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
-			}
-
-			if (value.Ranges is not null)
-			{
-				writer.WritePropertyName("ranges");
-				JsonSerializer.Serialize(writer, value.Ranges, options);
-			}
-
-			if (value.TimeZone is not null)
-			{
-				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, value.TimeZone, options);
-			}
-
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (value.Aggregations is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, value.Aggregations, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return agg;
 	}
 
-	[JsonConverter(typeof(DateRangeAggregationConverter))]
-	public sealed partial class DateRangeAggregation : Aggregation
+	public override void Write(Utf8JsonWriter writer, DateRangeAggregation value, JsonSerializerOptions options)
 	{
-		public DateRangeAggregation(string name) => Name = name;
-		internal DateRangeAggregation()
+		writer.WriteStartObject();
+		writer.WritePropertyName("date_range");
+		writer.WriteStartObject();
+		if (value.Field is not null)
 		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value.Field, options);
 		}
 
-		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+		if (!string.IsNullOrEmpty(value.Format))
+		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(value.Format);
+		}
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		if (value.Missing is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, value.Missing, options);
+		}
 
-		public string? Format { get; set; }
+		if (value.Ranges is not null)
+		{
+			writer.WritePropertyName("ranges");
+			JsonSerializer.Serialize(writer, value.Ranges, options);
+		}
 
-		public Dictionary<string, object>? Meta { get; set; }
+		if (value.TimeZone is not null)
+		{
+			writer.WritePropertyName("time_zone");
+			JsonSerializer.Serialize(writer, value.TimeZone, options);
+		}
 
-		public FieldValue? Missing { get; set; }
+		writer.WriteEndObject();
+		if (value.Meta is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
+		}
 
-		public override string? Name { get; internal set; }
+		if (value.Aggregations is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, value.Aggregations, options);
+		}
 
-		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		public string? TimeZone { get; set; }
+[JsonConverter(typeof(DateRangeAggregationConverter))]
+public sealed partial class DateRangeAggregation : Aggregation
+{
+	public DateRangeAggregation(string name) => Name = name;
+	internal DateRangeAggregation()
+	{
 	}
 
-	public sealed partial class DateRangeAggregationDescriptor<TDocument> : SerializableDescriptorBase<DateRangeAggregationDescriptor<TDocument>>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	public string? Format { get; set; }
+
+	public Dictionary<string, object>? Meta { get; set; }
+
+	public FieldValue? Missing { get; set; }
+
+	public override string? Name { get; internal set; }
+
+	public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
+
+	public string? TimeZone { get; set; }
+}
+
+public sealed partial class DateRangeAggregationDescriptor<TDocument> : SerializableDescriptor<DateRangeAggregationDescriptor<TDocument>>
+{
+	internal DateRangeAggregationDescriptor(Action<DateRangeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public DateRangeAggregationDescriptor() : base()
 	{
-		internal DateRangeAggregationDescriptor(Action<DateRangeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public DateRangeAggregationDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
-		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private string? FormatValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private FieldValue? MissingValue { get; set; }
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
-
-		private DateRangeExpressionDescriptor RangesDescriptor { get; set; }
-
-		private Action<DateRangeExpressionDescriptor> RangesDescriptorAction { get; set; }
-
-		private Action<DateRangeExpressionDescriptor>[] RangesDescriptorActions { get; set; }
-
-		private string? TimeZoneValue { get; set; }
-
-		public DateRangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-		{
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = null;
-			AggregationsValue = aggregations;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
-		{
-			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
-			AggregationsDescriptor = descriptor;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
-		{
-			AggregationsValue = null;
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = configure;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> Format(string? format)
-		{
-			FormatValue = format;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> Missing(FieldValue? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
-		{
-			RangesDescriptor = null;
-			RangesDescriptorAction = null;
-			RangesDescriptorActions = null;
-			RangesValue = ranges;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> Ranges(DateRangeExpressionDescriptor descriptor)
-		{
-			RangesValue = null;
-			RangesDescriptorAction = null;
-			RangesDescriptorActions = null;
-			RangesDescriptor = descriptor;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> Ranges(Action<DateRangeExpressionDescriptor> configure)
-		{
-			RangesValue = null;
-			RangesDescriptor = null;
-			RangesDescriptorActions = null;
-			RangesDescriptorAction = configure;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> Ranges(params Action<DateRangeExpressionDescriptor>[] configure)
-		{
-			RangesValue = null;
-			RangesDescriptor = null;
-			RangesDescriptorAction = null;
-			RangesDescriptorActions = configure;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor<TDocument> TimeZone(string? timeZone)
-		{
-			TimeZoneValue = timeZone;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("date_range");
-			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (RangesDescriptor is not null)
-			{
-				writer.WritePropertyName("ranges");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, RangesDescriptor, options);
-				writer.WriteEndArray();
-			}
-			else if (RangesDescriptorAction is not null)
-			{
-				writer.WritePropertyName("ranges");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(RangesDescriptorAction), options);
-				writer.WriteEndArray();
-			}
-			else if (RangesDescriptorActions is not null)
-			{
-				writer.WritePropertyName("ranges");
-				writer.WriteStartArray();
-				foreach (var action in RangesDescriptorActions)
-				{
-					JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(action), options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else if (RangesValue is not null)
-			{
-				writer.WritePropertyName("ranges");
-				JsonSerializer.Serialize(writer, RangesValue, options);
-			}
-
-			if (TimeZoneValue is not null)
-			{
-				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, TimeZoneValue, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (AggregationsDescriptor is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-			}
-			else if (AggregationsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
-			}
-			else if (AggregationsValue is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class DateRangeAggregationDescriptor : SerializableDescriptorBase<DateRangeAggregationDescriptor>
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
+
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
+
+	private DateRangeExpressionDescriptor RangesDescriptor { get; set; }
+
+	private Action<DateRangeExpressionDescriptor> RangesDescriptorAction { get; set; }
+
+	private Action<DateRangeExpressionDescriptor>[] RangesDescriptorActions { get; set; }
+
+	private string? TimeZoneValue { get; set; }
+
+	public DateRangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 	{
-		internal DateRangeAggregationDescriptor(Action<DateRangeAggregationDescriptor> configure) => configure.Invoke(this);
-		public DateRangeAggregationDescriptor() : base()
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = null;
+		AggregationsValue = aggregations;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptorAction = null;
+		AggregationsDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = configure;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
+	{
+		RangesDescriptor = null;
+		RangesDescriptorAction = null;
+		RangesDescriptorActions = null;
+		RangesValue = ranges;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> Ranges(DateRangeExpressionDescriptor descriptor)
+	{
+		RangesValue = null;
+		RangesDescriptorAction = null;
+		RangesDescriptorActions = null;
+		RangesDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> Ranges(Action<DateRangeExpressionDescriptor> configure)
+	{
+		RangesValue = null;
+		RangesDescriptor = null;
+		RangesDescriptorActions = null;
+		RangesDescriptorAction = configure;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> Ranges(params Action<DateRangeExpressionDescriptor>[] configure)
+	{
+		RangesValue = null;
+		RangesDescriptor = null;
+		RangesDescriptorAction = null;
+		RangesDescriptorActions = configure;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor<TDocument> TimeZone(string? timeZone)
+	{
+		TimeZoneValue = timeZone;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("date_range");
+		writer.WriteStartObject();
+		if (FieldValue is not null)
 		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
-
-		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private string? FormatValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private FieldValue? MissingValue { get; set; }
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
-
-		private DateRangeExpressionDescriptor RangesDescriptor { get; set; }
-
-		private Action<DateRangeExpressionDescriptor> RangesDescriptorAction { get; set; }
-
-		private Action<DateRangeExpressionDescriptor>[] RangesDescriptorActions { get; set; }
-
-		private string? TimeZoneValue { get; set; }
-
-		public DateRangeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = null;
-			AggregationsValue = aggregations;
-			return Self;
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
 		}
 
-		public DateRangeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+		if (MissingValue is not null)
 		{
-			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
-			AggregationsDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
 		}
 
-		public DateRangeAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+		if (RangesDescriptor is not null)
 		{
-			AggregationsValue = null;
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("ranges");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, RangesDescriptor, options);
+			writer.WriteEndArray();
 		}
-
-		public DateRangeAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		else if (RangesDescriptorAction is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("ranges");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(RangesDescriptorAction), options);
+			writer.WriteEndArray();
 		}
-
-		public DateRangeAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		else if (RangesDescriptorActions is not null)
 		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor Format(string? format)
-		{
-			FormatValue = format;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor Missing(FieldValue? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
-		{
-			RangesDescriptor = null;
-			RangesDescriptorAction = null;
-			RangesDescriptorActions = null;
-			RangesValue = ranges;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor Ranges(DateRangeExpressionDescriptor descriptor)
-		{
-			RangesValue = null;
-			RangesDescriptorAction = null;
-			RangesDescriptorActions = null;
-			RangesDescriptor = descriptor;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor Ranges(Action<DateRangeExpressionDescriptor> configure)
-		{
-			RangesValue = null;
-			RangesDescriptor = null;
-			RangesDescriptorActions = null;
-			RangesDescriptorAction = configure;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor Ranges(params Action<DateRangeExpressionDescriptor>[] configure)
-		{
-			RangesValue = null;
-			RangesDescriptor = null;
-			RangesDescriptorAction = null;
-			RangesDescriptorActions = configure;
-			return Self;
-		}
-
-		public DateRangeAggregationDescriptor TimeZone(string? timeZone)
-		{
-			TimeZoneValue = timeZone;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("date_range");
-			writer.WriteStartObject();
-			if (FieldValue is not null)
+			writer.WritePropertyName("ranges");
+			writer.WriteStartArray();
+			foreach (var action in RangesDescriptorActions)
 			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
+				JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(action), options);
 			}
 
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (RangesDescriptor is not null)
-			{
-				writer.WritePropertyName("ranges");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, RangesDescriptor, options);
-				writer.WriteEndArray();
-			}
-			else if (RangesDescriptorAction is not null)
-			{
-				writer.WritePropertyName("ranges");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(RangesDescriptorAction), options);
-				writer.WriteEndArray();
-			}
-			else if (RangesDescriptorActions is not null)
-			{
-				writer.WritePropertyName("ranges");
-				writer.WriteStartArray();
-				foreach (var action in RangesDescriptorActions)
-				{
-					JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(action), options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else if (RangesValue is not null)
-			{
-				writer.WritePropertyName("ranges");
-				JsonSerializer.Serialize(writer, RangesValue, options);
-			}
-
-			if (TimeZoneValue is not null)
-			{
-				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, TimeZoneValue, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (AggregationsDescriptor is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-			}
-			else if (AggregationsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
-			}
-			else if (AggregationsValue is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsValue, options);
-			}
-
-			writer.WriteEndObject();
+			writer.WriteEndArray();
 		}
+		else if (RangesValue is not null)
+		{
+			writer.WritePropertyName("ranges");
+			JsonSerializer.Serialize(writer, RangesValue, options);
+		}
+
+		if (TimeZoneValue is not null)
+		{
+			writer.WritePropertyName("time_zone");
+			JsonSerializer.Serialize(writer, TimeZoneValue, options);
+		}
+
+		writer.WriteEndObject();
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (AggregationsDescriptor is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+		}
+		else if (AggregationsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+		}
+		else if (AggregationsValue is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class DateRangeAggregationDescriptor : SerializableDescriptor<DateRangeAggregationDescriptor>
+{
+	internal DateRangeAggregationDescriptor(Action<DateRangeAggregationDescriptor> configure) => configure.Invoke(this);
+	public DateRangeAggregationDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
+
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
+
+	private DateRangeExpressionDescriptor RangesDescriptor { get; set; }
+
+	private Action<DateRangeExpressionDescriptor> RangesDescriptorAction { get; set; }
+
+	private Action<DateRangeExpressionDescriptor>[] RangesDescriptorActions { get; set; }
+
+	private string? TimeZoneValue { get; set; }
+
+	public DateRangeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+	{
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = null;
+		AggregationsValue = aggregations;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptorAction = null;
+		AggregationsDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = configure;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
+	{
+		RangesDescriptor = null;
+		RangesDescriptorAction = null;
+		RangesDescriptorActions = null;
+		RangesValue = ranges;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Ranges(DateRangeExpressionDescriptor descriptor)
+	{
+		RangesValue = null;
+		RangesDescriptorAction = null;
+		RangesDescriptorActions = null;
+		RangesDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Ranges(Action<DateRangeExpressionDescriptor> configure)
+	{
+		RangesValue = null;
+		RangesDescriptor = null;
+		RangesDescriptorActions = null;
+		RangesDescriptorAction = configure;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor Ranges(params Action<DateRangeExpressionDescriptor>[] configure)
+	{
+		RangesValue = null;
+		RangesDescriptor = null;
+		RangesDescriptorAction = null;
+		RangesDescriptorActions = configure;
+		return Self;
+	}
+
+	public DateRangeAggregationDescriptor TimeZone(string? timeZone)
+	{
+		TimeZoneValue = timeZone;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("date_range");
+		writer.WriteStartObject();
+		if (FieldValue is not null)
+		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(FormatValue))
+		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
+		}
+
+		if (MissingValue is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
+		}
+
+		if (RangesDescriptor is not null)
+		{
+			writer.WritePropertyName("ranges");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, RangesDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (RangesDescriptorAction is not null)
+		{
+			writer.WritePropertyName("ranges");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(RangesDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (RangesDescriptorActions is not null)
+		{
+			writer.WritePropertyName("ranges");
+			writer.WriteStartArray();
+			foreach (var action in RangesDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new DateRangeExpressionDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (RangesValue is not null)
+		{
+			writer.WritePropertyName("ranges");
+			JsonSerializer.Serialize(writer, RangesValue, options);
+		}
+
+		if (TimeZoneValue is not null)
+		{
+			writer.WritePropertyName("time_zone");
+			JsonSerializer.Serialize(writer, TimeZoneValue, options);
+		}
+
+		writer.WriteEndObject();
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (AggregationsDescriptor is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+		}
+		else if (AggregationsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
+		}
+		else if (AggregationsValue is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

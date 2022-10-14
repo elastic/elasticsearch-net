@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public partial class Like : Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
 {
-	public partial class Like : Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
+	public Like(string like) : base(like)
 	{
-		public Like(string like) : base(like)
-		{
-		}
+	}
 
-		public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument likeDocument) : base(likeDocument)
-		{
-		}
+	public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument likeDocument) : base(likeDocument)
+	{
 	}
 }

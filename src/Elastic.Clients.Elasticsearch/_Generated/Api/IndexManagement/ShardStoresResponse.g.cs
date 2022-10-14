@@ -15,17 +15,17 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class ShardStoresResponse : ElasticsearchResponseBase
 {
-	public sealed partial class ShardStoresResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("indices")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndicesShardStores> Indices { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("indices")]
+	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndicesShardStores> Indices { get; init; }
 }

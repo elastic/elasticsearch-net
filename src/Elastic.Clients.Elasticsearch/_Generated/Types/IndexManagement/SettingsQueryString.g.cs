@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,36 +24,34 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class SettingsQueryString
 {
-	public sealed partial class SettingsQueryString
+	[JsonInclude]
+	[JsonPropertyName("lenient")]
+	public bool Lenient { get; set; }
+}
+
+public sealed partial class SettingsQueryStringDescriptor : SerializableDescriptor<SettingsQueryStringDescriptor>
+{
+	internal SettingsQueryStringDescriptor(Action<SettingsQueryStringDescriptor> configure) => configure.Invoke(this);
+	public SettingsQueryStringDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("lenient")]
-		public bool Lenient { get; set; }
 	}
 
-	public sealed partial class SettingsQueryStringDescriptor : SerializableDescriptorBase<SettingsQueryStringDescriptor>
+	private bool LenientValue { get; set; }
+
+	public SettingsQueryStringDescriptor Lenient(bool lenient = true)
 	{
-		internal SettingsQueryStringDescriptor(Action<SettingsQueryStringDescriptor> configure) => configure.Invoke(this);
-		public SettingsQueryStringDescriptor() : base()
-		{
-		}
+		LenientValue = lenient;
+		return Self;
+	}
 
-		private bool LenientValue { get; set; }
-
-		public SettingsQueryStringDescriptor Lenient(bool lenient = true)
-		{
-			LenientValue = lenient;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("lenient");
-			writer.WriteBooleanValue(LenientValue);
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("lenient");
+		writer.WriteBooleanValue(LenientValue);
+		writer.WriteEndObject();
 	}
 }

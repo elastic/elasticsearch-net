@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Fluent;
 
 /// <summary>
 /// Used in the "fluent" syntax to support chained configuration of dictionary entries.

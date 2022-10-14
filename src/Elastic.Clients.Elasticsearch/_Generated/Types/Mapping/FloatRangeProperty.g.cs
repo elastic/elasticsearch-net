@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,522 +24,520 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Mapping
+namespace Elastic.Clients.Elasticsearch.Mapping;
+public sealed partial class FloatRangeProperty : IProperty
 {
-	public sealed partial class FloatRangeProperty : IProperty
+	[JsonInclude]
+	[JsonPropertyName("boost")]
+	public double? Boost { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("coerce")]
+	public bool? Coerce { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("copy_to")]
+	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("doc_values")]
+	public bool? DocValues { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("dynamic")]
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("fields")]
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("ignore_above")]
+	public int? IgnoreAbove { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("index")]
+	public bool? Index { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("local_metadata")]
+	public Dictionary<string, object>? LocalMetadata { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("meta")]
+	public Dictionary<string, string>? Meta { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("properties")]
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("similarity")]
+	public string? Similarity { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("store")]
+	public bool? Store { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "float_range";
+}
+
+public sealed partial class FloatRangePropertyDescriptor<TDocument> : SerializableDescriptor<FloatRangePropertyDescriptor<TDocument>>, IBuildableDescriptor<FloatRangeProperty>
+{
+	internal FloatRangePropertyDescriptor(Action<FloatRangePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public FloatRangePropertyDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("coerce")]
-		public bool? Coerce { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("copy_to")]
-		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("doc_values")]
-		public bool? DocValues { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("dynamic")]
-		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ignore_above")]
-		public int? IgnoreAbove { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("local_metadata")]
-		public Dictionary<string, object>? LocalMetadata { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, string>? Meta { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("properties")]
-		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("similarity")]
-		public string? Similarity { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("store")]
-		public bool? Store { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "float_range";
 	}
 
-	public sealed partial class FloatRangePropertyDescriptor<TDocument> : SerializableDescriptorBase<FloatRangePropertyDescriptor<TDocument>>, IBuildableDescriptor<FloatRangeProperty>
+	private double? BoostValue { get; set; }
+
+	private bool? CoerceValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+	private bool? DocValuesValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+	private int? IgnoreAboveValue { get; set; }
+
+	private bool? IndexValue { get; set; }
+
+	private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+	private Dictionary<string, string>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+	private string? SimilarityValue { get; set; }
+
+	private bool? StoreValue { get; set; }
+
+	public FloatRangePropertyDescriptor<TDocument> Boost(double? boost)
 	{
-		internal FloatRangePropertyDescriptor(Action<FloatRangePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public FloatRangePropertyDescriptor() : base()
-		{
-		}
-
-		private double? BoostValue { get; set; }
-
-		private bool? CoerceValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
-		private bool? DocValuesValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
-		private int? IgnoreAboveValue { get; set; }
-
-		private bool? IndexValue { get; set; }
-
-		private Dictionary<string, object>? LocalMetadataValue { get; set; }
-
-		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private string? SimilarityValue { get; set; }
-
-		private bool? StoreValue { get; set; }
-
-		public FloatRangePropertyDescriptor<TDocument> Boost(double? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Coerce(bool? coerce = true)
-		{
-			CoerceValue = coerce;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> DocValues(bool? docValues = true)
-		{
-			DocValuesValue = docValues;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
-		{
-			DynamicValue = dynamic;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
-		{
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
-		{
-			IgnoreAboveValue = ignoreAbove;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Index(bool? index = true)
-		{
-			IndexValue = index;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
-		{
-			PropertiesValue = properties;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
-		{
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Similarity(string? similarity)
-		{
-			SimilarityValue = similarity;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor<TDocument> Store(bool? store = true)
-		{
-			StoreValue = store;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			if (CoerceValue.HasValue)
-			{
-				writer.WritePropertyName("coerce");
-				writer.WriteBooleanValue(CoerceValue.Value);
-			}
-
-			if (CopyToValue is not null)
-			{
-				writer.WritePropertyName("copy_to");
-				JsonSerializer.Serialize(writer, CopyToValue, options);
-			}
-
-			if (DocValuesValue.HasValue)
-			{
-				writer.WritePropertyName("doc_values");
-				writer.WriteBooleanValue(DocValuesValue.Value);
-			}
-
-			if (DynamicValue is not null)
-			{
-				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, DynamicValue, options);
-			}
-
-			if (FieldsValue is not null)
-			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, FieldsValue, options);
-			}
-
-			if (IgnoreAboveValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_above");
-				writer.WriteNumberValue(IgnoreAboveValue.Value);
-			}
-
-			if (IndexValue.HasValue)
-			{
-				writer.WritePropertyName("index");
-				writer.WriteBooleanValue(IndexValue.Value);
-			}
-
-			if (LocalMetadataValue is not null)
-			{
-				writer.WritePropertyName("local_metadata");
-				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (PropertiesValue is not null)
-			{
-				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, PropertiesValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(SimilarityValue))
-			{
-				writer.WritePropertyName("similarity");
-				writer.WriteStringValue(SimilarityValue);
-			}
-
-			if (StoreValue.HasValue)
-			{
-				writer.WritePropertyName("store");
-				writer.WriteBooleanValue(StoreValue.Value);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("float_range");
-			writer.WriteEndObject();
-		}
-
-		FloatRangeProperty IBuildableDescriptor<FloatRangeProperty>.Build() => new()
-		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		BoostValue = boost;
+		return Self;
 	}
 
-	public sealed partial class FloatRangePropertyDescriptor : SerializableDescriptorBase<FloatRangePropertyDescriptor>, IBuildableDescriptor<FloatRangeProperty>
+	public FloatRangePropertyDescriptor<TDocument> Coerce(bool? coerce = true)
 	{
-		internal FloatRangePropertyDescriptor(Action<FloatRangePropertyDescriptor> configure) => configure.Invoke(this);
-		public FloatRangePropertyDescriptor() : base()
-		{
-		}
-
-		private double? BoostValue { get; set; }
-
-		private bool? CoerceValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
-		private bool? DocValuesValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
-		private int? IgnoreAboveValue { get; set; }
-
-		private bool? IndexValue { get; set; }
-
-		private Dictionary<string, object>? LocalMetadataValue { get; set; }
-
-		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private string? SimilarityValue { get; set; }
-
-		private bool? StoreValue { get; set; }
-
-		public FloatRangePropertyDescriptor Boost(double? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Coerce(bool? coerce = true)
-		{
-			CoerceValue = coerce;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor DocValues(bool? docValues = true)
-		{
-			DocValuesValue = docValues;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
-		{
-			DynamicValue = dynamic;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
-		{
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor IgnoreAbove(int? ignoreAbove)
-		{
-			IgnoreAboveValue = ignoreAbove;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Index(bool? index = true)
-		{
-			IndexValue = index;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
-		{
-			PropertiesValue = properties;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
-		{
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Similarity(string? similarity)
-		{
-			SimilarityValue = similarity;
-			return Self;
-		}
-
-		public FloatRangePropertyDescriptor Store(bool? store = true)
-		{
-			StoreValue = store;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			if (CoerceValue.HasValue)
-			{
-				writer.WritePropertyName("coerce");
-				writer.WriteBooleanValue(CoerceValue.Value);
-			}
-
-			if (CopyToValue is not null)
-			{
-				writer.WritePropertyName("copy_to");
-				JsonSerializer.Serialize(writer, CopyToValue, options);
-			}
-
-			if (DocValuesValue.HasValue)
-			{
-				writer.WritePropertyName("doc_values");
-				writer.WriteBooleanValue(DocValuesValue.Value);
-			}
-
-			if (DynamicValue is not null)
-			{
-				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, DynamicValue, options);
-			}
-
-			if (FieldsValue is not null)
-			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, FieldsValue, options);
-			}
-
-			if (IgnoreAboveValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_above");
-				writer.WriteNumberValue(IgnoreAboveValue.Value);
-			}
-
-			if (IndexValue.HasValue)
-			{
-				writer.WritePropertyName("index");
-				writer.WriteBooleanValue(IndexValue.Value);
-			}
-
-			if (LocalMetadataValue is not null)
-			{
-				writer.WritePropertyName("local_metadata");
-				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (PropertiesValue is not null)
-			{
-				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, PropertiesValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(SimilarityValue))
-			{
-				writer.WritePropertyName("similarity");
-				writer.WriteStringValue(SimilarityValue);
-			}
-
-			if (StoreValue.HasValue)
-			{
-				writer.WritePropertyName("store");
-				writer.WriteBooleanValue(StoreValue.Value);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("float_range");
-			writer.WriteEndObject();
-		}
-
-		FloatRangeProperty IBuildableDescriptor<FloatRangeProperty>.Build() => new()
-		{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		CoerceValue = coerce;
+		return Self;
 	}
+
+	public FloatRangePropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	{
+		CopyToValue = copyTo;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+	{
+		DocValuesValue = docValues;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	{
+		DynamicValue = dynamic;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	{
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	{
+		IgnoreAboveValue = ignoreAbove;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> Index(bool? index = true)
+	{
+		IndexValue = index;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	{
+		PropertiesValue = properties;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	{
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> Similarity(string? similarity)
+	{
+		SimilarityValue = similarity;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor<TDocument> Store(bool? store = true)
+	{
+		StoreValue = store;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (CoerceValue.HasValue)
+		{
+			writer.WritePropertyName("coerce");
+			writer.WriteBooleanValue(CoerceValue.Value);
+		}
+
+		if (CopyToValue is not null)
+		{
+			writer.WritePropertyName("copy_to");
+			JsonSerializer.Serialize(writer, CopyToValue, options);
+		}
+
+		if (DocValuesValue.HasValue)
+		{
+			writer.WritePropertyName("doc_values");
+			writer.WriteBooleanValue(DocValuesValue.Value);
+		}
+
+		if (DynamicValue is not null)
+		{
+			writer.WritePropertyName("dynamic");
+			JsonSerializer.Serialize(writer, DynamicValue, options);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (IgnoreAboveValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_above");
+			writer.WriteNumberValue(IgnoreAboveValue.Value);
+		}
+
+		if (IndexValue.HasValue)
+		{
+			writer.WritePropertyName("index");
+			writer.WriteBooleanValue(IndexValue.Value);
+		}
+
+		if (LocalMetadataValue is not null)
+		{
+			writer.WritePropertyName("local_metadata");
+			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (PropertiesValue is not null)
+		{
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(SimilarityValue))
+		{
+			writer.WritePropertyName("similarity");
+			writer.WriteStringValue(SimilarityValue);
+		}
+
+		if (StoreValue.HasValue)
+		{
+			writer.WritePropertyName("store");
+			writer.WriteBooleanValue(StoreValue.Value);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("float_range");
+		writer.WriteEndObject();
+	}
+
+	FloatRangeProperty IBuildableDescriptor<FloatRangeProperty>.Build() => new()
+	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+}
+
+public sealed partial class FloatRangePropertyDescriptor : SerializableDescriptor<FloatRangePropertyDescriptor>, IBuildableDescriptor<FloatRangeProperty>
+{
+	internal FloatRangePropertyDescriptor(Action<FloatRangePropertyDescriptor> configure) => configure.Invoke(this);
+	public FloatRangePropertyDescriptor() : base()
+	{
+	}
+
+	private double? BoostValue { get; set; }
+
+	private bool? CoerceValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+	private bool? DocValuesValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+	private int? IgnoreAboveValue { get; set; }
+
+	private bool? IndexValue { get; set; }
+
+	private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+	private Dictionary<string, string>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+	private string? SimilarityValue { get; set; }
+
+	private bool? StoreValue { get; set; }
+
+	public FloatRangePropertyDescriptor Boost(double? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Coerce(bool? coerce = true)
+	{
+		CoerceValue = coerce;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	{
+		CopyToValue = copyTo;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor DocValues(bool? docValues = true)
+	{
+		DocValuesValue = docValues;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	{
+		DynamicValue = dynamic;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	{
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	{
+		IgnoreAboveValue = ignoreAbove;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Index(bool? index = true)
+	{
+		IndexValue = index;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	{
+		PropertiesValue = properties;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	{
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Similarity(string? similarity)
+	{
+		SimilarityValue = similarity;
+		return Self;
+	}
+
+	public FloatRangePropertyDescriptor Store(bool? store = true)
+	{
+		StoreValue = store;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (CoerceValue.HasValue)
+		{
+			writer.WritePropertyName("coerce");
+			writer.WriteBooleanValue(CoerceValue.Value);
+		}
+
+		if (CopyToValue is not null)
+		{
+			writer.WritePropertyName("copy_to");
+			JsonSerializer.Serialize(writer, CopyToValue, options);
+		}
+
+		if (DocValuesValue.HasValue)
+		{
+			writer.WritePropertyName("doc_values");
+			writer.WriteBooleanValue(DocValuesValue.Value);
+		}
+
+		if (DynamicValue is not null)
+		{
+			writer.WritePropertyName("dynamic");
+			JsonSerializer.Serialize(writer, DynamicValue, options);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (IgnoreAboveValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_above");
+			writer.WriteNumberValue(IgnoreAboveValue.Value);
+		}
+
+		if (IndexValue.HasValue)
+		{
+			writer.WritePropertyName("index");
+			writer.WriteBooleanValue(IndexValue.Value);
+		}
+
+		if (LocalMetadataValue is not null)
+		{
+			writer.WritePropertyName("local_metadata");
+			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (PropertiesValue is not null)
+		{
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(SimilarityValue))
+		{
+			writer.WritePropertyName("similarity");
+			writer.WriteStringValue(SimilarityValue);
+		}
+
+		if (StoreValue.HasValue)
+		{
+			writer.WritePropertyName("store");
+			writer.WriteBooleanValue(StoreValue.Value);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("float_range");
+		writer.WriteEndObject();
+	}
+
+	FloatRangeProperty IBuildableDescriptor<FloatRangeProperty>.Build() => new()
+	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }

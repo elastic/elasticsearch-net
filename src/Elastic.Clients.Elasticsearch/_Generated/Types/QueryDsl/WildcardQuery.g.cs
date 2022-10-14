@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,402 +24,400 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+internal sealed class WildcardQueryConverter : JsonConverter<WildcardQuery>
 {
-	internal sealed class WildcardQueryConverter : JsonConverter<WildcardQuery>
+	public override WildcardQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override WildcardQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var fieldName = reader.GetString();
+		reader.Read();
+		var variant = new WildcardQuery(fieldName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var fieldName = reader.GetString();
-			reader.Read();
-			var variant = new WildcardQuery(fieldName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				var property = reader.GetString();
+				if (property == "_name")
 				{
-					var property = reader.GetString();
-					if (property == "_name")
-					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
+				if (property == "boost")
+				{
+					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "case_insensitive")
-					{
-						variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						continue;
-					}
+				if (property == "case_insensitive")
+				{
+					variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "rewrite")
-					{
-						variant.Rewrite = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+				if (property == "rewrite")
+				{
+					variant.Rewrite = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "value")
-					{
-						variant.Value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+				if (property == "value")
+				{
+					variant.Value = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "wildcard")
-					{
-						variant.Wildcard = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+				if (property == "wildcard")
+				{
+					variant.Wildcard = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
 				}
 			}
-
-			reader.Read();
-			return variant;
 		}
 
-		public override void Write(Utf8JsonWriter writer, WildcardQuery value, JsonSerializerOptions options)
-		{
-			if (value.Field is null)
-				throw new JsonException("Unable to serialize WildcardQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-			if (options.TryGetClientSettings(out var settings))
-			{
-				writer.WriteStartObject();
-				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-				writer.WriteStartObject();
-				if (!string.IsNullOrEmpty(value.QueryName))
-				{
-					writer.WritePropertyName("_name");
-					writer.WriteStringValue(value.QueryName);
-				}
-
-				if (value.Boost.HasValue)
-				{
-					writer.WritePropertyName("boost");
-					writer.WriteNumberValue(value.Boost.Value);
-				}
-
-				if (value.CaseInsensitive.HasValue)
-				{
-					writer.WritePropertyName("case_insensitive");
-					writer.WriteBooleanValue(value.CaseInsensitive.Value);
-				}
-
-				if (value.Rewrite is not null)
-				{
-					writer.WritePropertyName("rewrite");
-					JsonSerializer.Serialize(writer, value.Rewrite, options);
-				}
-
-				if (!string.IsNullOrEmpty(value.Value))
-				{
-					writer.WritePropertyName("value");
-					writer.WriteStringValue(value.Value);
-				}
-
-				if (!string.IsNullOrEmpty(value.Wildcard))
-				{
-					writer.WritePropertyName("wildcard");
-					writer.WriteStringValue(value.Wildcard);
-				}
-
-				writer.WriteEndObject();
-				writer.WriteEndObject();
-				return;
-			}
-
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
-		}
+		reader.Read();
+		return variant;
 	}
 
-	[JsonConverter(typeof(WildcardQueryConverter))]
-	public sealed partial class WildcardQuery : Query
+	public override void Write(Utf8JsonWriter writer, WildcardQuery value, JsonSerializerOptions options)
 	{
-		public WildcardQuery(Field field)
+		if (value.Field is null)
+			throw new JsonException("Unable to serialize WildcardQuery because the `Field` property is not set. Field name queries must include a valid field name.");
+		if (options.TryGetClientSettings(out var settings))
 		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			Field = field;
-		}
-
-		public string? QueryName { get; set; }
-
-		public float? Boost { get; set; }
-
-		public bool? CaseInsensitive { get; set; }
-
-		public string? Rewrite { get; set; }
-
-		public string? Value { get; set; }
-
-		public string? Wildcard { get; set; }
-
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	}
-
-	public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDescriptorBase<WildcardQueryDescriptor<TDocument>>
-	{
-		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal WildcardQueryDescriptor() : base()
-		{
-		}
-
-		public WildcardQueryDescriptor(Field field)
-		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
-		}
-
-		public WildcardQueryDescriptor(Expression<Func<TDocument, object>> field)
-		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
-		}
-
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		private bool? CaseInsensitiveValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private string? RewriteValue { get; set; }
-
-		private string? ValueValue { get; set; }
-
-		private string? WildcardValue { get; set; }
-
-		public WildcardQueryDescriptor<TDocument> QueryName(string? queryName)
-		{
-			QueryNameValue = queryName;
-			return Self;
-		}
-
-		public WildcardQueryDescriptor<TDocument> Boost(float? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		public WildcardQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
-		{
-			CaseInsensitiveValue = caseInsensitive;
-			return Self;
-		}
-
-		public WildcardQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public WildcardQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public WildcardQueryDescriptor<TDocument> Rewrite(string? rewrite)
-		{
-			RewriteValue = rewrite;
-			return Self;
-		}
-
-		public WildcardQueryDescriptor<TDocument> Value(string? value)
-		{
-			ValueValue = value;
-			return Self;
-		}
-
-		public WildcardQueryDescriptor<TDocument> Wildcard(string? wildcard)
-		{
-			WildcardValue = wildcard;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (FieldValue is null)
-				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
+			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
+				writer.WriteStringValue(value.QueryName);
 			}
 
-			if (BoostValue.HasValue)
+			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
+				writer.WriteNumberValue(value.Boost.Value);
 			}
 
-			if (CaseInsensitiveValue.HasValue)
+			if (value.CaseInsensitive.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+				writer.WriteBooleanValue(value.CaseInsensitive.Value);
 			}
 
-			if (RewriteValue is not null)
+			if (value.Rewrite is not null)
 			{
 				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, RewriteValue, options);
+				JsonSerializer.Serialize(writer, value.Rewrite, options);
 			}
 
-			if (!string.IsNullOrEmpty(ValueValue))
+			if (!string.IsNullOrEmpty(value.Value))
 			{
 				writer.WritePropertyName("value");
-				writer.WriteStringValue(ValueValue);
+				writer.WriteStringValue(value.Value);
 			}
 
-			if (!string.IsNullOrEmpty(WildcardValue))
+			if (!string.IsNullOrEmpty(value.Wildcard))
 			{
 				writer.WritePropertyName("wildcard");
-				writer.WriteStringValue(WildcardValue);
+				writer.WriteStringValue(value.Wildcard);
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			return;
 		}
+
+		throw new JsonException("Unable to retrieve client settings required to infer field.");
+	}
+}
+
+[JsonConverter(typeof(WildcardQueryConverter))]
+public sealed partial class WildcardQuery : Query
+{
+	public WildcardQuery(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		Field = field;
 	}
 
-	public sealed partial class WildcardQueryDescriptor : SerializableDescriptorBase<WildcardQueryDescriptor>
+	public string? QueryName { get; set; }
+
+	public float? Boost { get; set; }
+
+	public bool? CaseInsensitive { get; set; }
+
+	public string? Rewrite { get; set; }
+
+	public string? Value { get; set; }
+
+	public string? Wildcard { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+}
+
+public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDescriptor<WildcardQueryDescriptor<TDocument>>
+{
+	internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal WildcardQueryDescriptor() : base()
 	{
-		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor> configure) => configure.Invoke(this);
-		internal WildcardQueryDescriptor() : base()
+	}
+
+	public WildcardQueryDescriptor(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	public WildcardQueryDescriptor(Expression<Func<TDocument, object>> field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	private bool? CaseInsensitiveValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private string? RewriteValue { get; set; }
+
+	private string? ValueValue { get; set; }
+
+	private string? WildcardValue { get; set; }
+
+	public WildcardQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
+	{
+		CaseInsensitiveValue = caseInsensitive;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor<TDocument> Rewrite(string? rewrite)
+	{
+		RewriteValue = rewrite;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor<TDocument> Value(string? value)
+	{
+		ValueValue = value;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor<TDocument> Wildcard(string? wildcard)
+	{
+		WildcardValue = wildcard;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		public WildcardQueryDescriptor(Field field)
+		if (BoostValue.HasValue)
 		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		private bool? CaseInsensitiveValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private string? RewriteValue { get; set; }
-
-		private string? ValueValue { get; set; }
-
-		private string? WildcardValue { get; set; }
-
-		public WildcardQueryDescriptor QueryName(string? queryName)
+		if (CaseInsensitiveValue.HasValue)
 		{
-			QueryNameValue = queryName;
-			return Self;
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
 		}
 
-		public WildcardQueryDescriptor Boost(float? boost)
+		if (RewriteValue is not null)
 		{
-			BoostValue = boost;
-			return Self;
+			writer.WritePropertyName("rewrite");
+			JsonSerializer.Serialize(writer, RewriteValue, options);
 		}
 
-		public WildcardQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
+		if (!string.IsNullOrEmpty(ValueValue))
 		{
-			CaseInsensitiveValue = caseInsensitive;
-			return Self;
+			writer.WritePropertyName("value");
+			writer.WriteStringValue(ValueValue);
 		}
 
-		public WildcardQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		if (!string.IsNullOrEmpty(WildcardValue))
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("wildcard");
+			writer.WriteStringValue(WildcardValue);
 		}
 
-		public WildcardQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<WildcardQueryDescriptor>
+{
+	internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor> configure) => configure.Invoke(this);
+	internal WildcardQueryDescriptor() : base()
+	{
+	}
+
+	public WildcardQueryDescriptor(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	private bool? CaseInsensitiveValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private string? RewriteValue { get; set; }
+
+	private string? ValueValue { get; set; }
+
+	private string? WildcardValue { get; set; }
+
+	public WildcardQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
+	{
+		CaseInsensitiveValue = caseInsensitive;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor Rewrite(string? rewrite)
+	{
+		RewriteValue = rewrite;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor Value(string? value)
+	{
+		ValueValue = value;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor Wildcard(string? wildcard)
+	{
+		WildcardValue = wildcard;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		public WildcardQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		if (BoostValue.HasValue)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		public WildcardQueryDescriptor Rewrite(string? rewrite)
+		if (CaseInsensitiveValue.HasValue)
 		{
-			RewriteValue = rewrite;
-			return Self;
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
 		}
 
-		public WildcardQueryDescriptor Value(string? value)
+		if (RewriteValue is not null)
 		{
-			ValueValue = value;
-			return Self;
+			writer.WritePropertyName("rewrite");
+			JsonSerializer.Serialize(writer, RewriteValue, options);
 		}
 
-		public WildcardQueryDescriptor Wildcard(string? wildcard)
+		if (!string.IsNullOrEmpty(ValueValue))
 		{
-			WildcardValue = wildcard;
-			return Self;
+			writer.WritePropertyName("value");
+			writer.WriteStringValue(ValueValue);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		if (!string.IsNullOrEmpty(WildcardValue))
 		{
-			if (FieldValue is null)
-				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			if (CaseInsensitiveValue.HasValue)
-			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
-			}
-
-			if (RewriteValue is not null)
-			{
-				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, RewriteValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(ValueValue))
-			{
-				writer.WritePropertyName("value");
-				writer.WriteStringValue(ValueValue);
-			}
-
-			if (!string.IsNullOrEmpty(WildcardValue))
-			{
-				writer.WritePropertyName("wildcard");
-				writer.WriteStringValue(WildcardValue);
-			}
-
-			writer.WriteEndObject();
-			writer.WriteEndObject();
+			writer.WritePropertyName("wildcard");
+			writer.WriteStringValue(WildcardValue);
 		}
+
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,24 +24,22 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class IndicesValidationExplanation
 {
-	public sealed partial class IndicesValidationExplanation
-	{
-		[JsonInclude]
-		[JsonPropertyName("error")]
-		public string? Error { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("error")]
+	public string? Error { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("explanation")]
-		public string? Explanation { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("explanation")]
+	public string? Explanation { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("index")]
-		public string Index { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("index")]
+	public string Index { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("valid")]
-		public bool Valid { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("valid")]
+	public bool Valid { get; init; }
 }

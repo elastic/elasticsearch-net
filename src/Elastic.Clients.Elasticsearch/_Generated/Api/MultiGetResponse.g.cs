@@ -15,17 +15,17 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class MultiGetResponse<TDocument> : ElasticsearchResponseBase
 {
-	public sealed partial class MultiGetResponse<TDocument> : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("docs")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.ResponseItem<TDocument>> Docs { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("docs")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.ResponseItem<TDocument>> Docs { get; init; }
 }

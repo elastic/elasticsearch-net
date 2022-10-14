@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,76 +26,74 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed class ScriptRequestParameters : RequestParameters<ScriptRequestParameters>
 {
-	public sealed class ScriptRequestParameters : RequestParameters<ScriptRequestParameters>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+public sealed partial class ScriptRequest : PlainRequest<ScriptRequestParameters>
+{
+	public ScriptRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public sealed partial class ScriptRequest : PlainRequestBase<ScriptRequestParameters>
-	{
-		public ScriptRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+public sealed partial class ScriptRequestDescriptor<TDocument> : RequestDescriptor<ScriptRequestDescriptor<TDocument>, ScriptRequestParameters>
+{
+	internal ScriptRequestDescriptor(Action<ScriptRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public ScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	{
 	}
 
-	public sealed partial class ScriptRequestDescriptor<TDocument> : RequestDescriptorBase<ScriptRequestDescriptor<TDocument>, ScriptRequestParameters>
+	internal ScriptRequestDescriptor()
 	{
-		internal ScriptRequestDescriptor(Action<ScriptRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public ScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
-
-		internal ScriptRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public ScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ScriptRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 
-	public sealed partial class ScriptRequestDescriptor : RequestDescriptorBase<ScriptRequestDescriptor, ScriptRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public ScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public ScriptRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
-		internal ScriptRequestDescriptor(Action<ScriptRequestDescriptor> configure) => configure.Invoke(this);
-		public ScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
+		RouteValues.Required("id", id);
+		return Self;
+	}
 
-		internal ScriptRequestDescriptor()
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public ScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
+public sealed partial class ScriptRequestDescriptor : RequestDescriptor<ScriptRequestDescriptor, ScriptRequestParameters>
+{
+	internal ScriptRequestDescriptor(Action<ScriptRequestDescriptor> configure) => configure.Invoke(this);
+	public ScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	{
+	}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	internal ScriptRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public ScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public ScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		RouteValues.Required("id", id);
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Tasks
+namespace Elastic.Clients.Elasticsearch.Tasks;
+public partial class TaskInfos : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>, Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>>
 {
-	public partial class TaskInfos : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>, Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>>
+	public TaskInfos(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> taskInfos) : base(taskInfos)
 	{
-		public TaskInfos(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> taskInfos) : base(taskInfos)
-		{
-		}
+	}
 
-		public TaskInfos(Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo> taskInfos) : base(taskInfos)
-		{
-		}
+	public TaskInfos(Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo> taskInfos) : base(taskInfos)
+	{
 	}
 }
