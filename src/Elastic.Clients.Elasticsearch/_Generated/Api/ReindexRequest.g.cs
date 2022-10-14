@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Destination Dest { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_docs")]
@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Source Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
 	}
 
 	public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescriptorBase<ReindexRequestDescriptor<TDocument>, ReindexRequestParameters>
@@ -124,19 +124,19 @@ namespace Elastic.Clients.Elasticsearch
 		public ReindexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public ReindexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public ReindexRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-		private Elastic.Clients.Elasticsearch.Source SourceValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
 
-		private SourceDescriptor<TDocument> SourceDescriptor { get; set; }
+		private Core.Reindex.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
 
-		private Action<SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
+		private Action<Core.Reindex.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Destination DestValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
 
-		private DestinationDescriptor DestDescriptor { get; set; }
+		private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
 
-		private Action<DestinationDescriptor> DestDescriptorAction { get; set; }
+		private Action<Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
 
 		private long? MaxDocsValue { get; set; }
 
@@ -144,7 +144,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private long? SizeValue { get; set; }
 
-		public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Source source)
+		public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
 		{
 			SourceDescriptor = null;
 			SourceDescriptorAction = null;
@@ -152,7 +152,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ReindexRequestDescriptor<TDocument> Source(SourceDescriptor<TDocument> descriptor)
+		public ReindexRequestDescriptor<TDocument> Source(Core.Reindex.SourceDescriptor<TDocument> descriptor)
 		{
 			SourceValue = null;
 			SourceDescriptorAction = null;
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ReindexRequestDescriptor<TDocument> Source(Action<SourceDescriptor<TDocument>> configure)
+		public ReindexRequestDescriptor<TDocument> Source(Action<Core.Reindex.SourceDescriptor<TDocument>> configure)
 		{
 			SourceValue = null;
 			SourceDescriptor = null;
@@ -174,7 +174,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Destination dest)
+		public ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
 		{
 			DestDescriptor = null;
 			DestDescriptorAction = null;
@@ -182,7 +182,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ReindexRequestDescriptor<TDocument> Dest(DestinationDescriptor descriptor)
+		public ReindexRequestDescriptor<TDocument> Dest(Core.Reindex.DestinationDescriptor descriptor)
 		{
 			DestValue = null;
 			DestDescriptorAction = null;
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ReindexRequestDescriptor<TDocument> Dest(Action<DestinationDescriptor> configure)
+		public ReindexRequestDescriptor<TDocument> Dest(Action<Core.Reindex.DestinationDescriptor> configure)
 		{
 			DestValue = null;
 			DestDescriptor = null;
@@ -227,7 +227,7 @@ namespace Elastic.Clients.Elasticsearch
 			else if (SourceDescriptorAction is not null)
 			{
 				writer.WritePropertyName("source");
-				JsonSerializer.Serialize(writer, new SourceDescriptor<TDocument>(SourceDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor<TDocument>(SourceDescriptorAction), options);
 			}
 			else
 			{
@@ -249,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch
 			else if (DestDescriptorAction is not null)
 			{
 				writer.WritePropertyName("dest");
-				JsonSerializer.Serialize(writer, new DestinationDescriptor(DestDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
 			}
 			else
 			{
@@ -297,19 +297,19 @@ namespace Elastic.Clients.Elasticsearch
 		public ReindexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 		public ReindexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public ReindexRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-		private Elastic.Clients.Elasticsearch.Source SourceValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
 
-		private SourceDescriptor SourceDescriptor { get; set; }
+		private Core.Reindex.SourceDescriptor SourceDescriptor { get; set; }
 
-		private Action<SourceDescriptor> SourceDescriptorAction { get; set; }
+		private Action<Core.Reindex.SourceDescriptor> SourceDescriptorAction { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Destination DestValue { get; set; }
+		private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
 
-		private DestinationDescriptor DestDescriptor { get; set; }
+		private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
 
-		private Action<DestinationDescriptor> DestDescriptorAction { get; set; }
+		private Action<Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
 
 		private long? MaxDocsValue { get; set; }
 
@@ -317,7 +317,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private long? SizeValue { get; set; }
 
-		public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Source source)
+		public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
 		{
 			SourceDescriptor = null;
 			SourceDescriptorAction = null;
@@ -325,7 +325,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ReindexRequestDescriptor Source(SourceDescriptor descriptor)
+		public ReindexRequestDescriptor Source(Core.Reindex.SourceDescriptor descriptor)
 		{
 			SourceValue = null;
 			SourceDescriptorAction = null;
@@ -333,7 +333,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ReindexRequestDescriptor Source(Action<SourceDescriptor> configure)
+		public ReindexRequestDescriptor Source(Action<Core.Reindex.SourceDescriptor> configure)
 		{
 			SourceValue = null;
 			SourceDescriptor = null;
@@ -347,7 +347,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Destination dest)
+		public ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
 		{
 			DestDescriptor = null;
 			DestDescriptorAction = null;
@@ -355,7 +355,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ReindexRequestDescriptor Dest(DestinationDescriptor descriptor)
+		public ReindexRequestDescriptor Dest(Core.Reindex.DestinationDescriptor descriptor)
 		{
 			DestValue = null;
 			DestDescriptorAction = null;
@@ -363,7 +363,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public ReindexRequestDescriptor Dest(Action<DestinationDescriptor> configure)
+		public ReindexRequestDescriptor Dest(Action<Core.Reindex.DestinationDescriptor> configure)
 		{
 			DestValue = null;
 			DestDescriptor = null;
@@ -400,7 +400,7 @@ namespace Elastic.Clients.Elasticsearch
 			else if (SourceDescriptorAction is not null)
 			{
 				writer.WritePropertyName("source");
-				JsonSerializer.Serialize(writer, new SourceDescriptor(SourceDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor(SourceDescriptorAction), options);
 			}
 			else
 			{
@@ -422,7 +422,7 @@ namespace Elastic.Clients.Elasticsearch
 			else if (DestDescriptorAction is not null)
 			{
 				writer.WritePropertyName("dest");
-				JsonSerializer.Serialize(writer, new DestinationDescriptor(DestDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
 			}
 			else
 			{

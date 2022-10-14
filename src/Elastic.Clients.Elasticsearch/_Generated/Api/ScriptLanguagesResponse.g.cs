@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("language_contexts")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.LanguageContext> LanguageContexts { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext> LanguageContexts { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("types_allowed")]
