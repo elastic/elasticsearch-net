@@ -63,10 +63,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Dictionary<string, string>? Meta { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("null_value")]
-		public Elastic.Clients.Elasticsearch.GeoLocation? NullValue { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("properties")]
 		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
@@ -107,8 +103,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.GeoLocation? NullValueValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
@@ -181,12 +175,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public GeoPointPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public GeoPointPropertyDescriptor<TDocument> NullValue(Elastic.Clients.Elasticsearch.GeoLocation? nullValue)
-		{
-			NullValueValue = nullValue;
 			return Self;
 		}
 
@@ -279,12 +267,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
-			if (NullValueValue is not null)
-			{
-				writer.WritePropertyName("null_value");
-				JsonSerializer.Serialize(writer, NullValueValue, options);
-			}
-
 			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
@@ -309,7 +291,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		GeoPointProperty IBuildableDescriptor<GeoPointProperty>.Build() => new()
-		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 
 	public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptorBase<GeoPointPropertyDescriptor>, IBuildableDescriptor<GeoPointProperty>
@@ -336,8 +318,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.GeoLocation? NullValueValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
@@ -410,12 +390,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public GeoPointPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 		{
 			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public GeoPointPropertyDescriptor NullValue(Elastic.Clients.Elasticsearch.GeoLocation? nullValue)
-		{
-			NullValueValue = nullValue;
 			return Self;
 		}
 
@@ -508,12 +482,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
-			if (NullValueValue is not null)
-			{
-				writer.WritePropertyName("null_value");
-				JsonSerializer.Serialize(writer, NullValueValue, options);
-			}
-
 			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
@@ -538,6 +506,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 
 		GeoPointProperty IBuildableDescriptor<GeoPointProperty>.Build() => new()
-		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 	}
 }
