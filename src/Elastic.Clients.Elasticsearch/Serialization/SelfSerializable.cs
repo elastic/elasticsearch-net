@@ -4,7 +4,7 @@
 
 using System.Text.Json;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Serialization;
 
 /// <summary>
 /// Marks a type to provide it's own serialization code.

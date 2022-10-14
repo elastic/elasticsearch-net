@@ -13,6 +13,7 @@ using Elastic.Transport.Diagnostics.Auditing;
 using Elastic.Transport.Extensions;
 using Elastic.Transport.Products.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Core.Bulk;
+using Elastic.Clients.Elasticsearch.Requests;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -27,10 +28,10 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 
 	private readonly CancellationToken _compositeCancelToken;
 	private readonly CancellationTokenSource _compositeCancelTokenSource;
-	private readonly Action<BulkResponseItemBase, T> _droppedDocumentCallBack;
+	private readonly Action<ResponseItem, T> _droppedDocumentCallBack;
 	private readonly int _maxDegreeOfParallelism;
 	private readonly IBulkAllRequest<T> _partitionedBulkRequest;
-	private readonly Func<BulkResponseItemBase, T, bool> _retryPredicate;
+	private readonly Func<ResponseItem, T, bool> _retryPredicate;
 
 	private readonly Action _incrementFailed = () => { };
 	private readonly Action _incrementRetries = () => { };
@@ -158,7 +159,7 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 			return await HandleBulkRequestAsync(buffer, page, backOffRetries, response).ConfigureAwait(false);
 
 		var retryableDocuments = new List<T>();
-		var droppedDocuments = new List<Tuple<BulkResponseItemBase, T>>();
+		var droppedDocuments = new List<Tuple<ResponseItem, T>>();
 
 		foreach (var documentWithResponse in response.Items.Zip(buffer, Tuple.Create))
 		{
@@ -184,7 +185,7 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 		return new BulkAllResponse { Retries = backOffRetries, Page = page, Items = response.Items };
 	}
 
-	private void HandleDroppedDocuments(List<Tuple<BulkResponseItemBase, T>> droppedDocuments, BulkResponse response)
+	private void HandleDroppedDocuments(List<Tuple<ResponseItem, T>> droppedDocuments, BulkResponse response)
 	{
 		if (droppedDocuments.Count <= 0)
 			return;
@@ -248,9 +249,9 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 		return Throw(message, response.ApiCall);
 	}
 
-	private static bool RetryBulkActionPredicate(BulkResponseItemBase bulkResponseItem, T d) => bulkResponseItem.Status == 429;
+	private static bool RetryBulkActionPredicate(ResponseItem bulkResponseItem, T d) => bulkResponseItem.Status == 429;
 
-	private static void DroppedDocumentCallbackDefault(BulkResponseItemBase bulkResponseItem, T d) { }
+	private static void DroppedDocumentCallbackDefault(ResponseItem bulkResponseItem, T d) { }
 
 	public void Dispose()
 	{

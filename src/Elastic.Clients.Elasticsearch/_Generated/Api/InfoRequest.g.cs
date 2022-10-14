@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,31 +26,29 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed class InfoRequestParameters : RequestParameters<InfoRequestParameters>
 {
-	public sealed class InfoRequestParameters : RequestParameters<InfoRequestParameters>
+}
+
+public sealed partial class InfoRequest : PlainRequest<InfoRequestParameters>
+{
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+}
+
+public sealed partial class InfoRequestDescriptor : RequestDescriptor<InfoRequestDescriptor, InfoRequestParameters>
+{
+	internal InfoRequestDescriptor(Action<InfoRequestDescriptor> configure) => configure.Invoke(this);
+	public InfoRequestDescriptor()
 	{
 	}
 
-	public sealed partial class InfoRequest : PlainRequestBase<InfoRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-	}
-
-	public sealed partial class InfoRequestDescriptor : RequestDescriptorBase<InfoRequestDescriptor, InfoRequestParameters>
-	{
-		internal InfoRequestDescriptor(Action<InfoRequestDescriptor> configure) => configure.Invoke(this);
-		public InfoRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,170 +24,168 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+internal sealed class DerivativeAggregationConverter : JsonConverter<DerivativeAggregation>
 {
-	internal sealed class DerivativeAggregationConverter : JsonConverter<DerivativeAggregation>
+	public override DerivativeAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override DerivativeAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var aggName = reader.GetString();
+		if (aggName != "derivative")
+			throw new JsonException("Unexpected JSON detected.");
+		var agg = new DerivativeAggregation(aggName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "derivative")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new DerivativeAggregation(aggName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("format"))
 				{
-					if (reader.ValueTextEquals("format"))
+					reader.Read();
+					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+					if (value is not null)
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
-
-						continue;
+						agg.Format = value;
 					}
 
-					if (reader.ValueTextEquals("gap_policy"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.GapPolicy = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("gap_policy"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.GapPolicy = value;
 					}
+
+					continue;
 				}
 			}
+		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("meta"))
 				{
-					if (reader.ValueTextEquals("meta"))
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					if (value is not null)
 					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
+						agg.Meta = value;
 					}
+
+					continue;
 				}
 			}
-
-			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, DerivativeAggregation value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("derivative");
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.Format))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
-			}
-
-			if (value.GapPolicy is not null)
-			{
-				writer.WritePropertyName("gap_policy");
-				JsonSerializer.Serialize(writer, value.GapPolicy, options);
-			}
-
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return agg;
 	}
 
-	[JsonConverter(typeof(DerivativeAggregationConverter))]
-	public sealed partial class DerivativeAggregation : Aggregation
+	public override void Write(Utf8JsonWriter writer, DerivativeAggregation value, JsonSerializerOptions options)
 	{
-		public DerivativeAggregation(string name) => Name = name;
-		internal DerivativeAggregation()
+		writer.WriteStartObject();
+		writer.WritePropertyName("derivative");
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(value.Format))
 		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(value.Format);
 		}
 
-		public string? Format { get; set; }
+		if (value.GapPolicy is not null)
+		{
+			writer.WritePropertyName("gap_policy");
+			JsonSerializer.Serialize(writer, value.GapPolicy, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+		writer.WriteEndObject();
+		if (value.Meta is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
+		}
 
-		public Dictionary<string, object>? Meta { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		public override string? Name { get; internal set; }
+[JsonConverter(typeof(DerivativeAggregationConverter))]
+public sealed partial class DerivativeAggregation : Aggregation
+{
+	public DerivativeAggregation(string name) => Name = name;
+	internal DerivativeAggregation()
+	{
 	}
 
-	public sealed partial class DerivativeAggregationDescriptor : SerializableDescriptorBase<DerivativeAggregationDescriptor>
+	public string? Format { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+
+	public Dictionary<string, object>? Meta { get; set; }
+
+	public override string? Name { get; internal set; }
+}
+
+public sealed partial class DerivativeAggregationDescriptor : SerializableDescriptor<DerivativeAggregationDescriptor>
+{
+	internal DerivativeAggregationDescriptor(Action<DerivativeAggregationDescriptor> configure) => configure.Invoke(this);
+	public DerivativeAggregationDescriptor() : base()
 	{
-		internal DerivativeAggregationDescriptor(Action<DerivativeAggregationDescriptor> configure) => configure.Invoke(this);
-		public DerivativeAggregationDescriptor() : base()
+	}
+
+	private string? FormatValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	public DerivativeAggregationDescriptor Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public DerivativeAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
+	{
+		GapPolicyValue = gapPolicy;
+		return Self;
+	}
+
+	public DerivativeAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("derivative");
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
 		}
 
-		private string? FormatValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		public DerivativeAggregationDescriptor Format(string? format)
+		if (GapPolicyValue is not null)
 		{
-			FormatValue = format;
-			return Self;
+			writer.WritePropertyName("gap_policy");
+			JsonSerializer.Serialize(writer, GapPolicyValue, options);
 		}
 
-		public DerivativeAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
+		writer.WriteEndObject();
+		if (MetaValue is not null)
 		{
-			GapPolicyValue = gapPolicy;
-			return Self;
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		public DerivativeAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("derivative");
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (GapPolicyValue is not null)
-			{
-				writer.WritePropertyName("gap_policy");
-				JsonSerializer.Serialize(writer, GapPolicyValue, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

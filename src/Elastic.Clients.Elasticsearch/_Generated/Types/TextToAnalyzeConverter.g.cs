@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,9 +25,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+internal sealed class TextToAnalyzeConverter : IEnumerableSingleOrManyConverter<string>
 {
-	internal sealed class TextToAnalyzeConverter : IEnumerableSingleOrManyConverter<string>
-	{
-	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,68 +24,66 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class StandardAnalyzer : IAnalyzer
 {
-	public sealed partial class StandardAnalyzer : IAnalyzer
+	[JsonInclude]
+	[JsonPropertyName("max_token_length")]
+	public int? MaxTokenLength { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("stopwords")]
+	[JsonConverter(typeof(StopWordsConverter))]
+	public IEnumerable<string>? Stopwords { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "standard";
+}
+
+public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptor<StandardAnalyzerDescriptor>, IBuildableDescriptor<StandardAnalyzer>
+{
+	internal StandardAnalyzerDescriptor(Action<StandardAnalyzerDescriptor> configure) => configure.Invoke(this);
+	public StandardAnalyzerDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("max_token_length")]
-		public int? MaxTokenLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("stopwords")]
-		[JsonConverter(typeof(StopWordsConverter))]
-		public IEnumerable<string>? Stopwords { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "standard";
 	}
 
-	public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptorBase<StandardAnalyzerDescriptor>, IBuildableDescriptor<StandardAnalyzer>
+	private int? MaxTokenLengthValue { get; set; }
+
+	private IEnumerable<string>? StopwordsValue { get; set; }
+
+	public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength)
 	{
-		internal StandardAnalyzerDescriptor(Action<StandardAnalyzerDescriptor> configure) => configure.Invoke(this);
-		public StandardAnalyzerDescriptor() : base()
-		{
-		}
-
-		private int? MaxTokenLengthValue { get; set; }
-
-		private IEnumerable<string>? StopwordsValue { get; set; }
-
-		public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength)
-		{
-			MaxTokenLengthValue = maxTokenLength;
-			return Self;
-		}
-
-		public StandardAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
-		{
-			StopwordsValue = stopwords;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (MaxTokenLengthValue.HasValue)
-			{
-				writer.WritePropertyName("max_token_length");
-				writer.WriteNumberValue(MaxTokenLengthValue.Value);
-			}
-
-			if (StopwordsValue is not null)
-			{
-				writer.WritePropertyName("stopwords");
-				SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("standard");
-			writer.WriteEndObject();
-		}
-
-		StandardAnalyzer IBuildableDescriptor<StandardAnalyzer>.Build() => new()
-		{ MaxTokenLength = MaxTokenLengthValue, Stopwords = StopwordsValue };
+		MaxTokenLengthValue = maxTokenLength;
+		return Self;
 	}
+
+	public StandardAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
+	{
+		StopwordsValue = stopwords;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (MaxTokenLengthValue.HasValue)
+		{
+			writer.WritePropertyName("max_token_length");
+			writer.WriteNumberValue(MaxTokenLengthValue.Value);
+		}
+
+		if (StopwordsValue is not null)
+		{
+			writer.WritePropertyName("stopwords");
+			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("standard");
+		writer.WriteEndObject();
+	}
+
+	StandardAnalyzer IBuildableDescriptor<StandardAnalyzer>.Build() => new()
+	{ MaxTokenLength = MaxTokenLengthValue, Stopwords = StopwordsValue };
 }

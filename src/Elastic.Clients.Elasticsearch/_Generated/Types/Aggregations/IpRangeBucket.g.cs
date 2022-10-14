@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,88 +24,86 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+[JsonConverter(typeof(IpRangeBucketConverter))]
+public sealed partial class IpRangeBucket : AggregateDictionary
 {
-	[JsonConverter(typeof(IpRangeBucketConverter))]
-	public sealed partial class IpRangeBucket : AggregateDictionary
+	public IpRangeBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
 	{
-		public IpRangeBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
-		{
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long DocCount { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("from")]
-		public string? From { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("key")]
-		public string? Key { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("to")]
-		public string? To { get; init; }
 	}
 
-	internal sealed class IpRangeBucketConverter : JsonConverter<IpRangeBucket>
+	[JsonInclude]
+	[JsonPropertyName("doc_count")]
+	public long DocCount { get; init; }
+
+	[JsonInclude]
+	[JsonPropertyName("from")]
+	public string? From { get; init; }
+
+	[JsonInclude]
+	[JsonPropertyName("key")]
+	public string? Key { get; init; }
+
+	[JsonInclude]
+	[JsonPropertyName("to")]
+	public string? To { get; init; }
+}
+
+internal sealed class IpRangeBucketConverter : JsonConverter<IpRangeBucket>
+{
+	public override IpRangeBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override IpRangeBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
+		var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
+		long docCount = default;
+		string? from = default;
+		string? key = default;
+		string? to = default;
+		while (reader.Read())
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-			var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
-			long docCount = default;
-			string? from = default;
-			string? key = default;
-			string? to = default;
-			while (reader.Read())
+			if (reader.TokenType == JsonTokenType.EndObject)
+				break;
+			if (reader.TokenType != JsonTokenType.PropertyName)
+				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
+			var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+			reader.Read();
+			if (name.Equals("doc_count", StringComparison.Ordinal))
 			{
-				if (reader.TokenType == JsonTokenType.EndObject)
-					break;
-				if (reader.TokenType != JsonTokenType.PropertyName)
-					throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-				var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
-				reader.Read();
-				if (name.Equals("doc_count", StringComparison.Ordinal))
-				{
-					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
-
-				if (name.Equals("from", StringComparison.Ordinal))
-				{
-					from = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (name.Equals("key", StringComparison.Ordinal))
-				{
-					key = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (name.Equals("to", StringComparison.Ordinal))
-				{
-					to = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (name.Contains("#"))
-				{
-					AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
-					continue;
-				}
-
-				throw new JsonException("Unknown property read from JSON.");
+				docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+				continue;
 			}
 
-			return new IpRangeBucket(subAggs)
-			{ DocCount = docCount, From = from, Key = key, To = to };
+			if (name.Equals("from", StringComparison.Ordinal))
+			{
+				from = JsonSerializer.Deserialize<string?>(ref reader, options);
+				continue;
+			}
+
+			if (name.Equals("key", StringComparison.Ordinal))
+			{
+				key = JsonSerializer.Deserialize<string?>(ref reader, options);
+				continue;
+			}
+
+			if (name.Equals("to", StringComparison.Ordinal))
+			{
+				to = JsonSerializer.Deserialize<string?>(ref reader, options);
+				continue;
+			}
+
+			if (name.Contains("#"))
+			{
+				AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
+				continue;
+			}
+
+			throw new JsonException("Unknown property read from JSON.");
 		}
 
-		public override void Write(Utf8JsonWriter writer, IpRangeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
+		return new IpRangeBucket(subAggs)
+		{ DocCount = docCount, From = from, Key = key, To = to };
 	}
+
+	public override void Write(Utf8JsonWriter writer, IpRangeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
 }

@@ -20,11 +20,11 @@ public interface IIsADictionary<TKey, TValue> : IDictionary<TKey, TValue>, IIsAD
 /// <typeparam name="TKey"></typeparam>
 /// <typeparam name="TValue"></typeparam>
 
-public abstract class IsADictionaryBase<TKey, TValue> : IIsADictionary<TKey, TValue>
+public abstract class IsADictionary<TKey, TValue> : IIsADictionary<TKey, TValue>
 {
-	internal IsADictionaryBase() => BackingDictionary = new Dictionary<TKey, TValue>();
+	internal IsADictionary() => BackingDictionary = new Dictionary<TKey, TValue>();
 
-	internal IsADictionaryBase(IDictionary<TKey, TValue> backingDictionary)
+	internal IsADictionary(IDictionary<TKey, TValue> backingDictionary)
 	{
 		if (backingDictionary != null)
 			foreach (var key in backingDictionary.Keys)
@@ -86,67 +86,4 @@ public abstract class IsADictionaryBase<TKey, TValue> : IIsADictionary<TKey, TVa
 	protected virtual TKey ValidateKey(TKey key) => key;
 
 	protected virtual TKey Sanitize(TKey key) => key;
-}
-
-public interface IIsAReadOnlyDictionary { }
-
-public interface IIsAReadOnlyDictionary<TKey, TValue> : IReadOnlyDictionary<TKey, TValue>, IIsAReadOnlyDictionary { }
-
-public abstract class IsAReadOnlyDictionaryBase<TKey, TValue> : IIsAReadOnlyDictionary<TKey, TValue>
-{
-	internal IsAReadOnlyDictionaryBase(IReadOnlyDictionary<TKey, TValue> backingDictionary)
-	{
-		if (backingDictionary == null)
-			return;
-
-		var dictionary = new Dictionary<TKey, TValue>(backingDictionary.Count);
-		foreach (var key in backingDictionary.Keys)
-			// ReSharper disable once VirtualMemberCallInConstructor
-			// expect all implementations of Sanitize to be pure
-			dictionary[Sanitize(key)] = backingDictionary[key];
-
-		BackingDictionary = dictionary;
-	}
-
-	public int Count => BackingDictionary.Count;
-
-	public TValue this[TKey key] => BackingDictionary[key];
-
-	public IEnumerable<TKey> Keys => BackingDictionary.Keys;
-
-	public IEnumerable<TValue> Values => BackingDictionary.Values;
-	protected internal IReadOnlyDictionary<TKey, TValue> BackingDictionary { get; } = EmptyReadOnly<TKey, TValue>.Dictionary;
-
-	IEnumerator IEnumerable.GetEnumerator() => BackingDictionary.GetEnumerator();
-
-	IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() =>
-		BackingDictionary.GetEnumerator();
-
-	public bool ContainsKey(TKey key) => BackingDictionary.ContainsKey(key);
-
-	public bool TryGetValue(TKey key, out TValue value) =>
-		BackingDictionary.TryGetValue(key, out value);
-
-	protected virtual TKey Sanitize(TKey key) => key;
-}
-
-internal static class EmptyReadOnlyExtensions
-{
-	public static IReadOnlyCollection<T> ToReadOnlyCollection<T>(this IEnumerable<T> enumerable) =>
-		enumerable == null ? EmptyReadOnly<T>.Collection : new ReadOnlyCollection<T>(enumerable.ToList());
-
-	public static IReadOnlyCollection<T> ToReadOnlyCollection<T>(this IList<T> enumerable) =>
-		enumerable == null || enumerable.Count == 0 ? EmptyReadOnly<T>.Collection : new ReadOnlyCollection<T>(enumerable);
-}
-
-
-internal static class EmptyReadOnly<TElement>
-{
-	public static readonly IReadOnlyCollection<TElement> Collection = new ReadOnlyCollection<TElement>(new TElement[0]);
-	public static readonly IReadOnlyList<TElement> List = new List<TElement>();
-}
-
-internal static class EmptyReadOnly<TKey, TValue>
-{
-	public static readonly IReadOnlyDictionary<TKey, TValue> Dictionary = new ReadOnlyDictionary<TKey, TValue>(new Dictionary<TKey, TValue>(0));
 }

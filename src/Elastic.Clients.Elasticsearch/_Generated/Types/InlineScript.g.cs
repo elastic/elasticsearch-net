@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,90 +24,88 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class InlineScript
 {
-	public sealed partial class InlineScript
+	[JsonInclude]
+	[JsonPropertyName("lang")]
+	public Elastic.Clients.Elasticsearch.ScriptLanguage? Language { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("options")]
+	public Dictionary<string, string>? Options { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("params")]
+	public Dictionary<string, object>? Params { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("source")]
+	public string Source { get; set; }
+}
+
+public sealed partial class InlineScriptDescriptor : SerializableDescriptor<InlineScriptDescriptor>
+{
+	internal InlineScriptDescriptor(Action<InlineScriptDescriptor> configure) => configure.Invoke(this);
+	public InlineScriptDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("lang")]
-		public Elastic.Clients.Elasticsearch.ScriptLanguage? Language { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("options")]
-		public Dictionary<string, string>? Options { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("params")]
-		public Dictionary<string, object>? Params { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("source")]
-		public string Source { get; set; }
 	}
 
-	public sealed partial class InlineScriptDescriptor : SerializableDescriptorBase<InlineScriptDescriptor>
+	private Elastic.Clients.Elasticsearch.ScriptLanguage? LanguageValue { get; set; }
+
+	private Dictionary<string, string>? OptionsValue { get; set; }
+
+	private Dictionary<string, object>? ParamsValue { get; set; }
+
+	private string SourceValue { get; set; }
+
+	public InlineScriptDescriptor Language(Elastic.Clients.Elasticsearch.ScriptLanguage? language)
 	{
-		internal InlineScriptDescriptor(Action<InlineScriptDescriptor> configure) => configure.Invoke(this);
-		public InlineScriptDescriptor() : base()
+		LanguageValue = language;
+		return Self;
+	}
+
+	public InlineScriptDescriptor Options(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	{
+		OptionsValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public InlineScriptDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public InlineScriptDescriptor Source(string source)
+	{
+		SourceValue = source;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (LanguageValue is not null)
 		{
+			writer.WritePropertyName("lang");
+			JsonSerializer.Serialize(writer, LanguageValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.ScriptLanguage? LanguageValue { get; set; }
-
-		private Dictionary<string, string>? OptionsValue { get; set; }
-
-		private Dictionary<string, object>? ParamsValue { get; set; }
-
-		private string SourceValue { get; set; }
-
-		public InlineScriptDescriptor Language(Elastic.Clients.Elasticsearch.ScriptLanguage? language)
+		if (OptionsValue is not null)
 		{
-			LanguageValue = language;
-			return Self;
+			writer.WritePropertyName("options");
+			JsonSerializer.Serialize(writer, OptionsValue, options);
 		}
 
-		public InlineScriptDescriptor Options(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		if (ParamsValue is not null)
 		{
-			OptionsValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
+			writer.WritePropertyName("params");
+			JsonSerializer.Serialize(writer, ParamsValue, options);
 		}
 
-		public InlineScriptDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public InlineScriptDescriptor Source(string source)
-		{
-			SourceValue = source;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (LanguageValue is not null)
-			{
-				writer.WritePropertyName("lang");
-				JsonSerializer.Serialize(writer, LanguageValue, options);
-			}
-
-			if (OptionsValue is not null)
-			{
-				writer.WritePropertyName("options");
-				JsonSerializer.Serialize(writer, OptionsValue, options);
-			}
-
-			if (ParamsValue is not null)
-			{
-				writer.WritePropertyName("params");
-				JsonSerializer.Serialize(writer, ParamsValue, options);
-			}
-
-			writer.WritePropertyName("source");
-			writer.WriteStringValue(SourceValue);
-			writer.WriteEndObject();
-		}
+		writer.WritePropertyName("source");
+		writer.WriteStringValue(SourceValue);
+		writer.WriteEndObject();
 	}
 }

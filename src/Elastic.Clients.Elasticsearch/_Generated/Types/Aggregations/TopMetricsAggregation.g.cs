@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,563 +24,561 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+internal sealed class TopMetricsAggregationConverter : JsonConverter<TopMetricsAggregation>
 {
-	internal sealed class TopMetricsAggregationConverter : JsonConverter<TopMetricsAggregation>
+	public override TopMetricsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override TopMetricsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var aggName = reader.GetString();
+		if (aggName != "top_metrics")
+			throw new JsonException("Unexpected JSON detected.");
+		var agg = new TopMetricsAggregation(aggName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "top_metrics")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new TopMetricsAggregation(aggName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("field"))
 				{
-					if (reader.ValueTextEquals("field"))
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+					if (value is not null)
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
-
-						continue;
+						agg.Field = value;
 					}
 
-					if (reader.ValueTextEquals("metrics"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Metrics = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("metrics"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Metrics = value;
 					}
 
-					if (reader.ValueTextEquals("missing"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("missing"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Missing = value;
 					}
 
-					if (reader.ValueTextEquals("script"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Script = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("script"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Script = value;
 					}
 
-					if (reader.ValueTextEquals("size"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Size = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("size"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Size = value;
 					}
 
-					if (reader.ValueTextEquals("sort"))
-					{
-						reader.Read();
-						var value = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.SortCombinations>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Sort = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("sort"))
+				{
+					reader.Read();
+					var value = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.SortCombinations>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Sort = value;
 					}
+
+					continue;
 				}
 			}
+		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("meta"))
 				{
-					if (reader.ValueTextEquals("meta"))
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					if (value is not null)
 					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
+						agg.Meta = value;
 					}
+
+					continue;
 				}
 			}
-
-			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, TopMetricsAggregation value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("top_metrics");
-			writer.WriteStartObject();
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			if (value.Metrics is not null)
-			{
-				writer.WritePropertyName("metrics");
-				JsonSerializer.Serialize(writer, value.Metrics, options);
-			}
-
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
-			}
-
-			if (value.Script is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, value.Script, options);
-			}
-
-			if (value.Size.HasValue)
-			{
-				writer.WritePropertyName("size");
-				writer.WriteNumberValue(value.Size.Value);
-			}
-
-			if (value.Sort is not null)
-			{
-				writer.WritePropertyName("sort");
-				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(value.Sort, writer, options);
-			}
-
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return agg;
 	}
 
-	[JsonConverter(typeof(TopMetricsAggregationConverter))]
-	public sealed partial class TopMetricsAggregation : Aggregation
+	public override void Write(Utf8JsonWriter writer, TopMetricsAggregation value, JsonSerializerOptions options)
 	{
-		public TopMetricsAggregation(string name, Field field) : this(name) => Field = field;
-		public TopMetricsAggregation(string name) => Name = name;
-		internal TopMetricsAggregation()
+		writer.WriteStartObject();
+		writer.WritePropertyName("top_metrics");
+		writer.WriteStartObject();
+		if (value.Field is not null)
 		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value.Field, options);
 		}
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		if (value.Metrics is not null)
+		{
+			writer.WritePropertyName("metrics");
+			JsonSerializer.Serialize(writer, value.Metrics, options);
+		}
 
-		public Dictionary<string, object>? Meta { get; set; }
+		if (value.Missing is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, value.Missing, options);
+		}
 
-		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
+		if (value.Script is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, value.Script, options);
+		}
 
-		public FieldValue? Missing { get; set; }
+		if (value.Size.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(value.Size.Value);
+		}
 
-		public override string? Name { get; internal set; }
+		if (value.Sort is not null)
+		{
+			writer.WritePropertyName("sort");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(value.Sort, writer, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+		writer.WriteEndObject();
+		if (value.Meta is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
+		}
 
-		public int? Size { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		[JsonConverter(typeof(SortConverter))]
-		public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
+[JsonConverter(typeof(TopMetricsAggregationConverter))]
+public sealed partial class TopMetricsAggregation : Aggregation
+{
+	public TopMetricsAggregation(string name, Field field) : this(name) => Field = field;
+	public TopMetricsAggregation(string name) => Name = name;
+	internal TopMetricsAggregation()
+	{
 	}
 
-	public sealed partial class TopMetricsAggregationDescriptor<TDocument> : SerializableDescriptorBase<TopMetricsAggregationDescriptor<TDocument>>
+	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	public Dictionary<string, object>? Meta { get; set; }
+
+	public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
+
+	public FieldValue? Missing { get; set; }
+
+	public override string? Name { get; internal set; }
+
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	public int? Size { get; set; }
+
+	[JsonConverter(typeof(SortConverter))]
+	public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
+}
+
+public sealed partial class TopMetricsAggregationDescriptor<TDocument> : SerializableDescriptor<TopMetricsAggregationDescriptor<TDocument>>
+{
+	internal TopMetricsAggregationDescriptor(Action<TopMetricsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public TopMetricsAggregationDescriptor() : base()
 	{
-		internal TopMetricsAggregationDescriptor(Action<TopMetricsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public TopMetricsAggregationDescriptor() : base()
-		{
-		}
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
-
-		private TopMetricsValueDescriptor<TDocument> MetricsDescriptor { get; set; }
-
-		private Action<TopMetricsValueDescriptor<TDocument>> MetricsDescriptorAction { get; set; }
-
-		private Action<TopMetricsValueDescriptor<TDocument>>[] MetricsDescriptorActions { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private FieldValue? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		private int? SizeValue { get; set; }
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
-
-		public TopMetricsAggregationDescriptor<TDocument> Metrics(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
-		{
-			MetricsDescriptor = null;
-			MetricsDescriptorAction = null;
-			MetricsDescriptorActions = null;
-			MetricsValue = metrics;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor<TDocument> Metrics(TopMetricsValueDescriptor<TDocument> descriptor)
-		{
-			MetricsValue = null;
-			MetricsDescriptorAction = null;
-			MetricsDescriptorActions = null;
-			MetricsDescriptor = descriptor;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor<TDocument> Metrics(Action<TopMetricsValueDescriptor<TDocument>> configure)
-		{
-			MetricsValue = null;
-			MetricsDescriptor = null;
-			MetricsDescriptorActions = null;
-			MetricsDescriptorAction = configure;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor<TDocument> Metrics(params Action<TopMetricsValueDescriptor<TDocument>>[] configure)
-		{
-			MetricsValue = null;
-			MetricsDescriptor = null;
-			MetricsDescriptorAction = null;
-			MetricsDescriptorActions = configure;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-		{
-			ScriptValue = script;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor<TDocument> Size(int? size)
-		{
-			SizeValue = size;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
-		{
-			SortValue = sort;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("top_metrics");
-			writer.WriteStartObject();
-			if (MetricsDescriptor is not null)
-			{
-				writer.WritePropertyName("metrics");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-				writer.WriteEndArray();
-			}
-			else if (MetricsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("metrics");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor<TDocument>(MetricsDescriptorAction), options);
-				writer.WriteEndArray();
-			}
-			else if (MetricsDescriptorActions is not null)
-			{
-				writer.WritePropertyName("metrics");
-				writer.WriteStartArray();
-				foreach (var action in MetricsDescriptorActions)
-				{
-					JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor<TDocument>(action), options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else if (MetricsValue is not null)
-			{
-				writer.WritePropertyName("metrics");
-				JsonSerializer.Serialize(writer, MetricsValue, options);
-			}
-
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (SizeValue.HasValue)
-			{
-				writer.WritePropertyName("size");
-				writer.WriteNumberValue(SizeValue.Value);
-			}
-
-			if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class TopMetricsAggregationDescriptor : SerializableDescriptorBase<TopMetricsAggregationDescriptor>
+	private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
+
+	private TopMetricsValueDescriptor<TDocument> MetricsDescriptor { get; set; }
+
+	private Action<TopMetricsValueDescriptor<TDocument>> MetricsDescriptorAction { get; set; }
+
+	private Action<TopMetricsValueDescriptor<TDocument>>[] MetricsDescriptorActions { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	private int? SizeValue { get; set; }
+
+	private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
+
+	public TopMetricsAggregationDescriptor<TDocument> Metrics(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
 	{
-		internal TopMetricsAggregationDescriptor(Action<TopMetricsAggregationDescriptor> configure) => configure.Invoke(this);
-		public TopMetricsAggregationDescriptor() : base()
+		MetricsDescriptor = null;
+		MetricsDescriptorAction = null;
+		MetricsDescriptorActions = null;
+		MetricsValue = metrics;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Metrics(TopMetricsValueDescriptor<TDocument> descriptor)
+	{
+		MetricsValue = null;
+		MetricsDescriptorAction = null;
+		MetricsDescriptorActions = null;
+		MetricsDescriptor = descriptor;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Metrics(Action<TopMetricsValueDescriptor<TDocument>> configure)
+	{
+		MetricsValue = null;
+		MetricsDescriptor = null;
+		MetricsDescriptorActions = null;
+		MetricsDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Metrics(params Action<TopMetricsValueDescriptor<TDocument>>[] configure)
+	{
+		MetricsValue = null;
+		MetricsDescriptor = null;
+		MetricsDescriptorAction = null;
+		MetricsDescriptorActions = configure;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Size(int? size)
+	{
+		SizeValue = size;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+	{
+		SortValue = sort;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("top_metrics");
+		writer.WriteStartObject();
+		if (MetricsDescriptor is not null)
 		{
+			writer.WritePropertyName("metrics");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
+			writer.WriteEndArray();
 		}
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
-
-		private TopMetricsValueDescriptor MetricsDescriptor { get; set; }
-
-		private Action<TopMetricsValueDescriptor> MetricsDescriptorAction { get; set; }
-
-		private Action<TopMetricsValueDescriptor>[] MetricsDescriptorActions { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private FieldValue? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		private int? SizeValue { get; set; }
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
-
-		public TopMetricsAggregationDescriptor Metrics(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
+		else if (MetricsDescriptorAction is not null)
 		{
-			MetricsDescriptor = null;
-			MetricsDescriptorAction = null;
-			MetricsDescriptorActions = null;
-			MetricsValue = metrics;
-			return Self;
+			writer.WritePropertyName("metrics");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor<TDocument>(MetricsDescriptorAction), options);
+			writer.WriteEndArray();
 		}
-
-		public TopMetricsAggregationDescriptor Metrics(TopMetricsValueDescriptor descriptor)
+		else if (MetricsDescriptorActions is not null)
 		{
-			MetricsValue = null;
-			MetricsDescriptorAction = null;
-			MetricsDescriptorActions = null;
-			MetricsDescriptor = descriptor;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor Metrics(Action<TopMetricsValueDescriptor> configure)
-		{
-			MetricsValue = null;
-			MetricsDescriptor = null;
-			MetricsDescriptorActions = null;
-			MetricsDescriptorAction = configure;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor Metrics(params Action<TopMetricsValueDescriptor>[] configure)
-		{
-			MetricsValue = null;
-			MetricsDescriptor = null;
-			MetricsDescriptorAction = null;
-			MetricsDescriptorActions = configure;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor Missing(FieldValue? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
-		{
-			ScriptValue = script;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor Size(int? size)
-		{
-			SizeValue = size;
-			return Self;
-		}
-
-		public TopMetricsAggregationDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
-		{
-			SortValue = sort;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("top_metrics");
-			writer.WriteStartObject();
-			if (MetricsDescriptor is not null)
+			writer.WritePropertyName("metrics");
+			writer.WriteStartArray();
+			foreach (var action in MetricsDescriptorActions)
 			{
-				writer.WritePropertyName("metrics");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-				writer.WriteEndArray();
-			}
-			else if (MetricsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("metrics");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor(MetricsDescriptorAction), options);
-				writer.WriteEndArray();
-			}
-			else if (MetricsDescriptorActions is not null)
-			{
-				writer.WritePropertyName("metrics");
-				writer.WriteStartArray();
-				foreach (var action in MetricsDescriptorActions)
-				{
-					JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor(action), options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else if (MetricsValue is not null)
-			{
-				writer.WritePropertyName("metrics");
-				JsonSerializer.Serialize(writer, MetricsValue, options);
+				JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor<TDocument>(action), options);
 			}
 
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (SizeValue.HasValue)
-			{
-				writer.WritePropertyName("size");
-				writer.WriteNumberValue(SizeValue.Value);
-			}
-
-			if (SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
+			writer.WriteEndArray();
 		}
+		else if (MetricsValue is not null)
+		{
+			writer.WritePropertyName("metrics");
+			JsonSerializer.Serialize(writer, MetricsValue, options);
+		}
+
+		if (FieldValue is not null)
+		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+		}
+
+		if (MissingValue is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
+		}
+
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
+		}
+
+		if (SortValue is not null)
+		{
+			writer.WritePropertyName("sort");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+		}
+
+		writer.WriteEndObject();
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class TopMetricsAggregationDescriptor : SerializableDescriptor<TopMetricsAggregationDescriptor>
+{
+	internal TopMetricsAggregationDescriptor(Action<TopMetricsAggregationDescriptor> configure) => configure.Invoke(this);
+	public TopMetricsAggregationDescriptor() : base()
+	{
+	}
+
+	private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
+
+	private TopMetricsValueDescriptor MetricsDescriptor { get; set; }
+
+	private Action<TopMetricsValueDescriptor> MetricsDescriptorAction { get; set; }
+
+	private Action<TopMetricsValueDescriptor>[] MetricsDescriptorActions { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	private int? SizeValue { get; set; }
+
+	private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
+
+	public TopMetricsAggregationDescriptor Metrics(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
+	{
+		MetricsDescriptor = null;
+		MetricsDescriptorAction = null;
+		MetricsDescriptorActions = null;
+		MetricsValue = metrics;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Metrics(TopMetricsValueDescriptor descriptor)
+	{
+		MetricsValue = null;
+		MetricsDescriptorAction = null;
+		MetricsDescriptorActions = null;
+		MetricsDescriptor = descriptor;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Metrics(Action<TopMetricsValueDescriptor> configure)
+	{
+		MetricsValue = null;
+		MetricsDescriptor = null;
+		MetricsDescriptorActions = null;
+		MetricsDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Metrics(params Action<TopMetricsValueDescriptor>[] configure)
+	{
+		MetricsValue = null;
+		MetricsDescriptor = null;
+		MetricsDescriptorAction = null;
+		MetricsDescriptorActions = configure;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Size(int? size)
+	{
+		SizeValue = size;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+	{
+		SortValue = sort;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("top_metrics");
+		writer.WriteStartObject();
+		if (MetricsDescriptor is not null)
+		{
+			writer.WritePropertyName("metrics");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (MetricsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("metrics");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor(MetricsDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (MetricsDescriptorActions is not null)
+		{
+			writer.WritePropertyName("metrics");
+			writer.WriteStartArray();
+			foreach (var action in MetricsDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (MetricsValue is not null)
+		{
+			writer.WritePropertyName("metrics");
+			JsonSerializer.Serialize(writer, MetricsValue, options);
+		}
+
+		if (FieldValue is not null)
+		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+		}
+
+		if (MissingValue is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
+		}
+
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
+		}
+
+		if (SortValue is not null)
+		{
+			writer.WritePropertyName("sort");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+		}
+
+		writer.WriteEndObject();
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

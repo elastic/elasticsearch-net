@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,432 +26,430 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed class ReindexRequestParameters : RequestParameters<ReindexRequestParameters>
 {
-	public sealed class ReindexRequestParameters : RequestParameters<ReindexRequestParameters>
+	[JsonIgnore]
+	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+	[JsonIgnore]
+	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+	[JsonIgnore]
+	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+	[JsonIgnore]
+	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+}
+
+public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParameters>
+{
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	[JsonIgnore]
+	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+	[JsonIgnore]
+	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+	[JsonIgnore]
+	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+	[JsonIgnore]
+	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+	[JsonInclude]
+	[JsonPropertyName("conflicts")]
+	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("dest")]
+	public Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("max_docs")]
+	public long? MaxDocs { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("size")]
+	public long? Size { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("source")]
+	public Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
+}
+
+public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescriptor<ReindexRequestDescriptor<TDocument>, ReindexRequestParameters>
+{
+	internal ReindexRequestDescriptor(Action<ReindexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public ReindexRequestDescriptor()
 	{
-		[JsonIgnore]
-		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
-		[JsonIgnore]
-		public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
-		[JsonIgnore]
-		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-
-		[JsonIgnore]
-		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 	}
 
-	public sealed partial class ReindexRequest : PlainRequestBase<ReindexRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	public ReindexRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
+	public ReindexRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+	public ReindexRequestDescriptor<TDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
+	public ReindexRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
+	public ReindexRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
+	public ReindexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+	public ReindexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+	public ReindexRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+	private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
+
+	private Core.Reindex.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
+
+	private Action<Core.Reindex.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
+
+	private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
+
+	private Action<Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
+
+	private long? MaxDocsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	private long? SizeValue { get; set; }
+
+	public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		[JsonIgnore]
-		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
-		[JsonIgnore]
-		public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
-		[JsonIgnore]
-		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-
-		[JsonIgnore]
-		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
-
-		[JsonInclude]
-		[JsonPropertyName("conflicts")]
-		public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_docs")]
-		public long? MaxDocs { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public long? Size { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
+		SourceDescriptor = null;
+		SourceDescriptorAction = null;
+		SourceValue = source;
+		return Self;
 	}
 
-	public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescriptorBase<ReindexRequestDescriptor<TDocument>, ReindexRequestParameters>
+	public ReindexRequestDescriptor<TDocument> Source(Core.Reindex.SourceDescriptor<TDocument> descriptor)
 	{
-		internal ReindexRequestDescriptor(Action<ReindexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public ReindexRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		public ReindexRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
-		public ReindexRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-		public ReindexRequestDescriptor<TDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
-		public ReindexRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
-		public ReindexRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-		public ReindexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-		public ReindexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public ReindexRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-		private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
-
-		private Core.Reindex.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
-
-		private Action<Core.Reindex.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
-
-		private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
-
-		private Action<Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
-
-		private long? MaxDocsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		private long? SizeValue { get; set; }
-
-		public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
-		{
-			SourceDescriptor = null;
-			SourceDescriptorAction = null;
-			SourceValue = source;
-			return Self;
-		}
-
-		public ReindexRequestDescriptor<TDocument> Source(Core.Reindex.SourceDescriptor<TDocument> descriptor)
-		{
-			SourceValue = null;
-			SourceDescriptorAction = null;
-			SourceDescriptor = descriptor;
-			return Self;
-		}
-
-		public ReindexRequestDescriptor<TDocument> Source(Action<Core.Reindex.SourceDescriptor<TDocument>> configure)
-		{
-			SourceValue = null;
-			SourceDescriptor = null;
-			SourceDescriptorAction = configure;
-			return Self;
-		}
-
-		public ReindexRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
-		{
-			ConflictsValue = conflicts;
-			return Self;
-		}
-
-		public ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
-		{
-			DestDescriptor = null;
-			DestDescriptorAction = null;
-			DestValue = dest;
-			return Self;
-		}
-
-		public ReindexRequestDescriptor<TDocument> Dest(Core.Reindex.DestinationDescriptor descriptor)
-		{
-			DestValue = null;
-			DestDescriptorAction = null;
-			DestDescriptor = descriptor;
-			return Self;
-		}
-
-		public ReindexRequestDescriptor<TDocument> Dest(Action<Core.Reindex.DestinationDescriptor> configure)
-		{
-			DestValue = null;
-			DestDescriptor = null;
-			DestDescriptorAction = configure;
-			return Self;
-		}
-
-		public ReindexRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
-		{
-			MaxDocsValue = maxDocs;
-			return Self;
-		}
-
-		public ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-		{
-			ScriptValue = script;
-			return Self;
-		}
-
-		public ReindexRequestDescriptor<TDocument> Size(long? size)
-		{
-			SizeValue = size;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (SourceDescriptor is not null)
-			{
-				writer.WritePropertyName("source");
-				JsonSerializer.Serialize(writer, SourceDescriptor, options);
-			}
-			else if (SourceDescriptorAction is not null)
-			{
-				writer.WritePropertyName("source");
-				JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor<TDocument>(SourceDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("source");
-				JsonSerializer.Serialize(writer, SourceValue, options);
-			}
-
-			if (ConflictsValue is not null)
-			{
-				writer.WritePropertyName("conflicts");
-				JsonSerializer.Serialize(writer, ConflictsValue, options);
-			}
-
-			if (DestDescriptor is not null)
-			{
-				writer.WritePropertyName("dest");
-				JsonSerializer.Serialize(writer, DestDescriptor, options);
-			}
-			else if (DestDescriptorAction is not null)
-			{
-				writer.WritePropertyName("dest");
-				JsonSerializer.Serialize(writer, new Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("dest");
-				JsonSerializer.Serialize(writer, DestValue, options);
-			}
-
-			if (MaxDocsValue.HasValue)
-			{
-				writer.WritePropertyName("max_docs");
-				writer.WriteNumberValue(MaxDocsValue.Value);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (SizeValue.HasValue)
-			{
-				writer.WritePropertyName("size");
-				writer.WriteNumberValue(SizeValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		SourceValue = null;
+		SourceDescriptorAction = null;
+		SourceDescriptor = descriptor;
+		return Self;
 	}
 
-	public sealed partial class ReindexRequestDescriptor : RequestDescriptorBase<ReindexRequestDescriptor, ReindexRequestParameters>
+	public ReindexRequestDescriptor<TDocument> Source(Action<Core.Reindex.SourceDescriptor<TDocument>> configure)
 	{
-		internal ReindexRequestDescriptor(Action<ReindexRequestDescriptor> configure) => configure.Invoke(this);
-		public ReindexRequestDescriptor()
+		SourceValue = null;
+		SourceDescriptor = null;
+		SourceDescriptorAction = configure;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
+	{
+		ConflictsValue = conflicts;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
+	{
+		DestDescriptor = null;
+		DestDescriptorAction = null;
+		DestValue = dest;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor<TDocument> Dest(Core.Reindex.DestinationDescriptor descriptor)
+	{
+		DestValue = null;
+		DestDescriptorAction = null;
+		DestDescriptor = descriptor;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor<TDocument> Dest(Action<Core.Reindex.DestinationDescriptor> configure)
+	{
+		DestValue = null;
+		DestDescriptor = null;
+		DestDescriptorAction = configure;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
+	{
+		MaxDocsValue = maxDocs;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor<TDocument> Size(long? size)
+	{
+		SizeValue = size;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (SourceDescriptor is not null)
 		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, SourceDescriptor, options);
+		}
+		else if (SourceDescriptorAction is not null)
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor<TDocument>(SourceDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		public ReindexRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
-		public ReindexRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-		public ReindexRequestDescriptor RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
-		public ReindexRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
-		public ReindexRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-		public ReindexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-		public ReindexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public ReindexRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-		private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
-
-		private Core.Reindex.SourceDescriptor SourceDescriptor { get; set; }
-
-		private Action<Core.Reindex.SourceDescriptor> SourceDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
-
-		private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
-
-		private Action<Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
-
-		private long? MaxDocsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		private long? SizeValue { get; set; }
-
-		public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
+		if (ConflictsValue is not null)
 		{
-			SourceDescriptor = null;
-			SourceDescriptorAction = null;
-			SourceValue = source;
-			return Self;
+			writer.WritePropertyName("conflicts");
+			JsonSerializer.Serialize(writer, ConflictsValue, options);
 		}
 
-		public ReindexRequestDescriptor Source(Core.Reindex.SourceDescriptor descriptor)
+		if (DestDescriptor is not null)
 		{
-			SourceValue = null;
-			SourceDescriptorAction = null;
-			SourceDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("dest");
+			JsonSerializer.Serialize(writer, DestDescriptor, options);
+		}
+		else if (DestDescriptorAction is not null)
+		{
+			writer.WritePropertyName("dest");
+			JsonSerializer.Serialize(writer, new Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("dest");
+			JsonSerializer.Serialize(writer, DestValue, options);
 		}
 
-		public ReindexRequestDescriptor Source(Action<Core.Reindex.SourceDescriptor> configure)
+		if (MaxDocsValue.HasValue)
 		{
-			SourceValue = null;
-			SourceDescriptor = null;
-			SourceDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("max_docs");
+			writer.WriteNumberValue(MaxDocsValue.Value);
 		}
 
-		public ReindexRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
+		if (ScriptValue is not null)
 		{
-			ConflictsValue = conflicts;
-			return Self;
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		public ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
+		if (SizeValue.HasValue)
 		{
-			DestDescriptor = null;
-			DestDescriptorAction = null;
-			DestValue = dest;
-			return Self;
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
 		}
 
-		public ReindexRequestDescriptor Dest(Core.Reindex.DestinationDescriptor descriptor)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class ReindexRequestDescriptor : RequestDescriptor<ReindexRequestDescriptor, ReindexRequestParameters>
+{
+	internal ReindexRequestDescriptor(Action<ReindexRequestDescriptor> configure) => configure.Invoke(this);
+	public ReindexRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	public ReindexRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
+	public ReindexRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+	public ReindexRequestDescriptor RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
+	public ReindexRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
+	public ReindexRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
+	public ReindexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+	public ReindexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+	public ReindexRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+	private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
+
+	private Core.Reindex.SourceDescriptor SourceDescriptor { get; set; }
+
+	private Action<Core.Reindex.SourceDescriptor> SourceDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
+
+	private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
+
+	private Action<Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
+
+	private long? MaxDocsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	private long? SizeValue { get; set; }
+
+	public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
+	{
+		SourceDescriptor = null;
+		SourceDescriptorAction = null;
+		SourceValue = source;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Source(Core.Reindex.SourceDescriptor descriptor)
+	{
+		SourceValue = null;
+		SourceDescriptorAction = null;
+		SourceDescriptor = descriptor;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Source(Action<Core.Reindex.SourceDescriptor> configure)
+	{
+		SourceValue = null;
+		SourceDescriptor = null;
+		SourceDescriptorAction = configure;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
+	{
+		ConflictsValue = conflicts;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
+	{
+		DestDescriptor = null;
+		DestDescriptorAction = null;
+		DestValue = dest;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Dest(Core.Reindex.DestinationDescriptor descriptor)
+	{
+		DestValue = null;
+		DestDescriptorAction = null;
+		DestDescriptor = descriptor;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Dest(Action<Core.Reindex.DestinationDescriptor> configure)
+	{
+		DestValue = null;
+		DestDescriptor = null;
+		DestDescriptorAction = configure;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor MaxDocs(long? maxDocs)
+	{
+		MaxDocsValue = maxDocs;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Size(long? size)
+	{
+		SizeValue = size;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (SourceDescriptor is not null)
 		{
-			DestValue = null;
-			DestDescriptorAction = null;
-			DestDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, SourceDescriptor, options);
+		}
+		else if (SourceDescriptorAction is not null)
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor(SourceDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
-		public ReindexRequestDescriptor Dest(Action<Core.Reindex.DestinationDescriptor> configure)
+		if (ConflictsValue is not null)
 		{
-			DestValue = null;
-			DestDescriptor = null;
-			DestDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("conflicts");
+			JsonSerializer.Serialize(writer, ConflictsValue, options);
 		}
 
-		public ReindexRequestDescriptor MaxDocs(long? maxDocs)
+		if (DestDescriptor is not null)
 		{
-			MaxDocsValue = maxDocs;
-			return Self;
+			writer.WritePropertyName("dest");
+			JsonSerializer.Serialize(writer, DestDescriptor, options);
+		}
+		else if (DestDescriptorAction is not null)
+		{
+			writer.WritePropertyName("dest");
+			JsonSerializer.Serialize(writer, new Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("dest");
+			JsonSerializer.Serialize(writer, DestValue, options);
 		}
 
-		public ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		if (MaxDocsValue.HasValue)
 		{
-			ScriptValue = script;
-			return Self;
+			writer.WritePropertyName("max_docs");
+			writer.WriteNumberValue(MaxDocsValue.Value);
 		}
 
-		public ReindexRequestDescriptor Size(long? size)
+		if (ScriptValue is not null)
 		{
-			SizeValue = size;
-			return Self;
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		if (SizeValue.HasValue)
 		{
-			writer.WriteStartObject();
-			if (SourceDescriptor is not null)
-			{
-				writer.WritePropertyName("source");
-				JsonSerializer.Serialize(writer, SourceDescriptor, options);
-			}
-			else if (SourceDescriptorAction is not null)
-			{
-				writer.WritePropertyName("source");
-				JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor(SourceDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("source");
-				JsonSerializer.Serialize(writer, SourceValue, options);
-			}
-
-			if (ConflictsValue is not null)
-			{
-				writer.WritePropertyName("conflicts");
-				JsonSerializer.Serialize(writer, ConflictsValue, options);
-			}
-
-			if (DestDescriptor is not null)
-			{
-				writer.WritePropertyName("dest");
-				JsonSerializer.Serialize(writer, DestDescriptor, options);
-			}
-			else if (DestDescriptorAction is not null)
-			{
-				writer.WritePropertyName("dest");
-				JsonSerializer.Serialize(writer, new Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("dest");
-				JsonSerializer.Serialize(writer, DestValue, options);
-			}
-
-			if (MaxDocsValue.HasValue)
-			{
-				writer.WritePropertyName("max_docs");
-				writer.WriteNumberValue(MaxDocsValue.Value);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (SizeValue.HasValue)
-			{
-				writer.WritePropertyName("size");
-				writer.WriteNumberValue(SizeValue.Value);
-			}
-
-			writer.WriteEndObject();
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
 		}
+
+		writer.WriteEndObject();
 	}
 }

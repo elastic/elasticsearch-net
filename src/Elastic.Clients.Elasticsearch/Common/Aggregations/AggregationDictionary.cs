@@ -11,7 +11,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 /// <summary>
 /// Describes aggregations to execute as part of a search.
 /// </summary>
-public sealed class AggregationDictionary : IsADictionaryBase<string, AggregationContainer>
+public sealed class AggregationDictionary : IsADictionary<string, AggregationContainer>
 {
 	public AggregationDictionary() { }
 

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public partial class TokenFilter : Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions>
 {
-	public partial class TokenFilter : Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions>
+	public TokenFilter(string tokenFilter) : base(tokenFilter)
 	{
-		public TokenFilter(string tokenFilter) : base(tokenFilter)
-		{
-		}
+	}
 
-		public TokenFilter(Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions tokenFilterDefinitions) : base(tokenFilterDefinitions)
-		{
-		}
+	public TokenFilter(Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions tokenFilterDefinitions) : base(tokenFilterDefinitions)
+	{
 	}
 }

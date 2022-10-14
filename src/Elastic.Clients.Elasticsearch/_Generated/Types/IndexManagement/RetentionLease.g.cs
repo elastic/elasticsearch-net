@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,36 +24,34 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class RetentionLease
 {
-	public sealed partial class RetentionLease
+	[JsonInclude]
+	[JsonPropertyName("period")]
+	public Elastic.Clients.Elasticsearch.Duration Period { get; set; }
+}
+
+public sealed partial class RetentionLeaseDescriptor : SerializableDescriptor<RetentionLeaseDescriptor>
+{
+	internal RetentionLeaseDescriptor(Action<RetentionLeaseDescriptor> configure) => configure.Invoke(this);
+	public RetentionLeaseDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("period")]
-		public Elastic.Clients.Elasticsearch.Duration Period { get; set; }
 	}
 
-	public sealed partial class RetentionLeaseDescriptor : SerializableDescriptorBase<RetentionLeaseDescriptor>
+	private Elastic.Clients.Elasticsearch.Duration PeriodValue { get; set; }
+
+	public RetentionLeaseDescriptor Period(Elastic.Clients.Elasticsearch.Duration period)
 	{
-		internal RetentionLeaseDescriptor(Action<RetentionLeaseDescriptor> configure) => configure.Invoke(this);
-		public RetentionLeaseDescriptor() : base()
-		{
-		}
+		PeriodValue = period;
+		return Self;
+	}
 
-		private Elastic.Clients.Elasticsearch.Duration PeriodValue { get; set; }
-
-		public RetentionLeaseDescriptor Period(Elastic.Clients.Elasticsearch.Duration period)
-		{
-			PeriodValue = period;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("period");
-			JsonSerializer.Serialize(writer, PeriodValue, options);
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("period");
+		JsonSerializer.Serialize(writer, PeriodValue, options);
+		writer.WriteEndObject();
 	}
 }

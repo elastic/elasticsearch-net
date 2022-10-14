@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,48 +24,46 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class UppercaseTokenFilter : ITokenFilterDefinition
 {
-	public sealed partial class UppercaseTokenFilter : ITokenFilterDefinition
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "uppercase";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class UppercaseTokenFilterDescriptor : SerializableDescriptor<UppercaseTokenFilterDescriptor>, IBuildableDescriptor<UppercaseTokenFilter>
+{
+	internal UppercaseTokenFilterDescriptor(Action<UppercaseTokenFilterDescriptor> configure) => configure.Invoke(this);
+	public UppercaseTokenFilterDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "uppercase";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class UppercaseTokenFilterDescriptor : SerializableDescriptorBase<UppercaseTokenFilterDescriptor>, IBuildableDescriptor<UppercaseTokenFilter>
+	private string? VersionValue { get; set; }
+
+	public UppercaseTokenFilterDescriptor Version(string? version)
 	{
-		internal UppercaseTokenFilterDescriptor(Action<UppercaseTokenFilterDescriptor> configure) => configure.Invoke(this);
-		public UppercaseTokenFilterDescriptor() : base()
-		{
-		}
-
-		private string? VersionValue { get; set; }
-
-		public UppercaseTokenFilterDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("uppercase");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		UppercaseTokenFilter IBuildableDescriptor<UppercaseTokenFilter>.Build() => new()
-		{ Version = VersionValue };
+		VersionValue = version;
+		return Self;
 	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("uppercase");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	UppercaseTokenFilter IBuildableDescriptor<UppercaseTokenFilter>.Build() => new()
+	{ Version = VersionValue };
 }

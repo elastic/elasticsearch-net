@@ -15,25 +15,25 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class CloseResponse : ElasticsearchResponseBase
 {
-	public sealed partial class CloseResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("acknowledged")]
-		public bool Acknowledged { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("acknowledged")]
+	public bool Acknowledged { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("indices")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult> Indices { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("indices")]
+	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult> Indices { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("shards_acknowledged")]
-		public bool ShardsAcknowledged { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("shards_acknowledged")]
+	public bool ShardsAcknowledged { get; init; }
 }

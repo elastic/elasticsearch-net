@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,287 +25,285 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public partial class TokenFilterDefinitions : IsADictionary<string, ITokenFilterDefinition>
 {
-	public partial class TokenFilterDefinitions : IsADictionaryBase<string, ITokenFilterDefinition>
+	public TokenFilterDefinitions()
 	{
-		public TokenFilterDefinitions()
-		{
-		}
-
-		public TokenFilterDefinitions(IDictionary<string, ITokenFilterDefinition> container) : base(container)
-		{
-		}
-
-		public void Add(string name, ITokenFilterDefinition tokenFilterDefinitions) => BackingDictionary.Add(name, tokenFilterDefinitions);
 	}
 
-	public sealed partial class TokenFilterDefinitionsDescriptor : IsADictionaryDescriptor<TokenFilterDefinitionsDescriptor, TokenFilterDefinitions, string, ITokenFilterDefinition>
+	public TokenFilterDefinitions(IDictionary<string, ITokenFilterDefinition> container) : base(container)
 	{
-		public TokenFilterDefinitionsDescriptor() : base(new TokenFilterDefinitions())
-		{
-		}
-
-		public TokenFilterDefinitionsDescriptor(TokenFilterDefinitions tokenFilterDefinitions) : base(tokenFilterDefinitions ?? new TokenFilterDefinitions())
-		{
-		}
-
-		public TokenFilterDefinitionsDescriptor AsciiFoldingTokenFilter(string tokenFilterDefinitionName) => AssignVariant<AsciiFoldingTokenFilterDescriptor, AsciiFoldingTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor AsciiFoldingTokenFilter(string tokenFilterDefinitionName, Action<AsciiFoldingTokenFilterDescriptor> configure) => AssignVariant<AsciiFoldingTokenFilterDescriptor, AsciiFoldingTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor AsciiFoldingTokenFilter(string tokenFilterDefinitionName, AsciiFoldingTokenFilter asciiFoldingTokenFilter) => AssignVariant(tokenFilterDefinitionName, asciiFoldingTokenFilter);
-		public TokenFilterDefinitionsDescriptor CommonGramsTokenFilter(string tokenFilterDefinitionName) => AssignVariant<CommonGramsTokenFilterDescriptor, CommonGramsTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor CommonGramsTokenFilter(string tokenFilterDefinitionName, Action<CommonGramsTokenFilterDescriptor> configure) => AssignVariant<CommonGramsTokenFilterDescriptor, CommonGramsTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor CommonGramsTokenFilter(string tokenFilterDefinitionName, CommonGramsTokenFilter commonGramsTokenFilter) => AssignVariant(tokenFilterDefinitionName, commonGramsTokenFilter);
-		public TokenFilterDefinitionsDescriptor ConditionTokenFilter(string tokenFilterDefinitionName) => AssignVariant<ConditionTokenFilterDescriptor, ConditionTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor ConditionTokenFilter(string tokenFilterDefinitionName, Action<ConditionTokenFilterDescriptor> configure) => AssignVariant<ConditionTokenFilterDescriptor, ConditionTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor ConditionTokenFilter(string tokenFilterDefinitionName, ConditionTokenFilter conditionTokenFilter) => AssignVariant(tokenFilterDefinitionName, conditionTokenFilter);
-		public TokenFilterDefinitionsDescriptor DelimitedPayloadTokenFilter(string tokenFilterDefinitionName) => AssignVariant<DelimitedPayloadTokenFilterDescriptor, DelimitedPayloadTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor DelimitedPayloadTokenFilter(string tokenFilterDefinitionName, Action<DelimitedPayloadTokenFilterDescriptor> configure) => AssignVariant<DelimitedPayloadTokenFilterDescriptor, DelimitedPayloadTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor DelimitedPayloadTokenFilter(string tokenFilterDefinitionName, DelimitedPayloadTokenFilter delimitedPayloadTokenFilter) => AssignVariant(tokenFilterDefinitionName, delimitedPayloadTokenFilter);
-		public TokenFilterDefinitionsDescriptor DictionaryDecompounderTokenFilter(string tokenFilterDefinitionName) => AssignVariant<DictionaryDecompounderTokenFilterDescriptor, DictionaryDecompounderTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor DictionaryDecompounderTokenFilter(string tokenFilterDefinitionName, Action<DictionaryDecompounderTokenFilterDescriptor> configure) => AssignVariant<DictionaryDecompounderTokenFilterDescriptor, DictionaryDecompounderTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor DictionaryDecompounderTokenFilter(string tokenFilterDefinitionName, DictionaryDecompounderTokenFilter dictionaryDecompounderTokenFilter) => AssignVariant(tokenFilterDefinitionName, dictionaryDecompounderTokenFilter);
-		public TokenFilterDefinitionsDescriptor EdgeNGramTokenFilter(string tokenFilterDefinitionName) => AssignVariant<EdgeNGramTokenFilterDescriptor, EdgeNGramTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor EdgeNGramTokenFilter(string tokenFilterDefinitionName, Action<EdgeNGramTokenFilterDescriptor> configure) => AssignVariant<EdgeNGramTokenFilterDescriptor, EdgeNGramTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor EdgeNGramTokenFilter(string tokenFilterDefinitionName, EdgeNGramTokenFilter edgeNGramTokenFilter) => AssignVariant(tokenFilterDefinitionName, edgeNGramTokenFilter);
-		public TokenFilterDefinitionsDescriptor ElisionTokenFilter(string tokenFilterDefinitionName) => AssignVariant<ElisionTokenFilterDescriptor, ElisionTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor ElisionTokenFilter(string tokenFilterDefinitionName, Action<ElisionTokenFilterDescriptor> configure) => AssignVariant<ElisionTokenFilterDescriptor, ElisionTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor ElisionTokenFilter(string tokenFilterDefinitionName, ElisionTokenFilter elisionTokenFilter) => AssignVariant(tokenFilterDefinitionName, elisionTokenFilter);
-		public TokenFilterDefinitionsDescriptor FingerprintTokenFilter(string tokenFilterDefinitionName) => AssignVariant<FingerprintTokenFilterDescriptor, FingerprintTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor FingerprintTokenFilter(string tokenFilterDefinitionName, Action<FingerprintTokenFilterDescriptor> configure) => AssignVariant<FingerprintTokenFilterDescriptor, FingerprintTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor FingerprintTokenFilter(string tokenFilterDefinitionName, FingerprintTokenFilter fingerprintTokenFilter) => AssignVariant(tokenFilterDefinitionName, fingerprintTokenFilter);
-		public TokenFilterDefinitionsDescriptor HunspellTokenFilter(string tokenFilterDefinitionName) => AssignVariant<HunspellTokenFilterDescriptor, HunspellTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor HunspellTokenFilter(string tokenFilterDefinitionName, Action<HunspellTokenFilterDescriptor> configure) => AssignVariant<HunspellTokenFilterDescriptor, HunspellTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor HunspellTokenFilter(string tokenFilterDefinitionName, HunspellTokenFilter hunspellTokenFilter) => AssignVariant(tokenFilterDefinitionName, hunspellTokenFilter);
-		public TokenFilterDefinitionsDescriptor HyphenationDecompounderTokenFilter(string tokenFilterDefinitionName) => AssignVariant<HyphenationDecompounderTokenFilterDescriptor, HyphenationDecompounderTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor HyphenationDecompounderTokenFilter(string tokenFilterDefinitionName, Action<HyphenationDecompounderTokenFilterDescriptor> configure) => AssignVariant<HyphenationDecompounderTokenFilterDescriptor, HyphenationDecompounderTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor HyphenationDecompounderTokenFilter(string tokenFilterDefinitionName, HyphenationDecompounderTokenFilter hyphenationDecompounderTokenFilter) => AssignVariant(tokenFilterDefinitionName, hyphenationDecompounderTokenFilter);
-		public TokenFilterDefinitionsDescriptor IcuCollationTokenFilter(string tokenFilterDefinitionName) => AssignVariant<IcuCollationTokenFilterDescriptor, IcuCollationTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor IcuCollationTokenFilter(string tokenFilterDefinitionName, Action<IcuCollationTokenFilterDescriptor> configure) => AssignVariant<IcuCollationTokenFilterDescriptor, IcuCollationTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor IcuCollationTokenFilter(string tokenFilterDefinitionName, IcuCollationTokenFilter icuCollationTokenFilter) => AssignVariant(tokenFilterDefinitionName, icuCollationTokenFilter);
-		public TokenFilterDefinitionsDescriptor IcuFoldingTokenFilter(string tokenFilterDefinitionName) => AssignVariant<IcuFoldingTokenFilterDescriptor, IcuFoldingTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor IcuFoldingTokenFilter(string tokenFilterDefinitionName, Action<IcuFoldingTokenFilterDescriptor> configure) => AssignVariant<IcuFoldingTokenFilterDescriptor, IcuFoldingTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor IcuFoldingTokenFilter(string tokenFilterDefinitionName, IcuFoldingTokenFilter icuFoldingTokenFilter) => AssignVariant(tokenFilterDefinitionName, icuFoldingTokenFilter);
-		public TokenFilterDefinitionsDescriptor IcuNormalizationTokenFilter(string tokenFilterDefinitionName) => AssignVariant<IcuNormalizationTokenFilterDescriptor, IcuNormalizationTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor IcuNormalizationTokenFilter(string tokenFilterDefinitionName, Action<IcuNormalizationTokenFilterDescriptor> configure) => AssignVariant<IcuNormalizationTokenFilterDescriptor, IcuNormalizationTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor IcuNormalizationTokenFilter(string tokenFilterDefinitionName, IcuNormalizationTokenFilter icuNormalizationTokenFilter) => AssignVariant(tokenFilterDefinitionName, icuNormalizationTokenFilter);
-		public TokenFilterDefinitionsDescriptor IcuTokenizer(string tokenFilterDefinitionName) => AssignVariant<IcuTokenizerDescriptor, IcuTokenizer>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor IcuTokenizer(string tokenFilterDefinitionName, Action<IcuTokenizerDescriptor> configure) => AssignVariant<IcuTokenizerDescriptor, IcuTokenizer>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor IcuTokenizer(string tokenFilterDefinitionName, IcuTokenizer icuTokenizer) => AssignVariant(tokenFilterDefinitionName, icuTokenizer);
-		public TokenFilterDefinitionsDescriptor IcuTransformTokenFilter(string tokenFilterDefinitionName) => AssignVariant<IcuTransformTokenFilterDescriptor, IcuTransformTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor IcuTransformTokenFilter(string tokenFilterDefinitionName, Action<IcuTransformTokenFilterDescriptor> configure) => AssignVariant<IcuTransformTokenFilterDescriptor, IcuTransformTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor IcuTransformTokenFilter(string tokenFilterDefinitionName, IcuTransformTokenFilter icuTransformTokenFilter) => AssignVariant(tokenFilterDefinitionName, icuTransformTokenFilter);
-		public TokenFilterDefinitionsDescriptor KeepTypesTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KeepTypesTokenFilterDescriptor, KeepTypesTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor KeepTypesTokenFilter(string tokenFilterDefinitionName, Action<KeepTypesTokenFilterDescriptor> configure) => AssignVariant<KeepTypesTokenFilterDescriptor, KeepTypesTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor KeepTypesTokenFilter(string tokenFilterDefinitionName, KeepTypesTokenFilter keepTypesTokenFilter) => AssignVariant(tokenFilterDefinitionName, keepTypesTokenFilter);
-		public TokenFilterDefinitionsDescriptor KeepWordsTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KeepWordsTokenFilterDescriptor, KeepWordsTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor KeepWordsTokenFilter(string tokenFilterDefinitionName, Action<KeepWordsTokenFilterDescriptor> configure) => AssignVariant<KeepWordsTokenFilterDescriptor, KeepWordsTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor KeepWordsTokenFilter(string tokenFilterDefinitionName, KeepWordsTokenFilter keepWordsTokenFilter) => AssignVariant(tokenFilterDefinitionName, keepWordsTokenFilter);
-		public TokenFilterDefinitionsDescriptor KeywordMarkerTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KeywordMarkerTokenFilterDescriptor, KeywordMarkerTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor KeywordMarkerTokenFilter(string tokenFilterDefinitionName, Action<KeywordMarkerTokenFilterDescriptor> configure) => AssignVariant<KeywordMarkerTokenFilterDescriptor, KeywordMarkerTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor KeywordMarkerTokenFilter(string tokenFilterDefinitionName, KeywordMarkerTokenFilter keywordMarkerTokenFilter) => AssignVariant(tokenFilterDefinitionName, keywordMarkerTokenFilter);
-		public TokenFilterDefinitionsDescriptor KStemTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KStemTokenFilterDescriptor, KStemTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor KStemTokenFilter(string tokenFilterDefinitionName, Action<KStemTokenFilterDescriptor> configure) => AssignVariant<KStemTokenFilterDescriptor, KStemTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor KStemTokenFilter(string tokenFilterDefinitionName, KStemTokenFilter kStemTokenFilter) => AssignVariant(tokenFilterDefinitionName, kStemTokenFilter);
-		public TokenFilterDefinitionsDescriptor KuromojiPartOfSpeechTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KuromojiPartOfSpeechTokenFilterDescriptor, KuromojiPartOfSpeechTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor KuromojiPartOfSpeechTokenFilter(string tokenFilterDefinitionName, Action<KuromojiPartOfSpeechTokenFilterDescriptor> configure) => AssignVariant<KuromojiPartOfSpeechTokenFilterDescriptor, KuromojiPartOfSpeechTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor KuromojiPartOfSpeechTokenFilter(string tokenFilterDefinitionName, KuromojiPartOfSpeechTokenFilter kuromojiPartOfSpeechTokenFilter) => AssignVariant(tokenFilterDefinitionName, kuromojiPartOfSpeechTokenFilter);
-		public TokenFilterDefinitionsDescriptor KuromojiReadingFormTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KuromojiReadingFormTokenFilterDescriptor, KuromojiReadingFormTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor KuromojiReadingFormTokenFilter(string tokenFilterDefinitionName, Action<KuromojiReadingFormTokenFilterDescriptor> configure) => AssignVariant<KuromojiReadingFormTokenFilterDescriptor, KuromojiReadingFormTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor KuromojiReadingFormTokenFilter(string tokenFilterDefinitionName, KuromojiReadingFormTokenFilter kuromojiReadingFormTokenFilter) => AssignVariant(tokenFilterDefinitionName, kuromojiReadingFormTokenFilter);
-		public TokenFilterDefinitionsDescriptor KuromojiStemmerTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KuromojiStemmerTokenFilterDescriptor, KuromojiStemmerTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor KuromojiStemmerTokenFilter(string tokenFilterDefinitionName, Action<KuromojiStemmerTokenFilterDescriptor> configure) => AssignVariant<KuromojiStemmerTokenFilterDescriptor, KuromojiStemmerTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor KuromojiStemmerTokenFilter(string tokenFilterDefinitionName, KuromojiStemmerTokenFilter kuromojiStemmerTokenFilter) => AssignVariant(tokenFilterDefinitionName, kuromojiStemmerTokenFilter);
-		public TokenFilterDefinitionsDescriptor LengthTokenFilter(string tokenFilterDefinitionName) => AssignVariant<LengthTokenFilterDescriptor, LengthTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor LengthTokenFilter(string tokenFilterDefinitionName, Action<LengthTokenFilterDescriptor> configure) => AssignVariant<LengthTokenFilterDescriptor, LengthTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor LengthTokenFilter(string tokenFilterDefinitionName, LengthTokenFilter lengthTokenFilter) => AssignVariant(tokenFilterDefinitionName, lengthTokenFilter);
-		public TokenFilterDefinitionsDescriptor LimitTokenCountTokenFilter(string tokenFilterDefinitionName) => AssignVariant<LimitTokenCountTokenFilterDescriptor, LimitTokenCountTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor LimitTokenCountTokenFilter(string tokenFilterDefinitionName, Action<LimitTokenCountTokenFilterDescriptor> configure) => AssignVariant<LimitTokenCountTokenFilterDescriptor, LimitTokenCountTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor LimitTokenCountTokenFilter(string tokenFilterDefinitionName, LimitTokenCountTokenFilter limitTokenCountTokenFilter) => AssignVariant(tokenFilterDefinitionName, limitTokenCountTokenFilter);
-		public TokenFilterDefinitionsDescriptor LowercaseTokenFilter(string tokenFilterDefinitionName) => AssignVariant<LowercaseTokenFilterDescriptor, LowercaseTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor LowercaseTokenFilter(string tokenFilterDefinitionName, Action<LowercaseTokenFilterDescriptor> configure) => AssignVariant<LowercaseTokenFilterDescriptor, LowercaseTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor LowercaseTokenFilter(string tokenFilterDefinitionName, LowercaseTokenFilter lowercaseTokenFilter) => AssignVariant(tokenFilterDefinitionName, lowercaseTokenFilter);
-		public TokenFilterDefinitionsDescriptor MultiplexerTokenFilter(string tokenFilterDefinitionName) => AssignVariant<MultiplexerTokenFilterDescriptor, MultiplexerTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor MultiplexerTokenFilter(string tokenFilterDefinitionName, Action<MultiplexerTokenFilterDescriptor> configure) => AssignVariant<MultiplexerTokenFilterDescriptor, MultiplexerTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor MultiplexerTokenFilter(string tokenFilterDefinitionName, MultiplexerTokenFilter multiplexerTokenFilter) => AssignVariant(tokenFilterDefinitionName, multiplexerTokenFilter);
-		public TokenFilterDefinitionsDescriptor NGramTokenFilter(string tokenFilterDefinitionName) => AssignVariant<NGramTokenFilterDescriptor, NGramTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor NGramTokenFilter(string tokenFilterDefinitionName, Action<NGramTokenFilterDescriptor> configure) => AssignVariant<NGramTokenFilterDescriptor, NGramTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor NGramTokenFilter(string tokenFilterDefinitionName, NGramTokenFilter nGramTokenFilter) => AssignVariant(tokenFilterDefinitionName, nGramTokenFilter);
-		public TokenFilterDefinitionsDescriptor NoriPartOfSpeechTokenFilter(string tokenFilterDefinitionName) => AssignVariant<NoriPartOfSpeechTokenFilterDescriptor, NoriPartOfSpeechTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor NoriPartOfSpeechTokenFilter(string tokenFilterDefinitionName, Action<NoriPartOfSpeechTokenFilterDescriptor> configure) => AssignVariant<NoriPartOfSpeechTokenFilterDescriptor, NoriPartOfSpeechTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor NoriPartOfSpeechTokenFilter(string tokenFilterDefinitionName, NoriPartOfSpeechTokenFilter noriPartOfSpeechTokenFilter) => AssignVariant(tokenFilterDefinitionName, noriPartOfSpeechTokenFilter);
-		public TokenFilterDefinitionsDescriptor PatternCaptureTokenFilter(string tokenFilterDefinitionName) => AssignVariant<PatternCaptureTokenFilterDescriptor, PatternCaptureTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor PatternCaptureTokenFilter(string tokenFilterDefinitionName, Action<PatternCaptureTokenFilterDescriptor> configure) => AssignVariant<PatternCaptureTokenFilterDescriptor, PatternCaptureTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor PatternCaptureTokenFilter(string tokenFilterDefinitionName, PatternCaptureTokenFilter patternCaptureTokenFilter) => AssignVariant(tokenFilterDefinitionName, patternCaptureTokenFilter);
-		public TokenFilterDefinitionsDescriptor PatternReplaceTokenFilter(string tokenFilterDefinitionName) => AssignVariant<PatternReplaceTokenFilterDescriptor, PatternReplaceTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor PatternReplaceTokenFilter(string tokenFilterDefinitionName, Action<PatternReplaceTokenFilterDescriptor> configure) => AssignVariant<PatternReplaceTokenFilterDescriptor, PatternReplaceTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor PatternReplaceTokenFilter(string tokenFilterDefinitionName, PatternReplaceTokenFilter patternReplaceTokenFilter) => AssignVariant(tokenFilterDefinitionName, patternReplaceTokenFilter);
-		public TokenFilterDefinitionsDescriptor PhoneticTokenFilter(string tokenFilterDefinitionName) => AssignVariant<PhoneticTokenFilterDescriptor, PhoneticTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor PhoneticTokenFilter(string tokenFilterDefinitionName, Action<PhoneticTokenFilterDescriptor> configure) => AssignVariant<PhoneticTokenFilterDescriptor, PhoneticTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor PhoneticTokenFilter(string tokenFilterDefinitionName, PhoneticTokenFilter phoneticTokenFilter) => AssignVariant(tokenFilterDefinitionName, phoneticTokenFilter);
-		public TokenFilterDefinitionsDescriptor PorterStemTokenFilter(string tokenFilterDefinitionName) => AssignVariant<PorterStemTokenFilterDescriptor, PorterStemTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor PorterStemTokenFilter(string tokenFilterDefinitionName, Action<PorterStemTokenFilterDescriptor> configure) => AssignVariant<PorterStemTokenFilterDescriptor, PorterStemTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor PorterStemTokenFilter(string tokenFilterDefinitionName, PorterStemTokenFilter porterStemTokenFilter) => AssignVariant(tokenFilterDefinitionName, porterStemTokenFilter);
-		public TokenFilterDefinitionsDescriptor PredicateTokenFilter(string tokenFilterDefinitionName) => AssignVariant<PredicateTokenFilterDescriptor, PredicateTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor PredicateTokenFilter(string tokenFilterDefinitionName, Action<PredicateTokenFilterDescriptor> configure) => AssignVariant<PredicateTokenFilterDescriptor, PredicateTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor PredicateTokenFilter(string tokenFilterDefinitionName, PredicateTokenFilter predicateTokenFilter) => AssignVariant(tokenFilterDefinitionName, predicateTokenFilter);
-		public TokenFilterDefinitionsDescriptor RemoveDuplicatesTokenFilter(string tokenFilterDefinitionName) => AssignVariant<RemoveDuplicatesTokenFilterDescriptor, RemoveDuplicatesTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor RemoveDuplicatesTokenFilter(string tokenFilterDefinitionName, Action<RemoveDuplicatesTokenFilterDescriptor> configure) => AssignVariant<RemoveDuplicatesTokenFilterDescriptor, RemoveDuplicatesTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor RemoveDuplicatesTokenFilter(string tokenFilterDefinitionName, RemoveDuplicatesTokenFilter removeDuplicatesTokenFilter) => AssignVariant(tokenFilterDefinitionName, removeDuplicatesTokenFilter);
-		public TokenFilterDefinitionsDescriptor ReverseTokenFilter(string tokenFilterDefinitionName) => AssignVariant<ReverseTokenFilterDescriptor, ReverseTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor ReverseTokenFilter(string tokenFilterDefinitionName, Action<ReverseTokenFilterDescriptor> configure) => AssignVariant<ReverseTokenFilterDescriptor, ReverseTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor ReverseTokenFilter(string tokenFilterDefinitionName, ReverseTokenFilter reverseTokenFilter) => AssignVariant(tokenFilterDefinitionName, reverseTokenFilter);
-		public TokenFilterDefinitionsDescriptor ShingleTokenFilter(string tokenFilterDefinitionName) => AssignVariant<ShingleTokenFilterDescriptor, ShingleTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor ShingleTokenFilter(string tokenFilterDefinitionName, Action<ShingleTokenFilterDescriptor> configure) => AssignVariant<ShingleTokenFilterDescriptor, ShingleTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor ShingleTokenFilter(string tokenFilterDefinitionName, ShingleTokenFilter shingleTokenFilter) => AssignVariant(tokenFilterDefinitionName, shingleTokenFilter);
-		public TokenFilterDefinitionsDescriptor SnowballTokenFilter(string tokenFilterDefinitionName) => AssignVariant<SnowballTokenFilterDescriptor, SnowballTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor SnowballTokenFilter(string tokenFilterDefinitionName, Action<SnowballTokenFilterDescriptor> configure) => AssignVariant<SnowballTokenFilterDescriptor, SnowballTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor SnowballTokenFilter(string tokenFilterDefinitionName, SnowballTokenFilter snowballTokenFilter) => AssignVariant(tokenFilterDefinitionName, snowballTokenFilter);
-		public TokenFilterDefinitionsDescriptor StemmerOverrideTokenFilter(string tokenFilterDefinitionName) => AssignVariant<StemmerOverrideTokenFilterDescriptor, StemmerOverrideTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor StemmerOverrideTokenFilter(string tokenFilterDefinitionName, Action<StemmerOverrideTokenFilterDescriptor> configure) => AssignVariant<StemmerOverrideTokenFilterDescriptor, StemmerOverrideTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor StemmerOverrideTokenFilter(string tokenFilterDefinitionName, StemmerOverrideTokenFilter stemmerOverrideTokenFilter) => AssignVariant(tokenFilterDefinitionName, stemmerOverrideTokenFilter);
-		public TokenFilterDefinitionsDescriptor StemmerTokenFilter(string tokenFilterDefinitionName) => AssignVariant<StemmerTokenFilterDescriptor, StemmerTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor StemmerTokenFilter(string tokenFilterDefinitionName, Action<StemmerTokenFilterDescriptor> configure) => AssignVariant<StemmerTokenFilterDescriptor, StemmerTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor StemmerTokenFilter(string tokenFilterDefinitionName, StemmerTokenFilter stemmerTokenFilter) => AssignVariant(tokenFilterDefinitionName, stemmerTokenFilter);
-		public TokenFilterDefinitionsDescriptor StopTokenFilter(string tokenFilterDefinitionName) => AssignVariant<StopTokenFilterDescriptor, StopTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor StopTokenFilter(string tokenFilterDefinitionName, Action<StopTokenFilterDescriptor> configure) => AssignVariant<StopTokenFilterDescriptor, StopTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor StopTokenFilter(string tokenFilterDefinitionName, StopTokenFilter stopTokenFilter) => AssignVariant(tokenFilterDefinitionName, stopTokenFilter);
-		public TokenFilterDefinitionsDescriptor SynonymGraphTokenFilter(string tokenFilterDefinitionName) => AssignVariant<SynonymGraphTokenFilterDescriptor, SynonymGraphTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor SynonymGraphTokenFilter(string tokenFilterDefinitionName, Action<SynonymGraphTokenFilterDescriptor> configure) => AssignVariant<SynonymGraphTokenFilterDescriptor, SynonymGraphTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor SynonymGraphTokenFilter(string tokenFilterDefinitionName, SynonymGraphTokenFilter synonymGraphTokenFilter) => AssignVariant(tokenFilterDefinitionName, synonymGraphTokenFilter);
-		public TokenFilterDefinitionsDescriptor SynonymTokenFilter(string tokenFilterDefinitionName) => AssignVariant<SynonymTokenFilterDescriptor, SynonymTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor SynonymTokenFilter(string tokenFilterDefinitionName, Action<SynonymTokenFilterDescriptor> configure) => AssignVariant<SynonymTokenFilterDescriptor, SynonymTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor SynonymTokenFilter(string tokenFilterDefinitionName, SynonymTokenFilter synonymTokenFilter) => AssignVariant(tokenFilterDefinitionName, synonymTokenFilter);
-		public TokenFilterDefinitionsDescriptor TrimTokenFilter(string tokenFilterDefinitionName) => AssignVariant<TrimTokenFilterDescriptor, TrimTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor TrimTokenFilter(string tokenFilterDefinitionName, Action<TrimTokenFilterDescriptor> configure) => AssignVariant<TrimTokenFilterDescriptor, TrimTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor TrimTokenFilter(string tokenFilterDefinitionName, TrimTokenFilter trimTokenFilter) => AssignVariant(tokenFilterDefinitionName, trimTokenFilter);
-		public TokenFilterDefinitionsDescriptor TruncateTokenFilter(string tokenFilterDefinitionName) => AssignVariant<TruncateTokenFilterDescriptor, TruncateTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor TruncateTokenFilter(string tokenFilterDefinitionName, Action<TruncateTokenFilterDescriptor> configure) => AssignVariant<TruncateTokenFilterDescriptor, TruncateTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor TruncateTokenFilter(string tokenFilterDefinitionName, TruncateTokenFilter truncateTokenFilter) => AssignVariant(tokenFilterDefinitionName, truncateTokenFilter);
-		public TokenFilterDefinitionsDescriptor UniqueTokenFilter(string tokenFilterDefinitionName) => AssignVariant<UniqueTokenFilterDescriptor, UniqueTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor UniqueTokenFilter(string tokenFilterDefinitionName, Action<UniqueTokenFilterDescriptor> configure) => AssignVariant<UniqueTokenFilterDescriptor, UniqueTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor UniqueTokenFilter(string tokenFilterDefinitionName, UniqueTokenFilter uniqueTokenFilter) => AssignVariant(tokenFilterDefinitionName, uniqueTokenFilter);
-		public TokenFilterDefinitionsDescriptor UppercaseTokenFilter(string tokenFilterDefinitionName) => AssignVariant<UppercaseTokenFilterDescriptor, UppercaseTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor UppercaseTokenFilter(string tokenFilterDefinitionName, Action<UppercaseTokenFilterDescriptor> configure) => AssignVariant<UppercaseTokenFilterDescriptor, UppercaseTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor UppercaseTokenFilter(string tokenFilterDefinitionName, UppercaseTokenFilter uppercaseTokenFilter) => AssignVariant(tokenFilterDefinitionName, uppercaseTokenFilter);
-		public TokenFilterDefinitionsDescriptor WordDelimiterGraphTokenFilter(string tokenFilterDefinitionName) => AssignVariant<WordDelimiterGraphTokenFilterDescriptor, WordDelimiterGraphTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor WordDelimiterGraphTokenFilter(string tokenFilterDefinitionName, Action<WordDelimiterGraphTokenFilterDescriptor> configure) => AssignVariant<WordDelimiterGraphTokenFilterDescriptor, WordDelimiterGraphTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor WordDelimiterGraphTokenFilter(string tokenFilterDefinitionName, WordDelimiterGraphTokenFilter wordDelimiterGraphTokenFilter) => AssignVariant(tokenFilterDefinitionName, wordDelimiterGraphTokenFilter);
-		public TokenFilterDefinitionsDescriptor WordDelimiterTokenFilter(string tokenFilterDefinitionName) => AssignVariant<WordDelimiterTokenFilterDescriptor, WordDelimiterTokenFilter>(tokenFilterDefinitionName, null);
-		public TokenFilterDefinitionsDescriptor WordDelimiterTokenFilter(string tokenFilterDefinitionName, Action<WordDelimiterTokenFilterDescriptor> configure) => AssignVariant<WordDelimiterTokenFilterDescriptor, WordDelimiterTokenFilter>(tokenFilterDefinitionName, configure);
-		public TokenFilterDefinitionsDescriptor WordDelimiterTokenFilter(string tokenFilterDefinitionName, WordDelimiterTokenFilter wordDelimiterTokenFilter) => AssignVariant(tokenFilterDefinitionName, wordDelimiterTokenFilter);
 	}
 
-	internal sealed partial class TokenFilterDefinitionInterfaceConverter
+	public void Add(string name, ITokenFilterDefinition tokenFilterDefinitions) => BackingDictionary.Add(name, tokenFilterDefinitions);
+}
+
+public sealed partial class TokenFilterDefinitionsDescriptor : IsADictionaryDescriptor<TokenFilterDefinitionsDescriptor, TokenFilterDefinitions, string, ITokenFilterDefinition>
+{
+	public TokenFilterDefinitionsDescriptor() : base(new TokenFilterDefinitions())
 	{
-		private static ITokenFilterDefinition DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
-		{
-			switch (type)
-			{
-				case "dictionary_decompounder":
-					return JsonSerializer.Deserialize<DictionaryDecompounderTokenFilter>(ref reader, options);
-				case "phonetic":
-					return JsonSerializer.Deserialize<PhoneticTokenFilter>(ref reader, options);
-				case "icu_transform":
-					return JsonSerializer.Deserialize<IcuTransformTokenFilter>(ref reader, options);
-				case "icu_normalizer":
-					return JsonSerializer.Deserialize<IcuNormalizationTokenFilter>(ref reader, options);
-				case "icu_folding":
-					return JsonSerializer.Deserialize<IcuFoldingTokenFilter>(ref reader, options);
-				case "icu_collation":
-					return JsonSerializer.Deserialize<IcuCollationTokenFilter>(ref reader, options);
-				case "icu_tokenizer":
-					return JsonSerializer.Deserialize<IcuTokenizer>(ref reader, options);
-				case "kuromoji_part_of_speech":
-					return JsonSerializer.Deserialize<KuromojiPartOfSpeechTokenFilter>(ref reader, options);
-				case "kuromoji_readingform":
-					return JsonSerializer.Deserialize<KuromojiReadingFormTokenFilter>(ref reader, options);
-				case "kuromoji_stemmer":
-					return JsonSerializer.Deserialize<KuromojiStemmerTokenFilter>(ref reader, options);
-				case "word_delimiter":
-					return JsonSerializer.Deserialize<WordDelimiterTokenFilter>(ref reader, options);
-				case "word_delimiter_graph":
-					return JsonSerializer.Deserialize<WordDelimiterGraphTokenFilter>(ref reader, options);
-				case "uppercase":
-					return JsonSerializer.Deserialize<UppercaseTokenFilter>(ref reader, options);
-				case "unique":
-					return JsonSerializer.Deserialize<UniqueTokenFilter>(ref reader, options);
-				case "truncate":
-					return JsonSerializer.Deserialize<TruncateTokenFilter>(ref reader, options);
-				case "trim":
-					return JsonSerializer.Deserialize<TrimTokenFilter>(ref reader, options);
-				case "synonym":
-					return JsonSerializer.Deserialize<SynonymTokenFilter>(ref reader, options);
-				case "synonym_graph":
-					return JsonSerializer.Deserialize<SynonymGraphTokenFilter>(ref reader, options);
-				case "stop":
-					return JsonSerializer.Deserialize<StopTokenFilter>(ref reader, options);
-				case "stemmer":
-					return JsonSerializer.Deserialize<StemmerTokenFilter>(ref reader, options);
-				case "stemmer_override":
-					return JsonSerializer.Deserialize<StemmerOverrideTokenFilter>(ref reader, options);
-				case "snowball":
-					return JsonSerializer.Deserialize<SnowballTokenFilter>(ref reader, options);
-				case "shingle":
-					return JsonSerializer.Deserialize<ShingleTokenFilter>(ref reader, options);
-				case "reverse":
-					return JsonSerializer.Deserialize<ReverseTokenFilter>(ref reader, options);
-				case "remove_duplicates":
-					return JsonSerializer.Deserialize<RemoveDuplicatesTokenFilter>(ref reader, options);
-				case "predicate_token_filter":
-					return JsonSerializer.Deserialize<PredicateTokenFilter>(ref reader, options);
-				case "porter_stem":
-					return JsonSerializer.Deserialize<PorterStemTokenFilter>(ref reader, options);
-				case "pattern_replace":
-					return JsonSerializer.Deserialize<PatternReplaceTokenFilter>(ref reader, options);
-				case "pattern_capture":
-					return JsonSerializer.Deserialize<PatternCaptureTokenFilter>(ref reader, options);
-				case "nori_part_of_speech":
-					return JsonSerializer.Deserialize<NoriPartOfSpeechTokenFilter>(ref reader, options);
-				case "ngram":
-					return JsonSerializer.Deserialize<NGramTokenFilter>(ref reader, options);
-				case "multiplexer":
-					return JsonSerializer.Deserialize<MultiplexerTokenFilter>(ref reader, options);
-				case "lowercase":
-					return JsonSerializer.Deserialize<LowercaseTokenFilter>(ref reader, options);
-				case "limit":
-					return JsonSerializer.Deserialize<LimitTokenCountTokenFilter>(ref reader, options);
-				case "length":
-					return JsonSerializer.Deserialize<LengthTokenFilter>(ref reader, options);
-				case "kstem":
-					return JsonSerializer.Deserialize<KStemTokenFilter>(ref reader, options);
-				case "keyword_marker":
-					return JsonSerializer.Deserialize<KeywordMarkerTokenFilter>(ref reader, options);
-				case "keep":
-					return JsonSerializer.Deserialize<KeepWordsTokenFilter>(ref reader, options);
-				case "keep_types":
-					return JsonSerializer.Deserialize<KeepTypesTokenFilter>(ref reader, options);
-				case "hyphenation_decompounder":
-					return JsonSerializer.Deserialize<HyphenationDecompounderTokenFilter>(ref reader, options);
-				case "hunspell":
-					return JsonSerializer.Deserialize<HunspellTokenFilter>(ref reader, options);
-				case "fingerprint":
-					return JsonSerializer.Deserialize<FingerprintTokenFilter>(ref reader, options);
-				case "elision":
-					return JsonSerializer.Deserialize<ElisionTokenFilter>(ref reader, options);
-				case "edge_ngram":
-					return JsonSerializer.Deserialize<EdgeNGramTokenFilter>(ref reader, options);
-				case "delimited_payload":
-					return JsonSerializer.Deserialize<DelimitedPayloadTokenFilter>(ref reader, options);
-				case "condition":
-					return JsonSerializer.Deserialize<ConditionTokenFilter>(ref reader, options);
-				case "common_grams":
-					return JsonSerializer.Deserialize<CommonGramsTokenFilter>(ref reader, options);
-				case "asciifolding":
-					return JsonSerializer.Deserialize<AsciiFoldingTokenFilter>(ref reader, options);
-				default:
-					throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
-			}
-		}
 	}
 
-	public partial interface ITokenFilterDefinition
+	public TokenFilterDefinitionsDescriptor(TokenFilterDefinitions tokenFilterDefinitions) : base(tokenFilterDefinitions ?? new TokenFilterDefinitions())
 	{
-		public string Type { get; }
 	}
+
+	public TokenFilterDefinitionsDescriptor AsciiFoldingTokenFilter(string tokenFilterDefinitionName) => AssignVariant<AsciiFoldingTokenFilterDescriptor, AsciiFoldingTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor AsciiFoldingTokenFilter(string tokenFilterDefinitionName, Action<AsciiFoldingTokenFilterDescriptor> configure) => AssignVariant<AsciiFoldingTokenFilterDescriptor, AsciiFoldingTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor AsciiFoldingTokenFilter(string tokenFilterDefinitionName, AsciiFoldingTokenFilter asciiFoldingTokenFilter) => AssignVariant(tokenFilterDefinitionName, asciiFoldingTokenFilter);
+	public TokenFilterDefinitionsDescriptor CommonGramsTokenFilter(string tokenFilterDefinitionName) => AssignVariant<CommonGramsTokenFilterDescriptor, CommonGramsTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor CommonGramsTokenFilter(string tokenFilterDefinitionName, Action<CommonGramsTokenFilterDescriptor> configure) => AssignVariant<CommonGramsTokenFilterDescriptor, CommonGramsTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor CommonGramsTokenFilter(string tokenFilterDefinitionName, CommonGramsTokenFilter commonGramsTokenFilter) => AssignVariant(tokenFilterDefinitionName, commonGramsTokenFilter);
+	public TokenFilterDefinitionsDescriptor ConditionTokenFilter(string tokenFilterDefinitionName) => AssignVariant<ConditionTokenFilterDescriptor, ConditionTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor ConditionTokenFilter(string tokenFilterDefinitionName, Action<ConditionTokenFilterDescriptor> configure) => AssignVariant<ConditionTokenFilterDescriptor, ConditionTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor ConditionTokenFilter(string tokenFilterDefinitionName, ConditionTokenFilter conditionTokenFilter) => AssignVariant(tokenFilterDefinitionName, conditionTokenFilter);
+	public TokenFilterDefinitionsDescriptor DelimitedPayloadTokenFilter(string tokenFilterDefinitionName) => AssignVariant<DelimitedPayloadTokenFilterDescriptor, DelimitedPayloadTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor DelimitedPayloadTokenFilter(string tokenFilterDefinitionName, Action<DelimitedPayloadTokenFilterDescriptor> configure) => AssignVariant<DelimitedPayloadTokenFilterDescriptor, DelimitedPayloadTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor DelimitedPayloadTokenFilter(string tokenFilterDefinitionName, DelimitedPayloadTokenFilter delimitedPayloadTokenFilter) => AssignVariant(tokenFilterDefinitionName, delimitedPayloadTokenFilter);
+	public TokenFilterDefinitionsDescriptor DictionaryDecompounderTokenFilter(string tokenFilterDefinitionName) => AssignVariant<DictionaryDecompounderTokenFilterDescriptor, DictionaryDecompounderTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor DictionaryDecompounderTokenFilter(string tokenFilterDefinitionName, Action<DictionaryDecompounderTokenFilterDescriptor> configure) => AssignVariant<DictionaryDecompounderTokenFilterDescriptor, DictionaryDecompounderTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor DictionaryDecompounderTokenFilter(string tokenFilterDefinitionName, DictionaryDecompounderTokenFilter dictionaryDecompounderTokenFilter) => AssignVariant(tokenFilterDefinitionName, dictionaryDecompounderTokenFilter);
+	public TokenFilterDefinitionsDescriptor EdgeNGramTokenFilter(string tokenFilterDefinitionName) => AssignVariant<EdgeNGramTokenFilterDescriptor, EdgeNGramTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor EdgeNGramTokenFilter(string tokenFilterDefinitionName, Action<EdgeNGramTokenFilterDescriptor> configure) => AssignVariant<EdgeNGramTokenFilterDescriptor, EdgeNGramTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor EdgeNGramTokenFilter(string tokenFilterDefinitionName, EdgeNGramTokenFilter edgeNGramTokenFilter) => AssignVariant(tokenFilterDefinitionName, edgeNGramTokenFilter);
+	public TokenFilterDefinitionsDescriptor ElisionTokenFilter(string tokenFilterDefinitionName) => AssignVariant<ElisionTokenFilterDescriptor, ElisionTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor ElisionTokenFilter(string tokenFilterDefinitionName, Action<ElisionTokenFilterDescriptor> configure) => AssignVariant<ElisionTokenFilterDescriptor, ElisionTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor ElisionTokenFilter(string tokenFilterDefinitionName, ElisionTokenFilter elisionTokenFilter) => AssignVariant(tokenFilterDefinitionName, elisionTokenFilter);
+	public TokenFilterDefinitionsDescriptor FingerprintTokenFilter(string tokenFilterDefinitionName) => AssignVariant<FingerprintTokenFilterDescriptor, FingerprintTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor FingerprintTokenFilter(string tokenFilterDefinitionName, Action<FingerprintTokenFilterDescriptor> configure) => AssignVariant<FingerprintTokenFilterDescriptor, FingerprintTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor FingerprintTokenFilter(string tokenFilterDefinitionName, FingerprintTokenFilter fingerprintTokenFilter) => AssignVariant(tokenFilterDefinitionName, fingerprintTokenFilter);
+	public TokenFilterDefinitionsDescriptor HunspellTokenFilter(string tokenFilterDefinitionName) => AssignVariant<HunspellTokenFilterDescriptor, HunspellTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor HunspellTokenFilter(string tokenFilterDefinitionName, Action<HunspellTokenFilterDescriptor> configure) => AssignVariant<HunspellTokenFilterDescriptor, HunspellTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor HunspellTokenFilter(string tokenFilterDefinitionName, HunspellTokenFilter hunspellTokenFilter) => AssignVariant(tokenFilterDefinitionName, hunspellTokenFilter);
+	public TokenFilterDefinitionsDescriptor HyphenationDecompounderTokenFilter(string tokenFilterDefinitionName) => AssignVariant<HyphenationDecompounderTokenFilterDescriptor, HyphenationDecompounderTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor HyphenationDecompounderTokenFilter(string tokenFilterDefinitionName, Action<HyphenationDecompounderTokenFilterDescriptor> configure) => AssignVariant<HyphenationDecompounderTokenFilterDescriptor, HyphenationDecompounderTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor HyphenationDecompounderTokenFilter(string tokenFilterDefinitionName, HyphenationDecompounderTokenFilter hyphenationDecompounderTokenFilter) => AssignVariant(tokenFilterDefinitionName, hyphenationDecompounderTokenFilter);
+	public TokenFilterDefinitionsDescriptor IcuCollationTokenFilter(string tokenFilterDefinitionName) => AssignVariant<IcuCollationTokenFilterDescriptor, IcuCollationTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor IcuCollationTokenFilter(string tokenFilterDefinitionName, Action<IcuCollationTokenFilterDescriptor> configure) => AssignVariant<IcuCollationTokenFilterDescriptor, IcuCollationTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor IcuCollationTokenFilter(string tokenFilterDefinitionName, IcuCollationTokenFilter icuCollationTokenFilter) => AssignVariant(tokenFilterDefinitionName, icuCollationTokenFilter);
+	public TokenFilterDefinitionsDescriptor IcuFoldingTokenFilter(string tokenFilterDefinitionName) => AssignVariant<IcuFoldingTokenFilterDescriptor, IcuFoldingTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor IcuFoldingTokenFilter(string tokenFilterDefinitionName, Action<IcuFoldingTokenFilterDescriptor> configure) => AssignVariant<IcuFoldingTokenFilterDescriptor, IcuFoldingTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor IcuFoldingTokenFilter(string tokenFilterDefinitionName, IcuFoldingTokenFilter icuFoldingTokenFilter) => AssignVariant(tokenFilterDefinitionName, icuFoldingTokenFilter);
+	public TokenFilterDefinitionsDescriptor IcuNormalizationTokenFilter(string tokenFilterDefinitionName) => AssignVariant<IcuNormalizationTokenFilterDescriptor, IcuNormalizationTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor IcuNormalizationTokenFilter(string tokenFilterDefinitionName, Action<IcuNormalizationTokenFilterDescriptor> configure) => AssignVariant<IcuNormalizationTokenFilterDescriptor, IcuNormalizationTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor IcuNormalizationTokenFilter(string tokenFilterDefinitionName, IcuNormalizationTokenFilter icuNormalizationTokenFilter) => AssignVariant(tokenFilterDefinitionName, icuNormalizationTokenFilter);
+	public TokenFilterDefinitionsDescriptor IcuTokenizer(string tokenFilterDefinitionName) => AssignVariant<IcuTokenizerDescriptor, IcuTokenizer>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor IcuTokenizer(string tokenFilterDefinitionName, Action<IcuTokenizerDescriptor> configure) => AssignVariant<IcuTokenizerDescriptor, IcuTokenizer>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor IcuTokenizer(string tokenFilterDefinitionName, IcuTokenizer icuTokenizer) => AssignVariant(tokenFilterDefinitionName, icuTokenizer);
+	public TokenFilterDefinitionsDescriptor IcuTransformTokenFilter(string tokenFilterDefinitionName) => AssignVariant<IcuTransformTokenFilterDescriptor, IcuTransformTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor IcuTransformTokenFilter(string tokenFilterDefinitionName, Action<IcuTransformTokenFilterDescriptor> configure) => AssignVariant<IcuTransformTokenFilterDescriptor, IcuTransformTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor IcuTransformTokenFilter(string tokenFilterDefinitionName, IcuTransformTokenFilter icuTransformTokenFilter) => AssignVariant(tokenFilterDefinitionName, icuTransformTokenFilter);
+	public TokenFilterDefinitionsDescriptor KeepTypesTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KeepTypesTokenFilterDescriptor, KeepTypesTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor KeepTypesTokenFilter(string tokenFilterDefinitionName, Action<KeepTypesTokenFilterDescriptor> configure) => AssignVariant<KeepTypesTokenFilterDescriptor, KeepTypesTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor KeepTypesTokenFilter(string tokenFilterDefinitionName, KeepTypesTokenFilter keepTypesTokenFilter) => AssignVariant(tokenFilterDefinitionName, keepTypesTokenFilter);
+	public TokenFilterDefinitionsDescriptor KeepWordsTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KeepWordsTokenFilterDescriptor, KeepWordsTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor KeepWordsTokenFilter(string tokenFilterDefinitionName, Action<KeepWordsTokenFilterDescriptor> configure) => AssignVariant<KeepWordsTokenFilterDescriptor, KeepWordsTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor KeepWordsTokenFilter(string tokenFilterDefinitionName, KeepWordsTokenFilter keepWordsTokenFilter) => AssignVariant(tokenFilterDefinitionName, keepWordsTokenFilter);
+	public TokenFilterDefinitionsDescriptor KeywordMarkerTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KeywordMarkerTokenFilterDescriptor, KeywordMarkerTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor KeywordMarkerTokenFilter(string tokenFilterDefinitionName, Action<KeywordMarkerTokenFilterDescriptor> configure) => AssignVariant<KeywordMarkerTokenFilterDescriptor, KeywordMarkerTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor KeywordMarkerTokenFilter(string tokenFilterDefinitionName, KeywordMarkerTokenFilter keywordMarkerTokenFilter) => AssignVariant(tokenFilterDefinitionName, keywordMarkerTokenFilter);
+	public TokenFilterDefinitionsDescriptor KStemTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KStemTokenFilterDescriptor, KStemTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor KStemTokenFilter(string tokenFilterDefinitionName, Action<KStemTokenFilterDescriptor> configure) => AssignVariant<KStemTokenFilterDescriptor, KStemTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor KStemTokenFilter(string tokenFilterDefinitionName, KStemTokenFilter kStemTokenFilter) => AssignVariant(tokenFilterDefinitionName, kStemTokenFilter);
+	public TokenFilterDefinitionsDescriptor KuromojiPartOfSpeechTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KuromojiPartOfSpeechTokenFilterDescriptor, KuromojiPartOfSpeechTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor KuromojiPartOfSpeechTokenFilter(string tokenFilterDefinitionName, Action<KuromojiPartOfSpeechTokenFilterDescriptor> configure) => AssignVariant<KuromojiPartOfSpeechTokenFilterDescriptor, KuromojiPartOfSpeechTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor KuromojiPartOfSpeechTokenFilter(string tokenFilterDefinitionName, KuromojiPartOfSpeechTokenFilter kuromojiPartOfSpeechTokenFilter) => AssignVariant(tokenFilterDefinitionName, kuromojiPartOfSpeechTokenFilter);
+	public TokenFilterDefinitionsDescriptor KuromojiReadingFormTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KuromojiReadingFormTokenFilterDescriptor, KuromojiReadingFormTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor KuromojiReadingFormTokenFilter(string tokenFilterDefinitionName, Action<KuromojiReadingFormTokenFilterDescriptor> configure) => AssignVariant<KuromojiReadingFormTokenFilterDescriptor, KuromojiReadingFormTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor KuromojiReadingFormTokenFilter(string tokenFilterDefinitionName, KuromojiReadingFormTokenFilter kuromojiReadingFormTokenFilter) => AssignVariant(tokenFilterDefinitionName, kuromojiReadingFormTokenFilter);
+	public TokenFilterDefinitionsDescriptor KuromojiStemmerTokenFilter(string tokenFilterDefinitionName) => AssignVariant<KuromojiStemmerTokenFilterDescriptor, KuromojiStemmerTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor KuromojiStemmerTokenFilter(string tokenFilterDefinitionName, Action<KuromojiStemmerTokenFilterDescriptor> configure) => AssignVariant<KuromojiStemmerTokenFilterDescriptor, KuromojiStemmerTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor KuromojiStemmerTokenFilter(string tokenFilterDefinitionName, KuromojiStemmerTokenFilter kuromojiStemmerTokenFilter) => AssignVariant(tokenFilterDefinitionName, kuromojiStemmerTokenFilter);
+	public TokenFilterDefinitionsDescriptor LengthTokenFilter(string tokenFilterDefinitionName) => AssignVariant<LengthTokenFilterDescriptor, LengthTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor LengthTokenFilter(string tokenFilterDefinitionName, Action<LengthTokenFilterDescriptor> configure) => AssignVariant<LengthTokenFilterDescriptor, LengthTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor LengthTokenFilter(string tokenFilterDefinitionName, LengthTokenFilter lengthTokenFilter) => AssignVariant(tokenFilterDefinitionName, lengthTokenFilter);
+	public TokenFilterDefinitionsDescriptor LimitTokenCountTokenFilter(string tokenFilterDefinitionName) => AssignVariant<LimitTokenCountTokenFilterDescriptor, LimitTokenCountTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor LimitTokenCountTokenFilter(string tokenFilterDefinitionName, Action<LimitTokenCountTokenFilterDescriptor> configure) => AssignVariant<LimitTokenCountTokenFilterDescriptor, LimitTokenCountTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor LimitTokenCountTokenFilter(string tokenFilterDefinitionName, LimitTokenCountTokenFilter limitTokenCountTokenFilter) => AssignVariant(tokenFilterDefinitionName, limitTokenCountTokenFilter);
+	public TokenFilterDefinitionsDescriptor LowercaseTokenFilter(string tokenFilterDefinitionName) => AssignVariant<LowercaseTokenFilterDescriptor, LowercaseTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor LowercaseTokenFilter(string tokenFilterDefinitionName, Action<LowercaseTokenFilterDescriptor> configure) => AssignVariant<LowercaseTokenFilterDescriptor, LowercaseTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor LowercaseTokenFilter(string tokenFilterDefinitionName, LowercaseTokenFilter lowercaseTokenFilter) => AssignVariant(tokenFilterDefinitionName, lowercaseTokenFilter);
+	public TokenFilterDefinitionsDescriptor MultiplexerTokenFilter(string tokenFilterDefinitionName) => AssignVariant<MultiplexerTokenFilterDescriptor, MultiplexerTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor MultiplexerTokenFilter(string tokenFilterDefinitionName, Action<MultiplexerTokenFilterDescriptor> configure) => AssignVariant<MultiplexerTokenFilterDescriptor, MultiplexerTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor MultiplexerTokenFilter(string tokenFilterDefinitionName, MultiplexerTokenFilter multiplexerTokenFilter) => AssignVariant(tokenFilterDefinitionName, multiplexerTokenFilter);
+	public TokenFilterDefinitionsDescriptor NGramTokenFilter(string tokenFilterDefinitionName) => AssignVariant<NGramTokenFilterDescriptor, NGramTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor NGramTokenFilter(string tokenFilterDefinitionName, Action<NGramTokenFilterDescriptor> configure) => AssignVariant<NGramTokenFilterDescriptor, NGramTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor NGramTokenFilter(string tokenFilterDefinitionName, NGramTokenFilter nGramTokenFilter) => AssignVariant(tokenFilterDefinitionName, nGramTokenFilter);
+	public TokenFilterDefinitionsDescriptor NoriPartOfSpeechTokenFilter(string tokenFilterDefinitionName) => AssignVariant<NoriPartOfSpeechTokenFilterDescriptor, NoriPartOfSpeechTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor NoriPartOfSpeechTokenFilter(string tokenFilterDefinitionName, Action<NoriPartOfSpeechTokenFilterDescriptor> configure) => AssignVariant<NoriPartOfSpeechTokenFilterDescriptor, NoriPartOfSpeechTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor NoriPartOfSpeechTokenFilter(string tokenFilterDefinitionName, NoriPartOfSpeechTokenFilter noriPartOfSpeechTokenFilter) => AssignVariant(tokenFilterDefinitionName, noriPartOfSpeechTokenFilter);
+	public TokenFilterDefinitionsDescriptor PatternCaptureTokenFilter(string tokenFilterDefinitionName) => AssignVariant<PatternCaptureTokenFilterDescriptor, PatternCaptureTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor PatternCaptureTokenFilter(string tokenFilterDefinitionName, Action<PatternCaptureTokenFilterDescriptor> configure) => AssignVariant<PatternCaptureTokenFilterDescriptor, PatternCaptureTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor PatternCaptureTokenFilter(string tokenFilterDefinitionName, PatternCaptureTokenFilter patternCaptureTokenFilter) => AssignVariant(tokenFilterDefinitionName, patternCaptureTokenFilter);
+	public TokenFilterDefinitionsDescriptor PatternReplaceTokenFilter(string tokenFilterDefinitionName) => AssignVariant<PatternReplaceTokenFilterDescriptor, PatternReplaceTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor PatternReplaceTokenFilter(string tokenFilterDefinitionName, Action<PatternReplaceTokenFilterDescriptor> configure) => AssignVariant<PatternReplaceTokenFilterDescriptor, PatternReplaceTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor PatternReplaceTokenFilter(string tokenFilterDefinitionName, PatternReplaceTokenFilter patternReplaceTokenFilter) => AssignVariant(tokenFilterDefinitionName, patternReplaceTokenFilter);
+	public TokenFilterDefinitionsDescriptor PhoneticTokenFilter(string tokenFilterDefinitionName) => AssignVariant<PhoneticTokenFilterDescriptor, PhoneticTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor PhoneticTokenFilter(string tokenFilterDefinitionName, Action<PhoneticTokenFilterDescriptor> configure) => AssignVariant<PhoneticTokenFilterDescriptor, PhoneticTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor PhoneticTokenFilter(string tokenFilterDefinitionName, PhoneticTokenFilter phoneticTokenFilter) => AssignVariant(tokenFilterDefinitionName, phoneticTokenFilter);
+	public TokenFilterDefinitionsDescriptor PorterStemTokenFilter(string tokenFilterDefinitionName) => AssignVariant<PorterStemTokenFilterDescriptor, PorterStemTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor PorterStemTokenFilter(string tokenFilterDefinitionName, Action<PorterStemTokenFilterDescriptor> configure) => AssignVariant<PorterStemTokenFilterDescriptor, PorterStemTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor PorterStemTokenFilter(string tokenFilterDefinitionName, PorterStemTokenFilter porterStemTokenFilter) => AssignVariant(tokenFilterDefinitionName, porterStemTokenFilter);
+	public TokenFilterDefinitionsDescriptor PredicateTokenFilter(string tokenFilterDefinitionName) => AssignVariant<PredicateTokenFilterDescriptor, PredicateTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor PredicateTokenFilter(string tokenFilterDefinitionName, Action<PredicateTokenFilterDescriptor> configure) => AssignVariant<PredicateTokenFilterDescriptor, PredicateTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor PredicateTokenFilter(string tokenFilterDefinitionName, PredicateTokenFilter predicateTokenFilter) => AssignVariant(tokenFilterDefinitionName, predicateTokenFilter);
+	public TokenFilterDefinitionsDescriptor RemoveDuplicatesTokenFilter(string tokenFilterDefinitionName) => AssignVariant<RemoveDuplicatesTokenFilterDescriptor, RemoveDuplicatesTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor RemoveDuplicatesTokenFilter(string tokenFilterDefinitionName, Action<RemoveDuplicatesTokenFilterDescriptor> configure) => AssignVariant<RemoveDuplicatesTokenFilterDescriptor, RemoveDuplicatesTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor RemoveDuplicatesTokenFilter(string tokenFilterDefinitionName, RemoveDuplicatesTokenFilter removeDuplicatesTokenFilter) => AssignVariant(tokenFilterDefinitionName, removeDuplicatesTokenFilter);
+	public TokenFilterDefinitionsDescriptor ReverseTokenFilter(string tokenFilterDefinitionName) => AssignVariant<ReverseTokenFilterDescriptor, ReverseTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor ReverseTokenFilter(string tokenFilterDefinitionName, Action<ReverseTokenFilterDescriptor> configure) => AssignVariant<ReverseTokenFilterDescriptor, ReverseTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor ReverseTokenFilter(string tokenFilterDefinitionName, ReverseTokenFilter reverseTokenFilter) => AssignVariant(tokenFilterDefinitionName, reverseTokenFilter);
+	public TokenFilterDefinitionsDescriptor ShingleTokenFilter(string tokenFilterDefinitionName) => AssignVariant<ShingleTokenFilterDescriptor, ShingleTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor ShingleTokenFilter(string tokenFilterDefinitionName, Action<ShingleTokenFilterDescriptor> configure) => AssignVariant<ShingleTokenFilterDescriptor, ShingleTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor ShingleTokenFilter(string tokenFilterDefinitionName, ShingleTokenFilter shingleTokenFilter) => AssignVariant(tokenFilterDefinitionName, shingleTokenFilter);
+	public TokenFilterDefinitionsDescriptor SnowballTokenFilter(string tokenFilterDefinitionName) => AssignVariant<SnowballTokenFilterDescriptor, SnowballTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor SnowballTokenFilter(string tokenFilterDefinitionName, Action<SnowballTokenFilterDescriptor> configure) => AssignVariant<SnowballTokenFilterDescriptor, SnowballTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor SnowballTokenFilter(string tokenFilterDefinitionName, SnowballTokenFilter snowballTokenFilter) => AssignVariant(tokenFilterDefinitionName, snowballTokenFilter);
+	public TokenFilterDefinitionsDescriptor StemmerOverrideTokenFilter(string tokenFilterDefinitionName) => AssignVariant<StemmerOverrideTokenFilterDescriptor, StemmerOverrideTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor StemmerOverrideTokenFilter(string tokenFilterDefinitionName, Action<StemmerOverrideTokenFilterDescriptor> configure) => AssignVariant<StemmerOverrideTokenFilterDescriptor, StemmerOverrideTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor StemmerOverrideTokenFilter(string tokenFilterDefinitionName, StemmerOverrideTokenFilter stemmerOverrideTokenFilter) => AssignVariant(tokenFilterDefinitionName, stemmerOverrideTokenFilter);
+	public TokenFilterDefinitionsDescriptor StemmerTokenFilter(string tokenFilterDefinitionName) => AssignVariant<StemmerTokenFilterDescriptor, StemmerTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor StemmerTokenFilter(string tokenFilterDefinitionName, Action<StemmerTokenFilterDescriptor> configure) => AssignVariant<StemmerTokenFilterDescriptor, StemmerTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor StemmerTokenFilter(string tokenFilterDefinitionName, StemmerTokenFilter stemmerTokenFilter) => AssignVariant(tokenFilterDefinitionName, stemmerTokenFilter);
+	public TokenFilterDefinitionsDescriptor StopTokenFilter(string tokenFilterDefinitionName) => AssignVariant<StopTokenFilterDescriptor, StopTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor StopTokenFilter(string tokenFilterDefinitionName, Action<StopTokenFilterDescriptor> configure) => AssignVariant<StopTokenFilterDescriptor, StopTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor StopTokenFilter(string tokenFilterDefinitionName, StopTokenFilter stopTokenFilter) => AssignVariant(tokenFilterDefinitionName, stopTokenFilter);
+	public TokenFilterDefinitionsDescriptor SynonymGraphTokenFilter(string tokenFilterDefinitionName) => AssignVariant<SynonymGraphTokenFilterDescriptor, SynonymGraphTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor SynonymGraphTokenFilter(string tokenFilterDefinitionName, Action<SynonymGraphTokenFilterDescriptor> configure) => AssignVariant<SynonymGraphTokenFilterDescriptor, SynonymGraphTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor SynonymGraphTokenFilter(string tokenFilterDefinitionName, SynonymGraphTokenFilter synonymGraphTokenFilter) => AssignVariant(tokenFilterDefinitionName, synonymGraphTokenFilter);
+	public TokenFilterDefinitionsDescriptor SynonymTokenFilter(string tokenFilterDefinitionName) => AssignVariant<SynonymTokenFilterDescriptor, SynonymTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor SynonymTokenFilter(string tokenFilterDefinitionName, Action<SynonymTokenFilterDescriptor> configure) => AssignVariant<SynonymTokenFilterDescriptor, SynonymTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor SynonymTokenFilter(string tokenFilterDefinitionName, SynonymTokenFilter synonymTokenFilter) => AssignVariant(tokenFilterDefinitionName, synonymTokenFilter);
+	public TokenFilterDefinitionsDescriptor TrimTokenFilter(string tokenFilterDefinitionName) => AssignVariant<TrimTokenFilterDescriptor, TrimTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor TrimTokenFilter(string tokenFilterDefinitionName, Action<TrimTokenFilterDescriptor> configure) => AssignVariant<TrimTokenFilterDescriptor, TrimTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor TrimTokenFilter(string tokenFilterDefinitionName, TrimTokenFilter trimTokenFilter) => AssignVariant(tokenFilterDefinitionName, trimTokenFilter);
+	public TokenFilterDefinitionsDescriptor TruncateTokenFilter(string tokenFilterDefinitionName) => AssignVariant<TruncateTokenFilterDescriptor, TruncateTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor TruncateTokenFilter(string tokenFilterDefinitionName, Action<TruncateTokenFilterDescriptor> configure) => AssignVariant<TruncateTokenFilterDescriptor, TruncateTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor TruncateTokenFilter(string tokenFilterDefinitionName, TruncateTokenFilter truncateTokenFilter) => AssignVariant(tokenFilterDefinitionName, truncateTokenFilter);
+	public TokenFilterDefinitionsDescriptor UniqueTokenFilter(string tokenFilterDefinitionName) => AssignVariant<UniqueTokenFilterDescriptor, UniqueTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor UniqueTokenFilter(string tokenFilterDefinitionName, Action<UniqueTokenFilterDescriptor> configure) => AssignVariant<UniqueTokenFilterDescriptor, UniqueTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor UniqueTokenFilter(string tokenFilterDefinitionName, UniqueTokenFilter uniqueTokenFilter) => AssignVariant(tokenFilterDefinitionName, uniqueTokenFilter);
+	public TokenFilterDefinitionsDescriptor UppercaseTokenFilter(string tokenFilterDefinitionName) => AssignVariant<UppercaseTokenFilterDescriptor, UppercaseTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor UppercaseTokenFilter(string tokenFilterDefinitionName, Action<UppercaseTokenFilterDescriptor> configure) => AssignVariant<UppercaseTokenFilterDescriptor, UppercaseTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor UppercaseTokenFilter(string tokenFilterDefinitionName, UppercaseTokenFilter uppercaseTokenFilter) => AssignVariant(tokenFilterDefinitionName, uppercaseTokenFilter);
+	public TokenFilterDefinitionsDescriptor WordDelimiterGraphTokenFilter(string tokenFilterDefinitionName) => AssignVariant<WordDelimiterGraphTokenFilterDescriptor, WordDelimiterGraphTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor WordDelimiterGraphTokenFilter(string tokenFilterDefinitionName, Action<WordDelimiterGraphTokenFilterDescriptor> configure) => AssignVariant<WordDelimiterGraphTokenFilterDescriptor, WordDelimiterGraphTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor WordDelimiterGraphTokenFilter(string tokenFilterDefinitionName, WordDelimiterGraphTokenFilter wordDelimiterGraphTokenFilter) => AssignVariant(tokenFilterDefinitionName, wordDelimiterGraphTokenFilter);
+	public TokenFilterDefinitionsDescriptor WordDelimiterTokenFilter(string tokenFilterDefinitionName) => AssignVariant<WordDelimiterTokenFilterDescriptor, WordDelimiterTokenFilter>(tokenFilterDefinitionName, null);
+	public TokenFilterDefinitionsDescriptor WordDelimiterTokenFilter(string tokenFilterDefinitionName, Action<WordDelimiterTokenFilterDescriptor> configure) => AssignVariant<WordDelimiterTokenFilterDescriptor, WordDelimiterTokenFilter>(tokenFilterDefinitionName, configure);
+	public TokenFilterDefinitionsDescriptor WordDelimiterTokenFilter(string tokenFilterDefinitionName, WordDelimiterTokenFilter wordDelimiterTokenFilter) => AssignVariant(tokenFilterDefinitionName, wordDelimiterTokenFilter);
+}
+
+internal sealed partial class TokenFilterDefinitionInterfaceConverter
+{
+	private static ITokenFilterDefinition DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
+	{
+		switch (type)
+		{
+			case "dictionary_decompounder":
+				return JsonSerializer.Deserialize<DictionaryDecompounderTokenFilter>(ref reader, options);
+			case "phonetic":
+				return JsonSerializer.Deserialize<PhoneticTokenFilter>(ref reader, options);
+			case "icu_transform":
+				return JsonSerializer.Deserialize<IcuTransformTokenFilter>(ref reader, options);
+			case "icu_normalizer":
+				return JsonSerializer.Deserialize<IcuNormalizationTokenFilter>(ref reader, options);
+			case "icu_folding":
+				return JsonSerializer.Deserialize<IcuFoldingTokenFilter>(ref reader, options);
+			case "icu_collation":
+				return JsonSerializer.Deserialize<IcuCollationTokenFilter>(ref reader, options);
+			case "icu_tokenizer":
+				return JsonSerializer.Deserialize<IcuTokenizer>(ref reader, options);
+			case "kuromoji_part_of_speech":
+				return JsonSerializer.Deserialize<KuromojiPartOfSpeechTokenFilter>(ref reader, options);
+			case "kuromoji_readingform":
+				return JsonSerializer.Deserialize<KuromojiReadingFormTokenFilter>(ref reader, options);
+			case "kuromoji_stemmer":
+				return JsonSerializer.Deserialize<KuromojiStemmerTokenFilter>(ref reader, options);
+			case "word_delimiter":
+				return JsonSerializer.Deserialize<WordDelimiterTokenFilter>(ref reader, options);
+			case "word_delimiter_graph":
+				return JsonSerializer.Deserialize<WordDelimiterGraphTokenFilter>(ref reader, options);
+			case "uppercase":
+				return JsonSerializer.Deserialize<UppercaseTokenFilter>(ref reader, options);
+			case "unique":
+				return JsonSerializer.Deserialize<UniqueTokenFilter>(ref reader, options);
+			case "truncate":
+				return JsonSerializer.Deserialize<TruncateTokenFilter>(ref reader, options);
+			case "trim":
+				return JsonSerializer.Deserialize<TrimTokenFilter>(ref reader, options);
+			case "synonym":
+				return JsonSerializer.Deserialize<SynonymTokenFilter>(ref reader, options);
+			case "synonym_graph":
+				return JsonSerializer.Deserialize<SynonymGraphTokenFilter>(ref reader, options);
+			case "stop":
+				return JsonSerializer.Deserialize<StopTokenFilter>(ref reader, options);
+			case "stemmer":
+				return JsonSerializer.Deserialize<StemmerTokenFilter>(ref reader, options);
+			case "stemmer_override":
+				return JsonSerializer.Deserialize<StemmerOverrideTokenFilter>(ref reader, options);
+			case "snowball":
+				return JsonSerializer.Deserialize<SnowballTokenFilter>(ref reader, options);
+			case "shingle":
+				return JsonSerializer.Deserialize<ShingleTokenFilter>(ref reader, options);
+			case "reverse":
+				return JsonSerializer.Deserialize<ReverseTokenFilter>(ref reader, options);
+			case "remove_duplicates":
+				return JsonSerializer.Deserialize<RemoveDuplicatesTokenFilter>(ref reader, options);
+			case "predicate_token_filter":
+				return JsonSerializer.Deserialize<PredicateTokenFilter>(ref reader, options);
+			case "porter_stem":
+				return JsonSerializer.Deserialize<PorterStemTokenFilter>(ref reader, options);
+			case "pattern_replace":
+				return JsonSerializer.Deserialize<PatternReplaceTokenFilter>(ref reader, options);
+			case "pattern_capture":
+				return JsonSerializer.Deserialize<PatternCaptureTokenFilter>(ref reader, options);
+			case "nori_part_of_speech":
+				return JsonSerializer.Deserialize<NoriPartOfSpeechTokenFilter>(ref reader, options);
+			case "ngram":
+				return JsonSerializer.Deserialize<NGramTokenFilter>(ref reader, options);
+			case "multiplexer":
+				return JsonSerializer.Deserialize<MultiplexerTokenFilter>(ref reader, options);
+			case "lowercase":
+				return JsonSerializer.Deserialize<LowercaseTokenFilter>(ref reader, options);
+			case "limit":
+				return JsonSerializer.Deserialize<LimitTokenCountTokenFilter>(ref reader, options);
+			case "length":
+				return JsonSerializer.Deserialize<LengthTokenFilter>(ref reader, options);
+			case "kstem":
+				return JsonSerializer.Deserialize<KStemTokenFilter>(ref reader, options);
+			case "keyword_marker":
+				return JsonSerializer.Deserialize<KeywordMarkerTokenFilter>(ref reader, options);
+			case "keep":
+				return JsonSerializer.Deserialize<KeepWordsTokenFilter>(ref reader, options);
+			case "keep_types":
+				return JsonSerializer.Deserialize<KeepTypesTokenFilter>(ref reader, options);
+			case "hyphenation_decompounder":
+				return JsonSerializer.Deserialize<HyphenationDecompounderTokenFilter>(ref reader, options);
+			case "hunspell":
+				return JsonSerializer.Deserialize<HunspellTokenFilter>(ref reader, options);
+			case "fingerprint":
+				return JsonSerializer.Deserialize<FingerprintTokenFilter>(ref reader, options);
+			case "elision":
+				return JsonSerializer.Deserialize<ElisionTokenFilter>(ref reader, options);
+			case "edge_ngram":
+				return JsonSerializer.Deserialize<EdgeNGramTokenFilter>(ref reader, options);
+			case "delimited_payload":
+				return JsonSerializer.Deserialize<DelimitedPayloadTokenFilter>(ref reader, options);
+			case "condition":
+				return JsonSerializer.Deserialize<ConditionTokenFilter>(ref reader, options);
+			case "common_grams":
+				return JsonSerializer.Deserialize<CommonGramsTokenFilter>(ref reader, options);
+			case "asciifolding":
+				return JsonSerializer.Deserialize<AsciiFoldingTokenFilter>(ref reader, options);
+			default:
+				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
+		}
+	}
+}
+
+public partial interface ITokenFilterDefinition
+{
+	public string Type { get; }
 }

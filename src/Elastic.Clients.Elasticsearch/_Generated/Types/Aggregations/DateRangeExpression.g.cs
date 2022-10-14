@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,76 +24,74 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public sealed partial class DateRangeExpression
 {
-	public sealed partial class DateRangeExpression
+	[JsonInclude]
+	[JsonPropertyName("from")]
+	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? From { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("key")]
+	public string? Key { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("to")]
+	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? To { get; set; }
+}
+
+public sealed partial class DateRangeExpressionDescriptor : SerializableDescriptor<DateRangeExpressionDescriptor>
+{
+	internal DateRangeExpressionDescriptor(Action<DateRangeExpressionDescriptor> configure) => configure.Invoke(this);
+	public DateRangeExpressionDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("from")]
-		public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? From { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("key")]
-		public string? Key { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("to")]
-		public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? To { get; set; }
 	}
 
-	public sealed partial class DateRangeExpressionDescriptor : SerializableDescriptorBase<DateRangeExpressionDescriptor>
+	private Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? FromValue { get; set; }
+
+	private string? KeyValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? ToValue { get; set; }
+
+	public DateRangeExpressionDescriptor From(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? from)
 	{
-		internal DateRangeExpressionDescriptor(Action<DateRangeExpressionDescriptor> configure) => configure.Invoke(this);
-		public DateRangeExpressionDescriptor() : base()
+		FromValue = from;
+		return Self;
+	}
+
+	public DateRangeExpressionDescriptor Key(string? key)
+	{
+		KeyValue = key;
+		return Self;
+	}
+
+	public DateRangeExpressionDescriptor To(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? to)
+	{
+		ToValue = to;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FromValue is not null)
 		{
+			writer.WritePropertyName("from");
+			JsonSerializer.Serialize(writer, FromValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? FromValue { get; set; }
-
-		private string? KeyValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? ToValue { get; set; }
-
-		public DateRangeExpressionDescriptor From(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? from)
+		if (!string.IsNullOrEmpty(KeyValue))
 		{
-			FromValue = from;
-			return Self;
+			writer.WritePropertyName("key");
+			writer.WriteStringValue(KeyValue);
 		}
 
-		public DateRangeExpressionDescriptor Key(string? key)
+		if (ToValue is not null)
 		{
-			KeyValue = key;
-			return Self;
+			writer.WritePropertyName("to");
+			JsonSerializer.Serialize(writer, ToValue, options);
 		}
 
-		public DateRangeExpressionDescriptor To(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? to)
-		{
-			ToValue = to;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FromValue is not null)
-			{
-				writer.WritePropertyName("from");
-				JsonSerializer.Serialize(writer, FromValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(KeyValue))
-			{
-				writer.WritePropertyName("key");
-				writer.WriteStringValue(KeyValue);
-			}
-
-			if (ToValue is not null)
-			{
-				writer.WritePropertyName("to");
-				JsonSerializer.Serialize(writer, ToValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

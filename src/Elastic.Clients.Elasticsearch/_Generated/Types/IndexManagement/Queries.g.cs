@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,72 +24,70 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class Queries
 {
-	public sealed partial class Queries
+	[JsonInclude]
+	[JsonPropertyName("cache")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? Cache { get; set; }
+}
+
+public sealed partial class QueriesDescriptor : SerializableDescriptor<QueriesDescriptor>
+{
+	internal QueriesDescriptor(Action<QueriesDescriptor> configure) => configure.Invoke(this);
+	public QueriesDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("cache")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? Cache { get; set; }
 	}
 
-	public sealed partial class QueriesDescriptor : SerializableDescriptorBase<QueriesDescriptor>
+	private Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? CacheValue { get; set; }
+
+	private CacheQueriesDescriptor CacheDescriptor { get; set; }
+
+	private Action<CacheQueriesDescriptor> CacheDescriptorAction { get; set; }
+
+	public QueriesDescriptor Cache(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? cache)
 	{
-		internal QueriesDescriptor(Action<QueriesDescriptor> configure) => configure.Invoke(this);
-		public QueriesDescriptor() : base()
+		CacheDescriptor = null;
+		CacheDescriptorAction = null;
+		CacheValue = cache;
+		return Self;
+	}
+
+	public QueriesDescriptor Cache(CacheQueriesDescriptor descriptor)
+	{
+		CacheValue = null;
+		CacheDescriptorAction = null;
+		CacheDescriptor = descriptor;
+		return Self;
+	}
+
+	public QueriesDescriptor Cache(Action<CacheQueriesDescriptor> configure)
+	{
+		CacheValue = null;
+		CacheDescriptor = null;
+		CacheDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (CacheDescriptor is not null)
 		{
+			writer.WritePropertyName("cache");
+			JsonSerializer.Serialize(writer, CacheDescriptor, options);
+		}
+		else if (CacheDescriptorAction is not null)
+		{
+			writer.WritePropertyName("cache");
+			JsonSerializer.Serialize(writer, new CacheQueriesDescriptor(CacheDescriptorAction), options);
+		}
+		else if (CacheValue is not null)
+		{
+			writer.WritePropertyName("cache");
+			JsonSerializer.Serialize(writer, CacheValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? CacheValue { get; set; }
-
-		private CacheQueriesDescriptor CacheDescriptor { get; set; }
-
-		private Action<CacheQueriesDescriptor> CacheDescriptorAction { get; set; }
-
-		public QueriesDescriptor Cache(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? cache)
-		{
-			CacheDescriptor = null;
-			CacheDescriptorAction = null;
-			CacheValue = cache;
-			return Self;
-		}
-
-		public QueriesDescriptor Cache(CacheQueriesDescriptor descriptor)
-		{
-			CacheValue = null;
-			CacheDescriptorAction = null;
-			CacheDescriptor = descriptor;
-			return Self;
-		}
-
-		public QueriesDescriptor Cache(Action<CacheQueriesDescriptor> configure)
-		{
-			CacheValue = null;
-			CacheDescriptor = null;
-			CacheDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (CacheDescriptor is not null)
-			{
-				writer.WritePropertyName("cache");
-				JsonSerializer.Serialize(writer, CacheDescriptor, options);
-			}
-			else if (CacheDescriptorAction is not null)
-			{
-				writer.WritePropertyName("cache");
-				JsonSerializer.Serialize(writer, new CacheQueriesDescriptor(CacheDescriptorAction), options);
-			}
-			else if (CacheValue is not null)
-			{
-				writer.WritePropertyName("cache");
-				JsonSerializer.Serialize(writer, CacheValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

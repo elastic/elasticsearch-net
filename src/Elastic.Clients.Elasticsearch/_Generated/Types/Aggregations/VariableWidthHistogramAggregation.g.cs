@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,343 +24,341 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+internal sealed class VariableWidthHistogramAggregationConverter : JsonConverter<VariableWidthHistogramAggregation>
 {
-	internal sealed class VariableWidthHistogramAggregationConverter : JsonConverter<VariableWidthHistogramAggregation>
+	public override VariableWidthHistogramAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override VariableWidthHistogramAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var aggName = reader.GetString();
+		if (aggName != "variable_width_histogram")
+			throw new JsonException("Unexpected JSON detected.");
+		var agg = new VariableWidthHistogramAggregation(aggName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "variable_width_histogram")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new VariableWidthHistogramAggregation(aggName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("buckets"))
 				{
-					if (reader.ValueTextEquals("buckets"))
+					reader.Read();
+					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+					if (value is not null)
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Buckets = value;
-						}
-
-						continue;
+						agg.Buckets = value;
 					}
 
-					if (reader.ValueTextEquals("field"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("field"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Field = value;
 					}
 
-					if (reader.ValueTextEquals("initial_buffer"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.InitialBuffer = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("initial_buffer"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.InitialBuffer = value;
 					}
 
-					if (reader.ValueTextEquals("shard_size"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.ShardSize = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("shard_size"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.ShardSize = value;
 					}
+
+					continue;
 				}
 			}
+		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("meta"))
 				{
-					if (reader.ValueTextEquals("meta"))
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					if (value is not null)
 					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
+						agg.Meta = value;
 					}
+
+					continue;
 				}
 			}
-
-			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, VariableWidthHistogramAggregation value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("variable_width_histogram");
-			writer.WriteStartObject();
-			if (value.Buckets.HasValue)
-			{
-				writer.WritePropertyName("buckets");
-				writer.WriteNumberValue(value.Buckets.Value);
-			}
-
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			if (value.InitialBuffer.HasValue)
-			{
-				writer.WritePropertyName("initial_buffer");
-				writer.WriteNumberValue(value.InitialBuffer.Value);
-			}
-
-			if (value.ShardSize.HasValue)
-			{
-				writer.WritePropertyName("shard_size");
-				writer.WriteNumberValue(value.ShardSize.Value);
-			}
-
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return agg;
 	}
 
-	[JsonConverter(typeof(VariableWidthHistogramAggregationConverter))]
-	public sealed partial class VariableWidthHistogramAggregation : Aggregation
+	public override void Write(Utf8JsonWriter writer, VariableWidthHistogramAggregation value, JsonSerializerOptions options)
 	{
-		public VariableWidthHistogramAggregation(string name) => Name = name;
-		internal VariableWidthHistogramAggregation()
+		writer.WriteStartObject();
+		writer.WritePropertyName("variable_width_histogram");
+		writer.WriteStartObject();
+		if (value.Buckets.HasValue)
 		{
+			writer.WritePropertyName("buckets");
+			writer.WriteNumberValue(value.Buckets.Value);
 		}
 
-		public int? Buckets { get; set; }
+		if (value.Field is not null)
+		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value.Field, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		if (value.InitialBuffer.HasValue)
+		{
+			writer.WritePropertyName("initial_buffer");
+			writer.WriteNumberValue(value.InitialBuffer.Value);
+		}
 
-		public int? InitialBuffer { get; set; }
+		if (value.ShardSize.HasValue)
+		{
+			writer.WritePropertyName("shard_size");
+			writer.WriteNumberValue(value.ShardSize.Value);
+		}
 
-		public Dictionary<string, object>? Meta { get; set; }
+		writer.WriteEndObject();
+		if (value.Meta is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
+		}
 
-		public override string? Name { get; internal set; }
+		writer.WriteEndObject();
+	}
+}
 
-		public int? ShardSize { get; set; }
+[JsonConverter(typeof(VariableWidthHistogramAggregationConverter))]
+public sealed partial class VariableWidthHistogramAggregation : Aggregation
+{
+	public VariableWidthHistogramAggregation(string name) => Name = name;
+	internal VariableWidthHistogramAggregation()
+	{
 	}
 
-	public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocument> : SerializableDescriptorBase<VariableWidthHistogramAggregationDescriptor<TDocument>>
+	public int? Buckets { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	public int? InitialBuffer { get; set; }
+
+	public Dictionary<string, object>? Meta { get; set; }
+
+	public override string? Name { get; internal set; }
+
+	public int? ShardSize { get; set; }
+}
+
+public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocument> : SerializableDescriptor<VariableWidthHistogramAggregationDescriptor<TDocument>>
+{
+	internal VariableWidthHistogramAggregationDescriptor(Action<VariableWidthHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public VariableWidthHistogramAggregationDescriptor() : base()
 	{
-		internal VariableWidthHistogramAggregationDescriptor(Action<VariableWidthHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public VariableWidthHistogramAggregationDescriptor() : base()
-		{
-		}
-
-		private int? BucketsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private int? InitialBufferValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private int? ShardSizeValue { get; set; }
-
-		public VariableWidthHistogramAggregationDescriptor<TDocument> Buckets(int? buckets)
-		{
-			BucketsValue = buckets;
-			return Self;
-		}
-
-		public VariableWidthHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public VariableWidthHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public VariableWidthHistogramAggregationDescriptor<TDocument> InitialBuffer(int? initialBuffer)
-		{
-			InitialBufferValue = initialBuffer;
-			return Self;
-		}
-
-		public VariableWidthHistogramAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public VariableWidthHistogramAggregationDescriptor<TDocument> ShardSize(int? shardSize)
-		{
-			ShardSizeValue = shardSize;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("variable_width_histogram");
-			writer.WriteStartObject();
-			if (BucketsValue.HasValue)
-			{
-				writer.WritePropertyName("buckets");
-				writer.WriteNumberValue(BucketsValue.Value);
-			}
-
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (InitialBufferValue.HasValue)
-			{
-				writer.WritePropertyName("initial_buffer");
-				writer.WriteNumberValue(InitialBufferValue.Value);
-			}
-
-			if (ShardSizeValue.HasValue)
-			{
-				writer.WritePropertyName("shard_size");
-				writer.WriteNumberValue(ShardSizeValue.Value);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class VariableWidthHistogramAggregationDescriptor : SerializableDescriptorBase<VariableWidthHistogramAggregationDescriptor>
+	private int? BucketsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private int? InitialBufferValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private int? ShardSizeValue { get; set; }
+
+	public VariableWidthHistogramAggregationDescriptor<TDocument> Buckets(int? buckets)
 	{
-		internal VariableWidthHistogramAggregationDescriptor(Action<VariableWidthHistogramAggregationDescriptor> configure) => configure.Invoke(this);
-		public VariableWidthHistogramAggregationDescriptor() : base()
+		BucketsValue = buckets;
+		return Self;
+	}
+
+	public VariableWidthHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public VariableWidthHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public VariableWidthHistogramAggregationDescriptor<TDocument> InitialBuffer(int? initialBuffer)
+	{
+		InitialBufferValue = initialBuffer;
+		return Self;
+	}
+
+	public VariableWidthHistogramAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public VariableWidthHistogramAggregationDescriptor<TDocument> ShardSize(int? shardSize)
+	{
+		ShardSizeValue = shardSize;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("variable_width_histogram");
+		writer.WriteStartObject();
+		if (BucketsValue.HasValue)
 		{
+			writer.WritePropertyName("buckets");
+			writer.WriteNumberValue(BucketsValue.Value);
 		}
 
-		private int? BucketsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private int? InitialBufferValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private int? ShardSizeValue { get; set; }
-
-		public VariableWidthHistogramAggregationDescriptor Buckets(int? buckets)
+		if (FieldValue is not null)
 		{
-			BucketsValue = buckets;
-			return Self;
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		public VariableWidthHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		if (InitialBufferValue.HasValue)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("initial_buffer");
+			writer.WriteNumberValue(InitialBufferValue.Value);
 		}
 
-		public VariableWidthHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		if (ShardSizeValue.HasValue)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("shard_size");
+			writer.WriteNumberValue(ShardSizeValue.Value);
 		}
 
-		public VariableWidthHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		writer.WriteEndObject();
+		if (MetaValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		public VariableWidthHistogramAggregationDescriptor InitialBuffer(int? initialBuffer)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class VariableWidthHistogramAggregationDescriptor : SerializableDescriptor<VariableWidthHistogramAggregationDescriptor>
+{
+	internal VariableWidthHistogramAggregationDescriptor(Action<VariableWidthHistogramAggregationDescriptor> configure) => configure.Invoke(this);
+	public VariableWidthHistogramAggregationDescriptor() : base()
+	{
+	}
+
+	private int? BucketsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private int? InitialBufferValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private int? ShardSizeValue { get; set; }
+
+	public VariableWidthHistogramAggregationDescriptor Buckets(int? buckets)
+	{
+		BucketsValue = buckets;
+		return Self;
+	}
+
+	public VariableWidthHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public VariableWidthHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public VariableWidthHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public VariableWidthHistogramAggregationDescriptor InitialBuffer(int? initialBuffer)
+	{
+		InitialBufferValue = initialBuffer;
+		return Self;
+	}
+
+	public VariableWidthHistogramAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public VariableWidthHistogramAggregationDescriptor ShardSize(int? shardSize)
+	{
+		ShardSizeValue = shardSize;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("variable_width_histogram");
+		writer.WriteStartObject();
+		if (BucketsValue.HasValue)
 		{
-			InitialBufferValue = initialBuffer;
-			return Self;
+			writer.WritePropertyName("buckets");
+			writer.WriteNumberValue(BucketsValue.Value);
 		}
 
-		public VariableWidthHistogramAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		if (FieldValue is not null)
 		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		public VariableWidthHistogramAggregationDescriptor ShardSize(int? shardSize)
+		if (InitialBufferValue.HasValue)
 		{
-			ShardSizeValue = shardSize;
-			return Self;
+			writer.WritePropertyName("initial_buffer");
+			writer.WriteNumberValue(InitialBufferValue.Value);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		if (ShardSizeValue.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("variable_width_histogram");
-			writer.WriteStartObject();
-			if (BucketsValue.HasValue)
-			{
-				writer.WritePropertyName("buckets");
-				writer.WriteNumberValue(BucketsValue.Value);
-			}
-
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (InitialBufferValue.HasValue)
-			{
-				writer.WritePropertyName("initial_buffer");
-				writer.WriteNumberValue(InitialBufferValue.Value);
-			}
-
-			if (ShardSizeValue.HasValue)
-			{
-				writer.WritePropertyName("shard_size");
-				writer.WriteNumberValue(ShardSizeValue.Value);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
+			writer.WritePropertyName("shard_size");
+			writer.WriteNumberValue(ShardSizeValue.Value);
 		}
+
+		writer.WriteEndObject();
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

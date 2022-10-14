@@ -6,31 +6,30 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Serialization;
+
+internal sealed class IntermediateSourceConverter<T> : JsonConverter<T>
 {
-	internal sealed class IntermediateSourceConverter<T> : JsonConverter<T>
+	public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		var converter = options.GetConverter(typeof(SourceMarker<>).MakeGenericType(typeToConvert));
+
+		if (converter is SourceConverter<T> sourceConverter)
 		{
-			var converter = options.GetConverter(typeof(SourceMarker<>).MakeGenericType(typeToConvert));
-
-			if (converter is SourceConverter<T> sourceConverter)
-			{
-				var source = sourceConverter.Read(ref reader, typeToConvert, options);
-				return source.Source;
-			}
-
-			return default;
+			var source = sourceConverter.Read(ref reader, typeToConvert, options);
+			return source.Source;
 		}
 
-		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
-		{
-			var converter = options.GetConverter(typeof(SourceMarker<>).MakeGenericType(typeof(T)));
+		return default;
+	}
 
-			if (converter is SourceConverter<T> sourceConverter)
-			{
-				sourceConverter.Write(writer, new SourceMarker<T> { Source = value }, options);
-			}
+	public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+	{
+		var converter = options.GetConverter(typeof(SourceMarker<>).MakeGenericType(typeof(T)));
+
+		if (converter is SourceConverter<T> sourceConverter)
+		{
+			sourceConverter.Write(writer, new SourceMarker<T> { Source = value }, options);
 		}
 	}
 }

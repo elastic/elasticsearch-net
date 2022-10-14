@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,50 +26,48 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class DeleteDataStreamRequestParameters : RequestParameters<DeleteDataStreamRequestParameters>
 {
-	public sealed class DeleteDataStreamRequestParameters : RequestParameters<DeleteDataStreamRequestParameters>
+	[JsonIgnore]
+	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+}
+
+public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStreamRequestParameters>
+{
+	public DeleteDataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
 	{
-		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 
-	public sealed partial class DeleteDataStreamRequest : PlainRequestBase<DeleteDataStreamRequestParameters>
-	{
-		public DeleteDataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteDataStream;
+	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override bool SupportsBody => false;
+	[JsonIgnore]
+	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteDataStream;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => false;
-		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+public sealed partial class DeleteDataStreamRequestDescriptor : RequestDescriptor<DeleteDataStreamRequestDescriptor, DeleteDataStreamRequestParameters>
+{
+	internal DeleteDataStreamRequestDescriptor(Action<DeleteDataStreamRequestDescriptor> configure) => configure.Invoke(this);
+	public DeleteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
+	{
 	}
 
-	public sealed partial class DeleteDataStreamRequestDescriptor : RequestDescriptorBase<DeleteDataStreamRequestDescriptor, DeleteDataStreamRequestParameters>
+	internal DeleteDataStreamRequestDescriptor()
 	{
-		internal DeleteDataStreamRequestDescriptor(Action<DeleteDataStreamRequestDescriptor> configure) => configure.Invoke(this);
-		public DeleteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
-		{
-		}
+	}
 
-		internal DeleteDataStreamRequestDescriptor()
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteDataStream;
+	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override bool SupportsBody => false;
+	public DeleteDataStreamRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public DeleteDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames name)
+	{
+		RouteValues.Required("name", name);
+		return Self;
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteDataStream;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => false;
-		public DeleteDataStreamRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public DeleteDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames name)
-		{
-			RouteValues.Required("name", name);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

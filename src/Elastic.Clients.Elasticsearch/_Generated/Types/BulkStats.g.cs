@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,44 +24,42 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class BulkStats
 {
-	public sealed partial class BulkStats
-	{
-		[JsonInclude]
-		[JsonPropertyName("avg_size")]
-		public Elastic.Clients.Elasticsearch.ByteSize? AvgSize { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("avg_size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? AvgSize { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("avg_size_in_bytes")]
-		public long AvgSizeInBytes { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("avg_size_in_bytes")]
+	public long AvgSizeInBytes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("avg_time")]
-		public Elastic.Clients.Elasticsearch.Duration? AvgTime { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("avg_time")]
+	public Elastic.Clients.Elasticsearch.Duration? AvgTime { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("avg_time_in_millis")]
-		public long AvgTimeInMillis { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("avg_time_in_millis")]
+	public long AvgTimeInMillis { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_operations")]
-		public long TotalOperations { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("total_operations")]
+	public long TotalOperations { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_size")]
-		public Elastic.Clients.Elasticsearch.ByteSize? TotalSize { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("total_size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalSize { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_size_in_bytes")]
-		public long TotalSizeInBytes { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("total_size_in_bytes")]
+	public long TotalSizeInBytes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_time")]
-		public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("total_time")]
+	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_time_in_millis")]
-		public long TotalTimeInMillis { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("total_time_in_millis")]
+	public long TotalTimeInMillis { get; init; }
 }
