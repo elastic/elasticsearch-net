@@ -15,17 +15,17 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class UpdateByQueryRethrottleResponse : ElasticsearchResponseBase
 {
-	public sealed partial class UpdateByQueryRethrottleResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("nodes")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Core.UpdateByQueryRethrottle.UpdateByQueryRethrottleNode> Nodes { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("nodes")]
+	public Dictionary<string, Elastic.Clients.Elasticsearch.Core.UpdateByQueryRethrottle.UpdateByQueryRethrottleNode> Nodes { get; init; }
 }

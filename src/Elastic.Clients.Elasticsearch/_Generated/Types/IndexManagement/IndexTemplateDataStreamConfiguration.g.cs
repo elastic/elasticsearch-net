@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,16 +24,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class IndexTemplateDataStreamConfiguration
 {
-	public sealed partial class IndexTemplateDataStreamConfiguration
-	{
-		[JsonInclude]
-		[JsonPropertyName("allow_custom_routing")]
-		public bool? AllowCustomRouting { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("allow_custom_routing")]
+	public bool? AllowCustomRouting { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("hidden")]
-		public bool? Hidden { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("hidden")]
+	public bool? Hidden { get; init; }
 }

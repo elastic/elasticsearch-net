@@ -4,8 +4,7 @@
 
 using System;
 
-namespace Elastic.Clients.Elasticsearch
-{
-	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum)]
-	public class StringEnumAttribute : Attribute { }
-}
+namespace Elastic.Clients.Elasticsearch.Serialization;
+
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum)]
+public class StringEnumAttribute : Attribute { }

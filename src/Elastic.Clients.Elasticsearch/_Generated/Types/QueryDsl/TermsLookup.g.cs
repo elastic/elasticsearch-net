@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,158 +24,156 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class TermsLookup
 {
-	public sealed partial class TermsLookup
+	[JsonInclude]
+	[JsonPropertyName("id")]
+	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("index")]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("path")]
+	public Elastic.Clients.Elasticsearch.Field Path { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("routing")]
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+}
+
+public sealed partial class TermsLookupDescriptor<TDocument> : SerializableDescriptor<TermsLookupDescriptor<TDocument>>
+{
+	internal TermsLookupDescriptor(Action<TermsLookupDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public TermsLookupDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("index")]
-		public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("path")]
-		public Elastic.Clients.Elasticsearch.Field Path { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("routing")]
-		public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 	}
 
-	public sealed partial class TermsLookupDescriptor<TDocument> : SerializableDescriptorBase<TermsLookupDescriptor<TDocument>>
+	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
+
+	public TermsLookupDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
-		internal TermsLookupDescriptor(Action<TermsLookupDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public TermsLookupDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
-		public TermsLookupDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			IdValue = id;
-			return Self;
-		}
-
-		public TermsLookupDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
-		{
-			IndexValue = index;
-			return Self;
-		}
-
-		public TermsLookupDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field path)
-		{
-			PathValue = path;
-			return Self;
-		}
-
-		public TermsLookupDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
-		{
-			PathValue = path;
-			return Self;
-		}
-
-		public TermsLookupDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
-		{
-			RoutingValue = routing;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, PathValue, options);
-			if (RoutingValue is not null)
-			{
-				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, RoutingValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		IdValue = id;
+		return Self;
 	}
 
-	public sealed partial class TermsLookupDescriptor : SerializableDescriptorBase<TermsLookupDescriptor>
+	public TermsLookupDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
-		internal TermsLookupDescriptor(Action<TermsLookupDescriptor> configure) => configure.Invoke(this);
-		public TermsLookupDescriptor() : base()
+		IndexValue = index;
+		return Self;
+	}
+
+	public TermsLookupDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	public TermsLookupDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	public TermsLookupDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	{
+		RoutingValue = routing;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("id");
+		JsonSerializer.Serialize(writer, IdValue, options);
+		writer.WritePropertyName("index");
+		JsonSerializer.Serialize(writer, IndexValue, options);
+		writer.WritePropertyName("path");
+		JsonSerializer.Serialize(writer, PathValue, options);
+		if (RoutingValue is not null)
 		{
+			writer.WritePropertyName("routing");
+			JsonSerializer.Serialize(writer, RoutingValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
+public sealed partial class TermsLookupDescriptor : SerializableDescriptor<TermsLookupDescriptor>
+{
+	internal TermsLookupDescriptor(Action<TermsLookupDescriptor> configure) => configure.Invoke(this);
+	public TermsLookupDescriptor() : base()
+	{
+	}
 
-		private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 
-		private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
 
-		public TermsLookupDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
+
+	public TermsLookupDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		IdValue = id;
+		return Self;
+	}
+
+	public TermsLookupDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		IndexValue = index;
+		return Self;
+	}
+
+	public TermsLookupDescriptor Path(Elastic.Clients.Elasticsearch.Field path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	public TermsLookupDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	public TermsLookupDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	public TermsLookupDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	{
+		RoutingValue = routing;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("id");
+		JsonSerializer.Serialize(writer, IdValue, options);
+		writer.WritePropertyName("index");
+		JsonSerializer.Serialize(writer, IndexValue, options);
+		writer.WritePropertyName("path");
+		JsonSerializer.Serialize(writer, PathValue, options);
+		if (RoutingValue is not null)
 		{
-			IdValue = id;
-			return Self;
+			writer.WritePropertyName("routing");
+			JsonSerializer.Serialize(writer, RoutingValue, options);
 		}
 
-		public TermsLookupDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
-		{
-			IndexValue = index;
-			return Self;
-		}
-
-		public TermsLookupDescriptor Path(Elastic.Clients.Elasticsearch.Field path)
-		{
-			PathValue = path;
-			return Self;
-		}
-
-		public TermsLookupDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
-		{
-			PathValue = path;
-			return Self;
-		}
-
-		public TermsLookupDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
-		{
-			PathValue = path;
-			return Self;
-		}
-
-		public TermsLookupDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
-		{
-			RoutingValue = routing;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, PathValue, options);
-			if (RoutingValue is not null)
-			{
-				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, RoutingValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

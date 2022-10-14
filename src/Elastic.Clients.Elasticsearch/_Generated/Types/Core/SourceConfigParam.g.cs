@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Core.Search
+namespace Elastic.Clients.Elasticsearch.Core.Search;
+public partial class SourceConfigParam : Union<bool, Elastic.Clients.Elasticsearch.Fields>
 {
-	public partial class SourceConfigParam : Union<bool, Elastic.Clients.Elasticsearch.Fields>
+	public SourceConfigParam(bool sourceConfigParam) : base(sourceConfigParam)
 	{
-		public SourceConfigParam(bool sourceConfigParam) : base(sourceConfigParam)
-		{
-		}
+	}
 
-		public SourceConfigParam(Elastic.Clients.Elasticsearch.Fields fields) : base(fields)
-		{
-		}
+	public SourceConfigParam(Elastic.Clients.Elasticsearch.Fields fields) : base(fields)
+	{
 	}
 }

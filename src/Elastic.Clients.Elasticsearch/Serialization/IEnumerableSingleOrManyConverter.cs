@@ -7,14 +7,13 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
-{
-	internal abstract class IEnumerableSingleOrManyConverter<TItem> : JsonConverter<IEnumerable<TItem>>
-	{
-		public override IEnumerable<TItem>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-			SingleOrManySerializationHelper.Deserialize<TItem>(ref reader, options);
+namespace Elastic.Clients.Elasticsearch.Serialization;
 
-		public override void Write(Utf8JsonWriter writer, IEnumerable<TItem> value, JsonSerializerOptions options) => 
-			SingleOrManySerializationHelper.Serialize<TItem>(value, writer, options);
-	}
+internal abstract class IEnumerableSingleOrManyConverter<TItem> : JsonConverter<IEnumerable<TItem>>
+{
+	public override IEnumerable<TItem>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+		SingleOrManySerializationHelper.Deserialize<TItem>(ref reader, options);
+
+	public override void Write(Utf8JsonWriter writer, IEnumerable<TItem> value, JsonSerializerOptions options) => 
+		SingleOrManySerializationHelper.Serialize<TItem>(value, writer, options);
 }

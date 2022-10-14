@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,36 +24,34 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class FieldSort
 {
-	public sealed partial class FieldSort
-	{
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("format")]
+	public string? Format { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public FieldValue? Missing { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("missing")]
+	public FieldValue? Missing { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("mode")]
-		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("mode")]
+	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("nested")]
-		public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("nested")]
+	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("numeric_type")]
-		public Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericType { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("numeric_type")]
+	public Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericType { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("order")]
-		public Elastic.Clients.Elasticsearch.SortOrder? Order { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("order")]
+	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("unmapped_type")]
-		public Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedType { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("unmapped_type")]
+	public Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedType { get; init; }
 }

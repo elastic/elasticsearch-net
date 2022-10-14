@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Core.Bulk;
+using Elastic.Clients.Elasticsearch.Fluent;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -34,9 +35,9 @@ public sealed class BulkAllRequest<T> : IBulkAllRequest<T>, IHelperCallable
 
 	public int? Size { get; set; }
 
-	public Action<BulkResponseItemBase, T>? DroppedDocumentCallback { get; set; }
+	public Action<ResponseItem, T>? DroppedDocumentCallback { get; set; }
 
-	public Func<BulkResponseItemBase, T, bool>? RetryDocumentPredicate { get; set; }
+	public Func<ResponseItem, T, bool>? RetryDocumentPredicate { get; set; }
 
 	public Action<BulkResponse>? BulkResponseCallback { get; set; }
 
@@ -58,7 +59,7 @@ public sealed class BulkAllRequest<T> : IBulkAllRequest<T>, IHelperCallable
 	RequestMetaData IHelperCallable.ParentMetaData { get => ParentMetaData; set => ParentMetaData = value; }
 }
 
-public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<BulkAllRequestDescriptor<T>>, IBulkAllRequest<T>, IHelperCallable
+public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptor<BulkAllRequestDescriptor<T>>, IBulkAllRequest<T>, IHelperCallable
 {
 	private readonly IEnumerable<T> _documents;
 
@@ -71,8 +72,8 @@ public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<Bul
 	private int? _size;
 	private bool _refreshOnCompleted;
 	private Action<BulkRequestDescriptor, IList<T>> _bufferToBulk;
-	private Func<BulkResponseItemBase, T, bool> _retryDocumentPredicate;
-	private Action<BulkResponseItemBase, T> _droppedDocumentCallback;
+	private Func<ResponseItem, T, bool> _retryDocumentPredicate;
+	private Action<ResponseItem, T> _droppedDocumentCallback;
 	private Routing _routing;
 	private bool _continueAfterDroppedDocuments;
 	private string _pipeline;
@@ -94,13 +95,13 @@ public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<Bul
 	Action<BulkResponse>? IBulkAllRequest<T>.BulkResponseCallback => _bulkResponseCallback;
 	bool IBulkAllRequest<T>.ContinueAfterDroppedDocuments => _continueAfterDroppedDocuments;
 	IEnumerable<T> IBulkAllRequest<T>.Documents => _documents;
-	Action<BulkResponseItemBase, T>? IBulkAllRequest<T>.DroppedDocumentCallback => _droppedDocumentCallback;
+	Action<ResponseItem, T>? IBulkAllRequest<T>.DroppedDocumentCallback => _droppedDocumentCallback;
 	IndexName IBulkAllRequest<T>.Index => _index;
 	int? IBulkAllRequest<T>.MaxDegreeOfParallelism => _maxDegreeOfParallism;
 	string? IBulkAllRequest<T>.Pipeline => _pipeline;
 	Indices? IBulkAllRequest<T>.RefreshIndices => _refreshIndices;
 	bool IBulkAllRequest<T>.RefreshOnCompleted => _refreshOnCompleted;
-	Func<BulkResponseItemBase, T, bool>? IBulkAllRequest<T>.RetryDocumentPredicate => _retryDocumentPredicate;
+	Func<ResponseItem, T, bool>? IBulkAllRequest<T>.RetryDocumentPredicate => _retryDocumentPredicate;
 	Routing? IBulkAllRequest<T>.Routing => _routing;
 	int? IBulkAllRequest<T>.Size => _size;
 	Duration? IBulkAllRequest<T>.Timeout => _timeout;
@@ -121,7 +122,7 @@ public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<Bul
 
 	public BulkAllRequestDescriptor<T> ContinueAfterDroppedDocuments(bool proceed = true) => Assign(proceed, (a, v) => a._continueAfterDroppedDocuments = v);
 
-	public BulkAllRequestDescriptor<T> DroppedDocumentCallback(Action<BulkResponseItemBase, T> callback) =>
+	public BulkAllRequestDescriptor<T> DroppedDocumentCallback(Action<ResponseItem, T> callback) =>
 			Assign(callback, (a, v) => a._droppedDocumentCallback = v);
 
 	public BulkAllRequestDescriptor<T> Index(IndexName index) => Assign(index, (a, v) => a._index = v);
@@ -136,7 +137,7 @@ public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<Bul
 
 	public BulkAllRequestDescriptor<T> RefreshOnCompleted(bool refreshOnCompleted = true) => Assign(refreshOnCompleted, (a, v) => a._refreshOnCompleted = v);
 
-	public BulkAllRequestDescriptor<T> RetryDocumentPredicate(Func<BulkResponseItemBase, T, bool> predicate) =>
+	public BulkAllRequestDescriptor<T> RetryDocumentPredicate(Func<ResponseItem, T, bool> predicate) =>
 			Assign(predicate, (a, v) => a._retryDocumentPredicate = v);
 
 	public BulkAllRequestDescriptor<T> Routing(Routing routing) => Assign(routing, (a, v) => a._routing = v);

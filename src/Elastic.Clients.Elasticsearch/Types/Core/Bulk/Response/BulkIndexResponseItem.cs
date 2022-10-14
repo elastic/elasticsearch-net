@@ -4,7 +4,7 @@
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public sealed class BulkIndexResponseItem : BulkResponseItemBase
+public sealed class BulkIndexResponseItem : ResponseItem
 {
 	public override string Operation => "index";
 }

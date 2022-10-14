@@ -11,7 +11,7 @@ using Elastic.Transport;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Elastic.Clients.JsonNetSerializer.Converters
+namespace Elastic.Clients.Elasticsearch.JsonNetSerializer.Converters
 {
 	public class HandleNestTypesOnSourceJsonConverter : JsonConverter
 	{

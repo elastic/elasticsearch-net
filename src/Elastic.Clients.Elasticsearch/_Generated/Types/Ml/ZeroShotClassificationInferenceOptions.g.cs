@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,158 +24,156 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ml
+namespace Elastic.Clients.Elasticsearch.Ml;
+public sealed partial class ZeroShotClassificationInferenceOptions
 {
-	public sealed partial class ZeroShotClassificationInferenceOptions
+	[JsonInclude]
+	[JsonPropertyName("classification_labels")]
+	public IEnumerable<string> ClassificationLabels { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("hypothesis_template")]
+	public string? HypothesisTemplate { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("labels")]
+	public IEnumerable<string>? Labels { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("multi_label")]
+	public bool? MultiLabel { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("results_field")]
+	public string? ResultsField { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("tokenization")]
+	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+}
+
+public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : SerializableDescriptor<ZeroShotClassificationInferenceOptionsDescriptor>
+{
+	internal ZeroShotClassificationInferenceOptionsDescriptor(Action<ZeroShotClassificationInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+	public ZeroShotClassificationInferenceOptionsDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("classification_labels")]
-		public IEnumerable<string> ClassificationLabels { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("hypothesis_template")]
-		public string? HypothesisTemplate { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("labels")]
-		public IEnumerable<string>? Labels { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("multi_label")]
-		public bool? MultiLabel { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("results_field")]
-		public string? ResultsField { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("tokenization")]
-		public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
 	}
 
-	public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : SerializableDescriptorBase<ZeroShotClassificationInferenceOptionsDescriptor>
+	private IEnumerable<string> ClassificationLabelsValue { get; set; }
+
+	private string? HypothesisTemplateValue { get; set; }
+
+	private IEnumerable<string>? LabelsValue { get; set; }
+
+	private bool? MultiLabelValue { get; set; }
+
+	private string? ResultsFieldValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
+
+	private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
+
+	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
+
+	public ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(IEnumerable<string> classificationLabels)
 	{
-		internal ZeroShotClassificationInferenceOptionsDescriptor(Action<ZeroShotClassificationInferenceOptionsDescriptor> configure) => configure.Invoke(this);
-		public ZeroShotClassificationInferenceOptionsDescriptor() : base()
+		ClassificationLabelsValue = classificationLabels;
+		return Self;
+	}
+
+	public ZeroShotClassificationInferenceOptionsDescriptor HypothesisTemplate(string? hypothesisTemplate)
+	{
+		HypothesisTemplateValue = hypothesisTemplate;
+		return Self;
+	}
+
+	public ZeroShotClassificationInferenceOptionsDescriptor Labels(IEnumerable<string>? labels)
+	{
+		LabelsValue = labels;
+		return Self;
+	}
+
+	public ZeroShotClassificationInferenceOptionsDescriptor MultiLabel(bool? multiLabel = true)
+	{
+		MultiLabelValue = multiLabel;
+		return Self;
+	}
+
+	public ZeroShotClassificationInferenceOptionsDescriptor ResultsField(string? resultsField)
+	{
+		ResultsFieldValue = resultsField;
+		return Self;
+	}
+
+	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
+	{
+		TokenizationDescriptor = null;
+		TokenizationDescriptorAction = null;
+		TokenizationValue = tokenization;
+		return Self;
+	}
+
+	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
+	{
+		TokenizationValue = null;
+		TokenizationDescriptorAction = null;
+		TokenizationDescriptor = descriptor;
+		return Self;
+	}
+
+	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
+	{
+		TokenizationValue = null;
+		TokenizationDescriptor = null;
+		TokenizationDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("classification_labels");
+		JsonSerializer.Serialize(writer, ClassificationLabelsValue, options);
+		if (!string.IsNullOrEmpty(HypothesisTemplateValue))
 		{
+			writer.WritePropertyName("hypothesis_template");
+			writer.WriteStringValue(HypothesisTemplateValue);
 		}
 
-		private IEnumerable<string> ClassificationLabelsValue { get; set; }
-
-		private string? HypothesisTemplateValue { get; set; }
-
-		private IEnumerable<string>? LabelsValue { get; set; }
-
-		private bool? MultiLabelValue { get; set; }
-
-		private string? ResultsFieldValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
-
-		private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
-
-		private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
-
-		public ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(IEnumerable<string> classificationLabels)
+		if (LabelsValue is not null)
 		{
-			ClassificationLabelsValue = classificationLabels;
-			return Self;
+			writer.WritePropertyName("labels");
+			JsonSerializer.Serialize(writer, LabelsValue, options);
 		}
 
-		public ZeroShotClassificationInferenceOptionsDescriptor HypothesisTemplate(string? hypothesisTemplate)
+		if (MultiLabelValue.HasValue)
 		{
-			HypothesisTemplateValue = hypothesisTemplate;
-			return Self;
+			writer.WritePropertyName("multi_label");
+			writer.WriteBooleanValue(MultiLabelValue.Value);
 		}
 
-		public ZeroShotClassificationInferenceOptionsDescriptor Labels(IEnumerable<string>? labels)
+		if (!string.IsNullOrEmpty(ResultsFieldValue))
 		{
-			LabelsValue = labels;
-			return Self;
+			writer.WritePropertyName("results_field");
+			writer.WriteStringValue(ResultsFieldValue);
 		}
 
-		public ZeroShotClassificationInferenceOptionsDescriptor MultiLabel(bool? multiLabel = true)
+		if (TokenizationDescriptor is not null)
 		{
-			MultiLabelValue = multiLabel;
-			return Self;
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
+		}
+		else if (TokenizationDescriptorAction is not null)
+		{
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
+		}
+		else if (TokenizationValue is not null)
+		{
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, TokenizationValue, options);
 		}
 
-		public ZeroShotClassificationInferenceOptionsDescriptor ResultsField(string? resultsField)
-		{
-			ResultsFieldValue = resultsField;
-			return Self;
-		}
-
-		public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
-		{
-			TokenizationDescriptor = null;
-			TokenizationDescriptorAction = null;
-			TokenizationValue = tokenization;
-			return Self;
-		}
-
-		public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
-		{
-			TokenizationValue = null;
-			TokenizationDescriptorAction = null;
-			TokenizationDescriptor = descriptor;
-			return Self;
-		}
-
-		public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
-		{
-			TokenizationValue = null;
-			TokenizationDescriptor = null;
-			TokenizationDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("classification_labels");
-			JsonSerializer.Serialize(writer, ClassificationLabelsValue, options);
-			if (!string.IsNullOrEmpty(HypothesisTemplateValue))
-			{
-				writer.WritePropertyName("hypothesis_template");
-				writer.WriteStringValue(HypothesisTemplateValue);
-			}
-
-			if (LabelsValue is not null)
-			{
-				writer.WritePropertyName("labels");
-				JsonSerializer.Serialize(writer, LabelsValue, options);
-			}
-
-			if (MultiLabelValue.HasValue)
-			{
-				writer.WritePropertyName("multi_label");
-				writer.WriteBooleanValue(MultiLabelValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(ResultsFieldValue))
-			{
-				writer.WritePropertyName("results_field");
-				writer.WriteStringValue(ResultsFieldValue);
-			}
-
-			if (TokenizationDescriptor is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
-			}
-			else if (TokenizationDescriptorAction is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
-			}
-			else if (TokenizationValue is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, TokenizationValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

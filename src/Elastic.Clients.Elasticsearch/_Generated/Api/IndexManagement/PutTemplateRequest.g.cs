@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,213 +26,211 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class PutTemplateRequestParameters : RequestParameters<PutTemplateRequestParameters>
 {
-	public sealed class PutTemplateRequestParameters : RequestParameters<PutTemplateRequestParameters>
+	[JsonIgnore]
+	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+
+	[JsonIgnore]
+	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+}
+
+public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequestParameters>
+{
+	public PutTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
-		[JsonIgnore]
-		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-
-		[JsonIgnore]
-		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public sealed partial class PutTemplateRequest : PlainRequestBase<PutTemplateRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override bool SupportsBody => true;
+	[JsonIgnore]
+	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+
+	[JsonIgnore]
+	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	[JsonInclude]
+	[JsonPropertyName("aliases")]
+	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("index_patterns")]
+	public IEnumerable<string>? IndexPatterns { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("mappings")]
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("order")]
+	public int? Order { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("settings")]
+	public Dictionary<string, object>? Settings { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public long? Version { get; set; }
+}
+
+public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<PutTemplateRequestDescriptor, PutTemplateRequestParameters>
+{
+	internal PutTemplateRequestDescriptor(Action<PutTemplateRequestDescriptor> configure) => configure.Invoke(this);
+	public PutTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
-		public PutTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => true;
-		[JsonIgnore]
-		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-
-		[JsonIgnore]
-		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
-		[JsonInclude]
-		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("index_patterns")]
-		public IEnumerable<string>? IndexPatterns { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("order")]
-		public int? Order { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("settings")]
-		public Dictionary<string, object>? Settings { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public long? Version { get; set; }
 	}
 
-	public sealed partial class PutTemplateRequestDescriptor : RequestDescriptorBase<PutTemplateRequestDescriptor, PutTemplateRequestParameters>
+	internal PutTemplateRequestDescriptor()
 	{
-		internal PutTemplateRequestDescriptor(Action<PutTemplateRequestDescriptor> configure) => configure.Invoke(this);
-		public PutTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override bool SupportsBody => true;
+	public PutTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
+	public PutTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+	public PutTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public PutTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+	public PutTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	{
+		RouteValues.Required("name", name);
+		return Self;
+	}
+
+	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+
+	private IEnumerable<string>? IndexPatternsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
+
+	private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
+
+	private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
+
+	private int? OrderValue { get; set; }
+
+	private Dictionary<string, object>? SettingsValue { get; set; }
+
+	private long? VersionValue { get; set; }
+
+	public PutTemplateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
+	{
+		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
+		return Self;
+	}
+
+	public PutTemplateRequestDescriptor IndexPatterns(IEnumerable<string>? indexPatterns)
+	{
+		IndexPatternsValue = indexPatterns;
+		return Self;
+	}
+
+	public PutTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+	{
+		MappingsDescriptor = null;
+		MappingsDescriptorAction = null;
+		MappingsValue = mappings;
+		return Self;
+	}
+
+	public PutTemplateRequestDescriptor Mappings(Mapping.TypeMappingDescriptor descriptor)
+	{
+		MappingsValue = null;
+		MappingsDescriptorAction = null;
+		MappingsDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutTemplateRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
+	{
+		MappingsValue = null;
+		MappingsDescriptor = null;
+		MappingsDescriptorAction = configure;
+		return Self;
+	}
+
+	public PutTemplateRequestDescriptor Order(int? order)
+	{
+		OrderValue = order;
+		return Self;
+	}
+
+	public PutTemplateRequestDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		SettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public PutTemplateRequestDescriptor Version(long? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AliasesValue is not null)
 		{
+			writer.WritePropertyName("aliases");
+			JsonSerializer.Serialize(writer, AliasesValue, options);
 		}
 
-		internal PutTemplateRequestDescriptor()
+		if (IndexPatternsValue is not null)
 		{
+			writer.WritePropertyName("index_patterns");
+			JsonSerializer.Serialize(writer, IndexPatternsValue, options);
 		}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => true;
-		public PutTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
-		public PutTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-		public PutTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public PutTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-		public PutTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+		if (MappingsDescriptor is not null)
 		{
-			RouteValues.Required("name", name);
-			return Self;
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+		}
+		else if (MappingsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
+		}
+		else if (MappingsValue is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, MappingsValue, options);
 		}
 
-		private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
-
-		private IEnumerable<string>? IndexPatternsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-
-		private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-
-		private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
-
-		private int? OrderValue { get; set; }
-
-		private Dictionary<string, object>? SettingsValue { get; set; }
-
-		private long? VersionValue { get; set; }
-
-		public PutTemplateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
+		if (OrderValue.HasValue)
 		{
-			AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
-			return Self;
+			writer.WritePropertyName("order");
+			writer.WriteNumberValue(OrderValue.Value);
 		}
 
-		public PutTemplateRequestDescriptor IndexPatterns(IEnumerable<string>? indexPatterns)
+		if (SettingsValue is not null)
 		{
-			IndexPatternsValue = indexPatterns;
-			return Self;
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, SettingsValue, options);
 		}
 
-		public PutTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+		if (VersionValue is not null)
 		{
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = null;
-			MappingsValue = mappings;
-			return Self;
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
 		}
 
-		public PutTemplateRequestDescriptor Mappings(Mapping.TypeMappingDescriptor descriptor)
-		{
-			MappingsValue = null;
-			MappingsDescriptorAction = null;
-			MappingsDescriptor = descriptor;
-			return Self;
-		}
-
-		public PutTemplateRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
-		{
-			MappingsValue = null;
-			MappingsDescriptor = null;
-			MappingsDescriptorAction = configure;
-			return Self;
-		}
-
-		public PutTemplateRequestDescriptor Order(int? order)
-		{
-			OrderValue = order;
-			return Self;
-		}
-
-		public PutTemplateRequestDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			SettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public PutTemplateRequestDescriptor Version(long? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (AliasesValue is not null)
-			{
-				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, AliasesValue, options);
-			}
-
-			if (IndexPatternsValue is not null)
-			{
-				writer.WritePropertyName("index_patterns");
-				JsonSerializer.Serialize(writer, IndexPatternsValue, options);
-			}
-
-			if (MappingsDescriptor is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
-			}
-			else if (MappingsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
-			}
-			else if (MappingsValue is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsValue, options);
-			}
-
-			if (OrderValue.HasValue)
-			{
-				writer.WritePropertyName("order");
-				writer.WriteNumberValue(OrderValue.Value);
-			}
-
-			if (SettingsValue is not null)
-			{
-				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, SettingsValue, options);
-			}
-
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

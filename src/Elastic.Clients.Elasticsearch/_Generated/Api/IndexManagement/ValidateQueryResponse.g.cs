@@ -15,25 +15,25 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class ValidateQueryResponse : ElasticsearchResponseBase
 {
-	public sealed partial class ValidateQueryResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("explanations")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation>? Explanations { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("explanations")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation>? Explanations { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("_shards")]
-		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("_shards")]
+	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("valid")]
-		public bool Valid { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("valid")]
+	public bool Valid { get; init; }
 }

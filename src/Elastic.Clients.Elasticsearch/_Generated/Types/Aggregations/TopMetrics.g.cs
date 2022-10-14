@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,16 +24,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public sealed partial class TopMetrics
 {
-	public sealed partial class TopMetrics
-	{
-		[JsonInclude]
-		[JsonPropertyName("metrics")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.FieldValue>? Metrics { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("metrics")]
+	public Dictionary<string, Elastic.Clients.Elasticsearch.FieldValue>? Metrics { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("sort")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("sort")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; init; }
 }

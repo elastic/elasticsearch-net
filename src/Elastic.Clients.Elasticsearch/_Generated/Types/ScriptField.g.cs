@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,54 +24,52 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class ScriptField
 {
-	public sealed partial class ScriptField
-	{
-		[JsonInclude]
-		[JsonPropertyName("ignore_failure")]
-		public bool? IgnoreFailure { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("ignore_failure")]
+	public bool? IgnoreFailure { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+}
+
+public sealed partial class ScriptFieldDescriptor : SerializableDescriptor<ScriptFieldDescriptor>
+{
+	internal ScriptFieldDescriptor(Action<ScriptFieldDescriptor> configure) => configure.Invoke(this);
+	public ScriptFieldDescriptor() : base()
+	{
 	}
 
-	public sealed partial class ScriptFieldDescriptor : SerializableDescriptorBase<ScriptFieldDescriptor>
+	private bool? IgnoreFailureValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
+
+	public ScriptFieldDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
-		internal ScriptFieldDescriptor(Action<ScriptFieldDescriptor> configure) => configure.Invoke(this);
-		public ScriptFieldDescriptor() : base()
+		IgnoreFailureValue = ignoreFailure;
+		return Self;
+	}
+
+	public ScriptFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (IgnoreFailureValue.HasValue)
 		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
 		}
 
-		private bool? IgnoreFailureValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
-
-		public ScriptFieldDescriptor IgnoreFailure(bool? ignoreFailure = true)
-		{
-			IgnoreFailureValue = ignoreFailure;
-			return Self;
-		}
-
-		public ScriptFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
-		{
-			ScriptValue = script;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (IgnoreFailureValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_failure");
-				writer.WriteBooleanValue(IgnoreFailureValue.Value);
-			}
-
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-			writer.WriteEndObject();
-		}
+		writer.WritePropertyName("script");
+		JsonSerializer.Serialize(writer, ScriptValue, options);
+		writer.WriteEndObject();
 	}
 }
