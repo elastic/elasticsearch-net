@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,58 +24,56 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class IndexVersioning
 {
-	public sealed partial class IndexVersioning
-	{
-		[JsonInclude]
-		[JsonPropertyName("created")]
-		public string? Created { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("created")]
+	public string? Created { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("created_string")]
-		public string? CreatedString { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("created_string")]
+	public string? CreatedString { get; set; }
+}
+
+public sealed partial class IndexVersioningDescriptor : SerializableDescriptor<IndexVersioningDescriptor>
+{
+	internal IndexVersioningDescriptor(Action<IndexVersioningDescriptor> configure) => configure.Invoke(this);
+	public IndexVersioningDescriptor() : base()
+	{
 	}
 
-	public sealed partial class IndexVersioningDescriptor : SerializableDescriptorBase<IndexVersioningDescriptor>
+	private string? CreatedValue { get; set; }
+
+	private string? CreatedStringValue { get; set; }
+
+	public IndexVersioningDescriptor Created(string? created)
 	{
-		internal IndexVersioningDescriptor(Action<IndexVersioningDescriptor> configure) => configure.Invoke(this);
-		public IndexVersioningDescriptor() : base()
+		CreatedValue = created;
+		return Self;
+	}
+
+	public IndexVersioningDescriptor CreatedString(string? createdString)
+	{
+		CreatedStringValue = createdString;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (CreatedValue is not null)
 		{
+			writer.WritePropertyName("created");
+			JsonSerializer.Serialize(writer, CreatedValue, options);
 		}
 
-		private string? CreatedValue { get; set; }
-
-		private string? CreatedStringValue { get; set; }
-
-		public IndexVersioningDescriptor Created(string? created)
+		if (!string.IsNullOrEmpty(CreatedStringValue))
 		{
-			CreatedValue = created;
-			return Self;
+			writer.WritePropertyName("created_string");
+			writer.WriteStringValue(CreatedStringValue);
 		}
 
-		public IndexVersioningDescriptor CreatedString(string? createdString)
-		{
-			CreatedStringValue = createdString;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (CreatedValue is not null)
-			{
-				writer.WritePropertyName("created");
-				JsonSerializer.Serialize(writer, CreatedValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(CreatedStringValue))
-			{
-				writer.WritePropertyName("created_string");
-				writer.WriteStringValue(CreatedStringValue);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

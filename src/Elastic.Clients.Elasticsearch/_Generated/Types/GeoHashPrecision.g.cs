@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public partial class GeoHashPrecision : Union<double, string>
 {
-	public partial class GeoHashPrecision : Union<double, string>
+	public GeoHashPrecision(double geoHashPrecision) : base(geoHashPrecision)
 	{
-		public GeoHashPrecision(double geoHashPrecision) : base(geoHashPrecision)
-		{
-		}
+	}
 
-		public GeoHashPrecision(string geoHashPrecision) : base(geoHashPrecision)
-		{
-		}
+	public GeoHashPrecision(string geoHashPrecision) : base(geoHashPrecision)
+	{
 	}
 }

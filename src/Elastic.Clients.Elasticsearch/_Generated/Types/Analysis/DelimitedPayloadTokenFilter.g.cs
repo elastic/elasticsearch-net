@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,84 +24,82 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class DelimitedPayloadTokenFilter : ITokenFilterDefinition
 {
-	public sealed partial class DelimitedPayloadTokenFilter : ITokenFilterDefinition
+	[JsonInclude]
+	[JsonPropertyName("delimiter")]
+	public string? Delimiter { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("encoding")]
+	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? Encoding { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "delimited_payload";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class DelimitedPayloadTokenFilterDescriptor : SerializableDescriptor<DelimitedPayloadTokenFilterDescriptor>, IBuildableDescriptor<DelimitedPayloadTokenFilter>
+{
+	internal DelimitedPayloadTokenFilterDescriptor(Action<DelimitedPayloadTokenFilterDescriptor> configure) => configure.Invoke(this);
+	public DelimitedPayloadTokenFilterDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("delimiter")]
-		public string? Delimiter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("encoding")]
-		public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? Encoding { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "delimited_payload";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class DelimitedPayloadTokenFilterDescriptor : SerializableDescriptorBase<DelimitedPayloadTokenFilterDescriptor>, IBuildableDescriptor<DelimitedPayloadTokenFilter>
+	private string? DelimiterValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? EncodingValue { get; set; }
+
+	private string? VersionValue { get; set; }
+
+	public DelimitedPayloadTokenFilterDescriptor Delimiter(string? delimiter)
 	{
-		internal DelimitedPayloadTokenFilterDescriptor(Action<DelimitedPayloadTokenFilterDescriptor> configure) => configure.Invoke(this);
-		public DelimitedPayloadTokenFilterDescriptor() : base()
-		{
-		}
-
-		private string? DelimiterValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? EncodingValue { get; set; }
-
-		private string? VersionValue { get; set; }
-
-		public DelimitedPayloadTokenFilterDescriptor Delimiter(string? delimiter)
-		{
-			DelimiterValue = delimiter;
-			return Self;
-		}
-
-		public DelimitedPayloadTokenFilterDescriptor Encoding(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? encoding)
-		{
-			EncodingValue = encoding;
-			return Self;
-		}
-
-		public DelimitedPayloadTokenFilterDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(DelimiterValue))
-			{
-				writer.WritePropertyName("delimiter");
-				writer.WriteStringValue(DelimiterValue);
-			}
-
-			if (EncodingValue is not null)
-			{
-				writer.WritePropertyName("encoding");
-				JsonSerializer.Serialize(writer, EncodingValue, options);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("delimited_payload");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		DelimitedPayloadTokenFilter IBuildableDescriptor<DelimitedPayloadTokenFilter>.Build() => new()
-		{ Delimiter = DelimiterValue, Encoding = EncodingValue, Version = VersionValue };
+		DelimiterValue = delimiter;
+		return Self;
 	}
+
+	public DelimitedPayloadTokenFilterDescriptor Encoding(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? encoding)
+	{
+		EncodingValue = encoding;
+		return Self;
+	}
+
+	public DelimitedPayloadTokenFilterDescriptor Version(string? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DelimiterValue))
+		{
+			writer.WritePropertyName("delimiter");
+			writer.WriteStringValue(DelimiterValue);
+		}
+
+		if (EncodingValue is not null)
+		{
+			writer.WritePropertyName("encoding");
+			JsonSerializer.Serialize(writer, EncodingValue, options);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("delimited_payload");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	DelimitedPayloadTokenFilter IBuildableDescriptor<DelimitedPayloadTokenFilter>.Build() => new()
+	{ Delimiter = DelimiterValue, Encoding = EncodingValue, Version = VersionValue };
 }

@@ -9,14 +9,14 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-internal sealed class BulkResponseItemConverter : JsonConverter<IReadOnlyList<BulkResponseItemBase>>
+internal sealed class BulkResponseItemConverter : JsonConverter<IReadOnlyList<ResponseItem>>
 {
-	public override IReadOnlyList<BulkResponseItemBase>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override IReadOnlyList<ResponseItem>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.StartArray)
 			throw new JsonException($"Unexpected token in bulk response items. Read {reader.TokenType} but was expecting {JsonTokenType.StartArray}.");
 
-		var responseItems = new List<BulkResponseItemBase>();
+		var responseItems = new List<ResponseItem>();
 
 		while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
 		{
@@ -28,7 +28,7 @@ internal sealed class BulkResponseItemConverter : JsonConverter<IReadOnlyList<Bu
 			if (reader.TokenType != JsonTokenType.PropertyName)
 				throw new JsonException($"Unexpected token in bulk response items. Read {reader.TokenType} but was expecting {JsonTokenType.PropertyName}.");
 
-			BulkResponseItemBase responseItem;
+			ResponseItem responseItem;
 
 			if (reader.ValueTextEquals("index"))
 			{
@@ -62,5 +62,5 @@ internal sealed class BulkResponseItemConverter : JsonConverter<IReadOnlyList<Bu
 		return responseItems;
 	}
 
-	public override void Write(Utf8JsonWriter writer, IReadOnlyList<BulkResponseItemBase> value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, IReadOnlyList<ResponseItem> value, JsonSerializerOptions options) => throw new NotImplementedException();
 }

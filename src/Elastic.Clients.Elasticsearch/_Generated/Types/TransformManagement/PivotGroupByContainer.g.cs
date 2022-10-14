@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,220 +24,218 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.TransformManagement
+namespace Elastic.Clients.Elasticsearch.TransformManagement;
+[JsonConverter(typeof(PivotGroupByContainerConverter))]
+public sealed partial class PivotGroupByContainer
 {
-	[JsonConverter(typeof(PivotGroupByContainerConverter))]
-	public sealed partial class PivotGroupByContainer
+	internal PivotGroupByContainer(string variantName, object variant)
 	{
-		internal PivotGroupByContainer(string variantName, object variant)
-		{
-			if (variantName is null)
-				throw new ArgumentNullException(nameof(variantName));
-			if (variant is null)
-				throw new ArgumentNullException(nameof(variant));
-			if (string.IsNullOrWhiteSpace(variantName))
-				throw new ArgumentException("Variant name must not be empty or whitespace.");
-			VariantName = variantName;
-			Variant = variant;
-		}
-
-		internal object Variant { get; }
-
-		internal string VariantName { get; }
-
-		public static PivotGroupByContainer DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => new PivotGroupByContainer("date_histogram", dateHistogramAggregation);
-		public static PivotGroupByContainer Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => new PivotGroupByContainer("histogram", histogramAggregation);
-		public static PivotGroupByContainer Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new PivotGroupByContainer("terms", termsAggregation);
+		if (variantName is null)
+			throw new ArgumentNullException(nameof(variantName));
+		if (variant is null)
+			throw new ArgumentNullException(nameof(variant));
+		if (string.IsNullOrWhiteSpace(variantName))
+			throw new ArgumentException("Variant name must not be empty or whitespace.");
+		VariantName = variantName;
+		Variant = variant;
 	}
 
-	internal sealed class PivotGroupByContainerConverter : JsonConverter<PivotGroupByContainer>
-	{
-		public override PivotGroupByContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-			{
-				throw new JsonException("Expected start token.");
-			}
+	internal object Variant { get; }
 
+	internal string VariantName { get; }
+
+	public static PivotGroupByContainer DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => new PivotGroupByContainer("date_histogram", dateHistogramAggregation);
+	public static PivotGroupByContainer Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => new PivotGroupByContainer("histogram", histogramAggregation);
+	public static PivotGroupByContainer Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new PivotGroupByContainer("terms", termsAggregation);
+}
+
+internal sealed class PivotGroupByContainerConverter : JsonConverter<PivotGroupByContainer>
+{
+	public override PivotGroupByContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		if (reader.TokenType != JsonTokenType.StartObject)
+		{
+			throw new JsonException("Expected start token.");
+		}
+
+		reader.Read();
+		if (reader.TokenType != JsonTokenType.PropertyName)
+		{
+			throw new JsonException("Expected a property name token representing the variant held within this container.");
+		}
+
+		var propertyName = reader.GetString();
+		reader.Read();
+		if (propertyName == "date_histogram")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
 			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the variant held within this container.");
-			}
+			return new PivotGroupByContainer(propertyName, variant);
+		}
 
-			var propertyName = reader.GetString();
+		if (propertyName == "histogram")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
 			reader.Read();
-			if (propertyName == "date_histogram")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
-				reader.Read();
-				return new PivotGroupByContainer(propertyName, variant);
-			}
-
-			if (propertyName == "histogram")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
-				reader.Read();
-				return new PivotGroupByContainer(propertyName, variant);
-			}
-
-			if (propertyName == "terms")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
-				reader.Read();
-				return new PivotGroupByContainer(propertyName, variant);
-			}
-
-			throw new JsonException();
+			return new PivotGroupByContainer(propertyName, variant);
 		}
 
-		public override void Write(Utf8JsonWriter writer, PivotGroupByContainer value, JsonSerializerOptions options)
+		if (propertyName == "terms")
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "date_histogram":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation)value.Variant, options);
-					break;
-				case "histogram":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation)value.Variant, options);
-					break;
-				case "terms":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation)value.Variant, options);
-					break;
-			}
-
-			writer.WriteEndObject();
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
+			reader.Read();
+			return new PivotGroupByContainer(propertyName, variant);
 		}
+
+		throw new JsonException();
 	}
 
-	public sealed partial class PivotGroupByContainerDescriptor<TDocument> : SerializableDescriptorBase<PivotGroupByContainerDescriptor<TDocument>>
+	public override void Write(Utf8JsonWriter writer, PivotGroupByContainer value, JsonSerializerOptions options)
 	{
-		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public PivotGroupByContainerDescriptor() : base()
+		writer.WriteStartObject();
+		writer.WritePropertyName(value.VariantName);
+		switch (value.VariantName)
 		{
+			case "date_histogram":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation)value.Variant, options);
+				break;
+			case "histogram":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation)value.Variant, options);
+				break;
+			case "terms":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation)value.Variant, options);
+				break;
 		}
 
-		private bool ContainsVariant { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		private string ContainedVariantName { get; set; }
-
-		private object Variant { get; set; }
-
-		private Descriptor Descriptor { get; set; }
-
-		private PivotGroupByContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor
-		{
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-			descriptorAction?.Invoke(descriptor);
-			Descriptor = descriptor;
-			return Self;
-		}
-
-		private PivotGroupByContainerDescriptor<TDocument> Set(object variant, string variantName)
-		{
-			Variant = variant;
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			return Self;
-		}
-
-		public PivotGroupByContainerDescriptor<TDocument> DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
-		public PivotGroupByContainerDescriptor<TDocument> DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-		public PivotGroupByContainerDescriptor<TDocument> Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
-		public PivotGroupByContainerDescriptor<TDocument> Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
-		public PivotGroupByContainerDescriptor<TDocument> Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
-		public PivotGroupByContainerDescriptor<TDocument> Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			}
-			else
-			{
-				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-			}
-
-			writer.WriteEndObject();
-		}
+public sealed partial class PivotGroupByContainerDescriptor<TDocument> : SerializableDescriptor<PivotGroupByContainerDescriptor<TDocument>>
+{
+	internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public PivotGroupByContainerDescriptor() : base()
+	{
 	}
 
-	public sealed partial class PivotGroupByContainerDescriptor : SerializableDescriptorBase<PivotGroupByContainerDescriptor>
+	private bool ContainsVariant { get; set; }
+
+	private string ContainedVariantName { get; set; }
+
+	private object Variant { get; set; }
+
+	private Descriptor Descriptor { get; set; }
+
+	private PivotGroupByContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
+		where T : Descriptor
 	{
-		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor> configure) => configure.Invoke(this);
-		public PivotGroupByContainerDescriptor() : base()
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		return Self;
+	}
+
+	private PivotGroupByContainerDescriptor<TDocument> Set(object variant, string variantName)
+	{
+		Variant = variant;
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	public PivotGroupByContainerDescriptor<TDocument> DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
+	public PivotGroupByContainerDescriptor<TDocument> DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+	public PivotGroupByContainerDescriptor<TDocument> Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
+	public PivotGroupByContainerDescriptor<TDocument> Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
+	public PivotGroupByContainerDescriptor<TDocument> Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
+	public PivotGroupByContainerDescriptor<TDocument> Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (!ContainsVariant)
 		{
+			writer.WriteNullValue();
+			return;
 		}
 
-		private bool ContainsVariant { get; set; }
-
-		private string ContainedVariantName { get; set; }
-
-		private object Variant { get; set; }
-
-		private Descriptor Descriptor { get; set; }
-
-		private PivotGroupByContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor
+		writer.WriteStartObject();
+		writer.WritePropertyName(ContainedVariantName);
+		if (Variant is not null)
 		{
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-			descriptorAction?.Invoke(descriptor);
-			Descriptor = descriptor;
-			return Self;
+			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+		}
+		else
+		{
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		private PivotGroupByContainerDescriptor Set(object variant, string variantName)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class PivotGroupByContainerDescriptor : SerializableDescriptor<PivotGroupByContainerDescriptor>
+{
+	internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor> configure) => configure.Invoke(this);
+	public PivotGroupByContainerDescriptor() : base()
+	{
+	}
+
+	private bool ContainsVariant { get; set; }
+
+	private string ContainedVariantName { get; set; }
+
+	private object Variant { get; set; }
+
+	private Descriptor Descriptor { get; set; }
+
+	private PivotGroupByContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
+		where T : Descriptor
+	{
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		return Self;
+	}
+
+	private PivotGroupByContainerDescriptor Set(object variant, string variantName)
+	{
+		Variant = variant;
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	public PivotGroupByContainerDescriptor DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
+	public PivotGroupByContainerDescriptor DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
+	public PivotGroupByContainerDescriptor DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+	public PivotGroupByContainerDescriptor Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
+	public PivotGroupByContainerDescriptor Histogram(Action<Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
+	public PivotGroupByContainerDescriptor Histogram<TDocument>(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
+	public PivotGroupByContainerDescriptor Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
+	public PivotGroupByContainerDescriptor Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
+	public PivotGroupByContainerDescriptor Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (!ContainsVariant)
 		{
-			Variant = variant;
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			return Self;
+			writer.WriteNullValue();
+			return;
 		}
 
-		public PivotGroupByContainerDescriptor DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
-		public PivotGroupByContainerDescriptor DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
-		public PivotGroupByContainerDescriptor DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-		public PivotGroupByContainerDescriptor Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
-		public PivotGroupByContainerDescriptor Histogram(Action<Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
-		public PivotGroupByContainerDescriptor Histogram<TDocument>(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
-		public PivotGroupByContainerDescriptor Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
-		public PivotGroupByContainerDescriptor Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
-		public PivotGroupByContainerDescriptor Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		writer.WriteStartObject();
+		writer.WritePropertyName(ContainedVariantName);
+		if (Variant is not null)
 		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			}
-			else
-			{
-				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-			}
-
-			writer.WriteEndObject();
+			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
 		}
+		else
+		{
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

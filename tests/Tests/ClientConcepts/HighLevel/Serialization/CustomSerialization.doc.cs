@@ -11,7 +11,7 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using Elastic.Clients.Elasticsearch.QueryDsl;
-using Elastic.Clients.JsonNetSerializer;
+using Elastic.Clients.Elasticsearch.JsonNetSerializer;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
 {

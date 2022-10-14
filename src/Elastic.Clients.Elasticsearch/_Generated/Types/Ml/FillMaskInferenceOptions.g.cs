@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,108 +24,106 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ml
+namespace Elastic.Clients.Elasticsearch.Ml;
+public sealed partial class FillMaskInferenceOptions
 {
-	public sealed partial class FillMaskInferenceOptions
+	[JsonInclude]
+	[JsonPropertyName("num_top_classes")]
+	public int? NumTopClasses { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("results_field")]
+	public string? ResultsField { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("tokenization")]
+	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+}
+
+public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDescriptor<FillMaskInferenceOptionsDescriptor>
+{
+	internal FillMaskInferenceOptionsDescriptor(Action<FillMaskInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+	public FillMaskInferenceOptionsDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("num_top_classes")]
-		public int? NumTopClasses { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("results_field")]
-		public string? ResultsField { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("tokenization")]
-		public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
 	}
 
-	public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDescriptorBase<FillMaskInferenceOptionsDescriptor>
+	private int? NumTopClassesValue { get; set; }
+
+	private string? ResultsFieldValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
+
+	private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
+
+	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
+
+	public FillMaskInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)
 	{
-		internal FillMaskInferenceOptionsDescriptor(Action<FillMaskInferenceOptionsDescriptor> configure) => configure.Invoke(this);
-		public FillMaskInferenceOptionsDescriptor() : base()
+		NumTopClassesValue = numTopClasses;
+		return Self;
+	}
+
+	public FillMaskInferenceOptionsDescriptor ResultsField(string? resultsField)
+	{
+		ResultsFieldValue = resultsField;
+		return Self;
+	}
+
+	public FillMaskInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
+	{
+		TokenizationDescriptor = null;
+		TokenizationDescriptorAction = null;
+		TokenizationValue = tokenization;
+		return Self;
+	}
+
+	public FillMaskInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
+	{
+		TokenizationValue = null;
+		TokenizationDescriptorAction = null;
+		TokenizationDescriptor = descriptor;
+		return Self;
+	}
+
+	public FillMaskInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
+	{
+		TokenizationValue = null;
+		TokenizationDescriptor = null;
+		TokenizationDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (NumTopClassesValue.HasValue)
 		{
+			writer.WritePropertyName("num_top_classes");
+			writer.WriteNumberValue(NumTopClassesValue.Value);
 		}
 
-		private int? NumTopClassesValue { get; set; }
-
-		private string? ResultsFieldValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
-
-		private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
-
-		private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
-
-		public FillMaskInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)
+		if (!string.IsNullOrEmpty(ResultsFieldValue))
 		{
-			NumTopClassesValue = numTopClasses;
-			return Self;
+			writer.WritePropertyName("results_field");
+			writer.WriteStringValue(ResultsFieldValue);
 		}
 
-		public FillMaskInferenceOptionsDescriptor ResultsField(string? resultsField)
+		if (TokenizationDescriptor is not null)
 		{
-			ResultsFieldValue = resultsField;
-			return Self;
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
+		}
+		else if (TokenizationDescriptorAction is not null)
+		{
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
+		}
+		else if (TokenizationValue is not null)
+		{
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, TokenizationValue, options);
 		}
 
-		public FillMaskInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
-		{
-			TokenizationDescriptor = null;
-			TokenizationDescriptorAction = null;
-			TokenizationValue = tokenization;
-			return Self;
-		}
-
-		public FillMaskInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
-		{
-			TokenizationValue = null;
-			TokenizationDescriptorAction = null;
-			TokenizationDescriptor = descriptor;
-			return Self;
-		}
-
-		public FillMaskInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
-		{
-			TokenizationValue = null;
-			TokenizationDescriptor = null;
-			TokenizationDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (NumTopClassesValue.HasValue)
-			{
-				writer.WritePropertyName("num_top_classes");
-				writer.WriteNumberValue(NumTopClassesValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(ResultsFieldValue))
-			{
-				writer.WritePropertyName("results_field");
-				writer.WriteStringValue(ResultsFieldValue);
-			}
-
-			if (TokenizationDescriptor is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
-			}
-			else if (TokenizationDescriptorAction is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
-			}
-			else if (TokenizationValue is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, TokenizationValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

@@ -15,21 +15,21 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class CountResponse : ElasticsearchResponseBase
 {
-	public sealed partial class CountResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("count")]
-		public long Count { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("count")]
+	public long Count { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("_shards")]
-		public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("_shards")]
+	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 }

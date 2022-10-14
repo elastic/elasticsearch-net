@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,150 +24,148 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public sealed partial class WeightedAverageValue
 {
-	public sealed partial class WeightedAverageValue
+	[JsonInclude]
+	[JsonPropertyName("field")]
+	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("missing")]
+	public double? Missing { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+}
+
+public sealed partial class WeightedAverageValueDescriptor<TDocument> : SerializableDescriptor<WeightedAverageValueDescriptor<TDocument>>
+{
+	internal WeightedAverageValueDescriptor(Action<WeightedAverageValueDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public WeightedAverageValueDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public double? Missing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
-	public sealed partial class WeightedAverageValueDescriptor<TDocument> : SerializableDescriptorBase<WeightedAverageValueDescriptor<TDocument>>
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private double? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	public WeightedAverageValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
-		internal WeightedAverageValueDescriptor(Action<WeightedAverageValueDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public WeightedAverageValueDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private double? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		public WeightedAverageValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public WeightedAverageValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public WeightedAverageValueDescriptor<TDocument> Missing(double? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
-		public WeightedAverageValueDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-		{
-			ScriptValue = script;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (MissingValue.HasValue)
-			{
-				writer.WritePropertyName("missing");
-				writer.WriteNumberValue(MissingValue.Value);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		FieldValue = field;
+		return Self;
 	}
 
-	public sealed partial class WeightedAverageValueDescriptor : SerializableDescriptorBase<WeightedAverageValueDescriptor>
+	public WeightedAverageValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
-		internal WeightedAverageValueDescriptor(Action<WeightedAverageValueDescriptor> configure) => configure.Invoke(this);
-		public WeightedAverageValueDescriptor() : base()
+		FieldValue = field;
+		return Self;
+	}
+
+	public WeightedAverageValueDescriptor<TDocument> Missing(double? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public WeightedAverageValueDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FieldValue is not null)
 		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private double? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		public WeightedAverageValueDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		if (MissingValue.HasValue)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("missing");
+			writer.WriteNumberValue(MissingValue.Value);
 		}
 
-		public WeightedAverageValueDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		if (ScriptValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		public WeightedAverageValueDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class WeightedAverageValueDescriptor : SerializableDescriptor<WeightedAverageValueDescriptor>
+{
+	internal WeightedAverageValueDescriptor(Action<WeightedAverageValueDescriptor> configure) => configure.Invoke(this);
+	public WeightedAverageValueDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private double? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	public WeightedAverageValueDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public WeightedAverageValueDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public WeightedAverageValueDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public WeightedAverageValueDescriptor Missing(double? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public WeightedAverageValueDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FieldValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		public WeightedAverageValueDescriptor Missing(double? missing)
+		if (MissingValue.HasValue)
 		{
-			MissingValue = missing;
-			return Self;
+			writer.WritePropertyName("missing");
+			writer.WriteNumberValue(MissingValue.Value);
 		}
 
-		public WeightedAverageValueDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		if (ScriptValue is not null)
 		{
-			ScriptValue = script;
-			return Self;
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (MissingValue.HasValue)
-			{
-				writer.WritePropertyName("missing");
-				writer.WriteNumberValue(MissingValue.Value);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

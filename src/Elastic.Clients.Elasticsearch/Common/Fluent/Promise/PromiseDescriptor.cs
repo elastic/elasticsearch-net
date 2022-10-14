@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Fluent;
 
 public abstract class PromiseDescriptor<TDescriptor, TValue> : Descriptor, IPromise<TValue>
 	where TDescriptor : PromiseDescriptor<TDescriptor, TValue>

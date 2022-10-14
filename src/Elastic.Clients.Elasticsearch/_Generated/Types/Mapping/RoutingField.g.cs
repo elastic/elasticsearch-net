@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,36 +24,34 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Mapping
+namespace Elastic.Clients.Elasticsearch.Mapping;
+public sealed partial class RoutingField
 {
-	public sealed partial class RoutingField
+	[JsonInclude]
+	[JsonPropertyName("required")]
+	public bool Required { get; set; }
+}
+
+public sealed partial class RoutingFieldDescriptor : SerializableDescriptor<RoutingFieldDescriptor>
+{
+	internal RoutingFieldDescriptor(Action<RoutingFieldDescriptor> configure) => configure.Invoke(this);
+	public RoutingFieldDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("required")]
-		public bool Required { get; set; }
 	}
 
-	public sealed partial class RoutingFieldDescriptor : SerializableDescriptorBase<RoutingFieldDescriptor>
+	private bool RequiredValue { get; set; }
+
+	public RoutingFieldDescriptor Required(bool required = true)
 	{
-		internal RoutingFieldDescriptor(Action<RoutingFieldDescriptor> configure) => configure.Invoke(this);
-		public RoutingFieldDescriptor() : base()
-		{
-		}
+		RequiredValue = required;
+		return Self;
+	}
 
-		private bool RequiredValue { get; set; }
-
-		public RoutingFieldDescriptor Required(bool required = true)
-		{
-			RequiredValue = required;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("required");
-			writer.WriteBooleanValue(RequiredValue);
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("required");
+		writer.WriteBooleanValue(RequiredValue);
+		writer.WriteEndObject();
 	}
 }

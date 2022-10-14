@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,42 +24,40 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class SettingsSimilarityLmd
 {
-	public sealed partial class SettingsSimilarityLmd
-	{
-		[JsonInclude]
-		[JsonPropertyName("mu")]
-		public int Mu { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("mu")]
+	public int Mu { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "LMDirichlet";
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "LMDirichlet";
+}
+
+public sealed partial class SettingsSimilarityLmdDescriptor : SerializableDescriptor<SettingsSimilarityLmdDescriptor>
+{
+	internal SettingsSimilarityLmdDescriptor(Action<SettingsSimilarityLmdDescriptor> configure) => configure.Invoke(this);
+	public SettingsSimilarityLmdDescriptor() : base()
+	{
 	}
 
-	public sealed partial class SettingsSimilarityLmdDescriptor : SerializableDescriptorBase<SettingsSimilarityLmdDescriptor>
+	private int MuValue { get; set; }
+
+	public SettingsSimilarityLmdDescriptor Mu(int mu)
 	{
-		internal SettingsSimilarityLmdDescriptor(Action<SettingsSimilarityLmdDescriptor> configure) => configure.Invoke(this);
-		public SettingsSimilarityLmdDescriptor() : base()
-		{
-		}
+		MuValue = mu;
+		return Self;
+	}
 
-		private int MuValue { get; set; }
-
-		public SettingsSimilarityLmdDescriptor Mu(int mu)
-		{
-			MuValue = mu;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("mu");
-			writer.WriteNumberValue(MuValue);
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("LMDirichlet");
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("mu");
+		writer.WriteNumberValue(MuValue);
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("LMDirichlet");
+		writer.WriteEndObject();
 	}
 }

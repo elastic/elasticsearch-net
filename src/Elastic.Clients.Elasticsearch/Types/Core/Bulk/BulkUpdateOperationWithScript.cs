@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public class BulkUpdateOperationWithScript : BulkUpdateOperationBase
+public class BulkUpdateOperationWithScript : BulkUpdateOperation
 {
 	public BulkUpdateOperationWithScript(Id id, Script script)
 	{

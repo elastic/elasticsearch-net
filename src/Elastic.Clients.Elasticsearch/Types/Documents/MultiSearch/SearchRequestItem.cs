@@ -5,6 +5,7 @@
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Core.MSearch

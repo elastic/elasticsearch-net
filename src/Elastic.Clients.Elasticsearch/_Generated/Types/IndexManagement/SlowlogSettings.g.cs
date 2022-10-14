@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,126 +24,124 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class SlowlogSettings
 {
-	public sealed partial class SlowlogSettings
+	[JsonInclude]
+	[JsonPropertyName("level")]
+	public string? Level { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("reformat")]
+	public bool? Reformat { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("source")]
+	public int? Source { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("threshold")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds? Threshold { get; set; }
+}
+
+public sealed partial class SlowlogSettingsDescriptor : SerializableDescriptor<SlowlogSettingsDescriptor>
+{
+	internal SlowlogSettingsDescriptor(Action<SlowlogSettingsDescriptor> configure) => configure.Invoke(this);
+	public SlowlogSettingsDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("level")]
-		public string? Level { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("reformat")]
-		public bool? Reformat { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("source")]
-		public int? Source { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("threshold")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds? Threshold { get; set; }
 	}
 
-	public sealed partial class SlowlogSettingsDescriptor : SerializableDescriptorBase<SlowlogSettingsDescriptor>
+	private string? LevelValue { get; set; }
+
+	private bool? ReformatValue { get; set; }
+
+	private int? SourceValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds? ThresholdValue { get; set; }
+
+	private SlowlogTresholdsDescriptor ThresholdDescriptor { get; set; }
+
+	private Action<SlowlogTresholdsDescriptor> ThresholdDescriptorAction { get; set; }
+
+	public SlowlogSettingsDescriptor Level(string? level)
 	{
-		internal SlowlogSettingsDescriptor(Action<SlowlogSettingsDescriptor> configure) => configure.Invoke(this);
-		public SlowlogSettingsDescriptor() : base()
+		LevelValue = level;
+		return Self;
+	}
+
+	public SlowlogSettingsDescriptor Reformat(bool? reformat = true)
+	{
+		ReformatValue = reformat;
+		return Self;
+	}
+
+	public SlowlogSettingsDescriptor Source(int? source)
+	{
+		SourceValue = source;
+		return Self;
+	}
+
+	public SlowlogSettingsDescriptor Threshold(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds? threshold)
+	{
+		ThresholdDescriptor = null;
+		ThresholdDescriptorAction = null;
+		ThresholdValue = threshold;
+		return Self;
+	}
+
+	public SlowlogSettingsDescriptor Threshold(SlowlogTresholdsDescriptor descriptor)
+	{
+		ThresholdValue = null;
+		ThresholdDescriptorAction = null;
+		ThresholdDescriptor = descriptor;
+		return Self;
+	}
+
+	public SlowlogSettingsDescriptor Threshold(Action<SlowlogTresholdsDescriptor> configure)
+	{
+		ThresholdValue = null;
+		ThresholdDescriptor = null;
+		ThresholdDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(LevelValue))
 		{
+			writer.WritePropertyName("level");
+			writer.WriteStringValue(LevelValue);
 		}
 
-		private string? LevelValue { get; set; }
-
-		private bool? ReformatValue { get; set; }
-
-		private int? SourceValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds? ThresholdValue { get; set; }
-
-		private SlowlogTresholdsDescriptor ThresholdDescriptor { get; set; }
-
-		private Action<SlowlogTresholdsDescriptor> ThresholdDescriptorAction { get; set; }
-
-		public SlowlogSettingsDescriptor Level(string? level)
+		if (ReformatValue.HasValue)
 		{
-			LevelValue = level;
-			return Self;
+			writer.WritePropertyName("reformat");
+			writer.WriteBooleanValue(ReformatValue.Value);
 		}
 
-		public SlowlogSettingsDescriptor Reformat(bool? reformat = true)
+		if (SourceValue.HasValue)
 		{
-			ReformatValue = reformat;
-			return Self;
+			writer.WritePropertyName("source");
+			writer.WriteNumberValue(SourceValue.Value);
 		}
 
-		public SlowlogSettingsDescriptor Source(int? source)
+		if (ThresholdDescriptor is not null)
 		{
-			SourceValue = source;
-			return Self;
+			writer.WritePropertyName("threshold");
+			JsonSerializer.Serialize(writer, ThresholdDescriptor, options);
+		}
+		else if (ThresholdDescriptorAction is not null)
+		{
+			writer.WritePropertyName("threshold");
+			JsonSerializer.Serialize(writer, new SlowlogTresholdsDescriptor(ThresholdDescriptorAction), options);
+		}
+		else if (ThresholdValue is not null)
+		{
+			writer.WritePropertyName("threshold");
+			JsonSerializer.Serialize(writer, ThresholdValue, options);
 		}
 
-		public SlowlogSettingsDescriptor Threshold(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds? threshold)
-		{
-			ThresholdDescriptor = null;
-			ThresholdDescriptorAction = null;
-			ThresholdValue = threshold;
-			return Self;
-		}
-
-		public SlowlogSettingsDescriptor Threshold(SlowlogTresholdsDescriptor descriptor)
-		{
-			ThresholdValue = null;
-			ThresholdDescriptorAction = null;
-			ThresholdDescriptor = descriptor;
-			return Self;
-		}
-
-		public SlowlogSettingsDescriptor Threshold(Action<SlowlogTresholdsDescriptor> configure)
-		{
-			ThresholdValue = null;
-			ThresholdDescriptor = null;
-			ThresholdDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(LevelValue))
-			{
-				writer.WritePropertyName("level");
-				writer.WriteStringValue(LevelValue);
-			}
-
-			if (ReformatValue.HasValue)
-			{
-				writer.WritePropertyName("reformat");
-				writer.WriteBooleanValue(ReformatValue.Value);
-			}
-
-			if (SourceValue.HasValue)
-			{
-				writer.WritePropertyName("source");
-				writer.WriteNumberValue(SourceValue.Value);
-			}
-
-			if (ThresholdDescriptor is not null)
-			{
-				writer.WritePropertyName("threshold");
-				JsonSerializer.Serialize(writer, ThresholdDescriptor, options);
-			}
-			else if (ThresholdDescriptorAction is not null)
-			{
-				writer.WritePropertyName("threshold");
-				JsonSerializer.Serialize(writer, new SlowlogTresholdsDescriptor(ThresholdDescriptorAction), options);
-			}
-			else if (ThresholdValue is not null)
-			{
-				writer.WritePropertyName("threshold");
-				JsonSerializer.Serialize(writer, ThresholdValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

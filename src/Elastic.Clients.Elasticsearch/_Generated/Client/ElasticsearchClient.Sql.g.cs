@@ -20,286 +20,284 @@ using System.Threading;
 using System.Threading.Tasks;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Sql
+namespace Elastic.Clients.Elasticsearch.Sql;
+public class SqlNamespace : NamespacedClientProxy
 {
-	public class SqlNamespace : NamespacedClientProxy
+	internal SqlNamespace(ElasticsearchClient client) : base(client)
 	{
-		internal SqlNamespace(ElasticsearchClient client) : base(client)
-		{
-		}
+	}
 
-		public SqlClearCursorResponse ClearCursor(SqlClearCursorRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<SqlClearCursorRequest, SqlClearCursorResponse>(request);
-		}
+	public SqlClearCursorResponse ClearCursor(SqlClearCursorRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<SqlClearCursorRequest, SqlClearCursorResponse>(request);
+	}
 
-		public Task<SqlClearCursorResponse> ClearCursorAsync(SqlClearCursorRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<SqlClearCursorRequest, SqlClearCursorResponse>(request, cancellationToken);
-		}
+	public Task<SqlClearCursorResponse> ClearCursorAsync(SqlClearCursorRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<SqlClearCursorRequest, SqlClearCursorResponse>(request, cancellationToken);
+	}
 
-		public SqlClearCursorResponse ClearCursor()
-		{
-			var descriptor = new SqlClearCursorRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<SqlClearCursorRequestDescriptor, SqlClearCursorResponse>(descriptor);
-		}
+	public SqlClearCursorResponse ClearCursor()
+	{
+		var descriptor = new SqlClearCursorRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<SqlClearCursorRequestDescriptor, SqlClearCursorResponse>(descriptor);
+	}
 
-		public SqlClearCursorResponse ClearCursor(Action<SqlClearCursorRequestDescriptor> configureRequest)
-		{
-			var descriptor = new SqlClearCursorRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlClearCursorRequestDescriptor, SqlClearCursorResponse>(descriptor);
-		}
+	public SqlClearCursorResponse ClearCursor(Action<SqlClearCursorRequestDescriptor> configureRequest)
+	{
+		var descriptor = new SqlClearCursorRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlClearCursorRequestDescriptor, SqlClearCursorResponse>(descriptor);
+	}
 
-		public Task<SqlClearCursorResponse> ClearCursorAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlClearCursorRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlClearCursorRequestDescriptor, SqlClearCursorResponse>(descriptor);
-		}
+	public Task<SqlClearCursorResponse> ClearCursorAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlClearCursorRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlClearCursorRequestDescriptor, SqlClearCursorResponse>(descriptor);
+	}
 
-		public Task<SqlClearCursorResponse> ClearCursorAsync(Action<SqlClearCursorRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlClearCursorRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlClearCursorRequestDescriptor, SqlClearCursorResponse>(descriptor);
-		}
+	public Task<SqlClearCursorResponse> ClearCursorAsync(Action<SqlClearCursorRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlClearCursorRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlClearCursorRequestDescriptor, SqlClearCursorResponse>(descriptor);
+	}
 
-		public SqlDeleteAsyncResponse DeleteAsyncSearch(SqlDeleteAsyncRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<SqlDeleteAsyncRequest, SqlDeleteAsyncResponse>(request);
-		}
+	public SqlDeleteAsyncResponse DeleteAsyncSearch(SqlDeleteAsyncRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<SqlDeleteAsyncRequest, SqlDeleteAsyncResponse>(request);
+	}
 
-		public Task<SqlDeleteAsyncResponse> DeleteAsyncSearchAsync(SqlDeleteAsyncRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<SqlDeleteAsyncRequest, SqlDeleteAsyncResponse>(request, cancellationToken);
-		}
+	public Task<SqlDeleteAsyncResponse> DeleteAsyncSearchAsync(SqlDeleteAsyncRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<SqlDeleteAsyncRequest, SqlDeleteAsyncResponse>(request, cancellationToken);
+	}
 
-		public SqlDeleteAsyncResponse DeleteAsyncSearch(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new SqlDeleteAsyncRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlDeleteAsyncRequestDescriptor, SqlDeleteAsyncResponse>(descriptor);
-		}
+	public SqlDeleteAsyncResponse DeleteAsyncSearch(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new SqlDeleteAsyncRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlDeleteAsyncRequestDescriptor, SqlDeleteAsyncResponse>(descriptor);
+	}
 
-		public SqlDeleteAsyncResponse DeleteAsyncSearch(Elastic.Clients.Elasticsearch.Id id, Action<SqlDeleteAsyncRequestDescriptor> configureRequest)
-		{
-			var descriptor = new SqlDeleteAsyncRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlDeleteAsyncRequestDescriptor, SqlDeleteAsyncResponse>(descriptor);
-		}
+	public SqlDeleteAsyncResponse DeleteAsyncSearch(Elastic.Clients.Elasticsearch.Id id, Action<SqlDeleteAsyncRequestDescriptor> configureRequest)
+	{
+		var descriptor = new SqlDeleteAsyncRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlDeleteAsyncRequestDescriptor, SqlDeleteAsyncResponse>(descriptor);
+	}
 
-		public SqlDeleteAsyncResponse DeleteAsyncSearch<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlDeleteAsyncRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new SqlDeleteAsyncRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlDeleteAsyncRequestDescriptor<TDocument>, SqlDeleteAsyncResponse>(descriptor);
-		}
+	public SqlDeleteAsyncResponse DeleteAsyncSearch<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlDeleteAsyncRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new SqlDeleteAsyncRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlDeleteAsyncRequestDescriptor<TDocument>, SqlDeleteAsyncResponse>(descriptor);
+	}
 
-		public Task<SqlDeleteAsyncResponse> DeleteAsyncSearchAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlDeleteAsyncRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlDeleteAsyncRequestDescriptor, SqlDeleteAsyncResponse>(descriptor);
-		}
+	public Task<SqlDeleteAsyncResponse> DeleteAsyncSearchAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlDeleteAsyncRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlDeleteAsyncRequestDescriptor, SqlDeleteAsyncResponse>(descriptor);
+	}
 
-		public Task<SqlDeleteAsyncResponse> DeleteAsyncSearchAsync(Elastic.Clients.Elasticsearch.Id id, Action<SqlDeleteAsyncRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlDeleteAsyncRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlDeleteAsyncRequestDescriptor, SqlDeleteAsyncResponse>(descriptor);
-		}
+	public Task<SqlDeleteAsyncResponse> DeleteAsyncSearchAsync(Elastic.Clients.Elasticsearch.Id id, Action<SqlDeleteAsyncRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlDeleteAsyncRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlDeleteAsyncRequestDescriptor, SqlDeleteAsyncResponse>(descriptor);
+	}
 
-		public Task<SqlDeleteAsyncResponse> DeleteAsyncSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlDeleteAsyncRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlDeleteAsyncRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlDeleteAsyncRequestDescriptor<TDocument>, SqlDeleteAsyncResponse>(descriptor);
-		}
+	public Task<SqlDeleteAsyncResponse> DeleteAsyncSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlDeleteAsyncRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlDeleteAsyncRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlDeleteAsyncRequestDescriptor<TDocument>, SqlDeleteAsyncResponse>(descriptor);
+	}
 
-		public SqlGetAsyncResponse GetAsyncSearch(SqlGetAsyncRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<SqlGetAsyncRequest, SqlGetAsyncResponse>(request);
-		}
+	public SqlGetAsyncResponse GetAsyncSearch(SqlGetAsyncRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<SqlGetAsyncRequest, SqlGetAsyncResponse>(request);
+	}
 
-		public Task<SqlGetAsyncResponse> GetAsyncSearchAsync(SqlGetAsyncRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<SqlGetAsyncRequest, SqlGetAsyncResponse>(request, cancellationToken);
-		}
+	public Task<SqlGetAsyncResponse> GetAsyncSearchAsync(SqlGetAsyncRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<SqlGetAsyncRequest, SqlGetAsyncResponse>(request, cancellationToken);
+	}
 
-		public SqlGetAsyncResponse GetAsyncSearch(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new SqlGetAsyncRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlGetAsyncRequestDescriptor, SqlGetAsyncResponse>(descriptor);
-		}
+	public SqlGetAsyncResponse GetAsyncSearch(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new SqlGetAsyncRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlGetAsyncRequestDescriptor, SqlGetAsyncResponse>(descriptor);
+	}
 
-		public SqlGetAsyncResponse GetAsyncSearch(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncRequestDescriptor> configureRequest)
-		{
-			var descriptor = new SqlGetAsyncRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlGetAsyncRequestDescriptor, SqlGetAsyncResponse>(descriptor);
-		}
+	public SqlGetAsyncResponse GetAsyncSearch(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncRequestDescriptor> configureRequest)
+	{
+		var descriptor = new SqlGetAsyncRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlGetAsyncRequestDescriptor, SqlGetAsyncResponse>(descriptor);
+	}
 
-		public SqlGetAsyncResponse GetAsyncSearch<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new SqlGetAsyncRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlGetAsyncRequestDescriptor<TDocument>, SqlGetAsyncResponse>(descriptor);
-		}
+	public SqlGetAsyncResponse GetAsyncSearch<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new SqlGetAsyncRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlGetAsyncRequestDescriptor<TDocument>, SqlGetAsyncResponse>(descriptor);
+	}
 
-		public Task<SqlGetAsyncResponse> GetAsyncSearchAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlGetAsyncRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlGetAsyncRequestDescriptor, SqlGetAsyncResponse>(descriptor);
-		}
+	public Task<SqlGetAsyncResponse> GetAsyncSearchAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlGetAsyncRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlGetAsyncRequestDescriptor, SqlGetAsyncResponse>(descriptor);
+	}
 
-		public Task<SqlGetAsyncResponse> GetAsyncSearchAsync(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlGetAsyncRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlGetAsyncRequestDescriptor, SqlGetAsyncResponse>(descriptor);
-		}
+	public Task<SqlGetAsyncResponse> GetAsyncSearchAsync(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlGetAsyncRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlGetAsyncRequestDescriptor, SqlGetAsyncResponse>(descriptor);
+	}
 
-		public Task<SqlGetAsyncResponse> GetAsyncSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlGetAsyncRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlGetAsyncRequestDescriptor<TDocument>, SqlGetAsyncResponse>(descriptor);
-		}
+	public Task<SqlGetAsyncResponse> GetAsyncSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlGetAsyncRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlGetAsyncRequestDescriptor<TDocument>, SqlGetAsyncResponse>(descriptor);
+	}
 
-		public SqlGetAsyncStatusResponse GetAsyncSearchStatus(SqlGetAsyncStatusRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<SqlGetAsyncStatusRequest, SqlGetAsyncStatusResponse>(request);
-		}
+	public SqlGetAsyncStatusResponse GetAsyncSearchStatus(SqlGetAsyncStatusRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<SqlGetAsyncStatusRequest, SqlGetAsyncStatusResponse>(request);
+	}
 
-		public Task<SqlGetAsyncStatusResponse> GetAsyncSearchStatusAsync(SqlGetAsyncStatusRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<SqlGetAsyncStatusRequest, SqlGetAsyncStatusResponse>(request, cancellationToken);
-		}
+	public Task<SqlGetAsyncStatusResponse> GetAsyncSearchStatusAsync(SqlGetAsyncStatusRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<SqlGetAsyncStatusRequest, SqlGetAsyncStatusResponse>(request, cancellationToken);
+	}
 
-		public SqlGetAsyncStatusResponse GetAsyncSearchStatus(Elastic.Clients.Elasticsearch.Id id)
-		{
-			var descriptor = new SqlGetAsyncStatusRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusResponse>(descriptor);
-		}
+	public SqlGetAsyncStatusResponse GetAsyncSearchStatus(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new SqlGetAsyncStatusRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusResponse>(descriptor);
+	}
 
-		public SqlGetAsyncStatusResponse GetAsyncSearchStatus(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncStatusRequestDescriptor> configureRequest)
-		{
-			var descriptor = new SqlGetAsyncStatusRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusResponse>(descriptor);
-		}
+	public SqlGetAsyncStatusResponse GetAsyncSearchStatus(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncStatusRequestDescriptor> configureRequest)
+	{
+		var descriptor = new SqlGetAsyncStatusRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusResponse>(descriptor);
+	}
 
-		public SqlGetAsyncStatusResponse GetAsyncSearchStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncStatusRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new SqlGetAsyncStatusRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlGetAsyncStatusRequestDescriptor<TDocument>, SqlGetAsyncStatusResponse>(descriptor);
-		}
+	public SqlGetAsyncStatusResponse GetAsyncSearchStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncStatusRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new SqlGetAsyncStatusRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlGetAsyncStatusRequestDescriptor<TDocument>, SqlGetAsyncStatusResponse>(descriptor);
+	}
 
-		public Task<SqlGetAsyncStatusResponse> GetAsyncSearchStatusAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlGetAsyncStatusRequestDescriptor(id);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusResponse>(descriptor);
-		}
+	public Task<SqlGetAsyncStatusResponse> GetAsyncSearchStatusAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlGetAsyncStatusRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusResponse>(descriptor);
+	}
 
-		public Task<SqlGetAsyncStatusResponse> GetAsyncSearchStatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlGetAsyncStatusRequestDescriptor(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusResponse>(descriptor);
-		}
+	public Task<SqlGetAsyncStatusResponse> GetAsyncSearchStatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlGetAsyncStatusRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusResponse>(descriptor);
+	}
 
-		public Task<SqlGetAsyncStatusResponse> GetAsyncSearchStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlGetAsyncStatusRequestDescriptor<TDocument>(id);
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlGetAsyncStatusRequestDescriptor<TDocument>, SqlGetAsyncStatusResponse>(descriptor);
-		}
+	public Task<SqlGetAsyncStatusResponse> GetAsyncSearchStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SqlGetAsyncStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlGetAsyncStatusRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlGetAsyncStatusRequestDescriptor<TDocument>, SqlGetAsyncStatusResponse>(descriptor);
+	}
 
-		public SqlQueryResponse Query(SqlQueryRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<SqlQueryRequest, SqlQueryResponse>(request);
-		}
+	public SqlQueryResponse Query(SqlQueryRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<SqlQueryRequest, SqlQueryResponse>(request);
+	}
 
-		public Task<SqlQueryResponse> QueryAsync(SqlQueryRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<SqlQueryRequest, SqlQueryResponse>(request, cancellationToken);
-		}
+	public Task<SqlQueryResponse> QueryAsync(SqlQueryRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<SqlQueryRequest, SqlQueryResponse>(request, cancellationToken);
+	}
 
-		public SqlQueryResponse Query()
-		{
-			var descriptor = new SqlQueryRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequest<SqlQueryRequestDescriptor, SqlQueryResponse>(descriptor);
-		}
+	public SqlQueryResponse Query()
+	{
+		var descriptor = new SqlQueryRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<SqlQueryRequestDescriptor, SqlQueryResponse>(descriptor);
+	}
 
-		public SqlQueryResponse Query(Action<SqlQueryRequestDescriptor> configureRequest)
-		{
-			var descriptor = new SqlQueryRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlQueryRequestDescriptor, SqlQueryResponse>(descriptor);
-		}
+	public SqlQueryResponse Query(Action<SqlQueryRequestDescriptor> configureRequest)
+	{
+		var descriptor = new SqlQueryRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlQueryRequestDescriptor, SqlQueryResponse>(descriptor);
+	}
 
-		public SqlQueryResponse Query<TDocument>(Action<SqlQueryRequestDescriptor<TDocument>> configureRequest)
-		{
-			var descriptor = new SqlQueryRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<SqlQueryRequestDescriptor<TDocument>, SqlQueryResponse>(descriptor);
-		}
+	public SqlQueryResponse Query<TDocument>(Action<SqlQueryRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new SqlQueryRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SqlQueryRequestDescriptor<TDocument>, SqlQueryResponse>(descriptor);
+	}
 
-		public Task<SqlQueryResponse> QueryAsync(CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlQueryRequestDescriptor();
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlQueryRequestDescriptor, SqlQueryResponse>(descriptor);
-		}
+	public Task<SqlQueryResponse> QueryAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlQueryRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlQueryRequestDescriptor, SqlQueryResponse>(descriptor);
+	}
 
-		public Task<SqlQueryResponse> QueryAsync(Action<SqlQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlQueryRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlQueryRequestDescriptor, SqlQueryResponse>(descriptor);
-		}
+	public Task<SqlQueryResponse> QueryAsync(Action<SqlQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlQueryRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlQueryRequestDescriptor, SqlQueryResponse>(descriptor);
+	}
 
-		public Task<SqlQueryResponse> QueryAsync<TDocument>(Action<SqlQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new SqlQueryRequestDescriptor<TDocument>();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<SqlQueryRequestDescriptor<TDocument>, SqlQueryResponse>(descriptor);
-		}
+	public Task<SqlQueryResponse> QueryAsync<TDocument>(Action<SqlQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SqlQueryRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SqlQueryRequestDescriptor<TDocument>, SqlQueryResponse>(descriptor);
 	}
 }

@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,296 +26,294 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed class ExplainRequestParameters : RequestParameters<ExplainRequestParameters>
 {
-	public sealed class ExplainRequestParameters : RequestParameters<ExplainRequestParameters>
+	[JsonIgnore]
+	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
+
+	[JsonIgnore]
+	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
+
+	[JsonIgnore]
+	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
+
+	[JsonIgnore]
+	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+
+	[JsonIgnore]
+	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
+
+	[JsonIgnore]
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+}
+
+public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParameters>
+{
+	public ExplainRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
-		[JsonIgnore]
-		public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
-
-		[JsonIgnore]
-		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
-
-		[JsonIgnore]
-		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
-
-		[JsonIgnore]
-		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-
-		[JsonIgnore]
-		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
-
-		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 	}
 
-	public sealed partial class ExplainRequest : PlainRequestBase<ExplainRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExplain;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	[JsonIgnore]
+	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
+
+	[JsonIgnore]
+	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
+
+	[JsonIgnore]
+	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
+
+	[JsonIgnore]
+	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+
+	[JsonIgnore]
+	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
+
+	[JsonIgnore]
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	[JsonInclude]
+	[JsonPropertyName("query")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+}
+
+public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescriptor<ExplainRequestDescriptor<TDocument>, ExplainRequestParameters>
+{
+	internal ExplainRequestDescriptor(Action<ExplainRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public ExplainRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
-		public ExplainRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExplain;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		[JsonIgnore]
-		public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
-
-		[JsonIgnore]
-		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
-
-		[JsonIgnore]
-		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
-
-		[JsonIgnore]
-		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-
-		[JsonIgnore]
-		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
-
-		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
-
-		[JsonInclude]
-		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
-	public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescriptorBase<ExplainRequestDescriptor<TDocument>, ExplainRequestParameters>
+	public ExplainRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document))
 	{
-		internal ExplainRequestDescriptor(Action<ExplainRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public ExplainRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
-		{
-		}
-
-		public ExplainRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document))
-		{
-		}
-
-		public ExplainRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id)
-		{
-		}
-
-		public ExplainRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document))
-		{
-		}
-
-		public ExplainRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id)
-		{
-		}
-
-		public ExplainRequestDescriptor(Id id) : this(typeof(TDocument), id)
-		{
-		}
-
-		internal ExplainRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExplain;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		public ExplainRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-		public ExplainRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-		public ExplainRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public ExplainRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
-		public ExplainRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-		public ExplainRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
-		public ExplainRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
-		public ExplainRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
-		public ExplainRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-		public ExplainRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
-		public ExplainRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public ExplainRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
-		public ExplainRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
-
-		public ExplainRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
-		{
-			RouteValues.Required("index", index);
-			return Self;
-		}
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
-
-		private QueryDsl.QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
-
-		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
-		public ExplainRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
-		{
-			QueryDescriptor = null;
-			QueryDescriptorAction = null;
-			QueryValue = query;
-			return Self;
-		}
-
-		public ExplainRequestDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
-		{
-			QueryValue = null;
-			QueryDescriptorAction = null;
-			QueryDescriptor = descriptor;
-			return Self;
-		}
-
-		public ExplainRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
-		{
-			QueryValue = null;
-			QueryDescriptor = null;
-			QueryDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (QueryDescriptor is not null)
-			{
-				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, QueryDescriptor, options);
-			}
-			else if (QueryDescriptorAction is not null)
-			{
-				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
-			}
-			else if (QueryValue is not null)
-			{
-				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, QueryValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class ExplainRequestDescriptor : RequestDescriptorBase<ExplainRequestDescriptor, ExplainRequestParameters>
+	public ExplainRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id)
 	{
-		internal ExplainRequestDescriptor(Action<ExplainRequestDescriptor> configure) => configure.Invoke(this);
-		public ExplainRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+	}
+
+	public ExplainRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document))
+	{
+	}
+
+	public ExplainRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id)
+	{
+	}
+
+	public ExplainRequestDescriptor(Id id) : this(typeof(TDocument), id)
+	{
+	}
+
+	internal ExplainRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExplain;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	public ExplainRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
+	public ExplainRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public ExplainRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
+	public ExplainRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+	public ExplainRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public ExplainRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
+	public ExplainRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
+	public ExplainRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
+	public ExplainRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
+	public ExplainRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
+	public ExplainRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
+	public ExplainRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
+	public ExplainRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		RouteValues.Required("id", id);
+		return Self;
+	}
+
+	public ExplainRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		RouteValues.Required("index", index);
+		return Self;
+	}
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
+
+	private QueryDsl.QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
+
+	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+
+	public ExplainRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+	{
+		QueryDescriptor = null;
+		QueryDescriptorAction = null;
+		QueryValue = query;
+		return Self;
+	}
+
+	public ExplainRequestDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	{
+		QueryValue = null;
+		QueryDescriptorAction = null;
+		QueryDescriptor = descriptor;
+		return Self;
+	}
+
+	public ExplainRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	{
+		QueryValue = null;
+		QueryDescriptor = null;
+		QueryDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (QueryDescriptor is not null)
 		{
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, QueryDescriptor, options);
+		}
+		else if (QueryDescriptorAction is not null)
+		{
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
+		}
+		else if (QueryValue is not null)
+		{
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, QueryValue, options);
 		}
 
-		internal ExplainRequestDescriptor()
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class ExplainRequestDescriptor : RequestDescriptor<ExplainRequestDescriptor, ExplainRequestParameters>
+{
+	internal ExplainRequestDescriptor(Action<ExplainRequestDescriptor> configure) => configure.Invoke(this);
+	public ExplainRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+	{
+	}
+
+	internal ExplainRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExplain;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	public ExplainRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
+	public ExplainRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public ExplainRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
+	public ExplainRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+	public ExplainRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public ExplainRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
+	public ExplainRequestDescriptor Df(string? df) => Qs("df", df);
+	public ExplainRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
+	public ExplainRequestDescriptor Preference(string? preference) => Qs("preference", preference);
+	public ExplainRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
+	public ExplainRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
+	public ExplainRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
+	public ExplainRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		RouteValues.Required("id", id);
+		return Self;
+	}
+
+	public ExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		RouteValues.Required("index", index);
+		return Self;
+	}
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
+
+	private QueryDsl.QueryContainerDescriptor QueryDescriptor { get; set; }
+
+	private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
+
+	public ExplainRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+	{
+		QueryDescriptor = null;
+		QueryDescriptorAction = null;
+		QueryValue = query;
+		return Self;
+	}
+
+	public ExplainRequestDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
+	{
+		QueryValue = null;
+		QueryDescriptorAction = null;
+		QueryDescriptor = descriptor;
+		return Self;
+	}
+
+	public ExplainRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
+	{
+		QueryValue = null;
+		QueryDescriptor = null;
+		QueryDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (QueryDescriptor is not null)
 		{
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, QueryDescriptor, options);
+		}
+		else if (QueryDescriptorAction is not null)
+		{
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
+		}
+		else if (QueryValue is not null)
+		{
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, QueryValue, options);
 		}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExplain;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		public ExplainRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-		public ExplainRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-		public ExplainRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public ExplainRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
-		public ExplainRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-		public ExplainRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
-		public ExplainRequestDescriptor Df(string? df) => Qs("df", df);
-		public ExplainRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
-		public ExplainRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-		public ExplainRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
-		public ExplainRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public ExplainRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
-		public ExplainRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
-
-		public ExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
-		{
-			RouteValues.Required("index", index);
-			return Self;
-		}
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
-
-		private QueryDsl.QueryContainerDescriptor QueryDescriptor { get; set; }
-
-		private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
-
-		public ExplainRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
-		{
-			QueryDescriptor = null;
-			QueryDescriptorAction = null;
-			QueryValue = query;
-			return Self;
-		}
-
-		public ExplainRequestDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
-		{
-			QueryValue = null;
-			QueryDescriptorAction = null;
-			QueryDescriptor = descriptor;
-			return Self;
-		}
-
-		public ExplainRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
-		{
-			QueryValue = null;
-			QueryDescriptor = null;
-			QueryDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (QueryDescriptor is not null)
-			{
-				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, QueryDescriptor, options);
-			}
-			else if (QueryDescriptorAction is not null)
-			{
-				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
-			}
-			else if (QueryValue is not null)
-			{
-				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, QueryValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

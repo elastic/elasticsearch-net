@@ -6,28 +6,27 @@ using System.Threading.Tasks;
 using Elastic.Transport;
 using System.IO;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Serialization;
+
+/// <summary>
+/// Used to mark types which expect to directly serialise into a stream. This supports non-json compliant output such as NDJSON.
+/// </summary>
+internal interface IStreamSerializable
 {
 	/// <summary>
-	/// Used to mark types which expect to directly serialise into a stream. This supports non-json compliant output such as NDJSON.
+	/// Serialize the object into the supplied <see cref="Stream"/>.
 	/// </summary>
-	internal interface IStreamSerializable
-	{
-		/// <summary>
-		/// Serialize the object into the supplied <see cref="Stream"/>.
-		/// </summary>
-		/// <param name="stream"></param>
-		/// <param name="settings"></param>
-		/// <param name="formatting"></param>
-		void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
+	/// <param name="stream"></param>
+	/// <param name="settings"></param>
+	/// <param name="formatting"></param>
+	void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
 
-		/// <summary>
-		/// Asynchronously serialize the object into the supplied <see cref="Stream"/>.
-		/// </summary>
-		/// <param name="stream"></param>
-		/// <param name="settings"></param>
-		/// <param name="formatting"></param>
-		/// <returns></returns>
-		Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
-	}
+	/// <summary>
+	/// Asynchronously serialize the object into the supplied <see cref="Stream"/>.
+	/// </summary>
+	/// <param name="stream"></param>
+	/// <param name="settings"></param>
+	/// <param name="formatting"></param>
+	/// <returns></returns>
+	Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
 }

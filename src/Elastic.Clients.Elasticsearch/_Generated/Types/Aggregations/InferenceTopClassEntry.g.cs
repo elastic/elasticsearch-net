@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,20 +24,18 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public sealed partial class InferenceTopClassEntry
 {
-	public sealed partial class InferenceTopClassEntry
-	{
-		[JsonInclude]
-		[JsonPropertyName("class_name")]
-		public Elastic.Clients.Elasticsearch.FieldValue ClassName { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("class_name")]
+	public Elastic.Clients.Elasticsearch.FieldValue ClassName { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("class_probability")]
-		public double ClassProbability { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("class_probability")]
+	public double ClassProbability { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("class_score")]
-		public double ClassScore { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("class_score")]
+	public double ClassScore { get; init; }
 }

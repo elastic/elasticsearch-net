@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,32 +24,30 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class StoreStats
 {
-	public sealed partial class StoreStats
-	{
-		[JsonInclude]
-		[JsonPropertyName("reserved")]
-		public Elastic.Clients.Elasticsearch.ByteSize? Reserved { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("reserved")]
+	public Elastic.Clients.Elasticsearch.ByteSize? Reserved { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("reserved_in_bytes")]
-		public int ReservedInBytes { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("reserved_in_bytes")]
+	public int ReservedInBytes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("size_in_bytes")]
-		public int SizeInBytes { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("size_in_bytes")]
+	public int SizeInBytes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_data_set_size")]
-		public Elastic.Clients.Elasticsearch.ByteSize? TotalDataSetSize { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("total_data_set_size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalDataSetSize { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_data_set_size_in_bytes")]
-		public int? TotalDataSetSizeInBytes { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("total_data_set_size_in_bytes")]
+	public int? TotalDataSetSizeInBytes { get; init; }
 }
