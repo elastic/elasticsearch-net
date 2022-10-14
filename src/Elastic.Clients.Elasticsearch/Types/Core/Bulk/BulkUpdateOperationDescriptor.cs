@@ -10,10 +10,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Core.Search;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> : BulkOperationDescriptorBase<BulkUpdateOperationDescriptor<TDocument, TPartialDocument>>
+public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> : BulkOperationDescriptor<BulkUpdateOperationDescriptor<TDocument, TPartialDocument>>
 {
 	private static byte _newline => (byte)'\n';
 

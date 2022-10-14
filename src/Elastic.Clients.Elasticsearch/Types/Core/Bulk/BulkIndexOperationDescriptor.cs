@@ -8,11 +8,13 @@ using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public sealed class BulkIndexOperationDescriptor<TSource> : BulkOperationDescriptorBase<BulkIndexOperationDescriptor<TSource>>
+public sealed class BulkIndexOperationDescriptor<TSource> : BulkOperationDescriptor<BulkIndexOperationDescriptor<TSource>>
 {
 	private string _pipeline;
 	

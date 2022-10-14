@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public partial class SortCombinations : Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOptions>
 {
-	public partial class SortCombinations : Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOptions>
+	public SortCombinations(Elastic.Clients.Elasticsearch.Field field) : base(field)
 	{
-		public SortCombinations(Elastic.Clients.Elasticsearch.Field field) : base(field)
-		{
-		}
+	}
 
-		public SortCombinations(Elastic.Clients.Elasticsearch.SortOptions sortOptions) : base(sortOptions)
-		{
-		}
+	public SortCombinations(Elastic.Clients.Elasticsearch.SortOptions sortOptions) : base(sortOptions)
+	{
 	}
 }

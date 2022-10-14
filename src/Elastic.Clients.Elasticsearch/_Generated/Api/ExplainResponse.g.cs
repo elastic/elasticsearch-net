@@ -15,33 +15,33 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class ExplainResponse<TDocument> : ElasticsearchResponseBase
 {
-	public sealed partial class ExplainResponse<TDocument> : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("explanation")]
-		public Elastic.Clients.Elasticsearch.Core.Explain.ExplanationDetail? Explanation { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("explanation")]
+	public Elastic.Clients.Elasticsearch.Core.Explain.ExplanationDetail? Explanation { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("get")]
-		public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("get")]
+	public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("_id")]
-		public string Id { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("_id")]
+	public string Id { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("_index")]
-		public string Index { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("_index")]
+	public string Index { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("matched")]
-		public bool Matched { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("matched")]
+	public bool Matched { get; init; }
 }

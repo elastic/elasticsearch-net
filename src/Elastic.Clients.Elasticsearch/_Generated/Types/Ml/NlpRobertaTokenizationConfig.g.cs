@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,112 +24,110 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ml
+namespace Elastic.Clients.Elasticsearch.Ml;
+public sealed partial class NlpRobertaTokenizationConfig
 {
-	public sealed partial class NlpRobertaTokenizationConfig
+	[JsonInclude]
+	[JsonPropertyName("add_prefix_space")]
+	public bool? AddPrefixSpace { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("max_sequence_length")]
+	public int? MaxSequenceLength { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("span")]
+	public int? Span { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("truncate")]
+	public Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? Truncate { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("with_special_tokens")]
+	public bool? WithSpecialTokens { get; set; }
+}
+
+public sealed partial class NlpRobertaTokenizationConfigDescriptor : SerializableDescriptor<NlpRobertaTokenizationConfigDescriptor>
+{
+	internal NlpRobertaTokenizationConfigDescriptor(Action<NlpRobertaTokenizationConfigDescriptor> configure) => configure.Invoke(this);
+	public NlpRobertaTokenizationConfigDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("add_prefix_space")]
-		public bool? AddPrefixSpace { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_sequence_length")]
-		public int? MaxSequenceLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("span")]
-		public int? Span { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("truncate")]
-		public Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? Truncate { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("with_special_tokens")]
-		public bool? WithSpecialTokens { get; set; }
 	}
 
-	public sealed partial class NlpRobertaTokenizationConfigDescriptor : SerializableDescriptorBase<NlpRobertaTokenizationConfigDescriptor>
+	private bool? AddPrefixSpaceValue { get; set; }
+
+	private int? MaxSequenceLengthValue { get; set; }
+
+	private int? SpanValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? TruncateValue { get; set; }
+
+	private bool? WithSpecialTokensValue { get; set; }
+
+	public NlpRobertaTokenizationConfigDescriptor AddPrefixSpace(bool? addPrefixSpace = true)
 	{
-		internal NlpRobertaTokenizationConfigDescriptor(Action<NlpRobertaTokenizationConfigDescriptor> configure) => configure.Invoke(this);
-		public NlpRobertaTokenizationConfigDescriptor() : base()
+		AddPrefixSpaceValue = addPrefixSpace;
+		return Self;
+	}
+
+	public NlpRobertaTokenizationConfigDescriptor MaxSequenceLength(int? maxSequenceLength)
+	{
+		MaxSequenceLengthValue = maxSequenceLength;
+		return Self;
+	}
+
+	public NlpRobertaTokenizationConfigDescriptor Span(int? span)
+	{
+		SpanValue = span;
+		return Self;
+	}
+
+	public NlpRobertaTokenizationConfigDescriptor Truncate(Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? truncate)
+	{
+		TruncateValue = truncate;
+		return Self;
+	}
+
+	public NlpRobertaTokenizationConfigDescriptor WithSpecialTokens(bool? withSpecialTokens = true)
+	{
+		WithSpecialTokensValue = withSpecialTokens;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AddPrefixSpaceValue.HasValue)
 		{
+			writer.WritePropertyName("add_prefix_space");
+			writer.WriteBooleanValue(AddPrefixSpaceValue.Value);
 		}
 
-		private bool? AddPrefixSpaceValue { get; set; }
-
-		private int? MaxSequenceLengthValue { get; set; }
-
-		private int? SpanValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? TruncateValue { get; set; }
-
-		private bool? WithSpecialTokensValue { get; set; }
-
-		public NlpRobertaTokenizationConfigDescriptor AddPrefixSpace(bool? addPrefixSpace = true)
+		if (MaxSequenceLengthValue.HasValue)
 		{
-			AddPrefixSpaceValue = addPrefixSpace;
-			return Self;
+			writer.WritePropertyName("max_sequence_length");
+			writer.WriteNumberValue(MaxSequenceLengthValue.Value);
 		}
 
-		public NlpRobertaTokenizationConfigDescriptor MaxSequenceLength(int? maxSequenceLength)
+		if (SpanValue.HasValue)
 		{
-			MaxSequenceLengthValue = maxSequenceLength;
-			return Self;
+			writer.WritePropertyName("span");
+			writer.WriteNumberValue(SpanValue.Value);
 		}
 
-		public NlpRobertaTokenizationConfigDescriptor Span(int? span)
+		if (TruncateValue is not null)
 		{
-			SpanValue = span;
-			return Self;
+			writer.WritePropertyName("truncate");
+			JsonSerializer.Serialize(writer, TruncateValue, options);
 		}
 
-		public NlpRobertaTokenizationConfigDescriptor Truncate(Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? truncate)
+		if (WithSpecialTokensValue.HasValue)
 		{
-			TruncateValue = truncate;
-			return Self;
+			writer.WritePropertyName("with_special_tokens");
+			writer.WriteBooleanValue(WithSpecialTokensValue.Value);
 		}
 
-		public NlpRobertaTokenizationConfigDescriptor WithSpecialTokens(bool? withSpecialTokens = true)
-		{
-			WithSpecialTokensValue = withSpecialTokens;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (AddPrefixSpaceValue.HasValue)
-			{
-				writer.WritePropertyName("add_prefix_space");
-				writer.WriteBooleanValue(AddPrefixSpaceValue.Value);
-			}
-
-			if (MaxSequenceLengthValue.HasValue)
-			{
-				writer.WritePropertyName("max_sequence_length");
-				writer.WriteNumberValue(MaxSequenceLengthValue.Value);
-			}
-
-			if (SpanValue.HasValue)
-			{
-				writer.WritePropertyName("span");
-				writer.WriteNumberValue(SpanValue.Value);
-			}
-
-			if (TruncateValue is not null)
-			{
-				writer.WritePropertyName("truncate");
-				JsonSerializer.Serialize(writer, TruncateValue, options);
-			}
-
-			if (WithSpecialTokensValue.HasValue)
-			{
-				writer.WritePropertyName("with_special_tokens");
-				writer.WriteBooleanValue(WithSpecialTokensValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

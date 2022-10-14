@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch;
 using Newtonsoft.Json;
+using Elastic.Clients.Elasticsearch.JsonNetSerializer;
 
-namespace Elastic.Clients.JsonNetSerializer
+namespace Elastic.Clients.Elasticsearch.JsonNetSerializer
 {
 	public class JsonNetSerializer : ConnectionSettingsAwareSerializer
 	{

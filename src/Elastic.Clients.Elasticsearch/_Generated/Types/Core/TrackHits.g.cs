@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Core.Search
+namespace Elastic.Clients.Elasticsearch.Core.Search;
+public partial class TrackHits : Union<bool, int>
 {
-	public partial class TrackHits : Union<bool, int>
+	public TrackHits(bool trackHits) : base(trackHits)
 	{
-		public TrackHits(bool trackHits) : base(trackHits)
-		{
-		}
+	}
 
-		public TrackHits(int trackHits) : base(trackHits)
-		{
-		}
+	public TrackHits(int trackHits) : base(trackHits)
+	{
 	}
 }

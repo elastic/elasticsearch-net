@@ -4,7 +4,7 @@
 
 using System.Text.Json;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Serialization;
 
 internal static class JsonSerializerOptionsExtensions
 {

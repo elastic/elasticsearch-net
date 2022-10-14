@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,67 +24,65 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class CustomNormalizer : INormalizer
 {
-	public sealed partial class CustomNormalizer : INormalizer
+	[JsonInclude]
+	[JsonPropertyName("char_filter")]
+	public IEnumerable<string>? CharFilter { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("filter")]
+	public IEnumerable<string>? Filter { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "custom";
+}
+
+public sealed partial class CustomNormalizerDescriptor : SerializableDescriptor<CustomNormalizerDescriptor>, IBuildableDescriptor<CustomNormalizer>
+{
+	internal CustomNormalizerDescriptor(Action<CustomNormalizerDescriptor> configure) => configure.Invoke(this);
+	public CustomNormalizerDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("char_filter")]
-		public IEnumerable<string>? CharFilter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public IEnumerable<string>? Filter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "custom";
 	}
 
-	public sealed partial class CustomNormalizerDescriptor : SerializableDescriptorBase<CustomNormalizerDescriptor>, IBuildableDescriptor<CustomNormalizer>
+	private IEnumerable<string>? CharFilterValue { get; set; }
+
+	private IEnumerable<string>? FilterValue { get; set; }
+
+	public CustomNormalizerDescriptor CharFilter(IEnumerable<string>? charFilter)
 	{
-		internal CustomNormalizerDescriptor(Action<CustomNormalizerDescriptor> configure) => configure.Invoke(this);
-		public CustomNormalizerDescriptor() : base()
-		{
-		}
-
-		private IEnumerable<string>? CharFilterValue { get; set; }
-
-		private IEnumerable<string>? FilterValue { get; set; }
-
-		public CustomNormalizerDescriptor CharFilter(IEnumerable<string>? charFilter)
-		{
-			CharFilterValue = charFilter;
-			return Self;
-		}
-
-		public CustomNormalizerDescriptor Filter(IEnumerable<string>? filter)
-		{
-			FilterValue = filter;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (CharFilterValue is not null)
-			{
-				writer.WritePropertyName("char_filter");
-				JsonSerializer.Serialize(writer, CharFilterValue, options);
-			}
-
-			if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("custom");
-			writer.WriteEndObject();
-		}
-
-		CustomNormalizer IBuildableDescriptor<CustomNormalizer>.Build() => new()
-		{ CharFilter = CharFilterValue, Filter = FilterValue };
+		CharFilterValue = charFilter;
+		return Self;
 	}
+
+	public CustomNormalizerDescriptor Filter(IEnumerable<string>? filter)
+	{
+		FilterValue = filter;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (CharFilterValue is not null)
+		{
+			writer.WritePropertyName("char_filter");
+			JsonSerializer.Serialize(writer, CharFilterValue, options);
+		}
+
+		if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("custom");
+		writer.WriteEndObject();
+	}
+
+	CustomNormalizer IBuildableDescriptor<CustomNormalizer>.Build() => new()
+	{ CharFilter = CharFilterValue, Filter = FilterValue };
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,42 +24,40 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class SettingsSimilarityLmj
 {
-	public sealed partial class SettingsSimilarityLmj
-	{
-		[JsonInclude]
-		[JsonPropertyName("lambda")]
-		public double Lambda { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("lambda")]
+	public double Lambda { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "LMJelinekMercer";
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "LMJelinekMercer";
+}
+
+public sealed partial class SettingsSimilarityLmjDescriptor : SerializableDescriptor<SettingsSimilarityLmjDescriptor>
+{
+	internal SettingsSimilarityLmjDescriptor(Action<SettingsSimilarityLmjDescriptor> configure) => configure.Invoke(this);
+	public SettingsSimilarityLmjDescriptor() : base()
+	{
 	}
 
-	public sealed partial class SettingsSimilarityLmjDescriptor : SerializableDescriptorBase<SettingsSimilarityLmjDescriptor>
+	private double LambdaValue { get; set; }
+
+	public SettingsSimilarityLmjDescriptor Lambda(double lambda)
 	{
-		internal SettingsSimilarityLmjDescriptor(Action<SettingsSimilarityLmjDescriptor> configure) => configure.Invoke(this);
-		public SettingsSimilarityLmjDescriptor() : base()
-		{
-		}
+		LambdaValue = lambda;
+		return Self;
+	}
 
-		private double LambdaValue { get; set; }
-
-		public SettingsSimilarityLmjDescriptor Lambda(double lambda)
-		{
-			LambdaValue = lambda;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("lambda");
-			writer.WriteNumberValue(LambdaValue);
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("LMJelinekMercer");
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("lambda");
+		writer.WriteNumberValue(LambdaValue);
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("LMJelinekMercer");
+		writer.WriteEndObject();
 	}
 }

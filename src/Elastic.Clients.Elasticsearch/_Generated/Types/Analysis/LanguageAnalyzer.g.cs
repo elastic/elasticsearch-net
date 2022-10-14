@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,113 +24,111 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class LanguageAnalyzer : IAnalyzer
 {
-	public sealed partial class LanguageAnalyzer : IAnalyzer
+	[JsonInclude]
+	[JsonPropertyName("language")]
+	public Elastic.Clients.Elasticsearch.Analysis.Language Language { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("stem_exclusion")]
+	public IEnumerable<string> StemExclusion { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("stopwords")]
+	[JsonConverter(typeof(StopWordsConverter))]
+	public IEnumerable<string>? Stopwords { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("stopwords_path")]
+	public string? StopwordsPath { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "language";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class LanguageAnalyzerDescriptor : SerializableDescriptor<LanguageAnalyzerDescriptor>, IBuildableDescriptor<LanguageAnalyzer>
+{
+	internal LanguageAnalyzerDescriptor(Action<LanguageAnalyzerDescriptor> configure) => configure.Invoke(this);
+	public LanguageAnalyzerDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("language")]
-		public Elastic.Clients.Elasticsearch.Analysis.Language Language { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("stem_exclusion")]
-		public IEnumerable<string> StemExclusion { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("stopwords")]
-		[JsonConverter(typeof(StopWordsConverter))]
-		public IEnumerable<string>? Stopwords { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("stopwords_path")]
-		public string? StopwordsPath { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "language";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class LanguageAnalyzerDescriptor : SerializableDescriptorBase<LanguageAnalyzerDescriptor>, IBuildableDescriptor<LanguageAnalyzer>
+	private Elastic.Clients.Elasticsearch.Analysis.Language LanguageValue { get; set; }
+
+	private IEnumerable<string> StemExclusionValue { get; set; }
+
+	private IEnumerable<string>? StopwordsValue { get; set; }
+
+	private string? StopwordsPathValue { get; set; }
+
+	private string? VersionValue { get; set; }
+
+	public LanguageAnalyzerDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.Language language)
 	{
-		internal LanguageAnalyzerDescriptor(Action<LanguageAnalyzerDescriptor> configure) => configure.Invoke(this);
-		public LanguageAnalyzerDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Analysis.Language LanguageValue { get; set; }
-
-		private IEnumerable<string> StemExclusionValue { get; set; }
-
-		private IEnumerable<string>? StopwordsValue { get; set; }
-
-		private string? StopwordsPathValue { get; set; }
-
-		private string? VersionValue { get; set; }
-
-		public LanguageAnalyzerDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.Language language)
-		{
-			LanguageValue = language;
-			return Self;
-		}
-
-		public LanguageAnalyzerDescriptor StemExclusion(IEnumerable<string> stemExclusion)
-		{
-			StemExclusionValue = stemExclusion;
-			return Self;
-		}
-
-		public LanguageAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
-		{
-			StopwordsValue = stopwords;
-			return Self;
-		}
-
-		public LanguageAnalyzerDescriptor StopwordsPath(string? stopwordsPath)
-		{
-			StopwordsPathValue = stopwordsPath;
-			return Self;
-		}
-
-		public LanguageAnalyzerDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("language");
-			JsonSerializer.Serialize(writer, LanguageValue, options);
-			writer.WritePropertyName("stem_exclusion");
-			JsonSerializer.Serialize(writer, StemExclusionValue, options);
-			if (StopwordsValue is not null)
-			{
-				writer.WritePropertyName("stopwords");
-				SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
-			}
-
-			if (!string.IsNullOrEmpty(StopwordsPathValue))
-			{
-				writer.WritePropertyName("stopwords_path");
-				writer.WriteStringValue(StopwordsPathValue);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("language");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		LanguageAnalyzer IBuildableDescriptor<LanguageAnalyzer>.Build() => new()
-		{ Language = LanguageValue, StemExclusion = StemExclusionValue, Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
+		LanguageValue = language;
+		return Self;
 	}
+
+	public LanguageAnalyzerDescriptor StemExclusion(IEnumerable<string> stemExclusion)
+	{
+		StemExclusionValue = stemExclusion;
+		return Self;
+	}
+
+	public LanguageAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
+	{
+		StopwordsValue = stopwords;
+		return Self;
+	}
+
+	public LanguageAnalyzerDescriptor StopwordsPath(string? stopwordsPath)
+	{
+		StopwordsPathValue = stopwordsPath;
+		return Self;
+	}
+
+	public LanguageAnalyzerDescriptor Version(string? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("language");
+		JsonSerializer.Serialize(writer, LanguageValue, options);
+		writer.WritePropertyName("stem_exclusion");
+		JsonSerializer.Serialize(writer, StemExclusionValue, options);
+		if (StopwordsValue is not null)
+		{
+			writer.WritePropertyName("stopwords");
+			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+		}
+
+		if (!string.IsNullOrEmpty(StopwordsPathValue))
+		{
+			writer.WritePropertyName("stopwords_path");
+			writer.WriteStringValue(StopwordsPathValue);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("language");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	LanguageAnalyzer IBuildableDescriptor<LanguageAnalyzer>.Build() => new()
+	{ Language = LanguageValue, StemExclusion = StemExclusionValue, Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
 }

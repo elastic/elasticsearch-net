@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,50 +26,48 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class ExistsIndexTemplateRequestParameters : RequestParameters<ExistsIndexTemplateRequestParameters>
 {
-	public sealed class ExistsIndexTemplateRequestParameters : RequestParameters<ExistsIndexTemplateRequestParameters>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsIndexTemplateRequestParameters>
+{
+	public ExistsIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public sealed partial class ExistsIndexTemplateRequest : PlainRequestBase<ExistsIndexTemplateRequestParameters>
-	{
-		public ExistsIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsIndexTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override bool SupportsBody => false;
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsIndexTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+public sealed partial class ExistsIndexTemplateRequestDescriptor : RequestDescriptor<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateRequestParameters>
+{
+	internal ExistsIndexTemplateRequestDescriptor(Action<ExistsIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
+	public ExistsIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	{
 	}
 
-	public sealed partial class ExistsIndexTemplateRequestDescriptor : RequestDescriptorBase<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateRequestParameters>
+	internal ExistsIndexTemplateRequestDescriptor()
 	{
-		internal ExistsIndexTemplateRequestDescriptor(Action<ExistsIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
-		public ExistsIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
-		{
-		}
+	}
 
-		internal ExistsIndexTemplateRequestDescriptor()
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsIndexTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override bool SupportsBody => false;
+	public ExistsIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public ExistsIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	{
+		RouteValues.Required("name", name);
+		return Self;
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsIndexTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		public ExistsIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ExistsIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
-		{
-			RouteValues.Required("name", name);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

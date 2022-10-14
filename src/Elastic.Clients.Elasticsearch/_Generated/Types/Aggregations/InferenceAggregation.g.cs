@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,377 +24,375 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+internal sealed class InferenceAggregationConverter : JsonConverter<InferenceAggregation>
 {
-	internal sealed class InferenceAggregationConverter : JsonConverter<InferenceAggregation>
+	public override InferenceAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override InferenceAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var aggName = reader.GetString();
+		if (aggName != "inference")
+			throw new JsonException("Unexpected JSON detected.");
+		var agg = new InferenceAggregation(aggName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "inference")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new InferenceAggregation(aggName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("format"))
 				{
-					if (reader.ValueTextEquals("format"))
+					reader.Read();
+					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+					if (value is not null)
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
-
-						continue;
+						agg.Format = value;
 					}
 
-					if (reader.ValueTextEquals("gap_policy"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.GapPolicy = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("gap_policy"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.GapPolicy = value;
 					}
 
-					if (reader.ValueTextEquals("inference_config"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.InferenceConfig = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("inference_config"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.InferenceConfig = value;
 					}
 
-					if (reader.ValueTextEquals("model_id"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Name>(ref reader, options);
-						if (value is not null)
-						{
-							agg.ModelId = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("model_id"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Name>(ref reader, options);
+					if (value is not null)
+					{
+						agg.ModelId = value;
 					}
+
+					continue;
 				}
 			}
+		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("meta"))
 				{
-					if (reader.ValueTextEquals("meta"))
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					if (value is not null)
 					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
+						agg.Meta = value;
 					}
+
+					continue;
 				}
 			}
-
-			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, InferenceAggregation value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("inference");
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.Format))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
-			}
-
-			if (value.GapPolicy is not null)
-			{
-				writer.WritePropertyName("gap_policy");
-				JsonSerializer.Serialize(writer, value.GapPolicy, options);
-			}
-
-			if (value.InferenceConfig is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, value.InferenceConfig, options);
-			}
-
-			writer.WritePropertyName("model_id");
-			JsonSerializer.Serialize(writer, value.ModelId, options);
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return agg;
 	}
 
-	[JsonConverter(typeof(InferenceAggregationConverter))]
-	public sealed partial class InferenceAggregation : Aggregation
+	public override void Write(Utf8JsonWriter writer, InferenceAggregation value, JsonSerializerOptions options)
 	{
-		public InferenceAggregation(string name) => Name = name;
-		internal InferenceAggregation()
+		writer.WriteStartObject();
+		writer.WritePropertyName("inference");
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(value.Format))
 		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(value.Format);
 		}
 
-		public string? Format { get; set; }
+		if (value.GapPolicy is not null)
+		{
+			writer.WritePropertyName("gap_policy");
+			JsonSerializer.Serialize(writer, value.GapPolicy, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+		if (value.InferenceConfig is not null)
+		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, value.InferenceConfig, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfig { get; set; }
+		writer.WritePropertyName("model_id");
+		JsonSerializer.Serialize(writer, value.ModelId, options);
+		writer.WriteEndObject();
+		if (value.Meta is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
+		}
 
-		public Dictionary<string, object>? Meta { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
-
-		public override string? Name { get; internal set; }
+[JsonConverter(typeof(InferenceAggregationConverter))]
+public sealed partial class InferenceAggregation : Aggregation
+{
+	public InferenceAggregation(string name) => Name = name;
+	internal InferenceAggregation()
+	{
 	}
 
-	public sealed partial class InferenceAggregationDescriptor<TDocument> : SerializableDescriptorBase<InferenceAggregationDescriptor<TDocument>>
+	public string? Format { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfig { get; set; }
+
+	public Dictionary<string, object>? Meta { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
+
+	public override string? Name { get; internal set; }
+}
+
+public sealed partial class InferenceAggregationDescriptor<TDocument> : SerializableDescriptor<InferenceAggregationDescriptor<TDocument>>
+{
+	internal InferenceAggregationDescriptor(Action<InferenceAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public InferenceAggregationDescriptor() : base()
 	{
-		internal InferenceAggregationDescriptor(Action<InferenceAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public InferenceAggregationDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfigValue { get; set; }
-
-		private InferenceConfigContainerDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
-
-		private Action<InferenceConfigContainerDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
-
-		private string? FormatValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
-
-		public InferenceAggregationDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? inferenceConfig)
-		{
-			InferenceConfigDescriptor = null;
-			InferenceConfigDescriptorAction = null;
-			InferenceConfigValue = inferenceConfig;
-			return Self;
-		}
-
-		public InferenceAggregationDescriptor<TDocument> InferenceConfig(InferenceConfigContainerDescriptor<TDocument> descriptor)
-		{
-			InferenceConfigValue = null;
-			InferenceConfigDescriptorAction = null;
-			InferenceConfigDescriptor = descriptor;
-			return Self;
-		}
-
-		public InferenceAggregationDescriptor<TDocument> InferenceConfig(Action<InferenceConfigContainerDescriptor<TDocument>> configure)
-		{
-			InferenceConfigValue = null;
-			InferenceConfigDescriptor = null;
-			InferenceConfigDescriptorAction = configure;
-			return Self;
-		}
-
-		public InferenceAggregationDescriptor<TDocument> Format(string? format)
-		{
-			FormatValue = format;
-			return Self;
-		}
-
-		public InferenceAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
-		{
-			GapPolicyValue = gapPolicy;
-			return Self;
-		}
-
-		public InferenceAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public InferenceAggregationDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Name modelId)
-		{
-			ModelIdValue = modelId;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("inference");
-			writer.WriteStartObject();
-			if (InferenceConfigDescriptor is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-			}
-			else if (InferenceConfigDescriptorAction is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new InferenceConfigContainerDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
-			}
-			else if (InferenceConfigValue is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, InferenceConfigValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (GapPolicyValue is not null)
-			{
-				writer.WritePropertyName("gap_policy");
-				JsonSerializer.Serialize(writer, GapPolicyValue, options);
-			}
-
-			writer.WritePropertyName("model_id");
-			JsonSerializer.Serialize(writer, ModelIdValue, options);
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class InferenceAggregationDescriptor : SerializableDescriptorBase<InferenceAggregationDescriptor>
+	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfigValue { get; set; }
+
+	private InferenceConfigContainerDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
+
+	private Action<InferenceConfigContainerDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
+
+	public InferenceAggregationDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? inferenceConfig)
 	{
-		internal InferenceAggregationDescriptor(Action<InferenceAggregationDescriptor> configure) => configure.Invoke(this);
-		public InferenceAggregationDescriptor() : base()
+		InferenceConfigDescriptor = null;
+		InferenceConfigDescriptorAction = null;
+		InferenceConfigValue = inferenceConfig;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor<TDocument> InferenceConfig(InferenceConfigContainerDescriptor<TDocument> descriptor)
+	{
+		InferenceConfigValue = null;
+		InferenceConfigDescriptorAction = null;
+		InferenceConfigDescriptor = descriptor;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor<TDocument> InferenceConfig(Action<InferenceConfigContainerDescriptor<TDocument>> configure)
+	{
+		InferenceConfigValue = null;
+		InferenceConfigDescriptor = null;
+		InferenceConfigDescriptorAction = configure;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor<TDocument> Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
+	{
+		GapPolicyValue = gapPolicy;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Name modelId)
+	{
+		ModelIdValue = modelId;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("inference");
+		writer.WriteStartObject();
+		if (InferenceConfigDescriptor is not null)
 		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
+		}
+		else if (InferenceConfigDescriptorAction is not null)
+		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, new InferenceConfigContainerDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
+		}
+		else if (InferenceConfigValue is not null)
+		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfigValue { get; set; }
-
-		private InferenceConfigContainerDescriptor InferenceConfigDescriptor { get; set; }
-
-		private Action<InferenceConfigContainerDescriptor> InferenceConfigDescriptorAction { get; set; }
-
-		private string? FormatValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
-
-		public InferenceAggregationDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? inferenceConfig)
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
-			InferenceConfigDescriptor = null;
-			InferenceConfigDescriptorAction = null;
-			InferenceConfigValue = inferenceConfig;
-			return Self;
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
 		}
 
-		public InferenceAggregationDescriptor InferenceConfig(InferenceConfigContainerDescriptor descriptor)
+		if (GapPolicyValue is not null)
 		{
-			InferenceConfigValue = null;
-			InferenceConfigDescriptorAction = null;
-			InferenceConfigDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("gap_policy");
+			JsonSerializer.Serialize(writer, GapPolicyValue, options);
 		}
 
-		public InferenceAggregationDescriptor InferenceConfig(Action<InferenceConfigContainerDescriptor> configure)
+		writer.WritePropertyName("model_id");
+		JsonSerializer.Serialize(writer, ModelIdValue, options);
+		writer.WriteEndObject();
+		if (MetaValue is not null)
 		{
-			InferenceConfigValue = null;
-			InferenceConfigDescriptor = null;
-			InferenceConfigDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		public InferenceAggregationDescriptor Format(string? format)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class InferenceAggregationDescriptor : SerializableDescriptor<InferenceAggregationDescriptor>
+{
+	internal InferenceAggregationDescriptor(Action<InferenceAggregationDescriptor> configure) => configure.Invoke(this);
+	public InferenceAggregationDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfigValue { get; set; }
+
+	private InferenceConfigContainerDescriptor InferenceConfigDescriptor { get; set; }
+
+	private Action<InferenceConfigContainerDescriptor> InferenceConfigDescriptorAction { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
+
+	public InferenceAggregationDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? inferenceConfig)
+	{
+		InferenceConfigDescriptor = null;
+		InferenceConfigDescriptorAction = null;
+		InferenceConfigValue = inferenceConfig;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor InferenceConfig(InferenceConfigContainerDescriptor descriptor)
+	{
+		InferenceConfigValue = null;
+		InferenceConfigDescriptorAction = null;
+		InferenceConfigDescriptor = descriptor;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor InferenceConfig(Action<InferenceConfigContainerDescriptor> configure)
+	{
+		InferenceConfigValue = null;
+		InferenceConfigDescriptor = null;
+		InferenceConfigDescriptorAction = configure;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
+	{
+		GapPolicyValue = gapPolicy;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor ModelId(Elastic.Clients.Elasticsearch.Name modelId)
+	{
+		ModelIdValue = modelId;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("inference");
+		writer.WriteStartObject();
+		if (InferenceConfigDescriptor is not null)
 		{
-			FormatValue = format;
-			return Self;
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
+		}
+		else if (InferenceConfigDescriptorAction is not null)
+		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, new InferenceConfigContainerDescriptor(InferenceConfigDescriptorAction), options);
+		}
+		else if (InferenceConfigValue is not null)
+		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 		}
 
-		public InferenceAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
-			GapPolicyValue = gapPolicy;
-			return Self;
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
 		}
 
-		public InferenceAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		if (GapPolicyValue is not null)
 		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
+			writer.WritePropertyName("gap_policy");
+			JsonSerializer.Serialize(writer, GapPolicyValue, options);
 		}
 
-		public InferenceAggregationDescriptor ModelId(Elastic.Clients.Elasticsearch.Name modelId)
+		writer.WritePropertyName("model_id");
+		JsonSerializer.Serialize(writer, ModelIdValue, options);
+		writer.WriteEndObject();
+		if (MetaValue is not null)
 		{
-			ModelIdValue = modelId;
-			return Self;
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("inference");
-			writer.WriteStartObject();
-			if (InferenceConfigDescriptor is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-			}
-			else if (InferenceConfigDescriptorAction is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new InferenceConfigContainerDescriptor(InferenceConfigDescriptorAction), options);
-			}
-			else if (InferenceConfigValue is not null)
-			{
-				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, InferenceConfigValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (GapPolicyValue is not null)
-			{
-				writer.WritePropertyName("gap_policy");
-				JsonSerializer.Serialize(writer, GapPolicyValue, options);
-			}
-
-			writer.WritePropertyName("model_id");
-			JsonSerializer.Serialize(writer, ModelIdValue, options);
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

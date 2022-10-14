@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,40 +24,38 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class ScoreSort
 {
-	public sealed partial class ScoreSort
+	[JsonInclude]
+	[JsonPropertyName("order")]
+	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
+}
+
+public sealed partial class ScoreSortDescriptor : SerializableDescriptor<ScoreSortDescriptor>
+{
+	internal ScoreSortDescriptor(Action<ScoreSortDescriptor> configure) => configure.Invoke(this);
+	public ScoreSortDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("order")]
-		public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 	}
 
-	public sealed partial class ScoreSortDescriptor : SerializableDescriptorBase<ScoreSortDescriptor>
+	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
+
+	public ScoreSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
 	{
-		internal ScoreSortDescriptor(Action<ScoreSortDescriptor> configure) => configure.Invoke(this);
-		public ScoreSortDescriptor() : base()
+		OrderValue = order;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (OrderValue is not null)
 		{
+			writer.WritePropertyName("order");
+			JsonSerializer.Serialize(writer, OrderValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-
-		public ScoreSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
-		{
-			OrderValue = order;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (OrderValue is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, OrderValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

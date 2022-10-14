@@ -20,609 +20,608 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
 using Elastic.Transport;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+[JsonConverter(typeof(CalendarIntervalConverter))]
+public enum CalendarInterval
 {
-	[JsonConverter(typeof(CalendarIntervalConverter))]
-	public enum CalendarInterval
+	[EnumMember(Value = "year")]
+	Year,
+	[EnumMember(Value = "week")]
+	Week,
+	[EnumMember(Value = "second")]
+	Second,
+	[EnumMember(Value = "quarter")]
+	Quarter,
+	[EnumMember(Value = "month")]
+	Month,
+	[EnumMember(Value = "minute")]
+	Minute,
+	[EnumMember(Value = "hour")]
+	Hour,
+	[EnumMember(Value = "day")]
+	Day
+}
+
+internal sealed class CalendarIntervalConverter : JsonConverter<CalendarInterval>
+{
+	public override CalendarInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		[EnumMember(Value = "year")]
-		Year,
-		[EnumMember(Value = "week")]
-		Week,
-		[EnumMember(Value = "second")]
-		Second,
-		[EnumMember(Value = "quarter")]
-		Quarter,
-		[EnumMember(Value = "month")]
-		Month,
-		[EnumMember(Value = "minute")]
-		Minute,
-		[EnumMember(Value = "hour")]
-		Hour,
-		[EnumMember(Value = "day")]
-		Day
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "year":
+				return CalendarInterval.Year;
+			case "week":
+				return CalendarInterval.Week;
+			case "second":
+				return CalendarInterval.Second;
+			case "quarter":
+				return CalendarInterval.Quarter;
+			case "month":
+				return CalendarInterval.Month;
+			case "minute":
+				return CalendarInterval.Minute;
+			case "hour":
+				return CalendarInterval.Hour;
+			case "day":
+				return CalendarInterval.Day;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	internal sealed class CalendarIntervalConverter : JsonConverter<CalendarInterval>
+	public override void Write(Utf8JsonWriter writer, CalendarInterval value, JsonSerializerOptions options)
 	{
-		public override CalendarInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		switch (value)
 		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "year":
-					return CalendarInterval.Year;
-				case "week":
-					return CalendarInterval.Week;
-				case "second":
-					return CalendarInterval.Second;
-				case "quarter":
-					return CalendarInterval.Quarter;
-				case "month":
-					return CalendarInterval.Month;
-				case "minute":
-					return CalendarInterval.Minute;
-				case "hour":
-					return CalendarInterval.Hour;
-				case "day":
-					return CalendarInterval.Day;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
+			case CalendarInterval.Year:
+				writer.WriteStringValue("year");
+				return;
+			case CalendarInterval.Week:
+				writer.WriteStringValue("week");
+				return;
+			case CalendarInterval.Second:
+				writer.WriteStringValue("second");
+				return;
+			case CalendarInterval.Quarter:
+				writer.WriteStringValue("quarter");
+				return;
+			case CalendarInterval.Month:
+				writer.WriteStringValue("month");
+				return;
+			case CalendarInterval.Minute:
+				writer.WriteStringValue("minute");
+				return;
+			case CalendarInterval.Hour:
+				writer.WriteStringValue("hour");
+				return;
+			case CalendarInterval.Day:
+				writer.WriteStringValue("day");
+				return;
 		}
 
-		public override void Write(Utf8JsonWriter writer, CalendarInterval value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case CalendarInterval.Year:
-					writer.WriteStringValue("year");
-					return;
-				case CalendarInterval.Week:
-					writer.WriteStringValue("week");
-					return;
-				case CalendarInterval.Second:
-					writer.WriteStringValue("second");
-					return;
-				case CalendarInterval.Quarter:
-					writer.WriteStringValue("quarter");
-					return;
-				case CalendarInterval.Month:
-					writer.WriteStringValue("month");
-					return;
-				case CalendarInterval.Minute:
-					writer.WriteStringValue("minute");
-					return;
-				case CalendarInterval.Hour:
-					writer.WriteStringValue("hour");
-					return;
-				case CalendarInterval.Day:
-					writer.WriteStringValue("day");
-					return;
-			}
+		writer.WriteNullValue();
+	}
+}
 
-			writer.WriteNullValue();
+[JsonConverter(typeof(CardinalityExecutionModeConverter))]
+public enum CardinalityExecutionMode
+{
+	[EnumMember(Value = "segment_ordinals")]
+	SegmentOrdinals,
+	[EnumMember(Value = "save_time_heuristic")]
+	SaveTimeHeuristic,
+	[EnumMember(Value = "save_memory_heuristic")]
+	SaveMemoryHeuristic,
+	[EnumMember(Value = "global_ordinals")]
+	GlobalOrdinals,
+	[EnumMember(Value = "direct")]
+	Direct
+}
+
+internal sealed class CardinalityExecutionModeConverter : JsonConverter<CardinalityExecutionMode>
+{
+	public override CardinalityExecutionMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "segment_ordinals":
+				return CardinalityExecutionMode.SegmentOrdinals;
+			case "save_time_heuristic":
+				return CardinalityExecutionMode.SaveTimeHeuristic;
+			case "save_memory_heuristic":
+				return CardinalityExecutionMode.SaveMemoryHeuristic;
+			case "global_ordinals":
+				return CardinalityExecutionMode.GlobalOrdinals;
+			case "direct":
+				return CardinalityExecutionMode.Direct;
 		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	[JsonConverter(typeof(CardinalityExecutionModeConverter))]
-	public enum CardinalityExecutionMode
+	public override void Write(Utf8JsonWriter writer, CardinalityExecutionMode value, JsonSerializerOptions options)
 	{
-		[EnumMember(Value = "segment_ordinals")]
-		SegmentOrdinals,
-		[EnumMember(Value = "save_time_heuristic")]
-		SaveTimeHeuristic,
-		[EnumMember(Value = "save_memory_heuristic")]
-		SaveMemoryHeuristic,
-		[EnumMember(Value = "global_ordinals")]
-		GlobalOrdinals,
-		[EnumMember(Value = "direct")]
-		Direct
+		switch (value)
+		{
+			case CardinalityExecutionMode.SegmentOrdinals:
+				writer.WriteStringValue("segment_ordinals");
+				return;
+			case CardinalityExecutionMode.SaveTimeHeuristic:
+				writer.WriteStringValue("save_time_heuristic");
+				return;
+			case CardinalityExecutionMode.SaveMemoryHeuristic:
+				writer.WriteStringValue("save_memory_heuristic");
+				return;
+			case CardinalityExecutionMode.GlobalOrdinals:
+				writer.WriteStringValue("global_ordinals");
+				return;
+			case CardinalityExecutionMode.Direct:
+				writer.WriteStringValue("direct");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(GapPolicyConverter))]
+public enum GapPolicy
+{
+	[EnumMember(Value = "skip")]
+	Skip,
+	[EnumMember(Value = "keep_values")]
+	KeepValues,
+	[EnumMember(Value = "insert_zeros")]
+	InsertZeros
+}
+
+internal sealed class GapPolicyConverter : JsonConverter<GapPolicy>
+{
+	public override GapPolicy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "skip":
+				return GapPolicy.Skip;
+			case "keep_values":
+				return GapPolicy.KeepValues;
+			case "insert_zeros":
+				return GapPolicy.InsertZeros;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	internal sealed class CardinalityExecutionModeConverter : JsonConverter<CardinalityExecutionMode>
+	public override void Write(Utf8JsonWriter writer, GapPolicy value, JsonSerializerOptions options)
 	{
-		public override CardinalityExecutionMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		switch (value)
 		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "segment_ordinals":
-					return CardinalityExecutionMode.SegmentOrdinals;
-				case "save_time_heuristic":
-					return CardinalityExecutionMode.SaveTimeHeuristic;
-				case "save_memory_heuristic":
-					return CardinalityExecutionMode.SaveMemoryHeuristic;
-				case "global_ordinals":
-					return CardinalityExecutionMode.GlobalOrdinals;
-				case "direct":
-					return CardinalityExecutionMode.Direct;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
+			case GapPolicy.Skip:
+				writer.WriteStringValue("skip");
+				return;
+			case GapPolicy.KeepValues:
+				writer.WriteStringValue("keep_values");
+				return;
+			case GapPolicy.InsertZeros:
+				writer.WriteStringValue("insert_zeros");
+				return;
 		}
 
-		public override void Write(Utf8JsonWriter writer, CardinalityExecutionMode value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case CardinalityExecutionMode.SegmentOrdinals:
-					writer.WriteStringValue("segment_ordinals");
-					return;
-				case CardinalityExecutionMode.SaveTimeHeuristic:
-					writer.WriteStringValue("save_time_heuristic");
-					return;
-				case CardinalityExecutionMode.SaveMemoryHeuristic:
-					writer.WriteStringValue("save_memory_heuristic");
-					return;
-				case CardinalityExecutionMode.GlobalOrdinals:
-					writer.WriteStringValue("global_ordinals");
-					return;
-				case CardinalityExecutionMode.Direct:
-					writer.WriteStringValue("direct");
-					return;
-			}
+		writer.WriteNullValue();
+	}
+}
 
-			writer.WriteNullValue();
+[JsonConverter(typeof(MinimumIntervalConverter))]
+public enum MinimumInterval
+{
+	[EnumMember(Value = "year")]
+	Year,
+	[EnumMember(Value = "second")]
+	Second,
+	[EnumMember(Value = "month")]
+	Month,
+	[EnumMember(Value = "minute")]
+	Minute,
+	[EnumMember(Value = "hour")]
+	Hour,
+	[EnumMember(Value = "day")]
+	Day
+}
+
+internal sealed class MinimumIntervalConverter : JsonConverter<MinimumInterval>
+{
+	public override MinimumInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "year":
+				return MinimumInterval.Year;
+			case "second":
+				return MinimumInterval.Second;
+			case "month":
+				return MinimumInterval.Month;
+			case "minute":
+				return MinimumInterval.Minute;
+			case "hour":
+				return MinimumInterval.Hour;
+			case "day":
+				return MinimumInterval.Day;
 		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	[JsonConverter(typeof(GapPolicyConverter))]
-	public enum GapPolicy
+	public override void Write(Utf8JsonWriter writer, MinimumInterval value, JsonSerializerOptions options)
 	{
-		[EnumMember(Value = "skip")]
-		Skip,
-		[EnumMember(Value = "keep_values")]
-		KeepValues,
-		[EnumMember(Value = "insert_zeros")]
-		InsertZeros
+		switch (value)
+		{
+			case MinimumInterval.Year:
+				writer.WriteStringValue("year");
+				return;
+			case MinimumInterval.Second:
+				writer.WriteStringValue("second");
+				return;
+			case MinimumInterval.Month:
+				writer.WriteStringValue("month");
+				return;
+			case MinimumInterval.Minute:
+				writer.WriteStringValue("minute");
+				return;
+			case MinimumInterval.Hour:
+				writer.WriteStringValue("hour");
+				return;
+			case MinimumInterval.Day:
+				writer.WriteStringValue("day");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(MissingOrderConverter))]
+public enum MissingOrder
+{
+	[EnumMember(Value = "last")]
+	Last,
+	[EnumMember(Value = "first")]
+	First,
+	[EnumMember(Value = "default")]
+	Default
+}
+
+internal sealed class MissingOrderConverter : JsonConverter<MissingOrder>
+{
+	public override MissingOrder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "last":
+				return MissingOrder.Last;
+			case "first":
+				return MissingOrder.First;
+			case "default":
+				return MissingOrder.Default;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	internal sealed class GapPolicyConverter : JsonConverter<GapPolicy>
+	public override void Write(Utf8JsonWriter writer, MissingOrder value, JsonSerializerOptions options)
 	{
-		public override GapPolicy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		switch (value)
 		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "skip":
-					return GapPolicy.Skip;
-				case "keep_values":
-					return GapPolicy.KeepValues;
-				case "insert_zeros":
-					return GapPolicy.InsertZeros;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
+			case MissingOrder.Last:
+				writer.WriteStringValue("last");
+				return;
+			case MissingOrder.First:
+				writer.WriteStringValue("first");
+				return;
+			case MissingOrder.Default:
+				writer.WriteStringValue("default");
+				return;
 		}
 
-		public override void Write(Utf8JsonWriter writer, GapPolicy value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case GapPolicy.Skip:
-					writer.WriteStringValue("skip");
-					return;
-				case GapPolicy.KeepValues:
-					writer.WriteStringValue("keep_values");
-					return;
-				case GapPolicy.InsertZeros:
-					writer.WriteStringValue("insert_zeros");
-					return;
-			}
+		writer.WriteNullValue();
+	}
+}
 
-			writer.WriteNullValue();
+[JsonConverter(typeof(RateModeConverter))]
+public enum RateMode
+{
+	[EnumMember(Value = "value_count")]
+	ValueCount,
+	[EnumMember(Value = "sum")]
+	Sum
+}
+
+internal sealed class RateModeConverter : JsonConverter<RateMode>
+{
+	public override RateMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "value_count":
+				return RateMode.ValueCount;
+			case "sum":
+				return RateMode.Sum;
 		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	[JsonConverter(typeof(MinimumIntervalConverter))]
-	public enum MinimumInterval
+	public override void Write(Utf8JsonWriter writer, RateMode value, JsonSerializerOptions options)
 	{
-		[EnumMember(Value = "year")]
-		Year,
-		[EnumMember(Value = "second")]
-		Second,
-		[EnumMember(Value = "month")]
-		Month,
-		[EnumMember(Value = "minute")]
-		Minute,
-		[EnumMember(Value = "hour")]
-		Hour,
-		[EnumMember(Value = "day")]
-		Day
+		switch (value)
+		{
+			case RateMode.ValueCount:
+				writer.WriteStringValue("value_count");
+				return;
+			case RateMode.Sum:
+				writer.WriteStringValue("sum");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(TermsAggregationCollectModeConverter))]
+public enum TermsAggregationCollectMode
+{
+	[EnumMember(Value = "depth_first")]
+	DepthFirst,
+	[EnumMember(Value = "breadth_first")]
+	BreadthFirst
+}
+
+internal sealed class TermsAggregationCollectModeConverter : JsonConverter<TermsAggregationCollectMode>
+{
+	public override TermsAggregationCollectMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "depth_first":
+				return TermsAggregationCollectMode.DepthFirst;
+			case "breadth_first":
+				return TermsAggregationCollectMode.BreadthFirst;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	internal sealed class MinimumIntervalConverter : JsonConverter<MinimumInterval>
+	public override void Write(Utf8JsonWriter writer, TermsAggregationCollectMode value, JsonSerializerOptions options)
 	{
-		public override MinimumInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		switch (value)
 		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "year":
-					return MinimumInterval.Year;
-				case "second":
-					return MinimumInterval.Second;
-				case "month":
-					return MinimumInterval.Month;
-				case "minute":
-					return MinimumInterval.Minute;
-				case "hour":
-					return MinimumInterval.Hour;
-				case "day":
-					return MinimumInterval.Day;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
+			case TermsAggregationCollectMode.DepthFirst:
+				writer.WriteStringValue("depth_first");
+				return;
+			case TermsAggregationCollectMode.BreadthFirst:
+				writer.WriteStringValue("breadth_first");
+				return;
 		}
 
-		public override void Write(Utf8JsonWriter writer, MinimumInterval value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case MinimumInterval.Year:
-					writer.WriteStringValue("year");
-					return;
-				case MinimumInterval.Second:
-					writer.WriteStringValue("second");
-					return;
-				case MinimumInterval.Month:
-					writer.WriteStringValue("month");
-					return;
-				case MinimumInterval.Minute:
-					writer.WriteStringValue("minute");
-					return;
-				case MinimumInterval.Hour:
-					writer.WriteStringValue("hour");
-					return;
-				case MinimumInterval.Day:
-					writer.WriteStringValue("day");
-					return;
-			}
+		writer.WriteNullValue();
+	}
+}
 
-			writer.WriteNullValue();
+[JsonConverter(typeof(TermsAggregationExecutionHintConverter))]
+public enum TermsAggregationExecutionHint
+{
+	[EnumMember(Value = "map")]
+	Map,
+	[EnumMember(Value = "global_ordinals_low_cardinality")]
+	GlobalOrdinalsLowCardinality,
+	[EnumMember(Value = "global_ordinals_hash")]
+	GlobalOrdinalsHash,
+	[EnumMember(Value = "global_ordinals")]
+	GlobalOrdinals
+}
+
+internal sealed class TermsAggregationExecutionHintConverter : JsonConverter<TermsAggregationExecutionHint>
+{
+	public override TermsAggregationExecutionHint Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "map":
+				return TermsAggregationExecutionHint.Map;
+			case "global_ordinals_low_cardinality":
+				return TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality;
+			case "global_ordinals_hash":
+				return TermsAggregationExecutionHint.GlobalOrdinalsHash;
+			case "global_ordinals":
+				return TermsAggregationExecutionHint.GlobalOrdinals;
 		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	[JsonConverter(typeof(MissingOrderConverter))]
-	public enum MissingOrder
+	public override void Write(Utf8JsonWriter writer, TermsAggregationExecutionHint value, JsonSerializerOptions options)
 	{
-		[EnumMember(Value = "last")]
-		Last,
-		[EnumMember(Value = "first")]
-		First,
-		[EnumMember(Value = "default")]
-		Default
+		switch (value)
+		{
+			case TermsAggregationExecutionHint.Map:
+				writer.WriteStringValue("map");
+				return;
+			case TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality:
+				writer.WriteStringValue("global_ordinals_low_cardinality");
+				return;
+			case TermsAggregationExecutionHint.GlobalOrdinalsHash:
+				writer.WriteStringValue("global_ordinals_hash");
+				return;
+			case TermsAggregationExecutionHint.GlobalOrdinals:
+				writer.WriteStringValue("global_ordinals");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(TTestTypeConverter))]
+public enum TTestType
+{
+	[EnumMember(Value = "paired")]
+	Paired,
+	[EnumMember(Value = "homoscedastic")]
+	Homoscedastic,
+	[EnumMember(Value = "heteroscedastic")]
+	Heteroscedastic
+}
+
+internal sealed class TTestTypeConverter : JsonConverter<TTestType>
+{
+	public override TTestType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "paired":
+				return TTestType.Paired;
+			case "homoscedastic":
+				return TTestType.Homoscedastic;
+			case "heteroscedastic":
+				return TTestType.Heteroscedastic;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	internal sealed class MissingOrderConverter : JsonConverter<MissingOrder>
+	public override void Write(Utf8JsonWriter writer, TTestType value, JsonSerializerOptions options)
 	{
-		public override MissingOrder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		switch (value)
 		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "last":
-					return MissingOrder.Last;
-				case "first":
-					return MissingOrder.First;
-				case "default":
-					return MissingOrder.Default;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
+			case TTestType.Paired:
+				writer.WriteStringValue("paired");
+				return;
+			case TTestType.Homoscedastic:
+				writer.WriteStringValue("homoscedastic");
+				return;
+			case TTestType.Heteroscedastic:
+				writer.WriteStringValue("heteroscedastic");
+				return;
 		}
 
-		public override void Write(Utf8JsonWriter writer, MissingOrder value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case MissingOrder.Last:
-					writer.WriteStringValue("last");
-					return;
-				case MissingOrder.First:
-					writer.WriteStringValue("first");
-					return;
-				case MissingOrder.Default:
-					writer.WriteStringValue("default");
-					return;
-			}
+		writer.WriteNullValue();
+	}
+}
 
-			writer.WriteNullValue();
+[JsonConverter(typeof(ValueTypeConverter))]
+public enum ValueType
+{
+	[EnumMember(Value = "string")]
+	String,
+	[EnumMember(Value = "numeric")]
+	Numeric,
+	[EnumMember(Value = "number")]
+	Number,
+	[EnumMember(Value = "long")]
+	Long,
+	[EnumMember(Value = "ip")]
+	Ip,
+	[EnumMember(Value = "geo_point")]
+	GeoPoint,
+	[EnumMember(Value = "double")]
+	Double,
+	[EnumMember(Value = "date_nanos")]
+	DateNanos,
+	[EnumMember(Value = "date")]
+	Date,
+	[EnumMember(Value = "boolean")]
+	Boolean
+}
+
+internal sealed class ValueTypeConverter : JsonConverter<ValueType>
+{
+	public override ValueType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "string":
+				return ValueType.String;
+			case "numeric":
+				return ValueType.Numeric;
+			case "number":
+				return ValueType.Number;
+			case "long":
+				return ValueType.Long;
+			case "ip":
+				return ValueType.Ip;
+			case "geo_point":
+				return ValueType.GeoPoint;
+			case "double":
+				return ValueType.Double;
+			case "date_nanos":
+				return ValueType.DateNanos;
+			case "date":
+				return ValueType.Date;
+			case "boolean":
+				return ValueType.Boolean;
 		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	[JsonConverter(typeof(RateModeConverter))]
-	public enum RateMode
+	public override void Write(Utf8JsonWriter writer, ValueType value, JsonSerializerOptions options)
 	{
-		[EnumMember(Value = "value_count")]
-		ValueCount,
-		[EnumMember(Value = "sum")]
-		Sum
-	}
-
-	internal sealed class RateModeConverter : JsonConverter<RateMode>
-	{
-		public override RateMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		switch (value)
 		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "value_count":
-					return RateMode.ValueCount;
-				case "sum":
-					return RateMode.Sum;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
+			case ValueType.String:
+				writer.WriteStringValue("string");
+				return;
+			case ValueType.Numeric:
+				writer.WriteStringValue("numeric");
+				return;
+			case ValueType.Number:
+				writer.WriteStringValue("number");
+				return;
+			case ValueType.Long:
+				writer.WriteStringValue("long");
+				return;
+			case ValueType.Ip:
+				writer.WriteStringValue("ip");
+				return;
+			case ValueType.GeoPoint:
+				writer.WriteStringValue("geo_point");
+				return;
+			case ValueType.Double:
+				writer.WriteStringValue("double");
+				return;
+			case ValueType.DateNanos:
+				writer.WriteStringValue("date_nanos");
+				return;
+			case ValueType.Date:
+				writer.WriteStringValue("date");
+				return;
+			case ValueType.Boolean:
+				writer.WriteStringValue("boolean");
+				return;
 		}
 
-		public override void Write(Utf8JsonWriter writer, RateMode value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case RateMode.ValueCount:
-					writer.WriteStringValue("value_count");
-					return;
-				case RateMode.Sum:
-					writer.WriteStringValue("sum");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(TermsAggregationCollectModeConverter))]
-	public enum TermsAggregationCollectMode
-	{
-		[EnumMember(Value = "depth_first")]
-		DepthFirst,
-		[EnumMember(Value = "breadth_first")]
-		BreadthFirst
-	}
-
-	internal sealed class TermsAggregationCollectModeConverter : JsonConverter<TermsAggregationCollectMode>
-	{
-		public override TermsAggregationCollectMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "depth_first":
-					return TermsAggregationCollectMode.DepthFirst;
-				case "breadth_first":
-					return TermsAggregationCollectMode.BreadthFirst;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, TermsAggregationCollectMode value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case TermsAggregationCollectMode.DepthFirst:
-					writer.WriteStringValue("depth_first");
-					return;
-				case TermsAggregationCollectMode.BreadthFirst:
-					writer.WriteStringValue("breadth_first");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(TermsAggregationExecutionHintConverter))]
-	public enum TermsAggregationExecutionHint
-	{
-		[EnumMember(Value = "map")]
-		Map,
-		[EnumMember(Value = "global_ordinals_low_cardinality")]
-		GlobalOrdinalsLowCardinality,
-		[EnumMember(Value = "global_ordinals_hash")]
-		GlobalOrdinalsHash,
-		[EnumMember(Value = "global_ordinals")]
-		GlobalOrdinals
-	}
-
-	internal sealed class TermsAggregationExecutionHintConverter : JsonConverter<TermsAggregationExecutionHint>
-	{
-		public override TermsAggregationExecutionHint Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "map":
-					return TermsAggregationExecutionHint.Map;
-				case "global_ordinals_low_cardinality":
-					return TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality;
-				case "global_ordinals_hash":
-					return TermsAggregationExecutionHint.GlobalOrdinalsHash;
-				case "global_ordinals":
-					return TermsAggregationExecutionHint.GlobalOrdinals;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, TermsAggregationExecutionHint value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case TermsAggregationExecutionHint.Map:
-					writer.WriteStringValue("map");
-					return;
-				case TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality:
-					writer.WriteStringValue("global_ordinals_low_cardinality");
-					return;
-				case TermsAggregationExecutionHint.GlobalOrdinalsHash:
-					writer.WriteStringValue("global_ordinals_hash");
-					return;
-				case TermsAggregationExecutionHint.GlobalOrdinals:
-					writer.WriteStringValue("global_ordinals");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(TTestTypeConverter))]
-	public enum TTestType
-	{
-		[EnumMember(Value = "paired")]
-		Paired,
-		[EnumMember(Value = "homoscedastic")]
-		Homoscedastic,
-		[EnumMember(Value = "heteroscedastic")]
-		Heteroscedastic
-	}
-
-	internal sealed class TTestTypeConverter : JsonConverter<TTestType>
-	{
-		public override TTestType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "paired":
-					return TTestType.Paired;
-				case "homoscedastic":
-					return TTestType.Homoscedastic;
-				case "heteroscedastic":
-					return TTestType.Heteroscedastic;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, TTestType value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case TTestType.Paired:
-					writer.WriteStringValue("paired");
-					return;
-				case TTestType.Homoscedastic:
-					writer.WriteStringValue("homoscedastic");
-					return;
-				case TTestType.Heteroscedastic:
-					writer.WriteStringValue("heteroscedastic");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(ValueTypeConverter))]
-	public enum ValueType
-	{
-		[EnumMember(Value = "string")]
-		String,
-		[EnumMember(Value = "numeric")]
-		Numeric,
-		[EnumMember(Value = "number")]
-		Number,
-		[EnumMember(Value = "long")]
-		Long,
-		[EnumMember(Value = "ip")]
-		Ip,
-		[EnumMember(Value = "geo_point")]
-		GeoPoint,
-		[EnumMember(Value = "double")]
-		Double,
-		[EnumMember(Value = "date_nanos")]
-		DateNanos,
-		[EnumMember(Value = "date")]
-		Date,
-		[EnumMember(Value = "boolean")]
-		Boolean
-	}
-
-	internal sealed class ValueTypeConverter : JsonConverter<ValueType>
-	{
-		public override ValueType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "string":
-					return ValueType.String;
-				case "numeric":
-					return ValueType.Numeric;
-				case "number":
-					return ValueType.Number;
-				case "long":
-					return ValueType.Long;
-				case "ip":
-					return ValueType.Ip;
-				case "geo_point":
-					return ValueType.GeoPoint;
-				case "double":
-					return ValueType.Double;
-				case "date_nanos":
-					return ValueType.DateNanos;
-				case "date":
-					return ValueType.Date;
-				case "boolean":
-					return ValueType.Boolean;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, ValueType value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case ValueType.String:
-					writer.WriteStringValue("string");
-					return;
-				case ValueType.Numeric:
-					writer.WriteStringValue("numeric");
-					return;
-				case ValueType.Number:
-					writer.WriteStringValue("number");
-					return;
-				case ValueType.Long:
-					writer.WriteStringValue("long");
-					return;
-				case ValueType.Ip:
-					writer.WriteStringValue("ip");
-					return;
-				case ValueType.GeoPoint:
-					writer.WriteStringValue("geo_point");
-					return;
-				case ValueType.Double:
-					writer.WriteStringValue("double");
-					return;
-				case ValueType.DateNanos:
-					writer.WriteStringValue("date_nanos");
-					return;
-				case ValueType.Date:
-					writer.WriteStringValue("date");
-					return;
-				case ValueType.Boolean:
-					writer.WriteStringValue("boolean");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
+		writer.WriteNullValue();
 	}
 }

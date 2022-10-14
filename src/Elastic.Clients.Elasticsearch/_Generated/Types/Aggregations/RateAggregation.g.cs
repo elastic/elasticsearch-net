@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,440 +24,438 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+internal sealed class RateAggregationConverter : JsonConverter<RateAggregation>
 {
-	internal sealed class RateAggregationConverter : JsonConverter<RateAggregation>
+	public override RateAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override RateAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var aggName = reader.GetString();
+		if (aggName != "rate")
+			throw new JsonException("Unexpected JSON detected.");
+		var agg = new RateAggregation(aggName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "rate")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new RateAggregation(aggName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("field"))
 				{
-					if (reader.ValueTextEquals("field"))
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+					if (value is not null)
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
-
-						continue;
+						agg.Field = value;
 					}
 
-					if (reader.ValueTextEquals("format"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("format"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Format = value;
 					}
 
-					if (reader.ValueTextEquals("missing"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("missing"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Missing = value;
 					}
 
-					if (reader.ValueTextEquals("mode"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RateMode?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Mode = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("mode"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RateMode?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Mode = value;
 					}
 
-					if (reader.ValueTextEquals("script"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Script = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("script"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Script = value;
 					}
 
-					if (reader.ValueTextEquals("unit"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Unit = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("unit"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Unit = value;
 					}
+
+					continue;
 				}
 			}
+		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("meta"))
 				{
-					if (reader.ValueTextEquals("meta"))
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					if (value is not null)
 					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
+						agg.Meta = value;
 					}
+
+					continue;
 				}
 			}
-
-			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, RateAggregation value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("rate");
-			writer.WriteStartObject();
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Format))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
-			}
-
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
-			}
-
-			if (value.Mode is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, value.Mode, options);
-			}
-
-			if (value.Script is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, value.Script, options);
-			}
-
-			if (value.Unit is not null)
-			{
-				writer.WritePropertyName("unit");
-				JsonSerializer.Serialize(writer, value.Unit, options);
-			}
-
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return agg;
 	}
 
-	[JsonConverter(typeof(RateAggregationConverter))]
-	public sealed partial class RateAggregation : Aggregation
+	public override void Write(Utf8JsonWriter writer, RateAggregation value, JsonSerializerOptions options)
 	{
-		public RateAggregation(string name, Field field) : this(name) => Field = field;
-		public RateAggregation(string name) => Name = name;
-		internal RateAggregation()
+		writer.WriteStartObject();
+		writer.WritePropertyName("rate");
+		writer.WriteStartObject();
+		if (value.Field is not null)
 		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value.Field, options);
 		}
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		if (!string.IsNullOrEmpty(value.Format))
+		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(value.Format);
+		}
 
-		public string? Format { get; set; }
+		if (value.Missing is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, value.Missing, options);
+		}
 
-		public Dictionary<string, object>? Meta { get; set; }
+		if (value.Mode is not null)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, value.Mode, options);
+		}
 
-		public FieldValue? Missing { get; set; }
+		if (value.Script is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, value.Script, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
+		if (value.Unit is not null)
+		{
+			writer.WritePropertyName("unit");
+			JsonSerializer.Serialize(writer, value.Unit, options);
+		}
 
-		public override string? Name { get; internal set; }
+		writer.WriteEndObject();
+		if (value.Meta is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? Unit { get; set; }
+[JsonConverter(typeof(RateAggregationConverter))]
+public sealed partial class RateAggregation : Aggregation
+{
+	public RateAggregation(string name, Field field) : this(name) => Field = field;
+	public RateAggregation(string name) => Name = name;
+	internal RateAggregation()
+	{
 	}
 
-	public sealed partial class RateAggregationDescriptor<TDocument> : SerializableDescriptorBase<RateAggregationDescriptor<TDocument>>
+	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	public string? Format { get; set; }
+
+	public Dictionary<string, object>? Meta { get; set; }
+
+	public FieldValue? Missing { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
+
+	public override string? Name { get; internal set; }
+
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? Unit { get; set; }
+}
+
+public sealed partial class RateAggregationDescriptor<TDocument> : SerializableDescriptor<RateAggregationDescriptor<TDocument>>
+{
+	internal RateAggregationDescriptor(Action<RateAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public RateAggregationDescriptor() : base()
 	{
-		internal RateAggregationDescriptor(Action<RateAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public RateAggregationDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private string? FormatValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private FieldValue? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.RateMode? ModeValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? UnitValue { get; set; }
-
-		public RateAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public RateAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public RateAggregationDescriptor<TDocument> Format(string? format)
-		{
-			FormatValue = format;
-			return Self;
-		}
-
-		public RateAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public RateAggregationDescriptor<TDocument> Missing(FieldValue? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
-		public RateAggregationDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode)
-		{
-			ModeValue = mode;
-			return Self;
-		}
-
-		public RateAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-		{
-			ScriptValue = script;
-			return Self;
-		}
-
-		public RateAggregationDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit)
-		{
-			UnitValue = unit;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("rate");
-			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (ModeValue is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, ModeValue, options);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (UnitValue is not null)
-			{
-				writer.WritePropertyName("unit");
-				JsonSerializer.Serialize(writer, UnitValue, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class RateAggregationDescriptor : SerializableDescriptorBase<RateAggregationDescriptor>
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.RateMode? ModeValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? UnitValue { get; set; }
+
+	public RateAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
-		internal RateAggregationDescriptor(Action<RateAggregationDescriptor> configure) => configure.Invoke(this);
-		public RateAggregationDescriptor() : base()
+		FieldValue = field;
+		return Self;
+	}
+
+	public RateAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RateAggregationDescriptor<TDocument> Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public RateAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public RateAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public RateAggregationDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode)
+	{
+		ModeValue = mode;
+		return Self;
+	}
+
+	public RateAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	public RateAggregationDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit)
+	{
+		UnitValue = unit;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("rate");
+		writer.WriteStartObject();
+		if (FieldValue is not null)
 		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private string? FormatValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private FieldValue? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.RateMode? ModeValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? UnitValue { get; set; }
-
-		public RateAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
 		}
 
-		public RateAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		if (MissingValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
 		}
 
-		public RateAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		if (ModeValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
 		}
 
-		public RateAggregationDescriptor Format(string? format)
+		if (ScriptValue is not null)
 		{
-			FormatValue = format;
-			return Self;
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		public RateAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		if (UnitValue is not null)
 		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
+			writer.WritePropertyName("unit");
+			JsonSerializer.Serialize(writer, UnitValue, options);
 		}
 
-		public RateAggregationDescriptor Missing(FieldValue? missing)
+		writer.WriteEndObject();
+		if (MetaValue is not null)
 		{
-			MissingValue = missing;
-			return Self;
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		public RateAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class RateAggregationDescriptor : SerializableDescriptor<RateAggregationDescriptor>
+{
+	internal RateAggregationDescriptor(Action<RateAggregationDescriptor> configure) => configure.Invoke(this);
+	public RateAggregationDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.RateMode? ModeValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? UnitValue { get; set; }
+
+	public RateAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RateAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RateAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RateAggregationDescriptor Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public RateAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public RateAggregationDescriptor Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public RateAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode)
+	{
+		ModeValue = mode;
+		return Self;
+	}
+
+	public RateAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	public RateAggregationDescriptor Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit)
+	{
+		UnitValue = unit;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("rate");
+		writer.WriteStartObject();
+		if (FieldValue is not null)
 		{
-			ModeValue = mode;
-			return Self;
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		public RateAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
-			ScriptValue = script;
-			return Self;
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
 		}
 
-		public RateAggregationDescriptor Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit)
+		if (MissingValue is not null)
 		{
-			UnitValue = unit;
-			return Self;
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		if (ModeValue is not null)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("rate");
-			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (ModeValue is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, ModeValue, options);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (UnitValue is not null)
-			{
-				writer.WritePropertyName("unit");
-				JsonSerializer.Serialize(writer, UnitValue, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
 		}
+
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
+		if (UnitValue is not null)
+		{
+			writer.WritePropertyName("unit");
+			JsonSerializer.Serialize(writer, UnitValue, options);
+		}
+
+		writer.WriteEndObject();
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

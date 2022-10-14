@@ -8,82 +8,87 @@ using System.Linq;
 using System.Reflection;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.QueryDsl;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using JsonProperty = Newtonsoft.Json.Serialization.JsonProperty;
 
-namespace Elastic.Clients.JsonNetSerializer
+namespace Elastic.Clients.Elasticsearch.JsonNetSerializer;
+
+public class ConnectionSettingsAwareContractResolver : DefaultContractResolver
 {
-	public class ConnectionSettingsAwareContractResolver : DefaultContractResolver
+	public ConnectionSettingsAwareContractResolver(IElasticsearchClientSettings connectionSettings) =>
+		ConnectionSettings = connectionSettings ?? throw new ArgumentNullException(nameof(connectionSettings));
+
+	protected IElasticsearchClientSettings ConnectionSettings { get; }
+
+	protected override string ResolvePropertyName(string fieldName) =>
+		ConnectionSettings.DefaultFieldNameInferrer != null
+			? ConnectionSettings.DefaultFieldNameInferrer(fieldName)
+			: base.ResolvePropertyName(fieldName);
+
+	protected override JsonContract CreateContract(Type objectType)
 	{
-		public ConnectionSettingsAwareContractResolver(IElasticsearchClientSettings connectionSettings) =>
-			ConnectionSettings = connectionSettings ?? throw new ArgumentNullException(nameof(connectionSettings));
+		var contract = base.CreateContract(objectType);
+		if (objectType.IsEnum && objectType.GetCustomAttribute<StringEnumAttribute>() != null)
+			contract.Converter = new StringEnumConverter();
 
-		protected IElasticsearchClientSettings ConnectionSettings { get; }
+		return contract;
+	}
 
-		protected override string ResolvePropertyName(string fieldName) =>
-			ConnectionSettings.DefaultFieldNameInferrer != null
-				? ConnectionSettings.DefaultFieldNameInferrer(fieldName)
-				: base.ResolvePropertyName(fieldName);
+	protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+	{
+		var property = base.CreateProperty(member, memberSerialization);
+		ApplyShouldSerializer(property);
+		ApplyPropertyOverrides(member, property);
+		return property;
+	}
 
-		protected override JsonContract CreateContract(Type objectType)
-		{
-			var contract = base.CreateContract(objectType);
-			if (objectType.IsEnum && objectType.GetCustomAttribute<StringEnumAttribute>() != null)
-				contract.Converter = new StringEnumConverter();
+	/// <summary> Renames/Ignores a property based on the connection settings mapping or custom attributes for the property </summary>
+	private void ApplyPropertyOverrides(MemberInfo member, JsonProperty property)
+	{
+		//if (!ConnectionSettings.PropertyMappings.TryGetValue(member, out var propertyMapping))
+		//	propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
 
-			return contract;
-		}
+		var serializerMapping = ConnectionSettings.PropertyMappingProvider?.CreatePropertyMapping(member);
 
-		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
-		{
-			var property = base.CreateProperty(member, memberSerialization);
-			ApplyShouldSerializer(property);
-			ApplyPropertyOverrides(member, property);
-			return property;
-		}
+		var nameOverride = /*propertyMapping?.Name ??*/ serializerMapping?.Name;
+		if (!string.IsNullOrWhiteSpace(nameOverride))
+			property.PropertyName = nameOverride;
 
-		/// <summary> Renames/Ignores a property based on the connection settings mapping or custom attributes for the property </summary>
-		private void ApplyPropertyOverrides(MemberInfo member, JsonProperty property)
-		{
-			//if (!ConnectionSettings.PropertyMappings.TryGetValue(member, out var propertyMapping))
-			//	propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
+		var overrideIgnore = /*propertyMapping?.Ignore ??*/ serializerMapping?.Ignore;
+		if (overrideIgnore.HasValue)
+			property.Ignored = overrideIgnore.Value;
+	}
 
-			var serializerMapping = ConnectionSettings.PropertyMappingProvider?.CreatePropertyMapping(member);
+	private static void ApplyShouldSerializer(JsonProperty property)
+	{
+		if (property.PropertyType == typeof(QueryContainer))
+			property.ShouldSerialize = o => ShouldSerializeQueryContainer(o, property);
+		else if (property.PropertyType == typeof(IEnumerable<QueryContainer>))
+			property.ShouldSerialize = o => ShouldSerializeQueryContainers(o, property);
+	}
 
-			var nameOverride = /*propertyMapping?.Name ??*/ serializerMapping?.Name;
-			if (!string.IsNullOrWhiteSpace(nameOverride)) property.PropertyName = nameOverride;
+	private static bool ShouldSerializeQueryContainer(object o, JsonProperty prop)
+	{
+		if (o == null)
+			return false;
+		if (prop.ValueProvider.GetValue(o) is not QueryContainer q)
+			return false;
+		//return q.IsWritable;
+		return true;
+	}
 
-			var overrideIgnore = /*propertyMapping?.Ignore ??*/ serializerMapping?.Ignore;
-			if (overrideIgnore.HasValue)
-				property.Ignored = overrideIgnore.Value;
-		}
+	private static bool ShouldSerializeQueryContainers(object o, JsonProperty prop)
+	{
+		if (o == null)
+			return false;
+		if (prop.ValueProvider.GetValue(o) is not IEnumerable<QueryContainer> q)
+			return false;
 
-		private static void ApplyShouldSerializer(JsonProperty property)
-		{
-			if (property.PropertyType == typeof(QueryContainer))
-				property.ShouldSerialize = o => ShouldSerializeQueryContainer(o, property);
-			else if (property.PropertyType == typeof(IEnumerable<QueryContainer>))
-				property.ShouldSerialize = o => ShouldSerializeQueryContainers(o, property);
-		}
-
-		private static bool ShouldSerializeQueryContainer(object o, JsonProperty prop)
-		{
-			if (o == null) return false;
-			if (prop.ValueProvider.GetValue(o) is not QueryContainer q) return false;
-			//return q.IsWritable;
-			return true;
-		}
-
-		private static bool ShouldSerializeQueryContainers(object o, JsonProperty prop)
-		{
-			if (o == null) return false;
-			if (prop.ValueProvider.GetValue(o) is not IEnumerable<QueryContainer> q) return false;
-
-			var queryContainers = q as QueryContainer[] ?? q.ToArray();
-			//return queryContainers.Any(qq => qq != null && ((QueryContainer)qq).IsWritable);
-			return queryContainers.Any(qq => qq != null);
-		}
+		var queryContainers = q as QueryContainer[] ?? q.ToArray();
+		//return queryContainers.Any(qq => qq != null && ((QueryContainer)qq).IsWritable);
+		return queryContainers.Any(qq => qq != null);
 	}
 }

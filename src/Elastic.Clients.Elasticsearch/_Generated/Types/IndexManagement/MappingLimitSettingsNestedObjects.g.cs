@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,40 +24,38 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class MappingLimitSettingsNestedObjects
 {
-	public sealed partial class MappingLimitSettingsNestedObjects
+	[JsonInclude]
+	[JsonPropertyName("limit")]
+	public int? Limit { get; set; }
+}
+
+public sealed partial class MappingLimitSettingsNestedObjectsDescriptor : SerializableDescriptor<MappingLimitSettingsNestedObjectsDescriptor>
+{
+	internal MappingLimitSettingsNestedObjectsDescriptor(Action<MappingLimitSettingsNestedObjectsDescriptor> configure) => configure.Invoke(this);
+	public MappingLimitSettingsNestedObjectsDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("limit")]
-		public int? Limit { get; set; }
 	}
 
-	public sealed partial class MappingLimitSettingsNestedObjectsDescriptor : SerializableDescriptorBase<MappingLimitSettingsNestedObjectsDescriptor>
+	private int? LimitValue { get; set; }
+
+	public MappingLimitSettingsNestedObjectsDescriptor Limit(int? limit)
 	{
-		internal MappingLimitSettingsNestedObjectsDescriptor(Action<MappingLimitSettingsNestedObjectsDescriptor> configure) => configure.Invoke(this);
-		public MappingLimitSettingsNestedObjectsDescriptor() : base()
+		LimitValue = limit;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (LimitValue.HasValue)
 		{
+			writer.WritePropertyName("limit");
+			writer.WriteNumberValue(LimitValue.Value);
 		}
 
-		private int? LimitValue { get; set; }
-
-		public MappingLimitSettingsNestedObjectsDescriptor Limit(int? limit)
-		{
-			LimitValue = limit;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (LimitValue.HasValue)
-			{
-				writer.WritePropertyName("limit");
-				writer.WriteNumberValue(LimitValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,112 +24,110 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class IndexSettingBlocks
 {
-	public sealed partial class IndexSettingBlocks
+	[JsonInclude]
+	[JsonPropertyName("metadata")]
+	public bool? Metadata { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("read")]
+	public bool? Read { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("read_only")]
+	public bool? ReadOnly { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("read_only_allow_delete")]
+	public bool? ReadOnlyAllowDelete { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("write")]
+	public Union<bool?, string?>? Write { get; set; }
+}
+
+public sealed partial class IndexSettingBlocksDescriptor : SerializableDescriptor<IndexSettingBlocksDescriptor>
+{
+	internal IndexSettingBlocksDescriptor(Action<IndexSettingBlocksDescriptor> configure) => configure.Invoke(this);
+	public IndexSettingBlocksDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("metadata")]
-		public bool? Metadata { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("read")]
-		public bool? Read { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("read_only")]
-		public bool? ReadOnly { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("read_only_allow_delete")]
-		public bool? ReadOnlyAllowDelete { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("write")]
-		public Union<bool?, string?>? Write { get; set; }
 	}
 
-	public sealed partial class IndexSettingBlocksDescriptor : SerializableDescriptorBase<IndexSettingBlocksDescriptor>
+	private bool? MetadataValue { get; set; }
+
+	private bool? ReadValue { get; set; }
+
+	private bool? ReadOnlyValue { get; set; }
+
+	private bool? ReadOnlyAllowDeleteValue { get; set; }
+
+	private Union<bool?, string?>? WriteValue { get; set; }
+
+	public IndexSettingBlocksDescriptor Metadata(bool? metadata = true)
 	{
-		internal IndexSettingBlocksDescriptor(Action<IndexSettingBlocksDescriptor> configure) => configure.Invoke(this);
-		public IndexSettingBlocksDescriptor() : base()
+		MetadataValue = metadata;
+		return Self;
+	}
+
+	public IndexSettingBlocksDescriptor Read(bool? read = true)
+	{
+		ReadValue = read;
+		return Self;
+	}
+
+	public IndexSettingBlocksDescriptor ReadOnly(bool? readOnly = true)
+	{
+		ReadOnlyValue = readOnly;
+		return Self;
+	}
+
+	public IndexSettingBlocksDescriptor ReadOnlyAllowDelete(bool? readOnlyAllowDelete = true)
+	{
+		ReadOnlyAllowDeleteValue = readOnlyAllowDelete;
+		return Self;
+	}
+
+	public IndexSettingBlocksDescriptor Write(Union<bool?, string?>? write)
+	{
+		WriteValue = write;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (MetadataValue.HasValue)
 		{
+			writer.WritePropertyName("metadata");
+			writer.WriteBooleanValue(MetadataValue.Value);
 		}
 
-		private bool? MetadataValue { get; set; }
-
-		private bool? ReadValue { get; set; }
-
-		private bool? ReadOnlyValue { get; set; }
-
-		private bool? ReadOnlyAllowDeleteValue { get; set; }
-
-		private Union<bool?, string?>? WriteValue { get; set; }
-
-		public IndexSettingBlocksDescriptor Metadata(bool? metadata = true)
+		if (ReadValue.HasValue)
 		{
-			MetadataValue = metadata;
-			return Self;
+			writer.WritePropertyName("read");
+			writer.WriteBooleanValue(ReadValue.Value);
 		}
 
-		public IndexSettingBlocksDescriptor Read(bool? read = true)
+		if (ReadOnlyValue.HasValue)
 		{
-			ReadValue = read;
-			return Self;
+			writer.WritePropertyName("read_only");
+			writer.WriteBooleanValue(ReadOnlyValue.Value);
 		}
 
-		public IndexSettingBlocksDescriptor ReadOnly(bool? readOnly = true)
+		if (ReadOnlyAllowDeleteValue.HasValue)
 		{
-			ReadOnlyValue = readOnly;
-			return Self;
+			writer.WritePropertyName("read_only_allow_delete");
+			writer.WriteBooleanValue(ReadOnlyAllowDeleteValue.Value);
 		}
 
-		public IndexSettingBlocksDescriptor ReadOnlyAllowDelete(bool? readOnlyAllowDelete = true)
+		if (WriteValue is not null)
 		{
-			ReadOnlyAllowDeleteValue = readOnlyAllowDelete;
-			return Self;
+			writer.WritePropertyName("write");
+			JsonSerializer.Serialize(writer, WriteValue, options);
 		}
 
-		public IndexSettingBlocksDescriptor Write(Union<bool?, string?>? write)
-		{
-			WriteValue = write;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (MetadataValue.HasValue)
-			{
-				writer.WritePropertyName("metadata");
-				writer.WriteBooleanValue(MetadataValue.Value);
-			}
-
-			if (ReadValue.HasValue)
-			{
-				writer.WritePropertyName("read");
-				writer.WriteBooleanValue(ReadValue.Value);
-			}
-
-			if (ReadOnlyValue.HasValue)
-			{
-				writer.WritePropertyName("read_only");
-				writer.WriteBooleanValue(ReadOnlyValue.Value);
-			}
-
-			if (ReadOnlyAllowDeleteValue.HasValue)
-			{
-				writer.WritePropertyName("read_only_allow_delete");
-				writer.WriteBooleanValue(ReadOnlyAllowDeleteValue.Value);
-			}
-
-			if (WriteValue is not null)
-			{
-				writer.WritePropertyName("write");
-				JsonSerializer.Serialize(writer, WriteValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

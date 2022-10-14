@@ -8,6 +8,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
@@ -15,7 +16,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 /// Represents a bulk operation to create a document.
 /// </summary>
 /// <typeparam name="T">The type representing the document being created.</typeparam>
-public sealed class BulkCreateOperation<T> : BulkOperationBase
+public sealed class BulkCreateOperation<T> : BulkOperation
 {
 	/// <summary>
 	/// Creates an instance of <see cref="BulkCreateOperation{T}"/> with the provided <typeparamref name="T"/> document serialized

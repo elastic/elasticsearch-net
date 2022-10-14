@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,76 +24,74 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public sealed partial class IpRangeAggregationRange
 {
-	public sealed partial class IpRangeAggregationRange
+	[JsonInclude]
+	[JsonPropertyName("from")]
+	public string? From { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("mask")]
+	public string? Mask { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("to")]
+	public string? To { get; set; }
+}
+
+public sealed partial class IpRangeAggregationRangeDescriptor : SerializableDescriptor<IpRangeAggregationRangeDescriptor>
+{
+	internal IpRangeAggregationRangeDescriptor(Action<IpRangeAggregationRangeDescriptor> configure) => configure.Invoke(this);
+	public IpRangeAggregationRangeDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("from")]
-		public string? From { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("mask")]
-		public string? Mask { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("to")]
-		public string? To { get; set; }
 	}
 
-	public sealed partial class IpRangeAggregationRangeDescriptor : SerializableDescriptorBase<IpRangeAggregationRangeDescriptor>
+	private string? FromValue { get; set; }
+
+	private string? MaskValue { get; set; }
+
+	private string? ToValue { get; set; }
+
+	public IpRangeAggregationRangeDescriptor From(string? from)
 	{
-		internal IpRangeAggregationRangeDescriptor(Action<IpRangeAggregationRangeDescriptor> configure) => configure.Invoke(this);
-		public IpRangeAggregationRangeDescriptor() : base()
+		FromValue = from;
+		return Self;
+	}
+
+	public IpRangeAggregationRangeDescriptor Mask(string? mask)
+	{
+		MaskValue = mask;
+		return Self;
+	}
+
+	public IpRangeAggregationRangeDescriptor To(string? to)
+	{
+		ToValue = to;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(FromValue))
 		{
+			writer.WritePropertyName("from");
+			writer.WriteStringValue(FromValue);
 		}
 
-		private string? FromValue { get; set; }
-
-		private string? MaskValue { get; set; }
-
-		private string? ToValue { get; set; }
-
-		public IpRangeAggregationRangeDescriptor From(string? from)
+		if (!string.IsNullOrEmpty(MaskValue))
 		{
-			FromValue = from;
-			return Self;
+			writer.WritePropertyName("mask");
+			writer.WriteStringValue(MaskValue);
 		}
 
-		public IpRangeAggregationRangeDescriptor Mask(string? mask)
+		if (!string.IsNullOrEmpty(ToValue))
 		{
-			MaskValue = mask;
-			return Self;
+			writer.WritePropertyName("to");
+			writer.WriteStringValue(ToValue);
 		}
 
-		public IpRangeAggregationRangeDescriptor To(string? to)
-		{
-			ToValue = to;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(FromValue))
-			{
-				writer.WritePropertyName("from");
-				writer.WriteStringValue(FromValue);
-			}
-
-			if (!string.IsNullOrEmpty(MaskValue))
-			{
-				writer.WritePropertyName("mask");
-				writer.WriteStringValue(MaskValue);
-			}
-
-			if (!string.IsNullOrEmpty(ToValue))
-			{
-				writer.WritePropertyName("to");
-				writer.WriteStringValue(ToValue);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,324 +24,322 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public sealed partial class CompositeAggregationSource
 {
-	public sealed partial class CompositeAggregationSource
+	[JsonInclude]
+	[JsonPropertyName("date_histogram")]
+	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogram { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("histogram")]
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? Histogram { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("terms")]
+	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get; set; }
+}
+
+public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : SerializableDescriptor<CompositeAggregationSourceDescriptor<TDocument>>
+{
+	internal CompositeAggregationSourceDescriptor(Action<CompositeAggregationSourceDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public CompositeAggregationSourceDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("date_histogram")]
-		public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogram { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("histogram")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? Histogram { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("terms")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get; set; }
 	}
 
-	public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : SerializableDescriptorBase<CompositeAggregationSourceDescriptor<TDocument>>
+	private Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogramValue { get; set; }
+
+	private DateHistogramAggregationDescriptor<TDocument> DateHistogramDescriptor { get; set; }
+
+	private Action<DateHistogramAggregationDescriptor<TDocument>> DateHistogramDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? HistogramValue { get; set; }
+
+	private HistogramAggregationDescriptor<TDocument> HistogramDescriptor { get; set; }
+
+	private Action<HistogramAggregationDescriptor<TDocument>> HistogramDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? TermsValue { get; set; }
+
+	private TermsAggregationDescriptor<TDocument> TermsDescriptor { get; set; }
+
+	private Action<TermsAggregationDescriptor<TDocument>> TermsDescriptorAction { get; set; }
+
+	public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? dateHistogram)
 	{
-		internal CompositeAggregationSourceDescriptor(Action<CompositeAggregationSourceDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public CompositeAggregationSourceDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogramValue { get; set; }
-
-		private DateHistogramAggregationDescriptor<TDocument> DateHistogramDescriptor { get; set; }
-
-		private Action<DateHistogramAggregationDescriptor<TDocument>> DateHistogramDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? HistogramValue { get; set; }
-
-		private HistogramAggregationDescriptor<TDocument> HistogramDescriptor { get; set; }
-
-		private Action<HistogramAggregationDescriptor<TDocument>> HistogramDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? TermsValue { get; set; }
-
-		private TermsAggregationDescriptor<TDocument> TermsDescriptor { get; set; }
-
-		private Action<TermsAggregationDescriptor<TDocument>> TermsDescriptorAction { get; set; }
-
-		public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? dateHistogram)
-		{
-			DateHistogramDescriptor = null;
-			DateHistogramDescriptorAction = null;
-			DateHistogramValue = dateHistogram;
-			return Self;
-		}
-
-		public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(DateHistogramAggregationDescriptor<TDocument> descriptor)
-		{
-			DateHistogramValue = null;
-			DateHistogramDescriptorAction = null;
-			DateHistogramDescriptor = descriptor;
-			return Self;
-		}
-
-		public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(Action<DateHistogramAggregationDescriptor<TDocument>> configure)
-		{
-			DateHistogramValue = null;
-			DateHistogramDescriptor = null;
-			DateHistogramDescriptorAction = configure;
-			return Self;
-		}
-
-		public CompositeAggregationSourceDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? histogram)
-		{
-			HistogramDescriptor = null;
-			HistogramDescriptorAction = null;
-			HistogramValue = histogram;
-			return Self;
-		}
-
-		public CompositeAggregationSourceDescriptor<TDocument> Histogram(HistogramAggregationDescriptor<TDocument> descriptor)
-		{
-			HistogramValue = null;
-			HistogramDescriptorAction = null;
-			HistogramDescriptor = descriptor;
-			return Self;
-		}
-
-		public CompositeAggregationSourceDescriptor<TDocument> Histogram(Action<HistogramAggregationDescriptor<TDocument>> configure)
-		{
-			HistogramValue = null;
-			HistogramDescriptor = null;
-			HistogramDescriptorAction = configure;
-			return Self;
-		}
-
-		public CompositeAggregationSourceDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? terms)
-		{
-			TermsDescriptor = null;
-			TermsDescriptorAction = null;
-			TermsValue = terms;
-			return Self;
-		}
-
-		public CompositeAggregationSourceDescriptor<TDocument> Terms(TermsAggregationDescriptor<TDocument> descriptor)
-		{
-			TermsValue = null;
-			TermsDescriptorAction = null;
-			TermsDescriptor = descriptor;
-			return Self;
-		}
-
-		public CompositeAggregationSourceDescriptor<TDocument> Terms(Action<TermsAggregationDescriptor<TDocument>> configure)
-		{
-			TermsValue = null;
-			TermsDescriptor = null;
-			TermsDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (DateHistogramDescriptor is not null)
-			{
-				writer.WritePropertyName("date_histogram");
-				JsonSerializer.Serialize(writer, DateHistogramDescriptor, options);
-			}
-			else if (DateHistogramDescriptorAction is not null)
-			{
-				writer.WritePropertyName("date_histogram");
-				JsonSerializer.Serialize(writer, new DateHistogramAggregationDescriptor<TDocument>(DateHistogramDescriptorAction), options);
-			}
-			else if (DateHistogramValue is not null)
-			{
-				writer.WritePropertyName("date_histogram");
-				JsonSerializer.Serialize(writer, DateHistogramValue, options);
-			}
-
-			if (HistogramDescriptor is not null)
-			{
-				writer.WritePropertyName("histogram");
-				JsonSerializer.Serialize(writer, HistogramDescriptor, options);
-			}
-			else if (HistogramDescriptorAction is not null)
-			{
-				writer.WritePropertyName("histogram");
-				JsonSerializer.Serialize(writer, new HistogramAggregationDescriptor<TDocument>(HistogramDescriptorAction), options);
-			}
-			else if (HistogramValue is not null)
-			{
-				writer.WritePropertyName("histogram");
-				JsonSerializer.Serialize(writer, HistogramValue, options);
-			}
-
-			if (TermsDescriptor is not null)
-			{
-				writer.WritePropertyName("terms");
-				JsonSerializer.Serialize(writer, TermsDescriptor, options);
-			}
-			else if (TermsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("terms");
-				JsonSerializer.Serialize(writer, new TermsAggregationDescriptor<TDocument>(TermsDescriptorAction), options);
-			}
-			else if (TermsValue is not null)
-			{
-				writer.WritePropertyName("terms");
-				JsonSerializer.Serialize(writer, TermsValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		DateHistogramDescriptor = null;
+		DateHistogramDescriptorAction = null;
+		DateHistogramValue = dateHistogram;
+		return Self;
 	}
 
-	public sealed partial class CompositeAggregationSourceDescriptor : SerializableDescriptorBase<CompositeAggregationSourceDescriptor>
+	public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(DateHistogramAggregationDescriptor<TDocument> descriptor)
 	{
-		internal CompositeAggregationSourceDescriptor(Action<CompositeAggregationSourceDescriptor> configure) => configure.Invoke(this);
-		public CompositeAggregationSourceDescriptor() : base()
+		DateHistogramValue = null;
+		DateHistogramDescriptorAction = null;
+		DateHistogramDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(Action<DateHistogramAggregationDescriptor<TDocument>> configure)
+	{
+		DateHistogramValue = null;
+		DateHistogramDescriptor = null;
+		DateHistogramDescriptorAction = configure;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? histogram)
+	{
+		HistogramDescriptor = null;
+		HistogramDescriptorAction = null;
+		HistogramValue = histogram;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor<TDocument> Histogram(HistogramAggregationDescriptor<TDocument> descriptor)
+	{
+		HistogramValue = null;
+		HistogramDescriptorAction = null;
+		HistogramDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor<TDocument> Histogram(Action<HistogramAggregationDescriptor<TDocument>> configure)
+	{
+		HistogramValue = null;
+		HistogramDescriptor = null;
+		HistogramDescriptorAction = configure;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? terms)
+	{
+		TermsDescriptor = null;
+		TermsDescriptorAction = null;
+		TermsValue = terms;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor<TDocument> Terms(TermsAggregationDescriptor<TDocument> descriptor)
+	{
+		TermsValue = null;
+		TermsDescriptorAction = null;
+		TermsDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor<TDocument> Terms(Action<TermsAggregationDescriptor<TDocument>> configure)
+	{
+		TermsValue = null;
+		TermsDescriptor = null;
+		TermsDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DateHistogramDescriptor is not null)
 		{
+			writer.WritePropertyName("date_histogram");
+			JsonSerializer.Serialize(writer, DateHistogramDescriptor, options);
+		}
+		else if (DateHistogramDescriptorAction is not null)
+		{
+			writer.WritePropertyName("date_histogram");
+			JsonSerializer.Serialize(writer, new DateHistogramAggregationDescriptor<TDocument>(DateHistogramDescriptorAction), options);
+		}
+		else if (DateHistogramValue is not null)
+		{
+			writer.WritePropertyName("date_histogram");
+			JsonSerializer.Serialize(writer, DateHistogramValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogramValue { get; set; }
-
-		private DateHistogramAggregationDescriptor DateHistogramDescriptor { get; set; }
-
-		private Action<DateHistogramAggregationDescriptor> DateHistogramDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? HistogramValue { get; set; }
-
-		private HistogramAggregationDescriptor HistogramDescriptor { get; set; }
-
-		private Action<HistogramAggregationDescriptor> HistogramDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? TermsValue { get; set; }
-
-		private TermsAggregationDescriptor TermsDescriptor { get; set; }
-
-		private Action<TermsAggregationDescriptor> TermsDescriptorAction { get; set; }
-
-		public CompositeAggregationSourceDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? dateHistogram)
+		if (HistogramDescriptor is not null)
 		{
-			DateHistogramDescriptor = null;
-			DateHistogramDescriptorAction = null;
-			DateHistogramValue = dateHistogram;
-			return Self;
+			writer.WritePropertyName("histogram");
+			JsonSerializer.Serialize(writer, HistogramDescriptor, options);
+		}
+		else if (HistogramDescriptorAction is not null)
+		{
+			writer.WritePropertyName("histogram");
+			JsonSerializer.Serialize(writer, new HistogramAggregationDescriptor<TDocument>(HistogramDescriptorAction), options);
+		}
+		else if (HistogramValue is not null)
+		{
+			writer.WritePropertyName("histogram");
+			JsonSerializer.Serialize(writer, HistogramValue, options);
 		}
 
-		public CompositeAggregationSourceDescriptor DateHistogram(DateHistogramAggregationDescriptor descriptor)
+		if (TermsDescriptor is not null)
 		{
-			DateHistogramValue = null;
-			DateHistogramDescriptorAction = null;
-			DateHistogramDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("terms");
+			JsonSerializer.Serialize(writer, TermsDescriptor, options);
+		}
+		else if (TermsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("terms");
+			JsonSerializer.Serialize(writer, new TermsAggregationDescriptor<TDocument>(TermsDescriptorAction), options);
+		}
+		else if (TermsValue is not null)
+		{
+			writer.WritePropertyName("terms");
+			JsonSerializer.Serialize(writer, TermsValue, options);
 		}
 
-		public CompositeAggregationSourceDescriptor DateHistogram(Action<DateHistogramAggregationDescriptor> configure)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class CompositeAggregationSourceDescriptor : SerializableDescriptor<CompositeAggregationSourceDescriptor>
+{
+	internal CompositeAggregationSourceDescriptor(Action<CompositeAggregationSourceDescriptor> configure) => configure.Invoke(this);
+	public CompositeAggregationSourceDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogramValue { get; set; }
+
+	private DateHistogramAggregationDescriptor DateHistogramDescriptor { get; set; }
+
+	private Action<DateHistogramAggregationDescriptor> DateHistogramDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? HistogramValue { get; set; }
+
+	private HistogramAggregationDescriptor HistogramDescriptor { get; set; }
+
+	private Action<HistogramAggregationDescriptor> HistogramDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? TermsValue { get; set; }
+
+	private TermsAggregationDescriptor TermsDescriptor { get; set; }
+
+	private Action<TermsAggregationDescriptor> TermsDescriptorAction { get; set; }
+
+	public CompositeAggregationSourceDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? dateHistogram)
+	{
+		DateHistogramDescriptor = null;
+		DateHistogramDescriptorAction = null;
+		DateHistogramValue = dateHistogram;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor DateHistogram(DateHistogramAggregationDescriptor descriptor)
+	{
+		DateHistogramValue = null;
+		DateHistogramDescriptorAction = null;
+		DateHistogramDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor DateHistogram(Action<DateHistogramAggregationDescriptor> configure)
+	{
+		DateHistogramValue = null;
+		DateHistogramDescriptor = null;
+		DateHistogramDescriptorAction = configure;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? histogram)
+	{
+		HistogramDescriptor = null;
+		HistogramDescriptorAction = null;
+		HistogramValue = histogram;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor Histogram(HistogramAggregationDescriptor descriptor)
+	{
+		HistogramValue = null;
+		HistogramDescriptorAction = null;
+		HistogramDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor Histogram(Action<HistogramAggregationDescriptor> configure)
+	{
+		HistogramValue = null;
+		HistogramDescriptor = null;
+		HistogramDescriptorAction = configure;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? terms)
+	{
+		TermsDescriptor = null;
+		TermsDescriptorAction = null;
+		TermsValue = terms;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor Terms(TermsAggregationDescriptor descriptor)
+	{
+		TermsValue = null;
+		TermsDescriptorAction = null;
+		TermsDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor Terms(Action<TermsAggregationDescriptor> configure)
+	{
+		TermsValue = null;
+		TermsDescriptor = null;
+		TermsDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DateHistogramDescriptor is not null)
 		{
-			DateHistogramValue = null;
-			DateHistogramDescriptor = null;
-			DateHistogramDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("date_histogram");
+			JsonSerializer.Serialize(writer, DateHistogramDescriptor, options);
+		}
+		else if (DateHistogramDescriptorAction is not null)
+		{
+			writer.WritePropertyName("date_histogram");
+			JsonSerializer.Serialize(writer, new DateHistogramAggregationDescriptor(DateHistogramDescriptorAction), options);
+		}
+		else if (DateHistogramValue is not null)
+		{
+			writer.WritePropertyName("date_histogram");
+			JsonSerializer.Serialize(writer, DateHistogramValue, options);
 		}
 
-		public CompositeAggregationSourceDescriptor Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? histogram)
+		if (HistogramDescriptor is not null)
 		{
-			HistogramDescriptor = null;
-			HistogramDescriptorAction = null;
-			HistogramValue = histogram;
-			return Self;
+			writer.WritePropertyName("histogram");
+			JsonSerializer.Serialize(writer, HistogramDescriptor, options);
+		}
+		else if (HistogramDescriptorAction is not null)
+		{
+			writer.WritePropertyName("histogram");
+			JsonSerializer.Serialize(writer, new HistogramAggregationDescriptor(HistogramDescriptorAction), options);
+		}
+		else if (HistogramValue is not null)
+		{
+			writer.WritePropertyName("histogram");
+			JsonSerializer.Serialize(writer, HistogramValue, options);
 		}
 
-		public CompositeAggregationSourceDescriptor Histogram(HistogramAggregationDescriptor descriptor)
+		if (TermsDescriptor is not null)
 		{
-			HistogramValue = null;
-			HistogramDescriptorAction = null;
-			HistogramDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("terms");
+			JsonSerializer.Serialize(writer, TermsDescriptor, options);
+		}
+		else if (TermsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("terms");
+			JsonSerializer.Serialize(writer, new TermsAggregationDescriptor(TermsDescriptorAction), options);
+		}
+		else if (TermsValue is not null)
+		{
+			writer.WritePropertyName("terms");
+			JsonSerializer.Serialize(writer, TermsValue, options);
 		}
 
-		public CompositeAggregationSourceDescriptor Histogram(Action<HistogramAggregationDescriptor> configure)
-		{
-			HistogramValue = null;
-			HistogramDescriptor = null;
-			HistogramDescriptorAction = configure;
-			return Self;
-		}
-
-		public CompositeAggregationSourceDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? terms)
-		{
-			TermsDescriptor = null;
-			TermsDescriptorAction = null;
-			TermsValue = terms;
-			return Self;
-		}
-
-		public CompositeAggregationSourceDescriptor Terms(TermsAggregationDescriptor descriptor)
-		{
-			TermsValue = null;
-			TermsDescriptorAction = null;
-			TermsDescriptor = descriptor;
-			return Self;
-		}
-
-		public CompositeAggregationSourceDescriptor Terms(Action<TermsAggregationDescriptor> configure)
-		{
-			TermsValue = null;
-			TermsDescriptor = null;
-			TermsDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (DateHistogramDescriptor is not null)
-			{
-				writer.WritePropertyName("date_histogram");
-				JsonSerializer.Serialize(writer, DateHistogramDescriptor, options);
-			}
-			else if (DateHistogramDescriptorAction is not null)
-			{
-				writer.WritePropertyName("date_histogram");
-				JsonSerializer.Serialize(writer, new DateHistogramAggregationDescriptor(DateHistogramDescriptorAction), options);
-			}
-			else if (DateHistogramValue is not null)
-			{
-				writer.WritePropertyName("date_histogram");
-				JsonSerializer.Serialize(writer, DateHistogramValue, options);
-			}
-
-			if (HistogramDescriptor is not null)
-			{
-				writer.WritePropertyName("histogram");
-				JsonSerializer.Serialize(writer, HistogramDescriptor, options);
-			}
-			else if (HistogramDescriptorAction is not null)
-			{
-				writer.WritePropertyName("histogram");
-				JsonSerializer.Serialize(writer, new HistogramAggregationDescriptor(HistogramDescriptorAction), options);
-			}
-			else if (HistogramValue is not null)
-			{
-				writer.WritePropertyName("histogram");
-				JsonSerializer.Serialize(writer, HistogramValue, options);
-			}
-
-			if (TermsDescriptor is not null)
-			{
-				writer.WritePropertyName("terms");
-				JsonSerializer.Serialize(writer, TermsDescriptor, options);
-			}
-			else if (TermsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("terms");
-				JsonSerializer.Serialize(writer, new TermsAggregationDescriptor(TermsDescriptorAction), options);
-			}
-			else if (TermsValue is not null)
-			{
-				writer.WritePropertyName("terms");
-				JsonSerializer.Serialize(writer, TermsValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

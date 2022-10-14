@@ -15,33 +15,33 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Sql
+namespace Elastic.Clients.Elasticsearch.Sql;
+public sealed partial class SqlQueryResponse : ElasticsearchResponseBase
 {
-	public sealed partial class SqlQueryResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("columns")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? Columns { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("columns")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? Columns { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("cursor")]
-		public string? Cursor { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("cursor")]
+	public string? Cursor { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public string? Id { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("id")]
+	public string? Id { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("is_partial")]
-		public bool? IsPartial { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("is_partial")]
+	public bool? IsPartial { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("is_running")]
-		public bool? IsRunning { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("is_running")]
+	public bool? IsRunning { get; init; }
 }

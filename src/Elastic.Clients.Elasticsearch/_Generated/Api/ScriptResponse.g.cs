@@ -15,25 +15,25 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class ScriptResponse : ElasticsearchResponseBase
 {
-	public sealed partial class ScriptResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("found")]
-		public bool Found { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("found")]
+	public bool Found { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("_id")]
-		public string Id { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("_id")]
+	public string Id { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.StoredScript? Script { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.StoredScript? Script { get; init; }
 }

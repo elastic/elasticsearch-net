@@ -8,10 +8,11 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public sealed class BulkIndexOperation<T> : BulkOperationBase
+public sealed class BulkIndexOperation<T> : BulkOperation
 {
 	/// <summary>
 	/// Creates an instance of <see cref="BulkIndexOperation{T}"/> with the provided <typeparamref name="T"/> document serialized

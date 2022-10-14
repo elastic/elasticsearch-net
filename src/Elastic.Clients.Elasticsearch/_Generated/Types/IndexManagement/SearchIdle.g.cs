@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,40 +24,38 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class SearchIdle
 {
-	public sealed partial class SearchIdle
+	[JsonInclude]
+	[JsonPropertyName("after")]
+	public Elastic.Clients.Elasticsearch.Duration? After { get; set; }
+}
+
+public sealed partial class SearchIdleDescriptor : SerializableDescriptor<SearchIdleDescriptor>
+{
+	internal SearchIdleDescriptor(Action<SearchIdleDescriptor> configure) => configure.Invoke(this);
+	public SearchIdleDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("after")]
-		public Elastic.Clients.Elasticsearch.Duration? After { get; set; }
 	}
 
-	public sealed partial class SearchIdleDescriptor : SerializableDescriptorBase<SearchIdleDescriptor>
+	private Elastic.Clients.Elasticsearch.Duration? AfterValue { get; set; }
+
+	public SearchIdleDescriptor After(Elastic.Clients.Elasticsearch.Duration? after)
 	{
-		internal SearchIdleDescriptor(Action<SearchIdleDescriptor> configure) => configure.Invoke(this);
-		public SearchIdleDescriptor() : base()
+		AfterValue = after;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AfterValue is not null)
 		{
+			writer.WritePropertyName("after");
+			JsonSerializer.Serialize(writer, AfterValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Duration? AfterValue { get; set; }
-
-		public SearchIdleDescriptor After(Elastic.Clients.Elasticsearch.Duration? after)
-		{
-			AfterValue = after;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (AfterValue is not null)
-			{
-				writer.WritePropertyName("after");
-				JsonSerializer.Serialize(writer, AfterValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

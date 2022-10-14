@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,277 +24,275 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+internal sealed class GeoDistanceSortConverter : JsonConverter<GeoDistanceSort>
 {
-	internal sealed class GeoDistanceSortConverter : JsonConverter<GeoDistanceSort>
+	public override GeoDistanceSort Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override GeoDistanceSort Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		var variant = new GeoDistanceSort();
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			var variant = new GeoDistanceSort();
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				var property = reader.GetString();
+				if (property == "distance_type")
 				{
-					var property = reader.GetString();
-					if (property == "distance_type")
-					{
-						variant.DistanceType = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceType?>(ref reader, options);
-						continue;
-					}
+					variant.DistanceType = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceType?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "ignore_unmapped")
-					{
-						variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						continue;
-					}
+				if (property == "ignore_unmapped")
+				{
+					variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "mode")
-					{
-						variant.Mode = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortMode?>(ref reader, options);
-						continue;
-					}
+				if (property == "mode")
+				{
+					variant.Mode = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortMode?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "order")
-					{
-						variant.Order = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortOrder?>(ref reader, options);
-						continue;
-					}
+				if (property == "order")
+				{
+					variant.Order = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortOrder?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "unit")
-					{
-						variant.Unit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DistanceUnit?>(ref reader, options);
-						continue;
-					}
+				if (property == "unit")
+				{
+					variant.Unit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DistanceUnit?>(ref reader, options);
+					continue;
 				}
 			}
-
-			return variant;
 		}
 
-		public override void Write(Utf8JsonWriter writer, GeoDistanceSort value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value.DistanceType is not null)
-			{
-				writer.WritePropertyName("distance_type");
-				JsonSerializer.Serialize(writer, value.DistanceType, options);
-			}
-
-			if (value.IgnoreUnmapped.HasValue)
-			{
-				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
-			}
-
-			if (value.Mode is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, value.Mode, options);
-			}
-
-			if (value.Order is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, value.Order, options);
-			}
-
-			if (value.Unit is not null)
-			{
-				writer.WritePropertyName("unit");
-				JsonSerializer.Serialize(writer, value.Unit, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return variant;
 	}
 
-	[JsonConverter(typeof(GeoDistanceSortConverter))]
-	public sealed partial class GeoDistanceSort
+	public override void Write(Utf8JsonWriter writer, GeoDistanceSort value, JsonSerializerOptions options)
 	{
-		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
+		writer.WriteStartObject();
+		if (value.DistanceType is not null)
+		{
+			writer.WritePropertyName("distance_type");
+			JsonSerializer.Serialize(writer, value.DistanceType, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+		if (value.IgnoreUnmapped.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
+		}
 
-		public bool? IgnoreUnmapped { get; set; }
+		if (value.Mode is not null)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, value.Mode, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
+		if (value.Order is not null)
+		{
+			writer.WritePropertyName("order");
+			JsonSerializer.Serialize(writer, value.Order, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
+		if (value.Unit is not null)
+		{
+			writer.WritePropertyName("unit");
+			JsonSerializer.Serialize(writer, value.Unit, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GeoDistanceSortConverter))]
+public sealed partial class GeoDistanceSort
+{
+	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	public bool? IgnoreUnmapped { get; set; }
+
+	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
+
+	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
+
+	public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
+}
+
+public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableDescriptor<GeoDistanceSortDescriptor<TDocument>>
+{
+	internal GeoDistanceSortDescriptor(Action<GeoDistanceSortDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public GeoDistanceSortDescriptor() : base()
+	{
 	}
 
-	public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableDescriptorBase<GeoDistanceSortDescriptor<TDocument>>
+	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
+
+	private bool? IgnoreUnmappedValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	public GeoDistanceSortDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 	{
-		internal GeoDistanceSortDescriptor(Action<GeoDistanceSortDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public GeoDistanceSortDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
-
-		private bool? IgnoreUnmappedValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		public GeoDistanceSortDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
-		{
-			DistanceTypeValue = distanceType;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
-		{
-			IgnoreUnmappedValue = ignoreUnmapped;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
-		{
-			ModeValue = mode;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
-		{
-			OrderValue = order;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
-		{
-			UnitValue = unit;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (DistanceTypeValue is not null)
-			{
-				writer.WritePropertyName("distance_type");
-				JsonSerializer.Serialize(writer, DistanceTypeValue, options);
-			}
-
-			if (IgnoreUnmappedValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-			}
-
-			if (ModeValue is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, ModeValue, options);
-			}
-
-			if (OrderValue is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, OrderValue, options);
-			}
-
-			if (UnitValue is not null)
-			{
-				writer.WritePropertyName("unit");
-				JsonSerializer.Serialize(writer, UnitValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		DistanceTypeValue = distanceType;
+		return Self;
 	}
 
-	public sealed partial class GeoDistanceSortDescriptor : SerializableDescriptorBase<GeoDistanceSortDescriptor>
+	public GeoDistanceSortDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
-		internal GeoDistanceSortDescriptor(Action<GeoDistanceSortDescriptor> configure) => configure.Invoke(this);
-		public GeoDistanceSortDescriptor() : base()
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	{
+		ModeValue = mode;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+	{
+		OrderValue = order;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
+	{
+		UnitValue = unit;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DistanceTypeValue is not null)
 		{
+			writer.WritePropertyName("distance_type");
+			JsonSerializer.Serialize(writer, DistanceTypeValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
-
-		private bool? IgnoreUnmappedValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		public GeoDistanceSortDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
+		if (IgnoreUnmappedValue.HasValue)
 		{
-			DistanceTypeValue = distanceType;
-			return Self;
+			writer.WritePropertyName("ignore_unmapped");
+			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
 		}
 
-		public GeoDistanceSortDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+		if (ModeValue is not null)
 		{
-			IgnoreUnmappedValue = ignoreUnmapped;
-			return Self;
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
 		}
 
-		public GeoDistanceSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+		if (OrderValue is not null)
 		{
-			ModeValue = mode;
-			return Self;
+			writer.WritePropertyName("order");
+			JsonSerializer.Serialize(writer, OrderValue, options);
 		}
 
-		public GeoDistanceSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+		if (UnitValue is not null)
 		{
-			OrderValue = order;
-			return Self;
+			writer.WritePropertyName("unit");
+			JsonSerializer.Serialize(writer, UnitValue, options);
 		}
 
-		public GeoDistanceSortDescriptor Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class GeoDistanceSortDescriptor : SerializableDescriptor<GeoDistanceSortDescriptor>
+{
+	internal GeoDistanceSortDescriptor(Action<GeoDistanceSortDescriptor> configure) => configure.Invoke(this);
+	public GeoDistanceSortDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
+
+	private bool? IgnoreUnmappedValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	public GeoDistanceSortDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
+	{
+		DistanceTypeValue = distanceType;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	{
+		ModeValue = mode;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+	{
+		OrderValue = order;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
+	{
+		UnitValue = unit;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DistanceTypeValue is not null)
 		{
-			UnitValue = unit;
-			return Self;
+			writer.WritePropertyName("distance_type");
+			JsonSerializer.Serialize(writer, DistanceTypeValue, options);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		if (IgnoreUnmappedValue.HasValue)
 		{
-			writer.WriteStartObject();
-			if (DistanceTypeValue is not null)
-			{
-				writer.WritePropertyName("distance_type");
-				JsonSerializer.Serialize(writer, DistanceTypeValue, options);
-			}
-
-			if (IgnoreUnmappedValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-			}
-
-			if (ModeValue is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, ModeValue, options);
-			}
-
-			if (OrderValue is not null)
-			{
-				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, OrderValue, options);
-			}
-
-			if (UnitValue is not null)
-			{
-				writer.WritePropertyName("unit");
-				JsonSerializer.Serialize(writer, UnitValue, options);
-			}
-
-			writer.WriteEndObject();
+			writer.WritePropertyName("ignore_unmapped");
+			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
 		}
+
+		if (ModeValue is not null)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
+		}
+
+		if (OrderValue is not null)
+		{
+			writer.WritePropertyName("order");
+			JsonSerializer.Serialize(writer, OrderValue, options);
+		}
+
+		if (UnitValue is not null)
+		{
+			writer.WritePropertyName("unit");
+			JsonSerializer.Serialize(writer, UnitValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

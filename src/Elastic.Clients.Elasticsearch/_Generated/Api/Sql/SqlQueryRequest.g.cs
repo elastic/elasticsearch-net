@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,625 +26,623 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Sql
+namespace Elastic.Clients.Elasticsearch.Sql;
+public sealed class SqlQueryRequestParameters : RequestParameters<SqlQueryRequestParameters>
 {
-	public sealed class SqlQueryRequestParameters : RequestParameters<SqlQueryRequestParameters>
+}
+
+public sealed partial class SqlQueryRequest : PlainRequest<SqlQueryRequestParameters>
+{
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	[JsonInclude]
+	[JsonPropertyName("catalog")]
+	public string? Catalog { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("columnar")]
+	public bool? Columnar { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("cursor")]
+	public string? Cursor { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("fetch_size")]
+	public int? FetchSize { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("filter")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("query")]
+	public string? Query { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("request_timeout")]
+	public Elastic.Clients.Elasticsearch.Duration? RequestTimeout { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("page_timeout")]
+	public Elastic.Clients.Elasticsearch.Duration? PageTimeout { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("time_zone")]
+	public string? TimeZone { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("field_multi_value_leniency")]
+	public bool? FieldMultiValueLeniency { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("runtime_mappings")]
+	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("wait_for_completion_timeout")]
+	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("params")]
+	public Dictionary<string, object>? Params { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("keep_alive")]
+	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("keep_on_completion")]
+	public bool? KeepOnCompletion { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("index_using_frozen")]
+	public bool? IndexUsingFrozen { get; set; }
+}
+
+public sealed partial class SqlQueryRequestDescriptor<TDocument> : RequestDescriptor<SqlQueryRequestDescriptor<TDocument>, SqlQueryRequestParameters>
+{
+	internal SqlQueryRequestDescriptor(Action<SqlQueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public SqlQueryRequestDescriptor()
 	{
 	}
 
-	public sealed partial class SqlQueryRequest : PlainRequestBase<SqlQueryRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+
+	private QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+
+	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+
+	private string? CatalogValue { get; set; }
+
+	private bool? ColumnarValue { get; set; }
+
+	private string? CursorValue { get; set; }
+
+	private int? FetchSizeValue { get; set; }
+
+	private bool? FieldMultiValueLeniencyValue { get; set; }
+
+	private bool? IndexUsingFrozenValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
+
+	private bool? KeepOnCompletionValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
+
+	private Dictionary<string, object>? ParamsValue { get; set; }
+
+	private string? QueryValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
+
+	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+
+	private string? TimeZoneValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
+
+	public SqlQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		[JsonInclude]
-		[JsonPropertyName("catalog")]
-		public string? Catalog { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("columnar")]
-		public bool? Columnar { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("cursor")]
-		public string? Cursor { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("fetch_size")]
-		public int? FetchSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("query")]
-		public string? Query { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("request_timeout")]
-		public Elastic.Clients.Elasticsearch.Duration? RequestTimeout { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("page_timeout")]
-		public Elastic.Clients.Elasticsearch.Duration? PageTimeout { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("time_zone")]
-		public string? TimeZone { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field_multi_value_leniency")]
-		public bool? FieldMultiValueLeniency { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("wait_for_completion_timeout")]
-		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("params")]
-		public Dictionary<string, object>? Params { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("keep_alive")]
-		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("keep_on_completion")]
-		public bool? KeepOnCompletion { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("index_using_frozen")]
-		public bool? IndexUsingFrozen { get; set; }
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
 	}
 
-	public sealed partial class SqlQueryRequestDescriptor<TDocument> : RequestDescriptorBase<SqlQueryRequestDescriptor<TDocument>, SqlQueryRequestParameters>
+	public SqlQueryRequestDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 	{
-		internal SqlQueryRequestDescriptor(Action<SqlQueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public SqlQueryRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
-
-		private QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
-
-		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
-		private string? CatalogValue { get; set; }
-
-		private bool? ColumnarValue { get; set; }
-
-		private string? CursorValue { get; set; }
-
-		private int? FetchSizeValue { get; set; }
-
-		private bool? FieldMultiValueLeniencyValue { get; set; }
-
-		private bool? IndexUsingFrozenValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
-
-		private bool? KeepOnCompletionValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
-
-		private Dictionary<string, object>? ParamsValue { get; set; }
-
-		private string? QueryValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
-
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-
-		private string? TimeZoneValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
-
-		public SqlQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
-		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
-		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
-		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> Catalog(string? catalog)
-		{
-			CatalogValue = catalog;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> Columnar(bool? columnar = true)
-		{
-			ColumnarValue = columnar;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> Cursor(string? cursor)
-		{
-			CursorValue = cursor;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> FetchSize(int? fetchSize)
-		{
-			FetchSizeValue = fetchSize;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
-		{
-			FieldMultiValueLeniencyValue = fieldMultiValueLeniency;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> IndexUsingFrozen(bool? indexUsingFrozen = true)
-		{
-			IndexUsingFrozenValue = indexUsingFrozen;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
-		{
-			KeepAliveValue = keepAlive;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true)
-		{
-			KeepOnCompletionValue = keepOnCompletion;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
-		{
-			PageTimeoutValue = pageTimeout;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> Query(string? query)
-		{
-			QueryValue = query;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> RequestTimeout(Elastic.Clients.Elasticsearch.Duration? requestTimeout)
-		{
-			RequestTimeoutValue = requestTimeout;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
-		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> TimeZone(string? timeZone)
-		{
-			TimeZoneValue = timeZone;
-			return Self;
-		}
-
-		public SqlQueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
-		{
-			WaitForCompletionTimeoutValue = waitForCompletionTimeout;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(CatalogValue))
-			{
-				writer.WritePropertyName("catalog");
-				writer.WriteStringValue(CatalogValue);
-			}
-
-			if (ColumnarValue.HasValue)
-			{
-				writer.WritePropertyName("columnar");
-				writer.WriteBooleanValue(ColumnarValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(CursorValue))
-			{
-				writer.WritePropertyName("cursor");
-				writer.WriteStringValue(CursorValue);
-			}
-
-			if (FetchSizeValue.HasValue)
-			{
-				writer.WritePropertyName("fetch_size");
-				writer.WriteNumberValue(FetchSizeValue.Value);
-			}
-
-			if (FieldMultiValueLeniencyValue.HasValue)
-			{
-				writer.WritePropertyName("field_multi_value_leniency");
-				writer.WriteBooleanValue(FieldMultiValueLeniencyValue.Value);
-			}
-
-			if (IndexUsingFrozenValue.HasValue)
-			{
-				writer.WritePropertyName("index_using_frozen");
-				writer.WriteBooleanValue(IndexUsingFrozenValue.Value);
-			}
-
-			if (KeepAliveValue is not null)
-			{
-				writer.WritePropertyName("keep_alive");
-				JsonSerializer.Serialize(writer, KeepAliveValue, options);
-			}
-
-			if (KeepOnCompletionValue.HasValue)
-			{
-				writer.WritePropertyName("keep_on_completion");
-				writer.WriteBooleanValue(KeepOnCompletionValue.Value);
-			}
-
-			if (PageTimeoutValue is not null)
-			{
-				writer.WritePropertyName("page_timeout");
-				JsonSerializer.Serialize(writer, PageTimeoutValue, options);
-			}
-
-			if (ParamsValue is not null)
-			{
-				writer.WritePropertyName("params");
-				JsonSerializer.Serialize(writer, ParamsValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(QueryValue))
-			{
-				writer.WritePropertyName("query");
-				writer.WriteStringValue(QueryValue);
-			}
-
-			if (RequestTimeoutValue is not null)
-			{
-				writer.WritePropertyName("request_timeout");
-				JsonSerializer.Serialize(writer, RequestTimeoutValue, options);
-			}
-
-			if (RuntimeMappingsValue is not null)
-			{
-				writer.WritePropertyName("runtime_mappings");
-				JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-			}
-
-			if (TimeZoneValue is not null)
-			{
-				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, TimeZoneValue, options);
-			}
-
-			if (WaitForCompletionTimeoutValue is not null)
-			{
-				writer.WritePropertyName("wait_for_completion_timeout");
-				JsonSerializer.Serialize(writer, WaitForCompletionTimeoutValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
 	}
 
-	public sealed partial class SqlQueryRequestDescriptor : RequestDescriptorBase<SqlQueryRequestDescriptor, SqlQueryRequestParameters>
+	public SqlQueryRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 	{
-		internal SqlQueryRequestDescriptor(Action<SqlQueryRequestDescriptor> configure) => configure.Invoke(this);
-		public SqlQueryRequestDescriptor()
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> Catalog(string? catalog)
+	{
+		CatalogValue = catalog;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> Columnar(bool? columnar = true)
+	{
+		ColumnarValue = columnar;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> Cursor(string? cursor)
+	{
+		CursorValue = cursor;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> FetchSize(int? fetchSize)
+	{
+		FetchSizeValue = fetchSize;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
+	{
+		FieldMultiValueLeniencyValue = fieldMultiValueLeniency;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> IndexUsingFrozen(bool? indexUsingFrozen = true)
+	{
+		IndexUsingFrozenValue = indexUsingFrozen;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
+	{
+		KeepAliveValue = keepAlive;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true)
+	{
+		KeepOnCompletionValue = keepOnCompletion;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
+	{
+		PageTimeoutValue = pageTimeout;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> Query(string? query)
+	{
+		QueryValue = query;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> RequestTimeout(Elastic.Clients.Elasticsearch.Duration? requestTimeout)
+	{
+		RequestTimeoutValue = requestTimeout;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+	{
+		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> TimeZone(string? timeZone)
+	{
+		TimeZoneValue = timeZone;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
+	{
+		WaitForCompletionTimeoutValue = waitForCompletionTimeout;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FilterDescriptor is not null)
 		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
-
-		private QueryDsl.QueryContainerDescriptor FilterDescriptor { get; set; }
-
-		private Action<QueryDsl.QueryContainerDescriptor> FilterDescriptorAction { get; set; }
-
-		private string? CatalogValue { get; set; }
-
-		private bool? ColumnarValue { get; set; }
-
-		private string? CursorValue { get; set; }
-
-		private int? FetchSizeValue { get; set; }
-
-		private bool? FieldMultiValueLeniencyValue { get; set; }
-
-		private bool? IndexUsingFrozenValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
-
-		private bool? KeepOnCompletionValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
-
-		private Dictionary<string, object>? ParamsValue { get; set; }
-
-		private string? QueryValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
-
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-
-		private string? TimeZoneValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
-
-		public SqlQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		if (!string.IsNullOrEmpty(CatalogValue))
 		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
+			writer.WritePropertyName("catalog");
+			writer.WriteStringValue(CatalogValue);
 		}
 
-		public SqlQueryRequestDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+		if (ColumnarValue.HasValue)
 		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("columnar");
+			writer.WriteBooleanValue(ColumnarValue.Value);
 		}
 
-		public SqlQueryRequestDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+		if (!string.IsNullOrEmpty(CursorValue))
 		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("cursor");
+			writer.WriteStringValue(CursorValue);
 		}
 
-		public SqlQueryRequestDescriptor Catalog(string? catalog)
+		if (FetchSizeValue.HasValue)
 		{
-			CatalogValue = catalog;
-			return Self;
+			writer.WritePropertyName("fetch_size");
+			writer.WriteNumberValue(FetchSizeValue.Value);
 		}
 
-		public SqlQueryRequestDescriptor Columnar(bool? columnar = true)
+		if (FieldMultiValueLeniencyValue.HasValue)
 		{
-			ColumnarValue = columnar;
-			return Self;
+			writer.WritePropertyName("field_multi_value_leniency");
+			writer.WriteBooleanValue(FieldMultiValueLeniencyValue.Value);
 		}
 
-		public SqlQueryRequestDescriptor Cursor(string? cursor)
+		if (IndexUsingFrozenValue.HasValue)
 		{
-			CursorValue = cursor;
-			return Self;
+			writer.WritePropertyName("index_using_frozen");
+			writer.WriteBooleanValue(IndexUsingFrozenValue.Value);
 		}
 
-		public SqlQueryRequestDescriptor FetchSize(int? fetchSize)
+		if (KeepAliveValue is not null)
 		{
-			FetchSizeValue = fetchSize;
-			return Self;
+			writer.WritePropertyName("keep_alive");
+			JsonSerializer.Serialize(writer, KeepAliveValue, options);
 		}
 
-		public SqlQueryRequestDescriptor FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
+		if (KeepOnCompletionValue.HasValue)
 		{
-			FieldMultiValueLeniencyValue = fieldMultiValueLeniency;
-			return Self;
+			writer.WritePropertyName("keep_on_completion");
+			writer.WriteBooleanValue(KeepOnCompletionValue.Value);
 		}
 
-		public SqlQueryRequestDescriptor IndexUsingFrozen(bool? indexUsingFrozen = true)
+		if (PageTimeoutValue is not null)
 		{
-			IndexUsingFrozenValue = indexUsingFrozen;
-			return Self;
+			writer.WritePropertyName("page_timeout");
+			JsonSerializer.Serialize(writer, PageTimeoutValue, options);
 		}
 
-		public SqlQueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
+		if (ParamsValue is not null)
 		{
-			KeepAliveValue = keepAlive;
-			return Self;
+			writer.WritePropertyName("params");
+			JsonSerializer.Serialize(writer, ParamsValue, options);
 		}
 
-		public SqlQueryRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true)
+		if (!string.IsNullOrEmpty(QueryValue))
 		{
-			KeepOnCompletionValue = keepOnCompletion;
-			return Self;
+			writer.WritePropertyName("query");
+			writer.WriteStringValue(QueryValue);
 		}
 
-		public SqlQueryRequestDescriptor PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
+		if (RequestTimeoutValue is not null)
 		{
-			PageTimeoutValue = pageTimeout;
-			return Self;
+			writer.WritePropertyName("request_timeout");
+			JsonSerializer.Serialize(writer, RequestTimeoutValue, options);
 		}
 
-		public SqlQueryRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		if (RuntimeMappingsValue is not null)
 		{
-			ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
+			writer.WritePropertyName("runtime_mappings");
+			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
 		}
 
-		public SqlQueryRequestDescriptor Query(string? query)
+		if (TimeZoneValue is not null)
 		{
-			QueryValue = query;
-			return Self;
+			writer.WritePropertyName("time_zone");
+			JsonSerializer.Serialize(writer, TimeZoneValue, options);
 		}
 
-		public SqlQueryRequestDescriptor RequestTimeout(Elastic.Clients.Elasticsearch.Duration? requestTimeout)
+		if (WaitForCompletionTimeoutValue is not null)
 		{
-			RequestTimeoutValue = requestTimeout;
-			return Self;
+			writer.WritePropertyName("wait_for_completion_timeout");
+			JsonSerializer.Serialize(writer, WaitForCompletionTimeoutValue, options);
 		}
 
-		public SqlQueryRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class SqlQueryRequestDescriptor : RequestDescriptor<SqlQueryRequestDescriptor, SqlQueryRequestParameters>
+{
+	internal SqlQueryRequestDescriptor(Action<SqlQueryRequestDescriptor> configure) => configure.Invoke(this);
+	public SqlQueryRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+
+	private QueryDsl.QueryContainerDescriptor FilterDescriptor { get; set; }
+
+	private Action<QueryDsl.QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+
+	private string? CatalogValue { get; set; }
+
+	private bool? ColumnarValue { get; set; }
+
+	private string? CursorValue { get; set; }
+
+	private int? FetchSizeValue { get; set; }
+
+	private bool? FieldMultiValueLeniencyValue { get; set; }
+
+	private bool? IndexUsingFrozenValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
+
+	private bool? KeepOnCompletionValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
+
+	private Dictionary<string, object>? ParamsValue { get; set; }
+
+	private string? QueryValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
+
+	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+
+	private string? TimeZoneValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
+
+	public SqlQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor Catalog(string? catalog)
+	{
+		CatalogValue = catalog;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor Columnar(bool? columnar = true)
+	{
+		ColumnarValue = columnar;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor Cursor(string? cursor)
+	{
+		CursorValue = cursor;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor FetchSize(int? fetchSize)
+	{
+		FetchSizeValue = fetchSize;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
+	{
+		FieldMultiValueLeniencyValue = fieldMultiValueLeniency;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor IndexUsingFrozen(bool? indexUsingFrozen = true)
+	{
+		IndexUsingFrozenValue = indexUsingFrozen;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
+	{
+		KeepAliveValue = keepAlive;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true)
+	{
+		KeepOnCompletionValue = keepOnCompletion;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
+	{
+		PageTimeoutValue = pageTimeout;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor Query(string? query)
+	{
+		QueryValue = query;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor RequestTimeout(Elastic.Clients.Elasticsearch.Duration? requestTimeout)
+	{
+		RequestTimeoutValue = requestTimeout;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+	{
+		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor TimeZone(string? timeZone)
+	{
+		TimeZoneValue = timeZone;
+		return Self;
+	}
+
+	public SqlQueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
+	{
+		WaitForCompletionTimeoutValue = waitForCompletionTimeout;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FilterDescriptor is not null)
 		{
-			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
-			return Self;
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		public SqlQueryRequestDescriptor TimeZone(string? timeZone)
+		if (!string.IsNullOrEmpty(CatalogValue))
 		{
-			TimeZoneValue = timeZone;
-			return Self;
+			writer.WritePropertyName("catalog");
+			writer.WriteStringValue(CatalogValue);
 		}
 
-		public SqlQueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
+		if (ColumnarValue.HasValue)
 		{
-			WaitForCompletionTimeoutValue = waitForCompletionTimeout;
-			return Self;
+			writer.WritePropertyName("columnar");
+			writer.WriteBooleanValue(ColumnarValue.Value);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		if (!string.IsNullOrEmpty(CursorValue))
 		{
-			writer.WriteStartObject();
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(CatalogValue))
-			{
-				writer.WritePropertyName("catalog");
-				writer.WriteStringValue(CatalogValue);
-			}
-
-			if (ColumnarValue.HasValue)
-			{
-				writer.WritePropertyName("columnar");
-				writer.WriteBooleanValue(ColumnarValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(CursorValue))
-			{
-				writer.WritePropertyName("cursor");
-				writer.WriteStringValue(CursorValue);
-			}
-
-			if (FetchSizeValue.HasValue)
-			{
-				writer.WritePropertyName("fetch_size");
-				writer.WriteNumberValue(FetchSizeValue.Value);
-			}
-
-			if (FieldMultiValueLeniencyValue.HasValue)
-			{
-				writer.WritePropertyName("field_multi_value_leniency");
-				writer.WriteBooleanValue(FieldMultiValueLeniencyValue.Value);
-			}
-
-			if (IndexUsingFrozenValue.HasValue)
-			{
-				writer.WritePropertyName("index_using_frozen");
-				writer.WriteBooleanValue(IndexUsingFrozenValue.Value);
-			}
-
-			if (KeepAliveValue is not null)
-			{
-				writer.WritePropertyName("keep_alive");
-				JsonSerializer.Serialize(writer, KeepAliveValue, options);
-			}
-
-			if (KeepOnCompletionValue.HasValue)
-			{
-				writer.WritePropertyName("keep_on_completion");
-				writer.WriteBooleanValue(KeepOnCompletionValue.Value);
-			}
-
-			if (PageTimeoutValue is not null)
-			{
-				writer.WritePropertyName("page_timeout");
-				JsonSerializer.Serialize(writer, PageTimeoutValue, options);
-			}
-
-			if (ParamsValue is not null)
-			{
-				writer.WritePropertyName("params");
-				JsonSerializer.Serialize(writer, ParamsValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(QueryValue))
-			{
-				writer.WritePropertyName("query");
-				writer.WriteStringValue(QueryValue);
-			}
-
-			if (RequestTimeoutValue is not null)
-			{
-				writer.WritePropertyName("request_timeout");
-				JsonSerializer.Serialize(writer, RequestTimeoutValue, options);
-			}
-
-			if (RuntimeMappingsValue is not null)
-			{
-				writer.WritePropertyName("runtime_mappings");
-				JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-			}
-
-			if (TimeZoneValue is not null)
-			{
-				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, TimeZoneValue, options);
-			}
-
-			if (WaitForCompletionTimeoutValue is not null)
-			{
-				writer.WritePropertyName("wait_for_completion_timeout");
-				JsonSerializer.Serialize(writer, WaitForCompletionTimeoutValue, options);
-			}
-
-			writer.WriteEndObject();
+			writer.WritePropertyName("cursor");
+			writer.WriteStringValue(CursorValue);
 		}
+
+		if (FetchSizeValue.HasValue)
+		{
+			writer.WritePropertyName("fetch_size");
+			writer.WriteNumberValue(FetchSizeValue.Value);
+		}
+
+		if (FieldMultiValueLeniencyValue.HasValue)
+		{
+			writer.WritePropertyName("field_multi_value_leniency");
+			writer.WriteBooleanValue(FieldMultiValueLeniencyValue.Value);
+		}
+
+		if (IndexUsingFrozenValue.HasValue)
+		{
+			writer.WritePropertyName("index_using_frozen");
+			writer.WriteBooleanValue(IndexUsingFrozenValue.Value);
+		}
+
+		if (KeepAliveValue is not null)
+		{
+			writer.WritePropertyName("keep_alive");
+			JsonSerializer.Serialize(writer, KeepAliveValue, options);
+		}
+
+		if (KeepOnCompletionValue.HasValue)
+		{
+			writer.WritePropertyName("keep_on_completion");
+			writer.WriteBooleanValue(KeepOnCompletionValue.Value);
+		}
+
+		if (PageTimeoutValue is not null)
+		{
+			writer.WritePropertyName("page_timeout");
+			JsonSerializer.Serialize(writer, PageTimeoutValue, options);
+		}
+
+		if (ParamsValue is not null)
+		{
+			writer.WritePropertyName("params");
+			JsonSerializer.Serialize(writer, ParamsValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(QueryValue))
+		{
+			writer.WritePropertyName("query");
+			writer.WriteStringValue(QueryValue);
+		}
+
+		if (RequestTimeoutValue is not null)
+		{
+			writer.WritePropertyName("request_timeout");
+			JsonSerializer.Serialize(writer, RequestTimeoutValue, options);
+		}
+
+		if (RuntimeMappingsValue is not null)
+		{
+			writer.WritePropertyName("runtime_mappings");
+			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
+		}
+
+		if (TimeZoneValue is not null)
+		{
+			writer.WritePropertyName("time_zone");
+			JsonSerializer.Serialize(writer, TimeZoneValue, options);
+		}
+
+		if (WaitForCompletionTimeoutValue is not null)
+		{
+			writer.WritePropertyName("wait_for_completion_timeout");
+			JsonSerializer.Serialize(writer, WaitForCompletionTimeoutValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }
