@@ -191,45 +191,43 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private InferenceConfigUpdateContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the InferenceConfigUpdateContainerDescriptor. Only a single InferenceConfigUpdateContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private InferenceConfigUpdateContainerDescriptor<TDocument> Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the InferenceConfigUpdateContainerDescriptor. Only a single InferenceConfigUpdateContainer variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
-		public void Classification(ClassificationInferenceOptions variant) => Set(variant, "classification");
-		public void Classification(Action<ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-		public void FillMask(FillMaskInferenceUpdateOptions variant) => Set(variant, "fill_mask");
-		public void FillMask(Action<FillMaskInferenceUpdateOptionsDescriptor> configure) => Set(configure, "fill_mask");
-		public void Ner(NerInferenceUpdateOptions variant) => Set(variant, "ner");
-		public void Ner(Action<NerInferenceUpdateOptionsDescriptor> configure) => Set(configure, "ner");
-		public void PassThrough(PassThroughInferenceUpdateOptions variant) => Set(variant, "pass_through");
-		public void PassThrough(Action<PassThroughInferenceUpdateOptionsDescriptor> configure) => Set(configure, "pass_through");
-		public void QuestionAnswering(QuestionAnsweringInferenceUpdateOptions variant) => Set(variant, "question_answering");
-		public void QuestionAnswering(Action<QuestionAnsweringInferenceUpdateOptionsDescriptor> configure) => Set(configure, "question_answering");
-		public void Regression(RegressionInferenceOptions variant) => Set(variant, "regression");
-		public void Regression(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
-		public void TextClassification(TextClassificationInferenceUpdateOptions variant) => Set(variant, "text_classification");
-		public void TextClassification(Action<TextClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_classification");
-		public void TextEmbedding(TextEmbeddingInferenceUpdateOptions variant) => Set(variant, "text_embedding");
-		public void TextEmbedding(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_embedding");
-		public void ZeroShotClassification(ZeroShotClassificationInferenceUpdateOptions variant) => Set(variant, "zero_shot_classification");
-		public void ZeroShotClassification(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> Classification(ClassificationInferenceOptions variant) => Set(variant, "classification");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> Classification(Action<ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> FillMask(FillMaskInferenceUpdateOptions variant) => Set(variant, "fill_mask");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> FillMask(Action<FillMaskInferenceUpdateOptionsDescriptor> configure) => Set(configure, "fill_mask");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> Ner(NerInferenceUpdateOptions variant) => Set(variant, "ner");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> Ner(Action<NerInferenceUpdateOptionsDescriptor> configure) => Set(configure, "ner");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> PassThrough(PassThroughInferenceUpdateOptions variant) => Set(variant, "pass_through");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> PassThrough(Action<PassThroughInferenceUpdateOptionsDescriptor> configure) => Set(configure, "pass_through");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> QuestionAnswering(QuestionAnsweringInferenceUpdateOptions variant) => Set(variant, "question_answering");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> QuestionAnswering(Action<QuestionAnsweringInferenceUpdateOptionsDescriptor> configure) => Set(configure, "question_answering");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> Regression(RegressionInferenceOptions variant) => Set(variant, "regression");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> Regression(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> TextClassification(TextClassificationInferenceUpdateOptions variant) => Set(variant, "text_classification");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> TextClassification(Action<TextClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_classification");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> TextEmbedding(TextEmbeddingInferenceUpdateOptions variant) => Set(variant, "text_embedding");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> TextEmbedding(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_embedding");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> ZeroShotClassification(ZeroShotClassificationInferenceUpdateOptions variant) => Set(variant, "zero_shot_classification");
+		public InferenceConfigUpdateContainerDescriptor<TDocument> ZeroShotClassification(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -268,46 +266,44 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private InferenceConfigUpdateContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the InferenceConfigUpdateContainerDescriptor. Only a single InferenceConfigUpdateContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private InferenceConfigUpdateContainerDescriptor Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the InferenceConfigUpdateContainerDescriptor. Only a single InferenceConfigUpdateContainer variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
-		public void Classification(ClassificationInferenceOptions variant) => Set(variant, "classification");
-		public void Classification(Action<ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-		public void FillMask(FillMaskInferenceUpdateOptions variant) => Set(variant, "fill_mask");
-		public void FillMask(Action<FillMaskInferenceUpdateOptionsDescriptor> configure) => Set(configure, "fill_mask");
-		public void Ner(NerInferenceUpdateOptions variant) => Set(variant, "ner");
-		public void Ner(Action<NerInferenceUpdateOptionsDescriptor> configure) => Set(configure, "ner");
-		public void PassThrough(PassThroughInferenceUpdateOptions variant) => Set(variant, "pass_through");
-		public void PassThrough(Action<PassThroughInferenceUpdateOptionsDescriptor> configure) => Set(configure, "pass_through");
-		public void QuestionAnswering(QuestionAnsweringInferenceUpdateOptions variant) => Set(variant, "question_answering");
-		public void QuestionAnswering(Action<QuestionAnsweringInferenceUpdateOptionsDescriptor> configure) => Set(configure, "question_answering");
-		public void Regression(RegressionInferenceOptions variant) => Set(variant, "regression");
-		public void Regression(Action<RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
-		public void Regression<TDocument>(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
-		public void TextClassification(TextClassificationInferenceUpdateOptions variant) => Set(variant, "text_classification");
-		public void TextClassification(Action<TextClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_classification");
-		public void TextEmbedding(TextEmbeddingInferenceUpdateOptions variant) => Set(variant, "text_embedding");
-		public void TextEmbedding(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_embedding");
-		public void ZeroShotClassification(ZeroShotClassificationInferenceUpdateOptions variant) => Set(variant, "zero_shot_classification");
-		public void ZeroShotClassification(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
+		public InferenceConfigUpdateContainerDescriptor Classification(ClassificationInferenceOptions variant) => Set(variant, "classification");
+		public InferenceConfigUpdateContainerDescriptor Classification(Action<ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
+		public InferenceConfigUpdateContainerDescriptor FillMask(FillMaskInferenceUpdateOptions variant) => Set(variant, "fill_mask");
+		public InferenceConfigUpdateContainerDescriptor FillMask(Action<FillMaskInferenceUpdateOptionsDescriptor> configure) => Set(configure, "fill_mask");
+		public InferenceConfigUpdateContainerDescriptor Ner(NerInferenceUpdateOptions variant) => Set(variant, "ner");
+		public InferenceConfigUpdateContainerDescriptor Ner(Action<NerInferenceUpdateOptionsDescriptor> configure) => Set(configure, "ner");
+		public InferenceConfigUpdateContainerDescriptor PassThrough(PassThroughInferenceUpdateOptions variant) => Set(variant, "pass_through");
+		public InferenceConfigUpdateContainerDescriptor PassThrough(Action<PassThroughInferenceUpdateOptionsDescriptor> configure) => Set(configure, "pass_through");
+		public InferenceConfigUpdateContainerDescriptor QuestionAnswering(QuestionAnsweringInferenceUpdateOptions variant) => Set(variant, "question_answering");
+		public InferenceConfigUpdateContainerDescriptor QuestionAnswering(Action<QuestionAnsweringInferenceUpdateOptionsDescriptor> configure) => Set(configure, "question_answering");
+		public InferenceConfigUpdateContainerDescriptor Regression(RegressionInferenceOptions variant) => Set(variant, "regression");
+		public InferenceConfigUpdateContainerDescriptor Regression(Action<RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
+		public InferenceConfigUpdateContainerDescriptor Regression<TDocument>(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
+		public InferenceConfigUpdateContainerDescriptor TextClassification(TextClassificationInferenceUpdateOptions variant) => Set(variant, "text_classification");
+		public InferenceConfigUpdateContainerDescriptor TextClassification(Action<TextClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_classification");
+		public InferenceConfigUpdateContainerDescriptor TextEmbedding(TextEmbeddingInferenceUpdateOptions variant) => Set(variant, "text_embedding");
+		public InferenceConfigUpdateContainerDescriptor TextEmbedding(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_embedding");
+		public InferenceConfigUpdateContainerDescriptor ZeroShotClassification(ZeroShotClassificationInferenceUpdateOptions variant) => Set(variant, "zero_shot_classification");
+		public InferenceConfigUpdateContainerDescriptor ZeroShotClassification(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)

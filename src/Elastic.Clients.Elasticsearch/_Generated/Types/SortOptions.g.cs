@@ -169,35 +169,33 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private SortOptionsDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the SortOptionsDescriptor. Only a single SortOptions variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private SortOptionsDescriptor<TDocument> Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the SortOptionsDescriptor. Only a single SortOptions variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
-		public void Doc(ScoreSort variant) => Set(variant, "_doc");
-		public void Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
-		public void GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
-		public void GeoDistance(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
-		public void Score(ScoreSort variant) => Set(variant, "_score");
-		public void Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
-		public void Script(ScriptSort variant) => Set(variant, "_script");
-		public void Script(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
+		public SortOptionsDescriptor<TDocument> Doc(ScoreSort variant) => Set(variant, "_doc");
+		public SortOptionsDescriptor<TDocument> Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
+		public SortOptionsDescriptor<TDocument> GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
+		public SortOptionsDescriptor<TDocument> GeoDistance(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
+		public SortOptionsDescriptor<TDocument> Score(ScoreSort variant) => Set(variant, "_score");
+		public SortOptionsDescriptor<TDocument> Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
+		public SortOptionsDescriptor<TDocument> Script(ScriptSort variant) => Set(variant, "_script");
+		public SortOptionsDescriptor<TDocument> Script(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -236,37 +234,35 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private SortOptionsDescriptor Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the SortOptionsDescriptor. Only a single SortOptions variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private SortOptionsDescriptor Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the SortOptionsDescriptor. Only a single SortOptions variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
-		public void Doc(ScoreSort variant) => Set(variant, "_doc");
-		public void Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
-		public void GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
-		public void GeoDistance(Action<GeoDistanceSortDescriptor> configure) => Set(configure, "_geo_distance");
-		public void GeoDistance<TDocument>(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
-		public void Score(ScoreSort variant) => Set(variant, "_score");
-		public void Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
-		public void Script(ScriptSort variant) => Set(variant, "_script");
-		public void Script(Action<ScriptSortDescriptor> configure) => Set(configure, "_script");
-		public void Script<TDocument>(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
+		public SortOptionsDescriptor Doc(ScoreSort variant) => Set(variant, "_doc");
+		public SortOptionsDescriptor Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
+		public SortOptionsDescriptor GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
+		public SortOptionsDescriptor GeoDistance(Action<GeoDistanceSortDescriptor> configure) => Set(configure, "_geo_distance");
+		public SortOptionsDescriptor GeoDistance<TDocument>(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
+		public SortOptionsDescriptor Score(ScoreSort variant) => Set(variant, "_score");
+		public SortOptionsDescriptor Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
+		public SortOptionsDescriptor Script(ScriptSort variant) => Set(variant, "_script");
+		public SortOptionsDescriptor Script(Action<ScriptSortDescriptor> configure) => Set(configure, "_script");
+		public SortOptionsDescriptor Script<TDocument>(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
