@@ -4,6 +4,7 @@
 
 using System.Linq;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Core.MGet;
 using Tests.Domain;
 using VerifyXunit;
 

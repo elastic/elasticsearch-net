@@ -65,10 +65,6 @@ namespace Elastic.Clients.Elasticsearch
 						variant.Unit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DistanceUnit?>(ref reader, options);
 						continue;
 					}
-
-					variant.Field = property;
-					reader.Read();
-					variant.Location = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation>>(ref reader, options);
 				}
 			}
 
@@ -78,18 +74,6 @@ namespace Elastic.Clients.Elasticsearch
 		public override void Write(Utf8JsonWriter writer, GeoDistanceSort value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Field is not null && value.Location is not null)
-			{
-				if (!options.TryGetClientSettings(out var settings))
-				{
-					throw new JsonException("Unable to retrive client settings for JsonSerializerOptions.");
-				}
-
-				var propertyName = settings.Inferrer.Field(value.Field);
-				writer.WritePropertyName(propertyName);
-				JsonSerializer.Serialize(writer, value.Location, options);
-			}
-
 			if (value.DistanceType is not null)
 			{
 				writer.WritePropertyName("distance_type");
@@ -133,8 +117,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		public bool? IgnoreUnmapped { get; set; }
 
-		public IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> Location { get; set; }
-
 		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 
 		public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
@@ -160,8 +142,6 @@ namespace Elastic.Clients.Elasticsearch
 		private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> LocationValue { get; set; }
 
 		public GeoDistanceSortDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 		{
@@ -193,34 +173,9 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public GeoDistanceSortDescriptor<TDocument> Location(IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> location)
-		{
-			LocationValue = location;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FieldValue is not null && LocationValue is not null)
-			{
-				var propertyName = settings.Inferrer.Field(FieldValue);
-				writer.WritePropertyName(propertyName);
-				JsonSerializer.Serialize(writer, LocationValue, options);
-			}
-
 			if (DistanceTypeValue is not null)
 			{
 				writer.WritePropertyName("distance_type");
@@ -274,8 +229,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		private IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> LocationValue { get; set; }
-
 		public GeoDistanceSortDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 		{
 			DistanceTypeValue = distanceType;
@@ -306,40 +259,9 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
-		public GeoDistanceSortDescriptor Location(IEnumerable<Elastic.Clients.Elasticsearch.GeoLocation> location)
-		{
-			LocationValue = location;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public GeoDistanceSortDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (FieldValue is not null && LocationValue is not null)
-			{
-				var propertyName = settings.Inferrer.Field(FieldValue);
-				writer.WritePropertyName(propertyName);
-				JsonSerializer.Serialize(writer, LocationValue, options);
-			}
-
 			if (DistanceTypeValue is not null)
 			{
 				writer.WritePropertyName("distance_type");

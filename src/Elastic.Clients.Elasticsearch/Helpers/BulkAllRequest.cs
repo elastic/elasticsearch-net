@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Elastic.Transport;
+using Elastic.Clients.Elasticsearch.Core.Bulk;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -56,7 +57,6 @@ public sealed class BulkAllRequest<T> : IBulkAllRequest<T>, IHelperCallable
 
 	RequestMetaData IHelperCallable.ParentMetaData { get => ParentMetaData; set => ParentMetaData = value; }
 }
-
 
 public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<BulkAllRequestDescriptor<T>>, IBulkAllRequest<T>, IHelperCallable
 {
@@ -150,5 +150,3 @@ public sealed class BulkAllRequestDescriptor<T> : SerializableDescriptorBase<Bul
 	// This descriptor is not serializable and gets converted to a BullAllObservable
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => throw new NotImplementedException();
 }
-
-

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using Elastic.Clients.Elasticsearch.Core.Bulk;
 
 namespace Elastic.Clients.Elasticsearch
 {
