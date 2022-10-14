@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,31 +24,29 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class LowercaseNormalizer : INormalizer
 {
-	public sealed partial class LowercaseNormalizer : INormalizer
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "lowercase";
+}
+
+public sealed partial class LowercaseNormalizerDescriptor : SerializableDescriptor<LowercaseNormalizerDescriptor>, IBuildableDescriptor<LowercaseNormalizer>
+{
+	internal LowercaseNormalizerDescriptor(Action<LowercaseNormalizerDescriptor> configure) => configure.Invoke(this);
+	public LowercaseNormalizerDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "lowercase";
 	}
 
-	public sealed partial class LowercaseNormalizerDescriptor : SerializableDescriptorBase<LowercaseNormalizerDescriptor>, IBuildableDescriptor<LowercaseNormalizer>
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		internal LowercaseNormalizerDescriptor(Action<LowercaseNormalizerDescriptor> configure) => configure.Invoke(this);
-		public LowercaseNormalizerDescriptor() : base()
-		{
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("lowercase");
-			writer.WriteEndObject();
-		}
-
-		LowercaseNormalizer IBuildableDescriptor<LowercaseNormalizer>.Build() => new()
-		{ };
+		writer.WriteStartObject();
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("lowercase");
+		writer.WriteEndObject();
 	}
+
+	LowercaseNormalizer IBuildableDescriptor<LowercaseNormalizer>.Build() => new()
+	{ };
 }

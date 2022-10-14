@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,238 +24,236 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class IntervalsFuzzy
 {
-	public sealed partial class IntervalsFuzzy
+	[JsonInclude]
+	[JsonPropertyName("analyzer")]
+	public string? Analyzer { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("fuzziness")]
+	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("prefix_length")]
+	public int? PrefixLength { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("term")]
+	public string Term { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("transpositions")]
+	public bool? Transpositions { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("use_field")]
+	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
+}
+
+public sealed partial class IntervalsFuzzyDescriptor<TDocument> : SerializableDescriptor<IntervalsFuzzyDescriptor<TDocument>>
+{
+	internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public IntervalsFuzzyDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("fuzziness")]
-		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("prefix_length")]
-		public int? PrefixLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("term")]
-		public string Term { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("transpositions")]
-		public bool? Transpositions { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("use_field")]
-		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public sealed partial class IntervalsFuzzyDescriptor<TDocument> : SerializableDescriptorBase<IntervalsFuzzyDescriptor<TDocument>>
+	private string? AnalyzerValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
+
+	private int? PrefixLengthValue { get; set; }
+
+	private string TermValue { get; set; }
+
+	private bool? TranspositionsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+
+	public IntervalsFuzzyDescriptor<TDocument> Analyzer(string? analyzer)
 	{
-		internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public IntervalsFuzzyDescriptor() : base()
-		{
-		}
-
-		private string? AnalyzerValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
-		private int? PrefixLengthValue { get; set; }
-
-		private string TermValue { get; set; }
-
-		private bool? TranspositionsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
-
-		public IntervalsFuzzyDescriptor<TDocument> Analyzer(string? analyzer)
-		{
-			AnalyzerValue = analyzer;
-			return Self;
-		}
-
-		public IntervalsFuzzyDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
-		{
-			FuzzinessValue = fuzziness;
-			return Self;
-		}
-
-		public IntervalsFuzzyDescriptor<TDocument> PrefixLength(int? prefixLength)
-		{
-			PrefixLengthValue = prefixLength;
-			return Self;
-		}
-
-		public IntervalsFuzzyDescriptor<TDocument> Term(string term)
-		{
-			TermValue = term;
-			return Self;
-		}
-
-		public IntervalsFuzzyDescriptor<TDocument> Transpositions(bool? transpositions = true)
-		{
-			TranspositionsValue = transpositions;
-			return Self;
-		}
-
-		public IntervalsFuzzyDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
-		{
-			UseFieldValue = useField;
-			return Self;
-		}
-
-		public IntervalsFuzzyDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
-		{
-			UseFieldValue = useField;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
-			}
-
-			if (FuzzinessValue is not null)
-			{
-				writer.WritePropertyName("fuzziness");
-				JsonSerializer.Serialize(writer, FuzzinessValue, options);
-			}
-
-			if (PrefixLengthValue.HasValue)
-			{
-				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(PrefixLengthValue.Value);
-			}
-
-			writer.WritePropertyName("term");
-			writer.WriteStringValue(TermValue);
-			if (TranspositionsValue.HasValue)
-			{
-				writer.WritePropertyName("transpositions");
-				writer.WriteBooleanValue(TranspositionsValue.Value);
-			}
-
-			if (UseFieldValue is not null)
-			{
-				writer.WritePropertyName("use_field");
-				JsonSerializer.Serialize(writer, UseFieldValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		AnalyzerValue = analyzer;
+		return Self;
 	}
 
-	public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptorBase<IntervalsFuzzyDescriptor>
+	public IntervalsFuzzyDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
 	{
-		internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor> configure) => configure.Invoke(this);
-		public IntervalsFuzzyDescriptor() : base()
+		FuzzinessValue = fuzziness;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor<TDocument> PrefixLength(int? prefixLength)
+	{
+		PrefixLengthValue = prefixLength;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor<TDocument> Term(string term)
+	{
+		TermValue = term;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor<TDocument> Transpositions(bool? transpositions = true)
+	{
+		TranspositionsValue = transpositions;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
 		}
 
-		private string? AnalyzerValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
-		private int? PrefixLengthValue { get; set; }
-
-		private string TermValue { get; set; }
-
-		private bool? TranspositionsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
-
-		public IntervalsFuzzyDescriptor Analyzer(string? analyzer)
+		if (FuzzinessValue is not null)
 		{
-			AnalyzerValue = analyzer;
-			return Self;
+			writer.WritePropertyName("fuzziness");
+			JsonSerializer.Serialize(writer, FuzzinessValue, options);
 		}
 
-		public IntervalsFuzzyDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+		if (PrefixLengthValue.HasValue)
 		{
-			FuzzinessValue = fuzziness;
-			return Self;
+			writer.WritePropertyName("prefix_length");
+			writer.WriteNumberValue(PrefixLengthValue.Value);
 		}
 
-		public IntervalsFuzzyDescriptor PrefixLength(int? prefixLength)
+		writer.WritePropertyName("term");
+		writer.WriteStringValue(TermValue);
+		if (TranspositionsValue.HasValue)
 		{
-			PrefixLengthValue = prefixLength;
-			return Self;
+			writer.WritePropertyName("transpositions");
+			writer.WriteBooleanValue(TranspositionsValue.Value);
 		}
 
-		public IntervalsFuzzyDescriptor Term(string term)
+		if (UseFieldValue is not null)
 		{
-			TermValue = term;
-			return Self;
+			writer.WritePropertyName("use_field");
+			JsonSerializer.Serialize(writer, UseFieldValue, options);
 		}
 
-		public IntervalsFuzzyDescriptor Transpositions(bool? transpositions = true)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptor<IntervalsFuzzyDescriptor>
+{
+	internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor> configure) => configure.Invoke(this);
+	public IntervalsFuzzyDescriptor() : base()
+	{
+	}
+
+	private string? AnalyzerValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
+
+	private int? PrefixLengthValue { get; set; }
+
+	private string TermValue { get; set; }
+
+	private bool? TranspositionsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+
+	public IntervalsFuzzyDescriptor Analyzer(string? analyzer)
+	{
+		AnalyzerValue = analyzer;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+	{
+		FuzzinessValue = fuzziness;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor PrefixLength(int? prefixLength)
+	{
+		PrefixLengthValue = prefixLength;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor Term(string term)
+	{
+		TermValue = term;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor Transpositions(bool? transpositions = true)
+	{
+		TranspositionsValue = transpositions;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	public IntervalsFuzzyDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
-			TranspositionsValue = transpositions;
-			return Self;
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
 		}
 
-		public IntervalsFuzzyDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
+		if (FuzzinessValue is not null)
 		{
-			UseFieldValue = useField;
-			return Self;
+			writer.WritePropertyName("fuzziness");
+			JsonSerializer.Serialize(writer, FuzzinessValue, options);
 		}
 
-		public IntervalsFuzzyDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
+		if (PrefixLengthValue.HasValue)
 		{
-			UseFieldValue = useField;
-			return Self;
+			writer.WritePropertyName("prefix_length");
+			writer.WriteNumberValue(PrefixLengthValue.Value);
 		}
 
-		public IntervalsFuzzyDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
+		writer.WritePropertyName("term");
+		writer.WriteStringValue(TermValue);
+		if (TranspositionsValue.HasValue)
 		{
-			UseFieldValue = useField;
-			return Self;
+			writer.WritePropertyName("transpositions");
+			writer.WriteBooleanValue(TranspositionsValue.Value);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		if (UseFieldValue is not null)
 		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
-			}
-
-			if (FuzzinessValue is not null)
-			{
-				writer.WritePropertyName("fuzziness");
-				JsonSerializer.Serialize(writer, FuzzinessValue, options);
-			}
-
-			if (PrefixLengthValue.HasValue)
-			{
-				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(PrefixLengthValue.Value);
-			}
-
-			writer.WritePropertyName("term");
-			writer.WriteStringValue(TermValue);
-			if (TranspositionsValue.HasValue)
-			{
-				writer.WritePropertyName("transpositions");
-				writer.WriteBooleanValue(TranspositionsValue.Value);
-			}
-
-			if (UseFieldValue is not null)
-			{
-				writer.WritePropertyName("use_field");
-				JsonSerializer.Serialize(writer, UseFieldValue, options);
-			}
-
-			writer.WriteEndObject();
+			writer.WritePropertyName("use_field");
+			JsonSerializer.Serialize(writer, UseFieldValue, options);
 		}
+
+		writer.WriteEndObject();
 	}
 }

@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -25,186 +28,184 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed class MultiSearchTemplateRequestParameters : RequestParameters<MultiSearchTemplateRequestParameters>
 {
-	public sealed class MultiSearchTemplateRequestParameters : RequestParameters<MultiSearchTemplateRequestParameters>
+	[JsonIgnore]
+	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+
+	[JsonIgnore]
+	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
+
+	[JsonIgnore]
+	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+	[JsonIgnore]
+	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+}
+
+public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearchTemplateRequestParameters>, IStreamSerializable
+{
+	public MultiSearchTemplateRequest()
 	{
-		[JsonIgnore]
-		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
-
-		[JsonIgnore]
-		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-
-		[JsonIgnore]
-		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-
-		[JsonIgnore]
-		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
 
-	public sealed partial class MultiSearchTemplateRequest : PlainRequestBase<MultiSearchTemplateRequestParameters>, IStreamSerializable
+	public MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
-		public MultiSearchTemplateRequest()
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearchTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	[JsonIgnore]
+	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+
+	[JsonIgnore]
+	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
+
+	[JsonIgnore]
+	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+	[JsonIgnore]
+	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+
+	public List<Core.MSearchTemplate.RequestItem> SearchTemplates { get; set; }
+
+	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (SearchTemplates is null)
+			return;
+		foreach (var item in SearchTemplates)
 		{
-		}
-
-		public MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearchTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		[JsonIgnore]
-		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
-
-		[JsonIgnore]
-		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-
-		[JsonIgnore]
-		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-
-		[JsonIgnore]
-		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-
-		public List<Core.MSearchTemplate.RequestItem> SearchTemplates { get; set; }
-
-		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-		{
-			if (SearchTemplates is null)
-				return;
-			foreach (var item in SearchTemplates)
-			{
-				if (item is IStreamSerializable serializable)
-					serializable.Serialize(stream, settings, formatting);
-			}
-		}
-
-		async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-		{
-			if (SearchTemplates is null)
-				return;
-			foreach (var item in SearchTemplates)
-			{
-				if (item is IStreamSerializable serializable)
-					await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-			}
+			if (item is IStreamSerializable serializable)
+				serializable.Serialize(stream, settings, formatting);
 		}
 	}
 
-	public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : RequestDescriptorBase<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateRequestParameters>, IStreamSerializable
+	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{
-		internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public MultiSearchTemplateRequestDescriptor()
+		if (SearchTemplates is null)
+			return;
+		foreach (var item in SearchTemplates)
 		{
+			if (item is IStreamSerializable serializable)
+				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
 		}
+	}
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearchTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		public MultiSearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
-		public MultiSearchTemplateRequestDescriptor<TDocument> MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
-		public MultiSearchTemplateRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-		public MultiSearchTemplateRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public MultiSearchTemplateRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-		public MultiSearchTemplateRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
-		{
-			RouteValues.Optional("index", indices);
-			return Self;
-		}
+public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateRequestParameters>, IStreamSerializable
+{
+	internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public MultiSearchTemplateRequestDescriptor()
+	{
+	}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearchTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	public MultiSearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
+	public MultiSearchTemplateRequestDescriptor<TDocument> MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
+	public MultiSearchTemplateRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
+	public MultiSearchTemplateRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
+	public MultiSearchTemplateRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+	public MultiSearchTemplateRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		RouteValues.Optional("index", indices);
+		return Self;
+	}
 
-		List<Core.MSearchTemplate.RequestItem> _items = new();
-		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-		{
-			if (_items is null)
-				return;
-			foreach (var item in _items)
-			{
-				if (item is IStreamSerializable serializable)
-					serializable.Serialize(stream, settings, formatting);
-			}
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
 
-		async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	List<Core.MSearchTemplate.RequestItem> _items = new();
+	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (_items is null)
+			return;
+		foreach (var item in _items)
 		{
-			if (_items is null)
-				return;
-			foreach (var item in _items)
-			{
-				if (item is IStreamSerializable serializable)
-					await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-			}
-		}
-
-		public MultiSearchTemplateRequestDescriptor<TDocument> Add(Core.MSearchTemplate.RequestItem item)
-		{
-			_items.Add(item);
-			return this;
+			if (item is IStreamSerializable serializable)
+				serializable.Serialize(stream, settings, formatting);
 		}
 	}
 
-	public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescriptorBase<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateRequestParameters>, IStreamSerializable
+	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{
-		internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor> configure) => configure.Invoke(this);
-		public MultiSearchTemplateRequestDescriptor()
+		if (_items is null)
+			return;
+		foreach (var item in _items)
 		{
+			if (item is IStreamSerializable serializable)
+				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
 		}
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearchTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		public MultiSearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
-		public MultiSearchTemplateRequestDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
-		public MultiSearchTemplateRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-		public MultiSearchTemplateRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public MultiSearchTemplateRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-		public MultiSearchTemplateRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
-		{
-			RouteValues.Optional("index", indices);
-			return Self;
-		}
+	public MultiSearchTemplateRequestDescriptor<TDocument> Add(Core.MSearchTemplate.RequestItem item)
+	{
+		_items.Add(item);
+		return this;
+	}
+}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescriptor<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateRequestParameters>, IStreamSerializable
+{
+	internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor> configure) => configure.Invoke(this);
+	public MultiSearchTemplateRequestDescriptor()
+	{
+	}
 
-		List<Core.MSearchTemplate.RequestItem> _items = new();
-		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-		{
-			if (_items is null)
-				return;
-			foreach (var item in _items)
-			{
-				if (item is IStreamSerializable serializable)
-					serializable.Serialize(stream, settings, formatting);
-			}
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearchTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	public MultiSearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
+	public MultiSearchTemplateRequestDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
+	public MultiSearchTemplateRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
+	public MultiSearchTemplateRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
+	public MultiSearchTemplateRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+	public MultiSearchTemplateRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		RouteValues.Optional("index", indices);
+		return Self;
+	}
 
-		async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-		{
-			if (_items is null)
-				return;
-			foreach (var item in _items)
-			{
-				if (item is IStreamSerializable serializable)
-					await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-			}
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
 
-		public MultiSearchTemplateRequestDescriptor Add(Core.MSearchTemplate.RequestItem item)
+	List<Core.MSearchTemplate.RequestItem> _items = new();
+	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (_items is null)
+			return;
+		foreach (var item in _items)
 		{
-			_items.Add(item);
-			return this;
+			if (item is IStreamSerializable serializable)
+				serializable.Serialize(stream, settings, formatting);
 		}
+	}
+
+	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (_items is null)
+			return;
+		foreach (var item in _items)
+		{
+			if (item is IStreamSerializable serializable)
+				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+		}
+	}
+
+	public MultiSearchTemplateRequestDescriptor Add(Core.MSearchTemplate.RequestItem item)
+	{
+		_items.Add(item);
+		return this;
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,12 +24,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class IndicesShardStores
 {
-	public sealed partial class IndicesShardStores
-	{
-		[JsonInclude]
-		[JsonPropertyName("shards")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreWrapper> Shards { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("shards")]
+	public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreWrapper> Shards { get; init; }
 }

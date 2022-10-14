@@ -9,6 +9,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Core.Bulk;
+using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Clients.Elasticsearch.Requests;
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -107,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch
 			return this;
 		}
 
-		public BulkRequestDescriptor Update(BulkUpdateOperationBase update)
+		public BulkRequestDescriptor Update(BulkUpdateOperation update)
 		{
 			_operations.Add(update);
 			return this;

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,36 +24,34 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class RankFeatureFunctionLogarithm
 {
-	public sealed partial class RankFeatureFunctionLogarithm
+	[JsonInclude]
+	[JsonPropertyName("scaling_factor")]
+	public float ScalingFactor { get; set; }
+}
+
+public sealed partial class RankFeatureFunctionLogarithmDescriptor : SerializableDescriptor<RankFeatureFunctionLogarithmDescriptor>
+{
+	internal RankFeatureFunctionLogarithmDescriptor(Action<RankFeatureFunctionLogarithmDescriptor> configure) => configure.Invoke(this);
+	public RankFeatureFunctionLogarithmDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("scaling_factor")]
-		public float ScalingFactor { get; set; }
 	}
 
-	public sealed partial class RankFeatureFunctionLogarithmDescriptor : SerializableDescriptorBase<RankFeatureFunctionLogarithmDescriptor>
+	private float ScalingFactorValue { get; set; }
+
+	public RankFeatureFunctionLogarithmDescriptor ScalingFactor(float scalingFactor)
 	{
-		internal RankFeatureFunctionLogarithmDescriptor(Action<RankFeatureFunctionLogarithmDescriptor> configure) => configure.Invoke(this);
-		public RankFeatureFunctionLogarithmDescriptor() : base()
-		{
-		}
+		ScalingFactorValue = scalingFactor;
+		return Self;
+	}
 
-		private float ScalingFactorValue { get; set; }
-
-		public RankFeatureFunctionLogarithmDescriptor ScalingFactor(float scalingFactor)
-		{
-			ScalingFactorValue = scalingFactor;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("scaling_factor");
-			writer.WriteNumberValue(ScalingFactorValue);
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("scaling_factor");
+		writer.WriteNumberValue(ScalingFactorValue);
+		writer.WriteEndObject();
 	}
 }

@@ -15,21 +15,21 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class ScriptLanguagesResponse : ElasticsearchResponseBase
 {
-	public sealed partial class ScriptLanguagesResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("language_contexts")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext> LanguageContexts { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("language_contexts")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext> LanguageContexts { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("types_allowed")]
-		public IReadOnlyCollection<string> TypesAllowed { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("types_allowed")]
+	public IReadOnlyCollection<string> TypesAllowed { get; init; }
 }

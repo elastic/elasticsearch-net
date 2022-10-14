@@ -15,25 +15,25 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class SearchShardsResponse : ElasticsearchResponseBase
 {
-	public sealed partial class SearchShardsResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("indices")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex> Indices { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("indices")]
+	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex> Indices { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("nodes")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.NodeAttributes> Nodes { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("nodes")]
+	public Dictionary<string, Elastic.Clients.Elasticsearch.NodeAttributes> Nodes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("shards")]
-		public IReadOnlyCollection<IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard>> Shards { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("shards")]
+	public IReadOnlyCollection<IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard>> Shards { get; init; }
 }

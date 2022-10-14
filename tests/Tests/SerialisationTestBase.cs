@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.IO;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Tests;
 

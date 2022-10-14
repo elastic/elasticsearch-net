@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 

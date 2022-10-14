@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Core.MGet
+namespace Elastic.Clients.Elasticsearch.Core.MGet;
+public partial class ResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument>, Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError>
 {
-	public partial class ResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument>, Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError>
+	public ResponseItem(Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument> getResult) : base(getResult)
 	{
-		public ResponseItem(Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument> getResult) : base(getResult)
-		{
-		}
+	}
 
-		public ResponseItem(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError multiGetError) : base(multiGetError)
-		{
-		}
+	public ResponseItem(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError multiGetError) : base(multiGetError)
+	{
 	}
 }

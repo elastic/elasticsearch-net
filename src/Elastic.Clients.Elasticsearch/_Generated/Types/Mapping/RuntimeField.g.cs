@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,72 +24,70 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Mapping
+namespace Elastic.Clients.Elasticsearch.Mapping;
+public sealed partial class RuntimeField
 {
-	public sealed partial class RuntimeField
+	[JsonInclude]
+	[JsonPropertyName("format")]
+	public string? Format { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
+}
+
+public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<RuntimeFieldDescriptor>
+{
+	internal RuntimeFieldDescriptor(Action<RuntimeFieldDescriptor> configure) => configure.Invoke(this);
+	public RuntimeFieldDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
 	}
 
-	public sealed partial class RuntimeFieldDescriptor : SerializableDescriptorBase<RuntimeFieldDescriptor>
+	private string? FormatValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType TypeValue { get; set; }
+
+	public RuntimeFieldDescriptor Format(string? format)
 	{
-		internal RuntimeFieldDescriptor(Action<RuntimeFieldDescriptor> configure) => configure.Invoke(this);
-		public RuntimeFieldDescriptor() : base()
+		FormatValue = format;
+		return Self;
+	}
+
+	public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	public RuntimeFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type)
+	{
+		TypeValue = type;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
 		}
 
-		private string? FormatValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType TypeValue { get; set; }
-
-		public RuntimeFieldDescriptor Format(string? format)
+		if (ScriptValue is not null)
 		{
-			FormatValue = format;
-			return Self;
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
-		{
-			ScriptValue = script;
-			return Self;
-		}
-
-		public RuntimeFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type)
-		{
-			TypeValue = type;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-			writer.WriteEndObject();
-		}
+		writer.WritePropertyName("type");
+		JsonSerializer.Serialize(writer, TypeValue, options);
+		writer.WriteEndObject();
 	}
 }

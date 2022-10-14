@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,36 +24,34 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class NodeAttributes
 {
-	public sealed partial class NodeAttributes
-	{
-		[JsonInclude]
-		[JsonPropertyName("attributes")]
-		public Dictionary<string, string> Attributes { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("attributes")]
+	public Dictionary<string, string> Attributes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("ephemeral_id")]
-		public string EphemeralId { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("ephemeral_id")]
+	public string EphemeralId { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("external_id")]
-		public string ExternalId { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("external_id")]
+	public string ExternalId { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public string? Id { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("id")]
+	public string? Id { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string Name { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("name")]
+	public string Name { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("roles")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? Roles { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("roles")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? Roles { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("transport_address")]
-		public string TransportAddress { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("transport_address")]
+	public string TransportAddress { get; init; }
 }

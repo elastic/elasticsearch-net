@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch

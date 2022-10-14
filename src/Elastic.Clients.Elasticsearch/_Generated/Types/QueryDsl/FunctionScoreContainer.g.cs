@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,387 +24,385 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+[JsonConverter(typeof(FunctionScoreContainerConverter))]
+public sealed partial class FunctionScoreContainer
 {
-	[JsonConverter(typeof(FunctionScoreContainerConverter))]
-	public sealed partial class FunctionScoreContainer
+	internal FunctionScoreContainer(string variantName, object variant)
 	{
-		internal FunctionScoreContainer(string variantName, object variant)
-		{
-			if (variantName is null)
-				throw new ArgumentNullException(nameof(variantName));
-			if (variant is null)
-				throw new ArgumentNullException(nameof(variant));
-			if (string.IsNullOrWhiteSpace(variantName))
-				throw new ArgumentException("Variant name must not be empty or whitespace.");
-			VariantName = variantName;
-			Variant = variant;
-		}
-
-		internal object Variant { get; }
-
-		internal string VariantName { get; }
-
-		public static FunctionScoreContainer FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => new FunctionScoreContainer("field_value_factor", fieldValueFactorScoreFunction);
-		public static FunctionScoreContainer RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction randomScoreFunction) => new FunctionScoreContainer("random_score", randomScoreFunction);
-		public static FunctionScoreContainer ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction scriptScoreFunction) => new FunctionScoreContainer("script_score", scriptScoreFunction);
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("weight")]
-		public double? Weight { get; set; }
+		if (variantName is null)
+			throw new ArgumentNullException(nameof(variantName));
+		if (variant is null)
+			throw new ArgumentNullException(nameof(variant));
+		if (string.IsNullOrWhiteSpace(variantName))
+			throw new ArgumentException("Variant name must not be empty or whitespace.");
+		VariantName = variantName;
+		Variant = variant;
 	}
 
-	internal sealed class FunctionScoreContainerConverter : JsonConverter<FunctionScoreContainer>
+	internal object Variant { get; }
+
+	internal string VariantName { get; }
+
+	public static FunctionScoreContainer FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => new FunctionScoreContainer("field_value_factor", fieldValueFactorScoreFunction);
+	public static FunctionScoreContainer RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction randomScoreFunction) => new FunctionScoreContainer("random_score", randomScoreFunction);
+	public static FunctionScoreContainer ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction scriptScoreFunction) => new FunctionScoreContainer("script_score", scriptScoreFunction);
+	[JsonInclude]
+	[JsonPropertyName("filter")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("weight")]
+	public double? Weight { get; set; }
+}
+
+internal sealed class FunctionScoreContainerConverter : JsonConverter<FunctionScoreContainer>
+{
+	public override FunctionScoreContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override FunctionScoreContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Expected start token.");
+		}
+
+		object? variantValue = default;
+		string? variantNameValue = default;
+		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filterValue = default;
+		double? weightValue = default;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType != JsonTokenType.PropertyName)
 			{
-				throw new JsonException("Expected start token.");
+				throw new JsonException("Expected a property name token.");
 			}
 
-			object? variantValue = default;
-			string? variantNameValue = default;
-			Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filterValue = default;
-			double? weightValue = default;
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType != JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType != JsonTokenType.PropertyName)
-				{
-					throw new JsonException("Expected a property name token.");
-				}
-
-				if (reader.TokenType != JsonTokenType.PropertyName)
-				{
-					throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-				}
-
-				var propertyName = reader.GetString();
-				reader.Read();
-				if (propertyName == "filter")
-				{
-					filterValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>(ref reader, options);
-					continue;
-				}
-
-				if (propertyName == "weight")
-				{
-					weightValue = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (propertyName == "field_value_factor")
-				{
-					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(ref reader, options);
-					variantNameValue = propertyName;
-					continue;
-				}
-
-				if (propertyName == "random_score")
-				{
-					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?>(ref reader, options);
-					variantNameValue = propertyName;
-					continue;
-				}
-
-				if (propertyName == "script_score")
-				{
-					variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?>(ref reader, options);
-					variantNameValue = propertyName;
-					continue;
-				}
-
-				throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'FunctionScoreContainer' from the response.");
+				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
 			}
 
+			var propertyName = reader.GetString();
 			reader.Read();
-			var result = new FunctionScoreContainer(variantNameValue, variantValue);
-			result.Filter = filterValue;
-			result.Weight = weightValue;
-			return result;
+			if (propertyName == "filter")
+			{
+				filterValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>(ref reader, options);
+				continue;
+			}
+
+			if (propertyName == "weight")
+			{
+				weightValue = JsonSerializer.Deserialize<double?>(ref reader, options);
+				continue;
+			}
+
+			if (propertyName == "field_value_factor")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "random_score")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "script_score")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'FunctionScoreContainer' from the response.");
 		}
 
-		public override void Write(Utf8JsonWriter writer, FunctionScoreContainer value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value.Filter is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value.Filter, options);
-			}
-
-			if (value.Weight.HasValue)
-			{
-				writer.WritePropertyName("weight");
-				writer.WriteNumberValue(value.Weight.Value);
-			}
-
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "field_value_factor":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction)value.Variant, options);
-					break;
-				case "random_score":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction)value.Variant, options);
-					break;
-				case "script_score":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction)value.Variant, options);
-					break;
-			}
-
-			writer.WriteEndObject();
-		}
+		reader.Read();
+		var result = new FunctionScoreContainer(variantNameValue, variantValue);
+		result.Filter = filterValue;
+		result.Weight = weightValue;
+		return result;
 	}
 
-	public sealed partial class FunctionScoreContainerDescriptor<TDocument> : SerializableDescriptorBase<FunctionScoreContainerDescriptor<TDocument>>
+	public override void Write(Utf8JsonWriter writer, FunctionScoreContainer value, JsonSerializerOptions options)
 	{
-		internal FunctionScoreContainerDescriptor(Action<FunctionScoreContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public FunctionScoreContainerDescriptor() : base()
+		writer.WriteStartObject();
+		if (value.Filter is not null)
 		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, value.Filter, options);
 		}
 
-		private bool ContainsVariant { get; set; }
-
-		private string ContainedVariantName { get; set; }
-
-		private object Variant { get; set; }
-
-		private Descriptor Descriptor { get; set; }
-
-		private FunctionScoreContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor
+		if (value.Weight.HasValue)
 		{
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-			descriptorAction?.Invoke(descriptor);
-			Descriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("weight");
+			writer.WriteNumberValue(value.Weight.Value);
 		}
 
-		private FunctionScoreContainerDescriptor<TDocument> Set(object variant, string variantName)
+		writer.WritePropertyName(value.VariantName);
+		switch (value.VariantName)
 		{
-			Variant = variant;
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			return Self;
+			case "field_value_factor":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction)value.Variant, options);
+				break;
+			case "random_score":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction)value.Variant, options);
+				break;
+			case "script_score":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction)value.Variant, options);
+				break;
 		}
 
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
-
-		private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
-		private double? WeightValue { get; set; }
-
-		public FunctionScoreContainerDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
-		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
-		}
-
-		public FunctionScoreContainerDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
-		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
-		}
-
-		public FunctionScoreContainerDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
-		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
-		}
-
-		public FunctionScoreContainerDescriptor<TDocument> Weight(double? weight)
-		{
-			WeightValue = weight;
-			return Self;
-		}
-
-		public FunctionScoreContainerDescriptor<TDocument> FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
-		public FunctionScoreContainerDescriptor<TDocument> FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
-		public FunctionScoreContainerDescriptor<TDocument> RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
-		public FunctionScoreContainerDescriptor<TDocument> RandomScore(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
-		public FunctionScoreContainerDescriptor<TDocument> ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
-		public FunctionScoreContainerDescriptor<TDocument> ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			writer.WriteStartObject();
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			if (WeightValue.HasValue)
-			{
-				writer.WritePropertyName("weight");
-				writer.WriteNumberValue(WeightValue.Value);
-			}
-
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			}
-			else
-			{
-				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-			}
-
-			writer.WriteEndObject();
-		}
+public sealed partial class FunctionScoreContainerDescriptor<TDocument> : SerializableDescriptor<FunctionScoreContainerDescriptor<TDocument>>
+{
+	internal FunctionScoreContainerDescriptor(Action<FunctionScoreContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public FunctionScoreContainerDescriptor() : base()
+	{
 	}
 
-	public sealed partial class FunctionScoreContainerDescriptor : SerializableDescriptorBase<FunctionScoreContainerDescriptor>
+	private bool ContainsVariant { get; set; }
+
+	private string ContainedVariantName { get; set; }
+
+	private object Variant { get; set; }
+
+	private Descriptor Descriptor { get; set; }
+
+	private FunctionScoreContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
+		where T : Descriptor
 	{
-		internal FunctionScoreContainerDescriptor(Action<FunctionScoreContainerDescriptor> configure) => configure.Invoke(this);
-		public FunctionScoreContainerDescriptor() : base()
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		return Self;
+	}
+
+	private FunctionScoreContainerDescriptor<TDocument> Set(object variant, string variantName)
+	{
+		Variant = variant;
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+
+	private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+
+	private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+
+	private double? WeightValue { get; set; }
+
+	public FunctionScoreContainerDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public FunctionScoreContainerDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public FunctionScoreContainerDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public FunctionScoreContainerDescriptor<TDocument> Weight(double? weight)
+	{
+		WeightValue = weight;
+		return Self;
+	}
+
+	public FunctionScoreContainerDescriptor<TDocument> FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
+	public FunctionScoreContainerDescriptor<TDocument> FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
+	public FunctionScoreContainerDescriptor<TDocument> RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
+	public FunctionScoreContainerDescriptor<TDocument> RandomScore(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
+	public FunctionScoreContainerDescriptor<TDocument> ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
+	public FunctionScoreContainerDescriptor<TDocument> ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (!ContainsVariant)
 		{
+			writer.WriteNullValue();
+			return;
 		}
 
-		private bool ContainsVariant { get; set; }
-
-		private string ContainedVariantName { get; set; }
-
-		private object Variant { get; set; }
-
-		private Descriptor Descriptor { get; set; }
-
-		private FunctionScoreContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-			where T : Descriptor
+		writer.WriteStartObject();
+		if (FilterDescriptor is not null)
 		{
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-			descriptorAction?.Invoke(descriptor);
-			Descriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		private FunctionScoreContainerDescriptor Set(object variant, string variantName)
+		if (WeightValue.HasValue)
 		{
-			Variant = variant;
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-			return Self;
+			writer.WritePropertyName("weight");
+			writer.WriteNumberValue(WeightValue.Value);
 		}
 
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
-
-		private QueryContainerDescriptor FilterDescriptor { get; set; }
-
-		private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
-
-		private double? WeightValue { get; set; }
-
-		public FunctionScoreContainerDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		writer.WritePropertyName(ContainedVariantName);
+		if (Variant is not null)
 		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
+			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+		}
+		else
+		{
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		public FunctionScoreContainerDescriptor Filter(QueryContainerDescriptor descriptor)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class FunctionScoreContainerDescriptor : SerializableDescriptor<FunctionScoreContainerDescriptor>
+{
+	internal FunctionScoreContainerDescriptor(Action<FunctionScoreContainerDescriptor> configure) => configure.Invoke(this);
+	public FunctionScoreContainerDescriptor() : base()
+	{
+	}
+
+	private bool ContainsVariant { get; set; }
+
+	private string ContainedVariantName { get; set; }
+
+	private object Variant { get; set; }
+
+	private Descriptor Descriptor { get; set; }
+
+	private FunctionScoreContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
+		where T : Descriptor
+	{
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		return Self;
+	}
+
+	private FunctionScoreContainerDescriptor Set(object variant, string variantName)
+	{
+		Variant = variant;
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+
+	private QueryContainerDescriptor FilterDescriptor { get; set; }
+
+	private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+
+	private double? WeightValue { get; set; }
+
+	public FunctionScoreContainerDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public FunctionScoreContainerDescriptor Filter(QueryContainerDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public FunctionScoreContainerDescriptor Filter(Action<QueryContainerDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public FunctionScoreContainerDescriptor Weight(double? weight)
+	{
+		WeightValue = weight;
+		return Self;
+	}
+
+	public FunctionScoreContainerDescriptor FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
+	public FunctionScoreContainerDescriptor FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => Set(configure, "field_value_factor");
+	public FunctionScoreContainerDescriptor FieldValueFactor<TDocument>(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
+	public FunctionScoreContainerDescriptor RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
+	public FunctionScoreContainerDescriptor RandomScore(Action<RandomScoreFunctionDescriptor> configure) => Set(configure, "random_score");
+	public FunctionScoreContainerDescriptor RandomScore<TDocument>(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
+	public FunctionScoreContainerDescriptor ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
+	public FunctionScoreContainerDescriptor ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (!ContainsVariant)
 		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
+			writer.WriteNullValue();
+			return;
 		}
 
-		public FunctionScoreContainerDescriptor Filter(Action<QueryContainerDescriptor> configure)
+		writer.WriteStartObject();
+		if (FilterDescriptor is not null)
 		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		public FunctionScoreContainerDescriptor Weight(double? weight)
+		if (WeightValue.HasValue)
 		{
-			WeightValue = weight;
-			return Self;
+			writer.WritePropertyName("weight");
+			writer.WriteNumberValue(WeightValue.Value);
 		}
 
-		public FunctionScoreContainerDescriptor FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
-		public FunctionScoreContainerDescriptor FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => Set(configure, "field_value_factor");
-		public FunctionScoreContainerDescriptor FieldValueFactor<TDocument>(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
-		public FunctionScoreContainerDescriptor RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
-		public FunctionScoreContainerDescriptor RandomScore(Action<RandomScoreFunctionDescriptor> configure) => Set(configure, "random_score");
-		public FunctionScoreContainerDescriptor RandomScore<TDocument>(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
-		public FunctionScoreContainerDescriptor ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
-		public FunctionScoreContainerDescriptor ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		writer.WritePropertyName(ContainedVariantName);
+		if (Variant is not null)
 		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			writer.WriteStartObject();
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			if (WeightValue.HasValue)
-			{
-				writer.WritePropertyName("weight");
-				writer.WriteNumberValue(WeightValue.Value);
-			}
-
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			}
-			else
-			{
-				JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-			}
-
-			writer.WriteEndObject();
+			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
 		}
+		else
+		{
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

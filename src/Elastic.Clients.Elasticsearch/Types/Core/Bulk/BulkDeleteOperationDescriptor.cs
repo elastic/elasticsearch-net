@@ -7,11 +7,12 @@ using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public class BulkDeleteOperationDescriptor : BulkOperationDescriptorBase<BulkDeleteOperationDescriptor>
+public class BulkDeleteOperationDescriptor : BulkOperationDescriptor<BulkDeleteOperationDescriptor>
 {
 	public BulkDeleteOperationDescriptor() { }
 

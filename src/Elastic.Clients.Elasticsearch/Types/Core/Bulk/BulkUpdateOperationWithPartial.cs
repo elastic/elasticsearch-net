@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public sealed class BulkUpdateOperationWithPartial<TPartialDocument> : BulkUpdateOperationBase
+public sealed class BulkUpdateOperationWithPartial<TPartialDocument> : BulkUpdateOperation
 {
 	public BulkUpdateOperationWithPartial(Id id, TPartialDocument partialDocument)
 	{
