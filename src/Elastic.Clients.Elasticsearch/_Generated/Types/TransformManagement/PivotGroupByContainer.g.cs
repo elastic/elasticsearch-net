@@ -125,33 +125,31 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private PivotGroupByContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the PivotGroupByContainerDescriptor. Only a single PivotGroupByContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private PivotGroupByContainerDescriptor<TDocument> Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the PivotGroupByContainerDescriptor. Only a single PivotGroupByContainer variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
-		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
-		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-		public void Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
-		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
-		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
-		public void Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+		public PivotGroupByContainerDescriptor<TDocument> DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
+		public PivotGroupByContainerDescriptor<TDocument> DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+		public PivotGroupByContainerDescriptor<TDocument> Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
+		public PivotGroupByContainerDescriptor<TDocument> Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
+		public PivotGroupByContainerDescriptor<TDocument> Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
+		public PivotGroupByContainerDescriptor<TDocument> Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -190,36 +188,34 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		private Descriptor Descriptor { get; set; }
 
-		private void Set<T>(Action<T> descriptorAction, string variantName)
+		private PivotGroupByContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
 			where T : Descriptor
 		{
-			if (ContainsVariant)
-				throw new InvalidOperationException("A variant has already been assigned to the PivotGroupByContainerDescriptor. Only a single PivotGroupByContainer variant can be added to this container type.");
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
 			var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 			descriptorAction?.Invoke(descriptor);
 			Descriptor = descriptor;
+			return Self;
 		}
 
-		private void Set(object variant, string variantName)
+		private PivotGroupByContainerDescriptor Set(object variant, string variantName)
 		{
-			if (ContainsVariant)
-				throw new Exception("A variant has already been assigned to the PivotGroupByContainerDescriptor. Only a single PivotGroupByContainer variant can be added to this container type.");
 			Variant = variant;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			return Self;
 		}
 
-		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
-		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
-		public void DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-		public void Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
-		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
-		public void Histogram<TDocument>(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
-		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
-		public void Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
-		public void Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+		public PivotGroupByContainerDescriptor DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
+		public PivotGroupByContainerDescriptor DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
+		public PivotGroupByContainerDescriptor DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+		public PivotGroupByContainerDescriptor Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
+		public PivotGroupByContainerDescriptor Histogram(Action<Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
+		public PivotGroupByContainerDescriptor Histogram<TDocument>(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
+		public PivotGroupByContainerDescriptor Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
+		public PivotGroupByContainerDescriptor Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
+		public PivotGroupByContainerDescriptor Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
