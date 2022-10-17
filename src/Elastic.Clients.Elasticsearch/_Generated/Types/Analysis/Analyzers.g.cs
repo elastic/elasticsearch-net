@@ -93,10 +93,18 @@ public sealed partial class AnalyzersDescriptor : IsADictionaryDescriptor<Analyz
 	public AnalyzersDescriptor Whitespace(string analyzerName, WhitespaceAnalyzer whitespaceAnalyzer) => AssignVariant(analyzerName, whitespaceAnalyzer);
 }
 
-internal sealed partial class AnalyzerInterfaceConverter
+internal sealed partial class AnalyzerInterfaceConverter : JsonConverter<IAnalyzer>
 {
-	private static IAnalyzer DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
+	public override IAnalyzer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		var copiedReader = reader;
+		string? type = null;
+		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
+		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		{
+			type = readType.ToString();
+		}
+
 		switch (type)
 		{
 			case "dutch":
@@ -131,8 +139,68 @@ internal sealed partial class AnalyzerInterfaceConverter
 				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
 		}
 	}
+
+	public override void Write(Utf8JsonWriter writer, IAnalyzer value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		switch (value.Type)
+		{
+			case "dutch":
+				JsonSerializer.Serialize(writer, value, typeof(DutchAnalyzer), options);
+				return;
+			case "snowball":
+				JsonSerializer.Serialize(writer, value, typeof(SnowballAnalyzer), options);
+				return;
+			case "kuromoji":
+				JsonSerializer.Serialize(writer, value, typeof(KuromojiAnalyzer), options);
+				return;
+			case "icu_analyzer":
+				JsonSerializer.Serialize(writer, value, typeof(IcuAnalyzer), options);
+				return;
+			case "whitespace":
+				JsonSerializer.Serialize(writer, value, typeof(WhitespaceAnalyzer), options);
+				return;
+			case "stop":
+				JsonSerializer.Serialize(writer, value, typeof(StopAnalyzer), options);
+				return;
+			case "standard":
+				JsonSerializer.Serialize(writer, value, typeof(StandardAnalyzer), options);
+				return;
+			case "simple":
+				JsonSerializer.Serialize(writer, value, typeof(SimpleAnalyzer), options);
+				return;
+			case "pattern":
+				JsonSerializer.Serialize(writer, value, typeof(PatternAnalyzer), options);
+				return;
+			case "nori":
+				JsonSerializer.Serialize(writer, value, typeof(NoriAnalyzer), options);
+				return;
+			case "language":
+				JsonSerializer.Serialize(writer, value, typeof(LanguageAnalyzer), options);
+				return;
+			case "keyword":
+				JsonSerializer.Serialize(writer, value, typeof(KeywordAnalyzer), options);
+				return;
+			case "fingerprint":
+				JsonSerializer.Serialize(writer, value, typeof(FingerprintAnalyzer), options);
+				return;
+			case "custom":
+				JsonSerializer.Serialize(writer, value, typeof(CustomAnalyzer), options);
+				return;
+			default:
+				var type = value.GetType();
+				JsonSerializer.Serialize(writer, value, type, options);
+				return;
+		}
+	}
 }
 
+[JsonConverter(typeof(AnalyzerInterfaceConverter))]
 public partial interface IAnalyzer
 {
 	public string Type { get; }
