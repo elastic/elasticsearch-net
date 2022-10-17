@@ -195,10 +195,18 @@ public sealed partial class TokenFilterDefinitionsDescriptor : IsADictionaryDesc
 	public TokenFilterDefinitionsDescriptor WordDelimiterTokenFilter(string tokenFilterDefinitionName, WordDelimiterTokenFilter wordDelimiterTokenFilter) => AssignVariant(tokenFilterDefinitionName, wordDelimiterTokenFilter);
 }
 
-internal sealed partial class TokenFilterDefinitionInterfaceConverter
+internal sealed partial class TokenFilterDefinitionInterfaceConverter : JsonConverter<ITokenFilterDefinition>
 {
-	private static ITokenFilterDefinition DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
+	public override ITokenFilterDefinition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		var copiedReader = reader;
+		string? type = null;
+		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
+		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		{
+			type = readType.ToString();
+		}
+
 		switch (type)
 		{
 			case "dictionary_decompounder":
@@ -301,8 +309,170 @@ internal sealed partial class TokenFilterDefinitionInterfaceConverter
 				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
 		}
 	}
+
+	public override void Write(Utf8JsonWriter writer, ITokenFilterDefinition value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		switch (value.Type)
+		{
+			case "dictionary_decompounder":
+				JsonSerializer.Serialize(writer, value, typeof(DictionaryDecompounderTokenFilter), options);
+				return;
+			case "phonetic":
+				JsonSerializer.Serialize(writer, value, typeof(PhoneticTokenFilter), options);
+				return;
+			case "icu_transform":
+				JsonSerializer.Serialize(writer, value, typeof(IcuTransformTokenFilter), options);
+				return;
+			case "icu_normalizer":
+				JsonSerializer.Serialize(writer, value, typeof(IcuNormalizationTokenFilter), options);
+				return;
+			case "icu_folding":
+				JsonSerializer.Serialize(writer, value, typeof(IcuFoldingTokenFilter), options);
+				return;
+			case "icu_collation":
+				JsonSerializer.Serialize(writer, value, typeof(IcuCollationTokenFilter), options);
+				return;
+			case "icu_tokenizer":
+				JsonSerializer.Serialize(writer, value, typeof(IcuTokenizer), options);
+				return;
+			case "kuromoji_part_of_speech":
+				JsonSerializer.Serialize(writer, value, typeof(KuromojiPartOfSpeechTokenFilter), options);
+				return;
+			case "kuromoji_readingform":
+				JsonSerializer.Serialize(writer, value, typeof(KuromojiReadingFormTokenFilter), options);
+				return;
+			case "kuromoji_stemmer":
+				JsonSerializer.Serialize(writer, value, typeof(KuromojiStemmerTokenFilter), options);
+				return;
+			case "word_delimiter":
+				JsonSerializer.Serialize(writer, value, typeof(WordDelimiterTokenFilter), options);
+				return;
+			case "word_delimiter_graph":
+				JsonSerializer.Serialize(writer, value, typeof(WordDelimiterGraphTokenFilter), options);
+				return;
+			case "uppercase":
+				JsonSerializer.Serialize(writer, value, typeof(UppercaseTokenFilter), options);
+				return;
+			case "unique":
+				JsonSerializer.Serialize(writer, value, typeof(UniqueTokenFilter), options);
+				return;
+			case "truncate":
+				JsonSerializer.Serialize(writer, value, typeof(TruncateTokenFilter), options);
+				return;
+			case "trim":
+				JsonSerializer.Serialize(writer, value, typeof(TrimTokenFilter), options);
+				return;
+			case "synonym":
+				JsonSerializer.Serialize(writer, value, typeof(SynonymTokenFilter), options);
+				return;
+			case "synonym_graph":
+				JsonSerializer.Serialize(writer, value, typeof(SynonymGraphTokenFilter), options);
+				return;
+			case "stop":
+				JsonSerializer.Serialize(writer, value, typeof(StopTokenFilter), options);
+				return;
+			case "stemmer":
+				JsonSerializer.Serialize(writer, value, typeof(StemmerTokenFilter), options);
+				return;
+			case "stemmer_override":
+				JsonSerializer.Serialize(writer, value, typeof(StemmerOverrideTokenFilter), options);
+				return;
+			case "snowball":
+				JsonSerializer.Serialize(writer, value, typeof(SnowballTokenFilter), options);
+				return;
+			case "shingle":
+				JsonSerializer.Serialize(writer, value, typeof(ShingleTokenFilter), options);
+				return;
+			case "reverse":
+				JsonSerializer.Serialize(writer, value, typeof(ReverseTokenFilter), options);
+				return;
+			case "remove_duplicates":
+				JsonSerializer.Serialize(writer, value, typeof(RemoveDuplicatesTokenFilter), options);
+				return;
+			case "predicate_token_filter":
+				JsonSerializer.Serialize(writer, value, typeof(PredicateTokenFilter), options);
+				return;
+			case "porter_stem":
+				JsonSerializer.Serialize(writer, value, typeof(PorterStemTokenFilter), options);
+				return;
+			case "pattern_replace":
+				JsonSerializer.Serialize(writer, value, typeof(PatternReplaceTokenFilter), options);
+				return;
+			case "pattern_capture":
+				JsonSerializer.Serialize(writer, value, typeof(PatternCaptureTokenFilter), options);
+				return;
+			case "nori_part_of_speech":
+				JsonSerializer.Serialize(writer, value, typeof(NoriPartOfSpeechTokenFilter), options);
+				return;
+			case "ngram":
+				JsonSerializer.Serialize(writer, value, typeof(NGramTokenFilter), options);
+				return;
+			case "multiplexer":
+				JsonSerializer.Serialize(writer, value, typeof(MultiplexerTokenFilter), options);
+				return;
+			case "lowercase":
+				JsonSerializer.Serialize(writer, value, typeof(LowercaseTokenFilter), options);
+				return;
+			case "limit":
+				JsonSerializer.Serialize(writer, value, typeof(LimitTokenCountTokenFilter), options);
+				return;
+			case "length":
+				JsonSerializer.Serialize(writer, value, typeof(LengthTokenFilter), options);
+				return;
+			case "kstem":
+				JsonSerializer.Serialize(writer, value, typeof(KStemTokenFilter), options);
+				return;
+			case "keyword_marker":
+				JsonSerializer.Serialize(writer, value, typeof(KeywordMarkerTokenFilter), options);
+				return;
+			case "keep":
+				JsonSerializer.Serialize(writer, value, typeof(KeepWordsTokenFilter), options);
+				return;
+			case "keep_types":
+				JsonSerializer.Serialize(writer, value, typeof(KeepTypesTokenFilter), options);
+				return;
+			case "hyphenation_decompounder":
+				JsonSerializer.Serialize(writer, value, typeof(HyphenationDecompounderTokenFilter), options);
+				return;
+			case "hunspell":
+				JsonSerializer.Serialize(writer, value, typeof(HunspellTokenFilter), options);
+				return;
+			case "fingerprint":
+				JsonSerializer.Serialize(writer, value, typeof(FingerprintTokenFilter), options);
+				return;
+			case "elision":
+				JsonSerializer.Serialize(writer, value, typeof(ElisionTokenFilter), options);
+				return;
+			case "edge_ngram":
+				JsonSerializer.Serialize(writer, value, typeof(EdgeNGramTokenFilter), options);
+				return;
+			case "delimited_payload":
+				JsonSerializer.Serialize(writer, value, typeof(DelimitedPayloadTokenFilter), options);
+				return;
+			case "condition":
+				JsonSerializer.Serialize(writer, value, typeof(ConditionTokenFilter), options);
+				return;
+			case "common_grams":
+				JsonSerializer.Serialize(writer, value, typeof(CommonGramsTokenFilter), options);
+				return;
+			case "asciifolding":
+				JsonSerializer.Serialize(writer, value, typeof(AsciiFoldingTokenFilter), options);
+				return;
+			default:
+				var type = value.GetType();
+				JsonSerializer.Serialize(writer, value, type, options);
+				return;
+		}
+	}
 }
 
+[JsonConverter(typeof(TokenFilterDefinitionInterfaceConverter))]
 public partial interface ITokenFilterDefinition
 {
 	public string Type { get; }
