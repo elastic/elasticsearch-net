@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,57 +26,55 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class SimulateTemplateRequestParameters : RequestParameters<SimulateTemplateRequestParameters>
 {
-	public sealed class SimulateTemplateRequestParameters : RequestParameters<SimulateTemplateRequestParameters>
-	{
-		[JsonIgnore]
-		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+	[JsonIgnore]
+	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+public sealed partial class SimulateTemplateRequest : PlainRequest<SimulateTemplateRequestParameters>
+{
+	public SimulateTemplateRequest()
+	{
 	}
 
-	public sealed partial class SimulateTemplateRequest : PlainRequestBase<SimulateTemplateRequestParameters>
+	public SimulateTemplateRequest(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
 	{
-		public SimulateTemplateRequest()
-		{
-		}
-
-		public SimulateTemplateRequest(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		[JsonIgnore]
-		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public sealed partial class SimulateTemplateRequestDescriptor : RequestDescriptorBase<SimulateTemplateRequestDescriptor, SimulateTemplateRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => false;
+	[JsonIgnore]
+	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+public sealed partial class SimulateTemplateRequestDescriptor : RequestDescriptor<SimulateTemplateRequestDescriptor, SimulateTemplateRequestParameters>
+{
+	internal SimulateTemplateRequestDescriptor(Action<SimulateTemplateRequestDescriptor> configure) => configure.Invoke(this);
+	public SimulateTemplateRequestDescriptor()
 	{
-		internal SimulateTemplateRequestDescriptor(Action<SimulateTemplateRequestDescriptor> configure) => configure.Invoke(this);
-		public SimulateTemplateRequestDescriptor()
-		{
-		}
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		public SimulateTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
-		public SimulateTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public SimulateTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
-		{
-			RouteValues.Optional("name", name);
-			return Self;
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => false;
+	public SimulateTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
+	public SimulateTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public SimulateTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+	{
+		RouteValues.Optional("name", name);
+		return Self;
+	}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

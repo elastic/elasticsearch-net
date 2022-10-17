@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,40 +24,38 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class RankFeatureFunctionSaturation
 {
-	public sealed partial class RankFeatureFunctionSaturation
+	[JsonInclude]
+	[JsonPropertyName("pivot")]
+	public float? Pivot { get; set; }
+}
+
+public sealed partial class RankFeatureFunctionSaturationDescriptor : SerializableDescriptor<RankFeatureFunctionSaturationDescriptor>
+{
+	internal RankFeatureFunctionSaturationDescriptor(Action<RankFeatureFunctionSaturationDescriptor> configure) => configure.Invoke(this);
+	public RankFeatureFunctionSaturationDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("pivot")]
-		public float? Pivot { get; set; }
 	}
 
-	public sealed partial class RankFeatureFunctionSaturationDescriptor : SerializableDescriptorBase<RankFeatureFunctionSaturationDescriptor>
+	private float? PivotValue { get; set; }
+
+	public RankFeatureFunctionSaturationDescriptor Pivot(float? pivot)
 	{
-		internal RankFeatureFunctionSaturationDescriptor(Action<RankFeatureFunctionSaturationDescriptor> configure) => configure.Invoke(this);
-		public RankFeatureFunctionSaturationDescriptor() : base()
+		PivotValue = pivot;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (PivotValue.HasValue)
 		{
+			writer.WritePropertyName("pivot");
+			writer.WriteNumberValue(PivotValue.Value);
 		}
 
-		private float? PivotValue { get; set; }
-
-		public RankFeatureFunctionSaturationDescriptor Pivot(float? pivot)
-		{
-			PivotValue = pivot;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (PivotValue.HasValue)
-			{
-				writer.WritePropertyName("pivot");
-				writer.WriteNumberValue(PivotValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,174 +24,172 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class FieldValueFactorScoreFunction
 {
-	public sealed partial class FieldValueFactorScoreFunction
+	[JsonInclude]
+	[JsonPropertyName("factor")]
+	public double? Factor { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("field")]
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("missing")]
+	public double? Missing { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("modifier")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
+}
+
+public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> : SerializableDescriptor<FieldValueFactorScoreFunctionDescriptor<TDocument>>
+{
+	internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public FieldValueFactorScoreFunctionDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("factor")]
-		public double? Factor { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public double? Missing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("modifier")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
 	}
 
-	public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> : SerializableDescriptorBase<FieldValueFactorScoreFunctionDescriptor<TDocument>>
+	private double? FactorValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private double? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
+
+	public FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? factor)
 	{
-		internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public FieldValueFactorScoreFunctionDescriptor() : base()
-		{
-		}
-
-		private double? FactorValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private double? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
-
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? factor)
-		{
-			FactorValue = factor;
-			return Self;
-		}
-
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Missing(double? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier)
-		{
-			ModifierValue = modifier;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FactorValue.HasValue)
-			{
-				writer.WritePropertyName("factor");
-				writer.WriteNumberValue(FactorValue.Value);
-			}
-
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-			if (MissingValue.HasValue)
-			{
-				writer.WritePropertyName("missing");
-				writer.WriteNumberValue(MissingValue.Value);
-			}
-
-			if (ModifierValue is not null)
-			{
-				writer.WritePropertyName("modifier");
-				JsonSerializer.Serialize(writer, ModifierValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		FactorValue = factor;
+		return Self;
 	}
 
-	public sealed partial class FieldValueFactorScoreFunctionDescriptor : SerializableDescriptorBase<FieldValueFactorScoreFunctionDescriptor>
+	public FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
-		internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => configure.Invoke(this);
-		public FieldValueFactorScoreFunctionDescriptor() : base()
+		FieldValue = field;
+		return Self;
+	}
+
+	public FieldValueFactorScoreFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public FieldValueFactorScoreFunctionDescriptor<TDocument> Missing(double? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public FieldValueFactorScoreFunctionDescriptor<TDocument> Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier)
+	{
+		ModifierValue = modifier;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FactorValue.HasValue)
 		{
+			writer.WritePropertyName("factor");
+			writer.WriteNumberValue(FactorValue.Value);
 		}
 
-		private double? FactorValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private double? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
-
-		public FieldValueFactorScoreFunctionDescriptor Factor(double? factor)
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (MissingValue.HasValue)
 		{
-			FactorValue = factor;
-			return Self;
+			writer.WritePropertyName("missing");
+			writer.WriteNumberValue(MissingValue.Value);
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		if (ModifierValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("modifier");
+			JsonSerializer.Serialize(writer, ModifierValue, options);
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class FieldValueFactorScoreFunctionDescriptor : SerializableDescriptor<FieldValueFactorScoreFunctionDescriptor>
+{
+	internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => configure.Invoke(this);
+	public FieldValueFactorScoreFunctionDescriptor() : base()
+	{
+	}
+
+	private double? FactorValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private double? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
+
+	public FieldValueFactorScoreFunctionDescriptor Factor(double? factor)
+	{
+		FactorValue = factor;
+		return Self;
+	}
+
+	public FieldValueFactorScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public FieldValueFactorScoreFunctionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public FieldValueFactorScoreFunctionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public FieldValueFactorScoreFunctionDescriptor Missing(double? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public FieldValueFactorScoreFunctionDescriptor Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier)
+	{
+		ModifierValue = modifier;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FactorValue.HasValue)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("factor");
+			writer.WriteNumberValue(FactorValue.Value);
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (MissingValue.HasValue)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("missing");
+			writer.WriteNumberValue(MissingValue.Value);
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor Missing(double? missing)
+		if (ModifierValue is not null)
 		{
-			MissingValue = missing;
-			return Self;
+			writer.WritePropertyName("modifier");
+			JsonSerializer.Serialize(writer, ModifierValue, options);
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier)
-		{
-			ModifierValue = modifier;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FactorValue.HasValue)
-			{
-				writer.WritePropertyName("factor");
-				writer.WriteNumberValue(FactorValue.Value);
-			}
-
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-			if (MissingValue.HasValue)
-			{
-				writer.WritePropertyName("missing");
-				writer.WriteNumberValue(MissingValue.Value);
-			}
-
-			if (ModifierValue is not null)
-			{
-				writer.WritePropertyName("modifier");
-				JsonSerializer.Serialize(writer, ModifierValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

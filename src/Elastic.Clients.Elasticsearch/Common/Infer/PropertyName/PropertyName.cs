@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch

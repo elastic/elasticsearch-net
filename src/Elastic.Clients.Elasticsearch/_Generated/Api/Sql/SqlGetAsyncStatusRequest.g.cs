@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,70 +26,68 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Sql
+namespace Elastic.Clients.Elasticsearch.Sql;
+public sealed class SqlGetAsyncStatusRequestParameters : RequestParameters<SqlGetAsyncStatusRequestParameters>
 {
-	public sealed class SqlGetAsyncStatusRequestParameters : RequestParameters<SqlGetAsyncStatusRequestParameters>
+}
+
+public sealed partial class SqlGetAsyncStatusRequest : PlainRequest<SqlGetAsyncStatusRequestParameters>
+{
+	public SqlGetAsyncStatusRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
-	public sealed partial class SqlGetAsyncStatusRequest : PlainRequestBase<SqlGetAsyncStatusRequestParameters>
-	{
-		public SqlGetAsyncStatusRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
+public sealed partial class SqlGetAsyncStatusRequestDescriptor<TDocument> : RequestDescriptor<SqlGetAsyncStatusRequestDescriptor<TDocument>, SqlGetAsyncStatusRequestParameters>
+{
+	internal SqlGetAsyncStatusRequestDescriptor(Action<SqlGetAsyncStatusRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public SqlGetAsyncStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	{
 	}
 
-	public sealed partial class SqlGetAsyncStatusRequestDescriptor<TDocument> : RequestDescriptorBase<SqlGetAsyncStatusRequestDescriptor<TDocument>, SqlGetAsyncStatusRequestParameters>
+	internal SqlGetAsyncStatusRequestDescriptor()
 	{
-		internal SqlGetAsyncStatusRequestDescriptor(Action<SqlGetAsyncStatusRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public SqlGetAsyncStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
-
-		internal SqlGetAsyncStatusRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public SqlGetAsyncStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 
-	public sealed partial class SqlGetAsyncStatusRequestDescriptor : RequestDescriptorBase<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public SqlGetAsyncStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
-		internal SqlGetAsyncStatusRequestDescriptor(Action<SqlGetAsyncStatusRequestDescriptor> configure) => configure.Invoke(this);
-		public SqlGetAsyncStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
+		RouteValues.Required("id", id);
+		return Self;
+	}
 
-		internal SqlGetAsyncStatusRequestDescriptor()
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public SqlGetAsyncStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
+public sealed partial class SqlGetAsyncStatusRequestDescriptor : RequestDescriptor<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusRequestParameters>
+{
+	internal SqlGetAsyncStatusRequestDescriptor(Action<SqlGetAsyncStatusRequestDescriptor> configure) => configure.Invoke(this);
+	public SqlGetAsyncStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	{
+	}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	internal SqlGetAsyncStatusRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public SqlGetAsyncStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		RouteValues.Required("id", id);
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

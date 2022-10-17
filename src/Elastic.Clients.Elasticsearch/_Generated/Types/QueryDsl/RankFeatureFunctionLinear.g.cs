@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,21 +24,19 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class RankFeatureFunctionLinear
 {
-	public sealed partial class RankFeatureFunctionLinear
+}
+
+public sealed partial class RankFeatureFunctionLinearDescriptor : SerializableDescriptor<RankFeatureFunctionLinearDescriptor>
+{
+	internal RankFeatureFunctionLinearDescriptor(Action<RankFeatureFunctionLinearDescriptor> configure) => configure.Invoke(this);
+	public RankFeatureFunctionLinearDescriptor() : base()
 	{
 	}
 
-	public sealed partial class RankFeatureFunctionLinearDescriptor : SerializableDescriptorBase<RankFeatureFunctionLinearDescriptor>
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		internal RankFeatureFunctionLinearDescriptor(Action<RankFeatureFunctionLinearDescriptor> configure) => configure.Invoke(this);
-		public RankFeatureFunctionLinearDescriptor() : base()
-		{
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,24 +24,22 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Eql
+namespace Elastic.Clients.Elasticsearch.Eql;
+public sealed partial class HitsEvent<TEvent>
 {
-	public sealed partial class HitsEvent<TEvent>
-	{
-		[JsonInclude]
-		[JsonPropertyName("_id")]
-		public string Id { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("_id")]
+	public string Id { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("_index")]
-		public string Index { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("_index")]
+	public string Index { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("_source")]
-		public TEvent Source { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("_source")]
+	public TEvent Source { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? Fields { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("fields")]
+	public Dictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? Fields { get; init; }
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,76 +24,74 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public sealed partial class AggregationRange
 {
-	public sealed partial class AggregationRange
+	[JsonInclude]
+	[JsonPropertyName("from")]
+	public object? From { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("key")]
+	public string? Key { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("to")]
+	public object? To { get; set; }
+}
+
+public sealed partial class AggregationRangeDescriptor : SerializableDescriptor<AggregationRangeDescriptor>
+{
+	internal AggregationRangeDescriptor(Action<AggregationRangeDescriptor> configure) => configure.Invoke(this);
+	public AggregationRangeDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("from")]
-		public object? From { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("key")]
-		public string? Key { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("to")]
-		public object? To { get; set; }
 	}
 
-	public sealed partial class AggregationRangeDescriptor : SerializableDescriptorBase<AggregationRangeDescriptor>
+	private object? FromValue { get; set; }
+
+	private string? KeyValue { get; set; }
+
+	private object? ToValue { get; set; }
+
+	public AggregationRangeDescriptor From(object? from)
 	{
-		internal AggregationRangeDescriptor(Action<AggregationRangeDescriptor> configure) => configure.Invoke(this);
-		public AggregationRangeDescriptor() : base()
+		FromValue = from;
+		return Self;
+	}
+
+	public AggregationRangeDescriptor Key(string? key)
+	{
+		KeyValue = key;
+		return Self;
+	}
+
+	public AggregationRangeDescriptor To(object? to)
+	{
+		ToValue = to;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FromValue is not null)
 		{
+			writer.WritePropertyName("from");
+			JsonSerializer.Serialize(writer, FromValue, options);
 		}
 
-		private object? FromValue { get; set; }
-
-		private string? KeyValue { get; set; }
-
-		private object? ToValue { get; set; }
-
-		public AggregationRangeDescriptor From(object? from)
+		if (!string.IsNullOrEmpty(KeyValue))
 		{
-			FromValue = from;
-			return Self;
+			writer.WritePropertyName("key");
+			writer.WriteStringValue(KeyValue);
 		}
 
-		public AggregationRangeDescriptor Key(string? key)
+		if (ToValue is not null)
 		{
-			KeyValue = key;
-			return Self;
+			writer.WritePropertyName("to");
+			JsonSerializer.Serialize(writer, ToValue, options);
 		}
 
-		public AggregationRangeDescriptor To(object? to)
-		{
-			ToValue = to;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FromValue is not null)
-			{
-				writer.WritePropertyName("from");
-				JsonSerializer.Serialize(writer, FromValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(KeyValue))
-			{
-				writer.WritePropertyName("key");
-				writer.WriteStringValue(KeyValue);
-			}
-
-			if (ToValue is not null)
-			{
-				writer.WritePropertyName("to");
-				JsonSerializer.Serialize(writer, ToValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

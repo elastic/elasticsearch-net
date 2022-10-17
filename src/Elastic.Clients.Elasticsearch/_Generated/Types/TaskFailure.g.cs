@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,24 +24,22 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class TaskFailure
 {
-	public sealed partial class TaskFailure
-	{
-		[JsonInclude]
-		[JsonPropertyName("node_id")]
-		public string NodeId { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("node_id")]
+	public string NodeId { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("reason")]
-		public Elastic.Clients.Elasticsearch.ErrorCause Reason { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("reason")]
+	public Elastic.Clients.Elasticsearch.ErrorCause Reason { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("status")]
-		public string Status { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("status")]
+	public string Status { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("task_id")]
-		public long TaskId { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("task_id")]
+	public long TaskId { get; init; }
 }

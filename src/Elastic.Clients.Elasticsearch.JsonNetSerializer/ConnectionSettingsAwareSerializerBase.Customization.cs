@@ -11,7 +11,7 @@ using Elastic.Clients.Elasticsearch;
 using Elastic.Transport;
 using Newtonsoft.Json;
 
-namespace Elastic.Clients.JsonNetSerializer
+namespace Elastic.Clients.Elasticsearch.JsonNetSerializer
 {
 	public abstract partial class ConnectionSettingsAwareSerializer : Serializer
 	{

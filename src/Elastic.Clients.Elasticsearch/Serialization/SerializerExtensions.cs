@@ -5,17 +5,12 @@
 using System.Text.Json;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Serialization;
 
 internal static class SerializerExtensions
 {
 	public static bool TryGetJsonSerializerOptions(this Serializer serializer, out JsonSerializerOptions? options)
 	{
-		//if (serializer is DiagnosticsSerializerProxy diagnosticsSerializerProxy)
-		//{
-		//	return diagnosticsSerializerProxy.InnerSerializer.TryGetJsonSerializerOptions(out options);
-		//}
-
 		if (serializer is DefaultRequestResponseSerializer defaultSerializer)
 		{
 			options = defaultSerializer.Options;

@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,156 +26,154 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class SettingsRequestParameters : RequestParameters<SettingsRequestParameters>
 {
-	public sealed class SettingsRequestParameters : RequestParameters<SettingsRequestParameters>
+	[JsonIgnore]
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	[JsonIgnore]
+	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	[JsonIgnore]
+	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+	[JsonIgnore]
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	[JsonIgnore]
+	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+	[JsonIgnore]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+public sealed partial class SettingsRequest : PlainRequest<SettingsRequestParameters>
+{
+	public SettingsRequest()
 	{
-		[JsonIgnore]
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-		[JsonIgnore]
-		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-		[JsonIgnore]
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-		[JsonIgnore]
-		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-
-		[JsonIgnore]
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public sealed partial class SettingsRequest : PlainRequestBase<SettingsRequestParameters>
+	public SettingsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
-		public SettingsRequest()
-		{
-		}
-
-		public SettingsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
-		{
-		}
-
-		public SettingsRequest(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
-		{
-		}
-
-		public SettingsRequest(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetSettings;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		[JsonIgnore]
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-		[JsonIgnore]
-		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-		[JsonIgnore]
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-		[JsonIgnore]
-		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-
-		[JsonIgnore]
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public sealed partial class SettingsRequestDescriptor<TDocument> : RequestDescriptorBase<SettingsRequestDescriptor<TDocument>, SettingsRequestParameters>
+	public SettingsRequest(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
 	{
-		internal SettingsRequestDescriptor(Action<SettingsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public SettingsRequestDescriptor()
-		{
-		}
-
-		public SettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
-		{
-		}
-
-		public SettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetSettings;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public SettingsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public SettingsRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public SettingsRequestDescriptor<TDocument> FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-		public SettingsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-		public SettingsRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
-		public SettingsRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
-		public SettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public SettingsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
-		{
-			RouteValues.Optional("index", indices);
-			return Self;
-		}
-
-		public SettingsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names? name)
-		{
-			RouteValues.Optional("name", name);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 
-	public sealed partial class SettingsRequestDescriptor : RequestDescriptorBase<SettingsRequestDescriptor, SettingsRequestParameters>
+	public SettingsRequest(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
 	{
-		internal SettingsRequestDescriptor(Action<SettingsRequestDescriptor> configure) => configure.Invoke(this);
-		public SettingsRequestDescriptor()
-		{
-		}
+	}
 
-		public SettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetSettings;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	[JsonIgnore]
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-		public SettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
-		{
-		}
+	[JsonIgnore]
+	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetSettings;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public SettingsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public SettingsRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public SettingsRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-		public SettingsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-		public SettingsRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
-		public SettingsRequestDescriptor Local(bool? local = true) => Qs("local", local);
-		public SettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public SettingsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
-		{
-			RouteValues.Optional("index", indices);
-			return Self;
-		}
+	[JsonIgnore]
+	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-		public SettingsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? name)
-		{
-			RouteValues.Optional("name", name);
-			return Self;
-		}
+	[JsonIgnore]
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	[JsonIgnore]
+	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+	[JsonIgnore]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+public sealed partial class SettingsRequestDescriptor<TDocument> : RequestDescriptor<SettingsRequestDescriptor<TDocument>, SettingsRequestParameters>
+{
+	internal SettingsRequestDescriptor(Action<SettingsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public SettingsRequestDescriptor()
+	{
+	}
+
+	public SettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
+	{
+	}
+
+	public SettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetSettings;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public SettingsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+	public SettingsRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public SettingsRequestDescriptor<TDocument> FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+	public SettingsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public SettingsRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+	public SettingsRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
+	public SettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public SettingsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		RouteValues.Optional("index", indices);
+		return Self;
+	}
+
+	public SettingsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		RouteValues.Optional("name", name);
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
+}
+
+public sealed partial class SettingsRequestDescriptor : RequestDescriptor<SettingsRequestDescriptor, SettingsRequestParameters>
+{
+	internal SettingsRequestDescriptor(Action<SettingsRequestDescriptor> configure) => configure.Invoke(this);
+	public SettingsRequestDescriptor()
+	{
+	}
+
+	public SettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
+	{
+	}
+
+	public SettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetSettings;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public SettingsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+	public SettingsRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public SettingsRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+	public SettingsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public SettingsRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+	public SettingsRequestDescriptor Local(bool? local = true) => Qs("local", local);
+	public SettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public SettingsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		RouteValues.Optional("index", indices);
+		return Self;
+	}
+
+	public SettingsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		RouteValues.Optional("name", name);
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

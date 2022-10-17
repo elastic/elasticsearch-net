@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public partial class FieldDateMath : Union<Elastic.Clients.Elasticsearch.DateMath, double>
 {
-	public partial class FieldDateMath : Union<Elastic.Clients.Elasticsearch.DateMath, double>
+	public FieldDateMath(Elastic.Clients.Elasticsearch.DateMath dateMath) : base(dateMath)
 	{
-		public FieldDateMath(Elastic.Clients.Elasticsearch.DateMath dateMath) : base(dateMath)
-		{
-		}
+	}
 
-		public FieldDateMath(double fieldDateMath) : base(fieldDateMath)
-		{
-		}
+	public FieldDateMath(double fieldDateMath) : base(fieldDateMath)
+	{
 	}
 }

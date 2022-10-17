@@ -5,10 +5,9 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Serialization;
+
+internal sealed class SourceConverterAttribute : JsonConverterAttribute
 {
-	internal sealed class SourceConverterAttribute : JsonConverterAttribute
-	{
-		public override JsonConverter? CreateConverter(Type typeToConvert) => (JsonConverter)Activator.CreateInstance(typeof(IntermediateSourceConverter<>).MakeGenericType(typeToConvert));
-	}
+	public override JsonConverter? CreateConverter(Type typeToConvert) => (JsonConverter)Activator.CreateInstance(typeof(IntermediateSourceConverter<>).MakeGenericType(typeToConvert));
 }

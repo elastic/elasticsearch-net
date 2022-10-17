@@ -4,13 +4,44 @@
 
 using System.Text.Json;
 using Elastic.Clients.Elasticsearch.Core.Search;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBodyBase
+internal abstract class BulkUpdateBody : ISelfSerializable
+{
+	public long? IfSequenceNumber { get; set; }
+
+	public long? IfPrimaryTerm { get; set; }
+
+	protected abstract void SerializeProperties(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
+
+	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+
+		if (IfSequenceNumber.HasValue)
+		{
+			writer.WritePropertyName("if_seq_no");
+			writer.WriteNumberValue(IfSequenceNumber.Value);
+		}
+
+		if (IfPrimaryTerm.HasValue)
+		{
+			writer.WritePropertyName("if_primary_term");
+			writer.WriteNumberValue(IfPrimaryTerm.Value);
+		}
+
+		SerializeProperties(writer, options, settings);
+
+		writer.WriteEndObject();
+	}
+}
+
+internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBody
 {
 	public bool? DocAsUpsert { get; set; }
-			
+
 	public TPartialUpdate PartialUpdate { get; set; }
 
 	public Script Script { get; set; }
@@ -60,3 +91,4 @@ internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBodyBase
 		}
 	}
 }
+

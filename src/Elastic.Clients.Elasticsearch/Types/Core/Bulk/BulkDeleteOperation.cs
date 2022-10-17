@@ -7,10 +7,11 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public class BulkDeleteOperation : BulkOperationBase
+public class BulkDeleteOperation : BulkOperation
 {
 	public BulkDeleteOperation(Id id) => Id = id;
 

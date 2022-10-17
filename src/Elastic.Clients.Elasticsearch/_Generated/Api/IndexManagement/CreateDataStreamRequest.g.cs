@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,45 +26,43 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class CreateDataStreamRequestParameters : RequestParameters<CreateDataStreamRequestParameters>
 {
-	public sealed class CreateDataStreamRequestParameters : RequestParameters<CreateDataStreamRequestParameters>
+}
+
+public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStreamRequestParameters>
+{
+	public CreateDataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
 	{
 	}
 
-	public sealed partial class CreateDataStreamRequest : PlainRequestBase<CreateDataStreamRequestParameters>
-	{
-		public CreateDataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreateDataStream;
+	protected override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override bool SupportsBody => false;
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreateDataStream;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => false;
+public sealed partial class CreateDataStreamRequestDescriptor : RequestDescriptor<CreateDataStreamRequestDescriptor, CreateDataStreamRequestParameters>
+{
+	internal CreateDataStreamRequestDescriptor(Action<CreateDataStreamRequestDescriptor> configure) => configure.Invoke(this);
+	public CreateDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
+	{
 	}
 
-	public sealed partial class CreateDataStreamRequestDescriptor : RequestDescriptorBase<CreateDataStreamRequestDescriptor, CreateDataStreamRequestParameters>
+	internal CreateDataStreamRequestDescriptor()
 	{
-		internal CreateDataStreamRequestDescriptor(Action<CreateDataStreamRequestDescriptor> configure) => configure.Invoke(this);
-		public CreateDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
-		{
-		}
+	}
 
-		internal CreateDataStreamRequestDescriptor()
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreateDataStream;
+	protected override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override bool SupportsBody => false;
+	public CreateDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamName name)
+	{
+		RouteValues.Required("name", name);
+		return Self;
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreateDataStream;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => false;
-		public CreateDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamName name)
-		{
-			RouteValues.Required("name", name);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

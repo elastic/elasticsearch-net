@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,390 +24,388 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+internal sealed class MatchPhraseQueryConverter : JsonConverter<MatchPhraseQuery>
 {
-	internal sealed class MatchPhraseQueryConverter : JsonConverter<MatchPhraseQuery>
+	public override MatchPhraseQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override MatchPhraseQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var fieldName = reader.GetString();
+		reader.Read();
+		var variant = new MatchPhraseQuery(fieldName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var fieldName = reader.GetString();
-			reader.Read();
-			var variant = new MatchPhraseQuery(fieldName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				var property = reader.GetString();
+				if (property == "_name")
 				{
-					var property = reader.GetString();
-					if (property == "_name")
-					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "analyzer")
-					{
-						variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
-						continue;
-					}
+				if (property == "analyzer")
+				{
+					variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
+				if (property == "boost")
+				{
+					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "query")
-					{
-						variant.Query = JsonSerializer.Deserialize<string>(ref reader, options);
-						continue;
-					}
+				if (property == "query")
+				{
+					variant.Query = JsonSerializer.Deserialize<string>(ref reader, options);
+					continue;
+				}
 
-					if (property == "slop")
-					{
-						variant.Slop = JsonSerializer.Deserialize<int?>(ref reader, options);
-						continue;
-					}
+				if (property == "slop")
+				{
+					variant.Slop = JsonSerializer.Deserialize<int?>(ref reader, options);
+					continue;
+				}
 
-					if (property == "zero_terms_query")
-					{
-						variant.ZeroTermsQuery = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery?>(ref reader, options);
-						continue;
-					}
+				if (property == "zero_terms_query")
+				{
+					variant.ZeroTermsQuery = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery?>(ref reader, options);
+					continue;
 				}
 			}
-
-			reader.Read();
-			return variant;
 		}
 
-		public override void Write(Utf8JsonWriter writer, MatchPhraseQuery value, JsonSerializerOptions options)
-		{
-			if (value.Field is null)
-				throw new JsonException("Unable to serialize MatchPhraseQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-			if (options.TryGetClientSettings(out var settings))
-			{
-				writer.WriteStartObject();
-				writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-				writer.WriteStartObject();
-				if (!string.IsNullOrEmpty(value.QueryName))
-				{
-					writer.WritePropertyName("_name");
-					writer.WriteStringValue(value.QueryName);
-				}
-
-				if (!string.IsNullOrEmpty(value.Analyzer))
-				{
-					writer.WritePropertyName("analyzer");
-					writer.WriteStringValue(value.Analyzer);
-				}
-
-				if (value.Boost.HasValue)
-				{
-					writer.WritePropertyName("boost");
-					writer.WriteNumberValue(value.Boost.Value);
-				}
-
-				writer.WritePropertyName("query");
-				writer.WriteStringValue(value.Query);
-				if (value.Slop.HasValue)
-				{
-					writer.WritePropertyName("slop");
-					writer.WriteNumberValue(value.Slop.Value);
-				}
-
-				if (value.ZeroTermsQuery is not null)
-				{
-					writer.WritePropertyName("zero_terms_query");
-					JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
-				}
-
-				writer.WriteEndObject();
-				writer.WriteEndObject();
-				return;
-			}
-
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
-		}
+		reader.Read();
+		return variant;
 	}
 
-	[JsonConverter(typeof(MatchPhraseQueryConverter))]
-	public sealed partial class MatchPhraseQuery : Query
+	public override void Write(Utf8JsonWriter writer, MatchPhraseQuery value, JsonSerializerOptions options)
 	{
-		public MatchPhraseQuery(Field field)
+		if (value.Field is null)
+			throw new JsonException("Unable to serialize MatchPhraseQuery because the `Field` property is not set. Field name queries must include a valid field name.");
+		if (options.TryGetClientSettings(out var settings))
 		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			Field = field;
-		}
-
-		public string? QueryName { get; set; }
-
-		public string? Analyzer { get; set; }
-
-		public float? Boost { get; set; }
-
-		public string Query { get; set; }
-
-		public int? Slop { get; set; }
-
-		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
-
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	}
-
-	public sealed partial class MatchPhraseQueryDescriptor<TDocument> : SerializableDescriptorBase<MatchPhraseQueryDescriptor<TDocument>>
-	{
-		internal MatchPhraseQueryDescriptor(Action<MatchPhraseQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal MatchPhraseQueryDescriptor() : base()
-		{
-		}
-
-		public MatchPhraseQueryDescriptor(Field field)
-		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
-		}
-
-		public MatchPhraseQueryDescriptor(Expression<Func<TDocument, object>> field)
-		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
-		}
-
-		private string? QueryNameValue { get; set; }
-
-		private string? AnalyzerValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private string QueryValue { get; set; }
-
-		private int? SlopValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
-
-		public MatchPhraseQueryDescriptor<TDocument> QueryName(string? queryName)
-		{
-			QueryNameValue = queryName;
-			return Self;
-		}
-
-		public MatchPhraseQueryDescriptor<TDocument> Analyzer(string? analyzer)
-		{
-			AnalyzerValue = analyzer;
-			return Self;
-		}
-
-		public MatchPhraseQueryDescriptor<TDocument> Boost(float? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		public MatchPhraseQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public MatchPhraseQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public MatchPhraseQueryDescriptor<TDocument> Query(string query)
-		{
-			QueryValue = query;
-			return Self;
-		}
-
-		public MatchPhraseQueryDescriptor<TDocument> Slop(int? slop)
-		{
-			SlopValue = slop;
-			return Self;
-		}
-
-		public MatchPhraseQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
-		{
-			ZeroTermsQueryValue = zeroTermsQuery;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (FieldValue is null)
-				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
 			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
+			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
+				writer.WriteStringValue(value.QueryName);
 			}
 
-			if (!string.IsNullOrEmpty(AnalyzerValue))
+			if (!string.IsNullOrEmpty(value.Analyzer))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
+				writer.WriteStringValue(value.Analyzer);
 			}
 
-			if (BoostValue.HasValue)
+			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
+				writer.WriteNumberValue(value.Boost.Value);
 			}
 
 			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
-			if (SlopValue.HasValue)
+			writer.WriteStringValue(value.Query);
+			if (value.Slop.HasValue)
 			{
 				writer.WritePropertyName("slop");
-				writer.WriteNumberValue(SlopValue.Value);
+				writer.WriteNumberValue(value.Slop.Value);
 			}
 
-			if (ZeroTermsQueryValue is not null)
+			if (value.ZeroTermsQuery is not null)
 			{
 				writer.WritePropertyName("zero_terms_query");
-				JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
+				JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			return;
 		}
+
+		throw new JsonException("Unable to retrieve client settings required to infer field.");
+	}
+}
+
+[JsonConverter(typeof(MatchPhraseQueryConverter))]
+public sealed partial class MatchPhraseQuery : Query
+{
+	public MatchPhraseQuery(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		Field = field;
 	}
 
-	public sealed partial class MatchPhraseQueryDescriptor : SerializableDescriptorBase<MatchPhraseQueryDescriptor>
+	public string? QueryName { get; set; }
+
+	public string? Analyzer { get; set; }
+
+	public float? Boost { get; set; }
+
+	public string Query { get; set; }
+
+	public int? Slop { get; set; }
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+}
+
+public sealed partial class MatchPhraseQueryDescriptor<TDocument> : SerializableDescriptor<MatchPhraseQueryDescriptor<TDocument>>
+{
+	internal MatchPhraseQueryDescriptor(Action<MatchPhraseQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal MatchPhraseQueryDescriptor() : base()
 	{
-		internal MatchPhraseQueryDescriptor(Action<MatchPhraseQueryDescriptor> configure) => configure.Invoke(this);
-		internal MatchPhraseQueryDescriptor() : base()
+	}
+
+	public MatchPhraseQueryDescriptor(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	public MatchPhraseQueryDescriptor(Expression<Func<TDocument, object>> field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	private string? QueryNameValue { get; set; }
+
+	private string? AnalyzerValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private string QueryValue { get; set; }
+
+	private int? SlopValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
+
+	public MatchPhraseQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor<TDocument> Analyzer(string? analyzer)
+	{
+		AnalyzerValue = analyzer;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor<TDocument> Query(string query)
+	{
+		QueryValue = query;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor<TDocument> Slop(int? slop)
+	{
+		SlopValue = slop;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
+	{
+		ZeroTermsQueryValue = zeroTermsQuery;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		public MatchPhraseQueryDescriptor(Field field)
+		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
-			if (field is null)
-				throw new ArgumentNullException(nameof(field));
-			FieldValue = field;
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
 		}
 
-		private string? QueryNameValue { get; set; }
-
-		private string? AnalyzerValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
-		private string QueryValue { get; set; }
-
-		private int? SlopValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
-
-		public MatchPhraseQueryDescriptor QueryName(string? queryName)
+		if (BoostValue.HasValue)
 		{
-			QueryNameValue = queryName;
-			return Self;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		public MatchPhraseQueryDescriptor Analyzer(string? analyzer)
+		writer.WritePropertyName("query");
+		writer.WriteStringValue(QueryValue);
+		if (SlopValue.HasValue)
 		{
-			AnalyzerValue = analyzer;
-			return Self;
+			writer.WritePropertyName("slop");
+			writer.WriteNumberValue(SlopValue.Value);
 		}
 
-		public MatchPhraseQueryDescriptor Boost(float? boost)
+		if (ZeroTermsQueryValue is not null)
 		{
-			BoostValue = boost;
-			return Self;
+			writer.WritePropertyName("zero_terms_query");
+			JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
 		}
 
-		public MatchPhraseQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class MatchPhraseQueryDescriptor : SerializableDescriptor<MatchPhraseQueryDescriptor>
+{
+	internal MatchPhraseQueryDescriptor(Action<MatchPhraseQueryDescriptor> configure) => configure.Invoke(this);
+	internal MatchPhraseQueryDescriptor() : base()
+	{
+	}
+
+	public MatchPhraseQueryDescriptor(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	private string? QueryNameValue { get; set; }
+
+	private string? AnalyzerValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private string QueryValue { get; set; }
+
+	private int? SlopValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
+
+	public MatchPhraseQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor Analyzer(string? analyzer)
+	{
+		AnalyzerValue = analyzer;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor Query(string query)
+	{
+		QueryValue = query;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor Slop(int? slop)
+	{
+		SlopValue = slop;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
+	{
+		ZeroTermsQueryValue = zeroTermsQuery;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		public MatchPhraseQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
 		}
 
-		public MatchPhraseQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		if (BoostValue.HasValue)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		public MatchPhraseQueryDescriptor Query(string query)
+		writer.WritePropertyName("query");
+		writer.WriteStringValue(QueryValue);
+		if (SlopValue.HasValue)
 		{
-			QueryValue = query;
-			return Self;
+			writer.WritePropertyName("slop");
+			writer.WriteNumberValue(SlopValue.Value);
 		}
 
-		public MatchPhraseQueryDescriptor Slop(int? slop)
+		if (ZeroTermsQueryValue is not null)
 		{
-			SlopValue = slop;
-			return Self;
+			writer.WritePropertyName("zero_terms_query");
+			JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
 		}
 
-		public MatchPhraseQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
-		{
-			ZeroTermsQueryValue = zeroTermsQuery;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (FieldValue is null)
-				throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (!string.IsNullOrEmpty(AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
-			if (SlopValue.HasValue)
-			{
-				writer.WritePropertyName("slop");
-				writer.WriteNumberValue(SlopValue.Value);
-			}
-
-			if (ZeroTermsQueryValue is not null)
-			{
-				writer.WritePropertyName("zero_terms_query");
-				JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
-			}
-
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }

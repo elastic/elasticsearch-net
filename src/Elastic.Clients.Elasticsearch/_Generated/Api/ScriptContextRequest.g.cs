@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,31 +26,29 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed class ScriptContextRequestParameters : RequestParameters<ScriptContextRequestParameters>
 {
-	public sealed class ScriptContextRequestParameters : RequestParameters<ScriptContextRequestParameters>
+}
+
+public sealed partial class ScriptContextRequest : PlainRequest<ScriptContextRequestParameters>
+{
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptContext;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+}
+
+public sealed partial class ScriptContextRequestDescriptor : RequestDescriptor<ScriptContextRequestDescriptor, ScriptContextRequestParameters>
+{
+	internal ScriptContextRequestDescriptor(Action<ScriptContextRequestDescriptor> configure) => configure.Invoke(this);
+	public ScriptContextRequestDescriptor()
 	{
 	}
 
-	public sealed partial class ScriptContextRequest : PlainRequestBase<ScriptContextRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptContext;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptContext;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-	}
-
-	public sealed partial class ScriptContextRequestDescriptor : RequestDescriptorBase<ScriptContextRequestDescriptor, ScriptContextRequestParameters>
-	{
-		internal ScriptContextRequestDescriptor(Action<ScriptContextRequestDescriptor> configure) => configure.Invoke(this);
-		public ScriptContextRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptContext;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 }
