@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Serialization;
 
 public abstract class SystemTextJsonSerializer : Serializer
 {

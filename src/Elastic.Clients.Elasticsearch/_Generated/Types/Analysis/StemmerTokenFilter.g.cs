@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,62 +24,60 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class StemmerTokenFilter : ITokenFilterDefinition
 {
-	public sealed partial class StemmerTokenFilter : ITokenFilterDefinition
-	{
-		[JsonInclude]
-		[JsonPropertyName("language")]
-		public string Language { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("language")]
+	public string Language { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "stemmer";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "stemmer";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class StemmerTokenFilterDescriptor : SerializableDescriptor<StemmerTokenFilterDescriptor>, IBuildableDescriptor<StemmerTokenFilter>
+{
+	internal StemmerTokenFilterDescriptor(Action<StemmerTokenFilterDescriptor> configure) => configure.Invoke(this);
+	public StemmerTokenFilterDescriptor() : base()
+	{
 	}
 
-	public sealed partial class StemmerTokenFilterDescriptor : SerializableDescriptorBase<StemmerTokenFilterDescriptor>, IBuildableDescriptor<StemmerTokenFilter>
+	private string LanguageValue { get; set; }
+
+	private string? VersionValue { get; set; }
+
+	public StemmerTokenFilterDescriptor Language(string language)
 	{
-		internal StemmerTokenFilterDescriptor(Action<StemmerTokenFilterDescriptor> configure) => configure.Invoke(this);
-		public StemmerTokenFilterDescriptor() : base()
-		{
-		}
-
-		private string LanguageValue { get; set; }
-
-		private string? VersionValue { get; set; }
-
-		public StemmerTokenFilterDescriptor Language(string language)
-		{
-			LanguageValue = language;
-			return Self;
-		}
-
-		public StemmerTokenFilterDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("language");
-			writer.WriteStringValue(LanguageValue);
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("stemmer");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		StemmerTokenFilter IBuildableDescriptor<StemmerTokenFilter>.Build() => new()
-		{ Language = LanguageValue, Version = VersionValue };
+		LanguageValue = language;
+		return Self;
 	}
+
+	public StemmerTokenFilterDescriptor Version(string? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("language");
+		writer.WriteStringValue(LanguageValue);
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("stemmer");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	StemmerTokenFilter IBuildableDescriptor<StemmerTokenFilter>.Build() => new()
+	{ Language = LanguageValue, Version = VersionValue };
 }

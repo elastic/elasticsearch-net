@@ -7,6 +7,7 @@ using Tests.Domain;
 using Tests.Core.Extensions;
 using System.Collections.Generic;
 using Elastic.Clients.Elasticsearch.Cluster;
+using Elastic.Clients.Elasticsearch.Serialization;
 //using Elastic.Clients.Elasticsearch.Cluster.Health;
 
 namespace Tests.Serialization;

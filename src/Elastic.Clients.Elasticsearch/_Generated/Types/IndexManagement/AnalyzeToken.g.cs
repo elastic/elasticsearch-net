@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,32 +24,30 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class AnalyzeToken
 {
-	public sealed partial class AnalyzeToken
-	{
-		[JsonInclude]
-		[JsonPropertyName("end_offset")]
-		public long EndOffset { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("end_offset")]
+	public long EndOffset { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("position")]
-		public long Position { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("position")]
+	public long Position { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("positionLength")]
-		public long? Positionlength { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("positionLength")]
+	public long? Positionlength { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("start_offset")]
-		public long StartOffset { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("start_offset")]
+	public long StartOffset { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("token")]
-		public string Token { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("token")]
+	public string Token { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type { get; init; }
 }

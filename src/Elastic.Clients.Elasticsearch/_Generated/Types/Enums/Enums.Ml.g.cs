@@ -20,56 +20,55 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
 using Elastic.Transport;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ml
+namespace Elastic.Clients.Elasticsearch.Ml;
+[JsonConverter(typeof(TokenizationTruncateConverter))]
+public enum TokenizationTruncate
 {
-	[JsonConverter(typeof(TokenizationTruncateConverter))]
-	public enum TokenizationTruncate
+	[EnumMember(Value = "second")]
+	Second,
+	[EnumMember(Value = "none")]
+	None,
+	[EnumMember(Value = "first")]
+	First
+}
+
+internal sealed class TokenizationTruncateConverter : JsonConverter<TokenizationTruncate>
+{
+	public override TokenizationTruncate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		[EnumMember(Value = "second")]
-		Second,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "first")]
-		First
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "second":
+				return TokenizationTruncate.Second;
+			case "none":
+				return TokenizationTruncate.None;
+			case "first":
+				return TokenizationTruncate.First;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
-	internal sealed class TokenizationTruncateConverter : JsonConverter<TokenizationTruncate>
+	public override void Write(Utf8JsonWriter writer, TokenizationTruncate value, JsonSerializerOptions options)
 	{
-		public override TokenizationTruncate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		switch (value)
 		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "second":
-					return TokenizationTruncate.Second;
-				case "none":
-					return TokenizationTruncate.None;
-				case "first":
-					return TokenizationTruncate.First;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
+			case TokenizationTruncate.Second:
+				writer.WriteStringValue("second");
+				return;
+			case TokenizationTruncate.None:
+				writer.WriteStringValue("none");
+				return;
+			case TokenizationTruncate.First:
+				writer.WriteStringValue("first");
+				return;
 		}
 
-		public override void Write(Utf8JsonWriter writer, TokenizationTruncate value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case TokenizationTruncate.Second:
-					writer.WriteStringValue("second");
-					return;
-				case TokenizationTruncate.None:
-					writer.WriteStringValue("none");
-					return;
-				case TokenizationTruncate.First:
-					writer.WriteStringValue("first");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
+		writer.WriteNullValue();
 	}
 }

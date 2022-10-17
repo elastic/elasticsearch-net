@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public partial class Script : Union<Elastic.Clients.Elasticsearch.InlineScript, Elastic.Clients.Elasticsearch.StoredScriptId>
 {
-	public partial class Script : Union<Elastic.Clients.Elasticsearch.InlineScript, Elastic.Clients.Elasticsearch.StoredScriptId>
+	public Script(Elastic.Clients.Elasticsearch.InlineScript inlineScript) : base(inlineScript)
 	{
-		public Script(Elastic.Clients.Elasticsearch.InlineScript inlineScript) : base(inlineScript)
-		{
-		}
+	}
 
-		public Script(Elastic.Clients.Elasticsearch.StoredScriptId storedScriptId) : base(storedScriptId)
-		{
-		}
+	public Script(Elastic.Clients.Elasticsearch.StoredScriptId storedScriptId) : base(storedScriptId)
+	{
 	}
 }

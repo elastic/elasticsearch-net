@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public partial class TermsQueryField : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>
 {
-	public partial class TermsQueryField : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>
+	public TermsQueryField(IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> termsQueryField) : base(termsQueryField)
 	{
-		public TermsQueryField(IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> termsQueryField) : base(termsQueryField)
-		{
-		}
+	}
 
-		public TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup termsLookup) : base(termsLookup)
-		{
-		}
+	public TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup termsLookup) : base(termsLookup)
+	{
 	}
 }

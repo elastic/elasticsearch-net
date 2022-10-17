@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,90 +24,88 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ml
+namespace Elastic.Clients.Elasticsearch.Ml;
+public sealed partial class PassThroughInferenceOptions
 {
-	public sealed partial class PassThroughInferenceOptions
-	{
-		[JsonInclude]
-		[JsonPropertyName("results_field")]
-		public string? ResultsField { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("results_field")]
+	public string? ResultsField { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("tokenization")]
-		public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("tokenization")]
+	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+}
+
+public sealed partial class PassThroughInferenceOptionsDescriptor : SerializableDescriptor<PassThroughInferenceOptionsDescriptor>
+{
+	internal PassThroughInferenceOptionsDescriptor(Action<PassThroughInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+	public PassThroughInferenceOptionsDescriptor() : base()
+	{
 	}
 
-	public sealed partial class PassThroughInferenceOptionsDescriptor : SerializableDescriptorBase<PassThroughInferenceOptionsDescriptor>
+	private string? ResultsFieldValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
+
+	private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
+
+	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
+
+	public PassThroughInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
-		internal PassThroughInferenceOptionsDescriptor(Action<PassThroughInferenceOptionsDescriptor> configure) => configure.Invoke(this);
-		public PassThroughInferenceOptionsDescriptor() : base()
+		ResultsFieldValue = resultsField;
+		return Self;
+	}
+
+	public PassThroughInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
+	{
+		TokenizationDescriptor = null;
+		TokenizationDescriptorAction = null;
+		TokenizationValue = tokenization;
+		return Self;
+	}
+
+	public PassThroughInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
+	{
+		TokenizationValue = null;
+		TokenizationDescriptorAction = null;
+		TokenizationDescriptor = descriptor;
+		return Self;
+	}
+
+	public PassThroughInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
+	{
+		TokenizationValue = null;
+		TokenizationDescriptor = null;
+		TokenizationDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(ResultsFieldValue))
 		{
+			writer.WritePropertyName("results_field");
+			writer.WriteStringValue(ResultsFieldValue);
 		}
 
-		private string? ResultsFieldValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
-
-		private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
-
-		private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
-
-		public PassThroughInferenceOptionsDescriptor ResultsField(string? resultsField)
+		if (TokenizationDescriptor is not null)
 		{
-			ResultsFieldValue = resultsField;
-			return Self;
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
+		}
+		else if (TokenizationDescriptorAction is not null)
+		{
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
+		}
+		else if (TokenizationValue is not null)
+		{
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, TokenizationValue, options);
 		}
 
-		public PassThroughInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
-		{
-			TokenizationDescriptor = null;
-			TokenizationDescriptorAction = null;
-			TokenizationValue = tokenization;
-			return Self;
-		}
-
-		public PassThroughInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
-		{
-			TokenizationValue = null;
-			TokenizationDescriptorAction = null;
-			TokenizationDescriptor = descriptor;
-			return Self;
-		}
-
-		public PassThroughInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
-		{
-			TokenizationValue = null;
-			TokenizationDescriptor = null;
-			TokenizationDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(ResultsFieldValue))
-			{
-				writer.WritePropertyName("results_field");
-				writer.WriteStringValue(ResultsFieldValue);
-			}
-
-			if (TokenizationDescriptor is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
-			}
-			else if (TokenizationDescriptorAction is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
-			}
-			else if (TokenizationValue is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, TokenizationValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

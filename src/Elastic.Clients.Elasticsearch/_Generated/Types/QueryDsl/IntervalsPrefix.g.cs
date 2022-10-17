@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,142 +24,140 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class IntervalsPrefix
 {
-	public sealed partial class IntervalsPrefix
+	[JsonInclude]
+	[JsonPropertyName("analyzer")]
+	public string? Analyzer { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("prefix")]
+	public string Prefix { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("use_field")]
+	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
+}
+
+public sealed partial class IntervalsPrefixDescriptor<TDocument> : SerializableDescriptor<IntervalsPrefixDescriptor<TDocument>>
+{
+	internal IntervalsPrefixDescriptor(Action<IntervalsPrefixDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public IntervalsPrefixDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("prefix")]
-		public string Prefix { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("use_field")]
-		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public sealed partial class IntervalsPrefixDescriptor<TDocument> : SerializableDescriptorBase<IntervalsPrefixDescriptor<TDocument>>
+	private string? AnalyzerValue { get; set; }
+
+	private string PrefixValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+
+	public IntervalsPrefixDescriptor<TDocument> Analyzer(string? analyzer)
 	{
-		internal IntervalsPrefixDescriptor(Action<IntervalsPrefixDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public IntervalsPrefixDescriptor() : base()
-		{
-		}
-
-		private string? AnalyzerValue { get; set; }
-
-		private string PrefixValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
-
-		public IntervalsPrefixDescriptor<TDocument> Analyzer(string? analyzer)
-		{
-			AnalyzerValue = analyzer;
-			return Self;
-		}
-
-		public IntervalsPrefixDescriptor<TDocument> Prefix(string prefix)
-		{
-			PrefixValue = prefix;
-			return Self;
-		}
-
-		public IntervalsPrefixDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
-		{
-			UseFieldValue = useField;
-			return Self;
-		}
-
-		public IntervalsPrefixDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
-		{
-			UseFieldValue = useField;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
-			}
-
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-			if (UseFieldValue is not null)
-			{
-				writer.WritePropertyName("use_field");
-				JsonSerializer.Serialize(writer, UseFieldValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		AnalyzerValue = analyzer;
+		return Self;
 	}
 
-	public sealed partial class IntervalsPrefixDescriptor : SerializableDescriptorBase<IntervalsPrefixDescriptor>
+	public IntervalsPrefixDescriptor<TDocument> Prefix(string prefix)
 	{
-		internal IntervalsPrefixDescriptor(Action<IntervalsPrefixDescriptor> configure) => configure.Invoke(this);
-		public IntervalsPrefixDescriptor() : base()
+		PrefixValue = prefix;
+		return Self;
+	}
+
+	public IntervalsPrefixDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	public IntervalsPrefixDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
 		}
 
-		private string? AnalyzerValue { get; set; }
-
-		private string PrefixValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
-
-		public IntervalsPrefixDescriptor Analyzer(string? analyzer)
+		writer.WritePropertyName("prefix");
+		writer.WriteStringValue(PrefixValue);
+		if (UseFieldValue is not null)
 		{
-			AnalyzerValue = analyzer;
-			return Self;
+			writer.WritePropertyName("use_field");
+			JsonSerializer.Serialize(writer, UseFieldValue, options);
 		}
 
-		public IntervalsPrefixDescriptor Prefix(string prefix)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class IntervalsPrefixDescriptor : SerializableDescriptor<IntervalsPrefixDescriptor>
+{
+	internal IntervalsPrefixDescriptor(Action<IntervalsPrefixDescriptor> configure) => configure.Invoke(this);
+	public IntervalsPrefixDescriptor() : base()
+	{
+	}
+
+	private string? AnalyzerValue { get; set; }
+
+	private string PrefixValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+
+	public IntervalsPrefixDescriptor Analyzer(string? analyzer)
+	{
+		AnalyzerValue = analyzer;
+		return Self;
+	}
+
+	public IntervalsPrefixDescriptor Prefix(string prefix)
+	{
+		PrefixValue = prefix;
+		return Self;
+	}
+
+	public IntervalsPrefixDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	public IntervalsPrefixDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	public IntervalsPrefixDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
-			PrefixValue = prefix;
-			return Self;
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
 		}
 
-		public IntervalsPrefixDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
+		writer.WritePropertyName("prefix");
+		writer.WriteStringValue(PrefixValue);
+		if (UseFieldValue is not null)
 		{
-			UseFieldValue = useField;
-			return Self;
+			writer.WritePropertyName("use_field");
+			JsonSerializer.Serialize(writer, UseFieldValue, options);
 		}
 
-		public IntervalsPrefixDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
-		{
-			UseFieldValue = useField;
-			return Self;
-		}
-
-		public IntervalsPrefixDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
-		{
-			UseFieldValue = useField;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
-			}
-
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-			if (UseFieldValue is not null)
-			{
-				writer.WritePropertyName("use_field");
-				JsonSerializer.Serialize(writer, UseFieldValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

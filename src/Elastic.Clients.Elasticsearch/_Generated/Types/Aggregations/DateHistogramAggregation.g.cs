@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,791 +24,789 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+internal sealed class DateHistogramAggregationConverter : JsonConverter<DateHistogramAggregation>
 {
-	internal sealed class DateHistogramAggregationConverter : JsonConverter<DateHistogramAggregation>
+	public override DateHistogramAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override DateHistogramAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var aggName = reader.GetString();
+		if (aggName != "date_histogram")
+			throw new JsonException("Unexpected JSON detected.");
+		var agg = new DateHistogramAggregation(aggName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "date_histogram")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new DateHistogramAggregation(aggName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("calendar_interval"))
 				{
-					if (reader.ValueTextEquals("calendar_interval"))
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?>(ref reader, options);
+					if (value is not null)
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.CalendarInterval = value;
-						}
-
-						continue;
+						agg.CalendarInterval = value;
 					}
 
-					if (reader.ValueTextEquals("field"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("field"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Field = value;
 					}
 
-					if (reader.ValueTextEquals("fixed_interval"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.FixedInterval = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("fixed_interval"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.FixedInterval = value;
 					}
 
-					if (reader.ValueTextEquals("format"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("format"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Format = value;
 					}
 
-					if (reader.ValueTextEquals("min_doc_count"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.MinDocCount = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("min_doc_count"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.MinDocCount = value;
 					}
 
-					if (reader.ValueTextEquals("missing"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("missing"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<DateTimeOffset?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Missing = value;
 					}
 
-					if (reader.ValueTextEquals("offset"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Offset = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("offset"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Offset = value;
 					}
 
-					if (reader.ValueTextEquals("order"))
-					{
-						reader.Read();
-						var value = SingleOrManySerializationHelper.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Order = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("order"))
+				{
+					reader.Read();
+					var value = SingleOrManySerializationHelper.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Order = value;
 					}
 
-					if (reader.ValueTextEquals("params"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Params = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("params"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Params = value;
 					}
 
-					if (reader.ValueTextEquals("script"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Script = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("script"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Script = value;
 					}
 
-					if (reader.ValueTextEquals("time_zone"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.TimeZone = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("time_zone"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.TimeZone = value;
 					}
+
+					continue;
 				}
 			}
+		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("meta"))
 				{
-					if (reader.ValueTextEquals("meta"))
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					if (value is not null)
 					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
+						agg.Meta = value;
 					}
 
-					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-					{
-						var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Aggregations = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
+				{
+					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Aggregations = value;
 					}
+
+					continue;
 				}
 			}
-
-			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, DateHistogramAggregation value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("date_histogram");
-			writer.WriteStartObject();
-			if (value.CalendarInterval is not null)
-			{
-				writer.WritePropertyName("calendar_interval");
-				JsonSerializer.Serialize(writer, value.CalendarInterval, options);
-			}
-
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			if (value.FixedInterval is not null)
-			{
-				writer.WritePropertyName("fixed_interval");
-				JsonSerializer.Serialize(writer, value.FixedInterval, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Format))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
-			}
-
-			if (value.MinDocCount.HasValue)
-			{
-				writer.WritePropertyName("min_doc_count");
-				writer.WriteNumberValue(value.MinDocCount.Value);
-			}
-
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
-			}
-
-			if (value.Offset is not null)
-			{
-				writer.WritePropertyName("offset");
-				JsonSerializer.Serialize(writer, value.Offset, options);
-			}
-
-			if (value.Order is not null)
-			{
-				writer.WritePropertyName("order");
-				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(value.Order, writer, options);
-			}
-
-			if (value.Params is not null)
-			{
-				writer.WritePropertyName("params");
-				JsonSerializer.Serialize(writer, value.Params, options);
-			}
-
-			if (value.Script is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, value.Script, options);
-			}
-
-			if (value.TimeZone is not null)
-			{
-				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, value.TimeZone, options);
-			}
-
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (value.Aggregations is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, value.Aggregations, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return agg;
 	}
 
-	[JsonConverter(typeof(DateHistogramAggregationConverter))]
-	public sealed partial class DateHistogramAggregation : Aggregation
+	public override void Write(Utf8JsonWriter writer, DateHistogramAggregation value, JsonSerializerOptions options)
 	{
-		public DateHistogramAggregation(string name) => Name = name;
-		internal DateHistogramAggregation()
+		writer.WriteStartObject();
+		writer.WritePropertyName("date_histogram");
+		writer.WriteStartObject();
+		if (value.CalendarInterval is not null)
 		{
+			writer.WritePropertyName("calendar_interval");
+			JsonSerializer.Serialize(writer, value.CalendarInterval, options);
 		}
 
-		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+		if (value.Field is not null)
+		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value.Field, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarInterval { get; set; }
+		if (value.FixedInterval is not null)
+		{
+			writer.WritePropertyName("fixed_interval");
+			JsonSerializer.Serialize(writer, value.FixedInterval, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		if (!string.IsNullOrEmpty(value.Format))
+		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(value.Format);
+		}
 
-		public Elastic.Clients.Elasticsearch.Duration? FixedInterval { get; set; }
+		if (value.MinDocCount.HasValue)
+		{
+			writer.WritePropertyName("min_doc_count");
+			writer.WriteNumberValue(value.MinDocCount.Value);
+		}
 
-		public string? Format { get; set; }
+		if (value.Missing is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, value.Missing, options);
+		}
 
-		public Dictionary<string, object>? Meta { get; set; }
+		if (value.Offset is not null)
+		{
+			writer.WritePropertyName("offset");
+			JsonSerializer.Serialize(writer, value.Offset, options);
+		}
 
-		public int? MinDocCount { get; set; }
+		if (value.Order is not null)
+		{
+			writer.WritePropertyName("order");
+			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(value.Order, writer, options);
+		}
 
-		public DateTimeOffset? Missing { get; set; }
+		if (value.Params is not null)
+		{
+			writer.WritePropertyName("params");
+			JsonSerializer.Serialize(writer, value.Params, options);
+		}
 
-		public override string? Name { get; internal set; }
+		if (value.Script is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, value.Script, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
+		if (value.TimeZone is not null)
+		{
+			writer.WritePropertyName("time_zone");
+			JsonSerializer.Serialize(writer, value.TimeZone, options);
+		}
 
-		[JsonConverter(typeof(AggregateOrderConverter))]
-		public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+		writer.WriteEndObject();
+		if (value.Meta is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
+		}
 
-		public Dictionary<string, object>? Params { get; set; }
+		if (value.Aggregations is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, value.Aggregations, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		public string? TimeZone { get; set; }
+[JsonConverter(typeof(DateHistogramAggregationConverter))]
+public sealed partial class DateHistogramAggregation : Aggregation
+{
+	public DateHistogramAggregation(string name) => Name = name;
+	internal DateHistogramAggregation()
+	{
 	}
 
-	public sealed partial class DateHistogramAggregationDescriptor<TDocument> : SerializableDescriptorBase<DateHistogramAggregationDescriptor<TDocument>>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarInterval { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Duration? FixedInterval { get; set; }
+
+	public string? Format { get; set; }
+
+	public Dictionary<string, object>? Meta { get; set; }
+
+	public int? MinDocCount { get; set; }
+
+	public DateTimeOffset? Missing { get; set; }
+
+	public override string? Name { get; internal set; }
+
+	public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
+
+	[JsonConverter(typeof(AggregateOrderConverter))]
+	public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+
+	public Dictionary<string, object>? Params { get; set; }
+
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	public string? TimeZone { get; set; }
+}
+
+public sealed partial class DateHistogramAggregationDescriptor<TDocument> : SerializableDescriptor<DateHistogramAggregationDescriptor<TDocument>>
+{
+	internal DateHistogramAggregationDescriptor(Action<DateHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public DateHistogramAggregationDescriptor() : base()
 	{
-		internal DateHistogramAggregationDescriptor(Action<DateHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public DateHistogramAggregationDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
-		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarIntervalValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? FixedIntervalValue { get; set; }
-
-		private string? FormatValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private int? MinDocCountValue { get; set; }
-
-		private DateTimeOffset? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
-
-		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
-
-		private Dictionary<string, object>? ParamsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		private string? TimeZoneValue { get; set; }
-
-		public DateHistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-		{
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = null;
-			AggregationsValue = aggregations;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
-		{
-			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
-			AggregationsDescriptor = descriptor;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
-		{
-			AggregationsValue = null;
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = configure;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> CalendarInterval(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? calendarInterval)
-		{
-			CalendarIntervalValue = calendarInterval;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
-		{
-			FixedIntervalValue = fixedInterval;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Format(string? format)
-		{
-			FormatValue = format;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount)
-		{
-			MinDocCountValue = minDocCount;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Missing(DateTimeOffset? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Offset(Elastic.Clients.Elasticsearch.Duration? offset)
-		{
-			OffsetValue = offset;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
-		{
-			OrderValue = order;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-		{
-			ScriptValue = script;
-			return Self;
-		}
-
-		public DateHistogramAggregationDescriptor<TDocument> TimeZone(string? timeZone)
-		{
-			TimeZoneValue = timeZone;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("date_histogram");
-			writer.WriteStartObject();
-			if (CalendarIntervalValue is not null)
-			{
-				writer.WritePropertyName("calendar_interval");
-				JsonSerializer.Serialize(writer, CalendarIntervalValue, options);
-			}
-
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (FixedIntervalValue is not null)
-			{
-				writer.WritePropertyName("fixed_interval");
-				JsonSerializer.Serialize(writer, FixedIntervalValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (MinDocCountValue.HasValue)
-			{
-				writer.WritePropertyName("min_doc_count");
-				writer.WriteNumberValue(MinDocCountValue.Value);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (OffsetValue is not null)
-			{
-				writer.WritePropertyName("offset");
-				JsonSerializer.Serialize(writer, OffsetValue, options);
-			}
-
-			if (OrderValue is not null)
-			{
-				writer.WritePropertyName("order");
-				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
-			}
-
-			if (ParamsValue is not null)
-			{
-				writer.WritePropertyName("params");
-				JsonSerializer.Serialize(writer, ParamsValue, options);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (TimeZoneValue is not null)
-			{
-				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, TimeZoneValue, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (AggregationsDescriptor is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-			}
-			else if (AggregationsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
-			}
-			else if (AggregationsValue is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class DateHistogramAggregationDescriptor : SerializableDescriptorBase<DateHistogramAggregationDescriptor>
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
+
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarIntervalValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? FixedIntervalValue { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private int? MinDocCountValue { get; set; }
+
+	private DateTimeOffset? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
+
+	private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+
+	private Dictionary<string, object>? ParamsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	private string? TimeZoneValue { get; set; }
+
+	public DateHistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 	{
-		internal DateHistogramAggregationDescriptor(Action<DateHistogramAggregationDescriptor> configure) => configure.Invoke(this);
-		public DateHistogramAggregationDescriptor() : base()
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = null;
+		AggregationsValue = aggregations;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptorAction = null;
+		AggregationsDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = configure;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> CalendarInterval(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? calendarInterval)
+	{
+		CalendarIntervalValue = calendarInterval;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
+	{
+		FixedIntervalValue = fixedInterval;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount)
+	{
+		MinDocCountValue = minDocCount;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> Missing(DateTimeOffset? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> Offset(Elastic.Clients.Elasticsearch.Duration? offset)
+	{
+		OffsetValue = offset;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	{
+		OrderValue = order;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> TimeZone(string? timeZone)
+	{
+		TimeZoneValue = timeZone;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("date_histogram");
+		writer.WriteStartObject();
+		if (CalendarIntervalValue is not null)
 		{
+			writer.WritePropertyName("calendar_interval");
+			JsonSerializer.Serialize(writer, CalendarIntervalValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
-
-		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarIntervalValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? FixedIntervalValue { get; set; }
-
-		private string? FormatValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private int? MinDocCountValue { get; set; }
-
-		private DateTimeOffset? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
-
-		private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
-
-		private Dictionary<string, object>? ParamsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		private string? TimeZoneValue { get; set; }
-
-		public DateHistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		if (FieldValue is not null)
 		{
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = null;
-			AggregationsValue = aggregations;
-			return Self;
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+		if (FixedIntervalValue is not null)
 		{
-			AggregationsValue = null;
-			AggregationsDescriptorAction = null;
-			AggregationsDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("fixed_interval");
+			JsonSerializer.Serialize(writer, FixedIntervalValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
-			AggregationsValue = null;
-			AggregationsDescriptor = null;
-			AggregationsDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
 		}
 
-		public DateHistogramAggregationDescriptor CalendarInterval(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? calendarInterval)
+		if (MinDocCountValue.HasValue)
 		{
-			CalendarIntervalValue = calendarInterval;
-			return Self;
+			writer.WritePropertyName("min_doc_count");
+			writer.WriteNumberValue(MinDocCountValue.Value);
 		}
 
-		public DateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		if (MissingValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		if (OffsetValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("offset");
+			JsonSerializer.Serialize(writer, OffsetValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		if (OrderValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("order");
+			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
 		}
 
-		public DateHistogramAggregationDescriptor FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
+		if (ParamsValue is not null)
 		{
-			FixedIntervalValue = fixedInterval;
-			return Self;
+			writer.WritePropertyName("params");
+			JsonSerializer.Serialize(writer, ParamsValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor Format(string? format)
+		if (ScriptValue is not null)
 		{
-			FormatValue = format;
-			return Self;
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		if (TimeZoneValue is not null)
 		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
+			writer.WritePropertyName("time_zone");
+			JsonSerializer.Serialize(writer, TimeZoneValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor MinDocCount(int? minDocCount)
+		writer.WriteEndObject();
+		if (MetaValue is not null)
 		{
-			MinDocCountValue = minDocCount;
-			return Self;
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor Missing(DateTimeOffset? missing)
+		if (AggregationsDescriptor is not null)
 		{
-			MissingValue = missing;
-			return Self;
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+		}
+		else if (AggregationsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+		}
+		else if (AggregationsValue is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor Offset(Elastic.Clients.Elasticsearch.Duration? offset)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class DateHistogramAggregationDescriptor : SerializableDescriptor<DateHistogramAggregationDescriptor>
+{
+	internal DateHistogramAggregationDescriptor(Action<DateHistogramAggregationDescriptor> configure) => configure.Invoke(this);
+	public DateHistogramAggregationDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
+
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarIntervalValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? FixedIntervalValue { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private int? MinDocCountValue { get; set; }
+
+	private DateTimeOffset? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
+
+	private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+
+	private Dictionary<string, object>? ParamsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	private string? TimeZoneValue { get; set; }
+
+	public DateHistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+	{
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = null;
+		AggregationsValue = aggregations;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptorAction = null;
+		AggregationsDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+	{
+		AggregationsValue = null;
+		AggregationsDescriptor = null;
+		AggregationsDescriptorAction = configure;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor CalendarInterval(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? calendarInterval)
+	{
+		CalendarIntervalValue = calendarInterval;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
+	{
+		FixedIntervalValue = fixedInterval;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor MinDocCount(int? minDocCount)
+	{
+		MinDocCountValue = minDocCount;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Missing(DateTimeOffset? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Offset(Elastic.Clients.Elasticsearch.Duration? offset)
+	{
+		OffsetValue = offset;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	{
+		OrderValue = order;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor TimeZone(string? timeZone)
+	{
+		TimeZoneValue = timeZone;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("date_histogram");
+		writer.WriteStartObject();
+		if (CalendarIntervalValue is not null)
 		{
-			OffsetValue = offset;
-			return Self;
+			writer.WritePropertyName("calendar_interval");
+			JsonSerializer.Serialize(writer, CalendarIntervalValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+		if (FieldValue is not null)
 		{
-			OrderValue = order;
-			return Self;
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		if (FixedIntervalValue is not null)
 		{
-			ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
+			writer.WritePropertyName("fixed_interval");
+			JsonSerializer.Serialize(writer, FixedIntervalValue, options);
 		}
 
-		public DateHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
-			ScriptValue = script;
-			return Self;
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
 		}
 
-		public DateHistogramAggregationDescriptor TimeZone(string? timeZone)
+		if (MinDocCountValue.HasValue)
 		{
-			TimeZoneValue = timeZone;
-			return Self;
+			writer.WritePropertyName("min_doc_count");
+			writer.WriteNumberValue(MinDocCountValue.Value);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		if (MissingValue is not null)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("date_histogram");
-			writer.WriteStartObject();
-			if (CalendarIntervalValue is not null)
-			{
-				writer.WritePropertyName("calendar_interval");
-				JsonSerializer.Serialize(writer, CalendarIntervalValue, options);
-			}
-
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (FixedIntervalValue is not null)
-			{
-				writer.WritePropertyName("fixed_interval");
-				JsonSerializer.Serialize(writer, FixedIntervalValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (MinDocCountValue.HasValue)
-			{
-				writer.WritePropertyName("min_doc_count");
-				writer.WriteNumberValue(MinDocCountValue.Value);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (OffsetValue is not null)
-			{
-				writer.WritePropertyName("offset");
-				JsonSerializer.Serialize(writer, OffsetValue, options);
-			}
-
-			if (OrderValue is not null)
-			{
-				writer.WritePropertyName("order");
-				SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
-			}
-
-			if (ParamsValue is not null)
-			{
-				writer.WritePropertyName("params");
-				JsonSerializer.Serialize(writer, ParamsValue, options);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (TimeZoneValue is not null)
-			{
-				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, TimeZoneValue, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (AggregationsDescriptor is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-			}
-			else if (AggregationsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
-			}
-			else if (AggregationsValue is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, AggregationsValue, options);
-			}
-
-			writer.WriteEndObject();
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
 		}
+
+		if (OffsetValue is not null)
+		{
+			writer.WritePropertyName("offset");
+			JsonSerializer.Serialize(writer, OffsetValue, options);
+		}
+
+		if (OrderValue is not null)
+		{
+			writer.WritePropertyName("order");
+			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
+		}
+
+		if (ParamsValue is not null)
+		{
+			writer.WritePropertyName("params");
+			JsonSerializer.Serialize(writer, ParamsValue, options);
+		}
+
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
+		if (TimeZoneValue is not null)
+		{
+			writer.WritePropertyName("time_zone");
+			JsonSerializer.Serialize(writer, TimeZoneValue, options);
+		}
+
+		writer.WriteEndObject();
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (AggregationsDescriptor is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+		}
+		else if (AggregationsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
+		}
+		else if (AggregationsValue is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

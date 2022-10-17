@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,45 +26,43 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class MigrateToDataStreamRequestParameters : RequestParameters<MigrateToDataStreamRequestParameters>
 {
-	public sealed class MigrateToDataStreamRequestParameters : RequestParameters<MigrateToDataStreamRequestParameters>
+}
+
+public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToDataStreamRequestParameters>
+{
+	public MigrateToDataStreamRequest(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
 	{
 	}
 
-	public sealed partial class MigrateToDataStreamRequest : PlainRequestBase<MigrateToDataStreamRequestParameters>
-	{
-		public MigrateToDataStreamRequest(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementMigrateToDataStream;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => false;
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementMigrateToDataStream;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
+public sealed partial class MigrateToDataStreamRequestDescriptor : RequestDescriptor<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamRequestParameters>
+{
+	internal MigrateToDataStreamRequestDescriptor(Action<MigrateToDataStreamRequestDescriptor> configure) => configure.Invoke(this);
+	public MigrateToDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
+	{
 	}
 
-	public sealed partial class MigrateToDataStreamRequestDescriptor : RequestDescriptorBase<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamRequestParameters>
+	internal MigrateToDataStreamRequestDescriptor()
 	{
-		internal MigrateToDataStreamRequestDescriptor(Action<MigrateToDataStreamRequestDescriptor> configure) => configure.Invoke(this);
-		public MigrateToDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
-		{
-		}
+	}
 
-		internal MigrateToDataStreamRequestDescriptor()
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementMigrateToDataStream;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => false;
+	public MigrateToDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName name)
+	{
+		RouteValues.Required("name", name);
+		return Self;
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementMigrateToDataStream;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		public MigrateToDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName name)
-		{
-			RouteValues.Required("name", name);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

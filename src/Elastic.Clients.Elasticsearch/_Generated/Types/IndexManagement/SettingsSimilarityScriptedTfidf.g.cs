@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,42 +24,40 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class SettingsSimilarityScriptedTfidf
 {
-	public sealed partial class SettingsSimilarityScriptedTfidf
-	{
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "scripted";
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "scripted";
+}
+
+public sealed partial class SettingsSimilarityScriptedTfidfDescriptor : SerializableDescriptor<SettingsSimilarityScriptedTfidfDescriptor>
+{
+	internal SettingsSimilarityScriptedTfidfDescriptor(Action<SettingsSimilarityScriptedTfidfDescriptor> configure) => configure.Invoke(this);
+	public SettingsSimilarityScriptedTfidfDescriptor() : base()
+	{
 	}
 
-	public sealed partial class SettingsSimilarityScriptedTfidfDescriptor : SerializableDescriptorBase<SettingsSimilarityScriptedTfidfDescriptor>
+	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
+
+	public SettingsSimilarityScriptedTfidfDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 	{
-		internal SettingsSimilarityScriptedTfidfDescriptor(Action<SettingsSimilarityScriptedTfidfDescriptor> configure) => configure.Invoke(this);
-		public SettingsSimilarityScriptedTfidfDescriptor() : base()
-		{
-		}
+		ScriptValue = script;
+		return Self;
+	}
 
-		private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
-
-		public SettingsSimilarityScriptedTfidfDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
-		{
-			ScriptValue = script;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("scripted");
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("script");
+		JsonSerializer.Serialize(writer, ScriptValue, options);
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("scripted");
+		writer.WriteEndObject();
 	}
 }

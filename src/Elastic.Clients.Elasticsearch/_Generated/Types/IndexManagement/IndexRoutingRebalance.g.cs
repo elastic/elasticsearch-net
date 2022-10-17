@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,36 +24,34 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class IndexRoutingRebalance
 {
-	public sealed partial class IndexRoutingRebalance
+	[JsonInclude]
+	[JsonPropertyName("enable")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions Enable { get; set; }
+}
+
+public sealed partial class IndexRoutingRebalanceDescriptor : SerializableDescriptor<IndexRoutingRebalanceDescriptor>
+{
+	internal IndexRoutingRebalanceDescriptor(Action<IndexRoutingRebalanceDescriptor> configure) => configure.Invoke(this);
+	public IndexRoutingRebalanceDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("enable")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions Enable { get; set; }
 	}
 
-	public sealed partial class IndexRoutingRebalanceDescriptor : SerializableDescriptorBase<IndexRoutingRebalanceDescriptor>
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions EnableValue { get; set; }
+
+	public IndexRoutingRebalanceDescriptor Enable(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions enable)
 	{
-		internal IndexRoutingRebalanceDescriptor(Action<IndexRoutingRebalanceDescriptor> configure) => configure.Invoke(this);
-		public IndexRoutingRebalanceDescriptor() : base()
-		{
-		}
+		EnableValue = enable;
+		return Self;
+	}
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions EnableValue { get; set; }
-
-		public IndexRoutingRebalanceDescriptor Enable(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions enable)
-		{
-			EnableValue = enable;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("enable");
-			JsonSerializer.Serialize(writer, EnableValue, options);
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("enable");
+		JsonSerializer.Serialize(writer, EnableValue, options);
+		writer.WriteEndObject();
 	}
 }

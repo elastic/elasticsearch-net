@@ -15,33 +15,33 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class InfoResponse : ElasticsearchResponseBase
 {
-	public sealed partial class InfoResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("cluster_name")]
-		public string ClusterName { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("cluster_name")]
+	public string ClusterName { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("cluster_uuid")]
-		public string ClusterUuid { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("cluster_uuid")]
+	public string ClusterUuid { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string Name { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("name")]
+	public string Name { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("tagline")]
-		public string Tagline { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("tagline")]
+	public string Tagline { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version { get; init; }
 }
