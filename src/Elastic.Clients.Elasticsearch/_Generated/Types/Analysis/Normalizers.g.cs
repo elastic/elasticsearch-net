@@ -57,10 +57,18 @@ public sealed partial class NormalizersDescriptor : IsADictionaryDescriptor<Norm
 	public NormalizersDescriptor Lowercase(string normalizerName, LowercaseNormalizer lowercaseNormalizer) => AssignVariant(normalizerName, lowercaseNormalizer);
 }
 
-internal sealed partial class NormalizerInterfaceConverter
+internal sealed partial class NormalizerInterfaceConverter : JsonConverter<INormalizer>
 {
-	private static INormalizer DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
+	public override INormalizer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		var copiedReader = reader;
+		string? type = null;
+		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
+		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		{
+			type = readType.ToString();
+		}
+
 		switch (type)
 		{
 			case "custom":
@@ -71,8 +79,32 @@ internal sealed partial class NormalizerInterfaceConverter
 				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
 		}
 	}
+
+	public override void Write(Utf8JsonWriter writer, INormalizer value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		switch (value.Type)
+		{
+			case "custom":
+				JsonSerializer.Serialize(writer, value, typeof(CustomNormalizer), options);
+				return;
+			case "lowercase":
+				JsonSerializer.Serialize(writer, value, typeof(LowercaseNormalizer), options);
+				return;
+			default:
+				var type = value.GetType();
+				JsonSerializer.Serialize(writer, value, type, options);
+				return;
+		}
+	}
 }
 
+[JsonConverter(typeof(NormalizerInterfaceConverter))]
 public partial interface INormalizer
 {
 	public string Type { get; }

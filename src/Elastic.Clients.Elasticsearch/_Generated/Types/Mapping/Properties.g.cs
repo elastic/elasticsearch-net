@@ -281,10 +281,18 @@ public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescr
 	public PropertiesDescriptor<TDocument> Wildcard(Expression<Func<TDocument, object>> propertyName, Action<WildcardPropertyDescriptor<TDocument>> configure) => AssignVariant<WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, configure);
 }
 
-internal sealed partial class PropertyInterfaceConverter
+internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProperty>
 {
-	private static IProperty DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
+	public override IProperty Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		var copiedReader = reader;
+		string? type = null;
+		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
+		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		{
+			type = readType.ToString();
+		}
+
 		switch (type)
 		{
 			case "long_range":
@@ -383,8 +391,164 @@ internal sealed partial class PropertyInterfaceConverter
 				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
 		}
 	}
+
+	public override void Write(Utf8JsonWriter writer, IProperty value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		switch (value.Type)
+		{
+			case "long_range":
+				JsonSerializer.Serialize(writer, value, typeof(LongRangeProperty), options);
+				return;
+			case "ip_range":
+				JsonSerializer.Serialize(writer, value, typeof(IpRangeProperty), options);
+				return;
+			case "integer_range":
+				JsonSerializer.Serialize(writer, value, typeof(IntegerRangeProperty), options);
+				return;
+			case "float_range":
+				JsonSerializer.Serialize(writer, value, typeof(FloatRangeProperty), options);
+				return;
+			case "double_range":
+				JsonSerializer.Serialize(writer, value, typeof(DoubleRangeProperty), options);
+				return;
+			case "date_range":
+				JsonSerializer.Serialize(writer, value, typeof(DateRangeProperty), options);
+				return;
+			case "unsigned_long":
+				JsonSerializer.Serialize(writer, value, typeof(UnsignedLongNumberProperty), options);
+				return;
+			case "short":
+				JsonSerializer.Serialize(writer, value, typeof(ShortNumberProperty), options);
+				return;
+			case "scaled_float":
+				JsonSerializer.Serialize(writer, value, typeof(ScaledFloatNumberProperty), options);
+				return;
+			case "long":
+				JsonSerializer.Serialize(writer, value, typeof(LongNumberProperty), options);
+				return;
+			case "integer":
+				JsonSerializer.Serialize(writer, value, typeof(IntegerNumberProperty), options);
+				return;
+			case "half_float":
+				JsonSerializer.Serialize(writer, value, typeof(HalfFloatNumberProperty), options);
+				return;
+			case "float":
+				JsonSerializer.Serialize(writer, value, typeof(FloatNumberProperty), options);
+				return;
+			case "double":
+				JsonSerializer.Serialize(writer, value, typeof(DoubleNumberProperty), options);
+				return;
+			case "byte":
+				JsonSerializer.Serialize(writer, value, typeof(ByteNumberProperty), options);
+				return;
+			case "shape":
+				JsonSerializer.Serialize(writer, value, typeof(ShapeProperty), options);
+				return;
+			case "point":
+				JsonSerializer.Serialize(writer, value, typeof(PointProperty), options);
+				return;
+			case "geo_shape":
+				JsonSerializer.Serialize(writer, value, typeof(GeoShapeProperty), options);
+				return;
+			case "geo_point":
+				JsonSerializer.Serialize(writer, value, typeof(GeoPointProperty), options);
+				return;
+			case "token_count":
+				JsonSerializer.Serialize(writer, value, typeof(TokenCountProperty), options);
+				return;
+			case "murmur3":
+				JsonSerializer.Serialize(writer, value, typeof(Murmur3HashProperty), options);
+				return;
+			case "ip":
+				JsonSerializer.Serialize(writer, value, typeof(IpProperty), options);
+				return;
+			case "histogram":
+				JsonSerializer.Serialize(writer, value, typeof(HistogramProperty), options);
+				return;
+			case "alias":
+				JsonSerializer.Serialize(writer, value, typeof(FieldAliasProperty), options);
+				return;
+			case "constant_keyword":
+				JsonSerializer.Serialize(writer, value, typeof(ConstantKeywordProperty), options);
+				return;
+			case "completion":
+				JsonSerializer.Serialize(writer, value, typeof(CompletionProperty), options);
+				return;
+			case "object":
+				JsonSerializer.Serialize(writer, value, typeof(ObjectProperty), options);
+				return;
+			case "nested":
+				JsonSerializer.Serialize(writer, value, typeof(NestedProperty), options);
+				return;
+			case "flattened":
+				JsonSerializer.Serialize(writer, value, typeof(FlattenedProperty), options);
+				return;
+			case "dense_vector":
+				JsonSerializer.Serialize(writer, value, typeof(DenseVectorProperty), options);
+				return;
+			case "aggregate_metric_double":
+				JsonSerializer.Serialize(writer, value, typeof(AggregateMetricDoubleProperty), options);
+				return;
+			case "date":
+				JsonSerializer.Serialize(writer, value, typeof(DateProperty), options);
+				return;
+			case "date_nanos":
+				JsonSerializer.Serialize(writer, value, typeof(DateNanosProperty), options);
+				return;
+			case "wildcard":
+				JsonSerializer.Serialize(writer, value, typeof(WildcardProperty), options);
+				return;
+			case "version":
+				JsonSerializer.Serialize(writer, value, typeof(VersionProperty), options);
+				return;
+			case "text":
+				JsonSerializer.Serialize(writer, value, typeof(TextProperty), options);
+				return;
+			case "search_as_you_type":
+				JsonSerializer.Serialize(writer, value, typeof(SearchAsYouTypeProperty), options);
+				return;
+			case "rank_features":
+				JsonSerializer.Serialize(writer, value, typeof(RankFeaturesProperty), options);
+				return;
+			case "rank_feature":
+				JsonSerializer.Serialize(writer, value, typeof(RankFeatureProperty), options);
+				return;
+			case "percolator":
+				JsonSerializer.Serialize(writer, value, typeof(PercolatorProperty), options);
+				return;
+			case "match_only_text":
+				JsonSerializer.Serialize(writer, value, typeof(MatchOnlyTextProperty), options);
+				return;
+			case "keyword":
+				JsonSerializer.Serialize(writer, value, typeof(KeywordProperty), options);
+				return;
+			case "join":
+				JsonSerializer.Serialize(writer, value, typeof(JoinProperty), options);
+				return;
+			case "{dynamic_property}":
+				JsonSerializer.Serialize(writer, value, typeof(DynamicProperty), options);
+				return;
+			case "boolean":
+				JsonSerializer.Serialize(writer, value, typeof(BooleanProperty), options);
+				return;
+			case "binary":
+				JsonSerializer.Serialize(writer, value, typeof(BinaryProperty), options);
+				return;
+			default:
+				var type = value.GetType();
+				JsonSerializer.Serialize(writer, value, type, options);
+				return;
+		}
+	}
 }
 
+[JsonConverter(typeof(PropertyInterfaceConverter))]
 public partial interface IProperty
 {
 	public string Type { get; }
