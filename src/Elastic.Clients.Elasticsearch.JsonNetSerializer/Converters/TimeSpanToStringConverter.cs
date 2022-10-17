@@ -5,7 +5,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Elastic.Clients.JsonNetSerializer.Converters
+namespace Elastic.Clients.Elasticsearch.JsonNetSerializer.Converters
 {
 	/// <summary>
 	/// Included for compatibility reasons

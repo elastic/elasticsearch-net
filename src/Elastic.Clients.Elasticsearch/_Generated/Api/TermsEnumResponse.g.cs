@@ -15,25 +15,25 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class TermsEnumResponse : ElasticsearchResponseBase
 {
-	public sealed partial class TermsEnumResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("complete")]
-		public bool Complete { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("complete")]
+	public bool Complete { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("_shards")]
-		public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("_shards")]
+	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("terms")]
-		public IReadOnlyCollection<string> Terms { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("terms")]
+	public IReadOnlyCollection<string> Terms { get; init; }
 }

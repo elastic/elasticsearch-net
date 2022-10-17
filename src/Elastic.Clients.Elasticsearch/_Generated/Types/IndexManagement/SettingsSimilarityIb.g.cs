@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,70 +24,68 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class SettingsSimilarityIb
 {
-	public sealed partial class SettingsSimilarityIb
+	[JsonInclude]
+	[JsonPropertyName("distribution")]
+	public Elastic.Clients.Elasticsearch.IBDistribution Distribution { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("lambda")]
+	public Elastic.Clients.Elasticsearch.IBLambda Lambda { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("normalization")]
+	public Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "IB";
+}
+
+public sealed partial class SettingsSimilarityIbDescriptor : SerializableDescriptor<SettingsSimilarityIbDescriptor>
+{
+	internal SettingsSimilarityIbDescriptor(Action<SettingsSimilarityIbDescriptor> configure) => configure.Invoke(this);
+	public SettingsSimilarityIbDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("distribution")]
-		public Elastic.Clients.Elasticsearch.IBDistribution Distribution { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("lambda")]
-		public Elastic.Clients.Elasticsearch.IBLambda Lambda { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("normalization")]
-		public Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "IB";
 	}
 
-	public sealed partial class SettingsSimilarityIbDescriptor : SerializableDescriptorBase<SettingsSimilarityIbDescriptor>
+	private Elastic.Clients.Elasticsearch.IBDistribution DistributionValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.IBLambda LambdaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Normalization NormalizationValue { get; set; }
+
+	public SettingsSimilarityIbDescriptor Distribution(Elastic.Clients.Elasticsearch.IBDistribution distribution)
 	{
-		internal SettingsSimilarityIbDescriptor(Action<SettingsSimilarityIbDescriptor> configure) => configure.Invoke(this);
-		public SettingsSimilarityIbDescriptor() : base()
-		{
-		}
+		DistributionValue = distribution;
+		return Self;
+	}
 
-		private Elastic.Clients.Elasticsearch.IBDistribution DistributionValue { get; set; }
+	public SettingsSimilarityIbDescriptor Lambda(Elastic.Clients.Elasticsearch.IBLambda lambda)
+	{
+		LambdaValue = lambda;
+		return Self;
+	}
 
-		private Elastic.Clients.Elasticsearch.IBLambda LambdaValue { get; set; }
+	public SettingsSimilarityIbDescriptor Normalization(Elastic.Clients.Elasticsearch.Normalization normalization)
+	{
+		NormalizationValue = normalization;
+		return Self;
+	}
 
-		private Elastic.Clients.Elasticsearch.Normalization NormalizationValue { get; set; }
-
-		public SettingsSimilarityIbDescriptor Distribution(Elastic.Clients.Elasticsearch.IBDistribution distribution)
-		{
-			DistributionValue = distribution;
-			return Self;
-		}
-
-		public SettingsSimilarityIbDescriptor Lambda(Elastic.Clients.Elasticsearch.IBLambda lambda)
-		{
-			LambdaValue = lambda;
-			return Self;
-		}
-
-		public SettingsSimilarityIbDescriptor Normalization(Elastic.Clients.Elasticsearch.Normalization normalization)
-		{
-			NormalizationValue = normalization;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("distribution");
-			JsonSerializer.Serialize(writer, DistributionValue, options);
-			writer.WritePropertyName("lambda");
-			JsonSerializer.Serialize(writer, LambdaValue, options);
-			writer.WritePropertyName("normalization");
-			JsonSerializer.Serialize(writer, NormalizationValue, options);
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("IB");
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("distribution");
+		JsonSerializer.Serialize(writer, DistributionValue, options);
+		writer.WritePropertyName("lambda");
+		JsonSerializer.Serialize(writer, LambdaValue, options);
+		writer.WritePropertyName("normalization");
+		JsonSerializer.Serialize(writer, NormalizationValue, options);
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("IB");
+		writer.WriteEndObject();
 	}
 }

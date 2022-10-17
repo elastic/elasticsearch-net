@@ -7,35 +7,34 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Serialization;
+
+internal sealed class InterfaceConverterFactory : JsonConverterFactory
 {
-	internal sealed class InterfaceConverterFactory : JsonConverterFactory
+	private readonly IElasticsearchClientSettings _settings;
+
+	public InterfaceConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
+
+	public override bool CanConvert(Type typeToConvert)
 	{
-		private readonly IElasticsearchClientSettings _settings;
+		var customAttributes = typeToConvert.GetCustomAttributes();
 
-		public InterfaceConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
+		var canConvert = false;
 
-		public override bool CanConvert(Type typeToConvert)
+		foreach (var item in customAttributes)
 		{
-			var customAttributes = typeToConvert.GetCustomAttributes();
-
-			var canConvert = false;
-
-			foreach (var item in customAttributes)
-			{
-				var type = item.GetType();
-				if (type == typeof(InterfaceConverterAttribute))
-					canConvert = true;
-			}
-
-			return canConvert;
+			var type = item.GetType();
+			if (type == typeof(InterfaceConverterAttribute))
+				canConvert = true;
 		}
 
-		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-		{
-			var att = typeToConvert.GetCustomAttribute<InterfaceConverterAttribute>();
+		return canConvert;
+	}
 
-			return (JsonConverter)Activator.CreateInstance(att.ConverterType)!;
-		}
+	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+	{
+		var att = typeToConvert.GetCustomAttribute<InterfaceConverterAttribute>();
+
+		return (JsonConverter)Activator.CreateInstance(att.ConverterType)!;
 	}
 }

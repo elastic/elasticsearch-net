@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,72 +24,70 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class IndexingPressure
 {
-	public sealed partial class IndexingPressure
+	[JsonInclude]
+	[JsonPropertyName("memory")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory Memory { get; set; }
+}
+
+public sealed partial class IndexingPressureDescriptor : SerializableDescriptor<IndexingPressureDescriptor>
+{
+	internal IndexingPressureDescriptor(Action<IndexingPressureDescriptor> configure) => configure.Invoke(this);
+	public IndexingPressureDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("memory")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory Memory { get; set; }
 	}
 
-	public sealed partial class IndexingPressureDescriptor : SerializableDescriptorBase<IndexingPressureDescriptor>
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory MemoryValue { get; set; }
+
+	private IndexingPressureMemoryDescriptor MemoryDescriptor { get; set; }
+
+	private Action<IndexingPressureMemoryDescriptor> MemoryDescriptorAction { get; set; }
+
+	public IndexingPressureDescriptor Memory(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory memory)
 	{
-		internal IndexingPressureDescriptor(Action<IndexingPressureDescriptor> configure) => configure.Invoke(this);
-		public IndexingPressureDescriptor() : base()
+		MemoryDescriptor = null;
+		MemoryDescriptorAction = null;
+		MemoryValue = memory;
+		return Self;
+	}
+
+	public IndexingPressureDescriptor Memory(IndexingPressureMemoryDescriptor descriptor)
+	{
+		MemoryValue = null;
+		MemoryDescriptorAction = null;
+		MemoryDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexingPressureDescriptor Memory(Action<IndexingPressureMemoryDescriptor> configure)
+	{
+		MemoryValue = null;
+		MemoryDescriptor = null;
+		MemoryDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (MemoryDescriptor is not null)
 		{
+			writer.WritePropertyName("memory");
+			JsonSerializer.Serialize(writer, MemoryDescriptor, options);
+		}
+		else if (MemoryDescriptorAction is not null)
+		{
+			writer.WritePropertyName("memory");
+			JsonSerializer.Serialize(writer, new IndexingPressureMemoryDescriptor(MemoryDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("memory");
+			JsonSerializer.Serialize(writer, MemoryValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory MemoryValue { get; set; }
-
-		private IndexingPressureMemoryDescriptor MemoryDescriptor { get; set; }
-
-		private Action<IndexingPressureMemoryDescriptor> MemoryDescriptorAction { get; set; }
-
-		public IndexingPressureDescriptor Memory(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory memory)
-		{
-			MemoryDescriptor = null;
-			MemoryDescriptorAction = null;
-			MemoryValue = memory;
-			return Self;
-		}
-
-		public IndexingPressureDescriptor Memory(IndexingPressureMemoryDescriptor descriptor)
-		{
-			MemoryValue = null;
-			MemoryDescriptorAction = null;
-			MemoryDescriptor = descriptor;
-			return Self;
-		}
-
-		public IndexingPressureDescriptor Memory(Action<IndexingPressureMemoryDescriptor> configure)
-		{
-			MemoryValue = null;
-			MemoryDescriptor = null;
-			MemoryDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (MemoryDescriptor is not null)
-			{
-				writer.WritePropertyName("memory");
-				JsonSerializer.Serialize(writer, MemoryDescriptor, options);
-			}
-			else if (MemoryDescriptorAction is not null)
-			{
-				writer.WritePropertyName("memory");
-				JsonSerializer.Serialize(writer, new IndexingPressureMemoryDescriptor(MemoryDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("memory");
-				JsonSerializer.Serialize(writer, MemoryValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

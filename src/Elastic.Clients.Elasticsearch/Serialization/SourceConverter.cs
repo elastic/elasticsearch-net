@@ -6,19 +6,18 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Serialization;
+
+internal sealed class SourceConverter<T> : JsonConverter<SourceMarker<T>>
 {
-	internal sealed class SourceConverter<T> : JsonConverter<SourceMarker<T>>
+	private readonly IElasticsearchClientSettings _settings;
+
+	public SourceConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+	public override SourceMarker<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new()
 	{
-		private readonly IElasticsearchClientSettings _settings;
+		Source = SourceSerialisation.Deserialize<T>(ref reader, _settings)
+	};
 
-		public SourceConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
-		public override SourceMarker<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new()
-		{
-			Source = SourceSerialisation.Deserialize<T>(ref reader, _settings)
-		};
-
-		public override void Write(Utf8JsonWriter writer, SourceMarker<T> value, JsonSerializerOptions options) => SourceSerialisation.Serialize<T>(value.Source, writer, _settings);
-	}
+	public override void Write(Utf8JsonWriter writer, SourceMarker<T> value, JsonSerializerOptions options) => SourceSerialisation.Serialize<T>(value.Source, writer, _settings);
 }

@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq.Expressions;
+using Elastic.Clients.Elasticsearch.Fluent;
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -57,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Expression<Func<TDocument, object>> RoutingProperty { get; set; }
 	}
 
-	public sealed class ClrTypeMappingDescriptor : DescriptorBase<ClrTypeMappingDescriptor>
+	public sealed class ClrTypeMappingDescriptor : Descriptor<ClrTypeMappingDescriptor>
 	{
 		internal Type _clrType;
 		internal string _indexName;
@@ -84,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ClrTypeMappingDescriptor DisableIdInference(bool disable = true) => Assign(disable, (a, v) => a._disableIdInference = v);
 	}
 
-	public sealed class ClrTypeMappingDescriptor<TDocument> : DescriptorBase<ClrTypeMappingDescriptor<TDocument>>
+	public sealed class ClrTypeMappingDescriptor<TDocument> : Descriptor<ClrTypeMappingDescriptor<TDocument>>
 	{
 		internal Type _clrType = typeof(TDocument);
 		internal string _indexName;

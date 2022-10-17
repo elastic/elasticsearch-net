@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,66 +24,64 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class AsciiFoldingTokenFilter : ITokenFilterDefinition
 {
-	public sealed partial class AsciiFoldingTokenFilter : ITokenFilterDefinition
-	{
-		[JsonInclude]
-		[JsonPropertyName("preserve_original")]
-		public bool? PreserveOriginal { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("preserve_original")]
+	public bool? PreserveOriginal { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "asciifolding";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "asciifolding";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class AsciiFoldingTokenFilterDescriptor : SerializableDescriptor<AsciiFoldingTokenFilterDescriptor>, IBuildableDescriptor<AsciiFoldingTokenFilter>
+{
+	internal AsciiFoldingTokenFilterDescriptor(Action<AsciiFoldingTokenFilterDescriptor> configure) => configure.Invoke(this);
+	public AsciiFoldingTokenFilterDescriptor() : base()
+	{
 	}
 
-	public sealed partial class AsciiFoldingTokenFilterDescriptor : SerializableDescriptorBase<AsciiFoldingTokenFilterDescriptor>, IBuildableDescriptor<AsciiFoldingTokenFilter>
+	private bool? PreserveOriginalValue { get; set; }
+
+	private string? VersionValue { get; set; }
+
+	public AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
 	{
-		internal AsciiFoldingTokenFilterDescriptor(Action<AsciiFoldingTokenFilterDescriptor> configure) => configure.Invoke(this);
-		public AsciiFoldingTokenFilterDescriptor() : base()
-		{
-		}
-
-		private bool? PreserveOriginalValue { get; set; }
-
-		private string? VersionValue { get; set; }
-
-		public AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
-		{
-			PreserveOriginalValue = preserveOriginal;
-			return Self;
-		}
-
-		public AsciiFoldingTokenFilterDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (PreserveOriginalValue.HasValue)
-			{
-				writer.WritePropertyName("preserve_original");
-				writer.WriteBooleanValue(PreserveOriginalValue.Value);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("asciifolding");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		AsciiFoldingTokenFilter IBuildableDescriptor<AsciiFoldingTokenFilter>.Build() => new()
-		{ PreserveOriginal = PreserveOriginalValue, Version = VersionValue };
+		PreserveOriginalValue = preserveOriginal;
+		return Self;
 	}
+
+	public AsciiFoldingTokenFilterDescriptor Version(string? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (PreserveOriginalValue.HasValue)
+		{
+			writer.WritePropertyName("preserve_original");
+			writer.WriteBooleanValue(PreserveOriginalValue.Value);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("asciifolding");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	AsciiFoldingTokenFilter IBuildableDescriptor<AsciiFoldingTokenFilter>.Build() => new()
+	{ PreserveOriginal = PreserveOriginalValue, Version = VersionValue };
 }

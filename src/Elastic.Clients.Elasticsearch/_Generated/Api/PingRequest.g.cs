@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,31 +26,29 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed class PingRequestParameters : RequestParameters<PingRequestParameters>
 {
-	public sealed class PingRequestParameters : RequestParameters<PingRequestParameters>
+}
+
+public sealed partial class PingRequest : PlainRequest<PingRequestParameters>
+{
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
+	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override bool SupportsBody => false;
+}
+
+public sealed partial class PingRequestDescriptor : RequestDescriptor<PingRequestDescriptor, PingRequestParameters>
+{
+	internal PingRequestDescriptor(Action<PingRequestDescriptor> configure) => configure.Invoke(this);
+	public PingRequestDescriptor()
 	{
 	}
 
-	public sealed partial class PingRequest : PlainRequestBase<PingRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
+	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override bool SupportsBody => false;
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-	}
-
-	public sealed partial class PingRequestDescriptor : RequestDescriptorBase<PingRequestDescriptor, PingRequestParameters>
-	{
-		internal PingRequestDescriptor(Action<PingRequestDescriptor> configure) => configure.Invoke(this);
-		public PingRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 }

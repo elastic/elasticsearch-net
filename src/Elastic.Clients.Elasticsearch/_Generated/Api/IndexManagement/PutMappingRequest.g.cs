@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,692 +26,690 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class PutMappingRequestParameters : RequestParameters<PutMappingRequestParameters>
 {
-	public sealed class PutMappingRequestParameters : RequestParameters<PutMappingRequestParameters>
+	[JsonIgnore]
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	[JsonIgnore]
+	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	[JsonIgnore]
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	[JsonIgnore]
+	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
+}
+
+public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestParameters>
+{
+	public PutMappingRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
-		[JsonIgnore]
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-		[JsonIgnore]
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
-		[JsonIgnore]
-		public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 	}
 
-	public sealed partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
+	protected override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override bool SupportsBody => true;
+	[JsonIgnore]
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	[JsonIgnore]
+	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	[JsonIgnore]
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	[JsonIgnore]
+	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
+
+	[JsonInclude]
+	[JsonPropertyName("date_detection")]
+	public bool? DateDetection { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("dynamic")]
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("dynamic_date_formats")]
+	public IEnumerable<string>? DynamicDateFormats { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("dynamic_templates")]
+	public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplates { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("_field_names")]
+	public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("_meta")]
+	public Dictionary<string, object>? Meta { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("numeric_detection")]
+	public bool? NumericDetection { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("properties")]
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("_routing")]
+	public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("_source")]
+	public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("runtime")]
+	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
+}
+
+public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDescriptor<PutMappingRequestDescriptor<TDocument>, PutMappingRequestParameters>
+{
+	internal PutMappingRequestDescriptor(Action<PutMappingRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public PutMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
-		public PutMappingRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => true;
-		[JsonIgnore]
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-		[JsonIgnore]
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
-		[JsonIgnore]
-		public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
-
-		[JsonInclude]
-		[JsonPropertyName("date_detection")]
-		public bool? DateDetection { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("dynamic")]
-		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("dynamic_date_formats")]
-		public IEnumerable<string>? DynamicDateFormats { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("dynamic_templates")]
-		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplates { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("_field_names")]
-		public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("_meta")]
-		public Dictionary<string, object>? Meta { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("numeric_detection")]
-		public bool? NumericDetection { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("properties")]
-		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("_routing")]
-		public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("_source")]
-		public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("runtime")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 	}
 
-	public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDescriptorBase<PutMappingRequestDescriptor<TDocument>, PutMappingRequestParameters>
+	internal PutMappingRequestDescriptor()
 	{
-		internal PutMappingRequestDescriptor(Action<PutMappingRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public PutMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
-		{
-		}
-
-		internal PutMappingRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => true;
-		public PutMappingRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public PutMappingRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public PutMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-		public PutMappingRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public PutMappingRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-		public PutMappingRequestDescriptor<TDocument> WriteIndexOnly(bool? writeIndexOnly = true) => Qs("write_index_only", writeIndexOnly);
-		public PutMappingRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
-		{
-			RouteValues.Required("index", indices);
-			return Self;
-		}
-
-		private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
-
-		private Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
-
-		private Action<Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
-
-		private Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
-
-		private Action<Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
-
-		private Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
-
-		private Action<Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
-
-		private bool? DateDetectionValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
-		private IEnumerable<string>? DynamicDateFormatsValue { get; set; }
-
-		private Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
-
-		private bool? NumericDetectionValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
-
-		public PutMappingRequestDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)
-		{
-			FieldNamesDescriptor = null;
-			FieldNamesDescriptorAction = null;
-			FieldNamesValue = fieldNames;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> FieldNames(Mapping.FieldNamesFieldDescriptor descriptor)
-		{
-			FieldNamesValue = null;
-			FieldNamesDescriptorAction = null;
-			FieldNamesDescriptor = descriptor;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
-		{
-			FieldNamesValue = null;
-			FieldNamesDescriptor = null;
-			FieldNamesDescriptorAction = configure;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing)
-		{
-			RoutingDescriptor = null;
-			RoutingDescriptorAction = null;
-			RoutingValue = routing;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Routing(Mapping.RoutingFieldDescriptor descriptor)
-		{
-			RoutingValue = null;
-			RoutingDescriptorAction = null;
-			RoutingDescriptor = descriptor;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Routing(Action<Mapping.RoutingFieldDescriptor> configure)
-		{
-			RoutingValue = null;
-			RoutingDescriptor = null;
-			RoutingDescriptorAction = configure;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source)
-		{
-			SourceDescriptor = null;
-			SourceDescriptorAction = null;
-			SourceValue = source;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Source(Mapping.SourceFieldDescriptor descriptor)
-		{
-			SourceValue = null;
-			SourceDescriptorAction = null;
-			SourceDescriptor = descriptor;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Source(Action<Mapping.SourceFieldDescriptor> configure)
-		{
-			SourceValue = null;
-			SourceDescriptor = null;
-			SourceDescriptorAction = configure;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> DateDetection(bool? dateDetection = true)
-		{
-			DateDetectionValue = dateDetection;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
-		{
-			DynamicValue = dynamic;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> DynamicDateFormats(IEnumerable<string>? dynamicDateFormats)
-		{
-			DynamicDateFormatsValue = dynamicDateFormats;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
-		{
-			DynamicTemplatesValue = dynamicTemplates;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> NumericDetection(bool? numericDetection = true)
-		{
-			NumericDetectionValue = numericDetection;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
-		{
-			PropertiesValue = properties;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Properties(Mapping.PropertiesDescriptor<TDocument> descriptor)
-		{
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Properties(Action<Mapping.PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new Mapping.PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public PutMappingRequestDescriptor<TDocument> Runtime(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
-		{
-			RuntimeValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FieldNamesDescriptor is not null)
-			{
-				writer.WritePropertyName("_field_names");
-				JsonSerializer.Serialize(writer, FieldNamesDescriptor, options);
-			}
-			else if (FieldNamesDescriptorAction is not null)
-			{
-				writer.WritePropertyName("_field_names");
-				JsonSerializer.Serialize(writer, new Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
-			}
-			else if (FieldNamesValue is not null)
-			{
-				writer.WritePropertyName("_field_names");
-				JsonSerializer.Serialize(writer, FieldNamesValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("_meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (RoutingDescriptor is not null)
-			{
-				writer.WritePropertyName("_routing");
-				JsonSerializer.Serialize(writer, RoutingDescriptor, options);
-			}
-			else if (RoutingDescriptorAction is not null)
-			{
-				writer.WritePropertyName("_routing");
-				JsonSerializer.Serialize(writer, new Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
-			}
-			else if (RoutingValue is not null)
-			{
-				writer.WritePropertyName("_routing");
-				JsonSerializer.Serialize(writer, RoutingValue, options);
-			}
-
-			if (SourceDescriptor is not null)
-			{
-				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, SourceDescriptor, options);
-			}
-			else if (SourceDescriptorAction is not null)
-			{
-				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, new Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
-			}
-			else if (SourceValue is not null)
-			{
-				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, SourceValue, options);
-			}
-
-			if (DateDetectionValue.HasValue)
-			{
-				writer.WritePropertyName("date_detection");
-				writer.WriteBooleanValue(DateDetectionValue.Value);
-			}
-
-			if (DynamicValue is not null)
-			{
-				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, DynamicValue, options);
-			}
-
-			if (DynamicDateFormatsValue is not null)
-			{
-				writer.WritePropertyName("dynamic_date_formats");
-				JsonSerializer.Serialize(writer, DynamicDateFormatsValue, options);
-			}
-
-			if (DynamicTemplatesValue is not null)
-			{
-				writer.WritePropertyName("dynamic_templates");
-				JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
-			}
-
-			if (NumericDetectionValue.HasValue)
-			{
-				writer.WritePropertyName("numeric_detection");
-				writer.WriteBooleanValue(NumericDetectionValue.Value);
-			}
-
-			if (PropertiesValue is not null)
-			{
-				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, PropertiesValue, options);
-			}
-
-			if (RuntimeValue is not null)
-			{
-				writer.WritePropertyName("runtime");
-				JsonSerializer.Serialize(writer, RuntimeValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class PutMappingRequestDescriptor : RequestDescriptorBase<PutMappingRequestDescriptor, PutMappingRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
+	protected override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override bool SupportsBody => true;
+	public PutMappingRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+	public PutMappingRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public PutMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public PutMappingRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public PutMappingRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+	public PutMappingRequestDescriptor<TDocument> WriteIndexOnly(bool? writeIndexOnly = true) => Qs("write_index_only", writeIndexOnly);
+	public PutMappingRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		internal PutMappingRequestDescriptor(Action<PutMappingRequestDescriptor> configure) => configure.Invoke(this);
-		public PutMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+		RouteValues.Required("index", indices);
+		return Self;
+	}
+
+	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
+
+	private Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
+
+	private Action<Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
+
+	private Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
+
+	private Action<Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
+
+	private Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
+
+	private Action<Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
+
+	private bool? DateDetectionValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+	private IEnumerable<string>? DynamicDateFormatsValue { get; set; }
+
+	private Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
+
+	private bool? NumericDetectionValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
+
+	public PutMappingRequestDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)
+	{
+		FieldNamesDescriptor = null;
+		FieldNamesDescriptorAction = null;
+		FieldNamesValue = fieldNames;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> FieldNames(Mapping.FieldNamesFieldDescriptor descriptor)
+	{
+		FieldNamesValue = null;
+		FieldNamesDescriptorAction = null;
+		FieldNamesDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
+	{
+		FieldNamesValue = null;
+		FieldNamesDescriptor = null;
+		FieldNamesDescriptorAction = configure;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing)
+	{
+		RoutingDescriptor = null;
+		RoutingDescriptorAction = null;
+		RoutingValue = routing;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Routing(Mapping.RoutingFieldDescriptor descriptor)
+	{
+		RoutingValue = null;
+		RoutingDescriptorAction = null;
+		RoutingDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Routing(Action<Mapping.RoutingFieldDescriptor> configure)
+	{
+		RoutingValue = null;
+		RoutingDescriptor = null;
+		RoutingDescriptorAction = configure;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source)
+	{
+		SourceDescriptor = null;
+		SourceDescriptorAction = null;
+		SourceValue = source;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Source(Mapping.SourceFieldDescriptor descriptor)
+	{
+		SourceValue = null;
+		SourceDescriptorAction = null;
+		SourceDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Source(Action<Mapping.SourceFieldDescriptor> configure)
+	{
+		SourceValue = null;
+		SourceDescriptor = null;
+		SourceDescriptorAction = configure;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> DateDetection(bool? dateDetection = true)
+	{
+		DateDetectionValue = dateDetection;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	{
+		DynamicValue = dynamic;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> DynamicDateFormats(IEnumerable<string>? dynamicDateFormats)
+	{
+		DynamicDateFormatsValue = dynamicDateFormats;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
+	{
+		DynamicTemplatesValue = dynamicTemplates;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> NumericDetection(bool? numericDetection = true)
+	{
+		NumericDetectionValue = numericDetection;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	{
+		PropertiesValue = properties;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Properties(Mapping.PropertiesDescriptor<TDocument> descriptor)
+	{
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Properties(Action<Mapping.PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new Mapping.PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Runtime(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+	{
+		RuntimeValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FieldNamesDescriptor is not null)
 		{
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, FieldNamesDescriptor, options);
+		}
+		else if (FieldNamesDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, new Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
+		}
+		else if (FieldNamesValue is not null)
+		{
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, FieldNamesValue, options);
 		}
 
-		internal PutMappingRequestDescriptor()
+		if (MetaValue is not null)
 		{
+			writer.WritePropertyName("_meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => true;
-		public PutMappingRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public PutMappingRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public PutMappingRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-		public PutMappingRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public PutMappingRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-		public PutMappingRequestDescriptor WriteIndexOnly(bool? writeIndexOnly = true) => Qs("write_index_only", writeIndexOnly);
-		public PutMappingRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+		if (RoutingDescriptor is not null)
 		{
-			RouteValues.Required("index", indices);
-			return Self;
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, RoutingDescriptor, options);
+		}
+		else if (RoutingDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, new Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
+		}
+		else if (RoutingValue is not null)
+		{
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, RoutingValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
-
-		private Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
-
-		private Action<Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
-
-		private Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
-
-		private Action<Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
-
-		private Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
-
-		private Action<Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
-
-		private bool? DateDetectionValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
-		private IEnumerable<string>? DynamicDateFormatsValue { get; set; }
-
-		private Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
-
-		private bool? NumericDetectionValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
-
-		public PutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)
+		if (SourceDescriptor is not null)
 		{
-			FieldNamesDescriptor = null;
-			FieldNamesDescriptorAction = null;
-			FieldNamesValue = fieldNames;
-			return Self;
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, SourceDescriptor, options);
+		}
+		else if (SourceDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, new Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
+		}
+		else if (SourceValue is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
-		public PutMappingRequestDescriptor FieldNames(Mapping.FieldNamesFieldDescriptor descriptor)
+		if (DateDetectionValue.HasValue)
 		{
-			FieldNamesValue = null;
-			FieldNamesDescriptorAction = null;
-			FieldNamesDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("date_detection");
+			writer.WriteBooleanValue(DateDetectionValue.Value);
 		}
 
-		public PutMappingRequestDescriptor FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
+		if (DynamicValue is not null)
 		{
-			FieldNamesValue = null;
-			FieldNamesDescriptor = null;
-			FieldNamesDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("dynamic");
+			JsonSerializer.Serialize(writer, DynamicValue, options);
 		}
 
-		public PutMappingRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		if (DynamicDateFormatsValue is not null)
 		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
+			writer.WritePropertyName("dynamic_date_formats");
+			JsonSerializer.Serialize(writer, DynamicDateFormatsValue, options);
 		}
 
-		public PutMappingRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing)
+		if (DynamicTemplatesValue is not null)
 		{
-			RoutingDescriptor = null;
-			RoutingDescriptorAction = null;
-			RoutingValue = routing;
-			return Self;
+			writer.WritePropertyName("dynamic_templates");
+			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
 		}
 
-		public PutMappingRequestDescriptor Routing(Mapping.RoutingFieldDescriptor descriptor)
+		if (NumericDetectionValue.HasValue)
 		{
-			RoutingValue = null;
-			RoutingDescriptorAction = null;
-			RoutingDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("numeric_detection");
+			writer.WriteBooleanValue(NumericDetectionValue.Value);
 		}
 
-		public PutMappingRequestDescriptor Routing(Action<Mapping.RoutingFieldDescriptor> configure)
+		if (PropertiesValue is not null)
 		{
-			RoutingValue = null;
-			RoutingDescriptor = null;
-			RoutingDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		public PutMappingRequestDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source)
+		if (RuntimeValue is not null)
 		{
-			SourceDescriptor = null;
-			SourceDescriptorAction = null;
-			SourceValue = source;
-			return Self;
+			writer.WritePropertyName("runtime");
+			JsonSerializer.Serialize(writer, RuntimeValue, options);
 		}
 
-		public PutMappingRequestDescriptor Source(Mapping.SourceFieldDescriptor descriptor)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutMappingRequestDescriptor, PutMappingRequestParameters>
+{
+	internal PutMappingRequestDescriptor(Action<PutMappingRequestDescriptor> configure) => configure.Invoke(this);
+	public PutMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	{
+	}
+
+	internal PutMappingRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
+	protected override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override bool SupportsBody => true;
+	public PutMappingRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+	public PutMappingRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public PutMappingRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public PutMappingRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public PutMappingRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+	public PutMappingRequestDescriptor WriteIndexOnly(bool? writeIndexOnly = true) => Qs("write_index_only", writeIndexOnly);
+	public PutMappingRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		RouteValues.Required("index", indices);
+		return Self;
+	}
+
+	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
+
+	private Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
+
+	private Action<Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
+
+	private Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
+
+	private Action<Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
+
+	private Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
+
+	private Action<Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
+
+	private bool? DateDetectionValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+	private IEnumerable<string>? DynamicDateFormatsValue { get; set; }
+
+	private Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
+
+	private bool? NumericDetectionValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
+
+	public PutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)
+	{
+		FieldNamesDescriptor = null;
+		FieldNamesDescriptorAction = null;
+		FieldNamesValue = fieldNames;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor FieldNames(Mapping.FieldNamesFieldDescriptor descriptor)
+	{
+		FieldNamesValue = null;
+		FieldNamesDescriptorAction = null;
+		FieldNamesDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
+	{
+		FieldNamesValue = null;
+		FieldNamesDescriptor = null;
+		FieldNamesDescriptorAction = configure;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing)
+	{
+		RoutingDescriptor = null;
+		RoutingDescriptorAction = null;
+		RoutingValue = routing;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Routing(Mapping.RoutingFieldDescriptor descriptor)
+	{
+		RoutingValue = null;
+		RoutingDescriptorAction = null;
+		RoutingDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Routing(Action<Mapping.RoutingFieldDescriptor> configure)
+	{
+		RoutingValue = null;
+		RoutingDescriptor = null;
+		RoutingDescriptorAction = configure;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source)
+	{
+		SourceDescriptor = null;
+		SourceDescriptorAction = null;
+		SourceValue = source;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Source(Mapping.SourceFieldDescriptor descriptor)
+	{
+		SourceValue = null;
+		SourceDescriptorAction = null;
+		SourceDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Source(Action<Mapping.SourceFieldDescriptor> configure)
+	{
+		SourceValue = null;
+		SourceDescriptor = null;
+		SourceDescriptorAction = configure;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor DateDetection(bool? dateDetection = true)
+	{
+		DateDetectionValue = dateDetection;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	{
+		DynamicValue = dynamic;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor DynamicDateFormats(IEnumerable<string>? dynamicDateFormats)
+	{
+		DynamicDateFormatsValue = dynamicDateFormats;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
+	{
+		DynamicTemplatesValue = dynamicTemplates;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor NumericDetection(bool? numericDetection = true)
+	{
+		NumericDetectionValue = numericDetection;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	{
+		PropertiesValue = properties;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Properties<TDocument>(Mapping.PropertiesDescriptor<TDocument> descriptor)
+	{
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Properties<TDocument>(Action<Mapping.PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new Mapping.PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Runtime(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+	{
+		RuntimeValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FieldNamesDescriptor is not null)
 		{
-			SourceValue = null;
-			SourceDescriptorAction = null;
-			SourceDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, FieldNamesDescriptor, options);
+		}
+		else if (FieldNamesDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, new Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
+		}
+		else if (FieldNamesValue is not null)
+		{
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, FieldNamesValue, options);
 		}
 
-		public PutMappingRequestDescriptor Source(Action<Mapping.SourceFieldDescriptor> configure)
+		if (MetaValue is not null)
 		{
-			SourceValue = null;
-			SourceDescriptor = null;
-			SourceDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("_meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		public PutMappingRequestDescriptor DateDetection(bool? dateDetection = true)
+		if (RoutingDescriptor is not null)
 		{
-			DateDetectionValue = dateDetection;
-			return Self;
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, RoutingDescriptor, options);
+		}
+		else if (RoutingDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, new Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
+		}
+		else if (RoutingValue is not null)
+		{
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, RoutingValue, options);
 		}
 
-		public PutMappingRequestDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+		if (SourceDescriptor is not null)
 		{
-			DynamicValue = dynamic;
-			return Self;
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, SourceDescriptor, options);
+		}
+		else if (SourceDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, new Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
+		}
+		else if (SourceValue is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
-		public PutMappingRequestDescriptor DynamicDateFormats(IEnumerable<string>? dynamicDateFormats)
+		if (DateDetectionValue.HasValue)
 		{
-			DynamicDateFormatsValue = dynamicDateFormats;
-			return Self;
+			writer.WritePropertyName("date_detection");
+			writer.WriteBooleanValue(DateDetectionValue.Value);
 		}
 
-		public PutMappingRequestDescriptor DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
+		if (DynamicValue is not null)
 		{
-			DynamicTemplatesValue = dynamicTemplates;
-			return Self;
+			writer.WritePropertyName("dynamic");
+			JsonSerializer.Serialize(writer, DynamicValue, options);
 		}
 
-		public PutMappingRequestDescriptor NumericDetection(bool? numericDetection = true)
+		if (DynamicDateFormatsValue is not null)
 		{
-			NumericDetectionValue = numericDetection;
-			return Self;
+			writer.WritePropertyName("dynamic_date_formats");
+			JsonSerializer.Serialize(writer, DynamicDateFormatsValue, options);
 		}
 
-		public PutMappingRequestDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+		if (DynamicTemplatesValue is not null)
 		{
-			PropertiesValue = properties;
-			return Self;
+			writer.WritePropertyName("dynamic_templates");
+			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
 		}
 
-		public PutMappingRequestDescriptor Properties<TDocument>(Mapping.PropertiesDescriptor<TDocument> descriptor)
+		if (NumericDetectionValue.HasValue)
 		{
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
+			writer.WritePropertyName("numeric_detection");
+			writer.WriteBooleanValue(NumericDetectionValue.Value);
 		}
 
-		public PutMappingRequestDescriptor Properties<TDocument>(Action<Mapping.PropertiesDescriptor<TDocument>> configure)
+		if (PropertiesValue is not null)
 		{
-			var descriptor = new Mapping.PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		public PutMappingRequestDescriptor Runtime(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+		if (RuntimeValue is not null)
 		{
-			RuntimeValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
-			return Self;
+			writer.WritePropertyName("runtime");
+			JsonSerializer.Serialize(writer, RuntimeValue, options);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FieldNamesDescriptor is not null)
-			{
-				writer.WritePropertyName("_field_names");
-				JsonSerializer.Serialize(writer, FieldNamesDescriptor, options);
-			}
-			else if (FieldNamesDescriptorAction is not null)
-			{
-				writer.WritePropertyName("_field_names");
-				JsonSerializer.Serialize(writer, new Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
-			}
-			else if (FieldNamesValue is not null)
-			{
-				writer.WritePropertyName("_field_names");
-				JsonSerializer.Serialize(writer, FieldNamesValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("_meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (RoutingDescriptor is not null)
-			{
-				writer.WritePropertyName("_routing");
-				JsonSerializer.Serialize(writer, RoutingDescriptor, options);
-			}
-			else if (RoutingDescriptorAction is not null)
-			{
-				writer.WritePropertyName("_routing");
-				JsonSerializer.Serialize(writer, new Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
-			}
-			else if (RoutingValue is not null)
-			{
-				writer.WritePropertyName("_routing");
-				JsonSerializer.Serialize(writer, RoutingValue, options);
-			}
-
-			if (SourceDescriptor is not null)
-			{
-				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, SourceDescriptor, options);
-			}
-			else if (SourceDescriptorAction is not null)
-			{
-				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, new Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
-			}
-			else if (SourceValue is not null)
-			{
-				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, SourceValue, options);
-			}
-
-			if (DateDetectionValue.HasValue)
-			{
-				writer.WritePropertyName("date_detection");
-				writer.WriteBooleanValue(DateDetectionValue.Value);
-			}
-
-			if (DynamicValue is not null)
-			{
-				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, DynamicValue, options);
-			}
-
-			if (DynamicDateFormatsValue is not null)
-			{
-				writer.WritePropertyName("dynamic_date_formats");
-				JsonSerializer.Serialize(writer, DynamicDateFormatsValue, options);
-			}
-
-			if (DynamicTemplatesValue is not null)
-			{
-				writer.WritePropertyName("dynamic_templates");
-				JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
-			}
-
-			if (NumericDetectionValue.HasValue)
-			{
-				writer.WritePropertyName("numeric_detection");
-				writer.WriteBooleanValue(NumericDetectionValue.Value);
-			}
-
-			if (PropertiesValue is not null)
-			{
-				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, PropertiesValue, options);
-			}
-
-			if (RuntimeValue is not null)
-			{
-				writer.WritePropertyName("runtime");
-				JsonSerializer.Serialize(writer, RuntimeValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

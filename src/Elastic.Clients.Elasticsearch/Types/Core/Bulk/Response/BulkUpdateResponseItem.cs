@@ -4,7 +4,7 @@
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public sealed class BulkUpdateResponseItem : BulkResponseItemBase
+public sealed class BulkUpdateResponseItem : ResponseItem
 {
 	public override string Operation => "update";
 }

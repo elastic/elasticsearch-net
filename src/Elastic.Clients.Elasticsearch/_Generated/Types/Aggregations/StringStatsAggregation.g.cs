@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,344 +24,342 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+internal sealed class StringStatsAggregationConverter : JsonConverter<StringStatsAggregation>
 {
-	internal sealed class StringStatsAggregationConverter : JsonConverter<StringStatsAggregation>
+	public override StringStatsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override StringStatsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var aggName = reader.GetString();
+		if (aggName != "string_stats")
+			throw new JsonException("Unexpected JSON detected.");
+		var agg = new StringStatsAggregation(aggName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "string_stats")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new StringStatsAggregation(aggName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("field"))
 				{
-					if (reader.ValueTextEquals("field"))
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+					if (value is not null)
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
-
-						continue;
+						agg.Field = value;
 					}
 
-					if (reader.ValueTextEquals("missing"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("missing"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Missing = value;
 					}
 
-					if (reader.ValueTextEquals("script"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Script = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("script"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Script = value;
 					}
 
-					if (reader.ValueTextEquals("show_distribution"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.ShowDistribution = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("show_distribution"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.ShowDistribution = value;
 					}
+
+					continue;
 				}
 			}
+		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("meta"))
 				{
-					if (reader.ValueTextEquals("meta"))
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					if (value is not null)
 					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
+						agg.Meta = value;
 					}
+
+					continue;
 				}
 			}
-
-			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, StringStatsAggregation value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("string_stats");
-			writer.WriteStartObject();
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
-			}
-
-			if (value.Script is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, value.Script, options);
-			}
-
-			if (value.ShowDistribution.HasValue)
-			{
-				writer.WritePropertyName("show_distribution");
-				writer.WriteBooleanValue(value.ShowDistribution.Value);
-			}
-
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return agg;
 	}
 
-	[JsonConverter(typeof(StringStatsAggregationConverter))]
-	public sealed partial class StringStatsAggregation : Aggregation
+	public override void Write(Utf8JsonWriter writer, StringStatsAggregation value, JsonSerializerOptions options)
 	{
-		public StringStatsAggregation(string name, Field field) : this(name) => Field = field;
-		public StringStatsAggregation(string name) => Name = name;
-		internal StringStatsAggregation()
+		writer.WriteStartObject();
+		writer.WritePropertyName("string_stats");
+		writer.WriteStartObject();
+		if (value.Field is not null)
 		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value.Field, options);
 		}
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		if (value.Missing is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, value.Missing, options);
+		}
 
-		public Dictionary<string, object>? Meta { get; set; }
+		if (value.Script is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, value.Script, options);
+		}
 
-		public FieldValue? Missing { get; set; }
+		if (value.ShowDistribution.HasValue)
+		{
+			writer.WritePropertyName("show_distribution");
+			writer.WriteBooleanValue(value.ShowDistribution.Value);
+		}
 
-		public override string? Name { get; internal set; }
+		writer.WriteEndObject();
+		if (value.Meta is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
+		}
 
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+		writer.WriteEndObject();
+	}
+}
 
-		public bool? ShowDistribution { get; set; }
+[JsonConverter(typeof(StringStatsAggregationConverter))]
+public sealed partial class StringStatsAggregation : Aggregation
+{
+	public StringStatsAggregation(string name, Field field) : this(name) => Field = field;
+	public StringStatsAggregation(string name) => Name = name;
+	internal StringStatsAggregation()
+	{
 	}
 
-	public sealed partial class StringStatsAggregationDescriptor<TDocument> : SerializableDescriptorBase<StringStatsAggregationDescriptor<TDocument>>
+	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	public Dictionary<string, object>? Meta { get; set; }
+
+	public FieldValue? Missing { get; set; }
+
+	public override string? Name { get; internal set; }
+
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	public bool? ShowDistribution { get; set; }
+}
+
+public sealed partial class StringStatsAggregationDescriptor<TDocument> : SerializableDescriptor<StringStatsAggregationDescriptor<TDocument>>
+{
+	internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public StringStatsAggregationDescriptor() : base()
 	{
-		internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public StringStatsAggregationDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private FieldValue? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		private bool? ShowDistributionValue { get; set; }
-
-		public StringStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public StringStatsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public StringStatsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public StringStatsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
-		public StringStatsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-		{
-			ScriptValue = script;
-			return Self;
-		}
-
-		public StringStatsAggregationDescriptor<TDocument> ShowDistribution(bool? showDistribution = true)
-		{
-			ShowDistributionValue = showDistribution;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("string_stats");
-			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (ShowDistributionValue.HasValue)
-			{
-				writer.WritePropertyName("show_distribution");
-				writer.WriteBooleanValue(ShowDistributionValue.Value);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class StringStatsAggregationDescriptor : SerializableDescriptorBase<StringStatsAggregationDescriptor>
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	private bool? ShowDistributionValue { get; set; }
+
+	public StringStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
-		internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor> configure) => configure.Invoke(this);
-		public StringStatsAggregationDescriptor() : base()
+		FieldValue = field;
+		return Self;
+	}
+
+	public StringStatsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public StringStatsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public StringStatsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public StringStatsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	public StringStatsAggregationDescriptor<TDocument> ShowDistribution(bool? showDistribution = true)
+	{
+		ShowDistributionValue = showDistribution;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("string_stats");
+		writer.WriteStartObject();
+		if (FieldValue is not null)
 		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private FieldValue? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		private bool? ShowDistributionValue { get; set; }
-
-		public StringStatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		if (MissingValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
 		}
 
-		public StringStatsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		if (ScriptValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		public StringStatsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		if (ShowDistributionValue.HasValue)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("show_distribution");
+			writer.WriteBooleanValue(ShowDistributionValue.Value);
 		}
 
-		public StringStatsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		writer.WriteEndObject();
+		if (MetaValue is not null)
 		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		public StringStatsAggregationDescriptor Missing(FieldValue? missing)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class StringStatsAggregationDescriptor : SerializableDescriptor<StringStatsAggregationDescriptor>
+{
+	internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor> configure) => configure.Invoke(this);
+	public StringStatsAggregationDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	private bool? ShowDistributionValue { get; set; }
+
+	public StringStatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public StringStatsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public StringStatsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public StringStatsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public StringStatsAggregationDescriptor Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public StringStatsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	public StringStatsAggregationDescriptor ShowDistribution(bool? showDistribution = true)
+	{
+		ShowDistributionValue = showDistribution;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("string_stats");
+		writer.WriteStartObject();
+		if (FieldValue is not null)
 		{
-			MissingValue = missing;
-			return Self;
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		public StringStatsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		if (MissingValue is not null)
 		{
-			ScriptValue = script;
-			return Self;
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
 		}
 
-		public StringStatsAggregationDescriptor ShowDistribution(bool? showDistribution = true)
+		if (ScriptValue is not null)
 		{
-			ShowDistributionValue = showDistribution;
-			return Self;
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		if (ShowDistributionValue.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("string_stats");
-			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (ShowDistributionValue.HasValue)
-			{
-				writer.WritePropertyName("show_distribution");
-				writer.WriteBooleanValue(ShowDistributionValue.Value);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
+			writer.WritePropertyName("show_distribution");
+			writer.WriteBooleanValue(ShowDistributionValue.Value);
 		}
+
+		writer.WriteEndObject();
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

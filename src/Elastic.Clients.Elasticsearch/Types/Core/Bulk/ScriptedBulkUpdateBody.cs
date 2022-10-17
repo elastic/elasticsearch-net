@@ -3,10 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Text.Json;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-internal class ScriptedBulkUpdateBody : BulkUpdateBodyBase
+internal class ScriptedBulkUpdateBody : BulkUpdateBody
 {
 	public Script Script { get; set; }
 

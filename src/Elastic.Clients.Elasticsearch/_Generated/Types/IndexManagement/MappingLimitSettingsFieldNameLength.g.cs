@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,40 +24,38 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class MappingLimitSettingsFieldNameLength
 {
-	public sealed partial class MappingLimitSettingsFieldNameLength
+	[JsonInclude]
+	[JsonPropertyName("limit")]
+	public long? Limit { get; set; }
+}
+
+public sealed partial class MappingLimitSettingsFieldNameLengthDescriptor : SerializableDescriptor<MappingLimitSettingsFieldNameLengthDescriptor>
+{
+	internal MappingLimitSettingsFieldNameLengthDescriptor(Action<MappingLimitSettingsFieldNameLengthDescriptor> configure) => configure.Invoke(this);
+	public MappingLimitSettingsFieldNameLengthDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("limit")]
-		public long? Limit { get; set; }
 	}
 
-	public sealed partial class MappingLimitSettingsFieldNameLengthDescriptor : SerializableDescriptorBase<MappingLimitSettingsFieldNameLengthDescriptor>
+	private long? LimitValue { get; set; }
+
+	public MappingLimitSettingsFieldNameLengthDescriptor Limit(long? limit)
 	{
-		internal MappingLimitSettingsFieldNameLengthDescriptor(Action<MappingLimitSettingsFieldNameLengthDescriptor> configure) => configure.Invoke(this);
-		public MappingLimitSettingsFieldNameLengthDescriptor() : base()
+		LimitValue = limit;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (LimitValue.HasValue)
 		{
+			writer.WritePropertyName("limit");
+			writer.WriteNumberValue(LimitValue.Value);
 		}
 
-		private long? LimitValue { get; set; }
-
-		public MappingLimitSettingsFieldNameLengthDescriptor Limit(long? limit)
-		{
-			LimitValue = limit;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (LimitValue.HasValue)
-			{
-				writer.WritePropertyName("limit");
-				writer.WriteNumberValue(LimitValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

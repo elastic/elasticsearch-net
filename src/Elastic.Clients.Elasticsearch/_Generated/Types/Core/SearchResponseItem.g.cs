@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Core.MSearch
+namespace Elastic.Clients.Elasticsearch.Core.MSearch;
+public partial class SearchResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument>, Elastic.Clients.Elasticsearch.ErrorResponseBase>
 {
-	public partial class SearchResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument>, Elastic.Clients.Elasticsearch.ErrorResponseBase>
+	public SearchResponseItem(Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument> multiSearchItem) : base(multiSearchItem)
 	{
-		public SearchResponseItem(Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument> multiSearchItem) : base(multiSearchItem)
-		{
-		}
+	}
 
-		public SearchResponseItem(Elastic.Clients.Elasticsearch.ErrorResponseBase errorResponseBase) : base(errorResponseBase)
-		{
-		}
+	public SearchResponseItem(Elastic.Clients.Elasticsearch.ErrorResponseBase errorResponseBase) : base(errorResponseBase)
+	{
 	}
 }

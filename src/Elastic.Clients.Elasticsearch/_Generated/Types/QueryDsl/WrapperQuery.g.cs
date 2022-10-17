@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,72 +24,70 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class WrapperQuery : Query
 {
-	public sealed partial class WrapperQuery : Query
+	[JsonInclude]
+	[JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("boost")]
+	public float? Boost { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("query")]
+	public string Query { get; set; }
+}
+
+public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<WrapperQueryDescriptor>
+{
+	internal WrapperQueryDescriptor(Action<WrapperQueryDescriptor> configure) => configure.Invoke(this);
+	public WrapperQueryDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("_name")]
-		public string? QueryName { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("boost")]
-		public float? Boost { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("query")]
-		public string Query { get; set; }
 	}
 
-	public sealed partial class WrapperQueryDescriptor : SerializableDescriptorBase<WrapperQueryDescriptor>
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	private string QueryValue { get; set; }
+
+	public WrapperQueryDescriptor QueryName(string? queryName)
 	{
-		internal WrapperQueryDescriptor(Action<WrapperQueryDescriptor> configure) => configure.Invoke(this);
-		public WrapperQueryDescriptor() : base()
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public WrapperQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public WrapperQueryDescriptor Query(string query)
+	{
+		QueryValue = query;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		private string QueryValue { get; set; }
-
-		public WrapperQueryDescriptor QueryName(string? queryName)
+		if (BoostValue.HasValue)
 		{
-			QueryNameValue = queryName;
-			return Self;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		public WrapperQueryDescriptor Boost(float? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		public WrapperQueryDescriptor Query(string query)
-		{
-			QueryValue = query;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
-			writer.WriteEndObject();
-		}
+		writer.WritePropertyName("query");
+		writer.WriteStringValue(QueryValue);
+		writer.WriteEndObject();
 	}
 }

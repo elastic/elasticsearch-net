@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,100 +26,98 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Sql
+namespace Elastic.Clients.Elasticsearch.Sql;
+public sealed class SqlGetAsyncRequestParameters : RequestParameters<SqlGetAsyncRequestParameters>
 {
-	public sealed class SqlGetAsyncRequestParameters : RequestParameters<SqlGetAsyncRequestParameters>
+	[JsonIgnore]
+	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
+
+	[JsonIgnore]
+	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+}
+
+public sealed partial class SqlGetAsyncRequest : PlainRequest<SqlGetAsyncRequestParameters>
+{
+	public SqlGetAsyncRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
-		[JsonIgnore]
-		public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
-
-		[JsonIgnore]
-		public string? Format { get => Q<string?>("format"); set => Q("format", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	}
 
-	public sealed partial class SqlGetAsyncRequest : PlainRequestBase<SqlGetAsyncRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	[JsonIgnore]
+	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
+
+	[JsonIgnore]
+	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+}
+
+public sealed partial class SqlGetAsyncRequestDescriptor<TDocument> : RequestDescriptor<SqlGetAsyncRequestDescriptor<TDocument>, SqlGetAsyncRequestParameters>
+{
+	internal SqlGetAsyncRequestDescriptor(Action<SqlGetAsyncRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public SqlGetAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
-		public SqlGetAsyncRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		[JsonIgnore]
-		public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
-
-		[JsonIgnore]
-		public string? Format { get => Q<string?>("format"); set => Q("format", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	}
 
-	public sealed partial class SqlGetAsyncRequestDescriptor<TDocument> : RequestDescriptorBase<SqlGetAsyncRequestDescriptor<TDocument>, SqlGetAsyncRequestParameters>
+	internal SqlGetAsyncRequestDescriptor()
 	{
-		internal SqlGetAsyncRequestDescriptor(Action<SqlGetAsyncRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public SqlGetAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
-
-		internal SqlGetAsyncRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public SqlGetAsyncRequestDescriptor<TDocument> Delimiter(string? delimiter) => Qs("delimiter", delimiter);
-		public SqlGetAsyncRequestDescriptor<TDocument> Format(string? format) => Qs("format", format);
-		public SqlGetAsyncRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-		public SqlGetAsyncRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
-		public SqlGetAsyncRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 
-	public sealed partial class SqlGetAsyncRequestDescriptor : RequestDescriptorBase<SqlGetAsyncRequestDescriptor, SqlGetAsyncRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public SqlGetAsyncRequestDescriptor<TDocument> Delimiter(string? delimiter) => Qs("delimiter", delimiter);
+	public SqlGetAsyncRequestDescriptor<TDocument> Format(string? format) => Qs("format", format);
+	public SqlGetAsyncRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
+	public SqlGetAsyncRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+	public SqlGetAsyncRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
-		internal SqlGetAsyncRequestDescriptor(Action<SqlGetAsyncRequestDescriptor> configure) => configure.Invoke(this);
-		public SqlGetAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
+		RouteValues.Required("id", id);
+		return Self;
+	}
 
-		internal SqlGetAsyncRequestDescriptor()
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public SqlGetAsyncRequestDescriptor Delimiter(string? delimiter) => Qs("delimiter", delimiter);
-		public SqlGetAsyncRequestDescriptor Format(string? format) => Qs("format", format);
-		public SqlGetAsyncRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-		public SqlGetAsyncRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
-		public SqlGetAsyncRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
+public sealed partial class SqlGetAsyncRequestDescriptor : RequestDescriptor<SqlGetAsyncRequestDescriptor, SqlGetAsyncRequestParameters>
+{
+	internal SqlGetAsyncRequestDescriptor(Action<SqlGetAsyncRequestDescriptor> configure) => configure.Invoke(this);
+	public SqlGetAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	{
+	}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	internal SqlGetAsyncRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public SqlGetAsyncRequestDescriptor Delimiter(string? delimiter) => Qs("delimiter", delimiter);
+	public SqlGetAsyncRequestDescriptor Format(string? format) => Qs("format", format);
+	public SqlGetAsyncRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
+	public SqlGetAsyncRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+	public SqlGetAsyncRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		RouteValues.Required("id", id);
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

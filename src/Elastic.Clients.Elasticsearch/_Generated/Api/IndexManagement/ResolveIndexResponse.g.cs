@@ -15,25 +15,25 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class ResolveIndexResponse : ElasticsearchResponseBase
 {
-	public sealed partial class ResolveIndexResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("aliases")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexAliasItem> Aliases { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("aliases")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexAliasItem> Aliases { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("data_streams")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexDataStreamsItem> DataStreams { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("data_streams")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexDataStreamsItem> DataStreams { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexItem> Indices { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("indices")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexItem> Indices { get; init; }
 }

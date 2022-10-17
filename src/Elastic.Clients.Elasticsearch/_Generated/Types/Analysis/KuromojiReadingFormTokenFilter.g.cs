@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,62 +24,60 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class KuromojiReadingFormTokenFilter : ITokenFilterDefinition
 {
-	public sealed partial class KuromojiReadingFormTokenFilter : ITokenFilterDefinition
-	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "kuromoji_readingform";
-		[JsonInclude]
-		[JsonPropertyName("use_romaji")]
-		public bool UseRomaji { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "kuromoji_readingform";
+	[JsonInclude]
+	[JsonPropertyName("use_romaji")]
+	public bool UseRomaji { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class KuromojiReadingFormTokenFilterDescriptor : SerializableDescriptor<KuromojiReadingFormTokenFilterDescriptor>, IBuildableDescriptor<KuromojiReadingFormTokenFilter>
+{
+	internal KuromojiReadingFormTokenFilterDescriptor(Action<KuromojiReadingFormTokenFilterDescriptor> configure) => configure.Invoke(this);
+	public KuromojiReadingFormTokenFilterDescriptor() : base()
+	{
 	}
 
-	public sealed partial class KuromojiReadingFormTokenFilterDescriptor : SerializableDescriptorBase<KuromojiReadingFormTokenFilterDescriptor>, IBuildableDescriptor<KuromojiReadingFormTokenFilter>
+	private bool UseRomajiValue { get; set; }
+
+	private string? VersionValue { get; set; }
+
+	public KuromojiReadingFormTokenFilterDescriptor UseRomaji(bool useRomaji = true)
 	{
-		internal KuromojiReadingFormTokenFilterDescriptor(Action<KuromojiReadingFormTokenFilterDescriptor> configure) => configure.Invoke(this);
-		public KuromojiReadingFormTokenFilterDescriptor() : base()
-		{
-		}
-
-		private bool UseRomajiValue { get; set; }
-
-		private string? VersionValue { get; set; }
-
-		public KuromojiReadingFormTokenFilterDescriptor UseRomaji(bool useRomaji = true)
-		{
-			UseRomajiValue = useRomaji;
-			return Self;
-		}
-
-		public KuromojiReadingFormTokenFilterDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("kuromoji_readingform");
-			writer.WritePropertyName("use_romaji");
-			writer.WriteBooleanValue(UseRomajiValue);
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		KuromojiReadingFormTokenFilter IBuildableDescriptor<KuromojiReadingFormTokenFilter>.Build() => new()
-		{ UseRomaji = UseRomajiValue, Version = VersionValue };
+		UseRomajiValue = useRomaji;
+		return Self;
 	}
+
+	public KuromojiReadingFormTokenFilterDescriptor Version(string? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("kuromoji_readingform");
+		writer.WritePropertyName("use_romaji");
+		writer.WriteBooleanValue(UseRomajiValue);
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	KuromojiReadingFormTokenFilter IBuildableDescriptor<KuromojiReadingFormTokenFilter>.Build() => new()
+	{ UseRomaji = UseRomajiValue, Version = VersionValue };
 }

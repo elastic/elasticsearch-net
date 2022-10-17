@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,46 +26,44 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Sql
+namespace Elastic.Clients.Elasticsearch.Sql;
+public sealed class SqlClearCursorRequestParameters : RequestParameters<SqlClearCursorRequestParameters>
 {
-	public sealed class SqlClearCursorRequestParameters : RequestParameters<SqlClearCursorRequestParameters>
+}
+
+public sealed partial class SqlClearCursorRequest : PlainRequest<SqlClearCursorRequestParameters>
+{
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	[JsonInclude]
+	[JsonPropertyName("cursor")]
+	public string Cursor { get; set; }
+}
+
+public sealed partial class SqlClearCursorRequestDescriptor : RequestDescriptor<SqlClearCursorRequestDescriptor, SqlClearCursorRequestParameters>
+{
+	internal SqlClearCursorRequestDescriptor(Action<SqlClearCursorRequestDescriptor> configure) => configure.Invoke(this);
+	public SqlClearCursorRequestDescriptor()
 	{
 	}
 
-	public sealed partial class SqlClearCursorRequest : PlainRequestBase<SqlClearCursorRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
+	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override bool SupportsBody => true;
+	private string CursorValue { get; set; }
+
+	public SqlClearCursorRequestDescriptor Cursor(string cursor)
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		[JsonInclude]
-		[JsonPropertyName("cursor")]
-		public string Cursor { get; set; }
+		CursorValue = cursor;
+		return Self;
 	}
 
-	public sealed partial class SqlClearCursorRequestDescriptor : RequestDescriptorBase<SqlClearCursorRequestDescriptor, SqlClearCursorRequestParameters>
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		internal SqlClearCursorRequestDescriptor(Action<SqlClearCursorRequestDescriptor> configure) => configure.Invoke(this);
-		public SqlClearCursorRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		private string CursorValue { get; set; }
-
-		public SqlClearCursorRequestDescriptor Cursor(string cursor)
-		{
-			CursorValue = cursor;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("cursor");
-			writer.WriteStringValue(CursorValue);
-			writer.WriteEndObject();
-		}
+		writer.WriteStartObject();
+		writer.WritePropertyName("cursor");
+		writer.WriteStringValue(CursorValue);
+		writer.WriteEndObject();
 	}
 }

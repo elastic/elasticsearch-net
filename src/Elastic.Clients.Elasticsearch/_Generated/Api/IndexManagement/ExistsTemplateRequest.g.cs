@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,64 +26,62 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class ExistsTemplateRequestParameters : RequestParameters<ExistsTemplateRequestParameters>
 {
-	public sealed class ExistsTemplateRequestParameters : RequestParameters<ExistsTemplateRequestParameters>
+	[JsonIgnore]
+	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+	[JsonIgnore]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateRequestParameters>
+{
+	public ExistsTemplateRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 	{
-		[JsonIgnore]
-		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-		[JsonIgnore]
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public sealed partial class ExistsTemplateRequest : PlainRequestBase<ExistsTemplateRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override bool SupportsBody => false;
+	[JsonIgnore]
+	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+	[JsonIgnore]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+public sealed partial class ExistsTemplateRequestDescriptor : RequestDescriptor<ExistsTemplateRequestDescriptor, ExistsTemplateRequestParameters>
+{
+	internal ExistsTemplateRequestDescriptor(Action<ExistsTemplateRequestDescriptor> configure) => configure.Invoke(this);
+	public ExistsTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 	{
-		public ExistsTemplateRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		[JsonIgnore]
-		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-		[JsonIgnore]
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public sealed partial class ExistsTemplateRequestDescriptor : RequestDescriptorBase<ExistsTemplateRequestDescriptor, ExistsTemplateRequestParameters>
+	internal ExistsTemplateRequestDescriptor()
 	{
-		internal ExistsTemplateRequestDescriptor(Action<ExistsTemplateRequestDescriptor> configure) => configure.Invoke(this);
-		public ExistsTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
-		{
-		}
+	}
 
-		internal ExistsTemplateRequestDescriptor()
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override bool SupportsBody => false;
+	public ExistsTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+	public ExistsTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
+	public ExistsTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public ExistsTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
+	{
+		RouteValues.Required("name", name);
+		return Self;
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		public ExistsTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-		public ExistsTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
-		public ExistsTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ExistsTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
-		{
-			RouteValues.Required("name", name);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

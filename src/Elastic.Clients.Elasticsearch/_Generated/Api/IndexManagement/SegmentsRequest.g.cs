@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,96 +26,94 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class SegmentsRequestParameters : RequestParameters<SegmentsRequestParameters>
 {
-	public sealed class SegmentsRequestParameters : RequestParameters<SegmentsRequestParameters>
+	[JsonIgnore]
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	[JsonIgnore]
+	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	[JsonIgnore]
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	[JsonIgnore]
+	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
+}
+
+public sealed partial class SegmentsRequest : PlainRequest<SegmentsRequestParameters>
+{
+	public SegmentsRequest()
 	{
-		[JsonIgnore]
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-		[JsonIgnore]
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-		[JsonIgnore]
-		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
 
-	public sealed partial class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>
+	public SegmentsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
-		public SegmentsRequest()
-		{
-		}
-
-		public SegmentsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSegments;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		[JsonIgnore]
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-		[JsonIgnore]
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-		[JsonIgnore]
-		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
 
-	public sealed partial class SegmentsRequestDescriptor<TDocument> : RequestDescriptorBase<SegmentsRequestDescriptor<TDocument>, SegmentsRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSegments;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	[JsonIgnore]
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	[JsonIgnore]
+	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	[JsonIgnore]
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	[JsonIgnore]
+	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
+}
+
+public sealed partial class SegmentsRequestDescriptor<TDocument> : RequestDescriptor<SegmentsRequestDescriptor<TDocument>, SegmentsRequestParameters>
+{
+	internal SegmentsRequestDescriptor(Action<SegmentsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public SegmentsRequestDescriptor()
 	{
-		internal SegmentsRequestDescriptor(Action<SegmentsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public SegmentsRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSegments;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public SegmentsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public SegmentsRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public SegmentsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-		public SegmentsRequestDescriptor<TDocument> Verbose(bool? verbose = true) => Qs("verbose", verbose);
-		public SegmentsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
-		{
-			RouteValues.Optional("index", indices);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 
-	public sealed partial class SegmentsRequestDescriptor : RequestDescriptorBase<SegmentsRequestDescriptor, SegmentsRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSegments;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public SegmentsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+	public SegmentsRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public SegmentsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public SegmentsRequestDescriptor<TDocument> Verbose(bool? verbose = true) => Qs("verbose", verbose);
+	public SegmentsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		internal SegmentsRequestDescriptor(Action<SegmentsRequestDescriptor> configure) => configure.Invoke(this);
-		public SegmentsRequestDescriptor()
-		{
-		}
+		RouteValues.Optional("index", indices);
+		return Self;
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSegments;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public SegmentsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		public SegmentsRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public SegmentsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-		public SegmentsRequestDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
-		public SegmentsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
-		{
-			RouteValues.Optional("index", indices);
-			return Self;
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
+}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+public sealed partial class SegmentsRequestDescriptor : RequestDescriptor<SegmentsRequestDescriptor, SegmentsRequestParameters>
+{
+	internal SegmentsRequestDescriptor(Action<SegmentsRequestDescriptor> configure) => configure.Invoke(this);
+	public SegmentsRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSegments;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public SegmentsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+	public SegmentsRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public SegmentsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public SegmentsRequestDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
+	public SegmentsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		RouteValues.Optional("index", indices);
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }
