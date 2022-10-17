@@ -93,10 +93,18 @@ public sealed partial class TokenizerDefinitionsDescriptor : IsADictionaryDescri
 	public TokenizerDefinitionsDescriptor WhitespaceTokenizer(string tokenizerDefinitionName, WhitespaceTokenizer whitespaceTokenizer) => AssignVariant(tokenizerDefinitionName, whitespaceTokenizer);
 }
 
-internal sealed partial class TokenizerDefinitionInterfaceConverter
+internal sealed partial class TokenizerDefinitionInterfaceConverter : JsonConverter<ITokenizerDefinition>
 {
-	private static ITokenizerDefinition DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
+	public override ITokenizerDefinition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		var copiedReader = reader;
+		string? type = null;
+		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
+		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		{
+			type = readType.ToString();
+		}
+
 		switch (type)
 		{
 			case "icu_tokenizer":
@@ -131,8 +139,68 @@ internal sealed partial class TokenizerDefinitionInterfaceConverter
 				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
 		}
 	}
+
+	public override void Write(Utf8JsonWriter writer, ITokenizerDefinition value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		switch (value.Type)
+		{
+			case "icu_tokenizer":
+				JsonSerializer.Serialize(writer, value, typeof(IcuTokenizer), options);
+				return;
+			case "pattern":
+				JsonSerializer.Serialize(writer, value, typeof(PatternTokenizer), options);
+				return;
+			case "kuromoji_tokenizer":
+				JsonSerializer.Serialize(writer, value, typeof(KuromojiTokenizer), options);
+				return;
+			case "whitespace":
+				JsonSerializer.Serialize(writer, value, typeof(WhitespaceTokenizer), options);
+				return;
+			case "uax_url_email":
+				JsonSerializer.Serialize(writer, value, typeof(UaxEmailUrlTokenizer), options);
+				return;
+			case "standard":
+				JsonSerializer.Serialize(writer, value, typeof(StandardTokenizer), options);
+				return;
+			case "path_hierarchy":
+				JsonSerializer.Serialize(writer, value, typeof(PathHierarchyTokenizer), options);
+				return;
+			case "nori_tokenizer":
+				JsonSerializer.Serialize(writer, value, typeof(NoriTokenizer), options);
+				return;
+			case "ngram":
+				JsonSerializer.Serialize(writer, value, typeof(NGramTokenizer), options);
+				return;
+			case "lowercase":
+				JsonSerializer.Serialize(writer, value, typeof(LowercaseTokenizer), options);
+				return;
+			case "letter":
+				JsonSerializer.Serialize(writer, value, typeof(LetterTokenizer), options);
+				return;
+			case "keyword":
+				JsonSerializer.Serialize(writer, value, typeof(KeywordTokenizer), options);
+				return;
+			case "edge_ngram":
+				JsonSerializer.Serialize(writer, value, typeof(EdgeNGramTokenizer), options);
+				return;
+			case "char_group":
+				JsonSerializer.Serialize(writer, value, typeof(CharGroupTokenizer), options);
+				return;
+			default:
+				var type = value.GetType();
+				JsonSerializer.Serialize(writer, value, type, options);
+				return;
+		}
+	}
 }
 
+[JsonConverter(typeof(TokenizerDefinitionInterfaceConverter))]
 public partial interface ITokenizerDefinition
 {
 	public string Type { get; }
