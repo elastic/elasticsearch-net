@@ -48,6 +48,8 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 			return;
 		}
 
+		// TODO - Avoid the type check here by using the PropertyInterfaceConverter
+
 		var type = value.GetType();
 
 		JsonSerializer.Serialize(writer, value, type, options);
