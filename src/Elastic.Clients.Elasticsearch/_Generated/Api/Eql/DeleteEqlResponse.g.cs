@@ -15,17 +15,17 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Eql
+namespace Elastic.Clients.Elasticsearch.Eql;
+public sealed partial class DeleteEqlResponse : ElasticsearchResponseBase
 {
-	public sealed partial class DeleteEqlResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("acknowledged")]
-		public bool Acknowledged { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("acknowledged")]
+	public bool Acknowledged { get; init; }
 }

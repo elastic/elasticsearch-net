@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,48 +24,46 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class PorterStemTokenFilter : ITokenFilterDefinition
 {
-	public sealed partial class PorterStemTokenFilter : ITokenFilterDefinition
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "porter_stem";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class PorterStemTokenFilterDescriptor : SerializableDescriptor<PorterStemTokenFilterDescriptor>, IBuildableDescriptor<PorterStemTokenFilter>
+{
+	internal PorterStemTokenFilterDescriptor(Action<PorterStemTokenFilterDescriptor> configure) => configure.Invoke(this);
+	public PorterStemTokenFilterDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "porter_stem";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class PorterStemTokenFilterDescriptor : SerializableDescriptorBase<PorterStemTokenFilterDescriptor>, IBuildableDescriptor<PorterStemTokenFilter>
+	private string? VersionValue { get; set; }
+
+	public PorterStemTokenFilterDescriptor Version(string? version)
 	{
-		internal PorterStemTokenFilterDescriptor(Action<PorterStemTokenFilterDescriptor> configure) => configure.Invoke(this);
-		public PorterStemTokenFilterDescriptor() : base()
-		{
-		}
-
-		private string? VersionValue { get; set; }
-
-		public PorterStemTokenFilterDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("porter_stem");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		PorterStemTokenFilter IBuildableDescriptor<PorterStemTokenFilter>.Build() => new()
-		{ Version = VersionValue };
+		VersionValue = version;
+		return Self;
 	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("porter_stem");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	PorterStemTokenFilter IBuildableDescriptor<PorterStemTokenFilter>.Build() => new()
+	{ Version = VersionValue };
 }

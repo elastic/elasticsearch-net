@@ -5,7 +5,7 @@
 using System;
 using System.Text.Json;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Serialization;
 
 internal class CustomizedNamingPolicy : JsonNamingPolicy
 {

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,40 +24,38 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class MappingLimitSettingsDepth
 {
-	public sealed partial class MappingLimitSettingsDepth
+	[JsonInclude]
+	[JsonPropertyName("limit")]
+	public int? Limit { get; set; }
+}
+
+public sealed partial class MappingLimitSettingsDepthDescriptor : SerializableDescriptor<MappingLimitSettingsDepthDescriptor>
+{
+	internal MappingLimitSettingsDepthDescriptor(Action<MappingLimitSettingsDepthDescriptor> configure) => configure.Invoke(this);
+	public MappingLimitSettingsDepthDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("limit")]
-		public int? Limit { get; set; }
 	}
 
-	public sealed partial class MappingLimitSettingsDepthDescriptor : SerializableDescriptorBase<MappingLimitSettingsDepthDescriptor>
+	private int? LimitValue { get; set; }
+
+	public MappingLimitSettingsDepthDescriptor Limit(int? limit)
 	{
-		internal MappingLimitSettingsDepthDescriptor(Action<MappingLimitSettingsDepthDescriptor> configure) => configure.Invoke(this);
-		public MappingLimitSettingsDepthDescriptor() : base()
+		LimitValue = limit;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (LimitValue.HasValue)
 		{
+			writer.WritePropertyName("limit");
+			writer.WriteNumberValue(LimitValue.Value);
 		}
 
-		private int? LimitValue { get; set; }
-
-		public MappingLimitSettingsDepthDescriptor Limit(int? limit)
-		{
-			LimitValue = limit;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (LimitValue.HasValue)
-			{
-				writer.WritePropertyName("limit");
-				writer.WriteNumberValue(LimitValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

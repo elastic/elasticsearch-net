@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,80 +24,78 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class CharGroupTokenizer : ITokenizerDefinition
 {
-	public sealed partial class CharGroupTokenizer : ITokenizerDefinition
+	[JsonInclude]
+	[JsonPropertyName("max_token_length")]
+	public int? MaxTokenLength { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("tokenize_on_chars")]
+	public IEnumerable<string> TokenizeOnChars { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "char_group";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class CharGroupTokenizerDescriptor : SerializableDescriptor<CharGroupTokenizerDescriptor>, IBuildableDescriptor<CharGroupTokenizer>
+{
+	internal CharGroupTokenizerDescriptor(Action<CharGroupTokenizerDescriptor> configure) => configure.Invoke(this);
+	public CharGroupTokenizerDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("max_token_length")]
-		public int? MaxTokenLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("tokenize_on_chars")]
-		public IEnumerable<string> TokenizeOnChars { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "char_group";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class CharGroupTokenizerDescriptor : SerializableDescriptorBase<CharGroupTokenizerDescriptor>, IBuildableDescriptor<CharGroupTokenizer>
+	private int? MaxTokenLengthValue { get; set; }
+
+	private IEnumerable<string> TokenizeOnCharsValue { get; set; }
+
+	private string? VersionValue { get; set; }
+
+	public CharGroupTokenizerDescriptor MaxTokenLength(int? maxTokenLength)
 	{
-		internal CharGroupTokenizerDescriptor(Action<CharGroupTokenizerDescriptor> configure) => configure.Invoke(this);
-		public CharGroupTokenizerDescriptor() : base()
-		{
-		}
-
-		private int? MaxTokenLengthValue { get; set; }
-
-		private IEnumerable<string> TokenizeOnCharsValue { get; set; }
-
-		private string? VersionValue { get; set; }
-
-		public CharGroupTokenizerDescriptor MaxTokenLength(int? maxTokenLength)
-		{
-			MaxTokenLengthValue = maxTokenLength;
-			return Self;
-		}
-
-		public CharGroupTokenizerDescriptor TokenizeOnChars(IEnumerable<string> tokenizeOnChars)
-		{
-			TokenizeOnCharsValue = tokenizeOnChars;
-			return Self;
-		}
-
-		public CharGroupTokenizerDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (MaxTokenLengthValue.HasValue)
-			{
-				writer.WritePropertyName("max_token_length");
-				writer.WriteNumberValue(MaxTokenLengthValue.Value);
-			}
-
-			writer.WritePropertyName("tokenize_on_chars");
-			JsonSerializer.Serialize(writer, TokenizeOnCharsValue, options);
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("char_group");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		CharGroupTokenizer IBuildableDescriptor<CharGroupTokenizer>.Build() => new()
-		{ MaxTokenLength = MaxTokenLengthValue, TokenizeOnChars = TokenizeOnCharsValue, Version = VersionValue };
+		MaxTokenLengthValue = maxTokenLength;
+		return Self;
 	}
+
+	public CharGroupTokenizerDescriptor TokenizeOnChars(IEnumerable<string> tokenizeOnChars)
+	{
+		TokenizeOnCharsValue = tokenizeOnChars;
+		return Self;
+	}
+
+	public CharGroupTokenizerDescriptor Version(string? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (MaxTokenLengthValue.HasValue)
+		{
+			writer.WritePropertyName("max_token_length");
+			writer.WriteNumberValue(MaxTokenLengthValue.Value);
+		}
+
+		writer.WritePropertyName("tokenize_on_chars");
+		JsonSerializer.Serialize(writer, TokenizeOnCharsValue, options);
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("char_group");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	CharGroupTokenizer IBuildableDescriptor<CharGroupTokenizer>.Build() => new()
+	{ MaxTokenLength = MaxTokenLengthValue, TokenizeOnChars = TokenizeOnCharsValue, Version = VersionValue };
 }

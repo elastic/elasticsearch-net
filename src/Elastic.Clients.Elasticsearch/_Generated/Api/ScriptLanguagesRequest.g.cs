@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,31 +26,29 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed class ScriptLanguagesRequestParameters : RequestParameters<ScriptLanguagesRequestParameters>
 {
-	public sealed class ScriptLanguagesRequestParameters : RequestParameters<ScriptLanguagesRequestParameters>
+}
+
+public sealed partial class ScriptLanguagesRequest : PlainRequest<ScriptLanguagesRequestParameters>
+{
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+}
+
+public sealed partial class ScriptLanguagesRequestDescriptor : RequestDescriptor<ScriptLanguagesRequestDescriptor, ScriptLanguagesRequestParameters>
+{
+	internal ScriptLanguagesRequestDescriptor(Action<ScriptLanguagesRequestDescriptor> configure) => configure.Invoke(this);
+	public ScriptLanguagesRequestDescriptor()
 	{
 	}
 
-	public sealed partial class ScriptLanguagesRequest : PlainRequestBase<ScriptLanguagesRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-	}
-
-	public sealed partial class ScriptLanguagesRequestDescriptor : RequestDescriptorBase<ScriptLanguagesRequestDescriptor, ScriptLanguagesRequestParameters>
-	{
-		internal ScriptLanguagesRequestDescriptor(Action<ScriptLanguagesRequestDescriptor> configure) => configure.Invoke(this);
-		public ScriptLanguagesRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 }

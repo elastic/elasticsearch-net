@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,84 +24,82 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class LimitTokenCountTokenFilter : ITokenFilterDefinition
 {
-	public sealed partial class LimitTokenCountTokenFilter : ITokenFilterDefinition
+	[JsonInclude]
+	[JsonPropertyName("consume_all_tokens")]
+	public bool? ConsumeAllTokens { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("max_token_count")]
+	public int? MaxTokenCount { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "limit";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class LimitTokenCountTokenFilterDescriptor : SerializableDescriptor<LimitTokenCountTokenFilterDescriptor>, IBuildableDescriptor<LimitTokenCountTokenFilter>
+{
+	internal LimitTokenCountTokenFilterDescriptor(Action<LimitTokenCountTokenFilterDescriptor> configure) => configure.Invoke(this);
+	public LimitTokenCountTokenFilterDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("consume_all_tokens")]
-		public bool? ConsumeAllTokens { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_token_count")]
-		public int? MaxTokenCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "limit";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class LimitTokenCountTokenFilterDescriptor : SerializableDescriptorBase<LimitTokenCountTokenFilterDescriptor>, IBuildableDescriptor<LimitTokenCountTokenFilter>
+	private bool? ConsumeAllTokensValue { get; set; }
+
+	private int? MaxTokenCountValue { get; set; }
+
+	private string? VersionValue { get; set; }
+
+	public LimitTokenCountTokenFilterDescriptor ConsumeAllTokens(bool? consumeAllTokens = true)
 	{
-		internal LimitTokenCountTokenFilterDescriptor(Action<LimitTokenCountTokenFilterDescriptor> configure) => configure.Invoke(this);
-		public LimitTokenCountTokenFilterDescriptor() : base()
-		{
-		}
-
-		private bool? ConsumeAllTokensValue { get; set; }
-
-		private int? MaxTokenCountValue { get; set; }
-
-		private string? VersionValue { get; set; }
-
-		public LimitTokenCountTokenFilterDescriptor ConsumeAllTokens(bool? consumeAllTokens = true)
-		{
-			ConsumeAllTokensValue = consumeAllTokens;
-			return Self;
-		}
-
-		public LimitTokenCountTokenFilterDescriptor MaxTokenCount(int? maxTokenCount)
-		{
-			MaxTokenCountValue = maxTokenCount;
-			return Self;
-		}
-
-		public LimitTokenCountTokenFilterDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (ConsumeAllTokensValue.HasValue)
-			{
-				writer.WritePropertyName("consume_all_tokens");
-				writer.WriteBooleanValue(ConsumeAllTokensValue.Value);
-			}
-
-			if (MaxTokenCountValue.HasValue)
-			{
-				writer.WritePropertyName("max_token_count");
-				writer.WriteNumberValue(MaxTokenCountValue.Value);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("limit");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		LimitTokenCountTokenFilter IBuildableDescriptor<LimitTokenCountTokenFilter>.Build() => new()
-		{ ConsumeAllTokens = ConsumeAllTokensValue, MaxTokenCount = MaxTokenCountValue, Version = VersionValue };
+		ConsumeAllTokensValue = consumeAllTokens;
+		return Self;
 	}
+
+	public LimitTokenCountTokenFilterDescriptor MaxTokenCount(int? maxTokenCount)
+	{
+		MaxTokenCountValue = maxTokenCount;
+		return Self;
+	}
+
+	public LimitTokenCountTokenFilterDescriptor Version(string? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (ConsumeAllTokensValue.HasValue)
+		{
+			writer.WritePropertyName("consume_all_tokens");
+			writer.WriteBooleanValue(ConsumeAllTokensValue.Value);
+		}
+
+		if (MaxTokenCountValue.HasValue)
+		{
+			writer.WritePropertyName("max_token_count");
+			writer.WriteNumberValue(MaxTokenCountValue.Value);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("limit");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	LimitTokenCountTokenFilter IBuildableDescriptor<LimitTokenCountTokenFilter>.Build() => new()
+	{ ConsumeAllTokens = ConsumeAllTokensValue, MaxTokenCount = MaxTokenCountValue, Version = VersionValue };
 }

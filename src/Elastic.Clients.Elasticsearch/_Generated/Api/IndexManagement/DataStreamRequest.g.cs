@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,50 +26,48 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class DataStreamRequestParameters : RequestParameters<DataStreamRequestParameters>
 {
-	public sealed class DataStreamRequestParameters : RequestParameters<DataStreamRequestParameters>
+	[JsonIgnore]
+	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+}
+
+public sealed partial class DataStreamRequest : PlainRequest<DataStreamRequestParameters>
+{
+	public DataStreamRequest()
 	{
-		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 
-	public sealed partial class DataStreamRequest : PlainRequestBase<DataStreamRequestParameters>
+	public DataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamNames? name) : base(r => r.Optional("name", name))
 	{
-		public DataStreamRequest()
-		{
-		}
-
-		public DataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamNames? name) : base(r => r.Optional("name", name))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetDataStream;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 
-	public sealed partial class DataStreamRequestDescriptor : RequestDescriptorBase<DataStreamRequestDescriptor, DataStreamRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetDataStream;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	[JsonIgnore]
+	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+}
+
+public sealed partial class DataStreamRequestDescriptor : RequestDescriptor<DataStreamRequestDescriptor, DataStreamRequestParameters>
+{
+	internal DataStreamRequestDescriptor(Action<DataStreamRequestDescriptor> configure) => configure.Invoke(this);
+	public DataStreamRequestDescriptor()
 	{
-		internal DataStreamRequestDescriptor(Action<DataStreamRequestDescriptor> configure) => configure.Invoke(this);
-		public DataStreamRequestDescriptor()
-		{
-		}
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetDataStream;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public DataStreamRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public DataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames? name)
-		{
-			RouteValues.Optional("name", name);
-			return Self;
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetDataStream;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public DataStreamRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public DataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames? name)
+	{
+		RouteValues.Optional("name", name);
+		return Self;
+	}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,28 +24,26 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class RequestCacheStats
 {
-	public sealed partial class RequestCacheStats
-	{
-		[JsonInclude]
-		[JsonPropertyName("evictions")]
-		public long Evictions { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("evictions")]
+	public long Evictions { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("hit_count")]
-		public long HitCount { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("hit_count")]
+	public long HitCount { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("memory_size")]
-		public string? MemorySize { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("memory_size")]
+	public string? MemorySize { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("memory_size_in_bytes")]
-		public long MemorySizeInBytes { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("memory_size_in_bytes")]
+	public long MemorySizeInBytes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("miss_count")]
-		public long MissCount { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("miss_count")]
+	public long MissCount { get; init; }
 }

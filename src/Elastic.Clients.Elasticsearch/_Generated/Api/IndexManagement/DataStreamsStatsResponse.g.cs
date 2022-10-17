@@ -15,37 +15,37 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class DataStreamsStatsResponse : ElasticsearchResponseBase
 {
-	public sealed partial class DataStreamsStatsResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("backing_indices")]
-		public int BackingIndices { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("backing_indices")]
+	public int BackingIndices { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("data_stream_count")]
-		public int DataStreamCount { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("data_stream_count")]
+	public int DataStreamCount { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("data_streams")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem> DataStreams { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("data_streams")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem> DataStreams { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("_shards")]
-		public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("_shards")]
+	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_store_size_bytes")]
-		public int TotalStoreSizeBytes { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("total_store_size_bytes")]
+	public int TotalStoreSizeBytes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_store_sizes")]
-		public Elastic.Clients.Elasticsearch.ByteSize? TotalStoreSizes { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("total_store_sizes")]
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalStoreSizes { get; init; }
 }

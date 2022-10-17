@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,60 +24,58 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Tasks
+namespace Elastic.Clients.Elasticsearch.Tasks;
+public sealed partial class TaskInfo
 {
-	public sealed partial class TaskInfo
-	{
-		[JsonInclude]
-		[JsonPropertyName("action")]
-		public string Action { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("action")]
+	public string Action { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("cancellable")]
-		public bool Cancellable { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("cancellable")]
+	public bool Cancellable { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("cancelled")]
-		public bool? Cancelled { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("cancelled")]
+	public bool? Cancelled { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("description")]
-		public string? Description { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("description")]
+	public string? Description { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("headers")]
-		public Dictionary<string, string> Headers { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("headers")]
+	public Dictionary<string, string> Headers { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public long Id { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("id")]
+	public long Id { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("node")]
-		public string Node { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("node")]
+	public string Node { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("parent_task_id")]
-		public Elastic.Clients.Elasticsearch.TaskId? ParentTaskId { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("parent_task_id")]
+	public Elastic.Clients.Elasticsearch.TaskId? ParentTaskId { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("running_time")]
-		public Elastic.Clients.Elasticsearch.Duration? RunningTime { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("running_time")]
+	public Elastic.Clients.Elasticsearch.Duration? RunningTime { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("running_time_in_nanos")]
-		public long RunningTimeInNanos { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("running_time_in_nanos")]
+	public long RunningTimeInNanos { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("start_time_in_millis")]
-		public long StartTimeInMillis { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("start_time_in_millis")]
+	public long StartTimeInMillis { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("status")]
-		public Elastic.Clients.Elasticsearch.Tasks.TaskStatus? Status { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("status")]
+	public Elastic.Clients.Elasticsearch.Tasks.TaskStatus? Status { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type { get; init; }
 }

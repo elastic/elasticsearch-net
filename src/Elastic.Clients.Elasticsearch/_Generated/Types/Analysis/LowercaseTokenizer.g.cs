@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,48 +24,46 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class LowercaseTokenizer : ITokenizerDefinition
 {
-	public sealed partial class LowercaseTokenizer : ITokenizerDefinition
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "lowercase";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class LowercaseTokenizerDescriptor : SerializableDescriptor<LowercaseTokenizerDescriptor>, IBuildableDescriptor<LowercaseTokenizer>
+{
+	internal LowercaseTokenizerDescriptor(Action<LowercaseTokenizerDescriptor> configure) => configure.Invoke(this);
+	public LowercaseTokenizerDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "lowercase";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class LowercaseTokenizerDescriptor : SerializableDescriptorBase<LowercaseTokenizerDescriptor>, IBuildableDescriptor<LowercaseTokenizer>
+	private string? VersionValue { get; set; }
+
+	public LowercaseTokenizerDescriptor Version(string? version)
 	{
-		internal LowercaseTokenizerDescriptor(Action<LowercaseTokenizerDescriptor> configure) => configure.Invoke(this);
-		public LowercaseTokenizerDescriptor() : base()
-		{
-		}
-
-		private string? VersionValue { get; set; }
-
-		public LowercaseTokenizerDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("lowercase");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		LowercaseTokenizer IBuildableDescriptor<LowercaseTokenizer>.Build() => new()
-		{ Version = VersionValue };
+		VersionValue = version;
+		return Self;
 	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("lowercase");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	LowercaseTokenizer IBuildableDescriptor<LowercaseTokenizer>.Build() => new()
+	{ Version = VersionValue };
 }
