@@ -66,10 +66,18 @@ public sealed partial class CharFilterDefinitionsDescriptor : IsADictionaryDescr
 	public CharFilterDefinitionsDescriptor PatternReplaceCharFilter(string charFilterDefinitionName, PatternReplaceCharFilter patternReplaceCharFilter) => AssignVariant(charFilterDefinitionName, patternReplaceCharFilter);
 }
 
-internal sealed partial class CharFilterDefinitionInterfaceConverter
+internal sealed partial class CharFilterDefinitionInterfaceConverter : JsonConverter<ICharFilterDefinition>
 {
-	private static ICharFilterDefinition DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
+	public override ICharFilterDefinition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		var copiedReader = reader;
+		string? type = null;
+		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
+		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		{
+			type = readType.ToString();
+		}
+
 		switch (type)
 		{
 			case "kuromoji_iteration_mark":
@@ -86,8 +94,41 @@ internal sealed partial class CharFilterDefinitionInterfaceConverter
 				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
 		}
 	}
+
+	public override void Write(Utf8JsonWriter writer, ICharFilterDefinition value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		switch (value.Type)
+		{
+			case "kuromoji_iteration_mark":
+				JsonSerializer.Serialize(writer, value, typeof(KuromojiIterationMarkCharFilter), options);
+				return;
+			case "icu_normalizer":
+				JsonSerializer.Serialize(writer, value, typeof(IcuNormalizationCharFilter), options);
+				return;
+			case "pattern_replace":
+				JsonSerializer.Serialize(writer, value, typeof(PatternReplaceCharFilter), options);
+				return;
+			case "mapping":
+				JsonSerializer.Serialize(writer, value, typeof(MappingCharFilter), options);
+				return;
+			case "html_strip":
+				JsonSerializer.Serialize(writer, value, typeof(HtmlStripCharFilter), options);
+				return;
+			default:
+				var type = value.GetType();
+				JsonSerializer.Serialize(writer, value, type, options);
+				return;
+		}
+	}
 }
 
+[JsonConverter(typeof(CharFilterDefinitionInterfaceConverter))]
 public partial interface ICharFilterDefinition
 {
 	public string Type { get; }
