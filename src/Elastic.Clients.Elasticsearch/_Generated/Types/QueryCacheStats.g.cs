@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,40 +24,38 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class QueryCacheStats
 {
-	public sealed partial class QueryCacheStats
-	{
-		[JsonInclude]
-		[JsonPropertyName("cache_count")]
-		public int CacheCount { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("cache_count")]
+	public int CacheCount { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("cache_size")]
-		public int CacheSize { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("cache_size")]
+	public int CacheSize { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("evictions")]
-		public int Evictions { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("evictions")]
+	public int Evictions { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("hit_count")]
-		public int HitCount { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("hit_count")]
+	public int HitCount { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("memory_size")]
-		public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("memory_size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("memory_size_in_bytes")]
-		public int MemorySizeInBytes { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("memory_size_in_bytes")]
+	public int MemorySizeInBytes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("miss_count")]
-		public int MissCount { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("miss_count")]
+	public int MissCount { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("total_count")]
-		public int TotalCount { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("total_count")]
+	public int TotalCount { get; init; }
 }

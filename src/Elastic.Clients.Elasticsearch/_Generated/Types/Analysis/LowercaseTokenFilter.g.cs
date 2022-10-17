@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,66 +24,64 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class LowercaseTokenFilter : ITokenFilterDefinition
 {
-	public sealed partial class LowercaseTokenFilter : ITokenFilterDefinition
-	{
-		[JsonInclude]
-		[JsonPropertyName("language")]
-		public string? Language { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("language")]
+	public string? Language { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "lowercase";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "lowercase";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class LowercaseTokenFilterDescriptor : SerializableDescriptor<LowercaseTokenFilterDescriptor>, IBuildableDescriptor<LowercaseTokenFilter>
+{
+	internal LowercaseTokenFilterDescriptor(Action<LowercaseTokenFilterDescriptor> configure) => configure.Invoke(this);
+	public LowercaseTokenFilterDescriptor() : base()
+	{
 	}
 
-	public sealed partial class LowercaseTokenFilterDescriptor : SerializableDescriptorBase<LowercaseTokenFilterDescriptor>, IBuildableDescriptor<LowercaseTokenFilter>
+	private string? LanguageValue { get; set; }
+
+	private string? VersionValue { get; set; }
+
+	public LowercaseTokenFilterDescriptor Language(string? language)
 	{
-		internal LowercaseTokenFilterDescriptor(Action<LowercaseTokenFilterDescriptor> configure) => configure.Invoke(this);
-		public LowercaseTokenFilterDescriptor() : base()
-		{
-		}
-
-		private string? LanguageValue { get; set; }
-
-		private string? VersionValue { get; set; }
-
-		public LowercaseTokenFilterDescriptor Language(string? language)
-		{
-			LanguageValue = language;
-			return Self;
-		}
-
-		public LowercaseTokenFilterDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(LanguageValue))
-			{
-				writer.WritePropertyName("language");
-				writer.WriteStringValue(LanguageValue);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("lowercase");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		LowercaseTokenFilter IBuildableDescriptor<LowercaseTokenFilter>.Build() => new()
-		{ Language = LanguageValue, Version = VersionValue };
+		LanguageValue = language;
+		return Self;
 	}
+
+	public LowercaseTokenFilterDescriptor Version(string? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(LanguageValue))
+		{
+			writer.WritePropertyName("language");
+			writer.WriteStringValue(LanguageValue);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("lowercase");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	LowercaseTokenFilter IBuildableDescriptor<LowercaseTokenFilter>.Build() => new()
+	{ Language = LanguageValue, Version = VersionValue };
 }

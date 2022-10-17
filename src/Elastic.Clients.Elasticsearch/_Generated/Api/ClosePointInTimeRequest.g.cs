@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,46 +26,44 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed class ClosePointInTimeRequestParameters : RequestParameters<ClosePointInTimeRequestParameters>
 {
-	public sealed class ClosePointInTimeRequestParameters : RequestParameters<ClosePointInTimeRequestParameters>
+}
+
+public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInTimeRequestParameters>
+{
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
+	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override bool SupportsBody => true;
+	[JsonInclude]
+	[JsonPropertyName("id")]
+	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+}
+
+public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescriptor<ClosePointInTimeRequestDescriptor, ClosePointInTimeRequestParameters>
+{
+	internal ClosePointInTimeRequestDescriptor(Action<ClosePointInTimeRequestDescriptor> configure) => configure.Invoke(this);
+	public ClosePointInTimeRequestDescriptor()
 	{
 	}
 
-	public sealed partial class ClosePointInTimeRequest : PlainRequestBase<ClosePointInTimeRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
+	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override bool SupportsBody => true;
+	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
+
+	public ClosePointInTimeRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => true;
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+		IdValue = id;
+		return Self;
 	}
 
-	public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescriptorBase<ClosePointInTimeRequestDescriptor, ClosePointInTimeRequestParameters>
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		internal ClosePointInTimeRequestDescriptor(Action<ClosePointInTimeRequestDescriptor> configure) => configure.Invoke(this);
-		public ClosePointInTimeRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => true;
-		private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-
-		public ClosePointInTimeRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			IdValue = id;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-			writer.WriteEndObject();
-		}
+		writer.WriteStartObject();
+		writer.WritePropertyName("id");
+		JsonSerializer.Serialize(writer, IdValue, options);
+		writer.WriteEndObject();
 	}
 }

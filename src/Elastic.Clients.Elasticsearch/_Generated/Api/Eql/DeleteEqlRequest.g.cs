@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,70 +26,68 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Eql
+namespace Elastic.Clients.Elasticsearch.Eql;
+public sealed class DeleteEqlRequestParameters : RequestParameters<DeleteEqlRequestParameters>
 {
-	public sealed class DeleteEqlRequestParameters : RequestParameters<DeleteEqlRequestParameters>
+}
+
+public sealed partial class DeleteEqlRequest : PlainRequest<DeleteEqlRequestParameters>
+{
+	public DeleteEqlRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
-	public sealed partial class DeleteEqlRequest : PlainRequestBase<DeleteEqlRequestParameters>
-	{
-		public DeleteEqlRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override bool SupportsBody => false;
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => false;
+public sealed partial class DeleteEqlRequestDescriptor<TDocument> : RequestDescriptor<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlRequestParameters>
+{
+	internal DeleteEqlRequestDescriptor(Action<DeleteEqlRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public DeleteEqlRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	{
 	}
 
-	public sealed partial class DeleteEqlRequestDescriptor<TDocument> : RequestDescriptorBase<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlRequestParameters>
+	internal DeleteEqlRequestDescriptor()
 	{
-		internal DeleteEqlRequestDescriptor(Action<DeleteEqlRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public DeleteEqlRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
-
-		internal DeleteEqlRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => false;
-		public DeleteEqlRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 
-	public sealed partial class DeleteEqlRequestDescriptor : RequestDescriptorBase<DeleteEqlRequestDescriptor, DeleteEqlRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override bool SupportsBody => false;
+	public DeleteEqlRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
-		internal DeleteEqlRequestDescriptor(Action<DeleteEqlRequestDescriptor> configure) => configure.Invoke(this);
-		public DeleteEqlRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-		{
-		}
+		RouteValues.Required("id", id);
+		return Self;
+	}
 
-		internal DeleteEqlRequestDescriptor()
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
+}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => false;
-		public DeleteEqlRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
+public sealed partial class DeleteEqlRequestDescriptor : RequestDescriptor<DeleteEqlRequestDescriptor, DeleteEqlRequestParameters>
+{
+	internal DeleteEqlRequestDescriptor(Action<DeleteEqlRequestDescriptor> configure) => configure.Invoke(this);
+	public DeleteEqlRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	{
+	}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	internal DeleteEqlRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override bool SupportsBody => false;
+	public DeleteEqlRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		RouteValues.Required("id", id);
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

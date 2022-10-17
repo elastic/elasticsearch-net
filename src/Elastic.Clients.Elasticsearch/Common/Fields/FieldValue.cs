@@ -7,6 +7,7 @@ using System.Text.Json;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch
 {

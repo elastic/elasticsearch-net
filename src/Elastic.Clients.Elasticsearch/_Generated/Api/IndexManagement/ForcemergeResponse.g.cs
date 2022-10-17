@@ -15,21 +15,21 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class ForcemergeResponse : ElasticsearchResponseBase
 {
-	public sealed partial class ForcemergeResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("_shards")]
-		public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("_shards")]
+	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("task")]
-		public string? Task { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("task")]
+	public string? Task { get; init; }
 }

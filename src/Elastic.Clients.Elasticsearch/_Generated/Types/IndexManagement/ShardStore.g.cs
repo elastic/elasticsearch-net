@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,40 +24,38 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class ShardStore
 {
-	public sealed partial class ShardStore
-	{
-		[JsonInclude]
-		[JsonPropertyName("allocation")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation Allocation { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("allocation")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation Allocation { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("allocation_id")]
-		public string AllocationId { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("allocation_id")]
+	public string AllocationId { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("attributes")]
-		public Dictionary<string, object> Attributes { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("attributes")]
+	public Dictionary<string, object> Attributes { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public string Id { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("id")]
+	public string Id { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("legacy_version")]
-		public long LegacyVersion { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("legacy_version")]
+	public long LegacyVersion { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string Name { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("name")]
+	public string Name { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("store_exception")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreException StoreException { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("store_exception")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreException StoreException { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("transport_address")]
-		public string TransportAddress { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("transport_address")]
+	public string TransportAddress { get; init; }
 }

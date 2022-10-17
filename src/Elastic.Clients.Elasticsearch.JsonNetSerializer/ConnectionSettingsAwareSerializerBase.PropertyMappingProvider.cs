@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 using Elastic.Clients.Elasticsearch;
 using Newtonsoft.Json;
 
-namespace Elastic.Clients.JsonNetSerializer
+namespace Elastic.Clients.Elasticsearch.JsonNetSerializer
 {
 	public abstract partial class ConnectionSettingsAwareSerializer : IPropertyMappingProvider
 	{

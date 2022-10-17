@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,21 +24,19 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class GeoPolygonPoints
 {
-	public sealed partial class GeoPolygonPoints
+}
+
+public sealed partial class GeoPolygonPointsDescriptor : SerializableDescriptor<GeoPolygonPointsDescriptor>
+{
+	internal GeoPolygonPointsDescriptor(Action<GeoPolygonPointsDescriptor> configure) => configure.Invoke(this);
+	public GeoPolygonPointsDescriptor() : base()
 	{
 	}
 
-	public sealed partial class GeoPolygonPointsDescriptor : SerializableDescriptorBase<GeoPolygonPointsDescriptor>
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		internal GeoPolygonPointsDescriptor(Action<GeoPolygonPointsDescriptor> configure) => configure.Invoke(this);
-		public GeoPolygonPointsDescriptor() : base()
-		{
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 }

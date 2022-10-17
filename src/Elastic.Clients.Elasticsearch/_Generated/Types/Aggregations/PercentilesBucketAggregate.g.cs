@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,16 +24,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public sealed partial class PercentilesBucketAggregate : IAggregate
 {
-	public sealed partial class PercentilesBucketAggregate : IAggregate
-	{
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, object>? Meta { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("meta")]
+	public Dictionary<string, object>? Meta { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("values")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Percentiles Values { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("values")]
+	public Elastic.Clients.Elasticsearch.Aggregations.Percentiles Values { get; init; }
 }

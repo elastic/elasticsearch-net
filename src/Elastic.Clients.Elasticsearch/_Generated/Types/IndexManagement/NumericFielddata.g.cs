@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,39 +24,37 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class NumericFielddata
 {
-	public sealed partial class NumericFielddata
+	[JsonInclude]
+	[JsonPropertyName("format")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; set; }
+}
+
+public sealed partial class NumericFielddataDescriptor : SerializableDescriptor<NumericFielddataDescriptor>, IBuildableDescriptor<NumericFielddata>
+{
+	internal NumericFielddataDescriptor(Action<NumericFielddataDescriptor> configure) => configure.Invoke(this);
+	public NumericFielddataDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; set; }
 	}
 
-	public sealed partial class NumericFielddataDescriptor : SerializableDescriptorBase<NumericFielddataDescriptor>, IBuildableDescriptor<NumericFielddata>
+	private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat FormatValue { get; set; }
+
+	public NumericFielddataDescriptor Format(Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat format)
 	{
-		internal NumericFielddataDescriptor(Action<NumericFielddataDescriptor> configure) => configure.Invoke(this);
-		public NumericFielddataDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat FormatValue { get; set; }
-
-		public NumericFielddataDescriptor Format(Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat format)
-		{
-			FormatValue = format;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("format");
-			JsonSerializer.Serialize(writer, FormatValue, options);
-			writer.WriteEndObject();
-		}
-
-		NumericFielddata IBuildableDescriptor<NumericFielddata>.Build() => new()
-		{ Format = FormatValue };
+		FormatValue = format;
+		return Self;
 	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("format");
+		JsonSerializer.Serialize(writer, FormatValue, options);
+		writer.WriteEndObject();
+	}
+
+	NumericFielddata IBuildableDescriptor<NumericFielddata>.Build() => new()
+	{ Format = FormatValue };
 }

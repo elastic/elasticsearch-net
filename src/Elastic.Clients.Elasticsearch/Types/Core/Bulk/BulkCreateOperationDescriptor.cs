@@ -8,11 +8,13 @@ using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public sealed class BulkCreateOperationDescriptor<TSource> : BulkOperationDescriptorBase<BulkCreateOperationDescriptor<TSource>>
+public sealed class BulkCreateOperationDescriptor<TSource> : BulkOperationDescriptor<BulkCreateOperationDescriptor<TSource>>
 {
 	private string _pipeline;
 	private Dictionary<string, string> _dynamicTemplates;

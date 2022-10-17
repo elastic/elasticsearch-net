@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,126 +24,124 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ml
+namespace Elastic.Clients.Elasticsearch.Ml;
+public sealed partial class QuestionAnsweringInferenceOptions
 {
-	public sealed partial class QuestionAnsweringInferenceOptions
+	[JsonInclude]
+	[JsonPropertyName("max_answer_length")]
+	public int? MaxAnswerLength { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("num_top_classes")]
+	public int? NumTopClasses { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("results_field")]
+	public string? ResultsField { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("tokenization")]
+	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+}
+
+public sealed partial class QuestionAnsweringInferenceOptionsDescriptor : SerializableDescriptor<QuestionAnsweringInferenceOptionsDescriptor>
+{
+	internal QuestionAnsweringInferenceOptionsDescriptor(Action<QuestionAnsweringInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+	public QuestionAnsweringInferenceOptionsDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("max_answer_length")]
-		public int? MaxAnswerLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("num_top_classes")]
-		public int? NumTopClasses { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("results_field")]
-		public string? ResultsField { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("tokenization")]
-		public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
 	}
 
-	public sealed partial class QuestionAnsweringInferenceOptionsDescriptor : SerializableDescriptorBase<QuestionAnsweringInferenceOptionsDescriptor>
+	private int? MaxAnswerLengthValue { get; set; }
+
+	private int? NumTopClassesValue { get; set; }
+
+	private string? ResultsFieldValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
+
+	private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
+
+	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
+
+	public QuestionAnsweringInferenceOptionsDescriptor MaxAnswerLength(int? maxAnswerLength)
 	{
-		internal QuestionAnsweringInferenceOptionsDescriptor(Action<QuestionAnsweringInferenceOptionsDescriptor> configure) => configure.Invoke(this);
-		public QuestionAnsweringInferenceOptionsDescriptor() : base()
+		MaxAnswerLengthValue = maxAnswerLength;
+		return Self;
+	}
+
+	public QuestionAnsweringInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)
+	{
+		NumTopClassesValue = numTopClasses;
+		return Self;
+	}
+
+	public QuestionAnsweringInferenceOptionsDescriptor ResultsField(string? resultsField)
+	{
+		ResultsFieldValue = resultsField;
+		return Self;
+	}
+
+	public QuestionAnsweringInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
+	{
+		TokenizationDescriptor = null;
+		TokenizationDescriptorAction = null;
+		TokenizationValue = tokenization;
+		return Self;
+	}
+
+	public QuestionAnsweringInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
+	{
+		TokenizationValue = null;
+		TokenizationDescriptorAction = null;
+		TokenizationDescriptor = descriptor;
+		return Self;
+	}
+
+	public QuestionAnsweringInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
+	{
+		TokenizationValue = null;
+		TokenizationDescriptor = null;
+		TokenizationDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (MaxAnswerLengthValue.HasValue)
 		{
+			writer.WritePropertyName("max_answer_length");
+			writer.WriteNumberValue(MaxAnswerLengthValue.Value);
 		}
 
-		private int? MaxAnswerLengthValue { get; set; }
-
-		private int? NumTopClassesValue { get; set; }
-
-		private string? ResultsFieldValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
-
-		private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
-
-		private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
-
-		public QuestionAnsweringInferenceOptionsDescriptor MaxAnswerLength(int? maxAnswerLength)
+		if (NumTopClassesValue.HasValue)
 		{
-			MaxAnswerLengthValue = maxAnswerLength;
-			return Self;
+			writer.WritePropertyName("num_top_classes");
+			writer.WriteNumberValue(NumTopClassesValue.Value);
 		}
 
-		public QuestionAnsweringInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)
+		if (!string.IsNullOrEmpty(ResultsFieldValue))
 		{
-			NumTopClassesValue = numTopClasses;
-			return Self;
+			writer.WritePropertyName("results_field");
+			writer.WriteStringValue(ResultsFieldValue);
 		}
 
-		public QuestionAnsweringInferenceOptionsDescriptor ResultsField(string? resultsField)
+		if (TokenizationDescriptor is not null)
 		{
-			ResultsFieldValue = resultsField;
-			return Self;
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
+		}
+		else if (TokenizationDescriptorAction is not null)
+		{
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
+		}
+		else if (TokenizationValue is not null)
+		{
+			writer.WritePropertyName("tokenization");
+			JsonSerializer.Serialize(writer, TokenizationValue, options);
 		}
 
-		public QuestionAnsweringInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
-		{
-			TokenizationDescriptor = null;
-			TokenizationDescriptorAction = null;
-			TokenizationValue = tokenization;
-			return Self;
-		}
-
-		public QuestionAnsweringInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
-		{
-			TokenizationValue = null;
-			TokenizationDescriptorAction = null;
-			TokenizationDescriptor = descriptor;
-			return Self;
-		}
-
-		public QuestionAnsweringInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
-		{
-			TokenizationValue = null;
-			TokenizationDescriptor = null;
-			TokenizationDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (MaxAnswerLengthValue.HasValue)
-			{
-				writer.WritePropertyName("max_answer_length");
-				writer.WriteNumberValue(MaxAnswerLengthValue.Value);
-			}
-
-			if (NumTopClassesValue.HasValue)
-			{
-				writer.WritePropertyName("num_top_classes");
-				writer.WriteNumberValue(NumTopClassesValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(ResultsFieldValue))
-			{
-				writer.WritePropertyName("results_field");
-				writer.WriteStringValue(ResultsFieldValue);
-			}
-
-			if (TokenizationDescriptor is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
-			}
-			else if (TokenizationDescriptorAction is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
-			}
-			else if (TokenizationValue is not null)
-			{
-				writer.WritePropertyName("tokenization");
-				JsonSerializer.Serialize(writer, TokenizationValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

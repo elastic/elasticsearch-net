@@ -2,106 +2,137 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Core.Search;
+using System.Threading;
+using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdateOperationBase
+public abstract class BulkUpdateOperation : BulkOperation
 {
-	public BulkUpdateOperation(Id id) => Id = id;
+	protected internal BulkUpdateOperation() : base() { }
 
-	public BulkUpdateOperation(TDocument idFrom, bool useIdFromAsUpsert = false)
-	{
-		IdFrom = idFrom;
-		if (useIdFromAsUpsert)
-			Upsert = idFrom;
-	}
+	private static byte _newline => (byte)'\n';
 
-	public BulkUpdateOperation(TDocument idFrom, TPartialDocument update, bool useIdFromAsUpsert = false)
-	{
-		IdFrom = idFrom;
-		if (useIdFromAsUpsert)
-			Upsert = idFrom;
-		Doc = update;
-	}
-
-	protected override Type ClrType => typeof(TDocument);
-
-	[JsonPropertyName("pipeline")]
-	public string? Pipeline { get; set; }
-
-	[JsonPropertyName("dynamic_templates")]
-	public Dictionary<string, string>? DynamicTemplates { get; set; }
-
-	[JsonIgnore]
-	public TPartialDocument Doc { get; set; }
-
-	[JsonIgnore]
-	public TDocument IdFrom { get; set; }
-
-	[JsonIgnore]
-	public Script Script { get; set; }
-
-	[JsonIgnore]
-	public bool? ScriptedUpsert { get; set; }
-
-	[JsonIgnore]
-	public bool? DocAsUpsert { get; set; }
-
-	[JsonIgnore]
-	public TDocument Upsert { get; set; }
-
-	[JsonIgnore]
-	public Union<bool, SourceFilter> Source { get; set; }
+	[JsonPropertyName("retry_on_conflict")]
+	public bool? RetryOnConflict { get; set; }
 
 	protected override string Operation => "update";
 
-	protected override void BeforeSerialize(IElasticsearchClientSettings settings)
+	protected abstract void BeforeSerialize(IElasticsearchClientSettings settings);
+
+	/// <summary>
+	/// Serialise the operation action line for the NDJSON stream.
+	/// </summary>
+	/// <param name="writer"></param>
+	/// <param name="options"></param>
+	protected abstract void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null);
+
+	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings)
 	{
-		Id ??= new Id(new[] { IdFrom, Upsert }.FirstOrDefault(o => o != null));
+		BeforeSerialize(settings);
 
-		if (Routing is null)
-		{
-			if (IdFrom != null)
-				Routing ??= new Routing(IdFrom);
+		var requestResponseSerializer = settings.RequestResponseSerializer;
 
-			if (Upsert != null)
-				Routing ??= new Routing(Upsert);
-		}
+		var internalWriter = new Utf8JsonWriter(stream);
+
+		internalWriter.WriteStartObject();
+		internalWriter.WritePropertyName(Operation);
+		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+		WriteOperation(internalWriter, options);
+		internalWriter.WriteEndObject();
+		internalWriter.Flush();
+
+		stream.WriteByte(_newline);
+
+		var body = GetBody();
+		settings.RequestResponseSerializer.Serialize(body, stream);
+		stream.Flush();
 	}
 
-	protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => JsonSerializer.Serialize(writer, this, options);
+	protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings)
+	{
+		BeforeSerialize(settings);
 
-	protected override object GetBody() => new BulkUpdateBody<TDocument, TPartialDocument> {
-		PartialUpdate = Doc,
-		Script = Script,
-		Upsert = Upsert,
-		DocAsUpsert = DocAsUpsert,
-		ScriptedUpsert = ScriptedUpsert,
-		IfPrimaryTerm = IfPrimaryTerm,
-		IfSequenceNumber = IfSequenceNumber,
-		Source = Source
-	};
+		var internalWriter = new Utf8JsonWriter(stream);
+		SerializeOperationAction(settings, internalWriter);
+		internalWriter.Flush();
+
+		stream.WriteByte(_newline);
+
+		var body = GetBody();
+		await settings.RequestResponseSerializer.SerializeAsync(body, stream).ConfigureAwait(false);
+		await stream.FlushAsync().ConfigureAwait(false);
+	}
+
+	private void SerializeOperationAction(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
+	{
+		var requestResponseSerializer = settings.RequestResponseSerializer;
+		writer.WriteStartObject();
+		writer.WritePropertyName(Operation);
+		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+		WriteOperation(writer, options);
+		writer.WriteEndObject();
+	}
+
+	protected abstract object GetBody();
 }
 
-public static class BulkUpdateOperationFactory
+public abstract class BulkUpdateOperationDescriptorBase<TSource> : BulkOperationDescriptor<BulkUpdateOperationDescriptorBase<TSource>>
 {
-	public static BulkUpdateOperationWithPartial<TPartial> WithPartial<TPartial>(Id id, TPartial partialDocument) => new(id, partialDocument);
+	private static byte _newline => (byte)'\n';
 
-	public static BulkUpdateOperationWithPartial<TPartial> WithPartial<TPartial>(Id id, IndexName index, TPartial partialDocument) => new(id, index, partialDocument);
+	protected override string Operation => "update";
 
-	public static BulkUpdateOperationWithScript WithScript(Id id, IndexName index, Script script) => new(id, index, script);
+	protected abstract void BeforeSerialize(IElasticsearchClientSettings settings);
 
-	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>(Id id, IndexName index, Script script, TDocument upsert) => new(upsert, id, index, script);
+	protected abstract void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null);
 
-	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>(Id id, Script script, TDocument upsert) => new(upsert, id, script);
+	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+	{
+		BeforeSerialize(settings);
 
-	public static BulkUpdateOperationWithScript<TDocument> WithScript<TDocument>(Script script, TDocument upsert) => new(upsert, new Id(upsert), script);
+		var requestResponseSerializer = settings.RequestResponseSerializer;
 
-	public static BulkUpdateOperationWithScript WithScript(Id id, Script script) => new(id, script);
+		var internalWriter = new Utf8JsonWriter(stream);
+
+		internalWriter.WriteStartObject();
+		internalWriter.WritePropertyName(Operation);
+		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+		WriteOperation(internalWriter, options);
+		internalWriter.WriteEndObject();
+		internalWriter.Flush();
+
+		stream.WriteByte(_newline);
+		var body = GetBody();
+		settings.RequestResponseSerializer.Serialize(body, stream, formatting);
+	}
+
+	protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default)
+	{
+		BeforeSerialize(settings);
+
+		var requestResponseSerializer = settings.RequestResponseSerializer;
+
+		var internalWriter = new Utf8JsonWriter(stream);
+
+		internalWriter.WriteStartObject();
+		internalWriter.WritePropertyName(Operation);
+
+		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+		WriteOperation(internalWriter, options);
+
+		internalWriter.WriteEndObject();
+		internalWriter.Flush();
+
+		stream.WriteByte(_newline);
+
+		var body = GetBody();
+
+		await settings.SourceSerializer.SerializeAsync(body, stream, formatting).ConfigureAwait(false);
+	}
 }

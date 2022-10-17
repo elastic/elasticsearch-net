@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,72 +24,70 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class Merge
 {
-	public sealed partial class Merge
+	[JsonInclude]
+	[JsonPropertyName("scheduler")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? Scheduler { get; set; }
+}
+
+public sealed partial class MergeDescriptor : SerializableDescriptor<MergeDescriptor>
+{
+	internal MergeDescriptor(Action<MergeDescriptor> configure) => configure.Invoke(this);
+	public MergeDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("scheduler")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? Scheduler { get; set; }
 	}
 
-	public sealed partial class MergeDescriptor : SerializableDescriptorBase<MergeDescriptor>
+	private Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? SchedulerValue { get; set; }
+
+	private MergeSchedulerDescriptor SchedulerDescriptor { get; set; }
+
+	private Action<MergeSchedulerDescriptor> SchedulerDescriptorAction { get; set; }
+
+	public MergeDescriptor Scheduler(Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? scheduler)
 	{
-		internal MergeDescriptor(Action<MergeDescriptor> configure) => configure.Invoke(this);
-		public MergeDescriptor() : base()
+		SchedulerDescriptor = null;
+		SchedulerDescriptorAction = null;
+		SchedulerValue = scheduler;
+		return Self;
+	}
+
+	public MergeDescriptor Scheduler(MergeSchedulerDescriptor descriptor)
+	{
+		SchedulerValue = null;
+		SchedulerDescriptorAction = null;
+		SchedulerDescriptor = descriptor;
+		return Self;
+	}
+
+	public MergeDescriptor Scheduler(Action<MergeSchedulerDescriptor> configure)
+	{
+		SchedulerValue = null;
+		SchedulerDescriptor = null;
+		SchedulerDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (SchedulerDescriptor is not null)
 		{
+			writer.WritePropertyName("scheduler");
+			JsonSerializer.Serialize(writer, SchedulerDescriptor, options);
+		}
+		else if (SchedulerDescriptorAction is not null)
+		{
+			writer.WritePropertyName("scheduler");
+			JsonSerializer.Serialize(writer, new MergeSchedulerDescriptor(SchedulerDescriptorAction), options);
+		}
+		else if (SchedulerValue is not null)
+		{
+			writer.WritePropertyName("scheduler");
+			JsonSerializer.Serialize(writer, SchedulerValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? SchedulerValue { get; set; }
-
-		private MergeSchedulerDescriptor SchedulerDescriptor { get; set; }
-
-		private Action<MergeSchedulerDescriptor> SchedulerDescriptorAction { get; set; }
-
-		public MergeDescriptor Scheduler(Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? scheduler)
-		{
-			SchedulerDescriptor = null;
-			SchedulerDescriptorAction = null;
-			SchedulerValue = scheduler;
-			return Self;
-		}
-
-		public MergeDescriptor Scheduler(MergeSchedulerDescriptor descriptor)
-		{
-			SchedulerValue = null;
-			SchedulerDescriptorAction = null;
-			SchedulerDescriptor = descriptor;
-			return Self;
-		}
-
-		public MergeDescriptor Scheduler(Action<MergeSchedulerDescriptor> configure)
-		{
-			SchedulerValue = null;
-			SchedulerDescriptor = null;
-			SchedulerDescriptorAction = configure;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (SchedulerDescriptor is not null)
-			{
-				writer.WritePropertyName("scheduler");
-				JsonSerializer.Serialize(writer, SchedulerDescriptor, options);
-			}
-			else if (SchedulerDescriptorAction is not null)
-			{
-				writer.WritePropertyName("scheduler");
-				JsonSerializer.Serialize(writer, new MergeSchedulerDescriptor(SchedulerDescriptorAction), options);
-			}
-			else if (SchedulerValue is not null)
-			{
-				writer.WritePropertyName("scheduler");
-				JsonSerializer.Serialize(writer, SchedulerValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

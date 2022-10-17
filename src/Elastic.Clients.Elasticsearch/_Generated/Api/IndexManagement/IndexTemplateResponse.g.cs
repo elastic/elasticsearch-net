@@ -15,17 +15,17 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class IndexTemplateResponse : ElasticsearchResponseBase
 {
-	public sealed partial class IndexTemplateResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("index_templates")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem> IndexTemplates { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("index_templates")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem> IndexTemplates { get; init; }
 }

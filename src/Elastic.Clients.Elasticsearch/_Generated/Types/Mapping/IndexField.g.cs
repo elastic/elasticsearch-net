@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,36 +24,34 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Mapping
+namespace Elastic.Clients.Elasticsearch.Mapping;
+public sealed partial class IndexField
 {
-	public sealed partial class IndexField
+	[JsonInclude]
+	[JsonPropertyName("enabled")]
+	public bool Enabled { get; set; }
+}
+
+public sealed partial class IndexFieldDescriptor : SerializableDescriptor<IndexFieldDescriptor>
+{
+	internal IndexFieldDescriptor(Action<IndexFieldDescriptor> configure) => configure.Invoke(this);
+	public IndexFieldDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("enabled")]
-		public bool Enabled { get; set; }
 	}
 
-	public sealed partial class IndexFieldDescriptor : SerializableDescriptorBase<IndexFieldDescriptor>
+	private bool EnabledValue { get; set; }
+
+	public IndexFieldDescriptor Enabled(bool enabled = true)
 	{
-		internal IndexFieldDescriptor(Action<IndexFieldDescriptor> configure) => configure.Invoke(this);
-		public IndexFieldDescriptor() : base()
-		{
-		}
+		EnabledValue = enabled;
+		return Self;
+	}
 
-		private bool EnabledValue { get; set; }
-
-		public IndexFieldDescriptor Enabled(bool enabled = true)
-		{
-			EnabledValue = enabled;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue);
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("enabled");
+		writer.WriteBooleanValue(EnabledValue);
+		writer.WriteEndObject();
 	}
 }

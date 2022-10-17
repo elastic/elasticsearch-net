@@ -15,17 +15,17 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class ScriptContextResponse : ElasticsearchResponseBase
 {
-	public sealed partial class ScriptContextResponse : ElasticsearchResponseBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("contexts")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context> Contexts { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("contexts")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context> Contexts { get; init; }
 }
