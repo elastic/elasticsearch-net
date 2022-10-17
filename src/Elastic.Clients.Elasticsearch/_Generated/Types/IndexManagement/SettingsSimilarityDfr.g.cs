@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,70 +24,68 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class SettingsSimilarityDfr
 {
-	public sealed partial class SettingsSimilarityDfr
+	[JsonInclude]
+	[JsonPropertyName("after_effect")]
+	public Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffect { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("basic_model")]
+	public Elastic.Clients.Elasticsearch.DFRBasicModel BasicModel { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("normalization")]
+	public Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "DFR";
+}
+
+public sealed partial class SettingsSimilarityDfrDescriptor : SerializableDescriptor<SettingsSimilarityDfrDescriptor>
+{
+	internal SettingsSimilarityDfrDescriptor(Action<SettingsSimilarityDfrDescriptor> configure) => configure.Invoke(this);
+	public SettingsSimilarityDfrDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("after_effect")]
-		public Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffect { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("basic_model")]
-		public Elastic.Clients.Elasticsearch.DFRBasicModel BasicModel { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("normalization")]
-		public Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "DFR";
 	}
 
-	public sealed partial class SettingsSimilarityDfrDescriptor : SerializableDescriptorBase<SettingsSimilarityDfrDescriptor>
+	private Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffectValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.DFRBasicModel BasicModelValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Normalization NormalizationValue { get; set; }
+
+	public SettingsSimilarityDfrDescriptor AfterEffect(Elastic.Clients.Elasticsearch.DFRAfterEffect afterEffect)
 	{
-		internal SettingsSimilarityDfrDescriptor(Action<SettingsSimilarityDfrDescriptor> configure) => configure.Invoke(this);
-		public SettingsSimilarityDfrDescriptor() : base()
-		{
-		}
+		AfterEffectValue = afterEffect;
+		return Self;
+	}
 
-		private Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffectValue { get; set; }
+	public SettingsSimilarityDfrDescriptor BasicModel(Elastic.Clients.Elasticsearch.DFRBasicModel basicModel)
+	{
+		BasicModelValue = basicModel;
+		return Self;
+	}
 
-		private Elastic.Clients.Elasticsearch.DFRBasicModel BasicModelValue { get; set; }
+	public SettingsSimilarityDfrDescriptor Normalization(Elastic.Clients.Elasticsearch.Normalization normalization)
+	{
+		NormalizationValue = normalization;
+		return Self;
+	}
 
-		private Elastic.Clients.Elasticsearch.Normalization NormalizationValue { get; set; }
-
-		public SettingsSimilarityDfrDescriptor AfterEffect(Elastic.Clients.Elasticsearch.DFRAfterEffect afterEffect)
-		{
-			AfterEffectValue = afterEffect;
-			return Self;
-		}
-
-		public SettingsSimilarityDfrDescriptor BasicModel(Elastic.Clients.Elasticsearch.DFRBasicModel basicModel)
-		{
-			BasicModelValue = basicModel;
-			return Self;
-		}
-
-		public SettingsSimilarityDfrDescriptor Normalization(Elastic.Clients.Elasticsearch.Normalization normalization)
-		{
-			NormalizationValue = normalization;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("after_effect");
-			JsonSerializer.Serialize(writer, AfterEffectValue, options);
-			writer.WritePropertyName("basic_model");
-			JsonSerializer.Serialize(writer, BasicModelValue, options);
-			writer.WritePropertyName("normalization");
-			JsonSerializer.Serialize(writer, NormalizationValue, options);
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("DFR");
-			writer.WriteEndObject();
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("after_effect");
+		JsonSerializer.Serialize(writer, AfterEffectValue, options);
+		writer.WritePropertyName("basic_model");
+		JsonSerializer.Serialize(writer, BasicModelValue, options);
+		writer.WritePropertyName("normalization");
+		JsonSerializer.Serialize(writer, NormalizationValue, options);
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("DFR");
+		writer.WriteEndObject();
 	}
 }

@@ -17,13 +17,13 @@ namespace Elastic.Clients.Elasticsearch
 		Action<BulkResponse>? BulkResponseCallback { get; }
 		bool ContinueAfterDroppedDocuments { get; }
 		IEnumerable<T> Documents { get; }
-		Action<BulkResponseItemBase, T>? DroppedDocumentCallback { get; }
+		Action<ResponseItem, T>? DroppedDocumentCallback { get; }
 		IndexName Index { get; }
 		int? MaxDegreeOfParallelism { get; }
 		string? Pipeline { get; }
 		Indices? RefreshIndices { get; }
 		bool RefreshOnCompleted { get; }
-		Func<BulkResponseItemBase, T, bool>? RetryDocumentPredicate { get; }
+		Func<ResponseItem, T, bool>? RetryDocumentPredicate { get; }
 		Routing? Routing { get; }
 		int? Size { get; }
 		Duration? Timeout { get; }

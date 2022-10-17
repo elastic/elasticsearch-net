@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,84 +24,82 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class MappingCharFilter : ICharFilterDefinition
 {
-	public sealed partial class MappingCharFilter : ICharFilterDefinition
+	[JsonInclude]
+	[JsonPropertyName("mappings")]
+	public IEnumerable<string>? Mappings { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("mappings_path")]
+	public string? MappingsPath { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "mapping";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class MappingCharFilterDescriptor : SerializableDescriptor<MappingCharFilterDescriptor>, IBuildableDescriptor<MappingCharFilter>
+{
+	internal MappingCharFilterDescriptor(Action<MappingCharFilterDescriptor> configure) => configure.Invoke(this);
+	public MappingCharFilterDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("mappings")]
-		public IEnumerable<string>? Mappings { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("mappings_path")]
-		public string? MappingsPath { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "mapping";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class MappingCharFilterDescriptor : SerializableDescriptorBase<MappingCharFilterDescriptor>, IBuildableDescriptor<MappingCharFilter>
+	private IEnumerable<string>? MappingsValue { get; set; }
+
+	private string? MappingsPathValue { get; set; }
+
+	private string? VersionValue { get; set; }
+
+	public MappingCharFilterDescriptor Mappings(IEnumerable<string>? mappings)
 	{
-		internal MappingCharFilterDescriptor(Action<MappingCharFilterDescriptor> configure) => configure.Invoke(this);
-		public MappingCharFilterDescriptor() : base()
-		{
-		}
-
-		private IEnumerable<string>? MappingsValue { get; set; }
-
-		private string? MappingsPathValue { get; set; }
-
-		private string? VersionValue { get; set; }
-
-		public MappingCharFilterDescriptor Mappings(IEnumerable<string>? mappings)
-		{
-			MappingsValue = mappings;
-			return Self;
-		}
-
-		public MappingCharFilterDescriptor MappingsPath(string? mappingsPath)
-		{
-			MappingsPathValue = mappingsPath;
-			return Self;
-		}
-
-		public MappingCharFilterDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (MappingsValue is not null)
-			{
-				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, MappingsValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(MappingsPathValue))
-			{
-				writer.WritePropertyName("mappings_path");
-				writer.WriteStringValue(MappingsPathValue);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("mapping");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		MappingCharFilter IBuildableDescriptor<MappingCharFilter>.Build() => new()
-		{ Mappings = MappingsValue, MappingsPath = MappingsPathValue, Version = VersionValue };
+		MappingsValue = mappings;
+		return Self;
 	}
+
+	public MappingCharFilterDescriptor MappingsPath(string? mappingsPath)
+	{
+		MappingsPathValue = mappingsPath;
+		return Self;
+	}
+
+	public MappingCharFilterDescriptor Version(string? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (MappingsValue is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, MappingsValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(MappingsPathValue))
+		{
+			writer.WritePropertyName("mappings_path");
+			writer.WriteStringValue(MappingsPathValue);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("mapping");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	MappingCharFilter IBuildableDescriptor<MappingCharFilter>.Build() => new()
+	{ Mappings = MappingsValue, MappingsPath = MappingsPathValue, Version = VersionValue };
 }

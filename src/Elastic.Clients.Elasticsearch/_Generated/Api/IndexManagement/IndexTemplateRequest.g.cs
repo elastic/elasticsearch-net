@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,64 +26,62 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed class IndexTemplateRequestParameters : RequestParameters<IndexTemplateRequestParameters>
 {
-	public sealed class IndexTemplateRequestParameters : RequestParameters<IndexTemplateRequestParameters>
+	[JsonIgnore]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	[JsonIgnore]
+	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+public sealed partial class IndexTemplateRequest : PlainRequest<IndexTemplateRequestParameters>
+{
+	public IndexTemplateRequest()
 	{
-		[JsonIgnore]
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-		[JsonIgnore]
-		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public sealed partial class IndexTemplateRequest : PlainRequestBase<IndexTemplateRequestParameters>
+	public IndexTemplateRequest(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
 	{
-		public IndexTemplateRequest()
-		{
-		}
-
-		public IndexTemplateRequest(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetIndexTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		[JsonIgnore]
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-		[JsonIgnore]
-		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public sealed partial class IndexTemplateRequestDescriptor : RequestDescriptorBase<IndexTemplateRequestDescriptor, IndexTemplateRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetIndexTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	[JsonIgnore]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	[JsonIgnore]
+	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+public sealed partial class IndexTemplateRequestDescriptor : RequestDescriptor<IndexTemplateRequestDescriptor, IndexTemplateRequestParameters>
+{
+	internal IndexTemplateRequestDescriptor(Action<IndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
+	public IndexTemplateRequestDescriptor()
 	{
-		internal IndexTemplateRequestDescriptor(Action<IndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
-		public IndexTemplateRequestDescriptor()
-		{
-		}
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetIndexTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		public IndexTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-		public IndexTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
-		public IndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public IndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
-		{
-			RouteValues.Optional("name", name);
-			return Self;
-		}
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetIndexTemplate;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override bool SupportsBody => false;
+	public IndexTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+	public IndexTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
+	public IndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public IndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+	{
+		RouteValues.Optional("name", name);
+		return Self;
+	}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

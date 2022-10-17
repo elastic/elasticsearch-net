@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,58 +24,56 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class MatchNoneQuery : Query
 {
-	public sealed partial class MatchNoneQuery : Query
-	{
-		[JsonInclude]
-		[JsonPropertyName("_name")]
-		public string? QueryName { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("boost")]
-		public float? Boost { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("boost")]
+	public float? Boost { get; set; }
+}
+
+public sealed partial class MatchNoneQueryDescriptor : SerializableDescriptor<MatchNoneQueryDescriptor>
+{
+	internal MatchNoneQueryDescriptor(Action<MatchNoneQueryDescriptor> configure) => configure.Invoke(this);
+	public MatchNoneQueryDescriptor() : base()
+	{
 	}
 
-	public sealed partial class MatchNoneQueryDescriptor : SerializableDescriptorBase<MatchNoneQueryDescriptor>
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	public MatchNoneQueryDescriptor QueryName(string? queryName)
 	{
-		internal MatchNoneQueryDescriptor(Action<MatchNoneQueryDescriptor> configure) => configure.Invoke(this);
-		public MatchNoneQueryDescriptor() : base()
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public MatchNoneQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		public MatchNoneQueryDescriptor QueryName(string? queryName)
+		if (BoostValue.HasValue)
 		{
-			QueryNameValue = queryName;
-			return Self;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		public MatchNoneQueryDescriptor Boost(float? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

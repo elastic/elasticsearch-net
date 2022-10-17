@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,586 +24,584 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Mapping
+namespace Elastic.Clients.Elasticsearch.Mapping;
+public sealed partial class TokenCountProperty : IProperty
 {
-	public sealed partial class TokenCountProperty : IProperty
+	[JsonInclude]
+	[JsonPropertyName("analyzer")]
+	public string? Analyzer { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("boost")]
+	public double? Boost { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("copy_to")]
+	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("doc_values")]
+	public bool? DocValues { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("dynamic")]
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("enable_position_increments")]
+	public bool? EnablePositionIncrements { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("fields")]
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("ignore_above")]
+	public int? IgnoreAbove { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("index")]
+	public bool? Index { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("local_metadata")]
+	public Dictionary<string, object>? LocalMetadata { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("meta")]
+	public Dictionary<string, string>? Meta { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("null_value")]
+	public double? NullValue { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("properties")]
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("similarity")]
+	public string? Similarity { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("store")]
+	public bool? Store { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "token_count";
+}
+
+public sealed partial class TokenCountPropertyDescriptor<TDocument> : SerializableDescriptor<TokenCountPropertyDescriptor<TDocument>>, IBuildableDescriptor<TokenCountProperty>
+{
+	internal TokenCountPropertyDescriptor(Action<TokenCountPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public TokenCountPropertyDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("copy_to")]
-		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("doc_values")]
-		public bool? DocValues { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("dynamic")]
-		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("enable_position_increments")]
-		public bool? EnablePositionIncrements { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ignore_above")]
-		public int? IgnoreAbove { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("local_metadata")]
-		public Dictionary<string, object>? LocalMetadata { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, string>? Meta { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("null_value")]
-		public double? NullValue { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("properties")]
-		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("similarity")]
-		public string? Similarity { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("store")]
-		public bool? Store { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "token_count";
 	}
 
-	public sealed partial class TokenCountPropertyDescriptor<TDocument> : SerializableDescriptorBase<TokenCountPropertyDescriptor<TDocument>>, IBuildableDescriptor<TokenCountProperty>
+	private string? AnalyzerValue { get; set; }
+
+	private double? BoostValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+	private bool? DocValuesValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+	private bool? EnablePositionIncrementsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+	private int? IgnoreAboveValue { get; set; }
+
+	private bool? IndexValue { get; set; }
+
+	private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+	private Dictionary<string, string>? MetaValue { get; set; }
+
+	private double? NullValueValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+	private string? SimilarityValue { get; set; }
+
+	private bool? StoreValue { get; set; }
+
+	public TokenCountPropertyDescriptor<TDocument> Analyzer(string? analyzer)
 	{
-		internal TokenCountPropertyDescriptor(Action<TokenCountPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public TokenCountPropertyDescriptor() : base()
-		{
-		}
-
-		private string? AnalyzerValue { get; set; }
-
-		private double? BoostValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
-		private bool? DocValuesValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
-		private bool? EnablePositionIncrementsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
-		private int? IgnoreAboveValue { get; set; }
-
-		private bool? IndexValue { get; set; }
-
-		private Dictionary<string, object>? LocalMetadataValue { get; set; }
-
-		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private double? NullValueValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private string? SimilarityValue { get; set; }
-
-		private bool? StoreValue { get; set; }
-
-		public TokenCountPropertyDescriptor<TDocument> Analyzer(string? analyzer)
-		{
-			AnalyzerValue = analyzer;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Boost(double? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
-		{
-			DocValuesValue = docValues;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
-		{
-			DynamicValue = dynamic;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> EnablePositionIncrements(bool? enablePositionIncrements = true)
-		{
-			EnablePositionIncrementsValue = enablePositionIncrements;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
-		{
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
-		{
-			IgnoreAboveValue = ignoreAbove;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Index(bool? index = true)
-		{
-			IndexValue = index;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> NullValue(double? nullValue)
-		{
-			NullValueValue = nullValue;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
-		{
-			PropertiesValue = properties;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
-		{
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Similarity(string? similarity)
-		{
-			SimilarityValue = similarity;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor<TDocument> Store(bool? store = true)
-		{
-			StoreValue = store;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			if (CopyToValue is not null)
-			{
-				writer.WritePropertyName("copy_to");
-				JsonSerializer.Serialize(writer, CopyToValue, options);
-			}
-
-			if (DocValuesValue.HasValue)
-			{
-				writer.WritePropertyName("doc_values");
-				writer.WriteBooleanValue(DocValuesValue.Value);
-			}
-
-			if (DynamicValue is not null)
-			{
-				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, DynamicValue, options);
-			}
-
-			if (EnablePositionIncrementsValue.HasValue)
-			{
-				writer.WritePropertyName("enable_position_increments");
-				writer.WriteBooleanValue(EnablePositionIncrementsValue.Value);
-			}
-
-			if (FieldsValue is not null)
-			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, FieldsValue, options);
-			}
-
-			if (IgnoreAboveValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_above");
-				writer.WriteNumberValue(IgnoreAboveValue.Value);
-			}
-
-			if (IndexValue.HasValue)
-			{
-				writer.WritePropertyName("index");
-				writer.WriteBooleanValue(IndexValue.Value);
-			}
-
-			if (LocalMetadataValue is not null)
-			{
-				writer.WritePropertyName("local_metadata");
-				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (NullValueValue.HasValue)
-			{
-				writer.WritePropertyName("null_value");
-				writer.WriteNumberValue(NullValueValue.Value);
-			}
-
-			if (PropertiesValue is not null)
-			{
-				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, PropertiesValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(SimilarityValue))
-			{
-				writer.WritePropertyName("similarity");
-				writer.WriteStringValue(SimilarityValue);
-			}
-
-			if (StoreValue.HasValue)
-			{
-				writer.WritePropertyName("store");
-				writer.WriteBooleanValue(StoreValue.Value);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("token_count");
-			writer.WriteEndObject();
-		}
-
-		TokenCountProperty IBuildableDescriptor<TokenCountProperty>.Build() => new()
-		{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		AnalyzerValue = analyzer;
+		return Self;
 	}
 
-	public sealed partial class TokenCountPropertyDescriptor : SerializableDescriptorBase<TokenCountPropertyDescriptor>, IBuildableDescriptor<TokenCountProperty>
+	public TokenCountPropertyDescriptor<TDocument> Boost(double? boost)
 	{
-		internal TokenCountPropertyDescriptor(Action<TokenCountPropertyDescriptor> configure) => configure.Invoke(this);
-		public TokenCountPropertyDescriptor() : base()
-		{
-		}
-
-		private string? AnalyzerValue { get; set; }
-
-		private double? BoostValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
-		private bool? DocValuesValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
-		private bool? EnablePositionIncrementsValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
-		private int? IgnoreAboveValue { get; set; }
-
-		private bool? IndexValue { get; set; }
-
-		private Dictionary<string, object>? LocalMetadataValue { get; set; }
-
-		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private double? NullValueValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		private string? SimilarityValue { get; set; }
-
-		private bool? StoreValue { get; set; }
-
-		public TokenCountPropertyDescriptor Analyzer(string? analyzer)
-		{
-			AnalyzerValue = analyzer;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Boost(double? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
-		{
-			CopyToValue = copyTo;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor DocValues(bool? docValues = true)
-		{
-			DocValuesValue = docValues;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
-		{
-			DynamicValue = dynamic;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor EnablePositionIncrements(bool? enablePositionIncrements = true)
-		{
-			EnablePositionIncrementsValue = enablePositionIncrements;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
-		{
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor IgnoreAbove(int? ignoreAbove)
-		{
-			IgnoreAboveValue = ignoreAbove;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Index(bool? index = true)
-		{
-			IndexValue = index;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor NullValue(double? nullValue)
-		{
-			NullValueValue = nullValue;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
-		{
-			PropertiesValue = properties;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
-		{
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Similarity(string? similarity)
-		{
-			SimilarityValue = similarity;
-			return Self;
-		}
-
-		public TokenCountPropertyDescriptor Store(bool? store = true)
-		{
-			StoreValue = store;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			if (CopyToValue is not null)
-			{
-				writer.WritePropertyName("copy_to");
-				JsonSerializer.Serialize(writer, CopyToValue, options);
-			}
-
-			if (DocValuesValue.HasValue)
-			{
-				writer.WritePropertyName("doc_values");
-				writer.WriteBooleanValue(DocValuesValue.Value);
-			}
-
-			if (DynamicValue is not null)
-			{
-				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, DynamicValue, options);
-			}
-
-			if (EnablePositionIncrementsValue.HasValue)
-			{
-				writer.WritePropertyName("enable_position_increments");
-				writer.WriteBooleanValue(EnablePositionIncrementsValue.Value);
-			}
-
-			if (FieldsValue is not null)
-			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, FieldsValue, options);
-			}
-
-			if (IgnoreAboveValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_above");
-				writer.WriteNumberValue(IgnoreAboveValue.Value);
-			}
-
-			if (IndexValue.HasValue)
-			{
-				writer.WritePropertyName("index");
-				writer.WriteBooleanValue(IndexValue.Value);
-			}
-
-			if (LocalMetadataValue is not null)
-			{
-				writer.WritePropertyName("local_metadata");
-				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (NullValueValue.HasValue)
-			{
-				writer.WritePropertyName("null_value");
-				writer.WriteNumberValue(NullValueValue.Value);
-			}
-
-			if (PropertiesValue is not null)
-			{
-				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, PropertiesValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(SimilarityValue))
-			{
-				writer.WritePropertyName("similarity");
-				writer.WriteStringValue(SimilarityValue);
-			}
-
-			if (StoreValue.HasValue)
-			{
-				writer.WritePropertyName("store");
-				writer.WriteBooleanValue(StoreValue.Value);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("token_count");
-			writer.WriteEndObject();
-		}
-
-		TokenCountProperty IBuildableDescriptor<TokenCountProperty>.Build() => new()
-		{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+		BoostValue = boost;
+		return Self;
 	}
+
+	public TokenCountPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	{
+		CopyToValue = copyTo;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+	{
+		DocValuesValue = docValues;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	{
+		DynamicValue = dynamic;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> EnablePositionIncrements(bool? enablePositionIncrements = true)
+	{
+		EnablePositionIncrementsValue = enablePositionIncrements;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	{
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	{
+		IgnoreAboveValue = ignoreAbove;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> Index(bool? index = true)
+	{
+		IndexValue = index;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> NullValue(double? nullValue)
+	{
+		NullValueValue = nullValue;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	{
+		PropertiesValue = properties;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	{
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> Similarity(string? similarity)
+	{
+		SimilarityValue = similarity;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor<TDocument> Store(bool? store = true)
+	{
+		StoreValue = store;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
+		{
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
+		}
+
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (CopyToValue is not null)
+		{
+			writer.WritePropertyName("copy_to");
+			JsonSerializer.Serialize(writer, CopyToValue, options);
+		}
+
+		if (DocValuesValue.HasValue)
+		{
+			writer.WritePropertyName("doc_values");
+			writer.WriteBooleanValue(DocValuesValue.Value);
+		}
+
+		if (DynamicValue is not null)
+		{
+			writer.WritePropertyName("dynamic");
+			JsonSerializer.Serialize(writer, DynamicValue, options);
+		}
+
+		if (EnablePositionIncrementsValue.HasValue)
+		{
+			writer.WritePropertyName("enable_position_increments");
+			writer.WriteBooleanValue(EnablePositionIncrementsValue.Value);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (IgnoreAboveValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_above");
+			writer.WriteNumberValue(IgnoreAboveValue.Value);
+		}
+
+		if (IndexValue.HasValue)
+		{
+			writer.WritePropertyName("index");
+			writer.WriteBooleanValue(IndexValue.Value);
+		}
+
+		if (LocalMetadataValue is not null)
+		{
+			writer.WritePropertyName("local_metadata");
+			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (NullValueValue.HasValue)
+		{
+			writer.WritePropertyName("null_value");
+			writer.WriteNumberValue(NullValueValue.Value);
+		}
+
+		if (PropertiesValue is not null)
+		{
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(SimilarityValue))
+		{
+			writer.WritePropertyName("similarity");
+			writer.WriteStringValue(SimilarityValue);
+		}
+
+		if (StoreValue.HasValue)
+		{
+			writer.WritePropertyName("store");
+			writer.WriteBooleanValue(StoreValue.Value);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("token_count");
+		writer.WriteEndObject();
+	}
+
+	TokenCountProperty IBuildableDescriptor<TokenCountProperty>.Build() => new()
+	{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+}
+
+public sealed partial class TokenCountPropertyDescriptor : SerializableDescriptor<TokenCountPropertyDescriptor>, IBuildableDescriptor<TokenCountProperty>
+{
+	internal TokenCountPropertyDescriptor(Action<TokenCountPropertyDescriptor> configure) => configure.Invoke(this);
+	public TokenCountPropertyDescriptor() : base()
+	{
+	}
+
+	private string? AnalyzerValue { get; set; }
+
+	private double? BoostValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
+
+	private bool? DocValuesValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+	private bool? EnablePositionIncrementsValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+	private int? IgnoreAboveValue { get; set; }
+
+	private bool? IndexValue { get; set; }
+
+	private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+	private Dictionary<string, string>? MetaValue { get; set; }
+
+	private double? NullValueValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+	private string? SimilarityValue { get; set; }
+
+	private bool? StoreValue { get; set; }
+
+	public TokenCountPropertyDescriptor Analyzer(string? analyzer)
+	{
+		AnalyzerValue = analyzer;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Boost(double? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	{
+		CopyToValue = copyTo;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor DocValues(bool? docValues = true)
+	{
+		DocValuesValue = docValues;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	{
+		DynamicValue = dynamic;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor EnablePositionIncrements(bool? enablePositionIncrements = true)
+	{
+		EnablePositionIncrementsValue = enablePositionIncrements;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	{
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	{
+		IgnoreAboveValue = ignoreAbove;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Index(bool? index = true)
+	{
+		IndexValue = index;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor NullValue(double? nullValue)
+	{
+		NullValueValue = nullValue;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	{
+		PropertiesValue = properties;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	{
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Similarity(string? similarity)
+	{
+		SimilarityValue = similarity;
+		return Self;
+	}
+
+	public TokenCountPropertyDescriptor Store(bool? store = true)
+	{
+		StoreValue = store;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
+		{
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
+		}
+
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (CopyToValue is not null)
+		{
+			writer.WritePropertyName("copy_to");
+			JsonSerializer.Serialize(writer, CopyToValue, options);
+		}
+
+		if (DocValuesValue.HasValue)
+		{
+			writer.WritePropertyName("doc_values");
+			writer.WriteBooleanValue(DocValuesValue.Value);
+		}
+
+		if (DynamicValue is not null)
+		{
+			writer.WritePropertyName("dynamic");
+			JsonSerializer.Serialize(writer, DynamicValue, options);
+		}
+
+		if (EnablePositionIncrementsValue.HasValue)
+		{
+			writer.WritePropertyName("enable_position_increments");
+			writer.WriteBooleanValue(EnablePositionIncrementsValue.Value);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (IgnoreAboveValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_above");
+			writer.WriteNumberValue(IgnoreAboveValue.Value);
+		}
+
+		if (IndexValue.HasValue)
+		{
+			writer.WritePropertyName("index");
+			writer.WriteBooleanValue(IndexValue.Value);
+		}
+
+		if (LocalMetadataValue is not null)
+		{
+			writer.WritePropertyName("local_metadata");
+			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (NullValueValue.HasValue)
+		{
+			writer.WritePropertyName("null_value");
+			writer.WriteNumberValue(NullValueValue.Value);
+		}
+
+		if (PropertiesValue is not null)
+		{
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(SimilarityValue))
+		{
+			writer.WritePropertyName("similarity");
+			writer.WriteStringValue(SimilarityValue);
+		}
+
+		if (StoreValue.HasValue)
+		{
+			writer.WritePropertyName("store");
+			writer.WriteBooleanValue(StoreValue.Value);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("token_count");
+		writer.WriteEndObject();
+	}
+
+	TokenCountProperty IBuildableDescriptor<TokenCountProperty>.Build() => new()
+	{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }

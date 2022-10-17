@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Serialization;
 
 /// <summary>
 /// The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.

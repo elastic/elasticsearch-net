@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,196 +24,194 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class ConstantScoreQuery : Query
 {
-	public sealed partial class ConstantScoreQuery : Query
+	[JsonInclude]
+	[JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("boost")]
+	public float? Boost { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("filter")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Filter { get; set; }
+}
+
+public sealed partial class ConstantScoreQueryDescriptor<TDocument> : SerializableDescriptor<ConstantScoreQueryDescriptor<TDocument>>
+{
+	internal ConstantScoreQueryDescriptor(Action<ConstantScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public ConstantScoreQueryDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("_name")]
-		public string? QueryName { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("boost")]
-		public float? Boost { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Filter { get; set; }
 	}
 
-	public sealed partial class ConstantScoreQueryDescriptor<TDocument> : SerializableDescriptorBase<ConstantScoreQueryDescriptor<TDocument>>
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer FilterValue { get; set; }
+
+	private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+
+	private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	public ConstantScoreQueryDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer filter)
 	{
-		internal ConstantScoreQueryDescriptor(Action<ConstantScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public ConstantScoreQueryDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer FilterValue { get; set; }
-
-		private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
-
-		private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		public ConstantScoreQueryDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer filter)
-		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
-		}
-
-		public ConstantScoreQueryDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
-		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
-		}
-
-		public ConstantScoreQueryDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
-		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
-		}
-
-		public ConstantScoreQueryDescriptor<TDocument> QueryName(string? queryName)
-		{
-			QueryNameValue = queryName;
-			return Self;
-		}
-
-		public ConstantScoreQueryDescriptor<TDocument> Boost(float? boost)
-		{
-			BoostValue = boost;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
 	}
 
-	public sealed partial class ConstantScoreQueryDescriptor : SerializableDescriptorBase<ConstantScoreQueryDescriptor>
+	public ConstantScoreQueryDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
 	{
-		internal ConstantScoreQueryDescriptor(Action<ConstantScoreQueryDescriptor> configure) => configure.Invoke(this);
-		public ConstantScoreQueryDescriptor() : base()
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public ConstantScoreQueryDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public ConstantScoreQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public ConstantScoreQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FilterDescriptor is not null)
 		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer FilterValue { get; set; }
-
-		private QueryContainerDescriptor FilterDescriptor { get; set; }
-
-		private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
-
-		private string? QueryNameValue { get; set; }
-
-		private float? BoostValue { get; set; }
-
-		public ConstantScoreQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer filter)
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		public ConstantScoreQueryDescriptor Filter(QueryContainerDescriptor descriptor)
+		if (BoostValue.HasValue)
 		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		public ConstantScoreQueryDescriptor Filter(Action<QueryContainerDescriptor> configure)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class ConstantScoreQueryDescriptor : SerializableDescriptor<ConstantScoreQueryDescriptor>
+{
+	internal ConstantScoreQueryDescriptor(Action<ConstantScoreQueryDescriptor> configure) => configure.Invoke(this);
+	public ConstantScoreQueryDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer FilterValue { get; set; }
+
+	private QueryContainerDescriptor FilterDescriptor { get; set; }
+
+	private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+
+	private string? QueryNameValue { get; set; }
+
+	private float? BoostValue { get; set; }
+
+	public ConstantScoreQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public ConstantScoreQueryDescriptor Filter(QueryContainerDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public ConstantScoreQueryDescriptor Filter(Action<QueryContainerDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public ConstantScoreQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public ConstantScoreQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FilterDescriptor is not null)
 		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		public ConstantScoreQueryDescriptor QueryName(string? queryName)
+		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
-			QueryNameValue = queryName;
-			return Self;
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
-		public ConstantScoreQueryDescriptor Boost(float? boost)
+		if (BoostValue.HasValue)
 		{
-			BoostValue = boost;
-			return Self;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

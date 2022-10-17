@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,344 +24,342 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+internal sealed class ValueCountAggregationConverter : JsonConverter<ValueCountAggregation>
 {
-	internal sealed class ValueCountAggregationConverter : JsonConverter<ValueCountAggregation>
+	public override ValueCountAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override ValueCountAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var aggName = reader.GetString();
+		if (aggName != "value_count")
+			throw new JsonException("Unexpected JSON detected.");
+		var agg = new ValueCountAggregation(aggName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException("Unexpected JSON detected.");
-			reader.Read();
-			var aggName = reader.GetString();
-			if (aggName != "value_count")
-				throw new JsonException("Unexpected JSON detected.");
-			var agg = new ValueCountAggregation(aggName);
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("field"))
 				{
-					if (reader.ValueTextEquals("field"))
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+					if (value is not null)
 					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
-
-						continue;
+						agg.Field = value;
 					}
 
-					if (reader.ValueTextEquals("format"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("format"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Format = value;
 					}
 
-					if (reader.ValueTextEquals("missing"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("missing"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Missing = value;
 					}
 
-					if (reader.ValueTextEquals("script"))
-					{
-						reader.Read();
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Script = value;
-						}
+					continue;
+				}
 
-						continue;
+				if (reader.ValueTextEquals("script"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Script = value;
 					}
+
+					continue;
 				}
 			}
+		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				if (reader.TokenType == JsonTokenType.PropertyName)
+				if (reader.ValueTextEquals("meta"))
 				{
-					if (reader.ValueTextEquals("meta"))
+					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+					if (value is not null)
 					{
-						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Meta = value;
-						}
-
-						continue;
+						agg.Meta = value;
 					}
+
+					continue;
 				}
 			}
-
-			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, ValueCountAggregation value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("value_count");
-			writer.WriteStartObject();
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Format))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
-			}
-
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
-			}
-
-			if (value.Script is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, value.Script, options);
-			}
-
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		return agg;
 	}
 
-	[JsonConverter(typeof(ValueCountAggregationConverter))]
-	public sealed partial class ValueCountAggregation : Aggregation
+	public override void Write(Utf8JsonWriter writer, ValueCountAggregation value, JsonSerializerOptions options)
 	{
-		public ValueCountAggregation(string name, Field field) : this(name) => Field = field;
-		public ValueCountAggregation(string name) => Name = name;
-		internal ValueCountAggregation()
+		writer.WriteStartObject();
+		writer.WritePropertyName("value_count");
+		writer.WriteStartObject();
+		if (value.Field is not null)
 		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value.Field, options);
 		}
 
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		if (!string.IsNullOrEmpty(value.Format))
+		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(value.Format);
+		}
 
-		public string? Format { get; set; }
+		if (value.Missing is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, value.Missing, options);
+		}
 
-		public Dictionary<string, object>? Meta { get; set; }
+		if (value.Script is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, value.Script, options);
+		}
 
-		public FieldValue? Missing { get; set; }
+		writer.WriteEndObject();
+		if (value.Meta is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
+		}
 
-		public override string? Name { get; internal set; }
+		writer.WriteEndObject();
+	}
+}
 
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+[JsonConverter(typeof(ValueCountAggregationConverter))]
+public sealed partial class ValueCountAggregation : Aggregation
+{
+	public ValueCountAggregation(string name, Field field) : this(name) => Field = field;
+	public ValueCountAggregation(string name) => Name = name;
+	internal ValueCountAggregation()
+	{
 	}
 
-	public sealed partial class ValueCountAggregationDescriptor<TDocument> : SerializableDescriptorBase<ValueCountAggregationDescriptor<TDocument>>
+	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	public string? Format { get; set; }
+
+	public Dictionary<string, object>? Meta { get; set; }
+
+	public FieldValue? Missing { get; set; }
+
+	public override string? Name { get; internal set; }
+
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+}
+
+public sealed partial class ValueCountAggregationDescriptor<TDocument> : SerializableDescriptor<ValueCountAggregationDescriptor<TDocument>>
+{
+	internal ValueCountAggregationDescriptor(Action<ValueCountAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public ValueCountAggregationDescriptor() : base()
 	{
-		internal ValueCountAggregationDescriptor(Action<ValueCountAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public ValueCountAggregationDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private string? FormatValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private FieldValue? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		public ValueCountAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public ValueCountAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public ValueCountAggregationDescriptor<TDocument> Format(string? format)
-		{
-			FormatValue = format;
-			return Self;
-		}
-
-		public ValueCountAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public ValueCountAggregationDescriptor<TDocument> Missing(FieldValue? missing)
-		{
-			MissingValue = missing;
-			return Self;
-		}
-
-		public ValueCountAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-		{
-			ScriptValue = script;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("value_count");
-			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
-	public sealed partial class ValueCountAggregationDescriptor : SerializableDescriptorBase<ValueCountAggregationDescriptor>
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	public ValueCountAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
-		internal ValueCountAggregationDescriptor(Action<ValueCountAggregationDescriptor> configure) => configure.Invoke(this);
-		public ValueCountAggregationDescriptor() : base()
+		FieldValue = field;
+		return Self;
+	}
+
+	public ValueCountAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public ValueCountAggregationDescriptor<TDocument> Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public ValueCountAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public ValueCountAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public ValueCountAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("value_count");
+		writer.WriteStartObject();
+		if (FieldValue is not null)
 		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private string? FormatValue { get; set; }
-
-		private Dictionary<string, object>? MetaValue { get; set; }
-
-		private FieldValue? MissingValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-		public ValueCountAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
 		}
 
-		public ValueCountAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		if (MissingValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
 		}
 
-		public ValueCountAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		if (ScriptValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		public ValueCountAggregationDescriptor Format(string? format)
+		writer.WriteEndObject();
+		if (MetaValue is not null)
 		{
-			FormatValue = format;
-			return Self;
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		public ValueCountAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class ValueCountAggregationDescriptor : SerializableDescriptor<ValueCountAggregationDescriptor>
+{
+	internal ValueCountAggregationDescriptor(Action<ValueCountAggregationDescriptor> configure) => configure.Invoke(this);
+	public ValueCountAggregationDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private Dictionary<string, object>? MetaValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	public ValueCountAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public ValueCountAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public ValueCountAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public ValueCountAggregationDescriptor Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public ValueCountAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public ValueCountAggregationDescriptor Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public ValueCountAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("value_count");
+		writer.WriteStartObject();
+		if (FieldValue is not null)
 		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		public ValueCountAggregationDescriptor Missing(FieldValue? missing)
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
-			MissingValue = missing;
-			return Self;
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
 		}
 
-		public ValueCountAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+		if (MissingValue is not null)
 		{
-			ScriptValue = script;
-			return Self;
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
 		}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		if (ScriptValue is not null)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("value_count");
-			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
-			}
-
-			if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			writer.WriteEndObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			writer.WriteEndObject();
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
+
+		writer.WriteEndObject();
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

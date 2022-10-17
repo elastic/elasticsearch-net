@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,66 +24,64 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+[JsonConverter(typeof(CompositeBucketConverter))]
+public sealed partial class CompositeBucket : AggregateDictionary
 {
-	[JsonConverter(typeof(CompositeBucketConverter))]
-	public sealed partial class CompositeBucket : AggregateDictionary
+	public CompositeBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
 	{
-		public CompositeBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
-		{
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long DocCount { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("key")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue> Key { get; init; }
 	}
 
-	internal sealed class CompositeBucketConverter : JsonConverter<CompositeBucket>
+	[JsonInclude]
+	[JsonPropertyName("doc_count")]
+	public long DocCount { get; init; }
+
+	[JsonInclude]
+	[JsonPropertyName("key")]
+	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue> Key { get; init; }
+}
+
+internal sealed class CompositeBucketConverter : JsonConverter<CompositeBucket>
+{
+	public override CompositeBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override CompositeBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
+		var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
+		long docCount = default;
+		Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue> key = default;
+		while (reader.Read())
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-			var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
-			long docCount = default;
-			Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue> key = default;
-			while (reader.Read())
+			if (reader.TokenType == JsonTokenType.EndObject)
+				break;
+			if (reader.TokenType != JsonTokenType.PropertyName)
+				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
+			var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+			reader.Read();
+			if (name.Equals("doc_count", StringComparison.Ordinal))
 			{
-				if (reader.TokenType == JsonTokenType.EndObject)
-					break;
-				if (reader.TokenType != JsonTokenType.PropertyName)
-					throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-				var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
-				reader.Read();
-				if (name.Equals("doc_count", StringComparison.Ordinal))
-				{
-					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
-
-				if (name.Equals("key", StringComparison.Ordinal))
-				{
-					key = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>>(ref reader, options);
-					continue;
-				}
-
-				if (name.Contains("#"))
-				{
-					AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
-					continue;
-				}
-
-				throw new JsonException("Unknown property read from JSON.");
+				docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+				continue;
 			}
 
-			return new CompositeBucket(subAggs)
-			{ DocCount = docCount, Key = key };
+			if (name.Equals("key", StringComparison.Ordinal))
+			{
+				key = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>>(ref reader, options);
+				continue;
+			}
+
+			if (name.Contains("#"))
+			{
+				AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
+				continue;
+			}
+
+			throw new JsonException("Unknown property read from JSON.");
 		}
 
-		public override void Write(Utf8JsonWriter writer, CompositeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
+		return new CompositeBucket(subAggs)
+		{ DocCount = docCount, Key = key };
 	}
+
+	public override void Write(Utf8JsonWriter writer, CompositeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
 }

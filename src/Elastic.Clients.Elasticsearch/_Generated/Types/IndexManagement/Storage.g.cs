@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,54 +24,52 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class Storage
 {
-	public sealed partial class Storage
-	{
-		[JsonInclude]
-		[JsonPropertyName("allow_mmap")]
-		public bool? AllowMmap { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("allow_mmap")]
+	public bool? AllowMmap { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.StorageType Type { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.StorageType Type { get; set; }
+}
+
+public sealed partial class StorageDescriptor : SerializableDescriptor<StorageDescriptor>
+{
+	internal StorageDescriptor(Action<StorageDescriptor> configure) => configure.Invoke(this);
+	public StorageDescriptor() : base()
+	{
 	}
 
-	public sealed partial class StorageDescriptor : SerializableDescriptorBase<StorageDescriptor>
+	private bool? AllowMmapValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.IndexManagement.StorageType TypeValue { get; set; }
+
+	public StorageDescriptor AllowMmap(bool? allowMmap = true)
 	{
-		internal StorageDescriptor(Action<StorageDescriptor> configure) => configure.Invoke(this);
-		public StorageDescriptor() : base()
+		AllowMmapValue = allowMmap;
+		return Self;
+	}
+
+	public StorageDescriptor Type(Elastic.Clients.Elasticsearch.IndexManagement.StorageType type)
+	{
+		TypeValue = type;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AllowMmapValue.HasValue)
 		{
+			writer.WritePropertyName("allow_mmap");
+			writer.WriteBooleanValue(AllowMmapValue.Value);
 		}
 
-		private bool? AllowMmapValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.IndexManagement.StorageType TypeValue { get; set; }
-
-		public StorageDescriptor AllowMmap(bool? allowMmap = true)
-		{
-			AllowMmapValue = allowMmap;
-			return Self;
-		}
-
-		public StorageDescriptor Type(Elastic.Clients.Elasticsearch.IndexManagement.StorageType type)
-		{
-			TypeValue = type;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (AllowMmapValue.HasValue)
-			{
-				writer.WritePropertyName("allow_mmap");
-				writer.WriteBooleanValue(AllowMmapValue.Value);
-			}
-
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-			writer.WriteEndObject();
-		}
+		writer.WritePropertyName("type");
+		JsonSerializer.Serialize(writer, TypeValue, options);
+		writer.WriteEndObject();
 	}
 }

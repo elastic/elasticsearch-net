@@ -16,5 +16,5 @@ public sealed class BulkAllResponse
 	public int Retries { get; internal set; }
 
 	/// <summary>The items returned from the bulk response</summary>
-	public IReadOnlyCollection<BulkResponseItemBase> Items { get; internal set; } = EmptyReadOnly<BulkResponseItemBase>.Collection;
+	public IReadOnlyCollection<ResponseItem> Items { get; internal set; } = EmptyReadOnly<ResponseItem>.Collection;
 }

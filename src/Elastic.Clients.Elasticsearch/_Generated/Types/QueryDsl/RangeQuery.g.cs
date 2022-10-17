@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public partial class RangeQuery : Union<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery, Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery>
 {
-	public partial class RangeQuery : Union<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery, Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery>
+	public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery dateRangeQuery) : base(dateRangeQuery)
 	{
-		public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery dateRangeQuery) : base(dateRangeQuery)
-		{
-		}
+	}
 
-		public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery numberRangeQuery) : base(numberRangeQuery)
-		{
-		}
+	public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery numberRangeQuery) : base(numberRangeQuery)
+	{
 	}
 }

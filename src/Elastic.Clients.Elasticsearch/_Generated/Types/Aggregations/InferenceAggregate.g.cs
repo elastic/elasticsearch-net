@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,32 +24,30 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public sealed partial class InferenceAggregate : IAggregate
 {
-	public sealed partial class InferenceAggregate : IAggregate
-	{
-		[JsonInclude]
-		[JsonPropertyName("data")]
-		public Dictionary<string, object> Data { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("data")]
+	public Dictionary<string, object> Data { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("feature_importance")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>? FeatureImportance { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("feature_importance")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>? FeatureImportance { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, object>? Meta { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("meta")]
+	public Dictionary<string, object>? Meta { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("top_classes")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry>? TopClasses { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("top_classes")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry>? TopClasses { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("value")]
-		public Elastic.Clients.Elasticsearch.FieldValue? Value { get; init; }
+	[JsonInclude]
+	[JsonPropertyName("value")]
+	public Elastic.Clients.Elasticsearch.FieldValue? Value { get; init; }
 
-		[JsonInclude]
-		[JsonPropertyName("warning")]
-		public string? Warning { get; init; }
-	}
+	[JsonInclude]
+	[JsonPropertyName("warning")]
+	public string? Warning { get; init; }
 }

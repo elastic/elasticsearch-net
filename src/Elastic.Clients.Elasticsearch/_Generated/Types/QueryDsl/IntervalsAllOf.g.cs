@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,350 +24,348 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class IntervalsAllOf
 {
-	public sealed partial class IntervalsAllOf
+	[JsonInclude]
+	[JsonPropertyName("filter")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("intervals")]
+	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> Intervals { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("max_gaps")]
+	public int? MaxGaps { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("ordered")]
+	public bool? Ordered { get; set; }
+}
+
+public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDescriptor<IntervalsAllOfDescriptor<TDocument>>
+{
+	internal IntervalsAllOfDescriptor(Action<IntervalsAllOfDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public IntervalsAllOfDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("intervals")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> Intervals { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_gaps")]
-		public int? MaxGaps { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ordered")]
-		public bool? Ordered { get; set; }
 	}
 
-	public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDescriptorBase<IntervalsAllOfDescriptor<TDocument>>
+	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
+
+	private IntervalsContainerDescriptor<TDocument> IntervalsDescriptor { get; set; }
+
+	private Action<IntervalsContainerDescriptor<TDocument>> IntervalsDescriptorAction { get; set; }
+
+	private Action<IntervalsContainerDescriptor<TDocument>>[] IntervalsDescriptorActions { get; set; }
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
+
+	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
+
+	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
+
+	private int? MaxGapsValue { get; set; }
+
+	private bool? OrderedValue { get; set; }
+
+	public IntervalsAllOfDescriptor<TDocument> Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
 	{
-		internal IntervalsAllOfDescriptor(Action<IntervalsAllOfDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public IntervalsAllOfDescriptor() : base()
-		{
-		}
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
-
-		private IntervalsContainerDescriptor<TDocument> IntervalsDescriptor { get; set; }
-
-		private Action<IntervalsContainerDescriptor<TDocument>> IntervalsDescriptorAction { get; set; }
-
-		private Action<IntervalsContainerDescriptor<TDocument>>[] IntervalsDescriptorActions { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-
-		private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-
-		private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
-
-		private int? MaxGapsValue { get; set; }
-
-		private bool? OrderedValue { get; set; }
-
-		public IntervalsAllOfDescriptor<TDocument> Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
-		{
-			IntervalsDescriptor = null;
-			IntervalsDescriptorAction = null;
-			IntervalsDescriptorActions = null;
-			IntervalsValue = intervals;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor<TDocument> Intervals(IntervalsContainerDescriptor<TDocument> descriptor)
-		{
-			IntervalsValue = null;
-			IntervalsDescriptorAction = null;
-			IntervalsDescriptorActions = null;
-			IntervalsDescriptor = descriptor;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor<TDocument> Intervals(Action<IntervalsContainerDescriptor<TDocument>> configure)
-		{
-			IntervalsValue = null;
-			IntervalsDescriptor = null;
-			IntervalsDescriptorActions = null;
-			IntervalsDescriptorAction = configure;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor<TDocument> Intervals(params Action<IntervalsContainerDescriptor<TDocument>>[] configure)
-		{
-			IntervalsValue = null;
-			IntervalsDescriptor = null;
-			IntervalsDescriptorAction = null;
-			IntervalsDescriptorActions = configure;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
-		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor<TDocument> Filter(IntervalsFilterDescriptor descriptor)
-		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor<TDocument> Filter(Action<IntervalsFilterDescriptor> configure)
-		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor<TDocument> MaxGaps(int? maxGaps)
-		{
-			MaxGapsValue = maxGaps;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor<TDocument> Ordered(bool? ordered = true)
-		{
-			OrderedValue = ordered;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (IntervalsDescriptor is not null)
-			{
-				writer.WritePropertyName("intervals");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, IntervalsDescriptor, options);
-				writer.WriteEndArray();
-			}
-			else if (IntervalsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("intervals");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor<TDocument>(IntervalsDescriptorAction), options);
-				writer.WriteEndArray();
-			}
-			else if (IntervalsDescriptorActions is not null)
-			{
-				writer.WritePropertyName("intervals");
-				writer.WriteStartArray();
-				foreach (var action in IntervalsDescriptorActions)
-				{
-					JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor<TDocument>(action), options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else
-			{
-				writer.WritePropertyName("intervals");
-				JsonSerializer.Serialize(writer, IntervalsValue, options);
-			}
-
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			if (MaxGapsValue.HasValue)
-			{
-				writer.WritePropertyName("max_gaps");
-				writer.WriteNumberValue(MaxGapsValue.Value);
-			}
-
-			if (OrderedValue.HasValue)
-			{
-				writer.WritePropertyName("ordered");
-				writer.WriteBooleanValue(OrderedValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		IntervalsDescriptor = null;
+		IntervalsDescriptorAction = null;
+		IntervalsDescriptorActions = null;
+		IntervalsValue = intervals;
+		return Self;
 	}
 
-	public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptorBase<IntervalsAllOfDescriptor>
+	public IntervalsAllOfDescriptor<TDocument> Intervals(IntervalsContainerDescriptor<TDocument> descriptor)
 	{
-		internal IntervalsAllOfDescriptor(Action<IntervalsAllOfDescriptor> configure) => configure.Invoke(this);
-		public IntervalsAllOfDescriptor() : base()
+		IntervalsValue = null;
+		IntervalsDescriptorAction = null;
+		IntervalsDescriptorActions = null;
+		IntervalsDescriptor = descriptor;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor<TDocument> Intervals(Action<IntervalsContainerDescriptor<TDocument>> configure)
+	{
+		IntervalsValue = null;
+		IntervalsDescriptor = null;
+		IntervalsDescriptorActions = null;
+		IntervalsDescriptorAction = configure;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor<TDocument> Intervals(params Action<IntervalsContainerDescriptor<TDocument>>[] configure)
+	{
+		IntervalsValue = null;
+		IntervalsDescriptor = null;
+		IntervalsDescriptorAction = null;
+		IntervalsDescriptorActions = configure;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor<TDocument> Filter(IntervalsFilterDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor<TDocument> Filter(Action<IntervalsFilterDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor<TDocument> MaxGaps(int? maxGaps)
+	{
+		MaxGapsValue = maxGaps;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor<TDocument> Ordered(bool? ordered = true)
+	{
+		OrderedValue = ordered;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (IntervalsDescriptor is not null)
 		{
+			writer.WritePropertyName("intervals");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, IntervalsDescriptor, options);
+			writer.WriteEndArray();
 		}
-
-		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
-
-		private IntervalsContainerDescriptor IntervalsDescriptor { get; set; }
-
-		private Action<IntervalsContainerDescriptor> IntervalsDescriptorAction { get; set; }
-
-		private Action<IntervalsContainerDescriptor>[] IntervalsDescriptorActions { get; set; }
-
-		private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-
-		private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-
-		private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
-
-		private int? MaxGapsValue { get; set; }
-
-		private bool? OrderedValue { get; set; }
-
-		public IntervalsAllOfDescriptor Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
+		else if (IntervalsDescriptorAction is not null)
 		{
-			IntervalsDescriptor = null;
-			IntervalsDescriptorAction = null;
-			IntervalsDescriptorActions = null;
-			IntervalsValue = intervals;
-			return Self;
+			writer.WritePropertyName("intervals");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor<TDocument>(IntervalsDescriptorAction), options);
+			writer.WriteEndArray();
 		}
-
-		public IntervalsAllOfDescriptor Intervals(IntervalsContainerDescriptor descriptor)
+		else if (IntervalsDescriptorActions is not null)
 		{
-			IntervalsValue = null;
-			IntervalsDescriptorAction = null;
-			IntervalsDescriptorActions = null;
-			IntervalsDescriptor = descriptor;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor Intervals(Action<IntervalsContainerDescriptor> configure)
-		{
-			IntervalsValue = null;
-			IntervalsDescriptor = null;
-			IntervalsDescriptorActions = null;
-			IntervalsDescriptorAction = configure;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor Intervals(params Action<IntervalsContainerDescriptor>[] configure)
-		{
-			IntervalsValue = null;
-			IntervalsDescriptor = null;
-			IntervalsDescriptorAction = null;
-			IntervalsDescriptorActions = configure;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
-		{
-			FilterDescriptor = null;
-			FilterDescriptorAction = null;
-			FilterValue = filter;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor Filter(IntervalsFilterDescriptor descriptor)
-		{
-			FilterValue = null;
-			FilterDescriptorAction = null;
-			FilterDescriptor = descriptor;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor Filter(Action<IntervalsFilterDescriptor> configure)
-		{
-			FilterValue = null;
-			FilterDescriptor = null;
-			FilterDescriptorAction = configure;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor MaxGaps(int? maxGaps)
-		{
-			MaxGapsValue = maxGaps;
-			return Self;
-		}
-
-		public IntervalsAllOfDescriptor Ordered(bool? ordered = true)
-		{
-			OrderedValue = ordered;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (IntervalsDescriptor is not null)
+			writer.WritePropertyName("intervals");
+			writer.WriteStartArray();
+			foreach (var action in IntervalsDescriptorActions)
 			{
-				writer.WritePropertyName("intervals");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, IntervalsDescriptor, options);
-				writer.WriteEndArray();
-			}
-			else if (IntervalsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("intervals");
-				writer.WriteStartArray();
-				JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor(IntervalsDescriptorAction), options);
-				writer.WriteEndArray();
-			}
-			else if (IntervalsDescriptorActions is not null)
-			{
-				writer.WritePropertyName("intervals");
-				writer.WriteStartArray();
-				foreach (var action in IntervalsDescriptorActions)
-				{
-					JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor(action), options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else
-			{
-				writer.WritePropertyName("intervals");
-				JsonSerializer.Serialize(writer, IntervalsValue, options);
+				JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor<TDocument>(action), options);
 			}
 
-			if (FilterDescriptor is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			}
-			else if (FilterDescriptorAction is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
-			}
-			else if (FilterValue is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, FilterValue, options);
-			}
-
-			if (MaxGapsValue.HasValue)
-			{
-				writer.WritePropertyName("max_gaps");
-				writer.WriteNumberValue(MaxGapsValue.Value);
-			}
-
-			if (OrderedValue.HasValue)
-			{
-				writer.WritePropertyName("ordered");
-				writer.WriteBooleanValue(OrderedValue.Value);
-			}
-
-			writer.WriteEndObject();
+			writer.WriteEndArray();
 		}
+		else
+		{
+			writer.WritePropertyName("intervals");
+			JsonSerializer.Serialize(writer, IntervalsValue, options);
+		}
+
+		if (FilterDescriptor is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
+		}
+
+		if (MaxGapsValue.HasValue)
+		{
+			writer.WritePropertyName("max_gaps");
+			writer.WriteNumberValue(MaxGapsValue.Value);
+		}
+
+		if (OrderedValue.HasValue)
+		{
+			writer.WritePropertyName("ordered");
+			writer.WriteBooleanValue(OrderedValue.Value);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<IntervalsAllOfDescriptor>
+{
+	internal IntervalsAllOfDescriptor(Action<IntervalsAllOfDescriptor> configure) => configure.Invoke(this);
+	public IntervalsAllOfDescriptor() : base()
+	{
+	}
+
+	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
+
+	private IntervalsContainerDescriptor IntervalsDescriptor { get; set; }
+
+	private Action<IntervalsContainerDescriptor> IntervalsDescriptorAction { get; set; }
+
+	private Action<IntervalsContainerDescriptor>[] IntervalsDescriptorActions { get; set; }
+
+	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
+
+	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
+
+	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
+
+	private int? MaxGapsValue { get; set; }
+
+	private bool? OrderedValue { get; set; }
+
+	public IntervalsAllOfDescriptor Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
+	{
+		IntervalsDescriptor = null;
+		IntervalsDescriptorAction = null;
+		IntervalsDescriptorActions = null;
+		IntervalsValue = intervals;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor Intervals(IntervalsContainerDescriptor descriptor)
+	{
+		IntervalsValue = null;
+		IntervalsDescriptorAction = null;
+		IntervalsDescriptorActions = null;
+		IntervalsDescriptor = descriptor;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor Intervals(Action<IntervalsContainerDescriptor> configure)
+	{
+		IntervalsValue = null;
+		IntervalsDescriptor = null;
+		IntervalsDescriptorActions = null;
+		IntervalsDescriptorAction = configure;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor Intervals(params Action<IntervalsContainerDescriptor>[] configure)
+	{
+		IntervalsValue = null;
+		IntervalsDescriptor = null;
+		IntervalsDescriptorAction = null;
+		IntervalsDescriptorActions = configure;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor Filter(IntervalsFilterDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor Filter(Action<IntervalsFilterDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor MaxGaps(int? maxGaps)
+	{
+		MaxGapsValue = maxGaps;
+		return Self;
+	}
+
+	public IntervalsAllOfDescriptor Ordered(bool? ordered = true)
+	{
+		OrderedValue = ordered;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (IntervalsDescriptor is not null)
+		{
+			writer.WritePropertyName("intervals");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, IntervalsDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (IntervalsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("intervals");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor(IntervalsDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (IntervalsDescriptorActions is not null)
+		{
+			writer.WritePropertyName("intervals");
+			writer.WriteStartArray();
+			foreach (var action in IntervalsDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else
+		{
+			writer.WritePropertyName("intervals");
+			JsonSerializer.Serialize(writer, IntervalsValue, options);
+		}
+
+		if (FilterDescriptor is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
+		}
+
+		if (MaxGapsValue.HasValue)
+		{
+			writer.WritePropertyName("max_gaps");
+			writer.WriteNumberValue(MaxGapsValue.Value);
+		}
+
+		if (OrderedValue.HasValue)
+		{
+			writer.WritePropertyName("ordered");
+			writer.WriteBooleanValue(OrderedValue.Value);
+		}
+
+		writer.WriteEndObject();
 	}
 }

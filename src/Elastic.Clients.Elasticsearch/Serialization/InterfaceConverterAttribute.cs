@@ -4,14 +4,12 @@
 
 using System;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Serialization;
+
+[AttributeUsage(AttributeTargets.Interface)]
+internal class InterfaceConverterAttribute : Attribute
 {
+	public InterfaceConverterAttribute(Type converterType) => ConverterType = converterType;
 
-	[AttributeUsage(AttributeTargets.Interface)]
-	internal class InterfaceConverterAttribute : Attribute
-	{
-		public InterfaceConverterAttribute(Type converterType) => ConverterType = converterType;
-
-		public Type ConverterType { get; }
-	}
+	public Type ConverterType { get; }
 }

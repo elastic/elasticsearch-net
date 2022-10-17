@@ -15,6 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -23,172 +26,170 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+public sealed class ExistsSourceRequestParameters : RequestParameters<ExistsSourceRequestParameters>
 {
-	public sealed class ExistsSourceRequestParameters : RequestParameters<ExistsSourceRequestParameters>
+	[JsonIgnore]
+	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	[JsonIgnore]
+	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+	[JsonIgnore]
+	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	[JsonIgnore]
+	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
+}
+
+public sealed partial class ExistsSourceRequest : PlainRequest<ExistsSourceRequestParameters>
+{
+	public ExistsSourceRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
-		[JsonIgnore]
-		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-		[JsonIgnore]
-		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-
-		[JsonIgnore]
-		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
-		[JsonIgnore]
-		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 
-	public sealed partial class ExistsSourceRequest : PlainRequestBase<ExistsSourceRequestParameters>
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
+	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override bool SupportsBody => false;
+	[JsonIgnore]
+	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	[JsonIgnore]
+	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+	[JsonIgnore]
+	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	[JsonIgnore]
+	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
+}
+
+public sealed partial class ExistsSourceRequestDescriptor<TDocument> : RequestDescriptor<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceRequestParameters>
+{
+	internal ExistsSourceRequestDescriptor(Action<ExistsSourceRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public ExistsSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
-		public ExistsSourceRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		[JsonIgnore]
-		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-		[JsonIgnore]
-		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-
-		[JsonIgnore]
-		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
-		[JsonIgnore]
-		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 
-	public sealed partial class ExistsSourceRequestDescriptor<TDocument> : RequestDescriptorBase<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceRequestParameters>
+	public ExistsSourceRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document))
 	{
-		internal ExistsSourceRequestDescriptor(Action<ExistsSourceRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public ExistsSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
-		{
-		}
-
-		public ExistsSourceRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document))
-		{
-		}
-
-		public ExistsSourceRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id)
-		{
-		}
-
-		public ExistsSourceRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document))
-		{
-		}
-
-		public ExistsSourceRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id)
-		{
-		}
-
-		public ExistsSourceRequestDescriptor(Id id) : this(typeof(TDocument), id)
-		{
-		}
-
-		internal ExistsSourceRequestDescriptor()
-		{
-		}
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		public ExistsSourceRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-		public ExistsSourceRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-		public ExistsSourceRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public ExistsSourceRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-		public ExistsSourceRequestDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
-		public ExistsSourceRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
-		public ExistsSourceRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public ExistsSourceRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
-		public ExistsSourceRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
-		public ExistsSourceRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
-
-		public ExistsSourceRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
-		{
-			RouteValues.Required("index", index);
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
 	}
 
-	public sealed partial class ExistsSourceRequestDescriptor : RequestDescriptorBase<ExistsSourceRequestDescriptor, ExistsSourceRequestParameters>
+	public ExistsSourceRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id)
 	{
-		internal ExistsSourceRequestDescriptor(Action<ExistsSourceRequestDescriptor> configure) => configure.Invoke(this);
-		public ExistsSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
-		{
-		}
+	}
 
-		internal ExistsSourceRequestDescriptor()
-		{
-		}
+	public ExistsSourceRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document))
+	{
+	}
 
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		public ExistsSourceRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-		public ExistsSourceRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-		public ExistsSourceRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public ExistsSourceRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-		public ExistsSourceRequestDescriptor Realtime(bool? realtime = true) => Qs("realtime", realtime);
-		public ExistsSourceRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
-		public ExistsSourceRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public ExistsSourceRequestDescriptor Version(long? version) => Qs("version", version);
-		public ExistsSourceRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
-		public ExistsSourceRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-		{
-			RouteValues.Required("id", id);
-			return Self;
-		}
+	public ExistsSourceRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id)
+	{
+	}
 
-		public ExistsSourceRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
-		{
-			RouteValues.Required("index", index);
-			return Self;
-		}
+	public ExistsSourceRequestDescriptor(Id id) : this(typeof(TDocument), id)
+	{
+	}
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+	internal ExistsSourceRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
+	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override bool SupportsBody => false;
+	public ExistsSourceRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
+	public ExistsSourceRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public ExistsSourceRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
+	public ExistsSourceRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
+	public ExistsSourceRequestDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
+	public ExistsSourceRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
+	public ExistsSourceRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
+	public ExistsSourceRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
+	public ExistsSourceRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
+	public ExistsSourceRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		RouteValues.Required("id", id);
+		return Self;
+	}
+
+	public ExistsSourceRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		RouteValues.Required("index", index);
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
+}
+
+public sealed partial class ExistsSourceRequestDescriptor : RequestDescriptor<ExistsSourceRequestDescriptor, ExistsSourceRequestParameters>
+{
+	internal ExistsSourceRequestDescriptor(Action<ExistsSourceRequestDescriptor> configure) => configure.Invoke(this);
+	public ExistsSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+	{
+	}
+
+	internal ExistsSourceRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
+	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override bool SupportsBody => false;
+	public ExistsSourceRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
+	public ExistsSourceRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public ExistsSourceRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
+	public ExistsSourceRequestDescriptor Preference(string? preference) => Qs("preference", preference);
+	public ExistsSourceRequestDescriptor Realtime(bool? realtime = true) => Qs("realtime", realtime);
+	public ExistsSourceRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
+	public ExistsSourceRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
+	public ExistsSourceRequestDescriptor Version(long? version) => Qs("version", version);
+	public ExistsSourceRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
+	public ExistsSourceRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		RouteValues.Required("id", id);
+		return Self;
+	}
+
+	public ExistsSourceRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		RouteValues.Required("index", index);
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
 	}
 }

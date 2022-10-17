@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,48 +24,46 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class HtmlStripCharFilter : ICharFilterDefinition
 {
-	public sealed partial class HtmlStripCharFilter : ICharFilterDefinition
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "html_strip";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class HtmlStripCharFilterDescriptor : SerializableDescriptor<HtmlStripCharFilterDescriptor>, IBuildableDescriptor<HtmlStripCharFilter>
+{
+	internal HtmlStripCharFilterDescriptor(Action<HtmlStripCharFilterDescriptor> configure) => configure.Invoke(this);
+	public HtmlStripCharFilterDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "html_strip";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class HtmlStripCharFilterDescriptor : SerializableDescriptorBase<HtmlStripCharFilterDescriptor>, IBuildableDescriptor<HtmlStripCharFilter>
+	private string? VersionValue { get; set; }
+
+	public HtmlStripCharFilterDescriptor Version(string? version)
 	{
-		internal HtmlStripCharFilterDescriptor(Action<HtmlStripCharFilterDescriptor> configure) => configure.Invoke(this);
-		public HtmlStripCharFilterDescriptor() : base()
-		{
-		}
-
-		private string? VersionValue { get; set; }
-
-		public HtmlStripCharFilterDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("html_strip");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		HtmlStripCharFilter IBuildableDescriptor<HtmlStripCharFilter>.Build() => new()
-		{ Version = VersionValue };
+		VersionValue = version;
+		return Self;
 	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("html_strip");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	HtmlStripCharFilter IBuildableDescriptor<HtmlStripCharFilter>.Build() => new()
+	{ Version = VersionValue };
 }

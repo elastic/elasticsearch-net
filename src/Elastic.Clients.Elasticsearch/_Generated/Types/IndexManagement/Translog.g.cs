@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,126 +24,124 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
+public sealed partial class Translog
 {
-	public sealed partial class Translog
+	[JsonInclude]
+	[JsonPropertyName("durability")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? Durability { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("flush_threshold_size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSize { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("retention")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? Retention { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("sync_interval")]
+	public Elastic.Clients.Elasticsearch.Duration? SyncInterval { get; set; }
+}
+
+public sealed partial class TranslogDescriptor : SerializableDescriptor<TranslogDescriptor>
+{
+	internal TranslogDescriptor(Action<TranslogDescriptor> configure) => configure.Invoke(this);
+	public TranslogDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("durability")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? Durability { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("flush_threshold_size")]
-		public Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("retention")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? Retention { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("sync_interval")]
-		public Elastic.Clients.Elasticsearch.Duration? SyncInterval { get; set; }
 	}
 
-	public sealed partial class TranslogDescriptor : SerializableDescriptorBase<TranslogDescriptor>
+	private Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? DurabilityValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSizeValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? RetentionValue { get; set; }
+
+	private TranslogRetentionDescriptor RetentionDescriptor { get; set; }
+
+	private Action<TranslogRetentionDescriptor> RetentionDescriptorAction { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Duration? SyncIntervalValue { get; set; }
+
+	public TranslogDescriptor Durability(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? durability)
 	{
-		internal TranslogDescriptor(Action<TranslogDescriptor> configure) => configure.Invoke(this);
-		public TranslogDescriptor() : base()
+		DurabilityValue = durability;
+		return Self;
+	}
+
+	public TranslogDescriptor FlushThresholdSize(Elastic.Clients.Elasticsearch.ByteSize? flushThresholdSize)
+	{
+		FlushThresholdSizeValue = flushThresholdSize;
+		return Self;
+	}
+
+	public TranslogDescriptor Retention(Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? retention)
+	{
+		RetentionDescriptor = null;
+		RetentionDescriptorAction = null;
+		RetentionValue = retention;
+		return Self;
+	}
+
+	public TranslogDescriptor Retention(TranslogRetentionDescriptor descriptor)
+	{
+		RetentionValue = null;
+		RetentionDescriptorAction = null;
+		RetentionDescriptor = descriptor;
+		return Self;
+	}
+
+	public TranslogDescriptor Retention(Action<TranslogRetentionDescriptor> configure)
+	{
+		RetentionValue = null;
+		RetentionDescriptor = null;
+		RetentionDescriptorAction = configure;
+		return Self;
+	}
+
+	public TranslogDescriptor SyncInterval(Elastic.Clients.Elasticsearch.Duration? syncInterval)
+	{
+		SyncIntervalValue = syncInterval;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DurabilityValue is not null)
 		{
+			writer.WritePropertyName("durability");
+			JsonSerializer.Serialize(writer, DurabilityValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? DurabilityValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSizeValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? RetentionValue { get; set; }
-
-		private TranslogRetentionDescriptor RetentionDescriptor { get; set; }
-
-		private Action<TranslogRetentionDescriptor> RetentionDescriptorAction { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Duration? SyncIntervalValue { get; set; }
-
-		public TranslogDescriptor Durability(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? durability)
+		if (FlushThresholdSizeValue is not null)
 		{
-			DurabilityValue = durability;
-			return Self;
+			writer.WritePropertyName("flush_threshold_size");
+			JsonSerializer.Serialize(writer, FlushThresholdSizeValue, options);
 		}
 
-		public TranslogDescriptor FlushThresholdSize(Elastic.Clients.Elasticsearch.ByteSize? flushThresholdSize)
+		if (RetentionDescriptor is not null)
 		{
-			FlushThresholdSizeValue = flushThresholdSize;
-			return Self;
+			writer.WritePropertyName("retention");
+			JsonSerializer.Serialize(writer, RetentionDescriptor, options);
+		}
+		else if (RetentionDescriptorAction is not null)
+		{
+			writer.WritePropertyName("retention");
+			JsonSerializer.Serialize(writer, new TranslogRetentionDescriptor(RetentionDescriptorAction), options);
+		}
+		else if (RetentionValue is not null)
+		{
+			writer.WritePropertyName("retention");
+			JsonSerializer.Serialize(writer, RetentionValue, options);
 		}
 
-		public TranslogDescriptor Retention(Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? retention)
+		if (SyncIntervalValue is not null)
 		{
-			RetentionDescriptor = null;
-			RetentionDescriptorAction = null;
-			RetentionValue = retention;
-			return Self;
+			writer.WritePropertyName("sync_interval");
+			JsonSerializer.Serialize(writer, SyncIntervalValue, options);
 		}
 
-		public TranslogDescriptor Retention(TranslogRetentionDescriptor descriptor)
-		{
-			RetentionValue = null;
-			RetentionDescriptorAction = null;
-			RetentionDescriptor = descriptor;
-			return Self;
-		}
-
-		public TranslogDescriptor Retention(Action<TranslogRetentionDescriptor> configure)
-		{
-			RetentionValue = null;
-			RetentionDescriptor = null;
-			RetentionDescriptorAction = configure;
-			return Self;
-		}
-
-		public TranslogDescriptor SyncInterval(Elastic.Clients.Elasticsearch.Duration? syncInterval)
-		{
-			SyncIntervalValue = syncInterval;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (DurabilityValue is not null)
-			{
-				writer.WritePropertyName("durability");
-				JsonSerializer.Serialize(writer, DurabilityValue, options);
-			}
-
-			if (FlushThresholdSizeValue is not null)
-			{
-				writer.WritePropertyName("flush_threshold_size");
-				JsonSerializer.Serialize(writer, FlushThresholdSizeValue, options);
-			}
-
-			if (RetentionDescriptor is not null)
-			{
-				writer.WritePropertyName("retention");
-				JsonSerializer.Serialize(writer, RetentionDescriptor, options);
-			}
-			else if (RetentionDescriptorAction is not null)
-			{
-				writer.WritePropertyName("retention");
-				JsonSerializer.Serialize(writer, new TranslogRetentionDescriptor(RetentionDescriptorAction), options);
-			}
-			else if (RetentionValue is not null)
-			{
-				writer.WritePropertyName("retention");
-				JsonSerializer.Serialize(writer, RetentionValue, options);
-			}
-
-			if (SyncIntervalValue is not null)
-			{
-				writer.WritePropertyName("sync_interval");
-				JsonSerializer.Serialize(writer, SyncIntervalValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,48 +24,46 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Analysis;
+public sealed partial class RemoveDuplicatesTokenFilter : ITokenFilterDefinition
 {
-	public sealed partial class RemoveDuplicatesTokenFilter : ITokenFilterDefinition
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "remove_duplicates";
+	[JsonInclude]
+	[JsonPropertyName("version")]
+	public string? Version { get; set; }
+}
+
+public sealed partial class RemoveDuplicatesTokenFilterDescriptor : SerializableDescriptor<RemoveDuplicatesTokenFilterDescriptor>, IBuildableDescriptor<RemoveDuplicatesTokenFilter>
+{
+	internal RemoveDuplicatesTokenFilterDescriptor(Action<RemoveDuplicatesTokenFilterDescriptor> configure) => configure.Invoke(this);
+	public RemoveDuplicatesTokenFilterDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "remove_duplicates";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; set; }
 	}
 
-	public sealed partial class RemoveDuplicatesTokenFilterDescriptor : SerializableDescriptorBase<RemoveDuplicatesTokenFilterDescriptor>, IBuildableDescriptor<RemoveDuplicatesTokenFilter>
+	private string? VersionValue { get; set; }
+
+	public RemoveDuplicatesTokenFilterDescriptor Version(string? version)
 	{
-		internal RemoveDuplicatesTokenFilterDescriptor(Action<RemoveDuplicatesTokenFilterDescriptor> configure) => configure.Invoke(this);
-		public RemoveDuplicatesTokenFilterDescriptor() : base()
-		{
-		}
-
-		private string? VersionValue { get; set; }
-
-		public RemoveDuplicatesTokenFilterDescriptor Version(string? version)
-		{
-			VersionValue = version;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("remove_duplicates");
-			if (VersionValue is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-
-		RemoveDuplicatesTokenFilter IBuildableDescriptor<RemoveDuplicatesTokenFilter>.Build() => new()
-		{ Version = VersionValue };
+		VersionValue = version;
+		return Self;
 	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("remove_duplicates");
+		if (VersionValue is not null)
+		{
+			writer.WritePropertyName("version");
+			JsonSerializer.Serialize(writer, VersionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+
+	RemoveDuplicatesTokenFilter IBuildableDescriptor<RemoveDuplicatesTokenFilter>.Build() => new()
+	{ Version = VersionValue };
 }

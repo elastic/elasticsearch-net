@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,118 +24,116 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
+public sealed partial class RandomScoreFunction
 {
-	public sealed partial class RandomScoreFunction
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("field")]
+	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("seed")]
-		public Union<long?, string?>? Seed { get; set; }
+	[JsonInclude]
+	[JsonPropertyName("seed")]
+	public Union<long?, string?>? Seed { get; set; }
+}
+
+public sealed partial class RandomScoreFunctionDescriptor<TDocument> : SerializableDescriptor<RandomScoreFunctionDescriptor<TDocument>>
+{
+	internal RandomScoreFunctionDescriptor(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public RandomScoreFunctionDescriptor() : base()
+	{
 	}
 
-	public sealed partial class RandomScoreFunctionDescriptor<TDocument> : SerializableDescriptorBase<RandomScoreFunctionDescriptor<TDocument>>
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private Union<long?, string?>? SeedValue { get; set; }
+
+	public RandomScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
-		internal RandomScoreFunctionDescriptor(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public RandomScoreFunctionDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private Union<long?, string?>? SeedValue { get; set; }
-
-		public RandomScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public RandomScoreFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-		{
-			FieldValue = field;
-			return Self;
-		}
-
-		public RandomScoreFunctionDescriptor<TDocument> Seed(Union<long?, string?>? seed)
-		{
-			SeedValue = seed;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (SeedValue is not null)
-			{
-				writer.WritePropertyName("seed");
-				JsonSerializer.Serialize(writer, SeedValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		FieldValue = field;
+		return Self;
 	}
 
-	public sealed partial class RandomScoreFunctionDescriptor : SerializableDescriptorBase<RandomScoreFunctionDescriptor>
+	public RandomScoreFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
-		internal RandomScoreFunctionDescriptor(Action<RandomScoreFunctionDescriptor> configure) => configure.Invoke(this);
-		public RandomScoreFunctionDescriptor() : base()
+		FieldValue = field;
+		return Self;
+	}
+
+	public RandomScoreFunctionDescriptor<TDocument> Seed(Union<long?, string?>? seed)
+	{
+		SeedValue = seed;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FieldValue is not null)
 		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
-		private Union<long?, string?>? SeedValue { get; set; }
-
-		public RandomScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		if (SeedValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("seed");
+			JsonSerializer.Serialize(writer, SeedValue, options);
 		}
 
-		public RandomScoreFunctionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class RandomScoreFunctionDescriptor : SerializableDescriptor<RandomScoreFunctionDescriptor>
+{
+	internal RandomScoreFunctionDescriptor(Action<RandomScoreFunctionDescriptor> configure) => configure.Invoke(this);
+	public RandomScoreFunctionDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+	private Union<long?, string?>? SeedValue { get; set; }
+
+	public RandomScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RandomScoreFunctionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RandomScoreFunctionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RandomScoreFunctionDescriptor Seed(Union<long?, string?>? seed)
+	{
+		SeedValue = seed;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (FieldValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		public RandomScoreFunctionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		if (SeedValue is not null)
 		{
-			FieldValue = field;
-			return Self;
+			writer.WritePropertyName("seed");
+			JsonSerializer.Serialize(writer, SeedValue, options);
 		}
 
-		public RandomScoreFunctionDescriptor Seed(Union<long?, string?>? seed)
-		{
-			SeedValue = seed;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (SeedValue is not null)
-			{
-				writer.WritePropertyName("seed");
-				JsonSerializer.Serialize(writer, SeedValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		writer.WriteEndObject();
 	}
 }

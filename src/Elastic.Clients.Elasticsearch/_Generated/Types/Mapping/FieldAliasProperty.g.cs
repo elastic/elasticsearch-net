@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,348 +24,346 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Mapping
+namespace Elastic.Clients.Elasticsearch.Mapping;
+public sealed partial class FieldAliasProperty : IProperty
 {
-	public sealed partial class FieldAliasProperty : IProperty
+	[JsonInclude]
+	[JsonPropertyName("dynamic")]
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("fields")]
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("ignore_above")]
+	public int? IgnoreAbove { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("local_metadata")]
+	public Dictionary<string, object>? LocalMetadata { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("meta")]
+	public Dictionary<string, string>? Meta { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("path")]
+	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("properties")]
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("type")]
+	public string Type => "alias";
+}
+
+public sealed partial class FieldAliasPropertyDescriptor<TDocument> : SerializableDescriptor<FieldAliasPropertyDescriptor<TDocument>>, IBuildableDescriptor<FieldAliasProperty>
+{
+	internal FieldAliasPropertyDescriptor(Action<FieldAliasPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public FieldAliasPropertyDescriptor() : base()
 	{
-		[JsonInclude]
-		[JsonPropertyName("dynamic")]
-		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ignore_above")]
-		public int? IgnoreAbove { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("local_metadata")]
-		public Dictionary<string, object>? LocalMetadata { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, string>? Meta { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("path")]
-		public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("properties")]
-		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "alias";
 	}
 
-	public sealed partial class FieldAliasPropertyDescriptor<TDocument> : SerializableDescriptorBase<FieldAliasPropertyDescriptor<TDocument>>, IBuildableDescriptor<FieldAliasProperty>
+	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+	private int? IgnoreAboveValue { get; set; }
+
+	private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+	private Dictionary<string, string>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+	public FieldAliasPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
-		internal FieldAliasPropertyDescriptor(Action<FieldAliasPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
-		public FieldAliasPropertyDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
-		private int? IgnoreAboveValue { get; set; }
-
-		private Dictionary<string, object>? LocalMetadataValue { get; set; }
-
-		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		public FieldAliasPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
-		{
-			DynamicValue = dynamic;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
-		{
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
-		{
-			IgnoreAboveValue = ignoreAbove;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? path)
-		{
-			PathValue = path;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
-		{
-			PathValue = path;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
-		{
-			PropertiesValue = properties;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
-		{
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (DynamicValue is not null)
-			{
-				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, DynamicValue, options);
-			}
-
-			if (FieldsValue is not null)
-			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, FieldsValue, options);
-			}
-
-			if (IgnoreAboveValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_above");
-				writer.WriteNumberValue(IgnoreAboveValue.Value);
-			}
-
-			if (LocalMetadataValue is not null)
-			{
-				writer.WritePropertyName("local_metadata");
-				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (PathValue is not null)
-			{
-				writer.WritePropertyName("path");
-				JsonSerializer.Serialize(writer, PathValue, options);
-			}
-
-			if (PropertiesValue is not null)
-			{
-				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, PropertiesValue, options);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("alias");
-			writer.WriteEndObject();
-		}
-
-		FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
-		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
+		DynamicValue = dynamic;
+		return Self;
 	}
 
-	public sealed partial class FieldAliasPropertyDescriptor : SerializableDescriptorBase<FieldAliasPropertyDescriptor>, IBuildableDescriptor<FieldAliasProperty>
+	public FieldAliasPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
 	{
-		internal FieldAliasPropertyDescriptor(Action<FieldAliasPropertyDescriptor> configure) => configure.Invoke(this);
-		public FieldAliasPropertyDescriptor() : base()
-		{
-		}
-
-		private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
-		private int? IgnoreAboveValue { get; set; }
-
-		private Dictionary<string, object>? LocalMetadataValue { get; set; }
-
-		private Dictionary<string, string>? MetaValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-
-		private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
-		public FieldAliasPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
-		{
-			DynamicValue = dynamic;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
-		{
-			FieldsValue = fields;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
-		{
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			FieldsValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor IgnoreAbove(int? ignoreAbove)
-		{
-			IgnoreAboveValue = ignoreAbove;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
-		{
-			MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor Path(Elastic.Clients.Elasticsearch.Field? path)
-		{
-			PathValue = path;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
-		{
-			PathValue = path;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
-		{
-			PathValue = path;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
-		{
-			PropertiesValue = properties;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
-		{
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		public FieldAliasPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
-		{
-			var descriptor = new PropertiesDescriptor<TDocument>();
-			configure?.Invoke(descriptor);
-			PropertiesValue = descriptor.PromisedValue;
-			return Self;
-		}
-
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (DynamicValue is not null)
-			{
-				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, DynamicValue, options);
-			}
-
-			if (FieldsValue is not null)
-			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, FieldsValue, options);
-			}
-
-			if (IgnoreAboveValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_above");
-				writer.WriteNumberValue(IgnoreAboveValue.Value);
-			}
-
-			if (LocalMetadataValue is not null)
-			{
-				writer.WritePropertyName("local_metadata");
-				JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (PathValue is not null)
-			{
-				writer.WritePropertyName("path");
-				JsonSerializer.Serialize(writer, PathValue, options);
-			}
-
-			if (PropertiesValue is not null)
-			{
-				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, PropertiesValue, options);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("alias");
-			writer.WriteEndObject();
-		}
-
-		FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
-		{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
+		FieldsValue = fields;
+		return Self;
 	}
+
+	public FieldAliasPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	{
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	{
+		IgnoreAboveValue = ignoreAbove;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	{
+		PropertiesValue = properties;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	{
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DynamicValue is not null)
+		{
+			writer.WritePropertyName("dynamic");
+			JsonSerializer.Serialize(writer, DynamicValue, options);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (IgnoreAboveValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_above");
+			writer.WriteNumberValue(IgnoreAboveValue.Value);
+		}
+
+		if (LocalMetadataValue is not null)
+		{
+			writer.WritePropertyName("local_metadata");
+			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (PathValue is not null)
+		{
+			writer.WritePropertyName("path");
+			JsonSerializer.Serialize(writer, PathValue, options);
+		}
+
+		if (PropertiesValue is not null)
+		{
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("alias");
+		writer.WriteEndObject();
+	}
+
+	FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
+}
+
+public sealed partial class FieldAliasPropertyDescriptor : SerializableDescriptor<FieldAliasPropertyDescriptor>, IBuildableDescriptor<FieldAliasProperty>
+{
+	internal FieldAliasPropertyDescriptor(Action<FieldAliasPropertyDescriptor> configure) => configure.Invoke(this);
+	public FieldAliasPropertyDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
+
+	private int? IgnoreAboveValue { get; set; }
+
+	private Dictionary<string, object>? LocalMetadataValue { get; set; }
+
+	private Dictionary<string, string>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+
+	public FieldAliasPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	{
+		DynamicValue = dynamic;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	{
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		FieldsValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	{
+		IgnoreAboveValue = ignoreAbove;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor Path(Elastic.Clients.Elasticsearch.Field? path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	{
+		PropertiesValue = properties;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	{
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public FieldAliasPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	{
+		var descriptor = new PropertiesDescriptor<TDocument>();
+		configure?.Invoke(descriptor);
+		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DynamicValue is not null)
+		{
+			writer.WritePropertyName("dynamic");
+			JsonSerializer.Serialize(writer, DynamicValue, options);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (IgnoreAboveValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_above");
+			writer.WriteNumberValue(IgnoreAboveValue.Value);
+		}
+
+		if (LocalMetadataValue is not null)
+		{
+			writer.WritePropertyName("local_metadata");
+			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (PathValue is not null)
+		{
+			writer.WritePropertyName("path");
+			JsonSerializer.Serialize(writer, PathValue, options);
+		}
+
+		if (PropertiesValue is not null)
+		{
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("alias");
+		writer.WriteEndObject();
+	}
+
+	FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
 }
