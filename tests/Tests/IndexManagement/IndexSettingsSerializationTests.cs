@@ -25,17 +25,17 @@ public class IndexSettingsSerializationTests : SerializerTestBase
 		// Resolved after improved code-generation of internally-tagged untions to include
 		// converters for the variant interfaces.
 
-		var descriptor = new IndexSettingsDescriptor<Project>();
-		descriptor.Analysis(a => a
-			 .Analyzer(a => a
-				 .Custom("whitespace_lowercase", wl => wl
-					 .Tokenizer("whitespace")
-					 .Filter(Enumerable.Repeat("lowercase", 1))
-				 )
-			 )
+		var descriptor = new IndexSettingsDescriptor<Project>()
+			.Analysis(a => a
+				.Analyzer(a => a
+					.Custom("whitespace_lowercase", wl => wl
+						.Tokenizer("whitespace")
+						.Filter(Enumerable.Repeat("lowercase", 1))
+					)
+				)
 		 );
 
-		var json = SerializeAndGetJsonString(descriptor);
+		var json = await SerializeAndGetJsonStringAsync(descriptor);
 		await Verifier.VerifyJson(json);
 
 		var indexSettings = DeserializeJsonString<IndexSettings>(json);
@@ -44,7 +44,7 @@ public class IndexSettingsSerializationTests : SerializerTestBase
 		customAnalyzer.Tokenizer.Should().Be("whitespace");
 		customAnalyzer.Filter.Should().ContainSingle("lowercase");
 
-		var objectJson = SerializeAndGetJsonString(indexSettings);
+		var objectJson = await SerializeAndGetJsonStringAsync(indexSettings);
 		objectJson.Should().Be(json);
 	}
 
