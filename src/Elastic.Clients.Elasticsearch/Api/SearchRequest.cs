@@ -5,69 +5,68 @@
 using System;
 using Elastic.Clients.Elasticsearch.Requests;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+public partial class SearchRequest
 {
-	public partial class SearchRequest
+	internal override void BeforeRequest()
 	{
-		internal override void BeforeRequest()
+		if (Aggregations is not null)
 		{
-			if (Aggregations is not null)
-			{
-				TypedKeys = true;
-			}
-		}
-
-		protected override string ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
-		{
-			if (Pit is not null && !string.IsNullOrEmpty(Pit.Id ?? string.Empty) && routeValues.ContainsKey("index"))
-			{
-				routeValues.Remove("index");
-			}
-
-			return base.ResolveUrl(routeValues, settings);
+			TypedKeys = true;
 		}
 	}
 
-	public partial class SearchRequest<TInferDocument>
+	protected override string ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
 	{
-		public SearchRequest(Indices? indices) : base(indices)
+		if (Pit is not null && !string.IsNullOrEmpty(Pit.Id ?? string.Empty) && routeValues.ContainsKey("index"))
 		{
+			routeValues.Remove("index");
+		}
+
+		return base.ResolveUrl(routeValues, settings);
+	}
+}
+
+public partial class SearchRequest<TInferDocument>
+{
+	public SearchRequest(Indices? indices) : base(indices)
+	{
+	}
+}
+
+public sealed partial class SearchRequestDescriptor<TDocument>
+{
+	public SearchRequestDescriptor<TDocument> Index(Indices indices)
+	{
+		Self.RouteValues.Optional("index", indices);
+		return Self;
+	}
+
+	public SearchRequestDescriptor<TDocument> Pit(string id, Action<Core.Search.PointInTimeReferenceDescriptor> configure)
+	{
+		PitValue = null;
+		PitDescriptorAction = null;
+		configure += a => a.Id(id);
+		PitDescriptorAction = configure;
+		return Self;
+	}
+
+	internal override void BeforeRequest()
+	{
+		if (AggregationsValue is not null || AggregationsDescriptor is not null || AggregationsDescriptorAction is not null)
+		{
+			TypedKeys(true);
 		}
 	}
-	
-	public sealed partial class SearchRequestDescriptor<TDocument>
+
+	protected override string ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
 	{
-		public SearchRequestDescriptor<TDocument> Index(Indices indices)
+		if ((Self.PitValue is not null || Self.PitDescriptor is not null || Self.PitDescriptorAction is not null) && routeValues.ContainsKey("index"))
 		{
-			Self.RouteValues.Optional("index", indices);
-			return Self;
+			routeValues.Remove("index");
 		}
 
-		public SearchRequestDescriptor<TDocument> Pit(string id, Action<Core.Search.PointInTimeReferenceDescriptor> configure)
-		{
-			PitValue = null;
-			PitDescriptorAction = null;
-			configure += a => a.Id(id);
-			PitDescriptorAction = configure;
-			return Self;
-		}
-
-		internal override void BeforeRequest()
-		{
-			if (AggregationsValue is not null || AggregationsDescriptor is not null || AggregationsDescriptorAction is not null)
-			{
-				TypedKeys(true);
-			}
-		}
-
-		protected override string ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
-		{
-			if ((Self.PitValue is not null || Self.PitDescriptor is not null || Self.PitDescriptorAction is not null) && routeValues.ContainsKey("index"))
-			{
-				routeValues.Remove("index");
-			}
-
-			return base.ResolveUrl(routeValues, settings);
-		}
+		return base.ResolveUrl(routeValues, settings);
 	}
 }
