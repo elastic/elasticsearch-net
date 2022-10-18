@@ -6,57 +6,56 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+/// <summary>
+/// <para>Lazily deserializable JSON.</para>
+/// <para>Holds raw JSON bytes which can be lazily deserialized to a specific <see cref="Type"/> using the source serializer at a later time.</para>
+/// </summary>
+[JsonConverter(typeof(LazyJsonConverter))]
+public readonly struct LazyJson
 {
+	internal LazyJson(byte[] bytes, IElasticsearchClientSettings settings)
+	{
+		Bytes = bytes;
+		Settings = settings;
+	}
+
+	internal byte[]? Bytes { get; }
+	internal IElasticsearchClientSettings? Settings { get; }
+
 	/// <summary>
-	/// <para>Lazily deserializable JSON.</para>
-	/// <para>Holds raw JSON bytes which can be lazily deserialized to a specific <see cref="Type"/> using the source serializer at a later time.</para>
+	/// Creates an instance of <typeparamref name="T" /> from this
+	/// <see cref="LazyJson" /> instance.
 	/// </summary>
-	[JsonConverter(typeof(LazyJsonConverter))]
-	public readonly struct LazyJson
+	/// <typeparam name="T">The type</typeparam>
+	public T? As<T>()
 	{
-		internal LazyJson(byte[] bytes, IElasticsearchClientSettings settings)
-		{
-			Bytes = bytes;
-			Settings = settings;
-		}
+		if (Bytes is null || Settings is null || Bytes.Length == 0)
+			return default;
 
-		internal byte[]? Bytes { get; }
-		internal IElasticsearchClientSettings? Settings { get; }
+		using var ms = Settings.MemoryStreamFactory.Create(Bytes);
+		return Settings.SourceSerializer.Deserialize<T>(ms);
+	}
+}
 
-		/// <summary>
-		/// Creates an instance of <typeparamref name="T" /> from this
-		/// <see cref="LazyJson" /> instance.
-		/// </summary>
-		/// <typeparam name="T">The type</typeparam>
-		public T? As<T>()
-		{
-			if (Bytes is null || Settings is null || Bytes.Length == 0)
-				return default;
+internal sealed class LazyJsonConverter : JsonConverter<LazyJson>
+{
+	private readonly IElasticsearchClientSettings _settings;
 
-			using var ms = Settings.MemoryStreamFactory.Create(Bytes);
-			return Settings.SourceSerializer.Deserialize<T>(ms);
-		}
+	public LazyJsonConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+	public override LazyJson Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		using var jsonDoc = JsonSerializer.Deserialize<JsonDocument>(ref reader);
+		using var stream = _settings.MemoryStreamFactory.Create();
+
+		var writer = new Utf8JsonWriter(stream);
+		jsonDoc.WriteTo(writer);
+		writer.Flush();
+
+		return new LazyJson(stream.ToArray(), _settings);
 	}
 
-	internal sealed class LazyJsonConverter : JsonConverter<LazyJson>
-	{
-		private readonly IElasticsearchClientSettings _settings;
-
-		public LazyJsonConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
-		public override LazyJson Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			using var jsonDoc = JsonSerializer.Deserialize<JsonDocument>(ref reader);
-			using var stream = _settings.MemoryStreamFactory.Create();
-
-			var writer = new Utf8JsonWriter(stream);
-			jsonDoc.WriteTo(writer);
-			writer.Flush();
-
-			return new LazyJson(stream.ToArray(), _settings);
-		}
-
-		public override void Write(Utf8JsonWriter writer, LazyJson value, JsonSerializerOptions options) => throw new NotImplementedException("We only ever expect to deserialize LazyJson on responses.");
-	}
+	public override void Write(Utf8JsonWriter writer, LazyJson value, JsonSerializerOptions options) => throw new NotImplementedException("We only ever expect to deserialize LazyJson on responses.");
 }
