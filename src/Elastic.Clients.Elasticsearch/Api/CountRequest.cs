@@ -5,37 +5,36 @@
 using System;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+public sealed partial class CountRequest<TDocument> : CountRequest
 {
-	public sealed partial class CountRequest<TDocument> : CountRequest
+	//protected CountRequest<TDocument> TypedSelf => this;
+
+	///<summary>/{index}/_count</summary>
+	public CountRequest() : base(typeof(TDocument))
 	{
-		//protected CountRequest<TDocument> TypedSelf => this;
-
-		///<summary>/{index}/_count</summary>
-		public CountRequest() : base(typeof(TDocument))
-		{
-		}
-
-		///<summary>/{index}/_count</summary>
-		///<param name = "index">Optional, accepts null</param>
-		public CountRequest(Indices index) : base(index)
-		{
-		}
 	}
 
-	public partial class CountRequestDescriptor
+	///<summary>/{index}/_count</summary>
+	///<param name = "index">Optional, accepts null</param>
+	public CountRequest(Indices index) : base(index)
 	{
-		public CountRequestDescriptor Index(Indices indices)
-		{
-			RouteValues.Optional("index", indices);
-			return Self;
-		}
+	}
+}
 
-		public CountRequestDescriptor Query(Func<QueryContainerDescriptor, QueryContainer> configure)
-		{
-			var container = configure?.Invoke(new QueryContainerDescriptor());
-			QueryValue = container;
-			return Self;
-		}
+public partial class CountRequestDescriptor
+{
+	public CountRequestDescriptor Index(Indices indices)
+	{
+		RouteValues.Optional("index", indices);
+		return Self;
+	}
+
+	public CountRequestDescriptor Query(Func<QueryContainerDescriptor, QueryContainer> configure)
+	{
+		var container = configure?.Invoke(new QueryContainerDescriptor());
+		QueryValue = container;
+		return Self;
 	}
 }

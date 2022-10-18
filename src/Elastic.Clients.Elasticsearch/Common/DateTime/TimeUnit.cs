@@ -4,31 +4,30 @@
 
 using System;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+public static class TimeUnitExtensions
 {
-	public static class TimeUnitExtensions
+	public static string GetStringValue(this TimeUnit value)
 	{
-		public static string GetStringValue(this TimeUnit value)
+		switch (value)
 		{
-			switch (value)
-			{
-				case TimeUnit.Nanoseconds:
-					return "nanos";
-				case TimeUnit.Microseconds:
-					return "micros";
-				case TimeUnit.Milliseconds:
-					return "ms";
-				case TimeUnit.Seconds:
-					return "s";
-				case TimeUnit.Minutes:
-					return "m";
-				case TimeUnit.Hours:
-					return "h";
-				case TimeUnit.Days:
-					return "d";
-				default:
-					throw new ArgumentOutOfRangeException(nameof(value), value, null);
-			}
+			case TimeUnit.Nanoseconds:
+				return "nanos";
+			case TimeUnit.Microseconds:
+				return "micros";
+			case TimeUnit.Milliseconds:
+				return "ms";
+			case TimeUnit.Seconds:
+				return "s";
+			case TimeUnit.Minutes:
+				return "m";
+			case TimeUnit.Hours:
+				return "h";
+			case TimeUnit.Days:
+				return "d";
+			default:
+				throw new ArgumentOutOfRangeException(nameof(value), value, null);
 		}
 	}
 }

@@ -7,42 +7,41 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+/// <summary>
+/// Converts an <see cref="IndexName"/> to and from its JSON representation.
+/// </summary>
+internal class IndexNameConverter : JsonConverter<IndexName?>
 {
-	/// <summary>
-	/// Converts an <see cref="IndexName"/> to and from its JSON representation.
-	/// </summary>
-	internal class IndexNameConverter : JsonConverter<IndexName?>
+	private readonly IElasticsearchClientSettings _settings;
+
+	public IndexNameConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+	public override void WriteAsPropertyName(Utf8JsonWriter writer, IndexName value, JsonSerializerOptions options) => writer.WritePropertyName(((IUrlParameter)value).GetString(_settings));
+
+	public override IndexName ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.GetString();
+
+	public override IndexName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		private readonly IElasticsearchClientSettings _settings;
-
-		public IndexNameConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
-		public override void WriteAsPropertyName(Utf8JsonWriter writer, IndexName value, JsonSerializerOptions options) => writer.WritePropertyName(((IUrlParameter)value).GetString(_settings));
-
-		public override IndexName ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.GetString();
-
-		public override IndexName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		if (reader.TokenType != JsonTokenType.String)
 		{
-			if (reader.TokenType != JsonTokenType.String)
-			{
-				reader.Read();
-				return null;
-			}
-
-			IndexName? indexName = reader.GetString();
-			return indexName;
+			reader.Read();
+			return null;
 		}
 
-		public override void Write(Utf8JsonWriter writer, IndexName? value, JsonSerializerOptions options)
-		{
-			if (value is null)
-			{
-				writer.WriteNullValue();
-				return;
-			}
+		IndexName? indexName = reader.GetString();
+		return indexName;
+	}
 
-			writer.WriteStringValue(_settings.Inferrer.IndexName(value));
+	public override void Write(Utf8JsonWriter writer, IndexName? value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
 		}
+
+		writer.WriteStringValue(_settings.Inferrer.IndexName(value));
 	}
 }

@@ -8,48 +8,47 @@ using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch.Core.MSearch
+namespace Elastic.Clients.Elasticsearch.Core.MSearch;
+
+// POC - If we have more than one union doing this, can we autogenerate with correct ctors etc.
+public class SearchRequestItem : IStreamSerializable
 {
-	// POC - If we have more than one union doing this, can we autogenerate with correct ctors etc.
-	public class SearchRequestItem : IStreamSerializable
+	public SearchRequestItem(MultisearchBody body) => Body = body;
+
+	public SearchRequestItem(MultisearchHeader header, MultisearchBody body)
 	{
-		public SearchRequestItem(MultisearchBody body) => Body = body;
+		Header = header;
+		Body = body;
+	}	
 
-		public SearchRequestItem(MultisearchHeader header, MultisearchBody body)
+	public MultisearchHeader Header { get; init; }
+	public MultisearchBody Body { get; init; }
+
+	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (Body is null)
+			return;
+
+		if (settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
 		{
-			Header = header;
-			Body = body;
-		}	
-
-		public MultisearchHeader Header { get; init; }
-		public MultisearchBody Body { get; init; }
-
-		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-		{
-			if (Body is null)
-				return;
-
-			if (settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
-			{
-				JsonSerializer.Serialize(stream, Header, options);
-				stream.WriteByte((byte)'\n');
-				JsonSerializer.Serialize(stream, Body, options);
-				stream.WriteByte((byte)'\n');
-			}
+			JsonSerializer.Serialize(stream, Header, options);
+			stream.WriteByte((byte)'\n');
+			JsonSerializer.Serialize(stream, Body, options);
+			stream.WriteByte((byte)'\n');
 		}
+	}
 
-		async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (Body is null)
+			return;
+
+		if (settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
 		{
-			if (Body is null)
-				return;
-
-			if (settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
-			{
-				await JsonSerializer.SerializeAsync(stream, Header, options).ConfigureAwait(false);
-				stream.WriteByte((byte)'\n');
-				await JsonSerializer.SerializeAsync(stream, Body, options).ConfigureAwait(false);
-				stream.WriteByte((byte)'\n');
-			}
+			await JsonSerializer.SerializeAsync(stream, Header, options).ConfigureAwait(false);
+			stream.WriteByte((byte)'\n');
+			await JsonSerializer.SerializeAsync(stream, Body, options).ConfigureAwait(false);
+			stream.WriteByte((byte)'\n');
 		}
 	}
 }

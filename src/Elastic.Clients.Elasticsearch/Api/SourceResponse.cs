@@ -6,26 +6,25 @@ using System.Text.Json;
 using System.IO;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+public partial class SourceResponse<TDocument> : ISelfDeserializable
 {
-	public partial class SourceResponse<TDocument> : ISelfDeserializable
+	public TDocument Body { get; set; }
+
+	public void Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		public TDocument Body { get; set; }
+		using var jsonDoc = JsonSerializer.Deserialize<JsonDocument>(ref reader);
 
-		public void Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			using var jsonDoc = JsonSerializer.Deserialize<JsonDocument>(ref reader);
+		using var stream = new MemoryStream();
 
-			using var stream = new MemoryStream();
+		var writer = new Utf8JsonWriter(stream);
+		jsonDoc.WriteTo(writer);
+		writer.Flush();
+		stream.Position = 0;
 
-			var writer = new Utf8JsonWriter(stream);
-			jsonDoc.WriteTo(writer);
-			writer.Flush();
-			stream.Position = 0;
+		var body = settings.SourceSerializer.Deserialize<TDocument>(stream);
 
-			var body = settings.SourceSerializer.Deserialize<TDocument>(stream);
-
-			Body = body;
-		}
+		Body = body;
 	}
 }
