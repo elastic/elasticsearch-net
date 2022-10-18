@@ -6,19 +6,18 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System.Text.Json;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+public sealed partial class CreateRequest<TDocument> : ICustomJsonWriter
 {
-	public sealed partial class CreateRequest<TDocument> : ICustomJsonWriter
+
+	public CreateRequest(Id id) : this(typeof(TDocument), id)
 	{
-
-		public CreateRequest(Id id) : this(typeof(TDocument), id)
-		{
-		}
-
-		public CreateRequest(TDocument documentWithId, IndexName index = null, Id id = null)
-			: this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) =>
-				Document = documentWithId;
-
-		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
 	}
+
+	public CreateRequest(TDocument documentWithId, IndexName index = null, Id id = null)
+		: this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) =>
+			Document = documentWithId;
+
+	public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
 }
