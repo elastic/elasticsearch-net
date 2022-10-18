@@ -4,19 +4,18 @@
 
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+public partial struct WaitForActiveShards : IStringable
 {
-	public partial struct WaitForActiveShards : IStringable
-	{
-		public static WaitForActiveShards All = new("all");
+	public static WaitForActiveShards All = new("all");
 
-		public WaitForActiveShards(string value) => Value = value;
+	public WaitForActiveShards(string value) => Value = value;
 
-		public string Value { get; }
+	public string Value { get; }
 
-		public static implicit operator WaitForActiveShards(int v) => new(v.ToString());
-		public static implicit operator WaitForActiveShards(string v) => new(v);
+	public static implicit operator WaitForActiveShards(int v) => new(v.ToString());
+	public static implicit operator WaitForActiveShards(string v) => new(v);
 
-		public string GetString() => Value ?? string.Empty;
-	}
+	public string GetString() => Value ?? string.Empty;
 }

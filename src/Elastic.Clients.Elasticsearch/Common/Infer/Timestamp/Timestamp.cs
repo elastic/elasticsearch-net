@@ -6,37 +6,36 @@ using System;
 using System.Globalization;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+public sealed class Timestamp : IUrlParameter, IEquatable<Timestamp>
 {
-	public sealed class Timestamp : IUrlParameter, IEquatable<Timestamp>
+	internal readonly long Value;
+
+	public Timestamp(long value) => Value = value;
+
+	public bool Equals(Timestamp other) => Value == other.Value;
+
+	// ReSharper disable once ImpureMethodCallOnReadonlyValueField
+	public string GetString(ITransportConfiguration settings) => Value.ToString(CultureInfo.InvariantCulture);
+
+	public static implicit operator Timestamp(DateTimeOffset categoryId) => new(categoryId.ToUnixTimeMilliseconds());
+
+	public static implicit operator Timestamp(long categoryId) => new(categoryId);
+
+	public static implicit operator long(Timestamp categoryId) => categoryId.Value;
+
+	public override bool Equals(object obj) => obj switch
 	{
-		internal readonly long Value;
+		int l => Value == l,
+		long l => Value == l,
+		Timestamp i => Value == i.Value,
+		_ => false,
+	};
 
-		public Timestamp(long value) => Value = value;
+	public override int GetHashCode() => Value.GetHashCode();
 
-		public bool Equals(Timestamp other) => Value == other.Value;
+	public static bool operator ==(Timestamp left, Timestamp right) => Equals(left, right);
 
-		// ReSharper disable once ImpureMethodCallOnReadonlyValueField
-		public string GetString(ITransportConfiguration settings) => Value.ToString(CultureInfo.InvariantCulture);
-
-		public static implicit operator Timestamp(DateTimeOffset categoryId) => new(categoryId.ToUnixTimeMilliseconds());
-
-		public static implicit operator Timestamp(long categoryId) => new(categoryId);
-
-		public static implicit operator long(Timestamp categoryId) => categoryId.Value;
-
-		public override bool Equals(object obj) => obj switch
-		{
-			int l => Value == l,
-			long l => Value == l,
-			Timestamp i => Value == i.Value,
-			_ => false,
-		};
-
-		public override int GetHashCode() => Value.GetHashCode();
-
-		public static bool operator ==(Timestamp left, Timestamp right) => Equals(left, right);
-
-		public static bool operator !=(Timestamp left, Timestamp right) => !Equals(left, right);
-	}
+	public static bool operator !=(Timestamp left, Timestamp right) => !Equals(left, right);
 }
