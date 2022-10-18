@@ -2,11 +2,10 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+
+public partial class AggregateDictionary
 {
-	public partial class AggregateDictionary
-	{
-		/// <inheritdoc cref="GetAvg(string)"/>
-		public AvgAggregate? GetAverage(string key) => TryGet<AvgAggregate?>(key);
-	}
+	/// <inheritdoc cref="GetAvg(string)"/>
+	public AvgAggregate? GetAverage(string key) => TryGet<AvgAggregate?>(key);
 }
