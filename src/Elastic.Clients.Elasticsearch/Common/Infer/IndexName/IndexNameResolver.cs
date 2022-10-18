@@ -4,53 +4,52 @@
 
 using System;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+internal class IndexNameResolver
 {
-	internal class IndexNameResolver
+	private readonly IElasticsearchClientSettings _transportClientSettings;
+
+	public IndexNameResolver(IElasticsearchClientSettings connectionSettings)
 	{
-		private readonly IElasticsearchClientSettings _transportClientSettings;
+		connectionSettings.ThrowIfNull(nameof(connectionSettings));
+		_transportClientSettings = connectionSettings;
+	}
 
-		public IndexNameResolver(IElasticsearchClientSettings connectionSettings)
+	public string Resolve<T>() => Resolve(typeof(T));
+
+	public string Resolve(IndexName i)
+	{
+		if (string.IsNullOrEmpty(i?.Name))
+			return PrefixClusterName(i, Resolve(i?.Type));
+
+		ValidateIndexName(i.Name);
+		return PrefixClusterName(i, i.Name);
+	}
+
+	public string Resolve(Type type)
+	{
+		var indexName = _transportClientSettings.DefaultIndex;
+		var defaultIndices = _transportClientSettings.DefaultIndices;
+		if (defaultIndices != null && type != null)
 		{
-			connectionSettings.ThrowIfNull(nameof(connectionSettings));
-			_transportClientSettings = connectionSettings;
+			if (defaultIndices.TryGetValue(type, out var value) && !string.IsNullOrEmpty(value))
+				indexName = value;
 		}
+		ValidateIndexName(indexName);
+		return indexName;
+	}
 
-		public string Resolve<T>() => Resolve(typeof(T));
+	private static string PrefixClusterName(IndexName i, string name) => i.Cluster.IsNullOrEmpty() ? name : $"{i.Cluster}:{name}";
 
-		public string Resolve(IndexName i)
-		{
-			if (string.IsNullOrEmpty(i?.Name))
-				return PrefixClusterName(i, Resolve(i?.Type));
-
-			ValidateIndexName(i.Name);
-			return PrefixClusterName(i, i.Name);
-		}
-
-		public string Resolve(Type type)
-		{
-			var indexName = _transportClientSettings.DefaultIndex;
-			var defaultIndices = _transportClientSettings.DefaultIndices;
-			if (defaultIndices != null && type != null)
-			{
-				if (defaultIndices.TryGetValue(type, out var value) && !string.IsNullOrEmpty(value))
-					indexName = value;
-			}
-			ValidateIndexName(indexName);
-			return indexName;
-		}
-
-		private static string PrefixClusterName(IndexName i, string name) => i.Cluster.IsNullOrEmpty() ? name : $"{i.Cluster}:{name}";
-
-		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
-		private static void ValidateIndexName(string indexName)
-		{
-			if (string.IsNullOrWhiteSpace(indexName))
-				throw new ArgumentException(
-					"Index name is null for the given type and no default index is set. "
-					+ "Map an index name using ConnectionSettings.DefaultMappingFor<TDocument>() "
-					+ "or set a default index using ConnectionSettings.DefaultIndex()."
-				);
-		}
+	// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
+	private static void ValidateIndexName(string indexName)
+	{
+		if (string.IsNullOrWhiteSpace(indexName))
+			throw new ArgumentException(
+				"Index name is null for the given type and no default index is set. "
+				+ "Map an index name using ConnectionSettings.DefaultMappingFor<TDocument>() "
+				+ "or set a default index using ConnectionSettings.DefaultIndex()."
+			);
 	}
 }

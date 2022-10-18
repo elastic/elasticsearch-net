@@ -6,22 +6,21 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+/// <summary>
+/// Resolves member infos in an expression, instance may NOT be shared.
+/// </summary>
+public sealed class MemberInfoResolver : ExpressionVisitor
 {
-	/// <summary>
-	/// Resolves member infos in an expression, instance may NOT be shared.
-	/// </summary>
-	public sealed class MemberInfoResolver : ExpressionVisitor
+	// ReSharper disable once VirtualMemberCallInConstructor
+	public MemberInfoResolver(Expression expression) => Visit(expression);
+
+	public IList<MemberInfo> Members { get; } = new List<MemberInfo>();
+
+	protected override Expression VisitMember(MemberExpression expression)
 	{
-		// ReSharper disable once VirtualMemberCallInConstructor
-		public MemberInfoResolver(Expression expression) => Visit(expression);
-
-		public IList<MemberInfo> Members { get; } = new List<MemberInfo>();
-
-		protected override Expression VisitMember(MemberExpression expression)
-		{
-			Members.Add(expression.Member);
-			return base.VisitMember(expression);
-		}
+		Members.Add(expression.Member);
+		return base.VisitMember(expression);
 	}
 }

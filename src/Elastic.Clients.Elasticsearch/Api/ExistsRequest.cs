@@ -7,12 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+public partial class ExistsRequest
 {
-	public partial class ExistsRequest
+	public ExistsRequest(Type type, Id id) : base(r => r.Required("index", Infer.Index(type)).Required("id", id))
 	{
-		public ExistsRequest(Type type, Id id) : base(r => r.Required("index", Infer.Index(type)).Required("id", id))
-		{
-		}
 	}
 }

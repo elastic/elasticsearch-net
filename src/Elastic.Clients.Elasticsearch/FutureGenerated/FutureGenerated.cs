@@ -5,16 +5,15 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.QueryDsl
-{
-	// TODO - Generate these
-	public partial class TermQuery
-	{
-		public static implicit operator QueryContainer(TermQuery termQuery) => QueryContainer.Term(termQuery);
-	}
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-	public partial class MatchAllQuery
-	{
-		public static implicit operator QueryContainer(MatchAllQuery matchAllQuery) => QueryContainer.MatchAll(matchAllQuery);
-	}
+// TODO - Generate these
+public partial class TermQuery
+{
+	public static implicit operator QueryContainer(TermQuery termQuery) => QueryContainer.Term(termQuery);
+}
+
+public partial class MatchAllQuery
+{
+	public static implicit operator QueryContainer(MatchAllQuery matchAllQuery) => QueryContainer.MatchAll(matchAllQuery);
 }
