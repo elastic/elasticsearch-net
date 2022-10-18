@@ -2,14 +2,12 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-namespace Elastic.Clients.Elasticsearch
-{
-	//internal static class FieldExtensions
-	//{
-	//	internal static bool IsConditionless(this Field field) =>
-	//		field == null || field.Name.IsNullOrEmpty() && field.Expression == null && field.Property == null;
+namespace Elastic.Clients.Elasticsearch;
+//internal static class FieldExtensions
+//{
+//	internal static bool IsConditionless(this Field field) =>
+//		field == null || field.Name.IsNullOrEmpty() && field.Expression == null && field.Property == null;
 
-	//	internal static bool IsConditionless(this Fields field) =>
-	//		field?.ListOfFields == null || field.ListOfFields.All(l => l.IsConditionless());
-	//}
-}
+//	internal static bool IsConditionless(this Fields field) =>
+//		field?.ListOfFields == null || field.ListOfFields.All(l => l.IsConditionless());
+//}
