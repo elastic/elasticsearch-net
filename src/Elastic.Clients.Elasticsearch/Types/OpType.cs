@@ -4,19 +4,18 @@
 
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+public partial struct OpType : IStringable
 {
-	public partial struct OpType : IStringable
-	{
-		public static OpType Index = new("index");
-		public static OpType Create = new("create");
+	public static OpType Index = new("index");
+	public static OpType Create = new("create");
 
-		public OpType(string value) => Value = value;
+	public OpType(string value) => Value = value;
 
-		public string Value { get; }
+	public string Value { get; }
 
-		public static implicit operator OpType(string v) => new(v);
+	public static implicit operator OpType(string v) => new(v);
 
-		public string GetString() => Value ?? string.Empty;
-	}
+	public string GetString() => Value ?? string.Empty;
 }

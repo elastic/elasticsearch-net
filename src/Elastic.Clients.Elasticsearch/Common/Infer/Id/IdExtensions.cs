@@ -2,11 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-namespace Elastic.Clients.Elasticsearch
-{
-	//internal static class IdExtensions
-	//{
-	//	internal static bool IsConditionless(this Id id) =>
-	//		id == null || id.StringOrLongValue == null && id.Document == null;
-	//}
-}
+namespace Elastic.Clients.Elasticsearch;
+//internal static class IdExtensions
+//{
+//	internal static bool IsConditionless(this Id id) =>
+//		id == null || id.StringOrLongValue == null && id.Document == null;
+//}
