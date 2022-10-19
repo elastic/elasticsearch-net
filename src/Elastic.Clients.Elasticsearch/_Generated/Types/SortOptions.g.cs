@@ -58,7 +58,6 @@ public sealed partial class SortOptions
 	internal Elastic.Clients.Elasticsearch.Field? AdditionalPropertyName { get; }
 
 	public static SortOptions Doc(Elastic.Clients.Elasticsearch.ScoreSort scoreSort) => new SortOptions("_doc", scoreSort);
-	public static SortOptions GeoDistance(Elastic.Clients.Elasticsearch.GeoDistanceSort geoDistanceSort) => new SortOptions("_geo_distance", geoDistanceSort);
 	public static SortOptions Score(Elastic.Clients.Elasticsearch.ScoreSort scoreSort) => new SortOptions("_score", scoreSort);
 	public static SortOptions Script(Elastic.Clients.Elasticsearch.ScriptSort scriptSort) => new SortOptions("_script", scriptSort);
 	public static SortOptions Field(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.FieldSort fieldSort) => new SortOptions(field, fieldSort);
@@ -84,13 +83,6 @@ internal sealed class SortOptionsConverter : JsonConverter<SortOptions>
 		if (propertyName == "_doc")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScoreSort?>(ref reader, options);
-			reader.Read();
-			return new SortOptions(propertyName, variant);
-		}
-
-		if (propertyName == "_geo_distance")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceSort?>(ref reader, options);
 			reader.Read();
 			return new SortOptions(propertyName, variant);
 		}
@@ -136,9 +128,6 @@ internal sealed class SortOptionsConverter : JsonConverter<SortOptions>
 		{
 			case "_doc":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.ScoreSort>(writer, (Elastic.Clients.Elasticsearch.ScoreSort)value.Variant, options);
-				break;
-			case "_geo_distance":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.GeoDistanceSort>(writer, (Elastic.Clients.Elasticsearch.GeoDistanceSort)value.Variant, options);
 				break;
 			case "_score":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.ScoreSort>(writer, (Elastic.Clients.Elasticsearch.ScoreSort)value.Variant, options);
@@ -191,8 +180,6 @@ public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescr
 
 	public SortOptionsDescriptor<TDocument> Doc(ScoreSort variant) => Set(variant, "_doc");
 	public SortOptionsDescriptor<TDocument> Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
-	public SortOptionsDescriptor<TDocument> GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
-	public SortOptionsDescriptor<TDocument> GeoDistance(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
 	public SortOptionsDescriptor<TDocument> Score(ScoreSort variant) => Set(variant, "_score");
 	public SortOptionsDescriptor<TDocument> Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
 	public SortOptionsDescriptor<TDocument> Script(ScriptSort variant) => Set(variant, "_script");
@@ -256,9 +243,6 @@ public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortO
 
 	public SortOptionsDescriptor Doc(ScoreSort variant) => Set(variant, "_doc");
 	public SortOptionsDescriptor Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
-	public SortOptionsDescriptor GeoDistance(GeoDistanceSort variant) => Set(variant, "_geo_distance");
-	public SortOptionsDescriptor GeoDistance(Action<GeoDistanceSortDescriptor> configure) => Set(configure, "_geo_distance");
-	public SortOptionsDescriptor GeoDistance<TDocument>(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
 	public SortOptionsDescriptor Score(ScoreSort variant) => Set(variant, "_score");
 	public SortOptionsDescriptor Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
 	public SortOptionsDescriptor Script(ScriptSort variant) => Set(variant, "_script");
