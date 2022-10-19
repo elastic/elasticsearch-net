@@ -4,7 +4,7 @@
     "rollForward": "latestPatch",
     "allowPrerelease": false
   },
-  "version": "7.17.4",
+  "version": "7.17.5",
   "doc_current": "7.17",
   "doc_branch": "7.x"
 }
