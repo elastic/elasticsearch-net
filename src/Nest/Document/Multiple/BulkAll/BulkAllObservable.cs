@@ -162,24 +162,43 @@ namespace Nest
 
 			var retryableDocuments = new List<T>();
 			var droppedDocuments = new List<Tuple<BulkResponseItemBase, T>>();
+			var retryableDocsRemainingAfterRetriesExceeded = false;
 
 			foreach (var documentWithResponse in response.Items.Zip(buffer, Tuple.Create))
 			{
-				if (documentWithResponse.Item1.IsValid) continue;
+				if (documentWithResponse.Item1.IsValid)
+					continue;
 
 				if (_retryPredicate(documentWithResponse.Item1, documentWithResponse.Item2))
-					retryableDocuments.Add(documentWithResponse.Item2);
+				{
+					if (backOffRetries < _backOffRetries)
+					{
+						retryableDocuments.Add(documentWithResponse.Item2);
+					}
+					else
+					{
+						// We still have retriable documents but have exceeded all retries, so we mark these as
+						// dropped so they get handled correctly.
+						retryableDocsRemainingAfterRetriesExceeded = true;
+						droppedDocuments.Add(documentWithResponse);
+					}
+				}
 				else
+				{
 					droppedDocuments.Add(documentWithResponse);
+				}
 			}
 
 			HandleDroppedDocuments(droppedDocuments, response);
 
-			if (retryableDocuments.Count > 0 && backOffRetries < _backOffRetries)
+			if (retryableDocsRemainingAfterRetriesExceeded)
+			{
+				throw ThrowOnBadBulk(response, $"Bulk indexing failed and after retrying {backOffRetries} times.");
+			}
+			else if (retryableDocuments.Count > 0)
+			{
 				return await RetryDocuments(page, ++backOffRetries, retryableDocuments).ConfigureAwait(false);
-
-			if (retryableDocuments.Count > 0)
-				throw ThrowOnBadBulk(response, $"Bulk indexing failed and after retrying {backOffRetries} times");
+			}
 
 			request.BackPressure?.Release();
 
