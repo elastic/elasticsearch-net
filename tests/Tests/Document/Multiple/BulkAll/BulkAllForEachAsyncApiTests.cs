@@ -43,7 +43,7 @@ public class BulkAllForEachAsyncApiTests : BulkAllApiTestsBase
 		seenPages.Should().Be(pages);
 
 		var count = await Client.CountAsync(new CountRequest(index));
-		//var count = Client.Count<SmallObject>(f => f.Index(index));
+		//var count = Client.Count<SmallObject>(f => f.Index(index)); // TODO - Reintroduce this shortcut
 		count.Count.Should().Be(numberOfDocuments);
 	}
 }
