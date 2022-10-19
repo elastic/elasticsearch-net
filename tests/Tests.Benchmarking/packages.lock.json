@@ -40,6 +40,12 @@
           "LibGit2Sharp.NativeBinaries": "[1.0.245]"
         }
       },
+      "Microsoft.NETFramework.ReferenceAssemblies": {
+        "type": "Direct",
+        "requested": "[1.0.3, )",
+        "resolved": "1.0.3",
+        "contentHash": "vUc9Npcs14QsyOD01tnv/m8sQUnGTGOw1BCmKcv77LBJY7OxhJ+zJF7UD/sCL3lYNFuqmQEVlkfS4Quif6FyYg=="
+      },
       "BenchmarkDotNet.Annotations": {
         "type": "Transitive",
         "resolved": "0.12.0",
