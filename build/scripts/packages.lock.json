@@ -84,12 +84,6 @@
         "resolved": "5.0.0",
         "contentHash": "iHoYXA0VaSQUONGENB1aVafjDDZDZpwu39MtaRCTrmwFW/cTcK0b2yKNVYneFHJMc3ChtsSoM9lNtJ1dYXkHfA=="
       },
-      "Microsoft.NETFramework.ReferenceAssemblies": {
-        "type": "Direct",
-        "requested": "[1.0.0-preview.2, )",
-        "resolved": "1.0.0-preview.2",
-        "contentHash": "m+pJPEO7HyXvrOna5Sr3s77ewXonjYWJTNL6drh8xACnMNxnlqUDKx9HfGeSE9wmfY0lQwppaeZpFTPGaH7kZg=="
-      },
       "Newtonsoft.Json": {
         "type": "Direct",
         "requested": "[13.0.1, )",

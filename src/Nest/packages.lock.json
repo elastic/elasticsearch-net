@@ -8,15 +8,6 @@
         "resolved": "4.0.0",
         "contentHash": "PCgUb5I1DIe0GsBZ2fPXr/tOgph9Gh6yoHcpsFxNmTvyOQFXxyOcjM7wPs8ylakPNdFYBUs9YeF2Wsx6K/nEDQ=="
       },
-      "Microsoft.NETFramework.ReferenceAssemblies": {
-        "type": "Direct",
-        "requested": "[1.0.0-preview.2, )",
-        "resolved": "1.0.0-preview.2",
-        "contentHash": "m+pJPEO7HyXvrOna5Sr3s77ewXonjYWJTNL6drh8xACnMNxnlqUDKx9HfGeSE9wmfY0lQwppaeZpFTPGaH7kZg==",
-        "dependencies": {
-          "Microsoft.NETFramework.ReferenceAssemblies.net461": "1.0.0-preview.2"
-        }
-      },
       "Microsoft.SourceLink.GitHub": {
         "type": "Direct",
         "requested": "[1.0.0, )",
@@ -36,11 +27,6 @@
         "type": "Transitive",
         "resolved": "4.6.0",
         "contentHash": "kxn3M2rnAGy5N5DgcIwcE8QTePWU/XiYcQVzn9HqTls2NKluVzVSmVWRjK7OUPWbljCXuZxHyhEz9kPRIQeXow=="
-      },
-      "Microsoft.NETFramework.ReferenceAssemblies.net461": {
-        "type": "Transitive",
-        "resolved": "1.0.0-preview.2",
-        "contentHash": "59D9ISjzCpfHG41r5x4BNZNNOCmE2o5YX8vcdOwsqfxOA0+6vQnxZrYq8KtthUU2JSvC13g941rSr5GRaNQOJg=="
       },
       "Microsoft.SourceLink.Common": {
         "type": "Transitive",
@@ -97,12 +83,6 @@
         "requested": "[4.0.0, )",
         "resolved": "4.0.0",
         "contentHash": "PCgUb5I1DIe0GsBZ2fPXr/tOgph9Gh6yoHcpsFxNmTvyOQFXxyOcjM7wPs8ylakPNdFYBUs9YeF2Wsx6K/nEDQ=="
-      },
-      "Microsoft.NETFramework.ReferenceAssemblies": {
-        "type": "Direct",
-        "requested": "[1.0.0-preview.2, )",
-        "resolved": "1.0.0-preview.2",
-        "contentHash": "m+pJPEO7HyXvrOna5Sr3s77ewXonjYWJTNL6drh8xACnMNxnlqUDKx9HfGeSE9wmfY0lQwppaeZpFTPGaH7kZg=="
       },
       "Microsoft.SourceLink.GitHub": {
         "type": "Direct",

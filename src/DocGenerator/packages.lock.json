@@ -113,12 +113,6 @@
           "NETStandard.Library": "1.6.1"
         }
       },
-      "Microsoft.NETFramework.ReferenceAssemblies": {
-        "type": "Direct",
-        "requested": "[1.0.0-preview.2, )",
-        "resolved": "1.0.0-preview.2",
-        "contentHash": "m+pJPEO7HyXvrOna5Sr3s77ewXonjYWJTNL6drh8xACnMNxnlqUDKx9HfGeSE9wmfY0lQwppaeZpFTPGaH7kZg=="
-      },
       "Newtonsoft.Json": {
         "type": "Direct",
         "requested": "[13.0.1, )",
