@@ -171,8 +171,8 @@
       },
       "Microsoft.CodeCoverage": {
         "type": "Transitive",
-        "resolved": "17.2.0",
-        "contentHash": "MsKhJmwIfHxNDbTIlgQy29UpWSWPpbZOQPhQ7xalRy+ABnl8/neFHZGzSP3XlpW2dKAXHTFrtIcKzW/kopY2Bg=="
+        "resolved": "17.3.2",
+        "contentHash": "+CeYNY9hYNRgv1wAID5koeDVob1ZOrOYfRRTLxU9Zm5ZMDMkMZ8wzXgakxVv+jtk8tPdE8Ze9vVE+czMKapv/Q=="
       },
       "Microsoft.CSharp": {
         "type": "Transitive",
@@ -211,11 +211,11 @@
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Transitive",
-        "resolved": "17.2.0",
-        "contentHash": "kYmkDYbcDd+jNvmMH4TMtgHjsUYbIsWENM2VcjB0X7TawXbehL5I8OIsu2TgFS/nQCgZE94InrqMxrm7WDy+Lw==",
+        "resolved": "17.3.2",
+        "contentHash": "apR0ha1T8FujBwq1P8i/DOZjbI5XhcP/i8As4NnVztVSpZG8GtWRPCstcmgkUkBpvEfcrrDPlJWbuZY+Hl1hSg==",
         "dependencies": {
-          "Microsoft.CodeCoverage": "17.2.0",
-          "Microsoft.TestPlatform.TestHost": "17.2.0"
+          "Microsoft.CodeCoverage": "17.3.2",
+          "Microsoft.TestPlatform.TestHost": "17.3.2"
         }
       },
       "Microsoft.NETCore.Platforms": {
@@ -230,8 +230,8 @@
       },
       "Microsoft.TestPlatform.ObjectModel": {
         "type": "Transitive",
-        "resolved": "17.2.0",
-        "contentHash": "7j1KYDHLhU98XnCEbECMncXLydI9fNiFLcFsiBsP3lV6EkHOaj5kTPAWHYkKnPGRC9TbZUboSQq8rWI4dTQsxg==",
+        "resolved": "17.3.2",
+        "contentHash": "DJEIfSA2GDC+2m42vKGNR2hm+Uhta4SpCsLZVVvYIiYMjxtk7GzNnv82qvE4SCW3kIYllMg2D0rr8juuj/f7AA==",
         "dependencies": {
           "NuGet.Frameworks": "5.11.0",
           "System.Reflection.Metadata": "1.6.0"
@@ -239,10 +239,10 @@
       },
       "Microsoft.TestPlatform.TestHost": {
         "type": "Transitive",
-        "resolved": "17.2.0",
-        "contentHash": "bI67J+hers241h7eD2eecS02p9CbKcQDIeoRvO4FgMlTWg2ZTzc0D3uWLYr5U+K5x9O1pNmyMoMDbYIeWY/TWw==",
+        "resolved": "17.3.2",
+        "contentHash": "113J19v31pIx+PzmdEw67cWTZWh/YApnprbclFeat6szNbnpKOKG7Ap4PX5LT6E5Da+xONyilxvx2HZPpEaXPQ==",
         "dependencies": {
-          "Microsoft.TestPlatform.ObjectModel": "17.2.0",
+          "Microsoft.TestPlatform.ObjectModel": "17.3.2",
           "Newtonsoft.Json": "9.0.1"
         }
       },
@@ -1418,7 +1418,7 @@
           "Elastic.Elasticsearch.Xunit": "0.2.6",
           "FluentAssertions": "5.10.3",
           "JunitXml.TestLogger": "2.1.78",
-          "Microsoft.NET.Test.Sdk": "17.2.0",
+          "Microsoft.NET.Test.Sdk": "17.3.2",
           "NEST.JsonNetSerializer": "7.0.0",
           "Nullean.VsTest.Pretty.TestLogger": "0.3.0",
           "Proc": "0.6.1",

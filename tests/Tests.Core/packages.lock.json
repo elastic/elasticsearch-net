@@ -38,9 +38,9 @@
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
-        "requested": "[17.2.0, )",
-        "resolved": "17.2.0",
-        "contentHash": "kYmkDYbcDd+jNvmMH4TMtgHjsUYbIsWENM2VcjB0X7TawXbehL5I8OIsu2TgFS/nQCgZE94InrqMxrm7WDy+Lw=="
+        "requested": "[17.3.2, )",
+        "resolved": "17.3.2",
+        "contentHash": "apR0ha1T8FujBwq1P8i/DOZjbI5XhcP/i8As4NnVztVSpZG8GtWRPCstcmgkUkBpvEfcrrDPlJWbuZY+Hl1hSg=="
       },
       "NETStandard.Library": {
         "type": "Direct",
