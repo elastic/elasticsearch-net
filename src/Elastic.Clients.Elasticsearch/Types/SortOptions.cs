@@ -4,9 +4,7 @@
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class SortCombinations
+public partial class SortOptions
 {
-	public SortCombinations(string field) : base(field)
-	{
-	}
+	public static SortOptions Field(Field field) => new(field, new FieldSort());
 }
