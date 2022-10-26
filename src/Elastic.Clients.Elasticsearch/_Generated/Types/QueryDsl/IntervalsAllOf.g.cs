@@ -33,7 +33,7 @@ public sealed partial class IntervalsAllOf
 
 	[JsonInclude]
 	[JsonPropertyName("intervals")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> Intervals { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> Intervals { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("max_gaps")]
@@ -51,7 +51,7 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 	{
 	}
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
 
 	private IntervalsContainerDescriptor<TDocument> IntervalsDescriptor { get; set; }
 
@@ -69,7 +69,7 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 
 	private bool? OrderedValue { get; set; }
 
-	public IntervalsAllOfDescriptor<TDocument> Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
+	public IntervalsAllOfDescriptor<TDocument> Intervals(IList<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
 	{
 		IntervalsDescriptor = null;
 		IntervalsDescriptorAction = null;
@@ -214,7 +214,7 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 	{
 	}
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
 
 	private IntervalsContainerDescriptor IntervalsDescriptor { get; set; }
 
@@ -232,7 +232,7 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 
 	private bool? OrderedValue { get; set; }
 
-	public IntervalsAllOfDescriptor Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
+	public IntervalsAllOfDescriptor Intervals(IList<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
 	{
 		IntervalsDescriptor = null;
 		IntervalsDescriptorAction = null;

@@ -55,7 +55,7 @@ internal sealed class IpRangeAggregationConverter : JsonConverter<IpRangeAggrega
 				if (reader.ValueTextEquals("ranges"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Ranges = value;
@@ -147,7 +147,7 @@ public sealed partial class IpRangeAggregation : Aggregation
 
 	public override string? Name { get; internal set; }
 
-	public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? Ranges { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? Ranges { get; set; }
 }
 
 public sealed partial class IpRangeAggregationDescriptor<TDocument> : SerializableDescriptor<IpRangeAggregationDescriptor<TDocument>>
@@ -167,7 +167,7 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 
 	private Dictionary<string, object>? MetaValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? RangesValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? RangesValue { get; set; }
 
 	private IpRangeAggregationRangeDescriptor RangesDescriptor { get; set; }
 
@@ -217,7 +217,7 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public IpRangeAggregationDescriptor<TDocument> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? ranges)
+	public IpRangeAggregationDescriptor<TDocument> Ranges(IList<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? ranges)
 	{
 		RangesDescriptor = null;
 		RangesDescriptorAction = null;
@@ -339,7 +339,7 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 
 	private Dictionary<string, object>? MetaValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? RangesValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? RangesValue { get; set; }
 
 	private IpRangeAggregationRangeDescriptor RangesDescriptor { get; set; }
 
@@ -395,7 +395,7 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public IpRangeAggregationDescriptor Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? ranges)
+	public IpRangeAggregationDescriptor Ranges(IList<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? ranges)
 	{
 		RangesDescriptor = null;
 		RangesDescriptorAction = null;

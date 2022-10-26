@@ -54,7 +54,7 @@ public sealed class SearchRequestParameters : RequestParameters<SearchRequestPar
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
@@ -173,13 +173,13 @@ internal sealed class SearchRequestConverter : JsonConverter<SearchRequest>
 
 				if (property == "indices_boost")
 				{
-					variant.IndicesBoost = JsonSerializer.Deserialize<IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
+					variant.IndicesBoost = JsonSerializer.Deserialize<IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
 					continue;
 				}
 
 				if (property == "docvalue_fields")
 				{
-					variant.DocvalueFields = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
+					variant.DocvalueFields = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
 					continue;
 				}
 
@@ -215,7 +215,7 @@ internal sealed class SearchRequestConverter : JsonConverter<SearchRequest>
 
 				if (property == "rescore")
 				{
-					variant.Rescore = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?>(ref reader, options);
+					variant.Rescore = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?>(ref reader, options);
 					continue;
 				}
 
@@ -227,7 +227,7 @@ internal sealed class SearchRequestConverter : JsonConverter<SearchRequest>
 
 				if (property == "search_after")
 				{
-					variant.SearchAfter = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
+					variant.SearchAfter = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
 					continue;
 				}
 
@@ -245,7 +245,7 @@ internal sealed class SearchRequestConverter : JsonConverter<SearchRequest>
 
 				if (property == "sort")
 				{
-					variant.Sort = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
+					variant.Sort = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
 					continue;
 				}
 
@@ -257,7 +257,7 @@ internal sealed class SearchRequestConverter : JsonConverter<SearchRequest>
 
 				if (property == "fields")
 				{
-					variant.Fields = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
+					variant.Fields = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
 					continue;
 				}
 
@@ -317,7 +317,7 @@ internal sealed class SearchRequestConverter : JsonConverter<SearchRequest>
 
 				if (property == "stats")
 				{
-					variant.Stats = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
+					variant.Stats = JsonSerializer.Deserialize<IList<string>?>(ref reader, options);
 					continue;
 				}
 			}
@@ -564,7 +564,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
@@ -656,11 +656,11 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	[JsonInclude]
 	[JsonPropertyName("indices_boost")]
-	public IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
+	public IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("docvalue_fields")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("knn")]
@@ -684,7 +684,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	[JsonInclude]
 	[JsonPropertyName("rescore")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("script_fields")]
@@ -692,7 +692,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	[JsonInclude]
 	[JsonPropertyName("search_after")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("size")]
@@ -705,7 +705,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	[JsonInclude]
 	[JsonPropertyName("sort")]
 	[JsonConverter(typeof(SortConverter))]
-	public IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("_source")]
@@ -713,7 +713,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("suggest")]
@@ -753,7 +753,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	[JsonInclude]
 	[JsonPropertyName("stats")]
-	public IEnumerable<string>? Stats { get; set; }
+	public IList<string>? Stats { get; set; }
 }
 
 public sealed partial class SearchRequest<TInferDocument> : SearchRequest
@@ -787,7 +787,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	public SearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	public SearchRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public SearchRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
-	public SearchRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public SearchRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public SearchRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 	public SearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public SearchRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
@@ -824,7 +824,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	private Action<Core.Search.FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
 
@@ -832,7 +832,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
 
@@ -864,7 +864,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
 
 	private Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
 
@@ -886,7 +886,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	private int? FromValue { get; set; }
 
-	private IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 
 	private double? MinScoreValue { get; set; }
 
@@ -902,15 +902,15 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
 	private bool? SeqNoPrimaryTermValue { get; set; }
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
-	private IEnumerable<string>? StatsValue { get; set; }
+	private IList<string>? StatsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -978,7 +978,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+	public SearchRequestDescriptor<TDocument> DocvalueFields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
 		DocvalueFieldsDescriptorAction = null;
@@ -1014,7 +1014,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public SearchRequestDescriptor<TDocument> Fields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
 		FieldsDescriptorAction = null;
@@ -1146,7 +1146,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
+	public SearchRequestDescriptor<TDocument> Rescore(IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
 	{
 		RescoreDescriptor = null;
 		RescoreDescriptorAction = null;
@@ -1230,7 +1230,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public SearchRequestDescriptor<TDocument> IndicesBoost(IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
@@ -1284,7 +1284,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> SearchAfter(IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public SearchRequestDescriptor<TDocument> SearchAfter(IList<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
 	{
 		SearchAfterValue = searchAfter;
 		return Self;
@@ -1302,13 +1302,13 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public SearchRequestDescriptor<TDocument> Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Stats(IEnumerable<string>? stats)
+	public SearchRequestDescriptor<TDocument> Stats(IList<string>? stats)
 	{
 		StatsValue = stats;
 		return Self;
@@ -1762,7 +1762,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	public SearchRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	public SearchRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public SearchRequestDescriptor Df(string? df) => Qs("df", df);
-	public SearchRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public SearchRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public SearchRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 	public SearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public SearchRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
@@ -1799,7 +1799,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	private Action<Core.Search.FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
 
@@ -1807,7 +1807,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
 
@@ -1839,7 +1839,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
 
 	private Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
 
@@ -1861,7 +1861,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	private int? FromValue { get; set; }
 
-	private IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 
 	private double? MinScoreValue { get; set; }
 
@@ -1877,15 +1877,15 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
 	private bool? SeqNoPrimaryTermValue { get; set; }
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
-	private IEnumerable<string>? StatsValue { get; set; }
+	private IList<string>? StatsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -1953,7 +1953,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+	public SearchRequestDescriptor DocvalueFields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
 		DocvalueFieldsDescriptorAction = null;
@@ -1989,7 +1989,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public SearchRequestDescriptor Fields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
 		FieldsDescriptorAction = null;
@@ -2121,7 +2121,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
+	public SearchRequestDescriptor Rescore(IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
 	{
 		RescoreDescriptor = null;
 		RescoreDescriptorAction = null;
@@ -2205,7 +2205,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public SearchRequestDescriptor IndicesBoost(IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
@@ -2259,7 +2259,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor SearchAfter(IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public SearchRequestDescriptor SearchAfter(IList<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
 	{
 		SearchAfterValue = searchAfter;
 		return Self;
@@ -2277,13 +2277,13 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public SearchRequestDescriptor Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
 	}
 
-	public SearchRequestDescriptor Stats(IEnumerable<string>? stats)
+	public SearchRequestDescriptor Stats(IList<string>? stats)
 	{
 		StatsValue = stats;
 		return Self;

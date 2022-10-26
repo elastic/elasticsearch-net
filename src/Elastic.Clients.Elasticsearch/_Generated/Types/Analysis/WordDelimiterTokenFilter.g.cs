@@ -53,7 +53,7 @@ public sealed partial class WordDelimiterTokenFilter : ITokenFilterDefinition
 
 	[JsonInclude]
 	[JsonPropertyName("protected_words")]
-	public IEnumerable<string>? ProtectedWords { get; set; }
+	public IList<string>? ProtectedWords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("protected_words_path")]
@@ -76,7 +76,7 @@ public sealed partial class WordDelimiterTokenFilter : ITokenFilterDefinition
 	public string Type => "word_delimiter";
 	[JsonInclude]
 	[JsonPropertyName("type_table")]
-	public IEnumerable<string>? TypeTable { get; set; }
+	public IList<string>? TypeTable { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type_table_path")]
@@ -106,7 +106,7 @@ public sealed partial class WordDelimiterTokenFilterDescriptor : SerializableDes
 
 	private bool? PreserveOriginalValue { get; set; }
 
-	private IEnumerable<string>? ProtectedWordsValue { get; set; }
+	private IList<string>? ProtectedWordsValue { get; set; }
 
 	private string? ProtectedWordsPathValue { get; set; }
 
@@ -116,7 +116,7 @@ public sealed partial class WordDelimiterTokenFilterDescriptor : SerializableDes
 
 	private bool? StemEnglishPossessiveValue { get; set; }
 
-	private IEnumerable<string>? TypeTableValue { get; set; }
+	private IList<string>? TypeTableValue { get; set; }
 
 	private string? TypeTablePathValue { get; set; }
 
@@ -158,7 +158,7 @@ public sealed partial class WordDelimiterTokenFilterDescriptor : SerializableDes
 		return Self;
 	}
 
-	public WordDelimiterTokenFilterDescriptor ProtectedWords(IEnumerable<string>? protectedWords)
+	public WordDelimiterTokenFilterDescriptor ProtectedWords(IList<string>? protectedWords)
 	{
 		ProtectedWordsValue = protectedWords;
 		return Self;
@@ -188,7 +188,7 @@ public sealed partial class WordDelimiterTokenFilterDescriptor : SerializableDes
 		return Self;
 	}
 
-	public WordDelimiterTokenFilterDescriptor TypeTable(IEnumerable<string>? typeTable)
+	public WordDelimiterTokenFilterDescriptor TypeTable(IList<string>? typeTable)
 	{
 		TypeTableValue = typeTable;
 		return Self;

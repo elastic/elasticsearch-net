@@ -61,7 +61,7 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 
 	[JsonInclude]
 	[JsonPropertyName("composed_of")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("template")]
@@ -116,7 +116,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 
 	private bool? AllowAutoCreateValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
 
@@ -166,7 +166,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 		return Self;
 	}
 
-	public SimulateIndexTemplateRequestDescriptor<TDocument> ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf)
+	public SimulateIndexTemplateRequestDescriptor<TDocument> ComposedOf(IList<Elastic.Clients.Elasticsearch.Name>? composedOf)
 	{
 		ComposedOfValue = composedOf;
 		return Self;
@@ -321,7 +321,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 
 	private bool? AllowAutoCreateValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
 
@@ -371,7 +371,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 		return Self;
 	}
 
-	public SimulateIndexTemplateRequestDescriptor ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf)
+	public SimulateIndexTemplateRequestDescriptor ComposedOf(IList<Elastic.Clients.Elasticsearch.Name>? composedOf)
 	{
 		ComposedOfValue = composedOf;
 		return Self;

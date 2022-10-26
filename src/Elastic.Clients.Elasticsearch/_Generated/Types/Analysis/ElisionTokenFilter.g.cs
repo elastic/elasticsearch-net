@@ -29,7 +29,7 @@ public sealed partial class ElisionTokenFilter : ITokenFilterDefinition
 {
 	[JsonInclude]
 	[JsonPropertyName("articles")]
-	public IEnumerable<string>? Articles { get; set; }
+	public IList<string>? Articles { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("articles_case")]
@@ -54,7 +54,7 @@ public sealed partial class ElisionTokenFilterDescriptor : SerializableDescripto
 	{
 	}
 
-	private IEnumerable<string>? ArticlesValue { get; set; }
+	private IList<string>? ArticlesValue { get; set; }
 
 	private bool? ArticlesCaseValue { get; set; }
 
@@ -62,7 +62,7 @@ public sealed partial class ElisionTokenFilterDescriptor : SerializableDescripto
 
 	private string? VersionValue { get; set; }
 
-	public ElisionTokenFilterDescriptor Articles(IEnumerable<string>? articles)
+	public ElisionTokenFilterDescriptor Articles(IList<string>? articles)
 	{
 		ArticlesValue = articles;
 		return Self;
