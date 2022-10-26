@@ -254,7 +254,7 @@ internal sealed class AsyncSearchSubmitRequestConverter : JsonConverter<AsyncSea
 
 				if (property == "sort")
 				{
-					variant.Sort = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>?>(ref reader, options);
+					variant.Sort = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
 					continue;
 				}
 
@@ -723,7 +723,7 @@ public partial class AsyncSearchSubmitRequest : PlainRequest<AsyncSearchSubmitRe
 	[JsonInclude]
 	[JsonPropertyName("sort")]
 	[JsonConverter(typeof(SortConverter))]
-	public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
+	public IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("_source")]
@@ -925,7 +925,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
+	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private IEnumerable<string>? StatsValue { get; set; }
 
@@ -1319,7 +1319,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+	public AsyncSearchSubmitRequestDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
@@ -1690,7 +1690,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (StatsValue is not null)
@@ -1899,7 +1899,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
+	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private IEnumerable<string>? StatsValue { get; set; }
 
@@ -2293,7 +2293,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+	public AsyncSearchSubmitRequestDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
@@ -2664,7 +2664,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (StatsValue is not null)

@@ -37,8 +37,7 @@ internal static class SingleOrManySerializationHelper
 		// }
 		if (reader.TokenType == JsonTokenType.String)
 		{
-			var value = reader.GetString();
-			var item = (TItem)Activator.CreateInstance(typeof(TItem), value);
+			var item = (TItem)JsonSerializer.Deserialize(ref reader, typeof(TItem), options);
 			return new TItem[] { item };
 		}
 
