@@ -29,7 +29,7 @@ public sealed partial class NerInferenceOptions
 {
 	[JsonInclude]
 	[JsonPropertyName("classification_labels")]
-	public IEnumerable<string>? ClassificationLabels { get; set; }
+	public IList<string>? ClassificationLabels { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("results_field")]
@@ -47,7 +47,7 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 	{
 	}
 
-	private IEnumerable<string>? ClassificationLabelsValue { get; set; }
+	private IList<string>? ClassificationLabelsValue { get; set; }
 
 	private string? ResultsFieldValue { get; set; }
 
@@ -57,7 +57,7 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 
 	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
 
-	public NerInferenceOptionsDescriptor ClassificationLabels(IEnumerable<string>? classificationLabels)
+	public NerInferenceOptionsDescriptor ClassificationLabels(IList<string>? classificationLabels)
 	{
 		ClassificationLabelsValue = classificationLabels;
 		return Self;

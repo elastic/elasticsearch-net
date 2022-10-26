@@ -51,7 +51,7 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 
 	[JsonInclude]
 	[JsonPropertyName("composed_of")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("template")]
@@ -103,7 +103,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 
 	private Dictionary<string, object>? MetaValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
 
@@ -147,7 +147,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 		return Self;
 	}
 
-	public PutIndexTemplateRequestDescriptor<TDocument> ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf)
+	public PutIndexTemplateRequestDescriptor<TDocument> ComposedOf(IList<Elastic.Clients.Elasticsearch.Name>? composedOf)
 	{
 		ComposedOfValue = composedOf;
 		return Self;
@@ -293,7 +293,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 
 	private Dictionary<string, object>? MetaValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
 
@@ -337,7 +337,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
-	public PutIndexTemplateRequestDescriptor ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf)
+	public PutIndexTemplateRequestDescriptor ComposedOf(IList<Elastic.Clients.Elasticsearch.Name>? composedOf)
 	{
 		ComposedOfValue = composedOf;
 		return Self;

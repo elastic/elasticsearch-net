@@ -41,7 +41,7 @@ public sealed partial class CombinedFieldsQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Field> Fields { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Field> Fields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("minimum_should_match")]
@@ -73,7 +73,7 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 
 	private float? BoostValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Field> FieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Field> FieldsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
@@ -101,7 +101,7 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public CombinedFieldsQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field> fields)
+	public CombinedFieldsQueryDescriptor<TDocument> Fields(IList<Elastic.Clients.Elasticsearch.Field> fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -191,7 +191,7 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 
 	private float? BoostValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Field> FieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Field> FieldsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
@@ -219,7 +219,7 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public CombinedFieldsQueryDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field> fields)
+	public CombinedFieldsQueryDescriptor Fields(IList<Elastic.Clients.Elasticsearch.Field> fields)
 	{
 		FieldsValue = fields;
 		return Self;

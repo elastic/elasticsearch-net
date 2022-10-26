@@ -29,7 +29,7 @@ public sealed partial class PatternCaptureTokenFilter : ITokenFilterDefinition
 {
 	[JsonInclude]
 	[JsonPropertyName("patterns")]
-	public IEnumerable<string> Patterns { get; set; }
+	public IList<string> Patterns { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("preserve_original")]
@@ -50,13 +50,13 @@ public sealed partial class PatternCaptureTokenFilterDescriptor : SerializableDe
 	{
 	}
 
-	private IEnumerable<string> PatternsValue { get; set; }
+	private IList<string> PatternsValue { get; set; }
 
 	private bool? PreserveOriginalValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
-	public PatternCaptureTokenFilterDescriptor Patterns(IEnumerable<string> patterns)
+	public PatternCaptureTokenFilterDescriptor Patterns(IList<string> patterns)
 	{
 		PatternsValue = patterns;
 		return Self;

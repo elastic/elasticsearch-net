@@ -37,7 +37,7 @@ public sealed partial class InnerHits
 
 	[JsonInclude]
 	[JsonPropertyName("docvalue_fields")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("explain")]
@@ -78,7 +78,7 @@ public sealed partial class InnerHits
 	[JsonInclude]
 	[JsonPropertyName("sort")]
 	[JsonConverter(typeof(SortConverter))]
-	public IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("stored_field")]
@@ -106,7 +106,7 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 
 	private Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
 
@@ -138,7 +138,7 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldValue { get; set; }
 
@@ -170,7 +170,7 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public InnerHitsDescriptor<TDocument> DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+	public InnerHitsDescriptor<TDocument> DocvalueFields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
 		DocvalueFieldsDescriptorAction = null;
@@ -284,7 +284,7 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public InnerHitsDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public InnerHitsDescriptor<TDocument> Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
@@ -469,7 +469,7 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 
 	private Action<FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
 
@@ -501,7 +501,7 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldValue { get; set; }
 
@@ -533,7 +533,7 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 		return Self;
 	}
 
-	public InnerHitsDescriptor DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+	public InnerHitsDescriptor DocvalueFields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
 		DocvalueFieldsDescriptorAction = null;
@@ -647,7 +647,7 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 		return Self;
 	}
 
-	public InnerHitsDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public InnerHitsDescriptor Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
