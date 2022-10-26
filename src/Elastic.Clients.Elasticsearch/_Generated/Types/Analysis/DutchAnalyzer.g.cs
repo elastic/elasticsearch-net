@@ -30,7 +30,7 @@ public sealed partial class DutchAnalyzer : IAnalyzer
 	[JsonInclude]
 	[JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
-	public IEnumerable<string>? Stopwords { get; set; }
+	public IList<string>? Stopwords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -44,9 +44,9 @@ public sealed partial class DutchAnalyzerDescriptor : SerializableDescriptor<Dut
 	{
 	}
 
-	private IEnumerable<string>? StopwordsValue { get; set; }
+	private IList<string>? StopwordsValue { get; set; }
 
-	public DutchAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
+	public DutchAnalyzerDescriptor Stopwords(IList<string>? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;

@@ -53,7 +53,7 @@ public sealed partial class AggregateMetricDoubleProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("metrics")]
-	public IEnumerable<string> Metrics { get; set; }
+	public IList<string> Metrics { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("properties")]
@@ -87,7 +87,7 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor<TDocument> :
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
-	private IEnumerable<string> MetricsValue { get; set; }
+	private IList<string> MetricsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
@@ -143,7 +143,7 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor<TDocument> :
 		return Self;
 	}
 
-	public AggregateMetricDoublePropertyDescriptor<TDocument> Metrics(IEnumerable<string> metrics)
+	public AggregateMetricDoublePropertyDescriptor<TDocument> Metrics(IList<string> metrics)
 	{
 		MetricsValue = metrics;
 		return Self;
@@ -252,7 +252,7 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor : Serializab
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
-	private IEnumerable<string> MetricsValue { get; set; }
+	private IList<string> MetricsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
@@ -308,7 +308,7 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor : Serializab
 		return Self;
 	}
 
-	public AggregateMetricDoublePropertyDescriptor Metrics(IEnumerable<string> metrics)
+	public AggregateMetricDoublePropertyDescriptor Metrics(IList<string> metrics)
 	{
 		MetricsValue = metrics;
 		return Self;
