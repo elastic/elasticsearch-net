@@ -30,7 +30,7 @@ public class IndexSettingsSerializationTests : SerializerTestBase
 				.Analyzer(a => a
 					.Custom("whitespace_lowercase", wl => wl
 						.Tokenizer("whitespace")
-						.Filter(Enumerable.Repeat("lowercase", 1))
+						.Filter(new[] { "lowercase" })
 					)
 				)
 		 );

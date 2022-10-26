@@ -29,7 +29,7 @@ public sealed partial class CommonGramsTokenFilter : ITokenFilterDefinition
 {
 	[JsonInclude]
 	[JsonPropertyName("common_words")]
-	public IEnumerable<string>? CommonWords { get; set; }
+	public IList<string>? CommonWords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("common_words_path")]
@@ -58,7 +58,7 @@ public sealed partial class CommonGramsTokenFilterDescriptor : SerializableDescr
 	{
 	}
 
-	private IEnumerable<string>? CommonWordsValue { get; set; }
+	private IList<string>? CommonWordsValue { get; set; }
 
 	private string? CommonWordsPathValue { get; set; }
 
@@ -68,7 +68,7 @@ public sealed partial class CommonGramsTokenFilterDescriptor : SerializableDescr
 
 	private string? VersionValue { get; set; }
 
-	public CommonGramsTokenFilterDescriptor CommonWords(IEnumerable<string>? commonWords)
+	public CommonGramsTokenFilterDescriptor CommonWords(IList<string>? commonWords)
 	{
 		CommonWordsValue = commonWords;
 		return Self;

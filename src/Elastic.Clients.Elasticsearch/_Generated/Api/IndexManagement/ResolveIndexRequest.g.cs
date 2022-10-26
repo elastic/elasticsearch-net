@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class ResolveIndexRequestParameters : RequestParameters<ResolveIndexRequestParameters>
 {
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 public sealed partial class ResolveIndexRequest : PlainRequest<ResolveIndexRequestParameters>
@@ -43,7 +43,7 @@ public sealed partial class ResolveIndexRequest : PlainRequest<ResolveIndexReque
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 public sealed partial class ResolveIndexRequestDescriptor : RequestDescriptor<ResolveIndexRequestDescriptor, ResolveIndexRequestParameters>
@@ -60,7 +60,7 @@ public sealed partial class ResolveIndexRequestDescriptor : RequestDescriptor<Re
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementResolveIndex;
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
-	public ResolveIndexRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public ResolveIndexRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ResolveIndexRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
 	{
 		RouteValues.Required("name", name);

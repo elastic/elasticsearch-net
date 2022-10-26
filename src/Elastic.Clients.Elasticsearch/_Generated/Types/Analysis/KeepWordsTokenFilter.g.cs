@@ -29,7 +29,7 @@ public sealed partial class KeepWordsTokenFilter : ITokenFilterDefinition
 {
 	[JsonInclude]
 	[JsonPropertyName("keep_words")]
-	public IEnumerable<string>? KeepWords { get; set; }
+	public IList<string>? KeepWords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("keep_words_case")]
@@ -54,7 +54,7 @@ public sealed partial class KeepWordsTokenFilterDescriptor : SerializableDescrip
 	{
 	}
 
-	private IEnumerable<string>? KeepWordsValue { get; set; }
+	private IList<string>? KeepWordsValue { get; set; }
 
 	private bool? KeepWordsCaseValue { get; set; }
 
@@ -62,7 +62,7 @@ public sealed partial class KeepWordsTokenFilterDescriptor : SerializableDescrip
 
 	private string? VersionValue { get; set; }
 
-	public KeepWordsTokenFilterDescriptor KeepWords(IEnumerable<string>? keepWords)
+	public KeepWordsTokenFilterDescriptor KeepWords(IList<string>? keepWords)
 	{
 		KeepWordsValue = keepWords;
 		return Self;

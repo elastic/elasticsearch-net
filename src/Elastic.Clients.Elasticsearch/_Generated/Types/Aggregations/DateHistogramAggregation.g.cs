@@ -322,7 +322,7 @@ public sealed partial class DateHistogramAggregation : Aggregation
 	public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
 
 	[JsonConverter(typeof(AggregateOrderConverter))]
-	public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+	public IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
 	public Dictionary<string, object>? Params { get; set; }
 
@@ -360,7 +360,7 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 
 	private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
 
-	private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 	private Dictionary<string, object>? ParamsValue { get; set; }
 
@@ -446,7 +446,7 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 		return Self;
 	}
 
-	public DateHistogramAggregationDescriptor<TDocument> Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public DateHistogramAggregationDescriptor<TDocument> Order(IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -597,7 +597,7 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 
 	private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
 
-	private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 	private Dictionary<string, object>? ParamsValue { get; set; }
 
@@ -689,7 +689,7 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 		return Self;
 	}
 
-	public DateHistogramAggregationDescriptor Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public DateHistogramAggregationDescriptor Order(IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;

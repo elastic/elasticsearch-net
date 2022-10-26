@@ -69,7 +69,7 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 
 	[JsonInclude]
 	[JsonPropertyName("index_patterns")]
-	public IEnumerable<string>? IndexPatterns { get; set; }
+	public IList<string>? IndexPatterns { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("mappings")]
@@ -114,7 +114,7 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 
 	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
-	private IEnumerable<string>? IndexPatternsValue { get; set; }
+	private IList<string>? IndexPatternsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
 
@@ -134,7 +134,7 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 		return Self;
 	}
 
-	public PutTemplateRequestDescriptor IndexPatterns(IEnumerable<string>? indexPatterns)
+	public PutTemplateRequestDescriptor IndexPatterns(IList<string>? indexPatterns)
 	{
 		IndexPatternsValue = indexPatterns;
 		return Self;

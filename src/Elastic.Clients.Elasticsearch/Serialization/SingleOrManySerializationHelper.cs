@@ -5,13 +5,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
 internal static class SingleOrManySerializationHelper
 {
-	public static IEnumerable<TItem> Deserialize<TItem>(ref Utf8JsonReader reader, JsonSerializerOptions options)
+	public static IList<TItem> Deserialize<TItem>(ref Utf8JsonReader reader, JsonSerializerOptions options)
 	{
 		if (reader.TokenType == JsonTokenType.StartObject)
 		{
@@ -44,7 +43,7 @@ internal static class SingleOrManySerializationHelper
 		throw new JsonException("Unexpected token.");
 	}
 
-	public static void Serialize<TItem>(IEnumerable<TItem> value, Utf8JsonWriter writer, JsonSerializerOptions options)
+	public static void Serialize<TItem>(IList<TItem> value, Utf8JsonWriter writer, JsonSerializerOptions options)
 	{
 		if (value is not ICollection<TItem> collection)
 		{
