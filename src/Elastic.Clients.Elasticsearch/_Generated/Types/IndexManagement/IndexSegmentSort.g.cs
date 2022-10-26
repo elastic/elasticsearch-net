@@ -33,15 +33,15 @@ public sealed partial class IndexSegmentSort
 
 	[JsonInclude]
 	[JsonPropertyName("missing")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? Missing { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? Missing { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("mode")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? Mode { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? Mode { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("order")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? Order { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? Order { get; set; }
 }
 
 public sealed partial class IndexSegmentSortDescriptor<TDocument> : SerializableDescriptor<IndexSegmentSortDescriptor<TDocument>>
@@ -53,11 +53,11 @@ public sealed partial class IndexSegmentSortDescriptor<TDocument> : Serializable
 
 	private Elastic.Clients.Elasticsearch.Fields? FieldValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? MissingValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? MissingValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? ModeValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? ModeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? OrderValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? OrderValue { get; set; }
 
 	public IndexSegmentSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Fields? field)
 	{
@@ -65,19 +65,19 @@ public sealed partial class IndexSegmentSortDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public IndexSegmentSortDescriptor<TDocument> Missing(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? missing)
+	public IndexSegmentSortDescriptor<TDocument> Missing(IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? missing)
 	{
 		MissingValue = missing;
 		return Self;
 	}
 
-	public IndexSegmentSortDescriptor<TDocument> Mode(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? mode)
+	public IndexSegmentSortDescriptor<TDocument> Mode(IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? mode)
 	{
 		ModeValue = mode;
 		return Self;
 	}
 
-	public IndexSegmentSortDescriptor<TDocument> Order(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? order)
+	public IndexSegmentSortDescriptor<TDocument> Order(IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -123,11 +123,11 @@ public sealed partial class IndexSegmentSortDescriptor : SerializableDescriptor<
 
 	private Elastic.Clients.Elasticsearch.Fields? FieldValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? MissingValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? MissingValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? ModeValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? ModeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? OrderValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? OrderValue { get; set; }
 
 	public IndexSegmentSortDescriptor Field(Elastic.Clients.Elasticsearch.Fields? field)
 	{
@@ -135,19 +135,19 @@ public sealed partial class IndexSegmentSortDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public IndexSegmentSortDescriptor Missing(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? missing)
+	public IndexSegmentSortDescriptor Missing(IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? missing)
 	{
 		MissingValue = missing;
 		return Self;
 	}
 
-	public IndexSegmentSortDescriptor Mode(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? mode)
+	public IndexSegmentSortDescriptor Mode(IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? mode)
 	{
 		ModeValue = mode;
 		return Self;
 	}
 
-	public IndexSegmentSortDescriptor Order(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? order)
+	public IndexSegmentSortDescriptor Order(IList<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? order)
 	{
 		OrderValue = order;
 		return Self;

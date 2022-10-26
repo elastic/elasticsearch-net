@@ -41,7 +41,7 @@ public sealed partial class NGramTokenizer : ITokenizerDefinition
 
 	[JsonInclude]
 	[JsonPropertyName("token_chars")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -64,7 +64,7 @@ public sealed partial class NGramTokenizerDescriptor : SerializableDescriptor<NG
 
 	private int MinGramValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenCharsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenCharsValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
@@ -86,7 +86,7 @@ public sealed partial class NGramTokenizerDescriptor : SerializableDescriptor<NG
 		return Self;
 	}
 
-	public NGramTokenizerDescriptor TokenChars(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenChar> tokenChars)
+	public NGramTokenizerDescriptor TokenChars(IList<Elastic.Clients.Elasticsearch.Analysis.TokenChar> tokenChars)
 	{
 		TokenCharsValue = tokenChars;
 		return Self;

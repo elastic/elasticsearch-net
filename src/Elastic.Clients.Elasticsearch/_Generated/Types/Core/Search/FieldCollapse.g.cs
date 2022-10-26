@@ -37,7 +37,7 @@ public sealed partial class FieldCollapse
 
 	[JsonInclude]
 	[JsonPropertyName("inner_hits")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHits { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHits { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("max_concurrent_group_searches")]
@@ -57,7 +57,7 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 
 	private Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHitsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHitsValue { get; set; }
 
 	private InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
 
@@ -93,7 +93,7 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public FieldCollapseDescriptor<TDocument> InnerHits(IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? innerHits)
+	public FieldCollapseDescriptor<TDocument> InnerHits(IList<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? innerHits)
 	{
 		InnerHitsDescriptor = null;
 		InnerHitsDescriptorAction = null;
@@ -222,7 +222,7 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 
 	private Action<FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHitsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHitsValue { get; set; }
 
 	private InnerHitsDescriptor InnerHitsDescriptor { get; set; }
 
@@ -258,7 +258,7 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 		return Self;
 	}
 
-	public FieldCollapseDescriptor InnerHits(IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? innerHits)
+	public FieldCollapseDescriptor InnerHits(IList<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? innerHits)
 	{
 		InnerHitsDescriptor = null;
 		InnerHitsDescriptorAction = null;

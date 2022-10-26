@@ -101,11 +101,11 @@ public sealed partial class Highlight
 
 	[JsonInclude]
 	[JsonPropertyName("post_tags")]
-	public IEnumerable<string>? PostTags { get; set; }
+	public IList<string>? PostTags { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("pre_tags")]
-	public IEnumerable<string>? PreTags { get; set; }
+	public IList<string>? PreTags { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("require_field_match")]
@@ -167,9 +167,9 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 
 	private int? PhraseLimitValue { get; set; }
 
-	private IEnumerable<string>? PostTagsValue { get; set; }
+	private IList<string>? PostTagsValue { get; set; }
 
-	private IEnumerable<string>? PreTagsValue { get; set; }
+	private IList<string>? PreTagsValue { get; set; }
 
 	private bool? RequireFieldMatchValue { get; set; }
 
@@ -303,13 +303,13 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public HighlightDescriptor<TDocument> PostTags(IEnumerable<string>? postTags)
+	public HighlightDescriptor<TDocument> PostTags(IList<string>? postTags)
 	{
 		PostTagsValue = postTags;
 		return Self;
 	}
 
-	public HighlightDescriptor<TDocument> PreTags(IEnumerable<string>? preTags)
+	public HighlightDescriptor<TDocument> PreTags(IList<string>? preTags)
 	{
 		PreTagsValue = preTags;
 		return Self;
@@ -531,9 +531,9 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 
 	private int? PhraseLimitValue { get; set; }
 
-	private IEnumerable<string>? PostTagsValue { get; set; }
+	private IList<string>? PostTagsValue { get; set; }
 
-	private IEnumerable<string>? PreTagsValue { get; set; }
+	private IList<string>? PreTagsValue { get; set; }
 
 	private bool? RequireFieldMatchValue { get; set; }
 
@@ -667,13 +667,13 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 		return Self;
 	}
 
-	public HighlightDescriptor PostTags(IEnumerable<string>? postTags)
+	public HighlightDescriptor PostTags(IList<string>? postTags)
 	{
 		PostTagsValue = postTags;
 		return Self;
 	}
 
-	public HighlightDescriptor PreTags(IEnumerable<string>? preTags)
+	public HighlightDescriptor PreTags(IList<string>? preTags)
 	{
 		PreTagsValue = preTags;
 		return Self;

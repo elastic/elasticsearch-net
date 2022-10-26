@@ -56,7 +56,7 @@ public sealed partial class KuromojiTokenizer : ITokenizerDefinition
 
 	[JsonInclude]
 	[JsonPropertyName("user_dictionary_rules")]
-	public IEnumerable<string>? UserDictionaryRules { get; set; }
+	public IList<string>? UserDictionaryRules { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("version")]
@@ -82,7 +82,7 @@ public sealed partial class KuromojiTokenizerDescriptor : SerializableDescriptor
 
 	private string? UserDictionaryValue { get; set; }
 
-	private IEnumerable<string>? UserDictionaryRulesValue { get; set; }
+	private IList<string>? UserDictionaryRulesValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
@@ -122,7 +122,7 @@ public sealed partial class KuromojiTokenizerDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public KuromojiTokenizerDescriptor UserDictionaryRules(IEnumerable<string>? userDictionaryRules)
+	public KuromojiTokenizerDescriptor UserDictionaryRules(IList<string>? userDictionaryRules)
 	{
 		UserDictionaryRulesValue = userDictionaryRules;
 		return Self;

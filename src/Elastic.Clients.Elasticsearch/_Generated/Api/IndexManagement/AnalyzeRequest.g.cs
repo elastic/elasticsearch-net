@@ -50,11 +50,11 @@ public sealed partial class AnalyzeRequest : PlainRequest<AnalyzeRequestParamete
 
 	[JsonInclude]
 	[JsonPropertyName("attributes")]
-	public IEnumerable<string>? Attributes { get; set; }
+	public IList<string>? Attributes { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("char_filter")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilter { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("explain")]
@@ -66,7 +66,7 @@ public sealed partial class AnalyzeRequest : PlainRequest<AnalyzeRequestParamete
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? Filter { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("normalizer")]
@@ -75,7 +75,7 @@ public sealed partial class AnalyzeRequest : PlainRequest<AnalyzeRequestParamete
 	[JsonInclude]
 	[JsonPropertyName("text")]
 	[JsonConverter(typeof(TextToAnalyzeConverter))]
-	public IEnumerable<string>? Text { get; set; }
+	public IList<string>? Text { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("tokenizer")]
@@ -100,19 +100,19 @@ public sealed partial class AnalyzeRequestDescriptor<TDocument> : RequestDescrip
 
 	private string? AnalyzerValue { get; set; }
 
-	private IEnumerable<string>? AttributesValue { get; set; }
+	private IList<string>? AttributesValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilterValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilterValue { get; set; }
 
 	private bool? ExplainValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; set; }
 
 	private string? NormalizerValue { get; set; }
 
-	private IEnumerable<string>? TextValue { get; set; }
+	private IList<string>? TextValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Analysis.Tokenizer? TokenizerValue { get; set; }
 
@@ -122,13 +122,13 @@ public sealed partial class AnalyzeRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public AnalyzeRequestDescriptor<TDocument> Attributes(IEnumerable<string>? attributes)
+	public AnalyzeRequestDescriptor<TDocument> Attributes(IList<string>? attributes)
 	{
 		AttributesValue = attributes;
 		return Self;
 	}
 
-	public AnalyzeRequestDescriptor<TDocument> CharFilter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? charFilter)
+	public AnalyzeRequestDescriptor<TDocument> CharFilter(IList<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? charFilter)
 	{
 		CharFilterValue = charFilter;
 		return Self;
@@ -152,7 +152,7 @@ public sealed partial class AnalyzeRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public AnalyzeRequestDescriptor<TDocument> Filter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? filter)
+	public AnalyzeRequestDescriptor<TDocument> Filter(IList<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? filter)
 	{
 		FilterValue = filter;
 		return Self;
@@ -164,7 +164,7 @@ public sealed partial class AnalyzeRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public AnalyzeRequestDescriptor<TDocument> Text(IEnumerable<string>? text)
+	public AnalyzeRequestDescriptor<TDocument> Text(IList<string>? text)
 	{
 		TextValue = text;
 		return Self;
@@ -255,19 +255,19 @@ public sealed partial class AnalyzeRequestDescriptor : RequestDescriptor<Analyze
 
 	private string? AnalyzerValue { get; set; }
 
-	private IEnumerable<string>? AttributesValue { get; set; }
+	private IList<string>? AttributesValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilterValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilterValue { get; set; }
 
 	private bool? ExplainValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; set; }
 
 	private string? NormalizerValue { get; set; }
 
-	private IEnumerable<string>? TextValue { get; set; }
+	private IList<string>? TextValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Analysis.Tokenizer? TokenizerValue { get; set; }
 
@@ -277,13 +277,13 @@ public sealed partial class AnalyzeRequestDescriptor : RequestDescriptor<Analyze
 		return Self;
 	}
 
-	public AnalyzeRequestDescriptor Attributes(IEnumerable<string>? attributes)
+	public AnalyzeRequestDescriptor Attributes(IList<string>? attributes)
 	{
 		AttributesValue = attributes;
 		return Self;
 	}
 
-	public AnalyzeRequestDescriptor CharFilter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? charFilter)
+	public AnalyzeRequestDescriptor CharFilter(IList<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? charFilter)
 	{
 		CharFilterValue = charFilter;
 		return Self;
@@ -313,7 +313,7 @@ public sealed partial class AnalyzeRequestDescriptor : RequestDescriptor<Analyze
 		return Self;
 	}
 
-	public AnalyzeRequestDescriptor Filter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? filter)
+	public AnalyzeRequestDescriptor Filter(IList<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? filter)
 	{
 		FilterValue = filter;
 		return Self;
@@ -325,7 +325,7 @@ public sealed partial class AnalyzeRequestDescriptor : RequestDescriptor<Analyze
 		return Self;
 	}
 
-	public AnalyzeRequestDescriptor Text(IEnumerable<string>? text)
+	public AnalyzeRequestDescriptor Text(IList<string>? text)
 	{
 		TextValue = text;
 		return Self;

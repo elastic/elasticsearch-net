@@ -29,7 +29,7 @@ public sealed partial class MultiplexerTokenFilter : ITokenFilterDefinition
 {
 	[JsonInclude]
 	[JsonPropertyName("filters")]
-	public IEnumerable<string> Filters { get; set; }
+	public IList<string> Filters { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("preserve_original")]
@@ -50,13 +50,13 @@ public sealed partial class MultiplexerTokenFilterDescriptor : SerializableDescr
 	{
 	}
 
-	private IEnumerable<string> FiltersValue { get; set; }
+	private IList<string> FiltersValue { get; set; }
 
 	private bool? PreserveOriginalValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
-	public MultiplexerTokenFilterDescriptor Filters(IEnumerable<string> filters)
+	public MultiplexerTokenFilterDescriptor Filters(IList<string> filters)
 	{
 		FiltersValue = filters;
 		return Self;

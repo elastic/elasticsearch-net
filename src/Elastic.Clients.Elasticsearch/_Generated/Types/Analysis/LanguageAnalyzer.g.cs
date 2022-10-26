@@ -33,12 +33,12 @@ public sealed partial class LanguageAnalyzer : IAnalyzer
 
 	[JsonInclude]
 	[JsonPropertyName("stem_exclusion")]
-	public IEnumerable<string> StemExclusion { get; set; }
+	public IList<string> StemExclusion { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
-	public IEnumerable<string>? Stopwords { get; set; }
+	public IList<string>? Stopwords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("stopwords_path")]
@@ -61,9 +61,9 @@ public sealed partial class LanguageAnalyzerDescriptor : SerializableDescriptor<
 
 	private Elastic.Clients.Elasticsearch.Analysis.Language LanguageValue { get; set; }
 
-	private IEnumerable<string> StemExclusionValue { get; set; }
+	private IList<string> StemExclusionValue { get; set; }
 
-	private IEnumerable<string>? StopwordsValue { get; set; }
+	private IList<string>? StopwordsValue { get; set; }
 
 	private string? StopwordsPathValue { get; set; }
 
@@ -75,13 +75,13 @@ public sealed partial class LanguageAnalyzerDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public LanguageAnalyzerDescriptor StemExclusion(IEnumerable<string> stemExclusion)
+	public LanguageAnalyzerDescriptor StemExclusion(IList<string> stemExclusion)
 	{
 		StemExclusionValue = stemExclusion;
 		return Self;
 	}
 
-	public LanguageAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
+	public LanguageAnalyzerDescriptor Stopwords(IList<string>? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;
