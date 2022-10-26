@@ -33,7 +33,7 @@ public sealed partial class IntervalsAnyOf
 
 	[JsonInclude]
 	[JsonPropertyName("intervals")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> Intervals { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> Intervals { get; set; }
 }
 
 public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDescriptor<IntervalsAnyOfDescriptor<TDocument>>
@@ -43,7 +43,7 @@ public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDe
 	{
 	}
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
 
 	private IntervalsContainerDescriptor<TDocument> IntervalsDescriptor { get; set; }
 
@@ -57,7 +57,7 @@ public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDe
 
 	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
 
-	public IntervalsAnyOfDescriptor<TDocument> Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
+	public IntervalsAnyOfDescriptor<TDocument> Intervals(IList<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
 	{
 		IntervalsDescriptor = null;
 		IntervalsDescriptorAction = null;
@@ -178,7 +178,7 @@ public sealed partial class IntervalsAnyOfDescriptor : SerializableDescriptor<In
 	{
 	}
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
 
 	private IntervalsContainerDescriptor IntervalsDescriptor { get; set; }
 
@@ -192,7 +192,7 @@ public sealed partial class IntervalsAnyOfDescriptor : SerializableDescriptor<In
 
 	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
 
-	public IntervalsAnyOfDescriptor Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
+	public IntervalsAnyOfDescriptor Intervals(IList<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
 	{
 		IntervalsDescriptor = null;
 		IntervalsDescriptorAction = null;
