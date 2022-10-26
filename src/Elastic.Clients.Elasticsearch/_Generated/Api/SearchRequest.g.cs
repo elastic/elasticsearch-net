@@ -245,7 +245,7 @@ internal sealed class SearchRequestConverter : JsonConverter<SearchRequest>
 
 				if (property == "sort")
 				{
-					variant.Sort = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>?>(ref reader, options);
+					variant.Sort = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
 					continue;
 				}
 
@@ -705,7 +705,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	[JsonInclude]
 	[JsonPropertyName("sort")]
 	[JsonConverter(typeof(SortConverter))]
-	public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
+	public IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("_source")]
@@ -908,7 +908,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
+	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private IEnumerable<string>? StatsValue { get; set; }
 
@@ -1302,7 +1302,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+	public SearchRequestDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
@@ -1673,7 +1673,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (StatsValue is not null)
@@ -1883,7 +1883,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
+	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private IEnumerable<string>? StatsValue { get; set; }
 
@@ -2277,7 +2277,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+	public SearchRequestDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
@@ -2648,7 +2648,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (StatsValue is not null)

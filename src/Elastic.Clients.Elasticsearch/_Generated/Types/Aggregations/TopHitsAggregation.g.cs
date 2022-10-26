@@ -175,7 +175,7 @@ internal sealed class TopHitsAggregationConverter : JsonConverter<TopHitsAggrega
 				if (reader.ValueTextEquals("sort"))
 				{
 					reader.Read();
-					var value = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.SortCombinations>(ref reader, options);
+					var value = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.SortOptions>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Sort = value;
@@ -316,7 +316,7 @@ internal sealed class TopHitsAggregationConverter : JsonConverter<TopHitsAggrega
 		if (value.Sort is not null)
 		{
 			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(value.Sort, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(value.Sort, writer, options);
 		}
 
 		if (value.StoredFields is not null)
@@ -384,7 +384,7 @@ public sealed partial class TopHitsAggregation : Aggregation
 	public int? Size { get; set; }
 
 	[JsonConverter(typeof(SortConverter))]
-	public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
+	public IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
@@ -428,7 +428,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
+	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -532,7 +532,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+	public TopHitsAggregationDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
@@ -640,7 +640,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (StoredFieldsValue is not null)
@@ -707,7 +707,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
+	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -817,7 +817,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+	public TopHitsAggregationDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
@@ -925,7 +925,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (StoredFieldsValue is not null)
