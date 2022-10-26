@@ -29,7 +29,7 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptions
 {
 	[JsonInclude]
 	[JsonPropertyName("labels")]
-	public IEnumerable<string> Labels { get; set; }
+	public IList<string> Labels { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("multi_label")]
@@ -51,7 +51,7 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptionsDescript
 	{
 	}
 
-	private IEnumerable<string> LabelsValue { get; set; }
+	private IList<string> LabelsValue { get; set; }
 
 	private bool? MultiLabelValue { get; set; }
 
@@ -63,7 +63,7 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptionsDescript
 
 	private Action<NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
 
-	public ZeroShotClassificationInferenceUpdateOptionsDescriptor Labels(IEnumerable<string> labels)
+	public ZeroShotClassificationInferenceUpdateOptionsDescriptor Labels(IList<string> labels)
 	{
 		LabelsValue = labels;
 		return Self;

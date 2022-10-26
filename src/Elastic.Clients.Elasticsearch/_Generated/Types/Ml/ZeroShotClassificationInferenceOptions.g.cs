@@ -29,7 +29,7 @@ public sealed partial class ZeroShotClassificationInferenceOptions
 {
 	[JsonInclude]
 	[JsonPropertyName("classification_labels")]
-	public IEnumerable<string> ClassificationLabels { get; set; }
+	public IList<string> ClassificationLabels { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("hypothesis_template")]
@@ -37,7 +37,7 @@ public sealed partial class ZeroShotClassificationInferenceOptions
 
 	[JsonInclude]
 	[JsonPropertyName("labels")]
-	public IEnumerable<string>? Labels { get; set; }
+	public IList<string>? Labels { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("multi_label")]
@@ -59,11 +59,11 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	{
 	}
 
-	private IEnumerable<string> ClassificationLabelsValue { get; set; }
+	private IList<string> ClassificationLabelsValue { get; set; }
 
 	private string? HypothesisTemplateValue { get; set; }
 
-	private IEnumerable<string>? LabelsValue { get; set; }
+	private IList<string>? LabelsValue { get; set; }
 
 	private bool? MultiLabelValue { get; set; }
 
@@ -75,7 +75,7 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 
 	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
 
-	public ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(IEnumerable<string> classificationLabels)
+	public ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(IList<string> classificationLabels)
 	{
 		ClassificationLabelsValue = classificationLabels;
 		return Self;
@@ -87,7 +87,7 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 		return Self;
 	}
 
-	public ZeroShotClassificationInferenceOptionsDescriptor Labels(IEnumerable<string>? labels)
+	public ZeroShotClassificationInferenceOptionsDescriptor Labels(IList<string>? labels)
 	{
 		LabelsValue = labels;
 		return Self;

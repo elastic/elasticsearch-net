@@ -42,7 +42,7 @@ public sealed partial class MultisearchHeader
 	[JsonInclude]
 	[JsonPropertyName("expand_wildcards")]
 	[JsonConverter(typeof(ExpandWildcardsConverter))]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("ignore_throttled")]
@@ -86,7 +86,7 @@ public sealed partial class MultisearchHeaderDescriptor : SerializableDescriptor
 
 	private bool? CcsMinimizeRoundtripsValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcardsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcardsValue { get; set; }
 
 	private bool? IgnoreThrottledValue { get; set; }
 
@@ -120,7 +120,7 @@ public sealed partial class MultisearchHeaderDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public MultisearchHeaderDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards)
+	public MultisearchHeaderDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards)
 	{
 		ExpandWildcardsValue = expandWildcards;
 		return Self;

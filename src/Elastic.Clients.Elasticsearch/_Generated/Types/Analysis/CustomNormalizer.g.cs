@@ -29,11 +29,11 @@ public sealed partial class CustomNormalizer : INormalizer
 {
 	[JsonInclude]
 	[JsonPropertyName("char_filter")]
-	public IEnumerable<string>? CharFilter { get; set; }
+	public IList<string>? CharFilter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public IEnumerable<string>? Filter { get; set; }
+	public IList<string>? Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -47,17 +47,17 @@ public sealed partial class CustomNormalizerDescriptor : SerializableDescriptor<
 	{
 	}
 
-	private IEnumerable<string>? CharFilterValue { get; set; }
+	private IList<string>? CharFilterValue { get; set; }
 
-	private IEnumerable<string>? FilterValue { get; set; }
+	private IList<string>? FilterValue { get; set; }
 
-	public CustomNormalizerDescriptor CharFilter(IEnumerable<string>? charFilter)
+	public CustomNormalizerDescriptor CharFilter(IList<string>? charFilter)
 	{
 		CharFilterValue = charFilter;
 		return Self;
 	}
 
-	public CustomNormalizerDescriptor Filter(IEnumerable<string>? filter)
+	public CustomNormalizerDescriptor Filter(IList<string>? filter)
 	{
 		FilterValue = filter;
 		return Self;

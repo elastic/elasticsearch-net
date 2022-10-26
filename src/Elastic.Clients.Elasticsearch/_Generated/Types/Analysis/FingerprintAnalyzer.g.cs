@@ -42,7 +42,7 @@ public sealed partial class FingerprintAnalyzer : IAnalyzer
 	[JsonInclude]
 	[JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
-	public IEnumerable<string>? Stopwords { get; set; }
+	public IList<string>? Stopwords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("stopwords_path")]
@@ -69,7 +69,7 @@ public sealed partial class FingerprintAnalyzerDescriptor : SerializableDescript
 
 	private string SeparatorValue { get; set; }
 
-	private IEnumerable<string>? StopwordsValue { get; set; }
+	private IList<string>? StopwordsValue { get; set; }
 
 	private string? StopwordsPathValue { get; set; }
 
@@ -93,7 +93,7 @@ public sealed partial class FingerprintAnalyzerDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public FingerprintAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
+	public FingerprintAnalyzerDescriptor Stopwords(IList<string>? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;
