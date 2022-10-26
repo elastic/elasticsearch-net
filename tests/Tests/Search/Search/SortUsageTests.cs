@@ -27,8 +27,8 @@ public class SortUsageTests : SearchUsageTestBase
 	protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
 		.Sort(new[]
 		{
-			new SortCombinations(SortOptions.Field(Infer.Field<Project>(f => f.StartedOn), new FieldSort { Order = SortOrder.Asc })),
-			new SortCombinations(SortOptions.Field(Infer.Field<Project>(f => f.Name), new FieldSort { Order = SortOrder.Desc }))
+			SortOptions.Field(Infer.Field<Project>(f => f.StartedOn), new FieldSort { Order = SortOrder.Asc }),
+			SortOptions.Field(Infer.Field<Project>(f => f.Name), new FieldSort { Order = SortOrder.Desc })
 		});
 
 	protected override SearchRequest<Project> Initializer =>
@@ -36,8 +36,8 @@ public class SortUsageTests : SearchUsageTestBase
 		{
 			Sort = new[]
 			{
-				new SortCombinations(SortOptions.Field(Infer.Field<Project>(f => f.StartedOn), new FieldSort { Order = SortOrder.Asc })),
-				new SortCombinations(SortOptions.Field(Infer.Field<Project>(f => f.Name), new FieldSort { Order = SortOrder.Desc }))
+				SortOptions.Field(Infer.Field<Project>(f => f.StartedOn), new FieldSort { Order = SortOrder.Asc }),
+				SortOptions.Field(Infer.Field<Project>(f => f.Name), new FieldSort { Order = SortOrder.Desc })
 			}
 		};
 }

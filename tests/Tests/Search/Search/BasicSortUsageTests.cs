@@ -20,11 +20,11 @@ public class BasicSortUsageTests : SearchUsageTestBase
 		};
 
 	protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
-		.Sort(new[] { new SortCombinations("startedOn") });
+		.Sort(new[] { SortOptions.Field("startedOn") });
 
 	protected override SearchRequest<Project> Initializer =>
 		new()
 		{
-			Sort = new [] { new SortCombinations("startedOn") }
+			Sort = new [] { SortOptions.Field("startedOn") }
 		};
 }
