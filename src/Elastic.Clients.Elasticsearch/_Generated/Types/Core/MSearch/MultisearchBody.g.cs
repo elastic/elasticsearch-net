@@ -171,7 +171,7 @@ internal sealed class MultisearchBodyConverter : JsonConverter<MultisearchBody>
 
 				if (property == "sort")
 				{
-					variant.Sort = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>?>(ref reader, options);
+					variant.Sort = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
 					continue;
 				}
 
@@ -469,7 +469,7 @@ public sealed partial class MultisearchBody
 	public int? Size { get; set; }
 
 	[JsonConverter(typeof(SortConverter))]
-	public IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
+	public IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	public IEnumerable<string>? Stats { get; set; }
 
@@ -581,7 +581,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
+	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private IEnumerable<string>? StatsValue { get; set; }
 
@@ -933,7 +933,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+	public MultisearchBodyDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
@@ -1278,7 +1278,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (StatsValue is not null)
@@ -1436,7 +1436,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
+	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private IEnumerable<string>? StatsValue { get; set; }
 
@@ -1788,7 +1788,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
+	public MultisearchBodyDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
@@ -2133,7 +2133,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (StatsValue is not null)
