@@ -54,7 +54,7 @@ public class SlicedScrollSearchApiTests
 			.Slice(ss => ss.Max(maxSlices).Id(currentSlice))
 			.Sort(new[]
 			{
-				new SortCombinations(SortOptions.Field("_doc", new FieldSort { Order = SortOrder.Asc }))
+				SortOptions.Field("_doc", new FieldSort { Order = SortOrder.Asc })
 			})
 		);
 		if (!response.IsValid)
