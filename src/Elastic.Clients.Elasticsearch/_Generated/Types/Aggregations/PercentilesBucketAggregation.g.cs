@@ -67,7 +67,7 @@ internal sealed class PercentilesBucketAggregationConverter : JsonConverter<Perc
 				if (reader.ValueTextEquals("percents"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<IEnumerable<double>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<IList<double>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Percents = value;
@@ -148,7 +148,7 @@ public sealed partial class PercentilesBucketAggregation : Aggregation
 
 	public override string? Name { get; internal set; }
 
-	public IEnumerable<double>? Percents { get; set; }
+	public IList<double>? Percents { get; set; }
 }
 
 public sealed partial class PercentilesBucketAggregationDescriptor : SerializableDescriptor<PercentilesBucketAggregationDescriptor>
@@ -164,7 +164,7 @@ public sealed partial class PercentilesBucketAggregationDescriptor : Serializabl
 
 	private Dictionary<string, object>? MetaValue { get; set; }
 
-	private IEnumerable<double>? PercentsValue { get; set; }
+	private IList<double>? PercentsValue { get; set; }
 
 	public PercentilesBucketAggregationDescriptor Format(string? format)
 	{
@@ -184,7 +184,7 @@ public sealed partial class PercentilesBucketAggregationDescriptor : Serializabl
 		return Self;
 	}
 
-	public PercentilesBucketAggregationDescriptor Percents(IEnumerable<double>? percents)
+	public PercentilesBucketAggregationDescriptor Percents(IList<double>? percents)
 	{
 		PercentsValue = percents;
 		return Self;

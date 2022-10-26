@@ -33,13 +33,13 @@ public sealed class ShardStoresRequestParameters : RequestParameters<ShardStores
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? Status { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>?>("status"); set => Q("status", value); }
+	public IList<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? Status { get => Q<IList<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>?>("status"); set => Q("status", value); }
 }
 
 public sealed partial class ShardStoresRequest : PlainRequest<ShardStoresRequestParameters>
@@ -59,13 +59,13 @@ public sealed partial class ShardStoresRequest : PlainRequest<ShardStoresRequest
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? Status { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>?>("status"); set => Q("status", value); }
+	public IList<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? Status { get => Q<IList<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>?>("status"); set => Q("status", value); }
 }
 
 public sealed partial class ShardStoresRequestDescriptor<TDocument> : RequestDescriptor<ShardStoresRequestDescriptor<TDocument>, ShardStoresRequestParameters>
@@ -79,9 +79,9 @@ public sealed partial class ShardStoresRequestDescriptor<TDocument> : RequestDes
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
 	public ShardStoresRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public ShardStoresRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public ShardStoresRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ShardStoresRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public ShardStoresRequestDescriptor<TDocument> Status(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? status) => Qs("status", status);
+	public ShardStoresRequestDescriptor<TDocument> Status(IList<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? status) => Qs("status", status);
 	public ShardStoresRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
@@ -104,9 +104,9 @@ public sealed partial class ShardStoresRequestDescriptor : RequestDescriptor<Sha
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
 	public ShardStoresRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public ShardStoresRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public ShardStoresRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ShardStoresRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public ShardStoresRequestDescriptor Status(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? status) => Qs("status", status);
+	public ShardStoresRequestDescriptor Status(IList<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? status) => Qs("status", status);
 	public ShardStoresRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);

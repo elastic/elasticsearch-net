@@ -41,11 +41,11 @@ public sealed partial class SourceField
 
 	[JsonInclude]
 	[JsonPropertyName("excludes")]
-	public IEnumerable<string>? Excludes { get; set; }
+	public IList<string>? Excludes { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("includes")]
-	public IEnumerable<string>? Includes { get; set; }
+	public IList<string>? Includes { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("mode")]
@@ -65,9 +65,9 @@ public sealed partial class SourceFieldDescriptor : SerializableDescriptor<Sourc
 
 	private bool? EnabledValue { get; set; }
 
-	private IEnumerable<string>? ExcludesValue { get; set; }
+	private IList<string>? ExcludesValue { get; set; }
 
-	private IEnumerable<string>? IncludesValue { get; set; }
+	private IList<string>? IncludesValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? ModeValue { get; set; }
 
@@ -89,13 +89,13 @@ public sealed partial class SourceFieldDescriptor : SerializableDescriptor<Sourc
 		return Self;
 	}
 
-	public SourceFieldDescriptor Excludes(IEnumerable<string>? excludes)
+	public SourceFieldDescriptor Excludes(IList<string>? excludes)
 	{
 		ExcludesValue = excludes;
 		return Self;
 	}
 
-	public SourceFieldDescriptor Includes(IEnumerable<string>? includes)
+	public SourceFieldDescriptor Includes(IList<string>? includes)
 	{
 		IncludesValue = includes;
 		return Self;
