@@ -93,7 +93,7 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 
 	[JsonInclude]
 	[JsonPropertyName("docs")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? Docs { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? Docs { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("ids")]
@@ -124,7 +124,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? DocsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? DocsValue { get; set; }
 
 	private Core.MGet.OperationDescriptor DocsDescriptor { get; set; }
 
@@ -134,7 +134,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 
 	private Elastic.Clients.Elasticsearch.Ids? IdsValue { get; set; }
 
-	public MultiGetRequestDescriptor<TDocument> Docs(IEnumerable<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? docs)
+	public MultiGetRequestDescriptor<TDocument> Docs(IList<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? docs)
 	{
 		DocsDescriptor = null;
 		DocsDescriptorAction = null;
@@ -244,7 +244,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 		return Self;
 	}
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? DocsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? DocsValue { get; set; }
 
 	private Core.MGet.OperationDescriptor DocsDescriptor { get; set; }
 
@@ -254,7 +254,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 
 	private Elastic.Clients.Elasticsearch.Ids? IdsValue { get; set; }
 
-	public MultiGetRequestDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? docs)
+	public MultiGetRequestDescriptor Docs(IList<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? docs)
 	{
 		DocsDescriptor = null;
 		DocsDescriptorAction = null;

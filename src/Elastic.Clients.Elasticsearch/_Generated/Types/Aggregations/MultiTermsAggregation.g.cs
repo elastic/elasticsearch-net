@@ -127,7 +127,7 @@ internal sealed class MultiTermsAggregationConverter : JsonConverter<MultiTermsA
 				if (reader.ValueTextEquals("terms"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>>(ref reader, options);
+					var value = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Terms = value;
@@ -254,7 +254,7 @@ public sealed partial class MultiTermsAggregation : Aggregation
 	public override string? Name { get; internal set; }
 
 	[JsonConverter(typeof(AggregateOrderConverter))]
-	public IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+	public IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
 	public long? ShardMinDocCount { get; set; }
 
@@ -264,7 +264,7 @@ public sealed partial class MultiTermsAggregation : Aggregation
 
 	public int? Size { get; set; }
 
-	public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
 }
 
 public sealed partial class MultiTermsAggregationDescriptor<TDocument> : SerializableDescriptor<MultiTermsAggregationDescriptor<TDocument>>
@@ -280,7 +280,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> TermsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> TermsValue { get; set; }
 
 	private MultiTermLookupDescriptor<TDocument> TermsDescriptor { get; set; }
 
@@ -294,7 +294,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 
 	private long? MinDocCountValue { get; set; }
 
-	private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 	private long? ShardMinDocCountValue { get; set; }
 
@@ -328,7 +328,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor<TDocument> Terms(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> terms)
+	public MultiTermsAggregationDescriptor<TDocument> Terms(IList<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> terms)
 	{
 		TermsDescriptor = null;
 		TermsDescriptorAction = null;
@@ -382,7 +382,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor<TDocument> Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public MultiTermsAggregationDescriptor<TDocument> Order(IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -530,7 +530,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> TermsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> TermsValue { get; set; }
 
 	private MultiTermLookupDescriptor TermsDescriptor { get; set; }
 
@@ -544,7 +544,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 
 	private long? MinDocCountValue { get; set; }
 
-	private IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 	private long? ShardMinDocCountValue { get; set; }
 
@@ -578,7 +578,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor Terms(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> terms)
+	public MultiTermsAggregationDescriptor Terms(IList<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> terms)
 	{
 		TermsDescriptor = null;
 		TermsDescriptorAction = null;
@@ -632,7 +632,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor Order(IEnumerable<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public MultiTermsAggregationDescriptor Order(IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
