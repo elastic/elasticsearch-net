@@ -46,6 +46,8 @@ public sealed partial class BoostingQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("positive")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Positive { get; set; }
+
+	public static implicit operator QueryContainer(BoostingQuery boostingQuery) => QueryContainer.Boosting(boostingQuery);
 }
 
 public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDescriptor<BoostingQueryDescriptor<TDocument>>

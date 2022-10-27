@@ -42,6 +42,8 @@ public sealed partial class FieldValueFactorScoreFunction
 	[JsonInclude]
 	[JsonPropertyName("modifier")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
+
+	public static implicit operator FunctionScoreContainer(FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => FunctionScoreContainer.FieldValueFactor(fieldValueFactorScoreFunction);
 }
 
 public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> : SerializableDescriptor<FieldValueFactorScoreFunctionDescriptor<TDocument>>
