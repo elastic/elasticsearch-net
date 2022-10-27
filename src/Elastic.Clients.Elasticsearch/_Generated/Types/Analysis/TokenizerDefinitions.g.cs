@@ -36,7 +36,7 @@ public partial class TokenizerDefinitions : IsADictionary<string, ITokenizerDefi
 	{
 	}
 
-	public void Add(string name, ITokenizerDefinition tokenizerDefinitions) => BackingDictionary.Add(name, tokenizerDefinitions);
+	public void Add(string name, ITokenizerDefinition tokenizerDefinition) => BackingDictionary.Add(name, tokenizerDefinition);
 }
 
 public sealed partial class TokenizerDefinitionsDescriptor : IsADictionaryDescriptor<TokenizerDefinitionsDescriptor, TokenizerDefinitions, string, ITokenizerDefinition>
