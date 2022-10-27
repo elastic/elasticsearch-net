@@ -134,6 +134,8 @@ public sealed partial class QueryStringQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
+
+	public static implicit operator QueryContainer(QueryStringQuery queryStringQuery) => QueryContainer.QueryString(queryStringQuery);
 }
 
 public sealed partial class QueryStringQueryDescriptor<TDocument> : SerializableDescriptor<QueryStringQueryDescriptor<TDocument>>

@@ -38,6 +38,8 @@ public sealed partial class LinearInterpolationSmoothingModel
 	[JsonInclude]
 	[JsonPropertyName("unigram_lambda")]
 	public double UnigramLambda { get; set; }
+
+	public static implicit operator SmoothingModelContainer(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => SmoothingModelContainer.LinearInterpolation(linearInterpolationSmoothingModel);
 }
 
 public sealed partial class LinearInterpolationSmoothingModelDescriptor : SerializableDescriptor<LinearInterpolationSmoothingModelDescriptor>

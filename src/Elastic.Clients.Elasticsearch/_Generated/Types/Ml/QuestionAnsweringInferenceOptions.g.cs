@@ -42,6 +42,8 @@ public sealed partial class QuestionAnsweringInferenceOptions
 	[JsonInclude]
 	[JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+
+	public static implicit operator InferenceConfigCreateContainer(QuestionAnsweringInferenceOptions questionAnsweringInferenceOptions) => InferenceConfigCreateContainer.QuestionAnswering(questionAnsweringInferenceOptions);
 }
 
 public sealed partial class QuestionAnsweringInferenceOptionsDescriptor : SerializableDescriptor<QuestionAnsweringInferenceOptionsDescriptor>
