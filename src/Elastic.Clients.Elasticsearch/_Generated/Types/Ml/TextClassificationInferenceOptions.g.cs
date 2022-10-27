@@ -29,7 +29,7 @@ public sealed partial class TextClassificationInferenceOptions
 {
 	[JsonInclude]
 	[JsonPropertyName("classification_labels")]
-	public IEnumerable<string>? ClassificationLabels { get; set; }
+	public IList<string>? ClassificationLabels { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("num_top_classes")]
@@ -51,7 +51,7 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 	{
 	}
 
-	private IEnumerable<string>? ClassificationLabelsValue { get; set; }
+	private IList<string>? ClassificationLabelsValue { get; set; }
 
 	private int? NumTopClassesValue { get; set; }
 
@@ -63,7 +63,7 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 
 	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
 
-	public TextClassificationInferenceOptionsDescriptor ClassificationLabels(IEnumerable<string>? classificationLabels)
+	public TextClassificationInferenceOptionsDescriptor ClassificationLabels(IList<string>? classificationLabels)
 	{
 		ClassificationLabelsValue = classificationLabels;
 		return Self;

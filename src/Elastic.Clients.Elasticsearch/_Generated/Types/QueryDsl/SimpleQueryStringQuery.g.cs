@@ -53,7 +53,7 @@ public sealed partial class SimpleQueryStringQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("flags")]
@@ -107,7 +107,7 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? FlagsValue { get; set; }
 
@@ -161,7 +161,7 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 		return Self;
 	}
 
-	public SimpleQueryStringQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields)
+	public SimpleQueryStringQueryDescriptor<TDocument> Fields(IList<Elastic.Clients.Elasticsearch.Field>? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -327,7 +327,7 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? FlagsValue { get; set; }
 
@@ -381,7 +381,7 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public SimpleQueryStringQueryDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields)
+	public SimpleQueryStringQueryDescriptor Fields(IList<Elastic.Clients.Elasticsearch.Field>? fields)
 	{
 		FieldsValue = fields;
 		return Self;
