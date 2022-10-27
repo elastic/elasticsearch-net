@@ -46,6 +46,8 @@ public sealed partial class ParentIdQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string? Type { get; set; }
+
+	public static implicit operator QueryContainer(ParentIdQuery parentIdQuery) => QueryContainer.ParentId(parentIdQuery);
 }
 
 public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<ParentIdQueryDescriptor>

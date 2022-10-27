@@ -141,6 +141,8 @@ public sealed partial class TermsSetQuery : Query
 	public IList<string> Terms { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	public static implicit operator QueryContainer(TermsSetQuery termsSetQuery) => QueryContainer.TermsSet(termsSetQuery);
 }
 
 public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDescriptor<TermsSetQueryDescriptor<TDocument>>

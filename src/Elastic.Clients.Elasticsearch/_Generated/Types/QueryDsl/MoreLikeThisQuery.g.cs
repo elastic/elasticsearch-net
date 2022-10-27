@@ -111,6 +111,8 @@ public sealed partial class MoreLikeThisQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
+
+	public static implicit operator QueryContainer(MoreLikeThisQuery moreLikeThisQuery) => QueryContainer.MoreLikeThis(moreLikeThisQuery);
 }
 
 public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : SerializableDescriptor<MoreLikeThisQueryDescriptor<TDocument>>

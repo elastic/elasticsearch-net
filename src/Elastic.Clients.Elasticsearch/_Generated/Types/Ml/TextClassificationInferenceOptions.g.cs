@@ -42,6 +42,8 @@ public sealed partial class TextClassificationInferenceOptions
 	[JsonInclude]
 	[JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+
+	public static implicit operator InferenceConfigCreateContainer(TextClassificationInferenceOptions textClassificationInferenceOptions) => InferenceConfigCreateContainer.TextClassification(textClassificationInferenceOptions);
 }
 
 public sealed partial class TextClassificationInferenceOptionsDescriptor : SerializableDescriptor<TextClassificationInferenceOptionsDescriptor>

@@ -86,6 +86,8 @@ public sealed partial class SimpleQueryStringQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("quote_field_suffix")]
 	public string? QuoteFieldSuffix { get; set; }
+
+	public static implicit operator QueryContainer(SimpleQueryStringQuery simpleQueryStringQuery) => QueryContainer.SimpleQueryString(simpleQueryStringQuery);
 }
 
 public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : SerializableDescriptor<SimpleQueryStringQueryDescriptor<TDocument>>
