@@ -98,6 +98,8 @@ public sealed partial class MultiMatchQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
+
+	public static implicit operator QueryContainer(MultiMatchQuery multiMatchQuery) => QueryContainer.MultiMatch(multiMatchQuery);
 }
 
 public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableDescriptor<MultiMatchQueryDescriptor<TDocument>>

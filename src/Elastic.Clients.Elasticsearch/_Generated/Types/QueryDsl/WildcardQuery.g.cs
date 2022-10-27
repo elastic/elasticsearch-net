@@ -159,6 +159,8 @@ public sealed partial class WildcardQuery : Query
 	public string? Wildcard { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	public static implicit operator QueryContainer(WildcardQuery wildcardQuery) => QueryContainer.Wildcard(wildcardQuery);
 }
 
 public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDescriptor<WildcardQueryDescriptor<TDocument>>

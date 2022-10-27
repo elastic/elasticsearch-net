@@ -90,6 +90,8 @@ public sealed partial class PhraseSuggester
 	[JsonInclude]
 	[JsonPropertyName("token_limit")]
 	public int? TokenLimit { get; set; }
+
+	public static implicit operator FieldSuggester(PhraseSuggester phraseSuggester) => FieldSuggester.Phrase(phraseSuggester);
 }
 
 public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableDescriptor<PhraseSuggesterDescriptor<TDocument>>
