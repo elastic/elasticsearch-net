@@ -46,6 +46,8 @@ public sealed partial class ScriptSort
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.ScriptSortType? Type { get; set; }
+
+	public static implicit operator SortOptions(ScriptSort scriptSort) => SortOptions.Script(scriptSort);
 }
 
 public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescriptor<ScriptSortDescriptor<TDocument>>

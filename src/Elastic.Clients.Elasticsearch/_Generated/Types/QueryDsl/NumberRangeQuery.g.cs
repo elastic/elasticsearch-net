@@ -201,6 +201,8 @@ public sealed partial class NumberRangeQuery : Query
 	public double? To { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	public static implicit operator QueryContainer(NumberRangeQuery numberRangeQuery) => QueryContainer.Range(new RangeQuery(numberRangeQuery));
 }
 
 public sealed partial class NumberRangeQueryDescriptor<TDocument> : SerializableDescriptor<NumberRangeQueryDescriptor<TDocument>>

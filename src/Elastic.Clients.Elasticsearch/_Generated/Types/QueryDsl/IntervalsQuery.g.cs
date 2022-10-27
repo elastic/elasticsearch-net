@@ -64,6 +64,8 @@ public sealed partial class IntervalsQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	public static implicit operator QueryContainer(IntervalsQuery intervalsQuery) => QueryContainer.Intervals(intervalsQuery);
 }
 
 internal sealed class IntervalsQueryConverter : JsonConverter<IntervalsQuery>

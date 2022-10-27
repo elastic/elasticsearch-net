@@ -54,6 +54,8 @@ public sealed partial class NestedQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
+
+	public static implicit operator QueryContainer(NestedQuery nestedQuery) => QueryContainer.Nested(nestedQuery);
 }
 
 public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescriptor<NestedQueryDescriptor<TDocument>>

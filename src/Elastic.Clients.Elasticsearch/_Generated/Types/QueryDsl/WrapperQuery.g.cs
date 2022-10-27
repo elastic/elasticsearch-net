@@ -38,6 +38,8 @@ public sealed partial class WrapperQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("query")]
 	public string Query { get; set; }
+
+	public static implicit operator QueryContainer(WrapperQuery wrapperQuery) => QueryContainer.Wrapper(wrapperQuery);
 }
 
 public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<WrapperQueryDescriptor>
