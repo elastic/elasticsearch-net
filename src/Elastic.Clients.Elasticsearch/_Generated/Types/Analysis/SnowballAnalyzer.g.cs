@@ -34,7 +34,7 @@ public sealed partial class SnowballAnalyzer : IAnalyzer
 	[JsonInclude]
 	[JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
-	public IEnumerable<string>? Stopwords { get; set; }
+	public IList<string>? Stopwords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -53,7 +53,7 @@ public sealed partial class SnowballAnalyzerDescriptor : SerializableDescriptor<
 
 	private Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage LanguageValue { get; set; }
 
-	private IEnumerable<string>? StopwordsValue { get; set; }
+	private IList<string>? StopwordsValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
@@ -63,7 +63,7 @@ public sealed partial class SnowballAnalyzerDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public SnowballAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
+	public SnowballAnalyzerDescriptor Stopwords(IList<string>? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;

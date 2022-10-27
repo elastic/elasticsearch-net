@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class DataStreamsStatsRequestParameters : RequestParameters<DataStreamsStatsRequestParameters>
 {
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 public sealed partial class DataStreamsStatsRequest : PlainRequest<DataStreamsStatsRequestParameters>
@@ -47,7 +47,7 @@ public sealed partial class DataStreamsStatsRequest : PlainRequest<DataStreamsSt
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 public sealed partial class DataStreamsStatsRequestDescriptor : RequestDescriptor<DataStreamsStatsRequestDescriptor, DataStreamsStatsRequestParameters>
@@ -60,7 +60,7 @@ public sealed partial class DataStreamsStatsRequestDescriptor : RequestDescripto
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDataStreamsStats;
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
-	public DataStreamsStatsRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public DataStreamsStatsRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public DataStreamsStatsRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName? name)
 	{
 		RouteValues.Optional("name", name);

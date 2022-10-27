@@ -33,7 +33,7 @@ public sealed class ExistsAliasRequestParameters : RequestParameters<ExistsAlias
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -59,7 +59,7 @@ public sealed partial class ExistsAliasRequest : PlainRequest<ExistsAliasRequest
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -87,7 +87,7 @@ public sealed partial class ExistsAliasRequestDescriptor<TDocument> : RequestDes
 	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 	protected override bool SupportsBody => false;
 	public ExistsAliasRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public ExistsAliasRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public ExistsAliasRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ExistsAliasRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public ExistsAliasRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 	public ExistsAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names name)
@@ -126,7 +126,7 @@ public sealed partial class ExistsAliasRequestDescriptor : RequestDescriptor<Exi
 	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 	protected override bool SupportsBody => false;
 	public ExistsAliasRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public ExistsAliasRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public ExistsAliasRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ExistsAliasRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public ExistsAliasRequestDescriptor Local(bool? local = true) => Qs("local", local);
 	public ExistsAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)

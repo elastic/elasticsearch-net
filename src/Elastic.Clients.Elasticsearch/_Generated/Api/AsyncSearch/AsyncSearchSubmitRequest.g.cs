@@ -63,7 +63,7 @@ public sealed class AsyncSearchSubmitRequestParameters : RequestParameters<Async
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
@@ -182,13 +182,13 @@ internal sealed class AsyncSearchSubmitRequestConverter : JsonConverter<AsyncSea
 
 				if (property == "indices_boost")
 				{
-					variant.IndicesBoost = JsonSerializer.Deserialize<IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
+					variant.IndicesBoost = JsonSerializer.Deserialize<IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
 					continue;
 				}
 
 				if (property == "docvalue_fields")
 				{
-					variant.DocvalueFields = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
+					variant.DocvalueFields = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
 					continue;
 				}
 
@@ -224,7 +224,7 @@ internal sealed class AsyncSearchSubmitRequestConverter : JsonConverter<AsyncSea
 
 				if (property == "rescore")
 				{
-					variant.Rescore = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?>(ref reader, options);
+					variant.Rescore = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?>(ref reader, options);
 					continue;
 				}
 
@@ -236,7 +236,7 @@ internal sealed class AsyncSearchSubmitRequestConverter : JsonConverter<AsyncSea
 
 				if (property == "search_after")
 				{
-					variant.SearchAfter = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
+					variant.SearchAfter = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
 					continue;
 				}
 
@@ -254,7 +254,7 @@ internal sealed class AsyncSearchSubmitRequestConverter : JsonConverter<AsyncSea
 
 				if (property == "sort")
 				{
-					variant.Sort = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
+					variant.Sort = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
 					continue;
 				}
 
@@ -266,7 +266,7 @@ internal sealed class AsyncSearchSubmitRequestConverter : JsonConverter<AsyncSea
 
 				if (property == "fields")
 				{
-					variant.Fields = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
+					variant.Fields = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
 					continue;
 				}
 
@@ -326,7 +326,7 @@ internal sealed class AsyncSearchSubmitRequestConverter : JsonConverter<AsyncSea
 
 				if (property == "stats")
 				{
-					variant.Stats = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
+					variant.Stats = JsonSerializer.Deserialize<IList<string>?>(ref reader, options);
 					continue;
 				}
 			}
@@ -582,7 +582,7 @@ public partial class AsyncSearchSubmitRequest : PlainRequest<AsyncSearchSubmitRe
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
@@ -674,11 +674,11 @@ public partial class AsyncSearchSubmitRequest : PlainRequest<AsyncSearchSubmitRe
 
 	[JsonInclude]
 	[JsonPropertyName("indices_boost")]
-	public IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
+	public IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("docvalue_fields")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("knn")]
@@ -702,7 +702,7 @@ public partial class AsyncSearchSubmitRequest : PlainRequest<AsyncSearchSubmitRe
 
 	[JsonInclude]
 	[JsonPropertyName("rescore")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("script_fields")]
@@ -710,7 +710,7 @@ public partial class AsyncSearchSubmitRequest : PlainRequest<AsyncSearchSubmitRe
 
 	[JsonInclude]
 	[JsonPropertyName("search_after")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("size")]
@@ -723,7 +723,7 @@ public partial class AsyncSearchSubmitRequest : PlainRequest<AsyncSearchSubmitRe
 	[JsonInclude]
 	[JsonPropertyName("sort")]
 	[JsonConverter(typeof(SortConverter))]
-	public IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("_source")]
@@ -731,7 +731,7 @@ public partial class AsyncSearchSubmitRequest : PlainRequest<AsyncSearchSubmitRe
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("suggest")]
@@ -771,7 +771,7 @@ public partial class AsyncSearchSubmitRequest : PlainRequest<AsyncSearchSubmitRe
 
 	[JsonInclude]
 	[JsonPropertyName("stats")]
-	public IEnumerable<string>? Stats { get; set; }
+	public IList<string>? Stats { get; set; }
 }
 
 public sealed partial class AsyncSearchSubmitRequest<TInferDocument> : AsyncSearchSubmitRequest
@@ -801,7 +801,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 	public AsyncSearchSubmitRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	public AsyncSearchSubmitRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public AsyncSearchSubmitRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
-	public AsyncSearchSubmitRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public AsyncSearchSubmitRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public AsyncSearchSubmitRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 	public AsyncSearchSubmitRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public AsyncSearchSubmitRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
@@ -841,7 +841,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 
 	private Action<Core.Search.FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
 
@@ -849,7 +849,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
 
@@ -881,7 +881,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 
 	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
 
 	private Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
 
@@ -903,7 +903,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 
 	private int? FromValue { get; set; }
 
-	private IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 
 	private double? MinScoreValue { get; set; }
 
@@ -919,15 +919,15 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 
 	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
 	private bool? SeqNoPrimaryTermValue { get; set; }
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
-	private IEnumerable<string>? StatsValue { get; set; }
+	private IList<string>? StatsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -995,7 +995,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor<TDocument> DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+	public AsyncSearchSubmitRequestDescriptor<TDocument> DocvalueFields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
 		DocvalueFieldsDescriptorAction = null;
@@ -1031,7 +1031,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public AsyncSearchSubmitRequestDescriptor<TDocument> Fields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
 		FieldsDescriptorAction = null;
@@ -1163,7 +1163,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor<TDocument> Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
+	public AsyncSearchSubmitRequestDescriptor<TDocument> Rescore(IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
 	{
 		RescoreDescriptor = null;
 		RescoreDescriptorAction = null;
@@ -1247,7 +1247,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor<TDocument> IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public AsyncSearchSubmitRequestDescriptor<TDocument> IndicesBoost(IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
@@ -1301,7 +1301,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor<TDocument> SearchAfter(IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public AsyncSearchSubmitRequestDescriptor<TDocument> SearchAfter(IList<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
 	{
 		SearchAfterValue = searchAfter;
 		return Self;
@@ -1319,13 +1319,13 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor<TDocument> Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public AsyncSearchSubmitRequestDescriptor<TDocument> Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor<TDocument> Stats(IEnumerable<string>? stats)
+	public AsyncSearchSubmitRequestDescriptor<TDocument> Stats(IList<string>? stats)
 	{
 		StatsValue = stats;
 		return Self;
@@ -1775,7 +1775,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 	public AsyncSearchSubmitRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	public AsyncSearchSubmitRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public AsyncSearchSubmitRequestDescriptor Df(string? df) => Qs("df", df);
-	public AsyncSearchSubmitRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public AsyncSearchSubmitRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public AsyncSearchSubmitRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 	public AsyncSearchSubmitRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public AsyncSearchSubmitRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
@@ -1815,7 +1815,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 
 	private Action<Core.Search.FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
 
@@ -1823,7 +1823,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
 
@@ -1855,7 +1855,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 
 	private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
 
 	private Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
 
@@ -1877,7 +1877,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 
 	private int? FromValue { get; set; }
 
-	private IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 
 	private double? MinScoreValue { get; set; }
 
@@ -1893,15 +1893,15 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 
 	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
 	private bool? SeqNoPrimaryTermValue { get; set; }
 
 	private int? SizeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
-	private IEnumerable<string>? StatsValue { get; set; }
+	private IList<string>? StatsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -1969,7 +1969,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+	public AsyncSearchSubmitRequestDescriptor DocvalueFields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
 		DocvalueFieldsDescriptorAction = null;
@@ -2005,7 +2005,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public AsyncSearchSubmitRequestDescriptor Fields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
 		FieldsDescriptorAction = null;
@@ -2137,7 +2137,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
+	public AsyncSearchSubmitRequestDescriptor Rescore(IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
 	{
 		RescoreDescriptor = null;
 		RescoreDescriptorAction = null;
@@ -2221,7 +2221,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public AsyncSearchSubmitRequestDescriptor IndicesBoost(IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
@@ -2275,7 +2275,7 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor SearchAfter(IEnumerable<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public AsyncSearchSubmitRequestDescriptor SearchAfter(IList<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
 	{
 		SearchAfterValue = searchAfter;
 		return Self;
@@ -2293,13 +2293,13 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor Sort(IEnumerable<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public AsyncSearchSubmitRequestDescriptor Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
 	}
 
-	public AsyncSearchSubmitRequestDescriptor Stats(IEnumerable<string>? stats)
+	public AsyncSearchSubmitRequestDescriptor Stats(IList<string>? stats)
 	{
 		StatsValue = stats;
 		return Self;

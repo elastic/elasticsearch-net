@@ -37,7 +37,7 @@ public sealed partial class SpanNearQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("clauses")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("in_order")]
@@ -55,7 +55,7 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	{
 	}
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
 
 	private SpanQueryDescriptor<TDocument> ClausesDescriptor { get; set; }
 
@@ -71,7 +71,7 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 
 	private int? SlopValue { get; set; }
 
-	public SpanNearQueryDescriptor<TDocument> Clauses(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+	public SpanNearQueryDescriptor<TDocument> Clauses(IList<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
 	{
 		ClausesDescriptor = null;
 		ClausesDescriptorAction = null;
@@ -200,7 +200,7 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	{
 	}
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
 
 	private SpanQueryDescriptor ClausesDescriptor { get; set; }
 
@@ -216,7 +216,7 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 
 	private int? SlopValue { get; set; }
 
-	public SpanNearQueryDescriptor Clauses(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+	public SpanNearQueryDescriptor Clauses(IList<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
 	{
 		ClausesDescriptor = null;
 		ClausesDescriptorAction = null;

@@ -33,7 +33,7 @@ public sealed class GetRequestParameters : RequestParameters<GetRequestParameter
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
@@ -51,7 +51,7 @@ public sealed class GetRequestParameters : RequestParameters<GetRequestParameter
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? Features { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.Feature>?>("features"); set => Q("features", value); }
+	public IList<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? Features { get => Q<IList<Elastic.Clients.Elasticsearch.IndexManagement.Feature>?>("features"); set => Q("features", value); }
 }
 
 public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
@@ -67,7 +67,7 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
@@ -85,7 +85,7 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? Features { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.Feature>?>("features"); set => Q("features", value); }
+	public IList<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? Features { get => Q<IList<Elastic.Clients.Elasticsearch.IndexManagement.Feature>?>("features"); set => Q("features", value); }
 }
 
 public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptor<GetRequestDescriptor<TDocument>, GetRequestParameters>
@@ -103,8 +103,8 @@ public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptor<
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
 	public GetRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public GetRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public GetRequestDescriptor<TDocument> Features(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? features) => Qs("features", features);
+	public GetRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public GetRequestDescriptor<TDocument> Features(IList<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? features) => Qs("features", features);
 	public GetRequestDescriptor<TDocument> FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public GetRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public GetRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
@@ -136,8 +136,8 @@ public sealed partial class GetRequestDescriptor : RequestDescriptor<GetRequestD
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
 	public GetRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public GetRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public GetRequestDescriptor Features(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? features) => Qs("features", features);
+	public GetRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public GetRequestDescriptor Features(IList<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? features) => Qs("features", features);
 	public GetRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public GetRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public GetRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
