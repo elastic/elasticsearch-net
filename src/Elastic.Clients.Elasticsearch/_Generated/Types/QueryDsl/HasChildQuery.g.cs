@@ -62,6 +62,8 @@ public sealed partial class HasChildQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type { get; set; }
+
+	public static implicit operator QueryContainer(HasChildQuery hasChildQuery) => QueryContainer.HasChild(hasChildQuery);
 }
 
 public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDescriptor<HasChildQueryDescriptor<TDocument>>
