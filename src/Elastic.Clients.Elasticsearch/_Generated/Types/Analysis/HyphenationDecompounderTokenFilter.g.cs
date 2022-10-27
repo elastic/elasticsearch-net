@@ -56,7 +56,7 @@ public sealed partial class HyphenationDecompounderTokenFilter : ITokenFilterDef
 
 	[JsonInclude]
 	[JsonPropertyName("word_list")]
-	public IEnumerable<string>? WordList { get; set; }
+	public IList<string>? WordList { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("word_list_path")]
@@ -82,7 +82,7 @@ public sealed partial class HyphenationDecompounderTokenFilterDescriptor : Seria
 
 	private string? VersionValue { get; set; }
 
-	private IEnumerable<string>? WordListValue { get; set; }
+	private IList<string>? WordListValue { get; set; }
 
 	private string? WordListPathValue { get; set; }
 
@@ -122,7 +122,7 @@ public sealed partial class HyphenationDecompounderTokenFilterDescriptor : Seria
 		return Self;
 	}
 
-	public HyphenationDecompounderTokenFilterDescriptor WordList(IEnumerable<string>? wordList)
+	public HyphenationDecompounderTokenFilterDescriptor WordList(IList<string>? wordList)
 	{
 		WordListValue = wordList;
 		return Self;

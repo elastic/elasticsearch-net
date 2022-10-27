@@ -48,7 +48,7 @@ public sealed class DeleteByQueryRequestParameters : RequestParameters<DeleteByQ
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
@@ -93,10 +93,10 @@ public sealed class DeleteByQueryRequestParameters : RequestParameters<DeleteByQ
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 	[JsonIgnore]
-	public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
+	public IList<string>? Sort { get => Q<IList<string>?>("sort"); set => Q("sort", value); }
 
 	[JsonIgnore]
-	public IEnumerable<string>? Stats { get => Q<IEnumerable<string>?>("stats"); set => Q("stats", value); }
+	public IList<string>? Stats { get => Q<IList<string>?>("stats"); set => Q("stats", value); }
 
 	[JsonIgnore]
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
@@ -142,7 +142,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
@@ -187,10 +187,10 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 	[JsonIgnore]
-	public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
+	public IList<string>? Sort { get => Q<IList<string>?>("sort"); set => Q("sort", value); }
 
 	[JsonIgnore]
-	public IEnumerable<string>? Stats { get => Q<IEnumerable<string>?>("stats"); set => Q("stats", value); }
+	public IList<string>? Stats { get => Q<IList<string>?>("stats"); set => Q("stats", value); }
 
 	[JsonIgnore]
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
@@ -240,7 +240,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 	public DeleteByQueryRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts) => Qs("conflicts", conflicts);
 	public DeleteByQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public DeleteByQueryRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
-	public DeleteByQueryRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public DeleteByQueryRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public DeleteByQueryRequestDescriptor<TDocument> From(long? from) => Qs("from", from);
 	public DeleteByQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public DeleteByQueryRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
@@ -255,8 +255,8 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 	public DeleteByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Duration? searchTimeout) => Qs("search_timeout", searchTimeout);
 	public DeleteByQueryRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
 	public DeleteByQueryRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-	public DeleteByQueryRequestDescriptor<TDocument> Sort(IEnumerable<string>? sort) => Qs("sort", sort);
-	public DeleteByQueryRequestDescriptor<TDocument> Stats(IEnumerable<string>? stats) => Qs("stats", stats);
+	public DeleteByQueryRequestDescriptor<TDocument> Sort(IList<string>? sort) => Qs("sort", sort);
+	public DeleteByQueryRequestDescriptor<TDocument> Stats(IList<string>? stats) => Qs("stats", stats);
 	public DeleteByQueryRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 	public DeleteByQueryRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public DeleteByQueryRequestDescriptor<TDocument> Version(bool? version = true) => Qs("version", version);
@@ -401,7 +401,7 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 	public DeleteByQueryRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts) => Qs("conflicts", conflicts);
 	public DeleteByQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public DeleteByQueryRequestDescriptor Df(string? df) => Qs("df", df);
-	public DeleteByQueryRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public DeleteByQueryRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public DeleteByQueryRequestDescriptor From(long? from) => Qs("from", from);
 	public DeleteByQueryRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public DeleteByQueryRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
@@ -416,8 +416,8 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 	public DeleteByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Duration? searchTimeout) => Qs("search_timeout", searchTimeout);
 	public DeleteByQueryRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
 	public DeleteByQueryRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-	public DeleteByQueryRequestDescriptor Sort(IEnumerable<string>? sort) => Qs("sort", sort);
-	public DeleteByQueryRequestDescriptor Stats(IEnumerable<string>? stats) => Qs("stats", stats);
+	public DeleteByQueryRequestDescriptor Sort(IList<string>? sort) => Qs("sort", sort);
+	public DeleteByQueryRequestDescriptor Stats(IList<string>? stats) => Qs("stats", stats);
 	public DeleteByQueryRequestDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 	public DeleteByQueryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public DeleteByQueryRequestDescriptor Version(bool? version = true) => Qs("version", version);

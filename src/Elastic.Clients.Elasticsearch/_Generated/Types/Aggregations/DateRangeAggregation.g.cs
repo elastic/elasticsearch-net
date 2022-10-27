@@ -79,7 +79,7 @@ internal sealed class DateRangeAggregationConverter : JsonConverter<DateRangeAgg
 				if (reader.ValueTextEquals("ranges"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Ranges = value;
@@ -205,7 +205,7 @@ public sealed partial class DateRangeAggregation : Aggregation
 
 	public override string? Name { get; internal set; }
 
-	public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
 
 	public string? TimeZone { get; set; }
 }
@@ -231,7 +231,7 @@ public sealed partial class DateRangeAggregationDescriptor<TDocument> : Serializ
 
 	private FieldValue? MissingValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
 
 	private DateRangeExpressionDescriptor RangesDescriptor { get; set; }
 
@@ -295,7 +295,7 @@ public sealed partial class DateRangeAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public DateRangeAggregationDescriptor<TDocument> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
+	public DateRangeAggregationDescriptor<TDocument> Ranges(IList<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
 	{
 		RangesDescriptor = null;
 		RangesDescriptorAction = null;
@@ -445,7 +445,7 @@ public sealed partial class DateRangeAggregationDescriptor : SerializableDescrip
 
 	private FieldValue? MissingValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
 
 	private DateRangeExpressionDescriptor RangesDescriptor { get; set; }
 
@@ -515,7 +515,7 @@ public sealed partial class DateRangeAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public DateRangeAggregationDescriptor Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
+	public DateRangeAggregationDescriptor Ranges(IList<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
 	{
 		RangesDescriptor = null;
 		RangesDescriptorAction = null;
