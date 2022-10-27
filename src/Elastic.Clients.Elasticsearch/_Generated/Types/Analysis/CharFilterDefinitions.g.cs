@@ -36,7 +36,7 @@ public partial class CharFilterDefinitions : IsADictionary<string, ICharFilterDe
 	{
 	}
 
-	public void Add(string name, ICharFilterDefinition charFilterDefinitions) => BackingDictionary.Add(name, charFilterDefinitions);
+	public void Add(string name, ICharFilterDefinition charFilterDefinition) => BackingDictionary.Add(name, charFilterDefinition);
 }
 
 public sealed partial class CharFilterDefinitionsDescriptor : IsADictionaryDescriptor<CharFilterDefinitionsDescriptor, CharFilterDefinitions, string, ICharFilterDefinition>
