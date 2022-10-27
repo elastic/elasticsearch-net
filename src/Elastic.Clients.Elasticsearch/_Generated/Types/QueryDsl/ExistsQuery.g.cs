@@ -38,6 +38,8 @@ public sealed partial class ExistsQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	public static implicit operator QueryContainer(ExistsQuery existsQuery) => QueryContainer.Exists(existsQuery);
 }
 
 public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescriptor<ExistsQueryDescriptor<TDocument>>

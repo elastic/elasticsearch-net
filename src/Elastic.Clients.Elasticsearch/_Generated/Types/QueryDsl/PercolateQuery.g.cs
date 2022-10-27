@@ -70,6 +70,8 @@ public sealed partial class PercolateQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("version")]
 	public long? Version { get; set; }
+
+	public static implicit operator QueryContainer(PercolateQuery percolateQuery) => QueryContainer.Percolate(percolateQuery);
 }
 
 public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDescriptor<PercolateQueryDescriptor<TDocument>>

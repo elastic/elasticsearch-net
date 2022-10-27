@@ -46,6 +46,8 @@ public sealed partial class ScriptScoreQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+
+	public static implicit operator QueryContainer(ScriptScoreQuery scriptScoreQuery) => QueryContainer.ScriptScore(scriptScoreQuery);
 }
 
 public sealed partial class ScriptScoreQueryDescriptor<TDocument> : SerializableDescriptor<ScriptScoreQueryDescriptor<TDocument>>
