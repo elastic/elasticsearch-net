@@ -36,7 +36,7 @@ public partial class Normalizers : IsADictionary<string, INormalizer>
 	{
 	}
 
-	public void Add(string name, INormalizer normalizers) => BackingDictionary.Add(name, normalizers);
+	public void Add(string name, INormalizer normalizer) => BackingDictionary.Add(name, normalizer);
 }
 
 public sealed partial class NormalizersDescriptor : IsADictionaryDescriptor<NormalizersDescriptor, Normalizers, string, INormalizer>

@@ -36,7 +36,7 @@ public partial class Properties : IsADictionary<PropertyName, IProperty>
 	{
 	}
 
-	public void Add(string name, IProperty property) => BackingDictionary.Add(name, property);
+	public void Add(PropertyName propertyName, IProperty property) => BackingDictionary.Add(propertyName, property);
 }
 
 public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
