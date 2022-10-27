@@ -34,6 +34,8 @@ public sealed partial class MatchAllQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	public static implicit operator QueryContainer(MatchAllQuery matchAllQuery) => QueryContainer.MatchAll(matchAllQuery);
 }
 
 public sealed partial class MatchAllQueryDescriptor : SerializableDescriptor<MatchAllQueryDescriptor>

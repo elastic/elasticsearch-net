@@ -54,6 +54,8 @@ public sealed partial class HasParentQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("score")]
 	public bool? Score { get; set; }
+
+	public static implicit operator QueryContainer(HasParentQuery hasParentQuery) => QueryContainer.HasParent(hasParentQuery);
 }
 
 public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDescriptor<HasParentQueryDescriptor<TDocument>>

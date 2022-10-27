@@ -58,6 +58,8 @@ public sealed partial class CombinedFieldsQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
+
+	public static implicit operator QueryContainer(CombinedFieldsQuery combinedFieldsQuery) => QueryContainer.CombinedFields(combinedFieldsQuery);
 }
 
 public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : SerializableDescriptor<CombinedFieldsQueryDescriptor<TDocument>>
