@@ -36,7 +36,7 @@ public partial class TokenFilterDefinitions : IsADictionary<string, ITokenFilter
 	{
 	}
 
-	public void Add(string name, ITokenFilterDefinition tokenFilterDefinitions) => BackingDictionary.Add(name, tokenFilterDefinitions);
+	public void Add(string name, ITokenFilterDefinition tokenFilterDefinition) => BackingDictionary.Add(name, tokenFilterDefinition);
 }
 
 public sealed partial class TokenFilterDefinitionsDescriptor : IsADictionaryDescriptor<TokenFilterDefinitionsDescriptor, TokenFilterDefinitions, string, ITokenFilterDefinition>
