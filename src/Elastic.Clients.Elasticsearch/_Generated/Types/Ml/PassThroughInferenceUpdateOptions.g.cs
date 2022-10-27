@@ -34,6 +34,8 @@ public sealed partial class PassThroughInferenceUpdateOptions
 	[JsonInclude]
 	[JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
+
+	public static implicit operator InferenceConfigUpdateContainer(PassThroughInferenceUpdateOptions passThroughInferenceUpdateOptions) => InferenceConfigUpdateContainer.PassThrough(passThroughInferenceUpdateOptions);
 }
 
 public sealed partial class PassThroughInferenceUpdateOptionsDescriptor : SerializableDescriptor<PassThroughInferenceUpdateOptionsDescriptor>

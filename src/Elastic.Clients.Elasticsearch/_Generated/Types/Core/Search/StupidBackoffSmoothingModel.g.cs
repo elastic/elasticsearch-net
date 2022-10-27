@@ -30,6 +30,8 @@ public sealed partial class StupidBackoffSmoothingModel
 	[JsonInclude]
 	[JsonPropertyName("discount")]
 	public double Discount { get; set; }
+
+	public static implicit operator SmoothingModelContainer(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => SmoothingModelContainer.StupidBackoff(stupidBackoffSmoothingModel);
 }
 
 public sealed partial class StupidBackoffSmoothingModelDescriptor : SerializableDescriptor<StupidBackoffSmoothingModelDescriptor>

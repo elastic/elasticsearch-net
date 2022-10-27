@@ -42,6 +42,8 @@ public sealed partial class DisMaxQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
+
+	public static implicit operator QueryContainer(DisMaxQuery disMaxQuery) => QueryContainer.DisMax(disMaxQuery);
 }
 
 public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescriptor<DisMaxQueryDescriptor<TDocument>>
