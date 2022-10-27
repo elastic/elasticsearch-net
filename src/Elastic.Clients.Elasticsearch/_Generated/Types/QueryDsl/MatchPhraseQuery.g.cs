@@ -155,6 +155,8 @@ public sealed partial class MatchPhraseQuery : Query
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	public static implicit operator QueryContainer(MatchPhraseQuery matchPhraseQuery) => QueryContainer.MatchPhrase(matchPhraseQuery);
 }
 
 public sealed partial class MatchPhraseQueryDescriptor<TDocument> : SerializableDescriptor<MatchPhraseQueryDescriptor<TDocument>>

@@ -58,6 +58,8 @@ public sealed partial class FunctionScoreQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
+
+	public static implicit operator QueryContainer(FunctionScoreQuery functionScoreQuery) => QueryContainer.FunctionScore(functionScoreQuery);
 }
 
 public sealed partial class FunctionScoreQueryDescriptor<TDocument> : SerializableDescriptor<FunctionScoreQueryDescriptor<TDocument>>
