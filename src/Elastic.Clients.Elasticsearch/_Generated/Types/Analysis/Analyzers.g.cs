@@ -36,7 +36,7 @@ public partial class Analyzers : IsADictionary<string, IAnalyzer>
 	{
 	}
 
-	public void Add(string name, IAnalyzer analyzers) => BackingDictionary.Add(name, analyzers);
+	public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(name, analyzer);
 }
 
 public sealed partial class AnalyzersDescriptor : IsADictionaryDescriptor<AnalyzersDescriptor, Analyzers, string, IAnalyzer>
