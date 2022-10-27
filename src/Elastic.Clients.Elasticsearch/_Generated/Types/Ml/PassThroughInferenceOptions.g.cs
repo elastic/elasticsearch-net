@@ -34,6 +34,8 @@ public sealed partial class PassThroughInferenceOptions
 	[JsonInclude]
 	[JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+
+	public static implicit operator InferenceConfigCreateContainer(PassThroughInferenceOptions passThroughInferenceOptions) => InferenceConfigCreateContainer.PassThrough(passThroughInferenceOptions);
 }
 
 public sealed partial class PassThroughInferenceOptionsDescriptor : SerializableDescriptor<PassThroughInferenceOptionsDescriptor>

@@ -113,6 +113,8 @@ public sealed partial class ShapeQuery : Query
 	public bool? IgnoreUnmapped { get; set; }
 
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery Shape { get; set; }
+
+	public static implicit operator QueryContainer(ShapeQuery shapeQuery) => QueryContainer.Shape(shapeQuery);
 }
 
 public sealed partial class ShapeQueryDescriptor<TDocument> : SerializableDescriptor<ShapeQueryDescriptor<TDocument>>

@@ -54,6 +54,8 @@ public sealed partial class BoolQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("should")]
 	public IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Should { get; set; }
+
+	public static implicit operator QueryContainer(BoolQuery boolQuery) => QueryContainer.Bool(boolQuery);
 }
 
 public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescriptor<BoolQueryDescriptor<TDocument>>
