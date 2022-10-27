@@ -38,6 +38,8 @@ public sealed partial class IdsQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("values")]
 	public Elastic.Clients.Elasticsearch.Ids? Values { get; set; }
+
+	public static implicit operator QueryContainer(IdsQuery idsQuery) => QueryContainer.Ids(idsQuery);
 }
 
 public sealed partial class IdsQueryDescriptor : SerializableDescriptor<IdsQueryDescriptor>

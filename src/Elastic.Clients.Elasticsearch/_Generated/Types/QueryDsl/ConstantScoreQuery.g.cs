@@ -38,6 +38,8 @@ public sealed partial class ConstantScoreQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Filter { get; set; }
+
+	public static implicit operator QueryContainer(ConstantScoreQuery constantScoreQuery) => QueryContainer.ConstantScore(constantScoreQuery);
 }
 
 public sealed partial class ConstantScoreQueryDescriptor<TDocument> : SerializableDescriptor<ConstantScoreQueryDescriptor<TDocument>>
