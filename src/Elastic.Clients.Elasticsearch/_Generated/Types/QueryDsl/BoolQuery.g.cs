@@ -37,7 +37,7 @@ public sealed partial class BoolQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filter { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("minimum_should_match")]
@@ -45,15 +45,15 @@ public sealed partial class BoolQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("must")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Must { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Must { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("must_not")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNot { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNot { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("should")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Should { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Should { get; set; }
 }
 
 public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescriptor<BoolQueryDescriptor<TDocument>>
@@ -63,7 +63,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 	{
 	}
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
 
 	private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
 
@@ -71,7 +71,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 
 	private Action<QueryContainerDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustValue { get; set; }
 
 	private QueryContainerDescriptor<TDocument> MustDescriptor { get; set; }
 
@@ -79,7 +79,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 
 	private Action<QueryContainerDescriptor<TDocument>>[] MustDescriptorActions { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNotValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNotValue { get; set; }
 
 	private QueryContainerDescriptor<TDocument> MustNotDescriptor { get; set; }
 
@@ -87,7 +87,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 
 	private Action<QueryContainerDescriptor<TDocument>>[] MustNotDescriptorActions { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; set; }
 
 	private QueryContainerDescriptor<TDocument> ShouldDescriptor { get; set; }
 
@@ -101,7 +101,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-	public BoolQueryDescriptor<TDocument> Filter(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+	public BoolQueryDescriptor<TDocument> Filter(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -137,7 +137,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Must(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must)
+	public BoolQueryDescriptor<TDocument> Must(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must)
 	{
 		MustDescriptor = null;
 		MustDescriptorAction = null;
@@ -173,7 +173,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> MustNot(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot)
+	public BoolQueryDescriptor<TDocument> MustNot(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot)
 	{
 		MustNotDescriptor = null;
 		MustNotDescriptorAction = null;
@@ -209,7 +209,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Should(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should)
+	public BoolQueryDescriptor<TDocument> Should(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should)
 	{
 		ShouldDescriptor = null;
 		ShouldDescriptorAction = null;
@@ -419,7 +419,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 	{
 	}
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
 
 	private QueryContainerDescriptor FilterDescriptor { get; set; }
 
@@ -427,7 +427,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 
 	private Action<QueryContainerDescriptor>[] FilterDescriptorActions { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustValue { get; set; }
 
 	private QueryContainerDescriptor MustDescriptor { get; set; }
 
@@ -435,7 +435,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 
 	private Action<QueryContainerDescriptor>[] MustDescriptorActions { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNotValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNotValue { get; set; }
 
 	private QueryContainerDescriptor MustNotDescriptor { get; set; }
 
@@ -443,7 +443,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 
 	private Action<QueryContainerDescriptor>[] MustNotDescriptorActions { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; set; }
 
 	private QueryContainerDescriptor ShouldDescriptor { get; set; }
 
@@ -457,7 +457,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-	public BoolQueryDescriptor Filter(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+	public BoolQueryDescriptor Filter(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -493,7 +493,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Must(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must)
+	public BoolQueryDescriptor Must(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must)
 	{
 		MustDescriptor = null;
 		MustDescriptorAction = null;
@@ -529,7 +529,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor MustNot(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot)
+	public BoolQueryDescriptor MustNot(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot)
 	{
 		MustNotDescriptor = null;
 		MustNotDescriptorAction = null;
@@ -565,7 +565,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Should(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should)
+	public BoolQueryDescriptor Should(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should)
 	{
 		ShouldDescriptor = null;
 		ShouldDescriptorAction = null;

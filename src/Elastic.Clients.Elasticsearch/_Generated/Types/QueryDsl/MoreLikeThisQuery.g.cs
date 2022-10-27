@@ -49,7 +49,7 @@ public sealed partial class MoreLikeThisQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("include")]
@@ -57,7 +57,7 @@ public sealed partial class MoreLikeThisQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("like")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("max_doc_freq")]
@@ -98,11 +98,11 @@ public sealed partial class MoreLikeThisQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("stop_words")]
 	[JsonConverter(typeof(StopWordsConverter))]
-	public IEnumerable<string>? StopWords { get; set; }
+	public IList<string>? StopWords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("unlike")]
-	public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? Unlike { get; set; }
+	public IList<Elastic.Clients.Elasticsearch.QueryDsl.Like>? Unlike { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("version")]
@@ -130,11 +130,11 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 
 	private bool? FailOnUnsupportedFieldValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
 
 	private bool? IncludeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
 
 	private int? MaxDocFreqValue { get; set; }
 
@@ -154,9 +154,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 
-	private IEnumerable<string>? StopWordsValue { get; set; }
+	private IList<string>? StopWordsValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
 
 	private long? VersionValue { get; set; }
 
@@ -192,7 +192,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields)
+	public MoreLikeThisQueryDescriptor<TDocument> Fields(IList<Elastic.Clients.Elasticsearch.Field>? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -204,7 +204,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor<TDocument> Like(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> like)
+	public MoreLikeThisQueryDescriptor<TDocument> Like(IList<Elastic.Clients.Elasticsearch.QueryDsl.Like> like)
 	{
 		LikeValue = like;
 		return Self;
@@ -264,13 +264,13 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor<TDocument> StopWords(IEnumerable<string>? stopWords)
+	public MoreLikeThisQueryDescriptor<TDocument> StopWords(IList<string>? stopWords)
 	{
 		StopWordsValue = stopWords;
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor<TDocument> Unlike(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike)
+	public MoreLikeThisQueryDescriptor<TDocument> Unlike(IList<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike)
 	{
 		UnlikeValue = unlike;
 		return Self;
@@ -434,11 +434,11 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 
 	private bool? FailOnUnsupportedFieldValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
 
 	private bool? IncludeValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
 
 	private int? MaxDocFreqValue { get; set; }
 
@@ -458,9 +458,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 
-	private IEnumerable<string>? StopWordsValue { get; set; }
+	private IList<string>? StopWordsValue { get; set; }
 
-	private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
+	private IList<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
 
 	private long? VersionValue { get; set; }
 
@@ -496,7 +496,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields)
+	public MoreLikeThisQueryDescriptor Fields(IList<Elastic.Clients.Elasticsearch.Field>? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -508,7 +508,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor Like(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> like)
+	public MoreLikeThisQueryDescriptor Like(IList<Elastic.Clients.Elasticsearch.QueryDsl.Like> like)
 	{
 		LikeValue = like;
 		return Self;
@@ -568,13 +568,13 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor StopWords(IEnumerable<string>? stopWords)
+	public MoreLikeThisQueryDescriptor StopWords(IList<string>? stopWords)
 	{
 		StopWordsValue = stopWords;
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor Unlike(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike)
+	public MoreLikeThisQueryDescriptor Unlike(IList<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike)
 	{
 		UnlikeValue = unlike;
 		return Self;

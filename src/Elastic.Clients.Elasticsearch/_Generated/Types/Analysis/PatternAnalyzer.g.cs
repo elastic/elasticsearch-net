@@ -42,7 +42,7 @@ public sealed partial class PatternAnalyzer : IAnalyzer
 	[JsonInclude]
 	[JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
-	public IEnumerable<string>? Stopwords { get; set; }
+	public IList<string>? Stopwords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -65,7 +65,7 @@ public sealed partial class PatternAnalyzerDescriptor : SerializableDescriptor<P
 
 	private string PatternValue { get; set; }
 
-	private IEnumerable<string>? StopwordsValue { get; set; }
+	private IList<string>? StopwordsValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
@@ -87,7 +87,7 @@ public sealed partial class PatternAnalyzerDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PatternAnalyzerDescriptor Stopwords(IEnumerable<string>? stopwords)
+	public PatternAnalyzerDescriptor Stopwords(IList<string>? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;

@@ -33,7 +33,7 @@ public sealed class FieldCapsRequestParameters : RequestParameters<FieldCapsRequ
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
@@ -48,7 +48,7 @@ public sealed class FieldCapsRequestParameters : RequestParameters<FieldCapsRequ
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
 
 	[JsonIgnore]
-	public IEnumerable<string>? Types { get => Q<IEnumerable<string>?>("types"); set => Q("types", value); }
+	public IList<string>? Types { get => Q<IList<string>?>("types"); set => Q("types", value); }
 }
 
 public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestParameters>
@@ -68,7 +68,7 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
@@ -83,7 +83,7 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
 
 	[JsonIgnore]
-	public IEnumerable<string>? Types { get => Q<IEnumerable<string>?>("types"); set => Q("types", value); }
+	public IList<string>? Types { get => Q<IList<string>?>("types"); set => Q("types", value); }
 
 	[JsonInclude]
 	[JsonPropertyName("index_filter")]
@@ -105,12 +105,12 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 	protected override bool SupportsBody => true;
 	public FieldCapsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public FieldCapsRequestDescriptor<TDocument> ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public FieldCapsRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
 	public FieldCapsRequestDescriptor<TDocument> Filters(string? filters) => Qs("filters", filters);
 	public FieldCapsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public FieldCapsRequestDescriptor<TDocument> IncludeUnmapped(bool? includeUnmapped = true) => Qs("include_unmapped", includeUnmapped);
-	public FieldCapsRequestDescriptor<TDocument> Types(IEnumerable<string>? types) => Qs("types", types);
+	public FieldCapsRequestDescriptor<TDocument> Types(IList<string>? types) => Qs("types", types);
 	public FieldCapsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
@@ -195,12 +195,12 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 	protected override bool SupportsBody => true;
 	public FieldCapsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public FieldCapsRequestDescriptor ExpandWildcards(IEnumerable<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public FieldCapsRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
 	public FieldCapsRequestDescriptor Filters(string? filters) => Qs("filters", filters);
 	public FieldCapsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public FieldCapsRequestDescriptor IncludeUnmapped(bool? includeUnmapped = true) => Qs("include_unmapped", includeUnmapped);
-	public FieldCapsRequestDescriptor Types(IEnumerable<string>? types) => Qs("types", types);
+	public FieldCapsRequestDescriptor Types(IList<string>? types) => Qs("types", types);
 	public FieldCapsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
