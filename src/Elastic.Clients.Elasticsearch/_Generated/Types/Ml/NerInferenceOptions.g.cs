@@ -38,6 +38,8 @@ public sealed partial class NerInferenceOptions
 	[JsonInclude]
 	[JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+
+	public static implicit operator InferenceConfigCreateContainer(NerInferenceOptions nerInferenceOptions) => InferenceConfigCreateContainer.Ner(nerInferenceOptions);
 }
 
 public sealed partial class NerInferenceOptionsDescriptor : SerializableDescriptor<NerInferenceOptionsDescriptor>

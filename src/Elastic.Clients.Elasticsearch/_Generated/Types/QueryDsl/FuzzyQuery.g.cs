@@ -183,6 +183,8 @@ public sealed partial class FuzzyQuery : Query
 	public object Value { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	public static implicit operator QueryContainer(FuzzyQuery fuzzyQuery) => QueryContainer.Fuzzy(fuzzyQuery);
 }
 
 public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescriptor<FuzzyQueryDescriptor<TDocument>>

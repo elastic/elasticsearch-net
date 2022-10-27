@@ -50,6 +50,8 @@ public sealed partial class ZeroShotClassificationInferenceOptions
 	[JsonInclude]
 	[JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+
+	public static implicit operator InferenceConfigCreateContainer(ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => InferenceConfigCreateContainer.ZeroShotClassification(zeroShotClassificationInferenceOptions);
 }
 
 public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : SerializableDescriptor<ZeroShotClassificationInferenceOptionsDescriptor>
