@@ -25,7 +25,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch;
-internal sealed class TermsExcludeConverter : IEnumerableSingleOrManyConverter<string>
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+public partial class TermsExclude : Union<string, IReadOnlyCollection<string>>
 {
+	public TermsExclude(string termsExclude) : base(termsExclude)
+	{
+	}
+
+	public TermsExclude(IReadOnlyCollection<string> termsExclude) : base(termsExclude)
+	{
+	}
 }
