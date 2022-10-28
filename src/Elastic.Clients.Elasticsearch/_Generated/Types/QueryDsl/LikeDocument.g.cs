@@ -41,7 +41,7 @@ public sealed partial class LikeDocument
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public IList<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
+	public Fields? Fields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("per_field_analyzer")]
@@ -73,7 +73,7 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 
 	private object? DocValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Fields? FieldsValue { get; set; }
 
 	private Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
 
@@ -101,7 +101,7 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public LikeDocumentDescriptor<TDocument> Fields(IList<Elastic.Clients.Elasticsearch.Field>? fields)
+	public LikeDocumentDescriptor<TDocument> Fields(Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -193,7 +193,7 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 
 	private object? DocValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Fields? FieldsValue { get; set; }
 
 	private Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
 
@@ -221,7 +221,7 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 		return Self;
 	}
 
-	public LikeDocumentDescriptor Fields(IList<Elastic.Clients.Elasticsearch.Field>? fields)
+	public LikeDocumentDescriptor Fields(Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;
