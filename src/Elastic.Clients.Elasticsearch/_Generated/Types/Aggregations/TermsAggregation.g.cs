@@ -55,7 +55,7 @@ internal sealed class TermsAggregationConverter : JsonConverter<TermsAggregation
 				if (reader.ValueTextEquals("exclude"))
 				{
 					reader.Read();
-					var value = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsExclude?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Exclude = value;
@@ -267,7 +267,7 @@ internal sealed class TermsAggregationConverter : JsonConverter<TermsAggregation
 		if (value.Exclude is not null)
 		{
 			writer.WritePropertyName("exclude");
-			SingleOrManySerializationHelper.Serialize<string>(value.Exclude, writer, options);
+			JsonSerializer.Serialize(writer, value.Exclude, options);
 		}
 
 		if (value.ExecutionHint is not null)
@@ -377,8 +377,7 @@ public sealed partial class TermsAggregation : Aggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
-	[JsonConverter(typeof(TermsExcludeConverter))]
-	public IList<string>? Exclude { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
@@ -427,7 +426,7 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
 
-	private IList<string>? ExcludeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHintValue { get; set; }
 
@@ -487,7 +486,7 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public TermsAggregationDescriptor<TDocument> Exclude(IList<string>? exclude)
+	public TermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
 	{
 		ExcludeValue = exclude;
 		return Self;
@@ -597,7 +596,7 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 		if (ExcludeValue is not null)
 		{
 			writer.WritePropertyName("exclude");
-			SingleOrManySerializationHelper.Serialize<string>(ExcludeValue, writer, options);
+			JsonSerializer.Serialize(writer, ExcludeValue, options);
 		}
 
 		if (ExecutionHintValue is not null)
@@ -720,7 +719,7 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
 
-	private IList<string>? ExcludeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHintValue { get; set; }
 
@@ -780,7 +779,7 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public TermsAggregationDescriptor Exclude(IList<string>? exclude)
+	public TermsAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
 	{
 		ExcludeValue = exclude;
 		return Self;
@@ -896,7 +895,7 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 		if (ExcludeValue is not null)
 		{
 			writer.WritePropertyName("exclude");
-			SingleOrManySerializationHelper.Serialize<string>(ExcludeValue, writer, options);
+			JsonSerializer.Serialize(writer, ExcludeValue, options);
 		}
 
 		if (ExecutionHintValue is not null)
