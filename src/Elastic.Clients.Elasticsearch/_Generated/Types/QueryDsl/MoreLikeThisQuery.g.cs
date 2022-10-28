@@ -49,7 +49,7 @@ public sealed partial class MoreLikeThisQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public IList<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
+	public Fields? Fields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("include")]
@@ -132,7 +132,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 
 	private bool? FailOnUnsupportedFieldValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Fields? FieldsValue { get; set; }
 
 	private bool? IncludeValue { get; set; }
 
@@ -194,7 +194,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor<TDocument> Fields(IList<Elastic.Clients.Elasticsearch.Field>? fields)
+	public MoreLikeThisQueryDescriptor<TDocument> Fields(Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -436,7 +436,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 
 	private bool? FailOnUnsupportedFieldValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Fields? FieldsValue { get; set; }
 
 	private bool? IncludeValue { get; set; }
 
@@ -498,7 +498,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor Fields(IList<Elastic.Clients.Elasticsearch.Field>? fields)
+	public MoreLikeThisQueryDescriptor Fields(Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;
