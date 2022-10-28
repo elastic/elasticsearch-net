@@ -69,7 +69,7 @@ public sealed partial class QueryStringQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public IList<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
+	public Fields? Fields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("fuzziness")]
@@ -165,7 +165,7 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 
 	private bool? EscapeValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Fields? FieldsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -265,7 +265,7 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public QueryStringQueryDescriptor<TDocument> Fields(IList<Elastic.Clients.Elasticsearch.Field>? fields)
+	public QueryStringQueryDescriptor<TDocument> Fields(Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -559,7 +559,7 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 
 	private bool? EscapeValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Fields? FieldsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
@@ -665,7 +665,7 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public QueryStringQueryDescriptor Fields(IList<Elastic.Clients.Elasticsearch.Field>? fields)
+	public QueryStringQueryDescriptor Fields(Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;
