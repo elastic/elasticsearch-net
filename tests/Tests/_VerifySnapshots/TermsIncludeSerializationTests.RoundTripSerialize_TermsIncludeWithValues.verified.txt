@@ -1,0 +1,6 @@
+{
+  include: [
+    term_a,
+    term_b
+  ]
+}
