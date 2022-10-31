@@ -43,7 +43,7 @@ public class AsyncSearchApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 						ExecutionHint = TermsAggregationExecutionHint.Map,
 						Missing = "n/a",
 						// TODO - Review terms agg and fix this
-						//Include = new TermsInclude(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() }),
+						Include = new TermsInclude(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() }),
 						Order =new []
 						{
 							AggregateOrder.KeyAscending,
@@ -65,7 +65,7 @@ public class AsyncSearchApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 							.ExecutionHint(TermsAggregationExecutionHint.Map)
 							.Missing("n/a")
 							// TODO - Review terms agg and fix this
-							//.Include(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() })
+							.Include(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() })
 							.Order(new []
 							{
 								AggregateOrder.KeyAscending,
