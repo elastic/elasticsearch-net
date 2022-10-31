@@ -3,17 +3,17 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using Elastic.Clients.Elasticsearch.Types.Aggregations;
+using Elastic.Clients.Elasticsearch.Aggregations;
 using Tests.Serialization;
 using VerifyXunit;
 
-namespace Tests.Types;
+namespace Tests.Aggregations;
 
 [UsesVerify]
 public class TermsExcludeSerializationTests : SerializerTestBase
 {
 	[U]
-	public async Task RoundTripSerialize_TermsExlucdeWithRegexPattern()
+	public async Task RoundTripSerialize_TermsExcludeWithRegexPattern()
 	{
 		const string pattern = "water_.*";
 
@@ -29,7 +29,7 @@ public class TermsExcludeSerializationTests : SerializerTestBase
 	}
 
 	[U]
-	public async Task RoundTripSerialize_TermsExlucdeWithValues()
+	public async Task RoundTripSerialize_TermsExcludeWithValues()
 	{
 		var values = new[] { "term_a", "term_b" };
 

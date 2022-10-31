@@ -100,6 +100,18 @@ internal sealed class TermsAggregationConverter : JsonConverter<TermsAggregation
 					continue;
 				}
 
+				if (reader.ValueTextEquals("include"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.Include = value;
+					}
+
+					continue;
+				}
+
 				if (reader.ValueTextEquals("min_doc_count"))
 				{
 					reader.Read();
@@ -288,6 +300,12 @@ internal sealed class TermsAggregationConverter : JsonConverter<TermsAggregation
 			writer.WriteStringValue(value.Format);
 		}
 
+		if (value.Include is not null)
+		{
+			writer.WritePropertyName("include");
+			JsonSerializer.Serialize(writer, value.Include, options);
+		}
+
 		if (value.MinDocCount.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -385,6 +403,8 @@ public sealed partial class TermsAggregation : Aggregation
 
 	public string? Format { get; set; }
 
+	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
+
 	public Dictionary<string, object>? Meta { get; set; }
 
 	public int? MinDocCount { get; set; }
@@ -433,6 +453,8 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 	private string? FormatValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 
 	private Dictionary<string, object>? MetaValue { get; set; }
 
@@ -513,6 +535,12 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	public TermsAggregationDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
+		return Self;
+	}
+
+	public TermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
+	{
+		IncludeValue = include;
 		return Self;
 	}
 
@@ -615,6 +643,12 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(FormatValue);
+		}
+
+		if (IncludeValue is not null)
+		{
+			writer.WritePropertyName("include");
+			JsonSerializer.Serialize(writer, IncludeValue, options);
 		}
 
 		if (MinDocCountValue.HasValue)
@@ -727,6 +761,8 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 
 	private string? FormatValue { get; set; }
 
+	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
+
 	private Dictionary<string, object>? MetaValue { get; set; }
 
 	private int? MinDocCountValue { get; set; }
@@ -812,6 +848,12 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	public TermsAggregationDescriptor Format(string? format)
 	{
 		FormatValue = format;
+		return Self;
+	}
+
+	public TermsAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
+	{
+		IncludeValue = include;
 		return Self;
 	}
 
@@ -914,6 +956,12 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(FormatValue);
+		}
+
+		if (IncludeValue is not null)
+		{
+			writer.WritePropertyName("include");
+			JsonSerializer.Serialize(writer, IncludeValue, options);
 		}
 
 		if (MinDocCountValue.HasValue)

@@ -17,7 +17,6 @@
 
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -26,13 +25,47 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
-public partial class TermsExclude : Union<string, IReadOnlyCollection<string>>
+public sealed partial class TermsPartition
 {
-	public TermsExclude(string termsExclude) : base(termsExclude)
+	[JsonInclude]
+	[JsonPropertyName("num_partitions")]
+	public long NumPartitions { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("partition")]
+	public long Partition { get; set; }
+}
+
+public sealed partial class TermsPartitionDescriptor : SerializableDescriptor<TermsPartitionDescriptor>
+{
+	internal TermsPartitionDescriptor(Action<TermsPartitionDescriptor> configure) => configure.Invoke(this);
+	public TermsPartitionDescriptor() : base()
 	{
 	}
 
-	public TermsExclude(IReadOnlyCollection<string> termsExclude) : base(termsExclude)
+	private long NumPartitionsValue { get; set; }
+
+	private long PartitionValue { get; set; }
+
+	public TermsPartitionDescriptor NumPartitions(long numPartitions)
 	{
+		NumPartitionsValue = numPartitions;
+		return Self;
+	}
+
+	public TermsPartitionDescriptor Partition(long partition)
+	{
+		PartitionValue = partition;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("num_partitions");
+		writer.WriteNumberValue(NumPartitionsValue);
+		writer.WritePropertyName("partition");
+		writer.WriteNumberValue(PartitionValue);
+		writer.WriteEndObject();
 	}
 }
