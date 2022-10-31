@@ -7,7 +7,8 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Types.Aggregations;
+#nullable enable
+namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
 /// Filters which terms to exclude from the response.
@@ -20,14 +21,26 @@ public sealed class TermsExclude
 	/// to determine the terms to exclude from the response.
 	/// </summary>
 	/// <param name="pattern">The regular expression pattern.</param>
-	public TermsExclude(string regexPattern) => RegexPattern = regexPattern;
+	public TermsExclude(string regexPattern)
+	{
+		if (regexPattern is null)
+			throw new ArgumentNullException(nameof(regexPattern));
+
+		RegexPattern = regexPattern;
+	}
 
 	/// <summary>
 	/// Creates an instance of <see cref="TermsExclude" /> that uses a collection of terms
 	/// to exclude from the response.
 	/// </summary>
 	/// <param name="values">The exact terms to exclude.</param>
-	public TermsExclude(ICollection<string> values) => Values = values;
+	public TermsExclude(IEnumerable<string> values)
+	{
+		if (values is null)
+			throw new ArgumentNullException(nameof(values));
+
+		Values = values;
+	}
 
 	/// <summary>
 	/// The regular expression pattern to determine terms to exclude from the response.
@@ -37,7 +50,7 @@ public sealed class TermsExclude
 	/// <summary>
 	/// Collection of terms to exclude from the response.
 	/// </summary>
-	public ICollection<string>? Values { get; }
+	public IEnumerable<string>? Values { get; }
 }
 
 internal sealed class TermsExcludeConverter : JsonConverter<TermsExclude>
@@ -55,12 +68,12 @@ internal sealed class TermsExcludeConverter : JsonConverter<TermsExclude>
 		switch (reader.TokenType)
 		{
 			case JsonTokenType.StartArray:
-				var terms = JsonSerializer.Deserialize<IList<string>>(ref reader, options);
+				var terms = JsonSerializer.Deserialize<string[]>(ref reader, options) ?? Array.Empty<string>();
 				termsExclude = new TermsExclude(terms);
 				break;
 			case JsonTokenType.String:
 				var regex = reader.GetString();
-				termsExclude = new TermsExclude(regex);
+				termsExclude = new TermsExclude(regex!);
 				break;
 			default:
 				throw new JsonException($"Unexpected token {reader.TokenType} when deserializing {nameof(TermsExclude)}");
@@ -79,7 +92,7 @@ internal sealed class TermsExcludeConverter : JsonConverter<TermsExclude>
 
 		if (value.Values is not null)
 		{
-			JsonSerializer.Serialize<IEnumerable<string>>(writer, value.Values, options);
+			JsonSerializer.Serialize(writer, value.Values, options);
 			return;
 		}
 
