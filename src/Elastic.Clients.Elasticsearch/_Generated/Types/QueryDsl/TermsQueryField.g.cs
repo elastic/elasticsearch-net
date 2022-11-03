@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public partial class TermsQueryField : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>
 {
-	public TermsQueryField(IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> termsQueryField) : base(termsQueryField)
+	public TermsQueryField(IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> value) : base(value)
 	{
 	}
 
-	public TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup termsLookup) : base(termsLookup)
+	public TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup lookup) : base(lookup)
 	{
 	}
 }
