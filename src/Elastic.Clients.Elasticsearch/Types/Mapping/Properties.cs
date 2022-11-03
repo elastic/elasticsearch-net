@@ -3,19 +3,24 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+[JsonConverter(typeof(PropertiesConverter))]
 public partial class Properties
 {
-	// TODO - THE ADD METHOD IN THE GENERATED VERSION OF THIS SHOULD TAKE PROPERTYNAME
+	private readonly IElasticsearchClientSettings _settings;
 
-	// TODO - Generate this
-	public void Add<T>(Expression<Func<T, object>> propertyName, IProperty property) => BackingDictionary.Add(propertyName, property);
+	internal Properties(IElasticsearchClientSettings values) => _settings = values;
 
-	// TODO - Generate this
-	public bool TryGetProperty<T>(PropertyName propertyName, out T property) where T : IProperty
+	public void Add<TDocument>(Expression<Func<TDocument, object>> propertyName, IProperty property) => BackingDictionary.Add(Sanitize(propertyName), property);
+
+	public bool TryGetProperty<T>(PropertyName propertyName, [NotNullWhen(returnValue: true)] out T? property) where T : class, IProperty
 	{
 		if (BackingDictionary.TryGetValue(propertyName, out var matchedProperty) && matchedProperty is T finalProperty)
 		{
@@ -23,13 +28,67 @@ public partial class Properties
 			return true;
 		}
 
-		property = default;
+		property = null;
 		return false;
+	}
+
+	protected override PropertyName Sanitize(PropertyName key) => _settings?.Inferrer.PropertyName(key) ?? key;
+}
+
+internal sealed class PropertiesConverter : JsonConverter<Properties>
+{
+	public override Properties? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrive client settings during properties deserialization.");
+
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Expected start object token.");
+
+		var properties = new Properties(settings);
+
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType != JsonTokenType.PropertyName)
+				throw new JsonException("Expected property name token.");
+
+			var propertyName = reader.GetString();
+			reader.Read();
+			var property = JsonSerializer.Deserialize<IProperty>(ref reader, options);
+			properties.Add(propertyName, property);
+		}
+
+		return properties;
+	}
+
+	public override void Write(Utf8JsonWriter writer, Properties value, JsonSerializerOptions options)
+	{
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrive client settings during properties serialization.");
+
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		// HACK: Deduplicate property mappings with an instance of Properties that has access to ElasticsearchClientSettings to sanitize PropertyName keys.
+		var properties = new Properties(settings);
+
+		foreach (var kv in value)
+		{
+			// TODO - NEST checks for properties of IPropertyWithClrOrigin so that it can then skip ignored properties etc.
+			// This functionality is missing for GA.
+
+			properties[kv.Key] = kv.Value;
+			continue;
+		}
+
+		JsonSerializer.Serialize(writer, properties.BackingDictionary, options);
 	}
 }
 
-// TODO - Generate this?
-public partial class Properties<TDocument> : Properties
+public sealed class Properties<TDocument> : Properties
 {
 	public void Add<TValue>(Expression<Func<TDocument, TValue>> name, IProperty property) => BackingDictionary.Add(name, property);
 }

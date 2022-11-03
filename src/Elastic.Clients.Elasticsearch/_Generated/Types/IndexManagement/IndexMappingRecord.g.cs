@@ -17,19 +17,21 @@
 
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed partial class TemplateResponse : DictionaryResponse<string, Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping>
+public sealed partial class IndexMappingRecord
 {
-	public TemplateResponse(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping> dictionary) : base(dictionary)
-	{
-	}
+	[JsonInclude]
+	[JsonPropertyName("item")]
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Item { get; init; }
 
-	public TemplateResponse() : base()
-	{
-	}
+	[JsonInclude]
+	[JsonPropertyName("mappings")]
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; init; }
 }

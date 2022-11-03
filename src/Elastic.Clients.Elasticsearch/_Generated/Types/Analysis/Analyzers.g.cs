@@ -36,7 +36,7 @@ public partial class Analyzers : IsADictionary<string, IAnalyzer>
 	{
 	}
 
-	public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(name, analyzer);
+	public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(Sanitize(name), analyzer);
 }
 
 public sealed partial class AnalyzersDescriptor : IsADictionaryDescriptor<AnalyzersDescriptor, Analyzers, string, IAnalyzer>
@@ -135,8 +135,11 @@ internal sealed partial class AnalyzerInterfaceConverter : JsonConverter<IAnalyz
 				return JsonSerializer.Deserialize<FingerprintAnalyzer>(ref reader, options);
 			case "custom":
 				return JsonSerializer.Deserialize<CustomAnalyzer>(ref reader, options);
+			case null:
+				return JsonSerializer.Deserialize<CustomAnalyzer>(ref reader, options);
 			default:
-				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
+				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(IAnalyzer));
+				return null;
 		}
 	}
 
