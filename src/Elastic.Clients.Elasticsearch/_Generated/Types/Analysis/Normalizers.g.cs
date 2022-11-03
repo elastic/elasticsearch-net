@@ -36,7 +36,7 @@ public partial class Normalizers : IsADictionary<string, INormalizer>
 	{
 	}
 
-	public void Add(string name, INormalizer normalizer) => BackingDictionary.Add(name, normalizer);
+	public void Add(string name, INormalizer normalizer) => BackingDictionary.Add(Sanitize(name), normalizer);
 }
 
 public sealed partial class NormalizersDescriptor : IsADictionaryDescriptor<NormalizersDescriptor, Normalizers, string, INormalizer>
@@ -76,7 +76,8 @@ internal sealed partial class NormalizerInterfaceConverter : JsonConverter<INorm
 			case "lowercase":
 				return JsonSerializer.Deserialize<LowercaseNormalizer>(ref reader, options);
 			default:
-				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
+				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(INormalizer));
+				return null;
 		}
 	}
 
