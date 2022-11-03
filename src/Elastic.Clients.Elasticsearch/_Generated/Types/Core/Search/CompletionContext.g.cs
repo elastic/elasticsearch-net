@@ -33,7 +33,7 @@ public sealed partial class CompletionContext
 
 	[JsonInclude]
 	[JsonPropertyName("neighbours")]
-	public IList<Elastic.Clients.Elasticsearch.GeoHashPrecision>? Neighbours { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.GeoHashPrecision>? Neighbours { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("precision")]
@@ -53,7 +53,7 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 
 	private double? BoostValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.GeoHashPrecision>? NeighboursValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.GeoHashPrecision>? NeighboursValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.GeoHashPrecision? PrecisionValue { get; set; }
 
@@ -65,7 +65,7 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public CompletionContextDescriptor Neighbours(IList<Elastic.Clients.Elasticsearch.GeoHashPrecision>? neighbours)
+	public CompletionContextDescriptor Neighbours(ICollection<Elastic.Clients.Elasticsearch.GeoHashPrecision>? neighbours)
 	{
 		NeighboursValue = neighbours;
 		return Self;

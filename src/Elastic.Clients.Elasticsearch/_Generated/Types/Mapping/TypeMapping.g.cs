@@ -65,11 +65,11 @@ public sealed partial class TypeMapping
 
 	[JsonInclude]
 	[JsonPropertyName("dynamic_date_formats")]
-	public IList<string>? DynamicDateFormats { get; set; }
+	public ICollection<string>? DynamicDateFormats { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("dynamic_templates")]
-	public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IList<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplates { get; set; }
+	public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplates { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("enabled")]
@@ -141,9 +141,9 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
 
-	private IList<string>? DynamicDateFormatsValue { get; set; }
+	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 
-	private Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IList<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
+	private Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
 
 	private bool? EnabledValue { get; set; }
 
@@ -321,13 +321,13 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> DynamicDateFormats(IList<string>? dynamicDateFormats)
+	public TypeMappingDescriptor<TDocument> DynamicDateFormats(ICollection<string>? dynamicDateFormats)
 	{
 		DynamicDateFormatsValue = dynamicDateFormats;
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IList<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
+	public TypeMappingDescriptor<TDocument> DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;
@@ -617,9 +617,9 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
 
-	private IList<string>? DynamicDateFormatsValue { get; set; }
+	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 
-	private Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IList<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
+	private Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
 
 	private bool? EnabledValue { get; set; }
 
@@ -797,13 +797,13 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor DynamicDateFormats(IList<string>? dynamicDateFormats)
+	public TypeMappingDescriptor DynamicDateFormats(ICollection<string>? dynamicDateFormats)
 	{
 		DynamicDateFormatsValue = dynamicDateFormats;
 		return Self;
 	}
 
-	public TypeMappingDescriptor DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IList<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
+	public TypeMappingDescriptor DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;

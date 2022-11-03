@@ -57,7 +57,7 @@ public sealed partial class MoreLikeThisQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("like")]
-	public IList<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("max_doc_freq")]
@@ -98,11 +98,11 @@ public sealed partial class MoreLikeThisQuery : Query
 	[JsonInclude]
 	[JsonPropertyName("stop_words")]
 	[JsonConverter(typeof(StopWordsConverter))]
-	public IList<string>? StopWords { get; set; }
+	public ICollection<string>? StopWords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("unlike")]
-	public IList<Elastic.Clients.Elasticsearch.QueryDsl.Like>? Unlike { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? Unlike { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("version")]
@@ -136,7 +136,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 
 	private bool? IncludeValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
 
 	private int? MaxDocFreqValue { get; set; }
 
@@ -156,9 +156,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 
-	private IList<string>? StopWordsValue { get; set; }
+	private ICollection<string>? StopWordsValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
 
 	private long? VersionValue { get; set; }
 
@@ -206,7 +206,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor<TDocument> Like(IList<Elastic.Clients.Elasticsearch.QueryDsl.Like> like)
+	public MoreLikeThisQueryDescriptor<TDocument> Like(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> like)
 	{
 		LikeValue = like;
 		return Self;
@@ -266,13 +266,13 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor<TDocument> StopWords(IList<string>? stopWords)
+	public MoreLikeThisQueryDescriptor<TDocument> StopWords(ICollection<string>? stopWords)
 	{
 		StopWordsValue = stopWords;
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor<TDocument> Unlike(IList<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike)
+	public MoreLikeThisQueryDescriptor<TDocument> Unlike(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike)
 	{
 		UnlikeValue = unlike;
 		return Self;
@@ -440,7 +440,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 
 	private bool? IncludeValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
 
 	private int? MaxDocFreqValue { get; set; }
 
@@ -460,9 +460,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 
-	private IList<string>? StopWordsValue { get; set; }
+	private ICollection<string>? StopWordsValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
 
 	private long? VersionValue { get; set; }
 
@@ -510,7 +510,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor Like(IList<Elastic.Clients.Elasticsearch.QueryDsl.Like> like)
+	public MoreLikeThisQueryDescriptor Like(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> like)
 	{
 		LikeValue = like;
 		return Self;
@@ -570,13 +570,13 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor StopWords(IList<string>? stopWords)
+	public MoreLikeThisQueryDescriptor StopWords(ICollection<string>? stopWords)
 	{
 		StopWordsValue = stopWords;
 		return Self;
 	}
 
-	public MoreLikeThisQueryDescriptor Unlike(IList<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike)
+	public MoreLikeThisQueryDescriptor Unlike(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike)
 	{
 		UnlikeValue = unlike;
 		return Self;
