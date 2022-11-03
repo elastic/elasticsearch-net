@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public partial class Percentiles : Union<Dictionary<string, object>, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>>
 {
-	public Percentiles(Dictionary<string, object> keyedPercentiles) : base(keyedPercentiles)
+	public Percentiles(Dictionary<string, object> dictionary) : base(dictionary)
 	{
 	}
 
-	public Percentiles(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem> percentiles) : base(percentiles)
+	public Percentiles(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem> collection) : base(collection)
 	{
 	}
 }

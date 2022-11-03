@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public partial class TrackHits : Union<bool, int>
 {
-	public TrackHits(bool trackHits) : base(trackHits)
+	public TrackHits(bool enabled) : base(enabled)
 	{
 	}
 
-	public TrackHits(int trackHits) : base(trackHits)
+	public TrackHits(int count) : base(count)
 	{
 	}
 }

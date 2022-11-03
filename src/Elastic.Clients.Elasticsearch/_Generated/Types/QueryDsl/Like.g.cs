@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public partial class Like : Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
 {
-	public Like(string like) : base(like)
+	public Like(string text) : base(text)
 	{
 	}
 
-	public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument likeDocument) : base(likeDocument)
+	public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument document) : base(document)
 	{
 	}
 }

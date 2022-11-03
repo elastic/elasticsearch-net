@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public partial class SimpleQueryStringFlags : Union<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag, string>
 {
-	public SimpleQueryStringFlags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag simpleQueryStringFlag) : base(simpleQueryStringFlag)
+	public SimpleQueryStringFlags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag single) : base(single)
 	{
 	}
 
-	public SimpleQueryStringFlags(string simpleQueryStringFlags) : base(simpleQueryStringFlags)
+	public SimpleQueryStringFlags(string multiple) : base(multiple)
 	{
 	}
 }
