@@ -29,7 +29,7 @@ public sealed partial class KuromojiPartOfSpeechTokenFilter : ITokenFilterDefini
 {
 	[JsonInclude]
 	[JsonPropertyName("stoptags")]
-	public IList<string> Stoptags { get; set; }
+	public ICollection<string> Stoptags { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -46,11 +46,11 @@ public sealed partial class KuromojiPartOfSpeechTokenFilterDescriptor : Serializ
 	{
 	}
 
-	private IList<string> StoptagsValue { get; set; }
+	private ICollection<string> StoptagsValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
-	public KuromojiPartOfSpeechTokenFilterDescriptor Stoptags(IList<string> stoptags)
+	public KuromojiPartOfSpeechTokenFilterDescriptor Stoptags(ICollection<string> stoptags)
 	{
 		StoptagsValue = stoptags;
 		return Self;

@@ -30,7 +30,7 @@ public sealed partial class StopAnalyzer : IAnalyzer
 	[JsonInclude]
 	[JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
-	public IList<string>? Stopwords { get; set; }
+	public ICollection<string>? Stopwords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("stopwords_path")]
@@ -51,13 +51,13 @@ public sealed partial class StopAnalyzerDescriptor : SerializableDescriptor<Stop
 	{
 	}
 
-	private IList<string>? StopwordsValue { get; set; }
+	private ICollection<string>? StopwordsValue { get; set; }
 
 	private string? StopwordsPathValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
-	public StopAnalyzerDescriptor Stopwords(IList<string>? stopwords)
+	public StopAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;

@@ -66,7 +66,7 @@ internal sealed class TermsSetQueryConverter : JsonConverter<TermsSetQuery>
 
 				if (property == "terms")
 				{
-					variant.Terms = JsonSerializer.Deserialize<IList<string>>(ref reader, options);
+					variant.Terms = JsonSerializer.Deserialize<ICollection<string>>(ref reader, options);
 					continue;
 				}
 			}
@@ -138,7 +138,7 @@ public sealed partial class TermsSetQuery : Query
 
 	public Elastic.Clients.Elasticsearch.Script? MinimumShouldMatchScript { get; set; }
 
-	public IList<string> Terms { get; set; }
+	public ICollection<string> Terms { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -176,7 +176,7 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 
 	private Elastic.Clients.Elasticsearch.Script? MinimumShouldMatchScriptValue { get; set; }
 
-	private IList<string> TermsValue { get; set; }
+	private ICollection<string> TermsValue { get; set; }
 
 	public TermsSetQueryDescriptor<TDocument> QueryName(string? queryName)
 	{
@@ -220,7 +220,7 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public TermsSetQueryDescriptor<TDocument> Terms(IList<string> terms)
+	public TermsSetQueryDescriptor<TDocument> Terms(ICollection<string> terms)
 	{
 		TermsValue = terms;
 		return Self;
@@ -288,7 +288,7 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 
 	private Elastic.Clients.Elasticsearch.Script? MinimumShouldMatchScriptValue { get; set; }
 
-	private IList<string> TermsValue { get; set; }
+	private ICollection<string> TermsValue { get; set; }
 
 	public TermsSetQueryDescriptor QueryName(string? queryName)
 	{
@@ -344,7 +344,7 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 		return Self;
 	}
 
-	public TermsSetQueryDescriptor Terms(IList<string> terms)
+	public TermsSetQueryDescriptor Terms(ICollection<string> terms)
 	{
 		TermsValue = terms;
 		return Self;

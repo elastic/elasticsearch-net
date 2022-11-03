@@ -105,11 +105,11 @@ public sealed partial class HighlightField
 
 	[JsonInclude]
 	[JsonPropertyName("post_tags")]
-	public IList<string>? PostTags { get; set; }
+	public ICollection<string>? PostTags { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("pre_tags")]
-	public IList<string>? PreTags { get; set; }
+	public ICollection<string>? PreTags { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("require_field_match")]
@@ -173,9 +173,9 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 
 	private int? PhraseLimitValue { get; set; }
 
-	private IList<string>? PostTagsValue { get; set; }
+	private ICollection<string>? PostTagsValue { get; set; }
 
-	private IList<string>? PreTagsValue { get; set; }
+	private ICollection<string>? PreTagsValue { get; set; }
 
 	private bool? RequireFieldMatchValue { get; set; }
 
@@ -315,13 +315,13 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public HighlightFieldDescriptor<TDocument> PostTags(IList<string>? postTags)
+	public HighlightFieldDescriptor<TDocument> PostTags(ICollection<string>? postTags)
 	{
 		PostTagsValue = postTags;
 		return Self;
 	}
 
-	public HighlightFieldDescriptor<TDocument> PreTags(IList<string>? preTags)
+	public HighlightFieldDescriptor<TDocument> PreTags(ICollection<string>? preTags)
 	{
 		PreTagsValue = preTags;
 		return Self;
@@ -555,9 +555,9 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 
 	private int? PhraseLimitValue { get; set; }
 
-	private IList<string>? PostTagsValue { get; set; }
+	private ICollection<string>? PostTagsValue { get; set; }
 
-	private IList<string>? PreTagsValue { get; set; }
+	private ICollection<string>? PreTagsValue { get; set; }
 
 	private bool? RequireFieldMatchValue { get; set; }
 
@@ -697,13 +697,13 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
-	public HighlightFieldDescriptor PostTags(IList<string>? postTags)
+	public HighlightFieldDescriptor PostTags(ICollection<string>? postTags)
 	{
 		PostTagsValue = postTags;
 		return Self;
 	}
 
-	public HighlightFieldDescriptor PreTags(IList<string>? preTags)
+	public HighlightFieldDescriptor PreTags(ICollection<string>? preTags)
 	{
 		PreTagsValue = preTags;
 		return Self;

@@ -266,7 +266,7 @@ public sealed partial class HistogramAggregation : Aggregation
 	public double? Offset { get; set; }
 
 	[JsonConverter(typeof(AggregateOrderConverter))]
-	public IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
@@ -298,7 +298,7 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 
 	private double? OffsetValue { get; set; }
 
-	private IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
@@ -374,7 +374,7 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public HistogramAggregationDescriptor<TDocument> Order(IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public HistogramAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -493,7 +493,7 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 
 	private double? OffsetValue { get; set; }
 
-	private IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
@@ -575,7 +575,7 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public HistogramAggregationDescriptor Order(IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public HistogramAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
