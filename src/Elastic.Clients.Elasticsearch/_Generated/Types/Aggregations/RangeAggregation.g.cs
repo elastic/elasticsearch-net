@@ -79,7 +79,7 @@ internal sealed class RangeAggregationConverter : JsonConverter<RangeAggregation
 				if (reader.ValueTextEquals("ranges"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Ranges = value;
@@ -205,7 +205,7 @@ public sealed partial class RangeAggregation : Aggregation
 
 	public override string? Name { get; internal set; }
 
-	public IList<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
@@ -231,7 +231,7 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 
 	private int? MissingValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
 
 	private AggregationRangeDescriptor RangesDescriptor { get; set; }
 
@@ -295,7 +295,7 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RangeAggregationDescriptor<TDocument> Ranges(IList<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges)
+	public RangeAggregationDescriptor<TDocument> Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges)
 	{
 		RangesDescriptor = null;
 		RangesDescriptorAction = null;
@@ -445,7 +445,7 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 
 	private int? MissingValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
 
 	private AggregationRangeDescriptor RangesDescriptor { get; set; }
 
@@ -515,7 +515,7 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RangeAggregationDescriptor Ranges(IList<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges)
+	public RangeAggregationDescriptor Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges)
 	{
 		RangesDescriptor = null;
 		RangesDescriptorAction = null;

@@ -38,7 +38,7 @@ public sealed partial class StopTokenFilter : ITokenFilterDefinition
 	[JsonInclude]
 	[JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
-	public IList<string>? Stopwords { get; set; }
+	public ICollection<string>? Stopwords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("stopwords_path")]
@@ -63,7 +63,7 @@ public sealed partial class StopTokenFilterDescriptor : SerializableDescriptor<S
 
 	private bool? RemoveTrailingValue { get; set; }
 
-	private IList<string>? StopwordsValue { get; set; }
+	private ICollection<string>? StopwordsValue { get; set; }
 
 	private string? StopwordsPathValue { get; set; }
 
@@ -81,7 +81,7 @@ public sealed partial class StopTokenFilterDescriptor : SerializableDescriptor<S
 		return Self;
 	}
 
-	public StopTokenFilterDescriptor Stopwords(IList<string>? stopwords)
+	public StopTokenFilterDescriptor Stopwords(ICollection<string>? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;
