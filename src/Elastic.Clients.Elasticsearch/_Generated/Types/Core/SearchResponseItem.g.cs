@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 public partial class SearchResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument>, Elastic.Clients.Elasticsearch.ErrorResponseBase>
 {
-	public SearchResponseItem(Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument> multiSearchItem) : base(multiSearchItem)
+	public SearchResponseItem(Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument> result) : base(result)
 	{
 	}
 
-	public SearchResponseItem(Elastic.Clients.Elasticsearch.ErrorResponseBase errorResponseBase) : base(errorResponseBase)
+	public SearchResponseItem(Elastic.Clients.Elasticsearch.ErrorResponseBase failure) : base(failure)
 	{
 	}
 }

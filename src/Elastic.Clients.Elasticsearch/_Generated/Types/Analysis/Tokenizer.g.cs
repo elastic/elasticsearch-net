@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public partial class Tokenizer : Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenizerDefinitions>
 {
-	public Tokenizer(string tokenizer) : base(tokenizer)
+	public Tokenizer(string name) : base(name)
 	{
 	}
 
-	public Tokenizer(Elastic.Clients.Elasticsearch.Analysis.TokenizerDefinitions tokenizerDefinitions) : base(tokenizerDefinitions)
+	public Tokenizer(Elastic.Clients.Elasticsearch.Analysis.TokenizerDefinitions definition) : base(definition)
 	{
 	}
 }
