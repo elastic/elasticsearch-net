@@ -123,12 +123,13 @@ public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
 		if (other == null)
 			return false;
+
 		if (!Name.IsNullOrEmpty() && !other.Name.IsNullOrEmpty())
 			return EqualsString(PrefixClusterName(other, other.Name));
 
 		if ((!Cluster.IsNullOrEmpty() || !other.Cluster.IsNullOrEmpty()) && Cluster != other.Cluster)
 			return false;
 
-		return Type != null && other?.Type != null && Type == other.Type;
+		return Type is not null && other?.Type is not null && Type == other.Type;
 	}
 }
