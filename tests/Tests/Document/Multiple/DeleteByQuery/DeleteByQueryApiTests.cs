@@ -140,7 +140,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override string ExpectedUrlPathAndQuery => $"/{CallIsolatedValue}/_delete_by_query?wait_for_completion=false&conflicts=proceed";
 
-		protected override DeleteByQueryRequestDescriptor<Project> NewDescriptor() => new (CallIsolatedValue);
+		protected override DeleteByQueryRequestDescriptor<Project> NewDescriptor() => new(CallIsolatedValue);
 
 		protected override void ExpectResponse(DeleteByQueryResponse response)
 		{

@@ -36,7 +36,7 @@ public partial class TokenFilterDefinitions : IsADictionary<string, ITokenFilter
 	{
 	}
 
-	public void Add(string name, ITokenFilterDefinition tokenFilterDefinition) => BackingDictionary.Add(name, tokenFilterDefinition);
+	public void Add(string name, ITokenFilterDefinition tokenFilterDefinition) => BackingDictionary.Add(Sanitize(name), tokenFilterDefinition);
 }
 
 public sealed partial class TokenFilterDefinitionsDescriptor : IsADictionaryDescriptor<TokenFilterDefinitionsDescriptor, TokenFilterDefinitions, string, ITokenFilterDefinition>
@@ -306,7 +306,8 @@ internal sealed partial class TokenFilterDefinitionInterfaceConverter : JsonConv
 			case "asciifolding":
 				return JsonSerializer.Deserialize<AsciiFoldingTokenFilter>(ref reader, options);
 			default:
-				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
+				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ITokenFilterDefinition));
+				return null;
 		}
 	}
 
