@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
-public class AsyncSearchNamespace : NamespacedClientProxy
+public sealed partial class AsyncSearchNamespace : NamespacedClientProxy
 {
 	internal AsyncSearchNamespace(ElasticsearchClient client) : base(client)
 	{
