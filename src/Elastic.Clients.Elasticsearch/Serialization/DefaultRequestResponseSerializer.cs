@@ -2,7 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -47,10 +46,11 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 					new SelfTwoWaySerializableConverterFactory(settings),
 					new IndicesJsonConverter(settings),
 					new IdsConverter(settings),
-					new IsADictionaryConverter(),
+					new IsADictionaryConverterFactory(),
 					new ResponseItemConverterFactory(),
 					new UnionConverter(),
-					new ExtraSerializationData(settings)
+					new ExtraSerializationData(settings),
+					new DictionaryResponseConverterFactory(settings)
 				},
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 		};
