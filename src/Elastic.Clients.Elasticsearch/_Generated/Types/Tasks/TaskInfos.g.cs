@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Tasks;
 public partial class TaskInfos : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>, Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>>
 {
-	public TaskInfos(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> taskInfos) : base(taskInfos)
+	public TaskInfos(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> flat) : base(flat)
 	{
 	}
 
-	public TaskInfos(Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo> taskInfos) : base(taskInfos)
+	public TaskInfos(Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo> grouped) : base(grouped)
 	{
 	}
 }
