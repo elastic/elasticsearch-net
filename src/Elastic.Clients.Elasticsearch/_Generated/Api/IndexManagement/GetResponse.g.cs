@@ -23,6 +23,13 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed partial class GetResponse : ElasticsearchResponseBase
+public sealed partial class GetResponse : DictionaryResponse<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexState>
 {
+	public GetResponse(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexState> dictionary) : base(dictionary)
+	{
+	}
+
+	public GetResponse() : base()
+	{
+	}
 }

@@ -17,12 +17,21 @@
 
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed partial class SettingsResponse : ElasticsearchResponseBase
+namespace Elastic.Clients.Elasticsearch.Mapping;
+public sealed partial class FieldMapping
 {
+	[JsonInclude]
+	[JsonPropertyName("full_name")]
+	public string FullName { get; init; }
+
+	[JsonInclude]
+	[JsonPropertyName("mapping")]
+	public Elastic.Clients.Elasticsearch.Mapping.Properties Mapping { get; init; }
 }

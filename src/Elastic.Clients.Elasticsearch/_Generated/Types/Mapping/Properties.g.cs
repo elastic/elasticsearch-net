@@ -36,7 +36,7 @@ public partial class Properties : IsADictionary<PropertyName, IProperty>
 	{
 	}
 
-	public void Add(PropertyName propertyName, IProperty property) => BackingDictionary.Add(propertyName, property);
+	public void Add(PropertyName propertyName, IProperty property) => BackingDictionary.Add(Sanitize(propertyName), property);
 }
 
 public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
@@ -387,8 +387,11 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return JsonSerializer.Deserialize<BooleanProperty>(ref reader, options);
 			case "binary":
 				return JsonSerializer.Deserialize<BinaryProperty>(ref reader, options);
+			case null:
+				return JsonSerializer.Deserialize<ObjectProperty>(ref reader, options);
 			default:
-				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
+				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(IProperty));
+				return null;
 		}
 	}
 
