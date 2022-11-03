@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public partial class SourceConfig : Union<bool, Elastic.Clients.Elasticsearch.Core.Search.SourceFilter>
 {
-	public SourceConfig(bool sourceConfig) : base(sourceConfig)
+	public SourceConfig(bool fetch) : base(fetch)
 	{
 	}
 
-	public SourceConfig(Elastic.Clients.Elasticsearch.Core.Search.SourceFilter sourceFilter) : base(sourceFilter)
+	public SourceConfig(Elastic.Clients.Elasticsearch.Core.Search.SourceFilter filter) : base(filter)
 	{
 	}
 }

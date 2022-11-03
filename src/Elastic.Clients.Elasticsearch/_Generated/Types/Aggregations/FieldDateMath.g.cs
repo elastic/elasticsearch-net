@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public partial class FieldDateMath : Union<Elastic.Clients.Elasticsearch.DateMath, double>
 {
-	public FieldDateMath(Elastic.Clients.Elasticsearch.DateMath dateMath) : base(dateMath)
+	public FieldDateMath(Elastic.Clients.Elasticsearch.DateMath expr) : base(expr)
 	{
 	}
 
-	public FieldDateMath(double fieldDateMath) : base(fieldDateMath)
+	public FieldDateMath(double value) : base(value)
 	{
 	}
 }
