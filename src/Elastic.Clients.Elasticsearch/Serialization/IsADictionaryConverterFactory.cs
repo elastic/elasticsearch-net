@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Mapping;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
-// TODO : We need to handle these cases https://github.com/elastic/elasticsearch-specification/pull/1589
-
-internal sealed class IsADictionaryConverter : JsonConverterFactory
+internal sealed class IsADictionaryConverterFactory : JsonConverterFactory
 {
 	public override bool CanConvert(Type typeToConvert) =>
+		typeToConvert.Name != nameof(Properties) && // Properties has it's own converter assigned
 		typeToConvert.BaseType is not null &&
 		typeToConvert.BaseType.IsGenericType &&
 		typeToConvert.BaseType.GetGenericTypeDefinition() == typeof(IsADictionary<,>);
@@ -51,9 +51,4 @@ internal sealed class IsADictionaryConverter : JsonConverterFactory
 		public override void Write(Utf8JsonWriter writer, TType value, JsonSerializerOptions options) =>
 			JsonSerializer.Serialize<Dictionary<TKey, TValue>>(writer, value.BackingDictionary, options);
 	}
-}
-
-internal interface IUnionVerifiable
-{
-	bool IsSuccessful { get; }
 }

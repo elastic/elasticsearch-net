@@ -36,7 +36,7 @@ public partial class TokenizerDefinitions : IsADictionary<string, ITokenizerDefi
 	{
 	}
 
-	public void Add(string name, ITokenizerDefinition tokenizerDefinition) => BackingDictionary.Add(name, tokenizerDefinition);
+	public void Add(string name, ITokenizerDefinition tokenizerDefinition) => BackingDictionary.Add(Sanitize(name), tokenizerDefinition);
 }
 
 public sealed partial class TokenizerDefinitionsDescriptor : IsADictionaryDescriptor<TokenizerDefinitionsDescriptor, TokenizerDefinitions, string, ITokenizerDefinition>
@@ -136,7 +136,8 @@ internal sealed partial class TokenizerDefinitionInterfaceConverter : JsonConver
 			case "char_group":
 				return JsonSerializer.Deserialize<CharGroupTokenizer>(ref reader, options);
 			default:
-				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
+				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ITokenizerDefinition));
+				return null;
 		}
 	}
 

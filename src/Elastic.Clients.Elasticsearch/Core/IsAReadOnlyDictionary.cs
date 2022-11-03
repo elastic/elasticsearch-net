@@ -19,9 +19,8 @@ public abstract class IsAReadOnlyDictionary<TKey, TValue> : IIsAReadOnlyDictiona
 			return;
 
 		var dictionary = new Dictionary<TKey, TValue>(backingDictionary.Count);
+
 		foreach (var key in backingDictionary.Keys)
-			// ReSharper disable once VirtualMemberCallInConstructor
-			// expect all implementations of Sanitize to be pure
 			dictionary[Sanitize(key)] = backingDictionary[key];
 
 		BackingDictionary = dictionary;
