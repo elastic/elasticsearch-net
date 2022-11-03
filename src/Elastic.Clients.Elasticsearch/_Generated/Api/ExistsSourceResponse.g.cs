@@ -23,6 +23,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed partial class ExistsSourceResponse : ExistsResponseBase
+public sealed partial class ExistsSourceResponse : ElasticsearchResponseBase
 {
+	public bool Exists => ApiCall is { Success: true, HttpStatusCode: 200 };
 }
