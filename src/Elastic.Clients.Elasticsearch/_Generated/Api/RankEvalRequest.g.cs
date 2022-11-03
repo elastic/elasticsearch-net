@@ -44,7 +44,11 @@ public sealed class RankEvalRequestParameters : RequestParameters<RankEvalReques
 
 public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParameters>
 {
-	public RankEvalRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	public RankEvalRequest()
+	{
+	}
+
+	public RankEvalRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
 
@@ -75,11 +79,7 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescriptor<RankEvalRequestDescriptor<TDocument>, RankEvalRequestParameters>
 {
 	internal RankEvalRequestDescriptor(Action<RankEvalRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
-	{
-	}
-
-	internal RankEvalRequestDescriptor()
+	public RankEvalRequestDescriptor()
 	{
 	}
 
@@ -90,9 +90,9 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 	public RankEvalRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public RankEvalRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public RankEvalRequestDescriptor<TDocument> SearchType(string? searchType) => Qs("search_type", searchType);
-	public RankEvalRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public RankEvalRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		RouteValues.Required("index", indices);
+		RouteValues.Optional("index", indices);
 		return Self;
 	}
 
@@ -227,11 +227,7 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEvalRequestDescriptor, RankEvalRequestParameters>
 {
 	internal RankEvalRequestDescriptor(Action<RankEvalRequestDescriptor> configure) => configure.Invoke(this);
-	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
-	{
-	}
-
-	internal RankEvalRequestDescriptor()
+	public RankEvalRequestDescriptor()
 	{
 	}
 
@@ -242,9 +238,9 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 	public RankEvalRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public RankEvalRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public RankEvalRequestDescriptor SearchType(string? searchType) => Qs("search_type", searchType);
-	public RankEvalRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public RankEvalRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		RouteValues.Required("index", indices);
+		RouteValues.Optional("index", indices);
 		return Self;
 	}
 

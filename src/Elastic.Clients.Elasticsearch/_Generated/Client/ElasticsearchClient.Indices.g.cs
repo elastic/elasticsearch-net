@@ -1435,48 +1435,6 @@ public class IndicesNamespace : NamespacedClientProxy
 		return DoRequestAsync<OpenRequestDescriptor<TDocument>, OpenResponse>(descriptor);
 	}
 
-	public PromoteDataStreamResponse PromoteDataStream(PromoteDataStreamRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PromoteDataStreamRequest, PromoteDataStreamResponse>(request);
-	}
-
-	public Task<PromoteDataStreamResponse> PromoteDataStreamAsync(PromoteDataStreamRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<PromoteDataStreamRequest, PromoteDataStreamResponse>(request, cancellationToken);
-	}
-
-	public PromoteDataStreamResponse PromoteDataStream(Elastic.Clients.Elasticsearch.IndexName name)
-	{
-		var descriptor = new PromoteDataStreamRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<PromoteDataStreamRequestDescriptor, PromoteDataStreamResponse>(descriptor);
-	}
-
-	public PromoteDataStreamResponse PromoteDataStream(Elastic.Clients.Elasticsearch.IndexName name, Action<PromoteDataStreamRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PromoteDataStreamRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PromoteDataStreamRequestDescriptor, PromoteDataStreamResponse>(descriptor);
-	}
-
-	public Task<PromoteDataStreamResponse> PromoteDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PromoteDataStreamRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PromoteDataStreamRequestDescriptor, PromoteDataStreamResponse>(descriptor);
-	}
-
-	public Task<PromoteDataStreamResponse> PromoteDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, Action<PromoteDataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PromoteDataStreamRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PromoteDataStreamRequestDescriptor, PromoteDataStreamResponse>(descriptor);
-	}
-
 	public PutAliasResponse PutAlias(PutAliasRequest request)
 	{
 		request.BeforeRequest();
@@ -1751,64 +1709,6 @@ public class IndicesNamespace : NamespacedClientProxy
 		return DoRequestAsync<PutTemplateRequestDescriptor, PutTemplateResponse>(descriptor);
 	}
 
-	public RecoveryResponse Recovery(RecoveryRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<RecoveryRequest, RecoveryResponse>(request);
-	}
-
-	public Task<RecoveryResponse> RecoveryAsync(RecoveryRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<RecoveryRequest, RecoveryResponse>(request, cancellationToken);
-	}
-
-	public RecoveryResponse Recovery()
-	{
-		var descriptor = new RecoveryRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<RecoveryRequestDescriptor, RecoveryResponse>(descriptor);
-	}
-
-	public RecoveryResponse Recovery(Action<RecoveryRequestDescriptor> configureRequest)
-	{
-		var descriptor = new RecoveryRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RecoveryRequestDescriptor, RecoveryResponse>(descriptor);
-	}
-
-	public RecoveryResponse Recovery<TDocument>(Action<RecoveryRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new RecoveryRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RecoveryRequestDescriptor<TDocument>, RecoveryResponse>(descriptor);
-	}
-
-	public Task<RecoveryResponse> RecoveryAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RecoveryRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RecoveryRequestDescriptor, RecoveryResponse>(descriptor);
-	}
-
-	public Task<RecoveryResponse> RecoveryAsync(Action<RecoveryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RecoveryRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RecoveryRequestDescriptor, RecoveryResponse>(descriptor);
-	}
-
-	public Task<RecoveryResponse> RecoveryAsync<TDocument>(Action<RecoveryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RecoveryRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RecoveryRequestDescriptor<TDocument>, RecoveryResponse>(descriptor);
-	}
-
 	public RefreshResponse Refresh(RefreshRequest request)
 	{
 		request.BeforeRequest();
@@ -2065,64 +1965,6 @@ public class IndicesNamespace : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SegmentsRequestDescriptor<TDocument>, SegmentsResponse>(descriptor);
-	}
-
-	public SettingsResponse GetSettings(SettingsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SettingsRequest, SettingsResponse>(request);
-	}
-
-	public Task<SettingsResponse> GetSettingsAsync(SettingsRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<SettingsRequest, SettingsResponse>(request, cancellationToken);
-	}
-
-	public SettingsResponse GetSettings()
-	{
-		var descriptor = new SettingsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<SettingsRequestDescriptor, SettingsResponse>(descriptor);
-	}
-
-	public SettingsResponse GetSettings(Action<SettingsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new SettingsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SettingsRequestDescriptor, SettingsResponse>(descriptor);
-	}
-
-	public SettingsResponse GetSettings<TDocument>(Action<SettingsRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new SettingsRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SettingsRequestDescriptor<TDocument>, SettingsResponse>(descriptor);
-	}
-
-	public Task<SettingsResponse> GetSettingsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SettingsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SettingsRequestDescriptor, SettingsResponse>(descriptor);
-	}
-
-	public Task<SettingsResponse> GetSettingsAsync(Action<SettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SettingsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SettingsRequestDescriptor, SettingsResponse>(descriptor);
-	}
-
-	public Task<SettingsResponse> GetSettingsAsync<TDocument>(Action<SettingsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SettingsRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SettingsRequestDescriptor<TDocument>, SettingsResponse>(descriptor);
 	}
 
 	public ShardStoresResponse ShardStores(ShardStoresRequest request)
