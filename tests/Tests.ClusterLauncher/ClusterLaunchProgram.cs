@@ -66,7 +66,7 @@ namespace Tests.ClusterLauncher
 
 			try
 			{
-				if (TryStartClientTestClusterBaseImplementation(cluster) || TryStartXPackClusterImplementation(cluster)) return 0;
+				if (TryStartClientTestClusterBaseImplementation(cluster)) return 0;
 
 				Console.Error.WriteLine($"Could not create an instance of '{cluster.FullName}");
 				return 1;
@@ -79,21 +79,12 @@ namespace Tests.ClusterLauncher
 			}
 		}
 
-		private static bool TryStartXPackClusterImplementation(Type cluster)
-		{
-			if (!(Activator.CreateInstance(cluster) is XPackCluster instance)) return false;
-
-			Instance = instance;
-			using (instance)
-				return Run(instance);
-		}
-
-
 		private static bool TryStartClientTestClusterBaseImplementation(Type cluster)
 		{
-			if (!(Activator.CreateInstance(cluster) is ClientTestClusterBase instance)) return false;
+			if (Activator.CreateInstance(cluster) is not ClientTestClusterBase instance) return false;
 
 			Instance = instance;
+
 			using (instance)
 				return Run(instance);
 		}
