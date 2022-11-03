@@ -41,7 +41,7 @@ public sealed partial class EdgeNGramTokenizer : ITokenizerDefinition
 
 	[JsonInclude]
 	[JsonPropertyName("token_chars")]
-	public IList<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -64,7 +64,7 @@ public sealed partial class EdgeNGramTokenizerDescriptor : SerializableDescripto
 
 	private int MinGramValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenCharsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenCharsValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
@@ -86,7 +86,7 @@ public sealed partial class EdgeNGramTokenizerDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public EdgeNGramTokenizerDescriptor TokenChars(IList<Elastic.Clients.Elasticsearch.Analysis.TokenChar> tokenChars)
+	public EdgeNGramTokenizerDescriptor TokenChars(ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> tokenChars)
 	{
 		TokenCharsValue = tokenChars;
 		return Self;

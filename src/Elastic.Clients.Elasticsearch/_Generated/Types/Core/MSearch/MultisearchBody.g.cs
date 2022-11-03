@@ -57,7 +57,7 @@ internal sealed class MultisearchBodyConverter : JsonConverter<MultisearchBody>
 
 				if (property == "docvalue_fields")
 				{
-					variant.DocvalueFields = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
+					variant.DocvalueFields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
 					continue;
 				}
 
@@ -75,7 +75,7 @@ internal sealed class MultisearchBodyConverter : JsonConverter<MultisearchBody>
 
 				if (property == "fields")
 				{
-					variant.Fields = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
+					variant.Fields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
 					continue;
 				}
 
@@ -93,7 +93,7 @@ internal sealed class MultisearchBodyConverter : JsonConverter<MultisearchBody>
 
 				if (property == "indices_boost")
 				{
-					variant.IndicesBoost = JsonSerializer.Deserialize<IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
+					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
 					continue;
 				}
 
@@ -135,7 +135,7 @@ internal sealed class MultisearchBodyConverter : JsonConverter<MultisearchBody>
 
 				if (property == "rescore")
 				{
-					variant.Rescore = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?>(ref reader, options);
+					variant.Rescore = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?>(ref reader, options);
 					continue;
 				}
 
@@ -153,7 +153,7 @@ internal sealed class MultisearchBodyConverter : JsonConverter<MultisearchBody>
 
 				if (property == "search_after")
 				{
-					variant.SearchAfter = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
+					variant.SearchAfter = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
 					continue;
 				}
 
@@ -171,13 +171,13 @@ internal sealed class MultisearchBodyConverter : JsonConverter<MultisearchBody>
 
 				if (property == "sort")
 				{
-					variant.Sort = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
+					variant.Sort = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
 					continue;
 				}
 
 				if (property == "stats")
 				{
-					variant.Stats = JsonSerializer.Deserialize<IList<string>?>(ref reader, options);
+					variant.Stats = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
 					continue;
 				}
 
@@ -430,19 +430,19 @@ public sealed partial class MultisearchBody
 
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
-	public IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	public bool? Explain { get; set; }
 
 	public Dictionary<string, object>? Ext { get; set; }
 
-	public IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	public int? From { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
-	public IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
+	public ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
 	public Elastic.Clients.Elasticsearch.KnnQuery? Knn { get; set; }
 
@@ -456,22 +456,22 @@ public sealed partial class MultisearchBody
 
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
-	public IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
 	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
-	public IList<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	public bool? SeqNoPrimaryTerm { get; set; }
 
 	public int? Size { get; set; }
 
 	[JsonConverter(typeof(SortConverter))]
-	public IList<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
-	public IList<string>? Stats { get; set; }
+	public ICollection<string>? Stats { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
@@ -501,7 +501,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 
 	private Action<Core.Search.FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
 
@@ -509,7 +509,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
 
@@ -541,7 +541,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 
 	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
 
 	private Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
 
@@ -559,7 +559,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 
 	private int? FromValue { get; set; }
 
-	private IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 
 	private double? MinScoreValue { get; set; }
 
@@ -575,15 +575,15 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 
 	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
 	private bool? SeqNoPrimaryTermValue { get; set; }
 
 	private int? SizeValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
-	private IList<string>? StatsValue { get; set; }
+	private ICollection<string>? StatsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -627,7 +627,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor<TDocument> DocvalueFields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+	public MultisearchBodyDescriptor<TDocument> DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
 		DocvalueFieldsDescriptorAction = null;
@@ -663,7 +663,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor<TDocument> Fields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public MultisearchBodyDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
 		FieldsDescriptorAction = null;
@@ -795,7 +795,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor<TDocument> Rescore(IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
+	public MultisearchBodyDescriptor<TDocument> Rescore(ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
 	{
 		RescoreDescriptor = null;
 		RescoreDescriptorAction = null;
@@ -861,7 +861,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor<TDocument> IndicesBoost(IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public MultisearchBodyDescriptor<TDocument> IndicesBoost(ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
@@ -915,7 +915,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor<TDocument> SearchAfter(IList<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public MultisearchBodyDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
 	{
 		SearchAfterValue = searchAfter;
 		return Self;
@@ -933,13 +933,13 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor<TDocument> Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public MultisearchBodyDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor<TDocument> Stats(IList<string>? stats)
+	public MultisearchBodyDescriptor<TDocument> Stats(ICollection<string>? stats)
 	{
 		StatsValue = stats;
 		return Self;
@@ -1356,7 +1356,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 
 	private Action<Core.Search.FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
 
@@ -1364,7 +1364,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
 
@@ -1396,7 +1396,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 
 	private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
 
 	private Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
 
@@ -1414,7 +1414,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 
 	private int? FromValue { get; set; }
 
-	private IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 
 	private double? MinScoreValue { get; set; }
 
@@ -1430,15 +1430,15 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 
 	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
 	private bool? SeqNoPrimaryTermValue { get; set; }
 
 	private int? SizeValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
-	private IList<string>? StatsValue { get; set; }
+	private ICollection<string>? StatsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -1482,7 +1482,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor DocvalueFields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+	public MultisearchBodyDescriptor DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
 		DocvalueFieldsDescriptorAction = null;
@@ -1518,7 +1518,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor Fields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public MultisearchBodyDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
 		FieldsDescriptorAction = null;
@@ -1650,7 +1650,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor Rescore(IList<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
+	public MultisearchBodyDescriptor Rescore(ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? rescore)
 	{
 		RescoreDescriptor = null;
 		RescoreDescriptorAction = null;
@@ -1716,7 +1716,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor IndicesBoost(IList<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public MultisearchBodyDescriptor IndicesBoost(ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
@@ -1770,7 +1770,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor SearchAfter(IList<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public MultisearchBodyDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
 	{
 		SearchAfterValue = searchAfter;
 		return Self;
@@ -1788,13 +1788,13 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public MultisearchBodyDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor Stats(IList<string>? stats)
+	public MultisearchBodyDescriptor Stats(ICollection<string>? stats)
 	{
 		StatsValue = stats;
 		return Self;
