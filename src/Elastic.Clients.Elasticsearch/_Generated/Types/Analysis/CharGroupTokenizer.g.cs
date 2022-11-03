@@ -33,7 +33,7 @@ public sealed partial class CharGroupTokenizer : ITokenizerDefinition
 
 	[JsonInclude]
 	[JsonPropertyName("tokenize_on_chars")]
-	public IList<string> TokenizeOnChars { get; set; }
+	public ICollection<string> TokenizeOnChars { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -52,7 +52,7 @@ public sealed partial class CharGroupTokenizerDescriptor : SerializableDescripto
 
 	private int? MaxTokenLengthValue { get; set; }
 
-	private IList<string> TokenizeOnCharsValue { get; set; }
+	private ICollection<string> TokenizeOnCharsValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
@@ -62,7 +62,7 @@ public sealed partial class CharGroupTokenizerDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public CharGroupTokenizerDescriptor TokenizeOnChars(IList<string> tokenizeOnChars)
+	public CharGroupTokenizerDescriptor TokenizeOnChars(ICollection<string> tokenizeOnChars)
 	{
 		TokenizeOnCharsValue = tokenizeOnChars;
 		return Self;

@@ -33,7 +33,7 @@ public sealed class EqlSearchRequestParameters : RequestParameters<EqlSearchRequ
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -52,7 +52,7 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -83,7 +83,7 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filter { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("keep_alive")]
@@ -103,7 +103,7 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("result_position")]
@@ -129,7 +129,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 	protected override bool SupportsBody => true;
 	public EqlSearchRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public EqlSearchRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public EqlSearchRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public EqlSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public EqlSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
@@ -137,7 +137,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
 
@@ -145,7 +145,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
 
 	private QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
 
@@ -177,7 +177,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
-	public EqlSearchRequestDescriptor<TDocument> Fields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public EqlSearchRequestDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
 		FieldsDescriptorAction = null;
@@ -213,7 +213,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Filter(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+	public EqlSearchRequestDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -491,7 +491,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 	protected override bool SupportsBody => true;
 	public EqlSearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public EqlSearchRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public EqlSearchRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public EqlSearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public EqlSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
@@ -499,7 +499,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 
 	private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
 
@@ -507,7 +507,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
 
 	private QueryDsl.QueryContainerDescriptor FilterDescriptor { get; set; }
 
@@ -539,7 +539,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
-	public EqlSearchRequestDescriptor Fields(IList<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public EqlSearchRequestDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
 		FieldsDescriptorAction = null;
@@ -575,7 +575,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor Filter(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+	public EqlSearchRequestDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;

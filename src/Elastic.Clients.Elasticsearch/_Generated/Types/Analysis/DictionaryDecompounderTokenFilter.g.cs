@@ -56,7 +56,7 @@ public sealed partial class DictionaryDecompounderTokenFilter : ITokenFilterDefi
 
 	[JsonInclude]
 	[JsonPropertyName("word_list")]
-	public IList<string>? WordList { get; set; }
+	public ICollection<string>? WordList { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("word_list_path")]
@@ -82,7 +82,7 @@ public sealed partial class DictionaryDecompounderTokenFilterDescriptor : Serial
 
 	private string? VersionValue { get; set; }
 
-	private IList<string>? WordListValue { get; set; }
+	private ICollection<string>? WordListValue { get; set; }
 
 	private string? WordListPathValue { get; set; }
 
@@ -122,7 +122,7 @@ public sealed partial class DictionaryDecompounderTokenFilterDescriptor : Serial
 		return Self;
 	}
 
-	public DictionaryDecompounderTokenFilterDescriptor WordList(IList<string>? wordList)
+	public DictionaryDecompounderTokenFilterDescriptor WordList(ICollection<string>? wordList)
 	{
 		WordListValue = wordList;
 		return Self;

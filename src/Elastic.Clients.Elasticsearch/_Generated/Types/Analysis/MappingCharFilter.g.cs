@@ -29,7 +29,7 @@ public sealed partial class MappingCharFilter : ICharFilterDefinition
 {
 	[JsonInclude]
 	[JsonPropertyName("mappings")]
-	public IList<string>? Mappings { get; set; }
+	public ICollection<string>? Mappings { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("mappings_path")]
@@ -50,13 +50,13 @@ public sealed partial class MappingCharFilterDescriptor : SerializableDescriptor
 	{
 	}
 
-	private IList<string>? MappingsValue { get; set; }
+	private ICollection<string>? MappingsValue { get; set; }
 
 	private string? MappingsPathValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
-	public MappingCharFilterDescriptor Mappings(IList<string>? mappings)
+	public MappingCharFilterDescriptor Mappings(ICollection<string>? mappings)
 	{
 		MappingsValue = mappings;
 		return Self;

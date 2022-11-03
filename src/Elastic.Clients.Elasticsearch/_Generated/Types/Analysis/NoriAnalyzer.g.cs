@@ -33,7 +33,7 @@ public sealed partial class NoriAnalyzer : IAnalyzer
 
 	[JsonInclude]
 	[JsonPropertyName("stoptags")]
-	public IList<string>? Stoptags { get; set; }
+	public ICollection<string>? Stoptags { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -56,7 +56,7 @@ public sealed partial class NoriAnalyzerDescriptor : SerializableDescriptor<Nori
 
 	private Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundModeValue { get; set; }
 
-	private IList<string>? StoptagsValue { get; set; }
+	private ICollection<string>? StoptagsValue { get; set; }
 
 	private string? UserDictionaryValue { get; set; }
 
@@ -68,7 +68,7 @@ public sealed partial class NoriAnalyzerDescriptor : SerializableDescriptor<Nori
 		return Self;
 	}
 
-	public NoriAnalyzerDescriptor Stoptags(IList<string>? stoptags)
+	public NoriAnalyzerDescriptor Stoptags(ICollection<string>? stoptags)
 	{
 		StoptagsValue = stoptags;
 		return Self;

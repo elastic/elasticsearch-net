@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class DeleteDataStreamRequestParameters : RequestParameters<DeleteDataStreamRequestParameters>
 {
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStreamRequestParameters>
@@ -43,7 +43,7 @@ public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStr
 	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 	protected override bool SupportsBody => false;
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 public sealed partial class DeleteDataStreamRequestDescriptor : RequestDescriptor<DeleteDataStreamRequestDescriptor, DeleteDataStreamRequestParameters>
@@ -60,7 +60,7 @@ public sealed partial class DeleteDataStreamRequestDescriptor : RequestDescripto
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteDataStream;
 	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 	protected override bool SupportsBody => false;
-	public DeleteDataStreamRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public DeleteDataStreamRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public DeleteDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{
 		RouteValues.Required("name", name);
