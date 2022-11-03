@@ -418,7 +418,7 @@ public sealed partial class TermsAggregation : Aggregation
 	public override string? Name { get; internal set; }
 
 	[JsonConverter(typeof(AggregateOrderConverter))]
-	public IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
@@ -466,7 +466,7 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 
 	private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
 
-	private IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
@@ -574,7 +574,7 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public TermsAggregationDescriptor<TDocument> Order(IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public TermsAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -773,7 +773,7 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 
 	private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
 
-	private IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
@@ -887,7 +887,7 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public TermsAggregationDescriptor Order(IList<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public TermsAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;

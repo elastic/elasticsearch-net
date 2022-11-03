@@ -37,7 +37,7 @@ public sealed partial class SpanOrQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("clauses")]
-	public IList<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 }
 
 public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescriptor<SpanOrQueryDescriptor<TDocument>>
@@ -47,7 +47,7 @@ public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescr
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
 
 	private SpanQueryDescriptor<TDocument> ClausesDescriptor { get; set; }
 
@@ -59,7 +59,7 @@ public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescr
 
 	private float? BoostValue { get; set; }
 
-	public SpanOrQueryDescriptor<TDocument> Clauses(IList<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+	public SpanOrQueryDescriptor<TDocument> Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
 	{
 		ClausesDescriptor = null;
 		ClausesDescriptorAction = null;
@@ -164,7 +164,7 @@ public sealed partial class SpanOrQueryDescriptor : SerializableDescriptor<SpanO
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
 
 	private SpanQueryDescriptor ClausesDescriptor { get; set; }
 
@@ -176,7 +176,7 @@ public sealed partial class SpanOrQueryDescriptor : SerializableDescriptor<SpanO
 
 	private float? BoostValue { get; set; }
 
-	public SpanOrQueryDescriptor Clauses(IList<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+	public SpanOrQueryDescriptor Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
 	{
 		ClausesDescriptor = null;
 		ClausesDescriptorAction = null;

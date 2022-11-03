@@ -26,6 +26,6 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-internal sealed class FeaturesConverter : IEnumerableSingleOrManyConverter<Elastic.Clients.Elasticsearch.IndexManagement.Feature>
+internal sealed class FeaturesConverter : ICollectionSingleOrManyConverter<Elastic.Clients.Elasticsearch.IndexManagement.Feature>
 {
 }
