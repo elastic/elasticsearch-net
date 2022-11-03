@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public partial class TokenFilter : Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions>
 {
-	public TokenFilter(string tokenFilter) : base(tokenFilter)
+	public TokenFilter(string name) : base(name)
 	{
 	}
 
-	public TokenFilter(Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions tokenFilterDefinitions) : base(tokenFilterDefinitions)
+	public TokenFilter(Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions definition) : base(definition)
 	{
 	}
 }
