@@ -29,11 +29,11 @@ public sealed partial class CustomAnalyzer : IAnalyzer
 {
 	[JsonInclude]
 	[JsonPropertyName("char_filter")]
-	public IList<string>? CharFilter { get; set; }
+	public ICollection<string>? CharFilter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public IList<string>? Filter { get; set; }
+	public ICollection<string>? Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("position_increment_gap")]
@@ -59,9 +59,9 @@ public sealed partial class CustomAnalyzerDescriptor : SerializableDescriptor<Cu
 	{
 	}
 
-	private IList<string>? CharFilterValue { get; set; }
+	private ICollection<string>? CharFilterValue { get; set; }
 
-	private IList<string>? FilterValue { get; set; }
+	private ICollection<string>? FilterValue { get; set; }
 
 	private int? PositionIncrementGapValue { get; set; }
 
@@ -69,13 +69,13 @@ public sealed partial class CustomAnalyzerDescriptor : SerializableDescriptor<Cu
 
 	private string TokenizerValue { get; set; }
 
-	public CustomAnalyzerDescriptor CharFilter(IList<string>? charFilter)
+	public CustomAnalyzerDescriptor CharFilter(ICollection<string>? charFilter)
 	{
 		CharFilterValue = charFilter;
 		return Self;
 	}
 
-	public CustomAnalyzerDescriptor Filter(IList<string>? filter)
+	public CustomAnalyzerDescriptor Filter(ICollection<string>? filter)
 	{
 		FilterValue = filter;
 		return Self;

@@ -29,7 +29,7 @@ public sealed partial class StemmerOverrideTokenFilter : ITokenFilterDefinition
 {
 	[JsonInclude]
 	[JsonPropertyName("rules")]
-	public IList<string>? Rules { get; set; }
+	public ICollection<string>? Rules { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("rules_path")]
@@ -50,13 +50,13 @@ public sealed partial class StemmerOverrideTokenFilterDescriptor : SerializableD
 	{
 	}
 
-	private IList<string>? RulesValue { get; set; }
+	private ICollection<string>? RulesValue { get; set; }
 
 	private string? RulesPathValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
-	public StemmerOverrideTokenFilterDescriptor Rules(IList<string>? rules)
+	public StemmerOverrideTokenFilterDescriptor Rules(ICollection<string>? rules)
 	{
 		RulesValue = rules;
 		return Self;

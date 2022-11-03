@@ -37,7 +37,7 @@ public sealed partial class DisMaxQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("queries")]
-	public IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> Queries { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> Queries { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("tie_breaker")]
@@ -53,7 +53,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; set; }
 
 	private QueryContainerDescriptor<TDocument> QueriesDescriptor { get; set; }
 
@@ -67,7 +67,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 
 	private double? TieBreakerValue { get; set; }
 
-	public DisMaxQueryDescriptor<TDocument> Queries(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries)
+	public DisMaxQueryDescriptor<TDocument> Queries(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries)
 	{
 		QueriesDescriptor = null;
 		QueriesDescriptorAction = null;
@@ -184,7 +184,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; set; }
 
 	private QueryContainerDescriptor QueriesDescriptor { get; set; }
 
@@ -198,7 +198,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 
 	private double? TieBreakerValue { get; set; }
 
-	public DisMaxQueryDescriptor Queries(IList<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries)
+	public DisMaxQueryDescriptor Queries(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries)
 	{
 		QueriesDescriptor = null;
 		QueriesDescriptorAction = null;

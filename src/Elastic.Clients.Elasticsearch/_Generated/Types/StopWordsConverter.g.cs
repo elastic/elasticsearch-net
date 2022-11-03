@@ -26,6 +26,6 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-internal sealed class StopWordsConverter : IEnumerableSingleOrManyConverter<string>
+internal sealed class StopWordsConverter : ICollectionSingleOrManyConverter<string>
 {
 }
