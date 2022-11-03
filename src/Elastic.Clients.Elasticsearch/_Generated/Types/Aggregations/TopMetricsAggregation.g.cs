@@ -55,7 +55,7 @@ internal sealed class TopMetricsAggregationConverter : JsonConverter<TopMetricsA
 				if (reader.ValueTextEquals("metrics"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<IList<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Metrics = value;
@@ -199,7 +199,7 @@ public sealed partial class TopMetricsAggregation : Aggregation
 
 	public Dictionary<string, object>? Meta { get; set; }
 
-	public IList<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
 
 	public FieldValue? Missing { get; set; }
 
@@ -210,7 +210,7 @@ public sealed partial class TopMetricsAggregation : Aggregation
 	public int? Size { get; set; }
 
 	[JsonConverter(typeof(SortConverter))]
-	public IList<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
 public sealed partial class TopMetricsAggregationDescriptor<TDocument> : SerializableDescriptor<TopMetricsAggregationDescriptor<TDocument>>
@@ -220,7 +220,7 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
 
 	private TopMetricsValueDescriptor<TDocument> MetricsDescriptor { get; set; }
 
@@ -238,9 +238,9 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 
 	private int? SizeValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
-	public TopMetricsAggregationDescriptor<TDocument> Metrics(IList<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
+	public TopMetricsAggregationDescriptor<TDocument> Metrics(ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
 	{
 		MetricsDescriptor = null;
 		MetricsDescriptorAction = null;
@@ -312,7 +312,7 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public TopMetricsAggregationDescriptor<TDocument> Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public TopMetricsAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
@@ -402,7 +402,7 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
 
 	private TopMetricsValueDescriptor MetricsDescriptor { get; set; }
 
@@ -420,9 +420,9 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 
 	private int? SizeValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
-	public TopMetricsAggregationDescriptor Metrics(IList<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
+	public TopMetricsAggregationDescriptor Metrics(ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
 	{
 		MetricsDescriptor = null;
 		MetricsDescriptorAction = null;
@@ -500,7 +500,7 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public TopMetricsAggregationDescriptor Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public TopMetricsAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;

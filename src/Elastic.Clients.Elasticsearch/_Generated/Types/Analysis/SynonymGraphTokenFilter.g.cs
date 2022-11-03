@@ -41,7 +41,7 @@ public sealed partial class SynonymGraphTokenFilter : ITokenFilterDefinition
 
 	[JsonInclude]
 	[JsonPropertyName("synonyms")]
-	public IList<string>? Synonyms { get; set; }
+	public ICollection<string>? Synonyms { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("synonyms_path")]
@@ -76,7 +76,7 @@ public sealed partial class SynonymGraphTokenFilterDescriptor : SerializableDesc
 
 	private bool? LenientValue { get; set; }
 
-	private IList<string>? SynonymsValue { get; set; }
+	private ICollection<string>? SynonymsValue { get; set; }
 
 	private string? SynonymsPathValue { get; set; }
 
@@ -104,7 +104,7 @@ public sealed partial class SynonymGraphTokenFilterDescriptor : SerializableDesc
 		return Self;
 	}
 
-	public SynonymGraphTokenFilterDescriptor Synonyms(IList<string>? synonyms)
+	public SynonymGraphTokenFilterDescriptor Synonyms(ICollection<string>? synonyms)
 	{
 		SynonymsValue = synonyms;
 		return Self;

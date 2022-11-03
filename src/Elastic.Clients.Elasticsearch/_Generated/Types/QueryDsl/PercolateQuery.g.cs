@@ -41,7 +41,7 @@ public sealed partial class PercolateQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("documents")]
-	public IList<object>? Documents { get; set; }
+	public ICollection<object>? Documents { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("field")]
@@ -87,7 +87,7 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 
 	private object? DocumentValue { get; set; }
 
-	private IList<object>? DocumentsValue { get; set; }
+	private ICollection<object>? DocumentsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
@@ -121,7 +121,7 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public PercolateQueryDescriptor<TDocument> Documents(IList<object>? documents)
+	public PercolateQueryDescriptor<TDocument> Documents(ICollection<object>? documents)
 	{
 		DocumentsValue = documents;
 		return Self;
@@ -251,7 +251,7 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 
 	private object? DocumentValue { get; set; }
 
-	private IList<object>? DocumentsValue { get; set; }
+	private ICollection<object>? DocumentsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
@@ -285,7 +285,7 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 		return Self;
 	}
 
-	public PercolateQueryDescriptor Documents(IList<object>? documents)
+	public PercolateQueryDescriptor Documents(ICollection<object>? documents)
 	{
 		DocumentsValue = documents;
 		return Self;
