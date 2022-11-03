@@ -67,7 +67,7 @@ internal sealed class CompositeAggregationConverter : JsonConverter<CompositeAgg
 				if (reader.ValueTextEquals("sources"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<IList<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Sources = value;
@@ -167,7 +167,7 @@ public sealed partial class CompositeAggregation : Aggregation
 
 	public int? Size { get; set; }
 
-	public IList<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
+	public ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 }
 
 public sealed partial class CompositeAggregationDescriptor<TDocument> : SerializableDescriptor<CompositeAggregationDescriptor<TDocument>>
@@ -189,7 +189,7 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 
 	private int? SizeValue { get; set; }
 
-	private IList<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
+	private ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
 
 	public CompositeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 	{
@@ -233,7 +233,7 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public CompositeAggregationDescriptor<TDocument> Sources(IList<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources)
+	public CompositeAggregationDescriptor<TDocument> Sources(ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources)
 	{
 		SourcesValue = sources;
 		return Self;
@@ -308,7 +308,7 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 
 	private int? SizeValue { get; set; }
 
-	private IList<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
+	private ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
 
 	public CompositeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 	{
@@ -352,7 +352,7 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public CompositeAggregationDescriptor Sources(IList<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources)
+	public CompositeAggregationDescriptor Sources(ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources)
 	{
 		SourcesValue = sources;
 		return Self;

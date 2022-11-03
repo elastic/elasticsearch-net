@@ -43,23 +43,9 @@ internal static class SingleOrManySerializationHelper
 		throw new JsonException("Unexpected token.");
 	}
 
-	public static void Serialize<TItem>(IList<TItem> value, Utf8JsonWriter writer, JsonSerializerOptions options)
+	public static void Serialize<TItem>(ICollection<TItem> value, Utf8JsonWriter writer, JsonSerializerOptions options)
 	{
-		if (value is not ICollection<TItem> collection)
-		{
-			// Avoid a double enumeration of counting then iterating.
-			// Instead, produce an array, even if it's an array of one.
-
-			writer.WriteStartArray();
-			foreach (var item in value)
-			{
-				JsonSerializer.Serialize<TItem>(writer, item, options);
-			}
-			writer.WriteEndArray();
-			return;
-		}
-
-		var count = collection.Count;
+		var count = value.Count;
 
 		if (count == 0)
 		{

@@ -34,7 +34,7 @@ public sealed partial class StandardAnalyzer : IAnalyzer
 	[JsonInclude]
 	[JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
-	public IList<string>? Stopwords { get; set; }
+	public ICollection<string>? Stopwords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -50,7 +50,7 @@ public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptor<
 
 	private int? MaxTokenLengthValue { get; set; }
 
-	private IList<string>? StopwordsValue { get; set; }
+	private ICollection<string>? StopwordsValue { get; set; }
 
 	public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength)
 	{
@@ -58,7 +58,7 @@ public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public StandardAnalyzerDescriptor Stopwords(IList<string>? stopwords)
+	public StandardAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;

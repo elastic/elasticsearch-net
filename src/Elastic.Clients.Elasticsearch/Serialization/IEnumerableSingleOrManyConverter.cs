@@ -9,11 +9,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
-internal abstract class IEnumerableSingleOrManyConverter<TItem> : JsonConverter<IList<TItem>>
+internal abstract class ICollectionSingleOrManyConverter<TItem> : JsonConverter<ICollection<TItem>>
 {
-	public override IList<TItem>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+	public override ICollection<TItem>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
 		SingleOrManySerializationHelper.Deserialize<TItem>(ref reader, options);
 
-	public override void Write(Utf8JsonWriter writer, IList<TItem> value, JsonSerializerOptions options) => 
+	public override void Write(Utf8JsonWriter writer, ICollection<TItem> value, JsonSerializerOptions options) => 
 		SingleOrManySerializationHelper.Serialize<TItem>(value, writer, options);
 }

@@ -298,7 +298,7 @@ internal sealed class IndexSettingsConverter : JsonConverter<IndexSettings>
 
 				if (property == "routing_path")
 				{
-					variant.RoutingPath = JsonSerializer.Deserialize<IList<string>?>(ref reader, options);
+					variant.RoutingPath = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
 					continue;
 				}
 
@@ -840,7 +840,7 @@ public sealed partial class IndexSettings
 
 	public int? RoutingPartitionSize { get; set; }
 
-	public IList<string>? RoutingPath { get; set; }
+	public ICollection<string>? RoutingPath { get; set; }
 
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? Search { get; set; }
 
@@ -1028,7 +1028,7 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 
 	private int? RoutingPartitionSizeValue { get; set; }
 
-	private IList<string>? RoutingPathValue { get; set; }
+	private ICollection<string>? RoutingPathValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? SearchValue { get; set; }
 
@@ -1626,7 +1626,7 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public IndexSettingsDescriptor<TDocument> RoutingPath(IList<string>? routingPath)
+	public IndexSettingsDescriptor<TDocument> RoutingPath(ICollection<string>? routingPath)
 	{
 		RoutingPathValue = routingPath;
 		return Self;
@@ -2561,7 +2561,7 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 
 	private int? RoutingPartitionSizeValue { get; set; }
 
-	private IList<string>? RoutingPathValue { get; set; }
+	private ICollection<string>? RoutingPathValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? SearchValue { get; set; }
 
@@ -3159,7 +3159,7 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		return Self;
 	}
 
-	public IndexSettingsDescriptor RoutingPath(IList<string>? routingPath)
+	public IndexSettingsDescriptor RoutingPath(ICollection<string>? routingPath)
 	{
 		RoutingPathValue = routingPath;
 		return Self;
