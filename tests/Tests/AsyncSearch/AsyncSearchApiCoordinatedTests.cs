@@ -17,14 +17,14 @@ using Elastic.Clients.Elasticsearch.Experimental;
 
 namespace Tests.AsyncSearch;
 
-public class AsyncSearchApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluster>
+public class AsyncSearchApiCoordinatedTests : CoordinatedIntegrationTestBase<ReadOnlyCluster>
 {
 	private const string SubmitStep = nameof(SubmitStep);
 	private const string StatusStep = nameof(StatusStep);
 	private const string GetStep = nameof(GetStep);
 	private const string DeleteStep = nameof(DeleteStep);
 
-	public AsyncSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
+	public AsyncSearchApiCoordinatedTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 	{
 		{
 			SubmitStep, u =>

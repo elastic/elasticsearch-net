@@ -46,7 +46,7 @@ module Tests =
             sprintf "tests/%s.runsettings" prefix
         
         Directory.CreateDirectory Paths.BuildOutput |> ignore
-        let command = ["test"; proj; "--nologo"; "-c"; "Release"; "-s"; runSettings; "--no-build"]
+        let command = ["test"; proj; "--nologo"; "-c"; "Release"; "-s"; runSettings; "--no-build"; "--blame"]
         
         let wantsTrx =
             let wants = match args.CommandArguments with | Integration a -> a.TrxExport | Test t -> t.TrxExport | _ -> false
