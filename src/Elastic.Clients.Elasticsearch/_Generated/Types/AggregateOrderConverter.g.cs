@@ -26,6 +26,6 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-internal sealed class AggregateOrderConverter : IEnumerableSingleOrManyConverter<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>
+internal sealed class AggregateOrderConverter : ICollectionSingleOrManyConverter<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>
 {
 }

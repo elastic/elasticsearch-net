@@ -29,7 +29,7 @@ public sealed partial class NoriPartOfSpeechTokenFilter : ITokenFilterDefinition
 {
 	[JsonInclude]
 	[JsonPropertyName("stoptags")]
-	public IList<string>? Stoptags { get; set; }
+	public ICollection<string>? Stoptags { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -46,11 +46,11 @@ public sealed partial class NoriPartOfSpeechTokenFilterDescriptor : Serializable
 	{
 	}
 
-	private IList<string>? StoptagsValue { get; set; }
+	private ICollection<string>? StoptagsValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
-	public NoriPartOfSpeechTokenFilterDescriptor Stoptags(IList<string>? stoptags)
+	public NoriPartOfSpeechTokenFilterDescriptor Stoptags(ICollection<string>? stoptags)
 	{
 		StoptagsValue = stoptags;
 		return Self;

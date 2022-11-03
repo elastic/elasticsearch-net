@@ -33,7 +33,7 @@ public sealed class FieldMappingRequestParameters : RequestParameters<FieldMappi
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -62,7 +62,7 @@ public sealed partial class FieldMappingRequest : PlainRequest<FieldMappingReque
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -93,7 +93,7 @@ public sealed partial class FieldMappingRequestDescriptor<TDocument> : RequestDe
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
 	public FieldMappingRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public FieldMappingRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public FieldMappingRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public FieldMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public FieldMappingRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public FieldMappingRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
@@ -133,7 +133,7 @@ public sealed partial class FieldMappingRequestDescriptor : RequestDescriptor<Fi
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
 	public FieldMappingRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public FieldMappingRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public FieldMappingRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public FieldMappingRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public FieldMappingRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public FieldMappingRequestDescriptor Local(bool? local = true) => Qs("local", local);
