@@ -36,7 +36,7 @@ public sealed partial class KeepTypesTokenFilter : ITokenFilterDefinition
 	public string Type => "keep_types";
 	[JsonInclude]
 	[JsonPropertyName("types")]
-	public IList<string>? Types { get; set; }
+	public ICollection<string>? Types { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("version")]
@@ -52,7 +52,7 @@ public sealed partial class KeepTypesTokenFilterDescriptor : SerializableDescrip
 
 	private Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? ModeValue { get; set; }
 
-	private IList<string>? TypesValue { get; set; }
+	private ICollection<string>? TypesValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
@@ -62,7 +62,7 @@ public sealed partial class KeepTypesTokenFilterDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public KeepTypesTokenFilterDescriptor Types(IList<string>? types)
+	public KeepTypesTokenFilterDescriptor Types(ICollection<string>? types)
 	{
 		TypesValue = types;
 		return Self;

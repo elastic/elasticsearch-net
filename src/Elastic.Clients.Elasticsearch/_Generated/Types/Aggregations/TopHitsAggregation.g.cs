@@ -384,7 +384,7 @@ public sealed partial class TopHitsAggregation : Aggregation
 	public int? Size { get; set; }
 
 	[JsonConverter(typeof(SortConverter))]
-	public IList<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
@@ -428,7 +428,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 
 	private int? SizeValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -532,7 +532,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public TopHitsAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
@@ -707,7 +707,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 
 	private int? SizeValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -817,7 +817,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor Sort(IList<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public TopHitsAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortValue = sort;
 		return Self;
