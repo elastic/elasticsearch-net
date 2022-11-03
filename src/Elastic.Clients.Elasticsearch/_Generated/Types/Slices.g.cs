@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public partial class Slices : Union<int, Elastic.Clients.Elasticsearch.SlicesCalculation>
 {
-	public Slices(int slices) : base(slices)
+	public Slices(int value) : base(value)
 	{
 	}
 
-	public Slices(Elastic.Clients.Elasticsearch.SlicesCalculation slicesCalculation) : base(slicesCalculation)
+	public Slices(Elastic.Clients.Elasticsearch.SlicesCalculation computed) : base(computed)
 	{
 	}
 }

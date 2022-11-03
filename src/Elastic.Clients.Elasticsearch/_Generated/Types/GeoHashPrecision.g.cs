@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public partial class GeoHashPrecision : Union<double, string>
 {
-	public GeoHashPrecision(double geoHashPrecision) : base(geoHashPrecision)
+	public GeoHashPrecision(double geohash_length) : base(geohash_length)
 	{
 	}
 
-	public GeoHashPrecision(string geoHashPrecision) : base(geoHashPrecision)
+	public GeoHashPrecision(string distance) : base(distance)
 	{
 	}
 }

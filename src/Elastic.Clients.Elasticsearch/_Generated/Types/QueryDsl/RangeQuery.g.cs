@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public partial class RangeQuery : Union<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery, Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery>
 {
-	public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery dateRangeQuery) : base(dateRangeQuery)
+	public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery date) : base(date)
 	{
 	}
 
-	public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery numberRangeQuery) : base(numberRangeQuery)
+	public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery number) : base(number)
 	{
 	}
 }
