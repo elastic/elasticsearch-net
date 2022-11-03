@@ -33,7 +33,7 @@ public sealed class StatsRequestParameters : RequestParameters<StatsRequestParam
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
@@ -45,7 +45,7 @@ public sealed class StatsRequestParameters : RequestParameters<StatsRequestParam
 	public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
 
 	[JsonIgnore]
-	public IList<string>? Groups { get => Q<IList<string>?>("groups"); set => Q("groups", value); }
+	public ICollection<string>? Groups { get => Q<ICollection<string>?>("groups"); set => Q("groups", value); }
 
 	[JsonIgnore]
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
@@ -82,7 +82,7 @@ public sealed partial class StatsRequest : PlainRequest<StatsRequestParameters>
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
@@ -94,7 +94,7 @@ public sealed partial class StatsRequest : PlainRequest<StatsRequestParameters>
 	public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
 
 	[JsonIgnore]
-	public IList<string>? Groups { get => Q<IList<string>?>("groups"); set => Q("groups", value); }
+	public ICollection<string>? Groups { get => Q<ICollection<string>?>("groups"); set => Q("groups", value); }
 
 	[JsonIgnore]
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
@@ -125,11 +125,11 @@ public sealed partial class StatsRequestDescriptor<TDocument> : RequestDescripto
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
 	public StatsRequestDescriptor<TDocument> CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
-	public StatsRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public StatsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public StatsRequestDescriptor<TDocument> FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
 	public StatsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
 	public StatsRequestDescriptor<TDocument> ForbidClosedIndices(bool? forbidClosedIndices = true) => Qs("forbid_closed_indices", forbidClosedIndices);
-	public StatsRequestDescriptor<TDocument> Groups(IList<string>? groups) => Qs("groups", groups);
+	public StatsRequestDescriptor<TDocument> Groups(ICollection<string>? groups) => Qs("groups", groups);
 	public StatsRequestDescriptor<TDocument> IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 	public StatsRequestDescriptor<TDocument> IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
 	public StatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
@@ -169,11 +169,11 @@ public sealed partial class StatsRequestDescriptor : RequestDescriptor<StatsRequ
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override bool SupportsBody => false;
 	public StatsRequestDescriptor CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
-	public StatsRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public StatsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public StatsRequestDescriptor FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
 	public StatsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
 	public StatsRequestDescriptor ForbidClosedIndices(bool? forbidClosedIndices = true) => Qs("forbid_closed_indices", forbidClosedIndices);
-	public StatsRequestDescriptor Groups(IList<string>? groups) => Qs("groups", groups);
+	public StatsRequestDescriptor Groups(ICollection<string>? groups) => Qs("groups", groups);
 	public StatsRequestDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 	public StatsRequestDescriptor IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
 	public StatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);

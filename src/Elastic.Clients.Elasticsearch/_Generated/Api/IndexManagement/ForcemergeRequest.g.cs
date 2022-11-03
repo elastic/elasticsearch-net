@@ -33,7 +33,7 @@ public sealed class ForcemergeRequestParameters : RequestParameters<ForcemergeRe
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
@@ -68,7 +68,7 @@ public sealed partial class ForcemergeRequest : PlainRequest<ForcemergeRequestPa
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
@@ -97,7 +97,7 @@ public sealed partial class ForcemergeRequestDescriptor<TDocument> : RequestDesc
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 	protected override bool SupportsBody => false;
 	public ForcemergeRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public ForcemergeRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public ForcemergeRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ForcemergeRequestDescriptor<TDocument> Flush(bool? flush = true) => Qs("flush", flush);
 	public ForcemergeRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public ForcemergeRequestDescriptor<TDocument> MaxNumSegments(long? maxNumSegments) => Qs("max_num_segments", maxNumSegments);
@@ -125,7 +125,7 @@ public sealed partial class ForcemergeRequestDescriptor : RequestDescriptor<Forc
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 	protected override bool SupportsBody => false;
 	public ForcemergeRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public ForcemergeRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public ForcemergeRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ForcemergeRequestDescriptor Flush(bool? flush = true) => Qs("flush", flush);
 	public ForcemergeRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public ForcemergeRequestDescriptor MaxNumSegments(long? maxNumSegments) => Qs("max_num_segments", maxNumSegments);
