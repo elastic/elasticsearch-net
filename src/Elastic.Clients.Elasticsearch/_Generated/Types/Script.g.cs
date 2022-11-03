@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public partial class Script : Union<Elastic.Clients.Elasticsearch.InlineScript, Elastic.Clients.Elasticsearch.StoredScriptId>
 {
-	public Script(Elastic.Clients.Elasticsearch.InlineScript inlineScript) : base(inlineScript)
+	public Script(Elastic.Clients.Elasticsearch.InlineScript inline) : base(inline)
 	{
 	}
 
-	public Script(Elastic.Clients.Elasticsearch.StoredScriptId storedScriptId) : base(storedScriptId)
+	public Script(Elastic.Clients.Elasticsearch.StoredScriptId stored) : base(stored)
 	{
 	}
 }
