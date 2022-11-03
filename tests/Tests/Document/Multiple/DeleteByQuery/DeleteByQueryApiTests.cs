@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Mapping;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Tests.Core.Extensions;
@@ -91,7 +90,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				Client.IndexMany(Project.Projects, index);
 				var cloneIndex = index + "-clone";
 				Client.Indices.Create(cloneIndex);
-				Client.Indices.Refresh(new RefreshRequest(Infer.Index(index).And(cloneIndex)));
+				Client.Indices.Refresh(Infer.Index(index).And(cloneIndex));
 			}
 		}
 
@@ -102,7 +101,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			(client, r) => client.DeleteByQueryAsync(r)
 		);
 
-		protected override void OnAfterCall(ElasticsearchClient client) => client.Indices.Refresh(new RefreshRequest(CallIsolatedValue));
+		protected override void OnAfterCall(ElasticsearchClient client) => client.Indices.Refresh(CallIsolatedValue);
 
 		protected override DeleteByQueryRequestDescriptor<Project> NewDescriptor() => new(Indices);
 
@@ -276,7 +275,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 			// Since we only executed one slice of the two, some of the documents that
 			// match the query will still exist.
-			Client.Indices.Refresh(new RefreshRequest(CallIsolatedValue));
+			Client.Indices.Refresh(CallIsolatedValue);
 
 			var countResponse = Client.Count<Project>(c => c
 				.Indices(CallIsolatedValue)
