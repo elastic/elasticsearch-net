@@ -28,7 +28,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public partial class SourceConfigParam : Union<bool, Elastic.Clients.Elasticsearch.Fields>
 {
-	public SourceConfigParam(bool sourceConfigParam) : base(sourceConfigParam)
+	public SourceConfigParam(bool fetch) : base(fetch)
 	{
 	}
 

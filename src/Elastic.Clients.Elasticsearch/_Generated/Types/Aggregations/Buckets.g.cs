@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public partial class Buckets<TBucket> : Union<Dictionary<string, TBucket>, IReadOnlyCollection<TBucket>>
 {
-	public Buckets(Dictionary<string, TBucket> buckets) : base(buckets)
+	public Buckets(Dictionary<string, TBucket> dictionary) : base(dictionary)
 	{
 	}
 
-	public Buckets(IReadOnlyCollection<TBucket> buckets) : base(buckets)
+	public Buckets(IReadOnlyCollection<TBucket> collection) : base(collection)
 	{
 	}
 }
