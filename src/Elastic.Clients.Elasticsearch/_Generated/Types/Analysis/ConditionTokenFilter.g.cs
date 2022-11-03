@@ -29,7 +29,7 @@ public sealed partial class ConditionTokenFilter : ITokenFilterDefinition
 {
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public IList<string> Filter { get; set; }
+	public ICollection<string> Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("script")]
@@ -50,13 +50,13 @@ public sealed partial class ConditionTokenFilterDescriptor : SerializableDescrip
 	{
 	}
 
-	private IList<string> FilterValue { get; set; }
+	private ICollection<string> FilterValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
-	public ConditionTokenFilterDescriptor Filter(IList<string> filter)
+	public ConditionTokenFilterDescriptor Filter(ICollection<string> filter)
 	{
 		FilterValue = filter;
 		return Self;

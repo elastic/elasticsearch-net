@@ -41,7 +41,7 @@ public sealed partial class PhraseSuggester
 
 	[JsonInclude]
 	[JsonPropertyName("direct_generator")]
-	public IList<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGenerator { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGenerator { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("field")]
@@ -101,7 +101,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
 
 	private DirectGeneratorDescriptor<TDocument> DirectGeneratorDescriptor { get; set; }
 
@@ -151,7 +151,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 
 	private int? TokenLimitValue { get; set; }
 
-	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(IList<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? directGenerator)
+	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? directGenerator)
 	{
 		DirectGeneratorDescriptor = null;
 		DirectGeneratorDescriptorAction = null;
@@ -498,7 +498,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
 
 	private DirectGeneratorDescriptor DirectGeneratorDescriptor { get; set; }
 
@@ -548,7 +548,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 
 	private int? TokenLimitValue { get; set; }
 
-	public PhraseSuggesterDescriptor DirectGenerator(IList<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? directGenerator)
+	public PhraseSuggesterDescriptor DirectGenerator(ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? directGenerator)
 	{
 		DirectGeneratorDescriptor = null;
 		DirectGeneratorDescriptorAction = null;

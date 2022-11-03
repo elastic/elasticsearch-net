@@ -29,7 +29,7 @@ public sealed partial class TextClassificationInferenceUpdateOptions
 {
 	[JsonInclude]
 	[JsonPropertyName("classification_labels")]
-	public IList<string>? ClassificationLabels { get; set; }
+	public ICollection<string>? ClassificationLabels { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("num_top_classes")]
@@ -53,7 +53,7 @@ public sealed partial class TextClassificationInferenceUpdateOptionsDescriptor :
 	{
 	}
 
-	private IList<string>? ClassificationLabelsValue { get; set; }
+	private ICollection<string>? ClassificationLabelsValue { get; set; }
 
 	private int? NumTopClassesValue { get; set; }
 
@@ -65,7 +65,7 @@ public sealed partial class TextClassificationInferenceUpdateOptionsDescriptor :
 
 	private Action<NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
 
-	public TextClassificationInferenceUpdateOptionsDescriptor ClassificationLabels(IList<string>? classificationLabels)
+	public TextClassificationInferenceUpdateOptionsDescriptor ClassificationLabels(ICollection<string>? classificationLabels)
 	{
 		ClassificationLabelsValue = classificationLabels;
 		return Self;

@@ -33,7 +33,7 @@ public sealed partial class CompletionProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("contexts")]
-	public IList<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? Contexts { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? Contexts { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("copy_to")]
@@ -103,7 +103,7 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? ContextsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? ContextsValue { get; set; }
 
 	private SuggestContextDescriptor<TDocument> ContextsDescriptor { get; set; }
 
@@ -141,7 +141,7 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 
 	private bool? StoreValue { get; set; }
 
-	public CompletionPropertyDescriptor<TDocument> Contexts(IList<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? contexts)
+	public CompletionPropertyDescriptor<TDocument> Contexts(ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? contexts)
 	{
 		ContextsDescriptor = null;
 		ContextsDescriptorAction = null;
@@ -435,7 +435,7 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? ContextsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? ContextsValue { get; set; }
 
 	private SuggestContextDescriptor ContextsDescriptor { get; set; }
 
@@ -473,7 +473,7 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 
 	private bool? StoreValue { get; set; }
 
-	public CompletionPropertyDescriptor Contexts(IList<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? contexts)
+	public CompletionPropertyDescriptor Contexts(ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? contexts)
 	{
 		ContextsDescriptor = null;
 		ContextsDescriptorAction = null;

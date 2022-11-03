@@ -45,7 +45,7 @@ public sealed class UpdateByQueryRequestParameters : RequestParameters<UpdateByQ
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
@@ -90,10 +90,10 @@ public sealed class UpdateByQueryRequestParameters : RequestParameters<UpdateByQ
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 	[JsonIgnore]
-	public IList<string>? Sort { get => Q<IList<string>?>("sort"); set => Q("sort", value); }
+	public ICollection<string>? Sort { get => Q<ICollection<string>?>("sort"); set => Q("sort", value); }
 
 	[JsonIgnore]
-	public IList<string>? Stats { get => Q<IList<string>?>("stats"); set => Q("stats", value); }
+	public ICollection<string>? Stats { get => Q<ICollection<string>?>("stats"); set => Q("stats", value); }
 
 	[JsonIgnore]
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
@@ -139,7 +139,7 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
@@ -184,10 +184,10 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 	[JsonIgnore]
-	public IList<string>? Sort { get => Q<IList<string>?>("sort"); set => Q("sort", value); }
+	public ICollection<string>? Sort { get => Q<ICollection<string>?>("sort"); set => Q("sort", value); }
 
 	[JsonIgnore]
-	public IList<string>? Stats { get => Q<IList<string>?>("stats"); set => Q("stats", value); }
+	public ICollection<string>? Stats { get => Q<ICollection<string>?>("stats"); set => Q("stats", value); }
 
 	[JsonIgnore]
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
@@ -247,7 +247,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	public UpdateByQueryRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 	public UpdateByQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public UpdateByQueryRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
-	public UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public UpdateByQueryRequestDescriptor<TDocument> From(long? from) => Qs("from", from);
 	public UpdateByQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public UpdateByQueryRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
@@ -262,8 +262,8 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	public UpdateByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Duration? searchTimeout) => Qs("search_timeout", searchTimeout);
 	public UpdateByQueryRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
 	public UpdateByQueryRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-	public UpdateByQueryRequestDescriptor<TDocument> Sort(IList<string>? sort) => Qs("sort", sort);
-	public UpdateByQueryRequestDescriptor<TDocument> Stats(IList<string>? stats) => Qs("stats", stats);
+	public UpdateByQueryRequestDescriptor<TDocument> Sort(ICollection<string>? sort) => Qs("sort", sort);
+	public UpdateByQueryRequestDescriptor<TDocument> Stats(ICollection<string>? stats) => Qs("stats", stats);
 	public UpdateByQueryRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 	public UpdateByQueryRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public UpdateByQueryRequestDescriptor<TDocument> Version(bool? version = true) => Qs("version", version);
@@ -436,7 +436,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	public UpdateByQueryRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 	public UpdateByQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public UpdateByQueryRequestDescriptor Df(string? df) => Qs("df", df);
-	public UpdateByQueryRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public UpdateByQueryRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public UpdateByQueryRequestDescriptor From(long? from) => Qs("from", from);
 	public UpdateByQueryRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public UpdateByQueryRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
@@ -451,8 +451,8 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	public UpdateByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Duration? searchTimeout) => Qs("search_timeout", searchTimeout);
 	public UpdateByQueryRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
 	public UpdateByQueryRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-	public UpdateByQueryRequestDescriptor Sort(IList<string>? sort) => Qs("sort", sort);
-	public UpdateByQueryRequestDescriptor Stats(IList<string>? stats) => Qs("stats", stats);
+	public UpdateByQueryRequestDescriptor Sort(ICollection<string>? sort) => Qs("sort", sort);
+	public UpdateByQueryRequestDescriptor Stats(ICollection<string>? stats) => Qs("stats", stats);
 	public UpdateByQueryRequestDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 	public UpdateByQueryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public UpdateByQueryRequestDescriptor Version(bool? version = true) => Qs("version", version);

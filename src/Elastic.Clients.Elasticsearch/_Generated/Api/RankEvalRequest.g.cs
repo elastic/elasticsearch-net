@@ -33,7 +33,7 @@ public sealed class RankEvalRequestParameters : RequestParameters<RankEvalReques
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -59,7 +59,7 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	[JsonIgnore]
-	public IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<IList<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -69,7 +69,7 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 
 	[JsonInclude]
 	[JsonPropertyName("requests")]
-	public IList<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("metric")]
@@ -87,7 +87,7 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 	protected override bool SupportsBody => true;
 	public RankEvalRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public RankEvalRequestDescriptor<TDocument> ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public RankEvalRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public RankEvalRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public RankEvalRequestDescriptor<TDocument> SearchType(string? searchType) => Qs("search_type", searchType);
 	public RankEvalRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -96,7 +96,7 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> RequestsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> RequestsValue { get; set; }
 
 	private Core.RankEval.RankEvalRequestItemDescriptor<TDocument> RequestsDescriptor { get; set; }
 
@@ -110,7 +110,7 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 
 	private Action<Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
 
-	public RankEvalRequestDescriptor<TDocument> Requests(IList<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests)
+	public RankEvalRequestDescriptor<TDocument> Requests(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests)
 	{
 		RequestsDescriptor = null;
 		RequestsDescriptorAction = null;
@@ -235,7 +235,7 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 	protected override bool SupportsBody => true;
 	public RankEvalRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public RankEvalRequestDescriptor ExpandWildcards(IList<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public RankEvalRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public RankEvalRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public RankEvalRequestDescriptor SearchType(string? searchType) => Qs("search_type", searchType);
 	public RankEvalRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -244,7 +244,7 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 		return Self;
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> RequestsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> RequestsValue { get; set; }
 
 	private Core.RankEval.RankEvalRequestItemDescriptor RequestsDescriptor { get; set; }
 
@@ -258,7 +258,7 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 
 	private Action<Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
 
-	public RankEvalRequestDescriptor Requests(IList<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests)
+	public RankEvalRequestDescriptor Requests(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests)
 	{
 		RequestsDescriptor = null;
 		RequestsDescriptorAction = null;
