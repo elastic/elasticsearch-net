@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
 public partial class RequestItem : Union<Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader, Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig>
 {
-	public RequestItem(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader multisearchHeader) : base(multisearchHeader)
+	public RequestItem(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader header) : base(header)
 	{
 	}
 
-	public RequestItem(Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig templateConfig) : base(templateConfig)
+	public RequestItem(Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig body) : base(body)
 	{
 	}
 }
