@@ -28,11 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public partial class CharFilter : Union<string, Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions>
 {
-	public CharFilter(string charFilter) : base(charFilter)
+	public CharFilter(string name) : base(name)
 	{
 	}
 
-	public CharFilter(Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions charFilterDefinitions) : base(charFilterDefinitions)
+	public CharFilter(Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions definition) : base(definition)
 	{
 	}
 }
