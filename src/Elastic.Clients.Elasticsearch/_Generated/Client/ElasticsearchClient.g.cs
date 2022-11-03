@@ -1376,29 +1376,6 @@ public partial class ElasticsearchClient
 		return DoRequest<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
 	}
 
-	public RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices indices)
-	{
-		var descriptor = new RankEvalRequestDescriptor(indices);
-		descriptor.BeforeRequest();
-		return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-	}
-
-	public RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor> configureRequest)
-	{
-		var descriptor = new RankEvalRequestDescriptor(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-	}
-
-	public RankEvalResponse RankEval<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new RankEvalRequestDescriptor<TDocument>(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
-	}
-
 	public Task<RankEvalResponse> RankEvalAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new RankEvalRequestDescriptor();
@@ -1417,29 +1394,6 @@ public partial class ElasticsearchClient
 	public Task<RankEvalResponse> RankEvalAsync<TDocument>(Action<RankEvalRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new RankEvalRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);
-	}
-
-	public Task<RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RankEvalRequestDescriptor(indices);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-	}
-
-	public Task<RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RankEvalRequestDescriptor(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
-	}
-
-	public Task<RankEvalResponse> RankEvalAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RankEvalRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<RankEvalRequestDescriptor<TDocument>, RankEvalResponse>(descriptor);

@@ -36,7 +36,7 @@ public partial class CharFilterDefinitions : IsADictionary<string, ICharFilterDe
 	{
 	}
 
-	public void Add(string name, ICharFilterDefinition charFilterDefinition) => BackingDictionary.Add(name, charFilterDefinition);
+	public void Add(string name, ICharFilterDefinition charFilterDefinition) => BackingDictionary.Add(Sanitize(name), charFilterDefinition);
 }
 
 public sealed partial class CharFilterDefinitionsDescriptor : IsADictionaryDescriptor<CharFilterDefinitionsDescriptor, CharFilterDefinitions, string, ICharFilterDefinition>
@@ -91,7 +91,8 @@ internal sealed partial class CharFilterDefinitionInterfaceConverter : JsonConve
 			case "html_strip":
 				return JsonSerializer.Deserialize<HtmlStripCharFilter>(ref reader, options);
 			default:
-				throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
+				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ICharFilterDefinition));
+				return null;
 		}
 	}
 
