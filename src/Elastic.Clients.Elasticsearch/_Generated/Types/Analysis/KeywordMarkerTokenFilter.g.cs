@@ -33,7 +33,7 @@ public sealed partial class KeywordMarkerTokenFilter : ITokenFilterDefinition
 
 	[JsonInclude]
 	[JsonPropertyName("keywords")]
-	public IList<string>? Keywords { get; set; }
+	public ICollection<string>? Keywords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("keywords_path")]
@@ -60,7 +60,7 @@ public sealed partial class KeywordMarkerTokenFilterDescriptor : SerializableDes
 
 	private bool? IgnoreCaseValue { get; set; }
 
-	private IList<string>? KeywordsValue { get; set; }
+	private ICollection<string>? KeywordsValue { get; set; }
 
 	private string? KeywordsPathValue { get; set; }
 
@@ -74,7 +74,7 @@ public sealed partial class KeywordMarkerTokenFilterDescriptor : SerializableDes
 		return Self;
 	}
 
-	public KeywordMarkerTokenFilterDescriptor Keywords(IList<string>? keywords)
+	public KeywordMarkerTokenFilterDescriptor Keywords(ICollection<string>? keywords)
 	{
 		KeywordsValue = keywords;
 		return Self;

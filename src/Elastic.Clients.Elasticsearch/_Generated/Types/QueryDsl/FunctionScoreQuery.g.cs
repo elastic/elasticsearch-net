@@ -41,7 +41,7 @@ public sealed partial class FunctionScoreQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("functions")]
-	public IList<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? Functions { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? Functions { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("max_boost")]
@@ -69,7 +69,7 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? FunctionsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? FunctionsValue { get; set; }
 
 	private FunctionScoreContainerDescriptor<TDocument> FunctionsDescriptor { get; set; }
 
@@ -95,7 +95,7 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreModeValue { get; set; }
 
-	public FunctionScoreQueryDescriptor<TDocument> Functions(IList<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? functions)
+	public FunctionScoreQueryDescriptor<TDocument> Functions(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? functions)
 	{
 		FunctionsDescriptor = null;
 		FunctionsDescriptorAction = null;
@@ -288,7 +288,7 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 	{
 	}
 
-	private IList<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? FunctionsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? FunctionsValue { get; set; }
 
 	private FunctionScoreContainerDescriptor FunctionsDescriptor { get; set; }
 
@@ -314,7 +314,7 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreModeValue { get; set; }
 
-	public FunctionScoreQueryDescriptor Functions(IList<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? functions)
+	public FunctionScoreQueryDescriptor Functions(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? functions)
 	{
 		FunctionsDescriptor = null;
 		FunctionsDescriptorAction = null;

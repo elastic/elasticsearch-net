@@ -44,7 +44,7 @@ public sealed partial class NoriTokenizer : ITokenizerDefinition
 
 	[JsonInclude]
 	[JsonPropertyName("user_dictionary_rules")]
-	public IList<string>? UserDictionaryRules { get; set; }
+	public ICollection<string>? UserDictionaryRules { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("version")]
@@ -64,7 +64,7 @@ public sealed partial class NoriTokenizerDescriptor : SerializableDescriptor<Nor
 
 	private string? UserDictionaryValue { get; set; }
 
-	private IList<string>? UserDictionaryRulesValue { get; set; }
+	private ICollection<string>? UserDictionaryRulesValue { get; set; }
 
 	private string? VersionValue { get; set; }
 
@@ -86,7 +86,7 @@ public sealed partial class NoriTokenizerDescriptor : SerializableDescriptor<Nor
 		return Self;
 	}
 
-	public NoriTokenizerDescriptor UserDictionaryRules(IList<string>? userDictionaryRules)
+	public NoriTokenizerDescriptor UserDictionaryRules(ICollection<string>? userDictionaryRules)
 	{
 		UserDictionaryRulesValue = userDictionaryRules;
 		return Self;

@@ -57,7 +57,7 @@ public sealed partial class JoinProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("relations")]
-	public Dictionary<string, IList<string>>? Relations { get; set; }
+	public Dictionary<string, ICollection<string>>? Relations { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -85,7 +85,7 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
-	private Dictionary<string, IList<string>>? RelationsValue { get; set; }
+	private Dictionary<string, ICollection<string>>? RelationsValue { get; set; }
 
 	public JoinPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -157,9 +157,9 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public JoinPropertyDescriptor<TDocument> Relations(Func<FluentDictionary<string, IList<string>>, FluentDictionary<string, IList<string>>> selector)
+	public JoinPropertyDescriptor<TDocument> Relations(Func<FluentDictionary<string, ICollection<string>>, FluentDictionary<string, ICollection<string>>> selector)
 	{
-		RelationsValue = selector?.Invoke(new FluentDictionary<string, IList<string>>());
+		RelationsValue = selector?.Invoke(new FluentDictionary<string, ICollection<string>>());
 		return Self;
 	}
 
@@ -244,7 +244,7 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
-	private Dictionary<string, IList<string>>? RelationsValue { get; set; }
+	private Dictionary<string, ICollection<string>>? RelationsValue { get; set; }
 
 	public JoinPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -316,9 +316,9 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 		return Self;
 	}
 
-	public JoinPropertyDescriptor Relations(Func<FluentDictionary<string, IList<string>>, FluentDictionary<string, IList<string>>> selector)
+	public JoinPropertyDescriptor Relations(Func<FluentDictionary<string, ICollection<string>>, FluentDictionary<string, ICollection<string>>> selector)
 	{
-		RelationsValue = selector?.Invoke(new FluentDictionary<string, IList<string>>());
+		RelationsValue = selector?.Invoke(new FluentDictionary<string, ICollection<string>>());
 		return Self;
 	}
 

@@ -37,7 +37,7 @@ public sealed partial class RankEvalRequestItem
 
 	[JsonInclude]
 	[JsonPropertyName("ratings")]
-	public IList<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> Ratings { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> Ratings { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("request")]
@@ -65,7 +65,7 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 
 	private Dictionary<string, object>? ParamsValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> RatingsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> RatingsValue { get; set; }
 
 	private DocumentRatingDescriptor RatingsDescriptor { get; set; }
 
@@ -111,7 +111,7 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public RankEvalRequestItemDescriptor<TDocument> Ratings(IList<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> ratings)
+	public RankEvalRequestItemDescriptor<TDocument> Ratings(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> ratings)
 	{
 		RatingsDescriptor = null;
 		RatingsDescriptorAction = null;
@@ -238,7 +238,7 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 
 	private Dictionary<string, object>? ParamsValue { get; set; }
 
-	private IList<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> RatingsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> RatingsValue { get; set; }
 
 	private DocumentRatingDescriptor RatingsDescriptor { get; set; }
 
@@ -284,7 +284,7 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public RankEvalRequestItemDescriptor Ratings(IList<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> ratings)
+	public RankEvalRequestItemDescriptor Ratings(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> ratings)
 	{
 		RatingsDescriptor = null;
 		RatingsDescriptorAction = null;
