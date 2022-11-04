@@ -20,6 +20,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -37,6 +38,19 @@ public partial class Normalizers : IsADictionary<string, INormalizer>
 	}
 
 	public void Add(string name, INormalizer normalizer) => BackingDictionary.Add(Sanitize(name), normalizer);
+	public bool TryGetNormalizer(string name, [NotNullWhen(returnValue: true)] out INormalizer normalizer) => BackingDictionary.TryGetValue(name, out normalizer);
+	public bool TryGetNormalizer<T>(string name, [NotNullWhen(returnValue: true)] out T? normalizer)
+		where T : class, INormalizer
+	{
+		if (BackingDictionary.TryGetValue(name, out var matchedValue) && matchedValue is T finalValue)
+		{
+			normalizer = finalValue;
+			return true;
+		}
+
+		normalizer = null;
+		return false;
+	}
 }
 
 public sealed partial class NormalizersDescriptor : IsADictionaryDescriptor<NormalizersDescriptor, Normalizers, string, INormalizer>
