@@ -20,6 +20,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -37,6 +38,19 @@ public partial class Analyzers : IsADictionary<string, IAnalyzer>
 	}
 
 	public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(Sanitize(name), analyzer);
+	public bool TryGetAnalyzer(string name, [NotNullWhen(returnValue: true)] out IAnalyzer analyzer) => BackingDictionary.TryGetValue(name, out analyzer);
+	public bool TryGetAnalyzer<T>(string name, [NotNullWhen(returnValue: true)] out T? analyzer)
+		where T : class, IAnalyzer
+	{
+		if (BackingDictionary.TryGetValue(name, out var matchedValue) && matchedValue is T finalValue)
+		{
+			analyzer = finalValue;
+			return true;
+		}
+
+		analyzer = null;
+		return false;
+	}
 }
 
 public sealed partial class AnalyzersDescriptor : IsADictionaryDescriptor<AnalyzersDescriptor, Analyzers, string, IAnalyzer>
