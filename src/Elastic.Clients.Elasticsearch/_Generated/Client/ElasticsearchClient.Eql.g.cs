@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql;
-public class EqlNamespace : NamespacedClientProxy
+public sealed partial class EqlNamespace : NamespacedClientProxy
 {
 	internal EqlNamespace(ElasticsearchClient client) : base(client)
 	{

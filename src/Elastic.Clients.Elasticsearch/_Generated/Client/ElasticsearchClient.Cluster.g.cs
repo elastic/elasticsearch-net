@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster;
-public class ClusterNamespace : NamespacedClientProxy
+public sealed partial class ClusterNamespace : NamespacedClientProxy
 {
 	internal ClusterNamespace(ElasticsearchClient client) : base(client)
 	{
