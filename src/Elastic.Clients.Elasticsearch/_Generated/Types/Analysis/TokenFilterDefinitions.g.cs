@@ -20,6 +20,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -37,6 +38,19 @@ public partial class TokenFilterDefinitions : IsADictionary<string, ITokenFilter
 	}
 
 	public void Add(string name, ITokenFilterDefinition tokenFilterDefinition) => BackingDictionary.Add(Sanitize(name), tokenFilterDefinition);
+	public bool TryGetTokenFilterDefinition(string name, [NotNullWhen(returnValue: true)] out ITokenFilterDefinition tokenFilterDefinition) => BackingDictionary.TryGetValue(name, out tokenFilterDefinition);
+	public bool TryGetTokenFilterDefinition<T>(string name, [NotNullWhen(returnValue: true)] out T? tokenFilterDefinition)
+		where T : class, ITokenFilterDefinition
+	{
+		if (BackingDictionary.TryGetValue(name, out var matchedValue) && matchedValue is T finalValue)
+		{
+			tokenFilterDefinition = finalValue;
+			return true;
+		}
+
+		tokenFilterDefinition = null;
+		return false;
+	}
 }
 
 public sealed partial class TokenFilterDefinitionsDescriptor : IsADictionaryDescriptor<TokenFilterDefinitionsDescriptor, TokenFilterDefinitions, string, ITokenFilterDefinition>
