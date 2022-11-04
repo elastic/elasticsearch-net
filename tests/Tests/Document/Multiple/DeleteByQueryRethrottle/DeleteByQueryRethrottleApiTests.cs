@@ -48,7 +48,7 @@ public class DeleteByQueryRethrottleApiTests
 		foreach (var callUniqueValue in values)
 		{
 			client.IndexMany(Project.Projects, callUniqueValue.Value);
-			client.Indices.Refresh(new RefreshRequest(callUniqueValue.Value));
+			client.Indices.Refresh(CallIsolatedValue);
 		}
 	}
 
@@ -62,7 +62,7 @@ public class DeleteByQueryRethrottleApiTests
 	protected override void OnBeforeCall(ElasticsearchClient client)
 	{
 		client.IndexMany(Project.Projects, CallIsolatedValue);
-		client.Indices.Refresh(new RefreshRequest(CallIsolatedValue));
+		client.Indices.Refresh(CallIsolatedValue);
 
 		var deleteByQuery = client.DeleteByQuery<Project>(CallIsolatedValue, u => u
 			.Conflicts(Conflicts.Proceed)

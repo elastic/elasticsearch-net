@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public class IndicesNamespace : NamespacedClientProxy
+public sealed partial class IndicesNamespace : NamespacedClientProxy
 {
 	internal IndicesNamespace(ElasticsearchClient client) : base(client)
 	{
