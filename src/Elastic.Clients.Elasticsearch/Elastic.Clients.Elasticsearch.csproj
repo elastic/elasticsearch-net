@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Elastic.Clients.Elasticsearch</PackageId>
     <Title>Elastic.Clients.Elasticsearch - Official Elasticsearch .NET Client</Title>
@@ -17,7 +17,7 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Elastic.Transport" Version="0.3.2" />
+    <PackageReference Include="Elastic.Transport" Version="0.3.3-canary.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.3.44">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

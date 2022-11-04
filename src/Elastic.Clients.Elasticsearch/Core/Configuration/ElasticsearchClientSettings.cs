@@ -45,7 +45,7 @@ public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<Elast
 	///     Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId" />,
 	///     <para><see cref="CloudNodePool" /> documentation for more information on how to obtain your Cloud Id</para>
 	/// </summary>
-	public ElasticsearchClientSettings(string cloudId, IAuthenticationHeader credentials) : this(
+	public ElasticsearchClientSettings(string cloudId, AuthorizationHeader credentials) : this(
 		new CloudNodePool(cloudId, credentials))
 	{
 	}
@@ -340,7 +340,7 @@ public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionCon
 	///     Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId" />,
 	///     <para><see cref="CloudNodePool" /> documentation for more information on how to obtain your Cloud Id</para>
 	/// </summary>
-	public ConnectionConfiguration(string cloudId, IAuthenticationHeader credentials) : this(
+	public ConnectionConfiguration(string cloudId, AuthorizationHeader credentials) : this(
 		new CloudNodePool(cloudId, credentials))
 	{
 	}

@@ -43,7 +43,7 @@ public sealed partial class ElasticsearchClient
 	/// </summary>
 	/// <param name="cloudId">The Cloud ID of an Elastic Cloud deployment.</param>
 	/// <param name="credentials">The credentials to use for the connection.</param>
-	public ElasticsearchClient(string cloudId, IAuthenticationHeader credentials) : this(
+	public ElasticsearchClient(string cloudId, AuthorizationHeader credentials) : this(
 		new ElasticsearchClientSettings(cloudId, credentials))
 	{
 	}
