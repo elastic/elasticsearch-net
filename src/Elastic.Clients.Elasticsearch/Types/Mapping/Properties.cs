@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -19,18 +18,6 @@ public partial class Properties
 	internal Properties(IElasticsearchClientSettings values) => _settings = values;
 
 	public void Add<TDocument>(Expression<Func<TDocument, object>> propertyName, IProperty property) => BackingDictionary.Add(Sanitize(propertyName), property);
-
-	public bool TryGetProperty<T>(PropertyName propertyName, [NotNullWhen(returnValue: true)] out T? property) where T : class, IProperty
-	{
-		if (BackingDictionary.TryGetValue(propertyName, out var matchedProperty) && matchedProperty is T finalProperty)
-		{
-			property = finalProperty;
-			return true;
-		}
-
-		property = null;
-		return false;
-	}
 
 	protected override PropertyName Sanitize(PropertyName key) => _settings?.Inferrer.PropertyName(key) ?? key;
 }

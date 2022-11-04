@@ -20,6 +20,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -37,6 +38,19 @@ public partial class Properties : IsADictionary<PropertyName, IProperty>
 	}
 
 	public void Add(PropertyName propertyName, IProperty property) => BackingDictionary.Add(Sanitize(propertyName), property);
+	public bool TryGetProperty(PropertyName propertyName, [NotNullWhen(returnValue: true)] out IProperty property) => BackingDictionary.TryGetValue(propertyName, out property);
+	public bool TryGetProperty<T>(PropertyName propertyName, [NotNullWhen(returnValue: true)] out T? property)
+		where T : class, IProperty
+	{
+		if (BackingDictionary.TryGetValue(propertyName, out var matchedValue) && matchedValue is T finalValue)
+		{
+			property = finalValue;
+			return true;
+		}
+
+		property = null;
+		return false;
+	}
 }
 
 public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
