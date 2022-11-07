@@ -56,10 +56,6 @@ public sealed partial class CompletionProperty : IProperty
 	public int? IgnoreAbove { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("max_input_length")]
 	public int? MaxInputLength { get; set; }
 
@@ -122,8 +118,6 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private int? MaxInputLengthValue { get; set; }
 
@@ -224,12 +218,6 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 	public CompletionPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public CompletionPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -365,12 +353,6 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MaxInputLengthValue.HasValue)
 		{
 			writer.WritePropertyName("max_input_length");
@@ -425,7 +407,7 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 	}
 
 	CompletionProperty IBuildableDescriptor<CompletionProperty>.Build() => new()
-	{ Contexts = ContextsValue, Analyzer = AnalyzerValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, MaxInputLength = MaxInputLengthValue, Meta = MetaValue, PreservePositionIncrements = PreservePositionIncrementsValue, PreserveSeparators = PreserveSeparatorsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ Contexts = ContextsValue, Analyzer = AnalyzerValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, MaxInputLength = MaxInputLengthValue, Meta = MetaValue, PreservePositionIncrements = PreservePositionIncrementsValue, PreserveSeparators = PreserveSeparatorsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue };
 }
 
 public sealed partial class CompletionPropertyDescriptor : SerializableDescriptor<CompletionPropertyDescriptor>, IBuildableDescriptor<CompletionProperty>
@@ -454,8 +436,6 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private int? MaxInputLengthValue { get; set; }
 
@@ -556,12 +536,6 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 	public CompletionPropertyDescriptor IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public CompletionPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -697,12 +671,6 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MaxInputLengthValue.HasValue)
 		{
 			writer.WritePropertyName("max_input_length");
@@ -757,5 +725,5 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 	}
 
 	CompletionProperty IBuildableDescriptor<CompletionProperty>.Build() => new()
-	{ Contexts = ContextsValue, Analyzer = AnalyzerValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, MaxInputLength = MaxInputLengthValue, Meta = MetaValue, PreservePositionIncrements = PreservePositionIncrementsValue, PreserveSeparators = PreserveSeparatorsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ Contexts = ContextsValue, Analyzer = AnalyzerValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, MaxInputLength = MaxInputLengthValue, Meta = MetaValue, PreservePositionIncrements = PreservePositionIncrementsValue, PreserveSeparators = PreserveSeparatorsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue };
 }
