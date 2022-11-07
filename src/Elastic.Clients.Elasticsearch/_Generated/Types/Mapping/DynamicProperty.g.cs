@@ -92,10 +92,6 @@ public sealed partial class DynamicProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("locale")]
 	public string? Locale { get; set; }
 
@@ -202,8 +198,6 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 	private TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
 
 	private Action<TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private string? LocaleValue { get; set; }
 
@@ -360,12 +354,6 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 		IndexPrefixesValue = null;
 		IndexPrefixesDescriptor = null;
 		IndexPrefixesDescriptorAction = configure;
-		return Self;
-	}
-
-	public DynamicPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -582,12 +570,6 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 			JsonSerializer.Serialize(writer, IndexPrefixesValue, options);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(LocaleValue))
 		{
 			writer.WritePropertyName("locale");
@@ -708,7 +690,7 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 	}
 
 	DynamicProperty IBuildableDescriptor<DynamicProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Enabled = EnabledValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, Norms = NormsValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, PositionIncrementGap = PositionIncrementGapValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Script = ScriptValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{ Analyzer = AnalyzerValue, Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Enabled = EnabledValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), Locale = LocaleValue, Meta = MetaValue, Norms = NormsValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, PositionIncrementGap = PositionIncrementGapValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Script = ScriptValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue, TimeSeriesMetric = TimeSeriesMetricValue };
 }
 
 public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<DynamicPropertyDescriptor>, IBuildableDescriptor<DynamicProperty>
@@ -753,8 +735,6 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 	private TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
 
 	private Action<TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private string? LocaleValue { get; set; }
 
@@ -911,12 +891,6 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 		IndexPrefixesValue = null;
 		IndexPrefixesDescriptor = null;
 		IndexPrefixesDescriptorAction = configure;
-		return Self;
-	}
-
-	public DynamicPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -1133,12 +1107,6 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 			JsonSerializer.Serialize(writer, IndexPrefixesValue, options);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(LocaleValue))
 		{
 			writer.WritePropertyName("locale");
@@ -1259,5 +1227,5 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 	}
 
 	DynamicProperty IBuildableDescriptor<DynamicProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Enabled = EnabledValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, Norms = NormsValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, PositionIncrementGap = PositionIncrementGapValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Script = ScriptValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{ Analyzer = AnalyzerValue, Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Enabled = EnabledValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), Locale = LocaleValue, Meta = MetaValue, Norms = NormsValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, PositionIncrementGap = PositionIncrementGapValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Script = ScriptValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue, TimeSeriesMetric = TimeSeriesMetricValue };
 }
