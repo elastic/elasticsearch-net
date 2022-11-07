@@ -68,10 +68,6 @@ public sealed partial class DateProperty : IProperty
 	public bool? Index { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("locale")]
 	public string? Locale { get; set; }
 
@@ -134,8 +130,6 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 	private bool? IgnoreMalformedValue { get; set; }
 
 	private bool? IndexValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private string? LocaleValue { get; set; }
 
@@ -240,12 +234,6 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 	public DatePropertyDescriptor<TDocument> Index(bool? index = true)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	public DatePropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -378,12 +366,6 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 			writer.WriteBooleanValue(IndexValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(LocaleValue))
 		{
 			writer.WritePropertyName("locale");
@@ -456,7 +438,7 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 	}
 
 	DateProperty IBuildableDescriptor<DateProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }
 
 public sealed partial class DatePropertyDescriptor : SerializableDescriptor<DatePropertyDescriptor>, IBuildableDescriptor<DateProperty>
@@ -489,8 +471,6 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 	private bool? IgnoreMalformedValue { get; set; }
 
 	private bool? IndexValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private string? LocaleValue { get; set; }
 
@@ -595,12 +575,6 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 	public DatePropertyDescriptor Index(bool? index = true)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	public DatePropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -733,12 +707,6 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 			writer.WriteBooleanValue(IndexValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(LocaleValue))
 		{
 			writer.WritePropertyName("locale");
@@ -811,5 +779,5 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 	}
 
 	DateProperty IBuildableDescriptor<DateProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }

@@ -64,10 +64,6 @@ public sealed partial class TokenCountProperty : IProperty
 	public bool? Index { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -116,8 +112,6 @@ public sealed partial class TokenCountPropertyDescriptor<TDocument> : Serializab
 	private int? IgnoreAboveValue { get; set; }
 
 	private bool? IndexValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -194,12 +188,6 @@ public sealed partial class TokenCountPropertyDescriptor<TDocument> : Serializab
 	public TokenCountPropertyDescriptor<TDocument> Index(bool? index = true)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	public TokenCountPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -304,12 +292,6 @@ public sealed partial class TokenCountPropertyDescriptor<TDocument> : Serializab
 			writer.WriteBooleanValue(IndexValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -346,7 +328,7 @@ public sealed partial class TokenCountPropertyDescriptor<TDocument> : Serializab
 	}
 
 	TokenCountProperty IBuildableDescriptor<TokenCountProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }
 
 public sealed partial class TokenCountPropertyDescriptor : SerializableDescriptor<TokenCountPropertyDescriptor>, IBuildableDescriptor<TokenCountProperty>
@@ -373,8 +355,6 @@ public sealed partial class TokenCountPropertyDescriptor : SerializableDescripto
 	private int? IgnoreAboveValue { get; set; }
 
 	private bool? IndexValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -451,12 +431,6 @@ public sealed partial class TokenCountPropertyDescriptor : SerializableDescripto
 	public TokenCountPropertyDescriptor Index(bool? index = true)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	public TokenCountPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -561,12 +535,6 @@ public sealed partial class TokenCountPropertyDescriptor : SerializableDescripto
 			writer.WriteBooleanValue(IndexValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -603,5 +571,5 @@ public sealed partial class TokenCountPropertyDescriptor : SerializableDescripto
 	}
 
 	TokenCountProperty IBuildableDescriptor<TokenCountProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }
