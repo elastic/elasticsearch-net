@@ -231,11 +231,11 @@ public sealed partial class FunctionScoreContainerDescriptor<TDocument> : Serial
 		return Self;
 	}
 
-	public FunctionScoreContainerDescriptor<TDocument> FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
+	public FunctionScoreContainerDescriptor<TDocument> FieldValueFactor(FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => Set(fieldValueFactorScoreFunction, "field_value_factor");
 	public FunctionScoreContainerDescriptor<TDocument> FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
-	public FunctionScoreContainerDescriptor<TDocument> RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
+	public FunctionScoreContainerDescriptor<TDocument> RandomScore(RandomScoreFunction randomScoreFunction) => Set(randomScoreFunction, "random_score");
 	public FunctionScoreContainerDescriptor<TDocument> RandomScore(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
-	public FunctionScoreContainerDescriptor<TDocument> ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
+	public FunctionScoreContainerDescriptor<TDocument> ScriptScore(ScriptScoreFunction scriptScoreFunction) => Set(scriptScoreFunction, "script_score");
 	public FunctionScoreContainerDescriptor<TDocument> ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -354,13 +354,13 @@ public sealed partial class FunctionScoreContainerDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public FunctionScoreContainerDescriptor FieldValueFactor(FieldValueFactorScoreFunction variant) => Set(variant, "field_value_factor");
+	public FunctionScoreContainerDescriptor FieldValueFactor(FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => Set(fieldValueFactorScoreFunction, "field_value_factor");
 	public FunctionScoreContainerDescriptor FieldValueFactor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => Set(configure, "field_value_factor");
 	public FunctionScoreContainerDescriptor FieldValueFactor<TDocument>(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
-	public FunctionScoreContainerDescriptor RandomScore(RandomScoreFunction variant) => Set(variant, "random_score");
+	public FunctionScoreContainerDescriptor RandomScore(RandomScoreFunction randomScoreFunction) => Set(randomScoreFunction, "random_score");
 	public FunctionScoreContainerDescriptor RandomScore(Action<RandomScoreFunctionDescriptor> configure) => Set(configure, "random_score");
 	public FunctionScoreContainerDescriptor RandomScore<TDocument>(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
-	public FunctionScoreContainerDescriptor ScriptScore(ScriptScoreFunction variant) => Set(variant, "script_score");
+	public FunctionScoreContainerDescriptor ScriptScore(ScriptScoreFunction scriptScoreFunction) => Set(scriptScoreFunction, "script_score");
 	public FunctionScoreContainerDescriptor ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

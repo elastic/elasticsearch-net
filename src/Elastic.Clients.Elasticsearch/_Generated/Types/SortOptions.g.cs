@@ -97,11 +97,11 @@ public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public SortOptionsDescriptor<TDocument> Doc(ScoreSort variant) => Set(variant, "_doc");
+	public SortOptionsDescriptor<TDocument> Doc(ScoreSort scoreSort) => Set(scoreSort, "_doc");
 	public SortOptionsDescriptor<TDocument> Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
-	public SortOptionsDescriptor<TDocument> Score(ScoreSort variant) => Set(variant, "_score");
+	public SortOptionsDescriptor<TDocument> Score(ScoreSort scoreSort) => Set(scoreSort, "_score");
 	public SortOptionsDescriptor<TDocument> Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
-	public SortOptionsDescriptor<TDocument> Script(ScriptSort variant) => Set(variant, "_script");
+	public SortOptionsDescriptor<TDocument> Script(ScriptSort scriptSort) => Set(scriptSort, "_script");
 	public SortOptionsDescriptor<TDocument> Script(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -160,11 +160,11 @@ public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortO
 		return Self;
 	}
 
-	public SortOptionsDescriptor Doc(ScoreSort variant) => Set(variant, "_doc");
+	public SortOptionsDescriptor Doc(ScoreSort scoreSort) => Set(scoreSort, "_doc");
 	public SortOptionsDescriptor Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
-	public SortOptionsDescriptor Score(ScoreSort variant) => Set(variant, "_score");
+	public SortOptionsDescriptor Score(ScoreSort scoreSort) => Set(scoreSort, "_score");
 	public SortOptionsDescriptor Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
-	public SortOptionsDescriptor Script(ScriptSort variant) => Set(variant, "_script");
+	public SortOptionsDescriptor Script(ScriptSort scriptSort) => Set(scriptSort, "_script");
 	public SortOptionsDescriptor Script(Action<ScriptSortDescriptor> configure) => Set(configure, "_script");
 	public SortOptionsDescriptor Script<TDocument>(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
