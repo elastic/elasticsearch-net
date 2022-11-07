@@ -60,10 +60,6 @@ public sealed partial class ShapeProperty : IProperty
 	public bool? IgnoreZValue { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -110,8 +106,6 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 	private bool? IgnoreMalformedValue { get; set; }
 
 	private bool? IgnoreZValueValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -182,12 +176,6 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 	public ShapePropertyDescriptor<TDocument> IgnoreZValue(bool? ignoreZValue = true)
 	{
 		IgnoreZValueValue = ignoreZValue;
-		return Self;
-	}
-
-	public ShapePropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -286,12 +274,6 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 			writer.WriteBooleanValue(IgnoreZValueValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -328,7 +310,7 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 	}
 
 	ShapeProperty IBuildableDescriptor<ShapeProperty>.Build() => new()
-	{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }
 
 public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<ShapePropertyDescriptor>, IBuildableDescriptor<ShapeProperty>
@@ -353,8 +335,6 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 	private bool? IgnoreMalformedValue { get; set; }
 
 	private bool? IgnoreZValueValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -425,12 +405,6 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 	public ShapePropertyDescriptor IgnoreZValue(bool? ignoreZValue = true)
 	{
 		IgnoreZValueValue = ignoreZValue;
-		return Self;
-	}
-
-	public ShapePropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -529,12 +503,6 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 			writer.WriteBooleanValue(IgnoreZValueValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -571,5 +539,5 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 	}
 
 	ShapeProperty IBuildableDescriptor<ShapeProperty>.Build() => new()
-	{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }

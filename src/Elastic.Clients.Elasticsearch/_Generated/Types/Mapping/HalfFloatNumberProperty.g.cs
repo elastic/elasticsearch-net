@@ -64,10 +64,6 @@ public sealed partial class HalfFloatNumberProperty : IProperty
 	public bool? Index { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -132,8 +128,6 @@ public sealed partial class HalfFloatNumberPropertyDescriptor<TDocument> : Seria
 	private bool? IgnoreMalformedValue { get; set; }
 
 	private bool? IndexValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -218,12 +212,6 @@ public sealed partial class HalfFloatNumberPropertyDescriptor<TDocument> : Seria
 	public HalfFloatNumberPropertyDescriptor<TDocument> Index(bool? index = true)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	public HalfFloatNumberPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -352,12 +340,6 @@ public sealed partial class HalfFloatNumberPropertyDescriptor<TDocument> : Seria
 			writer.WriteBooleanValue(IndexValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -418,7 +400,7 @@ public sealed partial class HalfFloatNumberPropertyDescriptor<TDocument> : Seria
 	}
 
 	HalfFloatNumberProperty IBuildableDescriptor<HalfFloatNumberProperty>.Build() => new()
-	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
 }
 
 public sealed partial class HalfFloatNumberPropertyDescriptor : SerializableDescriptor<HalfFloatNumberPropertyDescriptor>, IBuildableDescriptor<HalfFloatNumberProperty>
@@ -445,8 +427,6 @@ public sealed partial class HalfFloatNumberPropertyDescriptor : SerializableDesc
 	private bool? IgnoreMalformedValue { get; set; }
 
 	private bool? IndexValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -531,12 +511,6 @@ public sealed partial class HalfFloatNumberPropertyDescriptor : SerializableDesc
 	public HalfFloatNumberPropertyDescriptor Index(bool? index = true)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	public HalfFloatNumberPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -665,12 +639,6 @@ public sealed partial class HalfFloatNumberPropertyDescriptor : SerializableDesc
 			writer.WriteBooleanValue(IndexValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -731,5 +699,5 @@ public sealed partial class HalfFloatNumberPropertyDescriptor : SerializableDesc
 	}
 
 	HalfFloatNumberProperty IBuildableDescriptor<HalfFloatNumberProperty>.Build() => new()
-	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
 }
