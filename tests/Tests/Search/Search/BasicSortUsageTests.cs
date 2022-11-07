@@ -28,3 +28,23 @@ public class BasicSortUsageTests : SearchUsageTestBase
 			Sort = new [] { SortOptions.Field("startedOn") }
 		};
 }
+
+public class BasicScoreSortUsageTests : SearchUsageTestBase
+{
+	public BasicScoreSortUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+	protected override object ExpectJson =>
+		new
+		{
+			sort = new { _score = new { order = "desc" }}
+		};
+
+	protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
+		.Sort(s => s.Score(sc => sc.Order(SortOrder.Desc)));
+
+	protected override SearchRequest<Project> Initializer =>
+		new()
+		{
+			Sort = new[] { SortOptions.Score(new() { Order = SortOrder.Desc }) }
+		};
+}
