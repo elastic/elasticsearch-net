@@ -56,10 +56,6 @@ public sealed partial class PointProperty : IProperty
 	public bool? IgnoreZValue { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -104,8 +100,6 @@ public sealed partial class PointPropertyDescriptor<TDocument> : SerializableDes
 	private bool? IgnoreMalformedValue { get; set; }
 
 	private bool? IgnoreZValueValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -170,12 +164,6 @@ public sealed partial class PointPropertyDescriptor<TDocument> : SerializableDes
 	public PointPropertyDescriptor<TDocument> IgnoreZValue(bool? ignoreZValue = true)
 	{
 		IgnoreZValueValue = ignoreZValue;
-		return Self;
-	}
-
-	public PointPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -268,12 +256,6 @@ public sealed partial class PointPropertyDescriptor<TDocument> : SerializableDes
 			writer.WriteBooleanValue(IgnoreZValueValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -310,7 +292,7 @@ public sealed partial class PointPropertyDescriptor<TDocument> : SerializableDes
 	}
 
 	PointProperty IBuildableDescriptor<PointProperty>.Build() => new()
-	{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }
 
 public sealed partial class PointPropertyDescriptor : SerializableDescriptor<PointPropertyDescriptor>, IBuildableDescriptor<PointProperty>
@@ -333,8 +315,6 @@ public sealed partial class PointPropertyDescriptor : SerializableDescriptor<Poi
 	private bool? IgnoreMalformedValue { get; set; }
 
 	private bool? IgnoreZValueValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -399,12 +379,6 @@ public sealed partial class PointPropertyDescriptor : SerializableDescriptor<Poi
 	public PointPropertyDescriptor IgnoreZValue(bool? ignoreZValue = true)
 	{
 		IgnoreZValueValue = ignoreZValue;
-		return Self;
-	}
-
-	public PointPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -497,12 +471,6 @@ public sealed partial class PointPropertyDescriptor : SerializableDescriptor<Poi
 			writer.WriteBooleanValue(IgnoreZValueValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -539,5 +507,5 @@ public sealed partial class PointPropertyDescriptor : SerializableDescriptor<Poi
 	}
 
 	PointProperty IBuildableDescriptor<PointProperty>.Build() => new()
-	{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }

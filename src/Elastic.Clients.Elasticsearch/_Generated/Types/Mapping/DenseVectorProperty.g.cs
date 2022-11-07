@@ -52,10 +52,6 @@ public sealed partial class DenseVectorProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? IndexOptions { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -94,8 +90,6 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	private DenseVectorIndexOptionsDescriptor IndexOptionsDescriptor { get; set; }
 
 	private Action<DenseVectorIndexOptionsDescriptor> IndexOptionsDescriptorAction { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -168,12 +162,6 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 		IndexOptionsValue = null;
 		IndexOptionsDescriptor = null;
 		IndexOptionsDescriptorAction = configure;
-		return Self;
-	}
-
-	public DenseVectorPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -254,12 +242,6 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -308,7 +290,7 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	}
 
 	DenseVectorProperty IBuildableDescriptor<DenseVectorProperty>.Build() => new()
-	{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = BuildIndexOptions(), LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
+	{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = BuildIndexOptions(), Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
 }
 
 public sealed partial class DenseVectorPropertyDescriptor : SerializableDescriptor<DenseVectorPropertyDescriptor>, IBuildableDescriptor<DenseVectorProperty>
@@ -333,8 +315,6 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	private DenseVectorIndexOptionsDescriptor IndexOptionsDescriptor { get; set; }
 
 	private Action<DenseVectorIndexOptionsDescriptor> IndexOptionsDescriptorAction { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -407,12 +387,6 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 		IndexOptionsValue = null;
 		IndexOptionsDescriptor = null;
 		IndexOptionsDescriptorAction = configure;
-		return Self;
-	}
-
-	public DenseVectorPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -493,12 +467,6 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -547,5 +515,5 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	}
 
 	DenseVectorProperty IBuildableDescriptor<DenseVectorProperty>.Build() => new()
-	{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = BuildIndexOptions(), LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
+	{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = BuildIndexOptions(), Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
 }
