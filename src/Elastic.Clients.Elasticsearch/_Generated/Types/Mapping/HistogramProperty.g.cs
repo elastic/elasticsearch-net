@@ -44,10 +44,6 @@ public sealed partial class HistogramProperty : IProperty
 	public bool? IgnoreMalformed { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -74,8 +70,6 @@ public sealed partial class HistogramPropertyDescriptor<TDocument> : Serializabl
 	private int? IgnoreAboveValue { get; set; }
 
 	private bool? IgnoreMalformedValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -116,12 +110,6 @@ public sealed partial class HistogramPropertyDescriptor<TDocument> : Serializabl
 	public HistogramPropertyDescriptor<TDocument> IgnoreMalformed(bool? ignoreMalformed = true)
 	{
 		IgnoreMalformedValue = ignoreMalformed;
-		return Self;
-	}
-
-	public HistogramPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -178,12 +166,6 @@ public sealed partial class HistogramPropertyDescriptor<TDocument> : Serializabl
 			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -202,7 +184,7 @@ public sealed partial class HistogramPropertyDescriptor<TDocument> : Serializabl
 	}
 
 	HistogramProperty IBuildableDescriptor<HistogramProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Meta = MetaValue, Properties = PropertiesValue };
 }
 
 public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor<HistogramPropertyDescriptor>, IBuildableDescriptor<HistogramProperty>
@@ -219,8 +201,6 @@ public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor
 	private int? IgnoreAboveValue { get; set; }
 
 	private bool? IgnoreMalformedValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -261,12 +241,6 @@ public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor
 	public HistogramPropertyDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
 	{
 		IgnoreMalformedValue = ignoreMalformed;
-		return Self;
-	}
-
-	public HistogramPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -323,12 +297,6 @@ public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor
 			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -347,5 +315,5 @@ public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor
 	}
 
 	HistogramProperty IBuildableDescriptor<HistogramProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Meta = MetaValue, Properties = PropertiesValue };
 }

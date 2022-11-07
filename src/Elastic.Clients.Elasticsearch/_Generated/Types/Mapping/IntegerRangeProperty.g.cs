@@ -60,10 +60,6 @@ public sealed partial class IntegerRangeProperty : IProperty
 	public bool? Index { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -106,8 +102,6 @@ public sealed partial class IntegerRangePropertyDescriptor<TDocument> : Serializ
 	private int? IgnoreAboveValue { get; set; }
 
 	private bool? IndexValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -176,12 +170,6 @@ public sealed partial class IntegerRangePropertyDescriptor<TDocument> : Serializ
 	public IntegerRangePropertyDescriptor<TDocument> Index(bool? index = true)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	public IntegerRangePropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -274,12 +262,6 @@ public sealed partial class IntegerRangePropertyDescriptor<TDocument> : Serializ
 			writer.WriteBooleanValue(IndexValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -310,7 +292,7 @@ public sealed partial class IntegerRangePropertyDescriptor<TDocument> : Serializ
 	}
 
 	IntegerRangeProperty IBuildableDescriptor<IntegerRangeProperty>.Build() => new()
-	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }
 
 public sealed partial class IntegerRangePropertyDescriptor : SerializableDescriptor<IntegerRangePropertyDescriptor>, IBuildableDescriptor<IntegerRangeProperty>
@@ -335,8 +317,6 @@ public sealed partial class IntegerRangePropertyDescriptor : SerializableDescrip
 	private int? IgnoreAboveValue { get; set; }
 
 	private bool? IndexValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -405,12 +385,6 @@ public sealed partial class IntegerRangePropertyDescriptor : SerializableDescrip
 	public IntegerRangePropertyDescriptor Index(bool? index = true)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	public IntegerRangePropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -503,12 +477,6 @@ public sealed partial class IntegerRangePropertyDescriptor : SerializableDescrip
 			writer.WriteBooleanValue(IndexValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -539,5 +507,5 @@ public sealed partial class IntegerRangePropertyDescriptor : SerializableDescrip
 	}
 
 	IntegerRangeProperty IBuildableDescriptor<IntegerRangeProperty>.Build() => new()
-	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }

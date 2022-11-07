@@ -44,10 +44,6 @@ public sealed partial class JoinProperty : IProperty
 	public int? IgnoreAbove { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -78,8 +74,6 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -122,12 +116,6 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 	public JoinPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public JoinPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -190,12 +178,6 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -220,7 +202,7 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 	}
 
 	JoinProperty IBuildableDescriptor<JoinProperty>.Build() => new()
-	{ Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
+	{ Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
 }
 
 public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<JoinPropertyDescriptor>, IBuildableDescriptor<JoinProperty>
@@ -237,8 +219,6 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -281,12 +261,6 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 	public JoinPropertyDescriptor IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public JoinPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -349,12 +323,6 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -379,5 +347,5 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 	}
 
 	JoinProperty IBuildableDescriptor<JoinProperty>.Build() => new()
-	{ Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
+	{ Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
 }
