@@ -60,10 +60,6 @@ public sealed partial class IpProperty : IProperty
 	public bool? Index { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -122,8 +118,6 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 	private bool? IgnoreMalformedValue { get; set; }
 
 	private bool? IndexValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -200,12 +194,6 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 	public IpPropertyDescriptor<TDocument> Index(bool? index = true)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	public IpPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -322,12 +310,6 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 			writer.WriteBooleanValue(IndexValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -382,7 +364,7 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 	}
 
 	IpProperty IBuildableDescriptor<IpProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
+	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
 }
 
 public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpPropertyDescriptor>, IBuildableDescriptor<IpProperty>
@@ -407,8 +389,6 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 	private bool? IgnoreMalformedValue { get; set; }
 
 	private bool? IndexValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -485,12 +465,6 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 	public IpPropertyDescriptor Index(bool? index = true)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	public IpPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -607,12 +581,6 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 			writer.WriteBooleanValue(IndexValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -667,5 +635,5 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 	}
 
 	IpProperty IBuildableDescriptor<IpProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
+	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
 }

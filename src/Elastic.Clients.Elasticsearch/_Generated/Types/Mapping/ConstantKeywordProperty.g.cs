@@ -40,10 +40,6 @@ public sealed partial class ConstantKeywordProperty : IProperty
 	public int? IgnoreAbove { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -71,8 +67,6 @@ public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : Seria
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -109,12 +103,6 @@ public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : Seria
 	public ConstantKeywordPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public ConstantKeywordPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -171,12 +159,6 @@ public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : Seria
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -195,7 +177,7 @@ public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : Seria
 	}
 
 	ConstantKeywordProperty IBuildableDescriptor<ConstantKeywordProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Value = ValueValue };
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Value = ValueValue };
 }
 
 public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDescriptor<ConstantKeywordPropertyDescriptor>, IBuildableDescriptor<ConstantKeywordProperty>
@@ -210,8 +192,6 @@ public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDesc
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -248,12 +228,6 @@ public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDesc
 	public ConstantKeywordPropertyDescriptor IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public ConstantKeywordPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -310,12 +284,6 @@ public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDesc
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -334,5 +302,5 @@ public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDesc
 	}
 
 	ConstantKeywordProperty IBuildableDescriptor<ConstantKeywordProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Value = ValueValue };
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Value = ValueValue };
 }

@@ -40,10 +40,6 @@ public sealed partial class FieldAliasProperty : IProperty
 	public int? IgnoreAbove { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -72,8 +68,6 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -110,12 +104,6 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 	public FieldAliasPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public FieldAliasPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -178,12 +166,6 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -208,7 +190,7 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 	}
 
 	FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
 }
 
 public sealed partial class FieldAliasPropertyDescriptor : SerializableDescriptor<FieldAliasPropertyDescriptor>, IBuildableDescriptor<FieldAliasProperty>
@@ -223,8 +205,6 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -261,12 +241,6 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 	public FieldAliasPropertyDescriptor IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public FieldAliasPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -335,12 +309,6 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -365,5 +333,5 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 	}
 
 	FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
 }
