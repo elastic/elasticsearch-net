@@ -56,10 +56,6 @@ public sealed partial class SearchAsYouTypeProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("max_shingle_size")]
 	public int? MaxShingleSize { get; set; }
 
@@ -120,8 +116,6 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 	private bool? IndexValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private int? MaxShingleSizeValue { get; set; }
 
@@ -194,12 +188,6 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 	public SearchAsYouTypePropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
 	{
 		IndexOptionsValue = indexOptions;
-		return Self;
-	}
-
-	public SearchAsYouTypePropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -316,12 +304,6 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MaxShingleSizeValue.HasValue)
 		{
 			writer.WritePropertyName("max_shingle_size");
@@ -382,7 +364,7 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 	}
 
 	SearchAsYouTypeProperty IBuildableDescriptor<SearchAsYouTypeProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, CopyTo = CopyToValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, MaxShingleSize = MaxShingleSizeValue, Meta = MetaValue, Norms = NormsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
+	{ Analyzer = AnalyzerValue, CopyTo = CopyToValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, MaxShingleSize = MaxShingleSizeValue, Meta = MetaValue, Norms = NormsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
 }
 
 public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDescriptor<SearchAsYouTypePropertyDescriptor>, IBuildableDescriptor<SearchAsYouTypeProperty>
@@ -405,8 +387,6 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 	private bool? IndexValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private int? MaxShingleSizeValue { get; set; }
 
@@ -479,12 +459,6 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 	public SearchAsYouTypePropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
 	{
 		IndexOptionsValue = indexOptions;
-		return Self;
-	}
-
-	public SearchAsYouTypePropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -601,12 +575,6 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MaxShingleSizeValue.HasValue)
 		{
 			writer.WritePropertyName("max_shingle_size");
@@ -667,5 +635,5 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 	}
 
 	SearchAsYouTypeProperty IBuildableDescriptor<SearchAsYouTypeProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, CopyTo = CopyToValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, MaxShingleSize = MaxShingleSizeValue, Meta = MetaValue, Norms = NormsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
+	{ Analyzer = AnalyzerValue, CopyTo = CopyToValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, MaxShingleSize = MaxShingleSizeValue, Meta = MetaValue, Norms = NormsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
 }

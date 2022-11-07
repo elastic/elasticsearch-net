@@ -40,10 +40,6 @@ public sealed partial class PercolatorProperty : IProperty
 	public int? IgnoreAbove { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -68,8 +64,6 @@ public sealed partial class PercolatorPropertyDescriptor<TDocument> : Serializab
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -104,12 +98,6 @@ public sealed partial class PercolatorPropertyDescriptor<TDocument> : Serializab
 	public PercolatorPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public PercolatorPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -160,12 +148,6 @@ public sealed partial class PercolatorPropertyDescriptor<TDocument> : Serializab
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -184,7 +166,7 @@ public sealed partial class PercolatorPropertyDescriptor<TDocument> : Serializab
 	}
 
 	PercolatorProperty IBuildableDescriptor<PercolatorProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue };
 }
 
 public sealed partial class PercolatorPropertyDescriptor : SerializableDescriptor<PercolatorPropertyDescriptor>, IBuildableDescriptor<PercolatorProperty>
@@ -199,8 +181,6 @@ public sealed partial class PercolatorPropertyDescriptor : SerializableDescripto
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -235,12 +215,6 @@ public sealed partial class PercolatorPropertyDescriptor : SerializableDescripto
 	public PercolatorPropertyDescriptor IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public PercolatorPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -291,12 +265,6 @@ public sealed partial class PercolatorPropertyDescriptor : SerializableDescripto
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -315,5 +283,5 @@ public sealed partial class PercolatorPropertyDescriptor : SerializableDescripto
 	}
 
 	PercolatorProperty IBuildableDescriptor<PercolatorProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue };
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue };
 }

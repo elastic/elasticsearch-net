@@ -56,10 +56,6 @@ public sealed partial class NestedProperty : IProperty
 	public bool? IncludeInRoot { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -100,8 +96,6 @@ public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDe
 	private bool? IncludeInParentValue { get; set; }
 
 	private bool? IncludeInRootValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -164,12 +158,6 @@ public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDe
 	public NestedPropertyDescriptor<TDocument> IncludeInRoot(bool? includeInRoot = true)
 	{
 		IncludeInRootValue = includeInRoot;
-		return Self;
-	}
-
-	public NestedPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -256,12 +244,6 @@ public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDe
 			writer.WriteBooleanValue(IncludeInRootValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -292,7 +274,7 @@ public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDe
 	}
 
 	NestedProperty IBuildableDescriptor<NestedProperty>.Build() => new()
-	{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IncludeInParent = IncludeInParentValue, IncludeInRoot = IncludeInRootValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IncludeInParent = IncludeInParentValue, IncludeInRoot = IncludeInRootValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }
 
 public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<NestedPropertyDescriptor>, IBuildableDescriptor<NestedProperty>
@@ -315,8 +297,6 @@ public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<Ne
 	private bool? IncludeInParentValue { get; set; }
 
 	private bool? IncludeInRootValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -379,12 +359,6 @@ public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<Ne
 	public NestedPropertyDescriptor IncludeInRoot(bool? includeInRoot = true)
 	{
 		IncludeInRootValue = includeInRoot;
-		return Self;
-	}
-
-	public NestedPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -471,12 +445,6 @@ public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<Ne
 			writer.WriteBooleanValue(IncludeInRootValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -507,5 +475,5 @@ public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<Ne
 	}
 
 	NestedProperty IBuildableDescriptor<NestedProperty>.Build() => new()
-	{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IncludeInParent = IncludeInParentValue, IncludeInRoot = IncludeInRootValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IncludeInParent = IncludeInParentValue, IncludeInRoot = IncludeInRootValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
 }
