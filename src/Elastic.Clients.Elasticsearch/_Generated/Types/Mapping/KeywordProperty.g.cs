@@ -64,10 +64,6 @@ public sealed partial class KeywordProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -132,8 +128,6 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 	private bool? IndexValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -218,12 +212,6 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 	public KeywordPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
 	{
 		IndexOptionsValue = indexOptions;
-		return Self;
-	}
-
-	public KeywordPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -352,12 +340,6 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -418,7 +400,7 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 	}
 
 	KeywordProperty IBuildableDescriptor<KeywordProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Normalizer = NormalizerValue, Norms = NormsValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
+	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, Meta = MetaValue, Normalizer = NormalizerValue, Norms = NormsValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
 }
 
 public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<KeywordPropertyDescriptor>, IBuildableDescriptor<KeywordProperty>
@@ -445,8 +427,6 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 	private bool? IndexValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -531,12 +511,6 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 	public KeywordPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
 	{
 		IndexOptionsValue = indexOptions;
-		return Self;
-	}
-
-	public KeywordPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -665,12 +639,6 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -731,5 +699,5 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 	}
 
 	KeywordProperty IBuildableDescriptor<KeywordProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, Normalizer = NormalizerValue, Norms = NormsValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
+	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, Meta = MetaValue, Normalizer = NormalizerValue, Norms = NormsValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
 }

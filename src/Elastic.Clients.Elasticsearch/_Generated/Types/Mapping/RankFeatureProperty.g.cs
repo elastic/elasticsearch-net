@@ -40,10 +40,6 @@ public sealed partial class RankFeatureProperty : IProperty
 	public int? IgnoreAbove { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -72,8 +68,6 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -110,12 +104,6 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 	public RankFeaturePropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public RankFeaturePropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -172,12 +160,6 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -202,7 +184,7 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 	}
 
 	RankFeatureProperty IBuildableDescriptor<RankFeatureProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, PositiveScoreImpact = PositiveScoreImpactValue, Properties = PropertiesValue };
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, PositiveScoreImpact = PositiveScoreImpactValue, Properties = PropertiesValue };
 }
 
 public sealed partial class RankFeaturePropertyDescriptor : SerializableDescriptor<RankFeaturePropertyDescriptor>, IBuildableDescriptor<RankFeatureProperty>
@@ -217,8 +199,6 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
 	private int? IgnoreAboveValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -255,12 +235,6 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 	public RankFeaturePropertyDescriptor IgnoreAbove(int? ignoreAbove)
 	{
 		IgnoreAboveValue = ignoreAbove;
-		return Self;
-	}
-
-	public RankFeaturePropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -317,12 +291,6 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -347,5 +315,5 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 	}
 
 	RankFeatureProperty IBuildableDescriptor<RankFeatureProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, PositiveScoreImpact = PositiveScoreImpactValue, Properties = PropertiesValue };
+	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, PositiveScoreImpact = PositiveScoreImpactValue, Properties = PropertiesValue };
 }

@@ -64,10 +64,6 @@ public sealed partial class FlattenedProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
 	[JsonInclude]
-	[JsonPropertyName("local_metadata")]
-	public Dictionary<string, object>? LocalMetadata { get; set; }
-
-	[JsonInclude]
 	[JsonPropertyName("meta")]
 	public Dictionary<string, string>? Meta { get; set; }
 
@@ -116,8 +112,6 @@ public sealed partial class FlattenedPropertyDescriptor<TDocument> : Serializabl
 	private bool? IndexValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -194,12 +188,6 @@ public sealed partial class FlattenedPropertyDescriptor<TDocument> : Serializabl
 	public FlattenedPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
 	{
 		IndexOptionsValue = indexOptions;
-		return Self;
-	}
-
-	public FlattenedPropertyDescriptor<TDocument> LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -304,12 +292,6 @@ public sealed partial class FlattenedPropertyDescriptor<TDocument> : Serializabl
 			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -346,7 +328,7 @@ public sealed partial class FlattenedPropertyDescriptor<TDocument> : Serializabl
 	}
 
 	FlattenedProperty IBuildableDescriptor<FlattenedProperty>.Build() => new()
-	{ Boost = BoostValue, DepthLimit = DepthLimitValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue };
+	{ Boost = BoostValue, DepthLimit = DepthLimitValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue };
 }
 
 public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor<FlattenedPropertyDescriptor>, IBuildableDescriptor<FlattenedProperty>
@@ -373,8 +355,6 @@ public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor
 	private bool? IndexValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
-	private Dictionary<string, object>? LocalMetadataValue { get; set; }
 
 	private Dictionary<string, string>? MetaValue { get; set; }
 
@@ -451,12 +431,6 @@ public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor
 	public FlattenedPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
 	{
 		IndexOptionsValue = indexOptions;
-		return Self;
-	}
-
-	public FlattenedPropertyDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		LocalMetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -561,12 +535,6 @@ public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor
 			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
 		}
 
-		if (LocalMetadataValue is not null)
-		{
-			writer.WritePropertyName("local_metadata");
-			JsonSerializer.Serialize(writer, LocalMetadataValue, options);
-		}
-
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -603,5 +571,5 @@ public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor
 	}
 
 	FlattenedProperty IBuildableDescriptor<FlattenedProperty>.Build() => new()
-	{ Boost = BoostValue, DepthLimit = DepthLimitValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, LocalMetadata = LocalMetadataValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue };
+	{ Boost = BoostValue, DepthLimit = DepthLimitValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue };
 }
