@@ -134,9 +134,9 @@ public sealed partial class InferenceConfigContainerDescriptor<TDocument> : Seri
 		return Self;
 	}
 
-	public InferenceConfigContainerDescriptor<TDocument> Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
+	public InferenceConfigContainerDescriptor<TDocument> Classification(Ml.ClassificationInferenceOptions classificationInferenceOptions) => Set(classificationInferenceOptions, "classification");
 	public InferenceConfigContainerDescriptor<TDocument> Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-	public InferenceConfigContainerDescriptor<TDocument> Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
+	public InferenceConfigContainerDescriptor<TDocument> Regression(Ml.RegressionInferenceOptions regressionInferenceOptions) => Set(regressionInferenceOptions, "regression");
 	public InferenceConfigContainerDescriptor<TDocument> Regression(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -151,12 +151,11 @@ public sealed partial class InferenceConfigContainerDescriptor<TDocument> : Seri
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -195,9 +194,9 @@ public sealed partial class InferenceConfigContainerDescriptor : SerializableDes
 		return Self;
 	}
 
-	public InferenceConfigContainerDescriptor Classification(Ml.ClassificationInferenceOptions variant) => Set(variant, "classification");
+	public InferenceConfigContainerDescriptor Classification(Ml.ClassificationInferenceOptions classificationInferenceOptions) => Set(classificationInferenceOptions, "classification");
 	public InferenceConfigContainerDescriptor Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-	public InferenceConfigContainerDescriptor Regression(Ml.RegressionInferenceOptions variant) => Set(variant, "regression");
+	public InferenceConfigContainerDescriptor Regression(Ml.RegressionInferenceOptions regressionInferenceOptions) => Set(regressionInferenceOptions, "regression");
 	public InferenceConfigContainerDescriptor Regression(Action<Ml.RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
 	public InferenceConfigContainerDescriptor Regression<TDocument>(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -213,12 +212,11 @@ public sealed partial class InferenceConfigContainerDescriptor : SerializableDes
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
