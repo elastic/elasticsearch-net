@@ -291,17 +291,17 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public IntervalsQueryDescriptor<TDocument> AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
+	public IntervalsQueryDescriptor<TDocument> AllOf(IntervalsAllOf intervalsAllOf) => Set(intervalsAllOf, "all_of");
 	public IntervalsQueryDescriptor<TDocument> AllOf(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
-	public IntervalsQueryDescriptor<TDocument> AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
+	public IntervalsQueryDescriptor<TDocument> AnyOf(IntervalsAnyOf intervalsAnyOf) => Set(intervalsAnyOf, "any_of");
 	public IntervalsQueryDescriptor<TDocument> AnyOf(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
-	public IntervalsQueryDescriptor<TDocument> Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
+	public IntervalsQueryDescriptor<TDocument> Fuzzy(IntervalsFuzzy intervalsFuzzy) => Set(intervalsFuzzy, "fuzzy");
 	public IntervalsQueryDescriptor<TDocument> Fuzzy(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
-	public IntervalsQueryDescriptor<TDocument> Match(IntervalsMatch variant) => Set(variant, "match");
+	public IntervalsQueryDescriptor<TDocument> Match(IntervalsMatch intervalsMatch) => Set(intervalsMatch, "match");
 	public IntervalsQueryDescriptor<TDocument> Match(Action<IntervalsMatchDescriptor<TDocument>> configure) => Set(configure, "match");
-	public IntervalsQueryDescriptor<TDocument> Prefix(IntervalsPrefix variant) => Set(variant, "prefix");
+	public IntervalsQueryDescriptor<TDocument> Prefix(IntervalsPrefix intervalsPrefix) => Set(intervalsPrefix, "prefix");
 	public IntervalsQueryDescriptor<TDocument> Prefix(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
-	public IntervalsQueryDescriptor<TDocument> Wildcard(IntervalsWildcard variant) => Set(variant, "wildcard");
+	public IntervalsQueryDescriptor<TDocument> Wildcard(IntervalsWildcard intervalsWildcard) => Set(intervalsWildcard, "wildcard");
 	public IntervalsQueryDescriptor<TDocument> Wildcard(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -330,12 +330,12 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -418,22 +418,22 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 		return Self;
 	}
 
-	public IntervalsQueryDescriptor AllOf(IntervalsAllOf variant) => Set(variant, "all_of");
+	public IntervalsQueryDescriptor AllOf(IntervalsAllOf intervalsAllOf) => Set(intervalsAllOf, "all_of");
 	public IntervalsQueryDescriptor AllOf(Action<IntervalsAllOfDescriptor> configure) => Set(configure, "all_of");
 	public IntervalsQueryDescriptor AllOf<TDocument>(Action<IntervalsAllOfDescriptor<TDocument>> configure) => Set(configure, "all_of");
-	public IntervalsQueryDescriptor AnyOf(IntervalsAnyOf variant) => Set(variant, "any_of");
+	public IntervalsQueryDescriptor AnyOf(IntervalsAnyOf intervalsAnyOf) => Set(intervalsAnyOf, "any_of");
 	public IntervalsQueryDescriptor AnyOf(Action<IntervalsAnyOfDescriptor> configure) => Set(configure, "any_of");
 	public IntervalsQueryDescriptor AnyOf<TDocument>(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => Set(configure, "any_of");
-	public IntervalsQueryDescriptor Fuzzy(IntervalsFuzzy variant) => Set(variant, "fuzzy");
+	public IntervalsQueryDescriptor Fuzzy(IntervalsFuzzy intervalsFuzzy) => Set(intervalsFuzzy, "fuzzy");
 	public IntervalsQueryDescriptor Fuzzy(Action<IntervalsFuzzyDescriptor> configure) => Set(configure, "fuzzy");
 	public IntervalsQueryDescriptor Fuzzy<TDocument>(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
-	public IntervalsQueryDescriptor Match(IntervalsMatch variant) => Set(variant, "match");
+	public IntervalsQueryDescriptor Match(IntervalsMatch intervalsMatch) => Set(intervalsMatch, "match");
 	public IntervalsQueryDescriptor Match(Action<IntervalsMatchDescriptor> configure) => Set(configure, "match");
 	public IntervalsQueryDescriptor Match<TDocument>(Action<IntervalsMatchDescriptor<TDocument>> configure) => Set(configure, "match");
-	public IntervalsQueryDescriptor Prefix(IntervalsPrefix variant) => Set(variant, "prefix");
+	public IntervalsQueryDescriptor Prefix(IntervalsPrefix intervalsPrefix) => Set(intervalsPrefix, "prefix");
 	public IntervalsQueryDescriptor Prefix(Action<IntervalsPrefixDescriptor> configure) => Set(configure, "prefix");
 	public IntervalsQueryDescriptor Prefix<TDocument>(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
-	public IntervalsQueryDescriptor Wildcard(IntervalsWildcard variant) => Set(variant, "wildcard");
+	public IntervalsQueryDescriptor Wildcard(IntervalsWildcard intervalsWildcard) => Set(intervalsWildcard, "wildcard");
 	public IntervalsQueryDescriptor Wildcard(Action<IntervalsWildcardDescriptor> configure) => Set(configure, "wildcard");
 	public IntervalsQueryDescriptor Wildcard<TDocument>(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -463,12 +463,12 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
