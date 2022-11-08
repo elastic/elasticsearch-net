@@ -34,8 +34,8 @@ public sealed class ScriptContextRequestParameters : RequestParameters<ScriptCon
 public sealed partial class ScriptContextRequest : PlainRequest<ScriptContextRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptContext;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 }
 
 public sealed partial class ScriptContextRequestDescriptor : RequestDescriptor<ScriptContextRequestDescriptor, ScriptContextRequestParameters>
@@ -46,8 +46,8 @@ public sealed partial class ScriptContextRequestDescriptor : RequestDescriptor<S
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptContext;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 	}

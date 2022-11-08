@@ -46,8 +46,8 @@ public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateR
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
@@ -70,8 +70,8 @@ public sealed partial class ExistsTemplateRequestDescriptor : RequestDescriptor<
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	internal override bool SupportsBody => false;
 	public ExistsTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public ExistsTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
 	public ExistsTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

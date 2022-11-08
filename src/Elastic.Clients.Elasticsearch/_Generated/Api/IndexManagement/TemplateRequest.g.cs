@@ -50,8 +50,8 @@ public sealed partial class TemplateRequest : PlainRequest<TemplateRequestParame
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
@@ -70,8 +70,8 @@ public sealed partial class TemplateRequestDescriptor : RequestDescriptor<Templa
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public TemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public TemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
 	public TemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

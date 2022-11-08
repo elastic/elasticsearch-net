@@ -383,7 +383,7 @@ public abstract class
 
 	bool ITransportClientConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
 
-	public override TConnectionConfiguration EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null) =>
+	public override TConnectionConfiguration EnableDebugMode(Action<ApiCallDetails> onRequestCompleted = null) =>
 		base.EnableDebugMode(onRequestCompleted)
 			.PrettyJson()
 			.IncludeServerStackTraceOnError();

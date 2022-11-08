@@ -40,8 +40,8 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
@@ -86,8 +86,8 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	public PutIndexTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
 	public PutIndexTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
 	{
@@ -276,8 +276,8 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	public PutIndexTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public PutIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{

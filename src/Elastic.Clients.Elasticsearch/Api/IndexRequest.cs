@@ -22,14 +22,14 @@ public partial class IndexRequest<TDocument> : ICustomJsonWriter
 
 	public IndexRequest(TDocument document, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(document)) => Document = document;
 
-	internal IRequest<IndexRequestParameters> Self => this;
+	internal Request<IndexRequestParameters> Self => this;
 
-	[JsonIgnore] private Id? Id => Self.RouteValues.Get<Id>("id");
+	[JsonIgnore] private Id? Id => RouteValues.Get<Id>("id");
 
 	void ICustomJsonWriter.WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
 
 	internal static HttpMethod GetHttpMethod(IndexRequest<TDocument> request) =>
-		request.Id?.StringOrLongValue != null || request.Self.RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
+		request.Id?.StringOrLongValue != null || request.RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
 }
 
 public sealed partial class IndexRequestDescriptor<TDocument> : ICustomJsonWriter

@@ -34,8 +34,8 @@ public sealed class ScriptLanguagesRequestParameters : RequestParameters<ScriptL
 public sealed partial class ScriptLanguagesRequest : PlainRequest<ScriptLanguagesRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 }
 
 public sealed partial class ScriptLanguagesRequestDescriptor : RequestDescriptor<ScriptLanguagesRequestDescriptor, ScriptLanguagesRequestParameters>
@@ -46,8 +46,8 @@ public sealed partial class ScriptLanguagesRequestDescriptor : RequestDescriptor
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 	}

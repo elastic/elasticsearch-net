@@ -74,8 +74,8 @@ public sealed partial class ClusterHealthRequest : PlainRequest<ClusterHealthReq
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
@@ -118,8 +118,8 @@ public sealed partial class ClusterHealthRequestDescriptor<TDocument> : RequestD
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public ClusterHealthRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ClusterHealthRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
 	public ClusterHealthRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
@@ -150,8 +150,8 @@ public sealed partial class ClusterHealthRequestDescriptor : RequestDescriptor<C
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public ClusterHealthRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ClusterHealthRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
 	public ClusterHealthRequestDescriptor Local(bool? local = true) => Qs("local", local);

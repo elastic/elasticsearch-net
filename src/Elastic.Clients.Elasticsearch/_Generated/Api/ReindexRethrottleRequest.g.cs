@@ -40,8 +40,8 @@ public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindexRethrottle;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
@@ -58,8 +58,8 @@ public sealed partial class ReindexRethrottleRequestDescriptor : RequestDescript
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindexRethrottle;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 	public ReindexRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 	public ReindexRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id task_id)
 	{

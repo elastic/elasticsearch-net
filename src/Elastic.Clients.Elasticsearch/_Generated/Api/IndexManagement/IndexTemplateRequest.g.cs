@@ -50,8 +50,8 @@ public sealed partial class IndexTemplateRequest : PlainRequest<IndexTemplateReq
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetIndexTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
@@ -70,8 +70,8 @@ public sealed partial class IndexTemplateRequestDescriptor : RequestDescriptor<I
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetIndexTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public IndexTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public IndexTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
 	public IndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

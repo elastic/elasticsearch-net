@@ -38,8 +38,8 @@ public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToD
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementMigrateToDataStream;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 }
 
 public sealed partial class MigrateToDataStreamRequestDescriptor : RequestDescriptor<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamRequestParameters>
@@ -54,8 +54,8 @@ public sealed partial class MigrateToDataStreamRequestDescriptor : RequestDescri
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementMigrateToDataStream;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 	public MigrateToDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName name)
 	{
 		RouteValues.Required("name", name);

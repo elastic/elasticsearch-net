@@ -76,7 +76,7 @@ public abstract partial class PlainRequest<TParameters> : Request<TParameters>
 	[JsonIgnore]
 	public IRequestConfiguration RequestConfiguration
 	{
-		get => RequestState.RequestParameters.RequestConfiguration;
-		set => RequestState.RequestParameters.RequestConfiguration = value;
+		get => RequestParameters.RequestConfiguration;
+		set => RequestParameters.RequestConfiguration = value;
 	}
 }

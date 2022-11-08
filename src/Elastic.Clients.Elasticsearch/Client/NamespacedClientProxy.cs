@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -15,48 +16,53 @@ namespace Elastic.Clients.Elasticsearch;
 /// <remarks>
 ///     Not intended to be used directly.
 /// </remarks>
-public class NamespacedClientProxy
+public abstract class NamespacedClientProxy
 {
 	private readonly ElasticsearchClient _client;
 
 	internal NamespacedClientProxy(ElasticsearchClient client) => _client = client;
 
-	internal TResponse DoRequest<TRequest, TResponse>(
+	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
-		IRequestParameters parameters,
+		TRequestParameters parameters,
 		Action<IRequestConfiguration>? forceConfiguration = null)
-		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse, new() =>
-		_client.DoRequest<TRequest, TResponse>(request, parameters, forceConfiguration);
+		where TRequest : Request<TRequestParameters>
+		where TResponse : ElasticsearchResponse, new()
+		where TRequestParameters : class, IRequestParameters, new() =>
+			_client.DoRequest<TRequest, TResponse, TRequestParameters>(request, parameters, forceConfiguration);
 
-	internal TResponse DoRequest<TRequest, TResponse>(
+	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
 		Action<IRequestConfiguration>? forceConfiguration = null)
-		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse, new() =>
-			_client.DoRequest<TRequest, TResponse>(request, forceConfiguration);
+		where TRequest : Request<TRequestParameters>
+		where TResponse : ElasticsearchResponse, new()
+		where TRequestParameters : class, IRequestParameters, new() =>
+			_client.DoRequest<TRequest, TResponse, TRequestParameters>(request, forceConfiguration);
 
-	internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
+	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
-		IRequestParameters parameters,
+		TRequestParameters parameters,
 		CancellationToken cancellationToken = default)
-		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse, new() =>
-		_client.DoRequestAsync<TRequest, TResponse>(request, parameters, cancellationToken: cancellationToken);
+		where TRequest : Request<TRequestParameters>
+		where TResponse : ElasticsearchResponse, new()
+		where TRequestParameters : class, IRequestParameters, new() =>
+			_client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, parameters, cancellationToken: cancellationToken);
 
-	internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
+	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
 		CancellationToken cancellationToken = default)
-		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse, new() =>
-		_client.DoRequestAsync<TRequest, TResponse>(request, cancellationToken: cancellationToken);
+		where TRequest : Request<TRequestParameters>
+		where TResponse : ElasticsearchResponse, new()
+		where TRequestParameters : class, IRequestParameters, new() =>
+			_client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, cancellationToken: cancellationToken);
 
-	internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
+	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
-		IRequestParameters parameters,
+		TRequestParameters parameters,
 		Action<IRequestConfiguration>? forceConfiguration,
 		CancellationToken cancellationToken = default)
-		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse, new() =>
-		_client.DoRequestAsync<TRequest, TResponse>(request, parameters, forceConfiguration, cancellationToken);
+		where TRequest : Request<TRequestParameters>
+		where TResponse : ElasticsearchResponse, new()
+		where TRequestParameters : class, IRequestParameters, new() =>
+			_client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, parameters, forceConfiguration, cancellationToken);
 }

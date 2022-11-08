@@ -546,8 +546,8 @@ public partial class AsyncSearchSubmitRequest : PlainRequest<AsyncSearchSubmitRe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchSubmit;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 
@@ -789,8 +789,8 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : Requ
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchSubmit;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	public AsyncSearchSubmitRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public AsyncSearchSubmitRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public AsyncSearchSubmitRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
@@ -1822,8 +1822,8 @@ public sealed partial class AsyncSearchSubmitRequestDescriptor : RequestDescript
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchSubmit;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	public AsyncSearchSubmitRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public AsyncSearchSubmitRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public AsyncSearchSubmitRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);

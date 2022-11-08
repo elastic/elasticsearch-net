@@ -61,8 +61,8 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGet;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
@@ -100,8 +100,8 @@ public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptor<
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGet;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public GetRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetRequestDescriptor<TDocument> Features(ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? features) => Qs("features", features);
@@ -133,8 +133,8 @@ public sealed partial class GetRequestDescriptor : RequestDescriptor<GetRequestD
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGet;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public GetRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetRequestDescriptor Features(ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? features) => Qs("features", features);

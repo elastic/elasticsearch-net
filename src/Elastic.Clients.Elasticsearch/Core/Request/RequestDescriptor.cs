@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch.Requests;
 /// Base class for all request descriptor types.
 /// </summary>
 public abstract partial class RequestDescriptor<TDescriptor, TParameters> : Request<TParameters>, ISelfSerializable
-		where TDescriptor : RequestDescriptor<TDescriptor, TParameters>, IRequest<TParameters>
+		where TDescriptor : RequestDescriptor<TDescriptor, TParameters>
 		where TParameters : RequestParameters<TParameters>, new()
 {
 	private readonly TDescriptor _descriptor;
@@ -31,8 +31,6 @@ public abstract partial class RequestDescriptor<TDescriptor, TParameters> : Requ
 		_descriptor = (TDescriptor)this;
 
 	protected TDescriptor Self => _descriptor;
-
-	protected RouteValues RouteValues => ((IRequest<TParameters>)this).RouteValues;
 
 	protected TDescriptor Qs(string name, object value)
 	{
@@ -52,8 +50,8 @@ public abstract partial class RequestDescriptor<TDescriptor, TParameters> : Requ
 	public TDescriptor RequestConfiguration(
 		Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
 	{
-		var rc = RequestState.RequestParameters.RequestConfiguration;
-		RequestState.RequestParameters.RequestConfiguration =
+		var rc = RequestParameters.RequestConfiguration;
+		RequestParameters.RequestConfiguration =
 			configurationSelector?.Invoke(new RequestConfigurationDescriptor(rc)) ?? rc;
 		return _descriptor;
 	}

@@ -8,8 +8,10 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -91,12 +93,13 @@ public sealed partial class ElasticsearchClient
 
 	private partial void SetupNamespaces();
 
-	internal TResponse DoRequest<TRequest, TResponse>(
+	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
-		IRequestParameters? parameters,
+		TRequestParameters? parameters,
 		Action<IRequestConfiguration>? forceConfiguration = null)
-		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse, new()
+		where TRequest : Request<TRequestParameters>
+		where TResponse : ElasticsearchResponse, new()
+		where TRequestParameters : class, IRequestParameters, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -129,7 +132,7 @@ public sealed partial class ElasticsearchClient
 			}
 		}
 
-		var (url, postData) = PrepareRequest(request, forceConfiguration);
+		var (url, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
 		var response = _transport.Request<TResponse>(request.HttpMethod, url, postData, parameters);
 		PostRequestProductCheck<TRequest, TResponse>(request, response);
 
@@ -151,11 +154,12 @@ public sealed partial class ElasticsearchClient
 		return response;
 	}
 
-	internal TResponse DoRequest<TRequest, TResponse>(
+	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
 		Action<IRequestConfiguration>? forceConfiguration = null)
-		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse, new()
+		where TRequest : Request<TRequestParameters>
+		where TResponse : ElasticsearchResponse, new()
+		where TRequestParameters : class, IRequestParameters, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -188,7 +192,7 @@ public sealed partial class ElasticsearchClient
 			}
 		}
 
-		var (url, postData) = PrepareRequest(request, forceConfiguration);
+		var (url, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
 		var response = _transport.Request<TResponse>(request.HttpMethod, url, postData, request.RequestParameters);
 		PostRequestProductCheck<TRequest, TResponse>(request, response);
 
@@ -210,12 +214,13 @@ public sealed partial class ElasticsearchClient
 		return response;
 	}
 
-	internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
+	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
 		IRequestParameters? parameters,
 		CancellationToken cancellationToken = default)
-		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse, new()
+		where TRequest : Request<TRequestParameters>
+		where TResponse : ElasticsearchResponse, new()
+		where TRequestParameters : class, IRequestParameters, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -249,7 +254,7 @@ public sealed partial class ElasticsearchClient
 			}
 		}
 
-		var (url, postData) = PrepareRequest(request, null);
+		var (url, postData) = PrepareRequest<TRequest, TRequestParameters>(request, null);
 
 		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified)
 			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
@@ -280,11 +285,12 @@ public sealed partial class ElasticsearchClient
 		}
 	}
 
-	internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
+	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
 		CancellationToken cancellationToken = default)
-		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse, new()
+		where TRequest : Request<TRequestParameters>
+		where TResponse : ElasticsearchResponse, new()
+		where TRequestParameters : class, IRequestParameters, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -318,7 +324,7 @@ public sealed partial class ElasticsearchClient
 			}
 		}
 
-		var (url, postData) = PrepareRequest(request, null);
+		var (url, postData) = PrepareRequest<TRequest, TRequestParameters>(request, null);
 
 		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified)
 			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, request.RequestParameters, cancellationToken);
@@ -349,13 +355,14 @@ public sealed partial class ElasticsearchClient
 		}
 	}
 
-	internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
+	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
 		IRequestParameters? parameters,
 		Action<IRequestConfiguration>? forceConfiguration = null,
 		CancellationToken cancellationToken = default)
-		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse, new()
+		where TRequest : Request<TRequestParameters>
+		where TResponse : ElasticsearchResponse, new()
+		where TRequestParameters : class, IRequestParameters, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -389,7 +396,7 @@ public sealed partial class ElasticsearchClient
 			}
 		}
 
-		var (url, postData) = PrepareRequest(request, forceConfiguration);
+		var (url, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
 
 		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified)
 			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
@@ -420,9 +427,10 @@ public sealed partial class ElasticsearchClient
 		}
 	}
 
-	private (string url, PostData data) PrepareRequest<TRequest>(TRequest request,
+	private (string url, PostData data) PrepareRequest<TRequest, TRequestParameters>(TRequest request,
 		Action<IRequestConfiguration>? forceConfiguration)
-		where TRequest : class, IRequest
+		where TRequest : Request<TRequestParameters>
+		where TRequestParameters : class, IRequestParameters, new()
 	{
 		request.ThrowIfNull(nameof(request), "A request is required.");
 
@@ -430,23 +438,15 @@ public sealed partial class ElasticsearchClient
 			ForceConfiguration(request, forceConfiguration);
 
 		if (request.ContentType is not null)
-			ForceContentType(request, request.ContentType);
+			ForceContentType<TRequest, TRequestParameters>(request, request.ContentType);
 
 		if (request.Accept is not null)
-			ForceAccept(request, request.Accept);
+			ForceAccept<TRequest, TRequestParameters>(request, request.Accept);
 
 		var url = request.GetUrl(ElasticsearchClientSettings);
 
-		// TODO: Left while we decide if we prefer this
-		//PostData postData = null;
-		//if (request is IProxyRequest proxyRequest)
-		//{
-		//	postData = PostData.ProxySerializable((stream, formatting) =>
-		//		proxyRequest.WriteJson(stream, ConnectionSettings.SourceSerializer, formatting));
-		//}
-
 		var postData =
-			/*request.CanBeEmpty && request.IsEmpty || */request.HttpMethod == HttpMethod.GET ||
+			request.HttpMethod == HttpMethod.GET ||
 			request.HttpMethod == HttpMethod.HEAD || !request.SupportsBody
 				? null
 				: PostData.Serializable(request);
@@ -455,12 +455,12 @@ public sealed partial class ElasticsearchClient
 	}
 
 	private void PostRequestProductCheck<TRequest, TResponse>(TRequest request, TResponse response)
-		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse, new()
+		where TRequest : Request
+		where TResponse : ElasticsearchResponse, new()
 	{
-		if (response.ApiCall.HttpStatusCode.HasValue && response.ApiCall.HttpStatusCode.Value >= 200 && response.ApiCall.HttpStatusCode.Value <= 299 && _productCheckStatus == ProductCheckStatus.NotChecked)
+		if (response.ApiCallDetails.HttpStatusCode.HasValue && response.ApiCallDetails.HttpStatusCode.Value >= 200 && response.ApiCallDetails.HttpStatusCode.Value <= 299 && _productCheckStatus == ProductCheckStatus.NotChecked)
 		{
-			if (response.ApiCall.ParsedHeaders is null || !response.ApiCall.ParsedHeaders.TryGetValue("x-elastic-product", out var values) || !values.Single().Equals("Elasticsearch", StringComparison.Ordinal))
+			if (!response.ApiCallDetails.TryGetHeader("x-elastic-product", out var values) || !values.Single().Equals("Elasticsearch", StringComparison.Ordinal))
 			{
 				_productCheckStatus = ProductCheckStatus.Failed;
 			}
@@ -469,15 +469,17 @@ public sealed partial class ElasticsearchClient
 		}
 	}
 
-	private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
+	private static void ForceConfiguration<TRequestParameters>(Request<TRequestParameters> request, Action<IRequestConfiguration> forceConfiguration)
+		where TRequestParameters : class, IRequestParameters, new()
 	{
 		var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 		forceConfiguration(configuration);
 		request.RequestParameters.RequestConfiguration = configuration;
 	}
 
-	private static void ForceContentType<TRequest>(TRequest request, string contentType)
-		where TRequest : class, IRequest
+	private static void ForceContentType<TRequest, TRequestParameters>(TRequest request, string contentType)
+		where TRequest : Request<TRequestParameters>
+		where TRequestParameters : class, IRequestParameters, new()
 	{
 		var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 		configuration.Accept = contentType;
@@ -485,8 +487,9 @@ public sealed partial class ElasticsearchClient
 		request.RequestParameters.RequestConfiguration = configuration;
 	}
 
-	private static void ForceAccept<TRequest>(TRequest request, string acceptType)
-		where TRequest : class, IRequest
+	private static void ForceAccept<TRequest, TRequestParameters>(TRequest request, string acceptType)
+		where TRequest : Request<TRequestParameters>
+		where TRequestParameters : class, IRequestParameters,new()
 	{
 		var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 		configuration.Accept = acceptType;

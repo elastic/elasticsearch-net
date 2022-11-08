@@ -53,8 +53,8 @@ public sealed partial class ExistsAliasRequest : PlainRequest<ExistsAliasRequest
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsAlias;
-	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
@@ -84,8 +84,8 @@ public sealed partial class ExistsAliasRequestDescriptor<TDocument> : RequestDes
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsAlias;
-	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	internal override bool SupportsBody => false;
 	public ExistsAliasRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public ExistsAliasRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ExistsAliasRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
@@ -123,8 +123,8 @@ public sealed partial class ExistsAliasRequestDescriptor : RequestDescriptor<Exi
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsAlias;
-	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	internal override bool SupportsBody => false;
 	public ExistsAliasRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public ExistsAliasRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ExistsAliasRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);

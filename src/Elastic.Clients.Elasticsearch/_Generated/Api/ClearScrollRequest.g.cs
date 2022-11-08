@@ -34,8 +34,8 @@ public sealed class ClearScrollRequestParameters : RequestParameters<ClearScroll
 public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClearScroll;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => true;
 	[JsonInclude]
 	[JsonPropertyName("scroll_id")]
 	public Elastic.Clients.Elasticsearch.ScrollIds? ScrollId { get; set; }
@@ -49,8 +49,8 @@ public sealed partial class ClearScrollRequestDescriptor : RequestDescriptor<Cle
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClearScroll;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => true;
 	private Elastic.Clients.Elasticsearch.ScrollIds? ScrollIdValue { get; set; }
 
 	public ClearScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollIds? scrollId)

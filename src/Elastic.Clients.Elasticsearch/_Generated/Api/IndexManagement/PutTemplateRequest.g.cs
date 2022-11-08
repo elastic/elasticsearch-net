@@ -49,8 +49,8 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
@@ -100,8 +100,8 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	public PutTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public PutTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public PutTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

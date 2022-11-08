@@ -8,5 +8,5 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class ElasticsearchResponseExtensions
 {
-	public static bool IsSuccess(this ElasticsearchResponse response) => response.ApiCall is not null && response.ApiCall.Success;
+	public static bool IsSuccess(this ElasticsearchResponse response) => response.ApiCallDetails is not null && response.ApiCallDetails.Success;
 }
