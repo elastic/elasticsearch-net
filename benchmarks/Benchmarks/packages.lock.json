@@ -65,17 +65,6 @@
         "resolved": "2.4.3",
         "contentHash": "U2FC9Y8NyIxxU6MpFFdWWu1xwiqz/61v/Doou7kmVjpeIEMLWyiNNkzNlSE84kyJ0O1LKApuEj5z48Ow0Hi4OQ=="
       },
-      "Elastic.Transport": {
-        "type": "Transitive",
-        "resolved": "0.3.3-canary.0.6",
-        "contentHash": "ykjnqrTCOJQiIz8hWHB4z5SykiWJEjNTArJFa2sg1ngcnuq80Rqe2n0ncDYXMwHN5YcHZTIdloKyDnGRvyjX/w==",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.1",
-          "System.Text.Json": "6.0.0"
-        }
-      },
       "Elasticsearch.Net": {
         "type": "Transitive",
         "resolved": "7.16.0",
@@ -1195,7 +1184,16 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.3.3-canary.0.6, )"
+          "Elastic.Transport": "[1.0.0, )"
+        }
+      },
+      "elastic.transport": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.CSharp": "[4.7.0, )",
+          "System.Buffers": "[4.5.1, )",
+          "System.Diagnostics.DiagnosticSource": "[5.0.1, )",
+          "System.Text.Json": "[6.0.0, )"
         }
       }
     }
