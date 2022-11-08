@@ -211,23 +211,23 @@ public sealed partial class SpanQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public SpanQueryDescriptor<TDocument> FieldMaskingSpan(SpanFieldMaskingQuery variant) => Set(variant, "field_masking_span");
+	public SpanQueryDescriptor<TDocument> FieldMaskingSpan(SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "field_masking_span");
 	public SpanQueryDescriptor<TDocument> FieldMaskingSpan(Action<SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "field_masking_span");
-	public SpanQueryDescriptor<TDocument> SpanContaining(SpanContainingQuery variant) => Set(variant, "span_containing");
+	public SpanQueryDescriptor<TDocument> SpanContaining(SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
 	public SpanQueryDescriptor<TDocument> SpanContaining(Action<SpanContainingQueryDescriptor<TDocument>> configure) => Set(configure, "span_containing");
-	public SpanQueryDescriptor<TDocument> SpanFirst(SpanFirstQuery variant) => Set(variant, "span_first");
+	public SpanQueryDescriptor<TDocument> SpanFirst(SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
 	public SpanQueryDescriptor<TDocument> SpanFirst(Action<SpanFirstQueryDescriptor<TDocument>> configure) => Set(configure, "span_first");
-	public SpanQueryDescriptor<TDocument> SpanMulti(SpanMultiTermQuery variant) => Set(variant, "span_multi");
+	public SpanQueryDescriptor<TDocument> SpanMulti(SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");
 	public SpanQueryDescriptor<TDocument> SpanMulti(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
-	public SpanQueryDescriptor<TDocument> SpanNear(SpanNearQuery variant) => Set(variant, "span_near");
+	public SpanQueryDescriptor<TDocument> SpanNear(SpanNearQuery spanNearQuery) => Set(spanNearQuery, "span_near");
 	public SpanQueryDescriptor<TDocument> SpanNear(Action<SpanNearQueryDescriptor<TDocument>> configure) => Set(configure, "span_near");
-	public SpanQueryDescriptor<TDocument> SpanNot(SpanNotQuery variant) => Set(variant, "span_not");
+	public SpanQueryDescriptor<TDocument> SpanNot(SpanNotQuery spanNotQuery) => Set(spanNotQuery, "span_not");
 	public SpanQueryDescriptor<TDocument> SpanNot(Action<SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
-	public SpanQueryDescriptor<TDocument> SpanOr(SpanOrQuery variant) => Set(variant, "span_or");
+	public SpanQueryDescriptor<TDocument> SpanOr(SpanOrQuery spanOrQuery) => Set(spanOrQuery, "span_or");
 	public SpanQueryDescriptor<TDocument> SpanOr(Action<SpanOrQueryDescriptor<TDocument>> configure) => Set(configure, "span_or");
-	public SpanQueryDescriptor<TDocument> SpanTerm(SpanTermQuery variant) => Set(variant, "span_term");
+	public SpanQueryDescriptor<TDocument> SpanTerm(SpanTermQuery spanTermQuery) => Set(spanTermQuery, "span_term");
 	public SpanQueryDescriptor<TDocument> SpanTerm(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
-	public SpanQueryDescriptor<TDocument> SpanWithin(SpanWithinQuery variant) => Set(variant, "span_within");
+	public SpanQueryDescriptor<TDocument> SpanWithin(SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
 	public SpanQueryDescriptor<TDocument> SpanWithin(Action<SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -242,12 +242,11 @@ public sealed partial class SpanQueryDescriptor<TDocument> : SerializableDescrip
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -286,31 +285,31 @@ public sealed partial class SpanQueryDescriptor : SerializableDescriptor<SpanQue
 		return Self;
 	}
 
-	public SpanQueryDescriptor FieldMaskingSpan(SpanFieldMaskingQuery variant) => Set(variant, "field_masking_span");
+	public SpanQueryDescriptor FieldMaskingSpan(SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "field_masking_span");
 	public SpanQueryDescriptor FieldMaskingSpan(Action<SpanFieldMaskingQueryDescriptor> configure) => Set(configure, "field_masking_span");
 	public SpanQueryDescriptor FieldMaskingSpan<TDocument>(Action<SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "field_masking_span");
-	public SpanQueryDescriptor SpanContaining(SpanContainingQuery variant) => Set(variant, "span_containing");
+	public SpanQueryDescriptor SpanContaining(SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
 	public SpanQueryDescriptor SpanContaining(Action<SpanContainingQueryDescriptor> configure) => Set(configure, "span_containing");
 	public SpanQueryDescriptor SpanContaining<TDocument>(Action<SpanContainingQueryDescriptor<TDocument>> configure) => Set(configure, "span_containing");
-	public SpanQueryDescriptor SpanFirst(SpanFirstQuery variant) => Set(variant, "span_first");
+	public SpanQueryDescriptor SpanFirst(SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
 	public SpanQueryDescriptor SpanFirst(Action<SpanFirstQueryDescriptor> configure) => Set(configure, "span_first");
 	public SpanQueryDescriptor SpanFirst<TDocument>(Action<SpanFirstQueryDescriptor<TDocument>> configure) => Set(configure, "span_first");
-	public SpanQueryDescriptor SpanMulti(SpanMultiTermQuery variant) => Set(variant, "span_multi");
+	public SpanQueryDescriptor SpanMulti(SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");
 	public SpanQueryDescriptor SpanMulti(Action<SpanMultiTermQueryDescriptor> configure) => Set(configure, "span_multi");
 	public SpanQueryDescriptor SpanMulti<TDocument>(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
-	public SpanQueryDescriptor SpanNear(SpanNearQuery variant) => Set(variant, "span_near");
+	public SpanQueryDescriptor SpanNear(SpanNearQuery spanNearQuery) => Set(spanNearQuery, "span_near");
 	public SpanQueryDescriptor SpanNear(Action<SpanNearQueryDescriptor> configure) => Set(configure, "span_near");
 	public SpanQueryDescriptor SpanNear<TDocument>(Action<SpanNearQueryDescriptor<TDocument>> configure) => Set(configure, "span_near");
-	public SpanQueryDescriptor SpanNot(SpanNotQuery variant) => Set(variant, "span_not");
+	public SpanQueryDescriptor SpanNot(SpanNotQuery spanNotQuery) => Set(spanNotQuery, "span_not");
 	public SpanQueryDescriptor SpanNot(Action<SpanNotQueryDescriptor> configure) => Set(configure, "span_not");
 	public SpanQueryDescriptor SpanNot<TDocument>(Action<SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
-	public SpanQueryDescriptor SpanOr(SpanOrQuery variant) => Set(variant, "span_or");
+	public SpanQueryDescriptor SpanOr(SpanOrQuery spanOrQuery) => Set(spanOrQuery, "span_or");
 	public SpanQueryDescriptor SpanOr(Action<SpanOrQueryDescriptor> configure) => Set(configure, "span_or");
 	public SpanQueryDescriptor SpanOr<TDocument>(Action<SpanOrQueryDescriptor<TDocument>> configure) => Set(configure, "span_or");
-	public SpanQueryDescriptor SpanTerm(SpanTermQuery variant) => Set(variant, "span_term");
+	public SpanQueryDescriptor SpanTerm(SpanTermQuery spanTermQuery) => Set(spanTermQuery, "span_term");
 	public SpanQueryDescriptor SpanTerm(Action<SpanTermQueryDescriptor> configure) => Set(configure, "span_term");
 	public SpanQueryDescriptor SpanTerm<TDocument>(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
-	public SpanQueryDescriptor SpanWithin(SpanWithinQuery variant) => Set(variant, "span_within");
+	public SpanQueryDescriptor SpanWithin(SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
 	public SpanQueryDescriptor SpanWithin(Action<SpanWithinQueryDescriptor> configure) => Set(configure, "span_within");
 	public SpanQueryDescriptor SpanWithin<TDocument>(Action<SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -326,12 +325,11 @@ public sealed partial class SpanQueryDescriptor : SerializableDescriptor<SpanQue
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }

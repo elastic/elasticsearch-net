@@ -316,7 +316,7 @@ internal sealed class TopHitsAggregationConverter : JsonConverter<TopHitsAggrega
 		if (value.Sort is not null)
 		{
 			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(value.Sort, writer, options);
+			JsonSerializer.Serialize(writer, value.Sort, options);
 		}
 
 		if (value.StoredFields is not null)
@@ -406,6 +406,14 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 
 	private Action<Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
 
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+
+	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
+
+	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
+
+	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+
 	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
@@ -427,8 +435,6 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	private bool? SeqNoPrimaryTermValue { get; set; }
 
 	private int? SizeValue { get; set; }
-
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -457,6 +463,42 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		HighlightValue = null;
 		HighlightDescriptor = null;
 		HighlightDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	{
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortValue = sort;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor<TDocument> Sort(SortOptionsDescriptor<TDocument> descriptor)
+	{
+		SortValue = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortDescriptor = descriptor;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor<TDocument> Sort(Action<SortOptionsDescriptor<TDocument>> configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorActions = null;
+		SortDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor<TDocument> Sort(params Action<SortOptionsDescriptor<TDocument>>[] configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = configure;
 		return Self;
 	}
 
@@ -532,12 +574,6 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
-	{
-		SortValue = sort;
-		return Self;
-	}
-
 	public TopHitsAggregationDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 	{
 		StoredFieldsValue = storedFields;
@@ -575,6 +611,35 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		{
 			writer.WritePropertyName("highlight");
 			JsonSerializer.Serialize(writer, HighlightValue, options);
+		}
+
+		if (SortDescriptor is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, SortDescriptor, options);
+		}
+		else if (SortDescriptorAction is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
+		}
+		else if (SortDescriptorActions is not null)
+		{
+			writer.WritePropertyName("sort");
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteStartArray();
+			foreach (var action in SortDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(action), options);
+			}
+
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteEndArray();
+		}
+		else if (SortValue is not null)
+		{
+			writer.WritePropertyName("sort");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (SourceValue is not null)
@@ -637,12 +702,6 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 			writer.WriteNumberValue(SizeValue.Value);
 		}
 
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
 		if (StoredFieldsValue is not null)
 		{
 			writer.WritePropertyName("stored_fields");
@@ -685,6 +744,14 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 
 	private Action<Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
 
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+
+	private SortOptionsDescriptor SortDescriptor { get; set; }
+
+	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
+
+	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+
 	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
@@ -706,8 +773,6 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	private bool? SeqNoPrimaryTermValue { get; set; }
 
 	private int? SizeValue { get; set; }
-
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
@@ -736,6 +801,42 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		HighlightValue = null;
 		HighlightDescriptor = null;
 		HighlightDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	{
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortValue = sort;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor Sort(SortOptionsDescriptor descriptor)
+	{
+		SortValue = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortDescriptor = descriptor;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor Sort(Action<SortOptionsDescriptor> configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorActions = null;
+		SortDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor Sort(params Action<SortOptionsDescriptor>[] configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = configure;
 		return Self;
 	}
 
@@ -817,12 +918,6 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
-	{
-		SortValue = sort;
-		return Self;
-	}
-
 	public TopHitsAggregationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 	{
 		StoredFieldsValue = storedFields;
@@ -860,6 +955,35 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("highlight");
 			JsonSerializer.Serialize(writer, HighlightValue, options);
+		}
+
+		if (SortDescriptor is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, SortDescriptor, options);
+		}
+		else if (SortDescriptorAction is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, new SortOptionsDescriptor(SortDescriptorAction), options);
+		}
+		else if (SortDescriptorActions is not null)
+		{
+			writer.WritePropertyName("sort");
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteStartArray();
+			foreach (var action in SortDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new SortOptionsDescriptor(action), options);
+			}
+
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteEndArray();
+		}
+		else if (SortValue is not null)
+		{
+			writer.WritePropertyName("sort");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (SourceValue is not null)
@@ -920,12 +1044,6 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("size");
 			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (StoredFieldsValue is not null)
