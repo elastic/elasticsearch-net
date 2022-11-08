@@ -242,12 +242,11 @@ public sealed partial class SpanQueryDescriptor<TDocument> : SerializableDescrip
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -326,12 +325,11 @@ public sealed partial class SpanQueryDescriptor : SerializableDescriptor<SpanQue
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }

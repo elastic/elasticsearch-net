@@ -78,9 +78,15 @@ public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescr
 
 	private Descriptor Descriptor { get; set; }
 
+	private Elastic.Clients.Elasticsearch.Field AdditionalPropertyName { get; set; }
+
+	private Elastic.Clients.Elasticsearch.FieldSort AdditionalPropertyValue { get; set; }
+
 	private SortOptionsDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
 		where T : Descriptor
 	{
+		AdditionalPropertyValue = null;
+		AdditionalPropertyName = null;
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
 		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
@@ -91,8 +97,34 @@ public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescr
 
 	private SortOptionsDescriptor<TDocument> Set(object variant, string variantName)
 	{
+		AdditionalPropertyValue = null;
+		AdditionalPropertyName = null;
 		Variant = variant;
 		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	private SortOptionsDescriptor<TDocument> Set<T>(Action<T> descriptorAction, Elastic.Clients.Elasticsearch.Field variantName)
+		where T : Descriptor
+	{
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		ContainedVariantName = null;
+		Variant = null;
+		AdditionalPropertyValue = null;
+		AdditionalPropertyName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	private SortOptionsDescriptor<TDocument> Set(Elastic.Clients.Elasticsearch.FieldSort variant, Elastic.Clients.Elasticsearch.Field variantName)
+	{
+		ContainedVariantName = null;
+		Variant = null;
+		AdditionalPropertyValue = variant;
+		AdditionalPropertyName = variantName;
 		ContainsVariant = true;
 		return Self;
 	}
@@ -103,6 +135,12 @@ public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescr
 	public SortOptionsDescriptor<TDocument> Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
 	public SortOptionsDescriptor<TDocument> Script(ScriptSort scriptSort) => Set(scriptSort, "_script");
 	public SortOptionsDescriptor<TDocument> Script(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
+	public SortOptionsDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Set(FieldSort.Empty, field);
+	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field) => Set(FieldSort.Empty, field);
+	public SortOptionsDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.FieldSort sort) => Set(sort, field);
+	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field, Elastic.Clients.Elasticsearch.FieldSort sort) => Set(sort, field);
+	public SortOptionsDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field, Action<FieldSortDescriptor<TDocument>> configure) => Set(configure, field);
+	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field, Action<FieldSortDescriptor<TDocument>> configure) => Set(configure, field);
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -111,17 +149,35 @@ public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescr
 			return;
 		}
 
+		var fieldName = ContainedVariantName;
+		if (AdditionalPropertyName is IUrlParameter urlParameter)
+		{
+			fieldName = urlParameter.GetString(settings);
+		}
+
+		if ((Variant is not null && Variant.Equals(FieldSort.Empty)) || (AdditionalPropertyValue is not null && AdditionalPropertyValue.Equals(FieldSort.Empty)))
+		{
+			writer.WriteStringValue(fieldName);
+			return;
+		}
+
 		writer.WriteStartObject();
 		writer.WritePropertyName(ContainedVariantName);
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		if (AdditionalPropertyValue is not null)
+		{
+			JsonSerializer.Serialize(writer, AdditionalPropertyValue, options);
+			writer.WriteEndObject();
+			return;
+		}
+
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -141,9 +197,15 @@ public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortO
 
 	private Descriptor Descriptor { get; set; }
 
+	private Elastic.Clients.Elasticsearch.Field AdditionalPropertyName { get; set; }
+
+	private Elastic.Clients.Elasticsearch.FieldSort AdditionalPropertyValue { get; set; }
+
 	private SortOptionsDescriptor Set<T>(Action<T> descriptorAction, string variantName)
 		where T : Descriptor
 	{
+		AdditionalPropertyValue = null;
+		AdditionalPropertyName = null;
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
 		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
@@ -154,8 +216,34 @@ public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortO
 
 	private SortOptionsDescriptor Set(object variant, string variantName)
 	{
+		AdditionalPropertyValue = null;
+		AdditionalPropertyName = null;
 		Variant = variant;
 		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	private SortOptionsDescriptor Set<T>(Action<T> descriptorAction, Elastic.Clients.Elasticsearch.Field variantName)
+		where T : Descriptor
+	{
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		ContainedVariantName = null;
+		Variant = null;
+		AdditionalPropertyValue = null;
+		AdditionalPropertyName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	private SortOptionsDescriptor Set(Elastic.Clients.Elasticsearch.FieldSort variant, Elastic.Clients.Elasticsearch.Field variantName)
+	{
+		ContainedVariantName = null;
+		Variant = null;
+		AdditionalPropertyValue = variant;
+		AdditionalPropertyName = variantName;
 		ContainsVariant = true;
 		return Self;
 	}
@@ -167,6 +255,9 @@ public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortO
 	public SortOptionsDescriptor Script(ScriptSort scriptSort) => Set(scriptSort, "_script");
 	public SortOptionsDescriptor Script(Action<ScriptSortDescriptor> configure) => Set(configure, "_script");
 	public SortOptionsDescriptor Script<TDocument>(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
+	public SortOptionsDescriptor Field(Elastic.Clients.Elasticsearch.Field field) => Set(FieldSort.Empty, field);
+	public SortOptionsDescriptor Field(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.FieldSort sort) => Set(sort, field);
+	public SortOptionsDescriptor Field(Elastic.Clients.Elasticsearch.Field field, Action<FieldSortDescriptor> configure) => Set(configure, field);
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -175,17 +266,35 @@ public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortO
 			return;
 		}
 
+		var fieldName = ContainedVariantName;
+		if (AdditionalPropertyName is IUrlParameter urlParameter)
+		{
+			fieldName = urlParameter.GetString(settings);
+		}
+
+		if ((Variant is not null && Variant.Equals(FieldSort.Empty)) || (AdditionalPropertyValue is not null && AdditionalPropertyValue.Equals(FieldSort.Empty)))
+		{
+			writer.WriteStringValue(fieldName);
+			return;
+		}
+
 		writer.WriteStartObject();
 		writer.WritePropertyName(ContainedVariantName);
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		if (AdditionalPropertyValue is not null)
+		{
+			JsonSerializer.Serialize(writer, AdditionalPropertyValue, options);
+			writer.WriteEndObject();
+			return;
+		}
+
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }

@@ -20,7 +20,7 @@ public class BasicSortUsageTests : SearchUsageTestBase
 		};
 
 	protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
-		.Sort(new[] { SortOptions.Field("startedOn") });
+		.Sort(s => s.Field(f => f.StartedOn));
 
 	protected override SearchRequest<Project> Initializer =>
 		new()
