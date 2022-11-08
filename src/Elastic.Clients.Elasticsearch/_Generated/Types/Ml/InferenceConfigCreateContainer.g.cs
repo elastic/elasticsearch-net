@@ -211,23 +211,23 @@ public sealed partial class InferenceConfigCreateContainerDescriptor<TDocument> 
 		return Self;
 	}
 
-	public InferenceConfigCreateContainerDescriptor<TDocument> Classification(ClassificationInferenceOptions variant) => Set(variant, "classification");
+	public InferenceConfigCreateContainerDescriptor<TDocument> Classification(ClassificationInferenceOptions classificationInferenceOptions) => Set(classificationInferenceOptions, "classification");
 	public InferenceConfigCreateContainerDescriptor<TDocument> Classification(Action<ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-	public InferenceConfigCreateContainerDescriptor<TDocument> FillMask(FillMaskInferenceOptions variant) => Set(variant, "fill_mask");
+	public InferenceConfigCreateContainerDescriptor<TDocument> FillMask(FillMaskInferenceOptions fillMaskInferenceOptions) => Set(fillMaskInferenceOptions, "fill_mask");
 	public InferenceConfigCreateContainerDescriptor<TDocument> FillMask(Action<FillMaskInferenceOptionsDescriptor> configure) => Set(configure, "fill_mask");
-	public InferenceConfigCreateContainerDescriptor<TDocument> Ner(NerInferenceOptions variant) => Set(variant, "ner");
+	public InferenceConfigCreateContainerDescriptor<TDocument> Ner(NerInferenceOptions nerInferenceOptions) => Set(nerInferenceOptions, "ner");
 	public InferenceConfigCreateContainerDescriptor<TDocument> Ner(Action<NerInferenceOptionsDescriptor> configure) => Set(configure, "ner");
-	public InferenceConfigCreateContainerDescriptor<TDocument> PassThrough(PassThroughInferenceOptions variant) => Set(variant, "pass_through");
+	public InferenceConfigCreateContainerDescriptor<TDocument> PassThrough(PassThroughInferenceOptions passThroughInferenceOptions) => Set(passThroughInferenceOptions, "pass_through");
 	public InferenceConfigCreateContainerDescriptor<TDocument> PassThrough(Action<PassThroughInferenceOptionsDescriptor> configure) => Set(configure, "pass_through");
-	public InferenceConfigCreateContainerDescriptor<TDocument> QuestionAnswering(QuestionAnsweringInferenceOptions variant) => Set(variant, "question_answering");
+	public InferenceConfigCreateContainerDescriptor<TDocument> QuestionAnswering(QuestionAnsweringInferenceOptions questionAnsweringInferenceOptions) => Set(questionAnsweringInferenceOptions, "question_answering");
 	public InferenceConfigCreateContainerDescriptor<TDocument> QuestionAnswering(Action<QuestionAnsweringInferenceOptionsDescriptor> configure) => Set(configure, "question_answering");
-	public InferenceConfigCreateContainerDescriptor<TDocument> Regression(RegressionInferenceOptions variant) => Set(variant, "regression");
+	public InferenceConfigCreateContainerDescriptor<TDocument> Regression(RegressionInferenceOptions regressionInferenceOptions) => Set(regressionInferenceOptions, "regression");
 	public InferenceConfigCreateContainerDescriptor<TDocument> Regression(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
-	public InferenceConfigCreateContainerDescriptor<TDocument> TextClassification(TextClassificationInferenceOptions variant) => Set(variant, "text_classification");
+	public InferenceConfigCreateContainerDescriptor<TDocument> TextClassification(TextClassificationInferenceOptions textClassificationInferenceOptions) => Set(textClassificationInferenceOptions, "text_classification");
 	public InferenceConfigCreateContainerDescriptor<TDocument> TextClassification(Action<TextClassificationInferenceOptionsDescriptor> configure) => Set(configure, "text_classification");
-	public InferenceConfigCreateContainerDescriptor<TDocument> TextEmbedding(TextEmbeddingInferenceOptions variant) => Set(variant, "text_embedding");
+	public InferenceConfigCreateContainerDescriptor<TDocument> TextEmbedding(TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => Set(textEmbeddingInferenceOptions, "text_embedding");
 	public InferenceConfigCreateContainerDescriptor<TDocument> TextEmbedding(Action<TextEmbeddingInferenceOptionsDescriptor> configure) => Set(configure, "text_embedding");
-	public InferenceConfigCreateContainerDescriptor<TDocument> ZeroShotClassification(ZeroShotClassificationInferenceOptions variant) => Set(variant, "zero_shot_classification");
+	public InferenceConfigCreateContainerDescriptor<TDocument> ZeroShotClassification(ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => Set(zeroShotClassificationInferenceOptions, "zero_shot_classification");
 	public InferenceConfigCreateContainerDescriptor<TDocument> ZeroShotClassification(Action<ZeroShotClassificationInferenceOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -242,12 +242,11 @@ public sealed partial class InferenceConfigCreateContainerDescriptor<TDocument> 
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -286,24 +285,24 @@ public sealed partial class InferenceConfigCreateContainerDescriptor : Serializa
 		return Self;
 	}
 
-	public InferenceConfigCreateContainerDescriptor Classification(ClassificationInferenceOptions variant) => Set(variant, "classification");
+	public InferenceConfigCreateContainerDescriptor Classification(ClassificationInferenceOptions classificationInferenceOptions) => Set(classificationInferenceOptions, "classification");
 	public InferenceConfigCreateContainerDescriptor Classification(Action<ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-	public InferenceConfigCreateContainerDescriptor FillMask(FillMaskInferenceOptions variant) => Set(variant, "fill_mask");
+	public InferenceConfigCreateContainerDescriptor FillMask(FillMaskInferenceOptions fillMaskInferenceOptions) => Set(fillMaskInferenceOptions, "fill_mask");
 	public InferenceConfigCreateContainerDescriptor FillMask(Action<FillMaskInferenceOptionsDescriptor> configure) => Set(configure, "fill_mask");
-	public InferenceConfigCreateContainerDescriptor Ner(NerInferenceOptions variant) => Set(variant, "ner");
+	public InferenceConfigCreateContainerDescriptor Ner(NerInferenceOptions nerInferenceOptions) => Set(nerInferenceOptions, "ner");
 	public InferenceConfigCreateContainerDescriptor Ner(Action<NerInferenceOptionsDescriptor> configure) => Set(configure, "ner");
-	public InferenceConfigCreateContainerDescriptor PassThrough(PassThroughInferenceOptions variant) => Set(variant, "pass_through");
+	public InferenceConfigCreateContainerDescriptor PassThrough(PassThroughInferenceOptions passThroughInferenceOptions) => Set(passThroughInferenceOptions, "pass_through");
 	public InferenceConfigCreateContainerDescriptor PassThrough(Action<PassThroughInferenceOptionsDescriptor> configure) => Set(configure, "pass_through");
-	public InferenceConfigCreateContainerDescriptor QuestionAnswering(QuestionAnsweringInferenceOptions variant) => Set(variant, "question_answering");
+	public InferenceConfigCreateContainerDescriptor QuestionAnswering(QuestionAnsweringInferenceOptions questionAnsweringInferenceOptions) => Set(questionAnsweringInferenceOptions, "question_answering");
 	public InferenceConfigCreateContainerDescriptor QuestionAnswering(Action<QuestionAnsweringInferenceOptionsDescriptor> configure) => Set(configure, "question_answering");
-	public InferenceConfigCreateContainerDescriptor Regression(RegressionInferenceOptions variant) => Set(variant, "regression");
+	public InferenceConfigCreateContainerDescriptor Regression(RegressionInferenceOptions regressionInferenceOptions) => Set(regressionInferenceOptions, "regression");
 	public InferenceConfigCreateContainerDescriptor Regression(Action<RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
 	public InferenceConfigCreateContainerDescriptor Regression<TDocument>(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
-	public InferenceConfigCreateContainerDescriptor TextClassification(TextClassificationInferenceOptions variant) => Set(variant, "text_classification");
+	public InferenceConfigCreateContainerDescriptor TextClassification(TextClassificationInferenceOptions textClassificationInferenceOptions) => Set(textClassificationInferenceOptions, "text_classification");
 	public InferenceConfigCreateContainerDescriptor TextClassification(Action<TextClassificationInferenceOptionsDescriptor> configure) => Set(configure, "text_classification");
-	public InferenceConfigCreateContainerDescriptor TextEmbedding(TextEmbeddingInferenceOptions variant) => Set(variant, "text_embedding");
+	public InferenceConfigCreateContainerDescriptor TextEmbedding(TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => Set(textEmbeddingInferenceOptions, "text_embedding");
 	public InferenceConfigCreateContainerDescriptor TextEmbedding(Action<TextEmbeddingInferenceOptionsDescriptor> configure) => Set(configure, "text_embedding");
-	public InferenceConfigCreateContainerDescriptor ZeroShotClassification(ZeroShotClassificationInferenceOptions variant) => Set(variant, "zero_shot_classification");
+	public InferenceConfigCreateContainerDescriptor ZeroShotClassification(ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => Set(zeroShotClassificationInferenceOptions, "zero_shot_classification");
 	public InferenceConfigCreateContainerDescriptor ZeroShotClassification(Action<ZeroShotClassificationInferenceOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -318,12 +317,11 @@ public sealed partial class InferenceConfigCreateContainerDescriptor : Serializa
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }

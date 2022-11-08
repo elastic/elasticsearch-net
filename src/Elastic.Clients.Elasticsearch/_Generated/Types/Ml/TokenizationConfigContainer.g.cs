@@ -145,11 +145,11 @@ public sealed partial class TokenizationConfigContainerDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public TokenizationConfigContainerDescriptor<TDocument> Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
+	public TokenizationConfigContainerDescriptor<TDocument> Bert(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert");
 	public TokenizationConfigContainerDescriptor<TDocument> Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-	public TokenizationConfigContainerDescriptor<TDocument> Mpnet(NlpBertTokenizationConfig variant) => Set(variant, "mpnet");
+	public TokenizationConfigContainerDescriptor<TDocument> Mpnet(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "mpnet");
 	public TokenizationConfigContainerDescriptor<TDocument> Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
-	public TokenizationConfigContainerDescriptor<TDocument> Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
+	public TokenizationConfigContainerDescriptor<TDocument> Roberta(NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");
 	public TokenizationConfigContainerDescriptor<TDocument> Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -164,12 +164,11 @@ public sealed partial class TokenizationConfigContainerDescriptor<TDocument> : S
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -208,11 +207,11 @@ public sealed partial class TokenizationConfigContainerDescriptor : Serializable
 		return Self;
 	}
 
-	public TokenizationConfigContainerDescriptor Bert(NlpBertTokenizationConfig variant) => Set(variant, "bert");
+	public TokenizationConfigContainerDescriptor Bert(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert");
 	public TokenizationConfigContainerDescriptor Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-	public TokenizationConfigContainerDescriptor Mpnet(NlpBertTokenizationConfig variant) => Set(variant, "mpnet");
+	public TokenizationConfigContainerDescriptor Mpnet(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "mpnet");
 	public TokenizationConfigContainerDescriptor Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
-	public TokenizationConfigContainerDescriptor Roberta(NlpRobertaTokenizationConfig variant) => Set(variant, "roberta");
+	public TokenizationConfigContainerDescriptor Roberta(NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");
 	public TokenizationConfigContainerDescriptor Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -227,12 +226,11 @@ public sealed partial class TokenizationConfigContainerDescriptor : Serializable
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
