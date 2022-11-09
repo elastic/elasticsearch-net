@@ -23,7 +23,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed partial class TermsEnumResponse : ElasticsearchResponseBase
+public sealed partial class TermsEnumResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("complete")]

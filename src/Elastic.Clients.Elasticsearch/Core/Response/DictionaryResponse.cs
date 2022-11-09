@@ -8,7 +8,7 @@ using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public abstract class DictionaryResponse<TKey, TValue> : ElasticsearchResponseBase
+public abstract class DictionaryResponse<TKey, TValue> : ElasticsearchResponse
 {
 	internal DictionaryResponse(IReadOnlyDictionary<TKey, TValue> dictionary)
 	{

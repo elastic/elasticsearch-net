@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class ExistsSourceRequestParameters : RequestParameters<ExistsSourceRequestParameters>
+public sealed class ExistsSourceRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -64,8 +64,8 @@ public sealed partial class ExistsSourceRequest : PlainRequest<ExistsSourceReque
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
-	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
@@ -126,8 +126,8 @@ public sealed partial class ExistsSourceRequestDescriptor<TDocument> : RequestDe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
-	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	internal override bool SupportsBody => false;
 	public ExistsSourceRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public ExistsSourceRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public ExistsSourceRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
@@ -166,8 +166,8 @@ public sealed partial class ExistsSourceRequestDescriptor : RequestDescriptor<Ex
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
-	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	internal override bool SupportsBody => false;
 	public ExistsSourceRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public ExistsSourceRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public ExistsSourceRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);

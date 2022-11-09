@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql;
-public sealed class DeleteEqlRequestParameters : RequestParameters<DeleteEqlRequestParameters>
+public sealed class DeleteEqlRequestParameters : RequestParameters
 {
 }
 
@@ -38,8 +38,8 @@ public sealed partial class DeleteEqlRequest : PlainRequest<DeleteEqlRequestPara
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 }
 
 public sealed partial class DeleteEqlRequestDescriptor<TDocument> : RequestDescriptor<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlRequestParameters>
@@ -54,8 +54,8 @@ public sealed partial class DeleteEqlRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 	public DeleteEqlRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -79,8 +79,8 @@ public sealed partial class DeleteEqlRequestDescriptor : RequestDescriptor<Delet
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 	public DeleteEqlRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);

@@ -30,20 +30,20 @@ public sealed partial class ClusterNamespace : NamespacedClientProxy
 	public ClusterHealthResponse Health(ClusterHealthRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ClusterHealthRequest, ClusterHealthResponse>(request);
+		return DoRequest<ClusterHealthRequest, ClusterHealthResponse, ClusterHealthRequestParameters>(request);
 	}
 
 	public Task<ClusterHealthResponse> HealthAsync(ClusterHealthRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ClusterHealthRequest, ClusterHealthResponse>(request, cancellationToken);
+		return DoRequestAsync<ClusterHealthRequest, ClusterHealthResponse, ClusterHealthRequestParameters>(request, cancellationToken);
 	}
 
 	public ClusterHealthResponse Health()
 	{
 		var descriptor = new ClusterHealthRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<ClusterHealthRequestDescriptor, ClusterHealthResponse>(descriptor);
+		return DoRequest<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
 	}
 
 	public ClusterHealthResponse Health(Action<ClusterHealthRequestDescriptor> configureRequest)
@@ -51,7 +51,7 @@ public sealed partial class ClusterNamespace : NamespacedClientProxy
 		var descriptor = new ClusterHealthRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ClusterHealthRequestDescriptor, ClusterHealthResponse>(descriptor);
+		return DoRequest<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
 	}
 
 	public ClusterHealthResponse Health<TDocument>(Action<ClusterHealthRequestDescriptor<TDocument>> configureRequest)
@@ -59,14 +59,14 @@ public sealed partial class ClusterNamespace : NamespacedClientProxy
 		var descriptor = new ClusterHealthRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ClusterHealthRequestDescriptor<TDocument>, ClusterHealthResponse>(descriptor);
+		return DoRequest<ClusterHealthRequestDescriptor<TDocument>, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
 	}
 
 	public Task<ClusterHealthResponse> HealthAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ClusterHealthRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterHealthRequestDescriptor, ClusterHealthResponse>(descriptor);
+		return DoRequestAsync<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
 	}
 
 	public Task<ClusterHealthResponse> HealthAsync(Action<ClusterHealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -74,7 +74,7 @@ public sealed partial class ClusterNamespace : NamespacedClientProxy
 		var descriptor = new ClusterHealthRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterHealthRequestDescriptor, ClusterHealthResponse>(descriptor);
+		return DoRequestAsync<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
 	}
 
 	public Task<ClusterHealthResponse> HealthAsync<TDocument>(Action<ClusterHealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -82,6 +82,6 @@ public sealed partial class ClusterNamespace : NamespacedClientProxy
 		var descriptor = new ClusterHealthRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterHealthRequestDescriptor<TDocument>, ClusterHealthResponse>(descriptor);
+		return DoRequestAsync<ClusterHealthRequestDescriptor<TDocument>, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
 	}
 }

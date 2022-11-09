@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed class RolloverRequestParameters : RequestParameters<RolloverRequestParameters>
+public sealed class RolloverRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
@@ -53,8 +53,8 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRollover;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
@@ -100,8 +100,8 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRollover;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	public RolloverRequestDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
 	public RolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public RolloverRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

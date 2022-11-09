@@ -96,7 +96,7 @@ public class IndexIntegrationTests : IntegrationDocumentationTestBase, IClusterF
 			.OpType(OpType.Create)
 		);
 		indexResult.ShouldBeValid();
-		indexResult.ApiCall.HttpStatusCode.Should().Be(201);
+		indexResult.ApiCallDetails.HttpStatusCode.Should().Be(201);
 		indexResult.Result.Should().Be(Result.Created);
 		indexResult.Index.Should().Be(indexName);
 		indexResult.Id.Should().Be(project.Name);
@@ -107,7 +107,7 @@ public class IndexIntegrationTests : IntegrationDocumentationTestBase, IClusterF
 		);
 
 		indexResult.ShouldNotBeValid();
-		indexResult.ApiCall.HttpStatusCode.Should().Be(409);
+		indexResult.ApiCallDetails.HttpStatusCode.Should().Be(409);
 		indexResult.ServerError.Should().NotBeNull();
 		indexResult.ServerError.Error.Type.Should().Contain("conflict");
 		indexResult.ServerError.Status.Should().Be(409);
@@ -121,7 +121,7 @@ public class IndexIntegrationTests : IntegrationDocumentationTestBase, IClusterF
 		var indexResult = Client.Index(commitActivity, f => f.Index(indexName));
 
 		indexResult.ShouldBeValid();
-		indexResult.ApiCall.HttpStatusCode.Should().Be(201);
+		indexResult.ApiCallDetails.HttpStatusCode.Should().Be(201);
 		indexResult.Result.Should().Be(Result.Created);
 		indexResult.Index.Should().Be(indexName);
 		indexResult.Id.Should().Be(commitActivity.Id);
@@ -135,7 +135,7 @@ public class IndexIntegrationTests : IntegrationDocumentationTestBase, IClusterF
 		indexResult = Client.Index(commitActivity, f => f.Index(indexName));
 
 		indexResult.ShouldBeValid();
-		indexResult.ApiCall.HttpStatusCode.Should().Be(200);
+		indexResult.ApiCallDetails.HttpStatusCode.Should().Be(200);
 		indexResult.Version.Should().Be(2);
 		indexResult.Result.Should().Be(Result.Updated);
 	}
