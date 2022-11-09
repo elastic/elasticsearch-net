@@ -172,7 +172,7 @@ internal sealed class TopMetricsAggregationConverter : JsonConverter<TopMetricsA
 		if (value.Sort is not null)
 		{
 			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(value.Sort, writer, options);
+			JsonSerializer.Serialize(writer, value.Sort, options);
 		}
 
 		writer.WriteEndObject();
@@ -228,6 +228,14 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 
 	private Action<TopMetricsValueDescriptor<TDocument>>[] MetricsDescriptorActions { get; set; }
 
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+
+	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
+
+	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
+
+	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 	private Dictionary<string, object>? MetaValue { get; set; }
@@ -237,8 +245,6 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	private int? SizeValue { get; set; }
-
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	public TopMetricsAggregationDescriptor<TDocument> Metrics(ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
 	{
@@ -273,6 +279,42 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		MetricsDescriptor = null;
 		MetricsDescriptorAction = null;
 		MetricsDescriptorActions = configure;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	{
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortValue = sort;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Sort(SortOptionsDescriptor<TDocument> descriptor)
+	{
+		SortValue = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortDescriptor = descriptor;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Sort(Action<SortOptionsDescriptor<TDocument>> configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorActions = null;
+		SortDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Sort(params Action<SortOptionsDescriptor<TDocument>>[] configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = configure;
 		return Self;
 	}
 
@@ -312,12 +354,6 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public TopMetricsAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
-	{
-		SortValue = sort;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -354,6 +390,35 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 			JsonSerializer.Serialize(writer, MetricsValue, options);
 		}
 
+		if (SortDescriptor is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, SortDescriptor, options);
+		}
+		else if (SortDescriptorAction is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
+		}
+		else if (SortDescriptorActions is not null)
+		{
+			writer.WritePropertyName("sort");
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteStartArray();
+			foreach (var action in SortDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(action), options);
+			}
+
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteEndArray();
+		}
+		else if (SortValue is not null)
+		{
+			writer.WritePropertyName("sort");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
+		}
+
 		if (FieldValue is not null)
 		{
 			writer.WritePropertyName("field");
@@ -376,12 +441,6 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		{
 			writer.WritePropertyName("size");
 			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		writer.WriteEndObject();
@@ -410,6 +469,14 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 
 	private Action<TopMetricsValueDescriptor>[] MetricsDescriptorActions { get; set; }
 
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+
+	private SortOptionsDescriptor SortDescriptor { get; set; }
+
+	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
+
+	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
 	private Dictionary<string, object>? MetaValue { get; set; }
@@ -419,8 +486,6 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	private int? SizeValue { get; set; }
-
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	public TopMetricsAggregationDescriptor Metrics(ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
 	{
@@ -455,6 +520,42 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		MetricsDescriptor = null;
 		MetricsDescriptorAction = null;
 		MetricsDescriptorActions = configure;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	{
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortValue = sort;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Sort(SortOptionsDescriptor descriptor)
+	{
+		SortValue = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortDescriptor = descriptor;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Sort(Action<SortOptionsDescriptor> configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorActions = null;
+		SortDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Sort(params Action<SortOptionsDescriptor>[] configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = configure;
 		return Self;
 	}
 
@@ -500,12 +601,6 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public TopMetricsAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
-	{
-		SortValue = sort;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -542,6 +637,35 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 			JsonSerializer.Serialize(writer, MetricsValue, options);
 		}
 
+		if (SortDescriptor is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, SortDescriptor, options);
+		}
+		else if (SortDescriptorAction is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, new SortOptionsDescriptor(SortDescriptorAction), options);
+		}
+		else if (SortDescriptorActions is not null)
+		{
+			writer.WritePropertyName("sort");
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteStartArray();
+			foreach (var action in SortDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new SortOptionsDescriptor(action), options);
+			}
+
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteEndArray();
+		}
+		else if (SortValue is not null)
+		{
+			writer.WritePropertyName("sort");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
+		}
+
 		if (FieldValue is not null)
 		{
 			writer.WritePropertyName("field");
@@ -564,12 +688,6 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		{
 			writer.WritePropertyName("size");
 			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		writer.WriteEndObject();

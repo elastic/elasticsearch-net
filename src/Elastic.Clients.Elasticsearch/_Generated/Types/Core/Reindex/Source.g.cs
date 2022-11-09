@@ -80,6 +80,14 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 
 	private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
 
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+
+	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
+
+	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
+
+	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+
 	private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
@@ -93,8 +101,6 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 	private int? SizeValue { get; set; }
-
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 	{
@@ -141,6 +147,42 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 		SliceValue = null;
 		SliceDescriptor = null;
 		SliceDescriptorAction = configure;
+		return Self;
+	}
+
+	public SourceDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	{
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortValue = sort;
+		return Self;
+	}
+
+	public SourceDescriptor<TDocument> Sort(SortOptionsDescriptor<TDocument> descriptor)
+	{
+		SortValue = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortDescriptor = descriptor;
+		return Self;
+	}
+
+	public SourceDescriptor<TDocument> Sort(Action<SortOptionsDescriptor<TDocument>> configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorActions = null;
+		SortDescriptorAction = configure;
+		return Self;
+	}
+
+	public SourceDescriptor<TDocument> Sort(params Action<SortOptionsDescriptor<TDocument>>[] configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = configure;
 		return Self;
 	}
 
@@ -192,12 +234,6 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 		return Self;
 	}
 
-	public SourceDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
-	{
-		SortValue = sort;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -231,6 +267,35 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 		{
 			writer.WritePropertyName("slice");
 			JsonSerializer.Serialize(writer, SliceValue, options);
+		}
+
+		if (SortDescriptor is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, SortDescriptor, options);
+		}
+		else if (SortDescriptorAction is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
+		}
+		else if (SortDescriptorActions is not null)
+		{
+			writer.WritePropertyName("sort");
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteStartArray();
+			foreach (var action in SortDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(action), options);
+			}
+
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteEndArray();
+		}
+		else if (SortValue is not null)
+		{
+			writer.WritePropertyName("sort");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (SourceFieldsValue is not null)
@@ -269,12 +334,6 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 			writer.WriteNumberValue(SizeValue.Value);
 		}
 
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
 		writer.WriteEndObject();
 	}
 }
@@ -298,6 +357,14 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 
 	private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
 
+	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
+
+	private SortOptionsDescriptor SortDescriptor { get; set; }
+
+	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
+
+	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+
 	private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
@@ -311,8 +378,6 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 	private int? SizeValue { get; set; }
-
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
 
 	public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 	{
@@ -359,6 +424,42 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		SliceValue = null;
 		SliceDescriptor = null;
 		SliceDescriptorAction = configure;
+		return Self;
+	}
+
+	public SourceDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	{
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortValue = sort;
+		return Self;
+	}
+
+	public SourceDescriptor Sort(SortOptionsDescriptor descriptor)
+	{
+		SortValue = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = null;
+		SortDescriptor = descriptor;
+		return Self;
+	}
+
+	public SourceDescriptor Sort(Action<SortOptionsDescriptor> configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorActions = null;
+		SortDescriptorAction = configure;
+		return Self;
+	}
+
+	public SourceDescriptor Sort(params Action<SortOptionsDescriptor>[] configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortDescriptorActions = configure;
 		return Self;
 	}
 
@@ -410,12 +511,6 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		return Self;
 	}
 
-	public SourceDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
-	{
-		SortValue = sort;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -449,6 +544,35 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		{
 			writer.WritePropertyName("slice");
 			JsonSerializer.Serialize(writer, SliceValue, options);
+		}
+
+		if (SortDescriptor is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, SortDescriptor, options);
+		}
+		else if (SortDescriptorAction is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, new SortOptionsDescriptor(SortDescriptorAction), options);
+		}
+		else if (SortDescriptorActions is not null)
+		{
+			writer.WritePropertyName("sort");
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteStartArray();
+			foreach (var action in SortDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new SortOptionsDescriptor(action), options);
+			}
+
+			if (SortDescriptorActions.Length > 1)
+				writer.WriteEndArray();
+		}
+		else if (SortValue is not null)
+		{
+			writer.WritePropertyName("sort");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		if (SourceFieldsValue is not null)
@@ -485,12 +609,6 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		{
 			writer.WritePropertyName("size");
 			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
 		}
 
 		writer.WriteEndObject();

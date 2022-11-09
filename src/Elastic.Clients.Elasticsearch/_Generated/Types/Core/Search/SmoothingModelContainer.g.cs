@@ -145,11 +145,11 @@ public sealed partial class SmoothingModelContainerDescriptor<TDocument> : Seria
 		return Self;
 	}
 
-	public SmoothingModelContainerDescriptor<TDocument> Laplace(LaplaceSmoothingModel variant) => Set(variant, "laplace");
+	public SmoothingModelContainerDescriptor<TDocument> Laplace(LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
 	public SmoothingModelContainerDescriptor<TDocument> Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-	public SmoothingModelContainerDescriptor<TDocument> LinearInterpolation(LinearInterpolationSmoothingModel variant) => Set(variant, "linear_interpolation");
+	public SmoothingModelContainerDescriptor<TDocument> LinearInterpolation(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
 	public SmoothingModelContainerDescriptor<TDocument> LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-	public SmoothingModelContainerDescriptor<TDocument> StupidBackoff(StupidBackoffSmoothingModel variant) => Set(variant, "stupid_backoff");
+	public SmoothingModelContainerDescriptor<TDocument> StupidBackoff(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
 	public SmoothingModelContainerDescriptor<TDocument> StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -164,12 +164,11 @@ public sealed partial class SmoothingModelContainerDescriptor<TDocument> : Seria
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -208,11 +207,11 @@ public sealed partial class SmoothingModelContainerDescriptor : SerializableDesc
 		return Self;
 	}
 
-	public SmoothingModelContainerDescriptor Laplace(LaplaceSmoothingModel variant) => Set(variant, "laplace");
+	public SmoothingModelContainerDescriptor Laplace(LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
 	public SmoothingModelContainerDescriptor Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-	public SmoothingModelContainerDescriptor LinearInterpolation(LinearInterpolationSmoothingModel variant) => Set(variant, "linear_interpolation");
+	public SmoothingModelContainerDescriptor LinearInterpolation(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
 	public SmoothingModelContainerDescriptor LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-	public SmoothingModelContainerDescriptor StupidBackoff(StupidBackoffSmoothingModel variant) => Set(variant, "stupid_backoff");
+	public SmoothingModelContainerDescriptor StupidBackoff(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
 	public SmoothingModelContainerDescriptor StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -227,12 +226,11 @@ public sealed partial class SmoothingModelContainerDescriptor : SerializableDesc
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
