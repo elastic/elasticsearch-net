@@ -27,15 +27,15 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql;
-public sealed class SqlQueryRequestParameters : RequestParameters<SqlQueryRequestParameters>
+public sealed class SqlQueryRequestParameters : RequestParameters
 {
 }
 
 public sealed partial class SqlQueryRequest : PlainRequest<SqlQueryRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	[JsonInclude]
 	[JsonPropertyName("catalog")]
 	public string? Catalog { get; set; }
@@ -109,8 +109,8 @@ public sealed partial class SqlQueryRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
 
 	private QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
@@ -382,8 +382,8 @@ public sealed partial class SqlQueryRequestDescriptor : RequestDescriptor<SqlQue
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
 
 	private QueryDsl.QueryContainerDescriptor FilterDescriptor { get; set; }

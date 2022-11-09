@@ -18,7 +18,7 @@ namespace Tests.Framework.EndpointTests
 	public abstract class ApiIntegrationTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		: ApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
-		where TResponse : class, IElasticsearchResponse
+		where TResponse : ElasticsearchResponse
 		where TDescriptor : class
 		where TInitializer : class
 	{
@@ -32,7 +32,7 @@ namespace Tests.Framework.EndpointTests
 		protected virtual void ExpectResponse(TResponse response) { }
 
 		[I] public virtual async Task ReturnsExpectedStatusCode() =>
-			await AssertOnAllResponses(r => r.ApiCall.HttpStatusCode.Should().Be(ExpectStatusCode));
+			await AssertOnAllResponses(r => r.ApiCallDetails.HttpStatusCode.Should().Be(ExpectStatusCode));
 
 		[I] public virtual async Task ReturnsExpectedIsValid() =>
 			await AssertOnAllResponses(r => r.ShouldHaveExpectedIsValid(ExpectIsValid));
@@ -42,10 +42,10 @@ namespace Tests.Framework.EndpointTests
 		protected override Task AssertOnAllResponses(Action<TResponse> assert) =>
 			base.AssertOnAllResponses(r =>
 			{
-				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-					&& r.ApiCall.OriginalException is not TransportException)
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCallDetails.OriginalException != null
+					&& r.ApiCallDetails.OriginalException is not TransportException)
 				{
-					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
+					var e = ExceptionDispatchInfo.Capture(r.ApiCallDetails.OriginalException.Demystify());
 					throw new ResponseAssertionException(e.SourceException, r).Demystify();
 				}
 
@@ -64,7 +64,7 @@ namespace Tests.Framework.EndpointTests
 	public abstract class NdJsonApiIntegrationTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		: NdJsonApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
-		where TResponse : class, IElasticsearchResponse
+		where TResponse : ElasticsearchResponse
 		where TDescriptor : class
 		where TInitializer : class
 	{
@@ -79,7 +79,7 @@ namespace Tests.Framework.EndpointTests
 
 		[I]
 		public virtual async Task ReturnsExpectedStatusCode() =>
-			await AssertOnAllResponses(r => r.ApiCall.HttpStatusCode.Should().Be(ExpectStatusCode));
+			await AssertOnAllResponses(r => r.ApiCallDetails.HttpStatusCode.Should().Be(ExpectStatusCode));
 
 		[I]
 		public virtual async Task ReturnsExpectedIsValid() =>
@@ -90,10 +90,10 @@ namespace Tests.Framework.EndpointTests
 		protected override Task AssertOnAllResponses(Action<TResponse> assert) =>
 			base.AssertOnAllResponses(r =>
 			{
-				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-					&& r.ApiCall.OriginalException is not TransportException)
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCallDetails.OriginalException != null
+					&& r.ApiCallDetails.OriginalException is not TransportException)
 				{
-					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
+					var e = ExceptionDispatchInfo.Capture(r.ApiCallDetails.OriginalException.Demystify());
 					throw new ResponseAssertionException(e.SourceException, r).Demystify();
 				}
 
@@ -111,10 +111,10 @@ namespace Tests.Framework.EndpointTests
 
 	public class ResponseAssertionException : Exception
 	{
-		public ResponseAssertionException(Exception innerException, IElasticsearchResponse response)
+		public ResponseAssertionException(Exception innerException, ElasticsearchResponse response)
 			: base(ResponseInMessage(innerException.Message, response), innerException) { }
 
-		private static string ResponseInMessage(string innerExceptionMessage, IElasticsearchResponse r) => $@"{innerExceptionMessage}
+		private static string ResponseInMessage(string innerExceptionMessage, ElasticsearchResponse r) => $@"{innerExceptionMessage}
 Response Under Test:
 {r.DebugInformation}";
 	}
