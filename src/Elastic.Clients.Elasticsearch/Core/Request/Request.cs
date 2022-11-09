@@ -35,7 +35,7 @@ public abstract class Request
 }
 
 public abstract class Request<TParameters> : Request
-	where TParameters : class, IRequestParameters, new()
+	where TParameters : RequestParameters, new()
 {
 	private readonly TParameters _parameters;
 

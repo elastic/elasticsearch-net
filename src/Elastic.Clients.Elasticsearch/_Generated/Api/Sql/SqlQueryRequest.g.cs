@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql;
-public sealed class SqlQueryRequestParameters : RequestParameters<SqlQueryRequestParameters>
+public sealed class SqlQueryRequestParameters : RequestParameters
 {
 }
 

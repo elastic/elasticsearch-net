@@ -99,7 +99,7 @@ public sealed partial class ElasticsearchClient
 		Action<IRequestConfiguration>? forceConfiguration = null)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : class, IRequestParameters, new()
+		where TRequestParameters : RequestParameters, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -159,7 +159,7 @@ public sealed partial class ElasticsearchClient
 		Action<IRequestConfiguration>? forceConfiguration = null)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : class, IRequestParameters, new()
+		where TRequestParameters : RequestParameters, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -216,11 +216,11 @@ public sealed partial class ElasticsearchClient
 
 	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
-		IRequestParameters? parameters,
+		RequestParameters? parameters,
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : class, IRequestParameters, new()
+		where TRequestParameters : RequestParameters, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -261,7 +261,7 @@ public sealed partial class ElasticsearchClient
 
 		return SendRequest(request, parameters, url, postData, hadRequestConfig, originalHeaders);
 
-		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
+		async Task<TResponse> SendRequest(TRequest request, RequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
 			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
 			PostRequestProductCheck<TRequest, TResponse>(request, response);
@@ -290,7 +290,7 @@ public sealed partial class ElasticsearchClient
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : class, IRequestParameters, new()
+		where TRequestParameters : RequestParameters, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -331,7 +331,7 @@ public sealed partial class ElasticsearchClient
 
 		return SendRequest(request, request.RequestParameters, url, postData, hadRequestConfig, originalHeaders);
 
-		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
+		async Task<TResponse> SendRequest(TRequest request, RequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
 			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
 			PostRequestProductCheck<TRequest, TResponse>(request, response);
@@ -357,12 +357,12 @@ public sealed partial class ElasticsearchClient
 
 	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
-		IRequestParameters? parameters,
+		RequestParameters? parameters,
 		Action<IRequestConfiguration>? forceConfiguration = null,
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : class, IRequestParameters, new()
+		where TRequestParameters : RequestParameters, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -403,7 +403,7 @@ public sealed partial class ElasticsearchClient
 
 		return SendRequest(request, parameters, url, postData, hadRequestConfig, originalHeaders);
 
-		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
+		async Task<TResponse> SendRequest(TRequest request, RequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
 			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
 			PostRequestProductCheck<TRequest, TResponse>(request, response);
@@ -430,7 +430,7 @@ public sealed partial class ElasticsearchClient
 	private (string url, PostData data) PrepareRequest<TRequest, TRequestParameters>(TRequest request,
 		Action<IRequestConfiguration>? forceConfiguration)
 		where TRequest : Request<TRequestParameters>
-		where TRequestParameters : class, IRequestParameters, new()
+		where TRequestParameters : RequestParameters, new()
 	{
 		request.ThrowIfNull(nameof(request), "A request is required.");
 
@@ -470,7 +470,7 @@ public sealed partial class ElasticsearchClient
 	}
 
 	private static void ForceConfiguration<TRequestParameters>(Request<TRequestParameters> request, Action<IRequestConfiguration> forceConfiguration)
-		where TRequestParameters : class, IRequestParameters, new()
+		where TRequestParameters : RequestParameters, new()
 	{
 		var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 		forceConfiguration(configuration);
@@ -479,7 +479,7 @@ public sealed partial class ElasticsearchClient
 
 	private static void ForceContentType<TRequest, TRequestParameters>(TRequest request, string contentType)
 		where TRequest : Request<TRequestParameters>
-		where TRequestParameters : class, IRequestParameters, new()
+		where TRequestParameters : RequestParameters, new()
 	{
 		var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 		configuration.Accept = contentType;
@@ -489,7 +489,7 @@ public sealed partial class ElasticsearchClient
 
 	private static void ForceAccept<TRequest, TRequestParameters>(TRequest request, string acceptType)
 		where TRequest : Request<TRequestParameters>
-		where TRequestParameters : class, IRequestParameters,new()
+		where TRequestParameters : RequestParameters, new()
 	{
 		var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 		configuration.Accept = acceptType;

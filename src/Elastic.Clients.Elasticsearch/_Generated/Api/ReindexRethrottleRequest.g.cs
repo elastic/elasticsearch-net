@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class ReindexRethrottleRequestParameters : RequestParameters<ReindexRethrottleRequestParameters>
+public sealed class ReindexRethrottleRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }

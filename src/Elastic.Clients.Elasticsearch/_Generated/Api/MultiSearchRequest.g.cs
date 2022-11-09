@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class MultiSearchRequestParameters : RequestParameters<MultiSearchRequestParameters>
+public sealed class MultiSearchRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }

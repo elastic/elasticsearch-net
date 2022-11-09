@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class MultiSearchTemplateRequestParameters : RequestParameters<MultiSearchTemplateRequestParameters>
+public sealed class MultiSearchTemplateRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }

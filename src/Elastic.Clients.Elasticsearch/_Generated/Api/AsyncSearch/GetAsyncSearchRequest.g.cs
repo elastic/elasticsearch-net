@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
-public sealed class GetAsyncSearchRequestParameters : RequestParameters<GetAsyncSearchRequestParameters>
+public sealed class GetAsyncSearchRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }

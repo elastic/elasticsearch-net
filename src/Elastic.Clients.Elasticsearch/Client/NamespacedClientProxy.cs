@@ -28,7 +28,7 @@ public abstract class NamespacedClientProxy
 		Action<IRequestConfiguration>? forceConfiguration = null)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : class, IRequestParameters, new() =>
+		where TRequestParameters : RequestParameters, new() =>
 			_client.DoRequest<TRequest, TResponse, TRequestParameters>(request, parameters, forceConfiguration);
 
 	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
@@ -36,7 +36,7 @@ public abstract class NamespacedClientProxy
 		Action<IRequestConfiguration>? forceConfiguration = null)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : class, IRequestParameters, new() =>
+		where TRequestParameters : RequestParameters, new() =>
 			_client.DoRequest<TRequest, TResponse, TRequestParameters>(request, forceConfiguration);
 
 	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
@@ -45,7 +45,7 @@ public abstract class NamespacedClientProxy
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : class, IRequestParameters, new() =>
+		where TRequestParameters : RequestParameters, new() =>
 			_client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, parameters, cancellationToken: cancellationToken);
 
 	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
@@ -53,7 +53,7 @@ public abstract class NamespacedClientProxy
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : class, IRequestParameters, new() =>
+		where TRequestParameters : RequestParameters, new() =>
 			_client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, cancellationToken: cancellationToken);
 
 	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
@@ -63,6 +63,6 @@ public abstract class NamespacedClientProxy
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : class, IRequestParameters, new() =>
+		where TRequestParameters : RequestParameters, new() =>
 			_client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, parameters, forceConfiguration, cancellationToken);
 }

@@ -15,7 +15,7 @@ namespace Elastic.Clients.Elasticsearch.Requests;
 /// </summary>
 public abstract partial class RequestDescriptor<TDescriptor, TParameters> : Request<TParameters>, ISelfSerializable
 		where TDescriptor : RequestDescriptor<TDescriptor, TParameters>
-		where TParameters : RequestParameters<TParameters>, new()
+		where TParameters : RequestParameters, new()
 {
 	private readonly TDescriptor _descriptor;
 

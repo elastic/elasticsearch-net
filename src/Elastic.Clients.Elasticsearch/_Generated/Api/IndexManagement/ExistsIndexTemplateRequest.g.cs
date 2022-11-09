@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed class ExistsIndexTemplateRequestParameters : RequestParameters<ExistsIndexTemplateRequestParameters>
+public sealed class ExistsIndexTemplateRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }

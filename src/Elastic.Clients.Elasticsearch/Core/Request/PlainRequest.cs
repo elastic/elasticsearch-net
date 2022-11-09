@@ -9,7 +9,7 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch.Requests;
 
 public abstract class PlainRequest<TParameters> : Request<TParameters>
-	where TParameters : class, IRequestParameters, new()
+	where TParameters : RequestParameters, new()
 {
 	// This internal ctor ensures that only types defined within the client assembly can derive from this base class.
 	// We don't expect consumers to derive from this public base class.

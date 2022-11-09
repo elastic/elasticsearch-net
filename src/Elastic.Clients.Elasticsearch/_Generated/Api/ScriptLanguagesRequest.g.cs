@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class ScriptLanguagesRequestParameters : RequestParameters<ScriptLanguagesRequestParameters>
+public sealed class ScriptLanguagesRequestParameters : RequestParameters
 {
 }
 

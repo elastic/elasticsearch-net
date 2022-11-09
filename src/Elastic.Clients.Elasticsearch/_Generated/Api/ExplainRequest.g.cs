@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class ExplainRequestParameters : RequestParameters<ExplainRequestParameters>
+public sealed class ExplainRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }

@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed class IndexTemplateRequestParameters : RequestParameters<IndexTemplateRequestParameters>
+public sealed class IndexTemplateRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }

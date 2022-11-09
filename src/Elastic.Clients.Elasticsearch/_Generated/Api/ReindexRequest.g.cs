@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class ReindexRequestParameters : RequestParameters<ReindexRequestParameters>
+public sealed class ReindexRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }

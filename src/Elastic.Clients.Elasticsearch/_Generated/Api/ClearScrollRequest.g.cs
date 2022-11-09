@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class ClearScrollRequestParameters : RequestParameters<ClearScrollRequestParameters>
+public sealed class ClearScrollRequestParameters : RequestParameters
 {
 }
 
