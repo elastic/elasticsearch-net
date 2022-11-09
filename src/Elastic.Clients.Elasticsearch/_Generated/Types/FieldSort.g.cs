@@ -29,29 +29,317 @@ public sealed partial class FieldSort
 {
 	[JsonInclude]
 	[JsonPropertyName("format")]
-	public string? Format { get; init; }
+	public string? Format { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("missing")]
-	public FieldValue? Missing { get; init; }
+	public FieldValue? Missing { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("mode")]
-	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; init; }
+	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("nested")]
-	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; init; }
+	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("numeric_type")]
-	public Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericType { get; init; }
+	public Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericType { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("order")]
-	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; init; }
+	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("unmapped_type")]
-	public Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedType { get; init; }
+	public Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedType { get; set; }
+}
+
+public sealed partial class FieldSortDescriptor<TDocument> : SerializableDescriptor<FieldSortDescriptor<TDocument>>
+{
+	internal FieldSortDescriptor(Action<FieldSortDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public FieldSortDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
+
+	private NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
+
+	private Action<NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericTypeValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedTypeValue { get; set; }
+
+	public FieldSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
+	{
+		NestedDescriptor = null;
+		NestedDescriptorAction = null;
+		NestedValue = nested;
+		return Self;
+	}
+
+	public FieldSortDescriptor<TDocument> Nested(NestedSortValueDescriptor<TDocument> descriptor)
+	{
+		NestedValue = null;
+		NestedDescriptorAction = null;
+		NestedDescriptor = descriptor;
+		return Self;
+	}
+
+	public FieldSortDescriptor<TDocument> Nested(Action<NestedSortValueDescriptor<TDocument>> configure)
+	{
+		NestedValue = null;
+		NestedDescriptor = null;
+		NestedDescriptorAction = configure;
+		return Self;
+	}
+
+	public FieldSortDescriptor<TDocument> Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public FieldSortDescriptor<TDocument> Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public FieldSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	{
+		ModeValue = mode;
+		return Self;
+	}
+
+	public FieldSortDescriptor<TDocument> NumericType(Elastic.Clients.Elasticsearch.FieldSortNumericType? numericType)
+	{
+		NumericTypeValue = numericType;
+		return Self;
+	}
+
+	public FieldSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+	{
+		OrderValue = order;
+		return Self;
+	}
+
+	public FieldSortDescriptor<TDocument> UnmappedType(Elastic.Clients.Elasticsearch.Mapping.FieldType? unmappedType)
+	{
+		UnmappedTypeValue = unmappedType;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (NestedDescriptor is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, NestedDescriptor, options);
+		}
+		else if (NestedDescriptorAction is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, new NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
+		}
+		else if (NestedValue is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, NestedValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(FormatValue))
+		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
+		}
+
+		if (MissingValue is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
+		}
+
+		if (ModeValue is not null)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
+		}
+
+		if (NumericTypeValue is not null)
+		{
+			writer.WritePropertyName("numeric_type");
+			JsonSerializer.Serialize(writer, NumericTypeValue, options);
+		}
+
+		if (OrderValue is not null)
+		{
+			writer.WritePropertyName("order");
+			JsonSerializer.Serialize(writer, OrderValue, options);
+		}
+
+		if (UnmappedTypeValue is not null)
+		{
+			writer.WritePropertyName("unmapped_type");
+			JsonSerializer.Serialize(writer, UnmappedTypeValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class FieldSortDescriptor : SerializableDescriptor<FieldSortDescriptor>
+{
+	internal FieldSortDescriptor(Action<FieldSortDescriptor> configure) => configure.Invoke(this);
+	public FieldSortDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
+
+	private NestedSortValueDescriptor NestedDescriptor { get; set; }
+
+	private Action<NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
+
+	private string? FormatValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericTypeValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedTypeValue { get; set; }
+
+	public FieldSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
+	{
+		NestedDescriptor = null;
+		NestedDescriptorAction = null;
+		NestedValue = nested;
+		return Self;
+	}
+
+	public FieldSortDescriptor Nested(NestedSortValueDescriptor descriptor)
+	{
+		NestedValue = null;
+		NestedDescriptorAction = null;
+		NestedDescriptor = descriptor;
+		return Self;
+	}
+
+	public FieldSortDescriptor Nested(Action<NestedSortValueDescriptor> configure)
+	{
+		NestedValue = null;
+		NestedDescriptor = null;
+		NestedDescriptorAction = configure;
+		return Self;
+	}
+
+	public FieldSortDescriptor Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public FieldSortDescriptor Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public FieldSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	{
+		ModeValue = mode;
+		return Self;
+	}
+
+	public FieldSortDescriptor NumericType(Elastic.Clients.Elasticsearch.FieldSortNumericType? numericType)
+	{
+		NumericTypeValue = numericType;
+		return Self;
+	}
+
+	public FieldSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
+	{
+		OrderValue = order;
+		return Self;
+	}
+
+	public FieldSortDescriptor UnmappedType(Elastic.Clients.Elasticsearch.Mapping.FieldType? unmappedType)
+	{
+		UnmappedTypeValue = unmappedType;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (NestedDescriptor is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, NestedDescriptor, options);
+		}
+		else if (NestedDescriptorAction is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, new NestedSortValueDescriptor(NestedDescriptorAction), options);
+		}
+		else if (NestedValue is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, NestedValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(FormatValue))
+		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
+		}
+
+		if (MissingValue is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
+		}
+
+		if (ModeValue is not null)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
+		}
+
+		if (NumericTypeValue is not null)
+		{
+			writer.WritePropertyName("numeric_type");
+			JsonSerializer.Serialize(writer, NumericTypeValue, options);
+		}
+
+		if (OrderValue is not null)
+		{
+			writer.WritePropertyName("order");
+			JsonSerializer.Serialize(writer, OrderValue, options);
+		}
+
+		if (UnmappedTypeValue is not null)
+		{
+			writer.WritePropertyName("unmapped_type");
+			JsonSerializer.Serialize(writer, UnmappedTypeValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
 }
