@@ -18,7 +18,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <inheritdoc />
 public sealed partial class ElasticsearchClient
 {
-	private readonly ITransport<IElasticsearchClientSettings> _transport;
+	private readonly HttpTransport<IElasticsearchClientSettings> _transport;
 
 	internal static ConditionalWeakTable<JsonSerializerOptions, IElasticsearchClientSettings> SettingsTable { get; } = new();
 
@@ -55,7 +55,7 @@ public sealed partial class ElasticsearchClient
 	/// </summary>
 	/// <param name="elasticsearchClientSettings"></param>
 	public ElasticsearchClient(IElasticsearchClientSettings elasticsearchClientSettings)
-		: this(new Transport<IElasticsearchClientSettings>(elasticsearchClientSettings))
+		: this(new DefaultHttpTransport<IElasticsearchClientSettings>(elasticsearchClientSettings))
 	{
 	}
 
@@ -63,7 +63,7 @@ public sealed partial class ElasticsearchClient
 	///     TODO
 	/// </summary>
 	/// <param name="transport"></param>
-	public ElasticsearchClient(ITransport<IElasticsearchClientSettings> transport)
+	public ElasticsearchClient(HttpTransport<IElasticsearchClientSettings> transport)
 	{
 		transport.ThrowIfNull(nameof(transport));
 		transport.Settings.ThrowIfNull(nameof(transport.Settings));
@@ -80,7 +80,7 @@ public sealed partial class ElasticsearchClient
 	public Inferrer Infer => _transport.Settings.Inferrer;
 	public Serializer RequestResponseSerializer => _transport.Settings.RequestResponseSerializer;
 	public Serializer SourceSerializer => _transport.Settings.SourceSerializer;
-	public ITransport Transport => _transport;
+	public HttpTransport Transport => _transport;
 
 	private ProductCheckStatus _productCheckStatus;
 
