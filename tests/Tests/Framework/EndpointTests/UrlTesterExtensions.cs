@@ -11,9 +11,9 @@ namespace Tests.Framework.EndpointTests
 	public static class UrlTesterExtensions
 	{
 		public static async Task<UrlTester> RequestAsync<TResponse>(this Task<UrlTester> tester, Func<ElasticsearchClient, Task<TResponse>> call)
-			where TResponse : IElasticsearchResponse => await (await tester).WhenCallingAsync(call, "request async");
+			where TResponse : ElasticsearchResponse => await (await tester).WhenCallingAsync(call, "request async");
 
 		public static async Task<UrlTester> FluentAsync<TResponse>(this Task<UrlTester> tester, Func<ElasticsearchClient, Task<TResponse>> call)
-			where TResponse : IElasticsearchResponse => await (await tester).WhenCallingAsync(call, "fluent async");
+			where TResponse : ElasticsearchResponse => await (await tester).WhenCallingAsync(call, "fluent async");
 	}
 }

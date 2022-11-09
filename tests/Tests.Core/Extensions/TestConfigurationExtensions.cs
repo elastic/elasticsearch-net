@@ -10,7 +10,7 @@ namespace Tests.Core.Extensions
 {
 	public static class TestConfigurationExtensions
 	{
-		public static ITransportClient CreateConnection(this TestConfigurationBase configuration, bool forceInMemory = false, byte[] response = null)
+		public static TransportClient CreateConnection(this TestConfigurationBase configuration, bool forceInMemory = false, byte[] response = null)
 		{
 			var headers = new Dictionary<string, IEnumerable<string>> { { "x-elastic-product", new[] { "Elasticsearch" } } };
 

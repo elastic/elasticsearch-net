@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed class CreateRequestParameters : RequestParameters<CreateRequestParameters>
+public sealed class CreateRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -46,8 +46,8 @@ public sealed partial class CreateRequest : PlainRequest<CreateRequestParameters
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
@@ -86,8 +86,8 @@ public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	public CreateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CreateRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public CreateRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
@@ -222,8 +222,8 @@ public sealed partial class CreateRequestDescriptor : RequestDescriptor<CreateRe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	public CreateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CreateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public CreateRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
