@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
-public sealed partial class AsyncSearchSubmitResponse<TDocument> : ElasticsearchResponseBase
+public sealed partial class AsyncSearchSubmitResponse<TDocument> : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("expiration_time")]

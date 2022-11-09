@@ -27,15 +27,15 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class ClosePointInTimeRequestParameters : RequestParameters<ClosePointInTimeRequestParameters>
+public sealed class ClosePointInTimeRequestParameters : RequestParameters
 {
 }
 
 public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInTimeRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => true;
 	[JsonInclude]
 	[JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
@@ -49,8 +49,8 @@ public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => true;
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 
 	public ClosePointInTimeRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)

@@ -7,8 +7,12 @@ using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Transport;
 using Playground;
+using CreateResponse = Elastic.Clients.Elasticsearch.IndexManagement.CreateResponse;
 
 // const string IndexName = "stock-demo-v1";
+
+var mockedResponse = ResponseFactory.CreateResponse(new CreateResponse { Acknowledged = true, Index = "testing", ShardsAcknowledged = true }, 200);
+var debug = mockedResponse.DebugInformation;
 
 AggregationContainer a = new TermsAggregation("test");
 

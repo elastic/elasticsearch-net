@@ -23,7 +23,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed partial class ClearScrollResponse : ElasticsearchResponseBase
+public sealed partial class ClearScrollResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("num_freed")]

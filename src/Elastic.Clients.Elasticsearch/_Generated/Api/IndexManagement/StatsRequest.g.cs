@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed class StatsRequestParameters : RequestParameters<StatsRequestParameters>
+public sealed class StatsRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
@@ -76,8 +76,8 @@ public sealed partial class StatsRequest : PlainRequest<StatsRequestParameters>
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementStats;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
@@ -122,8 +122,8 @@ public sealed partial class StatsRequestDescriptor<TDocument> : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementStats;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public StatsRequestDescriptor<TDocument> CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
 	public StatsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public StatsRequestDescriptor<TDocument> FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
@@ -166,8 +166,8 @@ public sealed partial class StatsRequestDescriptor : RequestDescriptor<StatsRequ
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementStats;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public StatsRequestDescriptor CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
 	public StatsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public StatsRequestDescriptor FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
