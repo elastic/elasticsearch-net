@@ -16,7 +16,7 @@ internal sealed class ElasticsearchClientProductRegistration : ElasticsearchProd
 	public static ElasticsearchClientProductRegistration DefaultForElasticsearchClientsElasticsearch { get; } = new(typeof(ElasticsearchClient));
 
 	/// <summary>
-	///     Elastic.Clients.Elasticsearch handles 404 in its <see cref="ElasticsearchResponseBase.IsValid" />, we do not want the low level client throwing
+	///     Elastic.Clients.Elasticsearch handles 404 in its <see cref="ElasticsearchResponse.IsValid" />, we do not want the low level client throwing
 	///     exceptions
 	///     when <see cref="ITransportConfiguration.ThrowExceptions" /> is enabled for 404's. The client is in charge of
 	///     composing paths
@@ -26,12 +26,12 @@ internal sealed class ElasticsearchClientProductRegistration : ElasticsearchProd
 		statusCode is >= 200 and < 300 or 404;
 
 	/// <summary>
-	///     Makes the low level transport aware of Elastic.Clients.Elasticsearch's <see cref="ElasticsearchResponseBase" />
+	///     Makes the low level transport aware of Elastic.Clients.Elasticsearch's <see cref="ElasticsearchResponse" />
 	///     so that it can peek in to its exposed error when reporting failures.
 	/// </summary>
 	public override bool TryGetServerErrorReason<TResponse>(TResponse response, [NotNullWhen(returnValue: true)] out string? reason)
 	{
-		if (response is not ElasticsearchResponseBase r)
+		if (response is not ElasticsearchResponse r)
 			return base.TryGetServerErrorReason(response, out reason);
 		reason = r.ServerError?.Error?.ToString();
 		return !string.IsNullOrEmpty(reason);

@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql;
-public sealed class SqlDeleteAsyncRequestParameters : RequestParameters<SqlDeleteAsyncRequestParameters>
+public sealed class SqlDeleteAsyncRequestParameters : RequestParameters
 {
 }
 
@@ -38,8 +38,8 @@ public sealed partial class SqlDeleteAsyncRequest : PlainRequest<SqlDeleteAsyncR
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlDeleteAsync;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 }
 
 public sealed partial class SqlDeleteAsyncRequestDescriptor<TDocument> : RequestDescriptor<SqlDeleteAsyncRequestDescriptor<TDocument>, SqlDeleteAsyncRequestParameters>
@@ -54,8 +54,8 @@ public sealed partial class SqlDeleteAsyncRequestDescriptor<TDocument> : Request
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlDeleteAsync;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 	public SqlDeleteAsyncRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -79,8 +79,8 @@ public sealed partial class SqlDeleteAsyncRequestDescriptor : RequestDescriptor<
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlDeleteAsync;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 	public SqlDeleteAsyncRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);

@@ -34,7 +34,7 @@ namespace Tests.Core.Extensions
 			{
 				var settings = modifySettings(cluster.CreateConnectionSettings());
 
-				var current = (ITransportClientConfigurationValues)settings;
+				var current = (TransportClientConfigurationValues)settings;
 				var notAlreadyAuthenticated = current.Authentication == null
 				                              && current.ClientCertificates == null;
 

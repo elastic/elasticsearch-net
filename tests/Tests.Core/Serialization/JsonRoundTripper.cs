@@ -48,13 +48,13 @@ namespace Tests.Core.Serialization
 			return deserializationResult.Result;
 		}
 
-		public void FromRequest(IElasticsearchResponse response) => ToSerializeTo(response.ApiCall.RequestBodyInBytes);
+		public void FromRequest(ElasticsearchResponse response) => ToSerializeTo(response.ApiCallDetails.RequestBodyInBytes);
 
-		public void FromRequest<T>(Func<ElasticsearchClient, T> call) where T : IElasticsearchResponse => FromRequest(call(Tester.Client));
+		public void FromRequest<T>(Func<ElasticsearchClient, T> call) where T : ElasticsearchResponse => FromRequest(call(Tester.Client));
 
-		public void FromResponse(IElasticsearchResponse response) => ToSerializeTo(response.ApiCall.ResponseBodyInBytes);
+		public void FromResponse(ElasticsearchResponse response) => ToSerializeTo(response.ApiCallDetails.ResponseBodyInBytes);
 
-		public void FromResponse<T>(Func<ElasticsearchClient, T> call) where T : IElasticsearchResponse => FromResponse(call(Tester.Client));
+		public void FromResponse<T>(Func<ElasticsearchClient, T> call) where T : ElasticsearchResponse => FromResponse(call(Tester.Client));
 
 		private void ToSerializeTo(byte[] json)
 		{

@@ -23,7 +23,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed partial class ExplainResponse<TDocument> : ElasticsearchResponseBase
+public sealed partial class ExplainResponse<TDocument> : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("explanation")]
