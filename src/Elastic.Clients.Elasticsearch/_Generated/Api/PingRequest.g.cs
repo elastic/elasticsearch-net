@@ -27,15 +27,15 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class PingRequestParameters : RequestParameters<PingRequestParameters>
+public sealed class PingRequestParameters : RequestParameters
 {
 }
 
 public sealed partial class PingRequest : PlainRequest<PingRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	internal override bool SupportsBody => false;
 }
 
 public sealed partial class PingRequestDescriptor : RequestDescriptor<PingRequestDescriptor, PingRequestParameters>
@@ -46,8 +46,8 @@ public sealed partial class PingRequestDescriptor : RequestDescriptor<PingReques
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-	protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	internal override bool SupportsBody => false;
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 	}

@@ -23,7 +23,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed partial class DeleteByQueryRethrottleResponse : ElasticsearchResponseBase
+public sealed partial class DeleteByQueryRethrottleResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("node_failures")]

@@ -23,7 +23,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed partial class UpdateByQueryResponse : ElasticsearchResponseBase
+public sealed partial class UpdateByQueryResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("batches")]

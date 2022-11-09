@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed class SimulateTemplateRequestParameters : RequestParameters<SimulateTemplateRequestParameters>
+public sealed class SimulateTemplateRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
@@ -47,8 +47,8 @@ public sealed partial class SimulateTemplateRequest : PlainRequest<SimulateTempl
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
@@ -64,8 +64,8 @@ public sealed partial class SimulateTemplateRequestDescriptor : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateTemplate;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 	public SimulateTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public SimulateTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public SimulateTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)

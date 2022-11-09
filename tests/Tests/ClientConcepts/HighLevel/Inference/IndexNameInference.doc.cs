@@ -50,7 +50,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			//hide
 			{
-				searchResponse.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
+				searchResponse.ApiCallDetails.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
 				var resolver = new IndexNameResolver(settings);
 				var index = resolver.Resolve<Project>();
 				index.Should().Be("defaultindex");
@@ -81,7 +81,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			//hide
 			{
-				searchResponse.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
+				searchResponse.ApiCallDetails.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
 				var resolver = new IndexNameResolver(settings);
 				var index = resolver.Resolve<Project>();
 				index.Should().Be("projects");
@@ -116,7 +116,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			//hide
 			{
-				projectSearchResponse.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
+				projectSearchResponse.ApiCallDetails.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
 				var resolver = new IndexNameResolver(settings);
 				var index = resolver.Resolve<Project>();
 				index.Should().Be("projects");
@@ -134,7 +134,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			expected = "http://localhost:9200/defaultindex/_search";
 
 			//hide
-			objectSearchResponse.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
+			objectSearchResponse.ApiCallDetails.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
 		}
 
 		/**
@@ -158,7 +158,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var expected = "http://localhost:9200/some-other-index/_search";
 
 			//hide
-			response.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
+			response.ApiCallDetails.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
 		}
 
 		/** When an index name is provided on a request, it **will take precedence** over the default
@@ -183,7 +183,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			//hide
 			{
 				var expected = "http://localhost:9200/some-other-index/_search";
-				response.ApiCall.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
+				response.ApiCallDetails.Uri.GetLeftPart(UriPartial.Path).Should().Be(expected);
 			}
 		}
 
