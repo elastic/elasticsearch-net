@@ -28,9 +28,9 @@ namespace Elastic.Clients.Elasticsearch.JsonNetSerializer.Converters
 		};
 
 		private readonly Serializer _builtInSerializer;
-		private readonly IMemoryStreamFactory _memoryStreamFactory;
+		private readonly MemoryStreamFactory _memoryStreamFactory;
 
-		public HandleNestTypesOnSourceJsonConverter(Serializer builtInSerializer, IMemoryStreamFactory memoryStreamFactory
+		public HandleNestTypesOnSourceJsonConverter(Serializer builtInSerializer, MemoryStreamFactory memoryStreamFactory
 		)
 		{
 			_builtInSerializer = builtInSerializer;

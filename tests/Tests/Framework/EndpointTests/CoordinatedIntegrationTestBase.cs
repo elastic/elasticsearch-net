@@ -26,7 +26,7 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 	protected CoordinatedIntegrationTestBase(CoordinatedUsage coordinatedUsage) => _coordinatedUsage = coordinatedUsage;
 
 	protected async Task Assert<TResponse>(string name, Action<TResponse> assert)
-		where TResponse : class, IElasticsearchResponse
+		where TResponse : ElasticsearchResponse
 	{
 		if (_coordinatedUsage.Skips(name))
 			return;
@@ -39,7 +39,7 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 	}
 
 	protected async Task Assert<TResponse>(string name, Action<string, TResponse> assert)
-		where TResponse : class, IElasticsearchResponse
+		where TResponse : ElasticsearchResponse
 	{
 		if (_coordinatedUsage.Skips(name))
 			return;
@@ -59,7 +59,7 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 	}
 
 	private async Task AssertOnAllResponses<TResponse>(string name, LazyResponses responses, Action<string, TResponse> assert)
-		where TResponse : class, IElasticsearchResponse
+		where TResponse : ElasticsearchResponse
 	{
 		foreach (var (key, value) in await responses)
 		{
@@ -70,10 +70,10 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 				throw new Exception($"{name} is not a request observed and so no call isolated values could be located for it");
 
 			var r = response;
-			if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-				&& r.ApiCall.OriginalException is not TransportException)
+			if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCallDetails.OriginalException != null
+				&& r.ApiCallDetails.OriginalException is not TransportException)
 			{
-				var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
+				var e = ExceptionDispatchInfo.Capture(r.ApiCallDetails.OriginalException.Demystify());
 				throw new ResponseAssertionException(e.SourceException, r).Demystify();
 			}
 

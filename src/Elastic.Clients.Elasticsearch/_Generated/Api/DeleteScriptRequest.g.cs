@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class DeleteScriptRequestParameters : RequestParameters<DeleteScriptRequestParameters>
+public sealed class DeleteScriptRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -43,8 +43,8 @@ public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptReque
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteScript;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
@@ -64,8 +64,8 @@ public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteScript;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 	public DeleteScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public DeleteScriptRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public DeleteScriptRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
@@ -91,8 +91,8 @@ public sealed partial class DeleteScriptRequestDescriptor : RequestDescriptor<De
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteScript;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 	public DeleteScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public DeleteScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public DeleteScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)

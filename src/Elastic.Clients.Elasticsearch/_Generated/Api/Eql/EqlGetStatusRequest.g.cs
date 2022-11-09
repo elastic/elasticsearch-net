@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql;
-public sealed class EqlGetStatusRequestParameters : RequestParameters<EqlGetStatusRequestParameters>
+public sealed class EqlGetStatusRequestParameters : RequestParameters
 {
 }
 
@@ -38,8 +38,8 @@ public sealed partial class EqlGetStatusRequest : PlainRequest<EqlGetStatusReque
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 }
 
 public sealed partial class EqlGetStatusRequestDescriptor<TDocument> : RequestDescriptor<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusRequestParameters>
@@ -54,8 +54,8 @@ public sealed partial class EqlGetStatusRequestDescriptor<TDocument> : RequestDe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public EqlGetStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -79,8 +79,8 @@ public sealed partial class EqlGetStatusRequestDescriptor : RequestDescriptor<Eq
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public EqlGetStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);

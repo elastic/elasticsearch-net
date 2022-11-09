@@ -10,7 +10,7 @@ namespace Elastic.Clients.Elasticsearch;
 
 internal static class RequestParametersExtensions
 {
-	internal static void SetRequestMetaData(this IRequestParameters parameters, RequestMetaData requestMetaData)
+	internal static void SetRequestMetaData(this RequestParameters parameters, RequestMetaData requestMetaData)
 	{
 		if (parameters is null)
 			throw new ArgumentNullException(nameof(parameters));

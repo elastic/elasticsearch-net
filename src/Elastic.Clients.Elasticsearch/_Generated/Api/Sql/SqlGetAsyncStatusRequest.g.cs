@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql;
-public sealed class SqlGetAsyncStatusRequestParameters : RequestParameters<SqlGetAsyncStatusRequestParameters>
+public sealed class SqlGetAsyncStatusRequestParameters : RequestParameters
 {
 }
 
@@ -38,8 +38,8 @@ public sealed partial class SqlGetAsyncStatusRequest : PlainRequest<SqlGetAsyncS
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 }
 
 public sealed partial class SqlGetAsyncStatusRequestDescriptor<TDocument> : RequestDescriptor<SqlGetAsyncStatusRequestDescriptor<TDocument>, SqlGetAsyncStatusRequestParameters>
@@ -54,8 +54,8 @@ public sealed partial class SqlGetAsyncStatusRequestDescriptor<TDocument> : Requ
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public SqlGetAsyncStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -79,8 +79,8 @@ public sealed partial class SqlGetAsyncStatusRequestDescriptor : RequestDescript
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public SqlGetAsyncStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);

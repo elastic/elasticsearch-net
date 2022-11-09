@@ -218,7 +218,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			var pool = new SingleNodePool(new Uri("http://localhost:9200"));
 			var connectionSettings = new ElasticsearchClientSettings(
 				pool,
-				connection: new InMemoryConnection(), // <1> an _in-memory_ connection is used here for example purposes. In your production application, you would use an `ITransportClient` implementation that actually sends a request.
+				connection: new InMemoryConnection(), // <1> an _in-memory_ connection is used here for example purposes. In your production application, you would use an `TransportClient` implementation that actually sends a request.
 				sourceSerializer: (builtin, settings) => new MyFirstCustomJsonNetSerializer(builtin, settings))
 				.DefaultIndex("my-index");
 
