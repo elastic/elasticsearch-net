@@ -235,11 +235,11 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public FieldSuggesterDescriptor<TDocument> Completion(CompletionSuggester variant) => Set(variant, "completion");
+	public FieldSuggesterDescriptor<TDocument> Completion(CompletionSuggester completionSuggester) => Set(completionSuggester, "completion");
 	public FieldSuggesterDescriptor<TDocument> Completion(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
-	public FieldSuggesterDescriptor<TDocument> Phrase(PhraseSuggester variant) => Set(variant, "phrase");
+	public FieldSuggesterDescriptor<TDocument> Phrase(PhraseSuggester phraseSuggester) => Set(phraseSuggester, "phrase");
 	public FieldSuggesterDescriptor<TDocument> Phrase(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
-	public FieldSuggesterDescriptor<TDocument> Term(TermSuggester variant) => Set(variant, "term");
+	public FieldSuggesterDescriptor<TDocument> Term(TermSuggester termSuggester) => Set(termSuggester, "term");
 	public FieldSuggesterDescriptor<TDocument> Term(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -272,12 +272,11 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -340,13 +339,13 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 		return Self;
 	}
 
-	public FieldSuggesterDescriptor Completion(CompletionSuggester variant) => Set(variant, "completion");
+	public FieldSuggesterDescriptor Completion(CompletionSuggester completionSuggester) => Set(completionSuggester, "completion");
 	public FieldSuggesterDescriptor Completion(Action<CompletionSuggesterDescriptor> configure) => Set(configure, "completion");
 	public FieldSuggesterDescriptor Completion<TDocument>(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
-	public FieldSuggesterDescriptor Phrase(PhraseSuggester variant) => Set(variant, "phrase");
+	public FieldSuggesterDescriptor Phrase(PhraseSuggester phraseSuggester) => Set(phraseSuggester, "phrase");
 	public FieldSuggesterDescriptor Phrase(Action<PhraseSuggesterDescriptor> configure) => Set(configure, "phrase");
 	public FieldSuggesterDescriptor Phrase<TDocument>(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
-	public FieldSuggesterDescriptor Term(TermSuggester variant) => Set(variant, "term");
+	public FieldSuggesterDescriptor Term(TermSuggester termSuggester) => Set(termSuggester, "term");
 	public FieldSuggesterDescriptor Term(Action<TermSuggesterDescriptor> configure) => Set(configure, "term");
 	public FieldSuggesterDescriptor Term<TDocument>(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -380,12 +379,11 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-		}
-		else
-		{
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			writer.WriteEndObject();
+			return;
 		}
 
+		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
