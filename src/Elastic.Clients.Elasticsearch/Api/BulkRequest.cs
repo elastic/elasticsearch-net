@@ -16,20 +16,20 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class BulkRequest : IStreamSerializable
 {
-	internal IRequest Self => this;
+	internal Request Self => this;
 
 	public BulkOperationsCollection Operations { get; set; }
 
-	protected override string ContentType => "application/x-ndjson";
+	internal override string ContentType => "application/x-ndjson";
 
-	protected override string Accept => "application/json";
+	internal override string Accept => "application/json";
 
 	public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 	{
 		if (Operations is null)
 			return;
 
-		var index = Self.RouteValues.Get<IndexName>("index");
+		var index = RouteValues.Get<IndexName>("index");
 
 		foreach (var op in Operations)
 		{
@@ -48,7 +48,7 @@ public partial class BulkRequest : IStreamSerializable
 		if (Operations is null)
 			return;
 
-		var index = Self.RouteValues.Get<IndexName>("index");
+		var index = RouteValues.Get<IndexName>("index");
 
 		foreach (var op in Operations)
 		{
@@ -65,9 +65,9 @@ public partial class BulkRequest : IStreamSerializable
 
 public sealed partial class BulkRequestDescriptor : IStreamSerializable
 {
-	protected override string ContentType => "application/x-ndjson";
+	internal override string ContentType => "application/x-ndjson";
 
-	protected override string Accept => "application/json";
+	internal override string Accept => "application/json";
 
 	private readonly BulkOperationsCollection _operations = new();
 

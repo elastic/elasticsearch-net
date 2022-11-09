@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch.JsonNetSerializer
 		/// <summary>
 		/// Writes a <see cref="JToken" /> to a <see cref="MemoryStream" /> using <see cref="ConnectionSettingsAwareSerializer.ExpectedEncoding" />
 		/// </summary>
-		public static MemoryStream ToStream(this JToken token, IMemoryStreamFactory memoryStreamFactory)
+		public static MemoryStream ToStream(this JToken token, MemoryStreamFactory memoryStreamFactory)
 		{
 			var ms = memoryStreamFactory.Create();
 			using (var streamWriter = new StreamWriter(ms, ConnectionSettingsAwareSerializer.ExpectedEncoding,

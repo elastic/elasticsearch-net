@@ -23,7 +23,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql;
-public sealed partial class SqlGetAsyncStatusResponse : ElasticsearchResponseBase
+public sealed partial class SqlGetAsyncStatusResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("completion_status")]

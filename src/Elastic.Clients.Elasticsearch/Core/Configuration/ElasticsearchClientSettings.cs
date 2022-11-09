@@ -45,7 +45,7 @@ public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<Elast
 	///     Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId" />,
 	///     <para><see cref="CloudNodePool" /> documentation for more information on how to obtain your Cloud Id</para>
 	/// </summary>
-	public ElasticsearchClientSettings(string cloudId, IAuthenticationHeader credentials) : this(
+	public ElasticsearchClientSettings(string cloudId, AuthorizationHeader credentials) : this(
 		new CloudNodePool(cloudId, credentials))
 	{
 	}
@@ -64,9 +64,9 @@ public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<Elast
 	public ElasticsearchClientSettings(NodePool nodePool, SourceSerializerFactory sourceSerializer)
 		: this(nodePool, null, sourceSerializer) { }
 
-	public ElasticsearchClientSettings(NodePool nodePool, ITransportClient connection) : this(nodePool, connection, null) { }
+	public ElasticsearchClientSettings(NodePool nodePool, TransportClient connection) : this(nodePool, connection, null) { }
 
-	public ElasticsearchClientSettings(NodePool nodePool, ITransportClient connection, SourceSerializerFactory sourceSerializer) : this(
+	public ElasticsearchClientSettings(NodePool nodePool, TransportClient connection, SourceSerializerFactory sourceSerializer) : this(
 		nodePool,
 		connection, sourceSerializer, null)
 	{
@@ -74,7 +74,7 @@ public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<Elast
 
 	public ElasticsearchClientSettings(
 		NodePool nodePool,
-		ITransportClient connection,
+		TransportClient connection,
 		SourceSerializerFactory sourceSerializer,
 		IPropertyMappingProvider propertyMappingProvider) : base(nodePool, connection, sourceSerializer, propertyMappingProvider)
 	{
@@ -109,7 +109,7 @@ public abstract class
 
 	protected ElasticsearchClientSettingsBase(
 		NodePool nodePool,
-		ITransportClient connection,
+		TransportClient connection,
 		ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory,
 		IPropertyMappingProvider propertyMappingProvider)
 		: base(nodePool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticsearchClientsElasticsearch)
@@ -317,7 +317,7 @@ public abstract class
 	}
 }
 
-/// <inheritdoc cref="ITransportClientConfigurationValues" />
+/// <inheritdoc cref="TransportClientConfigurationValues" />
 public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionConfiguration>
 {
 	/// <summary>
@@ -340,14 +340,14 @@ public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionCon
 	///     Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId" />,
 	///     <para><see cref="CloudNodePool" /> documentation for more information on how to obtain your Cloud Id</para>
 	/// </summary>
-	public ConnectionConfiguration(string cloudId, IAuthenticationHeader credentials) : this(
+	public ConnectionConfiguration(string cloudId, AuthorizationHeader credentials) : this(
 		new CloudNodePool(cloudId, credentials))
 	{
 	}
 
 	public ConnectionConfiguration(NodePool nodePool) : this(nodePool, null, null) { }
 
-	public ConnectionConfiguration(NodePool nodePool, ITransportClient connection) : this(nodePool,
+	public ConnectionConfiguration(NodePool nodePool, TransportClient connection) : this(nodePool,
 		connection, null)
 	{
 	}
@@ -357,33 +357,33 @@ public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionCon
 	{
 	}
 
-	public ConnectionConfiguration(NodePool nodePool, ITransportClient connection,
+	public ConnectionConfiguration(NodePool nodePool, TransportClient connection,
 		Serializer serializer)
 		: base(nodePool, connection, serializer)
 	{
 	}
 }
 
-/// <inheritdoc cref="ITransportClientConfigurationValues" />
+/// <inheritdoc cref="TransportClientConfigurationValues" />
 [Browsable(false)]
 [EditorBrowsable(EditorBrowsableState.Never)]
 public abstract class
 	ConnectionConfigurationBase<TConnectionConfiguration> : TransportConfigurationBase<TConnectionConfiguration>,
-		ITransportClientConfigurationValues
+		TransportClientConfigurationValues
 	where TConnectionConfiguration : ConnectionConfigurationBase<TConnectionConfiguration>,
-	ITransportClientConfigurationValues
+	TransportClientConfigurationValues
 {
 	private bool _includeServerStackTraceOnError;
 
-	protected ConnectionConfigurationBase(NodePool nodePool, ITransportClient connection,
+	protected ConnectionConfigurationBase(NodePool nodePool, TransportClient connection,
 		Serializer? serializer,
-		IProductRegistration registration = null)
+		ProductRegistration registration = null)
 		: base(nodePool, connection, serializer, registration ?? new ElasticsearchProductRegistration(typeof(ElasticsearchClient))) =>
 			UserAgent(ConnectionConfiguration.DefaultUserAgent);
 
-	bool ITransportClientConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
+	bool TransportClientConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
 
-	public override TConnectionConfiguration EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null) =>
+	public override TConnectionConfiguration EnableDebugMode(Action<ApiCallDetails> onRequestCompleted = null) =>
 		base.EnableDebugMode(onRequestCompleted)
 			.PrettyJson()
 			.IncludeServerStackTraceOnError();
@@ -409,7 +409,7 @@ public abstract class
 	});
 }
 
-public interface ITransportClientConfigurationValues : ITransportConfiguration
+public interface TransportClientConfigurationValues : ITransportConfiguration
 {
 	/// <summary>
 	///     Forces all requests to have ?error_trace=true querystring parameter appended,

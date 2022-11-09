@@ -34,7 +34,7 @@ public class IndexAnonymousTypesIntegrationTests : IntegrationDocumentationTestB
 		);
 
 		indexResult.ShouldBeValid();
-		indexResult.ApiCall.HttpStatusCode.Should().Be(201);
+		indexResult.ApiCallDetails.HttpStatusCode.Should().Be(201);
 		indexResult.Result.Should().Be(Result.Created);
 		indexResult.Index.Should().Be(index);
 		indexResult.Shards.Should().NotBeNull();

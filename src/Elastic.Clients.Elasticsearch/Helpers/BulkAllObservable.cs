@@ -110,7 +110,7 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
         var refresh = _client.Indices.Refresh(request);
 
         if (!refresh.IsValid)
-            throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
+            throw Throw($"Refreshing after all documents have indexed failed", refresh);
     }
 
     private async Task<BulkAllResponse> BulkAsync(IList<T> buffer, long page, int backOffRetries)
@@ -155,7 +155,7 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
         _compositeCancelToken.ThrowIfCancellationRequested();
         _bulkResponseCallback?.Invoke(response);
 
-        if (!response.ApiCall.Success)
+        if (!response.ApiCallDetails.Success)
             return await HandleBulkRequestAsync(buffer, page, backOffRetries, response).ConfigureAwait(false);
 
         var retryableDocuments = new List<T>();
@@ -218,13 +218,13 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 
     private async Task<BulkAllResponse> HandleBulkRequestAsync(IList<T> buffer, long page, int backOffRetries, BulkResponse response)
     {
-        var clientException = response.ApiCall.OriginalException as TransportException;
+        var clientException = response.ApiCallDetails.OriginalException as TransportException;
         var failureReason = clientException?.FailureReason;
         var reason = failureReason?.GetStringValue() ?? nameof(PipelineFailure.BadRequest);
         switch (failureReason)
         {
             case PipelineFailure.MaxRetriesReached:
-                if (response.ApiCall.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
+                if (response.ApiCallDetails.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
                     throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after attempted bulk failed over all the active nodes");
 
                 ThrowOnExhaustedRetries();
@@ -261,11 +261,11 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
         return await BulkAsync(retryDocuments, page, backOffRetries).ConfigureAwait(false);
     }
 
-    private Exception ThrowOnBadBulk(IElasticsearchResponse response, string message)
+    private Exception ThrowOnBadBulk(ElasticsearchResponse response, string message)
     {
         _incrementFailed();
         _partitionedBulkRequest.BackPressure?.Release();
-        return Throw(message, response.ApiCall);
+        return Throw(message, response);
     }
 
     private static bool RetryBulkActionPredicate(ResponseItem bulkResponseItem, T d) => bulkResponseItem.Status == 429;
@@ -290,6 +290,6 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
         return this;
     }
 
-    private static TransportException Throw(string message, IApiCallDetails details) =>
+    private static TransportException Throw(string message, ElasticsearchResponse details) =>
         new(PipelineFailure.BadResponse, message, details);
 }

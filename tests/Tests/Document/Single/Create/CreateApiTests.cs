@@ -99,7 +99,7 @@ namespace Tests.Document.Single.Create
 				.Index(index)
 			);
 			createResponse.ShouldBeValid();
-			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
+			createResponse.ApiCallDetails.HttpStatusCode.Should().Be(201);
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
 			createResponse.Id.Should().Be(project.Name);
@@ -115,7 +115,7 @@ namespace Tests.Document.Single.Create
 			);
 
 			createResponse.ShouldNotBeValid();
-			createResponse.ApiCall.HttpStatusCode.Should().Be(409);
+			createResponse.ApiCallDetails.HttpStatusCode.Should().Be(409);
 		}
 	}
 
@@ -153,7 +153,7 @@ namespace Tests.Document.Single.Create
 			);
 
 			createResponse.ShouldBeValid();
-			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
+			createResponse.ApiCallDetails.HttpStatusCode.Should().Be(201);
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
 
@@ -198,7 +198,7 @@ namespace Tests.Document.Single.Create
 			);
 
 			createResponse.ShouldBeValid();
-			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
+			createResponse.ApiCallDetails.HttpStatusCode.Should().Be(201);
 			createResponse.Index.Should().Be(index);
 			createResponse.Result.Should().Be(Result.Created);
 		}

@@ -8,8 +8,15 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Requests;
 
-public abstract partial class PlainRequest<TParameters>
+public abstract class PlainRequest<TParameters> : Request<TParameters>
+	where TParameters : RequestParameters, new()
 {
+	// This internal ctor ensures that only types defined within the client assembly can derive from this base class.
+	// We don't expect consumers to derive from this public base class.
+	internal PlainRequest() { }
+
+	protected PlainRequest(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) { }
+
 	///<summary>Include the stack trace of returned errors.</summary>
 	[JsonIgnore]
 	public bool? ErrorTrace
@@ -59,16 +66,6 @@ public abstract partial class PlainRequest<TParameters>
 		get => Q<string>("source");
 		set => Q("source", value);
 	}
-}
-
-public abstract partial class PlainRequest<TParameters> : Request<TParameters>
-	where TParameters : class, IRequestParameters, new()
-{
-	// This internal ctor ensures that only types defined within the client assembly can derive from this base class.
-	// We don't expect consumers to derive from this public base class.
-	internal PlainRequest() { }
-
-	protected PlainRequest(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) { }
 
 	/// <summary>
 	/// Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
@@ -76,7 +73,7 @@ public abstract partial class PlainRequest<TParameters> : Request<TParameters>
 	[JsonIgnore]
 	public IRequestConfiguration RequestConfiguration
 	{
-		get => RequestState.RequestParameters.RequestConfiguration;
-		set => RequestState.RequestParameters.RequestConfiguration = value;
+		get => RequestParameters.RequestConfiguration;
+		set => RequestParameters.RequestConfiguration = value;
 	}
 }
