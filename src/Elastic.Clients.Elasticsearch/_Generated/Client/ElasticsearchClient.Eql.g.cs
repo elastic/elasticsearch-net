@@ -30,20 +30,20 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 	public DeleteEqlResponse Delete(DeleteEqlRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteEqlRequest, DeleteEqlResponse>(request);
+		return DoRequest<DeleteEqlRequest, DeleteEqlResponse, DeleteEqlRequestParameters>(request);
 	}
 
 	public Task<DeleteEqlResponse> DeleteAsync(DeleteEqlRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteEqlRequest, DeleteEqlResponse>(request, cancellationToken);
+		return DoRequestAsync<DeleteEqlRequest, DeleteEqlResponse, DeleteEqlRequestParameters>(request, cancellationToken);
 	}
 
 	public DeleteEqlResponse Delete(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new DeleteEqlRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteEqlRequestDescriptor, DeleteEqlResponse>(descriptor);
+		return DoRequest<DeleteEqlRequestDescriptor, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
 	}
 
 	public DeleteEqlResponse Delete(Elastic.Clients.Elasticsearch.Id id, Action<DeleteEqlRequestDescriptor> configureRequest)
@@ -51,7 +51,7 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new DeleteEqlRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteEqlRequestDescriptor, DeleteEqlResponse>(descriptor);
+		return DoRequest<DeleteEqlRequestDescriptor, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
 	}
 
 	public DeleteEqlResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteEqlRequestDescriptor<TDocument>> configureRequest)
@@ -59,14 +59,14 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new DeleteEqlRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlResponse>(descriptor);
+		return DoRequest<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteEqlResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeleteEqlRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteEqlRequestDescriptor, DeleteEqlResponse>(descriptor);
+		return DoRequestAsync<DeleteEqlRequestDescriptor, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteEqlResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteEqlRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -74,7 +74,7 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new DeleteEqlRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteEqlRequestDescriptor, DeleteEqlResponse>(descriptor);
+		return DoRequestAsync<DeleteEqlRequestDescriptor, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteEqlResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteEqlRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -82,26 +82,26 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new DeleteEqlRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlResponse>(descriptor);
+		return DoRequestAsync<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
 	}
 
 	public EqlGetStatusResponse GetStatus(EqlGetStatusRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<EqlGetStatusRequest, EqlGetStatusResponse>(request);
+		return DoRequest<EqlGetStatusRequest, EqlGetStatusResponse, EqlGetStatusRequestParameters>(request);
 	}
 
 	public Task<EqlGetStatusResponse> GetStatusAsync(EqlGetStatusRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<EqlGetStatusRequest, EqlGetStatusResponse>(request, cancellationToken);
+		return DoRequestAsync<EqlGetStatusRequest, EqlGetStatusResponse, EqlGetStatusRequestParameters>(request, cancellationToken);
 	}
 
 	public EqlGetStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new EqlGetStatusRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequest<EqlGetStatusRequestDescriptor, EqlGetStatusResponse>(descriptor);
+		return DoRequest<EqlGetStatusRequestDescriptor, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
 	}
 
 	public EqlGetStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetStatusRequestDescriptor> configureRequest)
@@ -109,7 +109,7 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new EqlGetStatusRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<EqlGetStatusRequestDescriptor, EqlGetStatusResponse>(descriptor);
+		return DoRequest<EqlGetStatusRequestDescriptor, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
 	}
 
 	public EqlGetStatusResponse GetStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetStatusRequestDescriptor<TDocument>> configureRequest)
@@ -117,14 +117,14 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new EqlGetStatusRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusResponse>(descriptor);
+		return DoRequest<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
 	}
 
 	public Task<EqlGetStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new EqlGetStatusRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetStatusRequestDescriptor, EqlGetStatusResponse>(descriptor);
+		return DoRequestAsync<EqlGetStatusRequestDescriptor, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
 	}
 
 	public Task<EqlGetStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -132,7 +132,7 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new EqlGetStatusRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetStatusRequestDescriptor, EqlGetStatusResponse>(descriptor);
+		return DoRequestAsync<EqlGetStatusRequestDescriptor, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
 	}
 
 	public Task<EqlGetStatusResponse> GetStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -140,26 +140,26 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new EqlGetStatusRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusResponse>(descriptor);
+		return DoRequestAsync<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
 	}
 
 	public EqlSearchResponse<TEvent> Search<TEvent>(EqlSearchRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<EqlSearchRequest, EqlSearchResponse<TEvent>>(request);
+		return DoRequest<EqlSearchRequest, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(request);
 	}
 
 	public Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(EqlSearchRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequest, EqlSearchResponse<TEvent>>(request, cancellationToken);
+		return DoRequestAsync<EqlSearchRequest, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(request, cancellationToken);
 	}
 
 	public EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var descriptor = new EqlSearchRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>>(descriptor);
+		return DoRequest<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
 	}
 
 	public EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor> configureRequest)
@@ -167,14 +167,14 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new EqlSearchRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>>(descriptor);
+		return DoRequest<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
 	}
 
 	public Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new EqlSearchRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>>(descriptor);
+		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
 	}
 
 	public Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -182,26 +182,26 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new EqlSearchRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>>(descriptor);
+		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
 	}
 
 	public GetEqlResponse<TEvent> Get<TEvent>(GetEqlRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetEqlRequest, GetEqlResponse<TEvent>>(request);
+		return DoRequest<GetEqlRequest, GetEqlResponse<TEvent>, GetEqlRequestParameters>(request);
 	}
 
 	public Task<GetEqlResponse<TEvent>> GetAsync<TEvent>(GetEqlRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetEqlRequest, GetEqlResponse<TEvent>>(request, cancellationToken);
+		return DoRequestAsync<GetEqlRequest, GetEqlResponse<TEvent>, GetEqlRequestParameters>(request, cancellationToken);
 	}
 
 	public GetEqlResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new GetEqlRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequest<GetEqlRequestDescriptor, GetEqlResponse<TEvent>>(descriptor);
+		return DoRequest<GetEqlRequestDescriptor, GetEqlResponse<TEvent>, GetEqlRequestParameters>(descriptor);
 	}
 
 	public GetEqlResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlRequestDescriptor> configureRequest)
@@ -209,14 +209,14 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new GetEqlRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetEqlRequestDescriptor, GetEqlResponse<TEvent>>(descriptor);
+		return DoRequest<GetEqlRequestDescriptor, GetEqlResponse<TEvent>, GetEqlRequestParameters>(descriptor);
 	}
 
 	public Task<GetEqlResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetEqlRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlRequestDescriptor, GetEqlResponse<TEvent>>(descriptor);
+		return DoRequestAsync<GetEqlRequestDescriptor, GetEqlResponse<TEvent>, GetEqlRequestParameters>(descriptor);
 	}
 
 	public Task<GetEqlResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -224,6 +224,6 @@ public sealed partial class EqlNamespace : NamespacedClientProxy
 		var descriptor = new GetEqlRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlRequestDescriptor, GetEqlResponse<TEvent>>(descriptor);
+		return DoRequestAsync<GetEqlRequestDescriptor, GetEqlResponse<TEvent>, GetEqlRequestParameters>(descriptor);
 	}
 }

@@ -30,20 +30,20 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 	public AliasResponse GetAlias(AliasRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<AliasRequest, AliasResponse>(request);
+		return DoRequest<AliasRequest, AliasResponse, AliasRequestParameters>(request);
 	}
 
 	public Task<AliasResponse> GetAliasAsync(AliasRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<AliasRequest, AliasResponse>(request, cancellationToken);
+		return DoRequestAsync<AliasRequest, AliasResponse, AliasRequestParameters>(request, cancellationToken);
 	}
 
 	public AliasResponse GetAlias()
 	{
 		var descriptor = new AliasRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<AliasRequestDescriptor, AliasResponse>(descriptor);
+		return DoRequest<AliasRequestDescriptor, AliasResponse, AliasRequestParameters>(descriptor);
 	}
 
 	public AliasResponse GetAlias(Action<AliasRequestDescriptor> configureRequest)
@@ -51,7 +51,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new AliasRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<AliasRequestDescriptor, AliasResponse>(descriptor);
+		return DoRequest<AliasRequestDescriptor, AliasResponse, AliasRequestParameters>(descriptor);
 	}
 
 	public AliasResponse GetAlias<TDocument>(Action<AliasRequestDescriptor<TDocument>> configureRequest)
@@ -59,14 +59,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new AliasRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<AliasRequestDescriptor<TDocument>, AliasResponse>(descriptor);
+		return DoRequest<AliasRequestDescriptor<TDocument>, AliasResponse, AliasRequestParameters>(descriptor);
 	}
 
 	public Task<AliasResponse> GetAliasAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new AliasRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<AliasRequestDescriptor, AliasResponse>(descriptor);
+		return DoRequestAsync<AliasRequestDescriptor, AliasResponse, AliasRequestParameters>(descriptor);
 	}
 
 	public Task<AliasResponse> GetAliasAsync(Action<AliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -74,7 +74,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new AliasRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<AliasRequestDescriptor, AliasResponse>(descriptor);
+		return DoRequestAsync<AliasRequestDescriptor, AliasResponse, AliasRequestParameters>(descriptor);
 	}
 
 	public Task<AliasResponse> GetAliasAsync<TDocument>(Action<AliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -82,26 +82,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new AliasRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<AliasRequestDescriptor<TDocument>, AliasResponse>(descriptor);
+		return DoRequestAsync<AliasRequestDescriptor<TDocument>, AliasResponse, AliasRequestParameters>(descriptor);
 	}
 
 	public CloneResponse Clone(CloneRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<CloneRequest, CloneResponse>(request);
+		return DoRequest<CloneRequest, CloneResponse, CloneRequestParameters>(request);
 	}
 
 	public Task<CloneResponse> CloneAsync(CloneRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<CloneRequest, CloneResponse>(request, cancellationToken);
+		return DoRequestAsync<CloneRequest, CloneResponse, CloneRequestParameters>(request, cancellationToken);
 	}
 
 	public CloneResponse Clone(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target)
 	{
 		var descriptor = new CloneRequestDescriptor(index, target);
 		descriptor.BeforeRequest();
-		return DoRequest<CloneRequestDescriptor, CloneResponse>(descriptor);
+		return DoRequest<CloneRequestDescriptor, CloneResponse, CloneRequestParameters>(descriptor);
 	}
 
 	public CloneResponse Clone(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Action<CloneRequestDescriptor> configureRequest)
@@ -109,14 +109,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CloneRequestDescriptor(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<CloneRequestDescriptor, CloneResponse>(descriptor);
+		return DoRequest<CloneRequestDescriptor, CloneResponse, CloneRequestParameters>(descriptor);
 	}
 
 	public CloneResponse Clone<TDocument>(Elastic.Clients.Elasticsearch.Name target)
 	{
 		var descriptor = new CloneRequestDescriptor<TDocument>(typeof(TDocument), target);
 		descriptor.BeforeRequest();
-		return DoRequest<CloneRequestDescriptor<TDocument>, CloneResponse>(descriptor);
+		return DoRequest<CloneRequestDescriptor<TDocument>, CloneResponse, CloneRequestParameters>(descriptor);
 	}
 
 	public CloneResponse Clone<TDocument>(Elastic.Clients.Elasticsearch.Name target, Action<CloneRequestDescriptor<TDocument>> configureRequest)
@@ -124,7 +124,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CloneRequestDescriptor<TDocument>(typeof(TDocument), target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<CloneRequestDescriptor<TDocument>, CloneResponse>(descriptor);
+		return DoRequest<CloneRequestDescriptor<TDocument>, CloneResponse, CloneRequestParameters>(descriptor);
 	}
 
 	public CloneResponse Clone<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Action<CloneRequestDescriptor<TDocument>> configureRequest)
@@ -132,14 +132,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CloneRequestDescriptor<TDocument>(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<CloneRequestDescriptor<TDocument>, CloneResponse>(descriptor);
+		return DoRequest<CloneRequestDescriptor<TDocument>, CloneResponse, CloneRequestParameters>(descriptor);
 	}
 
 	public Task<CloneResponse> CloneAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new CloneRequestDescriptor(index, target);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CloneRequestDescriptor, CloneResponse>(descriptor);
+		return DoRequestAsync<CloneRequestDescriptor, CloneResponse, CloneRequestParameters>(descriptor);
 	}
 
 	public Task<CloneResponse> CloneAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Action<CloneRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -147,14 +147,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CloneRequestDescriptor(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CloneRequestDescriptor, CloneResponse>(descriptor);
+		return DoRequestAsync<CloneRequestDescriptor, CloneResponse, CloneRequestParameters>(descriptor);
 	}
 
 	public Task<CloneResponse> CloneAsync<TDocument>(Elastic.Clients.Elasticsearch.Name target, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new CloneRequestDescriptor<TDocument>(typeof(TDocument), target);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CloneRequestDescriptor<TDocument>, CloneResponse>(descriptor);
+		return DoRequestAsync<CloneRequestDescriptor<TDocument>, CloneResponse, CloneRequestParameters>(descriptor);
 	}
 
 	public Task<CloneResponse> CloneAsync<TDocument>(Elastic.Clients.Elasticsearch.Name target, Action<CloneRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -162,7 +162,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CloneRequestDescriptor<TDocument>(typeof(TDocument), target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CloneRequestDescriptor<TDocument>, CloneResponse>(descriptor);
+		return DoRequestAsync<CloneRequestDescriptor<TDocument>, CloneResponse, CloneRequestParameters>(descriptor);
 	}
 
 	public Task<CloneResponse> CloneAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Action<CloneRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -170,26 +170,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CloneRequestDescriptor<TDocument>(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CloneRequestDescriptor<TDocument>, CloneResponse>(descriptor);
+		return DoRequestAsync<CloneRequestDescriptor<TDocument>, CloneResponse, CloneRequestParameters>(descriptor);
 	}
 
 	public CloseResponse Close(CloseRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<CloseRequest, CloseResponse>(request);
+		return DoRequest<CloseRequest, CloseResponse, CloseRequestParameters>(request);
 	}
 
 	public Task<CloseResponse> CloseAsync(CloseRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<CloseRequest, CloseResponse>(request, cancellationToken);
+		return DoRequestAsync<CloseRequest, CloseResponse, CloseRequestParameters>(request, cancellationToken);
 	}
 
 	public CloseResponse Close(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var descriptor = new CloseRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<CloseRequestDescriptor, CloseResponse>(descriptor);
+		return DoRequest<CloseRequestDescriptor, CloseResponse, CloseRequestParameters>(descriptor);
 	}
 
 	public CloseResponse Close(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseRequestDescriptor> configureRequest)
@@ -197,7 +197,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CloseRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<CloseRequestDescriptor, CloseResponse>(descriptor);
+		return DoRequest<CloseRequestDescriptor, CloseResponse, CloseRequestParameters>(descriptor);
 	}
 
 	public CloseResponse Close<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseRequestDescriptor<TDocument>> configureRequest)
@@ -205,14 +205,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CloseRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<CloseRequestDescriptor<TDocument>, CloseResponse>(descriptor);
+		return DoRequest<CloseRequestDescriptor<TDocument>, CloseResponse, CloseRequestParameters>(descriptor);
 	}
 
 	public Task<CloseResponse> CloseAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new CloseRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CloseRequestDescriptor, CloseResponse>(descriptor);
+		return DoRequestAsync<CloseRequestDescriptor, CloseResponse, CloseRequestParameters>(descriptor);
 	}
 
 	public Task<CloseResponse> CloseAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -220,7 +220,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CloseRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CloseRequestDescriptor, CloseResponse>(descriptor);
+		return DoRequestAsync<CloseRequestDescriptor, CloseResponse, CloseRequestParameters>(descriptor);
 	}
 
 	public Task<CloseResponse> CloseAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -228,26 +228,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CloseRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CloseRequestDescriptor<TDocument>, CloseResponse>(descriptor);
+		return DoRequestAsync<CloseRequestDescriptor<TDocument>, CloseResponse, CloseRequestParameters>(descriptor);
 	}
 
 	public CreateDataStreamResponse CreateDataStream(CreateDataStreamRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<CreateDataStreamRequest, CreateDataStreamResponse>(request);
+		return DoRequest<CreateDataStreamRequest, CreateDataStreamResponse, CreateDataStreamRequestParameters>(request);
 	}
 
 	public Task<CreateDataStreamResponse> CreateDataStreamAsync(CreateDataStreamRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<CreateDataStreamRequest, CreateDataStreamResponse>(request, cancellationToken);
+		return DoRequestAsync<CreateDataStreamRequest, CreateDataStreamResponse, CreateDataStreamRequestParameters>(request, cancellationToken);
 	}
 
 	public CreateDataStreamResponse CreateDataStream(Elastic.Clients.Elasticsearch.DataStreamName name)
 	{
 		var descriptor = new CreateDataStreamRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<CreateDataStreamRequestDescriptor, CreateDataStreamResponse>(descriptor);
+		return DoRequest<CreateDataStreamRequestDescriptor, CreateDataStreamResponse, CreateDataStreamRequestParameters>(descriptor);
 	}
 
 	public CreateDataStreamResponse CreateDataStream(Elastic.Clients.Elasticsearch.DataStreamName name, Action<CreateDataStreamRequestDescriptor> configureRequest)
@@ -255,14 +255,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CreateDataStreamRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<CreateDataStreamRequestDescriptor, CreateDataStreamResponse>(descriptor);
+		return DoRequest<CreateDataStreamRequestDescriptor, CreateDataStreamResponse, CreateDataStreamRequestParameters>(descriptor);
 	}
 
 	public Task<CreateDataStreamResponse> CreateDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamName name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new CreateDataStreamRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateDataStreamRequestDescriptor, CreateDataStreamResponse>(descriptor);
+		return DoRequestAsync<CreateDataStreamRequestDescriptor, CreateDataStreamResponse, CreateDataStreamRequestParameters>(descriptor);
 	}
 
 	public Task<CreateDataStreamResponse> CreateDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamName name, Action<CreateDataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -270,26 +270,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CreateDataStreamRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateDataStreamRequestDescriptor, CreateDataStreamResponse>(descriptor);
+		return DoRequestAsync<CreateDataStreamRequestDescriptor, CreateDataStreamResponse, CreateDataStreamRequestParameters>(descriptor);
 	}
 
 	public CreateResponse Create(CreateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<CreateRequest, CreateResponse>(request);
+		return DoRequest<CreateRequest, CreateResponse, CreateRequestParameters>(request);
 	}
 
 	public Task<CreateResponse> CreateAsync(CreateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<CreateRequest, CreateResponse>(request, cancellationToken);
+		return DoRequestAsync<CreateRequest, CreateResponse, CreateRequestParameters>(request, cancellationToken);
 	}
 
 	public CreateResponse Create(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		var descriptor = new CreateRequestDescriptor(index);
 		descriptor.BeforeRequest();
-		return DoRequest<CreateRequestDescriptor, CreateResponse>(descriptor);
+		return DoRequest<CreateRequestDescriptor, CreateResponse, CreateRequestParameters>(descriptor);
 	}
 
 	public CreateResponse Create(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateRequestDescriptor> configureRequest)
@@ -297,14 +297,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CreateRequestDescriptor(index);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<CreateRequestDescriptor, CreateResponse>(descriptor);
+		return DoRequest<CreateRequestDescriptor, CreateResponse, CreateRequestParameters>(descriptor);
 	}
 
 	public CreateResponse Create<TDocument>()
 	{
 		var descriptor = new CreateRequestDescriptor<TDocument>(typeof(TDocument));
 		descriptor.BeforeRequest();
-		return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+		return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse, CreateRequestParameters>(descriptor);
 	}
 
 	public CreateResponse Create<TDocument>(Action<CreateRequestDescriptor<TDocument>> configureRequest)
@@ -312,7 +312,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CreateRequestDescriptor<TDocument>(typeof(TDocument));
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+		return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse, CreateRequestParameters>(descriptor);
 	}
 
 	public CreateResponse Create<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateRequestDescriptor<TDocument>> configureRequest)
@@ -320,14 +320,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CreateRequestDescriptor<TDocument>(index);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+		return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse, CreateRequestParameters>(descriptor);
 	}
 
 	public Task<CreateResponse> CreateAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new CreateRequestDescriptor(index);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateRequestDescriptor, CreateResponse>(descriptor);
+		return DoRequestAsync<CreateRequestDescriptor, CreateResponse, CreateRequestParameters>(descriptor);
 	}
 
 	public Task<CreateResponse> CreateAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -335,14 +335,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CreateRequestDescriptor(index);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateRequestDescriptor, CreateResponse>(descriptor);
+		return DoRequestAsync<CreateRequestDescriptor, CreateResponse, CreateRequestParameters>(descriptor);
 	}
 
 	public Task<CreateResponse> CreateAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new CreateRequestDescriptor<TDocument>(typeof(TDocument));
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse, CreateRequestParameters>(descriptor);
 	}
 
 	public Task<CreateResponse> CreateAsync<TDocument>(Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -350,7 +350,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CreateRequestDescriptor<TDocument>(typeof(TDocument));
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse, CreateRequestParameters>(descriptor);
 	}
 
 	public Task<CreateResponse> CreateAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -358,26 +358,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new CreateRequestDescriptor<TDocument>(index);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse, CreateRequestParameters>(descriptor);
 	}
 
 	public DataStreamResponse GetDataStream(DataStreamRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DataStreamRequest, DataStreamResponse>(request);
+		return DoRequest<DataStreamRequest, DataStreamResponse, DataStreamRequestParameters>(request);
 	}
 
 	public Task<DataStreamResponse> GetDataStreamAsync(DataStreamRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DataStreamRequest, DataStreamResponse>(request, cancellationToken);
+		return DoRequestAsync<DataStreamRequest, DataStreamResponse, DataStreamRequestParameters>(request, cancellationToken);
 	}
 
 	public DataStreamResponse GetDataStream()
 	{
 		var descriptor = new DataStreamRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<DataStreamRequestDescriptor, DataStreamResponse>(descriptor);
+		return DoRequest<DataStreamRequestDescriptor, DataStreamResponse, DataStreamRequestParameters>(descriptor);
 	}
 
 	public DataStreamResponse GetDataStream(Action<DataStreamRequestDescriptor> configureRequest)
@@ -385,14 +385,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DataStreamRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DataStreamRequestDescriptor, DataStreamResponse>(descriptor);
+		return DoRequest<DataStreamRequestDescriptor, DataStreamResponse, DataStreamRequestParameters>(descriptor);
 	}
 
 	public Task<DataStreamResponse> GetDataStreamAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DataStreamRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DataStreamRequestDescriptor, DataStreamResponse>(descriptor);
+		return DoRequestAsync<DataStreamRequestDescriptor, DataStreamResponse, DataStreamRequestParameters>(descriptor);
 	}
 
 	public Task<DataStreamResponse> GetDataStreamAsync(Action<DataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -400,26 +400,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DataStreamRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DataStreamRequestDescriptor, DataStreamResponse>(descriptor);
+		return DoRequestAsync<DataStreamRequestDescriptor, DataStreamResponse, DataStreamRequestParameters>(descriptor);
 	}
 
 	public DeleteAliasResponse DeleteAlias(DeleteAliasRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteAliasRequest, DeleteAliasResponse>(request);
+		return DoRequest<DeleteAliasRequest, DeleteAliasResponse, DeleteAliasRequestParameters>(request);
 	}
 
 	public Task<DeleteAliasResponse> DeleteAliasAsync(DeleteAliasRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteAliasRequest, DeleteAliasResponse>(request, cancellationToken);
+		return DoRequestAsync<DeleteAliasRequest, DeleteAliasResponse, DeleteAliasRequestParameters>(request, cancellationToken);
 	}
 
 	public DeleteAliasResponse DeleteAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
 	{
 		var descriptor = new DeleteAliasRequestDescriptor(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteAliasRequestDescriptor, DeleteAliasResponse>(descriptor);
+		return DoRequest<DeleteAliasRequestDescriptor, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
 	}
 
 	public DeleteAliasResponse DeleteAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor> configureRequest)
@@ -427,7 +427,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteAliasRequestDescriptor(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteAliasRequestDescriptor, DeleteAliasResponse>(descriptor);
+		return DoRequest<DeleteAliasRequestDescriptor, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
 	}
 
 	public DeleteAliasResponse DeleteAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor<TDocument>> configureRequest)
@@ -435,14 +435,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteAliasRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse>(descriptor);
+		return DoRequest<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteAliasResponse> DeleteAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeleteAliasRequestDescriptor(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAliasRequestDescriptor, DeleteAliasResponse>(descriptor);
+		return DoRequestAsync<DeleteAliasRequestDescriptor, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteAliasResponse> DeleteAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -450,7 +450,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteAliasRequestDescriptor(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAliasRequestDescriptor, DeleteAliasResponse>(descriptor);
+		return DoRequestAsync<DeleteAliasRequestDescriptor, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -458,26 +458,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteAliasRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse>(descriptor);
+		return DoRequestAsync<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
 	}
 
 	public DeleteDataStreamResponse DeleteDataStream(DeleteDataStreamRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteDataStreamRequest, DeleteDataStreamResponse>(request);
+		return DoRequest<DeleteDataStreamRequest, DeleteDataStreamResponse, DeleteDataStreamRequestParameters>(request);
 	}
 
 	public Task<DeleteDataStreamResponse> DeleteDataStreamAsync(DeleteDataStreamRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteDataStreamRequest, DeleteDataStreamResponse>(request, cancellationToken);
+		return DoRequestAsync<DeleteDataStreamRequest, DeleteDataStreamResponse, DeleteDataStreamRequestParameters>(request, cancellationToken);
 	}
 
 	public DeleteDataStreamResponse DeleteDataStream(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{
 		var descriptor = new DeleteDataStreamRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteDataStreamRequestDescriptor, DeleteDataStreamResponse>(descriptor);
+		return DoRequest<DeleteDataStreamRequestDescriptor, DeleteDataStreamResponse, DeleteDataStreamRequestParameters>(descriptor);
 	}
 
 	public DeleteDataStreamResponse DeleteDataStream(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<DeleteDataStreamRequestDescriptor> configureRequest)
@@ -485,14 +485,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteDataStreamRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteDataStreamRequestDescriptor, DeleteDataStreamResponse>(descriptor);
+		return DoRequest<DeleteDataStreamRequestDescriptor, DeleteDataStreamResponse, DeleteDataStreamRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteDataStreamResponse> DeleteDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeleteDataStreamRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteDataStreamRequestDescriptor, DeleteDataStreamResponse>(descriptor);
+		return DoRequestAsync<DeleteDataStreamRequestDescriptor, DeleteDataStreamResponse, DeleteDataStreamRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteDataStreamResponse> DeleteDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<DeleteDataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -500,26 +500,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteDataStreamRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteDataStreamRequestDescriptor, DeleteDataStreamResponse>(descriptor);
+		return DoRequestAsync<DeleteDataStreamRequestDescriptor, DeleteDataStreamResponse, DeleteDataStreamRequestParameters>(descriptor);
 	}
 
 	public DeleteIndexTemplateResponse DeleteIndexTemplate(DeleteIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(request);
+		return DoRequest<DeleteIndexTemplateRequest, DeleteIndexTemplateResponse, DeleteIndexTemplateRequestParameters>(request);
 	}
 
 	public Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(DeleteIndexTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(request, cancellationToken);
+		return DoRequestAsync<DeleteIndexTemplateRequest, DeleteIndexTemplateResponse, DeleteIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public DeleteIndexTemplateResponse DeleteIndexTemplate(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var descriptor = new DeleteIndexTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateResponse>(descriptor);
+		return DoRequest<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateResponse, DeleteIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public DeleteIndexTemplateResponse DeleteIndexTemplate(Elastic.Clients.Elasticsearch.Names name, Action<DeleteIndexTemplateRequestDescriptor> configureRequest)
@@ -527,14 +527,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteIndexTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateResponse>(descriptor);
+		return DoRequest<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateResponse, DeleteIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeleteIndexTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateResponse>(descriptor);
+		return DoRequestAsync<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateResponse, DeleteIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<DeleteIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -542,26 +542,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteIndexTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateResponse>(descriptor);
+		return DoRequestAsync<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateResponse, DeleteIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public DeleteResponse Delete(DeleteRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteRequest, DeleteResponse>(request);
+		return DoRequest<DeleteRequest, DeleteResponse, DeleteRequestParameters>(request);
 	}
 
 	public Task<DeleteResponse> DeleteAsync(DeleteRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteRequest, DeleteResponse>(request, cancellationToken);
+		return DoRequestAsync<DeleteRequest, DeleteResponse, DeleteRequestParameters>(request, cancellationToken);
 	}
 
 	public DeleteResponse Delete(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var descriptor = new DeleteRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteRequestDescriptor, DeleteResponse>(descriptor);
+		return DoRequest<DeleteRequestDescriptor, DeleteResponse, DeleteRequestParameters>(descriptor);
 	}
 
 	public DeleteResponse Delete(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteRequestDescriptor> configureRequest)
@@ -569,7 +569,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteRequestDescriptor, DeleteResponse>(descriptor);
+		return DoRequest<DeleteRequestDescriptor, DeleteResponse, DeleteRequestParameters>(descriptor);
 	}
 
 	public DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
@@ -577,14 +577,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
+		return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse, DeleteRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeleteRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse>(descriptor);
+		return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse, DeleteRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -592,7 +592,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse>(descriptor);
+		return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse, DeleteRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -600,26 +600,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
+		return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse, DeleteRequestParameters>(descriptor);
 	}
 
 	public DeleteTemplateResponse DeleteTemplate(DeleteTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteTemplateRequest, DeleteTemplateResponse>(request);
+		return DoRequest<DeleteTemplateRequest, DeleteTemplateResponse, DeleteTemplateRequestParameters>(request);
 	}
 
 	public Task<DeleteTemplateResponse> DeleteTemplateAsync(DeleteTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteTemplateRequest, DeleteTemplateResponse>(request, cancellationToken);
+		return DoRequestAsync<DeleteTemplateRequest, DeleteTemplateResponse, DeleteTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public DeleteTemplateResponse DeleteTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var descriptor = new DeleteTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteTemplateRequestDescriptor, DeleteTemplateResponse>(descriptor);
+		return DoRequest<DeleteTemplateRequestDescriptor, DeleteTemplateResponse, DeleteTemplateRequestParameters>(descriptor);
 	}
 
 	public DeleteTemplateResponse DeleteTemplate(Elastic.Clients.Elasticsearch.Name name, Action<DeleteTemplateRequestDescriptor> configureRequest)
@@ -627,14 +627,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteTemplateRequestDescriptor, DeleteTemplateResponse>(descriptor);
+		return DoRequest<DeleteTemplateRequestDescriptor, DeleteTemplateResponse, DeleteTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteTemplateResponse> DeleteTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeleteTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteTemplateRequestDescriptor, DeleteTemplateResponse>(descriptor);
+		return DoRequestAsync<DeleteTemplateRequestDescriptor, DeleteTemplateResponse, DeleteTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<DeleteTemplateResponse> DeleteTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<DeleteTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -642,26 +642,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new DeleteTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteTemplateRequestDescriptor, DeleteTemplateResponse>(descriptor);
+		return DoRequestAsync<DeleteTemplateRequestDescriptor, DeleteTemplateResponse, DeleteTemplateRequestParameters>(descriptor);
 	}
 
 	public ExistsAliasResponse ExistsAlias(ExistsAliasRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ExistsAliasRequest, ExistsAliasResponse>(request);
+		return DoRequest<ExistsAliasRequest, ExistsAliasResponse, ExistsAliasRequestParameters>(request);
 	}
 
 	public Task<ExistsAliasResponse> ExistsAliasAsync(ExistsAliasRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ExistsAliasRequest, ExistsAliasResponse>(request, cancellationToken);
+		return DoRequestAsync<ExistsAliasRequest, ExistsAliasResponse, ExistsAliasRequestParameters>(request, cancellationToken);
 	}
 
 	public ExistsAliasResponse ExistsAlias(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var descriptor = new ExistsAliasRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsAliasRequestDescriptor, ExistsAliasResponse>(descriptor);
+		return DoRequest<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
 	}
 
 	public ExistsAliasResponse ExistsAlias(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor> configureRequest)
@@ -669,7 +669,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsAliasRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsAliasRequestDescriptor, ExistsAliasResponse>(descriptor);
+		return DoRequest<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
 	}
 
 	public ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor<TDocument>> configureRequest)
@@ -677,14 +677,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsAliasRequestDescriptor<TDocument>(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse>(descriptor);
+		return DoRequest<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
 	}
 
 	public Task<ExistsAliasResponse> ExistsAliasAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ExistsAliasRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsAliasRequestDescriptor, ExistsAliasResponse>(descriptor);
+		return DoRequestAsync<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
 	}
 
 	public Task<ExistsAliasResponse> ExistsAliasAsync(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -692,7 +692,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsAliasRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsAliasRequestDescriptor, ExistsAliasResponse>(descriptor);
+		return DoRequestAsync<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
 	}
 
 	public Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -700,26 +700,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsAliasRequestDescriptor<TDocument>(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse>(descriptor);
+		return DoRequestAsync<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
 	}
 
 	public ExistsIndexTemplateResponse ExistsIndexTemplate(ExistsIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ExistsIndexTemplateRequest, ExistsIndexTemplateResponse>(request);
+		return DoRequest<ExistsIndexTemplateRequest, ExistsIndexTemplateResponse, ExistsIndexTemplateRequestParameters>(request);
 	}
 
 	public Task<ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(ExistsIndexTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ExistsIndexTemplateRequest, ExistsIndexTemplateResponse>(request, cancellationToken);
+		return DoRequestAsync<ExistsIndexTemplateRequest, ExistsIndexTemplateResponse, ExistsIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public ExistsIndexTemplateResponse ExistsIndexTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var descriptor = new ExistsIndexTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateResponse>(descriptor);
+		return DoRequest<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateResponse, ExistsIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public ExistsIndexTemplateResponse ExistsIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<ExistsIndexTemplateRequestDescriptor> configureRequest)
@@ -727,14 +727,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsIndexTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateResponse>(descriptor);
+		return DoRequest<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateResponse, ExistsIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ExistsIndexTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateResponse>(descriptor);
+		return DoRequestAsync<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateResponse, ExistsIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<ExistsIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -742,26 +742,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsIndexTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateResponse>(descriptor);
+		return DoRequestAsync<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateResponse, ExistsIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public ExistsResponse Exists(ExistsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ExistsRequest, ExistsResponse>(request);
+		return DoRequest<ExistsRequest, ExistsResponse, ExistsRequestParameters>(request);
 	}
 
 	public Task<ExistsResponse> ExistsAsync(ExistsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ExistsRequest, ExistsResponse>(request, cancellationToken);
+		return DoRequestAsync<ExistsRequest, ExistsResponse, ExistsRequestParameters>(request, cancellationToken);
 	}
 
 	public ExistsResponse Exists(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var descriptor = new ExistsRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsRequestDescriptor, ExistsResponse>(descriptor);
+		return DoRequest<ExistsRequestDescriptor, ExistsResponse, ExistsRequestParameters>(descriptor);
 	}
 
 	public ExistsResponse Exists(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor> configureRequest)
@@ -769,7 +769,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsRequestDescriptor, ExistsResponse>(descriptor);
+		return DoRequest<ExistsRequestDescriptor, ExistsResponse, ExistsRequestParameters>(descriptor);
 	}
 
 	public ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
@@ -777,14 +777,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
+		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor);
 	}
 
 	public Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ExistsRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse>(descriptor);
+		return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse, ExistsRequestParameters>(descriptor);
 	}
 
 	public Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -792,7 +792,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse>(descriptor);
+		return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse, ExistsRequestParameters>(descriptor);
 	}
 
 	public Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -800,26 +800,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
+		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor);
 	}
 
 	public ExistsTemplateResponse ExistsTemplate(ExistsTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ExistsTemplateRequest, ExistsTemplateResponse>(request);
+		return DoRequest<ExistsTemplateRequest, ExistsTemplateResponse, ExistsTemplateRequestParameters>(request);
 	}
 
 	public Task<ExistsTemplateResponse> ExistsTemplateAsync(ExistsTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ExistsTemplateRequest, ExistsTemplateResponse>(request, cancellationToken);
+		return DoRequestAsync<ExistsTemplateRequest, ExistsTemplateResponse, ExistsTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public ExistsTemplateResponse ExistsTemplate(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var descriptor = new ExistsTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsTemplateRequestDescriptor, ExistsTemplateResponse>(descriptor);
+		return DoRequest<ExistsTemplateRequestDescriptor, ExistsTemplateResponse, ExistsTemplateRequestParameters>(descriptor);
 	}
 
 	public ExistsTemplateResponse ExistsTemplate(Elastic.Clients.Elasticsearch.Names name, Action<ExistsTemplateRequestDescriptor> configureRequest)
@@ -827,14 +827,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsTemplateRequestDescriptor, ExistsTemplateResponse>(descriptor);
+		return DoRequest<ExistsTemplateRequestDescriptor, ExistsTemplateResponse, ExistsTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<ExistsTemplateResponse> ExistsTemplateAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ExistsTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsTemplateRequestDescriptor, ExistsTemplateResponse>(descriptor);
+		return DoRequestAsync<ExistsTemplateRequestDescriptor, ExistsTemplateResponse, ExistsTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<ExistsTemplateResponse> ExistsTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<ExistsTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -842,26 +842,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ExistsTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsTemplateRequestDescriptor, ExistsTemplateResponse>(descriptor);
+		return DoRequestAsync<ExistsTemplateRequestDescriptor, ExistsTemplateResponse, ExistsTemplateRequestParameters>(descriptor);
 	}
 
 	public FieldMappingResponse GetFieldMapping(FieldMappingRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<FieldMappingRequest, FieldMappingResponse>(request);
+		return DoRequest<FieldMappingRequest, FieldMappingResponse, FieldMappingRequestParameters>(request);
 	}
 
 	public Task<FieldMappingResponse> GetFieldMappingAsync(FieldMappingRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<FieldMappingRequest, FieldMappingResponse>(request, cancellationToken);
+		return DoRequestAsync<FieldMappingRequest, FieldMappingResponse, FieldMappingRequestParameters>(request, cancellationToken);
 	}
 
 	public FieldMappingResponse GetFieldMapping(Elastic.Clients.Elasticsearch.Fields fields)
 	{
 		var descriptor = new FieldMappingRequestDescriptor(fields);
 		descriptor.BeforeRequest();
-		return DoRequest<FieldMappingRequestDescriptor, FieldMappingResponse>(descriptor);
+		return DoRequest<FieldMappingRequestDescriptor, FieldMappingResponse, FieldMappingRequestParameters>(descriptor);
 	}
 
 	public FieldMappingResponse GetFieldMapping(Elastic.Clients.Elasticsearch.Fields fields, Action<FieldMappingRequestDescriptor> configureRequest)
@@ -869,7 +869,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new FieldMappingRequestDescriptor(fields);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<FieldMappingRequestDescriptor, FieldMappingResponse>(descriptor);
+		return DoRequest<FieldMappingRequestDescriptor, FieldMappingResponse, FieldMappingRequestParameters>(descriptor);
 	}
 
 	public FieldMappingResponse GetFieldMapping<TDocument>(Elastic.Clients.Elasticsearch.Fields fields, Action<FieldMappingRequestDescriptor<TDocument>> configureRequest)
@@ -877,14 +877,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new FieldMappingRequestDescriptor<TDocument>(fields);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<FieldMappingRequestDescriptor<TDocument>, FieldMappingResponse>(descriptor);
+		return DoRequest<FieldMappingRequestDescriptor<TDocument>, FieldMappingResponse, FieldMappingRequestParameters>(descriptor);
 	}
 
 	public Task<FieldMappingResponse> GetFieldMappingAsync(Elastic.Clients.Elasticsearch.Fields fields, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new FieldMappingRequestDescriptor(fields);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<FieldMappingRequestDescriptor, FieldMappingResponse>(descriptor);
+		return DoRequestAsync<FieldMappingRequestDescriptor, FieldMappingResponse, FieldMappingRequestParameters>(descriptor);
 	}
 
 	public Task<FieldMappingResponse> GetFieldMappingAsync(Elastic.Clients.Elasticsearch.Fields fields, Action<FieldMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -892,7 +892,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new FieldMappingRequestDescriptor(fields);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<FieldMappingRequestDescriptor, FieldMappingResponse>(descriptor);
+		return DoRequestAsync<FieldMappingRequestDescriptor, FieldMappingResponse, FieldMappingRequestParameters>(descriptor);
 	}
 
 	public Task<FieldMappingResponse> GetFieldMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Fields fields, Action<FieldMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -900,26 +900,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new FieldMappingRequestDescriptor<TDocument>(fields);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<FieldMappingRequestDescriptor<TDocument>, FieldMappingResponse>(descriptor);
+		return DoRequestAsync<FieldMappingRequestDescriptor<TDocument>, FieldMappingResponse, FieldMappingRequestParameters>(descriptor);
 	}
 
 	public FlushResponse Flush(FlushRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<FlushRequest, FlushResponse>(request);
+		return DoRequest<FlushRequest, FlushResponse, FlushRequestParameters>(request);
 	}
 
 	public Task<FlushResponse> FlushAsync(FlushRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<FlushRequest, FlushResponse>(request, cancellationToken);
+		return DoRequestAsync<FlushRequest, FlushResponse, FlushRequestParameters>(request, cancellationToken);
 	}
 
 	public FlushResponse Flush()
 	{
 		var descriptor = new FlushRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<FlushRequestDescriptor, FlushResponse>(descriptor);
+		return DoRequest<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor);
 	}
 
 	public FlushResponse Flush(Action<FlushRequestDescriptor> configureRequest)
@@ -927,7 +927,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new FlushRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<FlushRequestDescriptor, FlushResponse>(descriptor);
+		return DoRequest<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor);
 	}
 
 	public FlushResponse Flush<TDocument>(Action<FlushRequestDescriptor<TDocument>> configureRequest)
@@ -935,14 +935,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new FlushRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<FlushRequestDescriptor<TDocument>, FlushResponse>(descriptor);
+		return DoRequest<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor);
 	}
 
 	public Task<FlushResponse> FlushAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new FlushRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<FlushRequestDescriptor, FlushResponse>(descriptor);
+		return DoRequestAsync<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor);
 	}
 
 	public Task<FlushResponse> FlushAsync(Action<FlushRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -950,7 +950,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new FlushRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<FlushRequestDescriptor, FlushResponse>(descriptor);
+		return DoRequestAsync<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor);
 	}
 
 	public Task<FlushResponse> FlushAsync<TDocument>(Action<FlushRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -958,26 +958,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new FlushRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<FlushRequestDescriptor<TDocument>, FlushResponse>(descriptor);
+		return DoRequestAsync<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor);
 	}
 
 	public ForcemergeResponse Forcemerge(ForcemergeRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ForcemergeRequest, ForcemergeResponse>(request);
+		return DoRequest<ForcemergeRequest, ForcemergeResponse, ForcemergeRequestParameters>(request);
 	}
 
 	public Task<ForcemergeResponse> ForcemergeAsync(ForcemergeRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ForcemergeRequest, ForcemergeResponse>(request, cancellationToken);
+		return DoRequestAsync<ForcemergeRequest, ForcemergeResponse, ForcemergeRequestParameters>(request, cancellationToken);
 	}
 
 	public ForcemergeResponse Forcemerge()
 	{
 		var descriptor = new ForcemergeRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<ForcemergeRequestDescriptor, ForcemergeResponse>(descriptor);
+		return DoRequest<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
 	}
 
 	public ForcemergeResponse Forcemerge(Action<ForcemergeRequestDescriptor> configureRequest)
@@ -985,7 +985,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ForcemergeRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ForcemergeRequestDescriptor, ForcemergeResponse>(descriptor);
+		return DoRequest<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
 	}
 
 	public ForcemergeResponse Forcemerge<TDocument>(Action<ForcemergeRequestDescriptor<TDocument>> configureRequest)
@@ -993,14 +993,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ForcemergeRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse>(descriptor);
+		return DoRequest<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
 	}
 
 	public Task<ForcemergeResponse> ForcemergeAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ForcemergeRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ForcemergeRequestDescriptor, ForcemergeResponse>(descriptor);
+		return DoRequestAsync<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
 	}
 
 	public Task<ForcemergeResponse> ForcemergeAsync(Action<ForcemergeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1008,7 +1008,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ForcemergeRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ForcemergeRequestDescriptor, ForcemergeResponse>(descriptor);
+		return DoRequestAsync<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
 	}
 
 	public Task<ForcemergeResponse> ForcemergeAsync<TDocument>(Action<ForcemergeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1016,26 +1016,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ForcemergeRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse>(descriptor);
+		return DoRequestAsync<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
 	}
 
 	public GetResponse Get(GetRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetRequest, GetResponse>(request);
+		return DoRequest<GetRequest, GetResponse, GetRequestParameters>(request);
 	}
 
 	public Task<GetResponse> GetAsync(GetRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetRequest, GetResponse>(request, cancellationToken);
+		return DoRequestAsync<GetRequest, GetResponse, GetRequestParameters>(request, cancellationToken);
 	}
 
 	public GetResponse Get(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var descriptor = new GetRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<GetRequestDescriptor, GetResponse>(descriptor);
+		return DoRequest<GetRequestDescriptor, GetResponse, GetRequestParameters>(descriptor);
 	}
 
 	public GetResponse Get(Elastic.Clients.Elasticsearch.Indices indices, Action<GetRequestDescriptor> configureRequest)
@@ -1043,7 +1043,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new GetRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetRequestDescriptor, GetResponse>(descriptor);
+		return DoRequest<GetRequestDescriptor, GetResponse, GetRequestParameters>(descriptor);
 	}
 
 	public GetResponse Get<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetRequestDescriptor<TDocument>> configureRequest)
@@ -1051,14 +1051,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new GetRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetRequestDescriptor<TDocument>, GetResponse>(descriptor);
+		return DoRequest<GetRequestDescriptor<TDocument>, GetResponse, GetRequestParameters>(descriptor);
 	}
 
 	public Task<GetResponse> GetAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRequestDescriptor, GetResponse>(descriptor);
+		return DoRequestAsync<GetRequestDescriptor, GetResponse, GetRequestParameters>(descriptor);
 	}
 
 	public Task<GetResponse> GetAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<GetRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1066,7 +1066,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new GetRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRequestDescriptor, GetResponse>(descriptor);
+		return DoRequestAsync<GetRequestDescriptor, GetResponse, GetRequestParameters>(descriptor);
 	}
 
 	public Task<GetResponse> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1074,26 +1074,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new GetRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse>(descriptor);
+		return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse, GetRequestParameters>(descriptor);
 	}
 
 	public IndexTemplateResponse GetIndexTemplate(IndexTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<IndexTemplateRequest, IndexTemplateResponse>(request);
+		return DoRequest<IndexTemplateRequest, IndexTemplateResponse, IndexTemplateRequestParameters>(request);
 	}
 
 	public Task<IndexTemplateResponse> GetIndexTemplateAsync(IndexTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<IndexTemplateRequest, IndexTemplateResponse>(request, cancellationToken);
+		return DoRequestAsync<IndexTemplateRequest, IndexTemplateResponse, IndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public IndexTemplateResponse GetIndexTemplate()
 	{
 		var descriptor = new IndexTemplateRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<IndexTemplateRequestDescriptor, IndexTemplateResponse>(descriptor);
+		return DoRequest<IndexTemplateRequestDescriptor, IndexTemplateResponse, IndexTemplateRequestParameters>(descriptor);
 	}
 
 	public IndexTemplateResponse GetIndexTemplate(Action<IndexTemplateRequestDescriptor> configureRequest)
@@ -1101,14 +1101,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new IndexTemplateRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<IndexTemplateRequestDescriptor, IndexTemplateResponse>(descriptor);
+		return DoRequest<IndexTemplateRequestDescriptor, IndexTemplateResponse, IndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<IndexTemplateResponse> GetIndexTemplateAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new IndexTemplateRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<IndexTemplateRequestDescriptor, IndexTemplateResponse>(descriptor);
+		return DoRequestAsync<IndexTemplateRequestDescriptor, IndexTemplateResponse, IndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<IndexTemplateResponse> GetIndexTemplateAsync(Action<IndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1116,26 +1116,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new IndexTemplateRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<IndexTemplateRequestDescriptor, IndexTemplateResponse>(descriptor);
+		return DoRequestAsync<IndexTemplateRequestDescriptor, IndexTemplateResponse, IndexTemplateRequestParameters>(descriptor);
 	}
 
 	public MappingResponse GetMapping(MappingRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<MappingRequest, MappingResponse>(request);
+		return DoRequest<MappingRequest, MappingResponse, MappingRequestParameters>(request);
 	}
 
 	public Task<MappingResponse> GetMappingAsync(MappingRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<MappingRequest, MappingResponse>(request, cancellationToken);
+		return DoRequestAsync<MappingRequest, MappingResponse, MappingRequestParameters>(request, cancellationToken);
 	}
 
 	public MappingResponse GetMapping()
 	{
 		var descriptor = new MappingRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<MappingRequestDescriptor, MappingResponse>(descriptor);
+		return DoRequest<MappingRequestDescriptor, MappingResponse, MappingRequestParameters>(descriptor);
 	}
 
 	public MappingResponse GetMapping(Action<MappingRequestDescriptor> configureRequest)
@@ -1143,7 +1143,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new MappingRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<MappingRequestDescriptor, MappingResponse>(descriptor);
+		return DoRequest<MappingRequestDescriptor, MappingResponse, MappingRequestParameters>(descriptor);
 	}
 
 	public MappingResponse GetMapping<TDocument>(Action<MappingRequestDescriptor<TDocument>> configureRequest)
@@ -1151,14 +1151,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new MappingRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<MappingRequestDescriptor<TDocument>, MappingResponse>(descriptor);
+		return DoRequest<MappingRequestDescriptor<TDocument>, MappingResponse, MappingRequestParameters>(descriptor);
 	}
 
 	public Task<MappingResponse> GetMappingAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new MappingRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<MappingRequestDescriptor, MappingResponse>(descriptor);
+		return DoRequestAsync<MappingRequestDescriptor, MappingResponse, MappingRequestParameters>(descriptor);
 	}
 
 	public Task<MappingResponse> GetMappingAsync(Action<MappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1166,7 +1166,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new MappingRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<MappingRequestDescriptor, MappingResponse>(descriptor);
+		return DoRequestAsync<MappingRequestDescriptor, MappingResponse, MappingRequestParameters>(descriptor);
 	}
 
 	public Task<MappingResponse> GetMappingAsync<TDocument>(Action<MappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1174,26 +1174,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new MappingRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<MappingRequestDescriptor<TDocument>, MappingResponse>(descriptor);
+		return DoRequestAsync<MappingRequestDescriptor<TDocument>, MappingResponse, MappingRequestParameters>(descriptor);
 	}
 
 	public MigrateToDataStreamResponse MigrateToDataStream(MigrateToDataStreamRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<MigrateToDataStreamRequest, MigrateToDataStreamResponse>(request);
+		return DoRequest<MigrateToDataStreamRequest, MigrateToDataStreamResponse, MigrateToDataStreamRequestParameters>(request);
 	}
 
 	public Task<MigrateToDataStreamResponse> MigrateToDataStreamAsync(MigrateToDataStreamRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<MigrateToDataStreamRequest, MigrateToDataStreamResponse>(request, cancellationToken);
+		return DoRequestAsync<MigrateToDataStreamRequest, MigrateToDataStreamResponse, MigrateToDataStreamRequestParameters>(request, cancellationToken);
 	}
 
 	public MigrateToDataStreamResponse MigrateToDataStream(Elastic.Clients.Elasticsearch.IndexName name)
 	{
 		var descriptor = new MigrateToDataStreamRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamResponse>(descriptor);
+		return DoRequest<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamResponse, MigrateToDataStreamRequestParameters>(descriptor);
 	}
 
 	public MigrateToDataStreamResponse MigrateToDataStream(Elastic.Clients.Elasticsearch.IndexName name, Action<MigrateToDataStreamRequestDescriptor> configureRequest)
@@ -1201,14 +1201,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new MigrateToDataStreamRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamResponse>(descriptor);
+		return DoRequest<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamResponse, MigrateToDataStreamRequestParameters>(descriptor);
 	}
 
 	public Task<MigrateToDataStreamResponse> MigrateToDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new MigrateToDataStreamRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamResponse>(descriptor);
+		return DoRequestAsync<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamResponse, MigrateToDataStreamRequestParameters>(descriptor);
 	}
 
 	public Task<MigrateToDataStreamResponse> MigrateToDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, Action<MigrateToDataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1216,26 +1216,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new MigrateToDataStreamRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamResponse>(descriptor);
+		return DoRequestAsync<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamResponse, MigrateToDataStreamRequestParameters>(descriptor);
 	}
 
 	public OpenResponse Open(OpenRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<OpenRequest, OpenResponse>(request);
+		return DoRequest<OpenRequest, OpenResponse, OpenRequestParameters>(request);
 	}
 
 	public Task<OpenResponse> OpenAsync(OpenRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<OpenRequest, OpenResponse>(request, cancellationToken);
+		return DoRequestAsync<OpenRequest, OpenResponse, OpenRequestParameters>(request, cancellationToken);
 	}
 
 	public OpenResponse Open(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var descriptor = new OpenRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<OpenRequestDescriptor, OpenResponse>(descriptor);
+		return DoRequest<OpenRequestDescriptor, OpenResponse, OpenRequestParameters>(descriptor);
 	}
 
 	public OpenResponse Open(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenRequestDescriptor> configureRequest)
@@ -1243,7 +1243,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new OpenRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<OpenRequestDescriptor, OpenResponse>(descriptor);
+		return DoRequest<OpenRequestDescriptor, OpenResponse, OpenRequestParameters>(descriptor);
 	}
 
 	public OpenResponse Open<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenRequestDescriptor<TDocument>> configureRequest)
@@ -1251,14 +1251,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new OpenRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<OpenRequestDescriptor<TDocument>, OpenResponse>(descriptor);
+		return DoRequest<OpenRequestDescriptor<TDocument>, OpenResponse, OpenRequestParameters>(descriptor);
 	}
 
 	public Task<OpenResponse> OpenAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new OpenRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<OpenRequestDescriptor, OpenResponse>(descriptor);
+		return DoRequestAsync<OpenRequestDescriptor, OpenResponse, OpenRequestParameters>(descriptor);
 	}
 
 	public Task<OpenResponse> OpenAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1266,7 +1266,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new OpenRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<OpenRequestDescriptor, OpenResponse>(descriptor);
+		return DoRequestAsync<OpenRequestDescriptor, OpenResponse, OpenRequestParameters>(descriptor);
 	}
 
 	public Task<OpenResponse> OpenAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1274,26 +1274,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new OpenRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<OpenRequestDescriptor<TDocument>, OpenResponse>(descriptor);
+		return DoRequestAsync<OpenRequestDescriptor<TDocument>, OpenResponse, OpenRequestParameters>(descriptor);
 	}
 
 	public PutAliasResponse PutAlias(PutAliasRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutAliasRequest, PutAliasResponse>(request);
+		return DoRequest<PutAliasRequest, PutAliasResponse, PutAliasRequestParameters>(request);
 	}
 
 	public Task<PutAliasResponse> PutAliasAsync(PutAliasRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutAliasRequest, PutAliasResponse>(request, cancellationToken);
+		return DoRequestAsync<PutAliasRequest, PutAliasResponse, PutAliasRequestParameters>(request, cancellationToken);
 	}
 
 	public PutAliasResponse PutAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name)
 	{
 		var descriptor = new PutAliasRequestDescriptor(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequest<PutAliasRequestDescriptor, PutAliasResponse>(descriptor);
+		return DoRequest<PutAliasRequestDescriptor, PutAliasResponse, PutAliasRequestParameters>(descriptor);
 	}
 
 	public PutAliasResponse PutAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor> configureRequest)
@@ -1301,7 +1301,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutAliasRequestDescriptor(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<PutAliasRequestDescriptor, PutAliasResponse>(descriptor);
+		return DoRequest<PutAliasRequestDescriptor, PutAliasResponse, PutAliasRequestParameters>(descriptor);
 	}
 
 	public PutAliasResponse PutAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor<TDocument>> configureRequest)
@@ -1309,14 +1309,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutAliasRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<PutAliasRequestDescriptor<TDocument>, PutAliasResponse>(descriptor);
+		return DoRequest<PutAliasRequestDescriptor<TDocument>, PutAliasResponse, PutAliasRequestParameters>(descriptor);
 	}
 
 	public Task<PutAliasResponse> PutAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutAliasRequestDescriptor(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutAliasRequestDescriptor, PutAliasResponse>(descriptor);
+		return DoRequestAsync<PutAliasRequestDescriptor, PutAliasResponse, PutAliasRequestParameters>(descriptor);
 	}
 
 	public Task<PutAliasResponse> PutAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1324,7 +1324,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutAliasRequestDescriptor(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutAliasRequestDescriptor, PutAliasResponse>(descriptor);
+		return DoRequestAsync<PutAliasRequestDescriptor, PutAliasResponse, PutAliasRequestParameters>(descriptor);
 	}
 
 	public Task<PutAliasResponse> PutAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1332,26 +1332,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutAliasRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutAliasRequestDescriptor<TDocument>, PutAliasResponse>(descriptor);
+		return DoRequestAsync<PutAliasRequestDescriptor<TDocument>, PutAliasResponse, PutAliasRequestParameters>(descriptor);
 	}
 
 	public PutIndexTemplateResponse PutIndexTemplate(PutIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutIndexTemplateRequest, PutIndexTemplateResponse>(request);
+		return DoRequest<PutIndexTemplateRequest, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(request);
 	}
 
 	public Task<PutIndexTemplateResponse> PutIndexTemplateAsync(PutIndexTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutIndexTemplateRequest, PutIndexTemplateResponse>(request, cancellationToken);
+		return DoRequestAsync<PutIndexTemplateRequest, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public PutIndexTemplateResponse PutIndexTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var descriptor = new PutIndexTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse>(descriptor);
+		return DoRequest<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public PutIndexTemplateResponse PutIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor> configureRequest)
@@ -1359,7 +1359,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutIndexTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse>(descriptor);
+		return DoRequest<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public PutIndexTemplateResponse PutIndexTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -1367,14 +1367,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutIndexTemplateRequestDescriptor<TDocument>(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<PutIndexTemplateRequestDescriptor<TDocument>, PutIndexTemplateResponse>(descriptor);
+		return DoRequest<PutIndexTemplateRequestDescriptor<TDocument>, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutIndexTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse>(descriptor);
+		return DoRequestAsync<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1382,7 +1382,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutIndexTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse>(descriptor);
+		return DoRequestAsync<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<PutIndexTemplateResponse> PutIndexTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1390,26 +1390,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutIndexTemplateRequestDescriptor<TDocument>(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutIndexTemplateRequestDescriptor<TDocument>, PutIndexTemplateResponse>(descriptor);
+		return DoRequestAsync<PutIndexTemplateRequestDescriptor<TDocument>, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public PutMappingResponse PutMapping(PutMappingRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutMappingRequest, PutMappingResponse>(request);
+		return DoRequest<PutMappingRequest, PutMappingResponse, PutMappingRequestParameters>(request);
 	}
 
 	public Task<PutMappingResponse> PutMappingAsync(PutMappingRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutMappingRequest, PutMappingResponse>(request, cancellationToken);
+		return DoRequestAsync<PutMappingRequest, PutMappingResponse, PutMappingRequestParameters>(request, cancellationToken);
 	}
 
 	public PutMappingResponse PutMapping(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var descriptor = new PutMappingRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<PutMappingRequestDescriptor, PutMappingResponse>(descriptor);
+		return DoRequest<PutMappingRequestDescriptor, PutMappingResponse, PutMappingRequestParameters>(descriptor);
 	}
 
 	public PutMappingResponse PutMapping(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor> configureRequest)
@@ -1417,7 +1417,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutMappingRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<PutMappingRequestDescriptor, PutMappingResponse>(descriptor);
+		return DoRequest<PutMappingRequestDescriptor, PutMappingResponse, PutMappingRequestParameters>(descriptor);
 	}
 
 	public PutMappingResponse PutMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor<TDocument>> configureRequest)
@@ -1425,14 +1425,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutMappingRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<PutMappingRequestDescriptor<TDocument>, PutMappingResponse>(descriptor);
+		return DoRequest<PutMappingRequestDescriptor<TDocument>, PutMappingResponse, PutMappingRequestParameters>(descriptor);
 	}
 
 	public Task<PutMappingResponse> PutMappingAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutMappingRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutMappingRequestDescriptor, PutMappingResponse>(descriptor);
+		return DoRequestAsync<PutMappingRequestDescriptor, PutMappingResponse, PutMappingRequestParameters>(descriptor);
 	}
 
 	public Task<PutMappingResponse> PutMappingAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1440,7 +1440,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutMappingRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutMappingRequestDescriptor, PutMappingResponse>(descriptor);
+		return DoRequestAsync<PutMappingRequestDescriptor, PutMappingResponse, PutMappingRequestParameters>(descriptor);
 	}
 
 	public Task<PutMappingResponse> PutMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1448,26 +1448,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutMappingRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutMappingRequestDescriptor<TDocument>, PutMappingResponse>(descriptor);
+		return DoRequestAsync<PutMappingRequestDescriptor<TDocument>, PutMappingResponse, PutMappingRequestParameters>(descriptor);
 	}
 
 	public PutTemplateResponse PutTemplate(PutTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutTemplateRequest, PutTemplateResponse>(request);
+		return DoRequest<PutTemplateRequest, PutTemplateResponse, PutTemplateRequestParameters>(request);
 	}
 
 	public Task<PutTemplateResponse> PutTemplateAsync(PutTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutTemplateRequest, PutTemplateResponse>(request, cancellationToken);
+		return DoRequestAsync<PutTemplateRequest, PutTemplateResponse, PutTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public PutTemplateResponse PutTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var descriptor = new PutTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<PutTemplateRequestDescriptor, PutTemplateResponse>(descriptor);
+		return DoRequest<PutTemplateRequestDescriptor, PutTemplateResponse, PutTemplateRequestParameters>(descriptor);
 	}
 
 	public PutTemplateResponse PutTemplate(Elastic.Clients.Elasticsearch.Name name, Action<PutTemplateRequestDescriptor> configureRequest)
@@ -1475,14 +1475,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<PutTemplateRequestDescriptor, PutTemplateResponse>(descriptor);
+		return DoRequest<PutTemplateRequestDescriptor, PutTemplateResponse, PutTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutTemplateRequestDescriptor, PutTemplateResponse>(descriptor);
+		return DoRequestAsync<PutTemplateRequestDescriptor, PutTemplateResponse, PutTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1490,26 +1490,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new PutTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutTemplateRequestDescriptor, PutTemplateResponse>(descriptor);
+		return DoRequestAsync<PutTemplateRequestDescriptor, PutTemplateResponse, PutTemplateRequestParameters>(descriptor);
 	}
 
 	public RefreshResponse Refresh(RefreshRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<RefreshRequest, RefreshResponse>(request);
+		return DoRequest<RefreshRequest, RefreshResponse, RefreshRequestParameters>(request);
 	}
 
 	public Task<RefreshResponse> RefreshAsync(RefreshRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<RefreshRequest, RefreshResponse>(request, cancellationToken);
+		return DoRequestAsync<RefreshRequest, RefreshResponse, RefreshRequestParameters>(request, cancellationToken);
 	}
 
 	public RefreshResponse Refresh()
 	{
 		var descriptor = new RefreshRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<RefreshRequestDescriptor, RefreshResponse>(descriptor);
+		return DoRequest<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor);
 	}
 
 	public RefreshResponse Refresh(Action<RefreshRequestDescriptor> configureRequest)
@@ -1517,7 +1517,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new RefreshRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<RefreshRequestDescriptor, RefreshResponse>(descriptor);
+		return DoRequest<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor);
 	}
 
 	public RefreshResponse Refresh<TDocument>(Action<RefreshRequestDescriptor<TDocument>> configureRequest)
@@ -1525,14 +1525,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new RefreshRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<RefreshRequestDescriptor<TDocument>, RefreshResponse>(descriptor);
+		return DoRequest<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor);
 	}
 
 	public Task<RefreshResponse> RefreshAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new RefreshRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RefreshRequestDescriptor, RefreshResponse>(descriptor);
+		return DoRequestAsync<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor);
 	}
 
 	public Task<RefreshResponse> RefreshAsync(Action<RefreshRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1540,7 +1540,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new RefreshRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RefreshRequestDescriptor, RefreshResponse>(descriptor);
+		return DoRequestAsync<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor);
 	}
 
 	public Task<RefreshResponse> RefreshAsync<TDocument>(Action<RefreshRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1548,26 +1548,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new RefreshRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RefreshRequestDescriptor<TDocument>, RefreshResponse>(descriptor);
+		return DoRequestAsync<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor);
 	}
 
 	public RolloverResponse Rollover(RolloverRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<RolloverRequest, RolloverResponse>(request);
+		return DoRequest<RolloverRequest, RolloverResponse, RolloverRequestParameters>(request);
 	}
 
 	public Task<RolloverResponse> RolloverAsync(RolloverRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<RolloverRequest, RolloverResponse>(request, cancellationToken);
+		return DoRequestAsync<RolloverRequest, RolloverResponse, RolloverRequestParameters>(request, cancellationToken);
 	}
 
 	public RolloverResponse Rollover(Elastic.Clients.Elasticsearch.IndexAlias alias)
 	{
 		var descriptor = new RolloverRequestDescriptor(alias);
 		descriptor.BeforeRequest();
-		return DoRequest<RolloverRequestDescriptor, RolloverResponse>(descriptor);
+		return DoRequest<RolloverRequestDescriptor, RolloverResponse, RolloverRequestParameters>(descriptor);
 	}
 
 	public RolloverResponse Rollover(Elastic.Clients.Elasticsearch.IndexAlias alias, Action<RolloverRequestDescriptor> configureRequest)
@@ -1575,14 +1575,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new RolloverRequestDescriptor(alias);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<RolloverRequestDescriptor, RolloverResponse>(descriptor);
+		return DoRequest<RolloverRequestDescriptor, RolloverResponse, RolloverRequestParameters>(descriptor);
 	}
 
 	public Task<RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new RolloverRequestDescriptor(alias);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RolloverRequestDescriptor, RolloverResponse>(descriptor);
+		return DoRequestAsync<RolloverRequestDescriptor, RolloverResponse, RolloverRequestParameters>(descriptor);
 	}
 
 	public Task<RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, Action<RolloverRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1590,26 +1590,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new RolloverRequestDescriptor(alias);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RolloverRequestDescriptor, RolloverResponse>(descriptor);
+		return DoRequestAsync<RolloverRequestDescriptor, RolloverResponse, RolloverRequestParameters>(descriptor);
 	}
 
 	public ShrinkResponse Shrink(ShrinkRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ShrinkRequest, ShrinkResponse>(request);
+		return DoRequest<ShrinkRequest, ShrinkResponse, ShrinkRequestParameters>(request);
 	}
 
 	public Task<ShrinkResponse> ShrinkAsync(ShrinkRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ShrinkRequest, ShrinkResponse>(request, cancellationToken);
+		return DoRequestAsync<ShrinkRequest, ShrinkResponse, ShrinkRequestParameters>(request, cancellationToken);
 	}
 
 	public ShrinkResponse Shrink(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target)
 	{
 		var descriptor = new ShrinkRequestDescriptor(index, target);
 		descriptor.BeforeRequest();
-		return DoRequest<ShrinkRequestDescriptor, ShrinkResponse>(descriptor);
+		return DoRequest<ShrinkRequestDescriptor, ShrinkResponse, ShrinkRequestParameters>(descriptor);
 	}
 
 	public ShrinkResponse Shrink(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkRequestDescriptor> configureRequest)
@@ -1617,14 +1617,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ShrinkRequestDescriptor(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ShrinkRequestDescriptor, ShrinkResponse>(descriptor);
+		return DoRequest<ShrinkRequestDescriptor, ShrinkResponse, ShrinkRequestParameters>(descriptor);
 	}
 
 	public ShrinkResponse Shrink<TDocument>(Elastic.Clients.Elasticsearch.IndexName target)
 	{
 		var descriptor = new ShrinkRequestDescriptor<TDocument>(typeof(TDocument), target);
 		descriptor.BeforeRequest();
-		return DoRequest<ShrinkRequestDescriptor<TDocument>, ShrinkResponse>(descriptor);
+		return DoRequest<ShrinkRequestDescriptor<TDocument>, ShrinkResponse, ShrinkRequestParameters>(descriptor);
 	}
 
 	public ShrinkResponse Shrink<TDocument>(Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkRequestDescriptor<TDocument>> configureRequest)
@@ -1632,7 +1632,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ShrinkRequestDescriptor<TDocument>(typeof(TDocument), target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ShrinkRequestDescriptor<TDocument>, ShrinkResponse>(descriptor);
+		return DoRequest<ShrinkRequestDescriptor<TDocument>, ShrinkResponse, ShrinkRequestParameters>(descriptor);
 	}
 
 	public ShrinkResponse Shrink<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkRequestDescriptor<TDocument>> configureRequest)
@@ -1640,14 +1640,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ShrinkRequestDescriptor<TDocument>(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ShrinkRequestDescriptor<TDocument>, ShrinkResponse>(descriptor);
+		return DoRequest<ShrinkRequestDescriptor<TDocument>, ShrinkResponse, ShrinkRequestParameters>(descriptor);
 	}
 
 	public Task<ShrinkResponse> ShrinkAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ShrinkRequestDescriptor(index, target);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ShrinkRequestDescriptor, ShrinkResponse>(descriptor);
+		return DoRequestAsync<ShrinkRequestDescriptor, ShrinkResponse, ShrinkRequestParameters>(descriptor);
 	}
 
 	public Task<ShrinkResponse> ShrinkAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1655,14 +1655,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ShrinkRequestDescriptor(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ShrinkRequestDescriptor, ShrinkResponse>(descriptor);
+		return DoRequestAsync<ShrinkRequestDescriptor, ShrinkResponse, ShrinkRequestParameters>(descriptor);
 	}
 
 	public Task<ShrinkResponse> ShrinkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName target, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ShrinkRequestDescriptor<TDocument>(typeof(TDocument), target);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ShrinkRequestDescriptor<TDocument>, ShrinkResponse>(descriptor);
+		return DoRequestAsync<ShrinkRequestDescriptor<TDocument>, ShrinkResponse, ShrinkRequestParameters>(descriptor);
 	}
 
 	public Task<ShrinkResponse> ShrinkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1670,7 +1670,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ShrinkRequestDescriptor<TDocument>(typeof(TDocument), target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ShrinkRequestDescriptor<TDocument>, ShrinkResponse>(descriptor);
+		return DoRequestAsync<ShrinkRequestDescriptor<TDocument>, ShrinkResponse, ShrinkRequestParameters>(descriptor);
 	}
 
 	public Task<ShrinkResponse> ShrinkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1678,26 +1678,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new ShrinkRequestDescriptor<TDocument>(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ShrinkRequestDescriptor<TDocument>, ShrinkResponse>(descriptor);
+		return DoRequestAsync<ShrinkRequestDescriptor<TDocument>, ShrinkResponse, ShrinkRequestParameters>(descriptor);
 	}
 
 	public SimulateIndexTemplateResponse SimulateIndexTemplate(SimulateIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<SimulateIndexTemplateRequest, SimulateIndexTemplateResponse>(request);
+		return DoRequest<SimulateIndexTemplateRequest, SimulateIndexTemplateResponse, SimulateIndexTemplateRequestParameters>(request);
 	}
 
 	public Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(SimulateIndexTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<SimulateIndexTemplateRequest, SimulateIndexTemplateResponse>(request, cancellationToken);
+		return DoRequestAsync<SimulateIndexTemplateRequest, SimulateIndexTemplateResponse, SimulateIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public SimulateIndexTemplateResponse SimulateIndexTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var descriptor = new SimulateIndexTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateResponse>(descriptor);
+		return DoRequest<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateResponse, SimulateIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public SimulateIndexTemplateResponse SimulateIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<SimulateIndexTemplateRequestDescriptor> configureRequest)
@@ -1705,7 +1705,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SimulateIndexTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateResponse>(descriptor);
+		return DoRequest<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateResponse, SimulateIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public SimulateIndexTemplateResponse SimulateIndexTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<SimulateIndexTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -1713,14 +1713,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SimulateIndexTemplateRequestDescriptor<TDocument>(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<SimulateIndexTemplateRequestDescriptor<TDocument>, SimulateIndexTemplateResponse>(descriptor);
+		return DoRequest<SimulateIndexTemplateRequestDescriptor<TDocument>, SimulateIndexTemplateResponse, SimulateIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new SimulateIndexTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateResponse>(descriptor);
+		return DoRequestAsync<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateResponse, SimulateIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<SimulateIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1728,7 +1728,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SimulateIndexTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateResponse>(descriptor);
+		return DoRequestAsync<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateResponse, SimulateIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<SimulateIndexTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1736,26 +1736,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SimulateIndexTemplateRequestDescriptor<TDocument>(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateIndexTemplateRequestDescriptor<TDocument>, SimulateIndexTemplateResponse>(descriptor);
+		return DoRequestAsync<SimulateIndexTemplateRequestDescriptor<TDocument>, SimulateIndexTemplateResponse, SimulateIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public SimulateTemplateResponse SimulateTemplate(SimulateTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<SimulateTemplateRequest, SimulateTemplateResponse>(request);
+		return DoRequest<SimulateTemplateRequest, SimulateTemplateResponse, SimulateTemplateRequestParameters>(request);
 	}
 
 	public Task<SimulateTemplateResponse> SimulateTemplateAsync(SimulateTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<SimulateTemplateRequest, SimulateTemplateResponse>(request, cancellationToken);
+		return DoRequestAsync<SimulateTemplateRequest, SimulateTemplateResponse, SimulateTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public SimulateTemplateResponse SimulateTemplate()
 	{
 		var descriptor = new SimulateTemplateRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<SimulateTemplateRequestDescriptor, SimulateTemplateResponse>(descriptor);
+		return DoRequest<SimulateTemplateRequestDescriptor, SimulateTemplateResponse, SimulateTemplateRequestParameters>(descriptor);
 	}
 
 	public SimulateTemplateResponse SimulateTemplate(Action<SimulateTemplateRequestDescriptor> configureRequest)
@@ -1763,14 +1763,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SimulateTemplateRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<SimulateTemplateRequestDescriptor, SimulateTemplateResponse>(descriptor);
+		return DoRequest<SimulateTemplateRequestDescriptor, SimulateTemplateResponse, SimulateTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<SimulateTemplateResponse> SimulateTemplateAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new SimulateTemplateRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateTemplateRequestDescriptor, SimulateTemplateResponse>(descriptor);
+		return DoRequestAsync<SimulateTemplateRequestDescriptor, SimulateTemplateResponse, SimulateTemplateRequestParameters>(descriptor);
 	}
 
 	public Task<SimulateTemplateResponse> SimulateTemplateAsync(Action<SimulateTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1778,26 +1778,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SimulateTemplateRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateTemplateRequestDescriptor, SimulateTemplateResponse>(descriptor);
+		return DoRequestAsync<SimulateTemplateRequestDescriptor, SimulateTemplateResponse, SimulateTemplateRequestParameters>(descriptor);
 	}
 
 	public SplitResponse Split(SplitRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<SplitRequest, SplitResponse>(request);
+		return DoRequest<SplitRequest, SplitResponse, SplitRequestParameters>(request);
 	}
 
 	public Task<SplitResponse> SplitAsync(SplitRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<SplitRequest, SplitResponse>(request, cancellationToken);
+		return DoRequestAsync<SplitRequest, SplitResponse, SplitRequestParameters>(request, cancellationToken);
 	}
 
 	public SplitResponse Split(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target)
 	{
 		var descriptor = new SplitRequestDescriptor(index, target);
 		descriptor.BeforeRequest();
-		return DoRequest<SplitRequestDescriptor, SplitResponse>(descriptor);
+		return DoRequest<SplitRequestDescriptor, SplitResponse, SplitRequestParameters>(descriptor);
 	}
 
 	public SplitResponse Split(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<SplitRequestDescriptor> configureRequest)
@@ -1805,14 +1805,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SplitRequestDescriptor(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<SplitRequestDescriptor, SplitResponse>(descriptor);
+		return DoRequest<SplitRequestDescriptor, SplitResponse, SplitRequestParameters>(descriptor);
 	}
 
 	public SplitResponse Split<TDocument>(Elastic.Clients.Elasticsearch.IndexName target)
 	{
 		var descriptor = new SplitRequestDescriptor<TDocument>(typeof(TDocument), target);
 		descriptor.BeforeRequest();
-		return DoRequest<SplitRequestDescriptor<TDocument>, SplitResponse>(descriptor);
+		return DoRequest<SplitRequestDescriptor<TDocument>, SplitResponse, SplitRequestParameters>(descriptor);
 	}
 
 	public SplitResponse Split<TDocument>(Elastic.Clients.Elasticsearch.IndexName target, Action<SplitRequestDescriptor<TDocument>> configureRequest)
@@ -1820,7 +1820,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SplitRequestDescriptor<TDocument>(typeof(TDocument), target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<SplitRequestDescriptor<TDocument>, SplitResponse>(descriptor);
+		return DoRequest<SplitRequestDescriptor<TDocument>, SplitResponse, SplitRequestParameters>(descriptor);
 	}
 
 	public SplitResponse Split<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<SplitRequestDescriptor<TDocument>> configureRequest)
@@ -1828,14 +1828,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SplitRequestDescriptor<TDocument>(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<SplitRequestDescriptor<TDocument>, SplitResponse>(descriptor);
+		return DoRequest<SplitRequestDescriptor<TDocument>, SplitResponse, SplitRequestParameters>(descriptor);
 	}
 
 	public Task<SplitResponse> SplitAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new SplitRequestDescriptor(index, target);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SplitRequestDescriptor, SplitResponse>(descriptor);
+		return DoRequestAsync<SplitRequestDescriptor, SplitResponse, SplitRequestParameters>(descriptor);
 	}
 
 	public Task<SplitResponse> SplitAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<SplitRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1843,14 +1843,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SplitRequestDescriptor(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SplitRequestDescriptor, SplitResponse>(descriptor);
+		return DoRequestAsync<SplitRequestDescriptor, SplitResponse, SplitRequestParameters>(descriptor);
 	}
 
 	public Task<SplitResponse> SplitAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName target, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new SplitRequestDescriptor<TDocument>(typeof(TDocument), target);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SplitRequestDescriptor<TDocument>, SplitResponse>(descriptor);
+		return DoRequestAsync<SplitRequestDescriptor<TDocument>, SplitResponse, SplitRequestParameters>(descriptor);
 	}
 
 	public Task<SplitResponse> SplitAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName target, Action<SplitRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1858,7 +1858,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SplitRequestDescriptor<TDocument>(typeof(TDocument), target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SplitRequestDescriptor<TDocument>, SplitResponse>(descriptor);
+		return DoRequestAsync<SplitRequestDescriptor<TDocument>, SplitResponse, SplitRequestParameters>(descriptor);
 	}
 
 	public Task<SplitResponse> SplitAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<SplitRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1866,26 +1866,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new SplitRequestDescriptor<TDocument>(index, target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SplitRequestDescriptor<TDocument>, SplitResponse>(descriptor);
+		return DoRequestAsync<SplitRequestDescriptor<TDocument>, SplitResponse, SplitRequestParameters>(descriptor);
 	}
 
 	public StatsResponse Stats(StatsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<StatsRequest, StatsResponse>(request);
+		return DoRequest<StatsRequest, StatsResponse, StatsRequestParameters>(request);
 	}
 
 	public Task<StatsResponse> StatsAsync(StatsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<StatsRequest, StatsResponse>(request, cancellationToken);
+		return DoRequestAsync<StatsRequest, StatsResponse, StatsRequestParameters>(request, cancellationToken);
 	}
 
 	public StatsResponse Stats()
 	{
 		var descriptor = new StatsRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<StatsRequestDescriptor, StatsResponse>(descriptor);
+		return DoRequest<StatsRequestDescriptor, StatsResponse, StatsRequestParameters>(descriptor);
 	}
 
 	public StatsResponse Stats(Action<StatsRequestDescriptor> configureRequest)
@@ -1893,7 +1893,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new StatsRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<StatsRequestDescriptor, StatsResponse>(descriptor);
+		return DoRequest<StatsRequestDescriptor, StatsResponse, StatsRequestParameters>(descriptor);
 	}
 
 	public StatsResponse Stats<TDocument>(Action<StatsRequestDescriptor<TDocument>> configureRequest)
@@ -1901,14 +1901,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new StatsRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<StatsRequestDescriptor<TDocument>, StatsResponse>(descriptor);
+		return DoRequest<StatsRequestDescriptor<TDocument>, StatsResponse, StatsRequestParameters>(descriptor);
 	}
 
 	public Task<StatsResponse> StatsAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new StatsRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StatsRequestDescriptor, StatsResponse>(descriptor);
+		return DoRequestAsync<StatsRequestDescriptor, StatsResponse, StatsRequestParameters>(descriptor);
 	}
 
 	public Task<StatsResponse> StatsAsync(Action<StatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1916,7 +1916,7 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new StatsRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StatsRequestDescriptor, StatsResponse>(descriptor);
+		return DoRequestAsync<StatsRequestDescriptor, StatsResponse, StatsRequestParameters>(descriptor);
 	}
 
 	public Task<StatsResponse> StatsAsync<TDocument>(Action<StatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1924,26 +1924,26 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new StatsRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StatsRequestDescriptor<TDocument>, StatsResponse>(descriptor);
+		return DoRequestAsync<StatsRequestDescriptor<TDocument>, StatsResponse, StatsRequestParameters>(descriptor);
 	}
 
 	public TemplateResponse GetTemplate(TemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<TemplateRequest, TemplateResponse>(request);
+		return DoRequest<TemplateRequest, TemplateResponse, TemplateRequestParameters>(request);
 	}
 
 	public Task<TemplateResponse> GetTemplateAsync(TemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<TemplateRequest, TemplateResponse>(request, cancellationToken);
+		return DoRequestAsync<TemplateRequest, TemplateResponse, TemplateRequestParameters>(request, cancellationToken);
 	}
 
 	public TemplateResponse GetTemplate()
 	{
 		var descriptor = new TemplateRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<TemplateRequestDescriptor, TemplateResponse>(descriptor);
+		return DoRequest<TemplateRequestDescriptor, TemplateResponse, TemplateRequestParameters>(descriptor);
 	}
 
 	public TemplateResponse GetTemplate(Action<TemplateRequestDescriptor> configureRequest)
@@ -1951,14 +1951,14 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new TemplateRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<TemplateRequestDescriptor, TemplateResponse>(descriptor);
+		return DoRequest<TemplateRequestDescriptor, TemplateResponse, TemplateRequestParameters>(descriptor);
 	}
 
 	public Task<TemplateResponse> GetTemplateAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new TemplateRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<TemplateRequestDescriptor, TemplateResponse>(descriptor);
+		return DoRequestAsync<TemplateRequestDescriptor, TemplateResponse, TemplateRequestParameters>(descriptor);
 	}
 
 	public Task<TemplateResponse> GetTemplateAsync(Action<TemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1966,6 +1966,6 @@ public sealed partial class IndicesNamespace : NamespacedClientProxy
 		var descriptor = new TemplateRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<TemplateRequestDescriptor, TemplateResponse>(descriptor);
+		return DoRequestAsync<TemplateRequestDescriptor, TemplateResponse, TemplateRequestParameters>(descriptor);
 	}
 }

@@ -267,7 +267,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * to `Routing` which can infer the correct routing key based on the JoinField property on the instance
 			 */
 			var indexResponse = client.Index(parent, i => i.Routing(Routing.From(parent)));
-			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+			indexResponse.ApiCallDetails.Uri.Query.Should().Contain("routing=1337");
 
 			/**
 			 * The same goes for when we index a child, we can pass the instance directly to `Routing` and NEST will use the parent id
@@ -275,25 +275,25 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * create an instance of `Routing`
 			 */
 			indexResponse = client.Index(child, i => i.Routing(Infer.Route(child)));
-			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+			indexResponse.ApiCallDetails.Uri.Query.Should().Contain("routing=1337");
 
 			/** You can always override the default inferred routing though */
 			indexResponse = client.Index(child, i => i.Routing("explicit"));
-			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=explicit");
+			indexResponse.ApiCallDetails.Uri.Query.Should().Contain("routing=explicit");
 
 			indexResponse = client.Index(child, i => i.Routing(null));
-			indexResponse.ApiCall.Uri.Query.Should().NotContain("routing");
+			indexResponse.ApiCallDetails.Uri.Query.Should().NotContain("routing");
 
 			var indexRequest = new IndexRequest<MyChild>(child) { Routing = Infer.Route(child) } ;
 			indexResponse = client.Index(indexRequest);
-			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+			indexResponse.ApiCallDetails.Uri.Query.Should().Contain("routing=1337");
 			/**
 			 * Its important to note that the routing is resolved at request time, not instantiation time
 			 * here we update the `child`'s `JoinField` after already creating the index request for `child`
 			 */
 			child.MyJoinField = JoinField.Link<MyChild>(parentId: "something-else");
 			indexResponse = client.Index(indexRequest);
-			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=something-else");
+			indexResponse.ApiCallDetails.Uri.Query.Should().Contain("routing=something-else");
 		}
 		/** [NOTE]
 		 * --

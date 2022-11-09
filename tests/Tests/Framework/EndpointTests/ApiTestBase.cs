@@ -20,7 +20,7 @@ namespace Tests.Framework.EndpointTests
 	public abstract class ApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		: RequestResponseApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
-		where TResponse : class, IElasticsearchResponse
+		where TResponse : ElasticsearchResponse
 		where TDescriptor : class
 		where TInitializer : class
 	{
@@ -82,10 +82,10 @@ namespace Tests.Framework.EndpointTests
 			}
 		}
 
-		[U] protected virtual async Task HitsTheCorrectUrl() => await AssertOnAllResponses(r => AssertUrl(r.ApiCall.Uri));
+		[U] protected virtual async Task HitsTheCorrectUrl() => await AssertOnAllResponses(r => AssertUrl(r.ApiCallDetails.Uri));
 
 		[U] protected virtual async Task UsesCorrectHttpMethod() =>
-			await AssertOnAllResponses(r => r.ApiCall.HttpMethod.Should().Be(HttpMethod, UniqueValues.CurrentView.GetStringValue()));
+			await AssertOnAllResponses(r => r.ApiCallDetails.HttpMethod.Should().Be(HttpMethod, UniqueValues.CurrentView.GetStringValue()));
 
 		[U] protected virtual void SerializesInitializer() => RoundTripsOrSerializes(Initializer);
 
@@ -103,7 +103,7 @@ namespace Tests.Framework.EndpointTests
 	public abstract class NdJsonApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		: RequestResponseApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
-		where TResponse : class, IElasticsearchResponse
+		where TResponse : ElasticsearchResponse
 		where TDescriptor : class
 		where TInitializer : class
 	{
@@ -116,11 +116,11 @@ namespace Tests.Framework.EndpointTests
 		protected abstract HttpMethod HttpMethod { get; }
 		protected abstract string ExpectedUrlPathAndQuery { get; }
 
-		[U] protected virtual async Task HitsTheCorrectUrl() => await AssertOnAllResponses(r => AssertUrl(r.ApiCall.Uri));
+		[U] protected virtual async Task HitsTheCorrectUrl() => await AssertOnAllResponses(r => AssertUrl(r.ApiCallDetails.Uri));
 
 		[U]
 		protected virtual async Task UsesCorrectHttpMethod() =>
-			await AssertOnAllResponses(r => r.ApiCall.HttpMethod.Should().Be(HttpMethod, UniqueValues.CurrentView.GetStringValue()));
+			await AssertOnAllResponses(r => r.ApiCallDetails.HttpMethod.Should().Be(HttpMethod, UniqueValues.CurrentView.GetStringValue()));
 
 		[U] protected virtual void SerializesInitializer() => SerializesNdjson(Initializer);
 

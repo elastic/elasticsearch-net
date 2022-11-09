@@ -34,7 +34,7 @@ namespace Tests.ClientConcepts.Errors
 			response.Should().NotBeNull();
 			var serverError = response.ServerError;
 			serverError.Should().NotBeNull();
-			serverError.Status.Should().Be(response.ApiCall.HttpStatusCode);
+			serverError.Status.Should().Be(response.ApiCallDetails.HttpStatusCode);
 			serverError.Error.Should().NotBeNull();
 			serverError.Error.Headers.Should().NotBeNull();
 			AssertResponseError("high level client", serverError.Error);

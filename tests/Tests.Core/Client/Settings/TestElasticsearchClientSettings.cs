@@ -50,7 +50,7 @@ namespace Tests.Core.Client.Settings
 				{
 					//r.HttpMethod;
 
-					// TODO - Replace this using the request, no longer on IApiCallDetails
+					// TODO - Replace this using the request, no longer on ApiCallDetails
 					//if (!r.DeprecationWarnings.Any()) return;
 
 					var q = r.Uri.Query;
