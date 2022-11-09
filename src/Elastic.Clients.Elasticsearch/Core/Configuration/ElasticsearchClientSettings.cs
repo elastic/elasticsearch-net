@@ -377,7 +377,7 @@ public abstract class
 
 	protected ConnectionConfigurationBase(NodePool nodePool, TransportClient connection,
 		Serializer? serializer,
-		IProductRegistration registration = null)
+		ProductRegistration registration = null)
 		: base(nodePool, connection, serializer, registration ?? new ElasticsearchProductRegistration(typeof(ElasticsearchClient))) =>
 			UserAgent(ConnectionConfiguration.DefaultUserAgent);
 
