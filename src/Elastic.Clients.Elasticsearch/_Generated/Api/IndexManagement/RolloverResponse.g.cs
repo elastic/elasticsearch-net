@@ -23,7 +23,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed partial class RolloverResponse : ElasticsearchResponseBase
+public sealed partial class RolloverResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("acknowledged")]

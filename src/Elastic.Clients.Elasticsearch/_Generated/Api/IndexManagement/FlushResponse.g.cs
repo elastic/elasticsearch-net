@@ -23,7 +23,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed partial class FlushResponse : ElasticsearchResponseBase
+public sealed partial class FlushResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("_shards")]

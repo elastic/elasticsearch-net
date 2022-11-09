@@ -23,7 +23,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed partial class ScriptLanguagesResponse : ElasticsearchResponseBase
+public sealed partial class ScriptLanguagesResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("language_contexts")]

@@ -19,7 +19,7 @@ public partial class IndicesNamespace
 	{
 		var request = new RefreshRequest(indices);
 		request.BeforeRequest();
-		return DoRequest<RefreshRequest, RefreshResponse>(request);
+		return DoRequest<RefreshRequest, RefreshResponse, RefreshRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -33,6 +33,6 @@ public partial class IndicesNamespace
 	{
 		var request = new RefreshRequest(indices);
 		request.BeforeRequest();
-		return DoRequestAsync<RefreshRequest, RefreshResponse>(request, cancellationToken);
+		return DoRequestAsync<RefreshRequest, RefreshResponse, RefreshRequestParameters>(request, cancellationToken);
 	}
 }
