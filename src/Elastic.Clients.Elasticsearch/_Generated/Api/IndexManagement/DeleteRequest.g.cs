@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed class DeleteRequestParameters : RequestParameters<DeleteRequestParameters>
+public sealed class DeleteRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -52,8 +52,8 @@ public sealed partial class DeleteRequest : PlainRequest<DeleteRequestParameters
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDelete;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
@@ -82,8 +82,8 @@ public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDelete;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 	public DeleteRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public DeleteRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public DeleteRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
@@ -112,8 +112,8 @@ public sealed partial class DeleteRequestDescriptor : RequestDescriptor<DeleteRe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDelete;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	internal override bool SupportsBody => false;
 	public DeleteRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public DeleteRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public DeleteRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);

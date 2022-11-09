@@ -31,11 +31,11 @@
       },
       "Elastic.Transport.VirtualizedCluster": {
         "type": "Direct",
-        "requested": "[0.3.2, )",
-        "resolved": "0.3.2",
-        "contentHash": "KLM7C3AY9R9PvD8JKSb3z208SgzLhBRhhdIjNoyLseHU5hWSKvst0pWPCNwgB1SRTRlRa52C6zc5z/PVxoaR4g==",
+        "requested": "[0.4.0, )",
+        "resolved": "0.4.0",
+        "contentHash": "ayBs9J8+bi1hrlk3+kzlzfur9fTrRskz/IVQfNvxs74SP5gEaxiBp69V4r2WE6cVoZKJa583jyP5vb/yKk/lCg==",
         "dependencies": {
-          "Elastic.Transport": "0.3.2"
+          "Elastic.Transport": "0.4.0"
         }
       },
       "FSharp.Core": {
@@ -195,13 +195,13 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.3.2",
-        "contentHash": "saT+26tm2xsXEbCnZHP0bsQNUQbWrLQ2J9tlzAnxPHKsrnNbcuegNDTfZy8GJdrQNbg4tsnLerzThgkU8rYHbA==",
+        "resolved": "0.4.0",
+        "contentHash": "4uqaeeZOboqs8nSvYnQXnGOSTyPo4SvV4NH3o+Ls3OEV1d9VipYS09/8/DcmcklK7hWuQXhrdsQd1b6Vi0a//w==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
           "System.Diagnostics.DiagnosticSource": "5.0.1",
-          "System.Text.Json": "6.0.1"
+          "System.Text.Json": "6.0.0"
         }
       },
       "EmptyFiles": {
@@ -1320,8 +1320,8 @@
       },
       "System.Text.Json": {
         "type": "Transitive",
-        "resolved": "6.0.1",
-        "contentHash": "X3cTdM+jna1YyfTUzToW7aVgINFv7R1W4+1+3hua/YCyLjApPoR8fd+2Cep9DbfYjbv+rBx4K6dlmAWEJr9AHg==",
+        "resolved": "6.0.0",
+        "contentHash": "zaJsHfESQvJ11vbXnNlkrR46IaMULk/gHxYsJphzSF+07kTjPHv+Oc14w6QEOfo3Q4hqLJgStUaYB9DBl0TmWg==",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0",
           "System.Text.Encodings.Web": "6.0.0"
@@ -1492,7 +1492,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.3.2, )"
+          "Elastic.Transport": "[0.4.0, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {

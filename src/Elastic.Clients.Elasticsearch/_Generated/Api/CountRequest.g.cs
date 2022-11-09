@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class CountRequestParameters : RequestParameters<CountRequestParameters>
+public sealed class CountRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -83,8 +83,8 @@ public partial class CountRequest : PlainRequest<CountRequestParameters>
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
@@ -144,8 +144,8 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	public CountRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public CountRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public CountRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
@@ -231,8 +231,8 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	public CountRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public CountRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public CountRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);

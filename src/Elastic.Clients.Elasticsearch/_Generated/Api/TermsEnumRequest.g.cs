@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class TermsEnumRequestParameters : RequestParameters<TermsEnumRequestParameters>
+public sealed class TermsEnumRequestParameters : RequestParameters
 {
 }
 
@@ -38,8 +38,8 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	[JsonInclude]
 	[JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
@@ -85,8 +85,8 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	public TermsEnumRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		RouteValues.Required("index", index);
@@ -244,8 +244,8 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => true;
 	public TermsEnumRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		RouteValues.Required("index", index);

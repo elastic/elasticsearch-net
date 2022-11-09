@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed class AliasRequestParameters : RequestParameters<AliasRequestParameters>
+public sealed class AliasRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -61,8 +61,8 @@ public sealed partial class AliasRequest : PlainRequest<AliasRequestParameters>
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetAlias;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
@@ -92,8 +92,8 @@ public sealed partial class AliasRequestDescriptor<TDocument> : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetAlias;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public AliasRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public AliasRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public AliasRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
@@ -131,8 +131,8 @@ public sealed partial class AliasRequestDescriptor : RequestDescriptor<AliasRequ
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetAlias;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	internal override bool SupportsBody => false;
 	public AliasRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public AliasRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public AliasRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);

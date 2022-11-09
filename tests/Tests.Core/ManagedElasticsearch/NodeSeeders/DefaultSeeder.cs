@@ -72,7 +72,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		private bool AlreadySeeded()
 		{
 			var response = Client.Transport.Request<BytesResponse>(HttpMethod.HEAD, $"_template/{TestsIndexTemplateName}");
-			return response.HttpStatusCode == 200;
+			return response.ApiCallDetails.HttpStatusCode == 200;
 		}
 
 		private async Task SeedNodeAsync(bool alreadySeeded)
