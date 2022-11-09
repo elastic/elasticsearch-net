@@ -49,7 +49,7 @@ namespace Tests.Framework.EndpointTests.TestState
 	}
 
 	public class SingleEndpointUsage<TResponse> : EndpointUsage
-		where TResponse : class, IElasticsearchResponse
+		where TResponse : ElasticsearchResponse
 	{
 		private readonly Func<string, ElasticsearchClient, TResponse> _fluent;
 		private readonly Func<string, ElasticsearchClient, Task<TResponse>> _fluentAsync;
@@ -91,7 +91,7 @@ namespace Tests.Framework.EndpointTests.TestState
 
 				var randomCall = Random.Number(0, 3);
 
-				var dict = new Dictionary<ClientMethod, IElasticsearchResponse>();
+				var dict = new Dictionary<ClientMethod, ElasticsearchResponse>();
 
 				if (!oneRandomCall || randomCall == 0)
 					Call(client, dict, ClientMethod.Fluent, v => _fluent(v, client));
@@ -115,7 +115,7 @@ namespace Tests.Framework.EndpointTests.TestState
 				return dict;
 			}));
 
-		private void Call(ElasticsearchClient client, IDictionary<ClientMethod, IElasticsearchResponse> dict, ClientMethod method, Func<string, TResponse> call)
+		private void Call(ElasticsearchClient client, IDictionary<ClientMethod, ElasticsearchResponse> dict, ClientMethod method, Func<string, TResponse> call)
 		{
 			CallUniqueValues.CurrentView = method;
 			OnBeforeCall?.Invoke(client);
@@ -123,7 +123,7 @@ namespace Tests.Framework.EndpointTests.TestState
 			OnAfterCall?.Invoke(client);
 		}
 
-		private async Task CallAsync(ElasticsearchClient client, IDictionary<ClientMethod, IElasticsearchResponse> dict, ClientMethod method,
+		private async Task CallAsync(ElasticsearchClient client, IDictionary<ClientMethod, ElasticsearchResponse> dict, ClientMethod method,
 			Func<string, Task<TResponse>> call
 		)
 		{
@@ -141,10 +141,10 @@ namespace Tests.Framework.EndpointTests.TestState
 				var r = kv.Value as TResponse;
 
 				//this is to make sure any unexpected exceptions on the response are rethrown and shown during testing
-				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-					&& r.ApiCall.OriginalException is not TransportException)
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCallDetails.OriginalException != null
+					&& r.ApiCallDetails.OriginalException is not TransportException)
 				{
-					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
+					var e = ExceptionDispatchInfo.Capture(r.ApiCallDetails.OriginalException.Demystify());
 					throw new ResponseAssertionException(e.SourceException, r);
 				}
 

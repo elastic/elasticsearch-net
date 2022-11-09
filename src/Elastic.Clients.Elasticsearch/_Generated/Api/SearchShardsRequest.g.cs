@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class SearchShardsRequestParameters : RequestParameters<SearchShardsRequestParameters>
+public sealed class SearchShardsRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -59,8 +59,8 @@ public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsReque
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
@@ -88,8 +88,8 @@ public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 	public SearchShardsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SearchShardsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public SearchShardsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
@@ -115,8 +115,8 @@ public sealed partial class SearchShardsRequestDescriptor : RequestDescriptor<Se
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 	public SearchShardsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SearchShardsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public SearchShardsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);

@@ -23,7 +23,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql;
-public sealed partial class SqlClearCursorResponse : ElasticsearchResponseBase
+public sealed partial class SqlClearCursorResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("succeeded")]

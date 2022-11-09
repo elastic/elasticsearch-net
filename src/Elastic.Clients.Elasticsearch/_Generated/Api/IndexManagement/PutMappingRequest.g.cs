@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed class PutMappingRequestParameters : RequestParameters<PutMappingRequestParameters>
+public sealed class PutMappingRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -55,8 +55,8 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
@@ -132,8 +132,8 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	public PutMappingRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public PutMappingRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public PutMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
@@ -429,8 +429,8 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	public PutMappingRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public PutMappingRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public PutMappingRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);

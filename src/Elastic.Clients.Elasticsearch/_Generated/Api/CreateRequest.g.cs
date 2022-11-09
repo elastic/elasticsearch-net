@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class CreateRequestParameters : RequestParameters<CreateRequestParameters>
+public sealed class CreateRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
@@ -58,8 +58,8 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCreate;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public TDocument Document { get; set; }
 
@@ -105,8 +105,8 @@ public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCreate;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	public CreateRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 	public CreateRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
 	public CreateRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);

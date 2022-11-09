@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-public sealed class SplitRequestParameters : RequestParameters<SplitRequestParameters>
+public sealed class SplitRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -46,8 +46,8 @@ public sealed partial class SplitRequest : PlainRequest<SplitRequestParameters>
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSplit;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
@@ -78,8 +78,8 @@ public sealed partial class SplitRequestDescriptor<TDocument> : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSplit;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	public SplitRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public SplitRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public SplitRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
@@ -142,8 +142,8 @@ public sealed partial class SplitRequestDescriptor : RequestDescriptor<SplitRequ
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSplit;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
-	protected override bool SupportsBody => true;
+	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	internal override bool SupportsBody => true;
 	public SplitRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public SplitRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public SplitRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);

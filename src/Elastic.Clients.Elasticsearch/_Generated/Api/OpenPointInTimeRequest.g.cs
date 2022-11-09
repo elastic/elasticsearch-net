@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public sealed class OpenPointInTimeRequestParameters : RequestParameters<OpenPointInTimeRequestParameters>
+public sealed class OpenPointInTimeRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration>("keep_alive"); set => Q("keep_alive", value); }
@@ -43,8 +43,8 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration>("keep_alive"); set => Q("keep_alive", value); }
 
@@ -64,8 +64,8 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 	public OpenPointInTimeRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public OpenPointInTimeRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration keepAlive) => Qs("keep_alive", keepAlive);
 	public OpenPointInTimeRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
@@ -91,8 +91,8 @@ public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
-	protected override bool SupportsBody => false;
+	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	internal override bool SupportsBody => false;
 	public OpenPointInTimeRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public OpenPointInTimeRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration keepAlive) => Qs("keep_alive", keepAlive);
 	public OpenPointInTimeRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)

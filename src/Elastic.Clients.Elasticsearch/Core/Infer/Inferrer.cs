@@ -26,7 +26,7 @@ public sealed class Inferrer
 		//		Action<MultiGetResponseFormatter.MultiHitTuple, IJsonFormatterResolver, ICollection<IMultiGetHit<object>>>>();
 		//CreateSearchResponseDelegates =
 		//	new ConcurrentDictionary<Type,
-		//		Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IElasticsearchResponse>>>();
+		//		Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, ElasticsearchResponse>>>();
 	}
 
 	//internal ConcurrentDictionary<Type, Action<MultiGetResponseFormatter.MultiHitTuple, IJsonFormatterResolver, ICollection<IMultiGetHit<object>>>
@@ -34,7 +34,7 @@ public sealed class Inferrer
 	//	CreateMultiHitDelegates { get; }
 
 	//internal ConcurrentDictionary<Type,
-	//		Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IElasticsearchResponse>>>
+	//		Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, ElasticsearchResponse>>>
 	//	CreateSearchResponseDelegates { get; }
 
 	private FieldResolver FieldResolver { get; }
