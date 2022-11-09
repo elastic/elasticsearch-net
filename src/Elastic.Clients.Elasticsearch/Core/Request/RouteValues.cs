@@ -8,7 +8,7 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Requests;
 
-internal class ResolvedRouteValues : Dictionary<string, string>
+internal sealed class ResolvedRouteValues : Dictionary<string, string>
 {
 	internal static ResolvedRouteValues Empty = new(0);
 
