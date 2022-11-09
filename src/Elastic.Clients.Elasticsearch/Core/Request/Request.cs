@@ -20,7 +20,7 @@ public abstract class Request
 
 	[JsonIgnore] internal abstract bool SupportsBody { get; }
 
-	[JsonIgnore] protected RouteValues RouteValues { get; }
+	[JsonIgnore] protected RouteValues RouteValues { get; } = new();
 
 	[JsonIgnore] protected virtual HttpMethod? DynamicHttpMethod => null;
 
