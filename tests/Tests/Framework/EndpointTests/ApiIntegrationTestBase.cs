@@ -42,7 +42,7 @@ namespace Tests.Framework.EndpointTests
 		protected override Task AssertOnAllResponses(Action<TResponse> assert) =>
 			base.AssertOnAllResponses(r =>
 			{
-				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCallDetails.OriginalException != null
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValidResponse && r.ApiCallDetails.OriginalException != null
 					&& r.ApiCallDetails.OriginalException is not TransportException)
 				{
 					var e = ExceptionDispatchInfo.Capture(r.ApiCallDetails.OriginalException.Demystify());
@@ -90,7 +90,7 @@ namespace Tests.Framework.EndpointTests
 		protected override Task AssertOnAllResponses(Action<TResponse> assert) =>
 			base.AssertOnAllResponses(r =>
 			{
-				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCallDetails.OriginalException != null
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValidResponse && r.ApiCallDetails.OriginalException != null
 					&& r.ApiCallDetails.OriginalException is not TransportException)
 				{
 					var e = ExceptionDispatchInfo.Capture(r.ApiCallDetails.OriginalException.Demystify());

@@ -20,7 +20,7 @@ public partial class BulkResponse
 		? Enumerable.Empty<ResponseItem>()
 		: Items.Where(i => !i.IsValid);
 
-	public override bool IsValid => base.IsValid && !Errors && !ItemsWithErrors.HasAny();
+	public override bool IsValidResponse => base.IsValidResponse && !Errors && !ItemsWithErrors.HasAny();
 
 	protected override void DebugIsValid(StringBuilder sb)
 	{
