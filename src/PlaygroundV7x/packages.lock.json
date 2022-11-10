@@ -25,17 +25,17 @@
       },
       "NEST": {
         "type": "Direct",
-        "requested": "[7.17.4, )",
-        "resolved": "7.17.4",
-        "contentHash": "FFz357NTG4P+4cnclVZ4I7bpZp0oNYZ3Dk88IzZ2NEttaxzFSI7+C7yF93y9Jg5myNwiStI+/tppwNut8M85Lw==",
+        "requested": "[7.17.5, )",
+        "resolved": "7.17.5",
+        "contentHash": "bo9UyuIoVRx4IUQiuC8ZrlZuvAXKIccernC7UUKukQCEmRq2eVIk+gubHlnMQljrP51q0mN4cjgy9vv5uZPkoA==",
         "dependencies": {
-          "Elasticsearch.Net": "7.17.4"
+          "Elasticsearch.Net": "7.17.5"
         }
       },
       "Elasticsearch.Net": {
         "type": "Transitive",
-        "resolved": "7.17.4",
-        "contentHash": "5SIkngYAzsHhLLaj9fSmoTAZXARkKLUbvSzSdtZiNRdDxVPQjJgCT2q1FaSyTqRsWhh5zS5yhUUTL/CIKv2irA==",
+        "resolved": "7.17.5",
+        "contentHash": "orChsQi1Ceho/NyIylNOn6y4vuGcsbCfMZnCueNN0fzqYEGQmQdPfcVmsR5+3fwpXTgxCdjTUVmqOwvHpCSB+Q==",
         "dependencies": {
           "Microsoft.CSharp": "4.6.0",
           "System.Buffers": "4.5.1",

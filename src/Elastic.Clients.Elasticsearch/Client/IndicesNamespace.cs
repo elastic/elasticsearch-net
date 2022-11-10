@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class IndicesNamespace
+public partial class IndicesNamespacedClient
 {
 	/// <summary>
 	/// Refresh one or more indices. A refresh makes recent operations performed on one or more indices available for search. For data streams,
