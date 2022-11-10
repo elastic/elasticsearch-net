@@ -47,7 +47,7 @@ public class ClearScrollApiTests
 	{
 		var searchResponse = Client.Search<Project>(s => s.Query(q => q.MatchAll()).Scroll(TimeSpan.FromMinutes(1)));
 
-		if (!searchResponse.IsValid)
+		if (!searchResponse.IsValidResponse)
 			throw new Exception("Setup: Initial scroll failed.");
 
 		_scrollId = searchResponse.ScrollId ?? _scrollId;

@@ -70,7 +70,7 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 				throw new Exception($"{name} is not a request observed and so no call isolated values could be located for it");
 
 			var r = response;
-			if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCallDetails.OriginalException != null
+			if (TestClient.Configuration.RunIntegrationTests && !r.IsValidResponse && r.ApiCallDetails.OriginalException != null
 				&& r.ApiCallDetails.OriginalException is not TransportException)
 			{
 				var e = ExceptionDispatchInfo.Capture(r.ApiCallDetails.OriginalException.Demystify());
