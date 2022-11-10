@@ -73,7 +73,7 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 	[I]
 	public async Task CreateResponse() => await Assert<IndexResponse>(IndexDocumentStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Index.Should().Be("project");
 		r.Id.Should().Be(v);
 		r.Version.Should().BeGreaterOrEqualTo(1);
@@ -88,13 +88,13 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 	[I]
 	public async Task ExistsResponse() => await Assert<ExistsResponse>(DocumentExistsStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 	});
 
 	[I]
 	public async Task GetResponse() => await Assert<GetResponse<Project>>(GetDocumentStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Index.Should().Be("project");
 		r.Id.Should().Be(v);
 		r.Version.Should().BeGreaterOrEqualTo(1);
@@ -114,7 +114,7 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 	[I]
 	public async Task DeleteResponse() => await Assert<DeleteResponse>(DeleteDocumentStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Index.Should().Be("project");
 		r.Id.Should().Be(v);
 		r.Version.Should().BeGreaterOrEqualTo(1);

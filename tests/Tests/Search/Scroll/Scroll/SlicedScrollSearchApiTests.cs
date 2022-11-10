@@ -57,7 +57,7 @@ public class SlicedScrollSearchApiTests
 				SortOptions.Field("_doc", new FieldSort { Order = SortOrder.Asc })
 			})
 		);
-		if (!response.IsValid)
+		if (!response.IsValidResponse)
 			throw new Exception("Scroll setup failed");
 
 		_scrollId = response.ScrollId ?? _scrollId;
