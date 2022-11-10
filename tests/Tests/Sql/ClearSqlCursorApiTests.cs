@@ -50,7 +50,7 @@ ORDER BY numberOfContributors DESC";
 	protected override void OnBeforeCall(ElasticsearchClient client)
 	{
 		var sqlQueryResponse = Client.Sql.Query(q => q.Query(SqlQuery).FetchSize(5));
-		if (!sqlQueryResponse.IsValid)
+		if (!sqlQueryResponse.IsValidResponse)
 			throw new Exception("Setup: Initial scroll failed.");
 
 		_currentCursor = sqlQueryResponse.Cursor ?? _currentCursor;
