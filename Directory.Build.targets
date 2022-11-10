@@ -6,7 +6,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="$(IsPackable) == True">
     <OutDir>bin/$(Configuration)/$(TargetFramework)/</OutDir>
-    <NoWarn>1591,1572,1571,1573,1587,1570,NU5048,</NoWarn>
+    <NoWarn>1591,1572,1571,1573,1587,1570,NU5048</NoWarn>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
     <Prefer32Bit>false</Prefer32Bit>
     <DebugSymbols>true</DebugSymbols>
 
