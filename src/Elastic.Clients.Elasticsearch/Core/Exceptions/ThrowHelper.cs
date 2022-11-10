@@ -18,5 +18,11 @@ internal static class ThrowHelper
 		throw new JsonException($"Encounted an unsupported variant tag '{variantTag}' on '{SimplifiedFullName(interfaceType)}', which could not be deserialised.");
 
 	[MethodImpl(MethodImplOptions.NoInlining)]
+	internal static void ThrowInvalidOperationException(string message) =>
+		throw new InvalidOperationException(message);
+
+	[MethodImpl(MethodImplOptions.NoInlining)]
+#pragma warning disable IDE0057 // Use range operator
 	private static string SimplifiedFullName(Type type) => type.FullName.Substring(30);
+#pragma warning restore IDE0057 // Use range operator
 }
