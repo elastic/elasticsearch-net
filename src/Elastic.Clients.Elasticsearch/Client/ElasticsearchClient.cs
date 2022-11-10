@@ -8,40 +8,39 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Transport;
 using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <inheritdoc />
-public sealed partial class ElasticsearchClient
+/// <summary>
+/// A strongly-typed client for communicating with Elasticsearch server endpoints.
+/// </summary>
+public partial class ElasticsearchClient
 {
 	private readonly HttpTransport<IElasticsearchClientSettings> _transport;
 
 	internal static ConditionalWeakTable<JsonSerializerOptions, IElasticsearchClientSettings> SettingsTable { get; } = new();
 
 	/// <summary>
-	///     Creates a client configured to connect to localhost:9200.
+	/// Creates a client configured to connect to http://localhost:9200.
 	/// </summary>
 	public ElasticsearchClient() : this(new ElasticsearchClientSettings(new Uri("http://localhost:9200"))) { }
 
 	/// <summary>
-	///     Creates a client configured to connect to a node reachable at the provided <paramref name="uri" />.
+	/// Creates a client configured to connect to a node reachable at the provided <paramref name="uri" />.
 	/// </summary>
 	/// <param name="uri">The <see cref="Uri" /> to connect to.</param>
 	public ElasticsearchClient(Uri uri) : this(new ElasticsearchClientSettings(uri)) { }
 
 	/// <summary>
-	///     Creates a client configured to communicate with Elastic Cloud using the provided <paramref name="cloudId" />.
-	///     <para>See the <see cref="CloudNodePool" /> documentation for more information on how to obtain your Cloud Id.</para>
-	///     <para>
-	///         If you want more control, use the <see cref="ElasticsearchClient(IElasticsearchClientSettings)" /> constructor and
-	///         pass
-	///         an instance of
-	///         <see cref="ElasticsearchClientSettings" /> that takes a <paramref name="cloudId" /> in its constructor as well.
-	///     </para>
+	/// Creates a client configured to communicate with Elastic Cloud using the provided <paramref name="cloudId" />.
+	/// <para>See the <see cref="CloudNodePool" /> documentation for more information on how to obtain your Cloud Id.</para>
+	///   <para>
+	///     If you want more control, use the <see cref="ElasticsearchClient(IElasticsearchClientSettings)" /> constructor and
+	///     pass an instance of <see cref="ElasticsearchClientSettings" /> that takes a <paramref name="cloudId" /> in its constructor as well.
+	///   </para>
 	/// </summary>
 	/// <param name="cloudId">The Cloud ID of an Elastic Cloud deployment.</param>
 	/// <param name="credentials">The credentials to use for the connection.</param>
@@ -51,19 +50,15 @@ public sealed partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	///     TODO
+	/// Creates a client using the provided configuration to initialise the client.
 	/// </summary>
-	/// <param name="elasticsearchClientSettings"></param>
+	/// <param name="elasticsearchClientSettings">The <see cref="IElasticsearchClientSettings"/> used to configure the client.</param>
 	public ElasticsearchClient(IElasticsearchClientSettings elasticsearchClientSettings)
 		: this(new DefaultHttpTransport<IElasticsearchClientSettings>(elasticsearchClientSettings))
 	{
 	}
 
-	/// <summary>
-	///     TODO
-	/// </summary>
-	/// <param name="transport"></param>
-	public ElasticsearchClient(HttpTransport<IElasticsearchClientSettings> transport)
+	internal ElasticsearchClient(HttpTransport<IElasticsearchClientSettings> transport)
 	{
 		transport.ThrowIfNull(nameof(transport));
 		transport.Settings.ThrowIfNull(nameof(transport.Settings));
