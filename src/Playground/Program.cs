@@ -6,14 +6,27 @@ using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Transport;
+using Moq;
 using Playground;
 using CreateResponse = Elastic.Clients.Elasticsearch.IndexManagement.CreateResponse;
 
 // const string IndexName = "stock-demo-v1";
 
 var mockedResponse = ResponseFactory.CreateResponse(new CreateResponse { Acknowledged = true, Index = "testing", ShardsAcknowledged = true }, 200);
-var debug = mockedResponse.DebugInformation;
 
+var mockedClient = Mock.Of<ElasticsearchClient>(e =>
+	e.Indices.Create<It.IsAnyType>() == mockedResponse);
+
+var testResponse = mockedClient.Indices.Create<Person>();
+
+// ALTERNATIVE
+
+var stubbedClient = new TestableElasticsearchClient();
+var stubbedResponse = stubbedClient.Indices.Create<Person>();
+
+Console.ReadKey();
+
+#region Hidden
 AggregationContainer a = new TermsAggregation("test");
 
 var settings = new ElasticsearchClientSettings(new InMemoryConnection())
@@ -268,3 +281,16 @@ public class StockData
 //Console.WriteLine("DONE");
 
 //Console.ReadKey();
+
+#endregion
+
+public class TestableElasticsearchClient : ElasticsearchClient
+{
+	public override IndicesNamespacedClient Indices => new TestIndicesNamespace();
+}
+
+public class TestIndicesNamespace : IndicesNamespacedClient
+{
+	public override CreateResponse Create<TDocument>() =>
+		ResponseFactory.CreateResponse(new CreateResponse { Acknowledged = true, Index = "testing", ShardsAcknowledged = true }, 200);
+}
