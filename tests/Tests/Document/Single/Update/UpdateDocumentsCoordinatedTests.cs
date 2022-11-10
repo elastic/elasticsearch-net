@@ -150,14 +150,14 @@ public class UpdateDocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Wr
 	[I]
 	public async Task UpdateWithScriptResponse() => await Assert<UpdateResponse<UpdateTestDocument>>(UpdateWithScriptStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Result.Should().Be(Result.Updated);
 	});
 
 	[I]
 	public async Task GetResponseAfterScriptedUpdateStep() => await Assert<GetResponse<UpdateTestDocument>>(GetAfterScriptedUpdateStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Source.Name.Should().Be("Initial"); // The name should not have changed
 		r.Source.Counter.Should().Be(5); // The script updates by 4
 		r.Source.RenamedField.Should().BeNull(); // This hasn't been set yet and should not exist on the source
@@ -166,14 +166,14 @@ public class UpdateDocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Wr
 	[I]
 	public async Task UpdateWithPartialResponse() => await Assert<UpdateResponse<UpdateTestDocument>>(UpdateWithPartialStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Result.Should().Be(Result.Updated);
 	});
 
 	[I]
 	public async Task GetResponseAfterPartialUpdateStep() => await Assert<GetResponse<UpdateTestDocument>>(GetAfterPartialUpdateStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Source.Name.Should().Be("Initial"); // The name should not have changed
 		r.Source.Counter.Should().Be(5); // The count should still be five
 		r.Source.RenamedField.Should().Be("Partial"); // The partial update should have added the partial value for RenamedField
@@ -182,21 +182,21 @@ public class UpdateDocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Wr
 	[I]
 	public async Task UpdateWithPartialNoOpResponse() => await Assert<UpdateResponse<UpdateTestDocument>>(UpdateWithPartialStepTwo, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Result.Should().Be(Result.NoOp);
 	});
 
 	[I]
 	public async Task UpsertExistingResponse() => await Assert<UpdateResponse<UpdateTestDocument>>(UpsertExistingStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Result.Should().Be(Result.Updated);
 	});
 
 	[I]
 	public async Task GetResponseAfterUpsertExistingStep() => await Assert<GetResponse<UpdateTestDocument>>(GetAfterUpsertExistingStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Source.Name.Should().Be("Initial"); // The name should not have changed
 		r.Source.Counter.Should().Be(9); // The count should have been updated by the script
 		r.Source.RenamedField.Should().Be("Partial"); // The RenamedField should not have changed
@@ -205,14 +205,14 @@ public class UpdateDocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Wr
 	[I]
 	public async Task UpsertNewResponse() => await Assert<UpdateResponse<UpdateTestDocument>>(UpsertNewStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Result.Should().Be(Result.Created);
 	});
 
 	[I]
 	public async Task GetResponseAfterUpsertNewStep() => await Assert<GetResponse<UpdateTestDocument>>(GetAfterUpsertNewStep, (v, r) =>
 	{
-		r.IsValid.Should().BeTrue();
+		r.IsValidResponse.Should().BeTrue();
 		r.Source.Name.Should().Be("Newly inserted");
 		r.Source.Counter.Should().Be(100);
 		r.Source.RenamedField.Should().BeNull();
