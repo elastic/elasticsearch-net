@@ -109,7 +109,7 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 
         var refresh = _client.Indices.Refresh(request);
 
-        if (!refresh.IsValid)
+        if (!refresh.IsValidResponse)
             throw Throw($"Refreshing after all documents have indexed failed", refresh);
     }
 
@@ -155,7 +155,7 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
         _compositeCancelToken.ThrowIfCancellationRequested();
         _bulkResponseCallback?.Invoke(response);
 
-        if (!response.ApiCallDetails.Success)
+        if (!response.ApiCallDetails.HasSuccessfulStatusCode)
             return await HandleBulkRequestAsync(buffer, page, backOffRetries, response).ConfigureAwait(false);
 
         var retryableDocuments = new List<T>();
