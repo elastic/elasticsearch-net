@@ -134,7 +134,7 @@ namespace Tests.Document.Single.Get
 		{
 			response.Found.Should().BeFalse();
 			response.Index.Should().BeNull();
-			response.ServerError.Should().NotBeNull();
+			response.ElasticsearchServerError.Should().NotBeNull();
 		}
 	}
 
