@@ -16,7 +16,7 @@ internal sealed class ElasticsearchClientProductRegistration : ElasticsearchProd
 	public static ElasticsearchClientProductRegistration DefaultForElasticsearchClientsElasticsearch { get; } = new(typeof(ElasticsearchClient));
 
 	/// <summary>
-	///     Elastic.Clients.Elasticsearch handles 404 in its <see cref="ElasticsearchResponse.IsValid" />, we do not want the low level client throwing
+	///     Elastic.Clients.Elasticsearch handles 404 in its <see cref="ElasticsearchResponse.IsValidResponse" />, we do not want the low level client throwing
 	///     exceptions
 	///     when <see cref="ITransportConfiguration.ThrowExceptions" /> is enabled for 404's. The client is in charge of
 	///     composing paths
@@ -33,7 +33,7 @@ internal sealed class ElasticsearchClientProductRegistration : ElasticsearchProd
 	{
 		if (response is not ElasticsearchResponse r)
 			return base.TryGetServerErrorReason(response, out reason);
-		reason = r.ServerError?.Error?.ToString();
+		reason = r.ElasticsearchServerError?.Error?.ToString();
 		return !string.IsNullOrEmpty(reason);
 	}
 }
