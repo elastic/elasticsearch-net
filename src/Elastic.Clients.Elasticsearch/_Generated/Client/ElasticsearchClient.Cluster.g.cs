@@ -21,32 +21,39 @@ using System.Threading.Tasks;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster;
-public sealed partial class ClusterNamespace : NamespacedClientProxy
+public partial class ClusterNamespacedClient : NamespacedClientProxy
 {
-	internal ClusterNamespace(ElasticsearchClient client) : base(client)
+	/// <summary>
+	/// Initializes a new instance of the <see cref="ClusterNamespacedClient"/> class for mocking.
+	/// </summary>			
+	protected ClusterNamespacedClient() : base()
 	{
 	}
 
-	public ClusterHealthResponse Health(ClusterHealthRequest request)
+	internal ClusterNamespacedClient(ElasticsearchClient client) : base(client)
+	{
+	}
+
+	public virtual ClusterHealthResponse Health(ClusterHealthRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<ClusterHealthRequest, ClusterHealthResponse, ClusterHealthRequestParameters>(request);
 	}
 
-	public Task<ClusterHealthResponse> HealthAsync(ClusterHealthRequest request, CancellationToken cancellationToken = default)
+	public virtual Task<ClusterHealthResponse> HealthAsync(ClusterHealthRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<ClusterHealthRequest, ClusterHealthResponse, ClusterHealthRequestParameters>(request, cancellationToken);
 	}
 
-	public ClusterHealthResponse Health()
+	public virtual ClusterHealthResponse Health()
 	{
 		var descriptor = new ClusterHealthRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
 	}
 
-	public ClusterHealthResponse Health(Action<ClusterHealthRequestDescriptor> configureRequest)
+	public virtual ClusterHealthResponse Health(Action<ClusterHealthRequestDescriptor> configureRequest)
 	{
 		var descriptor = new ClusterHealthRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
@@ -54,7 +61,7 @@ public sealed partial class ClusterNamespace : NamespacedClientProxy
 		return DoRequest<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
 	}
 
-	public ClusterHealthResponse Health<TDocument>(Action<ClusterHealthRequestDescriptor<TDocument>> configureRequest)
+	public virtual ClusterHealthResponse Health<TDocument>(Action<ClusterHealthRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new ClusterHealthRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
@@ -62,14 +69,14 @@ public sealed partial class ClusterNamespace : NamespacedClientProxy
 		return DoRequest<ClusterHealthRequestDescriptor<TDocument>, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
 	}
 
-	public Task<ClusterHealthResponse> HealthAsync(CancellationToken cancellationToken = default)
+	public virtual Task<ClusterHealthResponse> HealthAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ClusterHealthRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
 	}
 
-	public Task<ClusterHealthResponse> HealthAsync(Action<ClusterHealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ClusterHealthResponse> HealthAsync(Action<ClusterHealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ClusterHealthRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
@@ -77,7 +84,7 @@ public sealed partial class ClusterNamespace : NamespacedClientProxy
 		return DoRequestAsync<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
 	}
 
-	public Task<ClusterHealthResponse> HealthAsync<TDocument>(Action<ClusterHealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ClusterHealthResponse> HealthAsync<TDocument>(Action<ClusterHealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ClusterHealthRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
