@@ -44,7 +44,7 @@ public class ScrollApiTests
 	protected override void OnBeforeCall(ElasticsearchClient client)
 	{
 		var response = client.Search<Project>(s => s.Query(q => q.MatchAll()).Scroll(TimeSpan.FromMinutes(1)));
-		if (!response.IsValid)
+		if (!response.IsValidResponse)
 			throw new Exception("Scroll setup failed");
 
 		_scrollId = response.ScrollId ?? _scrollId;

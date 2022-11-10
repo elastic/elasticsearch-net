@@ -25,5 +25,5 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ExistsResponse : ElasticsearchResponse
 {
-	public bool Exists => ApiCallDetails is { Success: true, HttpStatusCode: 200 };
+	public bool Exists => ApiCallDetails is { HasSuccessfulStatusCode: true, HttpStatusCode: 200 };
 }

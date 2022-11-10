@@ -32,7 +32,7 @@ namespace Tests.ClientConcepts.Errors
 		{
 			var response = HighLevelClient.Search<Project>(s => { });
 			response.Should().NotBeNull();
-			var serverError = response.ServerError;
+			var serverError = response.ElasticsearchServerError;
 			serverError.Should().NotBeNull();
 			serverError.Status.Should().Be(response.ApiCallDetails.HttpStatusCode);
 			serverError.Error.Should().NotBeNull();

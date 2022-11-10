@@ -8,16 +8,20 @@ using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Transport;
 using Moq;
 using Playground;
-using CreateResponse = Elastic.Clients.Elasticsearch.IndexManagement.CreateResponse;
+using CreateIndexResponse = Elastic.Clients.Elasticsearch.IndexManagement.CreateResponse;
 
 // const string IndexName = "stock-demo-v1";
 
-var mockedResponse = ResponseFactory.CreateResponse(new CreateResponse { Acknowledged = true, Index = "testing", ShardsAcknowledged = true }, 200);
+var createResponse = new CreateIndexResponse { Acknowledged = true, Index = "testing", ShardsAcknowledged = true };
+var mockedResponse = TestableResponseFactory.CreateSuccessfulResponse(createResponse, 201);
 
 var mockedClient = Mock.Of<ElasticsearchClient>(e =>
 	e.Indices.Create<It.IsAnyType>() == mockedResponse);
 
 var testResponse = mockedClient.Indices.Create<Person>();
+
+if (testResponse.IsValidResponse)
+	Console.WriteLine("SUCCESS");
 
 // ALTERNATIVE
 
@@ -291,6 +295,6 @@ public class TestableElasticsearchClient : ElasticsearchClient
 
 public class TestIndicesNamespace : IndicesNamespacedClient
 {
-	public override CreateResponse Create<TDocument>() =>
-		ResponseFactory.CreateResponse(new CreateResponse { Acknowledged = true, Index = "testing", ShardsAcknowledged = true }, 200);
+	public override CreateIndexResponse Create<TDocument>() =>
+		TestableResponseFactory.CreateSuccessfulResponse(new CreateIndexResponse { Acknowledged = true, Index = "testing", ShardsAcknowledged = true }, 201);
 }
