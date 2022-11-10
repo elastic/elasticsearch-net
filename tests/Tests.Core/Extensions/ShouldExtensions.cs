@@ -13,20 +13,19 @@ namespace Tests.Core.Extensions
 	public static class ShouldExtensions
 	{
 		public static void ShouldHaveExpectedIsValid(this ElasticsearchResponse response, bool expectedIsValid) =>
-			response.IsValid.Should().Be(expectedIsValid, "{0}", response.DebugInformation);
+			response.IsValidResponse.Should().Be(expectedIsValid, "{0}", response.DebugInformation);
 
 		public static void ShouldBeValid(this ElasticsearchResponse response) =>
-			response.IsValid.Should().BeTrue("{0}", response.DebugInformation);
+			response.IsValidResponse.Should().BeTrue("{0}", response.DebugInformation);
 
 		public static void ShouldBeValid(this ElasticsearchResponse response, string message) =>
-			response.IsValid.Should().BeTrue("{1} {0}", response.DebugInformation, message);
+			response.IsValidResponse.Should().BeTrue("{1} {0}", response.DebugInformation, message);
 
 		public static void ShouldNotBeValid(this ElasticsearchResponse response) =>
-			response.IsValid.Should().BeFalse("{0}", response.DebugInformation);
+			response.IsValidResponse.Should().BeFalse("{0}", response.DebugInformation);
 
 		public static void ShouldBeSuccess(this ElasticsearchResponse response) =>
-			response.ApiCallDetails.Success.Should().BeTrue("{0}", response.DebugInformation);
-
+			response.ApiCallDetails.HasSuccessfulStatusCode.Should().BeTrue("{0}", response.DebugInformation);
 
 		//public static void ShouldAdhereToSourceSerializerWhenSet(this Project project)
 		//{
