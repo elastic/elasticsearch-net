@@ -166,7 +166,7 @@ public class DeleteNonExistentIndexDocumentApiTests
 	{
 		response.ShouldNotBeValid();
 		//response.Result.Should().Be(Result.Error); TODO: This doesn't work until a valid default is set
-		response.ServerError.Should().NotBeNull();
-		response.ServerError.Error.Reason.Should().StartWith("no such index");
+		response.ElasticsearchServerError.Should().NotBeNull();
+		response.ElasticsearchServerError.Error.Reason.Should().StartWith("no such index");
 	}
 }
