@@ -108,9 +108,9 @@ public class IndexIntegrationTests : IntegrationDocumentationTestBase, IClusterF
 
 		indexResult.ShouldNotBeValid();
 		indexResult.ApiCallDetails.HttpStatusCode.Should().Be(409);
-		indexResult.ServerError.Should().NotBeNull();
-		indexResult.ServerError.Error.Type.Should().Contain("conflict");
-		indexResult.ServerError.Status.Should().Be(409);
+		indexResult.ElasticsearchServerError.Should().NotBeNull();
+		indexResult.ElasticsearchServerError.Error.Type.Should().Contain("conflict");
+		indexResult.ElasticsearchServerError.Status.Should().Be(409);
 	}
 
 	[I]

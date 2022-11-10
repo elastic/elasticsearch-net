@@ -77,6 +77,6 @@ public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<ReadOnl
 	protected override void ExpectResponse(MappingResponse response)
 	{
 		response.Indices.Should().BeEmpty();
-		response.ServerError.Should().NotBeNull();
+		response.ElasticsearchServerError.Should().NotBeNull();
 	}
 }
