@@ -75,7 +75,6 @@ public sealed partial class QueryContainer
 	public static QueryContainer Regexp(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery regexpQuery) => new QueryContainer("regexp", regexpQuery);
 	public static QueryContainer Script(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery scriptQuery) => new QueryContainer("script", scriptQuery);
 	public static QueryContainer ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery scriptScoreQuery) => new QueryContainer("script_score", scriptScoreQuery);
-	public static QueryContainer Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery shapeQuery) => new QueryContainer("shape", shapeQuery);
 	public static QueryContainer SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => new QueryContainer("simple_query_string", simpleQueryStringQuery);
 	public static QueryContainer SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => new QueryContainer("span_containing", spanContainingQuery);
 	public static QueryContainer SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery spanFirstQuery) => new QueryContainer("span_first", spanFirstQuery);
@@ -326,13 +325,6 @@ internal sealed class QueryContainerConverter : JsonConverter<QueryContainer>
 			return new QueryContainer(propertyName, variant);
 		}
 
-		if (propertyName == "shape")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery?>(ref reader, options);
-			reader.Read();
-			return new QueryContainer(propertyName, variant);
-		}
-
 		if (propertyName == "simple_query_string")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery?>(ref reader, options);
@@ -533,9 +525,6 @@ internal sealed class QueryContainerConverter : JsonConverter<QueryContainer>
 			case "script_score":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery)value.Variant, options);
 				break;
-			case "shape":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery)value.Variant, options);
-				break;
 			case "simple_query_string":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)value.Variant, options);
 				break;
@@ -679,8 +668,6 @@ public sealed partial class QueryContainerDescriptor<TDocument> : SerializableDe
 	public QueryContainerDescriptor<TDocument> Script(Action<ScriptQueryDescriptor> configure) => Set(configure, "script");
 	public QueryContainerDescriptor<TDocument> ScriptScore(ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
 	public QueryContainerDescriptor<TDocument> ScriptScore(Action<ScriptScoreQueryDescriptor<TDocument>> configure) => Set(configure, "script_score");
-	public QueryContainerDescriptor<TDocument> Shape(ShapeQuery shapeQuery) => Set(shapeQuery, "shape");
-	public QueryContainerDescriptor<TDocument> Shape(Action<ShapeQueryDescriptor<TDocument>> configure) => Set(configure, "shape");
 	public QueryContainerDescriptor<TDocument> SimpleQueryString(SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
 	public QueryContainerDescriptor<TDocument> SimpleQueryString(Action<SimpleQueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "simple_query_string");
 	public QueryContainerDescriptor<TDocument> SpanContaining(SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
@@ -851,9 +838,6 @@ public sealed partial class QueryContainerDescriptor : SerializableDescriptor<Qu
 	public QueryContainerDescriptor ScriptScore(ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
 	public QueryContainerDescriptor ScriptScore(Action<ScriptScoreQueryDescriptor> configure) => Set(configure, "script_score");
 	public QueryContainerDescriptor ScriptScore<TDocument>(Action<ScriptScoreQueryDescriptor<TDocument>> configure) => Set(configure, "script_score");
-	public QueryContainerDescriptor Shape(ShapeQuery shapeQuery) => Set(shapeQuery, "shape");
-	public QueryContainerDescriptor Shape(Action<ShapeQueryDescriptor> configure) => Set(configure, "shape");
-	public QueryContainerDescriptor Shape<TDocument>(Action<ShapeQueryDescriptor<TDocument>> configure) => Set(configure, "shape");
 	public QueryContainerDescriptor SimpleQueryString(SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
 	public QueryContainerDescriptor SimpleQueryString(Action<SimpleQueryStringQueryDescriptor> configure) => Set(configure, "simple_query_string");
 	public QueryContainerDescriptor SimpleQueryString<TDocument>(Action<SimpleQueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "simple_query_string");
