@@ -17,7 +17,7 @@ include::connecting.asciidoc[]
 
 include::configuration.asciidoc[]
 
-include::examples.asciidoc[]
+include::usage/index.asciidoc[]
 
 include::troubleshooting.asciidoc[]
 
