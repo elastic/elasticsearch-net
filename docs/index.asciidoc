@@ -1,12 +1,10 @@
-:title-separator: |
-
 [[elasticsearch-net-reference]]
 = Elasticsearch .NET Client
 
-:net-client: Elasticsearch .NET Client
-:ref-current: {ref}
-
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
+
+:net-client: Elasticsearch .NET Client
+:title-separator: |
 
 include::intro.asciidoc[]
 
