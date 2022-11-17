@@ -8,7 +8,7 @@ For a full reference, see the {ref-current}/[Elasticsearch documentation] and in
 If you're new to {es}, make sure also to read {ref-current}/getting-started.html[Elasticsearch's quick start] that provides a good introduction.
 
 * <<recommendations, Usage recommendations>>
-* <<examples, Core usage examples>>
+* <<examples, CRUD usage examples>>
 
 NOTE: This is still a work in progress, more sections will be added in the near future.
 

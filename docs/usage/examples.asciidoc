@@ -1,5 +1,5 @@
 [[examples]]
-=== Examples
+=== CRUD usage examples
 
 This page helps you to understand how to perform various basic {es} CRUD 
 operations using the .NET client. It demonstrates how to create a document by 
