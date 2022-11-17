@@ -8,6 +8,7 @@
 :ref-current: {ref}
 
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
+include::{asciidoc-dir}/../../shared/versions/stack/{source_branch}.asciidoc[]
 
 include::intro.asciidoc[]
 
