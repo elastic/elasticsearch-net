@@ -1,4 +1,14 @@
 [[recommendations]]
-== Usage recommendations
+=== Usage recommendations
+
+TODO
+
+[discrete]
+==== Instantiating the client
+
+TODO
+
+[discrete]
+==== Choosing between synchronous and asynchronous APIs
 
 TODO
