@@ -3,9 +3,9 @@
 
 The sections below provide tutorials on the most frequently used and some less obvious features of {es}.
 
-For a full reference, see the {es-docs}/[Elasticsearch documentation] and in particular the {es-docs}/rest-apis.html[REST APIs] section. The {net-client} follows closely the JSON structures described there.
+For a full reference, see the {ref-current}/[Elasticsearch documentation] and in particular the {ref-current}/rest-apis.html[REST APIs] section. The {net-client} follows closely the JSON structures described there.
 
-If you're new to {es}, make sure also to read {es-docs}/getting-started.html[Elasticsearch's quick start] that provides a good introduction.
+If you're new to {es}, make sure also to read {ref-current}/getting-started.html[Elasticsearch's quick start] that provides a good introduction.
 
 * <<recommendations, Usage recommendations>>
 * <<examples, Core usage examples>>
