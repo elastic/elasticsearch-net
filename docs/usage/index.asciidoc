@@ -7,10 +7,10 @@ For a full reference, see the {es-docs}/[Elasticsearch documentation] and in par
 
 If you're new to {es}, make sure also to read {es-docs}/getting-started.html[Elasticsearch's quick start] that provides a good introduction.
 
-* <<examples, Core usage examples>>
 * <<recommendations, Usage recommendations>>
+* <<examples, Core usage examples>>
 
 NOTE: This is still a work in progress, more sections will be added in the near future.
 
-include::examples.asciidoc[]
 include::recommendations.asciidoc[]
+include::examples.asciidoc[]
