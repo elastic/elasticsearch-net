@@ -19,8 +19,6 @@ include::configuration.asciidoc[]
 
 include::examples.asciidoc[]
 
-include::breaking-changes.asciidoc[]
-
 include::troubleshooting.asciidoc[]
 
 include::redirects.asciidoc[]
