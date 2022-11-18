@@ -1,11 +1,11 @@
 [[examples]]
-== Examples
+=== CRUD usage examples
 
 This page helps you to understand how to perform various basic {es} CRUD 
-operations using the .NET client. It demonstrates how to create a document by 
-indexing an object into {es}, read a document back, retrieving it by ID or 
-performing a search, update one of the fields in a document and delete a 
-specific document.
+(create, read, update, delete) operations using the .NET client. It demonstrates 
+how to create a document by indexing an object into {es}, read a document back,
+retrieving it by ID or performing a search, update one of the fields in a 
+document and delete a specific document.
 
 These examples assume you have an instance of the `ElasticsearchClient` 
 accessible via a local variable named `client` and several using directives in 
@@ -45,7 +45,7 @@ using the ID specified by the value of this property.
 
 [discrete]
 [[indexing-net]]
-=== Indexing a document
+==== Indexing a document
 
 Documents can be indexed by creating an instance representing a tweet and 
 indexing it via the client. In these examples, we will work with an index named 
@@ -77,7 +77,7 @@ operation succeeded.
 
 [discrete]
 [[getting-net]]
-=== Getting a document
+==== Getting a document
 
 [source,csharp]
 ----
@@ -91,7 +91,7 @@ accessible on the response via the `Source` property.
 
 [discrete]
 [[searching-net]]
-=== Searching for documents
+==== Searching for documents
 
 The client exposes a fluent interface and a powerful query DSL for searching.
 
@@ -146,7 +146,7 @@ search operation.
 
 [discrete]
 [[updating-net]]
-=== Updating documents
+==== Updating documents
 
 Documents can be updated in several ways, including by providing a complete 
 replacement for an existing document ID.
@@ -169,7 +169,7 @@ if (response.IsValid)
 
 [discrete]
 [[deleting-net]]
-=== Deleting documents
+==== Deleting documents
 
 Documents can be deleted by providing the ID of the document to remove.
 
