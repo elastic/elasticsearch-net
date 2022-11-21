@@ -28,7 +28,7 @@ public class MaxAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.Max("max_commits", m => m
 			.Field(p => p.NumberOfCommits)
 		);

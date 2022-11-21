@@ -28,7 +28,7 @@ public class CardinalityAggregationUsageTests : AggregationUsageTestBase<ReadOnl
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.Cardinality("state_count", c => c
 			.Field(p => p.State)
 			.PrecisionThreshold(100)

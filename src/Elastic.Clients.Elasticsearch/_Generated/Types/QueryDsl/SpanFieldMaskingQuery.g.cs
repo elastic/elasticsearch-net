@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class SpanFieldMaskingQuery : Query
+public sealed partial class SpanFieldMaskingQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]

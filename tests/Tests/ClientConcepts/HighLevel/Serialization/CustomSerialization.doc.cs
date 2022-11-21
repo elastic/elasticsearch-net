@@ -102,12 +102,12 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 */
 		public class MyPercolationDocument
 		{
-			public QueryContainer Query { get; set; }
+			public Query Query { get; set; }
 			public string Category { get; set; }
 		}
 
 		/**
-		 * A custom serializer would not know how to serialize `QueryContainer` or other NEST types that could appear as part of
+		 * A custom serializer would not know how to serialize `Query` or other NEST types that could appear as part of
 		 * the `_source` of a document, therefore a custom serializer needs to have a way to delegate serialization of NEST types
 		 * back to NEST's built-in serializer.
 		 */
@@ -188,7 +188,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 *
 		 * without affecting how NEST's own types are serialized. Furthermore, because this serializer is aware of
 		 * the built-in serializer, we can automatically inject a `JsonConverter` to handle
-		 * known NEST types that could appear as part of the source, such as the aformentioned `QueryContainer`.
+		 * known NEST types that could appear as part of the source, such as the aformentioned `Query`.
 		 *
 		 * Let's demonstrate with an example document type
 		 */

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class WrapperQuery : Query
+public sealed partial class WrapperQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -39,7 +39,7 @@ public sealed partial class WrapperQuery : Query
 	[JsonPropertyName("query")]
 	public string Query { get; set; }
 
-	public static implicit operator QueryContainer(WrapperQuery wrapperQuery) => QueryContainer.Wrapper(wrapperQuery);
+	public static implicit operator Query(WrapperQuery wrapperQuery) => QueryDsl.Query.Wrapper(wrapperQuery);
 }
 
 public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<WrapperQueryDescriptor>

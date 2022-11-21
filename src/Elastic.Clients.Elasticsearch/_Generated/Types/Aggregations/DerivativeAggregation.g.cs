@@ -115,7 +115,7 @@ internal sealed class DerivativeAggregationConverter : JsonConverter<DerivativeA
 }
 
 [JsonConverter(typeof(DerivativeAggregationConverter))]
-public sealed partial class DerivativeAggregation : Aggregation
+public sealed partial class DerivativeAggregation : SearchAggregation
 {
 	public DerivativeAggregation(string name) => Name = name;
 	internal DerivativeAggregation()
