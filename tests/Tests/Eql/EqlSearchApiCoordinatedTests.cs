@@ -46,8 +46,8 @@ namespace Tests.Eql
 				)
 			},
 			{StatusStep, u =>
-				u.Calls<EqlGetStatusRequestDescriptor, EqlGetStatusRequest, EqlGetStatusResponse>(
-					v => new EqlGetStatusRequest(v),
+				u.Calls<GetEqlStatusRequestDescriptor, GetEqlStatusRequest, GetEqlStatusResponse>(
+					v => new GetEqlStatusRequest(v),
 					(v, d) => d,
 					(v, c, f) => c.Eql.GetStatus(v, f),
 					(v, c, f) => c.Eql.GetStatusAsync(v, f),
@@ -102,7 +102,7 @@ namespace Tests.Eql
 			r.TimedOut.Should().BeFalse();
 		});
 		
-		[I] public async Task EqlSearchStatusResponse() => await Assert<EqlGetStatusResponse>(StatusStep, r =>
+		[I] public async Task EqlSearchStatusResponse() => await Assert<GetEqlStatusResponse>(StatusStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Id.Should().NotBeNullOrEmpty();

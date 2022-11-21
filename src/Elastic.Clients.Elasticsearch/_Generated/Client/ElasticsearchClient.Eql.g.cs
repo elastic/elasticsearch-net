@@ -176,61 +176,61 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
 	}
 
-	public virtual EqlGetStatusResponse GetStatus(EqlGetStatusRequest request)
+	public virtual GetEqlStatusResponse GetStatus(GetEqlStatusRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<EqlGetStatusRequest, EqlGetStatusResponse, EqlGetStatusRequestParameters>(request);
+		return DoRequest<GetEqlStatusRequest, GetEqlStatusResponse, GetEqlStatusRequestParameters>(request);
 	}
 
-	public virtual Task<EqlGetStatusResponse> GetStatusAsync(EqlGetStatusRequest request, CancellationToken cancellationToken = default)
+	public virtual Task<GetEqlStatusResponse> GetStatusAsync(GetEqlStatusRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<EqlGetStatusRequest, EqlGetStatusResponse, EqlGetStatusRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<GetEqlStatusRequest, GetEqlStatusResponse, GetEqlStatusRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual EqlGetStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id)
+	public virtual GetEqlStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id)
 	{
-		var descriptor = new EqlGetStatusRequestDescriptor(id);
+		var descriptor = new GetEqlStatusRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequest<EqlGetStatusRequestDescriptor, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
+		return DoRequest<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
 	}
 
-	public virtual EqlGetStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetStatusRequestDescriptor> configureRequest)
+	public virtual GetEqlStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlStatusRequestDescriptor> configureRequest)
 	{
-		var descriptor = new EqlGetStatusRequestDescriptor(id);
+		var descriptor = new GetEqlStatusRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<EqlGetStatusRequestDescriptor, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
+		return DoRequest<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
 	}
 
-	public virtual EqlGetStatusResponse GetStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetStatusRequestDescriptor<TDocument>> configureRequest)
+	public virtual GetEqlStatusResponse GetStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlStatusRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new EqlGetStatusRequestDescriptor<TDocument>(id);
+		var descriptor = new GetEqlStatusRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
+		return DoRequest<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
 	}
 
-	public virtual Task<EqlGetStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	public virtual Task<GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EqlGetStatusRequestDescriptor(id);
+		var descriptor = new GetEqlStatusRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetStatusRequestDescriptor, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
 	}
 
-	public virtual Task<EqlGetStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EqlGetStatusRequestDescriptor(id);
+		var descriptor = new GetEqlStatusRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetStatusRequestDescriptor, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
 	}
 
-	public virtual Task<EqlGetStatusResponse> GetStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetEqlStatusResponse> GetStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EqlGetStatusRequestDescriptor<TDocument>(id);
+		var descriptor = new GetEqlStatusRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
 	}
 }
