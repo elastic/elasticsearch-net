@@ -37,7 +37,7 @@ public sealed partial class Source
 
 	[JsonInclude]
 	[JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("remote")]
@@ -68,11 +68,11 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
@@ -102,7 +102,7 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 
 	private int? SizeValue { get; set; }
 
-	public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+	public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -110,7 +110,7 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 		return Self;
 	}
 
-	public SourceDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public SourceDescriptor<TDocument> Query(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -118,7 +118,7 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 		return Self;
 	}
 
-	public SourceDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public SourceDescriptor<TDocument> Query(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -245,7 +245,7 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -345,11 +345,11 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor QueryDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
@@ -379,7 +379,7 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 
 	private int? SizeValue { get; set; }
 
-	public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+	public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -387,7 +387,7 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		return Self;
 	}
 
-	public SourceDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
+	public SourceDescriptor Query(QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -395,7 +395,7 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		return Self;
 	}
 
-	public SourceDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public SourceDescriptor Query(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -522,7 +522,7 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{

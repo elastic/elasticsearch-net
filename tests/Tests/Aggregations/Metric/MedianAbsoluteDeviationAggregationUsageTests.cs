@@ -33,7 +33,7 @@ public class MedianAbsoluteDeviationAggregationUsageTests : AggregationUsageTest
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.Avg("average_commits", avg => avg
 			.Field(p => p.NumberOfCommits)
 		)

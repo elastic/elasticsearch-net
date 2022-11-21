@@ -27,7 +27,7 @@ public class StatsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.Stats("commit_stats", st => st
 			.Field(p => p.NumberOfCommits)
 		);

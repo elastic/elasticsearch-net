@@ -15,7 +15,7 @@ public class SearchSerializationTests : SerializerTestBase
 	[U]
 	public async Task Search_WithMatchQuery_SerializesInferredField_ForObjectInitializer()
 	{
-		var container = QueryContainer.Match(new MatchQuery(Infer.Field<Project>(d => d.Description))
+		var container = Query.Match(new MatchQuery(Infer.Field<Project>(d => d.Description))
 		{
 			Query = "testing"
 		});
@@ -28,7 +28,7 @@ public class SearchSerializationTests : SerializerTestBase
 	[U]
 	public async Task Search_WithTermsQuery_Serializes_ForObjectInitializer()
 	{
-		var container = QueryContainer.Terms(new TermsQuery
+		var container = Query.Terms(new TermsQuery
 		{
 			Field = Infer.Field<Project>(d => d.Description),
 			Terms = new TermsQueryField(new FieldValue[] { "term1", "term2" }),
@@ -43,7 +43,7 @@ public class SearchSerializationTests : SerializerTestBase
 	[U]
 	public async Task Search_WithTermsQuery_Serializes_ForDescriptor()
 	{
-		var container = new QueryContainerDescriptor<Project>(q => q.
+		var container = new QueryDescriptor<Project>(q => q.
 			Terms(t => t
 				.Boost(1.2f)
 				.Field(f => f.Description)

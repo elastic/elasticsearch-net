@@ -258,7 +258,7 @@ internal sealed class AutoDateHistogramAggregationConverter : JsonConverter<Auto
 }
 
 [JsonConverter(typeof(AutoDateHistogramAggregationConverter))]
-public sealed partial class AutoDateHistogramAggregation : Aggregation
+public sealed partial class AutoDateHistogramAggregation : SearchAggregation
 {
 	public AutoDateHistogramAggregation(string name) => Name = name;
 	internal AutoDateHistogramAggregation()
@@ -299,9 +299,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
 
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
 	private int? BucketsValue { get; set; }
 
@@ -331,7 +331,7 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 		return Self;
 	}
 
-	public AutoDateHistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
+	public AutoDateHistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptorAction = null;
@@ -339,7 +339,7 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 		return Self;
 	}
 
-	public AutoDateHistogramAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
+	public AutoDateHistogramAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
@@ -487,7 +487,7 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 		else if (AggregationsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
 		}
 		else if (AggregationsValue is not null)
 		{
@@ -508,9 +508,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
 
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 
 	private int? BucketsValue { get; set; }
 
@@ -540,7 +540,7 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 		return Self;
 	}
 
-	public AutoDateHistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+	public AutoDateHistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptorAction = null;
@@ -548,7 +548,7 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 		return Self;
 	}
 
-	public AutoDateHistogramAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+	public AutoDateHistogramAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
@@ -702,7 +702,7 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 		else if (AggregationsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
 		}
 		else if (AggregationsValue is not null)
 		{

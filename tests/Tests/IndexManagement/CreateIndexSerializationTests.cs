@@ -17,9 +17,9 @@ public class CreateIndexSerializationTests : SerializerTestBase
 	public async Task CreateIndexWithAliases_SerializesCorrectly()
 	{
 		var alias1 = new Alias();
-		var alias2 = new Alias { Filter = QueryContainer.Term(new TermQuery("username") { Value = "stevegordon" }), Routing = "shard-1" };
+		var alias2 = new Alias { Filter = Query.Term(new TermQuery("username") { Value = "stevegordon" }), Routing = "shard-1" };
 
-		var descriptor = new CreateRequestDescriptor("test")
+		var descriptor = new CreateIndexRequestDescriptor("test")
 			.Aliases(aliases => aliases
 				.Add("alias_1", alias1)
 				.Add("alias_2", alias2));
@@ -28,7 +28,7 @@ public class CreateIndexSerializationTests : SerializerTestBase
 
 		await Verifier.VerifyJson(json);
 
-		var createRequest = new CreateRequest("test")
+		var createRequest = new CreateIndexRequest("test")
 		{
 			Aliases = new()
 			{

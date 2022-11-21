@@ -69,7 +69,7 @@ public sealed partial class HighlightField
 
 	[JsonInclude]
 	[JsonPropertyName("highlight_query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? HighlightQuery { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQuery { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("matched_fields")]
@@ -131,11 +131,11 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? HighlightQueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQueryValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> HighlightQueryDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> HighlightQueryDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> HighlightQueryDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> HighlightQueryDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzerValue { get; set; }
 
@@ -183,7 +183,7 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? TypeValue { get; set; }
 
-	public HighlightFieldDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery)
+	public HighlightFieldDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query? highlightQuery)
 	{
 		HighlightQueryDescriptor = null;
 		HighlightQueryDescriptorAction = null;
@@ -191,7 +191,7 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public HighlightFieldDescriptor<TDocument> HighlightQuery(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public HighlightFieldDescriptor<TDocument> HighlightQuery(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		HighlightQueryValue = null;
 		HighlightQueryDescriptorAction = null;
@@ -199,7 +199,7 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public HighlightFieldDescriptor<TDocument> HighlightQuery(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public HighlightFieldDescriptor<TDocument> HighlightQuery(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		HighlightQueryValue = null;
 		HighlightQueryDescriptor = null;
@@ -356,7 +356,7 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		else if (HighlightQueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(HighlightQueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(HighlightQueryDescriptorAction), options);
 		}
 		else if (HighlightQueryValue is not null)
 		{
@@ -513,11 +513,11 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? HighlightQueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQueryValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor HighlightQueryDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor HighlightQueryDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> HighlightQueryDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> HighlightQueryDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzerValue { get; set; }
 
@@ -565,7 +565,7 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? TypeValue { get; set; }
 
-	public HighlightFieldDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery)
+	public HighlightFieldDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query? highlightQuery)
 	{
 		HighlightQueryDescriptor = null;
 		HighlightQueryDescriptorAction = null;
@@ -573,7 +573,7 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
-	public HighlightFieldDescriptor HighlightQuery(QueryDsl.QueryContainerDescriptor descriptor)
+	public HighlightFieldDescriptor HighlightQuery(QueryDsl.QueryDescriptor descriptor)
 	{
 		HighlightQueryValue = null;
 		HighlightQueryDescriptorAction = null;
@@ -581,7 +581,7 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
-	public HighlightFieldDescriptor HighlightQuery(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public HighlightFieldDescriptor HighlightQuery(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		HighlightQueryValue = null;
 		HighlightQueryDescriptor = null;
@@ -738,7 +738,7 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		else if (HighlightQueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(HighlightQueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(HighlightQueryDescriptorAction), options);
 		}
 		else if (HighlightQueryValue is not null)
 		{

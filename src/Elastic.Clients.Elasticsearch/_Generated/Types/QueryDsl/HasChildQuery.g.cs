@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class HasChildQuery : Query
+public sealed partial class HasChildQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -53,7 +53,7 @@ public sealed partial class HasChildQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("score_mode")]
@@ -63,7 +63,7 @@ public sealed partial class HasChildQuery : Query
 	[JsonPropertyName("type")]
 	public string Type { get; set; }
 
-	public static implicit operator QueryContainer(HasChildQuery hasChildQuery) => QueryContainer.HasChild(hasChildQuery);
+	public static implicit operator Query(HasChildQuery hasChildQuery) => QueryDsl.Query.HasChild(hasChildQuery);
 }
 
 public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDescriptor<HasChildQueryDescriptor<TDocument>>
@@ -79,11 +79,11 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 
 	private Action<Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
 
-	private QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
+	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	private string? QueryNameValue { get; set; }
 
@@ -123,7 +123,7 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public HasChildQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+	public HasChildQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -131,7 +131,7 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public HasChildQueryDescriptor<TDocument> Query(QueryContainerDescriptor<TDocument> descriptor)
+	public HasChildQueryDescriptor<TDocument> Query(QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -139,7 +139,7 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public HasChildQueryDescriptor<TDocument> Query(Action<QueryContainerDescriptor<TDocument>> configure)
+	public HasChildQueryDescriptor<TDocument> Query(Action<QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -216,7 +216,7 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else
 		{
@@ -279,11 +279,11 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 
 	private Action<Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
 
-	private QueryContainerDescriptor QueryDescriptor { get; set; }
+	private QueryDescriptor QueryDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor> QueryDescriptorAction { get; set; }
+	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	private string? QueryNameValue { get; set; }
 
@@ -323,7 +323,7 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		return Self;
 	}
 
-	public HasChildQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+	public HasChildQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -331,7 +331,7 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		return Self;
 	}
 
-	public HasChildQueryDescriptor Query(QueryContainerDescriptor descriptor)
+	public HasChildQueryDescriptor Query(QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -339,7 +339,7 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		return Self;
 	}
 
-	public HasChildQueryDescriptor Query(Action<QueryContainerDescriptor> configure)
+	public HasChildQueryDescriptor Query(Action<QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -416,7 +416,7 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else
 		{

@@ -35,7 +35,7 @@ public sealed partial class RandomScoreFunction
 	[JsonPropertyName("seed")]
 	public Union<long?, string?>? Seed { get; set; }
 
-	public static implicit operator FunctionScoreContainer(RandomScoreFunction randomScoreFunction) => FunctionScoreContainer.RandomScore(randomScoreFunction);
+	public static implicit operator FunctionScore(RandomScoreFunction randomScoreFunction) => QueryDsl.FunctionScore.RandomScore(randomScoreFunction);
 }
 
 public sealed partial class RandomScoreFunctionDescriptor<TDocument> : SerializableDescriptor<RandomScoreFunctionDescriptor<TDocument>>

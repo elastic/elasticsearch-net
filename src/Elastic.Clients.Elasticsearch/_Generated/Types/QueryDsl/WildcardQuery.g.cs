@@ -137,7 +137,7 @@ internal sealed class WildcardQueryConverter : JsonConverter<WildcardQuery>
 }
 
 [JsonConverter(typeof(WildcardQueryConverter))]
-public sealed partial class WildcardQuery : Query
+public sealed partial class WildcardQuery : SearchQuery
 {
 	public WildcardQuery(Field field)
 	{
@@ -160,7 +160,7 @@ public sealed partial class WildcardQuery : Query
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator QueryContainer(WildcardQuery wildcardQuery) => QueryContainer.Wildcard(wildcardQuery);
+	public static implicit operator Query(WildcardQuery wildcardQuery) => QueryDsl.Query.Wildcard(wildcardQuery);
 }
 
 public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDescriptor<WildcardQueryDescriptor<TDocument>>

@@ -19,7 +19,7 @@ public class WritingAggregationsTests : SerializerTestBase
 
 		// ** First test that the descriptor produces the expected JSON.
 
-		var descriptor = new AggregationContainerDescriptor(aggs => aggs
+		var descriptor = new AggregationDescriptor(aggs => aggs
 			.Children<CommitActivity>("name_of_child_agg", child => child
 				.Type("commits")
 				.Aggregations(childAggs => childAggs

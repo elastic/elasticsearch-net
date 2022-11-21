@@ -173,56 +173,56 @@ namespace Benchmarks
 		public void Version7()
 		{
 			Stream.Position = 0;
-			_ = NestClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponse>(Stream);
+			_ = NestClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.HealthResponse>(Stream);
 		}
 
 		[Benchmark]
 		public void Version8()
 		{
 			Stream.Position = 0;
-			_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponse>(Stream);
+			_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.HealthResponse>(Stream);
 		}
 
 		// [Benchmark]
 		// public void Version8_String()
 		// {
 		// 	Stream.Position = 0;
-		// 	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV2>(Stream);
+		// 	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.HealthResponseV2>(Stream);
 		// }
 
 		//[Benchmark]
 		//public void Version8_String_Converter()
 		//{
 		//	Stream.Position = 0;
-		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV3>(Stream);
+		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.HealthResponseV3>(Stream);
 		//}
 
 		//[Benchmark]
 		//public void Version8_String_ConverterWithBool()
 		//{
 		//	Stream.Position = 0;
-		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV3_BoolFlags>(Stream);
+		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.HealthResponseV3_BoolFlags>(Stream);
 		//}
 
 		//[Benchmark]
 		//public void Version8_String_ConverterWithSpan()
 		//{
 		//	Stream.Position = 0;
-		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV3_Span>(Stream);
+		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.HealthResponseV3_Span>(Stream);
 		//}
 
 		//[Benchmark]
 		//public void Version8_SourceWithoutUsingContext()
 		//{
 		//	Stream.Position = 0;
-		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV4>(Stream);
+		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.HealthResponseV4>(Stream);
 		//}
 
 		//[Benchmark]
 		//public void Version8_SourceDirect()
 		//{
 		//	Stream.Position = 0;
-		//	_ = JsonSerializer.Deserialize(Stream, Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV4Context.Default.ClusterHealthResponseV4);
+		//	_ = JsonSerializer.Deserialize(Stream, Elastic.Clients.Elasticsearch.Cluster.HealthResponseV4Context.Default.HealthResponseV4);
 		//}
 	}
 	

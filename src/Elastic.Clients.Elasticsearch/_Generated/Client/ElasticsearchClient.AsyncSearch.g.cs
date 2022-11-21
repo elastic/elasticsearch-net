@@ -92,48 +92,6 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
 	}
 
-	public virtual AsyncSearchSubmitResponse<TDocument> Submit<TDocument>(AsyncSearchSubmitRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<AsyncSearchSubmitRequest, AsyncSearchSubmitResponse<TDocument>, AsyncSearchSubmitRequestParameters>(request);
-	}
-
-	public virtual Task<AsyncSearchSubmitResponse<TDocument>> SubmitAsync<TDocument>(AsyncSearchSubmitRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<AsyncSearchSubmitRequest, AsyncSearchSubmitResponse<TDocument>, AsyncSearchSubmitRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual AsyncSearchSubmitResponse<TDocument> Submit<TDocument>()
-	{
-		var descriptor = new AsyncSearchSubmitRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchSubmitRequestDescriptor<TDocument>, AsyncSearchSubmitResponse<TDocument>, AsyncSearchSubmitRequestParameters>(descriptor);
-	}
-
-	public virtual AsyncSearchSubmitResponse<TDocument> Submit<TDocument>(Action<AsyncSearchSubmitRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new AsyncSearchSubmitRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchSubmitRequestDescriptor<TDocument>, AsyncSearchSubmitResponse<TDocument>, AsyncSearchSubmitRequestParameters>(descriptor);
-	}
-
-	public virtual Task<AsyncSearchSubmitResponse<TDocument>> SubmitAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncSearchSubmitRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchSubmitRequestDescriptor<TDocument>, AsyncSearchSubmitResponse<TDocument>, AsyncSearchSubmitRequestParameters>(descriptor);
-	}
-
-	public virtual Task<AsyncSearchSubmitResponse<TDocument>> SubmitAsync<TDocument>(Action<AsyncSearchSubmitRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncSearchSubmitRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchSubmitRequestDescriptor<TDocument>, AsyncSearchSubmitResponse<TDocument>, AsyncSearchSubmitRequestParameters>(descriptor);
-	}
-
 	public virtual DeleteAsyncSearchResponse Delete(DeleteAsyncSearchRequest request)
 	{
 		request.BeforeRequest();
@@ -232,5 +190,47 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchResponse<TDocument>, GetAsyncSearchRequestParameters>(descriptor);
+	}
+
+	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(SubmitAsyncSearchRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<SubmitAsyncSearchRequest, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(SubmitAsyncSearchRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<SubmitAsyncSearchRequest, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>()
+	{
+		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor);
+	}
+
+	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor);
+	}
+
+	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor);
+	}
+
+	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchResponse<TDocument>, SubmitAsyncSearchRequestParameters>(descriptor);
 	}
 }
