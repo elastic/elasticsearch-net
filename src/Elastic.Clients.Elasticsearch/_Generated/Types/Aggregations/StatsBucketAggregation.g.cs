@@ -115,7 +115,7 @@ internal sealed class StatsBucketAggregationConverter : JsonConverter<StatsBucke
 }
 
 [JsonConverter(typeof(StatsBucketAggregationConverter))]
-public sealed partial class StatsBucketAggregation : Aggregation
+public sealed partial class StatsBucketAggregation : SearchAggregation
 {
 	public StatsBucketAggregation(string name) => Name = name;
 	internal StatsBucketAggregation()

@@ -81,7 +81,7 @@ public sealed partial class PhraseSuggester
 
 	[JsonInclude]
 	[JsonPropertyName("smoothing")]
-	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelContainer? Smoothing { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? Smoothing { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("text")]
@@ -91,7 +91,7 @@ public sealed partial class PhraseSuggester
 	[JsonPropertyName("token_limit")]
 	public int? TokenLimit { get; set; }
 
-	public static implicit operator FieldSuggester(PhraseSuggester phraseSuggester) => FieldSuggester.Phrase(phraseSuggester);
+	public static implicit operator FieldSuggester(PhraseSuggester phraseSuggester) => Core.Search.FieldSuggester.Phrase(phraseSuggester);
 }
 
 public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableDescriptor<PhraseSuggesterDescriptor<TDocument>>
@@ -141,11 +141,11 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 
 	private int? SizeValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelContainer? SmoothingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? SmoothingValue { get; set; }
 
-	private SmoothingModelContainerDescriptor SmoothingDescriptor { get; set; }
+	private SmoothingModelDescriptor SmoothingDescriptor { get; set; }
 
-	private Action<SmoothingModelContainerDescriptor> SmoothingDescriptorAction { get; set; }
+	private Action<SmoothingModelDescriptor> SmoothingDescriptorAction { get; set; }
 
 	private string? TextValue { get; set; }
 
@@ -301,7 +301,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> Smoothing(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelContainer? smoothing)
+	public PhraseSuggesterDescriptor<TDocument> Smoothing(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? smoothing)
 	{
 		SmoothingDescriptor = null;
 		SmoothingDescriptorAction = null;
@@ -309,7 +309,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> Smoothing(SmoothingModelContainerDescriptor descriptor)
+	public PhraseSuggesterDescriptor<TDocument> Smoothing(SmoothingModelDescriptor descriptor)
 	{
 		SmoothingValue = null;
 		SmoothingDescriptorAction = null;
@@ -317,7 +317,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> Smoothing(Action<SmoothingModelContainerDescriptor> configure)
+	public PhraseSuggesterDescriptor<TDocument> Smoothing(Action<SmoothingModelDescriptor> configure)
 	{
 		SmoothingValue = null;
 		SmoothingDescriptor = null;
@@ -467,7 +467,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		else if (SmoothingDescriptorAction is not null)
 		{
 			writer.WritePropertyName("smoothing");
-			JsonSerializer.Serialize(writer, new SmoothingModelContainerDescriptor(SmoothingDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new SmoothingModelDescriptor(SmoothingDescriptorAction), options);
 		}
 		else if (SmoothingValue is not null)
 		{
@@ -538,11 +538,11 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 
 	private int? SizeValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelContainer? SmoothingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? SmoothingValue { get; set; }
 
-	private SmoothingModelContainerDescriptor SmoothingDescriptor { get; set; }
+	private SmoothingModelDescriptor SmoothingDescriptor { get; set; }
 
-	private Action<SmoothingModelContainerDescriptor> SmoothingDescriptorAction { get; set; }
+	private Action<SmoothingModelDescriptor> SmoothingDescriptorAction { get; set; }
 
 	private string? TextValue { get; set; }
 
@@ -704,7 +704,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor Smoothing(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelContainer? smoothing)
+	public PhraseSuggesterDescriptor Smoothing(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? smoothing)
 	{
 		SmoothingDescriptor = null;
 		SmoothingDescriptorAction = null;
@@ -712,7 +712,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor Smoothing(SmoothingModelContainerDescriptor descriptor)
+	public PhraseSuggesterDescriptor Smoothing(SmoothingModelDescriptor descriptor)
 	{
 		SmoothingValue = null;
 		SmoothingDescriptorAction = null;
@@ -720,7 +720,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor Smoothing(Action<SmoothingModelContainerDescriptor> configure)
+	public PhraseSuggesterDescriptor Smoothing(Action<SmoothingModelDescriptor> configure)
 	{
 		SmoothingValue = null;
 		SmoothingDescriptor = null;
@@ -870,7 +870,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		else if (SmoothingDescriptorAction is not null)
 		{
 			writer.WritePropertyName("smoothing");
-			JsonSerializer.Serialize(writer, new SmoothingModelContainerDescriptor(SmoothingDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new SmoothingModelDescriptor(SmoothingDescriptorAction), options);
 		}
 		else if (SmoothingValue is not null)
 		{

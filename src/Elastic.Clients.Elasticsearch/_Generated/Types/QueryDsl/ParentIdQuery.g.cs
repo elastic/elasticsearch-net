@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class ParentIdQuery : Query
+public sealed partial class ParentIdQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -47,7 +47,7 @@ public sealed partial class ParentIdQuery : Query
 	[JsonPropertyName("type")]
 	public string? Type { get; set; }
 
-	public static implicit operator QueryContainer(ParentIdQuery parentIdQuery) => QueryContainer.ParentId(parentIdQuery);
+	public static implicit operator Query(ParentIdQuery parentIdQuery) => QueryDsl.Query.ParentId(parentIdQuery);
 }
 
 public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<ParentIdQueryDescriptor>

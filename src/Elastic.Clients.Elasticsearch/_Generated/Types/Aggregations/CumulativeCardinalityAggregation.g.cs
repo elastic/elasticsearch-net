@@ -115,7 +115,7 @@ internal sealed class CumulativeCardinalityAggregationConverter : JsonConverter<
 }
 
 [JsonConverter(typeof(CumulativeCardinalityAggregationConverter))]
-public sealed partial class CumulativeCardinalityAggregation : Aggregation
+public sealed partial class CumulativeCardinalityAggregation : SearchAggregation
 {
 	public CumulativeCardinalityAggregation(string name) => Name = name;
 	internal CumulativeCardinalityAggregation()

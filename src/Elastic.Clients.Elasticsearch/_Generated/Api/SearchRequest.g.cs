@@ -197,7 +197,7 @@ internal sealed class SearchRequestConverter : JsonConverter<SearchRequest>
 
 				if (property == "post_filter")
 				{
-					variant.PostFilter = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>(ref reader, options);
+					variant.PostFilter = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
 					continue;
 				}
 
@@ -209,7 +209,7 @@ internal sealed class SearchRequestConverter : JsonConverter<SearchRequest>
 
 				if (property == "query")
 				{
-					variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>(ref reader, options);
+					variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
 					continue;
 				}
 
@@ -672,7 +672,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	[JsonInclude]
 	[JsonPropertyName("post_filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilter { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("profile")]
@@ -680,7 +680,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	[JsonInclude]
 	[JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("rescore")]
@@ -814,9 +814,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
 
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
 
@@ -852,17 +852,17 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 	private Action<KnnQueryDescriptor<TDocument>> KnnDescriptorAction { get; set; }
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> PostFilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> PostFilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> PostFilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> PostFilterDescriptorAction { get; set; }
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
 
@@ -944,7 +944,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptorAction = null;
@@ -952,7 +952,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
@@ -1104,7 +1104,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? postFilter)
+	public SearchRequestDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? postFilter)
 	{
 		PostFilterDescriptor = null;
 		PostFilterDescriptorAction = null;
@@ -1112,7 +1112,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> PostFilter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> PostFilter(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		PostFilterValue = null;
 		PostFilterDescriptorAction = null;
@@ -1120,7 +1120,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> PostFilter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> PostFilter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		PostFilterValue = null;
 		PostFilterDescriptor = null;
@@ -1128,7 +1128,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+	public SearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -1136,7 +1136,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> Query(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -1144,7 +1144,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -1421,7 +1421,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (AggregationsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
 		}
 		else if (AggregationsValue is not null)
 		{
@@ -1547,7 +1547,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (PostFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(PostFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(PostFilterDescriptorAction), options);
 		}
 		else if (PostFilterValue is not null)
 		{
@@ -1563,7 +1563,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -1848,9 +1848,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
 
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
 
@@ -1886,17 +1886,17 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 
 	private Action<KnnQueryDescriptor> KnnDescriptorAction { get; set; }
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor PostFilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor PostFilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> PostFilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> PostFilterDescriptorAction { get; set; }
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor QueryDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
 
@@ -1978,7 +1978,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+	public SearchRequestDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptorAction = null;
@@ -1986,7 +1986,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+	public SearchRequestDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
@@ -2138,7 +2138,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? postFilter)
+	public SearchRequestDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? postFilter)
 	{
 		PostFilterDescriptor = null;
 		PostFilterDescriptorAction = null;
@@ -2146,7 +2146,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor PostFilter(QueryDsl.QueryContainerDescriptor descriptor)
+	public SearchRequestDescriptor PostFilter(QueryDsl.QueryDescriptor descriptor)
 	{
 		PostFilterValue = null;
 		PostFilterDescriptorAction = null;
@@ -2154,7 +2154,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor PostFilter(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public SearchRequestDescriptor PostFilter(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		PostFilterValue = null;
 		PostFilterDescriptor = null;
@@ -2162,7 +2162,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+	public SearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -2170,7 +2170,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
+	public SearchRequestDescriptor Query(QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -2178,7 +2178,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public SearchRequestDescriptor Query(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -2455,7 +2455,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (AggregationsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor(AggregationsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor(AggregationsDescriptorAction), options);
 		}
 		else if (AggregationsValue is not null)
 		{
@@ -2581,7 +2581,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (PostFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(PostFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(PostFilterDescriptorAction), options);
 		}
 		else if (PostFilterValue is not null)
 		{
@@ -2597,7 +2597,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{

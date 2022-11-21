@@ -18,7 +18,7 @@ namespace Elastic.Clients.Elasticsearch.JsonNetSerializer.Converters
 		private static readonly HashSet<Type> NestTypesThatCanAppearInSource = new()
 		{
 			typeof(JoinField),
-			typeof(QueryContainer),
+			typeof(Query),
 			//typeof(CompletionField),
 			//typeof(Attachment),
 			typeof(LazyJson),

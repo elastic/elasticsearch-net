@@ -11,22 +11,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 /// <summary>
 /// Describes aggregations to execute as part of a search.
 /// </summary>
-public sealed class AggregationDictionary : IsADictionary<string, AggregationContainer>
+public sealed class AggregationDictionary : IsADictionary<string, Aggregation>
 {
 	public AggregationDictionary() { }
 
-	public AggregationDictionary(IDictionary<string, AggregationContainer> dictionary)
+	public AggregationDictionary(IDictionary<string, Aggregation> dictionary)
 		: base(dictionary.ToDictionary(kv => kv.Key, kv => kv.Value)) { } // Copy the existing dictionary rather then using the existing reference
 
-	public AggregationDictionary(Dictionary<string, AggregationContainer> dictionary)
+	public AggregationDictionary(Dictionary<string, Aggregation> dictionary)
 		: base(dictionary.ToDictionary(kv => kv.Key, kv => kv.Value)) { } // Copy the existing dictionary rather then using the existing reference
 
-	public static implicit operator AggregationDictionary(Dictionary<string, AggregationContainer> dictionary) =>
+	public static implicit operator AggregationDictionary(Dictionary<string, Aggregation> dictionary) =>
 		new(dictionary);
 
-	public static implicit operator AggregationDictionary(Aggregation aggregator)
+	public static implicit operator AggregationDictionary(SearchAggregation aggregator)
 	{
-		Aggregation b;
+		SearchAggregation b;
 		if (aggregator is AggregationCombinator combinator)
 		{
 			var dict = new AggregationDictionary();
@@ -49,9 +49,9 @@ public sealed class AggregationDictionary : IsADictionary<string, AggregationCon
 		return new AggregationDictionary { { aggregator } };
 	}
 
-	public void Add(string key, AggregationContainer value) => BackingDictionary.Add(ValidateKey(key), value);
+	public void Add(string key, Aggregation value) => BackingDictionary.Add(ValidateKey(key), value);
 
-	public void Add(AggregationContainer value)
+	public void Add(Aggregation value)
 	{
 		if (value.Variant.Name.IsNullOrEmpty())
 			throw new ArgumentException($"{value.GetType().Name}.Name is not set!");

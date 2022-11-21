@@ -34,61 +34,61 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	{
 	}
 
-	public virtual ClusterHealthResponse Health(ClusterHealthRequest request)
+	public virtual HealthResponse Health(HealthRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ClusterHealthRequest, ClusterHealthResponse, ClusterHealthRequestParameters>(request);
+		return DoRequest<HealthRequest, HealthResponse, HealthRequestParameters>(request);
 	}
 
-	public virtual Task<ClusterHealthResponse> HealthAsync(ClusterHealthRequest request, CancellationToken cancellationToken = default)
+	public virtual Task<HealthResponse> HealthAsync(HealthRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ClusterHealthRequest, ClusterHealthResponse, ClusterHealthRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<HealthRequest, HealthResponse, HealthRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual ClusterHealthResponse Health()
+	public virtual HealthResponse Health()
 	{
-		var descriptor = new ClusterHealthRequestDescriptor();
+		var descriptor = new HealthRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
+		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
-	public virtual ClusterHealthResponse Health(Action<ClusterHealthRequestDescriptor> configureRequest)
+	public virtual HealthResponse Health(Action<HealthRequestDescriptor> configureRequest)
 	{
-		var descriptor = new ClusterHealthRequestDescriptor();
+		var descriptor = new HealthRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
+		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
-	public virtual ClusterHealthResponse Health<TDocument>(Action<ClusterHealthRequestDescriptor<TDocument>> configureRequest)
+	public virtual HealthResponse Health<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ClusterHealthRequestDescriptor<TDocument>();
+		var descriptor = new HealthRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ClusterHealthRequestDescriptor<TDocument>, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
+		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
-	public virtual Task<ClusterHealthResponse> HealthAsync(CancellationToken cancellationToken = default)
+	public virtual Task<HealthResponse> HealthAsync(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClusterHealthRequestDescriptor();
+		var descriptor = new HealthRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
+		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
-	public virtual Task<ClusterHealthResponse> HealthAsync(Action<ClusterHealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<HealthResponse> HealthAsync(Action<HealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClusterHealthRequestDescriptor();
+		var descriptor = new HealthRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterHealthRequestDescriptor, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
+		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
-	public virtual Task<ClusterHealthResponse> HealthAsync<TDocument>(Action<ClusterHealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<HealthResponse> HealthAsync<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClusterHealthRequestDescriptor<TDocument>();
+		var descriptor = new HealthRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterHealthRequestDescriptor<TDocument>, ClusterHealthResponse, ClusterHealthRequestParameters>(descriptor);
+		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 }
