@@ -133,7 +133,7 @@ internal sealed class TTestAggregationConverter : JsonConverter<TTestAggregation
 }
 
 [JsonConverter(typeof(TTestAggregationConverter))]
-public sealed partial class TTestAggregation : Aggregation
+public sealed partial class TTestAggregation : SearchAggregation
 {
 	public TTestAggregation(string name) => Name = name;
 	internal TTestAggregation()

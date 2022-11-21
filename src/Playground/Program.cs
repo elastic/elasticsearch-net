@@ -8,7 +8,7 @@ using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Transport;
 using Moq;
 using Playground;
-using CreateIndexResponse = Elastic.Clients.Elasticsearch.IndexManagement.CreateResponse;
+using CreateIndexResponse = Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse;
 
 // const string IndexName = "stock-demo-v1";
 
@@ -31,7 +31,7 @@ var stubbedResponse = stubbedClient.Indices.Create<Person>();
 Console.ReadKey();
 
 #region Hidden
-AggregationContainer a = new TermsAggregation("test");
+Aggregation a = new TermsAggregation("test");
 
 var settings = new ElasticsearchClientSettings(new InMemoryConnection())
 	.DefaultIndex("default-index")
@@ -124,7 +124,7 @@ Console.ReadKey();
 //	.Size(0)
 //		.Query(q => q
 //			.Bool(b => b
-//				.Filter(new[] { new QueryContainer(new TermQuery { Field = "symbol", Value = "MSFT" }) })))
+//				.Filter(new[] { new Query(new TermQuery { Field = "symbol", Value = "MSFT" }) })))
 //	.Aggregations(a => a
 //		.DateHistogram("by-month", dh => dh
 //			.CalendarInterval(CalendarInterval.Month)

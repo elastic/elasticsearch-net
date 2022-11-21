@@ -39,7 +39,7 @@ public sealed partial class FillMaskInferenceUpdateOptions
 	[JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 
-	public static implicit operator InferenceConfigUpdateContainer(FillMaskInferenceUpdateOptions fillMaskInferenceUpdateOptions) => InferenceConfigUpdateContainer.FillMask(fillMaskInferenceUpdateOptions);
+	public static implicit operator InferenceConfigUpdate(FillMaskInferenceUpdateOptions fillMaskInferenceUpdateOptions) => Ml.InferenceConfigUpdate.FillMask(fillMaskInferenceUpdateOptions);
 }
 
 public sealed partial class FillMaskInferenceUpdateOptionsDescriptor : SerializableDescriptor<FillMaskInferenceUpdateOptionsDescriptor>

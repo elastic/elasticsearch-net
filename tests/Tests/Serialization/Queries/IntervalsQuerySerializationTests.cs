@@ -74,7 +74,7 @@ public class IntervalsQuerySerializationTests : SerializerTestBase
 	{
 		var stream = WrapInStream(@"{""intervals"":{""name"":{""boost"":2,""match"":{""max_gaps"":1,""ordered"":true,""query"":""Steve""},""_name"":""testing-intervals""}}}");
 
-		var queryContainer = _requestResponseSerializer.Deserialize<QueryContainer>(stream);
+		var queryContainer = _requestResponseSerializer.Deserialize<Query>(stream);
 		var intervalsQuery = queryContainer.Variant.Should().BeOfType<IntervalsQuery>().Subject;
 
 		intervalsQuery.Boost.Should().Be(2.0f);

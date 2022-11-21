@@ -61,7 +61,7 @@ public class MGetSerialization : SerializerTestBase
 	{
 		var request = new MultiGetRequest()
 		{
-			Docs = new[] { new Operation { Index = "test-index", Id = "single-value" } }
+			Docs = new[] { new MultiGetOperation { Index = "test-index", Id = "single-value" } }
 		};
 
 		var json = SerializeAndGetJsonString(request);
@@ -75,8 +75,8 @@ public class MGetSerialization : SerializerTestBase
 		{
 			Docs = new[]
 			{
-				new Operation { Index = "test-index", Id = "value-a" },
-				new Operation { Index = "test-index", Id = "value-b" }
+				new MultiGetOperation { Index = "test-index", Id = "value-a" },
+				new MultiGetOperation { Index = "test-index", Id = "value-b" }
 			}
 		};
 
@@ -107,7 +107,7 @@ public class MGetSerialization : SerializerTestBase
 	public async Task SerializesDescriptorWithSingleDocsAsValue()
 	{
 		var request = new MultiGetRequestDescriptor()
-			.Docs(new[] { new Operation { Index = "test-index", Id = "single-value" } });
+			.Docs(new[] { new MultiGetOperation { Index = "test-index", Id = "single-value" } });
 
 		var json = SerializeAndGetJsonString(request);
 		await Verifier.VerifyJson(json);
@@ -119,8 +119,8 @@ public class MGetSerialization : SerializerTestBase
 		var request = new MultiGetRequestDescriptor()
 			.Docs(new[]
 			{
-				new Operation { Index = "test-index", Id = "value-a" },
-				new Operation { Index = "test-index", Id = "value-b" }
+				new MultiGetOperation { Index = "test-index", Id = "value-a" },
+				new MultiGetOperation { Index = "test-index", Id = "value-b" }
 			});
 
 		var json = SerializeAndGetJsonString(request);
@@ -141,7 +141,7 @@ public class MGetSerialization : SerializerTestBase
 	public async Task SerializesDescriptorWithSingleDocsAsDescriptor()
 	{
 		var request = new MultiGetRequestDescriptor()
-			.Docs(new OperationDescriptor().Index("test-index").Id("single-value"));
+			.Docs(new MultiGetOperationDescriptor().Index("test-index").Id("single-value"));
 
 		var json = SerializeAndGetJsonString(request);
 		await Verifier.VerifyJson(json);
