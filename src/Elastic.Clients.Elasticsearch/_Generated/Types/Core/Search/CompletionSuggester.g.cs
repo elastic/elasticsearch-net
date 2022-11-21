@@ -59,7 +59,7 @@ public sealed partial class CompletionSuggester
 	[JsonPropertyName("skip_duplicates")]
 	public bool? SkipDuplicates { get; set; }
 
-	public static implicit operator FieldSuggester(CompletionSuggester completionSuggester) => FieldSuggester.Completion(completionSuggester);
+	public static implicit operator FieldSuggester(CompletionSuggester completionSuggester) => Core.Search.FieldSuggester.Completion(completionSuggester);
 }
 
 public sealed partial class CompletionSuggesterDescriptor<TDocument> : SerializableDescriptor<CompletionSuggesterDescriptor<TDocument>>

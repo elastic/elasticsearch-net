@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class CombinedFieldsQuery : Query
+public sealed partial class CombinedFieldsQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -59,7 +59,7 @@ public sealed partial class CombinedFieldsQuery : Query
 	[JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 
-	public static implicit operator QueryContainer(CombinedFieldsQuery combinedFieldsQuery) => QueryContainer.CombinedFields(combinedFieldsQuery);
+	public static implicit operator Query(CombinedFieldsQuery combinedFieldsQuery) => QueryDsl.Query.CombinedFields(combinedFieldsQuery);
 }
 
 public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : SerializableDescriptor<CombinedFieldsQueryDescriptor<TDocument>>

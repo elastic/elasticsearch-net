@@ -151,7 +151,7 @@ internal sealed class BoxplotAggregationConverter : JsonConverter<BoxplotAggrega
 }
 
 [JsonConverter(typeof(BoxplotAggregationConverter))]
-public sealed partial class BoxplotAggregation : Aggregation
+public sealed partial class BoxplotAggregation : SearchAggregation
 {
 	public BoxplotAggregation(string name, Field field) : this(name) => Field = field;
 	public BoxplotAggregation(string name) => Name = name;

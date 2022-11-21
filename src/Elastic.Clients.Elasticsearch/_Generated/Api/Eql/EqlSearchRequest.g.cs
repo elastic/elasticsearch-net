@@ -83,7 +83,7 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filter { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("keep_alive")]
@@ -145,13 +145,13 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
 
 	private bool? CaseSensitiveValue { get; set; }
 
@@ -213,7 +213,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+	public EqlSearchRequestDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -222,7 +222,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public EqlSearchRequestDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -231,7 +231,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public EqlSearchRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -240,7 +240,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Filter(params Action<QueryDsl.QueryContainerDescriptor<TDocument>>[] configure)
+	public EqlSearchRequestDescriptor<TDocument> Filter(params Action<QueryDsl.QueryDescriptor<TDocument>>[] configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -384,7 +384,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		{
 			writer.WritePropertyName("filter");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorActions is not null)
@@ -393,7 +393,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 			writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -507,13 +507,13 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor FilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor>[] FilterDescriptorActions { get; set; }
+	private Action<QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
 
 	private bool? CaseSensitiveValue { get; set; }
 
@@ -575,7 +575,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+	public EqlSearchRequestDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -584,7 +584,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+	public EqlSearchRequestDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -593,7 +593,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public EqlSearchRequestDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -602,7 +602,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor Filter(params Action<QueryDsl.QueryContainerDescriptor>[] configure)
+	public EqlSearchRequestDescriptor Filter(params Action<QueryDsl.QueryDescriptor>[] configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -764,7 +764,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		{
 			writer.WritePropertyName("filter");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorActions is not null)
@@ -773,7 +773,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 			writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

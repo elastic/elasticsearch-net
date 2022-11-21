@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class NestedQuery : Query
+public sealed partial class NestedQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -49,13 +49,13 @@ public sealed partial class NestedQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
 
-	public static implicit operator QueryContainer(NestedQuery nestedQuery) => QueryContainer.Nested(nestedQuery);
+	public static implicit operator Query(NestedQuery nestedQuery) => QueryDsl.Query.Nested(nestedQuery);
 }
 
 public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescriptor<NestedQueryDescriptor<TDocument>>
@@ -71,11 +71,11 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 
 	private Action<Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
 
-	private QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
+	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	private string? QueryNameValue { get; set; }
 
@@ -111,7 +111,7 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public NestedQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+	public NestedQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -119,7 +119,7 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public NestedQueryDescriptor<TDocument> Query(QueryContainerDescriptor<TDocument> descriptor)
+	public NestedQueryDescriptor<TDocument> Query(QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -127,7 +127,7 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public NestedQueryDescriptor<TDocument> Query(Action<QueryContainerDescriptor<TDocument>> configure)
+	public NestedQueryDescriptor<TDocument> Query(Action<QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -198,7 +198,7 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else
 		{
@@ -249,11 +249,11 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 
 	private Action<Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
 
-	private QueryContainerDescriptor QueryDescriptor { get; set; }
+	private QueryDescriptor QueryDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor> QueryDescriptorAction { get; set; }
+	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	private string? QueryNameValue { get; set; }
 
@@ -289,7 +289,7 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 		return Self;
 	}
 
-	public NestedQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+	public NestedQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -297,7 +297,7 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 		return Self;
 	}
 
-	public NestedQueryDescriptor Query(QueryContainerDescriptor descriptor)
+	public NestedQueryDescriptor Query(QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -305,7 +305,7 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 		return Self;
 	}
 
-	public NestedQueryDescriptor Query(Action<QueryContainerDescriptor> configure)
+	public NestedQueryDescriptor Query(Action<QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -382,7 +382,7 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else
 		{

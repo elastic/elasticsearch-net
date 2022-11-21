@@ -41,9 +41,9 @@ public sealed partial class TextClassificationInferenceOptions
 
 	[JsonInclude]
 	[JsonPropertyName("tokenization")]
-	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
-	public static implicit operator InferenceConfigCreateContainer(TextClassificationInferenceOptions textClassificationInferenceOptions) => InferenceConfigCreateContainer.TextClassification(textClassificationInferenceOptions);
+	public static implicit operator InferenceConfigCreate(TextClassificationInferenceOptions textClassificationInferenceOptions) => Ml.InferenceConfigCreate.TextClassification(textClassificationInferenceOptions);
 }
 
 public sealed partial class TextClassificationInferenceOptionsDescriptor : SerializableDescriptor<TextClassificationInferenceOptionsDescriptor>
@@ -59,11 +59,11 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 
 	private string? ResultsFieldValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
 
-	private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
+	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 
-	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
+	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	public TextClassificationInferenceOptionsDescriptor ClassificationLabels(ICollection<string>? classificationLabels)
 	{
@@ -83,7 +83,7 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 		return Self;
 	}
 
-	public TextClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
+	public TextClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
 	{
 		TokenizationDescriptor = null;
 		TokenizationDescriptorAction = null;
@@ -91,7 +91,7 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 		return Self;
 	}
 
-	public TextClassificationInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
+	public TextClassificationInferenceOptionsDescriptor Tokenization(TokenizationConfigDescriptor descriptor)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptorAction = null;
@@ -99,7 +99,7 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 		return Self;
 	}
 
-	public TextClassificationInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
+	public TextClassificationInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigDescriptor> configure)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptor = null;
@@ -136,7 +136,7 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 		else if (TokenizationDescriptorAction is not null)
 		{
 			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new TokenizationConfigDescriptor(TokenizationDescriptorAction), options);
 		}
 		else if (TokenizationValue is not null)
 		{
