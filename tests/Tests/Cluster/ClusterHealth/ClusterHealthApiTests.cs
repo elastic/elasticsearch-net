@@ -11,7 +11,7 @@ using HttpMethod = Elastic.Transport.HttpMethod;
 namespace Tests.Cluster.ClusterHealth;
 
 public class ClusterHealthApiTests
-	: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, ClusterHealthRequestDescriptor, ClusterHealthRequest>
+	: ApiIntegrationTestBase<ReadOnlyCluster, HealthResponse, HealthRequestDescriptor, HealthRequest>
 {
 	public ClusterHealthApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -27,7 +27,7 @@ public class ClusterHealthApiTests
 		(client, r) => client.Cluster.HealthAsync(r)
 	);
 
-	protected override void ExpectResponse(ClusterHealthResponse response)
+	protected override void ExpectResponse(HealthResponse response)
 	{
 		response.ClusterName.Should().NotBeNullOrWhiteSpace();
 		response.Status.Should().NotBe(HealthStatus.Red);

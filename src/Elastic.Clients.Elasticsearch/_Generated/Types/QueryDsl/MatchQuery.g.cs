@@ -229,7 +229,7 @@ internal sealed class MatchQueryConverter : JsonConverter<MatchQuery>
 }
 
 [JsonConverter(typeof(MatchQueryConverter))]
-public sealed partial class MatchQuery : Query
+public sealed partial class MatchQuery : SearchQuery
 {
 	public MatchQuery(Field field)
 	{
@@ -268,7 +268,7 @@ public sealed partial class MatchQuery : Query
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator QueryContainer(MatchQuery matchQuery) => QueryContainer.Match(matchQuery);
+	public static implicit operator Query(MatchQuery matchQuery) => QueryDsl.Query.Match(matchQuery);
 }
 
 public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescriptor<MatchQueryDescriptor<TDocument>>

@@ -187,7 +187,7 @@ internal sealed class TopMetricsAggregationConverter : JsonConverter<TopMetricsA
 }
 
 [JsonConverter(typeof(TopMetricsAggregationConverter))]
-public sealed partial class TopMetricsAggregation : Aggregation
+public sealed partial class TopMetricsAggregation : SearchAggregation
 {
 	public TopMetricsAggregation(string name, Field field) : this(name) => Field = field;
 	public TopMetricsAggregation(string name) => Name = name;

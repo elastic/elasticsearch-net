@@ -169,7 +169,7 @@ internal sealed class ExtendedStatsAggregationConverter : JsonConverter<Extended
 }
 
 [JsonConverter(typeof(ExtendedStatsAggregationConverter))]
-public sealed partial class ExtendedStatsAggregation : Aggregation
+public sealed partial class ExtendedStatsAggregation : SearchAggregation
 {
 	public ExtendedStatsAggregation(string name, Field field) : this(name) => Field = field;
 	public ExtendedStatsAggregation(string name) => Name = name;
