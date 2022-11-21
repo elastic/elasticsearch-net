@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class MatchNoneQuery : Query
+public sealed partial class MatchNoneQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -35,7 +35,7 @@ public sealed partial class MatchNoneQuery : Query
 	[JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	public static implicit operator QueryContainer(MatchNoneQuery matchNoneQuery) => QueryContainer.MatchNone(matchNoneQuery);
+	public static implicit operator Query(MatchNoneQuery matchNoneQuery) => QueryDsl.Query.MatchNone(matchNoneQuery);
 }
 
 public sealed partial class MatchNoneQueryDescriptor : SerializableDescriptor<MatchNoneQueryDescriptor>

@@ -151,7 +151,7 @@ internal sealed class MinAggregationConverter : JsonConverter<MinAggregation>
 }
 
 [JsonConverter(typeof(MinAggregationConverter))]
-public sealed partial class MinAggregation : Aggregation
+public sealed partial class MinAggregation : SearchAggregation
 {
 	public MinAggregation(string name, Field field) : this(name) => Field = field;
 	public MinAggregation(string name) => Name = name;

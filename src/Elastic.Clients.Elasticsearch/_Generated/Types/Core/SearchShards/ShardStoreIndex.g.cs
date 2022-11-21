@@ -33,5 +33,5 @@ public sealed partial class ShardStoreIndex
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; init; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; init; }
 }

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class BoolQuery : Query
+public sealed partial class BoolQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -37,7 +37,7 @@ public sealed partial class BoolQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filter { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("minimum_should_match")]
@@ -45,17 +45,17 @@ public sealed partial class BoolQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("must")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Must { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Must { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("must_not")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNot { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNot { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("should")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Should { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Should { get; set; }
 
-	public static implicit operator QueryContainer(BoolQuery boolQuery) => QueryContainer.Bool(boolQuery);
+	public static implicit operator Query(BoolQuery boolQuery) => QueryDsl.Query.Bool(boolQuery);
 }
 
 public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescriptor<BoolQueryDescriptor<TDocument>>
@@ -65,37 +65,37 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
 
-	private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+	private QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Action<QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
+	private Action<QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustValue { get; set; }
 
-	private QueryContainerDescriptor<TDocument> MustDescriptor { get; set; }
+	private QueryDescriptor<TDocument> MustDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>> MustDescriptorAction { get; set; }
+	private Action<QueryDescriptor<TDocument>> MustDescriptorAction { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>>[] MustDescriptorActions { get; set; }
+	private Action<QueryDescriptor<TDocument>>[] MustDescriptorActions { get; set; }
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNotValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNotValue { get; set; }
 
-	private QueryContainerDescriptor<TDocument> MustNotDescriptor { get; set; }
+	private QueryDescriptor<TDocument> MustNotDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>> MustNotDescriptorAction { get; set; }
+	private Action<QueryDescriptor<TDocument>> MustNotDescriptorAction { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>>[] MustNotDescriptorActions { get; set; }
+	private Action<QueryDescriptor<TDocument>>[] MustNotDescriptorActions { get; set; }
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? ShouldValue { get; set; }
 
-	private QueryContainerDescriptor<TDocument> ShouldDescriptor { get; set; }
+	private QueryDescriptor<TDocument> ShouldDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>> ShouldDescriptorAction { get; set; }
+	private Action<QueryDescriptor<TDocument>> ShouldDescriptorAction { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>>[] ShouldDescriptorActions { get; set; }
+	private Action<QueryDescriptor<TDocument>>[] ShouldDescriptorActions { get; set; }
 
 	private string? QueryNameValue { get; set; }
 
@@ -103,7 +103,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-	public BoolQueryDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+	public BoolQueryDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -112,7 +112,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
+	public BoolQueryDescriptor<TDocument> Filter(QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -121,7 +121,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
+	public BoolQueryDescriptor<TDocument> Filter(Action<QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -130,7 +130,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Filter(params Action<QueryContainerDescriptor<TDocument>>[] configure)
+	public BoolQueryDescriptor<TDocument> Filter(params Action<QueryDescriptor<TDocument>>[] configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -139,7 +139,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Must(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must)
+	public BoolQueryDescriptor<TDocument> Must(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? must)
 	{
 		MustDescriptor = null;
 		MustDescriptorAction = null;
@@ -148,7 +148,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Must(QueryContainerDescriptor<TDocument> descriptor)
+	public BoolQueryDescriptor<TDocument> Must(QueryDescriptor<TDocument> descriptor)
 	{
 		MustValue = null;
 		MustDescriptorAction = null;
@@ -157,7 +157,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Must(Action<QueryContainerDescriptor<TDocument>> configure)
+	public BoolQueryDescriptor<TDocument> Must(Action<QueryDescriptor<TDocument>> configure)
 	{
 		MustValue = null;
 		MustDescriptor = null;
@@ -166,7 +166,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Must(params Action<QueryContainerDescriptor<TDocument>>[] configure)
+	public BoolQueryDescriptor<TDocument> Must(params Action<QueryDescriptor<TDocument>>[] configure)
 	{
 		MustValue = null;
 		MustDescriptor = null;
@@ -175,7 +175,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> MustNot(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot)
+	public BoolQueryDescriptor<TDocument> MustNot(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? mustNot)
 	{
 		MustNotDescriptor = null;
 		MustNotDescriptorAction = null;
@@ -184,7 +184,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> MustNot(QueryContainerDescriptor<TDocument> descriptor)
+	public BoolQueryDescriptor<TDocument> MustNot(QueryDescriptor<TDocument> descriptor)
 	{
 		MustNotValue = null;
 		MustNotDescriptorAction = null;
@@ -193,7 +193,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> MustNot(Action<QueryContainerDescriptor<TDocument>> configure)
+	public BoolQueryDescriptor<TDocument> MustNot(Action<QueryDescriptor<TDocument>> configure)
 	{
 		MustNotValue = null;
 		MustNotDescriptor = null;
@@ -202,7 +202,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> MustNot(params Action<QueryContainerDescriptor<TDocument>>[] configure)
+	public BoolQueryDescriptor<TDocument> MustNot(params Action<QueryDescriptor<TDocument>>[] configure)
 	{
 		MustNotValue = null;
 		MustNotDescriptor = null;
@@ -211,7 +211,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Should(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should)
+	public BoolQueryDescriptor<TDocument> Should(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? should)
 	{
 		ShouldDescriptor = null;
 		ShouldDescriptorAction = null;
@@ -220,7 +220,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Should(QueryContainerDescriptor<TDocument> descriptor)
+	public BoolQueryDescriptor<TDocument> Should(QueryDescriptor<TDocument> descriptor)
 	{
 		ShouldValue = null;
 		ShouldDescriptorAction = null;
@@ -229,7 +229,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Should(Action<QueryContainerDescriptor<TDocument>> configure)
+	public BoolQueryDescriptor<TDocument> Should(Action<QueryDescriptor<TDocument>> configure)
 	{
 		ShouldValue = null;
 		ShouldDescriptor = null;
@@ -238,7 +238,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> Should(params Action<QueryContainerDescriptor<TDocument>>[] configure)
+	public BoolQueryDescriptor<TDocument> Should(params Action<QueryDescriptor<TDocument>>[] configure)
 	{
 		ShouldValue = null;
 		ShouldDescriptor = null;
@@ -279,7 +279,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		{
 			writer.WritePropertyName("filter");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorActions is not null)
@@ -288,7 +288,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 			writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -310,7 +310,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		{
 			writer.WritePropertyName("must");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(MustDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(MustDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (MustDescriptorActions is not null)
@@ -319,7 +319,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 			writer.WriteStartArray();
 			foreach (var action in MustDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -341,7 +341,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		{
 			writer.WritePropertyName("must_not");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(MustNotDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(MustNotDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (MustNotDescriptorActions is not null)
@@ -350,7 +350,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 			writer.WriteStartArray();
 			foreach (var action in MustNotDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -372,7 +372,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		{
 			writer.WritePropertyName("should");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(ShouldDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(ShouldDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (ShouldDescriptorActions is not null)
@@ -381,7 +381,7 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 			writer.WriteStartArray();
 			foreach (var action in ShouldDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -421,37 +421,37 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
 
-	private QueryContainerDescriptor FilterDescriptor { get; set; }
+	private QueryDescriptor FilterDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+	private Action<QueryDescriptor> FilterDescriptorAction { get; set; }
 
-	private Action<QueryContainerDescriptor>[] FilterDescriptorActions { get; set; }
+	private Action<QueryDescriptor>[] FilterDescriptorActions { get; set; }
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustValue { get; set; }
 
-	private QueryContainerDescriptor MustDescriptor { get; set; }
+	private QueryDescriptor MustDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor> MustDescriptorAction { get; set; }
+	private Action<QueryDescriptor> MustDescriptorAction { get; set; }
 
-	private Action<QueryContainerDescriptor>[] MustDescriptorActions { get; set; }
+	private Action<QueryDescriptor>[] MustDescriptorActions { get; set; }
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNotValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNotValue { get; set; }
 
-	private QueryContainerDescriptor MustNotDescriptor { get; set; }
+	private QueryDescriptor MustNotDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor> MustNotDescriptorAction { get; set; }
+	private Action<QueryDescriptor> MustNotDescriptorAction { get; set; }
 
-	private Action<QueryContainerDescriptor>[] MustNotDescriptorActions { get; set; }
+	private Action<QueryDescriptor>[] MustNotDescriptorActions { get; set; }
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? ShouldValue { get; set; }
 
-	private QueryContainerDescriptor ShouldDescriptor { get; set; }
+	private QueryDescriptor ShouldDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor> ShouldDescriptorAction { get; set; }
+	private Action<QueryDescriptor> ShouldDescriptorAction { get; set; }
 
-	private Action<QueryContainerDescriptor>[] ShouldDescriptorActions { get; set; }
+	private Action<QueryDescriptor>[] ShouldDescriptorActions { get; set; }
 
 	private string? QueryNameValue { get; set; }
 
@@ -459,7 +459,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-	public BoolQueryDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+	public BoolQueryDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -468,7 +468,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Filter(QueryContainerDescriptor descriptor)
+	public BoolQueryDescriptor Filter(QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -477,7 +477,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Filter(Action<QueryContainerDescriptor> configure)
+	public BoolQueryDescriptor Filter(Action<QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -486,7 +486,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Filter(params Action<QueryContainerDescriptor>[] configure)
+	public BoolQueryDescriptor Filter(params Action<QueryDescriptor>[] configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -495,7 +495,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Must(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must)
+	public BoolQueryDescriptor Must(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? must)
 	{
 		MustDescriptor = null;
 		MustDescriptorAction = null;
@@ -504,7 +504,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Must(QueryContainerDescriptor descriptor)
+	public BoolQueryDescriptor Must(QueryDescriptor descriptor)
 	{
 		MustValue = null;
 		MustDescriptorAction = null;
@@ -513,7 +513,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Must(Action<QueryContainerDescriptor> configure)
+	public BoolQueryDescriptor Must(Action<QueryDescriptor> configure)
 	{
 		MustValue = null;
 		MustDescriptor = null;
@@ -522,7 +522,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Must(params Action<QueryContainerDescriptor>[] configure)
+	public BoolQueryDescriptor Must(params Action<QueryDescriptor>[] configure)
 	{
 		MustValue = null;
 		MustDescriptor = null;
@@ -531,7 +531,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor MustNot(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot)
+	public BoolQueryDescriptor MustNot(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? mustNot)
 	{
 		MustNotDescriptor = null;
 		MustNotDescriptorAction = null;
@@ -540,7 +540,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor MustNot(QueryContainerDescriptor descriptor)
+	public BoolQueryDescriptor MustNot(QueryDescriptor descriptor)
 	{
 		MustNotValue = null;
 		MustNotDescriptorAction = null;
@@ -549,7 +549,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor MustNot(Action<QueryContainerDescriptor> configure)
+	public BoolQueryDescriptor MustNot(Action<QueryDescriptor> configure)
 	{
 		MustNotValue = null;
 		MustNotDescriptor = null;
@@ -558,7 +558,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor MustNot(params Action<QueryContainerDescriptor>[] configure)
+	public BoolQueryDescriptor MustNot(params Action<QueryDescriptor>[] configure)
 	{
 		MustNotValue = null;
 		MustNotDescriptor = null;
@@ -567,7 +567,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Should(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should)
+	public BoolQueryDescriptor Should(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? should)
 	{
 		ShouldDescriptor = null;
 		ShouldDescriptorAction = null;
@@ -576,7 +576,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Should(QueryContainerDescriptor descriptor)
+	public BoolQueryDescriptor Should(QueryDescriptor descriptor)
 	{
 		ShouldValue = null;
 		ShouldDescriptorAction = null;
@@ -585,7 +585,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Should(Action<QueryContainerDescriptor> configure)
+	public BoolQueryDescriptor Should(Action<QueryDescriptor> configure)
 	{
 		ShouldValue = null;
 		ShouldDescriptor = null;
@@ -594,7 +594,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor Should(params Action<QueryContainerDescriptor>[] configure)
+	public BoolQueryDescriptor Should(params Action<QueryDescriptor>[] configure)
 	{
 		ShouldValue = null;
 		ShouldDescriptor = null;
@@ -635,7 +635,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		{
 			writer.WritePropertyName("filter");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor(FilterDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorActions is not null)
@@ -644,7 +644,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 			writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new QueryDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -666,7 +666,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		{
 			writer.WritePropertyName("must");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor(MustDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor(MustDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (MustDescriptorActions is not null)
@@ -675,7 +675,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 			writer.WriteStartArray();
 			foreach (var action in MustDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new QueryDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -697,7 +697,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		{
 			writer.WritePropertyName("must_not");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor(MustNotDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor(MustNotDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (MustNotDescriptorActions is not null)
@@ -706,7 +706,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 			writer.WriteStartArray();
 			foreach (var action in MustNotDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new QueryDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -728,7 +728,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		{
 			writer.WritePropertyName("should");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor(ShouldDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor(ShouldDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (ShouldDescriptorActions is not null)
@@ -737,7 +737,7 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 			writer.WriteStartArray();
 			foreach (var action in ShouldDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new QueryDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

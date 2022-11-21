@@ -35,7 +35,7 @@ public sealed partial class NerInferenceUpdateOptions
 	[JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 
-	public static implicit operator InferenceConfigUpdateContainer(NerInferenceUpdateOptions nerInferenceUpdateOptions) => InferenceConfigUpdateContainer.Ner(nerInferenceUpdateOptions);
+	public static implicit operator InferenceConfigUpdate(NerInferenceUpdateOptions nerInferenceUpdateOptions) => Ml.InferenceConfigUpdate.Ner(nerInferenceUpdateOptions);
 }
 
 public sealed partial class NerInferenceUpdateOptionsDescriptor : SerializableDescriptor<NerInferenceUpdateOptionsDescriptor>

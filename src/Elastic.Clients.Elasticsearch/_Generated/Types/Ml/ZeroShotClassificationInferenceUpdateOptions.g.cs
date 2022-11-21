@@ -43,7 +43,7 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptions
 	[JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 
-	public static implicit operator InferenceConfigUpdateContainer(ZeroShotClassificationInferenceUpdateOptions zeroShotClassificationInferenceUpdateOptions) => InferenceConfigUpdateContainer.ZeroShotClassification(zeroShotClassificationInferenceUpdateOptions);
+	public static implicit operator InferenceConfigUpdate(ZeroShotClassificationInferenceUpdateOptions zeroShotClassificationInferenceUpdateOptions) => Ml.InferenceConfigUpdate.ZeroShotClassification(zeroShotClassificationInferenceUpdateOptions);
 }
 
 public sealed partial class ZeroShotClassificationInferenceUpdateOptionsDescriptor : SerializableDescriptor<ZeroShotClassificationInferenceUpdateOptionsDescriptor>
