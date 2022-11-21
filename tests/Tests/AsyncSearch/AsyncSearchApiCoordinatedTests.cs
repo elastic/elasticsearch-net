@@ -28,8 +28,8 @@ public class AsyncSearchApiCoordinatedTests : CoordinatedIntegrationTestBase<Rea
 	{
 		{
 			SubmitStep, u =>
-			u.Calls<AsyncSearchSubmitRequestDescriptor<Project>, AsyncSearchSubmitRequest<Project>, AsyncSearchSubmitResponse<Project>>(
-				v => new AsyncSearchSubmitRequest<Project>
+			u.Calls<SubmitAsyncSearchRequestDescriptor<Project>, SubmitAsyncSearchRequest, SubmitAsyncSearchResponse<Project>>(
+				v => new SubmitAsyncSearchRequest
 				{
 					Query = new MatchAllQuery(),
 					KeepOnCompletion = true,
@@ -123,7 +123,7 @@ public class AsyncSearchApiCoordinatedTests : CoordinatedIntegrationTestBase<Rea
 	{ }
 
 	[I]
-	public async Task AsyncSearchSubmitResponse() => await Assert<AsyncSearchSubmitResponse<Project>>(SubmitStep, r =>
+	public async Task SubmitAsyncSearchResponse() => await Assert<SubmitAsyncSearchResponse<Project>>(SubmitStep, r =>
 	{
 		r.ShouldBeValid();
 		r.Id.Should().NotBeNullOrEmpty();

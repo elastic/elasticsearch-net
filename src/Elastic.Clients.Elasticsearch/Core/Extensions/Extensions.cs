@@ -19,9 +19,9 @@ internal static class Extensions
 {
 	private static readonly ConcurrentDictionary<string, object> EnumCache = new();
 
-	//internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;
+	//internal static bool NotWritable(this Query q) => q == null || !q.IsWritable;
 
-	//internal static bool NotWritable(this IEnumerable<QueryContainer> qs) => qs == null || qs.All(q => q.NotWritable());
+	//internal static bool NotWritable(this IEnumerable<Query> qs) => qs == null || qs.All(q => q.NotWritable());
 
 	internal static string ToEnumValue<T>(this T enumValue) where T : struct
 	{

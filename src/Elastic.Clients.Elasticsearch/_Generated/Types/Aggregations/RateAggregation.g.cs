@@ -187,7 +187,7 @@ internal sealed class RateAggregationConverter : JsonConverter<RateAggregation>
 }
 
 [JsonConverter(typeof(RateAggregationConverter))]
-public sealed partial class RateAggregation : Aggregation
+public sealed partial class RateAggregation : SearchAggregation
 {
 	public RateAggregation(string name, Field field) : this(name) => Field = field;
 	public RateAggregation(string name) => Name = name;

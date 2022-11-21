@@ -43,7 +43,7 @@ internal sealed class FiltersAggregationConverter : JsonConverter<FiltersAggrega
 				if (reader.ValueTextEquals("filters"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Filters = value;
@@ -150,7 +150,7 @@ internal sealed class FiltersAggregationConverter : JsonConverter<FiltersAggrega
 }
 
 [JsonConverter(typeof(FiltersAggregationConverter))]
-public sealed partial class FiltersAggregation : Aggregation
+public sealed partial class FiltersAggregation : SearchAggregation
 {
 	public FiltersAggregation(string name) => Name = name;
 	internal FiltersAggregation()
@@ -159,7 +159,7 @@ public sealed partial class FiltersAggregation : Aggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filters { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filters { get; set; }
 
 	public Dictionary<string, object>? Meta { get; set; }
 
@@ -179,11 +179,11 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
 
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FiltersValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
 
 	private Dictionary<string, object>? MetaValue { get; set; }
 
@@ -199,7 +199,7 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public FiltersAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
+	public FiltersAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptorAction = null;
@@ -207,7 +207,7 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public FiltersAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
+	public FiltersAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
@@ -215,7 +215,7 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public FiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filters)
+	public FiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filters)
 	{
 		FiltersValue = filters;
 		return Self;
@@ -277,7 +277,7 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 		else if (AggregationsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
 		}
 		else if (AggregationsValue is not null)
 		{
@@ -298,11 +298,11 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
 
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FiltersValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
 
 	private Dictionary<string, object>? MetaValue { get; set; }
 
@@ -318,7 +318,7 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public FiltersAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+	public FiltersAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptorAction = null;
@@ -326,7 +326,7 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public FiltersAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+	public FiltersAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
@@ -334,7 +334,7 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public FiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filters)
+	public FiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filters)
 	{
 		FiltersValue = filters;
 		return Self;
@@ -396,7 +396,7 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 		else if (AggregationsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
 		}
 		else if (AggregationsValue is not null)
 		{

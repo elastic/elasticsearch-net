@@ -145,7 +145,7 @@ internal sealed class RegexpQueryConverter : JsonConverter<RegexpQuery>
 }
 
 [JsonConverter(typeof(RegexpQueryConverter))]
-public sealed partial class RegexpQuery : Query
+public sealed partial class RegexpQuery : SearchQuery
 {
 	public RegexpQuery(Field field)
 	{
@@ -170,7 +170,7 @@ public sealed partial class RegexpQuery : Query
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator QueryContainer(RegexpQuery regexpQuery) => QueryContainer.Regexp(regexpQuery);
+	public static implicit operator Query(RegexpQuery regexpQuery) => QueryDsl.Query.Regexp(regexpQuery);
 }
 
 public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescriptor<RegexpQueryDescriptor<TDocument>>

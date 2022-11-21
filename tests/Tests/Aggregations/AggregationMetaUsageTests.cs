@@ -36,7 +36,7 @@ public class AggregationMetaUsageTests : AggregationUsageTestBase<ReadOnlyCluste
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.Min("min_last_activity", m => m
 			.Field(p => p.LastActivity)
 			.Meta(d => d

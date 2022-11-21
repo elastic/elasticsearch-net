@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class DisMaxQuery : Query
+public sealed partial class DisMaxQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -37,13 +37,13 @@ public sealed partial class DisMaxQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("queries")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> Queries { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> Queries { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
 
-	public static implicit operator QueryContainer(DisMaxQuery disMaxQuery) => QueryContainer.DisMax(disMaxQuery);
+	public static implicit operator Query(DisMaxQuery disMaxQuery) => QueryDsl.Query.DisMax(disMaxQuery);
 }
 
 public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescriptor<DisMaxQueryDescriptor<TDocument>>
@@ -53,13 +53,13 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> QueriesValue { get; set; }
 
-	private QueryContainerDescriptor<TDocument> QueriesDescriptor { get; set; }
+	private QueryDescriptor<TDocument> QueriesDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>> QueriesDescriptorAction { get; set; }
+	private Action<QueryDescriptor<TDocument>> QueriesDescriptorAction { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>>[] QueriesDescriptorActions { get; set; }
+	private Action<QueryDescriptor<TDocument>>[] QueriesDescriptorActions { get; set; }
 
 	private string? QueryNameValue { get; set; }
 
@@ -67,7 +67,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 
 	private double? TieBreakerValue { get; set; }
 
-	public DisMaxQueryDescriptor<TDocument> Queries(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries)
+	public DisMaxQueryDescriptor<TDocument> Queries(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> queries)
 	{
 		QueriesDescriptor = null;
 		QueriesDescriptorAction = null;
@@ -76,7 +76,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor<TDocument> Queries(QueryContainerDescriptor<TDocument> descriptor)
+	public DisMaxQueryDescriptor<TDocument> Queries(QueryDescriptor<TDocument> descriptor)
 	{
 		QueriesValue = null;
 		QueriesDescriptorAction = null;
@@ -85,7 +85,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor<TDocument> Queries(Action<QueryContainerDescriptor<TDocument>> configure)
+	public DisMaxQueryDescriptor<TDocument> Queries(Action<QueryDescriptor<TDocument>> configure)
 	{
 		QueriesValue = null;
 		QueriesDescriptor = null;
@@ -94,7 +94,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor<TDocument> Queries(params Action<QueryContainerDescriptor<TDocument>>[] configure)
+	public DisMaxQueryDescriptor<TDocument> Queries(params Action<QueryDescriptor<TDocument>>[] configure)
 	{
 		QueriesValue = null;
 		QueriesDescriptor = null;
@@ -135,7 +135,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 		{
 			writer.WritePropertyName("queries");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(QueriesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(QueriesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (QueriesDescriptorActions is not null)
@@ -144,7 +144,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 			writer.WriteStartArray();
 			foreach (var action in QueriesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -184,13 +184,13 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> QueriesValue { get; set; }
 
-	private QueryContainerDescriptor QueriesDescriptor { get; set; }
+	private QueryDescriptor QueriesDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor> QueriesDescriptorAction { get; set; }
+	private Action<QueryDescriptor> QueriesDescriptorAction { get; set; }
 
-	private Action<QueryContainerDescriptor>[] QueriesDescriptorActions { get; set; }
+	private Action<QueryDescriptor>[] QueriesDescriptorActions { get; set; }
 
 	private string? QueryNameValue { get; set; }
 
@@ -198,7 +198,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 
 	private double? TieBreakerValue { get; set; }
 
-	public DisMaxQueryDescriptor Queries(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries)
+	public DisMaxQueryDescriptor Queries(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> queries)
 	{
 		QueriesDescriptor = null;
 		QueriesDescriptorAction = null;
@@ -207,7 +207,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor Queries(QueryContainerDescriptor descriptor)
+	public DisMaxQueryDescriptor Queries(QueryDescriptor descriptor)
 	{
 		QueriesValue = null;
 		QueriesDescriptorAction = null;
@@ -216,7 +216,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor Queries(Action<QueryContainerDescriptor> configure)
+	public DisMaxQueryDescriptor Queries(Action<QueryDescriptor> configure)
 	{
 		QueriesValue = null;
 		QueriesDescriptor = null;
@@ -225,7 +225,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor Queries(params Action<QueryContainerDescriptor>[] configure)
+	public DisMaxQueryDescriptor Queries(params Action<QueryDescriptor>[] configure)
 	{
 		QueriesValue = null;
 		QueriesDescriptor = null;
@@ -266,7 +266,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 		{
 			writer.WritePropertyName("queries");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor(QueriesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor(QueriesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (QueriesDescriptorActions is not null)
@@ -275,7 +275,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 			writer.WriteStartArray();
 			foreach (var action in QueriesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new QueryDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

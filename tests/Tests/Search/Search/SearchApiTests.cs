@@ -334,12 +334,12 @@ namespace Tests.Search.Search
 	//	{
 	//		From = 10,
 	//		Size = 20,
-	//		Query = new QueryContainer(new MatchAllQuery()),
+	//		Query = new Query(new MatchAllQuery()),
 	//		Aggregations = new TermsAggregation("startDates")
 	//		{
 	//			Field = "startedOn"
 	//		},
-	//		PostFilter = new QueryContainer(new TermQuery
+	//		PostFilter = new Query(new TermQuery
 	//		{
 	//			Field = "state",
 	//			Value = "Stable"
@@ -363,9 +363,9 @@ namespace Tests.Search.Search
 	//	}
 	//}
 
-	//public class SearchApiContainingConditionlessQueryContainerTests : SearchApiTests
+	//public class SearchApiContainingConditionlessQueryTests : SearchApiTests
 	//{
-	//	public SearchApiContainingConditionlessQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	//	public SearchApiContainingConditionlessQueryTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 	//	protected override object ExpectJson => new
 	//	{
@@ -387,21 +387,21 @@ namespace Tests.Search.Search
 	//					m => m.QueryString(qs => qs.Query("query")),
 	//					m => m.QueryString(qs => qs.Query(string.Empty)),
 	//					m => m.QueryString(qs => qs.Query(null)),
-	//					m => new QueryContainer(),
+	//					m => new Query(),
 	//					null
 	//				)
 	//				.Should(
 	//					m => m.QueryString(qs => qs.Query("query")),
 	//					m => m.QueryString(qs => qs.Query(string.Empty)),
 	//					m => m.QueryString(qs => qs.Query(null)),
-	//					m => new QueryContainer(),
+	//					m => new Query(),
 	//					null
 	//				)
 	//				.MustNot(
 	//					m => m.QueryString(qs => qs.Query("query")),
 	//					m => m.QueryString(qs => qs.Query(string.Empty)),
 	//					m => m.QueryString(qs => qs.Query(null)),
-	//					m => new QueryContainer(),
+	//					m => new Query(),
 	//					null
 	//				)
 	//			)
@@ -411,28 +411,28 @@ namespace Tests.Search.Search
 	//	{
 	//		Query = new BoolQuery
 	//		{
-	//			Must = new List<QueryContainer>
+	//			Must = new List<Query>
 	//			{
 	//				new QueryStringQuery { Query = "query" },
 	//				new QueryStringQuery { Query = string.Empty },
 	//				new QueryStringQuery { Query = null },
-	//				new QueryContainer(),
+	//				new Query(),
 	//				null
 	//			},
-	//			Should = new List<QueryContainer>
+	//			Should = new List<Query>
 	//			{
 	//				new QueryStringQuery { Query = "query" },
 	//				new QueryStringQuery { Query = string.Empty },
 	//				new QueryStringQuery { Query = null },
-	//				new QueryContainer(),
+	//				new Query(),
 	//				null
 	//			},
-	//			MustNot = new List<QueryContainer>
+	//			MustNot = new List<Query>
 	//			{
 	//				new QueryStringQuery { Query = "query" },
 	//				new QueryStringQuery { Query = string.Empty },
 	//				new QueryStringQuery { Query = null },
-	//				new QueryContainer(),
+	//				new Query(),
 	//				null
 	//			}
 	//		}
@@ -441,18 +441,18 @@ namespace Tests.Search.Search
 	//	protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldBeValid();
 	//}
 
-	//public class SearchApiNullQueryContainerTests : SearchApiTests
+	//public class SearchApiNullQueryTests : SearchApiTests
 	//{
-	//	public SearchApiNullQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	//	public SearchApiNullQueryTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 	//	protected override object ExpectJson => new { };
 
 	//	protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 	//		.Query(q => q
 	//			.Bool(b => b
-	//				.Must((Func<QueryContainerDescriptor<Project>, QueryContainer>)null)
-	//				.Should((Func<QueryContainerDescriptor<Project>, QueryContainer>)null)
-	//				.MustNot((Func<QueryContainerDescriptor<Project>, QueryContainer>)null)
+	//				.Must((Func<QueryDescriptor<Project>, Query>)null)
+	//				.Should((Func<QueryDescriptor<Project>, Query>)null)
+	//				.MustNot((Func<QueryDescriptor<Project>, Query>)null)
 	//			)
 	//		);
 
@@ -469,9 +469,9 @@ namespace Tests.Search.Search
 	//	protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldBeValid();
 	//}
 
-	//public class SearchApiNullQueriesInQueryContainerTests : SearchApiTests
+	//public class SearchApiNullQueriesInQueryTests : SearchApiTests
 	//{
-	//	public SearchApiNullQueriesInQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	//	public SearchApiNullQueriesInQueryTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 	//	protected override object ExpectJson => new
 	//	{
@@ -489,9 +489,9 @@ namespace Tests.Search.Search
 	//			{
 	//				b.Verbatim();
 	//				IBoolQuery bq = b;
-	//				bq.Must = new QueryContainer[] { null };
-	//				bq.Should = new QueryContainer[] { null };
-	//				bq.MustNot = new QueryContainer[] { null };
+	//				bq.Must = new Query[] { null };
+	//				bq.Should = new Query[] { null };
+	//				bq.MustNot = new Query[] { null };
 	//				return bq;
 	//			})
 	//		);
@@ -501,9 +501,9 @@ namespace Tests.Search.Search
 	//		Query = new BoolQuery
 	//		{
 	//			IsVerbatim = true,
-	//			Must = new QueryContainer[] { null },
-	//			Should = new QueryContainer[] { null },
-	//			MustNot = new QueryContainer[] { null }
+	//			Must = new Query[] { null },
+	//			Should = new Query[] { null },
+	//			MustNot = new Query[] { null }
 	//		}
 	//	};
 
@@ -657,7 +657,7 @@ namespace Tests.Search.Search
 	//	protected override SearchRequest<Project> Initializer => new SearchRequest<Project>(Nest.Indices.All)
 	//	{
 	//		Size = 1,
-	//		Query = new QueryContainer(new MatchAllQuery()),
+	//		Query = new Query(new MatchAllQuery()),
 	//		PointInTime = new Nest.PointInTime("a-long-id", "1m")
 	//	};
 
@@ -724,7 +724,7 @@ namespace Tests.Search.Search
 	//	protected override SearchRequest<Project> Initializer => new()
 	//	{
 	//		Size = 5,
-	//		Query = new QueryContainer(new MatchAllQuery()),
+	//		Query = new Query(new MatchAllQuery()),
 	//		Fields = Infer.Field<ProjectRuntimeFields>(p => p.StartedOnDayOfWeek)
 	//			.And<ProjectRuntimeFields>(p => p.ThirtyDaysFromStarted, format: DateFormat.basic_date)
 	//			.And(RuntimeFieldName),
@@ -801,7 +801,7 @@ namespace Tests.Search.Search
 	//	protected override SearchRequest<Project> Initializer => new()
 	//	{
 	//		Size = 5,
-	//		Query = new QueryContainer(new MatchAllQuery()),
+	//		Query = new Query(new MatchAllQuery()),
 	//		Sort = new List<ISort>
 	//		{
 	//			new FieldSort

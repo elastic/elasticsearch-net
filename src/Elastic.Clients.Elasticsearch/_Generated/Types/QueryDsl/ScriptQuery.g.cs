@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class ScriptQuery : Query
+public sealed partial class ScriptQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -39,7 +39,7 @@ public sealed partial class ScriptQuery : Query
 	[JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
-	public static implicit operator QueryContainer(ScriptQuery scriptQuery) => QueryContainer.Script(scriptQuery);
+	public static implicit operator Query(ScriptQuery scriptQuery) => QueryDsl.Query.Script(scriptQuery);
 }
 
 public sealed partial class ScriptQueryDescriptor : SerializableDescriptor<ScriptQueryDescriptor>

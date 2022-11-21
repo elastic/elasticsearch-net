@@ -28,7 +28,7 @@ public class MinAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.Min("min_last_activity", m => m
 			.Field(p => p.LastActivity)
 			.Format("yyyy")

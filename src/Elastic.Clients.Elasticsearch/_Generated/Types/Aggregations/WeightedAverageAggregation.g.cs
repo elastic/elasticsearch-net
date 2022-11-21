@@ -151,7 +151,7 @@ internal sealed class WeightedAverageAggregationConverter : JsonConverter<Weight
 }
 
 [JsonConverter(typeof(WeightedAverageAggregationConverter))]
-public sealed partial class WeightedAverageAggregation : Aggregation
+public sealed partial class WeightedAverageAggregation : SearchAggregation
 {
 	public WeightedAverageAggregation(string name) => Name = name;
 	internal WeightedAverageAggregation()

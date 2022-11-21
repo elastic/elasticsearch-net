@@ -34,7 +34,7 @@ public class BoxplotAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.Boxplot("boxplot_commits", plot => plot
 			.Meta(m => m
 				.Add("foo", "bar")

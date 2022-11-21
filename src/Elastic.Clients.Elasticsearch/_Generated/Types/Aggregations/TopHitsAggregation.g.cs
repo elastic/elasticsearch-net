@@ -349,7 +349,7 @@ internal sealed class TopHitsAggregationConverter : JsonConverter<TopHitsAggrega
 }
 
 [JsonConverter(typeof(TopHitsAggregationConverter))]
-public sealed partial class TopHitsAggregation : Aggregation
+public sealed partial class TopHitsAggregation : SearchAggregation
 {
 	public TopHitsAggregation(string name, Field field) : this(name) => Field = field;
 	public TopHitsAggregation(string name) => Name = name;
