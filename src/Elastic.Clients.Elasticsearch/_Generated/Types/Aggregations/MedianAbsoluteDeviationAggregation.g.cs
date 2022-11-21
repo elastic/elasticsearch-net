@@ -169,7 +169,7 @@ internal sealed class MedianAbsoluteDeviationAggregationConverter : JsonConverte
 }
 
 [JsonConverter(typeof(MedianAbsoluteDeviationAggregationConverter))]
-public sealed partial class MedianAbsoluteDeviationAggregation : Aggregation
+public sealed partial class MedianAbsoluteDeviationAggregation : SearchAggregation
 {
 	public MedianAbsoluteDeviationAggregation(string name, Field field) : this(name) => Field = field;
 	public MedianAbsoluteDeviationAggregation(string name) => Name = name;

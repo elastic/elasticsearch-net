@@ -64,31 +64,31 @@ public class ConnectionSettingsAwareContractResolver : DefaultContractResolver
 
 	private static void ApplyShouldSerializer(JsonProperty property)
 	{
-		if (property.PropertyType == typeof(QueryContainer))
-			property.ShouldSerialize = o => ShouldSerializeQueryContainer(o, property);
-		else if (property.PropertyType == typeof(IEnumerable<QueryContainer>))
-			property.ShouldSerialize = o => ShouldSerializeQueryContainers(o, property);
+		if (property.PropertyType == typeof(Query))
+			property.ShouldSerialize = o => ShouldSerializeQuery(o, property);
+		else if (property.PropertyType == typeof(IEnumerable<Query>))
+			property.ShouldSerialize = o => ShouldSerializeQuerys(o, property);
 	}
 
-	private static bool ShouldSerializeQueryContainer(object o, JsonProperty prop)
+	private static bool ShouldSerializeQuery(object o, JsonProperty prop)
 	{
 		if (o == null)
 			return false;
-		if (prop.ValueProvider.GetValue(o) is not QueryContainer q)
+		if (prop.ValueProvider.GetValue(o) is not Query q)
 			return false;
 		//return q.IsWritable;
 		return true;
 	}
 
-	private static bool ShouldSerializeQueryContainers(object o, JsonProperty prop)
+	private static bool ShouldSerializeQuerys(object o, JsonProperty prop)
 	{
 		if (o == null)
 			return false;
-		if (prop.ValueProvider.GetValue(o) is not IEnumerable<QueryContainer> q)
+		if (prop.ValueProvider.GetValue(o) is not IEnumerable<Query> q)
 			return false;
 
-		var queryContainers = q as QueryContainer[] ?? q.ToArray();
-		//return queryContainers.Any(qq => qq != null && ((QueryContainer)qq).IsWritable);
+		var queryContainers = q as Query[] ?? q.ToArray();
+		//return queryContainers.Any(qq => qq != null && ((Query)qq).IsWritable);
 		return queryContainers.Any(qq => qq != null);
 	}
 }

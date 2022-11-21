@@ -195,7 +195,7 @@
 //		 * and supports a number of special types defined in NEST
 //		 *
 //		 * [horizontal]
-//		 * `Nest.QueryContainer`:: maps to `"percolator"`
+//		 * `Nest.Query`:: maps to `"percolator"`
 //		 * `Nest.GeoLocation`:: maps to `"geo_point"`
 //		 * `Nest.IGeoShape`:: maps to `"geo_shape"` (if you want to map to a `"shape"` type use explicit mapping or the [Shape] attribute on the property)
 //		 * `Nest.CompletionField`:: maps to `"completion"`

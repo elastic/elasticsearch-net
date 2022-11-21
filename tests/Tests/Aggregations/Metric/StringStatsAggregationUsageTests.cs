@@ -27,7 +27,7 @@ public class StringStatsAggregationUsageTests : AggregationUsageTestBase<ReadOnl
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.StringStats("name_stats", st => st
 			.Field(p => p.Name)
 		);

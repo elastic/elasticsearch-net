@@ -55,7 +55,7 @@ public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTe
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.DateHistogram("projects_started_per_month", date => date
 			.Field(p => p.StartedOn)
 			.CalendarInterval(CalendarInterval.Month)

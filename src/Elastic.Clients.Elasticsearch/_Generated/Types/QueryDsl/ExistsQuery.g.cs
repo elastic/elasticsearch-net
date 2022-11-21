@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class ExistsQuery : Query
+public sealed partial class ExistsQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -39,7 +39,7 @@ public sealed partial class ExistsQuery : Query
 	[JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator QueryContainer(ExistsQuery existsQuery) => QueryContainer.Exists(existsQuery);
+	public static implicit operator Query(ExistsQuery existsQuery) => QueryDsl.Query.Exists(existsQuery);
 }
 
 public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescriptor<ExistsQueryDescriptor<TDocument>>

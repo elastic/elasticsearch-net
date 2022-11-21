@@ -29,7 +29,7 @@ public sealed partial class Alias
 {
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("index_routing")]
@@ -59,11 +59,11 @@ public sealed partial class AliasDescriptor<TDocument> : SerializableDescriptor<
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; set; }
 
@@ -75,7 +75,7 @@ public sealed partial class AliasDescriptor<TDocument> : SerializableDescriptor<
 
 	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
 
-	public AliasDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+	public AliasDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -83,7 +83,7 @@ public sealed partial class AliasDescriptor<TDocument> : SerializableDescriptor<
 		return Self;
 	}
 
-	public AliasDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public AliasDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -91,7 +91,7 @@ public sealed partial class AliasDescriptor<TDocument> : SerializableDescriptor<
 		return Self;
 	}
 
-	public AliasDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public AliasDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -140,7 +140,7 @@ public sealed partial class AliasDescriptor<TDocument> : SerializableDescriptor<
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -189,11 +189,11 @@ public sealed partial class AliasDescriptor : SerializableDescriptor<AliasDescri
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor FilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; set; }
 
@@ -205,7 +205,7 @@ public sealed partial class AliasDescriptor : SerializableDescriptor<AliasDescri
 
 	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
 
-	public AliasDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+	public AliasDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -213,7 +213,7 @@ public sealed partial class AliasDescriptor : SerializableDescriptor<AliasDescri
 		return Self;
 	}
 
-	public AliasDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+	public AliasDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -221,7 +221,7 @@ public sealed partial class AliasDescriptor : SerializableDescriptor<AliasDescri
 		return Self;
 	}
 
-	public AliasDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public AliasDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -270,7 +270,7 @@ public sealed partial class AliasDescriptor : SerializableDescriptor<AliasDescri
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{

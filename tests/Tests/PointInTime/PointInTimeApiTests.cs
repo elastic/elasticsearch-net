@@ -67,7 +67,7 @@ public class PointInTimeApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 			//			v => new SearchRequest<Project>
 			//			{
 			//				Size = 1,
-			//				Query = new QueryContainer(new MatchAllQuery()),
+			//				Query = new Query(new MatchAllQuery()),
 			//				PointInTime = new Nest.PointInTime(v, "1m"),
 			//				Sort =new List<ISort>
 			//				{

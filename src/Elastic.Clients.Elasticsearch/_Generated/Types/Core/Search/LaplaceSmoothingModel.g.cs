@@ -31,7 +31,7 @@ public sealed partial class LaplaceSmoothingModel
 	[JsonPropertyName("alpha")]
 	public double Alpha { get; set; }
 
-	public static implicit operator SmoothingModelContainer(LaplaceSmoothingModel laplaceSmoothingModel) => SmoothingModelContainer.Laplace(laplaceSmoothingModel);
+	public static implicit operator SmoothingModel(LaplaceSmoothingModel laplaceSmoothingModel) => Core.Search.SmoothingModel.Laplace(laplaceSmoothingModel);
 }
 
 public sealed partial class LaplaceSmoothingModelDescriptor : SerializableDescriptor<LaplaceSmoothingModelDescriptor>

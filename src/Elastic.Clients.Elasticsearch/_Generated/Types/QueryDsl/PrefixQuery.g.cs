@@ -121,7 +121,7 @@ internal sealed class PrefixQueryConverter : JsonConverter<PrefixQuery>
 }
 
 [JsonConverter(typeof(PrefixQueryConverter))]
-public sealed partial class PrefixQuery : Query
+public sealed partial class PrefixQuery : SearchQuery
 {
 	public PrefixQuery(Field field)
 	{
@@ -142,7 +142,7 @@ public sealed partial class PrefixQuery : Query
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator QueryContainer(PrefixQuery prefixQuery) => QueryContainer.Prefix(prefixQuery);
+	public static implicit operator Query(PrefixQuery prefixQuery) => QueryDsl.Query.Prefix(prefixQuery);
 }
 
 public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescriptor<PrefixQueryDescriptor<TDocument>>

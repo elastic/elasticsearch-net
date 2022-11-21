@@ -133,7 +133,7 @@ internal sealed class PercentilesBucketAggregationConverter : JsonConverter<Perc
 }
 
 [JsonConverter(typeof(PercentilesBucketAggregationConverter))]
-public sealed partial class PercentilesBucketAggregation : Aggregation
+public sealed partial class PercentilesBucketAggregation : SearchAggregation
 {
 	public PercentilesBucketAggregation(string name) => Name = name;
 	internal PercentilesBucketAggregation()
