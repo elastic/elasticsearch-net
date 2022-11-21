@@ -151,7 +151,7 @@ internal sealed class StatsAggregationConverter : JsonConverter<StatsAggregation
 }
 
 [JsonConverter(typeof(StatsAggregationConverter))]
-public sealed partial class StatsAggregation : Aggregation
+public sealed partial class StatsAggregation : SearchAggregation
 {
 	public StatsAggregation(string name, Field field) : this(name) => Field = field;
 	public StatsAggregation(string name) => Name = name;

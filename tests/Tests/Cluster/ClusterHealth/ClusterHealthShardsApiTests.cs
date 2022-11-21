@@ -14,7 +14,7 @@ using HttpMethod = Elastic.Transport.HttpMethod;
 namespace Tests.Cluster.ClusterHealth;
 
 public class ClusterHealthShardsApiTests
-	: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, ClusterHealthRequestDescriptor, ClusterHealthRequest>
+	: ApiIntegrationTestBase<ReadOnlyCluster, HealthResponse, HealthRequestDescriptor, HealthRequest>
 {
 	public ClusterHealthShardsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -22,8 +22,8 @@ public class ClusterHealthShardsApiTests
 	protected override int ExpectStatusCode => 200;
 
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override Action<ClusterHealthRequestDescriptor> Fluent => c => c.Level(Level.Shards);
-	protected override ClusterHealthRequest Initializer => new() { Level = Level.Shards };
+	protected override Action<HealthRequestDescriptor> Fluent => c => c.Level(Level.Shards);
+	protected override HealthRequest Initializer => new() { Level = Level.Shards };
 	protected override string ExpectedUrlPathAndQuery => "/_cluster/health?level=shards";
 
 	protected override LazyResponses ClientUsage() => Calls(
@@ -33,7 +33,7 @@ public class ClusterHealthShardsApiTests
 		(client, r) => client.Cluster.HealthAsync(r)
 	);
 
-	protected override void ExpectResponse(ClusterHealthResponse response)
+	protected override void ExpectResponse(HealthResponse response)
 	{
 		response.ClusterName.Should().NotBeNullOrWhiteSpace();
 		response.Status.Should().NotBe(HealthStatus.Red);

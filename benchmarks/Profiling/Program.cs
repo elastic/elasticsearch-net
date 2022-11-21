@@ -31,7 +31,7 @@ var alphaClient = new ElasticsearchClient(new ElasticsearchClientSettings(new Ur
 
 //var observer = bulkAll.Wait(TimeSpan.FromMinutes(1), n => { });
 
-_ = await alphaClient.RequestResponseSerializer.DeserializeAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponse>(stream);
+_ = await alphaClient.RequestResponseSerializer.DeserializeAsync<Elastic.Clients.Elasticsearch.Cluster.HealthResponse>(stream);
 
 MemoryProfiler.ForceGc();
 
@@ -47,7 +47,7 @@ MemoryProfiler.GetSnapshot();
 
 //observer = bulkAll.Wait(TimeSpan.FromMinutes(1), n => { });
 
-var result = await alphaClient.RequestResponseSerializer.DeserializeAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponse>(stream);
+var result = await alphaClient.RequestResponseSerializer.DeserializeAsync<Elastic.Clients.Elasticsearch.Cluster.HealthResponse>(stream);
 
 MemoryProfiler.GetSnapshot();
 

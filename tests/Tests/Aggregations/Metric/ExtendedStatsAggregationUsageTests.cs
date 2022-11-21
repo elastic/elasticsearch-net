@@ -29,7 +29,7 @@ public class ExtendedStatsAggregationUsageTests : AggregationUsageTestBase<ReadO
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.ExtendedStats("commit_stats", es => es
 			.Field(p => p.NumberOfCommits)
 			.Sigma(1)
@@ -68,13 +68,13 @@ public class ExtendedStatsAggregationUsageTests : AggregationUsageTestBase<ReadO
 	}
 }
 
-// TODO - Handle && operator on QueryContainer
+// TODO - Handle && operator on Query
 //public class ExtendedStatsAggregationUsageDocCountZeroTests */: AggregationUsageTestBase<ReadOnlyCluster>
 //{
 //	public ExtendedStatsAggregationUsageDocCountZeroTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 //	// a query that no docs will match
-//	protected override QueryContainer QueryScope => base.QueryScope &&
+//	protected override Query QueryScope => base.QueryScope &&
 //		new TermQuery { Field = Field<Project>(f => f.Branches), Value = "non-existent branch name" };
 
 //	protected override object QueryScopeJson { get; } = new
@@ -102,7 +102,7 @@ public class ExtendedStatsAggregationUsageTests : AggregationUsageTestBase<ReadO
 //		}
 //	};
 
-//	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+//	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 //		.ExtendedStats("commit_stats", es => es
 //			.Field(p => p.NumberOfCommits)
 //			.Sigma(1)

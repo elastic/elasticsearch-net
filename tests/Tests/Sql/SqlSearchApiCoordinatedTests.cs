@@ -31,8 +31,8 @@ ORDER BY numberOfContributors DESC";
 	{
 		{
 			SubmitStep, u =>
-				u.Calls<SqlQueryRequestDescriptor, SqlQueryRequest, SqlQueryResponse>(
-					_ => new SqlQueryRequest { Query = SqlQuery, FetchSize = 5, WaitForCompletionTimeout = "0s" },
+				u.Calls<QueryRequestDescriptor, QueryRequest, QueryResponse>(
+					_ => new QueryRequest { Query = SqlQuery, FetchSize = 5, WaitForCompletionTimeout = "0s" },
 					(_, d) => d
 						.Query(SqlQuery)
 						.FetchSize(5)
@@ -46,8 +46,8 @@ ORDER BY numberOfContributors DESC";
 		},
 		{
 			StatusStep, u =>
-				u.Calls<SqlGetAsyncStatusRequestDescriptor, SqlGetAsyncStatusRequest, SqlGetAsyncStatusResponse>(
-					v => new SqlGetAsyncStatusRequest(v),
+				u.Calls<GetAsyncStatusRequestDescriptor, GetAsyncStatusRequest, GetAsyncStatusResponse>(
+					v => new GetAsyncStatusRequest(v),
 					(v, d) => d,
 					(v, c, f) => c.Sql.GetAsyncSearchStatus(v, f),
 					(v, c, f) => c.Sql.GetAsyncSearchStatusAsync(v, f),
@@ -74,8 +74,8 @@ ORDER BY numberOfContributors DESC";
 		},
 		{
 			GetStep, u =>
-				u.Calls<SqlGetAsyncRequestDescriptor, SqlGetAsyncRequest, SqlGetAsyncResponse>(
-					v => new SqlGetAsyncRequest(v),
+				u.Calls<GetAsyncRequestDescriptor, GetAsyncRequest, GetAsyncResponse>(
+					v => new GetAsyncRequest(v),
 					(_, d) => d,
 					(v, c, f) => c.Sql.GetAsyncSearch(v, f),
 					(v, c, f) => c.Sql.GetAsyncSearchAsync(v, f),
@@ -86,8 +86,8 @@ ORDER BY numberOfContributors DESC";
 		},
 		{
 			DeleteStep, u =>
-				u.Calls<SqlDeleteAsyncRequestDescriptor, SqlDeleteAsyncRequest, SqlDeleteAsyncResponse>(
-					v => new SqlDeleteAsyncRequest(v),
+				u.Calls<DeleteAsyncRequestDescriptor, DeleteAsyncRequest, DeleteAsyncResponse>(
+					v => new DeleteAsyncRequest(v),
 					(_, d) => d,
 					(v, c, f) => c.Sql.DeleteAsyncSearch(v, f),
 					(v, c, f) => c.Sql.DeleteAsyncSearchAsync(v, f),
@@ -98,7 +98,7 @@ ORDER BY numberOfContributors DESC";
 		}
 	}) { }
 
-	[I] public async Task SqlSearchResponse() => await Assert<SqlQueryResponse>(SubmitStep, r =>
+	[I] public async Task SqlSearchResponse() => await Assert<QueryResponse>(SubmitStep, r =>
 	{
 		r.ShouldBeValid();
 		r.Id.Should().NotBeNullOrEmpty();
@@ -106,7 +106,7 @@ ORDER BY numberOfContributors DESC";
 		r.IsRunning.Should().BeTrue();
 	});
 
-	[I] public async Task SqlSearchStatusResponse() => await Assert<SqlGetAsyncStatusResponse>(StatusStep, r =>
+	[I] public async Task SqlSearchStatusResponse() => await Assert<GetAsyncStatusResponse>(StatusStep, r =>
 	{
 		r.ShouldBeValid();
 		r.Id.Should().NotBeNullOrEmpty();
@@ -126,7 +126,7 @@ ORDER BY numberOfContributors DESC";
 		r.ExpirationTimeInMillis.Should().BeGreaterThan(0);
 	});
 
-	[I] public async Task SqlGetResponse() => await Assert<SqlGetAsyncResponse>(GetStep, r =>
+	[I] public async Task SqlGetResponse() => await Assert<GetAsyncResponse>(GetStep, r =>
 	{
 		r.ShouldBeValid();
 		r.IsPartial.Should().BeFalse();
@@ -151,7 +151,7 @@ ORDER BY numberOfContributors DESC";
 		}
 	});
 
-	[I] public async Task SqlDeleteResponse() => await Assert<SqlDeleteAsyncResponse>(DeleteStep, r =>
+	[I] public async Task SqlDeleteResponse() => await Assert<DeleteAsyncResponse>(DeleteStep, r =>
 	{
 		r.ShouldBeValid();
 		r.Acknowledged.Should().BeTrue();

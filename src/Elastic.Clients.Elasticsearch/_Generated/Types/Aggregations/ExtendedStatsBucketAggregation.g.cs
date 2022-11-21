@@ -133,7 +133,7 @@ internal sealed class ExtendedStatsBucketAggregationConverter : JsonConverter<Ex
 }
 
 [JsonConverter(typeof(ExtendedStatsBucketAggregationConverter))]
-public sealed partial class ExtendedStatsBucketAggregation : Aggregation
+public sealed partial class ExtendedStatsBucketAggregation : SearchAggregation
 {
 	public ExtendedStatsBucketAggregation(string name) => Name = name;
 	internal ExtendedStatsBucketAggregation()

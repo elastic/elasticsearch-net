@@ -22,7 +22,7 @@ public class ReadOnlyIndexNameDictionaryTests : SerializerTestBase
 
 		var stream = WrapInStream(json);
 
-		var response = _requestResponseSerializer.Deserialize<SimplifiedClusterHealthResponse>(stream);
+		var response = _requestResponseSerializer.Deserialize<SimplifiedHealthResponse>(stream);
 
 		response.Indices.Should()
 			.NotBeEmpty()
@@ -36,7 +36,7 @@ public class ReadOnlyIndexNameDictionaryTests : SerializerTestBase
 			.And.ContainKey(Inferrer.IndexName<Developer>());
 	}
 
-	private class SimplifiedClusterHealthResponse
+	private class SimplifiedHealthResponse
 	{
 		[JsonInclude]
 		[JsonPropertyName("indices")]
@@ -55,7 +55,7 @@ public class ReadOnlyIndexNameDictionaryTests : SerializerTestBase
 
 		var stream = WrapInStream(json);
 
-		var response = _requestResponseSerializer.Deserialize<SimplifiedClusterHealthResponse>(stream);
+		var response = _requestResponseSerializer.Deserialize<SimplifiedHealthResponse>(stream);
 
 		response.IndicesTwo.HasValue.Should().BeTrue();
 #pragma warning disable CS8629 // Nullable value type may be null.

@@ -133,7 +133,7 @@ internal sealed class MatrixStatsAggregationConverter : JsonConverter<MatrixStat
 }
 
 [JsonConverter(typeof(MatrixStatsAggregationConverter))]
-public sealed partial class MatrixStatsAggregation : Aggregation
+public sealed partial class MatrixStatsAggregation : SearchAggregation
 {
 	public MatrixStatsAggregation(string name) => Name = name;
 	internal MatrixStatsAggregation()

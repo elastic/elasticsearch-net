@@ -4,7 +4,7 @@
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public abstract partial class Query
+public abstract partial class SearchQuery
 {
 	//[JsonIgnore]
 	//public bool IsWritable => throw new NotImplementedException();
@@ -22,10 +22,10 @@ public abstract partial class Query
 	//bool IQuery.Conditionless => Conditionless;
 
 	//always evaluate to false so that each side of && equation is evaluated
-	public static bool operator false(Query a) => false;
+	public static bool operator false(SearchQuery a) => false;
 
 	//always evaluate to false so that each side of && equation is evaluated
-	public static bool operator true(Query a) => false;
+	public static bool operator true(SearchQuery a) => false;
 
 	//public static QueryBase operator &(QueryBase leftQuery, QueryBase rightQuery) => Combine(leftQuery, rightQuery, (l, r) => l && r);
 
@@ -33,18 +33,18 @@ public abstract partial class Query
 
 	//public static QueryBase operator !(QueryBase query) => query == null || !query.IsWritable
 	//	? null
-	//	: new BoolQuery { MustNot = new QueryContainer[] { query } };
+	//	: new BoolQuery { MustNot = new Query[] { query } };
 
 	//public static QueryBase operator +(QueryBase query) => query == null || !query.IsWritable
 	//	? null
-	//	: new BoolQuery { Filter = new QueryContainer[] { query } };
+	//	: new BoolQuery { Filter = new Query[] { query } };
 
-	//private static QueryBase Combine(QueryBase leftQuery, QueryBase rightQuery, Func<QueryContainer, QueryContainer, QueryContainer> combine)
+	//private static QueryBase Combine(QueryBase leftQuery, QueryBase rightQuery, Func<Query, Query, Query> combine)
 	//{
 	//	if (IfEitherIsEmptyReturnTheOtherOrEmpty(leftQuery, rightQuery, out var q))
 	//		return q;
 
-	//	IQueryContainer container = combine(leftQuery, rightQuery);
+	//	IQuery container = combine(leftQuery, rightQuery);
 	//	var query = container.Bool;
 	//	return new BoolQuery
 	//	{
@@ -73,13 +73,13 @@ public abstract partial class Query
 	//	return true;
 	//}
 
-	//public static implicit operator QueryContainer(QueryBase query) =>
-	//	query == null ? null : new QueryContainer(query);
+	//public static implicit operator Query(QueryBase query) =>
+	//	query == null ? null : new Query(query);
 
-	//internal void WrapInContainer(IQueryContainer container) => InternalWrapInContainer(container);
+	//internal void WrapInContainer(IQuery container) => InternalWrapInContainer(container);
 
 	////container.IsVerbatim = IsVerbatim;
 	////container.IsStrict = IsStrict;
 
-	//internal abstract void InternalWrapInContainer(IQueryContainer container);
+	//internal abstract void InternalWrapInContainer(IQuery container);
 }
