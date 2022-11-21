@@ -193,7 +193,7 @@ internal sealed class MatchBoolPrefixQueryConverter : JsonConverter<MatchBoolPre
 }
 
 [JsonConverter(typeof(MatchBoolPrefixQueryConverter))]
-public sealed partial class MatchBoolPrefixQuery : Query
+public sealed partial class MatchBoolPrefixQuery : SearchQuery
 {
 	public MatchBoolPrefixQuery(Field field)
 	{
@@ -226,7 +226,7 @@ public sealed partial class MatchBoolPrefixQuery : Query
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator QueryContainer(MatchBoolPrefixQuery matchBoolPrefixQuery) => QueryContainer.MatchBoolPrefix(matchBoolPrefixQuery);
+	public static implicit operator Query(MatchBoolPrefixQuery matchBoolPrefixQuery) => QueryDsl.Query.MatchBoolPrefix(matchBoolPrefixQuery);
 }
 
 public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : SerializableDescriptor<MatchBoolPrefixQueryDescriptor<TDocument>>

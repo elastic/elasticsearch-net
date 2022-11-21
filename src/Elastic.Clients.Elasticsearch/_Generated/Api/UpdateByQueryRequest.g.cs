@@ -213,7 +213,7 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 
 	[JsonInclude]
 	[JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("script")]
@@ -276,11 +276,11 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
@@ -294,7 +294,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
-	public UpdateByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+	public UpdateByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -302,7 +302,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public UpdateByQueryRequestDescriptor<TDocument> Query(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -310,7 +310,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public UpdateByQueryRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -371,7 +371,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -465,11 +465,11 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor QueryDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
@@ -483,7 +483,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
-	public UpdateByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+	public UpdateByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -491,7 +491,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
+	public UpdateByQueryRequestDescriptor Query(QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -499,7 +499,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public UpdateByQueryRequestDescriptor Query(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -560,7 +560,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{

@@ -58,7 +58,7 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 
 	[JsonInclude]
 	[JsonPropertyName("index_filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IndexFilter { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("string")]
@@ -93,11 +93,11 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IndexFilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> IndexFilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> IndexFilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
 
 	private bool? CaseInsensitiveValue { get; set; }
 
@@ -111,7 +111,7 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 
 	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
-	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? indexFilter)
+	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
 	{
 		IndexFilterDescriptor = null;
 		IndexFilterDescriptorAction = null;
@@ -119,7 +119,7 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public TermsEnumRequestDescriptor<TDocument> IndexFilter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public TermsEnumRequestDescriptor<TDocument> IndexFilter(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		IndexFilterValue = null;
 		IndexFilterDescriptorAction = null;
@@ -127,7 +127,7 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		IndexFilterValue = null;
 		IndexFilterDescriptor = null;
@@ -188,7 +188,7 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 		else if (IndexFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(IndexFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(IndexFilterDescriptorAction), options);
 		}
 		else if (IndexFilterValue is not null)
 		{
@@ -252,11 +252,11 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IndexFilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor IndexFilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor IndexFilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> IndexFilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> IndexFilterDescriptorAction { get; set; }
 
 	private bool? CaseInsensitiveValue { get; set; }
 
@@ -270,7 +270,7 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 
 	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
-	public TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? indexFilter)
+	public TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
 	{
 		IndexFilterDescriptor = null;
 		IndexFilterDescriptorAction = null;
@@ -278,7 +278,7 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 		return Self;
 	}
 
-	public TermsEnumRequestDescriptor IndexFilter(QueryDsl.QueryContainerDescriptor descriptor)
+	public TermsEnumRequestDescriptor IndexFilter(QueryDsl.QueryDescriptor descriptor)
 	{
 		IndexFilterValue = null;
 		IndexFilterDescriptorAction = null;
@@ -286,7 +286,7 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 		return Self;
 	}
 
-	public TermsEnumRequestDescriptor IndexFilter(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public TermsEnumRequestDescriptor IndexFilter(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		IndexFilterValue = null;
 		IndexFilterDescriptor = null;
@@ -353,7 +353,7 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 		else if (IndexFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(IndexFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(IndexFilterDescriptorAction), options);
 		}
 		else if (IndexFilterValue is not null)
 		{

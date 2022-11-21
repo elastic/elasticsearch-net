@@ -151,7 +151,7 @@ internal sealed class AverageAggregationConverter : JsonConverter<AverageAggrega
 }
 
 [JsonConverter(typeof(AverageAggregationConverter))]
-public sealed partial class AverageAggregation : Aggregation
+public sealed partial class AverageAggregation : SearchAggregation
 {
 	public AverageAggregation(string name, Field field) : this(name) => Field = field;
 	public AverageAggregation(string name) => Name = name;

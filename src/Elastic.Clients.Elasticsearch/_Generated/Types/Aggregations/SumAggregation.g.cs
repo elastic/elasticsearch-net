@@ -151,7 +151,7 @@ internal sealed class SumAggregationConverter : JsonConverter<SumAggregation>
 }
 
 [JsonConverter(typeof(SumAggregationConverter))]
-public sealed partial class SumAggregation : Aggregation
+public sealed partial class SumAggregation : SearchAggregation
 {
 	public SumAggregation(string name, Field field) : this(name) => Field = field;
 	public SumAggregation(string name) => Name = name;

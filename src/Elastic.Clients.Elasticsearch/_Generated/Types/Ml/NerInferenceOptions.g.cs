@@ -37,9 +37,9 @@ public sealed partial class NerInferenceOptions
 
 	[JsonInclude]
 	[JsonPropertyName("tokenization")]
-	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
-	public static implicit operator InferenceConfigCreateContainer(NerInferenceOptions nerInferenceOptions) => InferenceConfigCreateContainer.Ner(nerInferenceOptions);
+	public static implicit operator InferenceConfigCreate(NerInferenceOptions nerInferenceOptions) => Ml.InferenceConfigCreate.Ner(nerInferenceOptions);
 }
 
 public sealed partial class NerInferenceOptionsDescriptor : SerializableDescriptor<NerInferenceOptionsDescriptor>
@@ -53,11 +53,11 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 
 	private string? ResultsFieldValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
 
-	private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
+	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 
-	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
+	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	public NerInferenceOptionsDescriptor ClassificationLabels(ICollection<string>? classificationLabels)
 	{
@@ -71,7 +71,7 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public NerInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
+	public NerInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
 	{
 		TokenizationDescriptor = null;
 		TokenizationDescriptorAction = null;
@@ -79,7 +79,7 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public NerInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
+	public NerInferenceOptionsDescriptor Tokenization(TokenizationConfigDescriptor descriptor)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptorAction = null;
@@ -87,7 +87,7 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public NerInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
+	public NerInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigDescriptor> configure)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptor = null;
@@ -118,7 +118,7 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 		else if (TokenizationDescriptorAction is not null)
 		{
 			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new TokenizationConfigDescriptor(TokenizationDescriptorAction), options);
 		}
 		else if (TokenizationValue is not null)
 		{

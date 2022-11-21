@@ -90,7 +90,7 @@ internal sealed class TermsQueryConverter : JsonConverter<TermsQuery>
 }
 
 [JsonConverter(typeof(TermsQueryConverter))]
-public sealed partial class TermsQuery : Query
+public sealed partial class TermsQuery : SearchQuery
 {
 	public string? QueryName { get; set; }
 
@@ -100,7 +100,7 @@ public sealed partial class TermsQuery : Query
 
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Terms { get; set; }
 
-	public static implicit operator QueryContainer(TermsQuery termsQuery) => QueryContainer.Terms(termsQuery);
+	public static implicit operator Query(TermsQuery termsQuery) => QueryDsl.Query.Terms(termsQuery);
 }
 
 public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescriptor<TermsQueryDescriptor<TDocument>>

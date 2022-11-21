@@ -23,16 +23,13 @@ namespace Tests.Search.Count
 		protected override int ExpectStatusCode => 200;
 
 		protected override Action<CountRequestDescriptor<Project>> Fluent => c => c
-			.Query(QueryContainer.Match(new MatchQuery("name")
-			{
-				Query = "NEST"
-			}));
+			.Query(q => q.Match(m => m.Field(f => f.Name).Query("NEST")));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override CountRequest<Project> Initializer => new()
 		{
-			Query = QueryContainer.Match(new MatchQuery("name")
+			Query = Query.Match(new MatchQuery("name")
 			{
 				Query = "NEST"
 			})
@@ -63,16 +60,13 @@ namespace Tests.Search.Count
 
 		protected override Action<CountRequestDescriptor> Fluent => c => c
 			.Indices("project")
-			.Query(QueryContainer.Match(new MatchQuery("name")
-			{
-				Query = "NEST"
-			}));
+			.Query(q => q.Match(m => m.Field(Infer.Field<Project>(f => f.Name)).Query("NEST")));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override CountRequest<Project> Initializer => new()
 		{
-			Query = QueryContainer.Match(new MatchQuery("name")
+			Query = Query.Match(new MatchQuery("name")
 			{
 				Query = "NEST"
 			})
@@ -101,17 +95,14 @@ namespace Tests.Search.Count
 
 		protected override int ExpectStatusCode => 200;
 
-		protected override Action<CountRequestDescriptor<Project>> Fluent => c => c
-			.Query(q => q
-				.Match(m => m
-					.Field(f => f.Name)
-					.Query("NEST")));
+		protected override Action<CountRequestDescriptor<Project>> Fluent => c =>
+			c.Query(q => q.Match(m => m.Field(f => f.Name).Query("NEST")));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override CountRequest<Project> Initializer => new()
 		{
-			Query = QueryContainer.Match(new MatchQuery("name")
+			Query = Query.Match(new MatchQuery("name")
 			{
 				Query = "NEST"
 			})

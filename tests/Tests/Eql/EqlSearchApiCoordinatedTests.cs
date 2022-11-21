@@ -46,8 +46,8 @@ namespace Tests.Eql
 				)
 			},
 			{StatusStep, u =>
-				u.Calls<EqlGetStatusRequestDescriptor, EqlGetStatusRequest, EqlGetStatusResponse>(
-					v => new EqlGetStatusRequest(v),
+				u.Calls<GetEqlStatusRequestDescriptor, GetEqlStatusRequest, GetEqlStatusResponse>(
+					v => new GetEqlStatusRequest(v),
 					(v, d) => d,
 					(v, c, f) => c.Eql.GetStatus(v, f),
 					(v, c, f) => c.Eql.GetStatusAsync(v, f),
@@ -70,8 +70,8 @@ namespace Tests.Eql
 				}
 			})}, // allows the search to complete
 			{GetStep, u =>
-				u.Calls<GetEqlRequestDescriptor, GetEqlRequest, GetEqlResponse<Log>>(
-					v => new GetEqlRequest(v),
+				u.Calls<EqlGetRequestDescriptor, EqlGetRequest, EqlGetResponse<Log>>(
+					v => new EqlGetRequest(v),
 					(v, d) => d,
 					(v, c, f) => c.Eql.Get<Log>(v, f),
 					(v, c, f) => c.Eql.GetAsync<Log>(v, f),
@@ -81,8 +81,8 @@ namespace Tests.Eql
 				)
 			},
 			{DeleteStep, u =>
-				u.Calls<DeleteEqlRequestDescriptor, DeleteEqlRequest, DeleteEqlResponse>(
-					v => new DeleteEqlRequest(v),
+				u.Calls<EqlDeleteRequestDescriptor, EqlDeleteRequest, EqlDeleteResponse>(
+					v => new EqlDeleteRequest(v),
 					(v, d) => d,
 					(v, c, f) => c.Eql.Delete(v, f),
 					(v, c, f) => c.Eql.DeleteAsync(v, f),
@@ -102,7 +102,7 @@ namespace Tests.Eql
 			r.TimedOut.Should().BeFalse();
 		});
 		
-		[I] public async Task EqlSearchStatusResponse() => await Assert<EqlGetStatusResponse>(StatusStep, r =>
+		[I] public async Task EqlSearchStatusResponse() => await Assert<GetEqlStatusResponse>(StatusStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Id.Should().NotBeNullOrEmpty();
@@ -124,7 +124,7 @@ namespace Tests.Eql
 			}
 		});	
 
-		[I] public async Task EqlGetResponse() => await Assert<GetEqlResponse<Log>>(GetStep, r =>
+		[I] public async Task EqlGetResponse() => await Assert<EqlGetResponse<Log>>(GetStep, r =>
 		{
 			r.ShouldBeValid();
 			r.IsPartial.Should().BeFalse();
@@ -141,7 +141,7 @@ namespace Tests.Eql
 			firstEvent.Source.Event.Category.Should().BeOneOf(Log.EventCategories);
 		});
 
-		[I] public async Task EqlDeleteResponse() => await Assert<DeleteEqlResponse>(DeleteStep, r =>
+		[I] public async Task EqlDeleteResponse() => await Assert<EqlDeleteResponse>(DeleteStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Acknowledged.Should().BeTrue();

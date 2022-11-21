@@ -83,9 +83,9 @@ namespace PlaygroundV7x
 //			{
 //				From = 10,
 //				Size = 20,
-//				Query = new QueryContainer(new MatchAllQuery()),
+//				Query = new Query(new MatchAllQuery()),
 //				Aggregations = aggs,
-//				PostFilter = new QueryContainer(new TermQuery
+//				PostFilter = new Query(new TermQuery
 //				{
 //					Field = "state",
 //					Value = "Stable"
@@ -174,17 +174,17 @@ namespace PlaygroundV7x
 //			thing = Query<Person>.Bool(TestBoolQuery);
 
 //			var matchQueryOne = Query<Person>.Match(m => m.Field(f => f.FirstName).Query("Steve"));
-//			var matchQueryTwo = new QueryContainer(new MatchQuery() { Field = Infer.Field<Person>(f => f.FirstName), Query = "Steve" });
-//			var matchQueryThree = new QueryContainerDescriptor<Person>().Match(m => m.Field(f => f.FirstName).Query("Steve"));
+//			var matchQueryTwo = new Query(new MatchQuery() { Field = Infer.Field<Person>(f => f.FirstName), Query = "Steve" });
+//			var matchQueryThree = new QueryDescriptor<Person>().Match(m => m.Field(f => f.FirstName).Query("Steve"));
 
 
 //			//var a = client.IndexMany<Person>(new Person[0] { }, a => a.)
 
-//			var matchAll = new QueryContainer(new MatchAllQuery() { Name = "test_query", IsVerbatim = true });
+//			var matchAll = new Query(new MatchAllQuery() { Name = "test_query", IsVerbatim = true });
 //			//var filter = Query<Person>.Bool(b => b.Filter(f => f.Match(m => m.Field(fld => fld.FirstName).Query("Steve").Name("test_match"))));
-//			var boolQuery = new QueryContainer(new BoolQuery() { Filter = new[] { new QueryContainer(new MatchQuery() { Name = "test_match", Field = "firstName", Query = "Steve" }) } });
+//			var boolQuery = new Query(new BoolQuery() { Filter = new[] { new Query(new MatchQuery() { Name = "test_match", Field = "firstName", Query = "Steve" }) } });
 
-//			var spanQuery = new QueryContainer(new SpanContainingQuery()
+//			var spanQuery = new Query(new SpanContainingQuery()
 //			{
 //				Big = new SpanQuery()
 //				{
@@ -202,7 +202,7 @@ namespace PlaygroundV7x
 //				}
 //			});
 
-//			spanQuery = new QueryContainer(new SpanNearQuery()
+//			spanQuery = new Query(new SpanNearQuery()
 //			{
 //				Clauses = new[] { new SpanQuery() { SpanGap = new SpanGapQuery() { Field = "test", Width = 10 } } }
 //			});
