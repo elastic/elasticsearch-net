@@ -8,7 +8,7 @@ using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Transport;
 using Moq;
 using Playground;
-using CreateIndexResponse = Elastic.Clients.Elasticsearch.IndexManagement.CreateResponse;
+using CreateIndexResponse = Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse;
 
 // const string IndexName = "stock-demo-v1";
 

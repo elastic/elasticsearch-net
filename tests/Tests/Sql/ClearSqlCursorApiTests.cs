@@ -12,7 +12,7 @@ using Elastic.Clients.Elasticsearch.Sql;
 namespace Tests.Sql.ClearSqlCursor;
 
 public class ClearSqlCursorApiTests
-	: ApiIntegrationTestBase<ReadOnlyCluster, SqlClearCursorResponse, SqlClearCursorRequestDescriptor, SqlClearCursorRequest>
+	: ApiIntegrationTestBase<ReadOnlyCluster, ClearCursorResponse, ClearCursorRequestDescriptor, ClearCursorRequest>
 {
 	private static readonly string SqlQuery =
 		$@"SELECT type, name, startedOn, numberOfCommits
@@ -29,11 +29,11 @@ ORDER BY numberOfContributors DESC";
 	protected override object ExpectJson => new { cursor = _currentCursor };
 	protected override int ExpectStatusCode => 200;
 
-	protected override Action<SqlClearCursorRequestDescriptor> Fluent => d => d.Cursor(_currentCursor);
+	protected override Action<ClearCursorRequestDescriptor> Fluent => d => d.Cursor(_currentCursor);
 
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-	protected override SqlClearCursorRequest Initializer => new()
+	protected override ClearCursorRequest Initializer => new()
 	{
 		Cursor = _currentCursor,
 	};
@@ -56,6 +56,6 @@ ORDER BY numberOfContributors DESC";
 		_currentCursor = sqlQueryResponse.Cursor ?? _currentCursor;
 	}
 
-	protected override void ExpectResponse(SqlClearCursorResponse response) =>
+	protected override void ExpectResponse(ClearCursorResponse response) =>
 		response.Succeeded.Should().BeTrue("succeeded property on response");
 }

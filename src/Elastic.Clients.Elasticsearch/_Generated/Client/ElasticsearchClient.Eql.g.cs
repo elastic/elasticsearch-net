@@ -34,62 +34,146 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	{
 	}
 
-	public virtual DeleteEqlResponse Delete(DeleteEqlRequest request)
+	public virtual EqlDeleteResponse Delete(EqlDeleteRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteEqlRequest, DeleteEqlResponse, DeleteEqlRequestParameters>(request);
+		return DoRequest<EqlDeleteRequest, EqlDeleteResponse, EqlDeleteRequestParameters>(request);
 	}
 
-	public virtual Task<DeleteEqlResponse> DeleteAsync(DeleteEqlRequest request, CancellationToken cancellationToken = default)
+	public virtual Task<EqlDeleteResponse> DeleteAsync(EqlDeleteRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteEqlRequest, DeleteEqlResponse, DeleteEqlRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<EqlDeleteRequest, EqlDeleteResponse, EqlDeleteRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual DeleteEqlResponse Delete(Elastic.Clients.Elasticsearch.Id id)
+	public virtual EqlDeleteResponse Delete(Elastic.Clients.Elasticsearch.Id id)
 	{
-		var descriptor = new DeleteEqlRequestDescriptor(id);
+		var descriptor = new EqlDeleteRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteEqlRequestDescriptor, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
+		return DoRequest<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
 	}
 
-	public virtual DeleteEqlResponse Delete(Elastic.Clients.Elasticsearch.Id id, Action<DeleteEqlRequestDescriptor> configureRequest)
+	public virtual EqlDeleteResponse Delete(Elastic.Clients.Elasticsearch.Id id, Action<EqlDeleteRequestDescriptor> configureRequest)
 	{
-		var descriptor = new DeleteEqlRequestDescriptor(id);
+		var descriptor = new EqlDeleteRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteEqlRequestDescriptor, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
+		return DoRequest<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
 	}
 
-	public virtual DeleteEqlResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteEqlRequestDescriptor<TDocument>> configureRequest)
+	public virtual EqlDeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<EqlDeleteRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new DeleteEqlRequestDescriptor<TDocument>(id);
+		var descriptor = new EqlDeleteRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
+		return DoRequest<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
 	}
 
-	public virtual Task<DeleteEqlResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	public virtual Task<EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteEqlRequestDescriptor(id);
+		var descriptor = new EqlDeleteRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteEqlRequestDescriptor, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
+		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
 	}
 
-	public virtual Task<DeleteEqlResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteEqlRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, Action<EqlDeleteRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteEqlRequestDescriptor(id);
+		var descriptor = new EqlDeleteRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteEqlRequestDescriptor, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
+		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
 	}
 
-	public virtual Task<DeleteEqlResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteEqlRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<EqlDeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<EqlDeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteEqlRequestDescriptor<TDocument>(id);
+		var descriptor = new EqlDeleteRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlResponse, DeleteEqlRequestParameters>(descriptor);
+		return DoRequestAsync<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
+	}
+
+	public virtual EqlGetResponse<TEvent> Get<TEvent>(EqlGetRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<EqlGetRequest, EqlGetResponse<TEvent>, EqlGetRequestParameters>(request);
+	}
+
+	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(EqlGetRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<EqlGetRequest, EqlGetResponse<TEvent>, EqlGetRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual EqlGetResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new EqlGetRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor);
+	}
+
+	public virtual EqlGetResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetRequestDescriptor> configureRequest)
+	{
+		var descriptor = new EqlGetRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor);
+	}
+
+	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new EqlGetRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor);
+	}
+
+	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new EqlGetRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor);
+	}
+
+	public virtual EqlSearchResponse<TEvent> Search<TEvent>(EqlSearchRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<EqlSearchRequest, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(request);
+	}
+
+	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(EqlSearchRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<EqlSearchRequest, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var descriptor = new EqlSearchRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequest<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
+	}
+
+	public virtual EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor> configureRequest)
+	{
+		var descriptor = new EqlSearchRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
+	}
+
+	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new EqlSearchRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
+	}
+
+	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new EqlSearchRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
 	}
 
 	public virtual EqlGetStatusResponse GetStatus(EqlGetStatusRequest request)
@@ -148,89 +232,5 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusResponse, EqlGetStatusRequestParameters>(descriptor);
-	}
-
-	public virtual EqlSearchResponse<TEvent> Search<TEvent>(EqlSearchRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<EqlSearchRequest, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(request);
-	}
-
-	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(EqlSearchRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequest, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices)
-	{
-		var descriptor = new EqlSearchRequestDescriptor(indices);
-		descriptor.BeforeRequest();
-		return DoRequest<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
-	}
-
-	public virtual EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor> configureRequest)
-	{
-		var descriptor = new EqlSearchRequestDescriptor(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
-	}
-
-	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlSearchRequestDescriptor(indices);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
-	}
-
-	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlSearchRequestDescriptor(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
-	}
-
-	public virtual GetEqlResponse<TEvent> Get<TEvent>(GetEqlRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetEqlRequest, GetEqlResponse<TEvent>, GetEqlRequestParameters>(request);
-	}
-
-	public virtual Task<GetEqlResponse<TEvent>> GetAsync<TEvent>(GetEqlRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetEqlRequest, GetEqlResponse<TEvent>, GetEqlRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual GetEqlResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new GetEqlRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetEqlRequestDescriptor, GetEqlResponse<TEvent>, GetEqlRequestParameters>(descriptor);
-	}
-
-	public virtual GetEqlResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetEqlRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetEqlRequestDescriptor, GetEqlResponse<TEvent>, GetEqlRequestParameters>(descriptor);
-	}
-
-	public virtual Task<GetEqlResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetEqlRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlRequestDescriptor, GetEqlResponse<TEvent>, GetEqlRequestParameters>(descriptor);
-	}
-
-	public virtual Task<GetEqlResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetEqlRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlRequestDescriptor, GetEqlResponse<TEvent>, GetEqlRequestParameters>(descriptor);
 	}
 }
