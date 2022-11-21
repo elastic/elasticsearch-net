@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class SimpleQueryStringQuery : Query
+public sealed partial class SimpleQueryStringQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -87,7 +87,7 @@ public sealed partial class SimpleQueryStringQuery : Query
 	[JsonPropertyName("quote_field_suffix")]
 	public string? QuoteFieldSuffix { get; set; }
 
-	public static implicit operator QueryContainer(SimpleQueryStringQuery simpleQueryStringQuery) => QueryContainer.SimpleQueryString(simpleQueryStringQuery);
+	public static implicit operator Query(SimpleQueryStringQuery simpleQueryStringQuery) => QueryDsl.Query.SimpleQueryString(simpleQueryStringQuery);
 }
 
 public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : SerializableDescriptor<SimpleQueryStringQueryDescriptor<TDocument>>

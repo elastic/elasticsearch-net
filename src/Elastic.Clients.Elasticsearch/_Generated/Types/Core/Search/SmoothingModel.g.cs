@@ -25,10 +25,10 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
-[JsonConverter(typeof(SmoothingModelContainerConverter))]
-public sealed partial class SmoothingModelContainer
+[JsonConverter(typeof(SmoothingModelConverter))]
+public sealed partial class SmoothingModel
 {
-	internal SmoothingModelContainer(string variantName, object variant)
+	internal SmoothingModel(string variantName, object variant)
 	{
 		if (variantName is null)
 			throw new ArgumentNullException(nameof(variantName));
@@ -44,14 +44,14 @@ public sealed partial class SmoothingModelContainer
 
 	internal string VariantName { get; }
 
-	public static SmoothingModelContainer Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel laplaceSmoothingModel) => new SmoothingModelContainer("laplace", laplaceSmoothingModel);
-	public static SmoothingModelContainer LinearInterpolation(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => new SmoothingModelContainer("linear_interpolation", linearInterpolationSmoothingModel);
-	public static SmoothingModelContainer StupidBackoff(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => new SmoothingModelContainer("stupid_backoff", stupidBackoffSmoothingModel);
+	public static SmoothingModel Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel laplaceSmoothingModel) => new SmoothingModel("laplace", laplaceSmoothingModel);
+	public static SmoothingModel LinearInterpolation(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => new SmoothingModel("linear_interpolation", linearInterpolationSmoothingModel);
+	public static SmoothingModel StupidBackoff(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => new SmoothingModel("stupid_backoff", stupidBackoffSmoothingModel);
 }
 
-internal sealed class SmoothingModelContainerConverter : JsonConverter<SmoothingModelContainer>
+internal sealed class SmoothingModelConverter : JsonConverter<SmoothingModel>
 {
-	public override SmoothingModelContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override SmoothingModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
 		{
@@ -70,27 +70,27 @@ internal sealed class SmoothingModelContainerConverter : JsonConverter<Smoothing
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel?>(ref reader, options);
 			reader.Read();
-			return new SmoothingModelContainer(propertyName, variant);
+			return new SmoothingModel(propertyName, variant);
 		}
 
 		if (propertyName == "linear_interpolation")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel?>(ref reader, options);
 			reader.Read();
-			return new SmoothingModelContainer(propertyName, variant);
+			return new SmoothingModel(propertyName, variant);
 		}
 
 		if (propertyName == "stupid_backoff")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel?>(ref reader, options);
 			reader.Read();
-			return new SmoothingModelContainer(propertyName, variant);
+			return new SmoothingModel(propertyName, variant);
 		}
 
 		throw new JsonException();
 	}
 
-	public override void Write(Utf8JsonWriter writer, SmoothingModelContainer value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, SmoothingModel value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName(value.VariantName);
@@ -111,10 +111,10 @@ internal sealed class SmoothingModelContainerConverter : JsonConverter<Smoothing
 	}
 }
 
-public sealed partial class SmoothingModelContainerDescriptor<TDocument> : SerializableDescriptor<SmoothingModelContainerDescriptor<TDocument>>
+public sealed partial class SmoothingModelDescriptor<TDocument> : SerializableDescriptor<SmoothingModelDescriptor<TDocument>>
 {
-	internal SmoothingModelContainerDescriptor(Action<SmoothingModelContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
-	public SmoothingModelContainerDescriptor() : base()
+	internal SmoothingModelDescriptor(Action<SmoothingModelDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public SmoothingModelDescriptor() : base()
 	{
 	}
 
@@ -126,7 +126,7 @@ public sealed partial class SmoothingModelContainerDescriptor<TDocument> : Seria
 
 	private Descriptor Descriptor { get; set; }
 
-	private SmoothingModelContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
+	private SmoothingModelDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
 		where T : Descriptor
 	{
 		ContainedVariantName = variantName;
@@ -137,7 +137,7 @@ public sealed partial class SmoothingModelContainerDescriptor<TDocument> : Seria
 		return Self;
 	}
 
-	private SmoothingModelContainerDescriptor<TDocument> Set(object variant, string variantName)
+	private SmoothingModelDescriptor<TDocument> Set(object variant, string variantName)
 	{
 		Variant = variant;
 		ContainedVariantName = variantName;
@@ -145,12 +145,12 @@ public sealed partial class SmoothingModelContainerDescriptor<TDocument> : Seria
 		return Self;
 	}
 
-	public SmoothingModelContainerDescriptor<TDocument> Laplace(LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
-	public SmoothingModelContainerDescriptor<TDocument> Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-	public SmoothingModelContainerDescriptor<TDocument> LinearInterpolation(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
-	public SmoothingModelContainerDescriptor<TDocument> LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-	public SmoothingModelContainerDescriptor<TDocument> StupidBackoff(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
-	public SmoothingModelContainerDescriptor<TDocument> StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
+	public SmoothingModelDescriptor<TDocument> Laplace(LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
+	public SmoothingModelDescriptor<TDocument> Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
+	public SmoothingModelDescriptor<TDocument> LinearInterpolation(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
+	public SmoothingModelDescriptor<TDocument> LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
+	public SmoothingModelDescriptor<TDocument> StupidBackoff(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
+	public SmoothingModelDescriptor<TDocument> StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -173,10 +173,10 @@ public sealed partial class SmoothingModelContainerDescriptor<TDocument> : Seria
 	}
 }
 
-public sealed partial class SmoothingModelContainerDescriptor : SerializableDescriptor<SmoothingModelContainerDescriptor>
+public sealed partial class SmoothingModelDescriptor : SerializableDescriptor<SmoothingModelDescriptor>
 {
-	internal SmoothingModelContainerDescriptor(Action<SmoothingModelContainerDescriptor> configure) => configure.Invoke(this);
-	public SmoothingModelContainerDescriptor() : base()
+	internal SmoothingModelDescriptor(Action<SmoothingModelDescriptor> configure) => configure.Invoke(this);
+	public SmoothingModelDescriptor() : base()
 	{
 	}
 
@@ -188,7 +188,7 @@ public sealed partial class SmoothingModelContainerDescriptor : SerializableDesc
 
 	private Descriptor Descriptor { get; set; }
 
-	private SmoothingModelContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
+	private SmoothingModelDescriptor Set<T>(Action<T> descriptorAction, string variantName)
 		where T : Descriptor
 	{
 		ContainedVariantName = variantName;
@@ -199,7 +199,7 @@ public sealed partial class SmoothingModelContainerDescriptor : SerializableDesc
 		return Self;
 	}
 
-	private SmoothingModelContainerDescriptor Set(object variant, string variantName)
+	private SmoothingModelDescriptor Set(object variant, string variantName)
 	{
 		Variant = variant;
 		ContainedVariantName = variantName;
@@ -207,12 +207,12 @@ public sealed partial class SmoothingModelContainerDescriptor : SerializableDesc
 		return Self;
 	}
 
-	public SmoothingModelContainerDescriptor Laplace(LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
-	public SmoothingModelContainerDescriptor Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-	public SmoothingModelContainerDescriptor LinearInterpolation(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
-	public SmoothingModelContainerDescriptor LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-	public SmoothingModelContainerDescriptor StupidBackoff(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
-	public SmoothingModelContainerDescriptor StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
+	public SmoothingModelDescriptor Laplace(LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
+	public SmoothingModelDescriptor Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
+	public SmoothingModelDescriptor LinearInterpolation(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
+	public SmoothingModelDescriptor LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
+	public SmoothingModelDescriptor StupidBackoff(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
+	public SmoothingModelDescriptor StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

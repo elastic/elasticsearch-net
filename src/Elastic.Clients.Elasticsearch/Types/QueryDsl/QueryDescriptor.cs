@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class QueryContainerDescriptor<TDocument>
+public sealed partial class QueryDescriptor<TDocument>
 {
 	public void MatchAll() =>
 		Set<MatchAllQueryDescriptor>(_ => { }, "match_all");
@@ -16,15 +16,10 @@ public sealed partial class QueryContainerDescriptor<TDocument>
 		Term(t => t.Field(field).Value(FieldValue.Composite(value)).Boost(boost));
 }
 
-public sealed partial class QueryContainerDescriptor/*<TDocument>*/
+public sealed partial class QueryDescriptor
 {
 	public void MatchAll() =>
 		Set<MatchAllQueryDescriptor>(_ => { }, "match_all");
-
-	// TODO - NAME IS MISSING
-
-	//public void Term<TDocument, TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null, string name = null) =>
-	//	Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
 
 	public void Term<TDocument, TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null) =>
 			Term(t => t.Field(field).Value(FieldValue.Composite(value)).Boost(boost));

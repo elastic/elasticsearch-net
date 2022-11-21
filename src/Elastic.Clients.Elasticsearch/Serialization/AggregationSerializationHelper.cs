@@ -7,24 +7,24 @@ using Elastic.Clients.Elasticsearch.Aggregations;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
-internal static class AggregationContainerSerializationHelper
+internal static class AggregationSerializationHelper
 {
-	public static AggregationContainer ReadContainer<T>(ref Utf8JsonReader reader, JsonSerializerOptions options) where T : Aggregation
+	public static Aggregation ReadContainer<T>(ref Utf8JsonReader reader, JsonSerializerOptions options) where T : SearchAggregation
 	{
 		var variant = JsonSerializer.Deserialize<T?>(ref reader, options);
 
-		var container = new AggregationContainer(variant);
+		var container = new Aggregation(variant);
 
 		return container;
 	}
 
-	public static AggregationContainer ReadContainer<T>(string variantName, ref Utf8JsonReader reader, JsonSerializerOptions options) where T : Aggregation
+	public static Aggregation ReadContainer<T>(string variantName, ref Utf8JsonReader reader, JsonSerializerOptions options) where T : SearchAggregation
 	{
 		var variant = JsonSerializer.Deserialize<T>(ref reader, options);
 
-		var container = new AggregationContainer(variant);
+		var container = new Aggregation(variant);
 
-		if (container.Variant is Aggregation agg)
+		if (container.Variant is SearchAggregation agg)
 			agg.Name = variantName;
 
 		return container;

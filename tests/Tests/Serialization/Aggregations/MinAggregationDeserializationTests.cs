@@ -15,7 +15,7 @@ public class MinAggregationDeserializationTests : SerializerTestBase
 
 		var stream = WrapInStream(json);
 
-		var aggregationContainer = _requestResponseSerializer.Deserialize<AggregationContainer>(stream);
+		var aggregationContainer = _requestResponseSerializer.Deserialize<Aggregation>(stream);
 				
 		//aggregationContainer.Meta.Should().HaveCount(3);
 

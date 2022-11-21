@@ -7,17 +7,17 @@ using System.Text.Json;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public partial class AggregationContainer
+public partial class Aggregation
 {
 	internal string ContainedVariantName { get; set; }
 
 	internal Action<Utf8JsonWriter, JsonSerializerOptions> SerializeFluent { get; private set; }
 
-	private AggregationContainer(string variant) => ContainedVariantName = variant;
+	private Aggregation(string variant) => ContainedVariantName = variant;
 
-	internal static AggregationContainer CreateWithAction<T>(string variantName, Action<T> configure) where T : new()
+	internal static Aggregation CreateWithAction<T>(string variantName, Action<T> configure) where T : new()
 	{
-		var container = new AggregationContainer(variantName);
+		var container = new Aggregation(variantName);
 		container.SetAction(configure);
 		return container;
 	}
@@ -30,6 +30,6 @@ public partial class AggregationContainer
 				JsonSerializer.Serialize(writer, descriptor, options);
 			};
 
-	public static implicit operator AggregationContainer(Aggregation aggregator) =>
-		aggregator == null ? null : new AggregationContainer(aggregator);
+	public static implicit operator Aggregation(SearchAggregation aggregator) =>
+		aggregator == null ? null : new Aggregation(aggregator);
 }

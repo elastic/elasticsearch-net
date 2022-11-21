@@ -197,7 +197,7 @@ internal sealed class DateRangeQueryConverter : JsonConverter<DateRangeQuery>
 }
 
 [JsonConverter(typeof(DateRangeQueryConverter))]
-public sealed partial class DateRangeQuery : Query
+public sealed partial class DateRangeQuery : SearchQuery
 {
 	public DateRangeQuery(Field field)
 	{
@@ -230,7 +230,7 @@ public sealed partial class DateRangeQuery : Query
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator QueryContainer(DateRangeQuery dateRangeQuery) => QueryContainer.Range(new RangeQuery(dateRangeQuery));
+	public static implicit operator Query(DateRangeQuery dateRangeQuery) => QueryDsl.Query.Range(new RangeQuery(dateRangeQuery));
 }
 
 public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDescriptor<DateRangeQueryDescriptor<TDocument>>

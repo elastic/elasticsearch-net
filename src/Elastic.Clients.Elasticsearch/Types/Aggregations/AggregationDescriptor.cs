@@ -6,11 +6,11 @@ using System.Text.Json;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public partial class AggregationContainerDescriptor<TDocument>
+public partial class AggregationDescriptor<TDocument>
 {
 	internal AggregationDictionary Aggregations { get; set; }
 
-	private AggregationContainerDescriptor<TDocument> SetContainer(string key, AggregationContainer container)
+	private AggregationDescriptor<TDocument> SetContainer(string key, Aggregation container)
 	{
 		if (Self.Aggregations == null)
 			Self.Aggregations = new AggregationDictionary();
@@ -23,11 +23,11 @@ public partial class AggregationContainerDescriptor<TDocument>
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => JsonSerializer.Serialize(writer, Aggregations, options);
 }
 
-public partial class AggregationContainerDescriptor
+public partial class AggregationDescriptor
 {
 	internal AggregationDictionary Aggregations { get; set; }
 
-	private AggregationContainerDescriptor SetContainer(string key, AggregationContainer container)
+	private AggregationDescriptor SetContainer(string key, Aggregation container)
 	{
 		if (Self.Aggregations == null)
 			Self.Aggregations = new AggregationDictionary();

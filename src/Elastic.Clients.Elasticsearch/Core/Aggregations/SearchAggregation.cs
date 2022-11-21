@@ -5,7 +5,7 @@
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 // This is marked as internal for now, until we are ready to support plugin aggregations.
-internal interface IAggregation
+internal interface ISearchAggregation
 {
 	string? Name { get; }
 }
@@ -13,18 +13,18 @@ internal interface IAggregation
 /// <summary>
 /// Base class for all aggregations.
 /// </summary>
-public abstract class Aggregation : IAggregation
+public abstract class SearchAggregation : ISearchAggregation
 {
-	internal Aggregation() { }
+	internal SearchAggregation() { }
 
 	public abstract string? Name { get; internal set; }
 
 	//always evaluate to false so that each side of && equation is evaluated
-	public static bool operator false(Aggregation _) => false;
+	public static bool operator false(SearchAggregation _) => false;
 
 	//always evaluate to false so that each side of && equation is evaluated
-	public static bool operator true(Aggregation _) => false;
+	public static bool operator true(SearchAggregation _) => false;
 
-	public static Aggregation operator &(Aggregation left, Aggregation right) =>
+	public static SearchAggregation operator &(SearchAggregation left, SearchAggregation right) =>
 		new AggregationCombinator(null, left, right);
 }

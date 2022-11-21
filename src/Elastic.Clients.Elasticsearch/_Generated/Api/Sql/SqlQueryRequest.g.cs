@@ -54,7 +54,7 @@ public sealed partial class SqlQueryRequest : PlainRequest<SqlQueryRequestParame
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("query")]
@@ -111,11 +111,11 @@ public sealed partial class SqlQueryRequestDescriptor<TDocument> : RequestDescri
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
 	internal override HttpMethod HttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 
 	private string? CatalogValue { get; set; }
 
@@ -147,7 +147,7 @@ public sealed partial class SqlQueryRequestDescriptor<TDocument> : RequestDescri
 
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
-	public SqlQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+	public SqlQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -155,7 +155,7 @@ public sealed partial class SqlQueryRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	public SqlQueryRequestDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public SqlQueryRequestDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -163,7 +163,7 @@ public sealed partial class SqlQueryRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	public SqlQueryRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public SqlQueryRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -272,7 +272,7 @@ public sealed partial class SqlQueryRequestDescriptor<TDocument> : RequestDescri
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -384,11 +384,11 @@ public sealed partial class SqlQueryRequestDescriptor : RequestDescriptor<SqlQue
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
 	internal override HttpMethod HttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor FilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 
 	private string? CatalogValue { get; set; }
 
@@ -420,7 +420,7 @@ public sealed partial class SqlQueryRequestDescriptor : RequestDescriptor<SqlQue
 
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
-	public SqlQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+	public SqlQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -428,7 +428,7 @@ public sealed partial class SqlQueryRequestDescriptor : RequestDescriptor<SqlQue
 		return Self;
 	}
 
-	public SqlQueryRequestDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+	public SqlQueryRequestDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -436,7 +436,7 @@ public sealed partial class SqlQueryRequestDescriptor : RequestDescriptor<SqlQue
 		return Self;
 	}
 
-	public SqlQueryRequestDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public SqlQueryRequestDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -545,7 +545,7 @@ public sealed partial class SqlQueryRequestDescriptor : RequestDescriptor<SqlQue
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{

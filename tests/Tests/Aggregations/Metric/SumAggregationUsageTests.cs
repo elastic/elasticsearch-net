@@ -28,7 +28,7 @@ public class SumAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.Sum("commits_sum", sm => sm
 			.Field(p => p.NumberOfCommits)
 		);

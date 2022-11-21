@@ -17,7 +17,7 @@ public class CreateIndexSerializationTests : SerializerTestBase
 	public async Task CreateIndexWithAliases_SerializesCorrectly()
 	{
 		var alias1 = new Alias();
-		var alias2 = new Alias { Filter = QueryContainer.Term(new TermQuery("username") { Value = "stevegordon" }), Routing = "shard-1" };
+		var alias2 = new Alias { Filter = Query.Term(new TermQuery("username") { Value = "stevegordon" }), Routing = "shard-1" };
 
 		var descriptor = new CreateRequestDescriptor("test")
 			.Aliases(aliases => aliases

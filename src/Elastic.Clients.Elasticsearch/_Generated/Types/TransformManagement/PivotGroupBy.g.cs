@@ -25,10 +25,10 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
-[JsonConverter(typeof(PivotGroupByContainerConverter))]
-public sealed partial class PivotGroupByContainer
+[JsonConverter(typeof(PivotGroupByConverter))]
+public sealed partial class PivotGroupBy
 {
-	internal PivotGroupByContainer(string variantName, object variant)
+	internal PivotGroupBy(string variantName, object variant)
 	{
 		if (variantName is null)
 			throw new ArgumentNullException(nameof(variantName));
@@ -44,14 +44,14 @@ public sealed partial class PivotGroupByContainer
 
 	internal string VariantName { get; }
 
-	public static PivotGroupByContainer DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => new PivotGroupByContainer("date_histogram", dateHistogramAggregation);
-	public static PivotGroupByContainer Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => new PivotGroupByContainer("histogram", histogramAggregation);
-	public static PivotGroupByContainer Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new PivotGroupByContainer("terms", termsAggregation);
+	public static PivotGroupBy DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => new PivotGroupBy("date_histogram", dateHistogramAggregation);
+	public static PivotGroupBy Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => new PivotGroupBy("histogram", histogramAggregation);
+	public static PivotGroupBy Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new PivotGroupBy("terms", termsAggregation);
 }
 
-internal sealed class PivotGroupByContainerConverter : JsonConverter<PivotGroupByContainer>
+internal sealed class PivotGroupByConverter : JsonConverter<PivotGroupBy>
 {
-	public override PivotGroupByContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override PivotGroupBy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
 		{
@@ -70,27 +70,27 @@ internal sealed class PivotGroupByContainerConverter : JsonConverter<PivotGroupB
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
 			reader.Read();
-			return new PivotGroupByContainer(propertyName, variant);
+			return new PivotGroupBy(propertyName, variant);
 		}
 
 		if (propertyName == "histogram")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
 			reader.Read();
-			return new PivotGroupByContainer(propertyName, variant);
+			return new PivotGroupBy(propertyName, variant);
 		}
 
 		if (propertyName == "terms")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
 			reader.Read();
-			return new PivotGroupByContainer(propertyName, variant);
+			return new PivotGroupBy(propertyName, variant);
 		}
 
 		throw new JsonException();
 	}
 
-	public override void Write(Utf8JsonWriter writer, PivotGroupByContainer value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, PivotGroupBy value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName(value.VariantName);
@@ -111,10 +111,10 @@ internal sealed class PivotGroupByContainerConverter : JsonConverter<PivotGroupB
 	}
 }
 
-public sealed partial class PivotGroupByContainerDescriptor<TDocument> : SerializableDescriptor<PivotGroupByContainerDescriptor<TDocument>>
+public sealed partial class PivotGroupByDescriptor<TDocument> : SerializableDescriptor<PivotGroupByDescriptor<TDocument>>
 {
-	internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
-	public PivotGroupByContainerDescriptor() : base()
+	internal PivotGroupByDescriptor(Action<PivotGroupByDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public PivotGroupByDescriptor() : base()
 	{
 	}
 
@@ -126,7 +126,7 @@ public sealed partial class PivotGroupByContainerDescriptor<TDocument> : Seriali
 
 	private Descriptor Descriptor { get; set; }
 
-	private PivotGroupByContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
+	private PivotGroupByDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
 		where T : Descriptor
 	{
 		ContainedVariantName = variantName;
@@ -137,7 +137,7 @@ public sealed partial class PivotGroupByContainerDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	private PivotGroupByContainerDescriptor<TDocument> Set(object variant, string variantName)
+	private PivotGroupByDescriptor<TDocument> Set(object variant, string variantName)
 	{
 		Variant = variant;
 		ContainedVariantName = variantName;
@@ -145,12 +145,12 @@ public sealed partial class PivotGroupByContainerDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public PivotGroupByContainerDescriptor<TDocument> DateHistogram(Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
-	public PivotGroupByContainerDescriptor<TDocument> DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-	public PivotGroupByContainerDescriptor<TDocument> Histogram(Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
-	public PivotGroupByContainerDescriptor<TDocument> Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
-	public PivotGroupByContainerDescriptor<TDocument> Terms(Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
-	public PivotGroupByContainerDescriptor<TDocument> Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+	public PivotGroupByDescriptor<TDocument> DateHistogram(Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
+	public PivotGroupByDescriptor<TDocument> DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+	public PivotGroupByDescriptor<TDocument> Histogram(Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
+	public PivotGroupByDescriptor<TDocument> Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
+	public PivotGroupByDescriptor<TDocument> Terms(Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
+	public PivotGroupByDescriptor<TDocument> Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -173,10 +173,10 @@ public sealed partial class PivotGroupByContainerDescriptor<TDocument> : Seriali
 	}
 }
 
-public sealed partial class PivotGroupByContainerDescriptor : SerializableDescriptor<PivotGroupByContainerDescriptor>
+public sealed partial class PivotGroupByDescriptor : SerializableDescriptor<PivotGroupByDescriptor>
 {
-	internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor> configure) => configure.Invoke(this);
-	public PivotGroupByContainerDescriptor() : base()
+	internal PivotGroupByDescriptor(Action<PivotGroupByDescriptor> configure) => configure.Invoke(this);
+	public PivotGroupByDescriptor() : base()
 	{
 	}
 
@@ -188,7 +188,7 @@ public sealed partial class PivotGroupByContainerDescriptor : SerializableDescri
 
 	private Descriptor Descriptor { get; set; }
 
-	private PivotGroupByContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
+	private PivotGroupByDescriptor Set<T>(Action<T> descriptorAction, string variantName)
 		where T : Descriptor
 	{
 		ContainedVariantName = variantName;
@@ -199,7 +199,7 @@ public sealed partial class PivotGroupByContainerDescriptor : SerializableDescri
 		return Self;
 	}
 
-	private PivotGroupByContainerDescriptor Set(object variant, string variantName)
+	private PivotGroupByDescriptor Set(object variant, string variantName)
 	{
 		Variant = variant;
 		ContainedVariantName = variantName;
@@ -207,15 +207,15 @@ public sealed partial class PivotGroupByContainerDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public PivotGroupByContainerDescriptor DateHistogram(Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
-	public PivotGroupByContainerDescriptor DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
-	public PivotGroupByContainerDescriptor DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-	public PivotGroupByContainerDescriptor Histogram(Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
-	public PivotGroupByContainerDescriptor Histogram(Action<Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
-	public PivotGroupByContainerDescriptor Histogram<TDocument>(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
-	public PivotGroupByContainerDescriptor Terms(Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
-	public PivotGroupByContainerDescriptor Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
-	public PivotGroupByContainerDescriptor Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+	public PivotGroupByDescriptor DateHistogram(Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
+	public PivotGroupByDescriptor DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
+	public PivotGroupByDescriptor DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+	public PivotGroupByDescriptor Histogram(Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
+	public PivotGroupByDescriptor Histogram(Action<Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
+	public PivotGroupByDescriptor Histogram<TDocument>(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
+	public PivotGroupByDescriptor Terms(Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
+	public PivotGroupByDescriptor Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
+	public PivotGroupByDescriptor Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

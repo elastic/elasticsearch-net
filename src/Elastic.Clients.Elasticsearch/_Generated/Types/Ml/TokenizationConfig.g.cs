@@ -25,10 +25,10 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
-[JsonConverter(typeof(TokenizationConfigContainerConverter))]
-public sealed partial class TokenizationConfigContainer
+[JsonConverter(typeof(TokenizationConfigConverter))]
+public sealed partial class TokenizationConfig
 {
-	internal TokenizationConfigContainer(string variantName, object variant)
+	internal TokenizationConfig(string variantName, object variant)
 	{
 		if (variantName is null)
 			throw new ArgumentNullException(nameof(variantName));
@@ -44,14 +44,14 @@ public sealed partial class TokenizationConfigContainer
 
 	internal string VariantName { get; }
 
-	public static TokenizationConfigContainer Bert(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfigContainer("bert", nlpBertTokenizationConfig);
-	public static TokenizationConfigContainer Mpnet(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfigContainer("mpnet", nlpBertTokenizationConfig);
-	public static TokenizationConfigContainer Roberta(Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => new TokenizationConfigContainer("roberta", nlpRobertaTokenizationConfig);
+	public static TokenizationConfig Bert(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("bert", nlpBertTokenizationConfig);
+	public static TokenizationConfig Mpnet(Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("mpnet", nlpBertTokenizationConfig);
+	public static TokenizationConfig Roberta(Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => new TokenizationConfig("roberta", nlpRobertaTokenizationConfig);
 }
 
-internal sealed class TokenizationConfigContainerConverter : JsonConverter<TokenizationConfigContainer>
+internal sealed class TokenizationConfigConverter : JsonConverter<TokenizationConfig>
 {
-	public override TokenizationConfigContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override TokenizationConfig Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
 		{
@@ -70,27 +70,27 @@ internal sealed class TokenizationConfigContainerConverter : JsonConverter<Token
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig?>(ref reader, options);
 			reader.Read();
-			return new TokenizationConfigContainer(propertyName, variant);
+			return new TokenizationConfig(propertyName, variant);
 		}
 
 		if (propertyName == "mpnet")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig?>(ref reader, options);
 			reader.Read();
-			return new TokenizationConfigContainer(propertyName, variant);
+			return new TokenizationConfig(propertyName, variant);
 		}
 
 		if (propertyName == "roberta")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig?>(ref reader, options);
 			reader.Read();
-			return new TokenizationConfigContainer(propertyName, variant);
+			return new TokenizationConfig(propertyName, variant);
 		}
 
 		throw new JsonException();
 	}
 
-	public override void Write(Utf8JsonWriter writer, TokenizationConfigContainer value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, TokenizationConfig value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName(value.VariantName);
@@ -111,10 +111,10 @@ internal sealed class TokenizationConfigContainerConverter : JsonConverter<Token
 	}
 }
 
-public sealed partial class TokenizationConfigContainerDescriptor<TDocument> : SerializableDescriptor<TokenizationConfigContainerDescriptor<TDocument>>
+public sealed partial class TokenizationConfigDescriptor<TDocument> : SerializableDescriptor<TokenizationConfigDescriptor<TDocument>>
 {
-	internal TokenizationConfigContainerDescriptor(Action<TokenizationConfigContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
-	public TokenizationConfigContainerDescriptor() : base()
+	internal TokenizationConfigDescriptor(Action<TokenizationConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public TokenizationConfigDescriptor() : base()
 	{
 	}
 
@@ -126,7 +126,7 @@ public sealed partial class TokenizationConfigContainerDescriptor<TDocument> : S
 
 	private Descriptor Descriptor { get; set; }
 
-	private TokenizationConfigContainerDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
+	private TokenizationConfigDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
 		where T : Descriptor
 	{
 		ContainedVariantName = variantName;
@@ -137,7 +137,7 @@ public sealed partial class TokenizationConfigContainerDescriptor<TDocument> : S
 		return Self;
 	}
 
-	private TokenizationConfigContainerDescriptor<TDocument> Set(object variant, string variantName)
+	private TokenizationConfigDescriptor<TDocument> Set(object variant, string variantName)
 	{
 		Variant = variant;
 		ContainedVariantName = variantName;
@@ -145,12 +145,12 @@ public sealed partial class TokenizationConfigContainerDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public TokenizationConfigContainerDescriptor<TDocument> Bert(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert");
-	public TokenizationConfigContainerDescriptor<TDocument> Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-	public TokenizationConfigContainerDescriptor<TDocument> Mpnet(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "mpnet");
-	public TokenizationConfigContainerDescriptor<TDocument> Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
-	public TokenizationConfigContainerDescriptor<TDocument> Roberta(NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");
-	public TokenizationConfigContainerDescriptor<TDocument> Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
+	public TokenizationConfigDescriptor<TDocument> Bert(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert");
+	public TokenizationConfigDescriptor<TDocument> Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
+	public TokenizationConfigDescriptor<TDocument> Mpnet(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "mpnet");
+	public TokenizationConfigDescriptor<TDocument> Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
+	public TokenizationConfigDescriptor<TDocument> Roberta(NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");
+	public TokenizationConfigDescriptor<TDocument> Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -173,10 +173,10 @@ public sealed partial class TokenizationConfigContainerDescriptor<TDocument> : S
 	}
 }
 
-public sealed partial class TokenizationConfigContainerDescriptor : SerializableDescriptor<TokenizationConfigContainerDescriptor>
+public sealed partial class TokenizationConfigDescriptor : SerializableDescriptor<TokenizationConfigDescriptor>
 {
-	internal TokenizationConfigContainerDescriptor(Action<TokenizationConfigContainerDescriptor> configure) => configure.Invoke(this);
-	public TokenizationConfigContainerDescriptor() : base()
+	internal TokenizationConfigDescriptor(Action<TokenizationConfigDescriptor> configure) => configure.Invoke(this);
+	public TokenizationConfigDescriptor() : base()
 	{
 	}
 
@@ -188,7 +188,7 @@ public sealed partial class TokenizationConfigContainerDescriptor : Serializable
 
 	private Descriptor Descriptor { get; set; }
 
-	private TokenizationConfigContainerDescriptor Set<T>(Action<T> descriptorAction, string variantName)
+	private TokenizationConfigDescriptor Set<T>(Action<T> descriptorAction, string variantName)
 		where T : Descriptor
 	{
 		ContainedVariantName = variantName;
@@ -199,7 +199,7 @@ public sealed partial class TokenizationConfigContainerDescriptor : Serializable
 		return Self;
 	}
 
-	private TokenizationConfigContainerDescriptor Set(object variant, string variantName)
+	private TokenizationConfigDescriptor Set(object variant, string variantName)
 	{
 		Variant = variant;
 		ContainedVariantName = variantName;
@@ -207,12 +207,12 @@ public sealed partial class TokenizationConfigContainerDescriptor : Serializable
 		return Self;
 	}
 
-	public TokenizationConfigContainerDescriptor Bert(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert");
-	public TokenizationConfigContainerDescriptor Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
-	public TokenizationConfigContainerDescriptor Mpnet(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "mpnet");
-	public TokenizationConfigContainerDescriptor Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
-	public TokenizationConfigContainerDescriptor Roberta(NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");
-	public TokenizationConfigContainerDescriptor Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
+	public TokenizationConfigDescriptor Bert(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert");
+	public TokenizationConfigDescriptor Bert(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
+	public TokenizationConfigDescriptor Mpnet(NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "mpnet");
+	public TokenizationConfigDescriptor Mpnet(Action<NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
+	public TokenizationConfigDescriptor Roberta(NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");
+	public TokenizationConfigDescriptor Roberta(Action<NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

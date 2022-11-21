@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class QueryStringQuery : Query
+public sealed partial class QueryStringQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -135,7 +135,7 @@ public sealed partial class QueryStringQuery : Query
 	[JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 
-	public static implicit operator QueryContainer(QueryStringQuery queryStringQuery) => QueryContainer.QueryString(queryStringQuery);
+	public static implicit operator Query(QueryStringQuery queryStringQuery) => QueryDsl.Query.QueryString(queryStringQuery);
 }
 
 public sealed partial class QueryStringQueryDescriptor<TDocument> : SerializableDescriptor<QueryStringQueryDescriptor<TDocument>>
