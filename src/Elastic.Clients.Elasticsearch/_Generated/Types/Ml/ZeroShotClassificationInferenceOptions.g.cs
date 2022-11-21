@@ -49,9 +49,9 @@ public sealed partial class ZeroShotClassificationInferenceOptions
 
 	[JsonInclude]
 	[JsonPropertyName("tokenization")]
-	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
-	public static implicit operator InferenceConfigCreateContainer(ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => InferenceConfigCreateContainer.ZeroShotClassification(zeroShotClassificationInferenceOptions);
+	public static implicit operator InferenceConfigCreate(ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => Ml.InferenceConfigCreate.ZeroShotClassification(zeroShotClassificationInferenceOptions);
 }
 
 public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : SerializableDescriptor<ZeroShotClassificationInferenceOptionsDescriptor>
@@ -71,11 +71,11 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 
 	private string? ResultsFieldValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
 
-	private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
+	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 
-	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
+	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	public ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(ICollection<string> classificationLabels)
 	{
@@ -107,7 +107,7 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 		return Self;
 	}
 
-	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
+	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
 	{
 		TokenizationDescriptor = null;
 		TokenizationDescriptorAction = null;
@@ -115,7 +115,7 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 		return Self;
 	}
 
-	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
+	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(TokenizationConfigDescriptor descriptor)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptorAction = null;
@@ -123,7 +123,7 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 		return Self;
 	}
 
-	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
+	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigDescriptor> configure)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptor = null;
@@ -168,7 +168,7 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 		else if (TokenizationDescriptorAction is not null)
 		{
 			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new TokenizationConfigDescriptor(TokenizationDescriptorAction), options);
 		}
 		else if (TokenizationValue is not null)
 		{

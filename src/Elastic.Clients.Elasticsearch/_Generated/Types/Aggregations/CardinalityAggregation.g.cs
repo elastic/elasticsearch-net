@@ -187,7 +187,7 @@ internal sealed class CardinalityAggregationConverter : JsonConverter<Cardinalit
 }
 
 [JsonConverter(typeof(CardinalityAggregationConverter))]
-public sealed partial class CardinalityAggregation : Aggregation
+public sealed partial class CardinalityAggregation : SearchAggregation
 {
 	public CardinalityAggregation(string name, Field field) : this(name) => Field = field;
 	public CardinalityAggregation(string name) => Name = name;

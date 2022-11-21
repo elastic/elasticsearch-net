@@ -48,7 +48,7 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.Terms("states", st => st
 			.Field(p => p.State)
 			.MinDocCount(2)

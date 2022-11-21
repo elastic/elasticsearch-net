@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class RankFeatureQuery : Query
+public sealed partial class RankFeatureQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -55,7 +55,7 @@ public sealed partial class RankFeatureQuery : Query
 	[JsonPropertyName("sigmoid")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 
-	public static implicit operator QueryContainer(RankFeatureQuery rankFeatureQuery) => QueryContainer.RankFeature(rankFeatureQuery);
+	public static implicit operator Query(RankFeatureQuery rankFeatureQuery) => QueryDsl.Query.RankFeature(rankFeatureQuery);
 }
 
 public sealed partial class RankFeatureQueryDescriptor<TDocument> : SerializableDescriptor<RankFeatureQueryDescriptor<TDocument>>

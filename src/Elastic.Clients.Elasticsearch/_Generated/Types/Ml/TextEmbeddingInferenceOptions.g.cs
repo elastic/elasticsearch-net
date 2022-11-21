@@ -33,9 +33,9 @@ public sealed partial class TextEmbeddingInferenceOptions
 
 	[JsonInclude]
 	[JsonPropertyName("tokenization")]
-	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
-	public static implicit operator InferenceConfigCreateContainer(TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => InferenceConfigCreateContainer.TextEmbedding(textEmbeddingInferenceOptions);
+	public static implicit operator InferenceConfigCreate(TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => Ml.InferenceConfigCreate.TextEmbedding(textEmbeddingInferenceOptions);
 }
 
 public sealed partial class TextEmbeddingInferenceOptionsDescriptor : SerializableDescriptor<TextEmbeddingInferenceOptionsDescriptor>
@@ -47,11 +47,11 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 
 	private string? ResultsFieldValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
 
-	private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
+	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 
-	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
+	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	public TextEmbeddingInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -59,7 +59,7 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 		return Self;
 	}
 
-	public TextEmbeddingInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
+	public TextEmbeddingInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
 	{
 		TokenizationDescriptor = null;
 		TokenizationDescriptorAction = null;
@@ -67,7 +67,7 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 		return Self;
 	}
 
-	public TextEmbeddingInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
+	public TextEmbeddingInferenceOptionsDescriptor Tokenization(TokenizationConfigDescriptor descriptor)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptorAction = null;
@@ -75,7 +75,7 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 		return Self;
 	}
 
-	public TextEmbeddingInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
+	public TextEmbeddingInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigDescriptor> configure)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptor = null;
@@ -100,7 +100,7 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 		else if (TokenizationDescriptorAction is not null)
 		{
 			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new TokenizationConfigDescriptor(TokenizationDescriptorAction), options);
 		}
 		else if (TokenizationValue is not null)
 		{

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class PercolateQuery : Query
+public sealed partial class PercolateQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -71,7 +71,7 @@ public sealed partial class PercolateQuery : Query
 	[JsonPropertyName("version")]
 	public long? Version { get; set; }
 
-	public static implicit operator QueryContainer(PercolateQuery percolateQuery) => QueryContainer.Percolate(percolateQuery);
+	public static implicit operator Query(PercolateQuery percolateQuery) => QueryDsl.Query.Percolate(percolateQuery);
 }
 
 public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDescriptor<PercolateQueryDescriptor<TDocument>>

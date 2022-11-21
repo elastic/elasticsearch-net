@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class MultiMatchQuery : Query
+public sealed partial class MultiMatchQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -99,7 +99,7 @@ public sealed partial class MultiMatchQuery : Query
 	[JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
-	public static implicit operator QueryContainer(MultiMatchQuery multiMatchQuery) => QueryContainer.MultiMatch(multiMatchQuery);
+	public static implicit operator Query(MultiMatchQuery multiMatchQuery) => QueryDsl.Query.MultiMatch(multiMatchQuery);
 }
 
 public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableDescriptor<MultiMatchQueryDescriptor<TDocument>>

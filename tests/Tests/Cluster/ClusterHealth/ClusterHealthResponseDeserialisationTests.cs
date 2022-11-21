@@ -6,7 +6,7 @@ using Elastic.Clients.Elasticsearch.Cluster;
 
 namespace Tests.Cluster.ClusterHealth
 {
-	public class ClusterHealthResponseDeserialisationTests : SerialisationTestBase<ClusterHealthResponse>
+	public class HealthResponseDeserialisationTests : SerialisationTestBase<HealthResponse>
 	{
 		protected override string ResponseJson => @"{
   ""cluster_name"" : ""test-cluster"",
@@ -68,7 +68,7 @@ namespace Tests.Cluster.ClusterHealth
   }
 }";
 
-		protected override void Validate(ClusterHealthResponse response)
+		protected override void Validate(HealthResponse response)
 		{
 			response.ClusterName.Should().Be("test-cluster");
 			response.Status.Should().Be(HealthStatus.Green);

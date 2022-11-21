@@ -240,7 +240,7 @@ internal sealed class HistogramAggregationConverter : JsonConverter<HistogramAgg
 }
 
 [JsonConverter(typeof(HistogramAggregationConverter))]
-public sealed partial class HistogramAggregation : Aggregation
+public sealed partial class HistogramAggregation : SearchAggregation
 {
 	public HistogramAggregation(string name) => Name = name;
 	internal HistogramAggregation()
@@ -280,9 +280,9 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
 
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
@@ -310,7 +310,7 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public HistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
+	public HistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptorAction = null;
@@ -318,7 +318,7 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public HistogramAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
+	public HistogramAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
@@ -454,7 +454,7 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		else if (AggregationsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
 		}
 		else if (AggregationsValue is not null)
 		{
@@ -475,9 +475,9 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
 
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
@@ -505,7 +505,7 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public HistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+	public HistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptorAction = null;
@@ -513,7 +513,7 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public HistogramAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+	public HistogramAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
@@ -655,7 +655,7 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		else if (AggregationsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
 		}
 		else if (AggregationsValue is not null)
 		{
