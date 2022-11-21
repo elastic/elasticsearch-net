@@ -31,9 +31,9 @@ public partial class CountRequestDescriptor
 		return Self;
 	}
 
-	public CountRequestDescriptor Query(Func<QueryContainerDescriptor, QueryContainer> configure)
+	public CountRequestDescriptor Query(Func<QueryDescriptor, Query> configure)
 	{
-		var container = configure?.Invoke(new QueryContainerDescriptor());
+		var container = configure?.Invoke(new QueryDescriptor());
 		QueryValue = container;
 		return Self;
 	}

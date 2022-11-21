@@ -47,7 +47,7 @@ public sealed partial class NlpRobertaTokenizationConfig
 	[JsonPropertyName("with_special_tokens")]
 	public bool? WithSpecialTokens { get; set; }
 
-	public static implicit operator TokenizationConfigContainer(NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => TokenizationConfigContainer.Roberta(nlpRobertaTokenizationConfig);
+	public static implicit operator TokenizationConfig(NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Ml.TokenizationConfig.Roberta(nlpRobertaTokenizationConfig);
 }
 
 public sealed partial class NlpRobertaTokenizationConfigDescriptor : SerializableDescriptor<NlpRobertaTokenizationConfigDescriptor>

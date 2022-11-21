@@ -28,7 +28,7 @@ public class ValueCountAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 		}
 	};
 
-	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.ValueCount("commit_count", c => c
 			.Field(p => p.NumberOfCommits)
 		);

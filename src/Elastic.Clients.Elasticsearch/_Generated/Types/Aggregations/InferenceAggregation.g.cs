@@ -67,7 +67,7 @@ internal sealed class InferenceAggregationConverter : JsonConverter<InferenceAgg
 				if (reader.ValueTextEquals("inference_config"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.InferenceConfig = value;
@@ -147,7 +147,7 @@ internal sealed class InferenceAggregationConverter : JsonConverter<InferenceAgg
 }
 
 [JsonConverter(typeof(InferenceAggregationConverter))]
-public sealed partial class InferenceAggregation : Aggregation
+public sealed partial class InferenceAggregation : SearchAggregation
 {
 	public InferenceAggregation(string name) => Name = name;
 	internal InferenceAggregation()
@@ -158,7 +158,7 @@ public sealed partial class InferenceAggregation : Aggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
-	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfig { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfig { get; set; }
 
 	public Dictionary<string, object>? Meta { get; set; }
 
@@ -174,11 +174,11 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfigValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
 
-	private InferenceConfigContainerDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
+	private InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
 
-	private Action<InferenceConfigContainerDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
+	private Action<InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
 
 	private string? FormatValue { get; set; }
 
@@ -188,7 +188,7 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 
 	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
 
-	public InferenceAggregationDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? inferenceConfig)
+	public InferenceAggregationDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? inferenceConfig)
 	{
 		InferenceConfigDescriptor = null;
 		InferenceConfigDescriptorAction = null;
@@ -196,7 +196,7 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public InferenceAggregationDescriptor<TDocument> InferenceConfig(InferenceConfigContainerDescriptor<TDocument> descriptor)
+	public InferenceAggregationDescriptor<TDocument> InferenceConfig(InferenceConfigDescriptor<TDocument> descriptor)
 	{
 		InferenceConfigValue = null;
 		InferenceConfigDescriptorAction = null;
@@ -204,7 +204,7 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public InferenceAggregationDescriptor<TDocument> InferenceConfig(Action<InferenceConfigContainerDescriptor<TDocument>> configure)
+	public InferenceAggregationDescriptor<TDocument> InferenceConfig(Action<InferenceConfigDescriptor<TDocument>> configure)
 	{
 		InferenceConfigValue = null;
 		InferenceConfigDescriptor = null;
@@ -249,7 +249,7 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 		else if (InferenceConfigDescriptorAction is not null)
 		{
 			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new InferenceConfigContainerDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new InferenceConfigDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
 		}
 		else if (InferenceConfigValue is not null)
 		{
@@ -289,11 +289,11 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfigValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
 
-	private InferenceConfigContainerDescriptor InferenceConfigDescriptor { get; set; }
+	private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
 
-	private Action<InferenceConfigContainerDescriptor> InferenceConfigDescriptorAction { get; set; }
+	private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
 
 	private string? FormatValue { get; set; }
 
@@ -303,7 +303,7 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 
 	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
 
-	public InferenceAggregationDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? inferenceConfig)
+	public InferenceAggregationDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? inferenceConfig)
 	{
 		InferenceConfigDescriptor = null;
 		InferenceConfigDescriptorAction = null;
@@ -311,7 +311,7 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public InferenceAggregationDescriptor InferenceConfig(InferenceConfigContainerDescriptor descriptor)
+	public InferenceAggregationDescriptor InferenceConfig(InferenceConfigDescriptor descriptor)
 	{
 		InferenceConfigValue = null;
 		InferenceConfigDescriptorAction = null;
@@ -319,7 +319,7 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public InferenceAggregationDescriptor InferenceConfig(Action<InferenceConfigContainerDescriptor> configure)
+	public InferenceAggregationDescriptor InferenceConfig(Action<InferenceConfigDescriptor> configure)
 	{
 		InferenceConfigValue = null;
 		InferenceConfigDescriptor = null;
@@ -364,7 +364,7 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 		else if (InferenceConfigDescriptorAction is not null)
 		{
 			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new InferenceConfigContainerDescriptor(InferenceConfigDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
 		}
 		else if (InferenceConfigValue is not null)
 		{

@@ -133,7 +133,7 @@ internal sealed class MatchPhraseQueryConverter : JsonConverter<MatchPhraseQuery
 }
 
 [JsonConverter(typeof(MatchPhraseQueryConverter))]
-public sealed partial class MatchPhraseQuery : Query
+public sealed partial class MatchPhraseQuery : SearchQuery
 {
 	public MatchPhraseQuery(Field field)
 	{
@@ -156,7 +156,7 @@ public sealed partial class MatchPhraseQuery : Query
 
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator QueryContainer(MatchPhraseQuery matchPhraseQuery) => QueryContainer.MatchPhrase(matchPhraseQuery);
+	public static implicit operator Query(MatchPhraseQuery matchPhraseQuery) => QueryDsl.Query.MatchPhrase(matchPhraseQuery);
 }
 
 public sealed partial class MatchPhraseQueryDescriptor<TDocument> : SerializableDescriptor<MatchPhraseQueryDescriptor<TDocument>>

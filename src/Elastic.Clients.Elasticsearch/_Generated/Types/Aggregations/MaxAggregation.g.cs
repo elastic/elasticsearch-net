@@ -151,7 +151,7 @@ internal sealed class MaxAggregationConverter : JsonConverter<MaxAggregation>
 }
 
 [JsonConverter(typeof(MaxAggregationConverter))]
-public sealed partial class MaxAggregation : Aggregation
+public sealed partial class MaxAggregation : SearchAggregation
 {
 	public MaxAggregation(string name, Field field) : this(name) => Field = field;
 	public MaxAggregation(string name) => Name = name;

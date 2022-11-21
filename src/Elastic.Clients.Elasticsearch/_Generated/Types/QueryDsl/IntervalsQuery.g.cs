@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [JsonConverter(typeof(IntervalsQueryConverter))]
-public sealed partial class IntervalsQuery : Query
+public sealed partial class IntervalsQuery : SearchQuery
 {
 	internal object Variant { get; }
 
@@ -65,7 +65,7 @@ public sealed partial class IntervalsQuery : Query
 	[JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator QueryContainer(IntervalsQuery intervalsQuery) => QueryContainer.Intervals(intervalsQuery);
+	public static implicit operator Query(IntervalsQuery intervalsQuery) => QueryDsl.Query.Intervals(intervalsQuery);
 }
 
 internal sealed class IntervalsQueryConverter : JsonConverter<IntervalsQuery>

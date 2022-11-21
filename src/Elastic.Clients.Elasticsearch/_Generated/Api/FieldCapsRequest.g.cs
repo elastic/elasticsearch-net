@@ -87,7 +87,7 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 
 	[JsonInclude]
 	[JsonPropertyName("index_filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IndexFilter { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("runtime_mappings")]
@@ -117,15 +117,15 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IndexFilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> IndexFilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> IndexFilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
 
 	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
-	public FieldCapsRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? indexFilter)
+	public FieldCapsRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
 	{
 		IndexFilterDescriptor = null;
 		IndexFilterDescriptorAction = null;
@@ -133,7 +133,7 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public FieldCapsRequestDescriptor<TDocument> IndexFilter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public FieldCapsRequestDescriptor<TDocument> IndexFilter(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		IndexFilterValue = null;
 		IndexFilterDescriptorAction = null;
@@ -141,7 +141,7 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public FieldCapsRequestDescriptor<TDocument> IndexFilter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public FieldCapsRequestDescriptor<TDocument> IndexFilter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		IndexFilterValue = null;
 		IndexFilterDescriptor = null;
@@ -166,7 +166,7 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 		else if (IndexFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(IndexFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(IndexFilterDescriptorAction), options);
 		}
 		else if (IndexFilterValue is not null)
 		{
@@ -207,15 +207,15 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IndexFilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor IndexFilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor IndexFilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> IndexFilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> IndexFilterDescriptorAction { get; set; }
 
 	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
-	public FieldCapsRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? indexFilter)
+	public FieldCapsRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
 	{
 		IndexFilterDescriptor = null;
 		IndexFilterDescriptorAction = null;
@@ -223,7 +223,7 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 		return Self;
 	}
 
-	public FieldCapsRequestDescriptor IndexFilter(QueryDsl.QueryContainerDescriptor descriptor)
+	public FieldCapsRequestDescriptor IndexFilter(QueryDsl.QueryDescriptor descriptor)
 	{
 		IndexFilterValue = null;
 		IndexFilterDescriptorAction = null;
@@ -231,7 +231,7 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 		return Self;
 	}
 
-	public FieldCapsRequestDescriptor IndexFilter(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public FieldCapsRequestDescriptor IndexFilter(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		IndexFilterValue = null;
 		IndexFilterDescriptor = null;
@@ -256,7 +256,7 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 		else if (IndexFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(IndexFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(IndexFilterDescriptorAction), options);
 		}
 		else if (IndexFilterValue is not null)
 		{

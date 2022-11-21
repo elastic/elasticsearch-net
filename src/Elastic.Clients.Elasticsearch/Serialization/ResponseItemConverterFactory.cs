@@ -11,11 +11,11 @@ using Elastic.Clients.Elasticsearch.Core.MGet;
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
 /// <summary>
-/// A converter factory able to provide a converter to handle (de)serializing <see cref="ResponseItem{TDocument}"/>.
+/// A converter factory able to provide a converter to handle (de)serializing <see cref="MultiGetResponseItem{TDocument}"/>.
 /// </summary>
 internal sealed class ResponseItemConverterFactory : JsonConverterFactory
 {
-	public override bool CanConvert(Type typeToConvert) => typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(ResponseItem<>);
+	public override bool CanConvert(Type typeToConvert) => typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(MultiGetResponseItem<>);
 
 	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
 	{
@@ -25,9 +25,9 @@ internal sealed class ResponseItemConverterFactory : JsonConverterFactory
 			typeof(ResponseItemConverter<>).MakeGenericType(documentType));
 	}
 
-	private sealed class ResponseItemConverter<TDocument> : JsonConverter<ResponseItem<TDocument>>
+	private sealed class ResponseItemConverter<TDocument> : JsonConverter<MultiGetResponseItem<TDocument>>
 	{
-		public override ResponseItem<TDocument>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override MultiGetResponseItem<TDocument>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			const string exceptionMessage = "Unable to deserialize union.";
 			var readerCopy = reader;
@@ -46,7 +46,7 @@ internal sealed class ResponseItemConverterFactory : JsonConverterFactory
 				if (result is not null && result.Version is not null)
 				{
 					reader = readerCopy; // Ensure we swap the reader to reflect the data we have consumed.
-					return new ResponseItem<TDocument>(result);
+					return new MultiGetResponseItem<TDocument>(result);
 				}
 			}
 			catch (Exception ex)
@@ -60,7 +60,7 @@ internal sealed class ResponseItemConverterFactory : JsonConverterFactory
 
 				if (result is not null && result.Error is not null)
 				{
-					return new ResponseItem<TDocument>(result);
+					return new MultiGetResponseItem<TDocument>(result);
 				}
 			}
 			catch (Exception ex)
@@ -92,7 +92,7 @@ internal sealed class ResponseItemConverterFactory : JsonConverterFactory
 		}
 
 		// Not implemented as this type is read-only on responses.
-		public override void Write(Utf8JsonWriter writer, ResponseItem<TDocument> value, JsonSerializerOptions options) =>
-			throw new NotImplementedException("We never expect to serialize an instance of ResponseItem<TDocument> as its a read-only response type.");
+		public override void Write(Utf8JsonWriter writer, MultiGetResponseItem<TDocument> value, JsonSerializerOptions options) =>
+			throw new NotImplementedException("We never expect to serialize an instance of MultiGetResponseItem<TDocument> as its a read-only response type.");
 	}
 }

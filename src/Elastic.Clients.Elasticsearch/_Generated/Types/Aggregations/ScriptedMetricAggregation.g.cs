@@ -223,7 +223,7 @@ internal sealed class ScriptedMetricAggregationConverter : JsonConverter<Scripte
 }
 
 [JsonConverter(typeof(ScriptedMetricAggregationConverter))]
-public sealed partial class ScriptedMetricAggregation : Aggregation
+public sealed partial class ScriptedMetricAggregation : SearchAggregation
 {
 	public ScriptedMetricAggregation(string name, Field field) : this(name) => Field = field;
 	public ScriptedMetricAggregation(string name) => Name = name;

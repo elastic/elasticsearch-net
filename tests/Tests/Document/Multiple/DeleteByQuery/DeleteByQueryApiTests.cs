@@ -52,7 +52,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		{
 			IgnoreUnavailable = true,
 			MaxDocs = Project.Projects.Count,
-			Query = QueryContainer.Ids(new IdsQuery
+			Query = Query.Ids(new IdsQuery
 			{
 				Values = new Ids(new[] { Project.First.Name, "x" })
 			})
@@ -175,7 +175,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override DeleteByQueryRequest Initializer => new(CallIsolatedValue)
 		{
-			Query = QueryContainer.Match(new MatchQuery(Infer.Field<Project>(p => p.Description))
+			Query = Query.Match(new MatchQuery(Infer.Field<Project>(p => p.Description))
 			{
 				Query = "description"
 			})
@@ -255,7 +255,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				Id = 0,
 				Max = 2
 			},
-			Query = QueryContainer.Terms(new TermsQuery()
+			Query = Query.Terms(new TermsQuery()
 			{
 				Field = Infer.Field<Project>(p => p.Name),
 				Terms = new TermsQueryField(FirstTenProjectNames)
