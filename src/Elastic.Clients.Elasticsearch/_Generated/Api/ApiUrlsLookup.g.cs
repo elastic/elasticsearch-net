@@ -35,7 +35,7 @@ internal static class ApiUrlsLookups
 	internal static ApiUrls EqlDelete = new ApiUrls(new[] { "/_eql/search/{id}" });
 	internal static ApiUrls EqlGet = new ApiUrls(new[] { "/_eql/search/{id}" });
 	internal static ApiUrls EqlSearch = new ApiUrls(new[] { "/{index}/_eql/search" });
-	internal static ApiUrls GetEqlStatus = new ApiUrls(new[] { "/_eql/search/status/{id}" });
+	internal static ApiUrls EqlGetStatus = new ApiUrls(new[] { "/_eql/search/status/{id}" });
 	internal static ApiUrls NoNamespaceExists = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 	internal static ApiUrls NoNamespaceExistsSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
 	internal static ApiUrls NoNamespaceExplain = new ApiUrls(new[] { "/{index}/_explain/{id}" });
