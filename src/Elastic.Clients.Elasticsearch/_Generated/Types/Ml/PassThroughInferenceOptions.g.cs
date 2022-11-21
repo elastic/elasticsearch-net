@@ -33,9 +33,9 @@ public sealed partial class PassThroughInferenceOptions
 
 	[JsonInclude]
 	[JsonPropertyName("tokenization")]
-	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? Tokenization { get; set; }
+	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
-	public static implicit operator InferenceConfigCreateContainer(PassThroughInferenceOptions passThroughInferenceOptions) => InferenceConfigCreateContainer.PassThrough(passThroughInferenceOptions);
+	public static implicit operator InferenceConfigCreate(PassThroughInferenceOptions passThroughInferenceOptions) => Ml.InferenceConfigCreate.PassThrough(passThroughInferenceOptions);
 }
 
 public sealed partial class PassThroughInferenceOptionsDescriptor : SerializableDescriptor<PassThroughInferenceOptionsDescriptor>
@@ -47,11 +47,11 @@ public sealed partial class PassThroughInferenceOptionsDescriptor : Serializable
 
 	private string? ResultsFieldValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? TokenizationValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
 
-	private TokenizationConfigContainerDescriptor TokenizationDescriptor { get; set; }
+	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 
-	private Action<TokenizationConfigContainerDescriptor> TokenizationDescriptorAction { get; set; }
+	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	public PassThroughInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -59,7 +59,7 @@ public sealed partial class PassThroughInferenceOptionsDescriptor : Serializable
 		return Self;
 	}
 
-	public PassThroughInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfigContainer? tokenization)
+	public PassThroughInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
 	{
 		TokenizationDescriptor = null;
 		TokenizationDescriptorAction = null;
@@ -67,7 +67,7 @@ public sealed partial class PassThroughInferenceOptionsDescriptor : Serializable
 		return Self;
 	}
 
-	public PassThroughInferenceOptionsDescriptor Tokenization(TokenizationConfigContainerDescriptor descriptor)
+	public PassThroughInferenceOptionsDescriptor Tokenization(TokenizationConfigDescriptor descriptor)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptorAction = null;
@@ -75,7 +75,7 @@ public sealed partial class PassThroughInferenceOptionsDescriptor : Serializable
 		return Self;
 	}
 
-	public PassThroughInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigContainerDescriptor> configure)
+	public PassThroughInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigDescriptor> configure)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptor = null;
@@ -100,7 +100,7 @@ public sealed partial class PassThroughInferenceOptionsDescriptor : Serializable
 		else if (TokenizationDescriptorAction is not null)
 		{
 			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, new TokenizationConfigContainerDescriptor(TokenizationDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new TokenizationConfigDescriptor(TokenizationDescriptorAction), options);
 		}
 		else if (TokenizationValue is not null)
 		{

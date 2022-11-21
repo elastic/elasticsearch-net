@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class MoreLikeThisQuery : Query
+public sealed partial class MoreLikeThisQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -112,7 +112,7 @@ public sealed partial class MoreLikeThisQuery : Query
 	[JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 
-	public static implicit operator QueryContainer(MoreLikeThisQuery moreLikeThisQuery) => QueryContainer.MoreLikeThis(moreLikeThisQuery);
+	public static implicit operator Query(MoreLikeThisQuery moreLikeThisQuery) => QueryDsl.Query.MoreLikeThis(moreLikeThisQuery);
 }
 
 public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : SerializableDescriptor<MoreLikeThisQueryDescriptor<TDocument>>

@@ -27,5 +27,5 @@ public sealed partial class MultiGetResponse<TDocument> : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("docs")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.ResponseItem<TDocument>> Docs { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> Docs { get; init; }
 }

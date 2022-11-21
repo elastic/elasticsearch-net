@@ -31,7 +31,7 @@ public sealed partial class StupidBackoffSmoothingModel
 	[JsonPropertyName("discount")]
 	public double Discount { get; set; }
 
-	public static implicit operator SmoothingModelContainer(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => SmoothingModelContainer.StupidBackoff(stupidBackoffSmoothingModel);
+	public static implicit operator SmoothingModel(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Core.Search.SmoothingModel.StupidBackoff(stupidBackoffSmoothingModel);
 }
 
 public sealed partial class StupidBackoffSmoothingModelDescriptor : SerializableDescriptor<StupidBackoffSmoothingModelDescriptor>

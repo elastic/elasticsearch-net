@@ -33,7 +33,7 @@ public sealed partial class IntervalsAllOf
 
 	[JsonInclude]
 	[JsonPropertyName("intervals")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> Intervals { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> Intervals { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("max_gaps")]
@@ -51,13 +51,13 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> IntervalsValue { get; set; }
 
-	private IntervalsContainerDescriptor<TDocument> IntervalsDescriptor { get; set; }
+	private IntervalsDescriptor<TDocument> IntervalsDescriptor { get; set; }
 
-	private Action<IntervalsContainerDescriptor<TDocument>> IntervalsDescriptorAction { get; set; }
+	private Action<IntervalsDescriptor<TDocument>> IntervalsDescriptorAction { get; set; }
 
-	private Action<IntervalsContainerDescriptor<TDocument>>[] IntervalsDescriptorActions { get; set; }
+	private Action<IntervalsDescriptor<TDocument>>[] IntervalsDescriptorActions { get; set; }
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
 
@@ -69,7 +69,7 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 
 	private bool? OrderedValue { get; set; }
 
-	public IntervalsAllOfDescriptor<TDocument> Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
+	public IntervalsAllOfDescriptor<TDocument> Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> intervals)
 	{
 		IntervalsDescriptor = null;
 		IntervalsDescriptorAction = null;
@@ -78,7 +78,7 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public IntervalsAllOfDescriptor<TDocument> Intervals(IntervalsContainerDescriptor<TDocument> descriptor)
+	public IntervalsAllOfDescriptor<TDocument> Intervals(IntervalsDescriptor<TDocument> descriptor)
 	{
 		IntervalsValue = null;
 		IntervalsDescriptorAction = null;
@@ -87,7 +87,7 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public IntervalsAllOfDescriptor<TDocument> Intervals(Action<IntervalsContainerDescriptor<TDocument>> configure)
+	public IntervalsAllOfDescriptor<TDocument> Intervals(Action<IntervalsDescriptor<TDocument>> configure)
 	{
 		IntervalsValue = null;
 		IntervalsDescriptor = null;
@@ -96,7 +96,7 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public IntervalsAllOfDescriptor<TDocument> Intervals(params Action<IntervalsContainerDescriptor<TDocument>>[] configure)
+	public IntervalsAllOfDescriptor<TDocument> Intervals(params Action<IntervalsDescriptor<TDocument>>[] configure)
 	{
 		IntervalsValue = null;
 		IntervalsDescriptor = null;
@@ -155,7 +155,7 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 		{
 			writer.WritePropertyName("intervals");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor<TDocument>(IntervalsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new IntervalsDescriptor<TDocument>(IntervalsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (IntervalsDescriptorActions is not null)
@@ -164,7 +164,7 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 			writer.WriteStartArray();
 			foreach (var action in IntervalsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new IntervalsDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -214,13 +214,13 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> IntervalsValue { get; set; }
 
-	private IntervalsContainerDescriptor IntervalsDescriptor { get; set; }
+	private IntervalsDescriptor IntervalsDescriptor { get; set; }
 
-	private Action<IntervalsContainerDescriptor> IntervalsDescriptorAction { get; set; }
+	private Action<IntervalsDescriptor> IntervalsDescriptorAction { get; set; }
 
-	private Action<IntervalsContainerDescriptor>[] IntervalsDescriptorActions { get; set; }
+	private Action<IntervalsDescriptor>[] IntervalsDescriptorActions { get; set; }
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
 
@@ -232,7 +232,7 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 
 	private bool? OrderedValue { get; set; }
 
-	public IntervalsAllOfDescriptor Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
+	public IntervalsAllOfDescriptor Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> intervals)
 	{
 		IntervalsDescriptor = null;
 		IntervalsDescriptorAction = null;
@@ -241,7 +241,7 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 		return Self;
 	}
 
-	public IntervalsAllOfDescriptor Intervals(IntervalsContainerDescriptor descriptor)
+	public IntervalsAllOfDescriptor Intervals(IntervalsDescriptor descriptor)
 	{
 		IntervalsValue = null;
 		IntervalsDescriptorAction = null;
@@ -250,7 +250,7 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 		return Self;
 	}
 
-	public IntervalsAllOfDescriptor Intervals(Action<IntervalsContainerDescriptor> configure)
+	public IntervalsAllOfDescriptor Intervals(Action<IntervalsDescriptor> configure)
 	{
 		IntervalsValue = null;
 		IntervalsDescriptor = null;
@@ -259,7 +259,7 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 		return Self;
 	}
 
-	public IntervalsAllOfDescriptor Intervals(params Action<IntervalsContainerDescriptor>[] configure)
+	public IntervalsAllOfDescriptor Intervals(params Action<IntervalsDescriptor>[] configure)
 	{
 		IntervalsValue = null;
 		IntervalsDescriptor = null;
@@ -318,7 +318,7 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 		{
 			writer.WritePropertyName("intervals");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor(IntervalsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new IntervalsDescriptor(IntervalsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (IntervalsDescriptorActions is not null)
@@ -327,7 +327,7 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 			writer.WriteStartArray();
 			foreach (var action in IntervalsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new IntervalsContainerDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new IntervalsDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

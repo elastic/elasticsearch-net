@@ -37,7 +37,7 @@ public abstract class AggregationUsageTestBase<TCluster>
 		.Query(QueryScope)
 		.Aggregations(FluentAggs);
 
-	protected abstract Action<AggregationContainerDescriptor<Project>> FluentAggs { get; }
+	protected abstract Action<AggregationDescriptor<Project>> FluentAggs { get; }
 
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 
@@ -51,7 +51,7 @@ public abstract class AggregationUsageTestBase<TCluster>
 
 	protected abstract AggregationDictionary InitializerAggs { get; }
 
-	protected virtual QueryContainer QueryScope { get; } = new TermQuery("type") { Value = Project.TypeName };
+	protected virtual Query QueryScope { get; } = new TermQuery("type") { Value = Project.TypeName };
 
 	protected virtual object QueryScopeJson { get; } = new { term = new { type = new { value = Project.TypeName } } };
 
