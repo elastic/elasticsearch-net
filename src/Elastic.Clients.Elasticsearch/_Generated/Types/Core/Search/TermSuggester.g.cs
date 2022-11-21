@@ -87,7 +87,7 @@ public sealed partial class TermSuggester
 	[JsonPropertyName("text")]
 	public string? Text { get; set; }
 
-	public static implicit operator FieldSuggester(TermSuggester termSuggester) => FieldSuggester.Term(termSuggester);
+	public static implicit operator FieldSuggester(TermSuggester termSuggester) => Core.Search.FieldSuggester.Term(termSuggester);
 }
 
 public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDescriptor<TermSuggesterDescriptor<TDocument>>

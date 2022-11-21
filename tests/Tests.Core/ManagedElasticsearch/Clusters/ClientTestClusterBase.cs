@@ -34,9 +34,9 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		protected sealed override void SeedCluster()
 		{
-			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = HealthStatus.Green });
+			Client.Cluster.Health(new HealthRequest { WaitForStatus = HealthStatus.Green });
 			SeedNode();
-			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = HealthStatus.Green });
+			Client.Cluster.Health(new HealthRequest { WaitForStatus = HealthStatus.Green });
 		}
 
 		protected virtual void SeedNode() { }

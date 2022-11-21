@@ -37,7 +37,7 @@ public sealed partial class KnnQuery
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filter { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("k")]
@@ -59,13 +59,13 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
 
 	private float? BoostValue { get; set; }
 
@@ -77,7 +77,7 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 
 	private ICollection<double> QueryVectorValue { get; set; }
 
-	public KnnQueryDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+	public KnnQueryDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -86,7 +86,7 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 		return Self;
 	}
 
-	public KnnQueryDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public KnnQueryDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -95,7 +95,7 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 		return Self;
 	}
 
-	public KnnQueryDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public KnnQueryDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -104,7 +104,7 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 		return Self;
 	}
 
-	public KnnQueryDescriptor<TDocument> Filter(params Action<QueryDsl.QueryContainerDescriptor<TDocument>>[] configure)
+	public KnnQueryDescriptor<TDocument> Filter(params Action<QueryDsl.QueryDescriptor<TDocument>>[] configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -163,7 +163,7 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 		{
 			writer.WritePropertyName("filter");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorActions is not null)
@@ -172,7 +172,7 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 			writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -208,13 +208,13 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor FilterDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor>[] FilterDescriptorActions { get; set; }
+	private Action<QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
 
 	private float? BoostValue { get; set; }
 
@@ -226,7 +226,7 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 
 	private ICollection<double> QueryVectorValue { get; set; }
 
-	public KnnQueryDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+	public KnnQueryDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -235,7 +235,7 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		return Self;
 	}
 
-	public KnnQueryDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+	public KnnQueryDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -244,7 +244,7 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		return Self;
 	}
 
-	public KnnQueryDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public KnnQueryDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -253,7 +253,7 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		return Self;
 	}
 
-	public KnnQueryDescriptor Filter(params Action<QueryDsl.QueryContainerDescriptor>[] configure)
+	public KnnQueryDescriptor Filter(params Action<QueryDsl.QueryDescriptor>[] configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -318,7 +318,7 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		{
 			writer.WritePropertyName("filter");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorActions is not null)
@@ -327,7 +327,7 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 			writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

@@ -943,6 +943,220 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>, GetRequestParameters>(descriptor);
 	}
 
+	public virtual GetScriptContextResponse GetScriptContext(GetScriptContextRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<GetScriptContextRequest, GetScriptContextResponse, GetScriptContextRequestParameters>(request);
+	}
+
+	public virtual Task<GetScriptContextResponse> GetScriptContextAsync(GetScriptContextRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<GetScriptContextRequest, GetScriptContextResponse, GetScriptContextRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual GetScriptContextResponse GetScriptContext()
+	{
+		var descriptor = new GetScriptContextRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<GetScriptContextRequestDescriptor, GetScriptContextResponse, GetScriptContextRequestParameters>(descriptor);
+	}
+
+	public virtual GetScriptContextResponse GetScriptContext(Action<GetScriptContextRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetScriptContextRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetScriptContextRequestDescriptor, GetScriptContextResponse, GetScriptContextRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetScriptContextResponse> GetScriptContextAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetScriptContextRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetScriptContextRequestDescriptor, GetScriptContextResponse, GetScriptContextRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetScriptContextResponse> GetScriptContextAsync(Action<GetScriptContextRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetScriptContextRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetScriptContextRequestDescriptor, GetScriptContextResponse, GetScriptContextRequestParameters>(descriptor);
+	}
+
+	public virtual GetScriptLanguagesResponse GetScriptLanguages(GetScriptLanguagesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<GetScriptLanguagesRequest, GetScriptLanguagesResponse, GetScriptLanguagesRequestParameters>(request);
+	}
+
+	public virtual Task<GetScriptLanguagesResponse> GetScriptLanguagesAsync(GetScriptLanguagesRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<GetScriptLanguagesRequest, GetScriptLanguagesResponse, GetScriptLanguagesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual GetScriptLanguagesResponse GetScriptLanguages()
+	{
+		var descriptor = new GetScriptLanguagesRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<GetScriptLanguagesRequestDescriptor, GetScriptLanguagesResponse, GetScriptLanguagesRequestParameters>(descriptor);
+	}
+
+	public virtual GetScriptLanguagesResponse GetScriptLanguages(Action<GetScriptLanguagesRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetScriptLanguagesRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetScriptLanguagesRequestDescriptor, GetScriptLanguagesResponse, GetScriptLanguagesRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetScriptLanguagesResponse> GetScriptLanguagesAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetScriptLanguagesRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetScriptLanguagesRequestDescriptor, GetScriptLanguagesResponse, GetScriptLanguagesRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetScriptLanguagesResponse> GetScriptLanguagesAsync(Action<GetScriptLanguagesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetScriptLanguagesRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetScriptLanguagesRequestDescriptor, GetScriptLanguagesResponse, GetScriptLanguagesRequestParameters>(descriptor);
+	}
+
+	public virtual GetScriptResponse GetScript(GetScriptRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<GetScriptRequest, GetScriptResponse, GetScriptRequestParameters>(request);
+	}
+
+	public virtual Task<GetScriptResponse> GetScriptAsync(GetScriptRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<GetScriptRequest, GetScriptResponse, GetScriptRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual GetScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new GetScriptRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<GetScriptRequestDescriptor, GetScriptResponse, GetScriptRequestParameters>(descriptor);
+	}
+
+	public virtual GetScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id, Action<GetScriptRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetScriptRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetScriptRequestDescriptor, GetScriptResponse, GetScriptRequestParameters>(descriptor);
+	}
+
+	public virtual GetScriptResponse GetScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetScriptRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new GetScriptRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetScriptRequestDescriptor<TDocument>, GetScriptResponse, GetScriptRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetScriptRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetScriptRequestDescriptor, GetScriptResponse, GetScriptRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<GetScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetScriptRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetScriptRequestDescriptor, GetScriptResponse, GetScriptRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetScriptResponse> GetScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetScriptRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetScriptRequestDescriptor<TDocument>, GetScriptResponse, GetScriptRequestParameters>(descriptor);
+	}
+
+	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(GetSourceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<GetSourceRequest, GetSourceResponse<TDocument>, GetSourceRequestParameters>(request);
+	}
+
+	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(GetSourceRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<GetSourceRequest, GetSourceResponse<TDocument>, GetSourceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new GetSourceRequestDescriptor<TDocument>(index, id);
+		descriptor.BeforeRequest();
+		return DoRequest<GetSourceRequestDescriptor<TDocument>, GetSourceResponse<TDocument>, GetSourceRequestParameters>(descriptor);
+	}
+
+	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new GetSourceRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetSourceRequestDescriptor<TDocument>, GetSourceResponse<TDocument>, GetSourceRequestParameters>(descriptor);
+	}
+
+	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new GetSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequest<GetSourceRequestDescriptor<TDocument>, GetSourceResponse<TDocument>, GetSourceRequestParameters>(descriptor);
+	}
+
+	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new GetSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetSourceRequestDescriptor<TDocument>, GetSourceResponse<TDocument>, GetSourceRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetSourceRequestDescriptor<TDocument>(index, id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetSourceRequestDescriptor<TDocument>, GetSourceResponse<TDocument>, GetSourceRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetSourceRequestDescriptor<TDocument>(index, id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetSourceRequestDescriptor<TDocument>, GetSourceResponse<TDocument>, GetSourceRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetSourceRequestDescriptor<TDocument>, GetSourceResponse<TDocument>, GetSourceRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetSourceRequestDescriptor<TDocument>, GetSourceResponse<TDocument>, GetSourceRequestParameters>(descriptor);
+	}
+
 	public virtual IndexResponse Index<TDocument>(IndexRequest<TDocument> request)
 	{
 		request.BeforeRequest();
@@ -1499,148 +1713,6 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse, ReindexRethrottleRequestParameters>(descriptor);
 	}
 
-	public virtual ScriptContextResponse GetScriptContext(ScriptContextRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ScriptContextRequest, ScriptContextResponse, ScriptContextRequestParameters>(request);
-	}
-
-	public virtual Task<ScriptContextResponse> GetScriptContextAsync(ScriptContextRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<ScriptContextRequest, ScriptContextResponse, ScriptContextRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual ScriptContextResponse GetScriptContext()
-	{
-		var descriptor = new ScriptContextRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ScriptContextRequestDescriptor, ScriptContextResponse, ScriptContextRequestParameters>(descriptor);
-	}
-
-	public virtual ScriptContextResponse GetScriptContext(Action<ScriptContextRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ScriptContextRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ScriptContextRequestDescriptor, ScriptContextResponse, ScriptContextRequestParameters>(descriptor);
-	}
-
-	public virtual Task<ScriptContextResponse> GetScriptContextAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ScriptContextRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ScriptContextRequestDescriptor, ScriptContextResponse, ScriptContextRequestParameters>(descriptor);
-	}
-
-	public virtual Task<ScriptContextResponse> GetScriptContextAsync(Action<ScriptContextRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ScriptContextRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ScriptContextRequestDescriptor, ScriptContextResponse, ScriptContextRequestParameters>(descriptor);
-	}
-
-	public virtual ScriptLanguagesResponse GetScriptLanguages(ScriptLanguagesRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ScriptLanguagesRequest, ScriptLanguagesResponse, ScriptLanguagesRequestParameters>(request);
-	}
-
-	public virtual Task<ScriptLanguagesResponse> GetScriptLanguagesAsync(ScriptLanguagesRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<ScriptLanguagesRequest, ScriptLanguagesResponse, ScriptLanguagesRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual ScriptLanguagesResponse GetScriptLanguages()
-	{
-		var descriptor = new ScriptLanguagesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse, ScriptLanguagesRequestParameters>(descriptor);
-	}
-
-	public virtual ScriptLanguagesResponse GetScriptLanguages(Action<ScriptLanguagesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ScriptLanguagesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse, ScriptLanguagesRequestParameters>(descriptor);
-	}
-
-	public virtual Task<ScriptLanguagesResponse> GetScriptLanguagesAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ScriptLanguagesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse, ScriptLanguagesRequestParameters>(descriptor);
-	}
-
-	public virtual Task<ScriptLanguagesResponse> GetScriptLanguagesAsync(Action<ScriptLanguagesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ScriptLanguagesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse, ScriptLanguagesRequestParameters>(descriptor);
-	}
-
-	public virtual ScriptResponse GetScript(ScriptRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ScriptRequest, ScriptResponse, ScriptRequestParameters>(request);
-	}
-
-	public virtual Task<ScriptResponse> GetScriptAsync(ScriptRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<ScriptRequest, ScriptResponse, ScriptRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual ScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new ScriptRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<ScriptRequestDescriptor, ScriptResponse, ScriptRequestParameters>(descriptor);
-	}
-
-	public virtual ScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ScriptRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ScriptRequestDescriptor, ScriptResponse, ScriptRequestParameters>(descriptor);
-	}
-
-	public virtual ScriptResponse GetScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new ScriptRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ScriptRequestDescriptor<TDocument>, ScriptResponse, ScriptRequestParameters>(descriptor);
-	}
-
-	public virtual Task<ScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ScriptRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ScriptRequestDescriptor, ScriptResponse, ScriptRequestParameters>(descriptor);
-	}
-
-	public virtual Task<ScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ScriptRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ScriptRequestDescriptor, ScriptResponse, ScriptRequestParameters>(descriptor);
-	}
-
-	public virtual Task<ScriptResponse> GetScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ScriptRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ScriptRequestDescriptor<TDocument>, ScriptResponse, ScriptRequestParameters>(descriptor);
-	}
-
 	public virtual ScrollResponse<TDocument> Scroll<TDocument>(ScrollRequest request)
 	{
 		request.BeforeRequest();
@@ -1781,78 +1853,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SearchShardsRequestDescriptor<TDocument>, SearchShardsResponse, SearchShardsRequestParameters>(descriptor);
-	}
-
-	public virtual SourceResponse<TDocument> GetSource<TDocument>(SourceRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SourceRequest, SourceResponse<TDocument>, SourceRequestParameters>(request);
-	}
-
-	public virtual Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(SourceRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<SourceRequest, SourceResponse<TDocument>, SourceRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
-		descriptor.BeforeRequest();
-		return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>, SourceRequestParameters>(descriptor);
-	}
-
-	public virtual SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>, SourceRequestParameters>(descriptor);
-	}
-
-	public virtual SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-		descriptor.BeforeRequest();
-		return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>, SourceRequestParameters>(descriptor);
-	}
-
-	public virtual SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>, SourceRequestParameters>(descriptor);
-	}
-
-	public virtual Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>, SourceRequestParameters>(descriptor);
-	}
-
-	public virtual Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>, SourceRequestParameters>(descriptor);
-	}
-
-	public virtual Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>, SourceRequestParameters>(descriptor);
-	}
-
-	public virtual Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SourceRequestDescriptor<TDocument>(typeof(TDocument), id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>, SourceRequestParameters>(descriptor);
 	}
 
 	public virtual TermsEnumResponse TermsEnum(TermsEnumRequest request)

@@ -97,7 +97,7 @@ internal sealed class SpanTermQueryConverter : JsonConverter<SpanTermQuery>
 }
 
 [JsonConverter(typeof(SpanTermQueryConverter))]
-public sealed partial class SpanTermQuery : Query
+public sealed partial class SpanTermQuery : SearchQuery
 {
 	public SpanTermQuery(Field field)
 	{

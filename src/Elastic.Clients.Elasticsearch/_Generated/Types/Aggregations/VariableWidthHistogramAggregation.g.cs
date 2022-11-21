@@ -151,7 +151,7 @@ internal sealed class VariableWidthHistogramAggregationConverter : JsonConverter
 }
 
 [JsonConverter(typeof(VariableWidthHistogramAggregationConverter))]
-public sealed partial class VariableWidthHistogramAggregation : Aggregation
+public sealed partial class VariableWidthHistogramAggregation : SearchAggregation
 {
 	public VariableWidthHistogramAggregation(string name) => Name = name;
 	internal VariableWidthHistogramAggregation()

@@ -151,7 +151,7 @@ internal sealed class ValueCountAggregationConverter : JsonConverter<ValueCountA
 }
 
 [JsonConverter(typeof(ValueCountAggregationConverter))]
-public sealed partial class ValueCountAggregation : Aggregation
+public sealed partial class ValueCountAggregation : SearchAggregation
 {
 	public ValueCountAggregation(string name, Field field) : this(name) => Field = field;
 	public ValueCountAggregation(string name) => Name = name;

@@ -11,7 +11,7 @@ using Tests.Domain;
 
 namespace Tests.IndexManagement.Mapping;
 
-public class GetMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, MappingResponse, MappingRequestDescriptor<Project>, MappingRequest>
+public class GetMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, GetMappingResponse, GetMappingRequestDescriptor<Project>, GetMappingRequest>
 {
 	public GetMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -19,8 +19,8 @@ public class GetMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, Mappin
 	protected override int ExpectStatusCode => 200;
 	protected override string ExpectedUrlPathAndQuery => "/project/_mapping?ignore_unavailable=true";
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override Action<MappingRequestDescriptor<Project>> Fluent => c => c.Indices(Infer.Index<Project>()).IgnoreUnavailable();
-	protected override MappingRequest Initializer => new(Infer.Index<Project>()) { IgnoreUnavailable = true };
+	protected override Action<GetMappingRequestDescriptor<Project>> Fluent => c => c.Indices(Infer.Index<Project>()).IgnoreUnavailable();
+	protected override GetMappingRequest Initializer => new(Infer.Index<Project>()) { IgnoreUnavailable = true };
 
 	protected override LazyResponses ClientUsage() => Calls(
 		(client, f) => client.Indices.GetMapping(f),
@@ -29,7 +29,7 @@ public class GetMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, Mappin
 		(client, r) => client.Indices.GetMappingAsync(r)
 	);
 
-	protected override void ExpectResponse(MappingResponse response)
+	protected override void ExpectResponse(GetMappingResponse response)
 	{
 		var projectMapping = response.Indices[Infer.Index<Project>()];
 
@@ -46,7 +46,7 @@ public class GetMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, Mappin
 		AssertExtensionMethods(response);
 	}
 
-	private static void AssertExtensionMethods(MappingResponse response)
+	private static void AssertExtensionMethods(GetMappingResponse response)
 	{
 		/** The `GetMappingFor` extension method can be used to get a type mapping easily and safely */
 		response.GetMappingFor<Project>().Should().NotBeNull();
@@ -54,7 +54,7 @@ public class GetMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, Mappin
 	}
 }
 
-public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<ReadOnlyCluster, MappingResponse, MappingRequestDescriptor<Project>, MappingRequest>
+public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<ReadOnlyCluster, GetMappingResponse, GetMappingRequestDescriptor<Project>, GetMappingRequest>
 {
 	private const string NonExistentIndex = "non-existent-index";
 
@@ -64,8 +64,8 @@ public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<ReadOnl
 	protected override int ExpectStatusCode => 404;
 	protected override string ExpectedUrlPathAndQuery => $"/{NonExistentIndex}/_mapping";
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
-	protected override Action<MappingRequestDescriptor<Project>> Fluent => c => c.Indices(NonExistentIndex);
-	protected override MappingRequest Initializer => new(NonExistentIndex);
+	protected override Action<GetMappingRequestDescriptor<Project>> Fluent => c => c.Indices(NonExistentIndex);
+	protected override GetMappingRequest Initializer => new(NonExistentIndex);
 
 	protected override LazyResponses ClientUsage() => Calls(
 		(client, f) => client.Indices.GetMapping(f),
@@ -74,7 +74,7 @@ public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<ReadOnl
 		(client, r) => client.Indices.GetMappingAsync(r)
 	);
 
-	protected override void ExpectResponse(MappingResponse response)
+	protected override void ExpectResponse(GetMappingResponse response)
 	{
 		response.Indices.Should().BeEmpty();
 		response.ElasticsearchServerError.Should().NotBeNull();

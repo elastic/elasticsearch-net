@@ -213,7 +213,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	[JsonInclude]
 	[JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("slice")]
@@ -268,11 +268,11 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
@@ -282,7 +282,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 
 	private long? MaxDocsValue { get; set; }
 
-	public DeleteByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+	public DeleteByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -290,7 +290,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public DeleteByQueryRequestDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+	public DeleteByQueryRequestDescriptor<TDocument> Query(QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -298,7 +298,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public DeleteByQueryRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+	public DeleteByQueryRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -347,7 +347,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -429,11 +429,11 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 
-	private QueryDsl.QueryContainerDescriptor QueryDescriptor { get; set; }
+	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 
-	private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
+	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
@@ -443,7 +443,7 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 
 	private long? MaxDocsValue { get; set; }
 
-	public DeleteByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+	public DeleteByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -451,7 +451,7 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 		return Self;
 	}
 
-	public DeleteByQueryRequestDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
+	public DeleteByQueryRequestDescriptor Query(QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -459,7 +459,7 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 		return Self;
 	}
 
-	public DeleteByQueryRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
+	public DeleteByQueryRequestDescriptor Query(Action<QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -508,7 +508,7 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class ConstantScoreQuery : Query
+public sealed partial class ConstantScoreQuery : SearchQuery
 {
 	[JsonInclude]
 	[JsonPropertyName("_name")]
@@ -37,9 +37,9 @@ public sealed partial class ConstantScoreQuery : Query
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Filter { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query Filter { get; set; }
 
-	public static implicit operator QueryContainer(ConstantScoreQuery constantScoreQuery) => QueryContainer.ConstantScore(constantScoreQuery);
+	public static implicit operator Query(ConstantScoreQuery constantScoreQuery) => QueryDsl.Query.ConstantScore(constantScoreQuery);
 }
 
 public sealed partial class ConstantScoreQueryDescriptor<TDocument> : SerializableDescriptor<ConstantScoreQueryDescriptor<TDocument>>
@@ -49,17 +49,17 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer FilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query FilterValue { get; set; }
 
-	private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+	private QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Action<QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 
 	private string? QueryNameValue { get; set; }
 
 	private float? BoostValue { get; set; }
 
-	public ConstantScoreQueryDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer filter)
+	public ConstantScoreQueryDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -67,7 +67,7 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public ConstantScoreQueryDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
+	public ConstantScoreQueryDescriptor<TDocument> Filter(QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -75,7 +75,7 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public ConstantScoreQueryDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
+	public ConstantScoreQueryDescriptor<TDocument> Filter(Action<QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -106,7 +106,7 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 		}
 		else
 		{
@@ -137,17 +137,17 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer FilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query FilterValue { get; set; }
 
-	private QueryContainerDescriptor FilterDescriptor { get; set; }
+	private QueryDescriptor FilterDescriptor { get; set; }
 
-	private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+	private Action<QueryDescriptor> FilterDescriptorAction { get; set; }
 
 	private string? QueryNameValue { get; set; }
 
 	private float? BoostValue { get; set; }
 
-	public ConstantScoreQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer filter)
+	public ConstantScoreQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query filter)
 	{
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
@@ -155,7 +155,7 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public ConstantScoreQueryDescriptor Filter(QueryContainerDescriptor descriptor)
+	public ConstantScoreQueryDescriptor Filter(QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -163,7 +163,7 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public ConstantScoreQueryDescriptor Filter(Action<QueryContainerDescriptor> configure)
+	public ConstantScoreQueryDescriptor Filter(Action<QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -194,7 +194,7 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new QueryDescriptor(FilterDescriptorAction), options);
 		}
 		else
 		{

@@ -132,7 +132,7 @@ internal sealed class MissingAggregationConverter : JsonConverter<MissingAggrega
 }
 
 [JsonConverter(typeof(MissingAggregationConverter))]
-public sealed partial class MissingAggregation : Aggregation
+public sealed partial class MissingAggregation : SearchAggregation
 {
 	public MissingAggregation(string name) => Name = name;
 	internal MissingAggregation()
@@ -159,9 +159,9 @@ public sealed partial class MissingAggregationDescriptor<TDocument> : Serializab
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
 
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
@@ -177,7 +177,7 @@ public sealed partial class MissingAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public MissingAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
+	public MissingAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptorAction = null;
@@ -185,7 +185,7 @@ public sealed partial class MissingAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public MissingAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
+	public MissingAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
@@ -249,7 +249,7 @@ public sealed partial class MissingAggregationDescriptor<TDocument> : Serializab
 		else if (AggregationsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
 		}
 		else if (AggregationsValue is not null)
 		{
@@ -270,9 +270,9 @@ public sealed partial class MissingAggregationDescriptor : SerializableDescripto
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
 
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
@@ -288,7 +288,7 @@ public sealed partial class MissingAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public MissingAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+	public MissingAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptorAction = null;
@@ -296,7 +296,7 @@ public sealed partial class MissingAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public MissingAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+	public MissingAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
 	{
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
@@ -366,7 +366,7 @@ public sealed partial class MissingAggregationDescriptor : SerializableDescripto
 		else if (AggregationsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
 		}
 		else if (AggregationsValue is not null)
 		{

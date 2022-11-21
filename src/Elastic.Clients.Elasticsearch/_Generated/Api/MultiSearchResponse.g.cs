@@ -27,7 +27,7 @@ public sealed partial class MultiSearchResponse<TDocument> : ElasticsearchRespon
 {
 	[JsonInclude]
 	[JsonPropertyName("responses")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchResponseItem<TDocument>> Responses { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>> Responses { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("took")]
