@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.MGet;
-public sealed partial class Operation
+public sealed partial class MultiGetOperation
 {
 	[JsonInclude]
 	[JsonPropertyName("_id")]
@@ -56,10 +56,10 @@ public sealed partial class Operation
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 
-public sealed partial class OperationDescriptor : SerializableDescriptor<OperationDescriptor>
+public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor<MultiGetOperationDescriptor>
 {
-	internal OperationDescriptor(Action<OperationDescriptor> configure) => configure.Invoke(this);
-	public OperationDescriptor() : base()
+	internal MultiGetOperationDescriptor(Action<MultiGetOperationDescriptor> configure) => configure.Invoke(this);
+	public MultiGetOperationDescriptor() : base()
 	{
 	}
 
@@ -77,43 +77,43 @@ public sealed partial class OperationDescriptor : SerializableDescriptor<Operati
 
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
-	public OperationDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	public MultiGetOperationDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		IdValue = id;
 		return Self;
 	}
 
-	public OperationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public MultiGetOperationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		IndexValue = index;
 		return Self;
 	}
 
-	public OperationDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
+	public MultiGetOperationDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
 		return Self;
 	}
 
-	public OperationDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public MultiGetOperationDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
 	{
 		RoutingValue = routing;
 		return Self;
 	}
 
-	public OperationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
+	public MultiGetOperationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 	{
 		StoredFieldsValue = storedFields;
 		return Self;
 	}
 
-	public OperationDescriptor Version(long? version)
+	public MultiGetOperationDescriptor Version(long? version)
 	{
 		VersionValue = version;
 		return Self;
 	}
 
-	public OperationDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
+	public MultiGetOperationDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
 	{
 		VersionTypeValue = versionType;
 		return Self;

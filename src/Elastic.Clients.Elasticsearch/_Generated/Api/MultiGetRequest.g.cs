@@ -93,7 +93,7 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 
 	[JsonInclude]
 	[JsonPropertyName("docs")]
-	public ICollection<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? Docs { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? Docs { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("ids")]
@@ -124,17 +124,17 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? DocsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? DocsValue { get; set; }
 
-	private Core.MGet.OperationDescriptor DocsDescriptor { get; set; }
+	private Core.MGet.MultiGetOperationDescriptor DocsDescriptor { get; set; }
 
-	private Action<Core.MGet.OperationDescriptor> DocsDescriptorAction { get; set; }
+	private Action<Core.MGet.MultiGetOperationDescriptor> DocsDescriptorAction { get; set; }
 
-	private Action<Core.MGet.OperationDescriptor>[] DocsDescriptorActions { get; set; }
+	private Action<Core.MGet.MultiGetOperationDescriptor>[] DocsDescriptorActions { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Ids? IdsValue { get; set; }
 
-	public MultiGetRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? docs)
+	public MultiGetRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? docs)
 	{
 		DocsDescriptor = null;
 		DocsDescriptorAction = null;
@@ -143,7 +143,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor<TDocument> Docs(Core.MGet.OperationDescriptor descriptor)
+	public MultiGetRequestDescriptor<TDocument> Docs(Core.MGet.MultiGetOperationDescriptor descriptor)
 	{
 		DocsValue = null;
 		DocsDescriptorAction = null;
@@ -152,7 +152,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor<TDocument> Docs(Action<Core.MGet.OperationDescriptor> configure)
+	public MultiGetRequestDescriptor<TDocument> Docs(Action<Core.MGet.MultiGetOperationDescriptor> configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -161,7 +161,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor<TDocument> Docs(params Action<Core.MGet.OperationDescriptor>[] configure)
+	public MultiGetRequestDescriptor<TDocument> Docs(params Action<Core.MGet.MultiGetOperationDescriptor>[] configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -190,7 +190,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 		{
 			writer.WritePropertyName("docs");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Core.MGet.OperationDescriptor(DocsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Core.MGet.MultiGetOperationDescriptor(DocsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DocsDescriptorActions is not null)
@@ -199,7 +199,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 			writer.WriteStartArray();
 			foreach (var action in DocsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Core.MGet.OperationDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Core.MGet.MultiGetOperationDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -244,17 +244,17 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 		return Self;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? DocsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? DocsValue { get; set; }
 
-	private Core.MGet.OperationDescriptor DocsDescriptor { get; set; }
+	private Core.MGet.MultiGetOperationDescriptor DocsDescriptor { get; set; }
 
-	private Action<Core.MGet.OperationDescriptor> DocsDescriptorAction { get; set; }
+	private Action<Core.MGet.MultiGetOperationDescriptor> DocsDescriptorAction { get; set; }
 
-	private Action<Core.MGet.OperationDescriptor>[] DocsDescriptorActions { get; set; }
+	private Action<Core.MGet.MultiGetOperationDescriptor>[] DocsDescriptorActions { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Ids? IdsValue { get; set; }
 
-	public MultiGetRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Core.MGet.Operation>? docs)
+	public MultiGetRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? docs)
 	{
 		DocsDescriptor = null;
 		DocsDescriptorAction = null;
@@ -263,7 +263,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor Docs(Core.MGet.OperationDescriptor descriptor)
+	public MultiGetRequestDescriptor Docs(Core.MGet.MultiGetOperationDescriptor descriptor)
 	{
 		DocsValue = null;
 		DocsDescriptorAction = null;
@@ -272,7 +272,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor Docs(Action<Core.MGet.OperationDescriptor> configure)
+	public MultiGetRequestDescriptor Docs(Action<Core.MGet.MultiGetOperationDescriptor> configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -281,7 +281,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor Docs(params Action<Core.MGet.OperationDescriptor>[] configure)
+	public MultiGetRequestDescriptor Docs(params Action<Core.MGet.MultiGetOperationDescriptor>[] configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -310,7 +310,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 		{
 			writer.WritePropertyName("docs");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Core.MGet.OperationDescriptor(DocsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Core.MGet.MultiGetOperationDescriptor(DocsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DocsDescriptorActions is not null)
@@ -319,7 +319,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 			writer.WriteStartArray();
 			foreach (var action in DocsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Core.MGet.OperationDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Core.MGet.MultiGetOperationDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
