@@ -26,12 +26,12 @@ public abstract class Request
 
 	internal abstract ApiUrls ApiUrls { get; }
 
-	protected virtual string ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings) =>
-	ApiUrls.Resolve(routeValues, settings);
+	protected virtual (string ResolvedUrl, string UrlTemplate) ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings) =>
+		ApiUrls.Resolve(routeValues, settings);
 
 	internal virtual void BeforeRequest() { }
 
-	internal string GetUrl(IElasticsearchClientSettings settings) => ResolveUrl(RouteValues, settings);
+	internal (string ResolvedUrl, string UrlTemplate) GetUrl(IElasticsearchClientSettings settings) => ResolveUrl(RouteValues, settings);
 }
 
 public abstract class Request<TParameters> : Request
