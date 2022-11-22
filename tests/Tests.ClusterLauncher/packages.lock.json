@@ -75,8 +75,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.2",
-        "contentHash": "umDR9uAzO8KPgb96O6llqN7DIv7oqATB4MPr3UrDCJ6Su+l7KJhB7lwItf/cw727e1jKTG9QEqkW6tBGjYoe4w==",
+        "resolved": "0.4.3",
+        "contentHash": "U4yHxScZG7YMDJJ9KGGWfhNx543NQmWlNPILyrd5UF0VMFfjuTZ+RXtWRCX8xMrqcSl4pUBKE+G4GoIVA65ZUQ==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -1271,7 +1271,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.2, )"
+          "Elastic.Transport": "[0.4.3, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
@@ -1388,8 +1388,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.2",
-        "contentHash": "umDR9uAzO8KPgb96O6llqN7DIv7oqATB4MPr3UrDCJ6Su+l7KJhB7lwItf/cw727e1jKTG9QEqkW6tBGjYoe4w==",
+        "resolved": "0.4.3",
+        "contentHash": "U4yHxScZG7YMDJJ9KGGWfhNx543NQmWlNPILyrd5UF0VMFfjuTZ+RXtWRCX8xMrqcSl4pUBKE+G4GoIVA65ZUQ==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -2588,7 +2588,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.2, )"
+          "Elastic.Transport": "[0.4.3, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
@@ -2705,8 +2705,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.2",
-        "contentHash": "umDR9uAzO8KPgb96O6llqN7DIv7oqATB4MPr3UrDCJ6Su+l7KJhB7lwItf/cw727e1jKTG9QEqkW6tBGjYoe4w==",
+        "resolved": "0.4.3",
+        "contentHash": "U4yHxScZG7YMDJJ9KGGWfhNx543NQmWlNPILyrd5UF0VMFfjuTZ+RXtWRCX8xMrqcSl4pUBKE+G4GoIVA65ZUQ==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -3905,7 +3905,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.2, )"
+          "Elastic.Transport": "[0.4.3, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
