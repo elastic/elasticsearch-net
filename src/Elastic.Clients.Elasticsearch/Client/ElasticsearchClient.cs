@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -20,6 +21,8 @@ namespace Elastic.Clients.Elasticsearch;
 public partial class ElasticsearchClient
 {
 	private readonly HttpTransport<IElasticsearchClientSettings> _transport;
+
+	private readonly ActivitySource _activitySource = new("Elastic.Clients.Elasticsearch.ElasticsearchClient");
 
 	internal static ConditionalWeakTable<JsonSerializerOptions, IElasticsearchClientSettings> SettingsTable { get; } = new();
 
@@ -127,8 +130,16 @@ public partial class ElasticsearchClient
 			}
 		}
 
-		var (url, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
-		var response = _transport.Request<TResponse>(request.HttpMethod, url, postData, parameters);
+		var (resolvedUrl, urlTemplate, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
+
+		TResponse response;
+
+		using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
+		{
+			activity?.AddTag("db.system", "elasticsearch");
+			response = _transport.Request<TResponse>(request.HttpMethod, resolvedUrl, postData, parameters);
+		}
+		
 		PostRequestProductCheck<TRequest, TResponse>(request, response);
 
 		if (_productCheckStatus == ProductCheckStatus.Failed)
@@ -187,8 +198,21 @@ public partial class ElasticsearchClient
 			}
 		}
 
-		var (url, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
-		var response = _transport.Request<TResponse>(request.HttpMethod, url, postData, request.RequestParameters);
+		var (resolvedUrl, urlTemplate, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
+
+		TResponse response;
+
+		using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
+		{
+			activity?.AddTag("db.system", "elasticsearch");
+			activity?.SetCustomProperty("elastic.transport.client", true);
+
+			response = _transport.Request<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters);
+
+			if (response.ApiCallDetails.RequestBodyInBytes is not null)
+				activity?.AddTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
+		}
+
 		PostRequestProductCheck<TRequest, TResponse>(request, response);
 
 		if (_productCheckStatus == ProductCheckStatus.Failed)
@@ -249,16 +273,28 @@ public partial class ElasticsearchClient
 			}
 		}
 
-		var (url, postData) = PrepareRequest<TRequest, TRequestParameters>(request, null);
+		var (resolvedUrl, urlTemplate, postData) = PrepareRequest<TRequest, TRequestParameters>(request, null);
 
-		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified)
-			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
+		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified && !_activitySource.HasListeners())
+			return _transport.RequestAsync<TResponse>(request.HttpMethod, resolvedUrl, postData, parameters, cancellationToken);
 
-		return SendRequest(request, parameters, url, postData, hadRequestConfig, originalHeaders);
+		return SendRequest(request, parameters, resolvedUrl, postData, hadRequestConfig, originalHeaders);
 
 		async Task<TResponse> SendRequest(TRequest request, RequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
-			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+			TResponse response;
+
+			using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
+			{
+				activity?.AddTag("db.system", "elasticsearch");
+				activity?.SetCustomProperty("elastic.transport.client", true);
+
+				response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+
+				if (response.ApiCallDetails.RequestBodyInBytes is not null)
+					activity?.AddTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
+			}
+
 			PostRequestProductCheck<TRequest, TResponse>(request, response);
 
 			if (_productCheckStatus == ProductCheckStatus.Failed)
@@ -319,16 +355,28 @@ public partial class ElasticsearchClient
 			}
 		}
 
-		var (url, postData) = PrepareRequest<TRequest, TRequestParameters>(request, null);
+		var (resolvedUrl, urlTemplate, postData) = PrepareRequest<TRequest, TRequestParameters>(request, null);
 
-		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified)
-			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, request.RequestParameters, cancellationToken);
+		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified && !_activitySource.HasListeners())
+			return _transport.RequestAsync<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters, cancellationToken);
 
-		return SendRequest(request, request.RequestParameters, url, postData, hadRequestConfig, originalHeaders);
+		return SendRequest(request, request.RequestParameters, resolvedUrl, postData, hadRequestConfig, originalHeaders);
 
 		async Task<TResponse> SendRequest(TRequest request, RequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
-			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+			TResponse response;
+
+			using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
+			{
+				activity?.AddTag("db.system", "elasticsearch");				
+				activity?.SetCustomProperty("elastic.transport.client", true);
+
+				response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+
+				if (response.ApiCallDetails.RequestBodyInBytes is not null)
+					activity?.AddTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
+			}
+
 			PostRequestProductCheck<TRequest, TResponse>(request, response);
 
 			if (_productCheckStatus == ProductCheckStatus.Failed)
@@ -391,16 +439,28 @@ public partial class ElasticsearchClient
 			}
 		}
 
-		var (url, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
+		var (resolvedUrl, urlTemplate, postData) = PrepareRequest<TRequest, TRequestParameters>(request, null);
 
-		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified)
-			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
+		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified && !_activitySource.HasListeners())
+			return _transport.RequestAsync<TResponse>(request.HttpMethod, resolvedUrl, postData, parameters, cancellationToken);
 
-		return SendRequest(request, parameters, url, postData, hadRequestConfig, originalHeaders);
+		return SendRequest(request, parameters, resolvedUrl, postData, hadRequestConfig, originalHeaders);
 
 		async Task<TResponse> SendRequest(TRequest request, RequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
-			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+			TResponse response;
+
+			using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
+			{
+				activity?.AddTag("db.system", "elasticsearch");
+				activity?.SetCustomProperty("elastic.transport.client", true);
+
+				response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+
+				if (response.ApiCallDetails.RequestBodyInBytes is not null)
+					activity?.AddTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
+			}
+
 			PostRequestProductCheck<TRequest, TResponse>(request, response);
 
 			if (_productCheckStatus == ProductCheckStatus.Failed)
@@ -422,7 +482,7 @@ public partial class ElasticsearchClient
 		}
 	}
 
-	private (string url, PostData data) PrepareRequest<TRequest, TRequestParameters>(TRequest request,
+	private (string resolvedUrl, string urlTemplate, PostData data) PrepareRequest<TRequest, TRequestParameters>(TRequest request,
 		Action<IRequestConfiguration>? forceConfiguration)
 		where TRequest : Request<TRequestParameters>
 		where TRequestParameters : RequestParameters, new()
@@ -438,7 +498,7 @@ public partial class ElasticsearchClient
 		if (request.Accept is not null)
 			ForceAccept<TRequest, TRequestParameters>(request, request.Accept);
 
-		var url = request.GetUrl(ElasticsearchClientSettings);
+		var (resolvedUrl, urlTemplate) = request.GetUrl(ElasticsearchClientSettings);
 
 		var postData =
 			request.HttpMethod == HttpMethod.GET ||
@@ -446,7 +506,7 @@ public partial class ElasticsearchClient
 				? null
 				: PostData.Serializable(request);
 
-		return (url, postData);
+		return (resolvedUrl, urlTemplate, postData);
 	}
 
 	private void PostRequestProductCheck<TRequest, TResponse>(TRequest request, TResponse response)
