@@ -2,7 +2,7 @@
 = Release notes
 
 * <<breaking-changes-policy,Breaking changes policy>>
-* <<release-notes-8.0.0,8.0.0 release notes>>
+* <<release-notes-8.0.0,Version 8.0.0>>
 
 include::breaking-change-policy.asciidoc[]
 include::release-notes-8.0.0.asciidoc[]
