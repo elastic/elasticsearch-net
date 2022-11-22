@@ -118,9 +118,10 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
         _compositeCancelToken.ThrowIfCancellationRequested();
 
         var request = _partitionedBulkRequest;
-
+		
         var response = await _client.BulkAsync(s =>
         {
+			s.RequestParameters.RequestConfiguration = new RequestConfiguration { DisableAuditTrail = false };
             s.Index(request.Index);
             s.Timeout(request.Timeout);
 

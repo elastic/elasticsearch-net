@@ -14,15 +14,15 @@ public static class TestClient
 	public static readonly TestConfigurationBase Configuration = TestConfiguration.Instance;
 
 	public static readonly ElasticsearchClient Default =
-		new ElasticsearchClient(new TestElasticsearchClientSettings().ApplyDomainSettings());
+		new(new TestElasticsearchClientSettings().ApplyDomainSettings());
 
 	public static readonly ElasticsearchClient DefaultInMemoryClient =
-		new ElasticsearchClient(new AlwaysInMemoryElasticsearchClientSettings().ApplyDomainSettings());
+		new(new AlwaysInMemoryElasticsearchClientSettings().ApplyDomainSettings());
 
 	public static readonly ElasticsearchClient DisabledStreaming =
-		new ElasticsearchClient(new TestElasticsearchClientSettings().ApplyDomainSettings().DisableDirectStreaming());
+		new(new TestElasticsearchClientSettings().ApplyDomainSettings().DisableDirectStreaming());
 
-	public static ElasticsearchClient FixedInMemoryClient(byte[] response) => new ElasticsearchClient(
+	public static ElasticsearchClient FixedInMemoryClient(byte[] response) => new(
 		new AlwaysInMemoryElasticsearchClientSettings(response)
 			.ApplyDomainSettings()
 			.DisableDirectStreaming()

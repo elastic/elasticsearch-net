@@ -11,13 +11,13 @@ namespace Elastic.Clients.Elasticsearch.Requests;
 internal class UrlLookup
 {
 	private readonly string[] _parts;
-	private readonly string _route;
 	private readonly string[] _tokenized;
 	private readonly int _length;
 
 	public UrlLookup(string route)
 	{
-		_route = route;
+		Route = route;
+
 		_tokenized = route.Replace("{", "{@")
 			.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -26,8 +26,10 @@ internal class UrlLookup
 			.Select(p => p.Remove(0, 1))
 			.ToArray();
 
-		_length = _route.Length + (_parts.Length * 4);
+		_length = Route.Length + (_parts.Length * 4);
 	}
+
+	public string Route { get; }
 
 	public bool Matches(ResolvedRouteValues values)
 	{
@@ -54,12 +56,12 @@ internal class UrlLookup
 				if (values.TryGetValue(_parts[i], out var v))
 				{
 					if (string.IsNullOrEmpty(v))
-						throw new Exception($"'{_parts[i]}' defined but is empty on url: {_route}");
+						throw new Exception($"'{_parts[i]}' defined but is empty on url: {Route}");
 
 					sb.Append(Uri.EscapeDataString(v));
 				}
 				else
-					throw new Exception($"No value provided for '{_parts[i]}' on url: {_route}");
+					throw new Exception($"No value provided for '{_parts[i]}' on url: {Route}");
 
 				i++;
 			}
