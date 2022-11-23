@@ -74,7 +74,7 @@ or comment on a relevant existing issue to highlight your need to us. This will
 help us prioritise our roadmap.
 
 [discrete]
-=== code-generation
+=== Code generation
 
 Given the size of the Elasticsearch API surface today, it is no longer practical 
 to maintain thousands of types (requests, responses, queries, aggregations, etc.) 
