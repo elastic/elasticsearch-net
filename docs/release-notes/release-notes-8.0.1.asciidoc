@@ -22,28 +22,28 @@ This release includes the following breaking changes:
 
 The `Core.MSearchTemplate.RequestItem` type has been renamed to
 `Core.MSearchTemplate.SearchTemplateRequestItem`. It no longer derives from the 
-`Union<T1, T2>` type. It has been manually designed to support serialisation to 
+`Union<T1, T2>` type. It has been manually designed to support serialization to 
 NDJSON, as required by the MSearchTemplate endpoint.
 
 The `MultiSearchTemplateRequest.SearchTemplates` property has been updated to 
 use this newly defined type.
 
 This breaking change has been included in this patch release due to the 
-original code-generated type not functioning correctly and therefore we have 
+original code-generated type functioning incorrectly, and therefore, we have 
 determined that this should ship ASAP.
 
 [discrete]
 ==== MultiSearch type changes
 
 The `Core.MSearch.SearchRequestItem` type has been sealed for consistency with 
-the design choices in the rest of the client. While technically breaking, we 
-have decided that this should be included in this release before any potential 
+the design choices of the rest of the client. While technically breaking, we 
+have decided that this should be included in this release before any potentially 
 derived types may exist in consuming applications.
 
 [discrete]
 ==== Sealing union types
 
-Code-generated types derived from `Union<T1, T2>` where incorrectly unsealed. 
+Code-generated types derived from `Union<T1, T2>` were incorrectly unsealed. 
 While technically breaking, we have decided that these should be sealed in this 
 patch release before any potential derived types may exist in consuming 
 applications. Sealing types by default aligns with our broader design choices 
