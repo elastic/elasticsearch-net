@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
-public partial class Percentiles : Union<Dictionary<string, object>, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>>
+public sealed partial class Percentiles : Union<Dictionary<string, object>, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>>
 {
 	public Percentiles(Dictionary<string, object> dictionary) : base(dictionary)
 	{

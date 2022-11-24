@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.MGet;
-public partial class MultiGetResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument>, Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError>
+public sealed partial class MultiGetResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument>, Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError>
 {
 	public MultiGetResponseItem(Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument> result) : base(result)
 	{
