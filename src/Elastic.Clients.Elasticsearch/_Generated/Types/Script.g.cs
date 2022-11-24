@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public partial class Script : Union<Elastic.Clients.Elasticsearch.InlineScript, Elastic.Clients.Elasticsearch.StoredScriptId>
+public sealed partial class Script : Union<Elastic.Clients.Elasticsearch.InlineScript, Elastic.Clients.Elasticsearch.StoredScriptId>
 {
 	public Script(Elastic.Clients.Elasticsearch.InlineScript inline) : base(inline)
 	{

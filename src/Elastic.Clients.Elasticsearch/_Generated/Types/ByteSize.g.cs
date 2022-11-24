@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public partial class ByteSize : Union<long, string>
+public sealed partial class ByteSize : Union<long, string>
 {
 	public ByteSize(long byteSize) : base(byteSize)
 	{
