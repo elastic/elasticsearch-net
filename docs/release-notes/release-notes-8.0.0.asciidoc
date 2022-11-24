@@ -84,7 +84,7 @@ automatically code-generated from a https://github.com/elastic/elasticsearch-spe
 client and server among SDKs and libraries, such as those for Azure, AWS and the 
 Google Cloud Platform.
 
-code-generation from a specification has inevitably led to some differences 
+Code-generation from a specification has inevitably led to some differences 
 between the existing v7 `NEST` types and those available in the new v7 {net-client}. 
 For the 8.0.0 release, we generate strictly from the specification, special 
 casing a few areas to improve usability or to align with language idioms. 
