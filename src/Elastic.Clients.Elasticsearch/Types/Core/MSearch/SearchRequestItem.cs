@@ -11,7 +11,7 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
 // POC - If we have more than one union doing this, can we autogenerate with correct ctors etc.
-public class SearchRequestItem : IStreamSerializable
+public sealed class SearchRequestItem : IStreamSerializable
 {
 	public SearchRequestItem(MultisearchBody body) => Body = body;
 
@@ -52,5 +52,3 @@ public class SearchRequestItem : IStreamSerializable
 		}
 	}
 }
-
-
