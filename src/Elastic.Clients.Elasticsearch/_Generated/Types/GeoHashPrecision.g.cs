@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public partial class GeoHashPrecision : Union<double, string>
+public sealed partial class GeoHashPrecision : Union<double, string>
 {
 	public GeoHashPrecision(double geohash_length) : base(geohash_length)
 	{
