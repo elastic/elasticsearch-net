@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public partial class Like : Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
+public sealed partial class Like : Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
 {
 	public Like(string text) : base(text)
 	{
