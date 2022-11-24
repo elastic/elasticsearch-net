@@ -3,12 +3,12 @@
 
 This page shows you how to install the .NET client for {es}.
 
-IMPORTANT: The v8 client for .NET is currently in pre-release and not supported for 
-production use. We provide it for testing and migration planning purposes. 
-You may continue to use the 7.17.x release of the client to communicate with v8 
+IMPORTANT: The v8 client for .NET does not have complete feature parity with 
+the v7 `NEST` client. It may not be suitable for for all applications until 
+additional endpoints and features are supported. We therefore recommend you thoroughly review our <<release-notes-8.0.0,release notes>> before attempting to migrate existing applications to the `Elastic.Clients.Elasticsearch` library. Until the new client supports all endpoints and features your application requires, 
+you may continue to use the 7.17.x release of the client to communicate with v8 
 Elasticsearch servers using compatibility mode. Refer to the 
-https://www.elastic.co/guide/en/elasticsearch/client/net-api/7.17/connecting-to-elasticsearch-v8.html[Connecting to Elasticsearch v8.x using the v7.17.x client documentation] 
-for guidance on configuring the 7.17.x client.
+https://www.elastic.co/guide/en/elasticsearch/client/net-api/7.17/connecting-to-elasticsearch-v8.html[Connecting to Elasticsearch v8.x using the v7.17.x client documentation] for guidance on configuring the 7.17.x client.
 
 [discrete]
 [[dot-net-client]]
@@ -19,7 +19,7 @@ For SDK style projects, you can install the {es} client by running the following
 
 [source,text]
 ----
-dotnet add package Elastic.Clients.Elasticsearch --prerelease
+dotnet add package Elastic.Clients.Elasticsearch
 ----
 
 This command adds a package reference to your project (csproj) file for the 
@@ -30,26 +30,21 @@ file:
 
 [source,shell]
 ----
-<PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.0.0-alpha.5" />
+<PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.0.0" />
 ----
-
-To install a different version, modify the version as necessary. During the prerelease 
-phase, we highly recommend using the latest pre-release version.
+_NOTE: The version number should reflect the latest published version from 
+https://www.nuget.org/packages/Elastic.Clients.Elasticsearch[NuGet.org]. To install a different version, modify the version as necessary._
 
 For Visual Studio users, the .NET client can also be installed from the Package
 Manager Console inside Visual Studio using the following command:
 
 [source,shell]
 ----
-Install-Package Elastic.Clients.Elasticsearch -IncludePrerelease
+Install-Package Elastic.Clients.Elasticsearch
 ----
 
 Alternatively, search for `Elastic.Clients.Elasticsearch` in the NuGet Package 
 Manager UI.
-
-NOTE: By default, NuGet does not include pre-release versions when working with packages, 
-but you can change this behavior by checking the "Include prerelease" option in the 
-Package Manager UI.
 
 To learn how to connect the {es} client, refer to the <<connecting,Connecting>> section.
 
