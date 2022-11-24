@@ -75,7 +75,7 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-	public List<Core.MSearchTemplate.RequestItem> SearchTemplates { get; set; }
+	public List<Core.MSearchTemplate.SearchTemplateRequestItem> SearchTemplates { get; set; }
 
 	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{
@@ -125,7 +125,7 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 	{
 	}
 
-	List<Core.MSearchTemplate.RequestItem> _items = new();
+	List<Core.MSearchTemplate.SearchTemplateRequestItem> _items = new();
 	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{
 		if (_items is null)
@@ -148,7 +148,7 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 		}
 	}
 
-	public MultiSearchTemplateRequestDescriptor<TDocument> Add(Core.MSearchTemplate.RequestItem item)
+	public MultiSearchTemplateRequestDescriptor<TDocument> Add(Core.MSearchTemplate.SearchTemplateRequestItem item)
 	{
 		_items.Add(item);
 		return this;
@@ -180,7 +180,7 @@ public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescri
 	{
 	}
 
-	List<Core.MSearchTemplate.RequestItem> _items = new();
+	List<Core.MSearchTemplate.SearchTemplateRequestItem> _items = new();
 	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{
 		if (_items is null)
@@ -203,7 +203,7 @@ public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescri
 		}
 	}
 
-	public MultiSearchTemplateRequestDescriptor Add(Core.MSearchTemplate.RequestItem item)
+	public MultiSearchTemplateRequestDescriptor Add(Core.MSearchTemplate.SearchTemplateRequestItem item)
 	{
 		_items.Add(item);
 		return this;
