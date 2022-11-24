@@ -4,8 +4,13 @@
 [discrete]
 === Bug fixes
 
-- Fix MultiSearchTemplateRequest serialization (issue: 
+- Fix MultiSearchTemplateRequest body serialization (issue: 
 https://github.com/elastic/elasticsearch-net/issues/7006[#7006])
+
+[discrete]
+=== Enhancements
+
+- Seal union types for consistency
 
 [discrete]
 === Breaking changes
@@ -28,9 +33,39 @@ original code-generated type not functioning correctly and therefore we have
 determined that this should ship ASAP.
 
 [discrete]
-=== MultiSearch type changes
+==== MultiSearch type changes
 
 The `Core.MSearch.SearchRequestItem` type has been sealed for consistency with 
 the design choices in the rest of the client. While technically breaking, we 
 have decided that this should be included in this release before any potential 
 derived types may exist in consuming applications.
+
+[discrete]
+==== Sealing union types
+
+Code-generated types derived from `Union<T1, T2>` where incorrectly unsealed. 
+While technically breaking, we have decided that these should be sealed in this 
+patch release before any potential derived types may exist in consuming 
+applications. Sealing types by default aligns with our broader design choices 
+and this decision is described in the <<release-notes-8.0.0,8.0.0 release notes>>.
+
+Affected types:
+- `Aggregations.Buckets`
+- `Aggregations.FieldDateMatch`
+- `Aggregations.Percentiles`
+- `Analysis.CharFilter`
+- `Analysis.TokenFilter`
+- `Analysis.Tokenizer`
+- `ByteSize`
+- `Fuzziness`
+- `GeoHashPrecision`
+- `MultiGetResponseItem`
+- `MultiSearchResponseItem`
+- `QueryDsl.Like`
+- `QueryDsl.TermsQueryField`
+- `Script`
+- `Slices`
+- `SourceConfig`
+- `SourceConfigParam`
+- `Tasks.TaskInfos`
+- `TrackHits`
