@@ -7,6 +7,7 @@
       This strongly-typed, client library enables working with Elasticsearch. It is the official client maintained and supported by Elastic.
     </Description>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <PropertyGroup>
     <IsPackable>true</IsPackable>
@@ -34,6 +35,6 @@
     </AssemblyAttribute>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Types\Documents\" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>
