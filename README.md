@@ -1,5 +1,3 @@
-<img alt="Elastic logo" align="right" width="auto" height="auto" src="https://www.elastic.co/static-res/images/elastic-logo-200.png">
-
 Repository for **Elastic.Clients.Elasticsearch** the official .NET client for [Elasticsearch](https://github.com/elastic/elasticsearch). *Older branches include both previous clients, **NEST** and **Elasticsearch.Net**.*
 
 The .NET client for Elasticsearch provides strongly typed requests and responses for Elasticsearch APIs. It delegates protocol handling to the [Elastic.Transport](https://github.com/elastic/elastic-transport-net) library, which takes care of all transport-level concerns (HTTP connection establishment and pooling, retries, etc.).
