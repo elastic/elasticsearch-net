@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-public partial class Fuzziness : Union<string, int>
+public sealed partial class Fuzziness : Union<string, int>
 {
 	public Fuzziness(string fuzziness) : base(fuzziness)
 	{

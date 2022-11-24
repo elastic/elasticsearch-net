@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
-public partial class FieldDateMath : Union<Elastic.Clients.Elasticsearch.DateMath, double>
+public sealed partial class FieldDateMath : Union<Elastic.Clients.Elasticsearch.DateMath, double>
 {
 	public FieldDateMath(Elastic.Clients.Elasticsearch.DateMath expr) : base(expr)
 	{

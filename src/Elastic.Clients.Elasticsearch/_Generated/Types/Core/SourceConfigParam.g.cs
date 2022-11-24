@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
-public partial class SourceConfigParam : Union<bool, Elastic.Clients.Elasticsearch.Fields>
+public sealed partial class SourceConfigParam : Union<bool, Elastic.Clients.Elasticsearch.Fields>
 {
 	public SourceConfigParam(bool fetch) : base(fetch)
 	{
