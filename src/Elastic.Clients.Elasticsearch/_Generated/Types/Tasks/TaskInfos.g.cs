@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Tasks;
-public partial class TaskInfos : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>, Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>>
+public sealed partial class TaskInfos : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>, Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>>
 {
 	public TaskInfos(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> flat) : base(flat)
 	{

@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
-public partial class CharFilter : Union<string, Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions>
+public sealed partial class CharFilter : Union<string, Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions>
 {
 	public CharFilter(string name) : base(name)
 	{
