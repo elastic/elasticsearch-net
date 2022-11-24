@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
-public partial class MultiSearchResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument>, Elastic.Clients.Elasticsearch.ErrorResponseBase>
+public sealed partial class MultiSearchResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument>, Elastic.Clients.Elasticsearch.ErrorResponseBase>
 {
 	public MultiSearchResponseItem(Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument> result) : base(result)
 	{

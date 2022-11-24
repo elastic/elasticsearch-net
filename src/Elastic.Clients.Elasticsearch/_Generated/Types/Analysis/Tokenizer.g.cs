@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
-public partial class Tokenizer : Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenizerDefinitions>
+public sealed partial class Tokenizer : Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenizerDefinitions>
 {
 	public Tokenizer(string name) : base(name)
 	{
