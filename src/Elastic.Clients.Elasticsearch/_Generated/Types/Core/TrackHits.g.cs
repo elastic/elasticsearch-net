@@ -26,7 +26,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
-public partial class TrackHits : Union<bool, int>
+public sealed partial class TrackHits : Union<bool, int>
 {
 	public TrackHits(bool enabled) : base(enabled)
 	{
