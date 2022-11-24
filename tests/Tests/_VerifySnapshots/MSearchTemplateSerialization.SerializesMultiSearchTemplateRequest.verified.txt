@@ -1,0 +1,4 @@
+{"index":"projects"}
+{"id":"my-search-template","params":{"query_string":"hello world","from":0}}
+{"index":"projects"}
+{"id":"my-search-template","params":{"query_type":"match_all"}}
