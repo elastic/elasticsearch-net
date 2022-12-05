@@ -240,8 +240,8 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			{
 				aliases = new Dictionary<string, object>
 				{
-					{ "projects-alias", new { } },
-					{ "projects-only", new { filter = new { term = new { join = new { value = "project" }}}} }
+					{ ProjectsAliasName, new { } },
+					{ ProjectsAliasFilter, new { filter = new { term = new { join = new { value = "project" }}}} }
 				},
 				mappings = new
 				{
