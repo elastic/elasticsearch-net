@@ -14,8 +14,6 @@ public partial class IndexRequest<TDocument> : ICustomJsonWriter
 {
 	public IndexRequest() : this(typeof(TDocument)) { }
 
-	//public IndexRequest(TDocument document) : this(typeof(TDocument)) => Document = document;
-
 	public IndexRequest(TDocument document, Id id) : this(typeof(TDocument), id) => Document = document;
 
 	protected override HttpMethod? DynamicHttpMethod => GetHttpMethod(this);
@@ -34,7 +32,6 @@ public partial class IndexRequest<TDocument> : ICustomJsonWriter
 
 public sealed partial class IndexRequestDescriptor<TDocument> : ICustomJsonWriter
 {
-	// TODO: Codegen
 	public IndexRequestDescriptor<TDocument> Document(TDocument document)
 	{
 		DocumentValue = document;

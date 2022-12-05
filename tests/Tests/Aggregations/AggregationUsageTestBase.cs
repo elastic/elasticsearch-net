@@ -39,7 +39,7 @@ public abstract class AggregationUsageTestBase<TCluster>
 
 	protected abstract Action<AggregationDescriptor<Project>> FluentAggs { get; }
 
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 	protected override SearchRequest<Project> Initializer =>
 		new(AgainstIndex)
