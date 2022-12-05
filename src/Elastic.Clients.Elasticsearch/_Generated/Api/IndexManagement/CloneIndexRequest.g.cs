@@ -46,7 +46,7 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClone;
-	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -78,7 +78,7 @@ public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClone;
-	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 	internal override bool SupportsBody => true;
 	public CloneIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CloneIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -142,7 +142,7 @@ public sealed partial class CloneIndexRequestDescriptor : RequestDescriptor<Clon
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClone;
-	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 	internal override bool SupportsBody => true;
 	public CloneIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CloneIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

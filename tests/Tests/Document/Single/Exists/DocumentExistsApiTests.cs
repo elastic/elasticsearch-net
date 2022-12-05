@@ -17,7 +17,7 @@ namespace Tests.Document.Single.Exists
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.HEAD;
 
 		protected override string ExpectedUrlPathAndQuery => $"/project/_doc/{CallIsolatedValue}?routing={CallIsolatedValue}";
 

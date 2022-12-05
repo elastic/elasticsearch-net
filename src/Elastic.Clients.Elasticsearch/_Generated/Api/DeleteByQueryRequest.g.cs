@@ -121,7 +121,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -232,7 +232,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public DeleteByQueryRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public DeleteByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
@@ -393,7 +393,7 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public DeleteByQueryRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public DeleteByQueryRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);

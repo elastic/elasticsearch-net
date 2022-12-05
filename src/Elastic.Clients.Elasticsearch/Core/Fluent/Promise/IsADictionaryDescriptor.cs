@@ -11,7 +11,7 @@ public abstract class IsADictionaryDescriptor<TDescriptor, TPromised, TKey, TVal
 	where TDescriptor : IsADictionaryDescriptor<TDescriptor, TPromised, TKey, TValue>
 	where TPromised : class, IIsADictionary<TKey, TValue>
 {
-	// This internal ctor ensures that only types defined within the client assembly can derive from this base class.
+	// This internal ctor ensures that only types defined within the Elastic.Clients.Elasticsearch assembly can derive from this base class.
 	// We don't expect consumers to derive from this public base class.
 	internal IsADictionaryDescriptor(TPromised instance) : base(instance) { }
 
