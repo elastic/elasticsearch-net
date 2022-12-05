@@ -44,7 +44,7 @@ public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamReq
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetDataStream;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -58,7 +58,7 @@ public sealed partial class GetDataStreamRequestDescriptor : RequestDescriptor<G
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetDataStream;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public GetDataStreamRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames? name)
