@@ -38,7 +38,7 @@ public sealed partial class GetEqlStatusRequest : PlainRequest<GetEqlStatusReque
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 }
 
@@ -54,7 +54,7 @@ public sealed partial class GetEqlStatusRequestDescriptor<TDocument> : RequestDe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public GetEqlStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -79,7 +79,7 @@ public sealed partial class GetEqlStatusRequestDescriptor : RequestDescriptor<Ge
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public GetEqlStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
