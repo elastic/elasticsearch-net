@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch.Fluent;
 
 public abstract class Descriptor
 {
-	// This internal ctor ensures that only types defined within the client assembly can derive from this base class.
+	// This internal ctor ensures that only types defined within the Elastic.Clients.Elasticsearch assembly can derive from this base class.
 	// We don't expect consumers to derive from this public base class.
 	internal Descriptor() { }
 
@@ -49,7 +49,7 @@ public abstract class Descriptor<TDescriptor> : Descriptor
 {
 	private readonly TDescriptor _self;
 
-	// This internal ctor ensures that only types defined within the client assembly can derive from this base class.
+	// This internal ctor ensures that only types defined within the Elastic.Clients.Elasticsearch assembly can derive from this base class.
 	// We don't expect consumers to derive from this public base class.
 	internal Descriptor() : base() => _self = (TDescriptor)this;
 
@@ -64,7 +64,7 @@ public abstract class Descriptor<TDescriptor> : Descriptor
 public abstract class SerializableDescriptor<TDescriptor> : Descriptor<TDescriptor>, ISelfSerializable
 	where TDescriptor : SerializableDescriptor<TDescriptor>
 {
-	// This internal ctor ensures that only types defined within the client assembly can derive from this base class.
+	// This internal ctor ensures that only types defined within the Elastic.Clients.Elasticsearch assembly can derive from this base class.
 	// We don't expect consumers to derive from this public base class.
 	internal SerializableDescriptor(): base() { }
 

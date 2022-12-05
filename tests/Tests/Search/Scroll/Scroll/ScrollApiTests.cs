@@ -20,7 +20,7 @@ public class ScrollApiTests
 
 	protected override bool ExpectIsValid => true;
 	protected override int ExpectStatusCode => 200;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 	protected override bool SupportsDeserialization => false;
 	protected override string ExpectedUrlPathAndQuery => $"/_search/scroll";
 

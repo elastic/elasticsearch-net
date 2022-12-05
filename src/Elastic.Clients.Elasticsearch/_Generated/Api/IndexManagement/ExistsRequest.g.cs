@@ -55,7 +55,7 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExists;
-	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -88,7 +88,7 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExists;
-	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 	internal override bool SupportsBody => false;
 	public ExistsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public ExistsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -119,7 +119,7 @@ public sealed partial class ExistsRequestDescriptor : RequestDescriptor<ExistsRe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExists;
-	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 	internal override bool SupportsBody => false;
 	public ExistsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public ExistsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);

@@ -79,7 +79,7 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearch;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -150,7 +150,7 @@ public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDes
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearch;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public MultiSearchRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public MultiSearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
@@ -212,7 +212,7 @@ public sealed partial class MultiSearchRequestDescriptor : RequestDescriptor<Mul
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearch;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public MultiSearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public MultiSearchRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);

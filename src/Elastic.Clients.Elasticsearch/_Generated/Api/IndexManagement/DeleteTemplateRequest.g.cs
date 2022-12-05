@@ -43,7 +43,7 @@ public sealed partial class DeleteTemplateRequest : PlainRequest<DeleteTemplateR
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -64,7 +64,7 @@ public sealed partial class DeleteTemplateRequestDescriptor : RequestDescriptor<
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 	internal override bool SupportsBody => false;
 	public DeleteTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public DeleteTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
