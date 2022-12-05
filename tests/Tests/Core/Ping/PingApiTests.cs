@@ -14,7 +14,7 @@ namespace Tests.Cluster.Core.Ping
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.HEAD;
 		protected override string ExpectedUrlPathAndQuery => "/";
 
 		protected override LazyResponses ClientUsage() => Calls(

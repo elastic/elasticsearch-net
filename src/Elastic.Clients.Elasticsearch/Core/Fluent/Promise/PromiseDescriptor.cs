@@ -12,7 +12,7 @@ public abstract class PromiseDescriptor<TDescriptor, TValue> : Descriptor, IProm
 {
 	internal readonly TValue PromisedValue;
 
-	// This internal ctor ensures that only types defined within the client assembly can derive from this base class.
+	// This internal ctor ensures that only types defined within the Elastic.Clients.Elasticsearch assembly can derive from this base class.
 	// We don't expect consumers to derive from this public base class.
 	internal PromiseDescriptor(TValue instance) : base()
 	{

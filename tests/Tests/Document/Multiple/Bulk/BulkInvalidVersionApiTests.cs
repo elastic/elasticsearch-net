@@ -34,7 +34,7 @@ public class BulkInvalidVersionApiTests : ApiIntegrationTestBase<WritableCluster
 		.Index(Project.Instance)
 		.Index(Project.Instance, i => i.IfSequenceNumber(-1).IfPrimaryTerm(0));
 
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 	protected override BulkRequest Initializer => new(CallIsolatedValue)
 	{

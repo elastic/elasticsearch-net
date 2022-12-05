@@ -17,7 +17,7 @@ public class ClusterHealthApiTests
 
 	protected override bool ExpectIsValid => true;
 	protected override int ExpectStatusCode => 200;
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.GET;
 	protected override string ExpectedUrlPathAndQuery => "/_cluster/health";
 
 	protected override LazyResponses ClientUsage() => Calls(
