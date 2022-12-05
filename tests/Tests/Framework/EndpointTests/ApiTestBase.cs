@@ -33,7 +33,7 @@ namespace Tests.Framework.EndpointTests
 
 		protected override IReadOnlyList<object> ExpectNdjson { get; } = null;
 
-		protected abstract HttpMethod HttpMethod { get; }
+		protected abstract HttpMethod ExpectHttpMethod { get; }
 		protected abstract string ExpectedUrlPathAndQuery { get; }
 
 		[U]
@@ -85,7 +85,7 @@ namespace Tests.Framework.EndpointTests
 		[U] protected virtual async Task HitsTheCorrectUrl() => await AssertOnAllResponses(r => AssertUrl(r.ApiCallDetails.Uri));
 
 		[U] protected virtual async Task UsesCorrectHttpMethod() =>
-			await AssertOnAllResponses(r => r.ApiCallDetails.HttpMethod.Should().Be(HttpMethod, UniqueValues.CurrentView.GetStringValue()));
+			await AssertOnAllResponses(r => r.ApiCallDetails.HttpMethod.Should().Be(ExpectHttpMethod, UniqueValues.CurrentView.GetStringValue()));
 
 		[U] protected virtual void SerializesInitializer() => RoundTripsOrSerializes(Initializer);
 

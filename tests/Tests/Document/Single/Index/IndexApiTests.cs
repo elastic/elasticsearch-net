@@ -13,6 +13,7 @@ using Tests.Framework.DocumentationTests;
 using System.Linq;
 using static Tests.Domain.Helpers.TestValueHelper;
 using Tests.Core.Client;
+using static Tests.Document.Single.Index.IndexApiWithoutIdInferenceTests;
 
 namespace Tests.Document.Single.Index;
 
@@ -46,7 +47,7 @@ public class IndexApiTests
 		.Refresh(Refresh.True)
 		.Routing("route");
 
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.PUT;
 	protected override bool IncludeNullInExpected => false;
 	protected override bool SupportsDeserialization => false;
 
@@ -79,6 +80,49 @@ public class IndexApiTests
 	);
 
 	protected override IndexRequestDescriptor<Project> NewDescriptor() => new(Document);
+}
+
+public class IndexApiWithoutIdInferenceTests
+	: ApiIntegrationTestBase<WritableCluster, IndexResponse, IndexRequestDescriptor<Thing>, IndexRequest<Thing>>
+{
+	private const string _value = "a_value";
+	private const string _index = "thing";
+
+	public IndexApiWithoutIdInferenceTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	
+	protected override object ExpectJson =>
+		new
+		{
+			value = _value
+		};
+
+	protected override bool ExpectIsValid => true;
+	protected override int ExpectStatusCode => 201;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
+	protected override bool IncludeNullInExpected => false;
+	protected override bool SupportsDeserialization => false;
+
+	protected override Action<IndexRequestDescriptor<Thing>> Fluent => s => s.Index(_index);
+	protected override IndexRequest<Thing> Initializer => new(Document, index: _index);
+
+	protected override string ExpectedUrlPathAndQuery
+		=> $"/{_index}/_doc";
+
+	private static Thing Document => new() { Value = _value };
+
+	protected override LazyResponses ClientUsage() => Calls(
+		(client, f) => client.Index(Document, f),
+		(client, f) => client.IndexAsync(Document, f),
+		(client, r) => client.Index(r),
+		(client, r) => client.IndexAsync(r)
+	);
+
+	protected override IndexRequestDescriptor<Thing> NewDescriptor() => new(Document);
+
+	public class Thing
+	{
+		public string Value { get; init; }
+	}
 }
 
 public class IndexIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>

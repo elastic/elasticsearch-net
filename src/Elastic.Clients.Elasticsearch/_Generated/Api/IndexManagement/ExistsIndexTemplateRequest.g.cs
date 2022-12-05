@@ -40,7 +40,7 @@ public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsInde
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsIndexTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -58,7 +58,7 @@ public sealed partial class ExistsIndexTemplateRequestDescriptor : RequestDescri
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsIndexTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 	internal override bool SupportsBody => false;
 	public ExistsIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public ExistsIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
