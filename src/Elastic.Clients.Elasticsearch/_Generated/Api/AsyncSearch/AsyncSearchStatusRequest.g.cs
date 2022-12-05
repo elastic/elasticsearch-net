@@ -38,7 +38,7 @@ public sealed partial class AsyncSearchStatusRequest : PlainRequest<AsyncSearchS
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchStatus;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 }
 
@@ -54,7 +54,7 @@ public sealed partial class AsyncSearchStatusRequestDescriptor<TDocument> : Requ
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchStatus;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public AsyncSearchStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -79,7 +79,7 @@ public sealed partial class AsyncSearchStatusRequestDescriptor : RequestDescript
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchStatus;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public AsyncSearchStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{

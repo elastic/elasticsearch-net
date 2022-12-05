@@ -25,7 +25,7 @@ public class SlicedScrollSearchApiTests
 	protected override bool SupportsDeserialization => false;
 	protected override string ExpectedUrlPathAndQuery => $"/_search/scroll";
 	protected override int ExpectStatusCode => 200;
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 	protected override object ExpectJson => new
 	{

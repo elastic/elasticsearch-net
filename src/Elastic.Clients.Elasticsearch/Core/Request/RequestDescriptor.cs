@@ -21,7 +21,7 @@ public abstract partial class RequestDescriptor<TDescriptor, TParameters> : Requ
 
 	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => Serialize(writer, options, settings);
 
-	// This internal ctor ensures that only types defined within the client assembly can derive from this base class.
+	// This internal ctor ensures that only types defined within the Elastic.Clients.Elasticsearch assembly can derive from this base class.
 	// We don't expect consumers to derive from this public base class.
 	internal RequestDescriptor() => _descriptor = (TDescriptor)this;
 

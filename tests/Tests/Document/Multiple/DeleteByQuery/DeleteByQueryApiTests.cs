@@ -46,7 +46,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				)
 			);
 
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 		protected override DeleteByQueryRequest Initializer => new(Indices)
 		{
