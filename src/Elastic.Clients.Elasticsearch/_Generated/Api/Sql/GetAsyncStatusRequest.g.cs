@@ -38,7 +38,7 @@ public sealed partial class GetAsyncStatusRequest : PlainRequest<GetAsyncStatusR
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 }
 
@@ -54,7 +54,7 @@ public sealed partial class GetAsyncStatusRequestDescriptor<TDocument> : Request
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public GetAsyncStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -79,7 +79,7 @@ public sealed partial class GetAsyncStatusRequestDescriptor : RequestDescriptor<
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public GetAsyncStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
