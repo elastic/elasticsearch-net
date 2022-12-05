@@ -19,7 +19,7 @@ public class DeleteApiTests
 
 	protected override bool ExpectIsValid => true;
 	protected override int ExpectStatusCode => 200;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.DELETE;
 
 	protected override Action<DeleteRequestDescriptor> Fluent => d => d.Routing(CallIsolatedValue);
 	protected override DeleteRequest Initializer => new(Infer.Index<Project>(), CallIsolatedValue) { Routing = CallIsolatedValue };
@@ -63,7 +63,7 @@ public class OriginalDeleteApiTests
 
 	protected override bool ExpectIsValid => true;
 	protected override int ExpectStatusCode => 200;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.DELETE;
 
 	protected override Action<DeleteRequestDescriptor<Project>> Fluent => d => d.Routing(CallIsolatedValue);
 	protected override DeleteRequest<Project> Initializer => new(CallIsolatedValue) { Routing = CallIsolatedValue };
@@ -105,7 +105,7 @@ public class DeleteNonExistentDocumentApiTests
 
 	protected override bool ExpectIsValid => false;
 	protected override int ExpectStatusCode => 404;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.DELETE;
 
 	protected override Action<DeleteRequestDescriptor<Project>> Fluent => d => d.Routing(CallIsolatedValue);
 	protected override DeleteRequest<Project> Initializer => new(CallIsolatedValue) { Routing = CallIsolatedValue };
@@ -143,7 +143,7 @@ public class DeleteNonExistentIndexDocumentApiTests
 	protected override bool ExpectIsValid => false;
 	protected override int ExpectStatusCode => 404;
 
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.DELETE;
 
 	protected override Action<DeleteRequestDescriptor<Project>> Fluent => d => d.Index(BadIndex).Routing(CallIsolatedValue);
 	protected override DeleteRequest<Project> Initializer => new(BadIndex, CallIsolatedValue) { Routing = CallIsolatedValue };

@@ -29,7 +29,7 @@ public class ClearScrollApiTests
 	};
 
 	protected override int ExpectStatusCode => 200;
-	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.DELETE;
 
 	protected override Action<ClearScrollRequestDescriptor> Fluent => cs => cs.ScrollId(_scrollId);
 	protected override ClearScrollRequest Initializer => new() { ScrollId = _scrollId };

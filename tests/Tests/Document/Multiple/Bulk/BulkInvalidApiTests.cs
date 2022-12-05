@@ -33,7 +33,7 @@ public class BulkInvalidApiTests : ApiIntegrationTestBase<WritableCluster, BulkR
 		.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
 		.Delete<Project>(b => b.Id(Project.Instance.Name + "1"));
 
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 	protected override BulkRequest Initializer => new(CallIsolatedValue)
 	{

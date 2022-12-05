@@ -31,7 +31,7 @@ ORDER BY numberOfContributors DESC";
 
 	protected override Action<ClearCursorRequestDescriptor> Fluent => d => d.Cursor(_currentCursor);
 
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 	protected override ClearCursorRequest Initializer => new()
 	{

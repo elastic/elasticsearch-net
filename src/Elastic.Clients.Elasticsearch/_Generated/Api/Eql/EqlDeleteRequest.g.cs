@@ -38,7 +38,7 @@ public sealed partial class EqlDeleteRequest : PlainRequest<EqlDeleteRequestPara
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
-	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 	internal override bool SupportsBody => false;
 }
 
@@ -54,7 +54,7 @@ public sealed partial class EqlDeleteRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
-	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 	internal override bool SupportsBody => false;
 	public EqlDeleteRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -79,7 +79,7 @@ public sealed partial class EqlDeleteRequestDescriptor : RequestDescriptor<EqlDe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
-	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 	internal override bool SupportsBody => false;
 	public EqlDeleteRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{

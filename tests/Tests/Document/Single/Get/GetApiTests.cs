@@ -19,7 +19,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override Action<GetRequestDescriptor<Project>> Fluent => g => g.Routing(ProjectId);
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.GET;
 
 		protected override GetRequest Initializer => new(Infer.Index<Project>(), ProjectId)
 		{
@@ -58,7 +58,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override Action<GetRequestDescriptor<Project>> Fluent => g => g.Routing(ProjectId);
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.GET;
 
 		protected override GetRequest Initializer => new(Infer.Index<Project>(), ProjectId)
 		{
@@ -112,7 +112,7 @@ namespace Tests.Document.Single.Get
 		protected override int ExpectStatusCode => 404;
 
 		protected override Action<GetRequestDescriptor<Project>> Fluent => f => { };
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.GET;
 
 		protected override GetRequest Initializer => new(BadIndex, ProjectId);
 		protected string ProjectId => CallIsolatedValue;

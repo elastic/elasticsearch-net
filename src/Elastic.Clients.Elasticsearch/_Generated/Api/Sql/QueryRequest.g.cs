@@ -34,7 +34,7 @@ public sealed class QueryRequestParameters : RequestParameters
 public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	[JsonInclude]
 	[JsonPropertyName("catalog")]
@@ -109,7 +109,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 
@@ -382,7 +382,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 
