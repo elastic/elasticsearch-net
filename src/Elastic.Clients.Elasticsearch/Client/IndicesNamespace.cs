@@ -4,6 +4,7 @@
 
 using System.Threading.Tasks;
 using System.Threading;
+using System;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
@@ -34,5 +35,21 @@ public partial class IndicesNamespacedClient
 		var request = new RefreshRequest(indices);
 		request.BeforeRequest();
 		return DoRequestAsync<RefreshRequest, RefreshResponse, RefreshRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual GetAliasResponse GetAlias(Indices indicies, Action<GetAliasRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetAliasRequestDescriptor(indicies);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetAliasResponse> GetAliasAsync(Indices indicies, Action<GetAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetAliasRequestDescriptor(indicies);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
 	}
 }
