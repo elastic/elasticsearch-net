@@ -73,7 +73,7 @@ namespace Tests.Search.Search
 				.Term(p => p.State, StateOfBeing.Stable)
 			);
 
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 		protected override SearchRequest<Project> Initializer => new()
 		{
@@ -156,7 +156,7 @@ namespace Tests.Search.Search
 				.MatchAll()
 			);
 
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 		protected override SearchRequest<Project> Initializer => new()
 		{

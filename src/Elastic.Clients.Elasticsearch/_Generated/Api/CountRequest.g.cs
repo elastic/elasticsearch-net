@@ -83,7 +83,7 @@ public partial class CountRequest : PlainRequest<CountRequestParameters>
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -144,7 +144,7 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public CountRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public CountRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
@@ -231,7 +231,7 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public CountRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public CountRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);

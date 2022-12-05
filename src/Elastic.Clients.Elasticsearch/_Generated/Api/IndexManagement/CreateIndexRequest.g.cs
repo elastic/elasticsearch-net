@@ -46,7 +46,7 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
-	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -86,7 +86,7 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
-	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 	internal override bool SupportsBody => true;
 	public CreateIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CreateIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -222,7 +222,7 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
-	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 	internal override bool SupportsBody => true;
 	public CreateIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CreateIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

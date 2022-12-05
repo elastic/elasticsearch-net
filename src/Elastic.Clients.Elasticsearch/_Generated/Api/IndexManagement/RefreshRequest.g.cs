@@ -50,7 +50,7 @@ public sealed partial class RefreshRequest : PlainRequest<RefreshRequestParamete
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -70,7 +70,7 @@ public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescrip
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	public RefreshRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public RefreshRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -94,7 +94,7 @@ public sealed partial class RefreshRequestDescriptor : RequestDescriptor<Refresh
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	public RefreshRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public RefreshRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);

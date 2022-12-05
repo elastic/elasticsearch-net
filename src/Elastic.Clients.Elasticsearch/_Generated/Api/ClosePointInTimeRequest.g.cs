@@ -34,7 +34,7 @@ public sealed class ClosePointInTimeRequestParameters : RequestParameters
 public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInTimeRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
-	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 	internal override bool SupportsBody => true;
 	[JsonInclude]
 	[JsonPropertyName("id")]
@@ -49,7 +49,7 @@ public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
-	internal override HttpMethod HttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 	internal override bool SupportsBody => true;
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 

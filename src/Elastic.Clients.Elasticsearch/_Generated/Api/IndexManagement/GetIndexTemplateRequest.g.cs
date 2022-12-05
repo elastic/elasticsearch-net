@@ -50,7 +50,7 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetIndexTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -70,7 +70,7 @@ public sealed partial class GetIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetIndexTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public GetIndexTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public GetIndexTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
