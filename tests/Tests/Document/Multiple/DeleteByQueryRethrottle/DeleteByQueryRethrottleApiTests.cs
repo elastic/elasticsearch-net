@@ -29,7 +29,7 @@ public class DeleteByQueryRethrottleApiTests
 	protected override Action<DeleteByQueryRethrottleRequestDescriptor> Fluent => d => d
 		.RequestsPerSecond(-1);
 
-	protected override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 	protected override DeleteByQueryRethrottleRequest Initializer => new(TaskId.ToString())
 	{

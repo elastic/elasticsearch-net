@@ -67,7 +67,7 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExists;
-	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -132,7 +132,7 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExists;
-	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 	internal override bool SupportsBody => false;
 	public ExistsRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public ExistsRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
@@ -173,7 +173,7 @@ public sealed partial class ExistsRequestDescriptor : RequestDescriptor<ExistsRe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExists;
-	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 	internal override bool SupportsBody => false;
 	public ExistsRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public ExistsRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
