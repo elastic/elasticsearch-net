@@ -25,7 +25,7 @@ namespace Tests.Search.Count
 		protected override Action<CountRequestDescriptor<Project>> Fluent => c => c
 			.Query(q => q.Match(m => m.Field(f => f.Name).Query("NEST")));
 
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 		protected override CountRequest<Project> Initializer => new()
 		{
@@ -62,7 +62,7 @@ namespace Tests.Search.Count
 			.Indices("project")
 			.Query(q => q.Match(m => m.Field(Infer.Field<Project>(f => f.Name)).Query("NEST")));
 
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 		protected override CountRequest<Project> Initializer => new()
 		{
@@ -98,7 +98,7 @@ namespace Tests.Search.Count
 		protected override Action<CountRequestDescriptor<Project>> Fluent => c =>
 			c.Query(q => q.Match(m => m.Field(f => f.Name).Query("NEST")));
 
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 		protected override CountRequest<Project> Initializer => new()
 		{

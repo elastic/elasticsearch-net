@@ -57,7 +57,7 @@ public sealed class ReindexRequestParameters : RequestParameters
 public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
@@ -116,7 +116,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public ReindexRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public ReindexRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
@@ -289,7 +289,7 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public ReindexRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public ReindexRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);

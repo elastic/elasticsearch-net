@@ -59,7 +59,7 @@ public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsReque
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -88,7 +88,7 @@ public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	public SearchShardsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SearchShardsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -115,7 +115,7 @@ public sealed partial class SearchShardsRequestDescriptor : RequestDescriptor<Se
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	public SearchShardsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SearchShardsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);

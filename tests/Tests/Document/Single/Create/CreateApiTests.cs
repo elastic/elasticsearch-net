@@ -52,7 +52,7 @@ namespace Tests.Document.Single.Create
 			.Refresh(Refresh.True)
 			.Routing("route");
 
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.PUT;
 		protected override bool IncludeNullInExpected => false;
 
 		protected override CreateRequest<Project> Initializer =>

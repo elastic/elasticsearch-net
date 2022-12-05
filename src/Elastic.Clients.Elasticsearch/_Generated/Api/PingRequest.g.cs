@@ -34,7 +34,7 @@ public sealed class PingRequestParameters : RequestParameters
 public sealed partial class PingRequest : PlainRequest<PingRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 	internal override bool SupportsBody => false;
 }
 
@@ -46,7 +46,7 @@ public sealed partial class PingRequestDescriptor : RequestDescriptor<PingReques
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-	internal override HttpMethod HttpMethod => HttpMethod.HEAD;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 	internal override bool SupportsBody => false;
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

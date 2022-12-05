@@ -53,7 +53,7 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRollover;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
@@ -100,7 +100,7 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRollover;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public RolloverRequestDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
 	public RolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

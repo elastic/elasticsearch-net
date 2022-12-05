@@ -34,7 +34,7 @@ namespace Tests.Document.Single.Update
 			.DocAsUpsert()
 			.DetectNoop();
 
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
 		protected override UpdateRequest<Project, Project> Initializer => new(Infer.Index<Project>(), CallIsolatedValue)
 		{

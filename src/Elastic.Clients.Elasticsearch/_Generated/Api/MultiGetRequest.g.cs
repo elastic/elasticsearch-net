@@ -65,7 +65,7 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMget;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -108,7 +108,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMget;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public MultiGetRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public MultiGetRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
@@ -228,7 +228,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMget;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public MultiGetRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public MultiGetRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);

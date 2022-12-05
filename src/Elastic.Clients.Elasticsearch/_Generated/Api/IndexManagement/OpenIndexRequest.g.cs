@@ -55,7 +55,7 @@ public sealed partial class OpenIndexRequest : PlainRequest<OpenIndexRequestPara
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementOpen;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -88,7 +88,7 @@ public sealed partial class OpenIndexRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementOpen;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	public OpenIndexRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public OpenIndexRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -119,7 +119,7 @@ public sealed partial class OpenIndexRequestDescriptor : RequestDescriptor<OpenI
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementOpen;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	public OpenIndexRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public OpenIndexRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
