@@ -21,7 +21,7 @@ public class ClusterHealthShardsApiTests
 	protected override bool ExpectIsValid => true;
 	protected override int ExpectStatusCode => 200;
 
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.GET;
 	protected override Action<HealthRequestDescriptor> Fluent => c => c.Level(Level.Shards);
 	protected override HealthRequest Initializer => new() { Level = Level.Shards };
 	protected override string ExpectedUrlPathAndQuery => "/_cluster/health?level=shards";

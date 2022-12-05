@@ -18,7 +18,7 @@ public class GetMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, GetMap
 	protected override bool ExpectIsValid => true;
 	protected override int ExpectStatusCode => 200;
 	protected override string ExpectedUrlPathAndQuery => "/project/_mapping?ignore_unavailable=true";
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.GET;
 	protected override Action<GetMappingRequestDescriptor<Project>> Fluent => c => c.Indices(Infer.Index<Project>()).IgnoreUnavailable();
 	protected override GetMappingRequest Initializer => new(Infer.Index<Project>()) { IgnoreUnavailable = true };
 
@@ -63,7 +63,7 @@ public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<ReadOnl
 	protected override bool ExpectIsValid => false;
 	protected override int ExpectStatusCode => 404;
 	protected override string ExpectedUrlPathAndQuery => $"/{NonExistentIndex}/_mapping";
-	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod ExpectHttpMethod => HttpMethod.GET;
 	protected override Action<GetMappingRequestDescriptor<Project>> Fluent => c => c.Indices(NonExistentIndex);
 	protected override GetMappingRequest Initializer => new(NonExistentIndex);
 

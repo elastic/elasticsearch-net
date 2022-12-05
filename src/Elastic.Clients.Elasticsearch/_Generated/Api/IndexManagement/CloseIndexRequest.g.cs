@@ -55,7 +55,7 @@ public sealed partial class CloseIndexRequest : PlainRequest<CloseIndexRequestPa
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClose;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -88,7 +88,7 @@ public sealed partial class CloseIndexRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClose;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	public CloseIndexRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public CloseIndexRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -119,7 +119,7 @@ public sealed partial class CloseIndexRequestDescriptor : RequestDescriptor<Clos
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClose;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	public CloseIndexRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public CloseIndexRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);

@@ -47,7 +47,7 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePutScript;
-	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -76,7 +76,7 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePutScript;
-	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 	internal override bool SupportsBody => true;
 	public PutScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutScriptRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -161,7 +161,7 @@ public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutSc
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePutScript;
-	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 	internal override bool SupportsBody => true;
 	public PutScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
