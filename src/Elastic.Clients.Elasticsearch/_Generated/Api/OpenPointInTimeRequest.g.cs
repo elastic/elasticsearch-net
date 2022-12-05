@@ -43,7 +43,7 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration>("keep_alive"); set => Q("keep_alive", value); }
@@ -64,7 +64,7 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	public OpenPointInTimeRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public OpenPointInTimeRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration keepAlive) => Qs("keep_alive", keepAlive);
@@ -91,7 +91,7 @@ public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => false;
 	public OpenPointInTimeRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public OpenPointInTimeRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration keepAlive) => Qs("keep_alive", keepAlive);

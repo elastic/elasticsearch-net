@@ -50,7 +50,7 @@ public sealed partial class GetTemplateRequest : PlainRequest<GetTemplateRequest
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
@@ -70,7 +70,7 @@ public sealed partial class GetTemplateRequestDescriptor : RequestDescriptor<Get
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public GetTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public GetTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);

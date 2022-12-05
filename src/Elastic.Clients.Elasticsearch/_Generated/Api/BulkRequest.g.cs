@@ -68,7 +68,7 @@ public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
@@ -106,7 +106,7 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public BulkRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public BulkRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
@@ -136,7 +136,7 @@ public sealed partial class BulkRequestDescriptor : RequestDescriptor<BulkReques
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public BulkRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public BulkRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);

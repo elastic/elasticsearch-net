@@ -49,7 +49,7 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
@@ -76,7 +76,7 @@ public sealed partial class GetAsyncRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public GetAsyncRequestDescriptor<TDocument> Delimiter(string? delimiter) => Qs("delimiter", delimiter);
 	public GetAsyncRequestDescriptor<TDocument> Format(string? format) => Qs("format", format);
@@ -105,7 +105,7 @@ public sealed partial class GetAsyncRequestDescriptor : RequestDescriptor<GetAsy
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public GetAsyncRequestDescriptor Delimiter(string? delimiter) => Qs("delimiter", delimiter);
 	public GetAsyncRequestDescriptor Format(string? format) => Qs("format", format);

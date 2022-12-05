@@ -43,7 +43,7 @@ public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
@@ -64,7 +64,7 @@ public sealed partial class EqlGetRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public EqlGetRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 	public EqlGetRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
@@ -91,7 +91,7 @@ public sealed partial class EqlGetRequestDescriptor : RequestDescriptor<EqlGetRe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public EqlGetRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 	public EqlGetRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
