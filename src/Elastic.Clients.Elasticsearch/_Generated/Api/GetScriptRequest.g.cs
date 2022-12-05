@@ -40,7 +40,7 @@ public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestPara
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -58,7 +58,7 @@ public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public GetScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public GetScriptRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
@@ -84,7 +84,7 @@ public sealed partial class GetScriptRequestDescriptor : RequestDescriptor<GetSc
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
-	internal override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 	internal override bool SupportsBody => false;
 	public GetScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public GetScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)

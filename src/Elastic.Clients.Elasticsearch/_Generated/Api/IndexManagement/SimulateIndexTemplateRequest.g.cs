@@ -43,7 +43,7 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateIndexTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
@@ -96,7 +96,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateIndexTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public SimulateIndexTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
 	public SimulateIndexTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
@@ -301,7 +301,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateIndexTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public SimulateIndexTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public SimulateIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

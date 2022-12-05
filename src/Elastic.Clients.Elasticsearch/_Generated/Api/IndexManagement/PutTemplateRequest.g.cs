@@ -49,7 +49,7 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 	internal override bool SupportsBody => true;
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
@@ -100,7 +100,7 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
-	internal override HttpMethod HttpMethod => HttpMethod.PUT;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 	internal override bool SupportsBody => true;
 	public PutTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public PutTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);

@@ -38,7 +38,7 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	[JsonInclude]
 	[JsonPropertyName("field")]
@@ -85,7 +85,7 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public TermsEnumRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
@@ -244,7 +244,7 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
-	internal override HttpMethod HttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
 	public TermsEnumRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
