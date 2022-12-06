@@ -16,8 +16,11 @@ public sealed class Timestamp : IUrlParameter, IEquatable<Timestamp>
 
 	public bool Equals(Timestamp other) => Value == other.Value;
 
-	// ReSharper disable once ImpureMethodCallOnReadonlyValueField
-	public string GetString(ITransportConfiguration settings) => Value.ToString(CultureInfo.InvariantCulture);
+	string IUrlParameter.GetString(ITransportConfiguration settings) => GetString();
+
+	public override string ToString() => GetString();
+
+	private string GetString() => Value.ToString(CultureInfo.InvariantCulture);
 
 	public static implicit operator Timestamp(DateTimeOffset categoryId) => new(categoryId.ToUnixTimeMilliseconds());
 

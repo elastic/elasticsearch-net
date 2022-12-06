@@ -405,7 +405,7 @@ public sealed partial class TermsAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public int? MinDocCount { get; set; }
 
@@ -456,7 +456,7 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private int? MinDocCountValue { get; set; }
 
@@ -763,7 +763,7 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private int? MinDocCountValue { get; set; }
 

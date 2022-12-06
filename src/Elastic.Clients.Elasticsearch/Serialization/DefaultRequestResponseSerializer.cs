@@ -29,7 +29,6 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 				{
 					new KeyValuePairConverterFactory(settings),
 					new SourceConverterFactory(settings),
-					new ReadOnlyIndexNameDictionaryConverterFactory(settings),
 					new CalendarIntervalConverter(),
 					new IndexNameConverter(settings),
 					new ObjectToInferredTypesConverter(),
@@ -47,6 +46,7 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 					new IndicesJsonConverter(settings),
 					new IdsConverter(settings),
 					new IsADictionaryConverterFactory(),
+					//new ResolvableReadonlyDictionaryConverterFactory(settings),
 					new ResponseItemConverterFactory(),
 					new UnionConverter(),
 					new ExtraSerializationData(settings),

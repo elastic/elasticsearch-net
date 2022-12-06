@@ -45,7 +45,7 @@ public sealed partial class AsyncSearch<TDocument>
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public Dictionary<string, object>? Fields { get; init; }
+	public IReadOnlyDictionary<string, object>? Fields { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("hits")]

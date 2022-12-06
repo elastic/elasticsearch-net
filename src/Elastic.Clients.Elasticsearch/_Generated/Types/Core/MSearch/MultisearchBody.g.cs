@@ -45,7 +45,7 @@ public sealed partial class MultisearchBody
 
 	[JsonInclude]
 	[JsonPropertyName("ext")]
-	public Dictionary<string, object>? Ext { get; set; }
+	public IDictionary<string, object>? Ext { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
@@ -61,7 +61,7 @@ public sealed partial class MultisearchBody
 
 	[JsonInclude]
 	[JsonPropertyName("indices_boost")]
-	public ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
+	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("knn")]
@@ -93,11 +93,11 @@ public sealed partial class MultisearchBody
 
 	[JsonInclude]
 	[JsonPropertyName("runtime_mappings")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("script_fields")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("search_after")]
@@ -222,11 +222,11 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 
 	private bool? ExplainValue { get; set; }
 
-	private Dictionary<string, object>? ExtValue { get; set; }
+	private IDictionary<string, object>? ExtValue { get; set; }
 
 	private int? FromValue { get; set; }
 
-	private ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 
 	private double? MinScoreValue { get; set; }
 
@@ -238,9 +238,9 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 
 	private bool? ProfileValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
@@ -556,7 +556,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor<TDocument> IndicesBoost(ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public MultisearchBodyDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
@@ -1122,11 +1122,11 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 
 	private bool? ExplainValue { get; set; }
 
-	private Dictionary<string, object>? ExtValue { get; set; }
+	private IDictionary<string, object>? ExtValue { get; set; }
 
 	private int? FromValue { get; set; }
 
-	private ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 
 	private double? MinScoreValue { get; set; }
 
@@ -1138,9 +1138,9 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 
 	private bool? ProfileValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
@@ -1456,7 +1456,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
-	public MultisearchBodyDescriptor IndicesBoost(ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public MultisearchBodyDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;

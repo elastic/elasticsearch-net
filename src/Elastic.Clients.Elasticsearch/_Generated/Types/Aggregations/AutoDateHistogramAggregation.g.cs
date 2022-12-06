@@ -115,7 +115,7 @@ internal sealed class AutoDateHistogramAggregationConverter : JsonConverter<Auto
 				if (reader.ValueTextEquals("params"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Params = value;
@@ -273,7 +273,7 @@ public sealed partial class AutoDateHistogramAggregation : SearchAggregation
 
 	public string? Format { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
 
@@ -283,7 +283,7 @@ public sealed partial class AutoDateHistogramAggregation : SearchAggregation
 
 	public string? Offset { get; set; }
 
-	public Dictionary<string, object>? Params { get; set; }
+	public IDictionary<string, object>? Params { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
@@ -309,7 +309,7 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumIntervalValue { get; set; }
 
@@ -317,7 +317,7 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 
 	private string? OffsetValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
@@ -518,7 +518,7 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumIntervalValue { get; set; }
 
@@ -526,7 +526,7 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 
 	private string? OffsetValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 

@@ -47,7 +47,8 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 
 	[JsonInclude]
 	[JsonPropertyName("indices")]
-	public Elastic.Clients.Elasticsearch.ReadOnlyIndexNameDictionary<Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>? Indices { get; init; }
+	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats))]
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>? Indices { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("initializing_shards")]

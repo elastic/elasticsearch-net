@@ -27,5 +27,5 @@ public sealed partial class UpdateByQueryRethrottleResponse : ElasticsearchRespo
 {
 	[JsonInclude]
 	[JsonPropertyName("nodes")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.Core.UpdateByQueryRethrottle.UpdateByQueryRethrottleNode> Nodes { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.UpdateByQueryRethrottle.UpdateByQueryRethrottleNode> Nodes { get; init; }
 }
