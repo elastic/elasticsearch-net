@@ -97,7 +97,7 @@ public sealed partial class DynamicProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("norms")]
@@ -201,7 +201,7 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 
 	private string? LocaleValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? NormsValue { get; set; }
 
@@ -738,7 +738,7 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 
 	private string? LocaleValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? NormsValue { get; set; }
 

@@ -29,7 +29,7 @@ public sealed partial class PhraseSuggestCollate
 {
 	[JsonInclude]
 	[JsonPropertyName("params")]
-	public Dictionary<string, object>? Params { get; set; }
+	public IDictionary<string, object>? Params { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("prune")]
@@ -47,7 +47,7 @@ public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescrip
 	{
 	}
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private bool? PruneValue { get; set; }
 

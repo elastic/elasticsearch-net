@@ -144,7 +144,7 @@ public sealed partial class TTestAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public override string? Name { get; internal set; }
 
@@ -170,7 +170,7 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 
 	private Action<TestPopulationDescriptor<TDocument>> bDescriptorAction { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
 
@@ -307,7 +307,7 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 
 	private Action<TestPopulationDescriptor> bDescriptorAction { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
 

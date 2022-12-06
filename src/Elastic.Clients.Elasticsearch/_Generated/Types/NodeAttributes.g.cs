@@ -29,7 +29,7 @@ public sealed partial class NodeAttributes
 {
 	[JsonInclude]
 	[JsonPropertyName("attributes")]
-	public Dictionary<string, string> Attributes { get; init; }
+	public IReadOnlyDictionary<string, string> Attributes { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("ephemeral_id")]

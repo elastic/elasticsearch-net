@@ -33,11 +33,11 @@ public sealed partial class InlineScript
 
 	[JsonInclude]
 	[JsonPropertyName("options")]
-	public Dictionary<string, string>? Options { get; set; }
+	public IDictionary<string, string>? Options { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("params")]
-	public Dictionary<string, object>? Params { get; set; }
+	public IDictionary<string, object>? Params { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("source")]
@@ -53,9 +53,9 @@ public sealed partial class InlineScriptDescriptor : SerializableDescriptor<Inli
 
 	private Elastic.Clients.Elasticsearch.ScriptLanguage? LanguageValue { get; set; }
 
-	private Dictionary<string, string>? OptionsValue { get; set; }
+	private IDictionary<string, string>? OptionsValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private string SourceValue { get; set; }
 

@@ -61,7 +61,7 @@ public sealed partial class SearchAsYouTypeProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("norms")]
@@ -119,7 +119,7 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 
 	private int? MaxShingleSizeValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? NormsValue { get; set; }
 
@@ -390,7 +390,7 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 
 	private int? MaxShingleSizeValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? NormsValue { get; set; }
 
