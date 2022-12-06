@@ -65,7 +65,7 @@ public sealed partial class KeywordProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("normalizer")]
@@ -129,7 +129,7 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private string? NormalizerValue { get; set; }
 
@@ -428,7 +428,7 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private string? NormalizerValue { get; set; }
 

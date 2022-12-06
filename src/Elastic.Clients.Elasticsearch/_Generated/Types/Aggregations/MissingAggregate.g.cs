@@ -38,7 +38,7 @@ public sealed partial class MissingAggregate : AggregateDictionary, IAggregate
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, object>? Meta { get; init; }
+	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 }
 
 internal sealed class MissingAggregateConverter : JsonConverter<MissingAggregate>
@@ -49,7 +49,7 @@ internal sealed class MissingAggregateConverter : JsonConverter<MissingAggregate
 			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
 		var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
 		long docCount = default;
-		Dictionary<string, object>? meta = default;
+		IReadOnlyDictionary<string, object>? meta = default;
 		while (reader.Read())
 		{
 			if (reader.TokenType == JsonTokenType.EndObject)
@@ -66,7 +66,7 @@ internal sealed class MissingAggregateConverter : JsonConverter<MissingAggregate
 
 			if (name.Equals("meta", StringComparison.Ordinal))
 			{
-				meta = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+				meta = JsonSerializer.Deserialize<IReadOnlyDictionary<string, object>?>(ref reader, options);
 				continue;
 			}
 

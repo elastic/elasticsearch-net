@@ -43,7 +43,7 @@ internal sealed class AdjacencyMatrixAggregationConverter : JsonConverter<Adjace
 				if (reader.ValueTextEquals("filters"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Filters = value;
@@ -123,9 +123,9 @@ public sealed partial class AdjacencyMatrixAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 
-	public Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filters { get; set; }
+	public IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filters { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public override string? Name { get; internal set; }
 }
@@ -143,9 +143,9 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : Se
 
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	public AdjacencyMatrixAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 	{
@@ -234,9 +234,9 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableD
 
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	public AdjacencyMatrixAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 	{

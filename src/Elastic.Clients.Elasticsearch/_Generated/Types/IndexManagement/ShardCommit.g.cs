@@ -41,5 +41,5 @@ public sealed partial class ShardCommit
 
 	[JsonInclude]
 	[JsonPropertyName("user_data")]
-	public Dictionary<string, string> UserData { get; init; }
+	public IReadOnlyDictionary<string, string> UserData { get; init; }
 }

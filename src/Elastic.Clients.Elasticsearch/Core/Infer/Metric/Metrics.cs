@@ -7,7 +7,7 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public class Metrics : IEquatable<Metrics>, IUrlParameter
+public sealed class Metrics : IEquatable<Metrics>, IUrlParameter
 {
 	// TODO: Complete this
 
@@ -27,7 +27,7 @@ public class Metrics : IEquatable<Metrics>, IUrlParameter
 
 	public bool Equals(Metrics other) => Value.Equals(other.Value);
 
-	public string GetString(ITransportConfiguration settings) => string.Empty; // TODO Value.GetStringValue();
+	string IUrlParameter.GetString(ITransportConfiguration settings) => string.Empty; // TODO Value.GetStringValue();
 
 	//public static implicit operator Metrics(IndicesStatsMetric metric) => new Metrics(metric);
 

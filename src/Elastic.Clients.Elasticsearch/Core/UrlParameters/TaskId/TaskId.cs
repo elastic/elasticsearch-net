@@ -5,7 +5,6 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Runtime;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -47,7 +46,7 @@ public sealed class TaskId : IUrlParameter, IEquatable<TaskId>
 
 	public bool Equals(TaskId other) => EqualsString(other?.FullyQualifiedId);
 
-	public string GetString(ITransportConfiguration settings) => FullyQualifiedId;
+	string IUrlParameter.GetString(ITransportConfiguration settings) => FullyQualifiedId;
 
 	public override string ToString() => FullyQualifiedId;
 
@@ -77,7 +76,7 @@ internal sealed class TaskIdConverter : JsonConverter<TaskId>
 	{
 		if (options.TryGetClientSettings(out var settings))
 		{
-			writer.WritePropertyName(value.GetString(settings));
+			writer.WritePropertyName(((IUrlParameter)value).GetString(settings));
 			return;
 		}
 

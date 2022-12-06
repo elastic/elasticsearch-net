@@ -33,7 +33,7 @@ public sealed partial class RemoteSource
 
 	[JsonInclude]
 	[JsonPropertyName("headers")]
-	public Dictionary<string, string>? Headers { get; set; }
+	public IDictionary<string, string>? Headers { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("host")]
@@ -61,7 +61,7 @@ public sealed partial class RemoteSourceDescriptor : SerializableDescriptor<Remo
 
 	private Elastic.Clients.Elasticsearch.Duration? ConnectTimeoutValue { get; set; }
 
-	private Dictionary<string, string>? HeadersValue { get; set; }
+	private IDictionary<string, string>? HeadersValue { get; set; }
 
 	private string HostValue { get; set; }
 

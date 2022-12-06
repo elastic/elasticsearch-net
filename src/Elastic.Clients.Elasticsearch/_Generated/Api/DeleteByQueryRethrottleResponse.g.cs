@@ -31,7 +31,7 @@ public sealed partial class DeleteByQueryRethrottleResponse : ElasticsearchRespo
 
 	[JsonInclude]
 	[JsonPropertyName("nodes")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.NodeTasks>? Nodes { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.NodeTasks>? Nodes { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("task_failures")]

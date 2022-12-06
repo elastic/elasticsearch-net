@@ -29,7 +29,7 @@ public sealed partial class TopMetrics
 {
 	[JsonInclude]
 	[JsonPropertyName("metrics")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.FieldValue>? Metrics { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldValue>? Metrics { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("sort")]

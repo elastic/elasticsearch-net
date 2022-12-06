@@ -4,6 +4,7 @@
 
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.QueryDsl;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tests.Serialization;
 using VerifyXunit;
@@ -30,7 +31,7 @@ public class CreateIndexSerializationTests : SerializerTestBase
 
 		var createRequest = new CreateIndexRequest("test")
 		{
-			Aliases = new()
+			Aliases = new Dictionary<Name, Alias>()
 			{
 				{  "alias_1", alias1 },
 				{  "alias_2", alias2 }

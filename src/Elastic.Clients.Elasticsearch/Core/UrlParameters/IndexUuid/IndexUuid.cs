@@ -26,7 +26,9 @@ public sealed class IndexUuid : IUrlParameter, IEquatable<IndexUuid>
 		return false;
 	}
 
-	public string GetString(ITransportConfiguration settings) => Value;
+	string IUrlParameter.GetString(ITransportConfiguration settings) => Value;
+
+	public override string ToString() => Value;
 
 	public override bool Equals(object obj)
 	{

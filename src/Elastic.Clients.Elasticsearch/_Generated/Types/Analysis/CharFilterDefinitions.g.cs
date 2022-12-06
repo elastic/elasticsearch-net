@@ -38,11 +38,11 @@ public partial class CharFilterDefinitions : IsADictionary<string, ICharFilterDe
 	}
 
 	public void Add(string name, ICharFilterDefinition charFilterDefinition) => BackingDictionary.Add(Sanitize(name), charFilterDefinition);
-	public bool TryGetCharFilterDefinition(string name, [NotNullWhen(returnValue: true)] out ICharFilterDefinition charFilterDefinition) => BackingDictionary.TryGetValue(name, out charFilterDefinition);
+	public bool TryGetCharFilterDefinition(string name, [NotNullWhen(returnValue: true)] out ICharFilterDefinition charFilterDefinition) => BackingDictionary.TryGetValue(Sanitize(name), out charFilterDefinition);
 	public bool TryGetCharFilterDefinition<T>(string name, [NotNullWhen(returnValue: true)] out T? charFilterDefinition)
 		where T : class, ICharFilterDefinition
 	{
-		if (BackingDictionary.TryGetValue(name, out var matchedValue) && matchedValue is T finalValue)
+		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
 		{
 			charFilterDefinition = finalValue;
 			return true;

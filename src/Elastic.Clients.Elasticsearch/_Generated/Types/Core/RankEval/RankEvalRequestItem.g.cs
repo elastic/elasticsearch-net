@@ -33,7 +33,7 @@ public sealed partial class RankEvalRequestItem
 
 	[JsonInclude]
 	[JsonPropertyName("params")]
-	public Dictionary<string, object>? Params { get; set; }
+	public IDictionary<string, object>? Params { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("ratings")]
@@ -63,7 +63,7 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> RatingsValue { get; set; }
 
@@ -236,7 +236,7 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> RatingsValue { get; set; }
 
