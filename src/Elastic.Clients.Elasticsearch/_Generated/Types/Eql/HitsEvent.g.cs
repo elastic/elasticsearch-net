@@ -41,5 +41,6 @@ public sealed partial class HitsEvent<TEvent>
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? Fields { get; init; }
+	[ReadOnlyFieldDictionaryConverter(typeof(IReadOnlyCollection<object>))]
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? Fields { get; init; }
 }

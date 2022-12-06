@@ -27,11 +27,11 @@ public sealed partial class RankEvalResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("details")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> Details { get; init; }
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> Details { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("failures")]
-	public Dictionary<string, object> Failures { get; init; }
+	public IReadOnlyDictionary<string, object> Failures { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("metric_score")]

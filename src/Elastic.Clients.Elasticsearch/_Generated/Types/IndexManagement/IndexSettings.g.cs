@@ -824,7 +824,7 @@ public sealed partial class IndexSettings
 
 	public Union<int?, string?>? NumberOfShards { get; set; }
 
-	public Dictionary<string, object> OtherSettings { get; set; }
+	public IDictionary<string, object> OtherSettings { get; set; }
 
 	public Union<int?, string?>? Priority { get; set; }
 
@@ -1000,7 +1000,7 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 
 	private Union<int?, string?>? NumberOfShardsValue { get; set; }
 
-	private Dictionary<string, object> OtherSettingsValue { get; set; }
+	private IDictionary<string, object> OtherSettingsValue { get; set; }
 
 	private Union<int?, string?>? PriorityValue { get; set; }
 
@@ -2533,7 +2533,7 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 
 	private Union<int?, string?>? NumberOfShardsValue { get; set; }
 
-	private Dictionary<string, object> OtherSettingsValue { get; set; }
+	private IDictionary<string, object> OtherSettingsValue { get; set; }
 
 	private Union<int?, string?>? PriorityValue { get; set; }
 

@@ -247,7 +247,7 @@ public sealed partial class MultiTermsAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public long? MinDocCount { get; set; }
 
@@ -290,7 +290,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private long? MinDocCountValue { get; set; }
 
@@ -540,7 +540,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private long? MinDocCountValue { get; set; }
 

@@ -59,11 +59,11 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 
 	[JsonInclude]
 	[JsonPropertyName("aliases")]
-	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("settings")]
-	public Dictionary<string, object>? Settings { get; set; }
+	public IDictionary<string, object>? Settings { get; set; }
 }
 
 public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDescriptor<CloneIndexRequestDescriptor<TDocument>, CloneIndexRequestParameters>
@@ -95,9 +95,9 @@ public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
-	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
-	private Dictionary<string, object>? SettingsValue { get; set; }
+	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	public CloneIndexRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
 	{
@@ -159,9 +159,9 @@ public sealed partial class CloneIndexRequestDescriptor : RequestDescriptor<Clon
 		return Self;
 	}
 
-	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
-	private Dictionary<string, object>? SettingsValue { get; set; }
+	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	public CloneIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
 	{

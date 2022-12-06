@@ -33,7 +33,7 @@ public sealed partial class StoredScriptId
 
 	[JsonInclude]
 	[JsonPropertyName("params")]
-	public Dictionary<string, object>? Params { get; set; }
+	public IDictionary<string, object>? Params { get; set; }
 }
 
 public sealed partial class StoredScriptIdDescriptor : SerializableDescriptor<StoredScriptIdDescriptor>
@@ -45,7 +45,7 @@ public sealed partial class StoredScriptIdDescriptor : SerializableDescriptor<St
 
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	public StoredScriptIdDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{

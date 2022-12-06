@@ -7,6 +7,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Tests.Document.Single.Update;
 
@@ -27,7 +28,7 @@ public class UpdateDocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Wr
 	{
 		Source = "ctx._source.counter += params.count",
 		Language = ScriptLanguage.Painless,
-		Params = new() { { "count", 4 } }
+		Params = new Dictionary<string, object>() { { "count", 4 } }
 	});
 
 	public UpdateDocumentsCoordinatedTests(WritableCluster cluster, EndpointUsage usage) : base(

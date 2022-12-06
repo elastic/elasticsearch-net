@@ -139,7 +139,7 @@ internal sealed class DateHistogramAggregationConverter : JsonConverter<DateHist
 				if (reader.ValueTextEquals("params"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Params = value;
@@ -311,7 +311,7 @@ public sealed partial class DateHistogramAggregation : SearchAggregation
 
 	public string? Format { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public int? MinDocCount { get; set; }
 
@@ -324,7 +324,7 @@ public sealed partial class DateHistogramAggregation : SearchAggregation
 	[JsonConverter(typeof(AggregateOrderConverter))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
-	public Dictionary<string, object>? Params { get; set; }
+	public IDictionary<string, object>? Params { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
@@ -352,7 +352,7 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private int? MinDocCountValue { get; set; }
 
@@ -362,7 +362,7 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
@@ -589,7 +589,7 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private int? MinDocCountValue { get; set; }
 
@@ -599,7 +599,7 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 

@@ -81,7 +81,7 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 
 	[JsonInclude]
 	[JsonPropertyName("_meta")]
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 }
 
 public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : RequestDescriptor<SimulateIndexTemplateRequestDescriptor<TDocument>, SimulateIndexTemplateRequestParameters>
@@ -112,7 +112,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 
 	private Action<IndexTemplateMappingDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private bool? AllowAutoCreateValue { get; set; }
 
@@ -317,7 +317,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 
 	private Action<IndexTemplateMappingDescriptor> TemplateDescriptorAction { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private bool? AllowAutoCreateValue { get; set; }
 

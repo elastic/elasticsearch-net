@@ -45,7 +45,7 @@ public sealed partial class Source
 
 	[JsonInclude]
 	[JsonPropertyName("runtime_mappings")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("size")]
@@ -98,7 +98,7 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 
 	private Action<RemoteSourceDescriptor> RemoteDescriptorAction { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 	private int? SizeValue { get; set; }
 
@@ -375,7 +375,7 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 
 	private Action<RemoteSourceDescriptor> RemoteDescriptorAction { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 	private int? SizeValue { get; set; }
 
