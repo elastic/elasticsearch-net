@@ -29,7 +29,7 @@ public sealed partial class CompositeAggregate : IAggregate
 {
 	[JsonInclude]
 	[JsonPropertyName("after_key")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? AfterKey { get; init; }
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? AfterKey { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("buckets")]
@@ -37,5 +37,5 @@ public sealed partial class CompositeAggregate : IAggregate
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, object>? Meta { get; init; }
+	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 }

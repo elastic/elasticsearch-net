@@ -31,7 +31,7 @@ public sealed partial class IndicesStatsResponse : ElasticsearchResponse
 
 	[JsonInclude]
 	[JsonPropertyName("indices")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats>? Indices { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats>? Indices { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("_shards")]

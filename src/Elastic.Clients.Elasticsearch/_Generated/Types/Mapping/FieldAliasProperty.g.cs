@@ -41,7 +41,7 @@ public sealed partial class FieldAliasProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("path")]
@@ -69,7 +69,7 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 
 	private int? IgnoreAboveValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
 
@@ -206,7 +206,7 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 
 	private int? IgnoreAboveValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
 

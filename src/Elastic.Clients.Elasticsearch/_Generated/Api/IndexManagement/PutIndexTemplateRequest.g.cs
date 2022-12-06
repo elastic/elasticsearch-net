@@ -71,7 +71,7 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 
 	[JsonInclude]
 	[JsonPropertyName("_meta")]
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 }
 
 public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : RequestDescriptor<PutIndexTemplateRequestDescriptor<TDocument>, PutIndexTemplateRequestParameters>
@@ -101,7 +101,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 
 	private Action<IndexTemplateMappingDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
 
@@ -291,7 +291,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 
 	private Action<IndexTemplateMappingDescriptor> TemplateDescriptorAction { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
 
