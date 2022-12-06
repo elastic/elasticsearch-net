@@ -79,7 +79,7 @@ internal sealed class SuggesterConverter : JsonConverter<Suggester>
 [JsonConverter(typeof(SuggesterConverter))]
 public sealed partial class Suggester
 {
-	public Dictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester> Suggesters { get; set; }
+	public IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester> Suggesters { get; set; }
 
 	public string? Text { get; set; }
 }
@@ -91,7 +91,7 @@ public sealed partial class SuggesterDescriptor : SerializableDescriptor<Suggest
 	{
 	}
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester> SuggestersValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester> SuggestersValue { get; set; }
 
 	private string? TextValue { get; set; }
 

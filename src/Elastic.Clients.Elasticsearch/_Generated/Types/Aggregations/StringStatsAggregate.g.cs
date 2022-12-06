@@ -41,7 +41,7 @@ public sealed partial class StringStatsAggregate : IAggregate
 
 	[JsonInclude]
 	[JsonPropertyName("distribution")]
-	public Dictionary<string, double>? Distribution { get; init; }
+	public IReadOnlyDictionary<string, double>? Distribution { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("entropy")]
@@ -57,7 +57,7 @@ public sealed partial class StringStatsAggregate : IAggregate
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, object>? Meta { get; init; }
+	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("min_length")]

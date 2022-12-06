@@ -39,7 +39,7 @@ public sealed class PropertyName : IEquatable<PropertyName>, IUrlParameter
 		_comparisonValue = property;
 		_type = property.DeclaringType;
 	}
-
+	
 	public bool CacheableExpression { get; }
 	public Expression Expression { get; }
 
@@ -77,6 +77,20 @@ public sealed class PropertyName : IEquatable<PropertyName>, IUrlParameter
 
 	public static implicit operator PropertyName(PropertyInfo property) =>
 		property == null ? null : new PropertyName(property);
+
+	internal static PropertyName FromField(Field field)
+	{
+		if (field.Property is not null)
+			return new PropertyName(field.Property);
+
+		if (field.Expression is not null)
+			return new PropertyName(field.Expression);
+
+		if (field.Name is not null)
+			return new PropertyName(field.Name);
+
+		return null;
+	}
 
 	public override int GetHashCode()
 	{

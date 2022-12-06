@@ -83,9 +83,9 @@ namespace Tests.Cluster.ClusterHealth
 			response.NumberOfPendingTasks.Should().Be(6);
 			response.NumberOfInFlightFetch.Should().Be(7);
 
-			response.Indices.HasValue.Should().BeTrue();
+			response.Indices.Should().NotBeNull();
 
-			var indices = response.Indices.Value;
+			var indices = response.Indices;
 			indices.Should().HaveCount(2);
 			var issueIndex = indices["issue-test"];
 			issueIndex.Status.Should().Be(HealthStatus.Green);

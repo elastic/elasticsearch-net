@@ -45,7 +45,7 @@ public sealed partial class TaskInfo
 
 	[JsonInclude]
 	[JsonPropertyName("headers")]
-	public Dictionary<string, string> Headers { get; init; }
+	public IReadOnlyDictionary<string, string> Headers { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("id")]

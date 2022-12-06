@@ -38,7 +38,7 @@ public sealed partial class CompositeBucket : AggregateDictionary
 
 	[JsonInclude]
 	[JsonPropertyName("key")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue> Key { get; init; }
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue> Key { get; init; }
 }
 
 internal sealed class CompositeBucketConverter : JsonConverter<CompositeBucket>
@@ -49,7 +49,7 @@ internal sealed class CompositeBucketConverter : JsonConverter<CompositeBucket>
 			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
 		var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
 		long docCount = default;
-		Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue> key = default;
+		IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue> key = default;
 		while (reader.Read())
 		{
 			if (reader.TokenType == JsonTokenType.EndObject)
@@ -66,7 +66,7 @@ internal sealed class CompositeBucketConverter : JsonConverter<CompositeBucket>
 
 			if (name.Equals("key", StringComparison.Ordinal))
 			{
-				key = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>>(ref reader, options);
+				key = JsonSerializer.Deserialize<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>>(ref reader, options);
 				continue;
 			}
 

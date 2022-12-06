@@ -65,7 +65,7 @@ public sealed partial class ScaledFloatNumberProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("null_value")]
@@ -133,7 +133,7 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 
 	private bool? IndexValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private double? NullValueValue { get; set; }
 
@@ -446,7 +446,7 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 
 	private bool? IndexValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private double? NullValueValue { get; set; }
 

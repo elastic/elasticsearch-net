@@ -61,7 +61,7 @@ public sealed partial class BooleanProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("null_value")]
@@ -111,7 +111,7 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 
 	private bool? IndexValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? NullValueValue { get; set; }
 
@@ -396,7 +396,7 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 
 	private bool? IndexValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? NullValueValue { get; set; }
 
