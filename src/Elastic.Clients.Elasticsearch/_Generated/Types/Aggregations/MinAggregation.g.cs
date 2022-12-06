@@ -163,7 +163,7 @@ public sealed partial class MinAggregation : SearchAggregation
 
 	public string? Format { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public FieldValue? Missing { get; set; }
 
@@ -183,7 +183,7 @@ public sealed partial class MinAggregationDescriptor<TDocument> : SerializableDe
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 
@@ -276,7 +276,7 @@ public sealed partial class MinAggregationDescriptor : SerializableDescriptor<Mi
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 

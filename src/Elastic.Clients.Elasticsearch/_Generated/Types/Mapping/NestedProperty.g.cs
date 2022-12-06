@@ -57,7 +57,7 @@ public sealed partial class NestedProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("properties")]
@@ -97,7 +97,7 @@ public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDe
 
 	private bool? IncludeInRootValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
@@ -298,7 +298,7 @@ public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<Ne
 
 	private bool? IncludeInRootValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 

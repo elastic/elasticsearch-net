@@ -164,7 +164,7 @@ public sealed partial class VariableWidthHistogramAggregation : SearchAggregatio
 
 	public int? InitialBuffer { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public override string? Name { get; internal set; }
 
@@ -184,7 +184,7 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 
 	private int? InitialBufferValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private int? ShardSizeValue { get; set; }
 
@@ -277,7 +277,7 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 
 	private int? InitialBufferValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private int? ShardSizeValue { get; set; }
 

@@ -81,7 +81,7 @@ public sealed partial class TextProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("norms")]
@@ -161,7 +161,7 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 
 	private Action<TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? NormsValue { get; set; }
 
@@ -628,7 +628,7 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 
 	private Action<TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? NormsValue { get; set; }
 

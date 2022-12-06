@@ -37,7 +37,7 @@ public sealed partial class TypeMapping
 
 	[JsonInclude]
 	[JsonPropertyName("_meta")]
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("_routing")]
@@ -69,7 +69,7 @@ public sealed partial class TypeMapping
 
 	[JsonInclude]
 	[JsonPropertyName("dynamic_templates")]
-	public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplates { get; set; }
+	public Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplates { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("enabled")]
@@ -89,7 +89,7 @@ public sealed partial class TypeMapping
 
 	[JsonInclude]
 	[JsonPropertyName("runtime")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
+	public IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 }
 
 public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescriptor<TypeMappingDescriptor<TDocument>>
@@ -111,7 +111,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 
 	private Action<FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
 
@@ -143,7 +143,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 
-	private Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
+	private Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
 
 	private bool? EnabledValue { get; set; }
 
@@ -157,7 +157,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
 
 	public TypeMappingDescriptor<TDocument> DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? dataStreamTimestamp)
 	{
@@ -327,7 +327,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
+	public TypeMappingDescriptor<TDocument> DynamicTemplates(Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;
@@ -587,7 +587,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 
 	private Action<FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
 
@@ -619,7 +619,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 
-	private Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
+	private Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
 
 	private bool? EnabledValue { get; set; }
 
@@ -633,7 +633,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
 
 	public TypeMappingDescriptor DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? dataStreamTimestamp)
 	{
@@ -803,7 +803,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
+	public TypeMappingDescriptor DynamicTemplates(Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;

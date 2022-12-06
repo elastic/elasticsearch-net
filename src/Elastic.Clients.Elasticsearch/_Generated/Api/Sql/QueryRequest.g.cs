@@ -78,7 +78,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	[JsonInclude]
 	[JsonPropertyName("runtime_mappings")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("wait_for_completion_timeout")]
@@ -86,7 +86,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	[JsonInclude]
 	[JsonPropertyName("params")]
-	public Dictionary<string, object>? Params { get; set; }
+	public IDictionary<string, object>? Params { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("keep_alive")]
@@ -135,13 +135,13 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private string? QueryValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 	private string? TimeZoneValue { get; set; }
 
@@ -408,13 +408,13 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private string? QueryValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 	private string? TimeZoneValue { get; set; }
 

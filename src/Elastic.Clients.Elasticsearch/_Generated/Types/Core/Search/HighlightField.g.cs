@@ -93,7 +93,7 @@ public sealed partial class HighlightField
 
 	[JsonInclude]
 	[JsonPropertyName("options")]
-	public Dictionary<string, object>? Options { get; set; }
+	public IDictionary<string, object>? Options { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("order")]
@@ -167,7 +167,7 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 
 	private int? NumberOfFragmentsValue { get; set; }
 
-	private Dictionary<string, object>? OptionsValue { get; set; }
+	private IDictionary<string, object>? OptionsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? OrderValue { get; set; }
 
@@ -549,7 +549,7 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 
 	private int? NumberOfFragmentsValue { get; set; }
 
-	private Dictionary<string, object>? OptionsValue { get; set; }
+	private IDictionary<string, object>? OptionsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? OrderValue { get; set; }
 
