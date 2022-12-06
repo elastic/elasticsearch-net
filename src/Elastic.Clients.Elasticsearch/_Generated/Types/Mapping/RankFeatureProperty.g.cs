@@ -41,7 +41,7 @@ public sealed partial class RankFeatureProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("positive_score_impact")]
@@ -69,7 +69,7 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 
 	private int? IgnoreAboveValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? PositiveScoreImpactValue { get; set; }
 
@@ -200,7 +200,7 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 
 	private int? IgnoreAboveValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? PositiveScoreImpactValue { get; set; }
 

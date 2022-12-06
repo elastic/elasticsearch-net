@@ -160,7 +160,7 @@ public sealed partial class WeightedAverageAggregation : SearchAggregation
 
 	public string? Format { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public override string? Name { get; internal set; }
 
@@ -192,7 +192,7 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
 
@@ -343,7 +343,7 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
 

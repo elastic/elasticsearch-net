@@ -81,5 +81,5 @@ public sealed partial class IndexingStats
 
 	[JsonInclude]
 	[JsonPropertyName("types")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? Types { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? Types { get; init; }
 }

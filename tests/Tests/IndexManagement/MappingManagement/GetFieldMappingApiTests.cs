@@ -19,6 +19,7 @@ public class GetFieldMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, G
 
 	private static readonly Fields Fields = Infer.Fields<Project>(p => p.Name, p => p.LeadDeveloper.IpAddress);
 	private static readonly Field NameField = Infer.Field<Project>(p => p.Name);
+	private static readonly PropertyName NameProperty = Infer.Property<Project>(p => p.Name);
 	private static readonly Indices OnIndices = Infer.Index<Project>()/*.And<ProjectPercolation>()*/;
 
 	public GetFieldMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -50,37 +51,36 @@ public class GetFieldMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, G
 		var projectMappings = response.FieldMappings[Infer.Index<Project>()];
 		projectMappings.Should().NotBeNull("project mapping value in the dictionary should not point to a null value");
 
-		// TODO - Reintroduce this once GetFieldMappingResponse.FieldMappings uses ResolvableReadOnlyDictionaryConverter
-		//projectMappings.Mappings.Should()
-		//	.NotBeEmpty("project has fields so should contain a type mapping")
-		//	.And.ContainKey(NameField, "project mappings should have 'name'");
+		projectMappings.Mappings.Should()
+			.NotBeEmpty("project has fields so should contain a type mapping")
+			.And.ContainKey(NameField, "project mappings should have 'name'");
 
-		//var fieldTypeMapping = projectMappings.Mappings[NameField];
-		//fieldTypeMapping.Should().NotBeNull("name field mapping should exist");
-		//fieldTypeMapping.FullName.Should().NotBeNullOrEmpty();
-		//fieldTypeMapping.Mapping.Should()
-		//	.NotBeEmpty("field type mapping should return a `mapping` with the field information")
-		//	.And.HaveCount(1, "field type mappings only return information from a single field")
-		//	.And.ContainKey(NameField);
+		var fieldTypeMapping = projectMappings.Mappings[NameField];
+		fieldTypeMapping.Should().NotBeNull("name field mapping should exist");
+		fieldTypeMapping.FullName.Should().NotBeNullOrEmpty();
+		fieldTypeMapping.Mapping.Should()
+			.NotBeEmpty("field type mapping should return a `mapping` with the field information")
+			.And.HaveCount(1, "field type mappings only return information from a single field")
+			.And.ContainKey(NameProperty);
 
-		//var fieldMapping = fieldTypeMapping.Mapping[NameField];
-		//AssertNameFieldMapping(fieldMapping);
+		var fieldMapping = fieldTypeMapping.Mapping[NameProperty];
+		AssertNameFieldMapping(fieldMapping);
 
-		//fieldMapping = response.MappingFor<Project>(NameField);
-		//AssertNameFieldMapping(fieldMapping);
+		fieldMapping = response.PropertyFor<Project>(NameField);
+		AssertNameFieldMapping(fieldMapping);
 
-		//fieldMapping = response.MappingFor<Project>(p => p.Name);
-		//AssertNameFieldMapping(fieldMapping);
+		fieldMapping = response.PropertyFor<Project>(p => p.Name);
+		AssertNameFieldMapping(fieldMapping);
 	}
 
-	private static void AssertNameFieldMapping(FieldMapping fieldMapping)
+	private static void AssertNameFieldMapping(IProperty property)
 	{
-		fieldMapping.Should().NotBeNull("expected to find name on field type mapping for project");
+		property.Should().NotBeNull("expected to find name on field type mapping for project");
 
-		//var nameKeyword = fieldMapping as KeywordProperty;
-		//nameKeyword.Should().NotBeNull("the field type is a keyword mapping");
-		//nameKeyword.Store.Should().BeTrue("name is keyword field that has store enabled");
-		//nameKeyword.Fields.Should().NotBeEmpty().And.HaveCount(2);
-		//nameKeyword.Fields["standard"].Should().NotBeNull();
+		var nameKeyword = property as KeywordProperty;
+		nameKeyword.Should().NotBeNull("the field type is a keyword mapping");
+		nameKeyword.Store.Should().BeTrue("name is keyword field that has store enabled");
+		nameKeyword.Fields.Should().NotBeEmpty().And.HaveCount(2);
+		nameKeyword.Fields["standard"].Should().NotBeNull();
 	}
 }

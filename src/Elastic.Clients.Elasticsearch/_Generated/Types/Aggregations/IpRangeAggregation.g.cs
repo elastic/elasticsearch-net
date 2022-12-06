@@ -143,7 +143,7 @@ public sealed partial class IpRangeAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public override string? Name { get; internal set; }
 
@@ -165,7 +165,7 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? RangesValue { get; set; }
 
@@ -337,7 +337,7 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? RangesValue { get; set; }
 

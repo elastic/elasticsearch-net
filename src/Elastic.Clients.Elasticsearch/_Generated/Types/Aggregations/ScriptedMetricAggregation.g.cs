@@ -103,7 +103,7 @@ internal sealed class ScriptedMetricAggregationConverter : JsonConverter<Scripte
 				if (reader.ValueTextEquals("params"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Params = value;
@@ -239,13 +239,13 @@ public sealed partial class ScriptedMetricAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public FieldValue? Missing { get; set; }
 
 	public override string? Name { get; internal set; }
 
-	public Dictionary<string, object>? Params { get; set; }
+	public IDictionary<string, object>? Params { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
 
@@ -267,11 +267,11 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 
 	private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
 
@@ -416,11 +416,11 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 
 	private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
 
