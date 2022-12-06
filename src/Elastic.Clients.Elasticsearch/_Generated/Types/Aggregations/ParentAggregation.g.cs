@@ -123,7 +123,7 @@ public sealed partial class ParentAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public override string? Name { get; internal set; }
 
@@ -143,7 +143,7 @@ public sealed partial class ParentAggregationDescriptor<TDocument> : Serializabl
 
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private string? TypeValue { get; set; }
 
@@ -234,7 +234,7 @@ public sealed partial class ParentAggregationDescriptor : SerializableDescriptor
 
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private string? TypeValue { get; set; }
 

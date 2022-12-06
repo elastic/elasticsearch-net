@@ -45,7 +45,7 @@ public sealed partial class AggregateMetricDoubleProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("metrics")]
@@ -79,7 +79,7 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor<TDocument> :
 
 	private int? IgnoreAboveValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private ICollection<string> MetricsValue { get; set; }
 
@@ -230,7 +230,7 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor : Serializab
 
 	private int? IgnoreAboveValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private ICollection<string> MetricsValue { get; set; }
 

@@ -65,7 +65,7 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 
 	[JsonInclude]
 	[JsonPropertyName("aliases")]
-	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("index_patterns")]
@@ -81,7 +81,7 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 
 	[JsonInclude]
 	[JsonPropertyName("settings")]
-	public Dictionary<string, object>? Settings { get; set; }
+	public IDictionary<string, object>? Settings { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("version")]
@@ -112,7 +112,7 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 		return Self;
 	}
 
-	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
 	private ICollection<string>? IndexPatternsValue { get; set; }
 
@@ -124,7 +124,7 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 
 	private int? OrderValue { get; set; }
 
-	private Dictionary<string, object>? SettingsValue { get; set; }
+	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	private long? VersionValue { get; set; }
 

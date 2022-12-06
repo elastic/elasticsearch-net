@@ -27,5 +27,5 @@ public sealed partial class ReindexRethrottleResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("nodes")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode> Nodes { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode> Nodes { get; init; }
 }

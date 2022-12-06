@@ -33,7 +33,7 @@ public sealed partial class CompletionSuggester
 
 	[JsonInclude]
 	[JsonPropertyName("contexts")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? Contexts { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? Contexts { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("field")]
@@ -71,7 +71,7 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 
 	private string? AnalyzerValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? ContextsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? ContextsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
@@ -231,7 +231,7 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 
 	private string? AnalyzerValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? ContextsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? ContextsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 

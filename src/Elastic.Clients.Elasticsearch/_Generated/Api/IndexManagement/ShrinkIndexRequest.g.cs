@@ -59,11 +59,11 @@ public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequest
 
 	[JsonInclude]
 	[JsonPropertyName("aliases")]
-	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("settings")]
-	public Dictionary<string, object>? Settings { get; set; }
+	public IDictionary<string, object>? Settings { get; set; }
 }
 
 public sealed partial class ShrinkIndexRequestDescriptor<TDocument> : RequestDescriptor<ShrinkIndexRequestDescriptor<TDocument>, ShrinkIndexRequestParameters>
@@ -95,9 +95,9 @@ public sealed partial class ShrinkIndexRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
-	private Dictionary<string, object>? SettingsValue { get; set; }
+	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	public ShrinkIndexRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
 	{
@@ -159,9 +159,9 @@ public sealed partial class ShrinkIndexRequestDescriptor : RequestDescriptor<Shr
 		return Self;
 	}
 
-	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
-	private Dictionary<string, object>? SettingsValue { get; set; }
+	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	public ShrinkIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
 	{

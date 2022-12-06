@@ -45,7 +45,7 @@ public sealed partial class JoinProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("properties")]
@@ -53,7 +53,7 @@ public sealed partial class JoinProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("relations")]
-	public Dictionary<string, ICollection<string>>? Relations { get; set; }
+	public IDictionary<string, ICollection<string>>? Relations { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -75,11 +75,11 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 
 	private int? IgnoreAboveValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
-	private Dictionary<string, ICollection<string>>? RelationsValue { get; set; }
+	private IDictionary<string, ICollection<string>>? RelationsValue { get; set; }
 
 	public JoinPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
@@ -220,11 +220,11 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 
 	private int? IgnoreAboveValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
-	private Dictionary<string, ICollection<string>>? RelationsValue { get; set; }
+	private IDictionary<string, ICollection<string>>? RelationsValue { get; set; }
 
 	public JoinPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
