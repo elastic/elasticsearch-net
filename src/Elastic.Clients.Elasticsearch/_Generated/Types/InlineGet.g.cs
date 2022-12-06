@@ -46,7 +46,7 @@ public sealed partial class InlineGet<TDocument>
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public Dictionary<string, object>? Fields { get; init; }
+	public IReadOnlyDictionary<string, object>? Fields { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("found")]
@@ -54,5 +54,5 @@ public sealed partial class InlineGet<TDocument>
 
 	[JsonInclude]
 	[JsonPropertyName("metadata")]
-	public Dictionary<string, object> Metadata { get; init; }
+	public IReadOnlyDictionary<string, object> Metadata { get; init; }
 }

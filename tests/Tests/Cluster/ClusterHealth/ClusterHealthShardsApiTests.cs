@@ -47,9 +47,9 @@ public class ClusterHealthShardsApiTests
 		response.NumberOfInFlightFetch.Should().BeGreaterOrEqualTo(0);
 		response.TaskMaxWaitingInQueueMillis.Should().BeGreaterOrEqualTo(0);
 
-		response.Indices.HasValue.Should().BeTrue();
+		response.Indices.Should().NotBeNull();
 
-		var indices = response.Indices.Value;
+		var indices = response.Indices;
 
 		indices.Should()
 			.NotBeEmpty()

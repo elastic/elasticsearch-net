@@ -45,7 +45,7 @@ public sealed partial class LikeDocument
 
 	[JsonInclude]
 	[JsonPropertyName("per_field_analyzer")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("routing")]
@@ -75,7 +75,7 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 
 	private Fields? FieldsValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 
@@ -195,7 +195,7 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 
 	private Fields? FieldsValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 

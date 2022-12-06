@@ -199,7 +199,7 @@ public sealed partial class RangeAggregation : SearchAggregation
 
 	public string? Format { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public int? Missing { get; set; }
 
@@ -227,7 +227,7 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private int? MissingValue { get; set; }
 
@@ -441,7 +441,7 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private int? MissingValue { get; set; }
 

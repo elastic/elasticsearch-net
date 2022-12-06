@@ -61,7 +61,7 @@ public sealed partial class IpProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("null_value")]
@@ -119,7 +119,7 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 
 	private bool? IndexValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private string? NullValueValue { get; set; }
 
@@ -390,7 +390,7 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 
 	private bool? IndexValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private string? NullValueValue { get; set; }
 

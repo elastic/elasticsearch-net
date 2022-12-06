@@ -160,7 +160,7 @@ public sealed partial class InferenceAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfig { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
 
@@ -184,7 +184,7 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
 
@@ -299,7 +299,7 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
 

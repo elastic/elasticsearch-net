@@ -26,9 +26,9 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
-public sealed partial class Buckets<TBucket> : Union<Dictionary<string, TBucket>, IReadOnlyCollection<TBucket>>
+public sealed partial class Buckets<TBucket> : Union<IReadOnlyDictionary<string, TBucket>, IReadOnlyCollection<TBucket>>
 {
-	public Buckets(Dictionary<string, TBucket> dictionary) : base(dictionary)
+	public Buckets(IReadOnlyDictionary<string, TBucket> dictionary) : base(dictionary)
 	{
 	}
 

@@ -29,7 +29,7 @@ public sealed partial class PercentilesBucketAggregate : IAggregate
 {
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, object>? Meta { get; init; }
+	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("values")]
