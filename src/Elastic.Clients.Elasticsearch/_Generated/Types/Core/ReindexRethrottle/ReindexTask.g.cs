@@ -41,7 +41,7 @@ public sealed partial class ReindexTask
 
 	[JsonInclude]
 	[JsonPropertyName("headers")]
-	public Dictionary<string, IReadOnlyCollection<string>> Headers { get; init; }
+	public IReadOnlyDictionary<string, IReadOnlyCollection<string>> Headers { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("id")]

@@ -158,7 +158,7 @@ internal sealed class SubmitAsyncSearchRequestConverter : JsonConverter<SubmitAs
 
 				if (property == "ext")
 				{
-					variant.Ext = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+					variant.Ext = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
 					continue;
 				}
 
@@ -182,7 +182,7 @@ internal sealed class SubmitAsyncSearchRequestConverter : JsonConverter<SubmitAs
 
 				if (property == "indices_boost")
 				{
-					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
+					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
 					continue;
 				}
 
@@ -230,7 +230,7 @@ internal sealed class SubmitAsyncSearchRequestConverter : JsonConverter<SubmitAs
 
 				if (property == "script_fields")
 				{
-					variant.ScriptFields = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
+					variant.ScriptFields = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
 					continue;
 				}
 
@@ -320,7 +320,7 @@ internal sealed class SubmitAsyncSearchRequestConverter : JsonConverter<SubmitAs
 
 				if (property == "runtime_mappings")
 				{
-					variant.RuntimeMappings = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
+					variant.RuntimeMappings = JsonSerializer.Deserialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
 					continue;
 				}
 
@@ -658,7 +658,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 
 	[JsonInclude]
 	[JsonPropertyName("ext")]
-	public Dictionary<string, object>? Ext { get; set; }
+	public IDictionary<string, object>? Ext { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("from")]
@@ -674,7 +674,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 
 	[JsonInclude]
 	[JsonPropertyName("indices_boost")]
-	public ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
+	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("docvalue_fields")]
@@ -706,7 +706,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 
 	[JsonInclude]
 	[JsonPropertyName("script_fields")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("search_after")]
@@ -767,7 +767,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 
 	[JsonInclude]
 	[JsonPropertyName("runtime_mappings")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("stats")]
@@ -900,11 +900,11 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 
 	private bool? ExplainValue { get; set; }
 
-	private Dictionary<string, object>? ExtValue { get; set; }
+	private IDictionary<string, object>? ExtValue { get; set; }
 
 	private int? FromValue { get; set; }
 
-	private ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 
 	private double? MinScoreValue { get; set; }
 
@@ -916,9 +916,9 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 
 	private bool? ProfileValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
@@ -1282,7 +1282,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
@@ -1933,11 +1933,11 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 
 	private bool? ExplainValue { get; set; }
 
-	private Dictionary<string, object>? ExtValue { get; set; }
+	private IDictionary<string, object>? ExtValue { get; set; }
 
 	private int? FromValue { get; set; }
 
-	private ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 
 	private double? MinScoreValue { get; set; }
 
@@ -1949,9 +1949,9 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 
 	private bool? ProfileValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 
@@ -2315,7 +2315,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor IndicesBoost(ICollection<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public SubmitAsyncSearchRequestDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;

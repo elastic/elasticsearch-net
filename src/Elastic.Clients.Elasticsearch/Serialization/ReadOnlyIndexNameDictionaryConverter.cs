@@ -15,20 +15,21 @@ internal sealed class ReadOnlyIndexNameDictionaryConverter : JsonConverterAttrib
 
 	public Type ValueType { get; }
 
-	public override JsonConverter? CreateConverter(Type typeToConvert) => (JsonConverter)Activator.CreateInstance(typeof(IntermediateConverter<>).MakeGenericType(ValueType));
+	public override JsonConverter? CreateConverter(Type typeToConvert) => (JsonConverter)Activator.CreateInstance(typeof(ReadOnlyIndexNameDictionaryConverter<>).MakeGenericType(ValueType));
 }
 
 internal sealed class ReadOnlyIndexNameDictionaryConverter<TValue> : JsonConverter<IReadOnlyDictionary<IndexName, TValue>>
 {
-	private readonly IElasticsearchClientSettings _settings;
-
-	public ReadOnlyIndexNameDictionaryConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
 	public override IReadOnlyDictionary<IndexName, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if (!options.TryGetClientSettings(out var clientSettings))
+		{
+			throw new JsonException("Unable to retrieve client settings required for deserialisation.");
+		}
+
 		var initialDictionary = JsonSerializer.Deserialize<Dictionary<IndexName, TValue>>(ref reader, options);
 
-		var readOnlyDictionary = new ReadOnlyIndexNameDictionary<TValue>(initialDictionary, _settings);
+		var readOnlyDictionary = new ReadOnlyIndexNameDictionary<TValue>(initialDictionary, clientSettings);
 
 		return readOnlyDictionary;
 	}

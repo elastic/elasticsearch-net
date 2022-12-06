@@ -33,7 +33,7 @@ public sealed partial class StoredScript
 
 	[JsonInclude]
 	[JsonPropertyName("options")]
-	public Dictionary<string, string>? Options { get; set; }
+	public IDictionary<string, string>? Options { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("source")]
@@ -49,7 +49,7 @@ public sealed partial class StoredScriptDescriptor : SerializableDescriptor<Stor
 
 	private Elastic.Clients.Elasticsearch.ScriptLanguage LanguageValue { get; set; }
 
-	private Dictionary<string, string>? OptionsValue { get; set; }
+	private IDictionary<string, string>? OptionsValue { get; set; }
 
 	private string SourceValue { get; set; }
 

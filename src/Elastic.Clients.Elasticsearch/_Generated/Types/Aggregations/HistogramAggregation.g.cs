@@ -255,7 +255,7 @@ public sealed partial class HistogramAggregation : SearchAggregation
 
 	public double? Interval { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public int? MinDocCount { get; set; }
 
@@ -290,7 +290,7 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 
 	private double? IntervalValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private int? MinDocCountValue { get; set; }
 
@@ -485,7 +485,7 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 
 	private double? IntervalValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private int? MinDocCountValue { get; set; }
 
