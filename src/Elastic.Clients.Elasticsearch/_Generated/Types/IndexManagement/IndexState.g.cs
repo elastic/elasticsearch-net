@@ -29,7 +29,7 @@ public sealed partial class IndexState
 {
 	[JsonInclude]
 	[JsonPropertyName("aliases")]
-	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("data_stream")]
@@ -73,7 +73,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 
 	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.DataStreamName? DataStreamValue { get; set; }
 
@@ -253,7 +253,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 
 	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.DataStreamName? DataStreamValue { get; set; }
 

@@ -37,5 +37,5 @@ public sealed partial class AutoDateHistogramAggregate : IAggregate
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, object>? Meta { get; init; }
+	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 }

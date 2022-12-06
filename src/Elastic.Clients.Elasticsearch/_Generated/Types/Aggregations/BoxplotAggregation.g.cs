@@ -163,7 +163,7 @@ public sealed partial class BoxplotAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public FieldValue? Missing { get; set; }
 
@@ -183,7 +183,7 @@ public sealed partial class BoxplotAggregationDescriptor<TDocument> : Serializab
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 
@@ -276,7 +276,7 @@ public sealed partial class BoxplotAggregationDescriptor : SerializableDescripto
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 

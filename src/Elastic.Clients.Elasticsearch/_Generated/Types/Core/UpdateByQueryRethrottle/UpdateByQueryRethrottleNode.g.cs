@@ -29,7 +29,7 @@ public sealed partial class UpdateByQueryRethrottleNode
 {
 	[JsonInclude]
 	[JsonPropertyName("attributes")]
-	public Dictionary<string, string> Attributes { get; init; }
+	public IReadOnlyDictionary<string, string> Attributes { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("host")]
@@ -49,7 +49,7 @@ public sealed partial class UpdateByQueryRethrottleNode
 
 	[JsonInclude]
 	[JsonPropertyName("tasks")]
-	public Dictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.Tasks.TaskInfo> Tasks { get; init; }
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.Tasks.TaskInfo> Tasks { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("transport_address")]
