@@ -197,7 +197,7 @@ public sealed partial class TopMetricsAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
 
@@ -238,7 +238,7 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 
@@ -479,7 +479,7 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 

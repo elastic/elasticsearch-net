@@ -139,7 +139,7 @@ internal sealed class TopHitsAggregationConverter : JsonConverter<TopHitsAggrega
 				if (reader.ValueTextEquals("script_fields"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.ScriptFields = value;
@@ -369,7 +369,7 @@ public sealed partial class TopHitsAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public FieldValue? Missing { get; set; }
 
@@ -377,7 +377,7 @@ public sealed partial class TopHitsAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
 	public bool? SeqNoPrimaryTerm { get; set; }
 
@@ -424,13 +424,13 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 
 	private int? FromValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
 	private bool? SeqNoPrimaryTermValue { get; set; }
 
@@ -762,13 +762,13 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 
 	private int? FromValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
 	private bool? SeqNoPrimaryTermValue { get; set; }
 

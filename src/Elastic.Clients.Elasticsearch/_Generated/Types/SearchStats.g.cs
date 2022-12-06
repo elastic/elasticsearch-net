@@ -45,7 +45,7 @@ public sealed partial class SearchStats
 
 	[JsonInclude]
 	[JsonPropertyName("groups")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.SearchStats>? Groups { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchStats>? Groups { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("open_contexts")]

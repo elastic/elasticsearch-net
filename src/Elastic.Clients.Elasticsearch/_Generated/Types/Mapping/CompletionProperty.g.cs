@@ -61,7 +61,7 @@ public sealed partial class CompletionProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("preserve_position_increments")]
@@ -121,7 +121,7 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 
 	private int? MaxInputLengthValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? PreservePositionIncrementsValue { get; set; }
 
@@ -439,7 +439,7 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 
 	private int? MaxInputLengthValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private bool? PreservePositionIncrementsValue { get; set; }
 

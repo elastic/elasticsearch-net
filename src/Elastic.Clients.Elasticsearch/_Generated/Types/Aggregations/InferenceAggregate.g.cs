@@ -29,7 +29,7 @@ public sealed partial class InferenceAggregate : IAggregate
 {
 	[JsonInclude]
 	[JsonPropertyName("data")]
-	public Dictionary<string, object> Data { get; init; }
+	public IReadOnlyDictionary<string, object> Data { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("feature_importance")]
@@ -37,7 +37,7 @@ public sealed partial class InferenceAggregate : IAggregate
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, object>? Meta { get; init; }
+	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("top_classes")]

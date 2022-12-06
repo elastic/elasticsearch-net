@@ -65,7 +65,7 @@ public sealed partial class IntegerNumberProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("null_value")]
@@ -129,7 +129,7 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 
 	private bool? IndexValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private int? NullValueValue { get; set; }
 
@@ -428,7 +428,7 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 
 	private bool? IndexValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private int? NullValueValue { get; set; }
 

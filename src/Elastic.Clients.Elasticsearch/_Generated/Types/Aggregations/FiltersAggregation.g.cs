@@ -161,7 +161,7 @@ public sealed partial class FiltersAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filters { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public override string? Name { get; internal set; }
 
@@ -185,7 +185,7 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 
 	private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private bool? OtherBucketValue { get; set; }
 
@@ -304,7 +304,7 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 
 	private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private bool? OtherBucketValue { get; set; }
 

@@ -49,7 +49,7 @@ public sealed partial class Highlight
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> Fields { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> Fields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("force_source")]
@@ -89,7 +89,7 @@ public sealed partial class Highlight
 
 	[JsonInclude]
 	[JsonPropertyName("options")]
-	public Dictionary<string, object>? Options { get; set; }
+	public IDictionary<string, object>? Options { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("order")]
@@ -143,7 +143,7 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? EncoderValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> FieldsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> FieldsValue { get; set; }
 
 	private bool? ForceSourceValue { get; set; }
 
@@ -161,7 +161,7 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 
 	private int? NumberOfFragmentsValue { get; set; }
 
-	private Dictionary<string, object>? OptionsValue { get; set; }
+	private IDictionary<string, object>? OptionsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? OrderValue { get; set; }
 
@@ -507,7 +507,7 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? EncoderValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> FieldsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> FieldsValue { get; set; }
 
 	private bool? ForceSourceValue { get; set; }
 
@@ -525,7 +525,7 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 
 	private int? NumberOfFragmentsValue { get; set; }
 
-	private Dictionary<string, object>? OptionsValue { get; set; }
+	private IDictionary<string, object>? OptionsValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? OrderValue { get; set; }
 

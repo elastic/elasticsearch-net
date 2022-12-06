@@ -183,7 +183,7 @@ public sealed partial class MedianAbsoluteDeviationAggregation : SearchAggregati
 
 	public string? Format { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public FieldValue? Missing { get; set; }
 
@@ -205,7 +205,7 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocume
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 
@@ -312,7 +312,7 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : Seria
 
 	private string? FormatValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 

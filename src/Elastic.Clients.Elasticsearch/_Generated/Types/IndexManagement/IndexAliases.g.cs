@@ -29,5 +29,5 @@ public sealed partial class IndexAliases
 {
 	[JsonInclude]
 	[JsonPropertyName("aliases")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition> Aliases { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition> Aliases { get; init; }
 }

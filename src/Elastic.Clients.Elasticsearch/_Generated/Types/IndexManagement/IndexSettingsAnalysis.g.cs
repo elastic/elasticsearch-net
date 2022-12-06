@@ -33,11 +33,11 @@ public sealed partial class IndexSettingsAnalysis
 
 	[JsonInclude]
 	[JsonPropertyName("char_filter")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilter { get; set; }
+	public IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("filter")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? Filter { get; set; }
+	public IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? Filter { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("normalizer")]
@@ -45,7 +45,7 @@ public sealed partial class IndexSettingsAnalysis
 
 	[JsonInclude]
 	[JsonPropertyName("tokenizer")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? Tokenizer { get; set; }
+	public IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? Tokenizer { get; set; }
 }
 
 public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescriptor<IndexSettingsAnalysisDescriptor>
@@ -57,13 +57,13 @@ public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescri
 
 	private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzerValue { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilterValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilterValue { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Analysis.Normalizers? NormalizerValue { get; set; }
 
-	private Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? TokenizerValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? TokenizerValue { get; set; }
 
 	public IndexSettingsAnalysisDescriptor Analyzer(Elastic.Clients.Elasticsearch.Analysis.Analyzers? analyzer)
 	{
