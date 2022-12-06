@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Mapping;
 using Tests.Serialization;
 
 namespace Tests.IndexManagement.MappingManagement;
@@ -17,6 +18,9 @@ public class GetFieldMappingResponseTests : SerializerTestBase
 		var response = DeserializeJsonString<GetFieldMappingResponse>(JsonResponse);
 
 		var property = response.GetProperty("test1", Infer.Field<Thing>(f => f.Id));
+
+		property.Should().NotBeNull();
+		property.Should().BeOfType<TextProperty>();
 	}
 
 	private class Thing

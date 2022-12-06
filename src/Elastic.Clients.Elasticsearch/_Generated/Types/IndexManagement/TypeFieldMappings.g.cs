@@ -29,5 +29,6 @@ public sealed partial class TypeFieldMappings
 {
 	[JsonInclude]
 	[JsonPropertyName("mappings")]
+	[ReadOnlyFieldDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.FieldMapping))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.FieldMapping> Mappings { get; init; }
 }

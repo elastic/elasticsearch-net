@@ -29,6 +29,7 @@ public sealed partial class MatrixStatsFields
 {
 	[JsonInclude]
 	[JsonPropertyName("correlation")]
+	[ReadOnlyFieldDictionaryConverter(typeof(double))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, double> Correlation { get; init; }
 
 	[JsonInclude]
@@ -37,6 +38,7 @@ public sealed partial class MatrixStatsFields
 
 	[JsonInclude]
 	[JsonPropertyName("covariance")]
+	[ReadOnlyFieldDictionaryConverter(typeof(double))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, double> Covariance { get; init; }
 
 	[JsonInclude]

@@ -27,6 +27,7 @@ public sealed partial class SearchShardsResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("indices")]
+	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex> Indices { get; init; }
 
 	[JsonInclude]

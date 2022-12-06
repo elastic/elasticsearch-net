@@ -47,6 +47,7 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 
 	[JsonInclude]
 	[JsonPropertyName("indices")]
+	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>? Indices { get; init; }
 
 	[JsonInclude]

@@ -29,6 +29,7 @@ public sealed partial class TemplateMapping
 {
 	[JsonInclude]
 	[JsonPropertyName("aliases")]
+	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Alias))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; init; }
 
 	[JsonInclude]

@@ -15,7 +15,7 @@ public partial class GetFieldMappingResponse
 	[JsonIgnore]
 	public IReadOnlyDictionary<IndexName, TypeFieldMappings> FieldMappings => BackingDictionary;
 
-	public IProperty GetProperty(IndexName index, Field field)
+	public IProperty? GetProperty(IndexName index, Field field)
 	{
 		if (index is null)
 			throw new ArgumentNullException(nameof(index));
@@ -34,24 +34,51 @@ public partial class GetFieldMappingResponse
 		return fieldMapping.Mapping.TryGetProperty(PropertyName.FromField(field), out var property) ? property : null;
 	}
 
-	public IProperty PropertyFor<T>(Field field) => PropertyFor<T>(field, null);
+	public bool TryGetProperty(IndexName index, Field field, out IProperty property)
+	{
+		property = null;
 
-	public IProperty PropertyFor<T>(Field field, IndexName index) =>
+		if (index is null)
+			throw new ArgumentNullException(nameof(index));
+
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+
+		var mappings = MappingsFor(index);
+
+		if (mappings is null)
+			return false;
+
+		if (!mappings.TryGetValue(field, out var fieldMapping) || fieldMapping.Mapping is null)
+			return false;
+
+		if (fieldMapping.Mapping.TryGetProperty(PropertyName.FromField(field), out var matched))
+		{
+			property = matched;
+			return true;
+		}
+
+		return false;
+	}
+
+	public IProperty? PropertyFor<T>(Field field) => PropertyFor<T>(field, null);
+
+	public IProperty? PropertyFor<T>(Field field, IndexName index) =>
 		GetProperty(index ?? Infer.Index<T>(), field);
 
-	public IProperty PropertyFor<T, TValue>(Expression<Func<T, TValue>> objectPath)
+	public IProperty? PropertyFor<T, TValue>(Expression<Func<T, TValue>> objectPath)
 		where T : class =>
 			GetProperty(Infer.Index<T>(), Infer.Field(objectPath));
 
-	public IProperty PropertyFor<T, TValue>(Expression<Func<T, TValue>> objectPath, IndexName index)
+	public IProperty? PropertyFor<T, TValue>(Expression<Func<T, TValue>> objectPath, IndexName index)
 		where T : class =>
 			GetProperty(index, Infer.Field(objectPath));
 
-	public IProperty PropertyFor<T>(Expression<Func<T, object>> objectPath)
+	public IProperty? PropertyFor<T>(Expression<Func<T, object>> objectPath)
 		where T : class =>
 			GetProperty(Infer.Index<T>(), Infer.Field(objectPath));
 
-	public IProperty PropertyFor<T>(Expression<Func<T, object>> objectPath, IndexName index)
+	public IProperty? PropertyFor<T>(Expression<Func<T, object>> objectPath, IndexName index)
 		where T : class =>
 			GetProperty(index, Infer.Field(objectPath));
 

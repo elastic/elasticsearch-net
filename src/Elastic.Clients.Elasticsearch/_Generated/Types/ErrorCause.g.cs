@@ -37,7 +37,7 @@ internal sealed class ErrorCauseConverter : JsonConverter<ErrorCause>
 		string? stackTrace = default;
 		IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? suppressed = default;
 		string type = default;
-		IReadOnlyDictionary<string, object> additionalProperties = null;
+		Dictionary<string, object> additionalProperties = null;
 		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
 			if (reader.TokenType == JsonTokenType.PropertyName)
@@ -79,7 +79,7 @@ internal sealed class ErrorCauseConverter : JsonConverter<ErrorCause>
 					continue;
 				}
 
-				additionalProperties ??= new IReadOnlyDictionary<string, object>();
+				additionalProperties ??= new Dictionary<string, object>();
 				var value = JsonSerializer.Deserialize<object>(ref reader, options);
 				additionalProperties.Add(property, value);
 			}

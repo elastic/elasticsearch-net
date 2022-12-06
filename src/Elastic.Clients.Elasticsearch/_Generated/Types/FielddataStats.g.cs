@@ -33,6 +33,7 @@ public sealed partial class FielddataStats
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
+	[ReadOnlyFieldDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.FieldMemoryUsage))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldMemoryUsage>? Fields { get; init; }
 
 	[JsonInclude]

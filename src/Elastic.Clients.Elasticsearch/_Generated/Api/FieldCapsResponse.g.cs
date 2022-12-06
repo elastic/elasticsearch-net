@@ -27,6 +27,7 @@ public sealed partial class FieldCapsResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("fields")]
+	[ReadOnlyFieldDictionaryConverter(typeof(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>> Fields { get; init; }
 
 	[JsonInclude]
