@@ -73,7 +73,7 @@ public sealed partial class DateProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("null_value")]
@@ -133,7 +133,7 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 
 	private string? LocaleValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private DateTimeOffset? NullValueValue { get; set; }
 
@@ -474,7 +474,7 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 
 	private string? LocaleValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private DateTimeOffset? NullValueValue { get; set; }
 

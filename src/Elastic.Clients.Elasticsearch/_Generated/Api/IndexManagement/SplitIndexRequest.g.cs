@@ -59,11 +59,11 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 
 	[JsonInclude]
 	[JsonPropertyName("aliases")]
-	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("settings")]
-	public Dictionary<string, object>? Settings { get; set; }
+	public IDictionary<string, object>? Settings { get; set; }
 }
 
 public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDescriptor<SplitIndexRequestDescriptor<TDocument>, SplitIndexRequestParameters>
@@ -95,9 +95,9 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
-	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
-	private Dictionary<string, object>? SettingsValue { get; set; }
+	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	public SplitIndexRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
 	{
@@ -159,9 +159,9 @@ public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<Spli
 		return Self;
 	}
 
-	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
-	private Dictionary<string, object>? SettingsValue { get; set; }
+	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	public SplitIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
 	{

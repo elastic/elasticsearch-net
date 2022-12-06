@@ -37,7 +37,7 @@ public sealed partial class IndicesStats
 
 	[JsonInclude]
 	[JsonPropertyName("shards")]
-	public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>? Shards { get; init; }
+	public IReadOnlyDictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>? Shards { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("status")]

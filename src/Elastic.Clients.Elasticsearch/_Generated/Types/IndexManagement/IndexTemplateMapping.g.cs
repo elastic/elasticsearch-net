@@ -29,7 +29,7 @@ public sealed partial class IndexTemplateMapping
 {
 	[JsonInclude]
 	[JsonPropertyName("aliases")]
-	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("mappings")]
@@ -59,7 +59,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 
 	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
 	public IndexTemplateMappingDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 	{
@@ -179,7 +179,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 
 	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
 	public IndexTemplateMappingDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 	{

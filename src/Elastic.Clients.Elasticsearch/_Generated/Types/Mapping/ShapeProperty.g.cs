@@ -61,7 +61,7 @@ public sealed partial class ShapeProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("orientation")]
@@ -107,7 +107,7 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 
 	private bool? IgnoreZValueValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? OrientationValue { get; set; }
 
@@ -336,7 +336,7 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 
 	private bool? IgnoreZValueValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? OrientationValue { get; set; }
 

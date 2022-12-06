@@ -55,7 +55,7 @@ internal sealed class MatrixStatsAggregationConverter : JsonConverter<MatrixStat
 				if (reader.ValueTextEquals("missing"))
 				{
 					reader.Read();
-					var value = JsonSerializer.Deserialize<Dictionary<Elastic.Clients.Elasticsearch.Field, double>?>(ref reader, options);
+					var value = JsonSerializer.Deserialize<IDictionary<Elastic.Clients.Elasticsearch.Field, double>?>(ref reader, options);
 					if (value is not null)
 					{
 						agg.Missing = value;
@@ -142,9 +142,9 @@ public sealed partial class MatrixStatsAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
 
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 
@@ -160,9 +160,9 @@ public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : Serial
 
 	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 
@@ -233,9 +233,9 @@ public sealed partial class MatrixStatsAggregationDescriptor : SerializableDescr
 
 	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 

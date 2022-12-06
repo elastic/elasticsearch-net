@@ -33,5 +33,5 @@ public sealed partial class CloseIndexResult
 
 	[JsonInclude]
 	[JsonPropertyName("shards")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.CloseShardResult>? Shards { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.CloseShardResult>? Shards { get; init; }
 }

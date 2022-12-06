@@ -31,7 +31,8 @@ public sealed partial class CloseIndexResponse : ElasticsearchResponse
 
 	[JsonInclude]
 	[JsonPropertyName("indices")]
-	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult> Indices { get; init; }
+	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult))]
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult> Indices { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("shards_acknowledged")]
