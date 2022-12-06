@@ -99,7 +99,7 @@ public sealed partial class ErrorCause
 {
 	public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; init; }
 
-	public Dictionary<string, object> Metadata { get; init; }
+	public IReadOnlyDictionary<string, object> Metadata { get; init; }
 
 	public string? Reason { get; init; }
 

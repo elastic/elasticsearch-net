@@ -45,7 +45,7 @@ public class IndexName : IEquatable<IndexName>, IUrlParameter
 
 	bool IEquatable<IndexName>.Equals(IndexName other) => EqualsMarker(other);
 
-	public string GetString(ITransportConfiguration settings)
+	string IUrlParameter.GetString(ITransportConfiguration settings)
 	{
 		if (settings is not IElasticsearchClientSettings elasticsearchClientSettings)
 			throw new Exception("Tried to pass index name on querystring but it could not be resolved because no Elastic.Clients.Elasticsearch settings are available.");

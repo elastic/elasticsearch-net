@@ -82,19 +82,19 @@ public sealed partial class Hit<TDocument>
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public Dictionary<string, object>? Fields { get; init; }
+	public IReadOnlyDictionary<string, object>? Fields { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("highlight")]
-	public Dictionary<string, IReadOnlyCollection<string>>? Highlight { get; init; }
+	public IReadOnlyDictionary<string, IReadOnlyCollection<string>>? Highlight { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("ignored_field_values")]
-	public Dictionary<string, IReadOnlyCollection<string>>? IgnoredFieldValues { get; init; }
+	public IReadOnlyDictionary<string, IReadOnlyCollection<string>>? IgnoredFieldValues { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("inner_hits")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult>? InnerHits { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult>? InnerHits { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("matched_queries")]

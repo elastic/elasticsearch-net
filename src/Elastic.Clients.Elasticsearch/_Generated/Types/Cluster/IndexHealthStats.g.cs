@@ -53,7 +53,7 @@ public sealed partial class IndexHealthStats
 
 	[JsonInclude]
 	[JsonPropertyName("shards")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.ShardHealthStats>? Shards { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ShardHealthStats>? Shards { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("status")]

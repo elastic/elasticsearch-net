@@ -35,7 +35,7 @@ public sealed partial class SearchResponse<TDocument> : ElasticsearchResponse
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public Dictionary<string, object>? Fields { get; init; }
+	public IReadOnlyDictionary<string, object>? Fields { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("hits")]
