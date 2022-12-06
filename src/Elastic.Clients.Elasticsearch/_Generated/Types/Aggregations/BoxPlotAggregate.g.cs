@@ -45,7 +45,7 @@ public sealed partial class BoxPlotAggregate : IAggregate
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, object>? Meta { get; init; }
+	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("min")]

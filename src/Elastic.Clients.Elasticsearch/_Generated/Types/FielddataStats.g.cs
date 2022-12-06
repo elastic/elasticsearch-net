@@ -33,7 +33,7 @@ public sealed partial class FielddataStats
 
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldMemoryUsage>? Fields { get; init; }
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldMemoryUsage>? Fields { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("memory_size")]

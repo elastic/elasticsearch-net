@@ -29,7 +29,7 @@ public sealed partial class CompletionStats
 {
 	[JsonInclude]
 	[JsonPropertyName("fields")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldSizeUsage>? Fields { get; init; }
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldSizeUsage>? Fields { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("size")]

@@ -27,11 +27,11 @@ public sealed partial class SearchShardsResponse : ElasticsearchResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("indices")]
-	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex> Indices { get; init; }
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex> Indices { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("nodes")]
-	public Dictionary<string, Elastic.Clients.Elasticsearch.NodeAttributes> Nodes { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.NodeAttributes> Nodes { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("shards")]

@@ -38,11 +38,11 @@ public partial class Analyzers : IsADictionary<string, IAnalyzer>
 	}
 
 	public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(Sanitize(name), analyzer);
-	public bool TryGetAnalyzer(string name, [NotNullWhen(returnValue: true)] out IAnalyzer analyzer) => BackingDictionary.TryGetValue(name, out analyzer);
+	public bool TryGetAnalyzer(string name, [NotNullWhen(returnValue: true)] out IAnalyzer analyzer) => BackingDictionary.TryGetValue(Sanitize(name), out analyzer);
 	public bool TryGetAnalyzer<T>(string name, [NotNullWhen(returnValue: true)] out T? analyzer)
 		where T : class, IAnalyzer
 	{
-		if (BackingDictionary.TryGetValue(name, out var matchedValue) && matchedValue is T finalValue)
+		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
 		{
 			analyzer = finalValue;
 			return true;

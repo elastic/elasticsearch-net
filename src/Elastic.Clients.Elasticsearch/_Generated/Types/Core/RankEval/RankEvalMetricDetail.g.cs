@@ -33,7 +33,7 @@ public sealed partial class RankEvalMetricDetail
 
 	[JsonInclude]
 	[JsonPropertyName("metric_details")]
-	public Dictionary<string, Dictionary<string, object>> MetricDetails { get; init; }
+	public IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>> MetricDetails { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("metric_score")]

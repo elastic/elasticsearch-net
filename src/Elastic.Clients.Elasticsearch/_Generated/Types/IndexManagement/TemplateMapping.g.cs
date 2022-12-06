@@ -29,7 +29,7 @@ public sealed partial class TemplateMapping
 {
 	[JsonInclude]
 	[JsonPropertyName("aliases")]
-	public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; init; }
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("index_patterns")]
@@ -45,7 +45,7 @@ public sealed partial class TemplateMapping
 
 	[JsonInclude]
 	[JsonPropertyName("settings")]
-	public Dictionary<string, object> Settings { get; init; }
+	public IReadOnlyDictionary<string, object> Settings { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("version")]
