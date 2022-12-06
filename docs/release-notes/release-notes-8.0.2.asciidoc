@@ -1,0 +1,82 @@
+[[release-notes-8.0.2]]
+== Release notes v8.0.2
+
+[discrete]
+=== Bug fixes
+
+- Add missing accessor properties for dictionary responses (issue: 
+https://github.com/elastic/elasticsearch-net/issues/7048[#7048])
+- Fix to ensure dynamic HTTP methods are used when available (issue: 
+https://github.com/elastic/elasticsearch-net/issues/7057[#7057])
+- Fix resolvable dictionary properties (issue: 
+https://github.com/elastic/elasticsearch-net/issues/7075[#7075])
+
+[discrete]
+=== Breaking changes
+
+Some low-impact changes were made to existing types to fix the resolvable 
+dictionary properties. We determined it worthwhile to retype the properties to 
+prefer the interfaces over concrete types.
+
+[discrete]
+==== Changes to dictionary properties on generated types
+
+As part of fixing the resolvable dictionary properties some low-impact changes 
+were made to the generated types. We determined it worthwhile to retype the 
+properties to prefer the interfaces over concrete types.
+
+Types that are immutable and only apply to server responses now use 
+`IReadOnlyDictionary` for relevant properties. For mutable types, we prefer 
+`IDictionary`.
+
+`HealthResponse.Indices` has changed from a bespoke `ReadOnlyIndexNameDictionary` 
+property to prefer `IReadOnlyDictionary` to improve ease of use and familiarity.
+
+[discrete]
+==== Internalise ReadOnlyIndexNameDictionary
+
+After changes for resolvable dictionaries, the `ReadOnlyIndexNameDictionary` type 
+was made internal and is no longer part of the public API. Properties that 
+previously used this type are now typed as `IReadOnlyDictionary`. This brings 
+advantages in being more familiar for developers.
+
+[discrete]
+==== Remove IndexName.GetString(ITransportConfiguration settings) method
+
+This method is used internally by the client and should not be exposed to 
+consuming applications. Instead, we prefer explicit interface implementation for 
+`IUrlParameter.GetString`.
+
+[discrete]
+==== Remove Metric.GetString(ITransportConfiguration settings) method
+
+This method is used internally by the client and should not be exposed to 
+consuming applications. Instead, we prefer explicit interface implementation for 
+`IUrlParameter.GetString`.
+
+[discrete]
+==== Remove TimeStamp.GetString(ITransportConfiguration settings) method
+
+This method is used internally by the client and should not be exposed to 
+consuming applications. Instead, we prefer explicit interface implementation for 
+`IUrlParameter.GetString`.
+
+[discrete]
+==== Remove IndexUuid.GetString(ITransportConfiguration settings) method
+
+This method is used internally by the client and should not be exposed to 
+consuming applications. Instead, we prefer explicit interface implementation for 
+`IUrlParameter.GetString`.
+
+[discrete]
+==== Remove TaskId.GetString(ITransportConfiguration settings) method
+
+This method is used internally by the client and should not be exposed to 
+consuming applications. Instead, we prefer explicit interface implementation for 
+`IUrlParameter.GetString`.
+
+[discrete]
+==== The Metric type is now sealed
+
+This type has been sealed to align with other types for consistency. We don’t 
+expect consumers to derive from this type.
