@@ -31,7 +31,7 @@ public sealed partial class RolloverResponse : ElasticsearchResponse
 
 	[JsonInclude]
 	[JsonPropertyName("conditions")]
-	public Dictionary<string, bool> Conditions { get; init; }
+	public IReadOnlyDictionary<string, bool> Conditions { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("dry_run")]

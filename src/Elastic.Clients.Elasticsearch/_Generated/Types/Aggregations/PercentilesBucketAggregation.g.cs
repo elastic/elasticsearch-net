@@ -144,7 +144,7 @@ public sealed partial class PercentilesBucketAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public override string? Name { get; internal set; }
 
@@ -162,7 +162,7 @@ public sealed partial class PercentilesBucketAggregationDescriptor : Serializabl
 
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private ICollection<double>? PercentsValue { get; set; }
 

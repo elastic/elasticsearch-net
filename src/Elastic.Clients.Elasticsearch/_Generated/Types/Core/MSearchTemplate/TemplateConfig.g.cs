@@ -37,7 +37,7 @@ public sealed partial class TemplateConfig
 
 	[JsonInclude]
 	[JsonPropertyName("params")]
-	public Dictionary<string, object>? Params { get; set; }
+	public IDictionary<string, object>? Params { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("profile")]
@@ -59,7 +59,7 @@ public sealed partial class TemplateConfigDescriptor : SerializableDescriptor<Te
 
 	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
 
-	private Dictionary<string, object>? ParamsValue { get; set; }
+	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	private bool? ProfileValue { get; set; }
 

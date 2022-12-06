@@ -199,7 +199,7 @@ public sealed partial class CardinalityAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	public Dictionary<string, object>? Meta { get; set; }
+	public IDictionary<string, object>? Meta { get; set; }
 
 	public FieldValue? Missing { get; set; }
 
@@ -223,7 +223,7 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 
@@ -344,7 +344,7 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-	private Dictionary<string, object>? MetaValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 
 	private FieldValue? MissingValue { get; set; }
 

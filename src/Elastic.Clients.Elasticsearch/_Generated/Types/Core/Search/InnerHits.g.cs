@@ -65,7 +65,7 @@ public sealed partial class InnerHits
 
 	[JsonInclude]
 	[JsonPropertyName("script_fields")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("seq_no_primary_term")]
@@ -140,7 +140,7 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 
 	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
 	private bool? SeqNoPrimaryTermValue { get; set; }
 
@@ -562,7 +562,7 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 
 	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
 	private bool? SeqNoPrimaryTermValue { get; set; }
 

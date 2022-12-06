@@ -61,7 +61,7 @@ public sealed partial class IpRangeProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("properties")]
@@ -103,7 +103,7 @@ public sealed partial class IpRangePropertyDescriptor<TDocument> : SerializableD
 
 	private bool? IndexValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
@@ -318,7 +318,7 @@ public sealed partial class IpRangePropertyDescriptor : SerializableDescriptor<I
 
 	private bool? IndexValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 

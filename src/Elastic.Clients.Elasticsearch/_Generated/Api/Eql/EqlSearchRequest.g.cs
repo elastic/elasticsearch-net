@@ -111,7 +111,7 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 
 	[JsonInclude]
 	[JsonPropertyName("runtime_mappings")]
-	public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 
 public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescriptor<EqlSearchRequestDescriptor<TDocument>, EqlSearchRequestParameters>
@@ -167,7 +167,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 
 	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 	private int? SizeValue { get; set; }
 
@@ -529,7 +529,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 
 	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
 
-	private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
 	private int? SizeValue { get; set; }
 

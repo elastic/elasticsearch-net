@@ -29,7 +29,7 @@ public sealed partial class IndexTemplate
 {
 	[JsonInclude]
 	[JsonPropertyName("_meta")]
-	public Dictionary<string, object>? Meta { get; init; }
+	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("allow_auto_create")]

@@ -37,7 +37,7 @@ public sealed partial class MatchOnlyTextProperty : IProperty
 
 	[JsonInclude]
 	[JsonPropertyName("meta")]
-	public Dictionary<string, string>? Meta { get; set; }
+	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
@@ -55,7 +55,7 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	public MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
@@ -130,7 +130,7 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 
-	private Dictionary<string, string>? MetaValue { get; set; }
+	private IDictionary<string, string>? MetaValue { get; set; }
 
 	public MatchOnlyTextPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
