@@ -162,7 +162,7 @@ public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescr
 		}
 
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
+		writer.WritePropertyName(fieldName);
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
@@ -279,7 +279,7 @@ public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortO
 		}
 
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
+		writer.WritePropertyName(fieldName);
 		if (Variant is not null)
 		{
 			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
