@@ -553,8 +553,8 @@ public partial class ElasticsearchClient
 
 	internal static void ForceJson(IRequestConfiguration requestConfiguration)
 	{
-		requestConfiguration.Accept = RequestData.MimeType;
-		requestConfiguration.ContentType = RequestData.MimeType;
+		requestConfiguration.Accept = RequestData.DefaultMimeType;
+		requestConfiguration.ContentType = RequestData.DefaultMimeType;
 	}
 
 	internal static void ForceTextPlain(IRequestConfiguration requestConfiguration)
