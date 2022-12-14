@@ -31,11 +31,11 @@
       },
       "Elastic.Transport.VirtualizedCluster": {
         "type": "Direct",
-        "requested": "[0.4.3, )",
-        "resolved": "0.4.3",
-        "contentHash": "U4Ss5iT3uuhzSo8es0TWh2HIeRENEyIq+0VsedJR7fjq3dbiErIqBR5bU3mA8D4b2Agac2sKNThVuGfdZHcxtg==",
+        "requested": "[0.4.5, )",
+        "resolved": "0.4.5",
+        "contentHash": "uQzPNr3JUUItoIhRucZ+64djkOuue+Yb+SdayHFo/HBq5bVLGblC/tZN0T8yfp8uh+pQk1Wt8HcpthrY+YKdig==",
         "dependencies": {
-          "Elastic.Transport": "0.4.3"
+          "Elastic.Transport": "0.4.5"
         }
       },
       "FSharp.Core": {
@@ -195,8 +195,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.3",
-        "contentHash": "U4yHxScZG7YMDJJ9KGGWfhNx543NQmWlNPILyrd5UF0VMFfjuTZ+RXtWRCX8xMrqcSl4pUBKE+G4GoIVA65ZUQ==",
+        "resolved": "0.4.5",
+        "contentHash": "iy3ekUGcbHCDAWCcaG7+IERXouKJ6ta3CXiqAGwdhu1FYudqnAzo1UBdPeQQHmYYGNvQ/cqLHAUQW+1Zh/i6KA==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -1492,7 +1492,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.3, )"
+          "Elastic.Transport": "[0.4.5, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
