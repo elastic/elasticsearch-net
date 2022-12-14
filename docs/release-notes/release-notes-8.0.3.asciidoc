@@ -1,0 +1,17 @@
+[[release-notes-8.0.3]]
+== Release notes v8.0.3
+
+[discrete]
+=== Bug fixes
+
+- Fix field sort serialization (issue: 
+https://github.com/elastic/elasticsearch-net/issues/7074[#7074])
+
+[discrete]
+=== Enhancements
+
+[discrete]
+==== Update to Elastic.Transport 0.4.5
+
+Upgrades the client to depend on the 0.4.5 release of Elastic.Transport which 
+includes automatic sending of (https://www.elastic.co/guide/en/elasticsearch/reference/current/rest-api-compatibility.html#rest-api-compatibility)[REST API compatibility] headers for Elasticsearch requests.
