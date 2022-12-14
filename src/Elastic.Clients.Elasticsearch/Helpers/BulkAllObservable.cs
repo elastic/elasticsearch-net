@@ -156,7 +156,7 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
         _compositeCancelToken.ThrowIfCancellationRequested();
         _bulkResponseCallback?.Invoke(response);
 
-        if (!response.ApiCallDetails.HasSuccessfulStatusCode)
+        if (!response.ApiCallDetails.HasSuccessfulStatusCode || !response.ApiCallDetails.HasExpectedContentType)
             return await HandleBulkRequestAsync(buffer, page, backOffRetries, response).ConfigureAwait(false);
 
         var retryableDocuments = new List<T>();
