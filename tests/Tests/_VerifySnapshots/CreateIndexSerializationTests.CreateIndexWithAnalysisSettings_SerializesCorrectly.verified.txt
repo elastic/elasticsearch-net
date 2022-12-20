@@ -1,0 +1,30 @@
+{
+  settings: {
+    analysis: {
+      analyzer: {
+        my-custom-analyzer: {
+          filter: [
+            stop,
+            synonym
+          ],
+          tokenizer: standard,
+          type: custom
+        },
+        pattern-name: {
+          type: pattern,
+          version: version
+        },
+        stop-name: {
+          stopwords_path: path.txt,
+          type: stop
+        }
+      },
+      filter: {
+        synonym: {
+          synonyms_path: analysis/synonym.txt,
+          type: synonym
+        }
+      }
+    }
+  }
+}
