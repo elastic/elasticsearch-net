@@ -19,7 +19,7 @@ public class IndexSettingsSerializationTests : SerializerTestBase
 	private const string IndexSettingsJson = @"{""creation_date"":""1655895084631""}";
 
 	[U]
-	public async Task CanSerializerIndexSettingsWithCustomAnalyzer()
+	public async Task CanSerialize_IndexSettingsWithCustomAnalyzer()
 	{
 		// Test case for https://github.com/elastic/elasticsearch-net/issues/6739
 		// Resolved after improved code-generation of internally-tagged untions to include
@@ -27,7 +27,7 @@ public class IndexSettingsSerializationTests : SerializerTestBase
 
 		var descriptor = new IndexSettingsDescriptor<Project>()
 			.Analysis(a => a
-				.Analyzer(a => a
+				.Analyzers(a => a
 					.Custom("whitespace_lowercase", wl => wl
 						.Tokenizer("whitespace")
 						.Filter(new[] { "lowercase" })
@@ -39,7 +39,7 @@ public class IndexSettingsSerializationTests : SerializerTestBase
 		await Verifier.VerifyJson(json);
 
 		var indexSettings = DeserializeJsonString<IndexSettings>(json);
-		var analyzer = indexSettings.Analysis.Analyzer["whitespace_lowercase"];
+		var analyzer = indexSettings.Analysis.Analyzers["whitespace_lowercase"];
 		var customAnalyzer = analyzer.Should().BeAssignableTo<CustomAnalyzer>().Subject;
 		customAnalyzer.Tokenizer.Should().Be("whitespace");
 		customAnalyzer.Filter.Should().ContainSingle("lowercase");
