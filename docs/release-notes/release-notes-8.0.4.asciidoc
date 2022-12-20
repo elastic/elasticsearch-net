@@ -38,33 +38,31 @@ NEST and make it clearer that this can contain more than one tokenizer definitio
 Its type has changes from a `IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>` 
 to `TokenFilters`, a tagged union type deriving from IsADictionary<string, ITokenizer>`.
 
-[discrete]
-===== Before
+*_Before_*
 
 [source,csharp]
 ----
 public sealed partial class IndexSettingsAnalysis
 {
-	public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzer { get; set; }
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilter { get; set; }
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? Filter { get; set; }
-	public Elastic.Clients.Elasticsearch.Analysis.Normalizers? Normalizer { get; set; }
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? Tokenizer { get; set; }
+   public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzer { get; set; }
+   public IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilter { get; set; }
+   public IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? Filter { get; set; }
+   public Elastic.Clients.Elasticsearch.Analysis.Normalizers? Normalizer { get; set; }
+   public IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? Tokenizer { get; set; }
 }
 ----
 
-[discrete]
-===== After
+*_After_*
 
 [source,csharp]
 ----
 public sealed partial class IndexSettingsAnalysis
 {
-	public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzers { get; set; }
-	public Elastic.Clients.Elasticsearch.Analysis.CharFilters? CharFilters { get; set; }
-	public Elastic.Clients.Elasticsearch.Analysis.TokenFilters? TokenFilters { get; set; }
-	public Elastic.Clients.Elasticsearch.Analysis.Normalizers? Normalizers { get; set; }
-	public Elastic.Clients.Elasticsearch.Analysis.Tokenizers? Tokenizers { get; set; }
+   public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzers { get; set; }
+   public Elastic.Clients.Elasticsearch.Analysis.CharFilters? CharFilters { get; set; }
+   public Elastic.Clients.Elasticsearch.Analysis.TokenFilters? TokenFilters { get; set; }
+   public Elastic.Clients.Elasticsearch.Analysis.Normalizers? Normalizers { get; set; }
+   public Elastic.Clients.Elasticsearch.Analysis.Tokenizers? Tokenizers { get; set; }
 }
 ----
 
@@ -78,17 +76,17 @@ the filters, normalizers and tokenizers that apply to the settings for indices.
 [source,csharp]
 ----
 var descriptor = new CreateIndexRequestDescriptor("test")
-			.Settings(s => s
-				.Analysis(a => a
-					.Analyzers(a => a
-						.Stop("stop-name", stop => stop.StopwordsPath("analysis/path.txt"))
-						.Pattern("pattern-name", pattern => pattern.Version("version"))
-						.Custom("my-custom-analyzer", c => c
-							.Filter(new[] { "stop", "synonym" })
-							.Tokenizer("standard")))
-					.TokenFilters(f => f
-						.Synonym("synonym", synonym => synonym
-							.SynonymsPath("analysis/synonym.txt")))));
+   .Settings(s => s
+      .Analysis(a => a
+         .Analyzers(a => a
+            .Stop("stop-name", stop => stop.StopwordsPath("analysis/path.txt"))
+            .Pattern("pattern-name", pattern => pattern.Version("version"))
+            .Custom("my-custom-analyzer", c => c
+               .Filter(new[] { "stop", "synonym" })
+               .Tokenizer("standard")))
+         .TokenFilters(f => f
+            .Synonym("synonym", synonym => synonym
+               .SynonymsPath("analysis/synonym.txt")))));
 ----
 
 [discrete]
