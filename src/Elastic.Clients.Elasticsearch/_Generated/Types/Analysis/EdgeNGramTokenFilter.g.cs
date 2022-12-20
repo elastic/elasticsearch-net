@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
-public sealed partial class EdgeNGramTokenFilter : ITokenFilterDefinition
+public sealed partial class EdgeNGramTokenFilter : ITokenFilter
 {
 	[JsonInclude]
 	[JsonPropertyName("max_gram")]
