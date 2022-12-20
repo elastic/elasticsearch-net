@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
-public sealed partial class StemmerTokenFilter : ITokenFilterDefinition
+public sealed partial class StemmerTokenFilter : ITokenFilter
 {
 	[JsonInclude]
 	[JsonPropertyName("language")]
