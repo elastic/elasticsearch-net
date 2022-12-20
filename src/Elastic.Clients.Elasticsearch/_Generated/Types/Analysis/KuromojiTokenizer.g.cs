@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
-public sealed partial class KuromojiTokenizer : ITokenizerDefinition
+public sealed partial class KuromojiTokenizer : ITokenizer
 {
 	[JsonInclude]
 	[JsonPropertyName("discard_compound_token")]
