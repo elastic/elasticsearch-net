@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
-public sealed partial class ReverseTokenFilter : ITokenFilterDefinition
+public sealed partial class ReverseTokenFilter : ITokenFilter
 {
 	[JsonInclude]
 	[JsonPropertyName("type")]
