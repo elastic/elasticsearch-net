@@ -500,60 +500,24 @@ internal sealed class ShardRoutingStateConverter : JsonConverter<ShardRoutingSta
 	}
 }
 
-[JsonConverter(typeof(StorageTypeConverter))]
-public enum StorageType
+[JsonConverter(typeof(EnumStructConverter<StorageType>))]
+public readonly partial struct StorageType
 {
-	[EnumMember(Value = "niofs")]
-	Niofs,
-	[EnumMember(Value = "mmapfs")]
-	Mmapfs,
-	[EnumMember(Value = "hybridfs")]
-	Hybridfs,
-	[EnumMember(Value = "fs")]
-	Fs
-}
+	public StorageType(string value) => Value = value;
+	public readonly string Value { get; }
 
-internal sealed class StorageTypeConverter : JsonConverter<StorageType>
-{
-	public override StorageType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "niofs":
-				return StorageType.Niofs;
-			case "mmapfs":
-				return StorageType.Mmapfs;
-			case "hybridfs":
-				return StorageType.Hybridfs;
-			case "fs":
-				return StorageType.Fs;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, StorageType value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case StorageType.Niofs:
-				writer.WriteStringValue("niofs");
-				return;
-			case StorageType.Mmapfs:
-				writer.WriteStringValue("mmapfs");
-				return;
-			case StorageType.Hybridfs:
-				writer.WriteStringValue("hybridfs");
-				return;
-			case StorageType.Fs:
-				writer.WriteStringValue("fs");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	public static StorageType Niofs { get; } = new StorageType("niofs");
+	public static StorageType Mmapfs { get; } = new StorageType("mmapfs");
+	public static StorageType Hybridfs { get; } = new StorageType("hybridfs");
+	public static StorageType Fs { get; } = new StorageType("fs");
+	public override string ToString() => Value ?? string.Empty;
+	public static implicit operator string(StorageType storageType) => storageType.Value;
+	public static implicit operator StorageType(string value) => new(value);
+	public override int GetHashCode() => Value.GetHashCode();
+	public override bool Equals(object obj) => obj is StorageType other && this.Equals(other);
+	public bool Equals(StorageType other) => Value == other.Value;
+	public static bool operator ==(StorageType a, StorageType b) => a.Equals(b);
+	public static bool operator !=(StorageType a, StorageType b) => !(a == b);
 }
 
 [JsonConverter(typeof(TranslogDurabilityConverter))]
