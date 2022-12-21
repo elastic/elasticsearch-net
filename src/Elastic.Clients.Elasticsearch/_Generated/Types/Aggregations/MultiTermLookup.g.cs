@@ -30,6 +30,10 @@ public sealed partial class MultiTermLookup
 	[JsonInclude]
 	[JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	[JsonInclude]
+	[JsonPropertyName("missing")]
+	public FieldValue? Missing { get; set; }
 }
 
 public sealed partial class MultiTermLookupDescriptor<TDocument> : SerializableDescriptor<MultiTermLookupDescriptor<TDocument>>
@@ -40,6 +44,8 @@ public sealed partial class MultiTermLookupDescriptor<TDocument> : SerializableD
 	}
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
 
 	public MultiTermLookupDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -53,11 +59,23 @@ public sealed partial class MultiTermLookupDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public MultiTermLookupDescriptor<TDocument> Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("field");
 		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (MissingValue is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }
@@ -70,6 +88,8 @@ public sealed partial class MultiTermLookupDescriptor : SerializableDescriptor<M
 	}
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+	private FieldValue? MissingValue { get; set; }
 
 	public MultiTermLookupDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -89,11 +109,23 @@ public sealed partial class MultiTermLookupDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
+	public MultiTermLookupDescriptor Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("field");
 		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (MissingValue is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }
