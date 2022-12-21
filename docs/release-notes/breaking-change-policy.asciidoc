@@ -12,7 +12,9 @@ This section explains how these breaking changes are considered for inclusion in
 
 Some issues in the API specification are properties that have an incorrect type, such as a `long` that should be a `string`, or a required property that is actually optional. These issues can cause the {net-client} to not work properly or even throw exceptions.
 
-When a specification issue is discovered and resolved, it may require code updates in applications using the {net-client}. Such breaking changes are considered acceptable, _even in patch releases_ (e.g. 7.17.0 -> 7.17.1), as they introduce stability to APIs that may otherwise be unusable.
+When a specification issue is discovered and resolved, it may require code updates in applications using the {net-client}. Such breaking changes are considered acceptable, _even in patch releases_ (e.g. 8.0.0 -> 8.0.1), as they introduce stability to APIs that may otherwise be unusable.
+
+We may also make breaking changes in patch releases to correct design flaws and code-generation issues that we deem beneficial to resolve at the earliest oppotunity. We will detail these in the relevant release notes and limit these as the client matures.
 
 [discrete]
 ==== Breaking changes in minor releases
