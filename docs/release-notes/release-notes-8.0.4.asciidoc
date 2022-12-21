@@ -7,6 +7,9 @@
 - Fix code-gen for IndexSettingsAnalysis (issue: 
 https://github.com/elastic/elasticsearch-net/issues/7118[#7118])
 - Complete implementation of Metrics type
+- Update generated code with fixes from 8.6 specification (issue: 
+https://github.com/elastic/elasticsearch-net/issues/7119[#7119]). Adds `Missing` 
+property to `MultiTermLookup`.
 
 [discrete]
 === Breaking changes
@@ -125,3 +128,11 @@ clearly signify it's use only within ML categorization contexts.
 
 A `Tokenizers` type has been introduced, which derives from `IsADictionary` and 
 supports convenient addition of known tokenizers via the fluent API.
+
+[discrete]
+==== IndexManagement.StorageType
+
+The 8.6 specification fixed this type to mark is as a non-exhaustive enum, since 
+it supports additional values besides those coded into the specification. As a 
+result the code-generation for this type causes some breaking changes. The type 
+is no longer generated as an `enum` and is not a custom `readonly struct`.
