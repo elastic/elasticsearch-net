@@ -6,6 +6,7 @@
 
 - Fix code-gen for IndexSettingsAnalysis (issue: 
 https://github.com/elastic/elasticsearch-net/issues/7118[#7118])
+- Complete implementation of Metrics type
 
 [discrete]
 === Breaking changes
