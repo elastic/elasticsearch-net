@@ -37,7 +37,7 @@ public sealed partial class IndexTemplate
 
 	[JsonInclude]
 	[JsonPropertyName("composed_of")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name> ComposedOf { get; init; }
+	public IReadOnlyCollection<string> ComposedOf { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("data_stream")]
@@ -45,7 +45,7 @@ public sealed partial class IndexTemplate
 
 	[JsonInclude]
 	[JsonPropertyName("index_patterns")]
-	public Elastic.Clients.Elasticsearch.Names IndexPatterns { get; init; }
+	public IReadOnlyCollection<string> IndexPatterns { get; init; }
 
 	[JsonInclude]
 	[JsonPropertyName("priority")]
