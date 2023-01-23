@@ -26,7 +26,7 @@ public sealed class Name : IEquatable<Name>, IUrlParameter
 
 	string IUrlParameter.GetString(ITransportConfiguration? settings) => Value;
 
-	public override string ToString() => DebugDisplay;
+	public override string ToString() => Value;
 
 	public static implicit operator Name(string name) => name.IsNullOrEmpty() ? null : new Name(name);
 
