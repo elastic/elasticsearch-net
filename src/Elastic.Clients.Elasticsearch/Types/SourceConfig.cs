@@ -60,5 +60,15 @@ internal class SourceConfigConverter : JsonConverter<SourceConfig>
 		return null;
 	}
 
-	public override void Write(Utf8JsonWriter writer, SourceConfig value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, SourceConfig value, JsonSerializerOptions options)
+	{
+		if (value.HasBoolValue)
+		{
+			writer.WriteBooleanValue(value.Item1);
+		}
+		else
+		{
+			JsonSerializer.Serialize(writer, value.Item2, options);
+		}
+	}
 }
