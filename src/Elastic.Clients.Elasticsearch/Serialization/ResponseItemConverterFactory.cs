@@ -43,7 +43,7 @@ internal sealed class ResponseItemConverterFactory : JsonConverterFactory
 				var result = JsonSerializer.Deserialize<GetResult<TDocument>>(ref readerCopy, options);
 
 				// If we have a version number, we can be sure this isn't an error
-				if (result is not null && result.Version is not null)
+				if (result is not null)
 				{
 					reader = readerCopy; // Ensure we swap the reader to reflect the data we have consumed.
 					return new MultiGetResponseItem<TDocument>(result);
