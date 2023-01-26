@@ -31,8 +31,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.5",
-        "contentHash": "iy3ekUGcbHCDAWCcaG7+IERXouKJ6ta3CXiqAGwdhu1FYudqnAzo1UBdPeQQHmYYGNvQ/cqLHAUQW+1Zh/i6KA==",
+        "resolved": "0.4.6",
+        "contentHash": "ZIB+JcjulPzlSMknHBO1JBKTe2yObhKvaDuKaOxGQfOsaHkBpVs/3QGy5zkY9fE7f8ajMAv5bKAI6iQOUd/Z5Q==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -131,7 +131,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.5, )"
+          "Elastic.Transport": "[0.4.6, )"
         }
       }
     }
