@@ -40,6 +40,20 @@ internal sealed class ResponseItemConverterFactory : JsonConverterFactory
 
 			try
 			{
+				var result = JsonSerializer.Deserialize<MultiGetError>(ref reader, options);
+
+				if (result is not null && result.Error is not null)
+				{
+					return new MultiGetResponseItem<TDocument>(result);
+				}
+			}
+			catch (Exception ex)
+			{
+				errorException = ex;
+			}
+
+			try
+			{
 				var result = JsonSerializer.Deserialize<GetResult<TDocument>>(ref readerCopy, options);
 
 				// If we have a version number, we can be sure this isn't an error
@@ -52,20 +66,6 @@ internal sealed class ResponseItemConverterFactory : JsonConverterFactory
 			catch (Exception ex)
 			{
 				getResultException = ex;
-			}
-
-			try
-			{
-				var result = JsonSerializer.Deserialize<MultiGetError>(ref reader, options);
-
-				if (result is not null && result.Error is not null)
-				{
-					return new MultiGetResponseItem<TDocument>(result);
-				}
-			}
-			catch (Exception ex)
-			{
-				errorException = ex;
 			}
 
 			Exception innerException = null;
