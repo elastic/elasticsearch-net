@@ -1,0 +1,98 @@
+[[release-notes-8.0.5]]
+== Release notes v8.0.5
+
+[discrete]
+=== Bug fixes
+
+- https://github.com/elastic/elasticsearch-net/pull/7171[#7171] Fix code-gen for IndexTemplate (issue: https://github.com/elastic/elasticsearch-net/issues/7161[#7161])
+- https://github.com/elastic/elasticsearch-net/pull/7181[#7181] Fix MultiGet response deserialization for non-matched IDs (issue: https://github.com/elastic/elasticsearch-net/issues/7169[#7169])
+- https://github.com/elastic/elasticsearch-net/pull/7182[#7182] Implement Write method on SourceConfigConverter (issue: https://github.com/elastic/elasticsearch-net/issues/7170[#7170])
+- https://github.com/elastic/elasticsearch-net/pull/7205[#7205] Update to Elastic.Transport to 0.4.6 which improves the version detection used by the REST API compatibility Accept header
+
+[discrete]
+=== Breaking changes
+
+In the course of fixing the code-generation for index templates to avoid serialization failures, some breaking changes were introduced.
+
+[discrete]
+==== IndexTemplate
+
+`IndexTemplate` forms part of the `IndexTemplateItem` included on `GetIndexTemplateResponse`.
+
+* The type for the `ComposedOf` property has changed from `IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>` to `IReadOnlyCollection<string>`
+* The type for the `IndexPatterns` property has changed from `Elastic.Clients.Elasticsearch.Names` to `IReadOnlyCollection<string>`
+
+*_Before_*
+
+[source,csharp]
+----
+public sealed partial class IndexTemplate
+{
+   ...
+   public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name> ComposedOf { get; init; }
+   public Elastic.Clients.Elasticsearch.Names IndexPatterns { get; init; }
+   ...
+}
+----
+
+*_After_*
+
+[source,csharp]
+----
+public sealed partial class IndexTemplate
+{
+   ...
+   public IReadOnlyCollection<string> ComposedOf { get; init; }
+   public IReadOnlyCollection<string> IndexPatterns { get; init; }
+   ...
+}
+----
+
+[discrete]
+==== SimulateIndexTemplateRequest
+
+* The type for the `ComposedOf` property has changed from `IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>` to `IReadOnlyCollection<string>`
+
+*_Before_*
+
+[source,csharp]
+----
+public sealed partial class SimulateIndexTemplateRequest
+{
+   ...
+   public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
+   ...
+}
+----
+
+*_After_*
+
+[source,csharp]
+----
+public sealed partial class SimulateIndexTemplateRequest
+{
+   ...
+   public IReadOnlyCollection<string>? ComposedOf { get; set; }
+   ...
+}
+----
+
+[discrete]
+==== SimulateIndexTemplateRequestDescriptor and SimulateIndexTemplateRequestDescriptor<T>
+
+The `ComposedOf` method signature has changed to accept a parameter of `ICollection<string>?` instead of 
+`ICollection<Elastic.Clients.Elasticsearch.Name>?`.
+
+*_Before_*
+
+[source,csharp]
+----
+public SimulateIndexTemplateRequestDescriptor<TDocument> ComposedOf(ICollection<Elastic.Clients.Elasticsearch.Name>? composedOf)
+----
+
+*_After_*
+
+[source,csharp]
+----
+public SimulateIndexTemplateRequestDescriptor<TDocument> ComposedOf(ICollection<string>? composedOf)
+----
