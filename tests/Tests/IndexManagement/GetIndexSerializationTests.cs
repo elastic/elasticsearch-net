@@ -2,7 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System.Linq;
 using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Mapping;
 using Tests.Serialization;
 
 namespace Tests.IndexManagement;
@@ -7052,5 +7054,85 @@ public class GetIndexSerializationTests : SerializerTestBase
 }";
 
 		var response = DeserializeJsonString<GetIndexResponse>(json);
+	}
+
+	[U]
+	public void GetIndexResponse_DeserializedCorrectly_WhenDynamicTemplateArrayIsPresentInResponse()
+	{
+		const string json = @"{
+  ""catalog-data-2023.01.31"": {
+    ""aliases"": {      
+    },
+    ""mappings"": {
+      ""dynamic_templates"": [
+        {
+          ""strings_as_keyword"": {
+            ""match_mapping_type"": ""string"",
+            ""mapping"": {
+              ""ignore_above"": 1024,
+              ""type"": ""keyword""
+            }
+          }
+        }
+      ],
+      ""properties"": {
+        ""@timestamp"": {
+          ""type"": ""date""
+        }
+      }
+    },
+    ""settings"": {
+    }
+  }
+}";
+
+		var response = DeserializeJsonString<GetIndexResponse>(json);
+		VerifyGetIndexResponseDynamicTemplates(response);
+	}
+
+	[U]
+	public void GetIndexResponse_DeserializedCorrectly_WhenSingleDynamicTemplateIsPresentInResponse()
+	{
+		const string json = @"{
+  ""catalog-data-2023.01.31"": {
+    ""aliases"": {      
+    },
+    ""mappings"": {
+      ""dynamic_templates"": 
+        {
+          ""strings_as_keyword"": {
+            ""match_mapping_type"": ""string"",
+            ""mapping"": {
+              ""ignore_above"": 1024,
+              ""type"": ""keyword""
+            }
+          }
+        },
+      ""properties"": {
+        ""@timestamp"": {
+          ""type"": ""date""
+        }
+      }
+    },
+    ""settings"": {
+    }
+  }
+}";
+
+		var response = DeserializeJsonString<GetIndexResponse>(json);
+		VerifyGetIndexResponseDynamicTemplates(response);
+	}
+
+	private static void VerifyGetIndexResponseDynamicTemplates(GetIndexResponse response)
+	{
+		response.Indices.TryGetValue("catalog-data-2023.01.31", out var indexState).Should().BeTrue();
+		indexState.Mappings.DynamicTemplates.Should().HaveCount(1);
+
+		var templateDictionary = indexState.Mappings.DynamicTemplates.Single();
+		templateDictionary.TryGetValue("strings_as_keyword", out var dynamicTemplate).Should().BeTrue();
+		dynamicTemplate.MatchMappingType.Should().Be("string");
+
+		var keywordProperty = dynamicTemplate.Mapping.Should().BeOfType<KeywordProperty>().Subject;
+		keywordProperty.IgnoreAbove.Should().Be(1024);
 	}
 }

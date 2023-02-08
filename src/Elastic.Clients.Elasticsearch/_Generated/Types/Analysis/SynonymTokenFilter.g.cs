@@ -27,39 +27,31 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class SynonymTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("expand")]
+	[JsonInclude, JsonPropertyName("expand")]
 	public bool? Expand { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("format")]
+	[JsonInclude, JsonPropertyName("format")]
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? Format { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("lenient")]
+	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("synonyms")]
+	[JsonInclude, JsonPropertyName("synonyms")]
 	public ICollection<string>? Synonyms { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("synonyms_path")]
+	[JsonInclude, JsonPropertyName("synonyms_path")]
 	public string? SynonymsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tokenizer")]
+	[JsonInclude, JsonPropertyName("tokenizer")]
 	public string? Tokenizer { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "synonym";
-	[JsonInclude]
-	[JsonPropertyName("updateable")]
+	[JsonInclude, JsonPropertyName("updateable")]
 	public bool? Updateable { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

@@ -27,27 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class NGramTokenizer : ITokenizer
 {
-	[JsonInclude]
-	[JsonPropertyName("custom_token_chars")]
+	[JsonInclude, JsonPropertyName("custom_token_chars")]
 	public string? CustomTokenChars { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_gram")]
+	[JsonInclude, JsonPropertyName("max_gram")]
 	public int MaxGram { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_gram")]
+	[JsonInclude, JsonPropertyName("min_gram")]
 	public int MinGram { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("token_chars")]
+	[JsonInclude, JsonPropertyName("token_chars")]
 	public ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "ngram";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

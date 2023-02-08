@@ -27,32 +27,25 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class HasParentQuery : SearchQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_unmapped")]
+	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("inner_hits")]
+	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("parent_type")]
+	[JsonInclude, JsonPropertyName("parent_type")]
 	public string ParentType { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("score")]
+	[JsonInclude, JsonPropertyName("score")]
 	public bool? Score { get; set; }
 
 	public static implicit operator Query(HasParentQuery hasParentQuery) => QueryDsl.Query.HasParent(hasParentQuery);

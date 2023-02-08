@@ -30,8 +30,7 @@ public sealed partial class WhitespaceAnalyzer : IAnalyzer
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "whitespace";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

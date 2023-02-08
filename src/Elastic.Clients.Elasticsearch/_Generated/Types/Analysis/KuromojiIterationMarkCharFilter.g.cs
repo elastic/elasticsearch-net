@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class KuromojiIterationMarkCharFilter : ICharFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("normalize_kana")]
+	[JsonInclude, JsonPropertyName("normalize_kana")]
 	public bool NormalizeKana { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("normalize_kanji")]
+	[JsonInclude, JsonPropertyName("normalize_kanji")]
 	public bool NormalizeKanji { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "kuromoji_iteration_mark";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

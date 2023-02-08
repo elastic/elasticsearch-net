@@ -27,27 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class EdgeNGramTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("max_gram")]
+	[JsonInclude, JsonPropertyName("max_gram")]
 	public int? MaxGram { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_gram")]
+	[JsonInclude, JsonPropertyName("min_gram")]
 	public int? MinGram { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("preserve_original")]
+	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("side")]
+	[JsonInclude, JsonPropertyName("side")]
 	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? Side { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "edge_ngram";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

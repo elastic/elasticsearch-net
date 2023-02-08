@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class StemmerOverrideTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("rules")]
+	[JsonInclude, JsonPropertyName("rules")]
 	public ICollection<string>? Rules { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("rules_path")]
+	[JsonInclude, JsonPropertyName("rules_path")]
 	public string? RulesPath { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "stemmer_override";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

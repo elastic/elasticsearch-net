@@ -362,32 +362,30 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		if (MetricsDescriptor is not null)
 		{
 			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (MetricsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor<TDocument>(MetricsDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (MetricsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
+			if (MetricsDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in MetricsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor<TDocument>(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (MetricsDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (MetricsValue is not null)
 		{
 			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>(MetricsValue, writer, options);
 		}
 
 		if (SortDescriptor is not null)
@@ -609,32 +607,30 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		if (MetricsDescriptor is not null)
 		{
 			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (MetricsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor(MetricsDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (MetricsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("metrics");
-			writer.WriteStartArray();
+			if (MetricsDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in MetricsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (MetricsDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (MetricsValue is not null)
 		{
 			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>(MetricsValue, writer, options);
 		}
 
 		if (SortDescriptor is not null)

@@ -27,28 +27,23 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class PatternAnalyzer : IAnalyzer
 {
-	[JsonInclude]
-	[JsonPropertyName("flags")]
+	[JsonInclude, JsonPropertyName("flags")]
 	public string? Flags { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("lowercase")]
+	[JsonInclude, JsonPropertyName("lowercase")]
 	public bool? Lowercase { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("pattern")]
+	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stopwords")]
+	[JsonInclude, JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "pattern";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

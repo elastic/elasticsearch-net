@@ -27,27 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class NoriTokenizer : ITokenizer
 {
-	[JsonInclude]
-	[JsonPropertyName("decompound_mode")]
+	[JsonInclude, JsonPropertyName("decompound_mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundMode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("discard_punctuation")]
+	[JsonInclude, JsonPropertyName("discard_punctuation")]
 	public bool? DiscardPunctuation { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "nori_tokenizer";
-	[JsonInclude]
-	[JsonPropertyName("user_dictionary")]
+	[JsonInclude, JsonPropertyName("user_dictionary")]
 	public string? UserDictionary { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("user_dictionary_rules")]
+	[JsonInclude, JsonPropertyName("user_dictionary_rules")]
 	public ICollection<string>? UserDictionaryRules { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

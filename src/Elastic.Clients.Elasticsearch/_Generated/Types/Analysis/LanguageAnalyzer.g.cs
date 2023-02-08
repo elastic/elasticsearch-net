@@ -27,28 +27,23 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class LanguageAnalyzer : IAnalyzer
 {
-	[JsonInclude]
-	[JsonPropertyName("language")]
+	[JsonInclude, JsonPropertyName("language")]
 	public Elastic.Clients.Elasticsearch.Analysis.Language Language { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stem_exclusion")]
+	[JsonInclude, JsonPropertyName("stem_exclusion")]
 	public ICollection<string> StemExclusion { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stopwords")]
+	[JsonInclude, JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stopwords_path")]
+	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "language";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

@@ -27,23 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class KeepWordsTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("keep_words")]
+	[JsonInclude, JsonPropertyName("keep_words")]
 	public ICollection<string>? KeepWords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("keep_words_case")]
+	[JsonInclude, JsonPropertyName("keep_words_case")]
 	public bool? KeepWordsCase { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("keep_words_path")]
+	[JsonInclude, JsonPropertyName("keep_words_path")]
 	public string? KeepWordsPath { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "keep";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

@@ -32,16 +32,13 @@ public sealed partial class HistogramBucket : AggregateDictionary
 	{
 	}
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count")]
+	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key")]
+	[JsonInclude, JsonPropertyName("key")]
 	public double Key { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key_as_string")]
+	[JsonInclude, JsonPropertyName("key_as_string")]
 	public string? KeyAsString { get; init; }
 }
 

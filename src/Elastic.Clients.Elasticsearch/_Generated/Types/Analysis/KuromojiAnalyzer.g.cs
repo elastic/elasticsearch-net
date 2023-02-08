@@ -27,15 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class KuromojiAnalyzer : IAnalyzer
 {
-	[JsonInclude]
-	[JsonPropertyName("mode")]
+	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "kuromoji";
-	[JsonInclude]
-	[JsonPropertyName("user_dictionary")]
+	[JsonInclude, JsonPropertyName("user_dictionary")]
 	public string? UserDictionary { get; set; }
 }
 

@@ -32,20 +32,16 @@ public sealed partial class IpRangeBucket : AggregateDictionary
 	{
 	}
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count")]
+	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("from")]
+	[JsonInclude, JsonPropertyName("from")]
 	public string? From { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key")]
+	[JsonInclude, JsonPropertyName("key")]
 	public string? Key { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("to")]
+	[JsonInclude, JsonPropertyName("to")]
 	public string? To { get; init; }
 }
 

@@ -6,6 +6,6 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed class SortConverter : ICollectionSingleOrManyConverter<SortOptions>
+internal sealed class SortConverter : SingleOrManyCollectionConverter<SortOptions>
 {
 }

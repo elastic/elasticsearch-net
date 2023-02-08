@@ -27,28 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class AliasDefinition
 {
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_routing")]
+	[JsonInclude, JsonPropertyName("index_routing")]
 	public string? IndexRouting { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("is_hidden")]
+	[JsonInclude, JsonPropertyName("is_hidden")]
 	public bool? IsHidden { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("is_write_index")]
+	[JsonInclude, JsonPropertyName("is_write_index")]
 	public bool? IsWriteIndex { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("routing")]
+	[JsonInclude, JsonPropertyName("routing")]
 	public string? Routing { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("search_routing")]
+	[JsonInclude, JsonPropertyName("search_routing")]
 	public string? SearchRouting { get; set; }
 }
 

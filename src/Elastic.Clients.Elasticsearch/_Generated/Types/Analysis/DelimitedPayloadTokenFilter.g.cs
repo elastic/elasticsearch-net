@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class DelimitedPayloadTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("delimiter")]
+	[JsonInclude, JsonPropertyName("delimiter")]
 	public string? Delimiter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("encoding")]
+	[JsonInclude, JsonPropertyName("encoding")]
 	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? Encoding { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "delimited_payload";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

@@ -27,125 +27,95 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 public sealed partial class MultisearchBody
 {
-	[JsonInclude]
-	[JsonPropertyName("_source")]
+	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("collapse")]
+	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("docvalue_fields")]
+	[JsonInclude, JsonPropertyName("docvalue_fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("explain")]
+	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ext")]
+	[JsonInclude, JsonPropertyName("ext")]
 	public IDictionary<string, object>? Ext { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("from")]
+	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("highlight")]
+	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("indices_boost")]
+	[JsonInclude, JsonPropertyName("indices_boost")]
 	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("knn")]
+	[JsonInclude, JsonPropertyName("knn")]
 	public Elastic.Clients.Elasticsearch.KnnQuery? Knn { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_score")]
+	[JsonInclude, JsonPropertyName("min_score")]
 	public double? MinScore { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("pit")]
+	[JsonInclude, JsonPropertyName("pit")]
 	public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? Pit { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("post_filter")]
+	[JsonInclude, JsonPropertyName("post_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("profile")]
+	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("rescore")]
+	[JsonInclude, JsonPropertyName("rescore"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Rescore))]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("runtime_mappings")]
+	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("script_fields")]
+	[JsonInclude, JsonPropertyName("script_fields")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("search_after")]
+	[JsonInclude, JsonPropertyName("search_after")]
 	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("seq_no_primary_term")]
+	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
 	public bool? SeqNoPrimaryTerm { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("sort")]
+	[JsonInclude, JsonPropertyName("sort"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	[JsonConverter(typeof(SortConverter))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stats")]
+	[JsonInclude, JsonPropertyName("stats")]
 	public ICollection<string>? Stats { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stored_fields")]
+	[JsonInclude, JsonPropertyName("stored_fields")]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("suggest")]
+	[JsonInclude, JsonPropertyName("suggest")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Suggester? Suggest { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("terminate_after")]
+	[JsonInclude, JsonPropertyName("terminate_after")]
 	public long? TerminateAfter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("timeout")]
+	[JsonInclude, JsonPropertyName("timeout")]
 	public string? Timeout { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("track_scores")]
+	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("track_total_hits")]
+	[JsonInclude, JsonPropertyName("track_total_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
 }
 
@@ -842,32 +812,30 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		if (RescoreDescriptor is not null)
 		{
 			writer.WritePropertyName("rescore");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, RescoreDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (RescoreDescriptorAction is not null)
 		{
 			writer.WritePropertyName("rescore");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor<TDocument>(RescoreDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (RescoreDescriptorActions is not null)
 		{
 			writer.WritePropertyName("rescore");
-			writer.WriteStartArray();
+			if (RescoreDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in RescoreDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor<TDocument>(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (RescoreDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (RescoreValue is not null)
 		{
 			writer.WritePropertyName("rescore");
-			JsonSerializer.Serialize(writer, RescoreValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(RescoreValue, writer, options);
 		}
 
 		if (SortDescriptor is not null)
@@ -1742,32 +1710,30 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		if (RescoreDescriptor is not null)
 		{
 			writer.WritePropertyName("rescore");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, RescoreDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (RescoreDescriptorAction is not null)
 		{
 			writer.WritePropertyName("rescore");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor(RescoreDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (RescoreDescriptorActions is not null)
 		{
 			writer.WritePropertyName("rescore");
-			writer.WriteStartArray();
+			if (RescoreDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in RescoreDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (RescoreDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (RescoreValue is not null)
 		{
 			writer.WritePropertyName("rescore");
-			JsonSerializer.Serialize(writer, RescoreValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(RescoreValue, writer, options);
 		}
 
 		if (SortDescriptor is not null)

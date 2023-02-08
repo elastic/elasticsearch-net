@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class PhraseSuggestHighlight
 {
-	[JsonInclude]
-	[JsonPropertyName("post_tag")]
+	[JsonInclude, JsonPropertyName("post_tag")]
 	public string PostTag { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("pre_tag")]
+	[JsonInclude, JsonPropertyName("pre_tag")]
 	public string PreTag { get; set; }
 }
 

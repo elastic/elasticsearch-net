@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class TextIndexPrefixes
 {
-	[JsonInclude]
-	[JsonPropertyName("max_chars")]
+	[JsonInclude, JsonPropertyName("max_chars")]
 	public int MaxChars { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_chars")]
+	[JsonInclude, JsonPropertyName("min_chars")]
 	public int MinChars { get; set; }
 }
 

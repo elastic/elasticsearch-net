@@ -27,27 +27,21 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndicesStats
 {
-	[JsonInclude]
-	[JsonPropertyName("health")]
+	[JsonInclude, JsonPropertyName("health")]
 	public Elastic.Clients.Elasticsearch.HealthStatus? Health { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("primaries")]
+	[JsonInclude, JsonPropertyName("primaries")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexStats? Primaries { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("shards")]
+	[JsonInclude, JsonPropertyName("shards")]
 	public IReadOnlyDictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>? Shards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("status")]
+	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState? Status { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total")]
+	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexStats? Total { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("uuid")]
+	[JsonInclude, JsonPropertyName("uuid")]
 	public string? Uuid { get; init; }
 }

@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class MultiplexerTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("filters")]
+	[JsonInclude, JsonPropertyName("filters")]
 	public ICollection<string> Filters { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("preserve_original")]
+	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "multiplexer";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

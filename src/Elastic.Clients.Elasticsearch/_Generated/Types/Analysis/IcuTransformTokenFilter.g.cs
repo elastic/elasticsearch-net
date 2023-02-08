@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class IcuTransformTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("dir")]
+	[JsonInclude, JsonPropertyName("dir")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? Dir { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "icu_transform";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

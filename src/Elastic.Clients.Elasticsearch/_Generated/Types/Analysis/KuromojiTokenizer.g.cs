@@ -27,39 +27,31 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class KuromojiTokenizer : ITokenizer
 {
-	[JsonInclude]
-	[JsonPropertyName("discard_compound_token")]
+	[JsonInclude, JsonPropertyName("discard_compound_token")]
 	public bool? DiscardCompoundToken { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("discard_punctuation")]
+	[JsonInclude, JsonPropertyName("discard_punctuation")]
 	public bool? DiscardPunctuation { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("mode")]
+	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("nbest_cost")]
+	[JsonInclude, JsonPropertyName("nbest_cost")]
 	public int? NbestCost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("nbest_examples")]
+	[JsonInclude, JsonPropertyName("nbest_examples")]
 	public string? NbestExamples { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "kuromoji_tokenizer";
-	[JsonInclude]
-	[JsonPropertyName("user_dictionary")]
+	[JsonInclude, JsonPropertyName("user_dictionary")]
 	public string? UserDictionary { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("user_dictionary_rules")]
+	[JsonInclude, JsonPropertyName("user_dictionary_rules")]
 	public ICollection<string>? UserDictionaryRules { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

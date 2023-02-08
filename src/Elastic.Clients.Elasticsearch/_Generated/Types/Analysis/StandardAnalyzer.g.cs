@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class StandardAnalyzer : IAnalyzer
 {
-	[JsonInclude]
-	[JsonPropertyName("max_token_length")]
+	[JsonInclude, JsonPropertyName("max_token_length")]
 	public int? MaxTokenLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stopwords")]
+	[JsonInclude, JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
 

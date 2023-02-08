@@ -25,15 +25,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class GetScriptResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("found")]
+	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_id")]
+	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.StoredScript? Script { get; init; }
 }

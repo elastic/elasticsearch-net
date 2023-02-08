@@ -27,36 +27,28 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class FunctionScoreQuery : SearchQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost_mode")]
+	[JsonInclude, JsonPropertyName("boost_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostMode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("functions")]
+	[JsonInclude, JsonPropertyName("functions")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? Functions { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_boost")]
+	[JsonInclude, JsonPropertyName("max_boost")]
 	public double? MaxBoost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_score")]
+	[JsonInclude, JsonPropertyName("min_score")]
 	public double? MinScore { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("score_mode")]
+	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
 
 	public static implicit operator Query(FunctionScoreQuery functionScoreQuery) => QueryDsl.Query.FunctionScore(functionScoreQuery);

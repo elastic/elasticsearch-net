@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class IcuAnalyzer : IAnalyzer
 {
-	[JsonInclude]
-	[JsonPropertyName("method")]
+	[JsonInclude, JsonPropertyName("method")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Method { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("mode")]
+	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; set; }
 
 	[JsonInclude]

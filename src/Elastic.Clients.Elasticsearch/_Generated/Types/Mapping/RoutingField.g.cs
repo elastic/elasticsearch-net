@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class RoutingField
 {
-	[JsonInclude]
-	[JsonPropertyName("required")]
+	[JsonInclude, JsonPropertyName("required")]
 	public bool Required { get; set; }
 }
 

@@ -27,27 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class CommonGramsTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("common_words")]
+	[JsonInclude, JsonPropertyName("common_words")]
 	public ICollection<string>? CommonWords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("common_words_path")]
+	[JsonInclude, JsonPropertyName("common_words_path")]
 	public string? CommonWordsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_case")]
+	[JsonInclude, JsonPropertyName("ignore_case")]
 	public bool? IgnoreCase { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("query_mode")]
+	[JsonInclude, JsonPropertyName("query_mode")]
 	public bool? QueryMode { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "common_grams";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

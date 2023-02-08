@@ -27,15 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class TruncateTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("length")]
+	[JsonInclude, JsonPropertyName("length")]
 	public int? Length { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "truncate";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

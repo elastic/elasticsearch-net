@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class LimitTokenCountTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("consume_all_tokens")]
+	[JsonInclude, JsonPropertyName("consume_all_tokens")]
 	public bool? ConsumeAllTokens { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_token_count")]
+	[JsonInclude, JsonPropertyName("max_token_count")]
 	public int? MaxTokenCount { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "limit";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

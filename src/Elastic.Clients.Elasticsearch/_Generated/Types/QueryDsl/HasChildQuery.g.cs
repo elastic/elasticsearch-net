@@ -27,40 +27,31 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class HasChildQuery : SearchQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_unmapped")]
+	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("inner_hits")]
+	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_children")]
+	[JsonInclude, JsonPropertyName("max_children")]
 	public int? MaxChildren { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_children")]
+	[JsonInclude, JsonPropertyName("min_children")]
 	public int? MinChildren { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("score_mode")]
+	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; set; }
 
 	public static implicit operator Query(HasChildQuery hasChildQuery) => QueryDsl.Query.HasChild(hasChildQuery);

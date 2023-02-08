@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class KeepTypesTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("mode")]
+	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? Mode { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "keep_types";
-	[JsonInclude]
-	[JsonPropertyName("types")]
+	[JsonInclude, JsonPropertyName("types")]
 	public ICollection<string>? Types { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

@@ -32,28 +32,22 @@ public sealed partial class RangeBucket : AggregateDictionary
 	{
 	}
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count")]
+	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("from")]
+	[JsonInclude, JsonPropertyName("from")]
 	public double? From { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("from_as_string")]
+	[JsonInclude, JsonPropertyName("from_as_string")]
 	public string? FromAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key")]
+	[JsonInclude, JsonPropertyName("key")]
 	public string? Key { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("to")]
+	[JsonInclude, JsonPropertyName("to")]
 	public double? To { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("to_as_string")]
+	[JsonInclude, JsonPropertyName("to_as_string")]
 	public string? ToAsString { get; init; }
 }
 

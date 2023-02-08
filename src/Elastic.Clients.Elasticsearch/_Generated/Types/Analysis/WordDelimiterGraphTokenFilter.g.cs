@@ -27,71 +27,55 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class WordDelimiterGraphTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("adjust_offsets")]
+	[JsonInclude, JsonPropertyName("adjust_offsets")]
 	public bool? AdjustOffsets { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("catenate_all")]
+	[JsonInclude, JsonPropertyName("catenate_all")]
 	public bool? CatenateAll { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("catenate_numbers")]
+	[JsonInclude, JsonPropertyName("catenate_numbers")]
 	public bool? CatenateNumbers { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("catenate_words")]
+	[JsonInclude, JsonPropertyName("catenate_words")]
 	public bool? CatenateWords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("generate_number_parts")]
+	[JsonInclude, JsonPropertyName("generate_number_parts")]
 	public bool? GenerateNumberParts { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("generate_word_parts")]
+	[JsonInclude, JsonPropertyName("generate_word_parts")]
 	public bool? GenerateWordParts { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_keywords")]
+	[JsonInclude, JsonPropertyName("ignore_keywords")]
 	public bool? IgnoreKeywords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("preserve_original")]
+	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("protected_words")]
+	[JsonInclude, JsonPropertyName("protected_words")]
 	public ICollection<string>? ProtectedWords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("protected_words_path")]
+	[JsonInclude, JsonPropertyName("protected_words_path")]
 	public string? ProtectedWordsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("split_on_case_change")]
+	[JsonInclude, JsonPropertyName("split_on_case_change")]
 	public bool? SplitOnCaseChange { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("split_on_numerics")]
+	[JsonInclude, JsonPropertyName("split_on_numerics")]
 	public bool? SplitOnNumerics { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stem_english_possessive")]
+	[JsonInclude, JsonPropertyName("stem_english_possessive")]
 	public bool? StemEnglishPossessive { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "word_delimiter_graph";
-	[JsonInclude]
-	[JsonPropertyName("type_table")]
+	[JsonInclude, JsonPropertyName("type_table")]
 	public ICollection<string>? TypeTable { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type_table_path")]
+	[JsonInclude, JsonPropertyName("type_table_path")]
 	public string? TypeTablePath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

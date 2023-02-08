@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class IcuNormalizationCharFilter : ICharFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("mode")]
+	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode? Mode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? Name { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "icu_normalizer";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

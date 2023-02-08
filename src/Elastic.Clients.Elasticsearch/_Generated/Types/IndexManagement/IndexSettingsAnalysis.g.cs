@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexSettingsAnalysis
 {
-	[JsonInclude]
-	[JsonPropertyName("analyzer")]
+	[JsonInclude, JsonPropertyName("analyzer")]
 	public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzers { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("char_filter")]
+	[JsonInclude, JsonPropertyName("char_filter")]
 	public Elastic.Clients.Elasticsearch.Analysis.CharFilters? CharFilters { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFilters? TokenFilters { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("normalizer")]
+	[JsonInclude, JsonPropertyName("normalizer")]
 	public Elastic.Clients.Elasticsearch.Analysis.Normalizers? Normalizers { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tokenizer")]
+	[JsonInclude, JsonPropertyName("tokenizer")]
 	public Elastic.Clients.Elasticsearch.Analysis.Tokenizers? Tokenizers { get; set; }
 }
 

@@ -32,20 +32,16 @@ public sealed partial class MultiTermsBucket : AggregateDictionary
 	{
 	}
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count")]
+	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count_error_upper_bound")]
+	[JsonInclude, JsonPropertyName("doc_count_error_upper_bound")]
 	public long? DocCountErrorUpperBound { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key")]
+	[JsonInclude, JsonPropertyName("key")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> Key { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key_as_string")]
+	[JsonInclude, JsonPropertyName("key_as_string")]
 	public string? KeyAsString { get; init; }
 }
 

@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class FielddataFrequencyFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("max")]
+	[JsonInclude, JsonPropertyName("max")]
 	public double Max { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min")]
+	[JsonInclude, JsonPropertyName("min")]
 	public double Min { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_segment_size")]
+	[JsonInclude, JsonPropertyName("min_segment_size")]
 	public int MinSegmentSize { get; set; }
 }
 

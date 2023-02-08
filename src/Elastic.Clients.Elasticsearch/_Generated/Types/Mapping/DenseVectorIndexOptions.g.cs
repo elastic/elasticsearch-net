@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class DenseVectorIndexOptions
 {
-	[JsonInclude]
-	[JsonPropertyName("ef_construction")]
+	[JsonInclude, JsonPropertyName("ef_construction")]
 	public int EfConstruction { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("m")]
+	[JsonInclude, JsonPropertyName("m")]
 	public int m { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; set; }
 }
 

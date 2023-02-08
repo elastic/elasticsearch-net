@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class CustomAnalyzer : IAnalyzer
 {
-	[JsonInclude]
-	[JsonPropertyName("char_filter")]
+	[JsonInclude, JsonPropertyName("char_filter")]
 	public ICollection<string>? CharFilter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter")]
 	public ICollection<string>? Filter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("position_increment_gap")]
+	[JsonInclude, JsonPropertyName("position_increment_gap")]
 	public int? PositionIncrementGap { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("position_offset_gap")]
+	[JsonInclude, JsonPropertyName("position_offset_gap")]
 	public int? PositionOffsetGap { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tokenizer")]
+	[JsonInclude, JsonPropertyName("tokenizer")]
 	public string Tokenizer { get; set; }
 
 	[JsonInclude]

@@ -30,12 +30,10 @@ public sealed partial class KuromojiReadingFormTokenFilter : ITokenFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "kuromoji_readingform";
-	[JsonInclude]
-	[JsonPropertyName("use_romaji")]
+	[JsonInclude, JsonPropertyName("use_romaji")]
 	public bool UseRomaji { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

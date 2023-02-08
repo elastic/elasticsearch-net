@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsSimilarityIb
 {
-	[JsonInclude]
-	[JsonPropertyName("distribution")]
+	[JsonInclude, JsonPropertyName("distribution")]
 	public Elastic.Clients.Elasticsearch.IBDistribution Distribution { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("lambda")]
+	[JsonInclude, JsonPropertyName("lambda")]
 	public Elastic.Clients.Elasticsearch.IBLambda Lambda { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("normalization")]
+	[JsonInclude, JsonPropertyName("normalization")]
 	public Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
 
 	[JsonInclude]

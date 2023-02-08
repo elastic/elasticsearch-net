@@ -27,32 +27,26 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class FingerprintAnalyzer : IAnalyzer
 {
-	[JsonInclude]
-	[JsonPropertyName("max_output_size")]
+	[JsonInclude, JsonPropertyName("max_output_size")]
 	public int MaxOutputSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("preserve_original")]
+	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool PreserveOriginal { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("separator")]
+	[JsonInclude, JsonPropertyName("separator")]
 	public string Separator { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stopwords")]
+	[JsonInclude, JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stopwords_path")]
+	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "fingerprint";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

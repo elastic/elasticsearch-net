@@ -27,36 +27,28 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class CompletionSuggester
 {
-	[JsonInclude]
-	[JsonPropertyName("analyzer")]
+	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("contexts")]
+	[JsonInclude, JsonPropertyName("contexts")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? Contexts { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fuzzy")]
+	[JsonInclude, JsonPropertyName("fuzzy")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? Fuzzy { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("prefix")]
+	[JsonInclude, JsonPropertyName("prefix")]
 	public string? Prefix { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("regex")]
+	[JsonInclude, JsonPropertyName("regex")]
 	public string? Regex { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("skip_duplicates")]
+	[JsonInclude, JsonPropertyName("skip_duplicates")]
 	public bool? SkipDuplicates { get; set; }
 
 	public static implicit operator FieldSuggester(CompletionSuggester completionSuggester) => Core.Search.FieldSuggester.Completion(completionSuggester);

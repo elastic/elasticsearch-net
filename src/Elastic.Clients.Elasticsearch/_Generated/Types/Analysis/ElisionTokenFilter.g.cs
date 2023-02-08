@@ -27,23 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class ElisionTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("articles")]
+	[JsonInclude, JsonPropertyName("articles")]
 	public ICollection<string>? Articles { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("articles_case")]
+	[JsonInclude, JsonPropertyName("articles_case")]
 	public bool? ArticlesCase { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("articles_path")]
+	[JsonInclude, JsonPropertyName("articles_path")]
 	public string? ArticlesPath { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "elision";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
