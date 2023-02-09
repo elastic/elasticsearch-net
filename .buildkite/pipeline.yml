@@ -1,0 +1,3 @@
+steps:
+  - label: ":dotnet: Greetings"
+    command: "echo 'Hello, world!'"
