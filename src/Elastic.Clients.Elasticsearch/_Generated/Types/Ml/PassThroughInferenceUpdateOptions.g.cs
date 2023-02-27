@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 public sealed partial class PassThroughInferenceUpdateOptions
 {
-	[JsonInclude]
-	[JsonPropertyName("results_field")]
+	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tokenization")]
+	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 
 	public static implicit operator InferenceConfigUpdate(PassThroughInferenceUpdateOptions passThroughInferenceUpdateOptions) => Ml.InferenceConfigUpdate.PassThrough(passThroughInferenceUpdateOptions);

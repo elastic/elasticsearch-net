@@ -25,15 +25,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class BulkResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("errors")]
+	[JsonInclude, JsonPropertyName("errors")]
 	public bool Errors { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("ingest_took")]
+	[JsonInclude, JsonPropertyName("ingest_took")]
 	public long? IngestTook { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("took")]
+	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
 }

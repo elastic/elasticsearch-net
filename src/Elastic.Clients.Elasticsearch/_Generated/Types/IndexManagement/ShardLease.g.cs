@@ -27,19 +27,15 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ShardLease
 {
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("retaining_seq_no")]
+	[JsonInclude, JsonPropertyName("retaining_seq_no")]
 	public long RetainingSeqNo { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("source")]
+	[JsonInclude, JsonPropertyName("source")]
 	public string Source { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("timestamp")]
+	[JsonInclude, JsonPropertyName("timestamp")]
 	public long Timestamp { get; init; }
 }

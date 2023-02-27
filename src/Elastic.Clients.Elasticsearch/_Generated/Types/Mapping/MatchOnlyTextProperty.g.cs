@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class MatchOnlyTextProperty : IProperty
 {
-	[JsonInclude]
-	[JsonPropertyName("copy_to")]
+	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 
 	[JsonInclude]
@@ -116,7 +113,11 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 	}
 
 	MatchOnlyTextProperty IBuildableDescriptor<MatchOnlyTextProperty>.Build() => new()
-	{ CopyTo = CopyToValue, Fields = FieldsValue, Meta = MetaValue };
+	{
+		CopyTo = CopyToValue,
+		Fields = FieldsValue,
+		Meta = MetaValue
+	};
 }
 
 public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescriptor<MatchOnlyTextPropertyDescriptor>, IBuildableDescriptor<MatchOnlyTextProperty>
@@ -191,5 +192,9 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 	}
 
 	MatchOnlyTextProperty IBuildableDescriptor<MatchOnlyTextProperty>.Build() => new()
-	{ CopyTo = CopyToValue, Fields = FieldsValue, Meta = MetaValue };
+	{
+		CopyTo = CopyToValue,
+		Fields = FieldsValue,
+		Meta = MetaValue
+	};
 }

@@ -30,8 +30,7 @@ public sealed partial class HtmlStripCharFilter : ICharFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "html_strip";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -65,5 +64,7 @@ public sealed partial class HtmlStripCharFilterDescriptor : SerializableDescript
 	}
 
 	HtmlStripCharFilter IBuildableDescriptor<HtmlStripCharFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

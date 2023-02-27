@@ -27,28 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class FieldAliasProperty : IProperty
 {
-	[JsonInclude]
-	[JsonPropertyName("dynamic")]
+	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_above")]
+	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("path")]
+	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("properties")]
+	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
 	[JsonInclude]
@@ -190,7 +184,14 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 	}
 
 	FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Path = PathValue,
+		Properties = PropertiesValue
+	};
 }
 
 public sealed partial class FieldAliasPropertyDescriptor : SerializableDescriptor<FieldAliasPropertyDescriptor>, IBuildableDescriptor<FieldAliasProperty>
@@ -333,5 +334,12 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 	}
 
 	FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Path = PathValue,
+		Properties = PropertiesValue
+	};
 }

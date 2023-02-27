@@ -27,32 +27,25 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsSimilarity
 {
-	[JsonInclude]
-	[JsonPropertyName("bm25")]
+	[JsonInclude, JsonPropertyName("bm25")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25? Bm25 { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dfi")]
+	[JsonInclude, JsonPropertyName("dfi")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi? Dfi { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dfr")]
+	[JsonInclude, JsonPropertyName("dfr")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr? Dfr { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ib")]
+	[JsonInclude, JsonPropertyName("ib")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb? Ib { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("lmd")]
+	[JsonInclude, JsonPropertyName("lmd")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd? Lmd { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("lmj")]
+	[JsonInclude, JsonPropertyName("lmj")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj? Lmj { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("scripted_tfidf")]
+	[JsonInclude, JsonPropertyName("scripted_tfidf")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedTfidf? ScriptedTfidf { get; set; }
 }
 

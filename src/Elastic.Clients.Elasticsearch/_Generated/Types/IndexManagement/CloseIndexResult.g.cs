@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class CloseIndexResult
 {
-	[JsonInclude]
-	[JsonPropertyName("closed")]
+	[JsonInclude, JsonPropertyName("closed")]
 	public bool Closed { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("shards")]
+	[JsonInclude, JsonPropertyName("shards")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.CloseShardResult>? Shards { get; init; }
 }

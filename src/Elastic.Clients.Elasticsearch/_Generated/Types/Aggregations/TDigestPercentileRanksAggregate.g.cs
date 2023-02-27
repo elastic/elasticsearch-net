@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class TDigestPercentileRanksAggregate : IAggregate
 {
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("values")]
+	[JsonInclude, JsonPropertyName("values")]
 	public Elastic.Clients.Elasticsearch.Aggregations.Percentiles Values { get; init; }
 }

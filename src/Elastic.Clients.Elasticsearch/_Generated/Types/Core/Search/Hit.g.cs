@@ -27,80 +27,61 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class Hit<TDocument>
 {
-	[JsonInclude]
-	[JsonPropertyName("_explanation")]
+	[JsonInclude, JsonPropertyName("_explanation")]
 	public Elastic.Clients.Elasticsearch.Core.Explain.Explanation? Explanation { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_id")]
+	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_ignored")]
+	[JsonInclude, JsonPropertyName("_ignored")]
 	public IReadOnlyCollection<string>? Ignored { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_index")]
+	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_nested")]
+	[JsonInclude, JsonPropertyName("_nested")]
 	public Elastic.Clients.Elasticsearch.Core.Search.NestedIdentity? Nested { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_node")]
+	[JsonInclude, JsonPropertyName("_node")]
 	public string? Node { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_primary_term")]
+	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long? PrimaryTerm { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_routing")]
+	[JsonInclude, JsonPropertyName("_routing")]
 	public string? Routing { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_score")]
+	[JsonInclude, JsonPropertyName("_score")]
 	public double? Score { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_seq_no")]
+	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long? SeqNo { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_shard")]
+	[JsonInclude, JsonPropertyName("_shard")]
 	public string? Shard { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_source")]
+	[JsonInclude, JsonPropertyName("_source")]
 	[SourceConverter]
 	public TDocument? Source { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_version")]
+	[JsonInclude, JsonPropertyName("_version")]
 	public long? Version { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public IReadOnlyDictionary<string, object>? Fields { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("highlight")]
+	[JsonInclude, JsonPropertyName("highlight")]
 	public IReadOnlyDictionary<string, IReadOnlyCollection<string>>? Highlight { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignored_field_values")]
+	[JsonInclude, JsonPropertyName("ignored_field_values")]
 	public IReadOnlyDictionary<string, IReadOnlyCollection<string>>? IgnoredFieldValues { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("inner_hits")]
+	[JsonInclude, JsonPropertyName("inner_hits")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult>? InnerHits { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("matched_queries")]
+	[JsonInclude, JsonPropertyName("matched_queries")]
 	public IReadOnlyCollection<string>? MatchedQueries { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("sort")]
+	[JsonInclude, JsonPropertyName("sort")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; init; }
 }

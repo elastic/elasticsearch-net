@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 public sealed partial class RankEvalMetric
 {
-	[JsonInclude]
-	[JsonPropertyName("dcg")]
+	[JsonInclude, JsonPropertyName("dcg")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain? Dcg { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("expected_reciprocal_rank")]
+	[JsonInclude, JsonPropertyName("expected_reciprocal_rank")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank? ExpectedReciprocalRank { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("mean_reciprocal_rank")]
+	[JsonInclude, JsonPropertyName("mean_reciprocal_rank")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank? MeanReciprocalRank { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("precision")]
+	[JsonInclude, JsonPropertyName("precision")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision? Precision { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("recall")]
+	[JsonInclude, JsonPropertyName("recall")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall? Recall { get; set; }
 }
 

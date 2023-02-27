@@ -27,23 +27,18 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ShardFailure
 {
-	[JsonInclude]
-	[JsonPropertyName("index")]
+	[JsonInclude, JsonPropertyName("index")]
 	public string? Index { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("node")]
+	[JsonInclude, JsonPropertyName("node")]
 	public string? Node { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("reason")]
+	[JsonInclude, JsonPropertyName("reason")]
 	public Elastic.Clients.Elasticsearch.ErrorCause Reason { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("shard")]
+	[JsonInclude, JsonPropertyName("shard")]
 	public int Shard { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("status")]
+	[JsonInclude, JsonPropertyName("status")]
 	public string? Status { get; init; }
 }

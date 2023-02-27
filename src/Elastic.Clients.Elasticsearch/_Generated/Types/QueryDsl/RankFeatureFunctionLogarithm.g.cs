@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class RankFeatureFunctionLogarithm
 {
-	[JsonInclude]
-	[JsonPropertyName("scaling_factor")]
+	[JsonInclude, JsonPropertyName("scaling_factor")]
 	public float ScalingFactor { get; set; }
 }
 

@@ -27,56 +27,43 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class ShapeProperty : IProperty
 {
-	[JsonInclude]
-	[JsonPropertyName("coerce")]
+	[JsonInclude, JsonPropertyName("coerce")]
 	public bool? Coerce { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("copy_to")]
+	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("doc_values")]
+	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dynamic")]
+	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_above")]
+	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_malformed")]
+	[JsonInclude, JsonPropertyName("ignore_malformed")]
 	public bool? IgnoreMalformed { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_z_value")]
+	[JsonInclude, JsonPropertyName("ignore_z_value")]
 	public bool? IgnoreZValue { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("orientation")]
+	[JsonInclude, JsonPropertyName("orientation")]
 	public Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? Orientation { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("properties")]
+	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("similarity")]
+	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("store")]
+	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
 	[JsonInclude]
@@ -310,7 +297,21 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 	}
 
 	ShapeProperty IBuildableDescriptor<ShapeProperty>.Build() => new()
-	{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		IgnoreZValue = IgnoreZValueValue,
+		Meta = MetaValue,
+		Orientation = OrientationValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }
 
 public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<ShapePropertyDescriptor>, IBuildableDescriptor<ShapeProperty>
@@ -539,5 +540,19 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 	}
 
 	ShapeProperty IBuildableDescriptor<ShapeProperty>.Build() => new()
-	{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		IgnoreZValue = IgnoreZValueValue,
+		Meta = MetaValue,
+		Orientation = OrientationValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }

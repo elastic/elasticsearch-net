@@ -27,69 +27,52 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class InnerHits
 {
-	[JsonInclude]
-	[JsonPropertyName("_source")]
+	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("collapse")]
+	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("docvalue_fields")]
+	[JsonInclude, JsonPropertyName("docvalue_fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("explain")]
+	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("from")]
+	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("highlight")]
+	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_unmapped")]
+	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("script_fields")]
+	[JsonInclude, JsonPropertyName("script_fields")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("seq_no_primary_term")]
+	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
 	public bool? SeqNoPrimaryTerm { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("sort")]
-	[JsonConverter(typeof(SortConverter))]
+	[JsonInclude, JsonPropertyName("sort"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stored_field")]
+	[JsonInclude, JsonPropertyName("stored_field")]
 	public Elastic.Clients.Elasticsearch.Fields? StoredField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("track_scores")]
+	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
 }
 

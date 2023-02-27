@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Eql;
 public sealed partial class EqlHits<TEvent>
 {
-	[JsonInclude]
-	[JsonPropertyName("events")]
+	[JsonInclude, JsonPropertyName("events")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>? Events { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("sequences")]
+	[JsonInclude, JsonPropertyName("sequences")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>? Sequences { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total")]
+	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TotalHits? Total { get; init; }
 }

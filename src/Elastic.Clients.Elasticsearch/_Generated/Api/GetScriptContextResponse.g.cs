@@ -25,7 +25,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class GetScriptContextResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("contexts")]
+	[JsonInclude, JsonPropertyName("contexts")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context> Contexts { get; init; }
 }

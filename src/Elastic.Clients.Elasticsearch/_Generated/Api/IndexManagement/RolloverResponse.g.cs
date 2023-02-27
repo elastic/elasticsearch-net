@@ -25,31 +25,24 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class RolloverResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("acknowledged")]
+	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("conditions")]
+	[JsonInclude, JsonPropertyName("conditions")]
 	public IReadOnlyDictionary<string, bool> Conditions { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("dry_run")]
+	[JsonInclude, JsonPropertyName("dry_run")]
 	public bool DryRun { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("new_index")]
+	[JsonInclude, JsonPropertyName("new_index")]
 	public string NewIndex { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("old_index")]
+	[JsonInclude, JsonPropertyName("old_index")]
 	public string OldIndex { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("rolled_over")]
+	[JsonInclude, JsonPropertyName("rolled_over")]
 	public bool RolledOver { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("shards_acknowledged")]
+	[JsonInclude, JsonPropertyName("shards_acknowledged")]
 	public bool ShardsAcknowledged { get; init; }
 }

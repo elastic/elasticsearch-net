@@ -27,36 +27,28 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class MappingLimitSettings
 {
-	[JsonInclude]
-	[JsonPropertyName("coerce")]
+	[JsonInclude, JsonPropertyName("coerce")]
 	public bool? Coerce { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("depth")]
+	[JsonInclude, JsonPropertyName("depth")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth? Depth { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dimension_fields")]
+	[JsonInclude, JsonPropertyName("dimension_fields")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields? DimensionFields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("field_name_length")]
+	[JsonInclude, JsonPropertyName("field_name_length")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength? FieldNameLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_malformed")]
+	[JsonInclude, JsonPropertyName("ignore_malformed")]
 	public bool? IgnoreMalformed { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("nested_fields")]
+	[JsonInclude, JsonPropertyName("nested_fields")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields? NestedFields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("nested_objects")]
+	[JsonInclude, JsonPropertyName("nested_objects")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects? NestedObjects { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_fields")]
+	[JsonInclude, JsonPropertyName("total_fields")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields? TotalFields { get; set; }
 }
 

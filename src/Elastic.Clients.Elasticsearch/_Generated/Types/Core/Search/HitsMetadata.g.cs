@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class HitsMetadata<T>
 {
-	[JsonInclude]
-	[JsonPropertyName("hits")]
+	[JsonInclude, JsonPropertyName("hits")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Hit<T>> Hits { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_score")]
+	[JsonInclude, JsonPropertyName("max_score")]
 	public double? MaxScore { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total")]
+	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TotalHits? Total { get; init; }
 }

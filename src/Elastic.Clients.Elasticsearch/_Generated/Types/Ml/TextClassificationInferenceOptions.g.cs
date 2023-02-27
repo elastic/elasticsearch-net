@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 public sealed partial class TextClassificationInferenceOptions
 {
-	[JsonInclude]
-	[JsonPropertyName("classification_labels")]
+	[JsonInclude, JsonPropertyName("classification_labels")]
 	public ICollection<string>? ClassificationLabels { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("num_top_classes")]
+	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("results_field")]
+	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tokenization")]
+	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
 	public static implicit operator InferenceConfigCreate(TextClassificationInferenceOptions textClassificationInferenceOptions) => Ml.InferenceConfigCreate.TextClassification(textClassificationInferenceOptions);
