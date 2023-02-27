@@ -25,72 +25,55 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class HealthResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("active_primary_shards")]
+	[JsonInclude, JsonPropertyName("active_primary_shards")]
 	public int ActivePrimaryShards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("active_shards")]
+	[JsonInclude, JsonPropertyName("active_shards")]
 	public int ActiveShards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("active_shards_percent_as_number")]
+	[JsonInclude, JsonPropertyName("active_shards_percent_as_number")]
 	public double ActiveShardsPercentAsNumber { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("cluster_name")]
+	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("delayed_unassigned_shards")]
+	[JsonInclude, JsonPropertyName("delayed_unassigned_shards")]
 	public int DelayedUnassignedShards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("indices")]
+	[JsonInclude, JsonPropertyName("indices")]
 	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>? Indices { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("initializing_shards")]
+	[JsonInclude, JsonPropertyName("initializing_shards")]
 	public int InitializingShards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("number_of_data_nodes")]
+	[JsonInclude, JsonPropertyName("number_of_data_nodes")]
 	public int NumberOfDataNodes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("number_of_in_flight_fetch")]
+	[JsonInclude, JsonPropertyName("number_of_in_flight_fetch")]
 	public int NumberOfInFlightFetch { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("number_of_nodes")]
+	[JsonInclude, JsonPropertyName("number_of_nodes")]
 	public int NumberOfNodes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("number_of_pending_tasks")]
+	[JsonInclude, JsonPropertyName("number_of_pending_tasks")]
 	public int NumberOfPendingTasks { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("relocating_shards")]
+	[JsonInclude, JsonPropertyName("relocating_shards")]
 	public int RelocatingShards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("status")]
+	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("task_max_waiting_in_queue")]
+	[JsonInclude, JsonPropertyName("task_max_waiting_in_queue")]
 	public Elastic.Clients.Elasticsearch.Duration? TaskMaxWaitingInQueue { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("task_max_waiting_in_queue_millis")]
+	[JsonInclude, JsonPropertyName("task_max_waiting_in_queue_millis")]
 	public long TaskMaxWaitingInQueueMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("timed_out")]
+	[JsonInclude, JsonPropertyName("timed_out")]
 	public bool TimedOut { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("unassigned_shards")]
+	[JsonInclude, JsonPropertyName("unassigned_shards")]
 	public int UnassignedShards { get; init; }
 }

@@ -27,23 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class PatternTokenizer : ITokenizer
 {
-	[JsonInclude]
-	[JsonPropertyName("flags")]
+	[JsonInclude, JsonPropertyName("flags")]
 	public string Flags { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("group")]
+	[JsonInclude, JsonPropertyName("group")]
 	public int Group { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("pattern")]
+	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "pattern";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -107,5 +103,10 @@ public sealed partial class PatternTokenizerDescriptor : SerializableDescriptor<
 	}
 
 	PatternTokenizer IBuildableDescriptor<PatternTokenizer>.Build() => new()
-	{ Flags = FlagsValue, Group = GroupValue, Pattern = PatternValue, Version = VersionValue };
+	{
+		Flags = FlagsValue,
+		Group = GroupValue,
+		Pattern = PatternValue,
+		Version = VersionValue
+	};
 }

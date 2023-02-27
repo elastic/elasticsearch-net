@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class SearchProfile
 {
-	[JsonInclude]
-	[JsonPropertyName("collector")]
+	[JsonInclude, JsonPropertyName("collector")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Collector> Collector { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile> Query { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("rewrite_time")]
+	[JsonInclude, JsonPropertyName("rewrite_time")]
 	public long RewriteTime { get; init; }
 }

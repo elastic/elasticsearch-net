@@ -27,19 +27,15 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class ShardProfile
 {
-	[JsonInclude]
-	[JsonPropertyName("aggregations")]
+	[JsonInclude, JsonPropertyName("aggregations")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile> Aggregations { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("fetch")]
+	[JsonInclude, JsonPropertyName("fetch")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FetchProfile? Fetch { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("searches")]
+	[JsonInclude, JsonPropertyName("searches")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile> Searches { get; init; }
 }

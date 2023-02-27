@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 public sealed partial class ClassificationInferenceOptions
 {
-	[JsonInclude]
-	[JsonPropertyName("num_top_classes")]
+	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("num_top_feature_importance_values")]
+	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("prediction_field_type")]
+	[JsonInclude, JsonPropertyName("prediction_field_type")]
 	public string? PredictionFieldType { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("results_field")]
+	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("top_classes_results_field")]
+	[JsonInclude, JsonPropertyName("top_classes_results_field")]
 	public string? TopClassesResultsField { get; set; }
 }
 

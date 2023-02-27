@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class Retries
 {
-	[JsonInclude]
-	[JsonPropertyName("bulk")]
+	[JsonInclude, JsonPropertyName("bulk")]
 	public long Bulk { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("search")]
+	[JsonInclude, JsonPropertyName("search")]
 	public long Search { get; init; }
 }

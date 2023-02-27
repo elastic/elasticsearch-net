@@ -27,44 +27,34 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class AllField
 {
-	[JsonInclude]
-	[JsonPropertyName("analyzer")]
+	[JsonInclude, JsonPropertyName("analyzer")]
 	public string Analyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("enabled")]
+	[JsonInclude, JsonPropertyName("enabled")]
 	public bool Enabled { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("omit_norms")]
+	[JsonInclude, JsonPropertyName("omit_norms")]
 	public bool OmitNorms { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("search_analyzer")]
+	[JsonInclude, JsonPropertyName("search_analyzer")]
 	public string SearchAnalyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("similarity")]
+	[JsonInclude, JsonPropertyName("similarity")]
 	public string Similarity { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("store")]
+	[JsonInclude, JsonPropertyName("store")]
 	public bool Store { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("store_term_vector_offsets")]
+	[JsonInclude, JsonPropertyName("store_term_vector_offsets")]
 	public bool StoreTermVectorOffsets { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("store_term_vector_payloads")]
+	[JsonInclude, JsonPropertyName("store_term_vector_payloads")]
 	public bool StoreTermVectorPayloads { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("store_term_vector_positions")]
+	[JsonInclude, JsonPropertyName("store_term_vector_positions")]
 	public bool StoreTermVectorPositions { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("store_term_vectors")]
+	[JsonInclude, JsonPropertyName("store_term_vectors")]
 	public bool StoreTermVectors { get; set; }
 }
 

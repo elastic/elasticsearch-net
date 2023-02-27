@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class CacheQueries
 {
-	[JsonInclude]
-	[JsonPropertyName("enabled")]
+	[JsonInclude, JsonPropertyName("enabled")]
 	public bool Enabled { get; set; }
 }
 

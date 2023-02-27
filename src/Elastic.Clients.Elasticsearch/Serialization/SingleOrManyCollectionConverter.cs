@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
-internal abstract class ICollectionSingleOrManyConverter<TItem> : JsonConverter<ICollection<TItem>>
+internal class SingleOrManyCollectionConverter<TItem> : JsonConverter<ICollection<TItem>>
 {
 	public override ICollection<TItem>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
 		SingleOrManySerializationHelper.Deserialize<TItem>(ref reader, options);

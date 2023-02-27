@@ -27,32 +27,25 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class RankFeatureQuery : SearchQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("linear")]
+	[JsonInclude, JsonPropertyName("linear")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? Linear { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("log")]
+	[JsonInclude, JsonPropertyName("log")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? Log { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("saturation")]
+	[JsonInclude, JsonPropertyName("saturation")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? Saturation { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("sigmoid")]
+	[JsonInclude, JsonPropertyName("sigmoid")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 
 	public static implicit operator Query(RankFeatureQuery rankFeatureQuery) => QueryDsl.Query.RankFeature(rankFeatureQuery);

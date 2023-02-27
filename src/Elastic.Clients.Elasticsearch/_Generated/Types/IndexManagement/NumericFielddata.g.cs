@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class NumericFielddata
 {
-	[JsonInclude]
-	[JsonPropertyName("format")]
+	[JsonInclude, JsonPropertyName("format")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; set; }
 }
 
@@ -56,5 +55,7 @@ public sealed partial class NumericFielddataDescriptor : SerializableDescriptor<
 	}
 
 	NumericFielddata IBuildableDescriptor<NumericFielddata>.Build() => new()
-	{ Format = FormatValue };
+	{
+		Format = FormatValue
+	};
 }

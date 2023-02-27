@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class MergeScheduler
 {
-	[JsonInclude]
-	[JsonPropertyName("max_merge_count")]
+	[JsonInclude, JsonPropertyName("max_merge_count")]
 	public int? MaxMergeCount { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_thread_count")]
+	[JsonInclude, JsonPropertyName("max_thread_count")]
 	public int? MaxThreadCount { get; set; }
 }
 
