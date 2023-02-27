@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class DynamicTemplate
 {
 	[JsonInclude, JsonPropertyName("mapping")]
-	public Elastic.Clients.Elasticsearch.Mapping.Properties? Mapping { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty? Mapping { get; set; }
 
 	[JsonInclude, JsonPropertyName("match")]
 	public string? Match { get; set; }
@@ -56,7 +56,7 @@ public sealed partial class DynamicTemplateDescriptor : SerializableDescriptor<D
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? MappingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.IProperty? MappingValue { get; set; }
 
 	private string? MatchValue { get; set; }
 
@@ -70,7 +70,7 @@ public sealed partial class DynamicTemplateDescriptor : SerializableDescriptor<D
 
 	private string? UnmatchValue { get; set; }
 
-	public DynamicTemplateDescriptor Mapping(Elastic.Clients.Elasticsearch.Mapping.Properties? mapping)
+	public DynamicTemplateDescriptor Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty? mapping)
 	{
 		MappingValue = mapping;
 		return Self;

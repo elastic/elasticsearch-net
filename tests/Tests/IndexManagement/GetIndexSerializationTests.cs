@@ -7054,6 +7054,7 @@ public class GetIndexSerializationTests : SerializerTestBase
 }";
 
 		var response = DeserializeJsonString<GetIndexResponse>(json);
+		VerifyGetIndexResponseDynamicTemplates(response);
 	}
 
 	[U]
