@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class BoostingQuery : SearchQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("negative")]
+	[JsonInclude, JsonPropertyName("negative")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Negative { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("negative_boost")]
+	[JsonInclude, JsonPropertyName("negative_boost")]
 	public double NegativeBoost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("positive")]
+	[JsonInclude, JsonPropertyName("positive")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Positive { get; set; }
 
 	public static implicit operator Query(BoostingQuery boostingQuery) => QueryDsl.Query.Boosting(boostingQuery);

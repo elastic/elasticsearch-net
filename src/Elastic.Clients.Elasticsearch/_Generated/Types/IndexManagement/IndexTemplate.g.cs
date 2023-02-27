@@ -27,35 +27,27 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexTemplate
 {
-	[JsonInclude]
-	[JsonPropertyName("_meta")]
+	[JsonInclude, JsonPropertyName("_meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("allow_auto_create")]
+	[JsonInclude, JsonPropertyName("allow_auto_create")]
 	public bool? AllowAutoCreate { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("composed_of")]
+	[JsonInclude, JsonPropertyName("composed_of")]
 	public IReadOnlyCollection<string> ComposedOf { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("data_stream")]
+	[JsonInclude, JsonPropertyName("data_stream")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration? DataStream { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_patterns")]
+	[JsonInclude, JsonPropertyName("index_patterns")]
 	public IReadOnlyCollection<string> IndexPatterns { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("priority")]
+	[JsonInclude, JsonPropertyName("priority")]
 	public long? Priority { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("template")]
+	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary? Template { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; init; }
 }

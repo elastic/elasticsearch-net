@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Reindex;
 public sealed partial class Destination
 {
-	[JsonInclude]
-	[JsonPropertyName("index")]
+	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("op_type")]
+	[JsonInclude, JsonPropertyName("op_type")]
 	public Elastic.Clients.Elasticsearch.OpType? OpType { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("pipeline")]
+	[JsonInclude, JsonPropertyName("pipeline")]
 	public string? Pipeline { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("routing")]
+	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version_type")]
+	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 

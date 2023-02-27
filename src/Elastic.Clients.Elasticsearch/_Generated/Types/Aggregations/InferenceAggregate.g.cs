@@ -27,27 +27,21 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class InferenceAggregate : IAggregate
 {
-	[JsonInclude]
-	[JsonPropertyName("data")]
+	[JsonInclude, JsonPropertyName("data")]
 	public IReadOnlyDictionary<string, object> Data { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("feature_importance")]
+	[JsonInclude, JsonPropertyName("feature_importance")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>? FeatureImportance { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("top_classes")]
+	[JsonInclude, JsonPropertyName("top_classes")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry>? TopClasses { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("value")]
+	[JsonInclude, JsonPropertyName("value")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Value { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("warning")]
+	[JsonInclude, JsonPropertyName("warning")]
 	public string? Warning { get; init; }
 }

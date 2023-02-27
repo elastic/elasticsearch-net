@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class CompletionContext
 {
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("neighbours")]
+	[JsonInclude, JsonPropertyName("neighbours")]
 	public ICollection<Elastic.Clients.Elasticsearch.GeoHashPrecision>? Neighbours { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("precision")]
+	[JsonInclude, JsonPropertyName("precision")]
 	public Elastic.Clients.Elasticsearch.GeoHashPrecision? Precision { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("prefix")]
+	[JsonInclude, JsonPropertyName("prefix")]
 	public bool? Prefix { get; set; }
 }
 

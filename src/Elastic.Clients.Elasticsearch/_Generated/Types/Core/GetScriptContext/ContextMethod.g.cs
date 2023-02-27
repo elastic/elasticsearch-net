@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.GetScriptContext;
 public sealed partial class ContextMethod
 {
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("params")]
+	[JsonInclude, JsonPropertyName("params")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethodParam> Params { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("return_type")]
+	[JsonInclude, JsonPropertyName("return_type")]
 	public string ReturnType { get; init; }
 }

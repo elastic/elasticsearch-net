@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class CompositeAggregationSource
 {
-	[JsonInclude]
-	[JsonPropertyName("date_histogram")]
+	[JsonInclude, JsonPropertyName("date_histogram")]
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogram { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("histogram")]
+	[JsonInclude, JsonPropertyName("histogram")]
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? Histogram { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("terms")]
+	[JsonInclude, JsonPropertyName("terms")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get; set; }
 }
 

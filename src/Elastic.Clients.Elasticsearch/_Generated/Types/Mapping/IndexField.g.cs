@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class IndexField
 {
-	[JsonInclude]
-	[JsonPropertyName("enabled")]
+	[JsonInclude, JsonPropertyName("enabled")]
 	public bool Enabled { get; set; }
 }
 

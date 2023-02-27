@@ -27,28 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexSettingsLifecycle
 {
-	[JsonInclude]
-	[JsonPropertyName("indexing_complete")]
+	[JsonInclude, JsonPropertyName("indexing_complete")]
 	public bool? IndexingComplete { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("origination_date")]
+	[JsonInclude, JsonPropertyName("origination_date")]
 	public long? OriginationDate { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("parse_origination_date")]
+	[JsonInclude, JsonPropertyName("parse_origination_date")]
 	public bool? ParseOriginationDate { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("rollover_alias")]
+	[JsonInclude, JsonPropertyName("rollover_alias")]
 	public string? RolloverAlias { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("step")]
+	[JsonInclude, JsonPropertyName("step")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep? Step { get; set; }
 }
 

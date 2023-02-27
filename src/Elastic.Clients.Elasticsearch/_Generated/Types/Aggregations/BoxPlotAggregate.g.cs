@@ -27,63 +27,48 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class BoxPlotAggregate : IAggregate
 {
-	[JsonInclude]
-	[JsonPropertyName("lower")]
+	[JsonInclude, JsonPropertyName("lower")]
 	public double Lower { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("lower_as_string")]
+	[JsonInclude, JsonPropertyName("lower_as_string")]
 	public string? LowerAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("max")]
+	[JsonInclude, JsonPropertyName("max")]
 	public double Max { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_as_string")]
+	[JsonInclude, JsonPropertyName("max_as_string")]
 	public string? MaxAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("min")]
+	[JsonInclude, JsonPropertyName("min")]
 	public double Min { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_as_string")]
+	[JsonInclude, JsonPropertyName("min_as_string")]
 	public string? MinAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("q1")]
+	[JsonInclude, JsonPropertyName("q1")]
 	public double Q1 { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("q1_as_string")]
+	[JsonInclude, JsonPropertyName("q1_as_string")]
 	public string? Q1AsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("q2")]
+	[JsonInclude, JsonPropertyName("q2")]
 	public double Q2 { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("q2_as_string")]
+	[JsonInclude, JsonPropertyName("q2_as_string")]
 	public string? Q2AsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("q3")]
+	[JsonInclude, JsonPropertyName("q3")]
 	public double Q3 { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("q3_as_string")]
+	[JsonInclude, JsonPropertyName("q3_as_string")]
 	public string? Q3AsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("upper")]
+	[JsonInclude, JsonPropertyName("upper")]
 	public double Upper { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("upper_as_string")]
+	[JsonInclude, JsonPropertyName("upper_as_string")]
 	public string? UpperAsString { get; init; }
 }

@@ -27,27 +27,21 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class AggregationProfile
 {
-	[JsonInclude]
-	[JsonPropertyName("breakdown")]
+	[JsonInclude, JsonPropertyName("breakdown")]
 	public Elastic.Clients.Elasticsearch.Core.Search.AggregationBreakdown Breakdown { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("children")]
+	[JsonInclude, JsonPropertyName("children")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile>? Children { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("debug")]
+	[JsonInclude, JsonPropertyName("debug")]
 	public Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug? Debug { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("description")]
+	[JsonInclude, JsonPropertyName("description")]
 	public string Description { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("time_in_nanos")]
+	[JsonInclude, JsonPropertyName("time_in_nanos")]
 	public long TimeInNanos { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }
 }
