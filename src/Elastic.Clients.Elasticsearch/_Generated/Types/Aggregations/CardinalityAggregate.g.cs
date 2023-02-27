@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class CardinalityAggregate : IAggregate
 {
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("value")]
+	[JsonInclude, JsonPropertyName("value")]
 	public long Value { get; init; }
 }

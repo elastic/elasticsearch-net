@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexMappingRecord
 {
-	[JsonInclude]
-	[JsonPropertyName("item")]
+	[JsonInclude, JsonPropertyName("item")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Item { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("mappings")]
+	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; init; }
 }

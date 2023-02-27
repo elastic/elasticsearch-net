@@ -383,7 +383,6 @@ public sealed partial class TopHitsAggregation : SearchAggregation
 
 	public int? Size { get; set; }
 
-	[JsonConverter(typeof(SortConverter))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }

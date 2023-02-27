@@ -27,15 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class UniqueTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("only_on_same_position")]
+	[JsonInclude, JsonPropertyName("only_on_same_position")]
 	public bool? OnlyOnSamePosition { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "unique";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -83,5 +81,8 @@ public sealed partial class UniqueTokenFilterDescriptor : SerializableDescriptor
 	}
 
 	UniqueTokenFilter IBuildableDescriptor<UniqueTokenFilter>.Build() => new()
-	{ OnlyOnSamePosition = OnlyOnSamePositionValue, Version = VersionValue };
+	{
+		OnlyOnSamePosition = OnlyOnSamePositionValue,
+		Version = VersionValue
+	};
 }

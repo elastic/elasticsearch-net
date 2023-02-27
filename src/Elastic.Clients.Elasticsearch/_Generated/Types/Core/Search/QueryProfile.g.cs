@@ -27,23 +27,18 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class QueryProfile
 {
-	[JsonInclude]
-	[JsonPropertyName("breakdown")]
+	[JsonInclude, JsonPropertyName("breakdown")]
 	public Elastic.Clients.Elasticsearch.Core.Search.QueryBreakdown Breakdown { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("children")]
+	[JsonInclude, JsonPropertyName("children")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile>? Children { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("description")]
+	[JsonInclude, JsonPropertyName("description")]
 	public string Description { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("time_in_nanos")]
+	[JsonInclude, JsonPropertyName("time_in_nanos")]
 	public long TimeInNanos { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }
 }

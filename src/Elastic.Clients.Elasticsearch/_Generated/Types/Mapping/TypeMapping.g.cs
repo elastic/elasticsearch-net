@@ -27,68 +27,52 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class TypeMapping
 {
-	[JsonInclude]
-	[JsonPropertyName("_data_stream_timestamp")]
+	[JsonInclude, JsonPropertyName("_data_stream_timestamp")]
 	public Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? DataStreamTimestamp { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_field_names")]
+	[JsonInclude, JsonPropertyName("_field_names")]
 	public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_meta")]
+	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_routing")]
+	[JsonInclude, JsonPropertyName("_routing")]
 	public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_size")]
+	[JsonInclude, JsonPropertyName("_size")]
 	public Elastic.Clients.Elasticsearch.Mapping.SizeField? Size { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_source")]
+	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("all_field")]
+	[JsonInclude, JsonPropertyName("all_field")]
 	public Elastic.Clients.Elasticsearch.Mapping.AllField? AllField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("date_detection")]
+	[JsonInclude, JsonPropertyName("date_detection")]
 	public bool? DateDetection { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dynamic")]
+	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dynamic_date_formats")]
+	[JsonInclude, JsonPropertyName("dynamic_date_formats")]
 	public ICollection<string>? DynamicDateFormats { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dynamic_templates")]
-	public Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplates { get; set; }
+	[JsonInclude, JsonPropertyName("dynamic_templates"), SingleOrManyCollectionConverter(typeof(IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>))]
+	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("enabled")]
+	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_field")]
+	[JsonInclude, JsonPropertyName("index_field")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexField? IndexField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("numeric_detection")]
+	[JsonInclude, JsonPropertyName("numeric_detection")]
 	public bool? NumericDetection { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("properties")]
+	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("runtime")]
+	[JsonInclude, JsonPropertyName("runtime")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 }
 
@@ -143,7 +127,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 
-	private Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
+	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
 
 	private bool? EnabledValue { get; set; }
 
@@ -327,7 +311,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> DynamicTemplates(Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
+	public TypeMappingDescriptor<TDocument> DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;
@@ -521,7 +505,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		if (DynamicTemplatesValue is not null)
 		{
 			writer.WritePropertyName("dynamic_templates");
-			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
+			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(DynamicTemplatesValue, writer, options);
 		}
 
 		if (EnabledValue.HasValue)
@@ -619,7 +603,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 
-	private Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
+	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
 
 	private bool? EnabledValue { get; set; }
 
@@ -803,7 +787,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor DynamicTemplates(Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
+	public TypeMappingDescriptor DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;
@@ -997,7 +981,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		if (DynamicTemplatesValue is not null)
 		{
 			writer.WritePropertyName("dynamic_templates");
-			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
+			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(DynamicTemplatesValue, writer, options);
 		}
 
 		if (EnabledValue.HasValue)

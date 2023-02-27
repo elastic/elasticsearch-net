@@ -47,16 +47,13 @@ public sealed partial class FieldSuggester
 	public static FieldSuggester Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester completionSuggester) => new FieldSuggester("completion", completionSuggester);
 	public static FieldSuggester Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester phraseSuggester) => new FieldSuggester("phrase", phraseSuggester);
 	public static FieldSuggester Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester termSuggester) => new FieldSuggester("term", termSuggester);
-	[JsonInclude]
-	[JsonPropertyName("prefix")]
+	[JsonInclude, JsonPropertyName("prefix")]
 	public string? Prefix { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("regex")]
+	[JsonInclude, JsonPropertyName("regex")]
 	public string? Regex { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("text")]
+	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
 }
 

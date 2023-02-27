@@ -25,7 +25,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class GetIndexTemplateResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("index_templates")]
+	[JsonInclude, JsonPropertyName("index_templates")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem> IndexTemplates { get; init; }
 }

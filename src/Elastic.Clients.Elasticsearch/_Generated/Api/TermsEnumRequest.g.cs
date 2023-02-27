@@ -40,32 +40,25 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("timeout")]
+	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("case_insensitive")]
+	[JsonInclude, JsonPropertyName("case_insensitive")]
 	public bool? CaseInsensitive { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_filter")]
+	[JsonInclude, JsonPropertyName("index_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("string")]
+	[JsonInclude, JsonPropertyName("string")]
 	public string? String { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("search_after")]
+	[JsonInclude, JsonPropertyName("search_after")]
 	public string? SearchAfter { get; set; }
 }
 

@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 public sealed partial class NlpTokenizationUpdateOptions
 {
-	[JsonInclude]
-	[JsonPropertyName("span")]
+	[JsonInclude, JsonPropertyName("span")]
 	public int? Span { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("truncate")]
+	[JsonInclude, JsonPropertyName("truncate")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? Truncate { get; set; }
 }
 

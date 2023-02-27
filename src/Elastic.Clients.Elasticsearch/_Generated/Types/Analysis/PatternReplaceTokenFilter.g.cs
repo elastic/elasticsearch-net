@@ -27,27 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class PatternReplaceTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("all")]
+	[JsonInclude, JsonPropertyName("all")]
 	public bool? All { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("flags")]
+	[JsonInclude, JsonPropertyName("flags")]
 	public string? Flags { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("pattern")]
+	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("replacement")]
+	[JsonInclude, JsonPropertyName("replacement")]
 	public string? Replacement { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "pattern_replace";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -133,5 +128,11 @@ public sealed partial class PatternReplaceTokenFilterDescriptor : SerializableDe
 	}
 
 	PatternReplaceTokenFilter IBuildableDescriptor<PatternReplaceTokenFilter>.Build() => new()
-	{ All = AllValue, Flags = FlagsValue, Pattern = PatternValue, Replacement = ReplacementValue, Version = VersionValue };
+	{
+		All = AllValue,
+		Flags = FlagsValue,
+		Pattern = PatternValue,
+		Replacement = ReplacementValue,
+		Version = VersionValue
+	};
 }

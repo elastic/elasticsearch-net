@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Eql;
 public sealed partial class HitsSequence<TEvent>
 {
-	[JsonInclude]
-	[JsonPropertyName("events")]
+	[JsonInclude, JsonPropertyName("events")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>> Events { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("join_keys")]
+	[JsonInclude, JsonPropertyName("join_keys")]
 	public IReadOnlyCollection<object> JoinKeys { get; init; }
 }

@@ -30,8 +30,7 @@ public sealed partial class TrimTokenFilter : ITokenFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "trim";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -65,5 +64,7 @@ public sealed partial class TrimTokenFilterDescriptor : SerializableDescriptor<T
 	}
 
 	TrimTokenFilter IBuildableDescriptor<TrimTokenFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

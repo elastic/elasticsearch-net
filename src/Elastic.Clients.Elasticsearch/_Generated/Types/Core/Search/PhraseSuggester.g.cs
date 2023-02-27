@@ -27,68 +27,52 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class PhraseSuggester
 {
-	[JsonInclude]
-	[JsonPropertyName("analyzer")]
+	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("collate")]
+	[JsonInclude, JsonPropertyName("collate")]
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate? Collate { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("confidence")]
+	[JsonInclude, JsonPropertyName("confidence")]
 	public double? Confidence { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("direct_generator")]
+	[JsonInclude, JsonPropertyName("direct_generator")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGenerator { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("force_unigrams")]
+	[JsonInclude, JsonPropertyName("force_unigrams")]
 	public bool? ForceUnigrams { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("gram_size")]
+	[JsonInclude, JsonPropertyName("gram_size")]
 	public int? GramSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("highlight")]
+	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight? Highlight { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_errors")]
+	[JsonInclude, JsonPropertyName("max_errors")]
 	public double? MaxErrors { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("real_word_error_likelihood")]
+	[JsonInclude, JsonPropertyName("real_word_error_likelihood")]
 	public double? RealWordErrorLikelihood { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("separator")]
+	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("shard_size")]
+	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("smoothing")]
+	[JsonInclude, JsonPropertyName("smoothing")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? Smoothing { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("text")]
+	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("token_limit")]
+	[JsonInclude, JsonPropertyName("token_limit")]
 	public int? TokenLimit { get; set; }
 
 	public static implicit operator FieldSuggester(PhraseSuggester phraseSuggester) => Core.Search.FieldSuggester.Phrase(phraseSuggester);

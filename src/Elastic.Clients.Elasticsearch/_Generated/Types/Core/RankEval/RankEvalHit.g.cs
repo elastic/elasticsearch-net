@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 public sealed partial class RankEvalHit
 {
-	[JsonInclude]
-	[JsonPropertyName("_id")]
+	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_index")]
+	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_score")]
+	[JsonInclude, JsonPropertyName("_score")]
 	public double Score { get; init; }
 }
