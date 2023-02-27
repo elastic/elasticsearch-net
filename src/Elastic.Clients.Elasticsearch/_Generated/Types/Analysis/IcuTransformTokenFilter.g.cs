@@ -94,5 +94,9 @@ public sealed partial class IcuTransformTokenFilterDescriptor : SerializableDesc
 	}
 
 	IcuTransformTokenFilter IBuildableDescriptor<IcuTransformTokenFilter>.Build() => new()
-	{ Dir = DirValue, Id = IdValue, Version = VersionValue };
+	{
+		Dir = DirValue,
+		Id = IdValue,
+		Version = VersionValue
+	};
 }

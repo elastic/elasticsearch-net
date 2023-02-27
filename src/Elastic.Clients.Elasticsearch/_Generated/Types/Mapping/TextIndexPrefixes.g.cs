@@ -68,5 +68,8 @@ public sealed partial class TextIndexPrefixesDescriptor : SerializableDescriptor
 	}
 
 	TextIndexPrefixes IBuildableDescriptor<TextIndexPrefixes>.Build() => new()
-	{ MaxChars = MaxCharsValue, MinChars = MinCharsValue };
+	{
+		MaxChars = MaxCharsValue,
+		MinChars = MinCharsValue
+	};
 }

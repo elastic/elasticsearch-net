@@ -64,5 +64,7 @@ public sealed partial class UppercaseTokenFilterDescriptor : SerializableDescrip
 	}
 
 	UppercaseTokenFilter IBuildableDescriptor<UppercaseTokenFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

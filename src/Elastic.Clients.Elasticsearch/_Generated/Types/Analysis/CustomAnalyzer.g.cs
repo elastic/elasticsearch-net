@@ -129,5 +129,11 @@ public sealed partial class CustomAnalyzerDescriptor : SerializableDescriptor<Cu
 	}
 
 	CustomAnalyzer IBuildableDescriptor<CustomAnalyzer>.Build() => new()
-	{ CharFilter = CharFilterValue, Filter = FilterValue, PositionIncrementGap = PositionIncrementGapValue, PositionOffsetGap = PositionOffsetGapValue, Tokenizer = TokenizerValue };
+	{
+		CharFilter = CharFilterValue,
+		Filter = FilterValue,
+		PositionIncrementGap = PositionIncrementGapValue,
+		PositionOffsetGap = PositionOffsetGapValue,
+		Tokenizer = TokenizerValue
+	};
 }

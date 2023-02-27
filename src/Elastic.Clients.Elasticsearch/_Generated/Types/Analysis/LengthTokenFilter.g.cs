@@ -98,5 +98,9 @@ public sealed partial class LengthTokenFilterDescriptor : SerializableDescriptor
 	}
 
 	LengthTokenFilter IBuildableDescriptor<LengthTokenFilter>.Build() => new()
-	{ Max = MaxValue, Min = MinValue, Version = VersionValue };
+	{
+		Max = MaxValue,
+		Min = MinValue,
+		Version = VersionValue
+	};
 }

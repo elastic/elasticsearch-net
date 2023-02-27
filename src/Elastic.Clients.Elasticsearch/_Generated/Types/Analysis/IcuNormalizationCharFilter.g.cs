@@ -98,5 +98,9 @@ public sealed partial class IcuNormalizationCharFilterDescriptor : SerializableD
 	}
 
 	IcuNormalizationCharFilter IBuildableDescriptor<IcuNormalizationCharFilter>.Build() => new()
-	{ Mode = ModeValue, Name = NameValue, Version = VersionValue };
+	{
+		Mode = ModeValue,
+		Name = NameValue,
+		Version = VersionValue
+	};
 }

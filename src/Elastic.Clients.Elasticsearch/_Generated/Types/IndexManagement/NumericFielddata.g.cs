@@ -55,5 +55,7 @@ public sealed partial class NumericFielddataDescriptor : SerializableDescriptor<
 	}
 
 	NumericFielddata IBuildableDescriptor<NumericFielddata>.Build() => new()
-	{ Format = FormatValue };
+	{
+		Format = FormatValue
+	};
 }

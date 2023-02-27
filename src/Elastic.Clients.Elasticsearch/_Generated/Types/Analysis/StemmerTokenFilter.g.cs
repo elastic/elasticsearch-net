@@ -77,5 +77,8 @@ public sealed partial class StemmerTokenFilterDescriptor : SerializableDescripto
 	}
 
 	StemmerTokenFilter IBuildableDescriptor<StemmerTokenFilter>.Build() => new()
-	{ Language = LanguageValue, Version = VersionValue };
+	{
+		Language = LanguageValue,
+		Version = VersionValue
+	};
 }

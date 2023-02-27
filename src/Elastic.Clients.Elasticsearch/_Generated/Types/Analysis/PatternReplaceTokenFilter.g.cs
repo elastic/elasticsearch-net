@@ -128,5 +128,11 @@ public sealed partial class PatternReplaceTokenFilterDescriptor : SerializableDe
 	}
 
 	PatternReplaceTokenFilter IBuildableDescriptor<PatternReplaceTokenFilter>.Build() => new()
-	{ All = AllValue, Flags = FlagsValue, Pattern = PatternValue, Replacement = ReplacementValue, Version = VersionValue };
+	{
+		All = AllValue,
+		Flags = FlagsValue,
+		Pattern = PatternValue,
+		Replacement = ReplacementValue,
+		Version = VersionValue
+	};
 }

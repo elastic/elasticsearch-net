@@ -128,5 +128,11 @@ public sealed partial class HunspellTokenFilterDescriptor : SerializableDescript
 	}
 
 	HunspellTokenFilter IBuildableDescriptor<HunspellTokenFilter>.Build() => new()
-	{ Dedup = DedupValue, Dictionary = DictionaryValue, Locale = LocaleValue, LongestOnly = LongestOnlyValue, Version = VersionValue };
+	{
+		Dedup = DedupValue,
+		Dictionary = DictionaryValue,
+		Locale = LocaleValue,
+		LongestOnly = LongestOnlyValue,
+		Version = VersionValue
+	};
 }

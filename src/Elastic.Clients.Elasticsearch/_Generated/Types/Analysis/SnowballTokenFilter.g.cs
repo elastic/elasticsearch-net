@@ -77,5 +77,8 @@ public sealed partial class SnowballTokenFilterDescriptor : SerializableDescript
 	}
 
 	SnowballTokenFilter IBuildableDescriptor<SnowballTokenFilter>.Build() => new()
-	{ Language = LanguageValue, Version = VersionValue };
+	{
+		Language = LanguageValue,
+		Version = VersionValue
+	};
 }

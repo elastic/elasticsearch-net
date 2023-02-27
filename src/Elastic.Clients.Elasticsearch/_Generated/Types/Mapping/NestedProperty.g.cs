@@ -263,7 +263,19 @@ public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDe
 	}
 
 	NestedProperty IBuildableDescriptor<NestedProperty>.Build() => new()
-	{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IncludeInParent = IncludeInParentValue, IncludeInRoot = IncludeInRootValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		CopyTo = CopyToValue,
+		Dynamic = DynamicValue,
+		Enabled = EnabledValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IncludeInParent = IncludeInParentValue,
+		IncludeInRoot = IncludeInRootValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }
 
 public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<NestedPropertyDescriptor>, IBuildableDescriptor<NestedProperty>
@@ -464,5 +476,17 @@ public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<Ne
 	}
 
 	NestedProperty IBuildableDescriptor<NestedProperty>.Build() => new()
-	{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IncludeInParent = IncludeInParentValue, IncludeInRoot = IncludeInRootValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		CopyTo = CopyToValue,
+		Dynamic = DynamicValue,
+		Enabled = EnabledValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IncludeInParent = IncludeInParentValue,
+		IncludeInRoot = IncludeInRootValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }

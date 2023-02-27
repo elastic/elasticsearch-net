@@ -348,7 +348,24 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 	}
 
 	SearchAsYouTypeProperty IBuildableDescriptor<SearchAsYouTypeProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, CopyTo = CopyToValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, MaxShingleSize = MaxShingleSizeValue, Meta = MetaValue, Norms = NormsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
+	{
+		Analyzer = AnalyzerValue,
+		CopyTo = CopyToValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		IndexOptions = IndexOptionsValue,
+		MaxShingleSize = MaxShingleSizeValue,
+		Meta = MetaValue,
+		Norms = NormsValue,
+		Properties = PropertiesValue,
+		SearchAnalyzer = SearchAnalyzerValue,
+		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		TermVector = TermVectorValue
+	};
 }
 
 public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDescriptor<SearchAsYouTypePropertyDescriptor>, IBuildableDescriptor<SearchAsYouTypeProperty>
@@ -619,5 +636,22 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 	}
 
 	SearchAsYouTypeProperty IBuildableDescriptor<SearchAsYouTypeProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, CopyTo = CopyToValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, MaxShingleSize = MaxShingleSizeValue, Meta = MetaValue, Norms = NormsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
+	{
+		Analyzer = AnalyzerValue,
+		CopyTo = CopyToValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		IndexOptions = IndexOptionsValue,
+		MaxShingleSize = MaxShingleSizeValue,
+		Meta = MetaValue,
+		Norms = NormsValue,
+		Properties = PropertiesValue,
+		SearchAnalyzer = SearchAnalyzerValue,
+		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		TermVector = TermVectorValue
+	};
 }

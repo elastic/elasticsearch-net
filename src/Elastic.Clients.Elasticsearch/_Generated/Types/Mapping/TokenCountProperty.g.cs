@@ -314,7 +314,22 @@ public sealed partial class TokenCountPropertyDescriptor<TDocument> : Serializab
 	}
 
 	TokenCountProperty IBuildableDescriptor<TokenCountProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Analyzer = AnalyzerValue,
+		Boost = BoostValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		EnablePositionIncrements = EnablePositionIncrementsValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }
 
 public sealed partial class TokenCountPropertyDescriptor : SerializableDescriptor<TokenCountPropertyDescriptor>, IBuildableDescriptor<TokenCountProperty>
@@ -557,5 +572,20 @@ public sealed partial class TokenCountPropertyDescriptor : SerializableDescripto
 	}
 
 	TokenCountProperty IBuildableDescriptor<TokenCountProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EnablePositionIncrements = EnablePositionIncrementsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Analyzer = AnalyzerValue,
+		Boost = BoostValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		EnablePositionIncrements = EnablePositionIncrementsValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }

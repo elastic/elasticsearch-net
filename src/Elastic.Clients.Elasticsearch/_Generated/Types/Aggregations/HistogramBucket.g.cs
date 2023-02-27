@@ -88,7 +88,11 @@ internal sealed class HistogramBucketConverter : JsonConverter<HistogramBucket>
 		}
 
 		return new HistogramBucket(subAggs)
-		{ DocCount = docCount, Key = key, KeyAsString = keyAsString };
+		{
+			DocCount = docCount,
+			Key = key,
+			KeyAsString = keyAsString
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, HistogramBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

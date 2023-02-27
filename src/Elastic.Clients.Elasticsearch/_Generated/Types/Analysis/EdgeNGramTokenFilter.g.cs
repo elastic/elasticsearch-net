@@ -132,5 +132,11 @@ public sealed partial class EdgeNGramTokenFilterDescriptor : SerializableDescrip
 	}
 
 	EdgeNGramTokenFilter IBuildableDescriptor<EdgeNGramTokenFilter>.Build() => new()
-	{ MaxGram = MaxGramValue, MinGram = MinGramValue, PreserveOriginal = PreserveOriginalValue, Side = SideValue, Version = VersionValue };
+	{
+		MaxGram = MaxGramValue,
+		MinGram = MinGramValue,
+		PreserveOriginal = PreserveOriginalValue,
+		Side = SideValue,
+		Version = VersionValue
+	};
 }

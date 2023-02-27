@@ -314,7 +314,22 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 	}
 
 	GeoShapeProperty IBuildableDescriptor<GeoShapeProperty>.Build() => new()
-	{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, Strategy = StrategyValue };
+	{
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		IgnoreZValue = IgnoreZValueValue,
+		Meta = MetaValue,
+		Orientation = OrientationValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		Strategy = StrategyValue
+	};
 }
 
 public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<GeoShapePropertyDescriptor>, IBuildableDescriptor<GeoShapeProperty>
@@ -557,5 +572,20 @@ public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<
 	}
 
 	GeoShapeProperty IBuildableDescriptor<GeoShapeProperty>.Build() => new()
-	{ Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, Meta = MetaValue, Orientation = OrientationValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue, Strategy = StrategyValue };
+	{
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		IgnoreZValue = IgnoreZValueValue,
+		Meta = MetaValue,
+		Orientation = OrientationValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		Strategy = StrategyValue
+	};
 }

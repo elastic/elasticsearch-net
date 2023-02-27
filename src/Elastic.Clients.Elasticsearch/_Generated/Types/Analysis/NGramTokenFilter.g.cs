@@ -115,5 +115,10 @@ public sealed partial class NGramTokenFilterDescriptor : SerializableDescriptor<
 	}
 
 	NGramTokenFilter IBuildableDescriptor<NGramTokenFilter>.Build() => new()
-	{ MaxGram = MaxGramValue, MinGram = MinGramValue, PreserveOriginal = PreserveOriginalValue, Version = VersionValue };
+	{
+		MaxGram = MaxGramValue,
+		MinGram = MinGramValue,
+		PreserveOriginal = PreserveOriginalValue,
+		Version = VersionValue
+	};
 }

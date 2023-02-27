@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class DynamicTemplate
 {
 	[JsonInclude, JsonPropertyName("mapping")]
-	public Elastic.Clients.Elasticsearch.Mapping.IProperty? Mapping { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Mapping { get; set; }
 
 	[JsonInclude, JsonPropertyName("match")]
 	public string? Match { get; set; }

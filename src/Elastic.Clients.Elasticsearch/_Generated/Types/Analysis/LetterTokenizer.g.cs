@@ -64,5 +64,7 @@ public sealed partial class LetterTokenizerDescriptor : SerializableDescriptor<L
 	}
 
 	LetterTokenizer IBuildableDescriptor<LetterTokenizer>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

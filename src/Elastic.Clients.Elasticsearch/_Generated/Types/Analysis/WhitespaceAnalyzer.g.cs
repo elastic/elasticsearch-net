@@ -64,5 +64,7 @@ public sealed partial class WhitespaceAnalyzerDescriptor : SerializableDescripto
 	}
 
 	WhitespaceAnalyzer IBuildableDescriptor<WhitespaceAnalyzer>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

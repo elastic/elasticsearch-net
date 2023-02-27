@@ -183,5 +183,14 @@ public sealed partial class DictionaryDecompounderTokenFilterDescriptor : Serial
 	}
 
 	DictionaryDecompounderTokenFilter IBuildableDescriptor<DictionaryDecompounderTokenFilter>.Build() => new()
-	{ HyphenationPatternsPath = HyphenationPatternsPathValue, MaxSubwordSize = MaxSubwordSizeValue, MinSubwordSize = MinSubwordSizeValue, MinWordSize = MinWordSizeValue, OnlyLongestMatch = OnlyLongestMatchValue, Version = VersionValue, WordList = WordListValue, WordListPath = WordListPathValue };
+	{
+		HyphenationPatternsPath = HyphenationPatternsPathValue,
+		MaxSubwordSize = MaxSubwordSizeValue,
+		MinSubwordSize = MinSubwordSizeValue,
+		MinWordSize = MinWordSizeValue,
+		OnlyLongestMatch = OnlyLongestMatchValue,
+		Version = VersionValue,
+		WordList = WordListValue,
+		WordListPath = WordListPathValue
+	};
 }

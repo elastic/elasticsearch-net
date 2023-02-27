@@ -81,5 +81,8 @@ public sealed partial class UaxEmailUrlTokenizerDescriptor : SerializableDescrip
 	}
 
 	UaxEmailUrlTokenizer IBuildableDescriptor<UaxEmailUrlTokenizer>.Build() => new()
-	{ MaxTokenLength = MaxTokenLengthValue, Version = VersionValue };
+	{
+		MaxTokenLength = MaxTokenLengthValue,
+		Version = VersionValue
+	};
 }

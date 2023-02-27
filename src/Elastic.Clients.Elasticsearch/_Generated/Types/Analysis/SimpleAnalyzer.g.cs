@@ -64,5 +64,7 @@ public sealed partial class SimpleAnalyzerDescriptor : SerializableDescriptor<Si
 	}
 
 	SimpleAnalyzer IBuildableDescriptor<SimpleAnalyzer>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

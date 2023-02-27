@@ -150,5 +150,13 @@ public sealed partial class PhoneticTokenFilterDescriptor : SerializableDescript
 	}
 
 	PhoneticTokenFilter IBuildableDescriptor<PhoneticTokenFilter>.Build() => new()
-	{ Encoder = EncoderValue, Languageset = LanguagesetValue, MaxCodeLen = MaxCodeLenValue, NameType = NameTypeValue, Replace = ReplaceValue, RuleType = RuleTypeValue, Version = VersionValue };
+	{
+		Encoder = EncoderValue,
+		Languageset = LanguagesetValue,
+		MaxCodeLen = MaxCodeLenValue,
+		NameType = NameTypeValue,
+		Replace = ReplaceValue,
+		RuleType = RuleTypeValue,
+		Version = VersionValue
+	};
 }

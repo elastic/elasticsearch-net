@@ -382,7 +382,26 @@ public sealed partial class LongNumberPropertyDescriptor<TDocument> : Serializab
 	}
 
 	LongNumberProperty IBuildableDescriptor<LongNumberProperty>.Build() => new()
-	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{
+		Boost = BoostValue,
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		Index = IndexValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
+		Properties = PropertiesValue,
+		Script = ScriptValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		TimeSeriesDimension = TimeSeriesDimensionValue,
+		TimeSeriesMetric = TimeSeriesMetricValue
+	};
 }
 
 public sealed partial class LongNumberPropertyDescriptor : SerializableDescriptor<LongNumberPropertyDescriptor>, IBuildableDescriptor<LongNumberProperty>
@@ -681,5 +700,24 @@ public sealed partial class LongNumberPropertyDescriptor : SerializableDescripto
 	}
 
 	LongNumberProperty IBuildableDescriptor<LongNumberProperty>.Build() => new()
-	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{
+		Boost = BoostValue,
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		Index = IndexValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
+		Properties = PropertiesValue,
+		Script = ScriptValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		TimeSeriesDimension = TimeSeriesDimensionValue,
+		TimeSeriesMetric = TimeSeriesMetricValue
+	};
 }

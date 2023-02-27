@@ -77,5 +77,8 @@ public sealed partial class KeywordTokenizerDescriptor : SerializableDescriptor<
 	}
 
 	KeywordTokenizer IBuildableDescriptor<KeywordTokenizer>.Build() => new()
-	{ BufferSize = BufferSizeValue, Version = VersionValue };
+	{
+		BufferSize = BufferSizeValue,
+		Version = VersionValue
+	};
 }

@@ -120,5 +120,11 @@ public sealed partial class NGramTokenizerDescriptor : SerializableDescriptor<NG
 	}
 
 	NGramTokenizer IBuildableDescriptor<NGramTokenizer>.Build() => new()
-	{ CustomTokenChars = CustomTokenCharsValue, MaxGram = MaxGramValue, MinGram = MinGramValue, TokenChars = TokenCharsValue, Version = VersionValue };
+	{
+		CustomTokenChars = CustomTokenCharsValue,
+		MaxGram = MaxGramValue,
+		MinGram = MinGramValue,
+		TokenChars = TokenCharsValue,
+		Version = VersionValue
+	};
 }

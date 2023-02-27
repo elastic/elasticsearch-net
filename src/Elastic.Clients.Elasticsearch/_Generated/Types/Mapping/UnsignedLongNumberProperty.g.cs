@@ -382,7 +382,26 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 	}
 
 	UnsignedLongNumberProperty IBuildableDescriptor<UnsignedLongNumberProperty>.Build() => new()
-	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{
+		Boost = BoostValue,
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		Index = IndexValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
+		Properties = PropertiesValue,
+		Script = ScriptValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		TimeSeriesDimension = TimeSeriesDimensionValue,
+		TimeSeriesMetric = TimeSeriesMetricValue
+	};
 }
 
 public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableDescriptor<UnsignedLongNumberPropertyDescriptor>, IBuildableDescriptor<UnsignedLongNumberProperty>
@@ -681,5 +700,24 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 	}
 
 	UnsignedLongNumberProperty IBuildableDescriptor<UnsignedLongNumberProperty>.Build() => new()
-	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, Properties = PropertiesValue, Script = ScriptValue, Similarity = SimilarityValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{
+		Boost = BoostValue,
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		Index = IndexValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
+		Properties = PropertiesValue,
+		Script = ScriptValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		TimeSeriesDimension = TimeSeriesDimensionValue,
+		TimeSeriesMetric = TimeSeriesMetricValue
+	};
 }

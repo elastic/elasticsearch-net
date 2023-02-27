@@ -81,5 +81,8 @@ public sealed partial class WhitespaceTokenizerDescriptor : SerializableDescript
 	}
 
 	WhitespaceTokenizer IBuildableDescriptor<WhitespaceTokenizer>.Build() => new()
-	{ MaxTokenLength = MaxTokenLengthValue, Version = VersionValue };
+	{
+		MaxTokenLength = MaxTokenLengthValue,
+		Version = VersionValue
+	};
 }

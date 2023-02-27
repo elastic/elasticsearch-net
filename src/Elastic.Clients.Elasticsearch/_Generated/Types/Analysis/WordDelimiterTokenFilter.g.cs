@@ -285,5 +285,20 @@ public sealed partial class WordDelimiterTokenFilterDescriptor : SerializableDes
 	}
 
 	WordDelimiterTokenFilter IBuildableDescriptor<WordDelimiterTokenFilter>.Build() => new()
-	{ CatenateAll = CatenateAllValue, CatenateNumbers = CatenateNumbersValue, CatenateWords = CatenateWordsValue, GenerateNumberParts = GenerateNumberPartsValue, GenerateWordParts = GenerateWordPartsValue, PreserveOriginal = PreserveOriginalValue, ProtectedWords = ProtectedWordsValue, ProtectedWordsPath = ProtectedWordsPathValue, SplitOnCaseChange = SplitOnCaseChangeValue, SplitOnNumerics = SplitOnNumericsValue, StemEnglishPossessive = StemEnglishPossessiveValue, TypeTable = TypeTableValue, TypeTablePath = TypeTablePathValue, Version = VersionValue };
+	{
+		CatenateAll = CatenateAllValue,
+		CatenateNumbers = CatenateNumbersValue,
+		CatenateWords = CatenateWordsValue,
+		GenerateNumberParts = GenerateNumberPartsValue,
+		GenerateWordParts = GenerateWordPartsValue,
+		PreserveOriginal = PreserveOriginalValue,
+		ProtectedWords = ProtectedWordsValue,
+		ProtectedWordsPath = ProtectedWordsPathValue,
+		SplitOnCaseChange = SplitOnCaseChangeValue,
+		SplitOnNumerics = SplitOnNumericsValue,
+		StemEnglishPossessive = StemEnglishPossessiveValue,
+		TypeTable = TypeTableValue,
+		TypeTablePath = TypeTablePathValue,
+		Version = VersionValue
+	};
 }

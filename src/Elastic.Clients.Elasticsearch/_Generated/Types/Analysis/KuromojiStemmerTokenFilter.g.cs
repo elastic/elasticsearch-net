@@ -77,5 +77,8 @@ public sealed partial class KuromojiStemmerTokenFilterDescriptor : SerializableD
 	}
 
 	KuromojiStemmerTokenFilter IBuildableDescriptor<KuromojiStemmerTokenFilter>.Build() => new()
-	{ MinimumLength = MinimumLengthValue, Version = VersionValue };
+	{
+		MinimumLength = MinimumLengthValue,
+		Version = VersionValue
+	};
 }

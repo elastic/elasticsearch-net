@@ -129,5 +129,11 @@ public sealed partial class PatternAnalyzerDescriptor : SerializableDescriptor<P
 	}
 
 	PatternAnalyzer IBuildableDescriptor<PatternAnalyzer>.Build() => new()
-	{ Flags = FlagsValue, Lowercase = LowercaseValue, Pattern = PatternValue, Stopwords = StopwordsValue, Version = VersionValue };
+	{
+		Flags = FlagsValue,
+		Lowercase = LowercaseValue,
+		Pattern = PatternValue,
+		Stopwords = StopwordsValue,
+		Version = VersionValue
+	};
 }

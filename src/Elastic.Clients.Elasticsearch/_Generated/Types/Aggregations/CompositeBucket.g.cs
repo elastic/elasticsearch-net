@@ -78,7 +78,10 @@ internal sealed class CompositeBucketConverter : JsonConverter<CompositeBucket>
 		}
 
 		return new CompositeBucket(subAggs)
-		{ DocCount = docCount, Key = key };
+		{
+			DocCount = docCount,
+			Key = key
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, CompositeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

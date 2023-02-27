@@ -113,7 +113,11 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 	}
 
 	MatchOnlyTextProperty IBuildableDescriptor<MatchOnlyTextProperty>.Build() => new()
-	{ CopyTo = CopyToValue, Fields = FieldsValue, Meta = MetaValue };
+	{
+		CopyTo = CopyToValue,
+		Fields = FieldsValue,
+		Meta = MetaValue
+	};
 }
 
 public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescriptor<MatchOnlyTextPropertyDescriptor>, IBuildableDescriptor<MatchOnlyTextProperty>
@@ -188,5 +192,9 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 	}
 
 	MatchOnlyTextProperty IBuildableDescriptor<MatchOnlyTextProperty>.Build() => new()
-	{ CopyTo = CopyToValue, Fields = FieldsValue, Meta = MetaValue };
+	{
+		CopyTo = CopyToValue,
+		Fields = FieldsValue,
+		Meta = MetaValue
+	};
 }

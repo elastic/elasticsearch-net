@@ -77,5 +77,8 @@ public sealed partial class PredicateTokenFilterDescriptor : SerializableDescrip
 	}
 
 	PredicateTokenFilter IBuildableDescriptor<PredicateTokenFilter>.Build() => new()
-	{ Script = ScriptValue, Version = VersionValue };
+	{
+		Script = ScriptValue,
+		Version = VersionValue
+	};
 }

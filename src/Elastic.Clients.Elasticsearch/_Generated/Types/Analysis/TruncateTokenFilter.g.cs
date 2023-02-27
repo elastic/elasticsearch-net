@@ -81,5 +81,8 @@ public sealed partial class TruncateTokenFilterDescriptor : SerializableDescript
 	}
 
 	TruncateTokenFilter IBuildableDescriptor<TruncateTokenFilter>.Build() => new()
-	{ Length = LengthValue, Version = VersionValue };
+	{
+		Length = LengthValue,
+		Version = VersionValue
+	};
 }

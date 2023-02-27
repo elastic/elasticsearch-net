@@ -103,5 +103,10 @@ public sealed partial class PatternTokenizerDescriptor : SerializableDescriptor<
 	}
 
 	PatternTokenizer IBuildableDescriptor<PatternTokenizer>.Build() => new()
-	{ Flags = FlagsValue, Group = GroupValue, Pattern = PatternValue, Version = VersionValue };
+	{
+		Flags = FlagsValue,
+		Group = GroupValue,
+		Pattern = PatternValue,
+		Version = VersionValue
+	};
 }

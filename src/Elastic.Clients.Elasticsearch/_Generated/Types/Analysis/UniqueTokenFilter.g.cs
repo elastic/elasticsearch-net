@@ -81,5 +81,8 @@ public sealed partial class UniqueTokenFilterDescriptor : SerializableDescriptor
 	}
 
 	UniqueTokenFilter IBuildableDescriptor<UniqueTokenFilter>.Build() => new()
-	{ OnlyOnSamePosition = OnlyOnSamePositionValue, Version = VersionValue };
+	{
+		OnlyOnSamePosition = OnlyOnSamePositionValue,
+		Version = VersionValue
+	};
 }

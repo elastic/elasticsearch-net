@@ -98,7 +98,12 @@ internal sealed class MultiTermsBucketConverter : JsonConverter<MultiTermsBucket
 		}
 
 		return new MultiTermsBucket(subAggs)
-		{ DocCount = docCount, DocCountErrorUpperBound = docCountErrorUpperBound, Key = key, KeyAsString = keyAsString };
+		{
+			DocCount = docCount,
+			DocCountErrorUpperBound = docCountErrorUpperBound,
+			Key = key,
+			KeyAsString = keyAsString
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, MultiTermsBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

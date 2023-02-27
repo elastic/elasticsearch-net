@@ -98,5 +98,9 @@ public sealed partial class KeepTypesTokenFilterDescriptor : SerializableDescrip
 	}
 
 	KeepTypesTokenFilter IBuildableDescriptor<KeepTypesTokenFilter>.Build() => new()
-	{ Mode = ModeValue, Types = TypesValue, Version = VersionValue };
+	{
+		Mode = ModeValue,
+		Types = TypesValue,
+		Version = VersionValue
+	};
 }

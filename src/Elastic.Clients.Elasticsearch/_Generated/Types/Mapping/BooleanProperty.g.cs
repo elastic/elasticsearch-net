@@ -353,7 +353,21 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 	}
 
 	BooleanProperty IBuildableDescriptor<BooleanProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Boost = BoostValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fielddata = BuildFielddata(),
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }
 
 public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<BooleanPropertyDescriptor>, IBuildableDescriptor<BooleanProperty>
@@ -638,5 +652,19 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 	}
 
 	BooleanProperty IBuildableDescriptor<BooleanProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Boost = BoostValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fielddata = BuildFielddata(),
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }

@@ -280,7 +280,20 @@ public sealed partial class IntegerRangePropertyDescriptor<TDocument> : Serializ
 	}
 
 	IntegerRangeProperty IBuildableDescriptor<IntegerRangeProperty>.Build() => new()
-	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Boost = BoostValue,
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }
 
 public sealed partial class IntegerRangePropertyDescriptor : SerializableDescriptor<IntegerRangePropertyDescriptor>, IBuildableDescriptor<IntegerRangeProperty>
@@ -495,5 +508,18 @@ public sealed partial class IntegerRangePropertyDescriptor : SerializableDescrip
 	}
 
 	IntegerRangeProperty IBuildableDescriptor<IntegerRangeProperty>.Build() => new()
-	{ Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Boost = BoostValue,
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }

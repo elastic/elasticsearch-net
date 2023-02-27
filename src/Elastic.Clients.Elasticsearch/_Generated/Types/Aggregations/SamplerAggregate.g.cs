@@ -78,7 +78,10 @@ internal sealed class SamplerAggregateConverter : JsonConverter<SamplerAggregate
 		}
 
 		return new SamplerAggregate(subAggs)
-		{ DocCount = docCount, Meta = meta };
+		{
+			DocCount = docCount,
+			Meta = meta
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, SamplerAggregate value, JsonSerializerOptions options) => throw new NotImplementedException();

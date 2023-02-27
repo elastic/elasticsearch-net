@@ -64,5 +64,7 @@ public sealed partial class TrimTokenFilterDescriptor : SerializableDescriptor<T
 	}
 
 	TrimTokenFilter IBuildableDescriptor<TrimTokenFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

@@ -115,5 +115,10 @@ public sealed partial class NoriAnalyzerDescriptor : SerializableDescriptor<Nori
 	}
 
 	NoriAnalyzer IBuildableDescriptor<NoriAnalyzer>.Build() => new()
-	{ DecompoundMode = DecompoundModeValue, Stoptags = StoptagsValue, UserDictionary = UserDictionaryValue, Version = VersionValue };
+	{
+		DecompoundMode = DecompoundModeValue,
+		Stoptags = StoptagsValue,
+		UserDictionary = UserDictionaryValue,
+		Version = VersionValue
+	};
 }

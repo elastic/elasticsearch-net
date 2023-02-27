@@ -74,5 +74,8 @@ public sealed partial class IcuAnalyzerDescriptor : SerializableDescriptor<IcuAn
 	}
 
 	IcuAnalyzer IBuildableDescriptor<IcuAnalyzer>.Build() => new()
-	{ Method = MethodValue, Mode = ModeValue };
+	{
+		Method = MethodValue,
+		Mode = ModeValue
+	};
 }

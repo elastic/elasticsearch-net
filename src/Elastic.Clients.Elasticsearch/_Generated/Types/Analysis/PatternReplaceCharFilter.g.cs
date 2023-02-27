@@ -111,5 +111,10 @@ public sealed partial class PatternReplaceCharFilterDescriptor : SerializableDes
 	}
 
 	PatternReplaceCharFilter IBuildableDescriptor<PatternReplaceCharFilter>.Build() => new()
-	{ Flags = FlagsValue, Pattern = PatternValue, Replacement = ReplacementValue, Version = VersionValue };
+	{
+		Flags = FlagsValue,
+		Pattern = PatternValue,
+		Replacement = ReplacementValue,
+		Version = VersionValue
+	};
 }

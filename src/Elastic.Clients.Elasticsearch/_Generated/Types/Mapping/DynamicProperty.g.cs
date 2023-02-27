@@ -659,7 +659,39 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 	}
 
 	DynamicProperty IBuildableDescriptor<DynamicProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Enabled = EnabledValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), Locale = LocaleValue, Meta = MetaValue, Norms = NormsValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, PositionIncrementGap = PositionIncrementGapValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Script = ScriptValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{
+		Analyzer = AnalyzerValue,
+		Boost = BoostValue,
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
+		Enabled = EnabledValue,
+		Fields = FieldsValue,
+		Format = FormatValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		Index = IndexValue,
+		IndexOptions = IndexOptionsValue,
+		IndexPhrases = IndexPhrasesValue,
+		IndexPrefixes = BuildIndexPrefixes(),
+		Locale = LocaleValue,
+		Meta = MetaValue,
+		Norms = NormsValue,
+		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
+		PositionIncrementGap = PositionIncrementGapValue,
+		PrecisionStep = PrecisionStepValue,
+		Properties = PropertiesValue,
+		Script = ScriptValue,
+		SearchAnalyzer = SearchAnalyzerValue,
+		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		TermVector = TermVectorValue,
+		TimeSeriesMetric = TimeSeriesMetricValue
+	};
 }
 
 public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<DynamicPropertyDescriptor>, IBuildableDescriptor<DynamicProperty>
@@ -1196,5 +1228,37 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 	}
 
 	DynamicProperty IBuildableDescriptor<DynamicProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, Boost = BoostValue, Coerce = CoerceValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Enabled = EnabledValue, Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), Locale = LocaleValue, Meta = MetaValue, Norms = NormsValue, NullValue = NullValueValue, OnScriptError = OnScriptErrorValue, PositionIncrementGap = PositionIncrementGapValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Script = ScriptValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{
+		Analyzer = AnalyzerValue,
+		Boost = BoostValue,
+		Coerce = CoerceValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
+		Enabled = EnabledValue,
+		Fields = FieldsValue,
+		Format = FormatValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		Index = IndexValue,
+		IndexOptions = IndexOptionsValue,
+		IndexPhrases = IndexPhrasesValue,
+		IndexPrefixes = BuildIndexPrefixes(),
+		Locale = LocaleValue,
+		Meta = MetaValue,
+		Norms = NormsValue,
+		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
+		PositionIncrementGap = PositionIncrementGapValue,
+		PrecisionStep = PrecisionStepValue,
+		Properties = PropertiesValue,
+		Script = ScriptValue,
+		SearchAnalyzer = SearchAnalyzerValue,
+		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		TermVector = TermVectorValue,
+		TimeSeriesMetric = TimeSeriesMetricValue
+	};
 }

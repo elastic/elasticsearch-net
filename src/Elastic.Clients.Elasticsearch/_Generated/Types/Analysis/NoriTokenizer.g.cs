@@ -132,5 +132,11 @@ public sealed partial class NoriTokenizerDescriptor : SerializableDescriptor<Nor
 	}
 
 	NoriTokenizer IBuildableDescriptor<NoriTokenizer>.Build() => new()
-	{ DecompoundMode = DecompoundModeValue, DiscardPunctuation = DiscardPunctuationValue, UserDictionary = UserDictionaryValue, UserDictionaryRules = UserDictionaryRulesValue, Version = VersionValue };
+	{
+		DecompoundMode = DecompoundModeValue,
+		DiscardPunctuation = DiscardPunctuationValue,
+		UserDictionary = UserDictionaryValue,
+		UserDictionaryRules = UserDictionaryRulesValue,
+		Version = VersionValue
+	};
 }

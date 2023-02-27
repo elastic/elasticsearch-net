@@ -77,5 +77,8 @@ public sealed partial class IcuTokenizerDescriptor : SerializableDescriptor<IcuT
 	}
 
 	IcuTokenizer IBuildableDescriptor<IcuTokenizer>.Build() => new()
-	{ RuleFiles = RuleFilesValue, Version = VersionValue };
+	{
+		RuleFiles = RuleFilesValue,
+		Version = VersionValue
+	};
 }

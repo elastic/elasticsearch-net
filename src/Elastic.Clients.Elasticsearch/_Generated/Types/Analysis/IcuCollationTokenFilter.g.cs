@@ -268,5 +268,19 @@ public sealed partial class IcuCollationTokenFilterDescriptor : SerializableDesc
 	}
 
 	IcuCollationTokenFilter IBuildableDescriptor<IcuCollationTokenFilter>.Build() => new()
-	{ Alternate = AlternateValue, Casefirst = CasefirstValue, Caselevel = CaselevelValue, Country = CountryValue, Decomposition = DecompositionValue, Hiraganaquaternarymode = HiraganaquaternarymodeValue, Language = LanguageValue, Numeric = NumericValue, Rules = RulesValue, Strength = StrengthValue, Variabletop = VariabletopValue, Variant = VariantValue, Version = VersionValue };
+	{
+		Alternate = AlternateValue,
+		Casefirst = CasefirstValue,
+		Caselevel = CaselevelValue,
+		Country = CountryValue,
+		Decomposition = DecompositionValue,
+		Hiraganaquaternarymode = HiraganaquaternarymodeValue,
+		Language = LanguageValue,
+		Numeric = NumericValue,
+		Rules = RulesValue,
+		Strength = StrengthValue,
+		Variabletop = VariabletopValue,
+		Variant = VariantValue,
+		Version = VersionValue
+	};
 }

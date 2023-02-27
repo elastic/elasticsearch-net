@@ -133,5 +133,11 @@ public sealed partial class StopTokenFilterDescriptor : SerializableDescriptor<S
 	}
 
 	StopTokenFilter IBuildableDescriptor<StopTokenFilter>.Build() => new()
-	{ IgnoreCase = IgnoreCaseValue, RemoveTrailing = RemoveTrailingValue, Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
+	{
+		IgnoreCase = IgnoreCaseValue,
+		RemoveTrailing = RemoveTrailingValue,
+		Stopwords = StopwordsValue,
+		StopwordsPath = StopwordsPathValue,
+		Version = VersionValue
+	};
 }

@@ -94,5 +94,9 @@ public sealed partial class PatternCaptureTokenFilterDescriptor : SerializableDe
 	}
 
 	PatternCaptureTokenFilter IBuildableDescriptor<PatternCaptureTokenFilter>.Build() => new()
-	{ Patterns = PatternsValue, PreserveOriginal = PreserveOriginalValue, Version = VersionValue };
+	{
+		Patterns = PatternsValue,
+		PreserveOriginal = PreserveOriginalValue,
+		Version = VersionValue
+	};
 }

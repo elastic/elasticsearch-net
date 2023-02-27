@@ -178,7 +178,14 @@ public sealed partial class HistogramPropertyDescriptor<TDocument> : Serializabl
 	}
 
 	HistogramProperty IBuildableDescriptor<HistogramProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Meta = MetaValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue
+	};
 }
 
 public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor<HistogramPropertyDescriptor>, IBuildableDescriptor<HistogramProperty>
@@ -309,5 +316,12 @@ public sealed partial class HistogramPropertyDescriptor : SerializableDescriptor
 	}
 
 	HistogramProperty IBuildableDescriptor<HistogramProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Meta = MetaValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue
+	};
 }

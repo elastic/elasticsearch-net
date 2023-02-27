@@ -77,5 +77,8 @@ public sealed partial class KuromojiAnalyzerDescriptor : SerializableDescriptor<
 	}
 
 	KuromojiAnalyzer IBuildableDescriptor<KuromojiAnalyzer>.Build() => new()
-	{ Mode = ModeValue, UserDictionary = UserDictionaryValue };
+	{
+		Mode = ModeValue,
+		UserDictionary = UserDictionaryValue
+	};
 }

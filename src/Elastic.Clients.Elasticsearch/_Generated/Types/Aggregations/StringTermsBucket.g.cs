@@ -88,7 +88,11 @@ internal sealed class StringTermsBucketConverter : JsonConverter<StringTermsBuck
 		}
 
 		return new StringTermsBucket(subAggs)
-		{ DocCount = docCount, DocCountError = docCountError, Key = key };
+		{
+			DocCount = docCount,
+			DocCountError = docCountError,
+			Key = key
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, StringTermsBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

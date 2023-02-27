@@ -83,5 +83,8 @@ public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptor<
 	}
 
 	StandardAnalyzer IBuildableDescriptor<StandardAnalyzer>.Build() => new()
-	{ MaxTokenLength = MaxTokenLengthValue, Stopwords = StopwordsValue };
+	{
+		MaxTokenLength = MaxTokenLengthValue,
+		Stopwords = StopwordsValue
+	};
 }

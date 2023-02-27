@@ -98,5 +98,9 @@ public sealed partial class MappingCharFilterDescriptor : SerializableDescriptor
 	}
 
 	MappingCharFilter IBuildableDescriptor<MappingCharFilter>.Build() => new()
-	{ Mappings = MappingsValue, MappingsPath = MappingsPathValue, Version = VersionValue };
+	{
+		Mappings = MappingsValue,
+		MappingsPath = MappingsPathValue,
+		Version = VersionValue
+	};
 }

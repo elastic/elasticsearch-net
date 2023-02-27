@@ -204,7 +204,16 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor<TDocument> :
 	}
 
 	AggregateMetricDoubleProperty IBuildableDescriptor<AggregateMetricDoubleProperty>.Build() => new()
-	{ DefaultMetric = DefaultMetricValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Metrics = MetricsValue, Properties = PropertiesValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{
+		DefaultMetric = DefaultMetricValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Metrics = MetricsValue,
+		Properties = PropertiesValue,
+		TimeSeriesMetric = TimeSeriesMetricValue
+	};
 }
 
 public sealed partial class AggregateMetricDoublePropertyDescriptor : SerializableDescriptor<AggregateMetricDoublePropertyDescriptor>, IBuildableDescriptor<AggregateMetricDoubleProperty>
@@ -355,5 +364,14 @@ public sealed partial class AggregateMetricDoublePropertyDescriptor : Serializab
 	}
 
 	AggregateMetricDoubleProperty IBuildableDescriptor<AggregateMetricDoubleProperty>.Build() => new()
-	{ DefaultMetric = DefaultMetricValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Metrics = MetricsValue, Properties = PropertiesValue, TimeSeriesMetric = TimeSeriesMetricValue };
+	{
+		DefaultMetric = DefaultMetricValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Metrics = MetricsValue,
+		Properties = PropertiesValue,
+		TimeSeriesMetric = TimeSeriesMetricValue
+	};
 }

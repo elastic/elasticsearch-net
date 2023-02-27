@@ -115,5 +115,10 @@ public sealed partial class ElisionTokenFilterDescriptor : SerializableDescripto
 	}
 
 	ElisionTokenFilter IBuildableDescriptor<ElisionTokenFilter>.Build() => new()
-	{ Articles = ArticlesValue, ArticlesCase = ArticlesCaseValue, ArticlesPath = ArticlesPathValue, Version = VersionValue };
+	{
+		Articles = ArticlesValue,
+		ArticlesCase = ArticlesCaseValue,
+		ArticlesPath = ArticlesPathValue,
+		Version = VersionValue
+	};
 }

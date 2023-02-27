@@ -314,7 +314,22 @@ public sealed partial class FlattenedPropertyDescriptor<TDocument> : Serializabl
 	}
 
 	FlattenedProperty IBuildableDescriptor<FlattenedProperty>.Build() => new()
-	{ Boost = BoostValue, DepthLimit = DepthLimitValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue };
+	{
+		Boost = BoostValue,
+		DepthLimit = DepthLimitValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		IndexOptions = IndexOptionsValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue
+	};
 }
 
 public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor<FlattenedPropertyDescriptor>, IBuildableDescriptor<FlattenedProperty>
@@ -557,5 +572,20 @@ public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor
 	}
 
 	FlattenedProperty IBuildableDescriptor<FlattenedProperty>.Build() => new()
-	{ Boost = BoostValue, DepthLimit = DepthLimitValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue };
+	{
+		Boost = BoostValue,
+		DepthLimit = DepthLimitValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		IndexOptions = IndexOptionsValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue
+	};
 }

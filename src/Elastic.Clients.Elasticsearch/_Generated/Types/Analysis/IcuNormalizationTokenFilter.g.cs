@@ -77,5 +77,8 @@ public sealed partial class IcuNormalizationTokenFilterDescriptor : Serializable
 	}
 
 	IcuNormalizationTokenFilter IBuildableDescriptor<IcuNormalizationTokenFilter>.Build() => new()
-	{ Name = NameValue, Version = VersionValue };
+	{
+		Name = NameValue,
+		Version = VersionValue
+	};
 }

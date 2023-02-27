@@ -129,5 +129,12 @@ public sealed partial class PathHierarchyTokenizerDescriptor : SerializableDescr
 	}
 
 	PathHierarchyTokenizer IBuildableDescriptor<PathHierarchyTokenizer>.Build() => new()
-	{ BufferSize = BufferSizeValue, Delimiter = DelimiterValue, Replacement = ReplacementValue, Reverse = ReverseValue, Skip = SkipValue, Version = VersionValue };
+	{
+		BufferSize = BufferSizeValue,
+		Delimiter = DelimiterValue,
+		Replacement = ReplacementValue,
+		Reverse = ReverseValue,
+		Skip = SkipValue,
+		Version = VersionValue
+	};
 }

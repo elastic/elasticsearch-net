@@ -77,5 +77,8 @@ public sealed partial class KuromojiReadingFormTokenFilterDescriptor : Serializa
 	}
 
 	KuromojiReadingFormTokenFilter IBuildableDescriptor<KuromojiReadingFormTokenFilter>.Build() => new()
-	{ UseRomaji = UseRomajiValue, Version = VersionValue };
+	{
+		UseRomaji = UseRomajiValue,
+		Version = VersionValue
+	};
 }

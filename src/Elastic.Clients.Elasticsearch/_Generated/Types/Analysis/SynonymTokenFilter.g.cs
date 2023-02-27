@@ -183,5 +183,14 @@ public sealed partial class SynonymTokenFilterDescriptor : SerializableDescripto
 	}
 
 	SynonymTokenFilter IBuildableDescriptor<SynonymTokenFilter>.Build() => new()
-	{ Expand = ExpandValue, Format = FormatValue, Lenient = LenientValue, Synonyms = SynonymsValue, SynonymsPath = SynonymsPathValue, Tokenizer = TokenizerValue, Updateable = UpdateableValue, Version = VersionValue };
+	{
+		Expand = ExpandValue,
+		Format = FormatValue,
+		Lenient = LenientValue,
+		Synonyms = SynonymsValue,
+		SynonymsPath = SynonymsPathValue,
+		Tokenizer = TokenizerValue,
+		Updateable = UpdateableValue,
+		Version = VersionValue
+	};
 }

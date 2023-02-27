@@ -132,5 +132,11 @@ public sealed partial class KeywordMarkerTokenFilterDescriptor : SerializableDes
 	}
 
 	KeywordMarkerTokenFilter IBuildableDescriptor<KeywordMarkerTokenFilter>.Build() => new()
-	{ IgnoreCase = IgnoreCaseValue, Keywords = KeywordsValue, KeywordsPath = KeywordsPathValue, KeywordsPattern = KeywordsPatternValue, Version = VersionValue };
+	{
+		IgnoreCase = IgnoreCaseValue,
+		Keywords = KeywordsValue,
+		KeywordsPath = KeywordsPathValue,
+		KeywordsPattern = KeywordsPatternValue,
+		Version = VersionValue
+	};
 }

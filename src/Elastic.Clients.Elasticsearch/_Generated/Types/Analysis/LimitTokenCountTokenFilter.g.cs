@@ -98,5 +98,9 @@ public sealed partial class LimitTokenCountTokenFilterDescriptor : SerializableD
 	}
 
 	LimitTokenCountTokenFilter IBuildableDescriptor<LimitTokenCountTokenFilter>.Build() => new()
-	{ ConsumeAllTokens = ConsumeAllTokensValue, MaxTokenCount = MaxTokenCountValue, Version = VersionValue };
+	{
+		ConsumeAllTokens = ConsumeAllTokensValue,
+		MaxTokenCount = MaxTokenCountValue,
+		Version = VersionValue
+	};
 }

@@ -78,7 +78,10 @@ internal sealed class ReverseNestedAggregateConverter : JsonConverter<ReverseNes
 		}
 
 		return new ReverseNestedAggregate(subAggs)
-		{ DocCount = docCount, Meta = meta };
+		{
+			DocCount = docCount,
+			Meta = meta
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, ReverseNestedAggregate value, JsonSerializerOptions options) => throw new NotImplementedException();

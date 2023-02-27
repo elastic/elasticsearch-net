@@ -64,5 +64,7 @@ public sealed partial class LowercaseTokenizerDescriptor : SerializableDescripto
 	}
 
 	LowercaseTokenizer IBuildableDescriptor<LowercaseTokenizer>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

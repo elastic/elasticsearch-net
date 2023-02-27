@@ -82,5 +82,8 @@ public sealed partial class CustomNormalizerDescriptor : SerializableDescriptor<
 	}
 
 	CustomNormalizer IBuildableDescriptor<CustomNormalizer>.Build() => new()
-	{ CharFilter = CharFilterValue, Filter = FilterValue };
+	{
+		CharFilter = CharFilterValue,
+		Filter = FilterValue
+	};
 }

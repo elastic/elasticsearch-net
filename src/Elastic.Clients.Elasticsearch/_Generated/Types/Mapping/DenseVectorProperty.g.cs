@@ -281,7 +281,17 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	}
 
 	DenseVectorProperty IBuildableDescriptor<DenseVectorProperty>.Build() => new()
-	{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = BuildIndexOptions(), Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
+	{
+		Dims = DimsValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		IndexOptions = BuildIndexOptions(),
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue
+	};
 }
 
 public sealed partial class DenseVectorPropertyDescriptor : SerializableDescriptor<DenseVectorPropertyDescriptor>, IBuildableDescriptor<DenseVectorProperty>
@@ -506,5 +516,15 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	}
 
 	DenseVectorProperty IBuildableDescriptor<DenseVectorProperty>.Build() => new()
-	{ Dims = DimsValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = BuildIndexOptions(), Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue };
+	{
+		Dims = DimsValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		IndexOptions = BuildIndexOptions(),
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue
+	};
 }

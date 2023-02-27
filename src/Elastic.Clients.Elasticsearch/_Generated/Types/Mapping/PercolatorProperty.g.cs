@@ -161,7 +161,13 @@ public sealed partial class PercolatorPropertyDescriptor<TDocument> : Serializab
 	}
 
 	PercolatorProperty IBuildableDescriptor<PercolatorProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue
+	};
 }
 
 public sealed partial class PercolatorPropertyDescriptor : SerializableDescriptor<PercolatorPropertyDescriptor>, IBuildableDescriptor<PercolatorProperty>
@@ -278,5 +284,11 @@ public sealed partial class PercolatorPropertyDescriptor : SerializableDescripto
 	}
 
 	PercolatorProperty IBuildableDescriptor<PercolatorProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue
+	};
 }

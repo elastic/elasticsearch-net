@@ -64,5 +64,7 @@ public sealed partial class KeywordAnalyzerDescriptor : SerializableDescriptor<K
 	}
 
 	KeywordAnalyzer IBuildableDescriptor<KeywordAnalyzer>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

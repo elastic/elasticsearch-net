@@ -64,5 +64,7 @@ public sealed partial class PorterStemTokenFilterDescriptor : SerializableDescri
 	}
 
 	PorterStemTokenFilter IBuildableDescriptor<PorterStemTokenFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

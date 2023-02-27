@@ -392,7 +392,23 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 	}
 
 	CompletionProperty IBuildableDescriptor<CompletionProperty>.Build() => new()
-	{ Contexts = ContextsValue, Analyzer = AnalyzerValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, MaxInputLength = MaxInputLengthValue, Meta = MetaValue, PreservePositionIncrements = PreservePositionIncrementsValue, PreserveSeparators = PreserveSeparatorsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Contexts = ContextsValue,
+		Analyzer = AnalyzerValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		MaxInputLength = MaxInputLengthValue,
+		Meta = MetaValue,
+		PreservePositionIncrements = PreservePositionIncrementsValue,
+		PreserveSeparators = PreserveSeparatorsValue,
+		Properties = PropertiesValue,
+		SearchAnalyzer = SearchAnalyzerValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }
 
 public sealed partial class CompletionPropertyDescriptor : SerializableDescriptor<CompletionPropertyDescriptor>, IBuildableDescriptor<CompletionProperty>
@@ -710,5 +726,21 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 	}
 
 	CompletionProperty IBuildableDescriptor<CompletionProperty>.Build() => new()
-	{ Contexts = ContextsValue, Analyzer = AnalyzerValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, MaxInputLength = MaxInputLengthValue, Meta = MetaValue, PreservePositionIncrements = PreservePositionIncrementsValue, PreserveSeparators = PreserveSeparatorsValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Contexts = ContextsValue,
+		Analyzer = AnalyzerValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		MaxInputLength = MaxInputLengthValue,
+		Meta = MetaValue,
+		PreservePositionIncrements = PreservePositionIncrementsValue,
+		PreserveSeparators = PreserveSeparatorsValue,
+		Properties = PropertiesValue,
+		SearchAnalyzer = SearchAnalyzerValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }

@@ -161,7 +161,13 @@ public sealed partial class RankFeaturesPropertyDescriptor<TDocument> : Serializ
 	}
 
 	RankFeaturesProperty IBuildableDescriptor<RankFeaturesProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue
+	};
 }
 
 public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescriptor<RankFeaturesPropertyDescriptor>, IBuildableDescriptor<RankFeaturesProperty>
@@ -278,5 +284,11 @@ public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescrip
 	}
 
 	RankFeaturesProperty IBuildableDescriptor<RankFeaturesProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue
+	};
 }

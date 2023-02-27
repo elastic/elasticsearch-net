@@ -98,7 +98,12 @@ internal sealed class DoubleTermsBucketConverter : JsonConverter<DoubleTermsBuck
 		}
 
 		return new DoubleTermsBucket(subAggs)
-		{ DocCount = docCount, DocCountError = docCountError, Key = key, KeyAsString = keyAsString };
+		{
+			DocCount = docCount,
+			DocCountError = docCountError,
+			Key = key,
+			KeyAsString = keyAsString
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, DoubleTermsBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

@@ -166,5 +166,13 @@ public sealed partial class ShingleTokenFilterDescriptor : SerializableDescripto
 	}
 
 	ShingleTokenFilter IBuildableDescriptor<ShingleTokenFilter>.Build() => new()
-	{ FillerToken = FillerTokenValue, MaxShingleSize = MaxShingleSizeValue, MinShingleSize = MinShingleSizeValue, OutputUnigrams = OutputUnigramsValue, OutputUnigramsIfNoShingles = OutputUnigramsIfNoShinglesValue, TokenSeparator = TokenSeparatorValue, Version = VersionValue };
+	{
+		FillerToken = FillerTokenValue,
+		MaxShingleSize = MaxShingleSizeValue,
+		MinShingleSize = MinShingleSizeValue,
+		OutputUnigrams = OutputUnigramsValue,
+		OutputUnigramsIfNoShingles = OutputUnigramsIfNoShinglesValue,
+		TokenSeparator = TokenSeparatorValue,
+		Version = VersionValue
+	};
 }

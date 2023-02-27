@@ -88,7 +88,11 @@ internal sealed class DateHistogramBucketConverter : JsonConverter<DateHistogram
 		}
 
 		return new DateHistogramBucket(subAggs)
-		{ DocCount = docCount, Key = key, KeyAsString = keyAsString };
+		{
+			DocCount = docCount,
+			Key = key,
+			KeyAsString = keyAsString
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, DateHistogramBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

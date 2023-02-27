@@ -81,5 +81,8 @@ public sealed partial class LowercaseTokenFilterDescriptor : SerializableDescrip
 	}
 
 	LowercaseTokenFilter IBuildableDescriptor<LowercaseTokenFilter>.Build() => new()
-	{ Language = LanguageValue, Version = VersionValue };
+	{
+		Language = LanguageValue,
+		Version = VersionValue
+	};
 }

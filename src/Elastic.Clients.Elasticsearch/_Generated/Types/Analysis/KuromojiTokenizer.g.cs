@@ -179,5 +179,14 @@ public sealed partial class KuromojiTokenizerDescriptor : SerializableDescriptor
 	}
 
 	KuromojiTokenizer IBuildableDescriptor<KuromojiTokenizer>.Build() => new()
-	{ DiscardCompoundToken = DiscardCompoundTokenValue, DiscardPunctuation = DiscardPunctuationValue, Mode = ModeValue, NbestCost = NbestCostValue, NbestExamples = NbestExamplesValue, UserDictionary = UserDictionaryValue, UserDictionaryRules = UserDictionaryRulesValue, Version = VersionValue };
+	{
+		DiscardCompoundToken = DiscardCompoundTokenValue,
+		DiscardPunctuation = DiscardPunctuationValue,
+		Mode = ModeValue,
+		NbestCost = NbestCostValue,
+		NbestExamples = NbestExamplesValue,
+		UserDictionary = UserDictionaryValue,
+		UserDictionaryRules = UserDictionaryRulesValue,
+		Version = VersionValue
+	};
 }

@@ -81,5 +81,9 @@ public sealed partial class FielddataFrequencyFilterDescriptor : SerializableDes
 	}
 
 	FielddataFrequencyFilter IBuildableDescriptor<FielddataFrequencyFilter>.Build() => new()
-	{ Max = MaxValue, Min = MinValue, MinSegmentSize = MinSegmentSizeValue };
+	{
+		Max = MaxValue,
+		Min = MinValue,
+		MinSegmentSize = MinSegmentSizeValue
+	};
 }

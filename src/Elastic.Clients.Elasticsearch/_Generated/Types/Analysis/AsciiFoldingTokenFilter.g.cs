@@ -81,5 +81,8 @@ public sealed partial class AsciiFoldingTokenFilterDescriptor : SerializableDesc
 	}
 
 	AsciiFoldingTokenFilter IBuildableDescriptor<AsciiFoldingTokenFilter>.Build() => new()
-	{ PreserveOriginal = PreserveOriginalValue, Version = VersionValue };
+	{
+		PreserveOriginal = PreserveOriginalValue,
+		Version = VersionValue
+	};
 }

@@ -64,5 +64,7 @@ public sealed partial class KStemTokenFilterDescriptor : SerializableDescriptor<
 	}
 
 	KStemTokenFilter IBuildableDescriptor<KStemTokenFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

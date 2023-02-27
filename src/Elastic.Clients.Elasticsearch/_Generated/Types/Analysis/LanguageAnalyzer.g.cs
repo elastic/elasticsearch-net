@@ -125,5 +125,11 @@ public sealed partial class LanguageAnalyzerDescriptor : SerializableDescriptor<
 	}
 
 	LanguageAnalyzer IBuildableDescriptor<LanguageAnalyzer>.Build() => new()
-	{ Language = LanguageValue, StemExclusion = StemExclusionValue, Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
+	{
+		Language = LanguageValue,
+		StemExclusion = StemExclusionValue,
+		Stopwords = StopwordsValue,
+		StopwordsPath = StopwordsPathValue,
+		Version = VersionValue
+	};
 }

@@ -64,5 +64,7 @@ public sealed partial class ReverseTokenFilterDescriptor : SerializableDescripto
 	}
 
 	ReverseTokenFilter IBuildableDescriptor<ReverseTokenFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

@@ -280,7 +280,20 @@ public sealed partial class PointPropertyDescriptor<TDocument> : SerializableDes
 	}
 
 	PointProperty IBuildableDescriptor<PointProperty>.Build() => new()
-	{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		IgnoreZValue = IgnoreZValueValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }
 
 public sealed partial class PointPropertyDescriptor : SerializableDescriptor<PointPropertyDescriptor>, IBuildableDescriptor<PointProperty>
@@ -495,5 +508,18 @@ public sealed partial class PointPropertyDescriptor : SerializableDescriptor<Poi
 	}
 
 	PointProperty IBuildableDescriptor<PointProperty>.Build() => new()
-	{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, IgnoreZValue = IgnoreZValueValue, Meta = MetaValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		IgnoreZValue = IgnoreZValueValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }

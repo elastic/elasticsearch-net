@@ -77,5 +77,8 @@ public sealed partial class KuromojiPartOfSpeechTokenFilterDescriptor : Serializ
 	}
 
 	KuromojiPartOfSpeechTokenFilter IBuildableDescriptor<KuromojiPartOfSpeechTokenFilter>.Build() => new()
-	{ Stoptags = StoptagsValue, Version = VersionValue };
+	{
+		Stoptags = StoptagsValue,
+		Version = VersionValue
+	};
 }

@@ -229,7 +229,17 @@ public sealed partial class BinaryPropertyDescriptor<TDocument> : SerializableDe
 	}
 
 	BinaryProperty IBuildableDescriptor<BinaryProperty>.Build() => new()
-	{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }
 
 public sealed partial class BinaryPropertyDescriptor : SerializableDescriptor<BinaryPropertyDescriptor>, IBuildableDescriptor<BinaryProperty>
@@ -402,5 +412,15 @@ public sealed partial class BinaryPropertyDescriptor : SerializableDescriptor<Bi
 	}
 
 	BinaryProperty IBuildableDescriptor<BinaryProperty>.Build() => new()
-	{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }

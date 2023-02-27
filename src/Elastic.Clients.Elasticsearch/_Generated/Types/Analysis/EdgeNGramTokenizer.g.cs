@@ -120,5 +120,11 @@ public sealed partial class EdgeNGramTokenizerDescriptor : SerializableDescripto
 	}
 
 	EdgeNGramTokenizer IBuildableDescriptor<EdgeNGramTokenizer>.Build() => new()
-	{ CustomTokenChars = CustomTokenCharsValue, MaxGram = MaxGramValue, MinGram = MinGramValue, TokenChars = TokenCharsValue, Version = VersionValue };
+	{
+		CustomTokenChars = CustomTokenCharsValue,
+		MaxGram = MaxGramValue,
+		MinGram = MinGramValue,
+		TokenChars = TokenCharsValue,
+		Version = VersionValue
+	};
 }

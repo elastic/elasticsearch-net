@@ -94,5 +94,9 @@ public sealed partial class MultiplexerTokenFilterDescriptor : SerializableDescr
 	}
 
 	MultiplexerTokenFilter IBuildableDescriptor<MultiplexerTokenFilter>.Build() => new()
-	{ Filters = FiltersValue, PreserveOriginal = PreserveOriginalValue, Version = VersionValue };
+	{
+		Filters = FiltersValue,
+		PreserveOriginal = PreserveOriginalValue,
+		Version = VersionValue
+	};
 }

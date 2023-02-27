@@ -81,5 +81,8 @@ public sealed partial class NoriPartOfSpeechTokenFilterDescriptor : Serializable
 	}
 
 	NoriPartOfSpeechTokenFilter IBuildableDescriptor<NoriPartOfSpeechTokenFilter>.Build() => new()
-	{ Stoptags = StoptagsValue, Version = VersionValue };
+	{
+		Stoptags = StoptagsValue,
+		Version = VersionValue
+	};
 }

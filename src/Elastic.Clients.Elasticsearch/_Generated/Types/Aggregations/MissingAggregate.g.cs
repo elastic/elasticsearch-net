@@ -78,7 +78,10 @@ internal sealed class MissingAggregateConverter : JsonConverter<MissingAggregate
 		}
 
 		return new MissingAggregate(subAggs)
-		{ DocCount = docCount, Meta = meta };
+		{
+			DocCount = docCount,
+			Meta = meta
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, MissingAggregate value, JsonSerializerOptions options) => throw new NotImplementedException();

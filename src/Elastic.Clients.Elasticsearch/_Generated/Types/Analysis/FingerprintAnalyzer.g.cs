@@ -138,5 +138,12 @@ public sealed partial class FingerprintAnalyzerDescriptor : SerializableDescript
 	}
 
 	FingerprintAnalyzer IBuildableDescriptor<FingerprintAnalyzer>.Build() => new()
-	{ MaxOutputSize = MaxOutputSizeValue, PreserveOriginal = PreserveOriginalValue, Separator = SeparatorValue, Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
+	{
+		MaxOutputSize = MaxOutputSizeValue,
+		PreserveOriginal = PreserveOriginalValue,
+		Separator = SeparatorValue,
+		Stopwords = StopwordsValue,
+		StopwordsPath = StopwordsPathValue,
+		Version = VersionValue
+	};
 }

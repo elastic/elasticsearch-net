@@ -94,5 +94,9 @@ public sealed partial class CharGroupTokenizerDescriptor : SerializableDescripto
 	}
 
 	CharGroupTokenizer IBuildableDescriptor<CharGroupTokenizer>.Build() => new()
-	{ MaxTokenLength = MaxTokenLengthValue, TokenizeOnChars = TokenizeOnCharsValue, Version = VersionValue };
+	{
+		MaxTokenLength = MaxTokenLengthValue,
+		TokenizeOnChars = TokenizeOnCharsValue,
+		Version = VersionValue
+	};
 }

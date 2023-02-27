@@ -78,7 +78,10 @@ internal sealed class AdjacencyMatrixBucketConverter : JsonConverter<AdjacencyMa
 		}
 
 		return new AdjacencyMatrixBucket(subAggs)
-		{ DocCount = docCount, Key = key };
+		{
+			DocCount = docCount,
+			Key = key
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, AdjacencyMatrixBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

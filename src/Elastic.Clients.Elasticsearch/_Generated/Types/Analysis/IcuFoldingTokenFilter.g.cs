@@ -77,5 +77,8 @@ public sealed partial class IcuFoldingTokenFilterDescriptor : SerializableDescri
 	}
 
 	IcuFoldingTokenFilter IBuildableDescriptor<IcuFoldingTokenFilter>.Build() => new()
-	{ UnicodeSetFilter = UnicodeSetFilterValue, Version = VersionValue };
+	{
+		UnicodeSetFilter = UnicodeSetFilterValue,
+		Version = VersionValue
+	};
 }

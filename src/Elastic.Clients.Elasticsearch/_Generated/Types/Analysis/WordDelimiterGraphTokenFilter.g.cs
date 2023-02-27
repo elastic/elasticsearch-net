@@ -319,5 +319,22 @@ public sealed partial class WordDelimiterGraphTokenFilterDescriptor : Serializab
 	}
 
 	WordDelimiterGraphTokenFilter IBuildableDescriptor<WordDelimiterGraphTokenFilter>.Build() => new()
-	{ AdjustOffsets = AdjustOffsetsValue, CatenateAll = CatenateAllValue, CatenateNumbers = CatenateNumbersValue, CatenateWords = CatenateWordsValue, GenerateNumberParts = GenerateNumberPartsValue, GenerateWordParts = GenerateWordPartsValue, IgnoreKeywords = IgnoreKeywordsValue, PreserveOriginal = PreserveOriginalValue, ProtectedWords = ProtectedWordsValue, ProtectedWordsPath = ProtectedWordsPathValue, SplitOnCaseChange = SplitOnCaseChangeValue, SplitOnNumerics = SplitOnNumericsValue, StemEnglishPossessive = StemEnglishPossessiveValue, TypeTable = TypeTableValue, TypeTablePath = TypeTablePathValue, Version = VersionValue };
+	{
+		AdjustOffsets = AdjustOffsetsValue,
+		CatenateAll = CatenateAllValue,
+		CatenateNumbers = CatenateNumbersValue,
+		CatenateWords = CatenateWordsValue,
+		GenerateNumberParts = GenerateNumberPartsValue,
+		GenerateWordParts = GenerateWordPartsValue,
+		IgnoreKeywords = IgnoreKeywordsValue,
+		PreserveOriginal = PreserveOriginalValue,
+		ProtectedWords = ProtectedWordsValue,
+		ProtectedWordsPath = ProtectedWordsPathValue,
+		SplitOnCaseChange = SplitOnCaseChangeValue,
+		SplitOnNumerics = SplitOnNumericsValue,
+		StemEnglishPossessive = StemEnglishPossessiveValue,
+		TypeTable = TypeTableValue,
+		TypeTablePath = TypeTablePathValue,
+		Version = VersionValue
+	};
 }

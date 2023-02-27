@@ -64,5 +64,7 @@ public sealed partial class RemoveDuplicatesTokenFilterDescriptor : Serializable
 	}
 
 	RemoveDuplicatesTokenFilter IBuildableDescriptor<RemoveDuplicatesTokenFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

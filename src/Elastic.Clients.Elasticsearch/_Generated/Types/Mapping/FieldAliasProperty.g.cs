@@ -184,7 +184,14 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 	}
 
 	FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Path = PathValue,
+		Properties = PropertiesValue
+	};
 }
 
 public sealed partial class FieldAliasPropertyDescriptor : SerializableDescriptor<FieldAliasPropertyDescriptor>, IBuildableDescriptor<FieldAliasProperty>
@@ -327,5 +334,12 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 	}
 
 	FieldAliasProperty IBuildableDescriptor<FieldAliasProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Path = PathValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Path = PathValue,
+		Properties = PropertiesValue
+	};
 }

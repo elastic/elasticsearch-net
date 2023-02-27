@@ -183,5 +183,14 @@ public sealed partial class HyphenationDecompounderTokenFilterDescriptor : Seria
 	}
 
 	HyphenationDecompounderTokenFilter IBuildableDescriptor<HyphenationDecompounderTokenFilter>.Build() => new()
-	{ HyphenationPatternsPath = HyphenationPatternsPathValue, MaxSubwordSize = MaxSubwordSizeValue, MinSubwordSize = MinSubwordSizeValue, MinWordSize = MinWordSizeValue, OnlyLongestMatch = OnlyLongestMatchValue, Version = VersionValue, WordList = WordListValue, WordListPath = WordListPathValue };
+	{
+		HyphenationPatternsPath = HyphenationPatternsPathValue,
+		MaxSubwordSize = MaxSubwordSizeValue,
+		MinSubwordSize = MinSubwordSizeValue,
+		MinWordSize = MinWordSizeValue,
+		OnlyLongestMatch = OnlyLongestMatchValue,
+		Version = VersionValue,
+		WordList = WordListValue,
+		WordListPath = WordListPathValue
+	};
 }

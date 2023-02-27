@@ -229,7 +229,17 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 	}
 
 	ObjectProperty IBuildableDescriptor<ObjectProperty>.Build() => new()
-	{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		CopyTo = CopyToValue,
+		Dynamic = DynamicValue,
+		Enabled = EnabledValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }
 
 public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<ObjectPropertyDescriptor>, IBuildableDescriptor<ObjectProperty>
@@ -402,5 +412,15 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 	}
 
 	ObjectProperty IBuildableDescriptor<ObjectProperty>.Build() => new()
-	{ CopyTo = CopyToValue, Dynamic = DynamicValue, Enabled = EnabledValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		CopyTo = CopyToValue,
+		Dynamic = DynamicValue,
+		Enabled = EnabledValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }

@@ -81,5 +81,8 @@ public sealed partial class StandardTokenizerDescriptor : SerializableDescriptor
 	}
 
 	StandardTokenizer IBuildableDescriptor<StandardTokenizer>.Build() => new()
-	{ MaxTokenLength = MaxTokenLengthValue, Version = VersionValue };
+	{
+		MaxTokenLength = MaxTokenLengthValue,
+		Version = VersionValue
+	};
 }

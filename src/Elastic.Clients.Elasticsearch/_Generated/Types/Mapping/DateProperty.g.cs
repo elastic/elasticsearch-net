@@ -421,7 +421,25 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 	}
 
 	DateProperty IBuildableDescriptor<DateProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Boost = BoostValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fielddata = BuildFielddata(),
+		Fields = FieldsValue,
+		Format = FormatValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		Index = IndexValue,
+		Locale = LocaleValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		PrecisionStep = PrecisionStepValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }
 
 public sealed partial class DatePropertyDescriptor : SerializableDescriptor<DatePropertyDescriptor>, IBuildableDescriptor<DateProperty>
@@ -762,5 +780,23 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 	}
 
 	DateProperty IBuildableDescriptor<DateProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fielddata = BuildFielddata(), Fields = FieldsValue, Format = FormatValue, IgnoreAbove = IgnoreAboveValue, IgnoreMalformed = IgnoreMalformedValue, Index = IndexValue, Locale = LocaleValue, Meta = MetaValue, NullValue = NullValueValue, PrecisionStep = PrecisionStepValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		Boost = BoostValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fielddata = BuildFielddata(),
+		Fields = FieldsValue,
+		Format = FormatValue,
+		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
+		Index = IndexValue,
+		Locale = LocaleValue,
+		Meta = MetaValue,
+		NullValue = NullValueValue,
+		PrecisionStep = PrecisionStepValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }

@@ -171,7 +171,14 @@ public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : Seria
 	}
 
 	ConstantKeywordProperty IBuildableDescriptor<ConstantKeywordProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Value = ValueValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Value = ValueValue
+	};
 }
 
 public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDescriptor<ConstantKeywordPropertyDescriptor>, IBuildableDescriptor<ConstantKeywordProperty>
@@ -296,5 +303,12 @@ public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDesc
 	}
 
 	ConstantKeywordProperty IBuildableDescriptor<ConstantKeywordProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Value = ValueValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Value = ValueValue
+	};
 }

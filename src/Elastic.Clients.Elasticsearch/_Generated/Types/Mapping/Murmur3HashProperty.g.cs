@@ -229,7 +229,17 @@ public sealed partial class Murmur3HashPropertyDescriptor<TDocument> : Serializa
 	}
 
 	Murmur3HashProperty IBuildableDescriptor<Murmur3HashProperty>.Build() => new()
-	{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }
 
 public sealed partial class Murmur3HashPropertyDescriptor : SerializableDescriptor<Murmur3HashPropertyDescriptor>, IBuildableDescriptor<Murmur3HashProperty>
@@ -402,5 +412,15 @@ public sealed partial class Murmur3HashPropertyDescriptor : SerializableDescript
 	}
 
 	Murmur3HashProperty IBuildableDescriptor<Murmur3HashProperty>.Build() => new()
-	{ CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Similarity = SimilarityValue, Store = StoreValue };
+	{
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue
+	};
 }

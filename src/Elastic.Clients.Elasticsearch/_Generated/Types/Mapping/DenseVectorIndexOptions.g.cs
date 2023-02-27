@@ -81,5 +81,9 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 	}
 
 	DenseVectorIndexOptions IBuildableDescriptor<DenseVectorIndexOptions>.Build() => new()
-	{ EfConstruction = EfConstructionValue, m = mValue, Type = TypeValue };
+	{
+		EfConstruction = EfConstructionValue,
+		m = mValue,
+		Type = TypeValue
+	};
 }

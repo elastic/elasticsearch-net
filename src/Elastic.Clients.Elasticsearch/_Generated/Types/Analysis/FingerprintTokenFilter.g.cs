@@ -98,5 +98,9 @@ public sealed partial class FingerprintTokenFilterDescriptor : SerializableDescr
 	}
 
 	FingerprintTokenFilter IBuildableDescriptor<FingerprintTokenFilter>.Build() => new()
-	{ MaxOutputSize = MaxOutputSizeValue, Separator = SeparatorValue, Version = VersionValue };
+	{
+		MaxOutputSize = MaxOutputSizeValue,
+		Separator = SeparatorValue,
+		Version = VersionValue
+	};
 }

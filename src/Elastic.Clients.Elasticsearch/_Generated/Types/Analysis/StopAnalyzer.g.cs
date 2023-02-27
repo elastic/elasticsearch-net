@@ -99,5 +99,9 @@ public sealed partial class StopAnalyzerDescriptor : SerializableDescriptor<Stop
 	}
 
 	StopAnalyzer IBuildableDescriptor<StopAnalyzer>.Build() => new()
-	{ Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
+	{
+		Stopwords = StopwordsValue,
+		StopwordsPath = StopwordsPathValue,
+		Version = VersionValue
+	};
 }

@@ -115,5 +115,10 @@ public sealed partial class KeepWordsTokenFilterDescriptor : SerializableDescrip
 	}
 
 	KeepWordsTokenFilter IBuildableDescriptor<KeepWordsTokenFilter>.Build() => new()
-	{ KeepWords = KeepWordsValue, KeepWordsCase = KeepWordsCaseValue, KeepWordsPath = KeepWordsPathValue, Version = VersionValue };
+	{
+		KeepWords = KeepWordsValue,
+		KeepWordsCase = KeepWordsCaseValue,
+		KeepWordsPath = KeepWordsPathValue,
+		Version = VersionValue
+	};
 }

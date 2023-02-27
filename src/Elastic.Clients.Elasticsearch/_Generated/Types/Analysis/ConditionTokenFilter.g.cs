@@ -90,5 +90,9 @@ public sealed partial class ConditionTokenFilterDescriptor : SerializableDescrip
 	}
 
 	ConditionTokenFilter IBuildableDescriptor<ConditionTokenFilter>.Build() => new()
-	{ Filter = FilterValue, Script = ScriptValue, Version = VersionValue };
+	{
+		Filter = FilterValue,
+		Script = ScriptValue,
+		Version = VersionValue
+	};
 }

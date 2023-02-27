@@ -64,5 +64,7 @@ public sealed partial class HtmlStripCharFilterDescriptor : SerializableDescript
 	}
 
 	HtmlStripCharFilter IBuildableDescriptor<HtmlStripCharFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

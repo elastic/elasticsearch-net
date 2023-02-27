@@ -95,5 +95,9 @@ public sealed partial class SnowballAnalyzerDescriptor : SerializableDescriptor<
 	}
 
 	SnowballAnalyzer IBuildableDescriptor<SnowballAnalyzer>.Build() => new()
-	{ Language = LanguageValue, Stopwords = StopwordsValue, Version = VersionValue };
+	{
+		Language = LanguageValue,
+		Stopwords = StopwordsValue,
+		Version = VersionValue
+	};
 }

@@ -78,7 +78,10 @@ internal sealed class NestedAggregateConverter : JsonConverter<NestedAggregate>
 		}
 
 		return new NestedAggregate(subAggs)
-		{ DocCount = docCount, Meta = meta };
+		{
+			DocCount = docCount,
+			Meta = meta
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, NestedAggregate value, JsonSerializerOptions options) => throw new NotImplementedException();

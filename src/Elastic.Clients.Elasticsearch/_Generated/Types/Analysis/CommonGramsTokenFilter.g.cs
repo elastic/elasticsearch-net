@@ -132,5 +132,11 @@ public sealed partial class CommonGramsTokenFilterDescriptor : SerializableDescr
 	}
 
 	CommonGramsTokenFilter IBuildableDescriptor<CommonGramsTokenFilter>.Build() => new()
-	{ CommonWords = CommonWordsValue, CommonWordsPath = CommonWordsPathValue, IgnoreCase = IgnoreCaseValue, QueryMode = QueryModeValue, Version = VersionValue };
+	{
+		CommonWords = CommonWordsValue,
+		CommonWordsPath = CommonWordsPathValue,
+		IgnoreCase = IgnoreCaseValue,
+		QueryMode = QueryModeValue,
+		Version = VersionValue
+	};
 }

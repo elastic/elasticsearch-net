@@ -382,7 +382,26 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 	}
 
 	KeywordProperty IBuildableDescriptor<KeywordProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, Meta = MetaValue, Normalizer = NormalizerValue, Norms = NormsValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
+	{
+		Boost = BoostValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		IndexOptions = IndexOptionsValue,
+		Meta = MetaValue,
+		Normalizer = NormalizerValue,
+		Norms = NormsValue,
+		NullValue = NullValueValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
+		Store = StoreValue,
+		TimeSeriesDimension = TimeSeriesDimensionValue
+	};
 }
 
 public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<KeywordPropertyDescriptor>, IBuildableDescriptor<KeywordProperty>
@@ -681,5 +700,24 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 	}
 
 	KeywordProperty IBuildableDescriptor<KeywordProperty>.Build() => new()
-	{ Boost = BoostValue, CopyTo = CopyToValue, DocValues = DocValuesValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, Meta = MetaValue, Normalizer = NormalizerValue, Norms = NormsValue, NullValue = NullValueValue, Properties = PropertiesValue, Similarity = SimilarityValue, SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue, Store = StoreValue, TimeSeriesDimension = TimeSeriesDimensionValue };
+	{
+		Boost = BoostValue,
+		CopyTo = CopyToValue,
+		DocValues = DocValuesValue,
+		Dynamic = DynamicValue,
+		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		IndexOptions = IndexOptionsValue,
+		Meta = MetaValue,
+		Normalizer = NormalizerValue,
+		Norms = NormsValue,
+		NullValue = NullValueValue,
+		Properties = PropertiesValue,
+		Similarity = SimilarityValue,
+		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
+		Store = StoreValue,
+		TimeSeriesDimension = TimeSeriesDimensionValue
+	};
 }

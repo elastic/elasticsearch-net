@@ -78,7 +78,10 @@ internal sealed class FilterAggregateConverter : JsonConverter<FilterAggregate>
 		}
 
 		return new FilterAggregate(subAggs)
-		{ DocCount = docCount, Meta = meta };
+		{
+			DocCount = docCount,
+			Meta = meta
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, FilterAggregate value, JsonSerializerOptions options) => throw new NotImplementedException();

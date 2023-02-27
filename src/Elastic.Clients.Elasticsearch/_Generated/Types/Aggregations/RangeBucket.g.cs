@@ -118,7 +118,14 @@ internal sealed class RangeBucketConverter : JsonConverter<RangeBucket>
 		}
 
 		return new RangeBucket(subAggs)
-		{ DocCount = docCount, From = from, FromAsString = fromAsString, Key = key, To = to, ToAsString = toAsString };
+		{
+			DocCount = docCount,
+			From = from,
+			FromAsString = fromAsString,
+			Key = key,
+			To = to,
+			ToAsString = toAsString
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, RangeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

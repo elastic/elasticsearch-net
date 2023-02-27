@@ -98,7 +98,12 @@ internal sealed class LongTermsBucketConverter : JsonConverter<LongTermsBucket>
 		}
 
 		return new LongTermsBucket(subAggs)
-		{ DocCount = docCount, DocCountError = docCountError, Key = key, KeyAsString = keyAsString };
+		{
+			DocCount = docCount,
+			DocCountError = docCountError,
+			Key = key,
+			KeyAsString = keyAsString
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, LongTermsBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

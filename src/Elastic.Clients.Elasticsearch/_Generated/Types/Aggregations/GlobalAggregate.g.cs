@@ -78,7 +78,10 @@ internal sealed class GlobalAggregateConverter : JsonConverter<GlobalAggregate>
 		}
 
 		return new GlobalAggregate(subAggs)
-		{ DocCount = docCount, Meta = meta };
+		{
+			DocCount = docCount,
+			Meta = meta
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, GlobalAggregate value, JsonSerializerOptions options) => throw new NotImplementedException();

@@ -90,5 +90,9 @@ public sealed partial class KuromojiIterationMarkCharFilterDescriptor : Serializ
 	}
 
 	KuromojiIterationMarkCharFilter IBuildableDescriptor<KuromojiIterationMarkCharFilter>.Build() => new()
-	{ NormalizeKana = NormalizeKanaValue, NormalizeKanji = NormalizeKanjiValue, Version = VersionValue };
+	{
+		NormalizeKana = NormalizeKanaValue,
+		NormalizeKanji = NormalizeKanjiValue,
+		Version = VersionValue
+	};
 }

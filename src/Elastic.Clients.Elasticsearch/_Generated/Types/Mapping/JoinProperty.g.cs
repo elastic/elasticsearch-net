@@ -195,7 +195,15 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 	}
 
 	JoinProperty IBuildableDescriptor<JoinProperty>.Build() => new()
-	{ Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
+	{
+		Dynamic = DynamicValue,
+		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Relations = RelationsValue
+	};
 }
 
 public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<JoinPropertyDescriptor>, IBuildableDescriptor<JoinProperty>
@@ -340,5 +348,13 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 	}
 
 	JoinProperty IBuildableDescriptor<JoinProperty>.Build() => new()
-	{ Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue, Relations = RelationsValue };
+	{
+		Dynamic = DynamicValue,
+		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue,
+		Relations = RelationsValue
+	};
 }

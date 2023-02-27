@@ -98,5 +98,9 @@ public sealed partial class DelimitedPayloadTokenFilterDescriptor : Serializable
 	}
 
 	DelimitedPayloadTokenFilter IBuildableDescriptor<DelimitedPayloadTokenFilter>.Build() => new()
-	{ Delimiter = DelimiterValue, Encoding = EncodingValue, Version = VersionValue };
+	{
+		Delimiter = DelimiterValue,
+		Encoding = EncodingValue,
+		Version = VersionValue
+	};
 }

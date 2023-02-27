@@ -128,7 +128,15 @@ internal sealed class VariableWidthHistogramBucketConverter : JsonConverter<Vari
 		}
 
 		return new VariableWidthHistogramBucket(subAggs)
-		{ DocCount = docCount, Key = key, KeyAsString = keyAsString, Max = max, MaxAsString = maxAsString, Min = min, MinAsString = minAsString };
+		{
+			DocCount = docCount,
+			Key = key,
+			KeyAsString = keyAsString,
+			Max = max,
+			MaxAsString = maxAsString,
+			Min = min,
+			MinAsString = minAsString
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, VariableWidthHistogramBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

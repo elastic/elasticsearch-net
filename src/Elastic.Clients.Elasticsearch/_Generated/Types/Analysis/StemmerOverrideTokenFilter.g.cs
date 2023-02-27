@@ -98,5 +98,9 @@ public sealed partial class StemmerOverrideTokenFilterDescriptor : SerializableD
 	}
 
 	StemmerOverrideTokenFilter IBuildableDescriptor<StemmerOverrideTokenFilter>.Build() => new()
-	{ Rules = RulesValue, RulesPath = RulesPathValue, Version = VersionValue };
+	{
+		Rules = RulesValue,
+		RulesPath = RulesPathValue,
+		Version = VersionValue
+	};
 }

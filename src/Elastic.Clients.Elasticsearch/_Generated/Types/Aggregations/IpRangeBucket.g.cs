@@ -98,7 +98,12 @@ internal sealed class IpRangeBucketConverter : JsonConverter<IpRangeBucket>
 		}
 
 		return new IpRangeBucket(subAggs)
-		{ DocCount = docCount, From = from, Key = key, To = to };
+		{
+			DocCount = docCount,
+			From = from,
+			Key = key,
+			To = to
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, IpRangeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

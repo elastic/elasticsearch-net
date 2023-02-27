@@ -78,7 +78,10 @@ internal sealed class ParentAggregateConverter : JsonConverter<ParentAggregate>
 		}
 
 		return new ParentAggregate(subAggs)
-		{ DocCount = docCount, Meta = meta };
+		{
+			DocCount = docCount,
+			Meta = meta
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, ParentAggregate value, JsonSerializerOptions options) => throw new NotImplementedException();

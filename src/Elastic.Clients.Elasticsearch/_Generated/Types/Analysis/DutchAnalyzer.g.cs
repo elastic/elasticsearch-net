@@ -66,5 +66,7 @@ public sealed partial class DutchAnalyzerDescriptor : SerializableDescriptor<Dut
 	}
 
 	DutchAnalyzer IBuildableDescriptor<DutchAnalyzer>.Build() => new()
-	{ Stopwords = StopwordsValue };
+	{
+		Stopwords = StopwordsValue
+	};
 }
