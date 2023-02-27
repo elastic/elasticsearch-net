@@ -419,8 +419,14 @@ internal sealed class GeoOrientationConverter : JsonConverter<GeoOrientation>
 		switch (enumString)
 		{
 			case "right":
+			case "RIGHT":
+			case "counterclockwise":
+			case "ccw":
 				return GeoOrientation.Right;
 			case "left":
+			case "LEFT":
+			case "clockwise":
+			case "cw":
 				return GeoOrientation.Left;
 		}
 
