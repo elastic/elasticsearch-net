@@ -25,11 +25,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class GetScriptLanguagesResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("language_contexts")]
+	[JsonInclude, JsonPropertyName("language_contexts")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext> LanguageContexts { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("types_allowed")]
+	[JsonInclude, JsonPropertyName("types_allowed")]
 	public IReadOnlyCollection<string> TypesAllowed { get; init; }
 }

@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 public sealed partial class TextEmbeddingInferenceOptions
 {
-	[JsonInclude]
-	[JsonPropertyName("results_field")]
+	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tokenization")]
+	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
 	public static implicit operator InferenceConfigCreate(TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => Ml.InferenceConfigCreate.TextEmbedding(textEmbeddingInferenceOptions);

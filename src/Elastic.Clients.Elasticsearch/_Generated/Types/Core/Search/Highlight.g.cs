@@ -27,96 +27,73 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class Highlight
 {
-	[JsonInclude]
-	[JsonPropertyName("boundary_chars")]
+	[JsonInclude, JsonPropertyName("boundary_chars")]
 	public string? BoundaryChars { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boundary_max_scan")]
+	[JsonInclude, JsonPropertyName("boundary_max_scan")]
 	public int? BoundaryMaxScan { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boundary_scanner")]
+	[JsonInclude, JsonPropertyName("boundary_scanner")]
 	public Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? BoundaryScanner { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boundary_scanner_locale")]
+	[JsonInclude, JsonPropertyName("boundary_scanner_locale")]
 	public string? BoundaryScannerLocale { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("encoder")]
+	[JsonInclude, JsonPropertyName("encoder")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? Encoder { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("force_source")]
+	[JsonInclude, JsonPropertyName("force_source")]
 	public bool? ForceSource { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fragment_size")]
+	[JsonInclude, JsonPropertyName("fragment_size")]
 	public int? FragmentSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fragmenter")]
+	[JsonInclude, JsonPropertyName("fragmenter")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? Fragmenter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("highlight_filter")]
+	[JsonInclude, JsonPropertyName("highlight_filter")]
 	public bool? HighlightFilter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("highlight_query")]
+	[JsonInclude, JsonPropertyName("highlight_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQuery { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_analyzed_offset")]
+	[JsonInclude, JsonPropertyName("max_analyzed_offset")]
 	public int? MaxAnalyzedOffset { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_fragment_length")]
+	[JsonInclude, JsonPropertyName("max_fragment_length")]
 	public int? MaxFragmentLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("no_match_size")]
+	[JsonInclude, JsonPropertyName("no_match_size")]
 	public int? NoMatchSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("number_of_fragments")]
+	[JsonInclude, JsonPropertyName("number_of_fragments")]
 	public int? NumberOfFragments { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("options")]
+	[JsonInclude, JsonPropertyName("options")]
 	public IDictionary<string, object>? Options { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("order")]
+	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? Order { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("phrase_limit")]
+	[JsonInclude, JsonPropertyName("phrase_limit")]
 	public int? PhraseLimit { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("post_tags")]
+	[JsonInclude, JsonPropertyName("post_tags")]
 	public ICollection<string>? PostTags { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("pre_tags")]
+	[JsonInclude, JsonPropertyName("pre_tags")]
 	public ICollection<string>? PreTags { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("require_field_match")]
+	[JsonInclude, JsonPropertyName("require_field_match")]
 	public bool? RequireFieldMatch { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tags_schema")]
+	[JsonInclude, JsonPropertyName("tags_schema")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? TagsSchema { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? Type { get; set; }
 }
 

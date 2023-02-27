@@ -24,6 +24,7 @@ internal class DefaultSourceSerializer : SystemTextJsonSerializer
 					new LazyJsonConverter(settings),
 					new IdsConverter(settings)
 			},
-			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+			PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+			NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals
 		};
 }

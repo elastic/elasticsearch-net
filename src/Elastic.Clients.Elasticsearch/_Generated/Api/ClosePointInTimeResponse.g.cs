@@ -25,11 +25,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ClosePointInTimeResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("num_freed")]
+	[JsonInclude, JsonPropertyName("num_freed")]
 	public int NumFreed { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("succeeded")]
+	[JsonInclude, JsonPropertyName("succeeded")]
 	public bool Succeeded { get; init; }
 }

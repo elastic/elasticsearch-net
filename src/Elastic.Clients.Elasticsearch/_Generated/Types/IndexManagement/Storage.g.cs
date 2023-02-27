@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class Storage
 {
-	[JsonInclude]
-	[JsonPropertyName("allow_mmap")]
+	[JsonInclude, JsonPropertyName("allow_mmap")]
 	public bool? AllowMmap { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.StorageType Type { get; set; }
 }
 

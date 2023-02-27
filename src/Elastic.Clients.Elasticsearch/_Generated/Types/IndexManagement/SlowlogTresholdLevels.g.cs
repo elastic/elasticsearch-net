@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SlowlogTresholdLevels
 {
-	[JsonInclude]
-	[JsonPropertyName("debug")]
+	[JsonInclude, JsonPropertyName("debug")]
 	public Elastic.Clients.Elasticsearch.Duration? Debug { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("info")]
+	[JsonInclude, JsonPropertyName("info")]
 	public Elastic.Clients.Elasticsearch.Duration? Info { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("trace")]
+	[JsonInclude, JsonPropertyName("trace")]
 	public Elastic.Clients.Elasticsearch.Duration? Trace { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("warn")]
+	[JsonInclude, JsonPropertyName("warn")]
 	public Elastic.Clients.Elasticsearch.Duration? Warn { get; set; }
 }
 

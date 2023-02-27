@@ -147,7 +147,49 @@ internal sealed class UnionConverter : JsonConverterFactory
 	private class UnionConverterInner<TItem1, TItem2> : JsonConverter<Union<TItem1, TItem2>>
 	{
 		public override Union<TItem1, TItem2>? Read(ref Utf8JsonReader reader, Type typeToConvert,
-			JsonSerializerOptions options) => null;
+			JsonSerializerOptions options)
+		{
+			var readerCopy = reader;
+
+			try
+			{
+				var itemOne = JsonSerializer.Deserialize<TItem1>(ref readerCopy, options);
+
+				if (itemOne is IUnionVerifiable verifiable)
+				{
+					if (verifiable.IsSuccessful)
+					{
+						reader = readerCopy;
+						return (TItem1)Activator.CreateInstance(typeof(TItem1), itemOne);
+					}
+				}
+				else if (itemOne is not null)
+				{
+					reader = readerCopy;
+					return (TItem1)Activator.CreateInstance(typeof(TItem1), itemOne);
+				}
+			}
+			catch
+			{
+				// TODO - Store for aggregate exception
+			}
+
+			try
+			{
+				var itemTwo = JsonSerializer.Deserialize<TItem2>(ref reader, options);
+
+				if (itemTwo is not null)
+				{
+					return (TItem2)Activator.CreateInstance(typeof(TItem2), itemTwo);
+				}
+			}
+			catch
+			{
+				// TODO - Store for aggregate exception
+			}
+
+			throw new JsonException("Unable to deserialize union."); // TODO - Add inner aggregate exception.
+		}
 
 		public override void Write(Utf8JsonWriter writer, Union<TItem1, TItem2> value,
 			JsonSerializerOptions options)

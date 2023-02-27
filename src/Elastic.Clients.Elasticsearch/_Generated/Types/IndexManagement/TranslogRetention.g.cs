@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class TranslogRetention
 {
-	[JsonInclude]
-	[JsonPropertyName("age")]
+	[JsonInclude, JsonPropertyName("age")]
 	public Elastic.Clients.Elasticsearch.Duration? Age { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; set; }
 }
 

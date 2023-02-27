@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 public sealed partial class RankEvalMetricDiscountedCumulativeGain
 {
-	[JsonInclude]
-	[JsonPropertyName("k")]
+	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("normalize")]
+	[JsonInclude, JsonPropertyName("normalize")]
 	public bool? Normalize { get; set; }
 }
 

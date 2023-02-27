@@ -27,40 +27,31 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Get;
 public sealed partial class GetResult<TDocument>
 {
-	[JsonInclude]
-	[JsonPropertyName("_id")]
+	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_index")]
+	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_primary_term")]
+	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long? PrimaryTerm { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_routing")]
+	[JsonInclude, JsonPropertyName("_routing")]
 	public string? Routing { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_seq_no")]
+	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long? SeqNo { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_source")]
+	[JsonInclude, JsonPropertyName("_source")]
 	[SourceConverter]
 	public TDocument? Source { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_version")]
+	[JsonInclude, JsonPropertyName("_version")]
 	public long? Version { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.FieldValues? Fields { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("found")]
+	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
 }

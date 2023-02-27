@@ -27,7 +27,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class Profile
 {
-	[JsonInclude]
-	[JsonPropertyName("shards")]
+	[JsonInclude, JsonPropertyName("shards")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile> Shards { get; init; }
 }

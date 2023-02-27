@@ -30,8 +30,7 @@ public sealed partial class SimpleAnalyzer : IAnalyzer
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "simple";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -65,5 +64,7 @@ public sealed partial class SimpleAnalyzerDescriptor : SerializableDescriptor<Si
 	}
 
 	SimpleAnalyzer IBuildableDescriptor<SimpleAnalyzer>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

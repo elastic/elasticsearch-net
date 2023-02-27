@@ -32,16 +32,13 @@ public sealed partial class DateHistogramBucket : AggregateDictionary
 	{
 	}
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count")]
+	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key")]
+	[JsonInclude, JsonPropertyName("key")]
 	public long Key { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key_as_string")]
+	[JsonInclude, JsonPropertyName("key_as_string")]
 	public string? KeyAsString { get; init; }
 }
 
@@ -91,7 +88,11 @@ internal sealed class DateHistogramBucketConverter : JsonConverter<DateHistogram
 		}
 
 		return new DateHistogramBucket(subAggs)
-		{ DocCount = docCount, Key = key, KeyAsString = keyAsString };
+		{
+			DocCount = docCount,
+			Key = key,
+			KeyAsString = keyAsString
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, DateHistogramBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

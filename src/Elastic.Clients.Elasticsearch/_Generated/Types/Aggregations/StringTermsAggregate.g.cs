@@ -27,19 +27,15 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class StringTermsAggregate : IAggregate
 {
-	[JsonInclude]
-	[JsonPropertyName("buckets")]
+	[JsonInclude, JsonPropertyName("buckets")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucket> Buckets { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count_error_upper_bound")]
+	[JsonInclude, JsonPropertyName("doc_count_error_upper_bound")]
 	public long? DocCountErrorUpperBound { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("sum_other_doc_count")]
+	[JsonInclude, JsonPropertyName("sum_other_doc_count")]
 	public long? SumOtherDocCount { get; init; }
 }
