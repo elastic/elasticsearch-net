@@ -426,8 +426,10 @@ internal sealed class OperatorConverter : JsonConverter<Operator>
 		switch (enumString)
 		{
 			case "or":
+			case "OR":
 				return Operator.Or;
 			case "and":
+			case "AND":
 				return Operator.And;
 		}
 
