@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.GetScriptContext;
 public sealed partial class Context
 {
-	[JsonInclude]
-	[JsonPropertyName("methods")]
+	[JsonInclude, JsonPropertyName("methods")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod> Methods { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 }

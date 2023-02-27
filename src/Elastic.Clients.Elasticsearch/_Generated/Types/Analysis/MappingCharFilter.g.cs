@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class MappingCharFilter : ICharFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("mappings")]
+	[JsonInclude, JsonPropertyName("mappings")]
 	public ICollection<string>? Mappings { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("mappings_path")]
+	[JsonInclude, JsonPropertyName("mappings_path")]
 	public string? MappingsPath { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "mapping";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -101,5 +98,9 @@ public sealed partial class MappingCharFilterDescriptor : SerializableDescriptor
 	}
 
 	MappingCharFilter IBuildableDescriptor<MappingCharFilter>.Build() => new()
-	{ Mappings = MappingsValue, MappingsPath = MappingsPathValue, Version = VersionValue };
+	{
+		Mappings = MappingsValue,
+		MappingsPath = MappingsPathValue,
+		Version = VersionValue
+	};
 }

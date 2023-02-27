@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class IpRangeAggregationRange
 {
-	[JsonInclude]
-	[JsonPropertyName("from")]
+	[JsonInclude, JsonPropertyName("from")]
 	public string? From { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("mask")]
+	[JsonInclude, JsonPropertyName("mask")]
 	public string? Mask { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("to")]
+	[JsonInclude, JsonPropertyName("to")]
 	public string? To { get; set; }
 }
 

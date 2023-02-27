@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class LinearInterpolationSmoothingModel
 {
-	[JsonInclude]
-	[JsonPropertyName("bigram_lambda")]
+	[JsonInclude, JsonPropertyName("bigram_lambda")]
 	public double BigramLambda { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("trigram_lambda")]
+	[JsonInclude, JsonPropertyName("trigram_lambda")]
 	public double TrigramLambda { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("unigram_lambda")]
+	[JsonInclude, JsonPropertyName("unigram_lambda")]
 	public double UnigramLambda { get; set; }
 
 	public static implicit operator SmoothingModel(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Core.Search.SmoothingModel.LinearInterpolation(linearInterpolationSmoothingModel);

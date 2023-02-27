@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class FieldValueFactorScoreFunction
 {
-	[JsonInclude]
-	[JsonPropertyName("factor")]
+	[JsonInclude, JsonPropertyName("factor")]
 	public double? Factor { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("missing")]
+	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("modifier")]
+	[JsonInclude, JsonPropertyName("modifier")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
 
 	public static implicit operator FunctionScore(FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => QueryDsl.FunctionScore.FieldValueFactor(fieldValueFactorScoreFunction);

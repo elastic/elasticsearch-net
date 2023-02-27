@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsHighlight
 {
-	[JsonInclude]
-	[JsonPropertyName("max_analyzed_offset")]
+	[JsonInclude, JsonPropertyName("max_analyzed_offset")]
 	public int? MaxAnalyzedOffset { get; set; }
 }
 

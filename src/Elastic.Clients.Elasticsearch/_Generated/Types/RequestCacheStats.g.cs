@@ -27,23 +27,18 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class RequestCacheStats
 {
-	[JsonInclude]
-	[JsonPropertyName("evictions")]
+	[JsonInclude, JsonPropertyName("evictions")]
 	public long Evictions { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("hit_count")]
+	[JsonInclude, JsonPropertyName("hit_count")]
 	public long HitCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("memory_size")]
+	[JsonInclude, JsonPropertyName("memory_size")]
 	public string? MemorySize { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("memory_size_in_bytes")]
+	[JsonInclude, JsonPropertyName("memory_size_in_bytes")]
 	public long MemorySizeInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("miss_count")]
+	[JsonInclude, JsonPropertyName("miss_count")]
 	public long MissCount { get; init; }
 }

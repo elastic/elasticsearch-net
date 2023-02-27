@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class TopMetrics
 {
-	[JsonInclude]
-	[JsonPropertyName("metrics")]
+	[JsonInclude, JsonPropertyName("metrics")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldValue>? Metrics { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("sort")]
+	[JsonInclude, JsonPropertyName("sort")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; init; }
 }

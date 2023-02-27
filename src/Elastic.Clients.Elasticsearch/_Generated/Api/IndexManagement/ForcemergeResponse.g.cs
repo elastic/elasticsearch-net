@@ -25,11 +25,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ForcemergeResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("_shards")]
+	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("task")]
+	[JsonInclude, JsonPropertyName("task")]
 	public string? Task { get; init; }
 }

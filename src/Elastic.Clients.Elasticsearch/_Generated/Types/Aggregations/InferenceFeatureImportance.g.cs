@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class InferenceFeatureImportance
 {
-	[JsonInclude]
-	[JsonPropertyName("classes")]
+	[JsonInclude, JsonPropertyName("classes")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceClassImportance>? Classes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("feature_name")]
+	[JsonInclude, JsonPropertyName("feature_name")]
 	public string FeatureName { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("importance")]
+	[JsonInclude, JsonPropertyName("importance")]
 	public double? Importance { get; init; }
 }

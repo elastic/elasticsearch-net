@@ -85,12 +85,10 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	[JsonIgnore]
 	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("index_filter")]
+	[JsonInclude, JsonPropertyName("index_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("runtime_mappings")]
+	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 

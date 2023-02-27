@@ -25,11 +25,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class MultiSearchTemplateResponse<TDocument> : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("responses")]
+	[JsonInclude, JsonPropertyName("responses")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>> Responses { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("took")]
+	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
 }

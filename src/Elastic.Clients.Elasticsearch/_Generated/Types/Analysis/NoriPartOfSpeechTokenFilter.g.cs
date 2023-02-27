@@ -27,15 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class NoriPartOfSpeechTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("stoptags")]
+	[JsonInclude, JsonPropertyName("stoptags")]
 	public ICollection<string>? Stoptags { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "nori_part_of_speech";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -83,5 +81,8 @@ public sealed partial class NoriPartOfSpeechTokenFilterDescriptor : Serializable
 	}
 
 	NoriPartOfSpeechTokenFilter IBuildableDescriptor<NoriPartOfSpeechTokenFilter>.Build() => new()
-	{ Stoptags = StoptagsValue, Version = VersionValue };
+	{
+		Stoptags = StoptagsValue,
+		Version = VersionValue
+	};
 }
