@@ -25,11 +25,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class PutMappingResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("acknowledged")]
+	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_shards")]
+	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
 }

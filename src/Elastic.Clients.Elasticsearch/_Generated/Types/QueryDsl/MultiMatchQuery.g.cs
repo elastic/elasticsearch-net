@@ -27,76 +27,58 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class MultiMatchQuery : SearchQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("analyzer")]
+	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fuzziness")]
+	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fuzzy_rewrite")]
+	[JsonInclude, JsonPropertyName("fuzzy_rewrite")]
 	public string? FuzzyRewrite { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fuzzy_transpositions")]
+	[JsonInclude, JsonPropertyName("fuzzy_transpositions")]
 	public bool? FuzzyTranspositions { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("lenient")]
+	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_expansions")]
+	[JsonInclude, JsonPropertyName("max_expansions")]
 	public int? MaxExpansions { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("minimum_should_match")]
+	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("operator")]
+	[JsonInclude, JsonPropertyName("operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("prefix_length")]
+	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("slop")]
+	[JsonInclude, JsonPropertyName("slop")]
 	public int? Slop { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tie_breaker")]
+	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("zero_terms_query")]
+	[JsonInclude, JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
 	public static implicit operator Query(MultiMatchQuery multiMatchQuery) => QueryDsl.Query.MultiMatch(multiMatchQuery);

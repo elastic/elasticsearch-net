@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class TermsLookup
 {
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index")]
+	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("path")]
+	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field Path { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("routing")]
+	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 }
 

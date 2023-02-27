@@ -48,5 +48,6 @@ public sealed partial class LowercaseNormalizerDescriptor : SerializableDescript
 	}
 
 	LowercaseNormalizer IBuildableDescriptor<LowercaseNormalizer>.Build() => new()
-	{ };
+	{
+	};
 }

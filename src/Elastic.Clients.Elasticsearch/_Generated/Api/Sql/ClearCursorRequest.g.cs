@@ -36,8 +36,7 @@ public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequest
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
-	[JsonInclude]
-	[JsonPropertyName("cursor")]
+	[JsonInclude, JsonPropertyName("cursor")]
 	public string Cursor { get; set; }
 }
 

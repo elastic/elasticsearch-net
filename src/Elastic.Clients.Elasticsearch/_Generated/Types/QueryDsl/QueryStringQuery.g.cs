@@ -27,112 +27,85 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class QueryStringQuery : SearchQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("allow_leading_wildcard")]
+	[JsonInclude, JsonPropertyName("allow_leading_wildcard")]
 	public bool? AllowLeadingWildcard { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("analyze_wildcard")]
+	[JsonInclude, JsonPropertyName("analyze_wildcard")]
 	public bool? AnalyzeWildcard { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("analyzer")]
+	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("default_field")]
+	[JsonInclude, JsonPropertyName("default_field")]
 	public Elastic.Clients.Elasticsearch.Field? DefaultField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("default_operator")]
+	[JsonInclude, JsonPropertyName("default_operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("enable_position_increments")]
+	[JsonInclude, JsonPropertyName("enable_position_increments")]
 	public bool? EnablePositionIncrements { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("escape")]
+	[JsonInclude, JsonPropertyName("escape")]
 	public bool? Escape { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public Fields? Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fuzziness")]
+	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fuzzy_max_expansions")]
+	[JsonInclude, JsonPropertyName("fuzzy_max_expansions")]
 	public int? FuzzyMaxExpansions { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fuzzy_prefix_length")]
+	[JsonInclude, JsonPropertyName("fuzzy_prefix_length")]
 	public int? FuzzyPrefixLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fuzzy_rewrite")]
+	[JsonInclude, JsonPropertyName("fuzzy_rewrite")]
 	public string? FuzzyRewrite { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fuzzy_transpositions")]
+	[JsonInclude, JsonPropertyName("fuzzy_transpositions")]
 	public bool? FuzzyTranspositions { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("lenient")]
+	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_determinized_states")]
+	[JsonInclude, JsonPropertyName("max_determinized_states")]
 	public int? MaxDeterminizedStates { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("minimum_should_match")]
+	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("phrase_slop")]
+	[JsonInclude, JsonPropertyName("phrase_slop")]
 	public double? PhraseSlop { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("quote_analyzer")]
+	[JsonInclude, JsonPropertyName("quote_analyzer")]
 	public string? QuoteAnalyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("quote_field_suffix")]
+	[JsonInclude, JsonPropertyName("quote_field_suffix")]
 	public string? QuoteFieldSuffix { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("rewrite")]
+	[JsonInclude, JsonPropertyName("rewrite")]
 	public string? Rewrite { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tie_breaker")]
+	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("time_zone")]
+	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 
 	public static implicit operator Query(QueryStringQuery queryStringQuery) => QueryDsl.Query.QueryString(queryStringQuery);

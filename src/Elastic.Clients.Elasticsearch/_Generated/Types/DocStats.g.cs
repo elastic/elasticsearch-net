@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class DocStats
 {
-	[JsonInclude]
-	[JsonPropertyName("count")]
+	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("deleted")]
+	[JsonInclude, JsonPropertyName("deleted")]
 	public long? Deleted { get; init; }
 }

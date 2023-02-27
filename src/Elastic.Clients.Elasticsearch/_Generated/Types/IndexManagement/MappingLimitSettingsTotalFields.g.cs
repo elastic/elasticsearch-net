@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class MappingLimitSettingsTotalFields
 {
-	[JsonInclude]
-	[JsonPropertyName("limit")]
+	[JsonInclude, JsonPropertyName("limit")]
 	public int? Limit { get; set; }
 }
 

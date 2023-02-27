@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsSimilarityScriptedTfidf
 {
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
 	[JsonInclude]

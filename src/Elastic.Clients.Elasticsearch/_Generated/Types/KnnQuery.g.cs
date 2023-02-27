@@ -27,28 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class KnnQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("k")]
+	[JsonInclude, JsonPropertyName("k")]
 	public long k { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("num_candidates")]
+	[JsonInclude, JsonPropertyName("num_candidates")]
 	public long NumCandidates { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("query_vector")]
+	[JsonInclude, JsonPropertyName("query_vector")]
 	public ICollection<double> QueryVector { get; set; }
 }
 
@@ -155,32 +149,30 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorActions is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
+			if (FilterDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (FilterDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (FilterValue is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
 		}
 
 		if (BoostValue.HasValue)
@@ -310,32 +302,30 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorActions is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
+			if (FilterDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (FilterDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (FilterValue is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
 		}
 
 		if (BoostValue.HasValue)

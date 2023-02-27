@@ -27,39 +27,31 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class DictionaryDecompounderTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("hyphenation_patterns_path")]
+	[JsonInclude, JsonPropertyName("hyphenation_patterns_path")]
 	public string? HyphenationPatternsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_subword_size")]
+	[JsonInclude, JsonPropertyName("max_subword_size")]
 	public int? MaxSubwordSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_subword_size")]
+	[JsonInclude, JsonPropertyName("min_subword_size")]
 	public int? MinSubwordSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_word_size")]
+	[JsonInclude, JsonPropertyName("min_word_size")]
 	public int? MinWordSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("only_longest_match")]
+	[JsonInclude, JsonPropertyName("only_longest_match")]
 	public bool? OnlyLongestMatch { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "dictionary_decompounder";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("word_list")]
+	[JsonInclude, JsonPropertyName("word_list")]
 	public ICollection<string>? WordList { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("word_list_path")]
+	[JsonInclude, JsonPropertyName("word_list_path")]
 	public string? WordListPath { get; set; }
 }
 
@@ -191,5 +183,14 @@ public sealed partial class DictionaryDecompounderTokenFilterDescriptor : Serial
 	}
 
 	DictionaryDecompounderTokenFilter IBuildableDescriptor<DictionaryDecompounderTokenFilter>.Build() => new()
-	{ HyphenationPatternsPath = HyphenationPatternsPathValue, MaxSubwordSize = MaxSubwordSizeValue, MinSubwordSize = MinSubwordSizeValue, MinWordSize = MinWordSizeValue, OnlyLongestMatch = OnlyLongestMatchValue, Version = VersionValue, WordList = WordListValue, WordListPath = WordListPathValue };
+	{
+		HyphenationPatternsPath = HyphenationPatternsPathValue,
+		MaxSubwordSize = MaxSubwordSizeValue,
+		MinSubwordSize = MinSubwordSizeValue,
+		MinWordSize = MinWordSizeValue,
+		OnlyLongestMatch = OnlyLongestMatchValue,
+		Version = VersionValue,
+		WordList = WordListValue,
+		WordListPath = WordListPathValue
+	};
 }

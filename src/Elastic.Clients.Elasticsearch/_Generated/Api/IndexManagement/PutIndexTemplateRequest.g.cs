@@ -45,32 +45,25 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("index_patterns")]
+	[JsonInclude, JsonPropertyName("index_patterns")]
 	public Elastic.Clients.Elasticsearch.Indices? IndexPatterns { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("composed_of")]
+	[JsonInclude, JsonPropertyName("composed_of")]
 	public ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("template")]
+	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? Template { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("data_stream")]
+	[JsonInclude, JsonPropertyName("data_stream")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStream { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("priority")]
+	[JsonInclude, JsonPropertyName("priority")]
 	public int? Priority { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_meta")]
+	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 }
 

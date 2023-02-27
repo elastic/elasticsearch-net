@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Explain;
 public sealed partial class ExplanationDetail
 {
-	[JsonInclude]
-	[JsonPropertyName("description")]
+	[JsonInclude, JsonPropertyName("description")]
 	public string Description { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("details")]
+	[JsonInclude, JsonPropertyName("details")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Explain.ExplanationDetail>? Details { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("value")]
+	[JsonInclude, JsonPropertyName("value")]
 	public float Value { get; init; }
 }

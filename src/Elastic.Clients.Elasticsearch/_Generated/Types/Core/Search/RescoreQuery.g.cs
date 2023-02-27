@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class RescoreQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("query_weight")]
+	[JsonInclude, JsonPropertyName("query_weight")]
 	public double? QueryWeight { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("rescore_query")]
+	[JsonInclude, JsonPropertyName("rescore_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("rescore_query_weight")]
+	[JsonInclude, JsonPropertyName("rescore_query_weight")]
 	public double? RescoreQueryWeight { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("score_mode")]
+	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreMode { get; set; }
 }
 

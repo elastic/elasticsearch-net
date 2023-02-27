@@ -67,12 +67,10 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	[JsonIgnore]
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("requests")]
+	[JsonInclude, JsonPropertyName("requests")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("metric")]
+	[JsonInclude, JsonPropertyName("metric")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? Metric { get; set; }
 }
 

@@ -27,35 +27,28 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class PhoneticTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("encoder")]
+	[JsonInclude, JsonPropertyName("encoder")]
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder Encoder { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("languageset")]
+	[JsonInclude, JsonPropertyName("languageset")]
 	public ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage> Languageset { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_code_len")]
+	[JsonInclude, JsonPropertyName("max_code_len")]
 	public int? MaxCodeLen { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("name_type")]
+	[JsonInclude, JsonPropertyName("name_type")]
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType NameType { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("replace")]
+	[JsonInclude, JsonPropertyName("replace")]
 	public bool? Replace { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("rule_type")]
+	[JsonInclude, JsonPropertyName("rule_type")]
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType RuleType { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "phonetic";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -157,5 +150,13 @@ public sealed partial class PhoneticTokenFilterDescriptor : SerializableDescript
 	}
 
 	PhoneticTokenFilter IBuildableDescriptor<PhoneticTokenFilter>.Build() => new()
-	{ Encoder = EncoderValue, Languageset = LanguagesetValue, MaxCodeLen = MaxCodeLenValue, NameType = NameTypeValue, Replace = ReplaceValue, RuleType = RuleTypeValue, Version = VersionValue };
+	{
+		Encoder = EncoderValue,
+		Languageset = LanguagesetValue,
+		MaxCodeLen = MaxCodeLenValue,
+		NameType = NameTypeValue,
+		Replace = ReplaceValue,
+		RuleType = RuleTypeValue,
+		Version = VersionValue
+	};
 }

@@ -28,47 +28,36 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 public abstract partial class ResponseItem
 {
-	[JsonInclude]
-	[JsonPropertyName("_id")]
+	[JsonInclude, JsonPropertyName("_id")]
 	public string? Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_index")]
+	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_primary_term")]
+	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long? PrimaryTerm { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_seq_no")]
+	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long? SeqNo { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_shards")]
+	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_version")]
+	[JsonInclude, JsonPropertyName("_version")]
 	public long? Version { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("error")]
+	[JsonInclude, JsonPropertyName("error")]
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("forced_refresh")]
+	[JsonInclude, JsonPropertyName("forced_refresh")]
 	public bool? ForcedRefresh { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("get")]
+	[JsonInclude, JsonPropertyName("get")]
 	public Elastic.Clients.Elasticsearch.InlineGet<LazyJson>? Get { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("result")]
+	[JsonInclude, JsonPropertyName("result")]
 	public string? Result { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("status")]
+	[JsonInclude, JsonPropertyName("status")]
 	public int Status { get; init; }
 }

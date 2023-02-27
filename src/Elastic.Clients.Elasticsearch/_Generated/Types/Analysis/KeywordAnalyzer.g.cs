@@ -30,8 +30,7 @@ public sealed partial class KeywordAnalyzer : IAnalyzer
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "keyword";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -65,5 +64,7 @@ public sealed partial class KeywordAnalyzerDescriptor : SerializableDescriptor<K
 	}
 
 	KeywordAnalyzer IBuildableDescriptor<KeywordAnalyzer>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

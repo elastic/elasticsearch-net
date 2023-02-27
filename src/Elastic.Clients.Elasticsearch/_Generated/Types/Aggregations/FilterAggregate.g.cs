@@ -32,12 +32,10 @@ public sealed partial class FilterAggregate : AggregateDictionary, IAggregate
 	{
 	}
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count")]
+	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 }
 
@@ -80,7 +78,10 @@ internal sealed class FilterAggregateConverter : JsonConverter<FilterAggregate>
 		}
 
 		return new FilterAggregate(subAggs)
-		{ DocCount = docCount, Meta = meta };
+		{
+			DocCount = docCount,
+			Meta = meta
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, FilterAggregate value, JsonSerializerOptions options) => throw new NotImplementedException();

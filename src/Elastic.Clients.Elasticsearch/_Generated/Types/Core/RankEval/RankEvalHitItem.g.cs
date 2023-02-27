@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 public sealed partial class RankEvalHitItem
 {
-	[JsonInclude]
-	[JsonPropertyName("hit")]
+	[JsonInclude, JsonPropertyName("hit")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHit Hit { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("rating")]
+	[JsonInclude, JsonPropertyName("rating")]
 	public double? Rating { get; init; }
 }

@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SearchIdle
 {
-	[JsonInclude]
-	[JsonPropertyName("after")]
+	[JsonInclude, JsonPropertyName("after")]
 	public Elastic.Clients.Elasticsearch.Duration? After { get; set; }
 }
 

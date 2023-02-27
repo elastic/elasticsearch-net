@@ -27,32 +27,25 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class FieldSort
 {
-	[JsonInclude]
-	[JsonPropertyName("format")]
+	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("missing")]
+	[JsonInclude, JsonPropertyName("missing")]
 	public FieldValue? Missing { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("mode")]
+	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("nested")]
+	[JsonInclude, JsonPropertyName("nested")]
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("numeric_type")]
+	[JsonInclude, JsonPropertyName("numeric_type")]
 	public Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericType { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("order")]
+	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("unmapped_type")]
+	[JsonInclude, JsonPropertyName("unmapped_type")]
 	public Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedType { get; set; }
 }
 

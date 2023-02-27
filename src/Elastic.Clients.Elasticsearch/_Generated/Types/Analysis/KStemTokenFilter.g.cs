@@ -30,8 +30,7 @@ public sealed partial class KStemTokenFilter : ITokenFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "kstem";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -65,5 +64,7 @@ public sealed partial class KStemTokenFilterDescriptor : SerializableDescriptor<
 	}
 
 	KStemTokenFilter IBuildableDescriptor<KStemTokenFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

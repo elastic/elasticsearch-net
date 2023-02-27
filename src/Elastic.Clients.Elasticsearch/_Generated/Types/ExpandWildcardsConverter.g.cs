@@ -26,6 +26,6 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch;
-internal sealed class ExpandWildcardsConverter : ICollectionSingleOrManyConverter<Elastic.Clients.Elasticsearch.ExpandWildcard>
+internal sealed class ExpandWildcardsConverter : SingleOrManyCollectionConverter<Elastic.Clients.Elasticsearch.ExpandWildcard>
 {
 }

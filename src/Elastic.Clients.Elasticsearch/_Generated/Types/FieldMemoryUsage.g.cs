@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class FieldMemoryUsage
 {
-	[JsonInclude]
-	[JsonPropertyName("memory_size")]
+	[JsonInclude, JsonPropertyName("memory_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("memory_size_in_bytes")]
+	[JsonInclude, JsonPropertyName("memory_size_in_bytes")]
 	public long MemorySizeInBytes { get; init; }
 }

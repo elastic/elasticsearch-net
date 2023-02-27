@@ -27,49 +27,38 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 public sealed partial class MultisearchHeader
 {
-	[JsonInclude]
-	[JsonPropertyName("allow_no_indices")]
+	[JsonInclude, JsonPropertyName("allow_no_indices")]
 	public bool? AllowNoIndices { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("allow_partial_search_results")]
+	[JsonInclude, JsonPropertyName("allow_partial_search_results")]
 	public bool? AllowPartialSearchResults { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ccs_minimize_roundtrips")]
+	[JsonInclude, JsonPropertyName("ccs_minimize_roundtrips")]
 	public bool? CcsMinimizeRoundtrips { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("expand_wildcards")]
+	[JsonInclude, JsonPropertyName("expand_wildcards")]
 	[JsonConverter(typeof(ExpandWildcardsConverter))]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_throttled")]
+	[JsonInclude, JsonPropertyName("ignore_throttled")]
 	public bool? IgnoreThrottled { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_unavailable")]
+	[JsonInclude, JsonPropertyName("ignore_unavailable")]
 	public bool? IgnoreUnavailable { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index")]
+	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.Indices? Index { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("preference")]
+	[JsonInclude, JsonPropertyName("preference")]
 	public string? Preference { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("request_cache")]
+	[JsonInclude, JsonPropertyName("request_cache")]
 	public bool? RequestCache { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("routing")]
+	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("search_type")]
+	[JsonInclude, JsonPropertyName("search_type")]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
 }
 

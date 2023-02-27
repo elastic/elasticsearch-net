@@ -27,27 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class HunspellTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("dedup")]
+	[JsonInclude, JsonPropertyName("dedup")]
 	public bool? Dedup { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dictionary")]
+	[JsonInclude, JsonPropertyName("dictionary")]
 	public string? Dictionary { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("locale")]
+	[JsonInclude, JsonPropertyName("locale")]
 	public string Locale { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("longest_only")]
+	[JsonInclude, JsonPropertyName("longest_only")]
 	public bool? LongestOnly { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "hunspell";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -133,5 +128,11 @@ public sealed partial class HunspellTokenFilterDescriptor : SerializableDescript
 	}
 
 	HunspellTokenFilter IBuildableDescriptor<HunspellTokenFilter>.Build() => new()
-	{ Dedup = DedupValue, Dictionary = DictionaryValue, Locale = LocaleValue, LongestOnly = LongestOnlyValue, Version = VersionValue };
+	{
+		Dedup = DedupValue,
+		Dictionary = DictionaryValue,
+		Locale = LocaleValue,
+		LongestOnly = LongestOnlyValue,
+		Version = VersionValue
+	};
 }

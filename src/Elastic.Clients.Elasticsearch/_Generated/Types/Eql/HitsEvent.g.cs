@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Eql;
 public sealed partial class HitsEvent<TEvent>
 {
-	[JsonInclude]
-	[JsonPropertyName("_id")]
+	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_index")]
+	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_source")]
+	[JsonInclude, JsonPropertyName("_source")]
 	public TEvent Source { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	[ReadOnlyFieldDictionaryConverter(typeof(IReadOnlyCollection<object>))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? Fields { get; init; }
 }
