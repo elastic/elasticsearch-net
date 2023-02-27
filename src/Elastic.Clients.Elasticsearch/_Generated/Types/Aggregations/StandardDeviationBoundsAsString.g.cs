@@ -27,27 +27,21 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class StandardDeviationBoundsAsString
 {
-	[JsonInclude]
-	[JsonPropertyName("lower")]
+	[JsonInclude, JsonPropertyName("lower")]
 	public string Lower { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("lower_population")]
+	[JsonInclude, JsonPropertyName("lower_population")]
 	public string LowerPopulation { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("lower_sampling")]
+	[JsonInclude, JsonPropertyName("lower_sampling")]
 	public string LowerSampling { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("upper")]
+	[JsonInclude, JsonPropertyName("upper")]
 	public string Upper { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("upper_population")]
+	[JsonInclude, JsonPropertyName("upper_population")]
 	public string UpperPopulation { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("upper_sampling")]
+	[JsonInclude, JsonPropertyName("upper_sampling")]
 	public string UpperSampling { get; init; }
 }

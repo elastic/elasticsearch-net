@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class RetentionLease
 {
-	[JsonInclude]
-	[JsonPropertyName("period")]
+	[JsonInclude, JsonPropertyName("period")]
 	public Elastic.Clients.Elasticsearch.Duration Period { get; set; }
 }
 

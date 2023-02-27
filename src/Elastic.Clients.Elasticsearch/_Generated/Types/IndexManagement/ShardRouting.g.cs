@@ -27,19 +27,15 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ShardRouting
 {
-	[JsonInclude]
-	[JsonPropertyName("node")]
+	[JsonInclude, JsonPropertyName("node")]
 	public string Node { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("primary")]
+	[JsonInclude, JsonPropertyName("primary")]
 	public bool Primary { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("relocating_node")]
+	[JsonInclude, JsonPropertyName("relocating_node")]
 	public string? RelocatingNode { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("state")]
+	[JsonInclude, JsonPropertyName("state")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; init; }
 }

@@ -47,12 +47,10 @@ public sealed partial class FunctionScore
 	public static FunctionScore FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => new FunctionScore("field_value_factor", fieldValueFactorScoreFunction);
 	public static FunctionScore RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction randomScoreFunction) => new FunctionScore("random_score", randomScoreFunction);
 	public static FunctionScore ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction scriptScoreFunction) => new FunctionScore("script_score", scriptScoreFunction);
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("weight")]
+	[JsonInclude, JsonPropertyName("weight")]
 	public double? Weight { get; set; }
 }
 

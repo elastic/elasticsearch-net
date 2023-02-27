@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ShardRetentionLeases
 {
-	[JsonInclude]
-	[JsonPropertyName("leases")]
+	[JsonInclude, JsonPropertyName("leases")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardLease> Leases { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("primary_term")]
+	[JsonInclude, JsonPropertyName("primary_term")]
 	public long PrimaryTerm { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public long Version { get; init; }
 }

@@ -32,20 +32,16 @@ public sealed partial class IpRangeBucket : AggregateDictionary
 	{
 	}
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count")]
+	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("from")]
+	[JsonInclude, JsonPropertyName("from")]
 	public string? From { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key")]
+	[JsonInclude, JsonPropertyName("key")]
 	public string? Key { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("to")]
+	[JsonInclude, JsonPropertyName("to")]
 	public string? To { get; init; }
 }
 
@@ -102,7 +98,12 @@ internal sealed class IpRangeBucketConverter : JsonConverter<IpRangeBucket>
 		}
 
 		return new IpRangeBucket(subAggs)
-		{ DocCount = docCount, From = from, Key = key, To = to };
+		{
+			DocCount = docCount,
+			From = from,
+			Key = key,
+			To = to
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, IpRangeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

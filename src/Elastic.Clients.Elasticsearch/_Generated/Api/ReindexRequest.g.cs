@@ -83,28 +83,22 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("conflicts")]
+	[JsonInclude, JsonPropertyName("conflicts")]
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dest")]
+	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_docs")]
+	[JsonInclude, JsonPropertyName("max_docs")]
 	public long? MaxDocs { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public long? Size { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("source")]
+	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
 }
 

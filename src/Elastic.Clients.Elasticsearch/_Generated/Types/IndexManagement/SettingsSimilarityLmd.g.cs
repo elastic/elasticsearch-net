@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsSimilarityLmd
 {
-	[JsonInclude]
-	[JsonPropertyName("mu")]
+	[JsonInclude, JsonPropertyName("mu")]
 	public int Mu { get; set; }
 
 	[JsonInclude]

@@ -26,35 +26,27 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 public sealed partial class GetAsyncSearchResponse<TDocument> : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("expiration_time")]
+	[JsonInclude, JsonPropertyName("expiration_time")]
 	public DateTimeOffset? ExpirationTime { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("expiration_time_in_millis")]
+	[JsonInclude, JsonPropertyName("expiration_time_in_millis")]
 	public long ExpirationTimeInMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public string? Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("is_partial")]
+	[JsonInclude, JsonPropertyName("is_partial")]
 	public bool IsPartial { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("is_running")]
+	[JsonInclude, JsonPropertyName("is_running")]
 	public bool IsRunning { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("response")]
+	[JsonInclude, JsonPropertyName("response")]
 	public Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearch<TDocument> Response { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("start_time")]
+	[JsonInclude, JsonPropertyName("start_time")]
 	public DateTimeOffset? StartTime { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("start_time_in_millis")]
+	[JsonInclude, JsonPropertyName("start_time_in_millis")]
 	public long StartTimeInMillis { get; init; }
 }

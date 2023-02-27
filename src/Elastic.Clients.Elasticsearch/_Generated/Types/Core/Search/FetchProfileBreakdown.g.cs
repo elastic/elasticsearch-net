@@ -27,35 +27,27 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class FetchProfileBreakdown
 {
-	[JsonInclude]
-	[JsonPropertyName("load_source")]
+	[JsonInclude, JsonPropertyName("load_source")]
 	public int? LoadSource { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("load_source_count")]
+	[JsonInclude, JsonPropertyName("load_source_count")]
 	public int? LoadSourceCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("load_stored_fields")]
+	[JsonInclude, JsonPropertyName("load_stored_fields")]
 	public int? LoadStoredFields { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("load_stored_fields_count")]
+	[JsonInclude, JsonPropertyName("load_stored_fields_count")]
 	public int? LoadStoredFieldsCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("next_reader")]
+	[JsonInclude, JsonPropertyName("next_reader")]
 	public int? NextReader { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("next_reader_count")]
+	[JsonInclude, JsonPropertyName("next_reader_count")]
 	public int? NextReaderCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("process")]
+	[JsonInclude, JsonPropertyName("process")]
 	public int? Process { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("process_count")]
+	[JsonInclude, JsonPropertyName("process_count")]
 	public int? ProcessCount { get; init; }
 }

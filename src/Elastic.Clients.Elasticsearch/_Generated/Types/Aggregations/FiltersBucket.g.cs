@@ -32,8 +32,7 @@ public sealed partial class FiltersBucket : AggregateDictionary
 	{
 	}
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count")]
+	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
 }
 
@@ -69,7 +68,9 @@ internal sealed class FiltersBucketConverter : JsonConverter<FiltersBucket>
 		}
 
 		return new FiltersBucket(subAggs)
-		{ DocCount = docCount };
+		{
+			DocCount = docCount
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, FiltersBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

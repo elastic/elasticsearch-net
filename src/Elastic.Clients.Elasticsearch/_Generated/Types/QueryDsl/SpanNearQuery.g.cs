@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class SpanNearQuery : SearchQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("clauses")]
+	[JsonInclude, JsonPropertyName("clauses")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("in_order")]
+	[JsonInclude, JsonPropertyName("in_order")]
 	public bool? InOrder { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("slop")]
+	[JsonInclude, JsonPropertyName("slop")]
 	public int? Slop { get; set; }
 }
 

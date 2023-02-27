@@ -25,11 +25,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SimulateTemplateResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("overlapping")]
+	[JsonInclude, JsonPropertyName("overlapping")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Overlapping>? Overlapping { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("template")]
+	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.Template Template { get; init; }
 }

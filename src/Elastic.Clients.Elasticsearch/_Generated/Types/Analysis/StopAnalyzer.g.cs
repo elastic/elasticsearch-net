@@ -27,20 +27,17 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class StopAnalyzer : IAnalyzer
 {
-	[JsonInclude]
-	[JsonPropertyName("stopwords")]
+	[JsonInclude, JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stopwords_path")]
+	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "stop";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -102,5 +99,9 @@ public sealed partial class StopAnalyzerDescriptor : SerializableDescriptor<Stop
 	}
 
 	StopAnalyzer IBuildableDescriptor<StopAnalyzer>.Build() => new()
-	{ Stopwords = StopwordsValue, StopwordsPath = StopwordsPathValue, Version = VersionValue };
+	{
+		Stopwords = StopwordsValue,
+		StopwordsPath = StopwordsPathValue,
+		Version = VersionValue
+	};
 }

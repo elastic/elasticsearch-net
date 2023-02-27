@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexSettingsLifecycleStep
 {
-	[JsonInclude]
-	[JsonPropertyName("wait_time_threshold")]
+	[JsonInclude, JsonPropertyName("wait_time_threshold")]
 	public Elastic.Clients.Elasticsearch.Duration? WaitTimeThreshold { get; set; }
 }
 

@@ -91,12 +91,10 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("docs")]
+	[JsonInclude, JsonPropertyName("docs")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? Docs { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ids")]
+	[JsonInclude, JsonPropertyName("ids")]
 	public Elastic.Clients.Elasticsearch.Ids? Ids { get; set; }
 }
 

@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class FielddataStats
 {
-	[JsonInclude]
-	[JsonPropertyName("evictions")]
+	[JsonInclude, JsonPropertyName("evictions")]
 	public long? Evictions { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	[ReadOnlyFieldDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.FieldMemoryUsage))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldMemoryUsage>? Fields { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("memory_size")]
+	[JsonInclude, JsonPropertyName("memory_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("memory_size_in_bytes")]
+	[JsonInclude, JsonPropertyName("memory_size_in_bytes")]
 	public long MemorySizeInBytes { get; init; }
 }
