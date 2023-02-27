@@ -702,7 +702,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 
 	[JsonInclude, JsonPropertyName("sort"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
-	[JsonConverter(typeof(SortConverter))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	[JsonInclude, JsonPropertyName("_source")]
