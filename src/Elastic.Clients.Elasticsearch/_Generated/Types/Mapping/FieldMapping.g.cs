@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class FieldMapping
 {
-	[JsonInclude]
-	[JsonPropertyName("full_name")]
+	[JsonInclude, JsonPropertyName("full_name")]
 	public string FullName { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("mapping")]
+	[JsonInclude, JsonPropertyName("mapping")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties Mapping { get; init; }
 }

@@ -127,8 +127,7 @@ public partial class CountRequest : PlainRequest<CountRequestParameters>
 	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 

@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class Rescore
 {
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("window_size")]
+	[JsonInclude, JsonPropertyName("window_size")]
 	public int? WindowSize { get; set; }
 }
 

@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class LengthTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("max")]
+	[JsonInclude, JsonPropertyName("max")]
 	public int? Max { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min")]
+	[JsonInclude, JsonPropertyName("min")]
 	public int? Min { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "length";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -101,5 +98,9 @@ public sealed partial class LengthTokenFilterDescriptor : SerializableDescriptor
 	}
 
 	LengthTokenFilter IBuildableDescriptor<LengthTokenFilter>.Build() => new()
-	{ Max = MaxValue, Min = MinValue, Version = VersionValue };
+	{
+		Max = MaxValue,
+		Min = MinValue,
+		Version = VersionValue
+	};
 }

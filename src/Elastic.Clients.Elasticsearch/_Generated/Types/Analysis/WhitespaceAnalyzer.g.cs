@@ -30,8 +30,7 @@ public sealed partial class WhitespaceAnalyzer : IAnalyzer
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "whitespace";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -65,5 +64,7 @@ public sealed partial class WhitespaceAnalyzerDescriptor : SerializableDescripto
 	}
 
 	WhitespaceAnalyzer IBuildableDescriptor<WhitespaceAnalyzer>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

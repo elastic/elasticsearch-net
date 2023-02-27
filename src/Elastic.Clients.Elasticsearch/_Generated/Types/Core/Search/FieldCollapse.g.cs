@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class FieldCollapse
 {
-	[JsonInclude]
-	[JsonPropertyName("collapse")]
+	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("inner_hits")]
+	[JsonInclude, JsonPropertyName("inner_hits"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.InnerHits))]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHits { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_concurrent_group_searches")]
+	[JsonInclude, JsonPropertyName("max_concurrent_group_searches")]
 	public int? MaxConcurrentGroupSearches { get; set; }
 }
 
@@ -169,32 +165,30 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 		if (InnerHitsDescriptor is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (InnerHitsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (InnerHitsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			writer.WriteStartArray();
+			if (InnerHitsDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in InnerHitsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new InnerHitsDescriptor<TDocument>(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (InnerHitsDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (InnerHitsValue is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>(InnerHitsValue, writer, options);
 		}
 
 		writer.WritePropertyName("field");
@@ -340,32 +334,30 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 		if (InnerHitsDescriptor is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (InnerHitsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new InnerHitsDescriptor(InnerHitsDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (InnerHitsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			writer.WriteStartArray();
+			if (InnerHitsDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in InnerHitsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new InnerHitsDescriptor(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (InnerHitsDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (InnerHitsValue is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>(InnerHitsValue, writer, options);
 		}
 
 		writer.WritePropertyName("field");

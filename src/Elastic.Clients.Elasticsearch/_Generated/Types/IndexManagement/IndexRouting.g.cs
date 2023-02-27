@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexRouting
 {
-	[JsonInclude]
-	[JsonPropertyName("allocation")]
+	[JsonInclude, JsonPropertyName("allocation")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? Allocation { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("rebalance")]
+	[JsonInclude, JsonPropertyName("rebalance")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? Rebalance { get; set; }
 }
 

@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 public sealed partial class RankEvalQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 }
 

@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexTemplateItem
 {
-	[JsonInclude]
-	[JsonPropertyName("index_template")]
+	[JsonInclude, JsonPropertyName("index_template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate IndexTemplate { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 }

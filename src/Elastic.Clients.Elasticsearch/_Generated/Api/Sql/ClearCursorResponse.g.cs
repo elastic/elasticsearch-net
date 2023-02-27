@@ -25,7 +25,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Sql;
 public sealed partial class ClearCursorResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("succeeded")]
+	[JsonInclude, JsonPropertyName("succeeded")]
 	public bool Succeeded { get; init; }
 }

@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class InferenceTopClassEntry
 {
-	[JsonInclude]
-	[JsonPropertyName("class_name")]
+	[JsonInclude, JsonPropertyName("class_name")]
 	public Elastic.Clients.Elasticsearch.FieldValue ClassName { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("class_probability")]
+	[JsonInclude, JsonPropertyName("class_probability")]
 	public double ClassProbability { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("class_score")]
+	[JsonInclude, JsonPropertyName("class_score")]
 	public double ClassScore { get; init; }
 }

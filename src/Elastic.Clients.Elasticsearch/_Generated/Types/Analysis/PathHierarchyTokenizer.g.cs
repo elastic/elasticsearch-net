@@ -27,31 +27,25 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class PathHierarchyTokenizer : ITokenizer
 {
-	[JsonInclude]
-	[JsonPropertyName("buffer_size")]
+	[JsonInclude, JsonPropertyName("buffer_size")]
 	public int BufferSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("delimiter")]
+	[JsonInclude, JsonPropertyName("delimiter")]
 	public string Delimiter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("replacement")]
+	[JsonInclude, JsonPropertyName("replacement")]
 	public string Replacement { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("reverse")]
+	[JsonInclude, JsonPropertyName("reverse")]
 	public bool Reverse { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("skip")]
+	[JsonInclude, JsonPropertyName("skip")]
 	public int Skip { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "path_hierarchy";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -135,5 +129,12 @@ public sealed partial class PathHierarchyTokenizerDescriptor : SerializableDescr
 	}
 
 	PathHierarchyTokenizer IBuildableDescriptor<PathHierarchyTokenizer>.Build() => new()
-	{ BufferSize = BufferSizeValue, Delimiter = DelimiterValue, Replacement = ReplacementValue, Reverse = ReverseValue, Skip = SkipValue, Version = VersionValue };
+	{
+		BufferSize = BufferSizeValue,
+		Delimiter = DelimiterValue,
+		Replacement = ReplacementValue,
+		Reverse = ReverseValue,
+		Skip = SkipValue,
+		Version = VersionValue
+	};
 }

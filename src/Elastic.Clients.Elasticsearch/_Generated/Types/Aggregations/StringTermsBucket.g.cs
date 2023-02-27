@@ -32,16 +32,13 @@ public sealed partial class StringTermsBucket : AggregateDictionary
 	{
 	}
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count")]
+	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count_error")]
+	[JsonInclude, JsonPropertyName("doc_count_error")]
 	public long? DocCountError { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key")]
+	[JsonInclude, JsonPropertyName("key")]
 	public Elastic.Clients.Elasticsearch.FieldValue Key { get; init; }
 }
 
@@ -91,7 +88,11 @@ internal sealed class StringTermsBucketConverter : JsonConverter<StringTermsBuck
 		}
 
 		return new StringTermsBucket(subAggs)
-		{ DocCount = docCount, DocCountError = docCountError, Key = key };
+		{
+			DocCount = docCount,
+			DocCountError = docCountError,
+			Key = key
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, StringTermsBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

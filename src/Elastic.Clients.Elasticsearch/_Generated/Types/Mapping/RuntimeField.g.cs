@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class RuntimeField
 {
-	[JsonInclude]
-	[JsonPropertyName("format")]
+	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
 }
 

@@ -30,8 +30,7 @@ public sealed partial class UppercaseTokenFilter : ITokenFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "uppercase";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -65,5 +64,7 @@ public sealed partial class UppercaseTokenFilterDescriptor : SerializableDescrip
 	}
 
 	UppercaseTokenFilter IBuildableDescriptor<UppercaseTokenFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

@@ -27,15 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class PredicateTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "predicate_token_filter";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -79,5 +77,8 @@ public sealed partial class PredicateTokenFilterDescriptor : SerializableDescrip
 	}
 
 	PredicateTokenFilter IBuildableDescriptor<PredicateTokenFilter>.Build() => new()
-	{ Script = ScriptValue, Version = VersionValue };
+	{
+		Script = ScriptValue,
+		Version = VersionValue
+	};
 }

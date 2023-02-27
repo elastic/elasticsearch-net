@@ -51,36 +51,28 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("allow_auto_create")]
+	[JsonInclude, JsonPropertyName("allow_auto_create")]
 	public bool? AllowAutoCreate { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_patterns")]
+	[JsonInclude, JsonPropertyName("index_patterns")]
 	public Elastic.Clients.Elasticsearch.Indices? IndexPatterns { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("composed_of")]
+	[JsonInclude, JsonPropertyName("composed_of")]
 	public ICollection<string>? ComposedOf { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("template")]
+	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? Template { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("data_stream")]
+	[JsonInclude, JsonPropertyName("data_stream")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStream { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("priority")]
+	[JsonInclude, JsonPropertyName("priority")]
 	public int? Priority { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_meta")]
+	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 }
 
