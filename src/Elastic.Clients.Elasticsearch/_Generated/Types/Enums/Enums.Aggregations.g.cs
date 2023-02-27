@@ -53,20 +53,28 @@ internal sealed class CalendarIntervalConverter : JsonConverter<CalendarInterval
 		switch (enumString)
 		{
 			case "year":
+			case "1Y":
 				return CalendarInterval.Year;
 			case "week":
+			case "1w":
 				return CalendarInterval.Week;
 			case "second":
+			case "1s":
 				return CalendarInterval.Second;
 			case "quarter":
+			case "1q":
 				return CalendarInterval.Quarter;
 			case "month":
+			case "1M":
 				return CalendarInterval.Month;
 			case "minute":
+			case "1m":
 				return CalendarInterval.Minute;
 			case "hour":
+			case "1h":
 				return CalendarInterval.Hour;
 			case "day":
+			case "1d":
 				return CalendarInterval.Day;
 		}
 

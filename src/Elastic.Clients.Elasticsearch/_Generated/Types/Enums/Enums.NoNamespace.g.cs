@@ -470,10 +470,13 @@ internal sealed class HealthStatusConverter : JsonConverter<HealthStatus>
 		switch (enumString)
 		{
 			case "yellow":
+			case "YELLOW":
 				return HealthStatus.Yellow;
 			case "red":
+			case "RED":
 				return HealthStatus.Red;
 			case "green":
+			case "GREEN":
 				return HealthStatus.Green;
 		}
 
