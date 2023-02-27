@@ -25,7 +25,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class UpdateByQueryRethrottleResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("nodes")]
+	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.UpdateByQueryRethrottle.UpdateByQueryRethrottleNode> Nodes { get; init; }
 }

@@ -57,60 +57,46 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("case_sensitive")]
+	[JsonInclude, JsonPropertyName("case_sensitive")]
 	public bool? CaseSensitive { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("event_category_field")]
+	[JsonInclude, JsonPropertyName("event_category_field")]
 	public Elastic.Clients.Elasticsearch.Field? EventCategoryField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tiebreaker_field")]
+	[JsonInclude, JsonPropertyName("tiebreaker_field")]
 	public Elastic.Clients.Elasticsearch.Field? TiebreakerField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("timestamp_field")]
+	[JsonInclude, JsonPropertyName("timestamp_field")]
 	public Elastic.Clients.Elasticsearch.Field? TimestampField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fetch_size")]
+	[JsonInclude, JsonPropertyName("fetch_size")]
 	public int? FetchSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("keep_alive")]
+	[JsonInclude, JsonPropertyName("keep_alive")]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("keep_on_completion")]
+	[JsonInclude, JsonPropertyName("keep_on_completion")]
 	public bool? KeepOnCompletion { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("wait_for_completion_timeout")]
+	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("result_position")]
+	[JsonInclude, JsonPropertyName("result_position")]
 	public Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPosition { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("runtime_mappings")]
+	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 
@@ -345,63 +331,59 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		if (FieldsDescriptor is not null)
 		{
 			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (FieldsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (FieldsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
+			if (FieldsDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in FieldsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (FieldsDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (FieldsValue is not null)
 		{
 			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(FieldsValue, writer, options);
 		}
 
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorActions is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
+			if (FilterDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (FilterDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (FilterValue is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
 		}
 
 		if (CaseSensitiveValue.HasValue)
@@ -725,63 +707,59 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		if (FieldsDescriptor is not null)
 		{
 			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (FieldsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (FieldsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
+			if (FieldsDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in FieldsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (FieldsDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (FieldsValue is not null)
 		{
 			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(FieldsValue, writer, options);
 		}
 
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (FilterDescriptorActions is not null)
 		{
 			writer.WritePropertyName("filter");
-			writer.WriteStartArray();
+			if (FilterDescriptorActions.Length > 1)
+				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (FilterDescriptorActions.Length > 1)
+				writer.WriteEndArray();
 		}
 		else if (FilterValue is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
 		}
 
 		if (CaseSensitiveValue.HasValue)

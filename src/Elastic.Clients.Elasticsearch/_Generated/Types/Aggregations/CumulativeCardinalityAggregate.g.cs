@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class CumulativeCardinalityAggregate : IAggregate
 {
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("value")]
+	[JsonInclude, JsonPropertyName("value")]
 	public long Value { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("value_as_string")]
+	[JsonInclude, JsonPropertyName("value_as_string")]
 	public string? ValueAsString { get; init; }
 }

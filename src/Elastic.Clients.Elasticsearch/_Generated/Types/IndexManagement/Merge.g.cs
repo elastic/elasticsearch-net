@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class Merge
 {
-	[JsonInclude]
-	[JsonPropertyName("scheduler")]
+	[JsonInclude, JsonPropertyName("scheduler")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? Scheduler { get; set; }
 }
 

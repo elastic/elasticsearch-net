@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.GetScriptLanguages;
 public sealed partial class LanguageContext
 {
-	[JsonInclude]
-	[JsonPropertyName("contexts")]
+	[JsonInclude, JsonPropertyName("contexts")]
 	public IReadOnlyCollection<string> Contexts { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("language")]
+	[JsonInclude, JsonPropertyName("language")]
 	public Elastic.Clients.Elasticsearch.ScriptLanguage Language { get; init; }
 }

@@ -27,15 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class KeywordTokenizer : ITokenizer
 {
-	[JsonInclude]
-	[JsonPropertyName("buffer_size")]
+	[JsonInclude, JsonPropertyName("buffer_size")]
 	public int BufferSize { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "keyword";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -79,5 +77,8 @@ public sealed partial class KeywordTokenizerDescriptor : SerializableDescriptor<
 	}
 
 	KeywordTokenizer IBuildableDescriptor<KeywordTokenizer>.Build() => new()
-	{ BufferSize = BufferSizeValue, Version = VersionValue };
+	{
+		BufferSize = BufferSizeValue,
+		Version = VersionValue
+	};
 }

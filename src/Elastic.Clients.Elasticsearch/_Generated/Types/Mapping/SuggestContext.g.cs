@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class SuggestContext
 {
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("path")]
+	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("precision")]
+	[JsonInclude, JsonPropertyName("precision")]
 	public Union<int?, string?>? Precision { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; set; }
 }
 

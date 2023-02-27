@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 public sealed partial class DocumentRating
 {
-	[JsonInclude]
-	[JsonPropertyName("_id")]
+	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_index")]
+	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("rating")]
+	[JsonInclude, JsonPropertyName("rating")]
 	public int Rating { get; set; }
 }
 

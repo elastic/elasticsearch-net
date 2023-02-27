@@ -25,7 +25,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class MultiGetResponse<TDocument> : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("docs")]
+	[JsonInclude, JsonPropertyName("docs")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> Docs { get; init; }
 }

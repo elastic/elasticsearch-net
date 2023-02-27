@@ -51,24 +51,19 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_routing")]
+	[JsonInclude, JsonPropertyName("index_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("is_write_index")]
+	[JsonInclude, JsonPropertyName("is_write_index")]
 	public bool? IsWriteIndex { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("routing")]
+	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("search_routing")]
+	[JsonInclude, JsonPropertyName("search_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 }
 

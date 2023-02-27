@@ -27,64 +27,49 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class TermSuggester
 {
-	[JsonInclude]
-	[JsonPropertyName("analyzer")]
+	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("lowercase_terms")]
+	[JsonInclude, JsonPropertyName("lowercase_terms")]
 	public bool? LowercaseTerms { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_edits")]
+	[JsonInclude, JsonPropertyName("max_edits")]
 	public int? MaxEdits { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_inspections")]
+	[JsonInclude, JsonPropertyName("max_inspections")]
 	public int? MaxInspections { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_term_freq")]
+	[JsonInclude, JsonPropertyName("max_term_freq")]
 	public float? MaxTermFreq { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_doc_freq")]
+	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public float? MinDocFreq { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_word_length")]
+	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("prefix_length")]
+	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("shard_size")]
+	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("sort")]
+	[JsonInclude, JsonPropertyName("sort")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? Sort { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("string_distance")]
+	[JsonInclude, JsonPropertyName("string_distance")]
 	public Elastic.Clients.Elasticsearch.Core.Search.StringDistance? StringDistance { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("suggest_mode")]
+	[JsonInclude, JsonPropertyName("suggest_mode")]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("text")]
+	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
 
 	public static implicit operator FieldSuggester(TermSuggester termSuggester) => Core.Search.FieldSuggester.Term(termSuggester);

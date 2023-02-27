@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class TermsPartition
 {
-	[JsonInclude]
-	[JsonPropertyName("num_partitions")]
+	[JsonInclude, JsonPropertyName("num_partitions")]
 	public long NumPartitions { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("partition")]
+	[JsonInclude, JsonPropertyName("partition")]
 	public long Partition { get; set; }
 }
 

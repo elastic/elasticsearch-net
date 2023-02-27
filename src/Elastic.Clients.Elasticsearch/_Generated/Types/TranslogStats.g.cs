@@ -27,31 +27,24 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class TranslogStats
 {
-	[JsonInclude]
-	[JsonPropertyName("earliest_last_modified_age")]
+	[JsonInclude, JsonPropertyName("earliest_last_modified_age")]
 	public long EarliestLastModifiedAge { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("operations")]
+	[JsonInclude, JsonPropertyName("operations")]
 	public long Operations { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public string? Size { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("size_in_bytes")]
+	[JsonInclude, JsonPropertyName("size_in_bytes")]
 	public long SizeInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("uncommitted_operations")]
+	[JsonInclude, JsonPropertyName("uncommitted_operations")]
 	public int UncommittedOperations { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("uncommitted_size")]
+	[JsonInclude, JsonPropertyName("uncommitted_size")]
 	public string? UncommittedSize { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("uncommitted_size_in_bytes")]
+	[JsonInclude, JsonPropertyName("uncommitted_size_in_bytes")]
 	public long UncommittedSizeInBytes { get; init; }
 }

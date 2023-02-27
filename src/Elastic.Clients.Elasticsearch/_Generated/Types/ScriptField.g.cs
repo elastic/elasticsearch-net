@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ScriptField
 {
-	[JsonInclude]
-	[JsonPropertyName("ignore_failure")]
+	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 }
 

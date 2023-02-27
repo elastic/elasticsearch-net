@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class IntervalsAllOf
 {
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("intervals")]
+	[JsonInclude, JsonPropertyName("intervals")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> Intervals { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_gaps")]
+	[JsonInclude, JsonPropertyName("max_gaps")]
 	public int? MaxGaps { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ordered")]
+	[JsonInclude, JsonPropertyName("ordered")]
 	public bool? Ordered { get; set; }
 }
 
