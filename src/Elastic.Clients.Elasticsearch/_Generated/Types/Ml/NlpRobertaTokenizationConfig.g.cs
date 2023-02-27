@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 public sealed partial class NlpRobertaTokenizationConfig
 {
-	[JsonInclude]
-	[JsonPropertyName("add_prefix_space")]
+	[JsonInclude, JsonPropertyName("add_prefix_space")]
 	public bool? AddPrefixSpace { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_sequence_length")]
+	[JsonInclude, JsonPropertyName("max_sequence_length")]
 	public int? MaxSequenceLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("span")]
+	[JsonInclude, JsonPropertyName("span")]
 	public int? Span { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("truncate")]
+	[JsonInclude, JsonPropertyName("truncate")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? Truncate { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("with_special_tokens")]
+	[JsonInclude, JsonPropertyName("with_special_tokens")]
 	public bool? WithSpecialTokens { get; set; }
 
 	public static implicit operator TokenizationConfig(NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Ml.TokenizationConfig.Roberta(nlpRobertaTokenizationConfig);

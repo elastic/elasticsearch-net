@@ -27,15 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class AsciiFoldingTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("preserve_original")]
+	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "asciifolding";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -83,5 +81,8 @@ public sealed partial class AsciiFoldingTokenFilterDescriptor : SerializableDesc
 	}
 
 	AsciiFoldingTokenFilter IBuildableDescriptor<AsciiFoldingTokenFilter>.Build() => new()
-	{ PreserveOriginal = PreserveOriginalValue, Version = VersionValue };
+	{
+		PreserveOriginal = PreserveOriginalValue,
+		Version = VersionValue
+	};
 }

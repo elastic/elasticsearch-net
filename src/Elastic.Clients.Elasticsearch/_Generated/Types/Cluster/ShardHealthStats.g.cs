@@ -27,27 +27,21 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class ShardHealthStats
 {
-	[JsonInclude]
-	[JsonPropertyName("active_shards")]
+	[JsonInclude, JsonPropertyName("active_shards")]
 	public int ActiveShards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("initializing_shards")]
+	[JsonInclude, JsonPropertyName("initializing_shards")]
 	public int InitializingShards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("primary_active")]
+	[JsonInclude, JsonPropertyName("primary_active")]
 	public bool PrimaryActive { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("relocating_shards")]
+	[JsonInclude, JsonPropertyName("relocating_shards")]
 	public int RelocatingShards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("status")]
+	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("unassigned_shards")]
+	[JsonInclude, JsonPropertyName("unassigned_shards")]
 	public int UnassignedShards { get; init; }
 }

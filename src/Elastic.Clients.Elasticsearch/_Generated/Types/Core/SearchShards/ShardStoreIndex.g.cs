@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.SearchShards;
 public sealed partial class ShardStoreIndex
 {
-	[JsonInclude]
-	[JsonPropertyName("aliases")]
+	[JsonInclude, JsonPropertyName("aliases")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>? Aliases { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; init; }
 }

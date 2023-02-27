@@ -27,99 +27,75 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class SegmentsStats
 {
-	[JsonInclude]
-	[JsonPropertyName("count")]
+	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("doc_values_memory")]
+	[JsonInclude, JsonPropertyName("doc_values_memory")]
 	public Elastic.Clients.Elasticsearch.ByteSize? DocValuesMemory { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("doc_values_memory_in_bytes")]
+	[JsonInclude, JsonPropertyName("doc_values_memory_in_bytes")]
 	public int DocValuesMemoryInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("file_sizes")]
+	[JsonInclude, JsonPropertyName("file_sizes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> FileSizes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("fixed_bit_set")]
+	[JsonInclude, JsonPropertyName("fixed_bit_set")]
 	public Elastic.Clients.Elasticsearch.ByteSize? FixedBitSet { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("fixed_bit_set_memory_in_bytes")]
+	[JsonInclude, JsonPropertyName("fixed_bit_set_memory_in_bytes")]
 	public int FixedBitSetMemoryInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_writer_max_memory_in_bytes")]
+	[JsonInclude, JsonPropertyName("index_writer_max_memory_in_bytes")]
 	public int? IndexWriterMaxMemoryInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_writer_memory")]
+	[JsonInclude, JsonPropertyName("index_writer_memory")]
 	public Elastic.Clients.Elasticsearch.ByteSize? IndexWriterMemory { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_writer_memory_in_bytes")]
+	[JsonInclude, JsonPropertyName("index_writer_memory_in_bytes")]
 	public int IndexWriterMemoryInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_unsafe_auto_id_timestamp")]
+	[JsonInclude, JsonPropertyName("max_unsafe_auto_id_timestamp")]
 	public long MaxUnsafeAutoIdTimestamp { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("memory")]
+	[JsonInclude, JsonPropertyName("memory")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Memory { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("memory_in_bytes")]
+	[JsonInclude, JsonPropertyName("memory_in_bytes")]
 	public int MemoryInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("norms_memory")]
+	[JsonInclude, JsonPropertyName("norms_memory")]
 	public Elastic.Clients.Elasticsearch.ByteSize? NormsMemory { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("norms_memory_in_bytes")]
+	[JsonInclude, JsonPropertyName("norms_memory_in_bytes")]
 	public int NormsMemoryInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("points_memory")]
+	[JsonInclude, JsonPropertyName("points_memory")]
 	public Elastic.Clients.Elasticsearch.ByteSize? PointsMemory { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("points_memory_in_bytes")]
+	[JsonInclude, JsonPropertyName("points_memory_in_bytes")]
 	public int PointsMemoryInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("stored_fields_memory_in_bytes")]
+	[JsonInclude, JsonPropertyName("stored_fields_memory_in_bytes")]
 	public int StoredFieldsMemoryInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("stored_memory")]
+	[JsonInclude, JsonPropertyName("stored_memory")]
 	public Elastic.Clients.Elasticsearch.ByteSize? StoredMemory { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("term_vectors_memory_in_bytes")]
+	[JsonInclude, JsonPropertyName("term_vectors_memory_in_bytes")]
 	public int TermVectorsMemoryInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("term_vectory_memory")]
+	[JsonInclude, JsonPropertyName("term_vectory_memory")]
 	public Elastic.Clients.Elasticsearch.ByteSize? TermVectoryMemory { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("terms_memory")]
+	[JsonInclude, JsonPropertyName("terms_memory")]
 	public Elastic.Clients.Elasticsearch.ByteSize? TermsMemory { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("terms_memory_in_bytes")]
+	[JsonInclude, JsonPropertyName("terms_memory_in_bytes")]
 	public int TermsMemoryInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("version_map_memory")]
+	[JsonInclude, JsonPropertyName("version_map_memory")]
 	public Elastic.Clients.Elasticsearch.ByteSize? VersionMapMemory { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("version_map_memory_in_bytes")]
+	[JsonInclude, JsonPropertyName("version_map_memory_in_bytes")]
 	public int VersionMapMemoryInBytes { get; init; }
 }

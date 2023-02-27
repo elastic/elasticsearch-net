@@ -27,20 +27,17 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class SnowballAnalyzer : IAnalyzer
 {
-	[JsonInclude]
-	[JsonPropertyName("language")]
+	[JsonInclude, JsonPropertyName("language")]
 	public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stopwords")]
+	[JsonInclude, JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "snowball";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -98,5 +95,9 @@ public sealed partial class SnowballAnalyzerDescriptor : SerializableDescriptor<
 	}
 
 	SnowballAnalyzer IBuildableDescriptor<SnowballAnalyzer>.Build() => new()
-	{ Language = LanguageValue, Stopwords = StopwordsValue, Version = VersionValue };
+	{
+		Language = LanguageValue,
+		Stopwords = StopwordsValue,
+		Version = VersionValue
+	};
 }

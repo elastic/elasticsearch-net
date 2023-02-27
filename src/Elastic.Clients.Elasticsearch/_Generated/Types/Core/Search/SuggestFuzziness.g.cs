@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class SuggestFuzziness
 {
-	[JsonInclude]
-	[JsonPropertyName("fuzziness")]
+	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_length")]
+	[JsonInclude, JsonPropertyName("min_length")]
 	public int? MinLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("prefix_length")]
+	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("transpositions")]
+	[JsonInclude, JsonPropertyName("transpositions")]
 	public bool? Transpositions { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("unicode_aware")]
+	[JsonInclude, JsonPropertyName("unicode_aware")]
 	public bool? UnicodeAware { get; set; }
 }
 

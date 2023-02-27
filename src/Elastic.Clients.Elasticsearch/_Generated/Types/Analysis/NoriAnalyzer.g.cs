@@ -27,23 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class NoriAnalyzer : IAnalyzer
 {
-	[JsonInclude]
-	[JsonPropertyName("decompound_mode")]
+	[JsonInclude, JsonPropertyName("decompound_mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundMode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stoptags")]
+	[JsonInclude, JsonPropertyName("stoptags")]
 	public ICollection<string>? Stoptags { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "nori";
-	[JsonInclude]
-	[JsonPropertyName("user_dictionary")]
+	[JsonInclude, JsonPropertyName("user_dictionary")]
 	public string? UserDictionary { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -119,5 +115,10 @@ public sealed partial class NoriAnalyzerDescriptor : SerializableDescriptor<Nori
 	}
 
 	NoriAnalyzer IBuildableDescriptor<NoriAnalyzer>.Build() => new()
-	{ DecompoundMode = DecompoundModeValue, Stoptags = StoptagsValue, UserDictionary = UserDictionaryValue, Version = VersionValue };
+	{
+		DecompoundMode = DecompoundModeValue,
+		Stoptags = StoptagsValue,
+		UserDictionary = UserDictionaryValue,
+		Version = VersionValue
+	};
 }

@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
 public sealed partial class TemplateConfig
 {
-	[JsonInclude]
-	[JsonPropertyName("explain")]
+	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("params")]
+	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("profile")]
+	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("source")]
+	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 }
 

@@ -27,43 +27,33 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class StatsBucketAggregate : IAggregate
 {
-	[JsonInclude]
-	[JsonPropertyName("avg")]
+	[JsonInclude, JsonPropertyName("avg")]
 	public double? Avg { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("avg_as_string")]
+	[JsonInclude, JsonPropertyName("avg_as_string")]
 	public string? AvgAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("count")]
+	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("max")]
+	[JsonInclude, JsonPropertyName("max")]
 	public double? Max { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_as_string")]
+	[JsonInclude, JsonPropertyName("max_as_string")]
 	public string? MaxAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("min")]
+	[JsonInclude, JsonPropertyName("min")]
 	public double? Min { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_as_string")]
+	[JsonInclude, JsonPropertyName("min_as_string")]
 	public string? MinAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("sum")]
+	[JsonInclude, JsonPropertyName("sum")]
 	public double Sum { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("sum_as_string")]
+	[JsonInclude, JsonPropertyName("sum_as_string")]
 	public string? SumAsString { get; init; }
 }

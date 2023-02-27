@@ -27,15 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class StandardTokenizer : ITokenizer
 {
-	[JsonInclude]
-	[JsonPropertyName("max_token_length")]
+	[JsonInclude, JsonPropertyName("max_token_length")]
 	public int? MaxTokenLength { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "standard";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -83,5 +81,8 @@ public sealed partial class StandardTokenizerDescriptor : SerializableDescriptor
 	}
 
 	StandardTokenizer IBuildableDescriptor<StandardTokenizer>.Build() => new()
-	{ MaxTokenLength = MaxTokenLengthValue, Version = VersionValue };
+	{
+		MaxTokenLength = MaxTokenLengthValue,
+		Version = VersionValue
+	};
 }

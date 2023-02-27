@@ -52,7 +52,8 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 					new ExtraSerializationData(settings),
 					new DictionaryResponseConverterFactory(settings)
 				},
-			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+			PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+			NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals
 		};
 
 		ElasticsearchClient.SettingsTable.Add(Options, settings);

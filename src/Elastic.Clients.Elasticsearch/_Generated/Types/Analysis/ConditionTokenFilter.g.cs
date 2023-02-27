@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class ConditionTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter")]
 	public ICollection<string> Filter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "condition";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -93,5 +90,9 @@ public sealed partial class ConditionTokenFilterDescriptor : SerializableDescrip
 	}
 
 	ConditionTokenFilter IBuildableDescriptor<ConditionTokenFilter>.Build() => new()
-	{ Filter = FilterValue, Script = ScriptValue, Version = VersionValue };
+	{
+		Filter = FilterValue,
+		Script = ScriptValue,
+		Version = VersionValue
+	};
 }

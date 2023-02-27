@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsSearch
 {
-	[JsonInclude]
-	[JsonPropertyName("idle")]
+	[JsonInclude, JsonPropertyName("idle")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle? Idle { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("slowlog")]
+	[JsonInclude, JsonPropertyName("slowlog")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? Slowlog { get; set; }
 }
 

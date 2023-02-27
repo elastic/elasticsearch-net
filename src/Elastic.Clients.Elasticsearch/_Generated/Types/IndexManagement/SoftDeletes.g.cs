@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SoftDeletes
 {
-	[JsonInclude]
-	[JsonPropertyName("enabled")]
+	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("retention_lease")]
+	[JsonInclude, JsonPropertyName("retention_lease")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? RetentionLease { get; set; }
 }
 

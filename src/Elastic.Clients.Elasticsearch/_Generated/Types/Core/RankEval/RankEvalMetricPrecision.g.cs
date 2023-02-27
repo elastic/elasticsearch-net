@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 public sealed partial class RankEvalMetricPrecision
 {
-	[JsonInclude]
-	[JsonPropertyName("ignore_unlabeled")]
+	[JsonInclude, JsonPropertyName("ignore_unlabeled")]
 	public bool? IgnoreUnlabeled { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("k")]
+	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("relevant_rating_threshold")]
+	[JsonInclude, JsonPropertyName("relevant_rating_threshold")]
 	public int? RelevantRatingThreshold { get; set; }
 }
 

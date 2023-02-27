@@ -27,19 +27,15 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class TaskFailure
 {
-	[JsonInclude]
-	[JsonPropertyName("node_id")]
+	[JsonInclude, JsonPropertyName("node_id")]
 	public string NodeId { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("reason")]
+	[JsonInclude, JsonPropertyName("reason")]
 	public Elastic.Clients.Elasticsearch.ErrorCause Reason { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("status")]
+	[JsonInclude, JsonPropertyName("status")]
 	public string Status { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("task_id")]
+	[JsonInclude, JsonPropertyName("task_id")]
 	public long TaskId { get; init; }
 }

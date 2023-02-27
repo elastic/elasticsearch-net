@@ -27,43 +27,33 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class GetStats
 {
-	[JsonInclude]
-	[JsonPropertyName("current")]
+	[JsonInclude, JsonPropertyName("current")]
 	public long Current { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("exists_time")]
+	[JsonInclude, JsonPropertyName("exists_time")]
 	public Elastic.Clients.Elasticsearch.Duration? ExistsTime { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("exists_time_in_millis")]
+	[JsonInclude, JsonPropertyName("exists_time_in_millis")]
 	public long ExistsTimeInMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("exists_total")]
+	[JsonInclude, JsonPropertyName("exists_total")]
 	public long ExistsTotal { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("missing_time")]
+	[JsonInclude, JsonPropertyName("missing_time")]
 	public Elastic.Clients.Elasticsearch.Duration? MissingTime { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("missing_time_in_millis")]
+	[JsonInclude, JsonPropertyName("missing_time_in_millis")]
 	public long MissingTimeInMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("missing_total")]
+	[JsonInclude, JsonPropertyName("missing_total")]
 	public long MissingTotal { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("time")]
+	[JsonInclude, JsonPropertyName("time")]
 	public Elastic.Clients.Elasticsearch.Duration? Time { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("time_in_millis")]
+	[JsonInclude, JsonPropertyName("time_in_millis")]
 	public long TimeInMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total")]
+	[JsonInclude, JsonPropertyName("total")]
 	public long Total { get; init; }
 }

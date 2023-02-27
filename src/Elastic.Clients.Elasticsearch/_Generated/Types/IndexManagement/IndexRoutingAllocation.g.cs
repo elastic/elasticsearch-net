@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexRoutingAllocation
 {
-	[JsonInclude]
-	[JsonPropertyName("disk")]
+	[JsonInclude, JsonPropertyName("disk")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? Disk { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("enable")]
+	[JsonInclude, JsonPropertyName("enable")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? Enable { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("include")]
+	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? Include { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("initial_recovery")]
+	[JsonInclude, JsonPropertyName("initial_recovery")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? InitialRecovery { get; set; }
 }
 

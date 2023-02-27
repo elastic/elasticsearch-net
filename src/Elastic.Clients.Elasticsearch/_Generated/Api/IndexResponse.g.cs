@@ -25,35 +25,27 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class IndexResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("forced_refresh")]
+	[JsonInclude, JsonPropertyName("forced_refresh")]
 	public bool? ForcedRefresh { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_id")]
+	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_index")]
+	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_primary_term")]
+	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long PrimaryTerm { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("result")]
+	[JsonInclude, JsonPropertyName("result")]
 	public Elastic.Clients.Elasticsearch.Result Result { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_seq_no")]
+	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long SeqNo { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_shards")]
+	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_version")]
+	[JsonInclude, JsonPropertyName("_version")]
 	public long Version { get; init; }
 }
