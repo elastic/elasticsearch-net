@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class TopHitsAggregate : IAggregate
 {
-	[JsonInclude]
-	[JsonPropertyName("hits")]
+	[JsonInclude, JsonPropertyName("hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<object> Hits { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 }

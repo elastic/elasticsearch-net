@@ -27,27 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class KeywordMarkerTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("ignore_case")]
+	[JsonInclude, JsonPropertyName("ignore_case")]
 	public bool? IgnoreCase { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("keywords")]
+	[JsonInclude, JsonPropertyName("keywords")]
 	public ICollection<string>? Keywords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("keywords_path")]
+	[JsonInclude, JsonPropertyName("keywords_path")]
 	public string? KeywordsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("keywords_pattern")]
+	[JsonInclude, JsonPropertyName("keywords_pattern")]
 	public string? KeywordsPattern { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "keyword_marker";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -137,5 +132,11 @@ public sealed partial class KeywordMarkerTokenFilterDescriptor : SerializableDes
 	}
 
 	KeywordMarkerTokenFilter IBuildableDescriptor<KeywordMarkerTokenFilter>.Build() => new()
-	{ IgnoreCase = IgnoreCaseValue, Keywords = KeywordsValue, KeywordsPath = KeywordsPathValue, KeywordsPattern = KeywordsPatternValue, Version = VersionValue };
+	{
+		IgnoreCase = IgnoreCaseValue,
+		Keywords = KeywordsValue,
+		KeywordsPath = KeywordsPathValue,
+		KeywordsPattern = KeywordsPatternValue,
+		Version = VersionValue
+	};
 }

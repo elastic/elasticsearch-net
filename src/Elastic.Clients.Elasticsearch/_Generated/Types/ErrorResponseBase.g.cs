@@ -28,11 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public abstract partial class ErrorResponseBase
 {
-	[JsonInclude]
-	[JsonPropertyName("error")]
+	[JsonInclude, JsonPropertyName("error")]
 	public Elastic.Clients.Elasticsearch.ErrorCause Error { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("status")]
+	[JsonInclude, JsonPropertyName("status")]
 	public int Status { get; init; }
 }

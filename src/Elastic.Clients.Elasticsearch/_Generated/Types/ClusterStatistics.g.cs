@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ClusterStatistics
 {
-	[JsonInclude]
-	[JsonPropertyName("skipped")]
+	[JsonInclude, JsonPropertyName("skipped")]
 	public int Skipped { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("successful")]
+	[JsonInclude, JsonPropertyName("successful")]
 	public int Successful { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total")]
+	[JsonInclude, JsonPropertyName("total")]
 	public int Total { get; init; }
 }

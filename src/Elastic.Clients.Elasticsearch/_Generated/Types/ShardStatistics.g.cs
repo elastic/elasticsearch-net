@@ -27,23 +27,18 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ShardStatistics
 {
-	[JsonInclude]
-	[JsonPropertyName("failed")]
+	[JsonInclude, JsonPropertyName("failed")]
 	public int Failed { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("failures")]
+	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("skipped")]
+	[JsonInclude, JsonPropertyName("skipped")]
 	public int? Skipped { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("successful")]
+	[JsonInclude, JsonPropertyName("successful")]
 	public int Successful { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total")]
+	[JsonInclude, JsonPropertyName("total")]
 	public int Total { get; init; }
 }

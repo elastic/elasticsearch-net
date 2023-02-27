@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsQueryString
 {
-	[JsonInclude]
-	[JsonPropertyName("lenient")]
+	[JsonInclude, JsonPropertyName("lenient")]
 	public bool Lenient { get; set; }
 }
 

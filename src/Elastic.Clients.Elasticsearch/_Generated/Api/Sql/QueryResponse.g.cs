@@ -25,23 +25,18 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Sql;
 public sealed partial class QueryResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("columns")]
+	[JsonInclude, JsonPropertyName("columns")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? Columns { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("cursor")]
+	[JsonInclude, JsonPropertyName("cursor")]
 	public string? Cursor { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public string? Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("is_partial")]
+	[JsonInclude, JsonPropertyName("is_partial")]
 	public bool? IsPartial { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("is_running")]
+	[JsonInclude, JsonPropertyName("is_running")]
 	public bool? IsRunning { get; init; }
 }

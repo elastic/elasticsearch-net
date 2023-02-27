@@ -30,12 +30,10 @@ public sealed partial class IcuFoldingTokenFilter : ITokenFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "icu_folding";
-	[JsonInclude]
-	[JsonPropertyName("unicode_set_filter")]
+	[JsonInclude, JsonPropertyName("unicode_set_filter")]
 	public string UnicodeSetFilter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -79,5 +77,8 @@ public sealed partial class IcuFoldingTokenFilterDescriptor : SerializableDescri
 	}
 
 	IcuFoldingTokenFilter IBuildableDescriptor<IcuFoldingTokenFilter>.Build() => new()
-	{ UnicodeSetFilter = UnicodeSetFilterValue, Version = VersionValue };
+	{
+		UnicodeSetFilter = UnicodeSetFilterValue,
+		Version = VersionValue
+	};
 }

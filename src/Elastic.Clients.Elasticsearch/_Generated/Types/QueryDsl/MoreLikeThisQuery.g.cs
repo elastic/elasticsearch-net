@@ -27,89 +27,68 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class MoreLikeThisQuery : SearchQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("analyzer")]
+	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost_terms")]
+	[JsonInclude, JsonPropertyName("boost_terms")]
 	public double? BoostTerms { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fail_on_unsupported_field")]
+	[JsonInclude, JsonPropertyName("fail_on_unsupported_field")]
 	public bool? FailOnUnsupportedField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public Fields? Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("include")]
+	[JsonInclude, JsonPropertyName("include")]
 	public bool? Include { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("like")]
+	[JsonInclude, JsonPropertyName("like"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Like))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_doc_freq")]
+	[JsonInclude, JsonPropertyName("max_doc_freq")]
 	public int? MaxDocFreq { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_query_terms")]
+	[JsonInclude, JsonPropertyName("max_query_terms")]
 	public int? MaxQueryTerms { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_word_length")]
+	[JsonInclude, JsonPropertyName("max_word_length")]
 	public int? MaxWordLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_doc_freq")]
+	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public int? MinDocFreq { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_term_freq")]
+	[JsonInclude, JsonPropertyName("min_term_freq")]
 	public int? MinTermFreq { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_word_length")]
+	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("minimum_should_match")]
+	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("per_field_analyzer")]
+	[JsonInclude, JsonPropertyName("per_field_analyzer")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("routing")]
+	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("stop_words")]
+	[JsonInclude, JsonPropertyName("stop_words")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? StopWords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("unlike")]
+	[JsonInclude, JsonPropertyName("unlike"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Like))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? Unlike { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version_type")]
+	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 
 	public static implicit operator Query(MoreLikeThisQuery moreLikeThisQuery) => QueryDsl.Query.MoreLikeThis(moreLikeThisQuery);
@@ -336,7 +315,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 		}
 
 		writer.WritePropertyName("like");
-		JsonSerializer.Serialize(writer, LikeValue, options);
+		SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Like>(LikeValue, writer, options);
 		if (MaxDocFreqValue.HasValue)
 		{
 			writer.WritePropertyName("max_doc_freq");
@@ -400,7 +379,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 		if (UnlikeValue is not null)
 		{
 			writer.WritePropertyName("unlike");
-			JsonSerializer.Serialize(writer, UnlikeValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Like>(UnlikeValue, writer, options);
 		}
 
 		if (VersionValue is not null)
@@ -640,7 +619,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		}
 
 		writer.WritePropertyName("like");
-		JsonSerializer.Serialize(writer, LikeValue, options);
+		SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Like>(LikeValue, writer, options);
 		if (MaxDocFreqValue.HasValue)
 		{
 			writer.WritePropertyName("max_doc_freq");
@@ -704,7 +683,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		if (UnlikeValue is not null)
 		{
 			writer.WritePropertyName("unlike");
-			JsonSerializer.Serialize(writer, UnlikeValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Like>(UnlikeValue, writer, options);
 		}
 
 		if (VersionValue is not null)

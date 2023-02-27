@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexSettingBlocks
 {
-	[JsonInclude]
-	[JsonPropertyName("metadata")]
+	[JsonInclude, JsonPropertyName("metadata")]
 	public bool? Metadata { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("read")]
+	[JsonInclude, JsonPropertyName("read")]
 	public bool? Read { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("read_only")]
+	[JsonInclude, JsonPropertyName("read_only")]
 	public bool? ReadOnly { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("read_only_allow_delete")]
+	[JsonInclude, JsonPropertyName("read_only_allow_delete")]
 	public bool? ReadOnlyAllowDelete { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("write")]
+	[JsonInclude, JsonPropertyName("write")]
 	public Union<bool?, string?>? Write { get; set; }
 }
 

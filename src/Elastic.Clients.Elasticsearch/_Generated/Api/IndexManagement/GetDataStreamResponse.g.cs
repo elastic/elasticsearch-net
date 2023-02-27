@@ -25,7 +25,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class GetDataStreamResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("data_streams")]
+	[JsonInclude, JsonPropertyName("data_streams")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStream> DataStreams { get; init; }
 }

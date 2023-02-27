@@ -30,8 +30,7 @@ public sealed partial class LowercaseTokenizer : ITokenizer
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "lowercase";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -65,5 +64,7 @@ public sealed partial class LowercaseTokenizerDescriptor : SerializableDescripto
 	}
 
 	LowercaseTokenizer IBuildableDescriptor<LowercaseTokenizer>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

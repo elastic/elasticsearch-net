@@ -27,7 +27,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexAliases
 {
-	[JsonInclude]
-	[JsonPropertyName("aliases")]
+	[JsonInclude, JsonPropertyName("aliases")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition> Aliases { get; init; }
 }

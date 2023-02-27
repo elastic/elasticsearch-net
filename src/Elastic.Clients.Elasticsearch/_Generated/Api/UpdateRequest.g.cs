@@ -105,33 +105,26 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("detect_noop")]
+	[JsonInclude, JsonPropertyName("detect_noop")]
 	public bool? DetectNoop { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("doc")]
+	[JsonInclude, JsonPropertyName("doc")]
 	[SourceConverter]
 	public TPartialDocument? Doc { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("doc_as_upsert")]
+	[JsonInclude, JsonPropertyName("doc_as_upsert")]
 	public bool? DocAsUpsert { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("scripted_upsert")]
+	[JsonInclude, JsonPropertyName("scripted_upsert")]
 	public bool? ScriptedUpsert { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_source")]
+	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("upsert")]
+	[JsonInclude, JsonPropertyName("upsert")]
 	[SourceConverter]
 	public TDocument? Upsert { get; set; }
 }
