@@ -25,15 +25,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class TermsEnumResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("complete")]
+	[JsonInclude, JsonPropertyName("complete")]
 	public bool Complete { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_shards")]
+	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("terms")]
+	[JsonInclude, JsonPropertyName("terms")]
 	public IReadOnlyCollection<string> Terms { get; init; }
 }

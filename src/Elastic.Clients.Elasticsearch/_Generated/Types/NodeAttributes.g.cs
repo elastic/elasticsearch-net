@@ -27,31 +27,24 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class NodeAttributes
 {
-	[JsonInclude]
-	[JsonPropertyName("attributes")]
+	[JsonInclude, JsonPropertyName("attributes")]
 	public IReadOnlyDictionary<string, string> Attributes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("ephemeral_id")]
+	[JsonInclude, JsonPropertyName("ephemeral_id")]
 	public string EphemeralId { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("external_id")]
+	[JsonInclude, JsonPropertyName("external_id")]
 	public string ExternalId { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public string? Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("roles")]
+	[JsonInclude, JsonPropertyName("roles")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? Roles { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("transport_address")]
+	[JsonInclude, JsonPropertyName("transport_address")]
 	public string TransportAddress { get; init; }
 }

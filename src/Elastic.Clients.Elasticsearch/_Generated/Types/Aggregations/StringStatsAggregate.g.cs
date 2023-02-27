@@ -27,43 +27,33 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class StringStatsAggregate : IAggregate
 {
-	[JsonInclude]
-	[JsonPropertyName("avg_length")]
+	[JsonInclude, JsonPropertyName("avg_length")]
 	public double? AvgLength { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("avg_length_as_string")]
+	[JsonInclude, JsonPropertyName("avg_length_as_string")]
 	public string? AvgLengthAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("count")]
+	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("distribution")]
+	[JsonInclude, JsonPropertyName("distribution")]
 	public IReadOnlyDictionary<string, double>? Distribution { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("entropy")]
+	[JsonInclude, JsonPropertyName("entropy")]
 	public double? Entropy { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_length")]
+	[JsonInclude, JsonPropertyName("max_length")]
 	public int? MaxLength { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_length_as_string")]
+	[JsonInclude, JsonPropertyName("max_length_as_string")]
 	public string? MaxLengthAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_length")]
+	[JsonInclude, JsonPropertyName("min_length")]
 	public int? MinLength { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_length_as_string")]
+	[JsonInclude, JsonPropertyName("min_length_as_string")]
 	public string? MinLengthAsString { get; init; }
 }

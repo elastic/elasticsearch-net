@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class PatternCaptureTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("patterns")]
+	[JsonInclude, JsonPropertyName("patterns")]
 	public ICollection<string> Patterns { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("preserve_original")]
+	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "pattern_capture";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -97,5 +94,9 @@ public sealed partial class PatternCaptureTokenFilterDescriptor : SerializableDe
 	}
 
 	PatternCaptureTokenFilter IBuildableDescriptor<PatternCaptureTokenFilter>.Build() => new()
-	{ Patterns = PatternsValue, PreserveOriginal = PreserveOriginalValue, Version = VersionValue };
+	{
+		Patterns = PatternsValue,
+		PreserveOriginal = PreserveOriginalValue,
+		Version = VersionValue
+	};
 }

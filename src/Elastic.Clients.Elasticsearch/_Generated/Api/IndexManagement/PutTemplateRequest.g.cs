@@ -63,28 +63,22 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("aliases")]
+	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_patterns")]
+	[JsonInclude, JsonPropertyName("index_patterns"), SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? IndexPatterns { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("mappings")]
+	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("order")]
+	[JsonInclude, JsonPropertyName("order")]
 	public int? Order { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("settings")]
+	[JsonInclude, JsonPropertyName("settings")]
 	public IDictionary<string, object>? Settings { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 }
 
@@ -194,7 +188,7 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 		if (IndexPatternsValue is not null)
 		{
 			writer.WritePropertyName("index_patterns");
-			JsonSerializer.Serialize(writer, IndexPatternsValue, options);
+			SingleOrManySerializationHelper.Serialize<string>(IndexPatternsValue, writer, options);
 		}
 
 		if (MappingsDescriptor is not null)

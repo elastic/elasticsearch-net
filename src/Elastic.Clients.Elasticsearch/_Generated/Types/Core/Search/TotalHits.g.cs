@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class TotalHits
 {
-	[JsonInclude]
-	[JsonPropertyName("relation")]
+	[JsonInclude, JsonPropertyName("relation")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation Relation { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("value")]
+	[JsonInclude, JsonPropertyName("value")]
 	public long Value { get; init; }
 }

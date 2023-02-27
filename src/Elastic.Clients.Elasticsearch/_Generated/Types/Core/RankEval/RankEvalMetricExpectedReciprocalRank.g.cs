@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 public sealed partial class RankEvalMetricExpectedReciprocalRank
 {
-	[JsonInclude]
-	[JsonPropertyName("k")]
+	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("maximum_relevance")]
+	[JsonInclude, JsonPropertyName("maximum_relevance")]
 	public int MaximumRelevance { get; set; }
 }
 

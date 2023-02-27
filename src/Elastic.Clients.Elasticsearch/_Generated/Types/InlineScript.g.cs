@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class InlineScript
 {
-	[JsonInclude]
-	[JsonPropertyName("lang")]
+	[JsonInclude, JsonPropertyName("lang")]
 	public Elastic.Clients.Elasticsearch.ScriptLanguage? Language { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("options")]
+	[JsonInclude, JsonPropertyName("options")]
 	public IDictionary<string, string>? Options { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("params")]
+	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("source")]
+	[JsonInclude, JsonPropertyName("source")]
 	public string Source { get; set; }
 }
 

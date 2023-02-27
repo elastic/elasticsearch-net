@@ -25,16 +25,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class SearchShardsResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("indices")]
+	[JsonInclude, JsonPropertyName("indices")]
 	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex> Indices { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("nodes")]
+	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.NodeAttributes> Nodes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("shards")]
+	[JsonInclude, JsonPropertyName("shards")]
 	public IReadOnlyCollection<IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard>> Shards { get; init; }
 }

@@ -36,68 +36,52 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 	internal override bool SupportsBody => true;
-	[JsonInclude]
-	[JsonPropertyName("catalog")]
+	[JsonInclude, JsonPropertyName("catalog")]
 	public string? Catalog { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("columnar")]
+	[JsonInclude, JsonPropertyName("columnar")]
 	public bool? Columnar { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("cursor")]
+	[JsonInclude, JsonPropertyName("cursor")]
 	public string? Cursor { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fetch_size")]
+	[JsonInclude, JsonPropertyName("fetch_size")]
 	public int? FetchSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public string? Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("request_timeout")]
+	[JsonInclude, JsonPropertyName("request_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? RequestTimeout { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("page_timeout")]
+	[JsonInclude, JsonPropertyName("page_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? PageTimeout { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("time_zone")]
+	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("field_multi_value_leniency")]
+	[JsonInclude, JsonPropertyName("field_multi_value_leniency")]
 	public bool? FieldMultiValueLeniency { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("runtime_mappings")]
+	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("wait_for_completion_timeout")]
+	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("params")]
+	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("keep_alive")]
+	[JsonInclude, JsonPropertyName("keep_alive")]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("keep_on_completion")]
+	[JsonInclude, JsonPropertyName("keep_on_completion")]
 	public bool? KeepOnCompletion { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_using_frozen")]
+	[JsonInclude, JsonPropertyName("index_using_frozen")]
 	public bool? IndexUsingFrozen { get; set; }
 }
 

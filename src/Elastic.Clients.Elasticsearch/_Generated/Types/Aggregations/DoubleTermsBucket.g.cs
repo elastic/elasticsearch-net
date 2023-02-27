@@ -32,20 +32,16 @@ public sealed partial class DoubleTermsBucket : AggregateDictionary
 	{
 	}
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count")]
+	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("doc_count_error")]
+	[JsonInclude, JsonPropertyName("doc_count_error")]
 	public long? DocCountError { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key")]
+	[JsonInclude, JsonPropertyName("key")]
 	public double Key { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("key_as_string")]
+	[JsonInclude, JsonPropertyName("key_as_string")]
 	public string? KeyAsString { get; init; }
 }
 
@@ -102,7 +98,12 @@ internal sealed class DoubleTermsBucketConverter : JsonConverter<DoubleTermsBuck
 		}
 
 		return new DoubleTermsBucket(subAggs)
-		{ DocCount = docCount, DocCountError = docCountError, Key = key, KeyAsString = keyAsString };
+		{
+			DocCount = docCount,
+			DocCountError = docCountError,
+			Key = key,
+			KeyAsString = keyAsString
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, DoubleTermsBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

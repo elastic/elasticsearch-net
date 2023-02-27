@@ -27,7 +27,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ShardsTotalStats
 {
-	[JsonInclude]
-	[JsonPropertyName("total_count")]
+	[JsonInclude, JsonPropertyName("total_count")]
 	public long TotalCount { get; init; }
 }
