@@ -377,8 +377,10 @@ internal sealed class SegmentSortModeConverter : JsonConverter<SegmentSortMode>
 		switch (enumString)
 		{
 			case "min":
+			case "MIN":
 				return SegmentSortMode.Min;
 			case "max":
+			case "MAX":
 				return SegmentSortMode.Max;
 		}
 
@@ -419,8 +421,10 @@ internal sealed class SegmentSortOrderConverter : JsonConverter<SegmentSortOrder
 		switch (enumString)
 		{
 			case "desc":
+			case "DESC":
 				return SegmentSortOrder.Desc;
 			case "asc":
+			case "ASC":
 				return SegmentSortOrder.Asc;
 		}
 
@@ -537,8 +541,10 @@ internal sealed class TranslogDurabilityConverter : JsonConverter<TranslogDurabi
 		switch (enumString)
 		{
 			case "request":
+			case "REQUEST":
 				return TranslogDurability.Request;
 			case "async":
+			case "ASYNC":
 				return TranslogDurability.Async;
 		}
 
