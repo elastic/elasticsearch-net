@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 public sealed partial class QuestionAnsweringInferenceUpdateOptions
 {
-	[JsonInclude]
-	[JsonPropertyName("max_answer_length")]
+	[JsonInclude, JsonPropertyName("max_answer_length")]
 	public int? MaxAnswerLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("num_top_classes")]
+	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("question")]
+	[JsonInclude, JsonPropertyName("question")]
 	public string Question { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("results_field")]
+	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tokenization")]
+	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 
 	public static implicit operator InferenceConfigUpdate(QuestionAnsweringInferenceUpdateOptions questionAnsweringInferenceUpdateOptions) => Ml.InferenceConfigUpdate.QuestionAnswering(questionAnsweringInferenceUpdateOptions);

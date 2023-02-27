@@ -27,28 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 public sealed partial class ZeroShotClassificationInferenceOptions
 {
-	[JsonInclude]
-	[JsonPropertyName("classification_labels")]
+	[JsonInclude, JsonPropertyName("classification_labels")]
 	public ICollection<string> ClassificationLabels { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("hypothesis_template")]
+	[JsonInclude, JsonPropertyName("hypothesis_template")]
 	public string? HypothesisTemplate { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("labels")]
+	[JsonInclude, JsonPropertyName("labels")]
 	public ICollection<string>? Labels { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("multi_label")]
+	[JsonInclude, JsonPropertyName("multi_label")]
 	public bool? MultiLabel { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("results_field")]
+	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tokenization")]
+	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
 	public static implicit operator InferenceConfigCreate(ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => Ml.InferenceConfigCreate.ZeroShotClassification(zeroShotClassificationInferenceOptions);

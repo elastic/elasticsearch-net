@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class PhraseSuggestCollateQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("source")]
+	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 }
 

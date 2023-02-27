@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsAnalyze
 {
-	[JsonInclude]
-	[JsonPropertyName("max_token_count")]
+	[JsonInclude, JsonPropertyName("max_token_count")]
 	public int? MaxTokenCount { get; set; }
 }
 

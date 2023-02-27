@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 public sealed partial class RankEvalRequestItem
 {
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("params")]
+	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ratings")]
+	[JsonInclude, JsonPropertyName("ratings")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> Ratings { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("request")]
+	[JsonInclude, JsonPropertyName("request")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? Request { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("template_id")]
+	[JsonInclude, JsonPropertyName("template_id")]
 	public Elastic.Clients.Elasticsearch.Id? TemplateId { get; set; }
 }
 

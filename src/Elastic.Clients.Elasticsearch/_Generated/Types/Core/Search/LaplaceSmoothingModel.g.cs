@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class LaplaceSmoothingModel
 {
-	[JsonInclude]
-	[JsonPropertyName("alpha")]
+	[JsonInclude, JsonPropertyName("alpha")]
 	public double Alpha { get; set; }
 
 	public static implicit operator SmoothingModel(LaplaceSmoothingModel laplaceSmoothingModel) => Core.Search.SmoothingModel.Laplace(laplaceSmoothingModel);

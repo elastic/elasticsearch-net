@@ -75,48 +75,37 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	[JsonIgnore]
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("date_detection")]
+	[JsonInclude, JsonPropertyName("date_detection")]
 	public bool? DateDetection { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dynamic")]
+	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dynamic_date_formats")]
+	[JsonInclude, JsonPropertyName("dynamic_date_formats")]
 	public ICollection<string>? DynamicDateFormats { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dynamic_templates")]
-	public Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplates { get; set; }
+	[JsonInclude, JsonPropertyName("dynamic_templates"), SingleOrManyCollectionConverter(typeof(IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>))]
+	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_field_names")]
+	[JsonInclude, JsonPropertyName("_field_names")]
 	public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_meta")]
+	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("numeric_detection")]
+	[JsonInclude, JsonPropertyName("numeric_detection")]
 	public bool? NumericDetection { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("properties")]
+	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_routing")]
+	[JsonInclude, JsonPropertyName("_routing")]
 	public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("_source")]
+	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("runtime")]
+	[JsonInclude, JsonPropertyName("runtime")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 }
 
@@ -172,7 +161,7 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 
-	private Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
+	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
 
 	private bool? NumericDetectionValue { get; set; }
 
@@ -276,7 +265,7 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
-	public PutMappingRequestDescriptor<TDocument> DynamicTemplates(Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
+	public PutMappingRequestDescriptor<TDocument> DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;
@@ -392,7 +381,7 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 		if (DynamicTemplatesValue is not null)
 		{
 			writer.WritePropertyName("dynamic_templates");
-			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
+			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(DynamicTemplatesValue, writer, options);
 		}
 
 		if (NumericDetectionValue.HasValue)
@@ -469,7 +458,7 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 
-	private Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplatesValue { get; set; }
+	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
 
 	private bool? NumericDetectionValue { get; set; }
 
@@ -573,7 +562,7 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 		return Self;
 	}
 
-	public PutMappingRequestDescriptor DynamicTemplates(Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates)
+	public PutMappingRequestDescriptor DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;
@@ -689,7 +678,7 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 		if (DynamicTemplatesValue is not null)
 		{
 			writer.WritePropertyName("dynamic_templates");
-			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
+			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(DynamicTemplatesValue, writer, options);
 		}
 
 		if (NumericDetectionValue.HasValue)

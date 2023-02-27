@@ -27,51 +27,39 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.FieldCaps;
 public sealed partial class FieldCapability
 {
-	[JsonInclude]
-	[JsonPropertyName("aggregatable")]
+	[JsonInclude, JsonPropertyName("aggregatable")]
 	public bool Aggregatable { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("indices")]
+	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("metadata_field")]
+	[JsonInclude, JsonPropertyName("metadata_field")]
 	public bool? MetadataField { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("metric_conflicts_indices")]
+	[JsonInclude, JsonPropertyName("metric_conflicts_indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName>? MetricConflictsIndices { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("non_aggregatable_indices")]
+	[JsonInclude, JsonPropertyName("non_aggregatable_indices")]
 	public Elastic.Clients.Elasticsearch.Indices? NonAggregatableIndices { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("non_dimension_indices")]
+	[JsonInclude, JsonPropertyName("non_dimension_indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName>? NonDimensionIndices { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("non_searchable_indices")]
+	[JsonInclude, JsonPropertyName("non_searchable_indices")]
 	public Elastic.Clients.Elasticsearch.Indices? NonSearchableIndices { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("searchable")]
+	[JsonInclude, JsonPropertyName("searchable")]
 	public bool Searchable { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("time_series_dimension")]
+	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("time_series_metric")]
+	[JsonInclude, JsonPropertyName("time_series_metric")]
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }
 }

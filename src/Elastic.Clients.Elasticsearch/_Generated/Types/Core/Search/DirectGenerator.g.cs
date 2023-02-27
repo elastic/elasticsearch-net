@@ -27,48 +27,37 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class DirectGenerator
 {
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_edits")]
+	[JsonInclude, JsonPropertyName("max_edits")]
 	public int? MaxEdits { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_inspections")]
+	[JsonInclude, JsonPropertyName("max_inspections")]
 	public float? MaxInspections { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_term_freq")]
+	[JsonInclude, JsonPropertyName("max_term_freq")]
 	public float? MaxTermFreq { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_doc_freq")]
+	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public float? MinDocFreq { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_word_length")]
+	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("post_filter")]
+	[JsonInclude, JsonPropertyName("post_filter")]
 	public string? PostFilter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("pre_filter")]
+	[JsonInclude, JsonPropertyName("pre_filter")]
 	public string? PreFilter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("prefix_length")]
+	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("suggest_mode")]
+	[JsonInclude, JsonPropertyName("suggest_mode")]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 }
 

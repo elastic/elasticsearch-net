@@ -27,19 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class FingerprintTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("max_output_size")]
+	[JsonInclude, JsonPropertyName("max_output_size")]
 	public int? MaxOutputSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("separator")]
+	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "fingerprint";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -101,5 +98,9 @@ public sealed partial class FingerprintTokenFilterDescriptor : SerializableDescr
 	}
 
 	FingerprintTokenFilter IBuildableDescriptor<FingerprintTokenFilter>.Build() => new()
-	{ MaxOutputSize = MaxOutputSizeValue, Separator = SeparatorValue, Version = VersionValue };
+	{
+		MaxOutputSize = MaxOutputSizeValue,
+		Separator = SeparatorValue,
+		Version = VersionValue
+	};
 }

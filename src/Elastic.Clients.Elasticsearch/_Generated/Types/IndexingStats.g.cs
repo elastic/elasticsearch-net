@@ -27,59 +27,45 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class IndexingStats
 {
-	[JsonInclude]
-	[JsonPropertyName("delete_current")]
+	[JsonInclude, JsonPropertyName("delete_current")]
 	public long DeleteCurrent { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("delete_time")]
+	[JsonInclude, JsonPropertyName("delete_time")]
 	public Elastic.Clients.Elasticsearch.Duration? DeleteTime { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("delete_time_in_millis")]
+	[JsonInclude, JsonPropertyName("delete_time_in_millis")]
 	public long DeleteTimeInMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("delete_total")]
+	[JsonInclude, JsonPropertyName("delete_total")]
 	public long DeleteTotal { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_current")]
+	[JsonInclude, JsonPropertyName("index_current")]
 	public long IndexCurrent { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_failed")]
+	[JsonInclude, JsonPropertyName("index_failed")]
 	public long IndexFailed { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_time")]
+	[JsonInclude, JsonPropertyName("index_time")]
 	public Elastic.Clients.Elasticsearch.Duration? IndexTime { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_time_in_millis")]
+	[JsonInclude, JsonPropertyName("index_time_in_millis")]
 	public long IndexTimeInMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_total")]
+	[JsonInclude, JsonPropertyName("index_total")]
 	public long IndexTotal { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("is_throttled")]
+	[JsonInclude, JsonPropertyName("is_throttled")]
 	public bool IsThrottled { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("noop_update_total")]
+	[JsonInclude, JsonPropertyName("noop_update_total")]
 	public long NoopUpdateTotal { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttle_time")]
+	[JsonInclude, JsonPropertyName("throttle_time")]
 	public Elastic.Clients.Elasticsearch.Duration? ThrottleTime { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttle_time_in_millis")]
+	[JsonInclude, JsonPropertyName("throttle_time_in_millis")]
 	public long ThrottleTimeInMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("types")]
+	[JsonInclude, JsonPropertyName("types")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? Types { get; init; }
 }

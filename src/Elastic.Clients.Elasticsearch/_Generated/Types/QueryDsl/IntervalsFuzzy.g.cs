@@ -27,28 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class IntervalsFuzzy
 {
-	[JsonInclude]
-	[JsonPropertyName("analyzer")]
+	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fuzziness")]
+	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("prefix_length")]
+	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("term")]
+	[JsonInclude, JsonPropertyName("term")]
 	public string Term { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("transpositions")]
+	[JsonInclude, JsonPropertyName("transpositions")]
 	public bool? Transpositions { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("use_field")]
+	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
 

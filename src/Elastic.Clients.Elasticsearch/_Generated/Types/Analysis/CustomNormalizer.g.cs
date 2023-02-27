@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class CustomNormalizer : INormalizer
 {
-	[JsonInclude]
-	[JsonPropertyName("char_filter")]
+	[JsonInclude, JsonPropertyName("char_filter")]
 	public ICollection<string>? CharFilter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter")]
 	public ICollection<string>? Filter { get; set; }
 
 	[JsonInclude]
@@ -84,5 +82,8 @@ public sealed partial class CustomNormalizerDescriptor : SerializableDescriptor<
 	}
 
 	CustomNormalizer IBuildableDescriptor<CustomNormalizer>.Build() => new()
-	{ CharFilter = CharFilterValue, Filter = FilterValue };
+	{
+		CharFilter = CharFilterValue,
+		Filter = FilterValue
+	};
 }

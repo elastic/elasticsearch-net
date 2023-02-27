@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class SpanWithinQuery : SearchQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("big")]
+	[JsonInclude, JsonPropertyName("big")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("little")]
+	[JsonInclude, JsonPropertyName("little")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
 }
 

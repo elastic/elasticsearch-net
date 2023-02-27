@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ScriptSort
 {
-	[JsonInclude]
-	[JsonPropertyName("mode")]
+	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("nested")]
+	[JsonInclude, JsonPropertyName("nested")]
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("order")]
+	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.ScriptSortType? Type { get; set; }
 
 	public static implicit operator SortOptions(ScriptSort scriptSort) => SortOptions.Script(scriptSort);

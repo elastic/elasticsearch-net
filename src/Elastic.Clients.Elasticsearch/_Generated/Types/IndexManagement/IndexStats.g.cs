@@ -27,79 +27,60 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexStats
 {
-	[JsonInclude]
-	[JsonPropertyName("bulk")]
+	[JsonInclude, JsonPropertyName("bulk")]
 	public Elastic.Clients.Elasticsearch.BulkStats? Bulk { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("completion")]
+	[JsonInclude, JsonPropertyName("completion")]
 	public Elastic.Clients.Elasticsearch.CompletionStats? Completion { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("docs")]
+	[JsonInclude, JsonPropertyName("docs")]
 	public Elastic.Clients.Elasticsearch.DocStats? Docs { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("fielddata")]
+	[JsonInclude, JsonPropertyName("fielddata")]
 	public Elastic.Clients.Elasticsearch.FielddataStats? Fielddata { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("flush")]
+	[JsonInclude, JsonPropertyName("flush")]
 	public Elastic.Clients.Elasticsearch.FlushStats? Flush { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("get")]
+	[JsonInclude, JsonPropertyName("get")]
 	public Elastic.Clients.Elasticsearch.GetStats? Get { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("indexing")]
+	[JsonInclude, JsonPropertyName("indexing")]
 	public Elastic.Clients.Elasticsearch.IndexingStats? Indexing { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("indices")]
+	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats? Indices { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("merges")]
+	[JsonInclude, JsonPropertyName("merges")]
 	public Elastic.Clients.Elasticsearch.MergesStats? Merges { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("query_cache")]
+	[JsonInclude, JsonPropertyName("query_cache")]
 	public Elastic.Clients.Elasticsearch.QueryCacheStats? QueryCache { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("recovery")]
+	[JsonInclude, JsonPropertyName("recovery")]
 	public Elastic.Clients.Elasticsearch.RecoveryStats? Recovery { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("refresh")]
+	[JsonInclude, JsonPropertyName("refresh")]
 	public Elastic.Clients.Elasticsearch.RefreshStats? Refresh { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("request_cache")]
+	[JsonInclude, JsonPropertyName("request_cache")]
 	public Elastic.Clients.Elasticsearch.RequestCacheStats? RequestCache { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("search")]
+	[JsonInclude, JsonPropertyName("search")]
 	public Elastic.Clients.Elasticsearch.SearchStats? Search { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("segments")]
+	[JsonInclude, JsonPropertyName("segments")]
 	public Elastic.Clients.Elasticsearch.SegmentsStats? Segments { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("shard_stats")]
+	[JsonInclude, JsonPropertyName("shard_stats")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? ShardStats { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("store")]
+	[JsonInclude, JsonPropertyName("store")]
 	public Elastic.Clients.Elasticsearch.StoreStats? Store { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("translog")]
+	[JsonInclude, JsonPropertyName("translog")]
 	public Elastic.Clients.Elasticsearch.TranslogStats? Translog { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("warmer")]
+	[JsonInclude, JsonPropertyName("warmer")]
 	public Elastic.Clients.Elasticsearch.WarmerStats? Warmer { get; init; }
 }

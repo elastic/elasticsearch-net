@@ -27,7 +27,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class InnerHitsResult
 {
-	[JsonInclude]
-	[JsonPropertyName("hits")]
+	[JsonInclude, JsonPropertyName("hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<object> Hits { get; init; }
 }

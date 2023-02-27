@@ -85,7 +85,16 @@ internal sealed class ErrorCauseConverter : JsonConverter<ErrorCause>
 			}
 		}
 
-		return new ErrorCause { CausedBy = causedBy, Reason = reason, RootCause = rootCause, StackTrace = stackTrace, Suppressed = suppressed, Type = type, Metadata = additionalProperties };
+		return new ErrorCause
+		{
+			CausedBy = causedBy,
+			Reason = reason,
+			RootCause = rootCause,
+			StackTrace = stackTrace,
+			Suppressed = suppressed,
+			Type = type,
+			Metadata = additionalProperties
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, ErrorCause value, JsonSerializerOptions options)

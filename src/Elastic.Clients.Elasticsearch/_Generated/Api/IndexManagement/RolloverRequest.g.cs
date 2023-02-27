@@ -67,20 +67,16 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("aliases")]
+	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("conditions")]
+	[JsonInclude, JsonPropertyName("conditions")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? Conditions { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("mappings")]
+	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("settings")]
+	[JsonInclude, JsonPropertyName("settings")]
 	public IDictionary<string, object>? Settings { get; set; }
 }
 

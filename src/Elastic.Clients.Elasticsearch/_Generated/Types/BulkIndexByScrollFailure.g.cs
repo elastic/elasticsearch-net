@@ -27,23 +27,18 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class BulkIndexByScrollFailure
 {
-	[JsonInclude]
-	[JsonPropertyName("cause")]
+	[JsonInclude, JsonPropertyName("cause")]
 	public Elastic.Clients.Elasticsearch.ErrorCause Cause { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("index")]
+	[JsonInclude, JsonPropertyName("index")]
 	public string Index { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("status")]
+	[JsonInclude, JsonPropertyName("status")]
 	public int Status { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }
 }

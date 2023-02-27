@@ -27,35 +27,28 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class ShingleTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("filler_token")]
+	[JsonInclude, JsonPropertyName("filler_token")]
 	public string? FillerToken { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_shingle_size")]
+	[JsonInclude, JsonPropertyName("max_shingle_size")]
 	public Union<int?, string?>? MaxShingleSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_shingle_size")]
+	[JsonInclude, JsonPropertyName("min_shingle_size")]
 	public Union<int?, string?>? MinShingleSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("output_unigrams")]
+	[JsonInclude, JsonPropertyName("output_unigrams")]
 	public bool? OutputUnigrams { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("output_unigrams_if_no_shingles")]
+	[JsonInclude, JsonPropertyName("output_unigrams_if_no_shingles")]
 	public bool? OutputUnigramsIfNoShingles { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("token_separator")]
+	[JsonInclude, JsonPropertyName("token_separator")]
 	public string? TokenSeparator { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "shingle";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -173,5 +166,13 @@ public sealed partial class ShingleTokenFilterDescriptor : SerializableDescripto
 	}
 
 	ShingleTokenFilter IBuildableDescriptor<ShingleTokenFilter>.Build() => new()
-	{ FillerToken = FillerTokenValue, MaxShingleSize = MaxShingleSizeValue, MinShingleSize = MinShingleSizeValue, OutputUnigrams = OutputUnigramsValue, OutputUnigramsIfNoShingles = OutputUnigramsIfNoShinglesValue, TokenSeparator = TokenSeparatorValue, Version = VersionValue };
+	{
+		FillerToken = FillerTokenValue,
+		MaxShingleSize = MaxShingleSizeValue,
+		MinShingleSize = MinShingleSizeValue,
+		OutputUnigrams = OutputUnigramsValue,
+		OutputUnigramsIfNoShingles = OutputUnigramsIfNoShinglesValue,
+		TokenSeparator = TokenSeparatorValue,
+		Version = VersionValue
+	};
 }

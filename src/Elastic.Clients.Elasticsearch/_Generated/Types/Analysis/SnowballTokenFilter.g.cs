@@ -27,15 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class SnowballTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("language")]
+	[JsonInclude, JsonPropertyName("language")]
 	public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "snowball";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -79,5 +77,8 @@ public sealed partial class SnowballTokenFilterDescriptor : SerializableDescript
 	}
 
 	SnowballTokenFilter IBuildableDescriptor<SnowballTokenFilter>.Build() => new()
-	{ Language = LanguageValue, Version = VersionValue };
+	{
+		Language = LanguageValue,
+		Version = VersionValue
+	};
 }

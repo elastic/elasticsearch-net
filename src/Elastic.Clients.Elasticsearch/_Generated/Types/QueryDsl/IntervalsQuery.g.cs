@@ -53,16 +53,13 @@ public sealed partial class IntervalsQuery : SearchQuery
 	public static IntervalsQuery Match(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => new IntervalsQuery(field, "match", intervalsMatch);
 	public static IntervalsQuery Prefix(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => new IntervalsQuery(field, "prefix", intervalsPrefix);
 	public static IntervalsQuery Wildcard(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => new IntervalsQuery(field, "wildcard", intervalsWildcard);
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(IntervalsQuery intervalsQuery) => QueryDsl.Query.Intervals(intervalsQuery);

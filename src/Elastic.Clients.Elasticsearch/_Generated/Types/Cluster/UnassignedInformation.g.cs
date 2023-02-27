@@ -27,31 +27,24 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class UnassignedInformation
 {
-	[JsonInclude]
-	[JsonPropertyName("allocation_status")]
+	[JsonInclude, JsonPropertyName("allocation_status")]
 	public string? AllocationStatus { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("at")]
+	[JsonInclude, JsonPropertyName("at")]
 	public DateTimeOffset At { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("delayed")]
+	[JsonInclude, JsonPropertyName("delayed")]
 	public bool? Delayed { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("details")]
+	[JsonInclude, JsonPropertyName("details")]
 	public string? Details { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("failed_allocation_attempts")]
+	[JsonInclude, JsonPropertyName("failed_allocation_attempts")]
 	public int? FailedAllocationAttempts { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("last_allocation_status")]
+	[JsonInclude, JsonPropertyName("last_allocation_status")]
 	public string? LastAllocationStatus { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("reason")]
+	[JsonInclude, JsonPropertyName("reason")]
 	public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason Reason { get; init; }
 }

@@ -2250,7 +2250,7 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		if (RoutingPathValue is not null)
 		{
 			writer.WritePropertyName("routing_path");
-			JsonSerializer.Serialize(writer, RoutingPathValue, options);
+			SingleOrManySerializationHelper.Serialize<string>(RoutingPathValue, writer, options);
 		}
 
 		if (SearchDescriptor is not null)
@@ -3783,7 +3783,7 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		if (RoutingPathValue is not null)
 		{
 			writer.WritePropertyName("routing_path");
-			JsonSerializer.Serialize(writer, RoutingPathValue, options);
+			SingleOrManySerializationHelper.Serialize<string>(RoutingPathValue, writer, options);
 		}
 
 		if (SearchDescriptor is not null)

@@ -27,55 +27,42 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.ReindexRethrottle;
 public sealed partial class ReindexStatus
 {
-	[JsonInclude]
-	[JsonPropertyName("batches")]
+	[JsonInclude, JsonPropertyName("batches")]
 	public long Batches { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("created")]
+	[JsonInclude, JsonPropertyName("created")]
 	public long Created { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("deleted")]
+	[JsonInclude, JsonPropertyName("deleted")]
 	public long Deleted { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("noops")]
+	[JsonInclude, JsonPropertyName("noops")]
 	public long Noops { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("requests_per_second")]
+	[JsonInclude, JsonPropertyName("requests_per_second")]
 	public float RequestsPerSecond { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("retries")]
+	[JsonInclude, JsonPropertyName("retries")]
 	public Elastic.Clients.Elasticsearch.Retries Retries { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttled")]
+	[JsonInclude, JsonPropertyName("throttled")]
 	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttled_millis")]
+	[JsonInclude, JsonPropertyName("throttled_millis")]
 	public long ThrottledMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttled_until")]
+	[JsonInclude, JsonPropertyName("throttled_until")]
 	public Elastic.Clients.Elasticsearch.Duration? ThrottledUntil { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttled_until_millis")]
+	[JsonInclude, JsonPropertyName("throttled_until_millis")]
 	public long ThrottledUntilMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total")]
+	[JsonInclude, JsonPropertyName("total")]
 	public long Total { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("updated")]
+	[JsonInclude, JsonPropertyName("updated")]
 	public long Updated { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("version_conflicts")]
+	[JsonInclude, JsonPropertyName("version_conflicts")]
 	public long VersionConflicts { get; init; }
 }

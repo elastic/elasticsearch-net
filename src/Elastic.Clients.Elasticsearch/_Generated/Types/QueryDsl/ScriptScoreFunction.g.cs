@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class ScriptScoreFunction
 {
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
 	public static implicit operator FunctionScore(ScriptScoreFunction scriptScoreFunction) => QueryDsl.FunctionScore.ScriptScore(scriptScoreFunction);

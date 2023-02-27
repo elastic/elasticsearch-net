@@ -27,19 +27,15 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class RecoveryStats
 {
-	[JsonInclude]
-	[JsonPropertyName("current_as_source")]
+	[JsonInclude, JsonPropertyName("current_as_source")]
 	public long CurrentAsSource { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("current_as_target")]
+	[JsonInclude, JsonPropertyName("current_as_target")]
 	public long CurrentAsTarget { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttle_time")]
+	[JsonInclude, JsonPropertyName("throttle_time")]
 	public Elastic.Clients.Elasticsearch.Duration? ThrottleTime { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttle_time_in_millis")]
+	[JsonInclude, JsonPropertyName("throttle_time_in_millis")]
 	public long ThrottleTimeInMillis { get; init; }
 }

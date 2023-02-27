@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class FieldAndFormat
 {
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("format")]
+	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("include_unmapped")]
+	[JsonInclude, JsonPropertyName("include_unmapped")]
 	public bool? IncludeUnmapped { get; set; }
 }
 

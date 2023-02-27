@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class FetchProfileDebug
 {
-	[JsonInclude]
-	[JsonPropertyName("fast_path")]
+	[JsonInclude, JsonPropertyName("fast_path")]
 	public int? FastPath { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("stored_fields")]
+	[JsonInclude, JsonPropertyName("stored_fields")]
 	public IReadOnlyCollection<string>? StoredFields { get; init; }
 }

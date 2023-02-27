@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class NestedSortValue
 {
-	[JsonInclude]
-	[JsonPropertyName("filter")]
+	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_children")]
+	[JsonInclude, JsonPropertyName("max_children")]
 	public int? MaxChildren { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("nested")]
+	[JsonInclude, JsonPropertyName("nested")]
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("path")]
+	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field Path { get; set; }
 }
 
