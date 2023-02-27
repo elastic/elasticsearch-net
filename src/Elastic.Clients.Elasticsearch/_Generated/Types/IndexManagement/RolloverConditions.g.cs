@@ -27,52 +27,40 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class RolloverConditions
 {
-	[JsonInclude]
-	[JsonPropertyName("max_age")]
+	[JsonInclude, JsonPropertyName("max_age")]
 	public Elastic.Clients.Elasticsearch.Duration? MaxAge { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_age_millis")]
+	[JsonInclude, JsonPropertyName("max_age_millis")]
 	public long? MaxAgeMillis { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_docs")]
+	[JsonInclude, JsonPropertyName("max_docs")]
 	public long? MaxDocs { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_primary_shard_docs")]
+	[JsonInclude, JsonPropertyName("max_primary_shard_docs")]
 	public long? MaxPrimaryShardDocs { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_primary_shard_size")]
+	[JsonInclude, JsonPropertyName("max_primary_shard_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_size")]
+	[JsonInclude, JsonPropertyName("max_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_size_bytes")]
+	[JsonInclude, JsonPropertyName("max_size_bytes")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxSizeBytes { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_age")]
+	[JsonInclude, JsonPropertyName("min_age")]
 	public Elastic.Clients.Elasticsearch.Duration? MinAge { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_docs")]
+	[JsonInclude, JsonPropertyName("min_docs")]
 	public long? MinDocs { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_primary_shard_docs")]
+	[JsonInclude, JsonPropertyName("min_primary_shard_docs")]
 	public long? MinPrimaryShardDocs { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_primary_shard_size")]
+	[JsonInclude, JsonPropertyName("min_primary_shard_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MinPrimaryShardSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_size")]
+	[JsonInclude, JsonPropertyName("min_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MinSize { get; set; }
 }
 

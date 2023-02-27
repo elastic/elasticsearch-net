@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class CompositeAggregate : IAggregate
 {
-	[JsonInclude]
-	[JsonPropertyName("after_key")]
+	[JsonInclude, JsonPropertyName("after_key")]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? AfterKey { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("buckets")]
+	[JsonInclude, JsonPropertyName("buckets")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.CompositeBucket> Buckets { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 }

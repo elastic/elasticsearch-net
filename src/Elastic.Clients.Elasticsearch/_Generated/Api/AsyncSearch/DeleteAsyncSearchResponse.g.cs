@@ -25,7 +25,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 public sealed partial class DeleteAsyncSearchResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("acknowledged")]
+	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
 }

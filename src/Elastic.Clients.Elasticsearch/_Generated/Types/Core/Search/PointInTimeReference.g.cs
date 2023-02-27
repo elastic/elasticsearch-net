@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class PointInTimeReference
 {
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("keep_alive")]
+	[JsonInclude, JsonPropertyName("keep_alive")]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 }
 

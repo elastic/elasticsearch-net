@@ -30,8 +30,7 @@ public sealed partial class LetterTokenizer : ITokenizer
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "letter";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -65,5 +64,7 @@ public sealed partial class LetterTokenizerDescriptor : SerializableDescriptor<L
 	}
 
 	LetterTokenizer IBuildableDescriptor<LetterTokenizer>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

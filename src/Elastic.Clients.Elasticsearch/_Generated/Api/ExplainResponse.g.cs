@@ -25,23 +25,18 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ExplainResponse<TDocument> : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("explanation")]
+	[JsonInclude, JsonPropertyName("explanation")]
 	public Elastic.Clients.Elasticsearch.Core.Explain.ExplanationDetail? Explanation { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("get")]
+	[JsonInclude, JsonPropertyName("get")]
 	public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_id")]
+	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_index")]
+	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("matched")]
+	[JsonInclude, JsonPropertyName("matched")]
 	public bool Matched { get; init; }
 }

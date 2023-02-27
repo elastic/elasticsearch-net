@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexingPressure
 {
-	[JsonInclude]
-	[JsonPropertyName("memory")]
+	[JsonInclude, JsonPropertyName("memory")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory Memory { get; set; }
 }
 

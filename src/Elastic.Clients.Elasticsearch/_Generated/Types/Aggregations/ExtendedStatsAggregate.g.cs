@@ -27,99 +27,75 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class ExtendedStatsAggregate : IAggregate
 {
-	[JsonInclude]
-	[JsonPropertyName("avg")]
+	[JsonInclude, JsonPropertyName("avg")]
 	public double? Avg { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("avg_as_string")]
+	[JsonInclude, JsonPropertyName("avg_as_string")]
 	public string? AvgAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("count")]
+	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("max")]
+	[JsonInclude, JsonPropertyName("max")]
 	public double? Max { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("max_as_string")]
+	[JsonInclude, JsonPropertyName("max_as_string")]
 	public string? MaxAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("min")]
+	[JsonInclude, JsonPropertyName("min")]
 	public double? Min { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_as_string")]
+	[JsonInclude, JsonPropertyName("min_as_string")]
 	public string? MinAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("std_deviation")]
+	[JsonInclude, JsonPropertyName("std_deviation")]
 	public double? StdDeviation { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("std_deviation_as_string")]
+	[JsonInclude, JsonPropertyName("std_deviation_as_string")]
 	public string? StdDeviationAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("std_deviation_bounds")]
+	[JsonInclude, JsonPropertyName("std_deviation_bounds")]
 	public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds? StdDeviationBounds { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("std_deviation_bounds_as_string")]
+	[JsonInclude, JsonPropertyName("std_deviation_bounds_as_string")]
 	public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString? StdDeviationBoundsAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("std_deviation_population")]
+	[JsonInclude, JsonPropertyName("std_deviation_population")]
 	public double? StdDeviationPopulation { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("std_deviation_sampling")]
+	[JsonInclude, JsonPropertyName("std_deviation_sampling")]
 	public double? StdDeviationSampling { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("sum")]
+	[JsonInclude, JsonPropertyName("sum")]
 	public double Sum { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("sum_as_string")]
+	[JsonInclude, JsonPropertyName("sum_as_string")]
 	public string? SumAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("sum_of_squares")]
+	[JsonInclude, JsonPropertyName("sum_of_squares")]
 	public double? SumOfSquares { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("sum_of_squares_as_string")]
+	[JsonInclude, JsonPropertyName("sum_of_squares_as_string")]
 	public string? SumOfSquaresAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("variance")]
+	[JsonInclude, JsonPropertyName("variance")]
 	public double? Variance { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("variance_as_string")]
+	[JsonInclude, JsonPropertyName("variance_as_string")]
 	public string? VarianceAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("variance_population")]
+	[JsonInclude, JsonPropertyName("variance_population")]
 	public double? VariancePopulation { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("variance_population_as_string")]
+	[JsonInclude, JsonPropertyName("variance_population_as_string")]
 	public string? VariancePopulationAsString { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("variance_sampling")]
+	[JsonInclude, JsonPropertyName("variance_sampling")]
 	public double? VarianceSampling { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("variance_sampling_as_string")]
+	[JsonInclude, JsonPropertyName("variance_sampling_as_string")]
 	public string? VarianceSamplingAsString { get; init; }
 }

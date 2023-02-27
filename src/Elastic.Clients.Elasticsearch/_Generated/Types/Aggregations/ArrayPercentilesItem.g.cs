@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class ArrayPercentilesItem
 {
-	[JsonInclude]
-	[JsonPropertyName("key")]
+	[JsonInclude, JsonPropertyName("key")]
 	public string Key { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("value")]
+	[JsonInclude, JsonPropertyName("value")]
 	public double? Value { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("value_as_string")]
+	[JsonInclude, JsonPropertyName("value_as_string")]
 	public string? ValueAsString { get; init; }
 }

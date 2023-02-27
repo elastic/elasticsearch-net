@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class RankFeatureFunctionSigmoid
 {
-	[JsonInclude]
-	[JsonPropertyName("exponent")]
+	[JsonInclude, JsonPropertyName("exponent")]
 	public float Exponent { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("pivot")]
+	[JsonInclude, JsonPropertyName("pivot")]
 	public float Pivot { get; set; }
 }
 

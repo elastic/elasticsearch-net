@@ -27,24 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class RankFeaturesProperty : IProperty
 {
-	[JsonInclude]
-	[JsonPropertyName("dynamic")]
+	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_above")]
+	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("properties")]
+	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
 	[JsonInclude]
@@ -166,7 +161,13 @@ public sealed partial class RankFeaturesPropertyDescriptor<TDocument> : Serializ
 	}
 
 	RankFeaturesProperty IBuildableDescriptor<RankFeaturesProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue
+	};
 }
 
 public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescriptor<RankFeaturesPropertyDescriptor>, IBuildableDescriptor<RankFeaturesProperty>
@@ -283,5 +284,11 @@ public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescrip
 	}
 
 	RankFeaturesProperty IBuildableDescriptor<RankFeaturesProperty>.Build() => new()
-	{ Dynamic = DynamicValue, Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Meta = MetaValue, Properties = PropertiesValue };
+	{
+		Dynamic = DynamicValue,
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Meta = MetaValue,
+		Properties = PropertiesValue
+	};
 }
