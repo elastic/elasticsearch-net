@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexRoutingAllocationDisk
 {
-	[JsonInclude]
-	[JsonPropertyName("threshold_enabled")]
+	[JsonInclude, JsonPropertyName("threshold_enabled")]
 	public Union<bool?, string?>? ThresholdEnabled { get; set; }
 }
 

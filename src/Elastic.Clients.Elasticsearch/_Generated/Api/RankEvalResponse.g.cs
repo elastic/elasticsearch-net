@@ -25,15 +25,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class RankEvalResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("details")]
+	[JsonInclude, JsonPropertyName("details")]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> Details { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("failures")]
+	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyDictionary<string, object> Failures { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("metric_score")]
+	[JsonInclude, JsonPropertyName("metric_score")]
 	public double MetricScore { get; init; }
 }

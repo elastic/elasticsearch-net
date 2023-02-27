@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class RandomScoreFunction
 {
-	[JsonInclude]
-	[JsonPropertyName("field")]
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("seed")]
+	[JsonInclude, JsonPropertyName("seed")]
 	public Union<long?, string?>? Seed { get; set; }
 
 	public static implicit operator FunctionScore(RandomScoreFunction randomScoreFunction) => QueryDsl.FunctionScore.RandomScore(randomScoreFunction);

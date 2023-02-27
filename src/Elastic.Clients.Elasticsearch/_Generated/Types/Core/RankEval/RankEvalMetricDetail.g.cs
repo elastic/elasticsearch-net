@@ -27,19 +27,15 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 public sealed partial class RankEvalMetricDetail
 {
-	[JsonInclude]
-	[JsonPropertyName("hits")]
+	[JsonInclude, JsonPropertyName("hits")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> Hits { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("metric_details")]
+	[JsonInclude, JsonPropertyName("metric_details")]
 	public IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>> MetricDetails { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("metric_score")]
+	[JsonInclude, JsonPropertyName("metric_score")]
 	public double MetricScore { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("unrated_docs")]
+	[JsonInclude, JsonPropertyName("unrated_docs")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> UnratedDocs { get; init; }
 }

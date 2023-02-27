@@ -30,8 +30,7 @@ public sealed partial class RemoveDuplicatesTokenFilter : ITokenFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "remove_duplicates";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -65,5 +64,7 @@ public sealed partial class RemoveDuplicatesTokenFilterDescriptor : Serializable
 	}
 
 	RemoveDuplicatesTokenFilter IBuildableDescriptor<RemoveDuplicatesTokenFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

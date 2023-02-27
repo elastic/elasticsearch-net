@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class DataStreamIndex
 {
-	[JsonInclude]
-	[JsonPropertyName("index_name")]
+	[JsonInclude, JsonPropertyName("index_name")]
 	public string IndexName { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_uuid")]
+	[JsonInclude, JsonPropertyName("index_uuid")]
 	public string IndexUuid { get; init; }
 }

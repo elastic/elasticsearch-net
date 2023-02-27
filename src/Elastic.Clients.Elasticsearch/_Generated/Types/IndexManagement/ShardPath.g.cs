@@ -27,15 +27,12 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ShardPath
 {
-	[JsonInclude]
-	[JsonPropertyName("data_path")]
+	[JsonInclude, JsonPropertyName("data_path")]
 	public string DataPath { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("is_custom_data_path")]
+	[JsonInclude, JsonPropertyName("is_custom_data_path")]
 	public bool IsCustomDataPath { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("state_path")]
+	[JsonInclude, JsonPropertyName("state_path")]
 	public string StatePath { get; init; }
 }

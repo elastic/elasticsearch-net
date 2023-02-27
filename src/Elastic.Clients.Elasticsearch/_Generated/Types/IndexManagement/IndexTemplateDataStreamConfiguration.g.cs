@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexTemplateDataStreamConfiguration
 {
-	[JsonInclude]
-	[JsonPropertyName("allow_custom_routing")]
+	[JsonInclude, JsonPropertyName("allow_custom_routing")]
 	public bool? AllowCustomRouting { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("hidden")]
+	[JsonInclude, JsonPropertyName("hidden")]
 	public bool? Hidden { get; init; }
 }

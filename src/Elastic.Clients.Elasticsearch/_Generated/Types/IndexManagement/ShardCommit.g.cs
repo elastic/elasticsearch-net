@@ -27,19 +27,15 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ShardCommit
 {
-	[JsonInclude]
-	[JsonPropertyName("generation")]
+	[JsonInclude, JsonPropertyName("generation")]
 	public int Generation { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("id")]
+	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("num_docs")]
+	[JsonInclude, JsonPropertyName("num_docs")]
 	public long NumDocs { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("user_data")]
+	[JsonInclude, JsonPropertyName("user_data")]
 	public IReadOnlyDictionary<string, string> UserData { get; init; }
 }

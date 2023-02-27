@@ -27,7 +27,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class CloseShardResult
 {
-	[JsonInclude]
-	[JsonPropertyName("failures")]
+	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> Failures { get; init; }
 }

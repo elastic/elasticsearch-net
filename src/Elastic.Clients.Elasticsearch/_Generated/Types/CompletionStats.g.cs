@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class CompletionStats
 {
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	[ReadOnlyFieldDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.FieldSizeUsage))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldSizeUsage>? Fields { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("size")]
+	[JsonInclude, JsonPropertyName("size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("size_in_bytes")]
+	[JsonInclude, JsonPropertyName("size_in_bytes")]
 	public long SizeInBytes { get; init; }
 }

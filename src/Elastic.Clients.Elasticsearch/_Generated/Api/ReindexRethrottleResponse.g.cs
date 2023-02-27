@@ -25,7 +25,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ReindexRethrottleResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("nodes")]
+	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode> Nodes { get; init; }
 }

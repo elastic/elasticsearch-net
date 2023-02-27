@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class DisMaxQuery : SearchQuery
 {
-	[JsonInclude]
-	[JsonPropertyName("_name")]
+	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("queries")]
+	[JsonInclude, JsonPropertyName("queries")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> Queries { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("tie_breaker")]
+	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
 
 	public static implicit operator Query(DisMaxQuery disMaxQuery) => QueryDsl.Query.DisMax(disMaxQuery);

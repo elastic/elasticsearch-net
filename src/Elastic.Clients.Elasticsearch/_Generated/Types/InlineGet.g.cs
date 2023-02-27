@@ -27,32 +27,25 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class InlineGet<TDocument>
 {
-	[JsonInclude]
-	[JsonPropertyName("_primary_term")]
+	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long? PrimaryTerm { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_routing")]
+	[JsonInclude, JsonPropertyName("_routing")]
 	public string? Routing { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_seq_no")]
+	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long? SeqNo { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("_source")]
+	[JsonInclude, JsonPropertyName("_source")]
 	[SourceConverter]
 	public TDocument Source { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public IReadOnlyDictionary<string, object>? Fields { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("found")]
+	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("metadata")]
+	[JsonInclude, JsonPropertyName("metadata")]
 	public IReadOnlyDictionary<string, object> Metadata { get; init; }
 }

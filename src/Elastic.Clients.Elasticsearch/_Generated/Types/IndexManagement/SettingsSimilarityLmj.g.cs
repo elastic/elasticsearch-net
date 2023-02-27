@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsSimilarityLmj
 {
-	[JsonInclude]
-	[JsonPropertyName("lambda")]
+	[JsonInclude, JsonPropertyName("lambda")]
 	public double Lambda { get; set; }
 
 	[JsonInclude]

@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsSimilarityBm25
 {
-	[JsonInclude]
-	[JsonPropertyName("b")]
+	[JsonInclude, JsonPropertyName("b")]
 	public double b { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("discount_overlaps")]
+	[JsonInclude, JsonPropertyName("discount_overlaps")]
 	public bool DiscountOverlaps { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("k1")]
+	[JsonInclude, JsonPropertyName("k1")]
 	public double K1 { get; set; }
 
 	[JsonInclude]

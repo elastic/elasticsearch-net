@@ -207,24 +207,19 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("max_docs")]
+	[JsonInclude, JsonPropertyName("max_docs")]
 	public long? MaxDocs { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("query")]
+	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("slice")]
+	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("conflicts")]
+	[JsonInclude, JsonPropertyName("conflicts")]
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
 }
 

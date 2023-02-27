@@ -27,28 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Reindex;
 public sealed partial class RemoteSource
 {
-	[JsonInclude]
-	[JsonPropertyName("connect_timeout")]
+	[JsonInclude, JsonPropertyName("connect_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? ConnectTimeout { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("headers")]
+	[JsonInclude, JsonPropertyName("headers")]
 	public IDictionary<string, string>? Headers { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("host")]
+	[JsonInclude, JsonPropertyName("host")]
 	public string Host { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("password")]
+	[JsonInclude, JsonPropertyName("password")]
 	public string? Password { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("socket_timeout")]
+	[JsonInclude, JsonPropertyName("socket_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? SocketTimeout { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("username")]
+	[JsonInclude, JsonPropertyName("username")]
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 

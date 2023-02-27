@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SlowlogSettings
 {
-	[JsonInclude]
-	[JsonPropertyName("level")]
+	[JsonInclude, JsonPropertyName("level")]
 	public string? Level { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("reformat")]
+	[JsonInclude, JsonPropertyName("reformat")]
 	public bool? Reformat { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("source")]
+	[JsonInclude, JsonPropertyName("source")]
 	public int? Source { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("threshold")]
+	[JsonInclude, JsonPropertyName("threshold")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds? Threshold { get; set; }
 }
 

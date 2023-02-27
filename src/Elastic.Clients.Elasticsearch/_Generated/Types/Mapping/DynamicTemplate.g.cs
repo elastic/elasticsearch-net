@@ -27,32 +27,25 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class DynamicTemplate
 {
-	[JsonInclude]
-	[JsonPropertyName("mapping")]
-	public Elastic.Clients.Elasticsearch.Mapping.Properties? Mapping { get; set; }
+	[JsonInclude, JsonPropertyName("mapping")]
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty? Mapping { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("match")]
+	[JsonInclude, JsonPropertyName("match")]
 	public string? Match { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("match_mapping_type")]
+	[JsonInclude, JsonPropertyName("match_mapping_type")]
 	public string? MatchMappingType { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("match_pattern")]
+	[JsonInclude, JsonPropertyName("match_pattern")]
 	public Elastic.Clients.Elasticsearch.Mapping.MatchType? MatchPattern { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("path_match")]
+	[JsonInclude, JsonPropertyName("path_match")]
 	public string? PathMatch { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("path_unmatch")]
+	[JsonInclude, JsonPropertyName("path_unmatch")]
 	public string? PathUnmatch { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("unmatch")]
+	[JsonInclude, JsonPropertyName("unmatch")]
 	public string? Unmatch { get; set; }
 }
 
@@ -63,7 +56,7 @@ public sealed partial class DynamicTemplateDescriptor : SerializableDescriptor<D
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? MappingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.IProperty? MappingValue { get; set; }
 
 	private string? MatchValue { get; set; }
 
@@ -77,7 +70,7 @@ public sealed partial class DynamicTemplateDescriptor : SerializableDescriptor<D
 
 	private string? UnmatchValue { get; set; }
 
-	public DynamicTemplateDescriptor Mapping(Elastic.Clients.Elasticsearch.Mapping.Properties? mapping)
+	public DynamicTemplateDescriptor Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty? mapping)
 	{
 		MappingValue = mapping;
 		return Self;

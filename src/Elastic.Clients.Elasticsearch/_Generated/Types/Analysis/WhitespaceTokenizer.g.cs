@@ -27,15 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class WhitespaceTokenizer : ITokenizer
 {
-	[JsonInclude]
-	[JsonPropertyName("max_token_length")]
+	[JsonInclude, JsonPropertyName("max_token_length")]
 	public int? MaxTokenLength { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "whitespace";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -83,5 +81,8 @@ public sealed partial class WhitespaceTokenizerDescriptor : SerializableDescript
 	}
 
 	WhitespaceTokenizer IBuildableDescriptor<WhitespaceTokenizer>.Build() => new()
-	{ MaxTokenLength = MaxTokenLengthValue, Version = VersionValue };
+	{
+		MaxTokenLength = MaxTokenLengthValue,
+		Version = VersionValue
+	};
 }

@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 public sealed partial class RegressionInferenceOptions
 {
-	[JsonInclude]
-	[JsonPropertyName("num_top_feature_importance_values")]
+	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("results_field")]
+	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 }
 
