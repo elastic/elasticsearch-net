@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsSimilarityDfr
 {
-	[JsonInclude]
-	[JsonPropertyName("after_effect")]
+	[JsonInclude, JsonPropertyName("after_effect")]
 	public Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffect { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("basic_model")]
+	[JsonInclude, JsonPropertyName("basic_model")]
 	public Elastic.Clients.Elasticsearch.DFRBasicModel BasicModel { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("normalization")]
+	[JsonInclude, JsonPropertyName("normalization")]
 	public Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
 
 	[JsonInclude]

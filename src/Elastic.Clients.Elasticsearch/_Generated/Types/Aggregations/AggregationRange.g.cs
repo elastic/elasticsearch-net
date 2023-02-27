@@ -27,16 +27,13 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class AggregationRange
 {
-	[JsonInclude]
-	[JsonPropertyName("from")]
+	[JsonInclude, JsonPropertyName("from")]
 	public object? From { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("key")]
+	[JsonInclude, JsonPropertyName("key")]
 	public string? Key { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("to")]
+	[JsonInclude, JsonPropertyName("to")]
 	public object? To { get; set; }
 }
 

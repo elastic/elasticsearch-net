@@ -27,28 +27,22 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class SourceField
 {
-	[JsonInclude]
-	[JsonPropertyName("compress")]
+	[JsonInclude, JsonPropertyName("compress")]
 	public bool? Compress { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("compress_threshold")]
+	[JsonInclude, JsonPropertyName("compress_threshold")]
 	public string? CompressThreshold { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("enabled")]
+	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("excludes")]
+	[JsonInclude, JsonPropertyName("excludes")]
 	public ICollection<string>? Excludes { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("includes")]
+	[JsonInclude, JsonPropertyName("includes")]
 	public ICollection<string>? Includes { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("mode")]
+	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? Mode { get; set; }
 }
 

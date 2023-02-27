@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsSimilarityDfi
 {
-	[JsonInclude]
-	[JsonPropertyName("independence_measure")]
+	[JsonInclude, JsonPropertyName("independence_measure")]
 	public Elastic.Clients.Elasticsearch.DFIIndependenceMeasure IndependenceMeasure { get; set; }
 
 	[JsonInclude]

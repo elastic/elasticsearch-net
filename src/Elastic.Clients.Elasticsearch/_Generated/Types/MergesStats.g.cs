@@ -27,67 +27,51 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class MergesStats
 {
-	[JsonInclude]
-	[JsonPropertyName("current")]
+	[JsonInclude, JsonPropertyName("current")]
 	public long Current { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("current_docs")]
+	[JsonInclude, JsonPropertyName("current_docs")]
 	public long CurrentDocs { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("current_size")]
+	[JsonInclude, JsonPropertyName("current_size")]
 	public string? CurrentSize { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("current_size_in_bytes")]
+	[JsonInclude, JsonPropertyName("current_size_in_bytes")]
 	public long CurrentSizeInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total")]
+	[JsonInclude, JsonPropertyName("total")]
 	public long Total { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_auto_throttle")]
+	[JsonInclude, JsonPropertyName("total_auto_throttle")]
 	public string? TotalAutoThrottle { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_auto_throttle_in_bytes")]
+	[JsonInclude, JsonPropertyName("total_auto_throttle_in_bytes")]
 	public long TotalAutoThrottleInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_docs")]
+	[JsonInclude, JsonPropertyName("total_docs")]
 	public long TotalDocs { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_size")]
+	[JsonInclude, JsonPropertyName("total_size")]
 	public string? TotalSize { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_size_in_bytes")]
+	[JsonInclude, JsonPropertyName("total_size_in_bytes")]
 	public long TotalSizeInBytes { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_stopped_time")]
+	[JsonInclude, JsonPropertyName("total_stopped_time")]
 	public Elastic.Clients.Elasticsearch.Duration? TotalStoppedTime { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_stopped_time_in_millis")]
+	[JsonInclude, JsonPropertyName("total_stopped_time_in_millis")]
 	public long TotalStoppedTimeInMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_throttled_time")]
+	[JsonInclude, JsonPropertyName("total_throttled_time")]
 	public Elastic.Clients.Elasticsearch.Duration? TotalThrottledTime { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_throttled_time_in_millis")]
+	[JsonInclude, JsonPropertyName("total_throttled_time_in_millis")]
 	public long TotalThrottledTimeInMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_time")]
+	[JsonInclude, JsonPropertyName("total_time")]
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total_time_in_millis")]
+	[JsonInclude, JsonPropertyName("total_time_in_millis")]
 	public long TotalTimeInMillis { get; init; }
 }

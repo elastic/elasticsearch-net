@@ -27,12 +27,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexSettingsTimeSeries
 {
-	[JsonInclude]
-	[JsonPropertyName("end_time")]
+	[JsonInclude, JsonPropertyName("end_time")]
 	public DateTimeOffset? EndTime { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("start_time")]
+	[JsonInclude, JsonPropertyName("start_time")]
 	public DateTimeOffset? StartTime { get; set; }
 }
 

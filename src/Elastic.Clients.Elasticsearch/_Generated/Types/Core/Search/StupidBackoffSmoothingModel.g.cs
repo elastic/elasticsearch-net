@@ -27,8 +27,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class StupidBackoffSmoothingModel
 {
-	[JsonInclude]
-	[JsonPropertyName("discount")]
+	[JsonInclude, JsonPropertyName("discount")]
 	public double Discount { get; set; }
 
 	public static implicit operator SmoothingModel(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Core.Search.SmoothingModel.StupidBackoff(stupidBackoffSmoothingModel);

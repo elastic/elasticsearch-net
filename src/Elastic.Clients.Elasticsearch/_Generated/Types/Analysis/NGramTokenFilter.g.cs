@@ -27,23 +27,19 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class NGramTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("max_gram")]
+	[JsonInclude, JsonPropertyName("max_gram")]
 	public int? MaxGram { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("min_gram")]
+	[JsonInclude, JsonPropertyName("min_gram")]
 	public int? MinGram { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("preserve_original")]
+	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "ngram";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -119,5 +115,10 @@ public sealed partial class NGramTokenFilterDescriptor : SerializableDescriptor<
 	}
 
 	NGramTokenFilter IBuildableDescriptor<NGramTokenFilter>.Build() => new()
-	{ MaxGram = MaxGramValue, MinGram = MinGramValue, PreserveOriginal = PreserveOriginalValue, Version = VersionValue };
+	{
+		MaxGram = MaxGramValue,
+		MinGram = MinGramValue,
+		PreserveOriginal = PreserveOriginalValue,
+		Version = VersionValue
+	};
 }

@@ -27,92 +27,70 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class TextProperty : IProperty
 {
-	[JsonInclude]
-	[JsonPropertyName("analyzer")]
+	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("boost")]
+	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("copy_to")]
+	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("dynamic")]
+	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("eager_global_ordinals")]
+	[JsonInclude, JsonPropertyName("eager_global_ordinals")]
 	public bool? EagerGlobalOrdinals { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fielddata")]
+	[JsonInclude, JsonPropertyName("fielddata")]
 	public bool? Fielddata { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fielddata_frequency_filter")]
+	[JsonInclude, JsonPropertyName("fielddata_frequency_filter")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("fields")]
+	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("ignore_above")]
+	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index")]
+	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_options")]
+	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_phrases")]
+	[JsonInclude, JsonPropertyName("index_phrases")]
 	public bool? IndexPhrases { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("index_prefixes")]
+	[JsonInclude, JsonPropertyName("index_prefixes")]
 	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("norms")]
+	[JsonInclude, JsonPropertyName("norms")]
 	public bool? Norms { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("position_increment_gap")]
+	[JsonInclude, JsonPropertyName("position_increment_gap")]
 	public int? PositionIncrementGap { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("properties")]
+	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("search_analyzer")]
+	[JsonInclude, JsonPropertyName("search_analyzer")]
 	public string? SearchAnalyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("search_quote_analyzer")]
+	[JsonInclude, JsonPropertyName("search_quote_analyzer")]
 	public string? SearchQuoteAnalyzer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("similarity")]
+	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("store")]
+	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("term_vector")]
+	[JsonInclude, JsonPropertyName("term_vector")]
 	public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
 
 	[JsonInclude]
@@ -584,7 +562,30 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 	}
 
 	TextProperty IBuildableDescriptor<TextProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fielddata = FielddataValue, FielddataFrequencyFilter = BuildFielddataFrequencyFilter(), Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), Meta = MetaValue, Norms = NormsValue, PositionIncrementGap = PositionIncrementGapValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
+	{
+		Analyzer = AnalyzerValue,
+		Boost = BoostValue,
+		CopyTo = CopyToValue,
+		Dynamic = DynamicValue,
+		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
+		Fielddata = FielddataValue,
+		FielddataFrequencyFilter = BuildFielddataFrequencyFilter(),
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		IndexOptions = IndexOptionsValue,
+		IndexPhrases = IndexPhrasesValue,
+		IndexPrefixes = BuildIndexPrefixes(),
+		Meta = MetaValue,
+		Norms = NormsValue,
+		PositionIncrementGap = PositionIncrementGapValue,
+		Properties = PropertiesValue,
+		SearchAnalyzer = SearchAnalyzerValue,
+		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		TermVector = TermVectorValue
+	};
 }
 
 public sealed partial class TextPropertyDescriptor : SerializableDescriptor<TextPropertyDescriptor>, IBuildableDescriptor<TextProperty>
@@ -1051,5 +1052,28 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 	}
 
 	TextProperty IBuildableDescriptor<TextProperty>.Build() => new()
-	{ Analyzer = AnalyzerValue, Boost = BoostValue, CopyTo = CopyToValue, Dynamic = DynamicValue, EagerGlobalOrdinals = EagerGlobalOrdinalsValue, Fielddata = FielddataValue, FielddataFrequencyFilter = BuildFielddataFrequencyFilter(), Fields = FieldsValue, IgnoreAbove = IgnoreAboveValue, Index = IndexValue, IndexOptions = IndexOptionsValue, IndexPhrases = IndexPhrasesValue, IndexPrefixes = BuildIndexPrefixes(), Meta = MetaValue, Norms = NormsValue, PositionIncrementGap = PositionIncrementGapValue, Properties = PropertiesValue, SearchAnalyzer = SearchAnalyzerValue, SearchQuoteAnalyzer = SearchQuoteAnalyzerValue, Similarity = SimilarityValue, Store = StoreValue, TermVector = TermVectorValue };
+	{
+		Analyzer = AnalyzerValue,
+		Boost = BoostValue,
+		CopyTo = CopyToValue,
+		Dynamic = DynamicValue,
+		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
+		Fielddata = FielddataValue,
+		FielddataFrequencyFilter = BuildFielddataFrequencyFilter(),
+		Fields = FieldsValue,
+		IgnoreAbove = IgnoreAboveValue,
+		Index = IndexValue,
+		IndexOptions = IndexOptionsValue,
+		IndexPhrases = IndexPhrasesValue,
+		IndexPrefixes = BuildIndexPrefixes(),
+		Meta = MetaValue,
+		Norms = NormsValue,
+		PositionIncrementGap = PositionIncrementGapValue,
+		Properties = PropertiesValue,
+		SearchAnalyzer = SearchAnalyzerValue,
+		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
+		Similarity = SimilarityValue,
+		Store = StoreValue,
+		TermVector = TermVectorValue
+	};
 }

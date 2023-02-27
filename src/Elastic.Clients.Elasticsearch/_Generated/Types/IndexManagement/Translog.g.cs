@@ -27,20 +27,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class Translog
 {
-	[JsonInclude]
-	[JsonPropertyName("durability")]
+	[JsonInclude, JsonPropertyName("durability")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? Durability { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("flush_threshold_size")]
+	[JsonInclude, JsonPropertyName("flush_threshold_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("retention")]
+	[JsonInclude, JsonPropertyName("retention")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? Retention { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("sync_interval")]
+	[JsonInclude, JsonPropertyName("sync_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? SyncInterval { get; set; }
 }
 

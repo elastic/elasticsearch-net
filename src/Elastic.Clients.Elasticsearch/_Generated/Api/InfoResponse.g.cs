@@ -25,23 +25,18 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class InfoResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("cluster_name")]
+	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("cluster_uuid")]
+	[JsonInclude, JsonPropertyName("cluster_uuid")]
 	public string ClusterUuid { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("tagline")]
+	[JsonInclude, JsonPropertyName("tagline")]
 	public string Tagline { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version { get; init; }
 }

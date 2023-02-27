@@ -27,59 +27,46 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class IcuCollationTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("alternate")]
+	[JsonInclude, JsonPropertyName("alternate")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? Alternate { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("caseFirst")]
+	[JsonInclude, JsonPropertyName("caseFirst")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? Casefirst { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("caseLevel")]
+	[JsonInclude, JsonPropertyName("caseLevel")]
 	public bool? Caselevel { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("country")]
+	[JsonInclude, JsonPropertyName("country")]
 	public string? Country { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("decomposition")]
+	[JsonInclude, JsonPropertyName("decomposition")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? Decomposition { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("hiraganaQuaternaryMode")]
+	[JsonInclude, JsonPropertyName("hiraganaQuaternaryMode")]
 	public bool? Hiraganaquaternarymode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("language")]
+	[JsonInclude, JsonPropertyName("language")]
 	public string? Language { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("numeric")]
+	[JsonInclude, JsonPropertyName("numeric")]
 	public bool? Numeric { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("rules")]
+	[JsonInclude, JsonPropertyName("rules")]
 	public string? Rules { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("strength")]
+	[JsonInclude, JsonPropertyName("strength")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? Strength { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "icu_collation";
-	[JsonInclude]
-	[JsonPropertyName("variableTop")]
+	[JsonInclude, JsonPropertyName("variableTop")]
 	public string? Variabletop { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("variant")]
+	[JsonInclude, JsonPropertyName("variant")]
 	public string? Variant { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -281,5 +268,19 @@ public sealed partial class IcuCollationTokenFilterDescriptor : SerializableDesc
 	}
 
 	IcuCollationTokenFilter IBuildableDescriptor<IcuCollationTokenFilter>.Build() => new()
-	{ Alternate = AlternateValue, Casefirst = CasefirstValue, Caselevel = CaselevelValue, Country = CountryValue, Decomposition = DecompositionValue, Hiraganaquaternarymode = HiraganaquaternarymodeValue, Language = LanguageValue, Numeric = NumericValue, Rules = RulesValue, Strength = StrengthValue, Variabletop = VariabletopValue, Variant = VariantValue, Version = VersionValue };
+	{
+		Alternate = AlternateValue,
+		Casefirst = CasefirstValue,
+		Caselevel = CaselevelValue,
+		Country = CountryValue,
+		Decomposition = DecompositionValue,
+		Hiraganaquaternarymode = HiraganaquaternarymodeValue,
+		Language = LanguageValue,
+		Numeric = NumericValue,
+		Rules = RulesValue,
+		Strength = StrengthValue,
+		Variabletop = VariabletopValue,
+		Variant = VariantValue,
+		Version = VersionValue
+	};
 }

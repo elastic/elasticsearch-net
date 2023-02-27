@@ -27,51 +27,39 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class DataStream
 {
-	[JsonInclude]
-	[JsonPropertyName("_meta")]
+	[JsonInclude, JsonPropertyName("_meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("allow_custom_routing")]
+	[JsonInclude, JsonPropertyName("allow_custom_routing")]
 	public bool? AllowCustomRouting { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("generation")]
+	[JsonInclude, JsonPropertyName("generation")]
 	public int Generation { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("hidden")]
+	[JsonInclude, JsonPropertyName("hidden")]
 	public bool Hidden { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("ilm_policy")]
+	[JsonInclude, JsonPropertyName("ilm_policy")]
 	public string? IlmPolicy { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("indices")]
+	[JsonInclude, JsonPropertyName("indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> Indices { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("replicated")]
+	[JsonInclude, JsonPropertyName("replicated")]
 	public bool? Replicated { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("status")]
+	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("system")]
+	[JsonInclude, JsonPropertyName("system")]
 	public bool? System { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("template")]
+	[JsonInclude, JsonPropertyName("template")]
 	public string Template { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("timestamp_field")]
+	[JsonInclude, JsonPropertyName("timestamp_field")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField TimestampField { get; init; }
 }

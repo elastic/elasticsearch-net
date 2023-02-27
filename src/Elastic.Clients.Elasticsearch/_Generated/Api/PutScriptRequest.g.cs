@@ -55,8 +55,7 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	[JsonInclude]
-	[JsonPropertyName("script")]
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.StoredScript Script { get; set; }
 }
 

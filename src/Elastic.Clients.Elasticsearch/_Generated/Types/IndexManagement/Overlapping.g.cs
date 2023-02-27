@@ -27,11 +27,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class Overlapping
 {
-	[JsonInclude]
-	[JsonPropertyName("index_patterns")]
+	[JsonInclude, JsonPropertyName("index_patterns")]
 	public IReadOnlyCollection<string> IndexPatterns { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 }

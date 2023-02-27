@@ -25,67 +25,51 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 public sealed partial class UpdateByQueryResponse : ElasticsearchResponse
 {
-	[JsonInclude]
-	[JsonPropertyName("batches")]
+	[JsonInclude, JsonPropertyName("batches")]
 	public long? Batches { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("deleted")]
+	[JsonInclude, JsonPropertyName("deleted")]
 	public long? Deleted { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("failures")]
+	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("noops")]
+	[JsonInclude, JsonPropertyName("noops")]
 	public long? Noops { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("requests_per_second")]
+	[JsonInclude, JsonPropertyName("requests_per_second")]
 	public float? RequestsPerSecond { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("retries")]
+	[JsonInclude, JsonPropertyName("retries")]
 	public Elastic.Clients.Elasticsearch.Retries? Retries { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("task")]
+	[JsonInclude, JsonPropertyName("task")]
 	public Elastic.Clients.Elasticsearch.TaskId? Task { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttled")]
+	[JsonInclude, JsonPropertyName("throttled")]
 	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttled_millis")]
+	[JsonInclude, JsonPropertyName("throttled_millis")]
 	public long? ThrottledMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttled_until")]
+	[JsonInclude, JsonPropertyName("throttled_until")]
 	public Elastic.Clients.Elasticsearch.Duration? ThrottledUntil { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("throttled_until_millis")]
+	[JsonInclude, JsonPropertyName("throttled_until_millis")]
 	public long? ThrottledUntilMillis { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("timed_out")]
+	[JsonInclude, JsonPropertyName("timed_out")]
 	public bool? TimedOut { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("took")]
+	[JsonInclude, JsonPropertyName("took")]
 	public long? Took { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("total")]
+	[JsonInclude, JsonPropertyName("total")]
 	public long? Total { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("updated")]
+	[JsonInclude, JsonPropertyName("updated")]
 	public long? Updated { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("version_conflicts")]
+	[JsonInclude, JsonPropertyName("version_conflicts")]
 	public long? VersionConflicts { get; init; }
 }

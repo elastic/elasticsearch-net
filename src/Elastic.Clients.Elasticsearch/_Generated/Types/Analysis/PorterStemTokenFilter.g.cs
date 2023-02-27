@@ -30,8 +30,7 @@ public sealed partial class PorterStemTokenFilter : ITokenFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "porter_stem";
-	[JsonInclude]
-	[JsonPropertyName("version")]
+	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -65,5 +64,7 @@ public sealed partial class PorterStemTokenFilterDescriptor : SerializableDescri
 	}
 
 	PorterStemTokenFilter IBuildableDescriptor<PorterStemTokenFilter>.Build() => new()
-	{ Version = VersionValue };
+	{
+		Version = VersionValue
+	};
 }

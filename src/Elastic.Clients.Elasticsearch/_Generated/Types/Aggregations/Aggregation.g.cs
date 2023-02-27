@@ -84,6 +84,11 @@ internal sealed class AggregationConverter : JsonConverter<Aggregation>
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation?>("cumulative_cardinality", ref reader, options);
 		}
 
+		if (propertyName == "cumulative_sum")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation?>("cumulative_sum", ref reader, options);
+		}
+
 		if (propertyName == "date_histogram")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>("date_histogram", ref reader, options);
@@ -329,6 +334,11 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 	public AggregationDescriptor<TDocument> CumulativeCardinality(string name, Action<CumulativeCardinalityAggregationDescriptor> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("cumulative_cardinality", configure));
+	}
+
+	public AggregationDescriptor<TDocument> CumulativeSum(string name, Action<CumulativeSumAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("cumulative_sum", configure));
 	}
 
 	public AggregationDescriptor<TDocument> DateHistogram(string name, Action<DateHistogramAggregationDescriptor<TDocument>> configure)
@@ -587,6 +597,11 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 	public AggregationDescriptor CumulativeCardinality(string name, Action<CumulativeCardinalityAggregationDescriptor> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("cumulative_cardinality", configure));
+	}
+
+	public AggregationDescriptor CumulativeSum(string name, Action<CumulativeSumAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("cumulative_sum", configure));
 	}
 
 	public AggregationDescriptor DateHistogram(string name, Action<DateHistogramAggregationDescriptor> configure)

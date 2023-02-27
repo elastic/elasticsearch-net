@@ -27,19 +27,15 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class Collector
 {
-	[JsonInclude]
-	[JsonPropertyName("children")]
+	[JsonInclude, JsonPropertyName("children")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Collector>? Children { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("name")]
+	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("reason")]
+	[JsonInclude, JsonPropertyName("reason")]
 	public string Reason { get; init; }
 
-	[JsonInclude]
-	[JsonPropertyName("time_in_nanos")]
+	[JsonInclude, JsonPropertyName("time_in_nanos")]
 	public long TimeInNanos { get; init; }
 }
