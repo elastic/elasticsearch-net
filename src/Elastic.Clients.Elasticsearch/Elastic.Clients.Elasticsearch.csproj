@@ -18,7 +18,7 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Elastic.Transport" Version="0.4.6" />
+    <PackageReference Include="Elastic.Transport" Version="0.4.7" />
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.3.44">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -35,6 +35,6 @@
     </AssemblyAttribute>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>
