@@ -1,0 +1,12 @@
+[[release-notes-8.0.6]]
+== Release notes v8.0.6
+
+[discrete]
+=== Bug fixes
+
+TODO
+
+[discrete]
+=== Breaking changes
+
+TODO
