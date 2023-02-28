@@ -4,9 +4,88 @@
 [discrete]
 === Bug fixes
 
-TODO
+- https://github.com/elastic/elasticsearch-net/pull/7244[#7244] Fix code-gen for 
+single or many types. Includes support for deserializing numbers represented as 
+strings in the JSON payload. (issues: https://github.com/elastic/elasticsearch-net/issues/7221[#7221], 
+https://github.com/elastic/elasticsearch-net/issues/7234[#7234], 
+https://github.com/elastic/elasticsearch-net/issues/7240[#7240]). 
+- https://github.com/elastic/elasticsearch-net/pull/7253[#7253] Fix code-gen for 
+enums with aliases (issue: https://github.com/elastic/elasticsearch-net/issues/7236[#7236])
+- https://github.com/elastic/elasticsearch-net/pull/7262[#7262] Update to 
+`Elastic.Transport` 0.4.7 which includes fixes for helpers used during application 
+testing.
 
 [discrete]
 === Breaking changes
 
-TODO
+[discrete]
+==== DynamicTemplate
+
+`DynamicTemplate` forms part of the `TypeMapping` object, included on `GetIndexRespone`.
+
+* The type for the `Mapping` property has changed from `Elastic.Clients.Elasticsearch.Properties` 
+to `Elastic.Clients.Elasticsearch.IProperty`. This breaking change fixes an error 
+introduced by the code-generator. Before introducing this fix, the type could 
+not correctly deserialize responses for GET index requests and prevented dynamic
+templates from being configured for indices via PUT index.
+
+*_Before_*
+
+[source,csharp]
+----
+public sealed partial class DynamicTemplate
+{
+   ...
+   public Elastic.Clients.Elasticsearch.Mapping.Properties? Mapping { get; set; }
+   ...
+}
+----
+
+*_After_*
+
+[source,csharp]
+----
+public sealed partial class DynamicTemplate
+{
+   ...
+   public Elastic.Clients.Elasticsearch.Mapping.IProperty? Mapping { get; set; }
+   ...
+}
+----
+
+[discrete]
+==== TypeMapping
+
+Among other uses, `TypeMapping` forms part of the `GetIndexRespone`.
+
+* The `DynamicTemplates` property has been simplified to make it easier to work 
+with and to fix deserialization failures on certain responses. Rather than use a 
+`Union` to describe the fact that this property may be a single dictionary of 
+dynamic templates, or an array of dictionaries, this is now code-generated as a 
+specialised single or many collection. The API exposes this as an `ICollection` 
+of dictionaries and the JSON converter is able to handle either an array or 
+individual dictionary in responses.
+
+*_Before_*
+
+[source,csharp]
+----
+public sealed partial class TypeMapping
+{
+   ...
+   public Union<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplates { get; set; }
+   ...
+}
+----
+
+*_After_*
+
+[source,csharp]
+----
+public sealed partial class TypeMapping
+{
+   ...
+   public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
+   ...
+}
+----
