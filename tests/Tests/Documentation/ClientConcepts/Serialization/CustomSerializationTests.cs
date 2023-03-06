@@ -35,18 +35,20 @@ public class CustomSerializationTests : DocumentationTestBase
     {
         // This example resets the PropertyNamingPolicy, such that the existing C# Pascal case is sent in the JSON.
 
-        //tag::custom-options-local-function[]
-        static void ConfigureOptions(JsonSerializerOptions o) => o.PropertyNamingPolicy = null; // <1>
-        //end::custom-options-local-function[]
-
-        //tag::create-client[]
-        var nodePool = new SingleNodePool(new Uri("http://localhost:9200"));
-        var settings = new ElasticsearchClientSettings(
-            nodePool,
-            sourceSerializer: (defaultSerializer, settings) =>
-                new DefaultSourceSerializer(settings, ConfigureOptions)); // <3>
-        var client = new ElasticsearchClient(settings);
-        //end::create-client[]
+    #pragma warning disable format
+    //tag::custom-options-local-function[]
+    static void ConfigureOptions(JsonSerializerOptions o) => o.PropertyNamingPolicy = null; // <1>
+    //end::custom-options-local-function[]
+  
+    //tag::create-client[]
+    var nodePool = new SingleNodePool(new Uri("http://localhost:9200"));
+    var settings = new ElasticsearchClientSettings(
+        nodePool,
+        sourceSerializer: (defaultSerializer, settings) =>
+            new DefaultSourceSerializer(settings, ConfigureOptions)); // <2>
+    var client = new ElasticsearchClient(settings);
+    //end::create-client[]
+    #pragma warning restore format
 
         // Needed for the test assertion as we should use the in memory connection and disable direct streaming.
         // We don't want to include those in the docs as it may mislead or confuse developers.
@@ -59,10 +61,12 @@ public class CustomSerializationTests : DocumentationTestBase
             .DisableDirectStreaming();
         client = new ElasticsearchClient(settings);
 
-        //tag::index-person[]
-        var person = new Person { FirstName = "Steve" };
-        var indexResponse = await client.IndexAsync(person, "my-index-name");
-        //end::index-person[]
+    #pragma warning disable format
+    //tag::index-person[]
+    var person = new Person { FirstName = "Steve" };
+    var indexResponse = await client.IndexAsync(person, "my-index-name");
+    //end::index-person[]
+    #pragma warning restore format
 
         var requestJson = Encoding.UTF8.GetString(indexResponse.ApiCallDetails.RequestBodyInBytes);
         await Verifier.Verify(requestJson);
@@ -71,11 +75,10 @@ public class CustomSerializationTests : DocumentationTestBase
         var deserializedPerson = client.SourceSerializer.Deserialize<Person>(ms);
         deserializedPerson.FirstName.Should().Be("Steve");
 
-        // Alternative example using an Action
-
-        //tag::custom-options-action[]
-        Action<JsonSerializerOptions> configureOptions = o => o.PropertyNamingPolicy = null; // <3>
-        //end::custom-options-action[]
+// Alternative example using an Action
+//tag::custom-options-action[]
+Action<JsonSerializerOptions> configureOptions = o => o.PropertyNamingPolicy = null; // <3>
+//end::custom-options-action[]
     }
 
 #pragma warning disable format

@@ -35,5 +35,3 @@ The index request is serialized, with the source serializer handling the `MyDocu
   "stringProperty": "value"
 }
 ----
-
-NOTE: This is still a work in progress, more sections will be added in the future.

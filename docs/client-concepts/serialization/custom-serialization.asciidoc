@@ -1,5 +1,5 @@
-[[custom-serialization]]
-==== Custom serialization
+[[customizing-source-serialization]]
+==== Customizing source serialization
 
 The built-in source serializer handles most POCO document models correctly. Sometimes, you may need further control over how your types are serialized.
 
@@ -8,19 +8,19 @@ NOTE: The built-in source serializer uses the Microsoft https://learn.microsoft.
 [[system-text-json-attributes]]
 ===== Using `System.Text.Json` attributes
 
-`System.Text.Json` includes attributes that can be applied to types and properties to control how they are serialized. These can be applied to your POCO document types to perform actions such as controlling the name of a property, or ignoring a property entirely. Visit the https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview[Microsoft documentation for further examples].
+`System.Text.Json` includes attributes that can be applied to types and properties to control their serialization. These can be applied to your POCO document types to perform actions such as controlling the name of a property or ignoring a property entirely. Visit the https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview[Microsoft documentation for further examples].
 
-We can model a document to represent data about a person using a regular class (POCO), applying `System.Text.Json`` attributes as necessary.
+We can model a document to represent data about a person using a regular class (POCO), applying `System.Text.Json` attributes as necessary.
 
 [source,csharp]
 ----
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=usings-serialization]
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=person-class-with-attributes]
 ----
-<1> the `JsonPropertyName` attribute is used to provide a specific name (`forename`) for the `FirstName` property when serialized.
-<2> the `JsonIgnore` attribute is used to prevent the `Age` property from appearing in the serialized JSON.
+<1> The `JsonPropertyName` attribute is used to ensure the `FirstName` property uses the JSON property name `forename` when serialized.
+<2> The `JsonIgnore` attribute is used to prevent the `Age` property from appearing in the serialized JSON.
 
-We can then index the an instance of the document into {es}.
+We can then index an instance of the document into {es}.
 
 [source,csharp]
 ----
@@ -45,11 +45,56 @@ TODO
 [[configuring-custom-jsonserializeroptions]]
 ===== Configuring custom `JsonSerializerOptions`
 
-TODO
+The default source serializer applies a set of standard `JsonSerializerOptions` when serializing source document types. In some circumstances, you may wish to override some of our defaults. This is possible by creating an instance of `DefaultSourceSerializer` and passing an `Action<JsonSerializerOptions>` which is applied after our defaults have been set. This mechanism allows you to apply additional settings, or change the value of our defaults.
+
+The `DefaultSourceSerializer` includes a constructor that accepts the current `IElasticsearchClientSettings` and a `configureOptions` `Action`.
+
+[source,csharp]
+----
+public DefaultSourceSerializer(IElasticsearchClientSettings settings, Action<JsonSerializerOptions> configureOptions);
+----
+
+Our application defines the following `Person` class, which models a document we will index to {es}.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=person-class]
+----
+
+We want to serialize our source document using Pascal Casing for the JSON properties. Since the options applied in the `DefaultSouceSerializer` set the `PropertyNamingPolicy` to `JsonNamingPolicy.CamelCase`, we must override this setting.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=usings]
+private async Task SerializeWithCustomOptionsAsync()
+{
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=custom-options-local-function]
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=create-client]
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=index-person]
+}
+----
+<1> A local function can be defined, accepting a `JsonSerializerOptions` parameter. Here, we set `PropertyNamingPolicy` to `null`. This returns to the default behavior for `System.Text.Json`, which uses Pascal Case.
+<2> When creating the `ElasticsearchClientSettings`, we supply a `SourceSerializerFactory` using a lambda. The factory function creates a new instance of `DefaultSourceSerializer`, passing in the `settings` and our `ConfigureOptions` local function. We have now configured the settings with a custom instance of the source serializer.
+
+The `Person` instance is serialized, with the source serializer serializing the POCO property named `FirstName` using Pascal Case.
+
+[source,javascript]
+----
+{
+  "FirstName": "Steve"
+}
+----
+
+As an alternative to using a local function, we could store an `Action<JsonSerializerOptions>` into a variable instead, which can be passed to the `DefaultSouceSerializer` constructor.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=custom-options-action]
+----
 
 [[injecting-custom-serializer]]
 ===== Injecting a custom serializer
 
 TODO
-- Deriving from SystemTextJsonSerializer
-- Deriving from Serializer
+- Deriving from SystemTextJsonSerializer for enum Converter
+- Deriving from Serializer for different library
