@@ -27,7 +27,7 @@ internal sealed class PropertiesConverter : JsonConverter<Properties>
 	public override Properties? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrive client settings during properties deserialization.");
+			ThrowHelper.ThrowJsonExceptionForMissingSettings();
 
 		if (reader.TokenType != JsonTokenType.StartObject)
 			throw new JsonException("Expected start object token.");
@@ -51,7 +51,7 @@ internal sealed class PropertiesConverter : JsonConverter<Properties>
 	public override void Write(Utf8JsonWriter writer, Properties value, JsonSerializerOptions options)
 	{
 		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrive client settings during properties serialization.");
+			ThrowHelper.ThrowJsonExceptionForMissingSettings();
 
 		if (value is null)
 		{
