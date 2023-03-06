@@ -10,11 +10,13 @@
 
 #pragma warning disable IDE0005
 //tag::usings[]
+//tag::converter-usings[]
 using System;
 using System.Text.Json;
 //tag::usings-serialization[]
 using System.Text.Json.Serialization;
 //end::usings-serialization[]
+//end::converter-usings[]
 using System.Threading.Tasks;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch;
@@ -37,7 +39,8 @@ public class CustomSerializationTests : DocumentationTestBase
 
     #pragma warning disable format
     //tag::custom-options-local-function[]
-    static void ConfigureOptions(JsonSerializerOptions o) => o.PropertyNamingPolicy = null; // <1>
+    static void ConfigureOptions(JsonSerializerOptions o) => // <1>
+        o.PropertyNamingPolicy = null; 
     //end::custom-options-local-function[]
   
     //tag::create-client[]
@@ -64,8 +67,7 @@ public class CustomSerializationTests : DocumentationTestBase
     #pragma warning disable format
     //tag::index-person[]
     var person = new Person { FirstName = "Steve" };
-    var indexResponse = await client.IndexAsync(person, "my-index-name");
-    //end::index-person[]
+    var indexResponse = await client.IndexAsync(person, "my-index-name"); //end::index-person[]
     #pragma warning restore format
 
         var requestJson = Encoding.UTF8.GetString(indexResponse.ApiCallDetails.RequestBodyInBytes);
@@ -77,13 +79,13 @@ public class CustomSerializationTests : DocumentationTestBase
 
 // Alternative example using an Action
 //tag::custom-options-action[]
-Action<JsonSerializerOptions> configureOptions = o => o.PropertyNamingPolicy = null; // <3>
+Action<JsonSerializerOptions> configureOptions = o => o.PropertyNamingPolicy = null;
 //end::custom-options-action[]
     }
 
 #pragma warning disable format
 //tag::person-class[]
-private class Person
+public class Person
 {
     public string FirstName { get; set; }
 }
@@ -115,7 +117,11 @@ var indexResponse = await Client.IndexAsync(person, "my-index-name");
     {
 #pragma warning disable format
 //tag::index-customer-with-converter[]
-var customer = new Customer { CustomerName = "Customer Ltd", Type = CustomerType.Enhanced };
+var customer = new Customer 
+{ 
+    CustomerName = "Customer Ltd", 
+    CustomerType = CustomerType.Enhanced 
+};
 var indexResponse = await Client.IndexAsync(customer, "my-index-name");
 //end::index-customer-with-converter[]
 #pragma warning restore format
@@ -126,12 +132,12 @@ var indexResponse = await Client.IndexAsync(customer, "my-index-name");
         var ms = new MemoryStream(indexResponse.ApiCallDetails.RequestBodyInBytes);
         var deserializedCustomer = Client.SourceSerializer.Deserialize<Customer>(ms);
         deserializedCustomer.CustomerName.Should().Be("Customer Ltd");
-        deserializedCustomer.Type.Should().Be(CustomerType.Enhanced);
+        deserializedCustomer.CustomerType.Should().Be(CustomerType.Enhanced);
     }
 
 #pragma warning disable format
 //tag::person-class-with-attributes[]
-private class Person
+public class Person
 {
     [JsonPropertyName("forename")] // <1>
     public string FirstName { get; set; }
@@ -142,92 +148,103 @@ private class Person
 //end::person-class-with-attributes[]
 #pragma warning restore format
 
-    [JsonConverter(typeof(CustomerConverter))]
-    private class Customer
-    {
-        public string CustomerName { get; set; }
-        public CustomerType Type { get; set; }
-    }
+#pragma warning disable format
+//tag::customer-with-jsonconverter-attribute[]
+[JsonConverter(typeof(CustomerConverter))] // <1>
+public class Customer
+{
+    public string CustomerName { get; set; }
+    public CustomerType CustomerType { get; set; }
+}
 
-    private enum CustomerType
-    {
-        Standard,
-        Enhanced
-    }
+public enum CustomerType
+{
+    Standard,
+    Enhanced
+}
+//end::customer-with-jsonconverter-attribute[]
+#pragma warning restore format
 
-    private class CustomerConverter : JsonConverter<Customer>
+#pragma warning disable format
+//tag::customer-converter[]
+public class CustomerConverter : JsonConverter<Customer>
+{
+    public override Customer Read(ref Utf8JsonReader reader, 
+        Type typeToConvert, JsonSerializerOptions options)
     {
-        public override Customer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        var customer = new Customer();
+
+        while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
         {
-            var customer = new Customer();
-
-            while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+            if (reader.TokenType == JsonTokenType.PropertyName)
             {
-                if (reader.TokenType == JsonTokenType.PropertyName)
+                if (reader.ValueTextEquals("customerName"))
                 {
-                    if (reader.ValueTextEquals("customerName"))
+                    reader.Read();
+                    customer.CustomerName = reader.GetString();
+                    continue;
+                }
+
+                if (reader.ValueTextEquals("isStandard")) // <1>
+                {
+                    reader.Read();
+                    var isStandard = reader.GetBoolean();
+
+                    if (isStandard)
                     {
-                        reader.Read();
-                        customer.CustomerName = reader.GetString();
-                        continue;
+                        customer.CustomerType = CustomerType.Standard;
+                    }
+                    else
+                    {
+                        customer.CustomerType = CustomerType.Enhanced;
                     }
 
-                    if (reader.ValueTextEquals("isStandard"))
-                    {
-                        reader.Read();
-                        var isStandard = reader.GetBoolean();
-
-                        if (isStandard)
-                        {
-                            customer.Type = CustomerType.Standard;
-                        }
-                        else
-                        {
-                            customer.Type = CustomerType.Enhanced;
-                        }
-
-                        continue;
-                    }
+                    continue;
                 }
             }
-
-            return customer;
         }
 
-        public override void Write(Utf8JsonWriter writer, Customer value, JsonSerializerOptions options)
-        {
-            if (value is null)
-            {
-                writer.WriteNullValue();
-                return;
-            }
-
-            writer.WriteStartObject();
-
-            if (!string.IsNullOrEmpty(value.CustomerName))
-            {
-                writer.WritePropertyName("customerName");
-                writer.WriteStringValue(value.CustomerName);
-            }
-
-            writer.WritePropertyName("isStandard");
-
-            if (value.Type == CustomerType.Standard)
-            {
-                writer.WriteBooleanValue(true);
-            }
-            else
-            {
-                writer.WriteBooleanValue(false);
-            }
-
-            writer.WriteEndObject();
-        }
+        return customer;
     }
+
+    public override void Write(Utf8JsonWriter writer, 
+        Customer value, JsonSerializerOptions options)
+    {
+        if (value is null)
+        {
+            writer.WriteNullValue();
+            return;
+        }
+
+        writer.WriteStartObject();
+
+        if (!string.IsNullOrEmpty(value.CustomerName))
+        {
+            writer.WritePropertyName("customerName");
+            writer.WriteStringValue(value.CustomerName);
+        }
+
+        writer.WritePropertyName("isStandard");
+
+        if (value.CustomerType == CustomerType.Standard) // <2>
+        {
+            writer.WriteBooleanValue(true);
+        }
+        else
+        {
+            writer.WriteBooleanValue(false);
+        }
+
+        writer.WriteEndObject();
+    }
+}
+//end::customer-converter[]
+#pragma warning restore format
 
     private class CustomerTypeConverter : JsonConverter<CustomerType>
     {
-        public override CustomerType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override CustomerType Read(ref Utf8JsonReader reader, 
+            Type typeToConvert, JsonSerializerOptions options)
         {
             return reader.GetString() switch
             {
@@ -238,7 +255,8 @@ private class Person
             };
         }
 
-        public override void Write(Utf8JsonWriter writer, CustomerType value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, 
+            CustomerType value, JsonSerializerOptions options)
         {
             switch (value)
             {
@@ -296,19 +314,19 @@ public class CustomSerializationTestsEnumAttribute : DocumentationTestBase
         deserializedCustomer.Type.Should().Be(CustomerType.Enhanced);
     }
 
-    private class Customer
+    public class Customer
     {
         public string CustomerName { get; set; }
         public CustomerType Type { get; set; }
     }
 
-    private enum CustomerType
+    public enum CustomerType
     {
         Standard,
         Enhanced
     }
 
-    private class MyCustomSerializer : SystemTextJsonSerializer
+    public class MyCustomSerializer : SystemTextJsonSerializer
     {
         private readonly JsonSerializerOptions _options;
 
@@ -324,7 +342,7 @@ public class CustomSerializationTestsEnumAttribute : DocumentationTestBase
         protected override JsonSerializerOptions CreateJsonSerializerOptions() => _options;
     }
 
-    private class CustomerTypeConverter : JsonConverter<CustomerType>
+    public class CustomerTypeConverter : JsonConverter<CustomerType>
     {
         public override CustomerType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

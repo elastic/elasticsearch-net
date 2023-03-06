@@ -3,7 +3,7 @@
 
 The built-in source serializer handles most POCO document models correctly. Sometimes, you may need further control over how your types are serialized.
 
-NOTE: The built-in source serializer uses the Microsoft https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview[`System.Text.Json` library] internally. You can apply `System.Text.Json` attributes and converters to control serialization of your document types.
+NOTE: The built-in source serializer uses the https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview[Microsoft `System.Text.Json` library] internally. You can apply `System.Text.Json` attributes and converters to control the serialization of your document types.
 
 [[system-text-json-attributes]]
 ===== Using `System.Text.Json` attributes
@@ -17,8 +17,8 @@ We can model a document to represent data about a person using a regular class (
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=usings-serialization]
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=person-class-with-attributes]
 ----
-<1> The `JsonPropertyName` attribute is used to ensure the `FirstName` property uses the JSON property name `forename` when serialized.
-<2> The `JsonIgnore` attribute is used to prevent the `Age` property from appearing in the serialized JSON.
+<1> The `JsonPropertyName` attribute ensures the `FirstName` property uses the JSON name `forename` when serialized.
+<2> The `JsonIgnore` attribute prevents the `Age` property from appearing in the serialized JSON.
 
 We can then index an instance of the document into {es}.
 
@@ -37,15 +37,10 @@ The index request is serialized, with the source serializer handling the `Person
 }
 ----
 
-[[registering-custom-converters]]
-===== Registering custom `System.Text.Json` converters
-
-TODO
-
 [[configuring-custom-jsonserializeroptions]]
 ===== Configuring custom `JsonSerializerOptions`
 
-The default source serializer applies a set of standard `JsonSerializerOptions` when serializing source document types. In some circumstances, you may wish to override some of our defaults. This is possible by creating an instance of `DefaultSourceSerializer` and passing an `Action<JsonSerializerOptions>` which is applied after our defaults have been set. This mechanism allows you to apply additional settings, or change the value of our defaults.
+The default source serializer applies a set of standard `JsonSerializerOptions` when serializing source document types. In some circumstances, you may need to override some of our defaults. This is achievable by creating an instance of `DefaultSourceSerializer` and passing an `Action<JsonSerializerOptions>`, which is applied after our defaults have been set. This mechanism allows you to apply additional settings or change the value of our defaults.
 
 The `DefaultSourceSerializer` includes a constructor that accepts the current `IElasticsearchClientSettings` and a `configureOptions` `Action`.
 
@@ -61,7 +56,7 @@ Our application defines the following `Person` class, which models a document we
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=person-class]
 ----
 
-We want to serialize our source document using Pascal Casing for the JSON properties. Since the options applied in the `DefaultSouceSerializer` set the `PropertyNamingPolicy` to `JsonNamingPolicy.CamelCase`, we must override this setting.
+We want to serialize our source document using Pascal Casing for the JSON properties. Since the options applied in the `DefaultSouceSerializer` set the `PropertyNamingPolicy` to `JsonNamingPolicy.CamelCase`, we must override this setting. After configuring the `ElasticsearchClientSettings`, we index our document to {es}.
 
 [source,csharp]
 ----
@@ -90,6 +85,49 @@ As an alternative to using a local function, we could store an `Action<JsonSeria
 [source,csharp]
 ----
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=custom-options-action]
+----
+
+[[registering-custom-converters]]
+===== Registering custom `System.Text.Json` converters
+
+In certain more advanced situations, you may have types which require further customization during serialization than is possible using `System.Text.Json` property attributes. In these cases, the recommendation from Microsoft is to leverage a custom `JsonConverter`. Source document types serialized using the  `DefaultSourceSerializer` can leverage the power of custom converters.
+
+For this example, our application has a document class that should use a legacy JSON structure to continue operating with existing indexed documents. Several options are available, but we'll apply a custom converter in this case.
+
+Our class is defined, and the `JsonConverter` attribute is applied to the class type, specifying the type of a custom converter.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=usings-serialization]
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=customer-with-jsonconverter-attribute]
+----
+<1> The `JsonConverter` attribute signals to `System.Text.Json` that it should use a converter of type `CustomerConverter` when serializing instances of this class.
+
+When serializing this class, rather than include a string value representing the value of the `CustomerType` property, we must send a boolean property named `isStandard`. This requirement can be achieved with a custom JsonConverter implementation.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=converter-usings]
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=customer-converter]
+----
+<1> When reading, this converter will read the `isStandard` boolean and translate this to the correct `CustomerType` enum value.
+<2> When writing, this converter will translate the `CustomerType` enum value to an `isStandard` boolean property.
+
+We can then index a customer document into {es}.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=index-customer-with-converter]
+----
+
+The `Customer` instance is serialized using the custom converter, creating the following JSON document.
+
+[source,javascript]
+----
+{
+  "customerName": "Customer Ltd",
+  "isStandard": false
+}
 ----
 
 [[injecting-custom-serializer]]
