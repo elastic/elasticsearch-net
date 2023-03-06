@@ -5,15 +5,14 @@
 using System;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
 /// <summary>
-/// May be used by requests that need to serialise only part of their source rather than the request object itself.
+/// May be used by requests that need to serialize only part of their source rather than the request object itself.
 /// </summary>
-internal static class SourceSerialisation
+internal static class SourceSerialization
 {
 	public static void SerializeParams<T>(T toSerialize, Utf8JsonWriter writer, IElasticsearchClientSettings settings)
 	{
@@ -49,7 +48,7 @@ internal static class SourceSerialisation
 	{
 		if (sourceSerializer is DefaultSourceSerializer defaultSerializer)
 		{
-			// When the serializer is our own, which uses STJ we can avoid unneccesary allocations and serialise straight into the writer
+			// When the serializer is our own, which uses STJ we can avoid unnecessary allocations and serialize straight into the writer
 			// In most cases this is not the case as it's wrapped in the DiagnosticsSerializerProxy
 			// Ideally, we'd short-circuit here if we know there are no listeners or avoid wrapping the default source serializer.
 			JsonSerializer.Serialize(writer, toSerialize, defaultSerializer.Options);
@@ -75,7 +74,7 @@ internal static class SourceSerialisation
 	{
 		if (sourceSerializer is DefaultSourceSerializer defaultSerializer)
 		{
-			// When the serializer is our own, which uses STJ we can avoid unneccesary allocations and serialise straight into the writer
+			// When the serializer is our own, which uses STJ we can avoid unnecessary allocations and serialize straight into the writer
 			// In most cases this is not the case as it's wrapped in the DiagnosticsSerializerProxy
 			// Ideally, we'd short-circuit here if we know there are no listeners or avoid wrapping the default source serializer.
 			JsonSerializer.Serialize(writer, toSerialize, type, defaultSerializer.Options);
@@ -103,7 +102,7 @@ internal static class SourceSerialisation
 
 		if (sourceSerializer is DefaultSourceSerializer defaultSerializer)
 		{
-			// When the serializer is our own which uses STJ we can avoid unneccesary allocations and serialise straight into the writer
+			// When the serializer is our own which uses STJ we can avoid unnecessary allocations and serialize straight into the writer
 			return JsonSerializer.Deserialize<T>(ref reader, defaultSerializer.Options);
 		}
 		else

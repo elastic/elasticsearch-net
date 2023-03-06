@@ -376,7 +376,7 @@ internal sealed class FieldValueConverter : JsonConverter<FieldValue>
 			if (!options.TryGetClientSettings(out var settings))
 				throw new JsonException("Unable to retrieve ElasticsearchClientSettings in order to access source serializer.");
 
-			SourceSerialisation.Serialize(objectValue, objectValue.GetType(), writer, settings);
+			SourceSerialization.Serialize(objectValue, objectValue.GetType(), writer, settings);
 		}
 
 		else if (value.Kind == FieldValue.ValueKind.Null)
