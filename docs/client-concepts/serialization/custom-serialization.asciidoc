@@ -1,0 +1,57 @@
+[[custom-serialization]]
+=== Custom Serialization
+
+The built-in source serializer handles most POCO document models correctly. Sometimes, you may need further control over how your types are serialized.
+
+NOTE: The built-in source serializer uses the Microsoft https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview[`System.Text.Json` library] internally. You can apply `System.Text.Json` attributes and converters to control serialization of your document types.
+
+[[system-text-json-attributes]]
+==== Using System.Text.Json attributes
+
+`System.Text.Json` includes attributes that can be applied to types and properties to control how they are serialized. These can be applied to your POCO document types to perform actions such as controlling the name of a property, or ignoring a property entirely. Visit the https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview[Microsoft documentation for further examples].
+
+We can model a document to represent data about a person using a regular class (POCO), applying `System.Text.Json`` attributes as necessary.
+
+[source,csharp]
+----
+include-tagged::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[usings-serialization]
+
+include-tagged::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[person-class-with-attributes]
+----
+<1> the `JsonPropertyName` attribute is used to provide a specific name (`forename`) for the `FirstName` property when serialized.
+<2> the `JsonIgnore` attribute is used to prevent the `Age` property from appearing in the serialized JSON.
+
+We can then index the an instance of the document into {es}.
+
+[source,csharp]
+----
+include-tagged::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[usings]
+
+include-tagged::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[index-person-with-attributes]
+----
+
+The index request is serialized, with the source serializer handling the `Person` type, serializing the POCO property named `FirstName` to the JSON object member named `forename`. The `Age` property is ignored and does not appear in the JSON.
+
+[source,javascript]
+----
+{
+  "forename": "Steve"
+}
+----
+
+[[registering-custom-converters]]
+==== Registering custom System.Text.Json converters
+
+TODO
+
+[[configuring-custom-jsonserializeroptions]]
+==== Configuring custom JsonSerializerOptions
+
+TODO
+
+[[injecting-custom-serializer]]
+==== Injecting a custom serializer
+
+TODO
+- Deriving from SystemTextJsonSerializer
+- Deriving from Serializer

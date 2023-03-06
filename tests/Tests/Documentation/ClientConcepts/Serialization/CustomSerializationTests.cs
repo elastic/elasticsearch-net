@@ -6,7 +6,9 @@
 //tag::usings
 using System;
 using System.Text.Json;
+//tag::usings-serialization
 using System.Text.Json.Serialization;
+//end::usings-serialization
 using System.Threading.Tasks;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch;
@@ -81,7 +83,7 @@ public class CustomSerializationTests_WithAttributes : DocumentationTestBase
 		// This example uses a STJ attribute on the property to provide a specific name to use in the JSON.
 
 		//tag::index-person-with-attributes
-		var person = new Person { FirstName = "Steve" };
+		var person = new Person { FirstName = "Steve", Age = 35 };
 		var indexResponse = await Client.IndexAsync(person, "my-index-name");
 		//end::index-person-with-attributes
 
@@ -111,6 +113,9 @@ public class CustomSerializationTests_WithAttributes : DocumentationTestBase
 	{
 		[JsonPropertyName("forename")] // <1>
 		public string FirstName { get; set; }
+
+		[JsonIgnore] // <2>
+		public int Age { get; set; }
 	}
 	//end::person-class-with-attributes
 
