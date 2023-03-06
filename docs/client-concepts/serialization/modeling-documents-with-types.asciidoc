@@ -1,5 +1,5 @@
 [[modeling-documents-with-types]]
-=== Modeling documents with types
+==== Modeling documents with types
 
 {es} provides search and aggregation capabilities on the documents that it is sent and indexes. These documents are sent as
 JSON objects within the request body of a HTTP request. It is natural to model documents within the {es} .NET client using
@@ -8,7 +8,7 @@ https://en.wikipedia.org/wiki/Plain_Old_CLR_Object[POCOs (__Plain Old CLR Object
 This section provides an overview of how types and type hierarchies can be used to model documents.
 
 [[default-behaviour]]
-==== Default behaviour
+===== Default behaviour
 
 The default behaviour is to serialize type property names as camelcase JSON object members.
 
@@ -24,7 +24,6 @@ We can then index the an instance of the document into {es}.
 [source,csharp]
 ----
 include-tagged::{doc-tests-src}/ClientConcepts/Serialization/ModellingDocumentsWithTypesTests.cs[usings]
-
 include-tagged::{doc-tests-src}/ClientConcepts/Serialization/ModellingDocumentsWithTypesTests.cs[index-my-document]
 ----
 
