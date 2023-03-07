@@ -5,6 +5,7 @@ The built-in source serializer handles most POCO document models correctly. Some
 
 NOTE: The built-in source serializer uses the https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview[Microsoft `System.Text.Json` library] internally. You can apply `System.Text.Json` attributes and converters to control the serialization of your document types.
 
+[discrete]
 [[system-text-json-attributes]]
 ===== Using `System.Text.Json` attributes
 
@@ -37,6 +38,7 @@ The index request is serialized, with the source serializer handling the `Person
 }
 ----
 
+[discrete]
 [[configuring-custom-jsonserializeroptions]]
 ===== Configuring custom `JsonSerializerOptions`
 
@@ -87,6 +89,7 @@ As an alternative to using a local function, we could store an `Action<JsonSeria
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=custom-options-action]
 ----
 
+[discrete]
 [[registering-custom-converters]]
 ===== Registering custom `System.Text.Json` converters
 
@@ -131,6 +134,7 @@ The `Customer` instance is serialized using the custom converter, creating the f
 }
 ----
 
+[discrete]
 [[creating-custom-system-text-json-serializer]]
 ===== Creating a custom `SystemTextJsonSerializer`
 
@@ -196,6 +200,7 @@ The `Customer` instance is serialized using the custom `enum` converter, creatin
 ----
 <1> The string value applied during serialization is provided by our custom converter.
 
+[discrete]
 [[creating-custom-serializers]]
 ===== Creating a custom `Serializer`
 
