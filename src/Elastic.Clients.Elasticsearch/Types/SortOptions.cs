@@ -73,7 +73,7 @@ internal sealed class SortOptionsConverter : JsonConverter<SortOptions>
 	public override void Write(Utf8JsonWriter writer, SortOptions value, JsonSerializerOptions options)
 	{
 		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrieve IElasticsearchClientSettings.");
+			ThrowHelper.ThrowJsonExceptionForMissingSettings();
 
 		string? fieldName = null;
 

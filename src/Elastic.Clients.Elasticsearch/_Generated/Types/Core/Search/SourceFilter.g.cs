@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
-internal sealed class SourceFilterConverter : JsonConverter<SourceFilter>
+internal sealed partial class SourceFilterConverter : JsonConverter<SourceFilter>
 {
 	public override SourceFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

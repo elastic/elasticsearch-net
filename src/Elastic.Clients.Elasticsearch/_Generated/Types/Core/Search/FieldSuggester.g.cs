@@ -57,7 +57,7 @@ public sealed partial class FieldSuggester
 	public string? Text { get; set; }
 }
 
-internal sealed class FieldSuggesterConverter : JsonConverter<FieldSuggester>
+internal sealed partial class FieldSuggesterConverter : JsonConverter<FieldSuggester>
 {
 	public override FieldSuggester Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
