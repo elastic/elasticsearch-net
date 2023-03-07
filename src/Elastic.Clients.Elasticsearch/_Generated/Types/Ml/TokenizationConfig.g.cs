@@ -49,7 +49,7 @@ public sealed partial class TokenizationConfig
 	public static TokenizationConfig Roberta(Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => new TokenizationConfig("roberta", nlpRobertaTokenizationConfig);
 }
 
-internal sealed class TokenizationConfigConverter : JsonConverter<TokenizationConfig>
+internal sealed partial class TokenizationConfigConverter : JsonConverter<TokenizationConfig>
 {
 	public override TokenizationConfig Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

@@ -130,6 +130,6 @@ public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescript
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		SourceSerialisation.Serialize(DocumentValue, writer, settings.SourceSerializer);
+		SourceSerialization.Serialize(DocumentValue, writer, settings.SourceSerializer);
 	}
 }
