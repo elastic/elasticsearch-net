@@ -208,7 +208,7 @@ if (response.IsValidResponse)
 //tag::tweet-class[]
 public class Tweet
 {
-    public int Id { get; set; }
+    public int Id { get; set; } // <1>
     public string User { get; set; }
     public DateTime PostDate { get; set; }
     public string Message { get; set; }

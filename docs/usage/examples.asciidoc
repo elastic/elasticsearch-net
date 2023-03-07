@@ -13,7 +13,7 @@ your C# file.
 
 [source,csharp]
 ----
-include::{doc-tests-src}/Usage/CrudExamplesTests.cs[tag=using-directives,create-client]
+include::{doc-tests-src}/Usage/CrudExamplesTests.cs[tags=using-directives;create-client]
 ----
 <1> The default constructor, assumes an unsecured {es} server is running and 
 exposed on 'http://localhost:9200'. See <<connecting, connecting>> for examples 
