@@ -5,7 +5,6 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
@@ -21,8 +20,7 @@ public class DefaultSourceSerializer : SystemTextJsonSerializer
 	/// </summary>
 	public static JsonConverter[] DefaultBuiltInConverters => new JsonConverter[]
 	{
-		new JsonStringEnumConverter(),
-		new QueryConverter()
+		new JsonStringEnumConverter()
 	};
 
 	private readonly JsonSerializerOptions _jsonSerializerOptions;

@@ -74,9 +74,6 @@ public class DefaultSourceSerializerTests : SerializerTestBase
 	[U]
 	public async Task SourceSerialization_WithCustomSerializer_CorrectlySerializes_TypesUsingQuery()
 	{
-		// This client provides custom JsonSerializerOptions and tests that our built in converters apply correctly in
-		// that scenario.
-
 		var nodePool = new SingleNodePool(new Uri("http://localhost:9200"));
 
 		var settings = new ElasticsearchClientSettings(
@@ -154,6 +151,8 @@ public class DefaultSourceSerializerTests : SerializerTestBase
 		public MyCustomSerializer(IElasticsearchClientSettings settings) : base(settings)
 		{
 			var options = DefaultSourceSerializer.CreateDefaultJsonSerializerOptions(false);
+
+			// At this point, a custom converter could be added, before our default ones. That's not what we're testing here.
 
 			// This is necessary for custom serializers if they want to support serializing our types, such as Query.
 			_options = DefaultSourceSerializer.AddDefaultConverters(options);

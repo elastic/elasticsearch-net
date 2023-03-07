@@ -2,13 +2,16 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+// **********************************
 // IMPORTANT: These tests have a secondary use as code snippets used in documentation.
 // We disable formatting in sections of this file to ensure the correct indentation when tagged regions are
 // included in the asciidocs. While hard to read, this formatting should be left as-is for docs generation.
 // We also include using directives that are not required due to global using directives, but remain here
 // so that can appear in the documentation.
+// **********************************
 
-#pragma warning disable IDE0005
+#pragma warning disable CS0105 // Using directive appeared previously in this namespace
+#pragma warning disable IDE0005 // Remove unnecessary using directives
 //tag::usings[]
 //tag::converter-usings[]
 using System;
@@ -22,10 +25,26 @@ using Elastic.Transport;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Serialization;
 //end::usings[]
+//tag::derived-converter-usings[]
+using System.Text.Json;
+using Elastic.Clients.Elasticsearch.Serialization;
+//end::derived-converter-usings[]
+//tag::vanilla-serializer-using-directives[]
+using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using Elastic.Transport;
+//end::vanilla-serializer-using-directives[]
 using System.Text;
 using VerifyXunit;
 using System.IO;
-#pragma warning restore IDE0005
+using System.Threading;
+//tag::querydsl-using-directives[]
+using Elastic.Clients.Elasticsearch.QueryDsl;
+//end::querydsl-using-directives[]
+#pragma warning restore IDE0005 // Remove unnecessary using directives
+#pragma warning restore CS0105 // Using directive appeared previously in this namespace
 
 namespace Tests.Documentation.Serialization;
 
@@ -67,7 +86,8 @@ public class CustomSerializationTests : DocumentationTestBase
     #pragma warning disable format
     //tag::index-person[]
     var person = new Person { FirstName = "Steve" };
-    var indexResponse = await client.IndexAsync(person, "my-index-name"); //end::index-person[]
+    var indexResponse = await client.IndexAsync(person, "my-index-name");
+    //end::index-person[]
     #pragma warning restore format
 
         var requestJson = Encoding.UTF8.GetString(indexResponse.ApiCallDetails.RequestBodyInBytes);
@@ -297,13 +317,17 @@ public class CustomSerializationTestsEnumAttribute : DocumentationTestBase
             .DisableDirectStreaming();
         client = new ElasticsearchClient(settings);
 
-        var customer = new Customer
-        {
-            CustomerName = "Customer Ltd",
-            Type = CustomerType.Enhanced
-        };
+#pragma warning disable format
+//tag::index-customer-without-jsonconverter-attribute[]
+var customer = new Customer
+{
+    CustomerName = "Customer Ltd",
+    CustomerType = CustomerType.Enhanced
+};
 
-        var indexResponse = await client.IndexAsync(customer, "my-index-name");
+var indexResponse = await client.IndexAsync(customer, "my-index-name");
+//end::index-customer-without-jsonconverter-attribute[]
+#pragma warning restore format
 
         var requestJson = Encoding.UTF8.GetString(indexResponse.ApiCallDetails.RequestBodyInBytes);
         await Verifier.Verify(requestJson);
@@ -311,63 +335,125 @@ public class CustomSerializationTestsEnumAttribute : DocumentationTestBase
         var ms = new MemoryStream(indexResponse.ApiCallDetails.RequestBodyInBytes);
         var deserializedCustomer = client.SourceSerializer.Deserialize<Customer>(ms);
         deserializedCustomer.CustomerName.Should().Be("Customer Ltd");
-        deserializedCustomer.Type.Should().Be(CustomerType.Enhanced);
+        deserializedCustomer.CustomerType.Should().Be(CustomerType.Enhanced);
     }
 
-    public class Customer
+#pragma warning disable format
+//tag::customer-without-jsonconverter-attribute[]
+public class Customer
+{
+    public string CustomerName { get; set; }
+    public CustomerType CustomerType { get; set; }
+}
+
+public enum CustomerType
+{
+    Standard,
+    Enhanced
+}
+//end::customer-without-jsonconverter-attribute[]
+#pragma warning restore format
+
+#pragma warning disable format
+//tag::my-custom-serializer[]
+public class MyCustomSerializer : SystemTextJsonSerializer // <1>
+{
+    private readonly JsonSerializerOptions _options;
+
+    public MyCustomSerializer(IElasticsearchClientSettings settings) : base(settings)
     {
-        public string CustomerName { get; set; }
-        public CustomerType Type { get; set; }
+        var options = DefaultSourceSerializer.CreateDefaultJsonSerializerOptions(false); // <2>
+
+        options.Converters.Add(new CustomerTypeConverter()); // <3>
+
+        _options = DefaultSourceSerializer.AddDefaultConverters(options); // <4>
     }
 
-    public enum CustomerType
-    {
-        Standard,
-        Enhanced
-    }
+    protected override JsonSerializerOptions CreateJsonSerializerOptions() => _options; // <5>
+}
+//end::my-custom-serializer[]
+#pragma warning restore format
 
-    public class MyCustomSerializer : SystemTextJsonSerializer
+#pragma warning disable format
+//tag::customer-type-converter[]
+public class CustomerTypeConverter : JsonConverter<CustomerType>
+{
+    public override CustomerType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        private readonly JsonSerializerOptions _options;
-
-        public MyCustomSerializer(IElasticsearchClientSettings settings) : base(settings)
+        return reader.GetString() switch // <1>
         {
-            var options = DefaultSourceSerializer.CreateDefaultJsonSerializerOptions(false);
+            "basic" => CustomerType.Standard,
+            "premium" => CustomerType.Enhanced,
+            _ => throw new JsonException(
+                $"Unknown value read when deserializing {nameof(CustomerType)}."),
+        };
+    }
 
-            options.Converters.Add(new CustomerTypeConverter());
-
-            _options = DefaultSourceSerializer.AddDefaultConverters(options);
+    public override void Write(Utf8JsonWriter writer, CustomerType value, JsonSerializerOptions options)
+    {
+        switch (value) // <2>
+        {
+            case CustomerType.Standard:
+                writer.WriteStringValue("basic");
+                return;
+            case CustomerType.Enhanced:
+                writer.WriteStringValue("premium");
+                return;
         }
 
-        protected override JsonSerializerOptions CreateJsonSerializerOptions() => _options;
+        writer.WriteNullValue();
     }
+}
+//end::customer-type-converter[]
+#pragma warning restore format
 
-    public class CustomerTypeConverter : JsonConverter<CustomerType>
-    {
-        public override CustomerType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            return reader.GetString() switch
-            {
-                "basic" => CustomerType.Standard,
-                "premium" => CustomerType.Enhanced,
-                _ => throw new JsonException(
-                    $"Unknown value read when deserializing {nameof(CustomerType)}."),
-            };
-        }
+public void RegisterVanillaSerializer()
+{
+#pragma warning disable format
+//tag::register-vanilla-serializer[]
+var nodePool = new SingleNodePool(new Uri("http://localhost:9200"));
+var settings = new ElasticsearchClientSettings(
+    nodePool,
+    sourceSerializer: (defaultSerializer, settings) =>
+        new VanillaSerializer()); // <1>
+var client = new ElasticsearchClient(settings);
+//end::register-vanilla-serializer[]
+#pragma warning restore format
+}
 
-        public override void Write(Utf8JsonWriter writer, CustomerType value, JsonSerializerOptions options)
-        {
-            switch (value)
-            {
-                case CustomerType.Standard:
-                    writer.WriteStringValue("basic");
-                    return;
-                case CustomerType.Enhanced:
-                    writer.WriteStringValue("premium");
-                    return;
-            }
+#pragma warning disable format
+//tag::vanilla-serializer[]
+public class VanillaSerializer : Serializer
+{
+    public override object Deserialize(Type type, Stream stream) =>
+        throw new NotImplementedException();
 
-            writer.WriteNullValue();
-        }
-    }
+    public override T Deserialize<T>(Stream stream) =>
+        throw new NotImplementedException();
+
+    public override ValueTask<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>
+        throw new NotImplementedException();
+
+    public override ValueTask<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default) =>
+        throw new NotImplementedException();
+
+    public override void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None) =>
+        throw new NotImplementedException();
+
+    public override Task SerializeAsync<T>(T data, Stream stream, 
+        SerializationFormatting formatting = SerializationFormatting.None, CancellationToken cancellationToken = default) =>
+            throw new NotImplementedException();
+}
+//end::vanilla-serializer[]
+#pragma warning restore format
+
+#pragma warning disable format
+//tag::percolation-document[]
+public class MyPercolationDocument
+{
+    public Query Query { get; set; }
+    public string Category { get; set; }
+}
+//end::percolation-document[]
+#pragma warning restore format
 }

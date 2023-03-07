@@ -110,13 +110,14 @@ When serializing this class, rather than include a string value representing the
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=converter-usings]
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=customer-converter]
 ----
-<1> When reading, this converter will read the `isStandard` boolean and translate this to the correct `CustomerType` enum value.
-<2> When writing, this converter will translate the `CustomerType` enum value to an `isStandard` boolean property.
+<1> When reading, this converter reads the `isStandard` boolean and translate this to the correct `CustomerType` enum value.
+<2> When writing, this converter translates the `CustomerType` enum value to an `isStandard` boolean property.
 
 We can then index a customer document into {es}.
 
 [source,csharp]
 ----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=usings]
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=index-customer-with-converter]
 ----
 
@@ -130,9 +131,100 @@ The `Customer` instance is serialized using the custom converter, creating the f
 }
 ----
 
-[[injecting-custom-serializer]]
-===== Injecting a custom serializer
+[[creating-custom-system-text-json-serializer]]
+===== Creating a custom `SystemTextJsonSerializer`
 
-TODO
-- Deriving from SystemTextJsonSerializer for enum Converter
-- Deriving from Serializer for different library
+The built-in `DefaultSourceSerializer` includes the registration of `JsonConverter` instances which apply during source serialization. In most cases, these provide the proper behavior for serializing source documents, including those which use `Elastic.Clients.Elasticsearch` types on their properties.
+
+An example of a situation where you may require more control over the converter registration order is for serializing `enum` types. The `DefaultSourceSerializer` registers the `System.Text.Json.Serialization.JsonStringEnumConverter`, so enum values are serialized using their string representation. Generally, this is the preferred option for types used to index documents to {es}.
+
+In some scenarios, you may need to control the string value sent for an enumeration value. That is not directly supported in `System.Text.Json` but can be achieved by creating a custom `JsonConverter` for the `enum` type you wish to customize. In this situation, it is not sufficient to use the `JsonConverterAttribute` on the `enum` type to register the converter. `System.Text.Json` will prefer the converters added to the `Converters` collection on the `JsonSerializerOptions` over an attribute applied to an `enum` type. It is, therefore, necessary to either remove the `JsonStringEnumConverter` from the `Converters` collection or register a specialized converter for your `enum` type before the `JsonStringEnumConverter`.
+
+The latter is possible via several techniques. When using the {es} .NET library, we can achieve this by deriving from the abstract `SystemTextJsonSerializer` class.
+
+Here we have a POCO which uses the `CustomerType` enum as the type for a property.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=usings-serialization]
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=customer-without-jsonconverter-attribute]
+----
+
+To customize the strings used during serialization of the `CustomerType`, we define a custom `JsonConverter` specific to our `enum` type.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=usings-serialization]
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=customer-type-converter]
+----
+<1> When reading, this converter translates the string used in the JSON to the matching enum value.
+<2> When writing, this converter translates the `CustomerType` enum value to a custom string value written to the JSON.
+
+We create a serializer derived from `SystemTextJsonSerializer` to give us complete control of converter registration order.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=derived-converter-usings]
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=my-custom-serializer]
+----
+<1> Inherit from `SystemTextJsonSerializer`.
+<2> In the constructor, use the factory method `DefaultSourceSerializer.CreateDefaultJsonSerializerOptions` to create default options for serialization. No default converters are registered at this stage because we pass `false` as an argument.
+<3> Register our `CustomerTypeConverter` as the first converter.
+<4> To apply any default converters, call the `DefaultSourceSerializer.AddDefaultConverters` helper method, passing the options to modify.
+<5> Implement the `CreateJsonSerializerOptions` method returning the stored `JsonSerializerOptions`.
+
+Because we have registered our `CustomerTypeConverter` before the default converters (which include the `JsonStringEnumConverter`), our converter takes precedence when serializing `CustomerType` instances on source documents.
+
+The base `SystemTextJsonSerializer` class handles the implementation details of binding, which is required to ensure that the built-in converters can access the `IElasticsearchClientSettings` where needed.
+
+We can then index a customer document into {es}.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=usings]
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=index-customer-without-jsonconverter-attribute]
+----
+
+The `Customer` instance is serialized using the custom `enum` converter, creating the following JSON document.
+
+[source,javascript]
+----
+{
+  "customerName": "Customer Ltd",
+  "customerType": "premium" // <1>
+}
+----
+<1> The string value applied during serialization is provided by our custom converter.
+
+[[creating-custom-serializers]]
+===== Creating a custom `Serializer`
+
+Suppose you prefer using an alternative JSON serialization library for your source types. In that case, you can inject an isolated serializer only to be called for the serialization of `_source`, `_fields`, or wherever a user-provided value is expected to be written and returned.
+
+Implementing `Elastic.Transport.Serializer` is technically enough to create a custom source serializer.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=vanilla-serializer-using-directives]
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=vanilla-serializer]
+----
+
+Registering up the serializer is performed in the `ConnectionSettings` constructor.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=usings]
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=register-vanilla-serializer]
+----
+<1> If implementing `Serializer` is enough, why must we provide an instance wrapped in a factory `Func`?
+
+There are various cases where you might have a POCO type that contains an `Elastic.Clients.Elasticsearch` type as one of its properties. The `SourceSerializerFactory` delegate provides access to the default built-in serializer so you can access it when necessary. For example, consider if you want to use percolation; you need to store {es} queries as part of the `_source` of your document, which means you need to have a POCO that looks like this.
+
+[source,csharp]
+----
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=querydsl-using-directives]
+include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=percolation-document]
+----
+
+A custom serializer would not know how to serialize `Query` or other `Elastic.Clients.Elasticsearch` types that could appear as part of
+the `_source` of a document. Therefore, your custom `Serializer` would need to store a reference to our built-in serializer and delegate serialization of Elastic types back to it.
