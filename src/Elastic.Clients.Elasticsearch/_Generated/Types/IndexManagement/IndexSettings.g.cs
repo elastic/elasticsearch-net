@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-internal sealed class IndexSettingsConverter : JsonConverter<IndexSettings>
+internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettings>
 {
 	public override IndexSettings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

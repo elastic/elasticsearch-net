@@ -32,7 +32,7 @@ public sealed partial class Aggregation
 	internal ISearchAggregation Variant { get; }
 }
 
-internal sealed class AggregationConverter : JsonConverter<Aggregation>
+internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 {
 	public override Aggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

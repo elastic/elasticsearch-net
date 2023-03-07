@@ -5,17 +5,20 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 internal sealed class FieldConverter : JsonConverter<Field>
 {
-	private readonly IElasticsearchClientSettings _settings;
+	private IElasticsearchClientSettings _settings;
 
-	public FieldConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
-	public override void WriteAsPropertyName(Utf8JsonWriter writer, Field value, JsonSerializerOptions options) => writer.WritePropertyName(((IUrlParameter)value).GetString(_settings));
+	public override void WriteAsPropertyName(Utf8JsonWriter writer, Field value, JsonSerializerOptions options)
+	{
+		InitializeSettings(options);
+		writer.WritePropertyName(((IUrlParameter)value).GetString(_settings));
+	}
 
 	public override Field ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.GetString();
 
@@ -72,6 +75,8 @@ internal sealed class FieldConverter : JsonConverter<Field>
 
 	public override void Write(Utf8JsonWriter writer, Field value, JsonSerializerOptions options)
 	{
+		InitializeSettings(options);
+
 		if (value is null)
 		{
 			writer.WriteNullValue();
@@ -92,6 +97,17 @@ internal sealed class FieldConverter : JsonConverter<Field>
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(value.Format);
 			writer.WriteEndObject();
+		}
+	}
+
+	private void InitializeSettings(JsonSerializerOptions options)
+	{
+		if (_settings is null)
+		{
+			if (!options.TryGetClientSettings(out var settings))
+				ThrowHelper.ThrowJsonExceptionForMissingSettings();
+
+			_settings = settings;
 		}
 	}
 }
