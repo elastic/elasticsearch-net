@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-internal sealed class TermsSetQueryConverter : JsonConverter<TermsSetQuery>
+internal sealed partial class TermsSetQueryConverter : JsonConverter<TermsSetQuery>
 {
 	public override TermsSetQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

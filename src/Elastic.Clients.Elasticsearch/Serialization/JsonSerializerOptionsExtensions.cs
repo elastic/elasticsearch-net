@@ -8,6 +8,6 @@ namespace Elastic.Clients.Elasticsearch.Serialization;
 
 internal static class JsonSerializerOptionsExtensions
 {
-	public static bool TryGetClientSettings(this JsonSerializerOptions options, out IElasticsearchClientSettings settings) =>
+	internal static bool TryGetClientSettings(this JsonSerializerOptions options, out IElasticsearchClientSettings settings) =>
 		ElasticsearchClient.SettingsTable.TryGetValue(options, out settings);
 }

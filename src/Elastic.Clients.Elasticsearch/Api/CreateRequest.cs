@@ -19,5 +19,5 @@ public sealed partial class CreateRequest<TDocument> : ICustomJsonWriter
 		: this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) =>
 			Document = documentWithId;
 
-	public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
+	public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialization.Serialize(Document, writer, sourceSerializer);
 }
