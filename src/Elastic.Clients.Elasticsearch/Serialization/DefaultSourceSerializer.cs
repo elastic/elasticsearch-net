@@ -9,8 +9,16 @@ using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
+/// <summary>
+/// The built in internal serializer that the <see cref="ElasticsearchClient"/> uses to serialize
+/// source document types.
+/// </summary>
 public class DefaultSourceSerializer : SystemTextJsonSerializer
 {
+	/// <summary>
+	/// Returns an array of the built in <see cref="JsonConverter"/>s that are used registered with the
+	/// source serializer by default.
+	/// </summary>
 	public static JsonConverter[] DefaultBuiltInConverters => new JsonConverter[]
 	{
 		new JsonStringEnumConverter(),
@@ -26,20 +34,31 @@ public class DefaultSourceSerializer : SystemTextJsonSerializer
 		Initialize();
 	}
 
+	/// <summary>
+	/// Constructs a new <see cref="DefaultSourceSerializer"/> instance that accepts an <see cref="Action{T}"/> that can
+	/// be provided to customize the default <see cref="JsonSerializerOptions"/>.
+	/// </summary>
+	/// <param name="settings">An <see cref="IElasticsearchClientSettings"/> instance to which this
+	/// serializers <see cref="JsonSerializerOptions"/> will be linked.</param>
+	/// <param name="configureOptions">An <see cref="Action{T}"/> to customize the configuration of the
+	/// default <see cref="JsonSerializerOptions"/>.</param>
 	public DefaultSourceSerializer(IElasticsearchClientSettings settings, Action<JsonSerializerOptions> configureOptions) : base(settings)
 	{
-		if (configureOptions is null)
-			throw new ArgumentNullException(nameof(configureOptions));
-
 		var options = CreateDefaultJsonSerializerOptions();
 
-		configureOptions(options);
+		configureOptions?.Invoke(options);
 
 		_jsonSerializerOptions = options;
 
 		Initialize();
-	}	
+	}
 
+	/// <summary>
+	/// A factory method which returns a new instance of <see cref="JsonSerializerOptions"/> configured with the
+	/// default configuration applied to for serialization by the <see cref="DefaultSourceSerializer"/>.
+	/// </summary>
+	/// <param name="includeDefaultConverters"></param>
+	/// <returns></returns>
 	public static JsonSerializerOptions CreateDefaultJsonSerializerOptions(bool includeDefaultConverters = true)
 	{
 		var options = new JsonSerializerOptions()
@@ -60,6 +79,13 @@ public class DefaultSourceSerializer : SystemTextJsonSerializer
 		return options;
 	}
 
+	/// <summary>
+	/// A helper method which applies the default converters for the built in source serializer to an
+	/// existing <see cref="JsonSerializerOptions"/> instance.
+	/// </summary>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> instance to which to append the default
+	/// built in <see cref="JsonConverter"/>s.</param>
+	/// <returns>The <see cref="JsonSerializerOptions"/> instance that was provided as an argument.</returns>
 	public static JsonSerializerOptions AddDefaultConverters(JsonSerializerOptions options)
 	{
 		foreach (var converter in DefaultBuiltInConverters)
@@ -70,5 +96,5 @@ public class DefaultSourceSerializer : SystemTextJsonSerializer
 		return options;	
 	}
 
-	protected override JsonSerializerOptions CreateJsonSerializerOptions() => _jsonSerializerOptions;
+	protected sealed override JsonSerializerOptions CreateJsonSerializerOptions() => _jsonSerializerOptions;
 }

@@ -12,7 +12,8 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
 /// <summary>
-/// The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.
+/// The built in internal serializer that the <see cref="ElasticsearchClient"/> uses to serialize
+/// built in types.
 /// </summary>
 internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 {
@@ -27,7 +28,7 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 			Converters =
 				{
 					new KeyValuePairConverterFactory(settings),
-					new ObjectToInferredTypesConverter(),					
+					new ObjectToInferredTypesConverter(),
 					new SourceConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
 					new SelfSerializableConverterFactory(settings),

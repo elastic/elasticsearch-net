@@ -14,11 +14,23 @@ namespace Elastic.Clients.Elasticsearch.Serialization;
 /// <summary>
 /// An abstract implementation of the transport <see cref="Serializer"/> which serializes
 /// using the Microsoft System.Text.Json library.
+/// <para>
+/// This serializer is <see cref="IElasticsearchClientSettings"/> aware and able to register its
+/// <see cref="JsonSerializerOptions"/> in such a way that built in converters for types defined in
+/// <c>Elastic.Clients.Elasticsearch</c> can access those settings during serialization.
+/// </para>
 /// </summary>
 public abstract class SystemTextJsonSerializer : Serializer
 {
 	private bool _initialized;
 
+	/// <summary>
+	/// Initializes a new instance of the <see cref="SystemTextJsonSerializer"/> class, linked to an 
+	/// instance of <see cref="IElasticsearchClientSettings"/>.
+	/// </summary>
+	/// <param name="settings">An <see cref="IElasticsearchClientSettings"/> instance to which this
+	/// serializers <see cref="JsonSerializerOptions"/> will be linked.</param>
+	/// <exception cref="ArgumentNullException"><paramref name="settings"/> is <c>null</c></exception>
 	public SystemTextJsonSerializer(IElasticsearchClientSettings settings)
 	{
 		if (settings is null)
@@ -31,8 +43,17 @@ public abstract class SystemTextJsonSerializer : Serializer
 
 	internal JsonSerializerOptions? IndentedOptions { get; private set; }
 
+	/// <summary>
+	/// Provides access to the <see cref="IElasticsearchClientSettings"/> instance to which this
+	/// serializers <see cref="JsonSerializerOptions"/> are be linked.
+	/// </summary>
 	protected IElasticsearchClientSettings Settings { get; }
 
+	/// <summary>
+	/// A factory method that can create an instance of <see cref="JsonSerializerOptions"/> that will
+	/// be used when serializing.
+	/// </summary>
+	/// <returns></returns>
 	protected abstract JsonSerializerOptions CreateJsonSerializerOptions();	
 
 	/// <inheritdoc />
@@ -95,6 +116,10 @@ public abstract class SystemTextJsonSerializer : Serializer
 		return stream == null || stream == Stream.Null || (stream.CanSeek && stream.Length == 0);
 	}
 
+	/// <summary>
+	/// Initializes a serializer instance such that its <see cref="JsonSerializerOptions"/>
+	/// are populated and linked to the <see cref="IElasticsearchClientSettings"/>.
+	/// </summary>
 	protected void Initialize()
 	{
 		if (_initialized)
