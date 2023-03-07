@@ -40,7 +40,7 @@ public sealed partial class InlineScript : ISelfTwoWaySerializable
 		if (Params is not null)
 		{
 			writer.WritePropertyName("params");
-			SourceSerialisation.SerializeParams(Params, writer, settings);
+			SourceSerialization.SerializeParams(Params, writer, settings);
 		}
 
 		writer.WriteEndObject();
@@ -89,7 +89,7 @@ public sealed partial class InlineScript : ISelfTwoWaySerializable
 
 				if (reader.ValueTextEquals("params"))
 				{
-					var value = SourceSerialisation.DeserializeParams<Dictionary<string, object>>(ref reader, settings);
+					var value = SourceSerialization.DeserializeParams<Dictionary<string, object>>(ref reader, settings);
 					if (value is not null)
 					{
 						Params = value;

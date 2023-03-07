@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -191,9 +192,7 @@ public sealed class Indices : IUrlParameter, IEnumerable<IndexName>, IEquatable<
 
 internal sealed class IndicesJsonConverter : JsonConverter<Indices>
 {
-	private readonly IElasticsearchClientSettings _settings;
-
-	public IndicesJsonConverter(IElasticsearchClientSettings settings) => _settings = settings;
+	private IElasticsearchClientSettings _settings;
 
 	public override Indices? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
@@ -219,6 +218,8 @@ internal sealed class IndicesJsonConverter : JsonConverter<Indices>
 
 	public override void Write(Utf8JsonWriter writer, Indices value, JsonSerializerOptions options)
 	{
+		InitializeSettings(options);
+
 		if (value == null)
 		{
 			writer.WriteNullValue();
@@ -226,5 +227,16 @@ internal sealed class IndicesJsonConverter : JsonConverter<Indices>
 		}
 
 		writer.WriteStringValue(((IUrlParameter)value).GetString(_settings));
+	}
+
+	private void InitializeSettings(JsonSerializerOptions options)
+	{
+		if (_settings is null)
+		{
+			if (!options.TryGetClientSettings(out var settings))
+				ThrowHelper.ThrowJsonExceptionForMissingSettings();
+
+			_settings = settings;
+		}
 	}
 }

@@ -48,7 +48,7 @@ public sealed partial class InferenceConfig
 	public static InferenceConfig Regression(Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions regressionInferenceOptions) => new InferenceConfig("regression", regressionInferenceOptions);
 }
 
-internal sealed class InferenceConfigConverter : JsonConverter<InferenceConfig>
+internal sealed partial class InferenceConfigConverter : JsonConverter<InferenceConfig>
 {
 	public override InferenceConfig Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

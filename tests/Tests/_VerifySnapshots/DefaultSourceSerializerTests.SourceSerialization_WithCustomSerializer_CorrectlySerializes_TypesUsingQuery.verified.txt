@@ -1,0 +1,2 @@
+{"parentProperty":"A parent property","id":1,"myJoinField":"my_parent"}
+{"id":2,"myJoinField":{"name":"mychild","parent":"1"}}

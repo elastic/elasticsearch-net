@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-internal sealed class MatchQueryConverter : JsonConverter<MatchQuery>
+internal sealed partial class MatchQueryConverter : JsonConverter<MatchQuery>
 {
 	public override MatchQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
