@@ -5,17 +5,20 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 internal sealed class IdConverter : JsonConverter<Id>
 {
-	private readonly IElasticsearchClientSettings _settings;
+	private IElasticsearchClientSettings? _settings;
 
-	public IdConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
-	public override void WriteAsPropertyName(Utf8JsonWriter writer, Id value, JsonSerializerOptions options) => writer.WritePropertyName(((IUrlParameter)value).GetString(_settings));
+	public override void WriteAsPropertyName(Utf8JsonWriter writer, Id value, JsonSerializerOptions options)
+	{
+		InitializeSettings(options);
+		writer.WritePropertyName(((IUrlParameter)value).GetString(_settings));
+	}
 
 	public override Id ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.GetString();
 
@@ -34,6 +37,7 @@ internal sealed class IdConverter : JsonConverter<Id>
 
 		if (value.Document is not null)
 		{
+			InitializeSettings(options);
 			var documentId = _settings.Inferrer.Id(value.Document.GetType(), value.Document);
 			writer.WriteStringValue(documentId);
 		}
@@ -44,6 +48,17 @@ internal sealed class IdConverter : JsonConverter<Id>
 		else
 		{
 			writer.WriteStringValue(value.StringValue);
+		}
+	}
+
+	private void InitializeSettings(JsonSerializerOptions options)
+	{
+		if (_settings is null)
+		{
+			if (!options.TryGetClientSettings(out var settings))
+				ThrowHelper.ThrowJsonExceptionForMissingSettings();
+
+			_settings = settings;
 		}
 	}
 }
