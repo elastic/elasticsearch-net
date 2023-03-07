@@ -49,7 +49,7 @@ public sealed partial class PivotGroupBy
 	public static PivotGroupBy Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new PivotGroupBy("terms", termsAggregation);
 }
 
-internal sealed class PivotGroupByConverter : JsonConverter<PivotGroupBy>
+internal sealed partial class PivotGroupByConverter : JsonConverter<PivotGroupBy>
 {
 	public override PivotGroupBy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

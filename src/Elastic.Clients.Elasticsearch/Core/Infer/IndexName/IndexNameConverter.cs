@@ -5,6 +5,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -12,13 +13,15 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// Converts an <see cref="IndexName"/> to and from its JSON representation.
 /// </summary>
-internal class IndexNameConverter : JsonConverter<IndexName?>
+internal class IndexNameConverter : JsonConverter<IndexName>
 {
-	private readonly IElasticsearchClientSettings _settings;
+	private IElasticsearchClientSettings _settings;
 
-	public IndexNameConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
-	public override void WriteAsPropertyName(Utf8JsonWriter writer, IndexName value, JsonSerializerOptions options) => writer.WritePropertyName(((IUrlParameter)value).GetString(_settings));
+	public override void WriteAsPropertyName(Utf8JsonWriter writer, IndexName value, JsonSerializerOptions options)
+	{
+		InitializeSettings(options);
+		writer.WritePropertyName(((IUrlParameter)value).GetString(_settings));
+	}
 
 	public override IndexName ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.GetString();
 
@@ -36,6 +39,8 @@ internal class IndexNameConverter : JsonConverter<IndexName?>
 
 	public override void Write(Utf8JsonWriter writer, IndexName? value, JsonSerializerOptions options)
 	{
+		InitializeSettings(options);
+
 		if (value is null)
 		{
 			writer.WriteNullValue();
@@ -43,5 +48,16 @@ internal class IndexNameConverter : JsonConverter<IndexName?>
 		}
 
 		writer.WriteStringValue(_settings.Inferrer.IndexName(value));
+	}
+
+	private void InitializeSettings(JsonSerializerOptions options)
+	{
+		if (_settings is null)
+		{
+			if (!options.TryGetClientSettings(out var settings))
+				ThrowHelper.ThrowJsonExceptionForMissingSettings();
+
+			_settings = settings;
+		}
 	}
 }
