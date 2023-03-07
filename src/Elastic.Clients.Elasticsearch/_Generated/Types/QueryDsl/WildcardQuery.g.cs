@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-internal sealed class WildcardQueryConverter : JsonConverter<WildcardQuery>
+internal sealed partial class WildcardQueryConverter : JsonConverter<WildcardQuery>
 {
 	public override WildcardQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

@@ -57,7 +57,7 @@ internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBody
 		if (PartialUpdate is not null)
 		{
 			writer.WritePropertyName("doc");
-			SourceSerialisation.Serialize(PartialUpdate, writer, settings.SourceSerializer);
+			SourceSerialization.Serialize(PartialUpdate, writer, settings.SourceSerializer);
 		}
 
 		if (Script is not null)
@@ -81,7 +81,7 @@ internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBody
 		if (Upsert is not null)
 		{
 			writer.WritePropertyName("upsert");
-			SourceSerialisation.Serialize(Upsert, writer, settings.SourceSerializer);
+			SourceSerialization.Serialize(Upsert, writer, settings.SourceSerializer);
 		}
 
 		if (Source is not null)
