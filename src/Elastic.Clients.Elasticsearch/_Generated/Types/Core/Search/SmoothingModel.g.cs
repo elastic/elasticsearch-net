@@ -49,7 +49,7 @@ public sealed partial class SmoothingModel
 	public static SmoothingModel StupidBackoff(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => new SmoothingModel("stupid_backoff", stupidBackoffSmoothingModel);
 }
 
-internal sealed class SmoothingModelConverter : JsonConverter<SmoothingModel>
+internal sealed partial class SmoothingModelConverter : JsonConverter<SmoothingModel>
 {
 	public override SmoothingModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

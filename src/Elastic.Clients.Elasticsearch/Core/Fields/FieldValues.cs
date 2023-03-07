@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -98,12 +99,12 @@ public sealed class FieldValues : IsADictionary<string, LazyJson>
 
 internal sealed class FieldValuesConverter : JsonConverter<FieldValues>
 {
-	private readonly IElasticsearchClientSettings _settings;
-
-	public FieldValuesConverter(IElasticsearchClientSettings settings) => _settings = settings;
+	private IElasticsearchClientSettings _settings;
 
 	public override FieldValues? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		InitializeSettings(options);
+
 		if (reader.TokenType != JsonTokenType.StartObject)
 		{
 			return null;
@@ -126,4 +127,15 @@ internal sealed class FieldValuesConverter : JsonConverter<FieldValues>
 	}
 
 	public override void Write(Utf8JsonWriter writer, FieldValues value, JsonSerializerOptions options) => throw new NotImplementedException();
+
+	private void InitializeSettings(JsonSerializerOptions options)
+	{
+		if (_settings is null)
+		{
+			if (!options.TryGetClientSettings(out var settings))
+				ThrowHelper.ThrowJsonExceptionForMissingSettings();
+
+			_settings = settings;
+		}
+	}
 }

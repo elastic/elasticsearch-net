@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-internal sealed class FuzzyQueryConverter : JsonConverter<FuzzyQuery>
+internal sealed partial class FuzzyQueryConverter : JsonConverter<FuzzyQuery>
 {
 	public override FuzzyQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
