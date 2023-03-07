@@ -36,7 +36,7 @@ internal class ScriptedBulkUpdateBody<TDocument> : ScriptedBulkUpdateBody
 		if (Upsert is not null)
 		{
 			writer.WritePropertyName("upsert");
-			SourceSerialisation.Serialize(Upsert, writer, settings.SourceSerializer);
+			SourceSerialization.Serialize(Upsert, writer, settings.SourceSerializer);
 		}
 	}
 }

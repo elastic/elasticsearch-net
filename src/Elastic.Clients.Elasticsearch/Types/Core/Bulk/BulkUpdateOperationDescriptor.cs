@@ -155,7 +155,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 		if (_document is not null)
 		{
 			writer.WritePropertyName("doc");
-			SourceSerialisation.Serialize(_document, writer, settings.SourceSerializer);
+			SourceSerialization.Serialize(_document, writer, settings.SourceSerializer);
 		}
 
 		if (_scriptedUpsert.HasValue)
@@ -173,7 +173,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 		if (_upsert is not null)
 		{
 			writer.WritePropertyName("upsert");
-			SourceSerialisation.Serialize(_upsert, writer, settings.SourceSerializer);
+			SourceSerialization.Serialize(_upsert, writer, settings.SourceSerializer);
 		}
 
 		if (_source is not null)

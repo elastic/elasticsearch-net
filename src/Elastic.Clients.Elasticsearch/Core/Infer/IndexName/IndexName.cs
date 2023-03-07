@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -11,6 +12,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// Represents the name of an index, which may be inferred from a <see cref="Type"/>.
 /// </summary>
+[JsonConverter(typeof(IndexNameConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
 public class IndexName : IEquatable<IndexName>, IUrlParameter
 {
@@ -48,7 +50,7 @@ public class IndexName : IEquatable<IndexName>, IUrlParameter
 	string IUrlParameter.GetString(ITransportConfiguration settings)
 	{
 		if (settings is not IElasticsearchClientSettings elasticsearchClientSettings)
-			throw new Exception("Tried to pass index name on querystring but it could not be resolved because no Elastic.Clients.Elasticsearch settings are available.");
+			throw new Exception("Tried to pass index name on query string but it could not be resolved because no Elastic.Clients.Elasticsearch settings are available.");
 
 		return elasticsearchClientSettings.Inferrer.IndexName(this);
 	}

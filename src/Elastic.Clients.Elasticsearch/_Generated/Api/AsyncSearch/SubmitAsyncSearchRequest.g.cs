@@ -126,7 +126,7 @@ public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 }
 
-internal sealed class SubmitAsyncSearchRequestConverter : JsonConverter<SubmitAsyncSearchRequest>
+internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<SubmitAsyncSearchRequest>
 {
 	public override SubmitAsyncSearchRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

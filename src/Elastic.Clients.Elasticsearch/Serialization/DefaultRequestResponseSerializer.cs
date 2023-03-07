@@ -7,58 +7,44 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
 /// <summary>
-/// The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.
+/// The built in internal serializer that the <see cref="ElasticsearchClient"/> uses to serialize
+/// built in types.
 /// </summary>
 internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 {
-	private readonly IElasticsearchClientSettings _settings;
+	private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-	public DefaultRequestResponseSerializer(IElasticsearchClientSettings settings)
+	public DefaultRequestResponseSerializer(IElasticsearchClientSettings settings) : base(settings)
 	{
-		Options = new JsonSerializerOptions
+		_jsonSerializerOptions = new JsonSerializerOptions
 		{	
 			DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
 			IncludeFields = true,
 			Converters =
 				{
 					new KeyValuePairConverterFactory(settings),
-					new SourceConverterFactory(settings),
-					new CalendarIntervalConverter(),
-					new IndexNameConverter(settings),
 					new ObjectToInferredTypesConverter(),
-					new IdConverter(settings),
-					new FieldConverter(settings),
-					new FieldValuesConverter(settings),
-					new LazyJsonConverter(settings),
-					new RelationNameConverter(settings),
-					new JoinFieldConverter(settings),
+					new SourceConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
-					new RoutingConverter(settings),
 					new SelfSerializableConverterFactory(settings),
 					new SelfDeserializableConverterFactory(settings),
 					new SelfTwoWaySerializableConverterFactory(settings),
-					new IndicesJsonConverter(settings),
-					new IdsConverter(settings),
+					new FieldValuesConverter(), // explicitly registered before IsADictionaryConverterFactory as we want this specialised converter to match
 					new IsADictionaryConverterFactory(),
-					//new ResolvableReadonlyDictionaryConverterFactory(settings),
 					new ResponseItemConverterFactory(),
-					new UnionConverter(),
-					new ExtraSerializationData(settings),
-					new DictionaryResponseConverterFactory(settings)
+					new DictionaryResponseConverterFactory(settings),
+					new UnionConverter()
 				},
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
 			NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals
 		};
 
-		ElasticsearchClient.SettingsTable.Add(Options, settings);
-
-		_settings = settings;
+		Initialize();
 	}
 
 	public override void Serialize<T>(T data, Stream writableStream,
@@ -66,7 +52,7 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 	{
 		if (data is IStreamSerializable streamSerializable)
 		{
-			streamSerializable.Serialize(writableStream, _settings, formatting);
+			streamSerializable.Serialize(writableStream, Settings, SerializationFormatting.None);
 			return;
 		}
 
@@ -79,9 +65,11 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 	{
 		if (data is IStreamSerializable streamSerializable)
 		{
-			return streamSerializable.SerializeAsync(stream, _settings, formatting);
+			return streamSerializable.SerializeAsync(stream, Settings, SerializationFormatting.None);
 		}
 
 		return base.SerializeAsync(data, stream, formatting, cancellationToken);
 	}
+
+	protected override JsonSerializerOptions CreateJsonSerializerOptions() => _jsonSerializerOptions;
 }

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-internal sealed class SpanTermQueryConverter : JsonConverter<SpanTermQuery>
+internal sealed partial class SpanTermQueryConverter : JsonConverter<SpanTermQuery>
 {
 	public override SpanTermQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
