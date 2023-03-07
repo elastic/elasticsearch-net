@@ -90,7 +90,7 @@ public sealed partial class Query
 	public static Query Wrapper(Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery wrapperQuery) => new Query("wrapper", wrapperQuery);
 }
 
-internal sealed class QueryConverter : JsonConverter<Query>
+internal sealed partial class QueryConverter : JsonConverter<Query>
 {
 	public override Query Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

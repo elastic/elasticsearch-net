@@ -52,7 +52,7 @@ public sealed partial class Intervals
 	public static Intervals Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => new Intervals("wildcard", intervalsWildcard);
 }
 
-internal sealed class IntervalsConverter : JsonConverter<Intervals>
+internal sealed partial class IntervalsConverter : JsonConverter<Intervals>
 {
 	public override Intervals Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

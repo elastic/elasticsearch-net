@@ -4,6 +4,8 @@
 include::{asciidoc-dir}/../../shared/versions/stack/{source_branch}.asciidoc[]
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
+:doc-tests-src: {docdir}/../tests/Tests/Documentation
+
 :net-client: Elasticsearch .NET Client
 
 include::intro.asciidoc[]
@@ -13,6 +15,8 @@ include::install.asciidoc[]
 include::connecting.asciidoc[]
 
 include::configuration.asciidoc[]
+
+include::client-concepts/client-concepts.asciidoc[]
 
 include::usage/index.asciidoc[]
 

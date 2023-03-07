@@ -45,7 +45,7 @@ public sealed partial class IntervalsFilter
 	internal string VariantName { get; }
 }
 
-internal sealed class IntervalsFilterConverter : JsonConverter<IntervalsFilter>
+internal sealed partial class IntervalsFilterConverter : JsonConverter<IntervalsFilter>
 {
 	public override IntervalsFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

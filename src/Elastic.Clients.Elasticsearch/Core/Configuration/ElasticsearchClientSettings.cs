@@ -115,18 +115,12 @@ public abstract class
 		: base(nodePool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticsearchClientsElasticsearch)
 	{
 		var requestResponseSerializer = new DefaultRequestResponseSerializer(this);
-		var sourceSerializer = sourceSerializerFactory?.Invoke(requestResponseSerializer, this) ?? new DefaultSourceSerializer(this);
+		var sourceSerializer = new DefaultSourceSerializer(this);
 
-		_propertyMappingProvider = propertyMappingProvider ?? sourceSerializer as IPropertyMappingProvider ?? new DefaultPropertyMappingProvider();
-
-		// TODO - Serializer implementations should directly call diagnostics to avoid wrapping
-		//We wrap these in an internal proxy to facilitate serialization diagnostics
-		//_sourceSerializer = new DiagnosticsSerializerProxy(sourceSerializer, "source");
-		_sourceSerializer = sourceSerializer;
-
-		//UseThisRequestResponseSerializer = new DiagnosticsSerializerProxy(defaultSerializer);
 		UseThisRequestResponseSerializer = requestResponseSerializer;
 
+		_sourceSerializer = sourceSerializerFactory?.Invoke(sourceSerializer, this) ?? sourceSerializer;
+		_propertyMappingProvider = propertyMappingProvider ?? sourceSerializer as IPropertyMappingProvider ?? new DefaultPropertyMappingProvider();
 		_defaultFieldNameInferrer = p => p.ToCamelCase();
 		_defaultIndices = new FluentDictionary<Type, string>();
 		_defaultRelationNames = new FluentDictionary<Type, string>();

@@ -24,7 +24,7 @@ internal class PartialBulkUpdateBody<TPartialUpdate> : BulkUpdateBody
 		if (PartialUpdate is not null)
 		{
 			writer.WritePropertyName("doc");
-			SourceSerialisation.Serialize(PartialUpdate, writer, settings.SourceSerializer);
+			SourceSerialization.Serialize(PartialUpdate, writer, settings.SourceSerializer);
 		}
 	}
 }

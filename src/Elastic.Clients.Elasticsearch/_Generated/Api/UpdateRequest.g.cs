@@ -260,7 +260,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 		if (DocValue is not null)
 		{
 			writer.WritePropertyName("doc");
-			SourceSerialisation.Serialize(DocValue, writer, settings);
+			SourceSerialization.Serialize(DocValue, writer, settings);
 		}
 
 		if (DocAsUpsertValue.HasValue)
@@ -284,7 +284,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 		if (UpsertValue is not null)
 		{
 			writer.WritePropertyName("upsert");
-			SourceSerialisation.Serialize(UpsertValue, writer, settings);
+			SourceSerialization.Serialize(UpsertValue, writer, settings);
 		}
 
 		writer.WriteEndObject();
