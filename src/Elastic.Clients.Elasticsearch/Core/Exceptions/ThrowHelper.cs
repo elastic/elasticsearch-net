@@ -15,7 +15,7 @@ internal static class ThrowHelper
 
 	[MethodImpl(MethodImplOptions.NoInlining)]
 	internal static void ThrowUnknownTaggedUnionVariantJsonException(string variantTag, Type interfaceType) =>
-		throw new JsonException($"Encounted an unsupported variant tag '{variantTag}' on '{SimplifiedFullName(interfaceType)}', which could not be deserialised.");
+		throw new JsonException($"Encountered an unsupported variant tag '{variantTag}' on '{SimplifiedFullName(interfaceType)}', which could not be deserialized.");
 
 	[MethodImpl(MethodImplOptions.NoInlining)]
 	internal static void ThrowInvalidOperationException(string message) =>
@@ -25,4 +25,10 @@ internal static class ThrowHelper
 #pragma warning disable IDE0057 // Use range operator
 	private static string SimplifiedFullName(Type type) => type.FullName.Substring(30);
 #pragma warning restore IDE0057 // Use range operator
+
+	[MethodImpl(MethodImplOptions.NoInlining)]
+	internal static void ThrowJsonExceptionForMissingSettings() => throw new JsonException("Unable to retrieve client settings for JsonSerializerOptions.");
+
+	[MethodImpl(MethodImplOptions.NoInlining)]
+	internal static void ThrowInvalidOperationForBulkWhenNotIStreamSerializable() => throw new InvalidOperationException("Operation must implement IStreamSerializable.");
 }

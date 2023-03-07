@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-internal sealed class TermsQueryConverter : JsonConverter<TermsQuery>
+internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 {
 	public override TermsQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
@@ -65,7 +65,7 @@ internal sealed class TermsQueryConverter : JsonConverter<TermsQuery>
 		{
 			if (!options.TryGetClientSettings(out var settings))
 			{
-				throw new JsonException("Unable to retrive client settings for JsonSerializerOptions.");
+				ThrowHelper.ThrowJsonExceptionForMissingSettings();
 			}
 
 			var propertyName = settings.Inferrer.Field(value.Field);
