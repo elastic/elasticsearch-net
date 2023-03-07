@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-internal sealed class PrefixQueryConverter : JsonConverter<PrefixQuery>
+internal sealed partial class PrefixQueryConverter : JsonConverter<PrefixQuery>
 {
 	public override PrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

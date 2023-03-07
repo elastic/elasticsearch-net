@@ -55,7 +55,7 @@ public sealed partial class SpanQuery : SearchQuery
 	public static SpanQuery SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery spanWithinQuery) => new SpanQuery("span_within", spanWithinQuery);
 }
 
-internal sealed class SpanQueryConverter : JsonConverter<SpanQuery>
+internal sealed partial class SpanQueryConverter : JsonConverter<SpanQuery>
 {
 	public override SpanQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

@@ -9,7 +9,7 @@ using System.IO;
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
 /// <summary>
-/// Used to mark types which expect to directly serialise into a stream. This supports non-json compliant output such as NDJSON.
+/// Used to mark types which expect to directly serialize into a stream. This supports non-json compliant output such as NDJSON.
 /// </summary>
 internal interface IStreamSerializable
 {
