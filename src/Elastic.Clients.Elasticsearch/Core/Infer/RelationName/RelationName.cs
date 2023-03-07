@@ -6,6 +6,7 @@ using System;
 using Elastic.Transport;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -80,9 +81,7 @@ public sealed class RelationName : IEquatable<RelationName>, IUrlParameter
 
 internal sealed class RelationNameConverter : JsonConverter<RelationName>
 {
-	private readonly IElasticsearchClientSettings _settings;
-
-	public RelationNameConverter(IElasticsearchClientSettings settings) => _settings = settings;
+	private IElasticsearchClientSettings? _settings;
 
 	public override RelationName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
@@ -103,7 +102,19 @@ internal sealed class RelationNameConverter : JsonConverter<RelationName>
 			return;
 		}
 
+		InitializeSettings(options);
 		var relationName = _settings.Inferrer.RelationName(value);
 		writer.WriteStringValue(relationName);
+	}
+
+	private void InitializeSettings(JsonSerializerOptions options)
+	{
+		if (_settings is null)
+		{
+			if (!options.TryGetClientSettings(out var settings))
+				ThrowHelper.ThrowJsonExceptionForMissingSettings();
+
+			_settings = settings;
+		}
 	}
 }

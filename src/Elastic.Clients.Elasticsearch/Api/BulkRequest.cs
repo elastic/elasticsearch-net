@@ -34,11 +34,14 @@ public partial class BulkRequest : IStreamSerializable
 		foreach (var op in Operations)
 		{
 			if (op is not IStreamSerializable serializable)
-				throw new InvalidOperationException("");
+			{
+				ThrowHelper.ThrowInvalidOperationForBulkWhenNotIStreamSerializable();
+				return;
+			}
 
 			op.PrepareIndex(index);
 
-			serializable.Serialize(stream, settings, formatting);
+			serializable.Serialize(stream, settings, SerializationFormatting.None);
 			stream.WriteByte((byte)'\n');
 		}
 	}
@@ -53,11 +56,14 @@ public partial class BulkRequest : IStreamSerializable
 		foreach (var op in Operations)
 		{
 			if (op is not IStreamSerializable serializable)
-				throw new InvalidOperationException("");
+			{
+				ThrowHelper.ThrowInvalidOperationForBulkWhenNotIStreamSerializable();
+				return;
+			}
 
 			op.PrepareIndex(index);
 
-			await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+			await serializable.SerializeAsync(stream, settings, SerializationFormatting.None).ConfigureAwait(false);
 			stream.WriteByte((byte)'\n');
 		}
 	}
@@ -200,11 +206,14 @@ public sealed partial class BulkRequestDescriptor : IStreamSerializable
 		foreach (var op in _operations)
 		{
 			if (op is not IStreamSerializable serializable)
-				throw new InvalidOperationException("");
+			{
+				ThrowHelper.ThrowInvalidOperationForBulkWhenNotIStreamSerializable();
+				return;
+			}
 
 			op.PrepareIndex(index);
 
-			serializable.Serialize(stream, settings, formatting);
+			serializable.Serialize(stream, settings, SerializationFormatting.None);
 			stream.WriteByte((byte)'\n');
 		}
 	}
@@ -219,11 +228,14 @@ public sealed partial class BulkRequestDescriptor : IStreamSerializable
 		foreach (var op in _operations)
 		{
 			if (op is not IStreamSerializable serializable)
-				throw new InvalidOperationException("");
+			{
+				ThrowHelper.ThrowInvalidOperationForBulkWhenNotIStreamSerializable();
+				return;
+			}
 
 			op.PrepareIndex(index);
 
-			await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+			await serializable.SerializeAsync(stream, settings, SerializationFormatting.None).ConfigureAwait(false);
 			stream.WriteByte((byte)'\n');
 		}
 	}

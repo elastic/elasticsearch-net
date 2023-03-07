@@ -65,7 +65,7 @@ public sealed partial class IntervalsQuery : SearchQuery
 	public static implicit operator Query(IntervalsQuery intervalsQuery) => QueryDsl.Query.Intervals(intervalsQuery);
 }
 
-internal sealed class IntervalsQueryConverter : JsonConverter<IntervalsQuery>
+internal sealed partial class IntervalsQueryConverter : JsonConverter<IntervalsQuery>
 {
 	public override IntervalsQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

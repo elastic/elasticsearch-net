@@ -87,10 +87,6 @@ public partial class Ids : IUrlParameter, IEquatable<Ids>
 
 internal sealed class IdsConverter : JsonConverter<Ids>
 {
-	private readonly IElasticsearchClientSettings _settings;
-
-	public IdsConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
 	public override Ids? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.StartArray)

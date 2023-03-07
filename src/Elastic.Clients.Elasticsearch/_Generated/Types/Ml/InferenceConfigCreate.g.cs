@@ -55,7 +55,7 @@ public sealed partial class InferenceConfigCreate
 	public static InferenceConfigCreate ZeroShotClassification(Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => new InferenceConfigCreate("zero_shot_classification", zeroShotClassificationInferenceOptions);
 }
 
-internal sealed class InferenceConfigCreateConverter : JsonConverter<InferenceConfigCreate>
+internal sealed partial class InferenceConfigCreateConverter : JsonConverter<InferenceConfigCreate>
 {
 	public override InferenceConfigCreate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
