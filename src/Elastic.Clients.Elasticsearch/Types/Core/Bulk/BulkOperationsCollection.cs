@@ -235,9 +235,12 @@ public sealed class BulkOperationsCollection : IList<IBulkOperation>, IList, ISt
 		foreach (var op in this)
 		{
 			if (op is not IStreamSerializable serializable)
-				throw new InvalidOperationException("");
+			{
+				ThrowHelper.ThrowInvalidOperationForBulkWhenNotIStreamSerializable();
+				return;
+			}
 
-			serializable.Serialize(stream, settings, formatting);
+			serializable.Serialize(stream, settings, SerializationFormatting.None);
 			stream.WriteByte((byte)'\n');
 		}
 	}
@@ -247,9 +250,12 @@ public sealed class BulkOperationsCollection : IList<IBulkOperation>, IList, ISt
 		foreach (var op in this)
 		{
 			if (op is not IStreamSerializable serializable)
-				throw new InvalidOperationException("");
+			{
+				ThrowHelper.ThrowInvalidOperationForBulkWhenNotIStreamSerializable();
+				return;
+			}
 
-			await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+			await serializable.SerializeAsync(stream, settings, SerializationFormatting.None).ConfigureAwait(false);
 			stream.WriteByte((byte)'\n');
 		}
 	}

@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-internal sealed class RegexpQueryConverter : JsonConverter<RegexpQuery>
+internal sealed partial class RegexpQueryConverter : JsonConverter<RegexpQuery>
 {
 	public override RegexpQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
