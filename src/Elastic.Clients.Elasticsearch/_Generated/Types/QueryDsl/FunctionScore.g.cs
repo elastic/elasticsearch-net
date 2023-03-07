@@ -54,7 +54,7 @@ public sealed partial class FunctionScore
 	public double? Weight { get; set; }
 }
 
-internal sealed class FunctionScoreConverter : JsonConverter<FunctionScore>
+internal sealed partial class FunctionScoreConverter : JsonConverter<FunctionScore>
 {
 	public override FunctionScore Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

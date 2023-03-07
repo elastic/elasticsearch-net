@@ -117,7 +117,7 @@ public sealed class SearchRequestParameters : RequestParameters
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 }
 
-internal sealed class SearchRequestConverter : JsonConverter<SearchRequest>
+internal sealed partial class SearchRequestConverter : JsonConverter<SearchRequest>
 {
 	public override SearchRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
