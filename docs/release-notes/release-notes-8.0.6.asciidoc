@@ -16,6 +16,11 @@ enums with aliases (issue: https://github.com/elastic/elasticsearch-net/issues/7
 testing.
 
 [discrete]
+=== Features
+
+- https://github.com/elastic/elasticsearch-net/pull/7272[#7272] Support custom JsonSerializerOptions.
+
+[discrete]
 === Breaking changes
 
 [discrete]
@@ -88,4 +93,18 @@ public sealed partial class TypeMapping
    public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
    ...
 }
+----
+
+[discrete]
+==== SystemTextJsonSerializer
+
+The `SystemTextJsonSerializer` is used as a base type for the built-in serializers. Two breaking changes have been made after adding better support for <<customizing-source-serialization, customizing source serialization>>.
+
+The public `Options` property has been made internal. 
+
+A new public abstract method `CreateJsonSerializerOptions` has been added, which derived types must implement.
+
+[source,csharp]
+----
+protected abstract JsonSerializerOptions CreateJsonSerializerOptions();
 ----
