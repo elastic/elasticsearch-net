@@ -6,6 +6,7 @@
 [discrete]
 == Version 8.0
 
+* <<release-notes-8.0.6,Release notes v8.0.6>>
 * <<release-notes-8.0.5,Release notes v8.0.5>>
 * <<release-notes-8.0.4,Release notes v8.0.4>>
 * <<release-notes-8.0.3,Release notes v8.0.3>>
@@ -14,6 +15,7 @@
 * <<release-notes-8.0.0,Release notes v8.0.0>>
 
 include::breaking-change-policy.asciidoc[]
+include::release-notes-8.0.6.asciidoc[]
 include::release-notes-8.0.5.asciidoc[]
 include::release-notes-8.0.4.asciidoc[]
 include::release-notes-8.0.3.asciidoc[]
