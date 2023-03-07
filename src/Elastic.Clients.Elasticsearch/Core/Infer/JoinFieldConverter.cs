@@ -6,14 +6,14 @@ using System;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using Elastic.Transport;
+using Elastic.Clients.Elasticsearch.Serialization;
+using System.Runtime;
 
 namespace Elastic.Clients.Elasticsearch;
 
 internal sealed class JoinFieldConverter : JsonConverter<JoinField>
 {
-	private readonly IElasticsearchClientSettings _elasticsearchClientSettings;
-
-	public JoinFieldConverter(IElasticsearchClientSettings elasticsearchClientSettings) => _elasticsearchClientSettings = elasticsearchClientSettings;
+	private IElasticsearchClientSettings _settings;
 
 	public override JoinField? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
@@ -67,14 +67,26 @@ internal sealed class JoinFieldConverter : JsonConverter<JoinField>
 				break;
 
 			case 1:
+				InitializeSettings(options);
 				writer.WriteStartObject();
 				writer.WritePropertyName("name");
 				JsonSerializer.Serialize(writer, value.ChildOption.Name, options);
 				writer.WritePropertyName("parent");
-				var id = (value.ChildOption.ParentId as IUrlParameter)?.GetString(_elasticsearchClientSettings);
+				var id = (value.ChildOption.ParentId as IUrlParameter)?.GetString(_settings);
 				writer.WriteStringValue(id);
 				writer.WriteEndObject();
 				break;
+		}
+	}
+
+	private void InitializeSettings(JsonSerializerOptions options)
+	{
+		if (_settings is null)
+		{
+			if (!options.TryGetClientSettings(out var settings))
+				ThrowHelper.ThrowJsonExceptionForMissingSettings();
+
+			_settings = settings;
 		}
 	}
 }

@@ -24,7 +24,7 @@ public partial class IndexRequest<TDocument> : ICustomJsonWriter
 
 	[JsonIgnore] private Id? Id => RouteValues.Get<Id>("id");
 
-	void ICustomJsonWriter.WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
+	void ICustomJsonWriter.WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialization.Serialize(Document, writer, sourceSerializer);
 
 	internal static HttpMethod GetHttpMethod(IndexRequest<TDocument> request) =>
 		request.Id?.StringOrLongValue != null || request.RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
@@ -40,7 +40,7 @@ public sealed partial class IndexRequestDescriptor<TDocument> : ICustomJsonWrite
 
 	internal Id _id;
 
-	public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
+	public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialization.Serialize(DocumentValue, writer, sourceSerializer);
 
 	protected override HttpMethod? DynamicHttpMethod => _id is not null || RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
 }

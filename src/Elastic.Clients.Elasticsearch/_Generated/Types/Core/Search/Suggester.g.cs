@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
-internal sealed class SuggesterConverter : JsonConverter<Suggester>
+internal sealed partial class SuggesterConverter : JsonConverter<Suggester>
 {
 	public override Suggester Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
