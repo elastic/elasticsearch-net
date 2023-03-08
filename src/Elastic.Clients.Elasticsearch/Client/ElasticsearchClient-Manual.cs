@@ -23,6 +23,24 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor, cancellationToken);
 	}
 
+	// TODO: Test and introduce in a future release
+	//public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	//{
+	//	var descriptor = new UpdateRequestDescriptor<TDocument, TDocument>(index, id);
+	//	configureRequest?.Invoke(descriptor);
+	//	return DoRequestAsync<UpdateRequestDescriptor<TDocument, TDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor, cancellationToken);
+	//}
+
+	// TODO: Test and introduce in a future release
+	//public virtual Task<UpdateResponse<TPartialDocument>> UpdateAsync<TPartialDocument>(IndexName index, Id id, TPartialDocument doc, CancellationToken cancellationToken = default)
+	//{
+	//	var descriptor = new UpdateRequestDescriptor<TPartialDocument, TPartialDocument>(index, id);
+	//	descriptor.Doc(doc);
+	//	return DoRequestAsync<UpdateRequestDescriptor<TPartialDocument, TPartialDocument>, UpdateResponse<TPartialDocument>, UpdateRequestParameters>(descriptor, cancellationToken);
+	//}
+
+	// TODO - Add methods to infer index and/or ID + use expressions as we know the document type.
+
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IndexName index, Id id)
 	{
 		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
