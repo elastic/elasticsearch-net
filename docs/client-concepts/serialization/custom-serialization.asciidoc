@@ -63,7 +63,6 @@ We want to serialize our source document using Pascal Casing for the JSON proper
 [source,csharp]
 ----
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=usings]
-...
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=custom-options-local-function]
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=create-client]
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=index-person]
