@@ -1,11 +1,11 @@
 [[recommendations]]
-=== Usage recommendations
+== Usage recommendations
 
 To achieve the most efficient use of the {net-client}, we recommend following 
 the guidance defined in this article.
 
 [discrete]
-==== Reuse the same client instance
+=== Reuse the same client instance
 
 When working with the {net-client} we recommend that consumers reuse a single 
 instance of `ElasticsearchClient` for the entire lifetime of the application. 
@@ -22,7 +22,7 @@ by creating a singleton static instance or by registering the type with a
 singleton lifetime when using dependency injection containers.
 
 [discrete]
-==== Prefer asynchronous methods
+=== Prefer asynchronous methods
 
 The {net-client} exposes synchronous and asynchronous methods on the 
 `ElasticsearchClient`. We recommend always preferring the asynchronous methods, 

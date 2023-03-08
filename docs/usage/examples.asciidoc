@@ -1,5 +1,5 @@
 [[examples]]
-=== CRUD usage examples
+== CRUD usage examples
 
 This page helps you to understand how to perform various basic {es} CRUD 
 (create, read, update, delete) operations using the .NET client. It demonstrates 
@@ -13,11 +13,7 @@ your C# file.
 
 [source,csharp]
 ----
-using System;
-using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.QueryDsl;
-
-var client = new ElasticsearchClient(); <1>
+include::{doc-tests-src}/Usage/CrudExamplesTests.cs[tags=using-directives;create-client]
 ----
 <1> The default constructor, assumes an unsecured {es} server is running and 
 exposed on 'http://localhost:9200'. See <<connecting, connecting>> for examples 
@@ -30,13 +26,7 @@ that map to the document structure being stored in {es}.
 
 [source,csharp]
 ----
-public class Tweet
-{
-    public int Id { get; set; } <1>
-    public string User { get; set; }
-    public DateTime PostDate { get; set; }
-    public string Message { get; set; }
-}
+include::{doc-tests-src}/Usage/CrudExamplesTests.cs[tag=tweet-class]
 ----
 <1> By default, the .NET client will try to find a property called `Id` on the 
 class. When such a property is present it will index the document into {es} 
@@ -45,7 +35,7 @@ using the ID specified by the value of this property.
 
 [discrete]
 [[indexing-net]]
-==== Indexing a document
+=== Indexing a document
 
 Documents can be indexed by creating an instance representing a tweet and 
 indexing it via the client. In these examples, we will work with an index named 
@@ -53,21 +43,7 @@ indexing it via the client. In these examples, we will work with an index named
 
 [source,csharp]
 ----
-var tweet = new Tweet <1>
-{
-    Id = 1,
-    User = "stevejgordon",
-    PostDate = new DateTime(2009, 11, 15),
-    Message = "Trying out the client, so far so good?"
-};
-
-var response = await client.IndexAsync(tweet, request => request.Index("my-tweet-index")); <2>
-
-if (response.IsValid) <3>
-{
-     Console.WriteLine($"Index document with ID {response.Id} succeeded."); <4>
-}
-
+include::{doc-tests-src}/Usage/CrudExamplesTests.cs[tag=create-tweet]
 ----
 <1> Create an instance of the `Tweet` class with relevant properties set.
 <2> Prefer the async APIs, which require awaiting the response.
@@ -77,12 +53,11 @@ operation succeeded.
 
 [discrete]
 [[getting-net]]
-==== Getting a document
+=== Getting a document
 
 [source,csharp]
 ----
-var response = await client.GetAsync<Tweet>(1, idx => idx.Index("my-tweet-index")); <1>
-var tweet = response.Source; <2>
+include::{doc-tests-src}/Usage/CrudExamplesTests.cs[tag=get-tweet]
 ----
 <1> The `GetResponse` is mapped 1-to-1 with the Elasticsearch JSON response.
 <2> The original document is deserialized as an instance of the Tweet class, 
@@ -91,25 +66,13 @@ accessible on the response via the `Source` property.
 
 [discrete]
 [[searching-net]]
-==== Searching for documents
+=== Searching for documents
 
 The client exposes a fluent interface and a powerful query DSL for searching.
 
 [source,csharp]
 ----
-var response = await client.SearchAsync<Tweet>(s => s <1>
-    .Index("my-tweet-index") <2>
-    .From(0)
-    .Size(10)
-    .Query(q => q
-        .Term(t => t.User, "stevejgordon") <3>
-    )
-);
-
-if (response.IsValid)
-{
-    var tweet = response.Documents.FirstOrDefault(); <4>
-}
+include::{doc-tests-src}/Usage/CrudExamplesTests.cs[tag=search-tweet-fluent]
 ----
 <1> The generic type argument specifies the `Tweet` class, which is used when 
 deserialising the hits from the response.
@@ -126,19 +89,7 @@ aren't your thing.
 
 [source,csharp]
 ----
-var request = new SearchRequest("my-tweet-index") <1>
-{
-    From = 0,
-    Size = 10,
-    Query = new TermQuery("user") { Value = "stevejgordon" }
-};
-
-var response = await client.SearchAsync<Tweet>(request); <2>
-
-if (response.IsValid)
-{
-    var tweet = response.Documents.FirstOrDefault();
-}
+include::{doc-tests-src}/Usage/CrudExamplesTests.cs[tag=search-tweet-object-initializer]
 ----
 <1> Create an instance of `SearchRequest`, setting properties to control the 
 search operation.
@@ -146,22 +97,14 @@ search operation.
 
 [discrete]
 [[updating-net]]
-==== Updating documents
+=== Updating documents
 
 Documents can be updated in several ways, including by providing a complete 
 replacement for an existing document ID.
 
 [source,csharp]
 ----
-tweet.Message = "This is a new message"; <1>
-
-var response = await client.UpdateAsync<Tweet, object>("my-tweet-index", 1, u => u
-        .Doc(tweet)); <2>
-
-if (response.IsValid)
-{
-    Console.WriteLine("Update document succeeded.");
-}
+include::{doc-tests-src}/Usage/CrudExamplesTests.cs[tag=update-tweet]
 ----
 <1> Update a property on the existing tweet instance.
 <2> Send the updated tweet object in the update request.
@@ -169,16 +112,11 @@ if (response.IsValid)
 
 [discrete]
 [[deleting-net]]
-==== Deleting documents
+=== Deleting documents
 
 Documents can be deleted by providing the ID of the document to remove.
 
 [source,csharp]
 ----
-var response = await client.DeleteAsync("my-tweet-index", 1);
-
-if (response.IsValid)
-{
-    Console.WriteLine("Delete document succeeded.");
-}
+include::{doc-tests-src}/Usage/CrudExamplesTests.cs[tag=delete-tweet]
 ----
