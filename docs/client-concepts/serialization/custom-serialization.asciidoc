@@ -63,12 +63,9 @@ We want to serialize our source document using Pascal Casing for the JSON proper
 [source,csharp]
 ----
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=usings]
-private async Task SerializeWithCustomOptionsAsync()
-{
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=custom-options-local-function]
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=create-client]
 include::{doc-tests-src}/ClientConcepts/Serialization/CustomSerializationTests.cs[tag=index-person]
-}
 ----
 <1> A local function can be defined, accepting a `JsonSerializerOptions` parameter. Here, we set `PropertyNamingPolicy` to `null`. This returns to the default behavior for `System.Text.Json`, which uses Pascal Case.
 <2> When creating the `ElasticsearchClientSettings`, we supply a `SourceSerializerFactory` using a lambda. The factory function creates a new instance of `DefaultSourceSerializer`, passing in the `settings` and our `ConfigureOptions` local function. We have now configured the settings with a custom instance of the source serializer.

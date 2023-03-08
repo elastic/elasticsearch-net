@@ -1,6 +1,7 @@
 [[usage]]
-== Using the .NET Client
+= Using the .NET Client
 
+[partintro]
 The sections below provide tutorials on the most frequently used and some less obvious features of {es}.
 
 For a full reference, see the {ref}/[Elasticsearch documentation] and in particular the {ref}/rest-apis.html[REST APIs] section. The {net-client} follows closely the JSON structures described there.
