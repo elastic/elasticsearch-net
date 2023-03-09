@@ -130,7 +130,7 @@ public abstract class SerializerTestBase
 
 	protected static Inferrer Inferrer => _settings.Inferrer;
 
-	public static async Task<string> SerializeAndVerifyJson<T>(T data)
+	public static async Task<string> SerializeAndVerifyJsonAsync<T>(T data)
 	{
 		var serialisedJson = await SerializeAndGetJsonStringAsync(data);
 		await Verifier.VerifyJson(serialisedJson);
