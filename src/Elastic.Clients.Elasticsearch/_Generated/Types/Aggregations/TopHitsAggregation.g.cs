@@ -316,7 +316,7 @@ internal sealed class TopHitsAggregationConverter : JsonConverter<TopHitsAggrega
 		if (value.Sort is not null)
 		{
 			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, value.Sort, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(value.Sort, writer, options);
 		}
 
 		if (value.StoredFields is not null)
