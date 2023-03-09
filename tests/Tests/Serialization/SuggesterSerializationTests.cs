@@ -46,6 +46,6 @@ public class SuggesterSerializationTests : SerializerTestBase
 				.Add("my-suggester-1", FieldSuggester.Term(new TermSuggester { Field = Infer.Field<Project>(f => f.Description) }))
 				.Add("my-suggester-2", FieldSuggester.Term(new TermSuggester { Field = Infer.Field<Project>(f => f.LeadDeveloper) })));
 
-		await SerializeAndVerifyJson(suggester);
+		await SerializeAndVerifyJsonAsync(suggester);
 	}
 }
