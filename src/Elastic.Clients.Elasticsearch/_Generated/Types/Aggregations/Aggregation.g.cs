@@ -64,6 +64,11 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation?>("boxplot", ref reader, options);
 		}
 
+		if (propertyName == "bucket_sort")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation?>("bucket_sort", ref reader, options);
+		}
+
 		if (propertyName == "cardinality")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?>("cardinality", ref reader, options);
@@ -316,6 +321,11 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 		return SetContainer(name, Aggregation.CreateWithAction("boxplot", configure));
 	}
 
+	public AggregationDescriptor<TDocument> BucketSort(string name, Action<BucketSortAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("bucket_sort", configure));
+	}
+
 	public AggregationDescriptor<TDocument> Cardinality(string name, Action<CardinalityAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("cardinality", configure));
@@ -562,6 +572,16 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 	public AggregationDescriptor Boxplot<TDocument>(string name, Action<BoxplotAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("boxplot", configure));
+	}
+
+	public AggregationDescriptor BucketSort(string name, Action<BucketSortAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("bucket_sort", configure));
+	}
+
+	public AggregationDescriptor BucketSort<TDocument>(string name, Action<BucketSortAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("bucket_sort", configure));
 	}
 
 	public AggregationDescriptor Cardinality(string name, Action<CardinalityAggregationDescriptor> configure)
