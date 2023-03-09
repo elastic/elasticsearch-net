@@ -399,8 +399,6 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 				throw new Exception("The aggregate in response is not yet supported.");
 			case "bucket_selector":
 				throw new Exception("The aggregate in response is not yet supported.");
-			case "bucket_sort":
-				throw new Exception("The aggregate in response is not yet supported.");
 
 			case "cumulative_cardinality":
 				{
