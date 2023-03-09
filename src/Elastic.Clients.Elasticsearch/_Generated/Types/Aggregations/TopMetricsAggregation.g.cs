@@ -172,7 +172,7 @@ internal sealed class TopMetricsAggregationConverter : JsonConverter<TopMetricsA
 		if (value.Sort is not null)
 		{
 			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, value.Sort, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(value.Sort, writer, options);
 		}
 
 		writer.WriteEndObject();
