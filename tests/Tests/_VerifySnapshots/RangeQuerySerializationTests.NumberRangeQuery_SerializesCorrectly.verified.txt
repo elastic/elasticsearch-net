@@ -1,0 +1,8 @@
+{
+  my-field: {
+    boost: 1.1,
+    gte: 100,
+    lt: 1000,
+    _name: named_query
+  }
+}

@@ -70,6 +70,7 @@ public sealed partial class Query
 	public static Query Percolate(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery percolateQuery) => new Query("percolate", percolateQuery);
 	public static Query Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery prefixQuery) => new Query("prefix", prefixQuery);
 	public static Query QueryString(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery queryStringQuery) => new Query("query_string", queryStringQuery);
+	public static Query Range(Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery rangeQuery) => new Query("range", rangeQuery);
 	public static Query RankFeature(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery rankFeatureQuery) => new Query("rank_feature", rankFeatureQuery);
 	public static Query Regexp(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery regexpQuery) => new Query("regexp", regexpQuery);
 	public static Query Script(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery scriptQuery) => new Query("script", scriptQuery);
@@ -289,6 +290,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			return new Query(propertyName, variant);
 		}
 
+		if (propertyName == "range")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery?>(ref reader, options);
+			reader.Read();
+			return new Query(propertyName, variant);
+		}
+
 		if (propertyName == "rank_feature")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery?>(ref reader, options);
@@ -502,6 +510,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			case "query_string":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery)value.Variant, options);
 				break;
+			case "range":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery)value.Variant, options);
+				break;
 			case "rank_feature":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery)value.Variant, options);
 				break;
@@ -648,6 +659,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> Prefix(Action<PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
 	public QueryDescriptor<TDocument> QueryString(QueryStringQuery queryStringQuery) => Set(queryStringQuery, "query_string");
 	public QueryDescriptor<TDocument> QueryString(Action<QueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "query_string");
+	public QueryDescriptor<TDocument> Range(RangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor<TDocument> Range(Action<RangeQueryDescriptor<TDocument>> configure) => Set(configure, "range");
 	public QueryDescriptor<TDocument> RankFeature(RankFeatureQuery rankFeatureQuery) => Set(rankFeatureQuery, "rank_feature");
 	public QueryDescriptor<TDocument> RankFeature(Action<RankFeatureQueryDescriptor<TDocument>> configure) => Set(configure, "rank_feature");
 	public QueryDescriptor<TDocument> Regexp(RegexpQuery regexpQuery) => Set(regexpQuery, "regexp");
@@ -814,6 +827,9 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor QueryString(QueryStringQuery queryStringQuery) => Set(queryStringQuery, "query_string");
 	public QueryDescriptor QueryString(Action<QueryStringQueryDescriptor> configure) => Set(configure, "query_string");
 	public QueryDescriptor QueryString<TDocument>(Action<QueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "query_string");
+	public QueryDescriptor Range(RangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor Range(Action<RangeQueryDescriptor> configure) => Set(configure, "range");
+	public QueryDescriptor Range<TDocument>(Action<RangeQueryDescriptor<TDocument>> configure) => Set(configure, "range");
 	public QueryDescriptor RankFeature(RankFeatureQuery rankFeatureQuery) => Set(rankFeatureQuery, "rank_feature");
 	public QueryDescriptor RankFeature(Action<RankFeatureQueryDescriptor> configure) => Set(configure, "rank_feature");
 	public QueryDescriptor RankFeature<TDocument>(Action<RankFeatureQueryDescriptor<TDocument>> configure) => Set(configure, "rank_feature");
