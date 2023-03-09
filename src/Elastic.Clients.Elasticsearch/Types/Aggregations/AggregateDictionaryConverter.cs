@@ -52,7 +52,7 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 			case "lterms":
 			case "dterms":
 				{
-					if (TermsAggregateSerializationHelper.TryDeserialiseTermsAggregate(aggregateName, ref reader, options, out var agg))
+					if (TermsAggregateSerializationHelper.TryDeserializeTermsAggregate(aggregateName, ref reader, options, out var agg))
 					{
 						dictionary.Add(nameParts[1], agg);
 					}
