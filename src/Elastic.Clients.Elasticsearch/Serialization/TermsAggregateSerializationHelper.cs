@@ -15,11 +15,11 @@ internal static class TermsAggregateSerializationHelper
 	private static readonly byte[] s_key = Encoding.UTF8.GetBytes("key");
 	private static readonly byte s_period = (byte)'.';
 
-	public static bool TryDeserialiseTermsAggregate(string aggregateName, ref Utf8JsonReader reader, JsonSerializerOptions options, out IAggregate? aggregate)
+	public static bool TryDeserializeTermsAggregate(string aggregateName, ref Utf8JsonReader reader, JsonSerializerOptions options, out IAggregate? aggregate)
 	{
 		aggregate = null;
 
-		// We take a copy here so we can read forward to establish the term key type before we resume with final deserialisation.
+		// We take a copy here so we can read forward to establish the term key type before we resume with final deserialization.
 		var readerCopy = reader;
 
 		if (JsonHelper.TryReadUntilStringPropertyValue(ref readerCopy, s_buckets))
