@@ -40,7 +40,7 @@ public class Project
 
 	public Developer LeadDeveloper { get; set; }
 
-	//public GeoPoint LocationPoint { get; set; } // Was SimpleGeoPoint
+	public SimpleGeoPoint LocationPoint { get; set; }
 
 	//public IGeoShape LocationShape { get; set; }
 	//public IGeoShape ArbitraryShape { get; set; }
@@ -88,7 +88,7 @@ public class Project
 			.RuleFor(p => p.LeadDeveloper, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count - 1)])
 			.RuleFor(p => p.Tags, f => Tag.Generator.Generate(Gimme.Random.Number(2, 10)))
 			.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)))
-			//.RuleFor(p => p.LocationPoint, f => SimpleGeoPoint.Generator.Generate())
+			.RuleFor(p => p.LocationPoint, f => SimpleGeoPoint.Generator.Generate())
 			//.RuleFor(p => p.LocationShape, f => new PointGeoShape(new GeoCoordinate(f.Address.Latitude(), f.Address.Latitude())))
 			//.RuleFor(p => p.ArbitraryShape, f => new PointGeoShape(new GeoCoordinate(f.Address.Latitude(), f.Address.Latitude())))
 			.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))

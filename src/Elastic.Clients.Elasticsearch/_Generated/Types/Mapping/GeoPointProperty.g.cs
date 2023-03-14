@@ -51,6 +51,9 @@ public sealed partial class GeoPointProperty : IProperty
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 
+	[JsonInclude, JsonPropertyName("null_value")]
+	public Elastic.Clients.Elasticsearch.GeoLocation? NullValue { get; set; }
+
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
@@ -87,6 +90,8 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 	private bool? IgnoreZValueValue { get; set; }
 
 	private IDictionary<string, string>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.GeoLocation? NullValueValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
@@ -153,6 +158,12 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 	public GeoPointPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public GeoPointPropertyDescriptor<TDocument> NullValue(Elastic.Clients.Elasticsearch.GeoLocation? nullValue)
+	{
+		NullValueValue = nullValue;
 		return Self;
 	}
 
@@ -239,6 +250,12 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
+		if (NullValueValue is not null)
+		{
+			writer.WritePropertyName("null_value");
+			JsonSerializer.Serialize(writer, NullValueValue, options);
+		}
+
 		if (PropertiesValue is not null)
 		{
 			writer.WritePropertyName("properties");
@@ -272,6 +289,7 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 		IgnoreMalformed = IgnoreMalformedValue,
 		IgnoreZValue = IgnoreZValueValue,
 		Meta = MetaValue,
+		NullValue = NullValueValue,
 		Properties = PropertiesValue,
 		Similarity = SimilarityValue,
 		Store = StoreValue
@@ -300,6 +318,8 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 	private bool? IgnoreZValueValue { get; set; }
 
 	private IDictionary<string, string>? MetaValue { get; set; }
+
+	private Elastic.Clients.Elasticsearch.GeoLocation? NullValueValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
@@ -366,6 +386,12 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 	public GeoPointPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public GeoPointPropertyDescriptor NullValue(Elastic.Clients.Elasticsearch.GeoLocation? nullValue)
+	{
+		NullValueValue = nullValue;
 		return Self;
 	}
 
@@ -452,6 +478,12 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
+		if (NullValueValue is not null)
+		{
+			writer.WritePropertyName("null_value");
+			JsonSerializer.Serialize(writer, NullValueValue, options);
+		}
+
 		if (PropertiesValue is not null)
 		{
 			writer.WritePropertyName("properties");
@@ -485,6 +517,7 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 		IgnoreMalformed = IgnoreMalformedValue,
 		IgnoreZValue = IgnoreZValueValue,
 		Meta = MetaValue,
+		NullValue = NullValueValue,
 		Properties = PropertiesValue,
 		Similarity = SimilarityValue,
 		Store = StoreValue
