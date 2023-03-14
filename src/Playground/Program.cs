@@ -5,6 +5,7 @@
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Mapping;
 using Elastic.Transport;
 using Moq;
 using Playground;
@@ -45,6 +46,28 @@ var settings = new ElasticsearchClientSettings(new InMemoryConnection())
 	.EnableDebugMode();
 
 var client = new ElasticsearchClient(settings);
+
+var myTemplate = new DynamicTemplate
+{
+	PathMatch = "testPathMatch",
+	Mapping = new KeywordProperty()
+};
+
+var createIndexRequest = new CreateIndexRequest("testing")
+{
+	Mappings = new TypeMapping
+	{
+		DynamicTemplates = new[]
+		{
+			new Dictionary<string, DynamicTemplate>
+			{
+			{ "testTemplateName", myTemplate }
+			}
+		}
+	}
+};
+
+var indexCreateResponse = await client.Indices.CreateAsync(createIndexRequest);
 
 var createIndexResponse = await client.Indices.CreateAsync<Person>("my-index-name", i => i
 	.Mappings(m => m.Properties(p => p
