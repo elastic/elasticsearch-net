@@ -57,7 +57,7 @@ public sealed partial class TypeMapping
 	[JsonInclude, JsonPropertyName("dynamic_date_formats")]
 	public ICollection<string>? DynamicDateFormats { get; set; }
 
-	[JsonInclude, JsonPropertyName("dynamic_templates"), SingleOrManyCollectionConverter(typeof(IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>))]
+	[JsonInclude, JsonPropertyName("dynamic_templates")]
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 
 	[JsonInclude, JsonPropertyName("enabled")]
@@ -505,7 +505,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		if (DynamicTemplatesValue is not null)
 		{
 			writer.WritePropertyName("dynamic_templates");
-			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(DynamicTemplatesValue, writer, options);
+			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
 		}
 
 		if (EnabledValue.HasValue)
@@ -981,7 +981,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		if (DynamicTemplatesValue is not null)
 		{
 			writer.WritePropertyName("dynamic_templates");
-			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(DynamicTemplatesValue, writer, options);
+			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
 		}
 
 		if (EnabledValue.HasValue)
