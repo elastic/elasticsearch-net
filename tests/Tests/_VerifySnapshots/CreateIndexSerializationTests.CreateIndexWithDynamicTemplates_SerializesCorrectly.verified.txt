@@ -1,0 +1,14 @@
+{
+  mappings: {
+    dynamic_templates: [
+      {
+        testTemplateName: {
+          mapping: {
+            type: keyword
+          },
+          path_match: testPathMatch
+        }
+      }
+    ]
+  }
+}
