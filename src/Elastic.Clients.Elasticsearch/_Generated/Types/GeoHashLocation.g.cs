@@ -17,23 +17,40 @@
 
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class TermsQueryField : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class GeoHashLocation
 {
-	public TermsQueryField(IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> value) : base(value)
+	[JsonInclude, JsonPropertyName("geohash")]
+	public string Geohash { get; set; }
+}
+
+public sealed partial class GeoHashLocationDescriptor : SerializableDescriptor<GeoHashLocationDescriptor>
+{
+	internal GeoHashLocationDescriptor(Action<GeoHashLocationDescriptor> configure) => configure.Invoke(this);
+	public GeoHashLocationDescriptor() : base()
 	{
 	}
 
-	public TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup lookup) : base(lookup)
+	private string GeohashValue { get; set; }
+
+	public GeoHashLocationDescriptor Geohash(string geohash)
 	{
+		GeohashValue = geohash;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("geohash");
+		JsonSerializer.Serialize(writer, GeohashValue, options);
+		writer.WriteEndObject();
 	}
 }
