@@ -17,23 +17,40 @@
 
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class TermsQueryField : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class WktGeoBounds
 {
-	public TermsQueryField(IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> value) : base(value)
+	[JsonInclude, JsonPropertyName("wkt")]
+	public string Wkt { get; set; }
+}
+
+public sealed partial class WktGeoBoundsDescriptor : SerializableDescriptor<WktGeoBoundsDescriptor>
+{
+	internal WktGeoBoundsDescriptor(Action<WktGeoBoundsDescriptor> configure) => configure.Invoke(this);
+	public WktGeoBoundsDescriptor() : base()
 	{
 	}
 
-	public TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup lookup) : base(lookup)
+	private string WktValue { get; set; }
+
+	public WktGeoBoundsDescriptor Wkt(string wkt)
 	{
+		WktValue = wkt;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("wkt");
+		writer.WriteStringValue(WktValue);
+		writer.WriteEndObject();
 	}
 }

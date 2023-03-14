@@ -30,6 +30,9 @@ public sealed partial class CompletionContext
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
 
+	[JsonInclude, JsonPropertyName("context")]
+	public Elastic.Clients.Elasticsearch.Core.Search.Context Context { get; set; }
+
 	[JsonInclude, JsonPropertyName("neighbours")]
 	public ICollection<Elastic.Clients.Elasticsearch.GeoHashPrecision>? Neighbours { get; set; }
 
@@ -49,6 +52,8 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 
 	private double? BoostValue { get; set; }
 
+	private Elastic.Clients.Elasticsearch.Core.Search.Context ContextValue { get; set; }
+
 	private ICollection<Elastic.Clients.Elasticsearch.GeoHashPrecision>? NeighboursValue { get; set; }
 
 	private Elastic.Clients.Elasticsearch.GeoHashPrecision? PrecisionValue { get; set; }
@@ -58,6 +63,12 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 	public CompletionContextDescriptor Boost(double? boost)
 	{
 		BoostValue = boost;
+		return Self;
+	}
+
+	public CompletionContextDescriptor Context(Elastic.Clients.Elasticsearch.Core.Search.Context context)
+	{
+		ContextValue = context;
 		return Self;
 	}
 
@@ -88,6 +99,8 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 			writer.WriteNumberValue(BoostValue.Value);
 		}
 
+		writer.WritePropertyName("context");
+		JsonSerializer.Serialize(writer, ContextValue, options);
 		if (NeighboursValue is not null)
 		{
 			writer.WritePropertyName("neighbours");
