@@ -409,6 +409,55 @@ internal sealed class FunctionScoreModeConverter : JsonConverter<FunctionScoreMo
 	}
 }
 
+[JsonConverter(typeof(GeoValidationMethodConverter))]
+public enum GeoValidationMethod
+{
+	[EnumMember(Value = "strict")]
+	Strict,
+	[EnumMember(Value = "ignore_malformed")]
+	IgnoreMalformed,
+	[EnumMember(Value = "coerce")]
+	Coerce
+}
+
+internal sealed class GeoValidationMethodConverter : JsonConverter<GeoValidationMethod>
+{
+	public override GeoValidationMethod Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "strict":
+				return GeoValidationMethod.Strict;
+			case "ignore_malformed":
+				return GeoValidationMethod.IgnoreMalformed;
+			case "coerce":
+				return GeoValidationMethod.Coerce;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, GeoValidationMethod value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case GeoValidationMethod.Strict:
+				writer.WriteStringValue("strict");
+				return;
+			case GeoValidationMethod.IgnoreMalformed:
+				writer.WriteStringValue("ignore_malformed");
+				return;
+			case GeoValidationMethod.Coerce:
+				writer.WriteStringValue("coerce");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(OperatorConverter))]
 public enum Operator
 {

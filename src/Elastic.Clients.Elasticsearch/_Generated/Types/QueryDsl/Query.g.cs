@@ -53,6 +53,7 @@ public sealed partial class Query
 	public static Query FieldMaskingSpan(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => new Query("field_masking_span", spanFieldMaskingQuery);
 	public static Query FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery functionScoreQuery) => new Query("function_score", functionScoreQuery);
 	public static Query Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery fuzzyQuery) => new Query("fuzzy", fuzzyQuery);
+	public static Query GeoBoundingBox(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery geoBoundingBoxQuery) => new Query("geo_bounding_box", geoBoundingBoxQuery);
 	public static Query HasChild(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery hasChildQuery) => new Query("has_child", hasChildQuery);
 	public static Query HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery hasParentQuery) => new Query("has_parent", hasParentQuery);
 	public static Query Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => new Query("ids", idsQuery);
@@ -167,6 +168,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 		if (propertyName == "fuzzy")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery?>(ref reader, options);
+			reader.Read();
+			return new Query(propertyName, variant);
+		}
+
+		if (propertyName == "geo_bounding_box")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery?>(ref reader, options);
 			reader.Read();
 			return new Query(propertyName, variant);
 		}
@@ -459,6 +467,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			case "fuzzy":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery)value.Variant, options);
 				break;
+			case "geo_bounding_box":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery)value.Variant, options);
+				break;
 			case "has_child":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery)value.Variant, options);
 				break;
@@ -625,6 +636,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> FunctionScore(Action<FunctionScoreQueryDescriptor<TDocument>> configure) => Set(configure, "function_score");
 	public QueryDescriptor<TDocument> Fuzzy(FuzzyQuery fuzzyQuery) => Set(fuzzyQuery, "fuzzy");
 	public QueryDescriptor<TDocument> Fuzzy(Action<FuzzyQueryDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
+	public QueryDescriptor<TDocument> GeoBoundingBox(GeoBoundingBoxQuery geoBoundingBoxQuery) => Set(geoBoundingBoxQuery, "geo_bounding_box");
+	public QueryDescriptor<TDocument> GeoBoundingBox(Action<GeoBoundingBoxQueryDescriptor<TDocument>> configure) => Set(configure, "geo_bounding_box");
 	public QueryDescriptor<TDocument> HasChild(HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
 	public QueryDescriptor<TDocument> HasChild(Action<HasChildQueryDescriptor<TDocument>> configure) => Set(configure, "has_child");
 	public QueryDescriptor<TDocument> HasParent(HasParentQuery hasParentQuery) => Set(hasParentQuery, "has_parent");
@@ -780,6 +793,9 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor Fuzzy(FuzzyQuery fuzzyQuery) => Set(fuzzyQuery, "fuzzy");
 	public QueryDescriptor Fuzzy(Action<FuzzyQueryDescriptor> configure) => Set(configure, "fuzzy");
 	public QueryDescriptor Fuzzy<TDocument>(Action<FuzzyQueryDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
+	public QueryDescriptor GeoBoundingBox(GeoBoundingBoxQuery geoBoundingBoxQuery) => Set(geoBoundingBoxQuery, "geo_bounding_box");
+	public QueryDescriptor GeoBoundingBox(Action<GeoBoundingBoxQueryDescriptor> configure) => Set(configure, "geo_bounding_box");
+	public QueryDescriptor GeoBoundingBox<TDocument>(Action<GeoBoundingBoxQueryDescriptor<TDocument>> configure) => Set(configure, "geo_bounding_box");
 	public QueryDescriptor HasChild(HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
 	public QueryDescriptor HasChild(Action<HasChildQueryDescriptor> configure) => Set(configure, "has_child");
 	public QueryDescriptor HasChild<TDocument>(Action<HasChildQueryDescriptor<TDocument>> configure) => Set(configure, "has_child");
