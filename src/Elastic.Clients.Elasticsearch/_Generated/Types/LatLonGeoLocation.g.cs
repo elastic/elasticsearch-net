@@ -17,23 +17,53 @@
 
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class TermsQueryField : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>
+namespace Elastic.Clients.Elasticsearch;
+public sealed partial class LatLonGeoLocation
 {
-	public TermsQueryField(IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> value) : base(value)
+	[JsonInclude, JsonPropertyName("lat")]
+	public double Lat { get; set; }
+
+	[JsonInclude, JsonPropertyName("lon")]
+	public double Lon { get; set; }
+}
+
+public sealed partial class LatLonGeoLocationDescriptor : SerializableDescriptor<LatLonGeoLocationDescriptor>
+{
+	internal LatLonGeoLocationDescriptor(Action<LatLonGeoLocationDescriptor> configure) => configure.Invoke(this);
+	public LatLonGeoLocationDescriptor() : base()
 	{
 	}
 
-	public TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup lookup) : base(lookup)
+	private double LatValue { get; set; }
+
+	private double LonValue { get; set; }
+
+	public LatLonGeoLocationDescriptor Lat(double lat)
 	{
+		LatValue = lat;
+		return Self;
+	}
+
+	public LatLonGeoLocationDescriptor Lon(double lon)
+	{
+		LonValue = lon;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("lat");
+		writer.WriteNumberValue(LatValue);
+		writer.WritePropertyName("lon");
+		writer.WriteNumberValue(LonValue);
+		writer.WriteEndObject();
 	}
 }
