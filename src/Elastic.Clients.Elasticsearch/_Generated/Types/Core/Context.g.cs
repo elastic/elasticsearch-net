@@ -26,14 +26,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl;
-public sealed partial class TermsQueryField : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>
+namespace Elastic.Clients.Elasticsearch.Core.Search;
+public sealed partial class Context : Union<string, Elastic.Clients.Elasticsearch.GeoLocation>
 {
-	public TermsQueryField(IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> value) : base(value)
+	public Context(string category) : base(category)
 	{
 	}
 
-	public TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup lookup) : base(lookup)
+	public Context(Elastic.Clients.Elasticsearch.GeoLocation location) : base(location)
 	{
 	}
 }
