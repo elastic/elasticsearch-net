@@ -11,7 +11,7 @@ Language clients are forward compatible; meaning that clients support communicat
 ### Elasticsearch 8.x Clusters
 
 We have released the next generation of the .NET client for Elasticsearch, which aligns with v8 of Elasticsearch. We have renamed this library `Elastic.Clients.Elasticsearch`, and the packages are published on [NuGet](https://www.nuget.org/packages/Elastic.Clients.Elasticsearch/). The 8.0.x versions do not offer complete
-feature parity with the exitsing `NEST` client. We therefore recommend you thoroughly review our [release notes and migration guidance](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/release-notes-8.0.0.html) before attempting to migrate existing applications to the `Elastic.Clients.Elasticsearch` library.
+feature parity with the existing `NEST` client. We therefore recommend you thoroughly review our [release notes and migration guidance](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/release-notes-8.0.0.html) before attempting to migrate existing applications to the `Elastic.Clients.Elasticsearch` library.
 
 Until the new client supports all endpoints and features your application requires, you may continue to use the latest `7.17.x` client to communicate with Elasticsearch v8 servers. Please review [our documentation](https://www.elastic.co/guide/en/elasticsearch/client/net-api/7.17/connecting-to-elasticsearch-v8.html), which describes how to enable compatibility mode and secure communications with a v8 cluster.
 
