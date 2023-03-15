@@ -54,6 +54,8 @@ public sealed partial class Query
 	public static Query FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery functionScoreQuery) => new Query("function_score", functionScoreQuery);
 	public static Query Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery fuzzyQuery) => new Query("fuzzy", fuzzyQuery);
 	public static Query GeoBoundingBox(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery geoBoundingBoxQuery) => new Query("geo_bounding_box", geoBoundingBoxQuery);
+	public static Query GeoDistance(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery geoDistanceQuery) => new Query("geo_distance", geoDistanceQuery);
+	public static Query GeoPolygon(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery geoPolygonQuery) => new Query("geo_polygon", geoPolygonQuery);
 	public static Query HasChild(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery hasChildQuery) => new Query("has_child", hasChildQuery);
 	public static Query HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery hasParentQuery) => new Query("has_parent", hasParentQuery);
 	public static Query Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => new Query("ids", idsQuery);
@@ -176,6 +178,20 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 		if (propertyName == "geo_bounding_box")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery?>(ref reader, options);
+			reader.Read();
+			return new Query(propertyName, variant);
+		}
+
+		if (propertyName == "geo_distance")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery?>(ref reader, options);
+			reader.Read();
+			return new Query(propertyName, variant);
+		}
+
+		if (propertyName == "geo_polygon")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery?>(ref reader, options);
 			reader.Read();
 			return new Query(propertyName, variant);
 		}
@@ -484,6 +500,12 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			case "geo_bounding_box":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery)value.Variant, options);
 				break;
+			case "geo_distance":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery)value.Variant, options);
+				break;
+			case "geo_polygon":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery)value.Variant, options);
+				break;
 			case "has_child":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery)value.Variant, options);
 				break;
@@ -655,6 +677,10 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> Fuzzy(Action<FuzzyQueryDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
 	public QueryDescriptor<TDocument> GeoBoundingBox(GeoBoundingBoxQuery geoBoundingBoxQuery) => Set(geoBoundingBoxQuery, "geo_bounding_box");
 	public QueryDescriptor<TDocument> GeoBoundingBox(Action<GeoBoundingBoxQueryDescriptor<TDocument>> configure) => Set(configure, "geo_bounding_box");
+	public QueryDescriptor<TDocument> GeoDistance(GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
+	public QueryDescriptor<TDocument> GeoDistance(Action<GeoDistanceQueryDescriptor<TDocument>> configure) => Set(configure, "geo_distance");
+	public QueryDescriptor<TDocument> GeoPolygon(GeoPolygonQuery geoPolygonQuery) => Set(geoPolygonQuery, "geo_polygon");
+	public QueryDescriptor<TDocument> GeoPolygon(Action<GeoPolygonQueryDescriptor<TDocument>> configure) => Set(configure, "geo_polygon");
 	public QueryDescriptor<TDocument> HasChild(HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
 	public QueryDescriptor<TDocument> HasChild(Action<HasChildQueryDescriptor<TDocument>> configure) => Set(configure, "has_child");
 	public QueryDescriptor<TDocument> HasParent(HasParentQuery hasParentQuery) => Set(hasParentQuery, "has_parent");
@@ -820,6 +846,12 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor GeoBoundingBox(GeoBoundingBoxQuery geoBoundingBoxQuery) => Set(geoBoundingBoxQuery, "geo_bounding_box");
 	public QueryDescriptor GeoBoundingBox(Action<GeoBoundingBoxQueryDescriptor> configure) => Set(configure, "geo_bounding_box");
 	public QueryDescriptor GeoBoundingBox<TDocument>(Action<GeoBoundingBoxQueryDescriptor<TDocument>> configure) => Set(configure, "geo_bounding_box");
+	public QueryDescriptor GeoDistance(GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
+	public QueryDescriptor GeoDistance(Action<GeoDistanceQueryDescriptor> configure) => Set(configure, "geo_distance");
+	public QueryDescriptor GeoDistance<TDocument>(Action<GeoDistanceQueryDescriptor<TDocument>> configure) => Set(configure, "geo_distance");
+	public QueryDescriptor GeoPolygon(GeoPolygonQuery geoPolygonQuery) => Set(geoPolygonQuery, "geo_polygon");
+	public QueryDescriptor GeoPolygon(Action<GeoPolygonQueryDescriptor> configure) => Set(configure, "geo_polygon");
+	public QueryDescriptor GeoPolygon<TDocument>(Action<GeoPolygonQueryDescriptor<TDocument>> configure) => Set(configure, "geo_polygon");
 	public QueryDescriptor HasChild(HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
 	public QueryDescriptor HasChild(Action<HasChildQueryDescriptor> configure) => Set(configure, "has_child");
 	public QueryDescriptor HasChild<TDocument>(Action<HasChildQueryDescriptor<TDocument>> configure) => Set(configure, "has_child");
