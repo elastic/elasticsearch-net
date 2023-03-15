@@ -13,23 +13,27 @@ public class SortUsageTests : SearchUsageTestBase
 {
 	public SortUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	protected override object ExpectJson =>
-		new
-		{
-			sort = new object[]
-			{
-				new { startedOn = new { order = "asc" } },
-				new { name = new { order = "desc" } }
-			}
-		};
+	protected override bool VerifyJson => true;
 
-	// TODO - Update once we code-generate the fluent syntax
+	// TODO: Port other tests from NEST
+
+	// NOTE: The descriptor syntax is usable but more complex than NEST which provides a collection-based promise.
+	// TODO: Consider updating code-gen to produce simpler descriptor syntax for this case.
 	protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
-		.Sort(new[]
-		{
-			SortOptions.Field(Infer.Field<Project>(f => f.StartedOn), new FieldSort { Order = SortOrder.Asc }),
-			SortOptions.Field(Infer.Field<Project>(f => f.Name), new FieldSort { Order = SortOrder.Desc })
-		});
+		.Sort(
+			s => s.Field(f => f.StartedOn, fs => fs.Order(SortOrder.Asc)),
+			s => s.Field(f => f.Name, fs => fs.Order(SortOrder.Desc)),
+			s => s.GeoDistance(f => f
+				.Field(fld => fld.LocationPoint)
+				.DistanceType(GeoDistanceType.Arc)
+				.Order(SortOrder.Asc)
+				.Unit(DistanceUnit.Centimeters)
+				.Mode(SortMode.Min)
+				.Location(new []
+				{
+					GeoLocation.LatitudeLongitude(new () { Lat = 70, Lon = -70 }),
+					GeoLocation.LatitudeLongitude(new () { Lat = -12, Lon = 12 })
+				})));
 
 	protected override SearchRequest<Project> Initializer =>
 		new()
@@ -37,7 +41,20 @@ public class SortUsageTests : SearchUsageTestBase
 			Sort = new[]
 			{
 				SortOptions.Field(Infer.Field<Project>(f => f.StartedOn), new FieldSort { Order = SortOrder.Asc }),
-				SortOptions.Field(Infer.Field<Project>(f => f.Name), new FieldSort { Order = SortOrder.Desc })
+				SortOptions.Field(Infer.Field<Project>(f => f.Name), new FieldSort { Order = SortOrder.Desc }),
+				SortOptions.GeoDistance(new GeoDistanceSort
+				{
+					Field = Infer.Field<Project>(f => f.LocationPoint),
+					DistanceType = GeoDistanceType.Arc,
+					Order = SortOrder.Asc,
+					Unit = DistanceUnit.Centimeters,
+					Mode = SortMode.Min,
+					Location = new []
+					{
+						GeoLocation.LatitudeLongitude(new () { Lat = 70, Lon = -70 }),
+						GeoLocation.LatitudeLongitude(new () { Lat = -12, Lon = 12 })
+					}
+				})
 			}
 		};
 }
