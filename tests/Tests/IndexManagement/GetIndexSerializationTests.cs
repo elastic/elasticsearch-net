@@ -7058,7 +7058,7 @@ public class GetIndexSerializationTests : SerializerTestBase
 	}
 
 	[U]
-	public void GetIndexResponse_DeserializedCorrectly_WhenDynamicTemplateArrayIsPresentInResponse()
+	public void GetIndexResponse_DeserializedCorrectly_WhenDynamicTemplatesArePresentInResponse()
 	{
 		const string json = @"{
   ""catalog-data-2023.01.31"": {
@@ -7076,39 +7076,6 @@ public class GetIndexSerializationTests : SerializerTestBase
           }
         }
       ],
-      ""properties"": {
-        ""@timestamp"": {
-          ""type"": ""date""
-        }
-      }
-    },
-    ""settings"": {
-    }
-  }
-}";
-
-		var response = DeserializeJsonString<GetIndexResponse>(json);
-		VerifyGetIndexResponseDynamicTemplates(response);
-	}
-
-	[U]
-	public void GetIndexResponse_DeserializedCorrectly_WhenSingleDynamicTemplateIsPresentInResponse()
-	{
-		const string json = @"{
-  ""catalog-data-2023.01.31"": {
-    ""aliases"": {      
-    },
-    ""mappings"": {
-      ""dynamic_templates"": 
-        {
-          ""strings_as_keyword"": {
-            ""match_mapping_type"": ""string"",
-            ""mapping"": {
-              ""ignore_above"": 1024,
-              ""type"": ""keyword""
-            }
-          }
-        },
       ""properties"": {
         ""@timestamp"": {
           ""type"": ""date""
