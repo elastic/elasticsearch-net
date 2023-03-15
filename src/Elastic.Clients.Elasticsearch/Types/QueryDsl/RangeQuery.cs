@@ -10,26 +10,12 @@ using Elastic.Clients.Elasticsearch.Fluent;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public partial class Query
-{
-	public bool TryGet<T>([NotNullWhen(true)]out T? query)
-	{
-		query = default(T);
-
-		if (Variant is T variant)
-		{
-			query = variant;
-			return true;
-		}
-
-		return false;
-	}
-}
-
 [JsonConverter(typeof(RangeQueryConverter))]
 public class RangeQuery : SearchQuery
 {
 	internal RangeQuery() { }
+
+	public static implicit operator Query(RangeQuery rangeQuery) => QueryDsl.Query.Range(rangeQuery);
 }
 
 internal sealed class RangeQueryConverter : JsonConverter<RangeQuery>
