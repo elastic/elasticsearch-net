@@ -19,8 +19,6 @@ namespace Tests.Search.Search
 			Value = Project.TypeName
 		};
 
-		protected object ProjectFilterExpectedJson = new { term = new { type = new { value = Project.TypeName } } };
-
 		protected SearchUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;

@@ -1,0 +1,32 @@
+{
+  sort: [
+    {
+      startedOn: {
+        order: asc
+      }
+    },
+    {
+      name: {
+        order: desc
+      }
+    },
+    {
+      _geo_distance: {
+        distance_type: arc,
+        locationPoint: [
+          {
+            lat: 70,
+            lon: -70
+          },
+          {
+            lat: -12,
+            lon: 12
+          }
+        ],
+        mode: min,
+        order: asc,
+        unit: cm
+      }
+    }
+  ]
+}
