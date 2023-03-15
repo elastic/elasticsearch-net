@@ -1,0 +1,7 @@
+[[release-notes-8.0.7]]
+== Release notes v8.0.7
+
+[discrete]
+=== Bug fixes
+
+- https://github.com/elastic/elasticsearch-net/pull/7337[#7337] Fix code-gen for dynamic_templates. (issue: https://github.com/elastic/elasticsearch-net/issues/7234[#7234])
