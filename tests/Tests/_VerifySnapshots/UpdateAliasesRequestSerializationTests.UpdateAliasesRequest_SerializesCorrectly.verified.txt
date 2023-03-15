@@ -1,0 +1,16 @@
+{
+  actions: [
+    {
+      add: {
+        alias: test-alias,
+        index: index-02
+      }
+    },
+    {
+      remove: {
+        alias: test-alias,
+        index: index-01
+      }
+    }
+  ]
+}

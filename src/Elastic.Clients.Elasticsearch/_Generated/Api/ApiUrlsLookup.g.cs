@@ -80,6 +80,7 @@ internal static class ApiUrlsLookups
 	internal static ApiUrls IndexManagementSimulateIndexTemplate = new ApiUrls(new[] { "/_index_template/_simulate_index/{name}" });
 	internal static ApiUrls IndexManagementSimulateTemplate = new ApiUrls(new[] { "/_index_template/_simulate", "/_index_template/_simulate/{name}" });
 	internal static ApiUrls IndexManagementSplit = new ApiUrls(new[] { "/{index}/_split/{target}" });
+	internal static ApiUrls IndexManagementUpdateAliases = new ApiUrls(new[] { "/_aliases" });
 	internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[] { "/{index}/_doc/{id}", "/{index}/_doc" });
 	internal static ApiUrls NoNamespaceInfo = new ApiUrls(new[] { "/" });
 	internal static ApiUrls NoNamespaceMget = new ApiUrls(new[] { "/_mget", "/{index}/_mget" });
