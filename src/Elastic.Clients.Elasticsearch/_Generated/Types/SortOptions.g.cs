@@ -58,6 +58,7 @@ public sealed partial class SortOptions
 	internal Elastic.Clients.Elasticsearch.Field? AdditionalPropertyName { get; }
 
 	public static SortOptions Doc(Elastic.Clients.Elasticsearch.ScoreSort scoreSort) => new SortOptions("_doc", scoreSort);
+	public static SortOptions GeoDistance(Elastic.Clients.Elasticsearch.GeoDistanceSort geoDistanceSort) => new SortOptions("_geo_distance", geoDistanceSort);
 	public static SortOptions Score(Elastic.Clients.Elasticsearch.ScoreSort scoreSort) => new SortOptions("_score", scoreSort);
 	public static SortOptions Script(Elastic.Clients.Elasticsearch.ScriptSort scriptSort) => new SortOptions("_script", scriptSort);
 	public static SortOptions Field(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.FieldSort fieldSort) => new SortOptions(field, fieldSort);
@@ -131,6 +132,8 @@ public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescr
 
 	public SortOptionsDescriptor<TDocument> Doc(ScoreSort scoreSort) => Set(scoreSort, "_doc");
 	public SortOptionsDescriptor<TDocument> Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
+	public SortOptionsDescriptor<TDocument> GeoDistance(GeoDistanceSort geoDistanceSort) => Set(geoDistanceSort, "_geo_distance");
+	public SortOptionsDescriptor<TDocument> GeoDistance(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
 	public SortOptionsDescriptor<TDocument> Score(ScoreSort scoreSort) => Set(scoreSort, "_score");
 	public SortOptionsDescriptor<TDocument> Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
 	public SortOptionsDescriptor<TDocument> Script(ScriptSort scriptSort) => Set(scriptSort, "_script");
@@ -250,6 +253,9 @@ public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortO
 
 	public SortOptionsDescriptor Doc(ScoreSort scoreSort) => Set(scoreSort, "_doc");
 	public SortOptionsDescriptor Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
+	public SortOptionsDescriptor GeoDistance(GeoDistanceSort geoDistanceSort) => Set(geoDistanceSort, "_geo_distance");
+	public SortOptionsDescriptor GeoDistance(Action<GeoDistanceSortDescriptor> configure) => Set(configure, "_geo_distance");
+	public SortOptionsDescriptor GeoDistance<TDocument>(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
 	public SortOptionsDescriptor Score(ScoreSort scoreSort) => Set(scoreSort, "_score");
 	public SortOptionsDescriptor Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
 	public SortOptionsDescriptor Script(ScriptSort scriptSort) => Set(scriptSort, "_script");
