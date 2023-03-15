@@ -73,6 +73,7 @@ public sealed partial class Query
 	public static Query QueryString(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery queryStringQuery) => new Query("query_string", queryStringQuery);
 	public static Query Range(Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery rangeQuery) => new Query("range", rangeQuery);
 	public static Query RankFeature(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery rankFeatureQuery) => new Query("rank_feature", rankFeatureQuery);
+	public static Query RawJson(Elastic.Clients.Elasticsearch.QueryDsl.RawJsonQuery rawJsonQuery) => new Query("raw_json", rawJsonQuery);
 	public static Query Regexp(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery regexpQuery) => new Query("regexp", regexpQuery);
 	public static Query Script(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery scriptQuery) => new Query("script", scriptQuery);
 	public static Query ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery scriptScoreQuery) => new Query("script_score", scriptScoreQuery);
@@ -312,6 +313,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			return new Query(propertyName, variant);
 		}
 
+		if (propertyName == "raw_json")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RawJsonQuery?>(ref reader, options);
+			reader.Read();
+			return new Query(propertyName, variant);
+		}
+
 		if (propertyName == "regexp")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery?>(ref reader, options);
@@ -436,6 +444,12 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 
 	public override void Write(Utf8JsonWriter writer, Query value, JsonSerializerOptions options)
 	{
+		if (value.VariantName == "raw_json" && value.TryGet<RawJsonQuery>(out var rawJsonQuery))
+		{
+			writer.WriteRawValue(rawJsonQuery.Raw);
+			return;
+		}
+
 		writer.WriteStartObject();
 		writer.WritePropertyName(value.VariantName);
 		switch (value.VariantName)
@@ -526,6 +540,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				break;
 			case "rank_feature":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery)value.Variant, options);
+				break;
+			case "raw_json":
+				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RawJsonQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RawJsonQuery)value.Variant, options);
 				break;
 			case "regexp":
 				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery)value.Variant, options);
@@ -676,6 +693,7 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> Range(Action<RangeQueryDescriptor<TDocument>> configure) => Set(configure, "range");
 	public QueryDescriptor<TDocument> RankFeature(RankFeatureQuery rankFeatureQuery) => Set(rankFeatureQuery, "rank_feature");
 	public QueryDescriptor<TDocument> RankFeature(Action<RankFeatureQueryDescriptor<TDocument>> configure) => Set(configure, "rank_feature");
+	public QueryDescriptor<TDocument> RawJson(Elastic.Clients.Elasticsearch.QueryDsl.RawJsonQuery rawJsonQuery) => Set(rawJsonQuery, "raw_json");
 	public QueryDescriptor<TDocument> Regexp(RegexpQuery regexpQuery) => Set(regexpQuery, "regexp");
 	public QueryDescriptor<TDocument> Regexp(Action<RegexpQueryDescriptor<TDocument>> configure) => Set(configure, "regexp");
 	public QueryDescriptor<TDocument> Script(ScriptQuery scriptQuery) => Set(scriptQuery, "script");
@@ -715,6 +733,12 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 		if (!ContainsVariant)
 		{
 			writer.WriteNullValue();
+			return;
+		}
+
+		if (ContainedVariantName == "raw_json")
+		{
+			writer.WriteRawValue(((RawJsonQuery)Variant).Raw);
 			return;
 		}
 
@@ -849,6 +873,7 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor RankFeature(RankFeatureQuery rankFeatureQuery) => Set(rankFeatureQuery, "rank_feature");
 	public QueryDescriptor RankFeature(Action<RankFeatureQueryDescriptor> configure) => Set(configure, "rank_feature");
 	public QueryDescriptor RankFeature<TDocument>(Action<RankFeatureQueryDescriptor<TDocument>> configure) => Set(configure, "rank_feature");
+	public QueryDescriptor RawJson(Elastic.Clients.Elasticsearch.QueryDsl.RawJsonQuery rawJsonQuery) => Set(rawJsonQuery, "raw_json");
 	public QueryDescriptor Regexp(RegexpQuery regexpQuery) => Set(regexpQuery, "regexp");
 	public QueryDescriptor Regexp(Action<RegexpQueryDescriptor> configure) => Set(configure, "regexp");
 	public QueryDescriptor Regexp<TDocument>(Action<RegexpQueryDescriptor<TDocument>> configure) => Set(configure, "regexp");
@@ -903,6 +928,12 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 		if (!ContainsVariant)
 		{
 			writer.WriteNullValue();
+			return;
+		}
+
+		if (ContainedVariantName == "raw_json")
+		{
+			writer.WriteRawValue(((RawJsonQuery)Variant).Raw);
 			return;
 		}
 
