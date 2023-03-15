@@ -36,6 +36,26 @@ namespace Tests.Framework.EndpointTests
 		protected abstract HttpMethod ExpectHttpMethod { get; }
 		protected abstract string ExpectedUrlPathAndQuery { get; }
 
+		// TODO - It would be useful to verify that the JSON is equivalent, but using a string
+		// comparison is too brittle due to potential for elements to be ordered differently.
+
+		//[U]
+		//protected virtual void VerifyInitializerAndDescriptorProduceIdenticalJson()
+		//{
+		//	if (VerifyJson)
+		//	{
+
+		//		var initializerJson = SerializeUsingClient(Initializer);
+
+		//		var descriptor = NewDescriptor();
+		//		Fluent?.Invoke(descriptor);
+
+		//		var descriptorJson = SerializeUsingClient(descriptor);
+
+		//		initializerJson.Equals(descriptorJson).Should().BeTrue();
+		//	}
+		//}
+
 		[U]
 		protected virtual async Task VerifyInitializerJson()
 		{

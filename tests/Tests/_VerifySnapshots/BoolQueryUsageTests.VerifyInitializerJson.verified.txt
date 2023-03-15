@@ -1,0 +1,25 @@
+{
+  query: {
+    bool: {
+      must: {
+        match_all: {}
+      },
+      should: [
+        {
+          term: {
+            name: {
+              value: Steve
+            }
+          }
+        },
+        {
+          term: {
+            name: {
+              value: David
+            }
+          }
+        }
+      ]
+    }
+  }
+}
