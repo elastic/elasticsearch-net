@@ -18,7 +18,7 @@ public partial class SortOptions
 internal sealed class SortOptionsConverter : JsonConverter<SortOptions>
 {
 	// We manually define this converter since we simplify SortCombinations union from the spec as SortOptions instance.
-	// This requires a custom read method to handle deserialisation of the potential union JSON as specified.
+	// This requires a custom read method to handle deserialization of the potential union JSON as specified.
 
 	public override SortOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
@@ -49,6 +49,13 @@ internal sealed class SortOptionsConverter : JsonConverter<SortOptions>
 			if (propertyName == "_script")
 			{
 				var variant = JsonSerializer.Deserialize<ScriptSort?>(ref reader, options);
+				reader.Read();
+				return new SortOptions(propertyName, variant);
+			}
+
+			if (propertyName == "_geo_distance")
+			{
+				var variant = JsonSerializer.Deserialize<GeoDistanceSort?>(ref reader, options);
 				reader.Read();
 				return new SortOptions(propertyName, variant);
 			}
@@ -103,6 +110,9 @@ internal sealed class SortOptionsConverter : JsonConverter<SortOptions>
 				break;
 			case "_script":
 				JsonSerializer.Serialize<ScriptSort>(writer, (ScriptSort)value.Variant, options);
+				break;
+			case "_geo_distance":
+				JsonSerializer.Serialize<GeoDistanceSort>(writer, (GeoDistanceSort)value.Variant, options);
 				break;
 			default:
 				JsonSerializer.Serialize<FieldSort>(writer, (FieldSort)value.Variant, options);
