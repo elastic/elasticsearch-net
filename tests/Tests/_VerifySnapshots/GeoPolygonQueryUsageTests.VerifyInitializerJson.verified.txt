@@ -1,0 +1,26 @@
+{
+  query: {
+    geo_polygon: {
+      boost: 1.1,
+      ignore_unmapped: true,
+      locationPoint: {
+        points: [
+          {
+            lat: 45,
+            lon: -45
+          },
+          {
+            lat: -34,
+            lon: -34
+          },
+          {
+            lat: 70,
+            lon: -70
+          }
+        ]
+      },
+      validation_method: strict,
+      _name: named_query
+    }
+  }
+}
