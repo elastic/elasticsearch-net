@@ -451,6 +451,48 @@ internal sealed class FieldSortNumericTypeConverter : JsonConverter<FieldSortNum
 	}
 }
 
+[JsonConverter(typeof(GeoDistanceTypeConverter))]
+public enum GeoDistanceType
+{
+	[EnumMember(Value = "plane")]
+	Plane,
+	[EnumMember(Value = "arc")]
+	Arc
+}
+
+internal sealed class GeoDistanceTypeConverter : JsonConverter<GeoDistanceType>
+{
+	public override GeoDistanceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "plane":
+				return GeoDistanceType.Plane;
+			case "arc":
+				return GeoDistanceType.Arc;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, GeoDistanceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case GeoDistanceType.Plane:
+				writer.WriteStringValue("plane");
+				return;
+			case GeoDistanceType.Arc:
+				writer.WriteStringValue("arc");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(HealthStatusConverter))]
 public enum HealthStatus
 {
