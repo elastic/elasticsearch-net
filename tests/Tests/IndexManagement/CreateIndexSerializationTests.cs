@@ -4,6 +4,7 @@
 
 using Elastic.Clients.Elasticsearch.Analysis;
 using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Mapping;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -76,6 +77,47 @@ public class CreateIndexSerializationTests : SerializerTestBase
 						{ "my-custom-analyzer", new CustomAnalyzer { Filter = new[] { "stop", "synonym" }, Tokenizer = "standard" }}
 					},
 					TokenFilters = new TokenFilters {{ "synonym", new SynonymTokenFilter { SynonymsPath = "analysis/synonym.txt" }}}					
+				}
+			}
+		};
+
+		var objectJson = await SerializeAndGetJsonStringAsync(createRequest);
+		objectJson.Should().Be(json);
+	}
+
+	[U]
+	public async Task CreateIndexWithDynamicTemplates_SerializesCorrectly()
+	{
+		var myTemplate = new DynamicTemplate
+		{
+			PathMatch = "testPathMatch",
+			Mapping = new KeywordProperty()
+		};
+
+		var descriptor = new CreateIndexRequestDescriptor("test")
+			.Mappings(m => m
+				.DynamicTemplates(new[]
+				{
+					new Dictionary<string, DynamicTemplate>
+					{
+						{ "testTemplateName", myTemplate }
+					}
+				}));
+
+		var json = await SerializeAndGetJsonStringAsync(descriptor);
+
+		await Verifier.VerifyJson(json);
+
+		var createRequest = new CreateIndexRequest("test")
+		{
+			Mappings = new TypeMapping
+			{
+				DynamicTemplates = new[]
+				{
+					new Dictionary<string, DynamicTemplate>
+					{
+						{ "testTemplateName", myTemplate }
+					}
 				}
 			}
 		};
