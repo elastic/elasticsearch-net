@@ -1975,4 +1975,62 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SplitIndexRequestDescriptor<TDocument>, SplitIndexResponse, SplitIndexRequestParameters>(descriptor);
 	}
+
+	public virtual UpdateAliasesResponse UpdateAliases(UpdateAliasesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<UpdateAliasesRequest, UpdateAliasesResponse, UpdateAliasesRequestParameters>(request);
+	}
+
+	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync(UpdateAliasesRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<UpdateAliasesRequest, UpdateAliasesResponse, UpdateAliasesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual UpdateAliasesResponse UpdateAliases()
+	{
+		var descriptor = new UpdateAliasesRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateAliasesRequestDescriptor, UpdateAliasesResponse, UpdateAliasesRequestParameters>(descriptor);
+	}
+
+	public virtual UpdateAliasesResponse UpdateAliases(Action<UpdateAliasesRequestDescriptor> configureRequest)
+	{
+		var descriptor = new UpdateAliasesRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateAliasesRequestDescriptor, UpdateAliasesResponse, UpdateAliasesRequestParameters>(descriptor);
+	}
+
+	public virtual UpdateAliasesResponse UpdateAliases<TDocument>(Action<UpdateAliasesRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new UpdateAliasesRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateAliasesRequestDescriptor<TDocument>, UpdateAliasesResponse, UpdateAliasesRequestParameters>(descriptor);
+	}
+
+	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateAliasesRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateAliasesRequestDescriptor, UpdateAliasesResponse, UpdateAliasesRequestParameters>(descriptor);
+	}
+
+	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync(Action<UpdateAliasesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateAliasesRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateAliasesRequestDescriptor, UpdateAliasesResponse, UpdateAliasesRequestParameters>(descriptor);
+	}
+
+	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync<TDocument>(Action<UpdateAliasesRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateAliasesRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateAliasesRequestDescriptor<TDocument>, UpdateAliasesResponse, UpdateAliasesRequestParameters>(descriptor);
+	}
 }
