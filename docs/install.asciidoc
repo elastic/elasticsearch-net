@@ -62,3 +62,16 @@ guarantees made.
 
 Refer to the https://www.elastic.co/support/eol[end-of-life policy] for more 
 information.
+
+[discrete]
+[[ci-feed]]
+=== CI feed
+
+We publish CI builds of our client packages, including the latest 
+unreleased features. If you want to experiment with the latest bits, you 
+can add the CI feed to your list of NuGet package sources.
+
+Feed URL: https://f.feedz.io/elastic/all/nuget/index.json
+
+We do not recommend using CI builds for production applications as they are not 
+formally supported until they are released.
