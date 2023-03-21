@@ -83,6 +83,8 @@ public sealed partial class DocumentDescriptor : SerializableDescriptor<Document
 			JsonSerializer.Serialize(writer, IndexValue, options);
 		}
 
+		writer.WritePropertyName("_source");
+		JsonSerializer.Serialize(writer, SourceValue, options);
 		writer.WriteEndObject();
 	}
 }

@@ -290,6 +290,12 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 			writer.WriteStringValue(TagValue);
 		}
 
+		if (ValueValue is not null)
+		{
+			writer.WritePropertyName("value");
+			JsonSerializer.Serialize(writer, ValueValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }
@@ -531,6 +537,12 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		{
 			writer.WritePropertyName("tag");
 			writer.WriteStringValue(TagValue);
+		}
+
+		if (ValueValue is not null)
+		{
+			writer.WritePropertyName("value");
+			JsonSerializer.Serialize(writer, ValueValue, options);
 		}
 
 		writer.WriteEndObject();

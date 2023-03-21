@@ -251,6 +251,12 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 			writer.WriteStringValue(DescriptionValue);
 		}
 
+		if (EmptyValueValue is not null)
+		{
+			writer.WritePropertyName("empty_value");
+			JsonSerializer.Serialize(writer, EmptyValueValue, options);
+		}
+
 		writer.WritePropertyName("field");
 		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (!string.IsNullOrEmpty(IfValue))
@@ -490,6 +496,12 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 		{
 			writer.WritePropertyName("description");
 			writer.WriteStringValue(DescriptionValue);
+		}
+
+		if (EmptyValueValue is not null)
+		{
+			writer.WritePropertyName("empty_value");
+			JsonSerializer.Serialize(writer, EmptyValueValue, options);
 		}
 
 		writer.WritePropertyName("field");
