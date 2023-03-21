@@ -167,6 +167,12 @@ public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : Seria
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("constant_keyword");
+		if (ValueValue is not null)
+		{
+			writer.WritePropertyName("value");
+			JsonSerializer.Serialize(writer, ValueValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 
@@ -299,6 +305,12 @@ public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDesc
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("constant_keyword");
+		if (ValueValue is not null)
+		{
+			writer.WritePropertyName("value");
+			JsonSerializer.Serialize(writer, ValueValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 
