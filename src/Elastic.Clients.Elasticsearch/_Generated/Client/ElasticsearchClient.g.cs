@@ -19,6 +19,7 @@ using Elastic.Clients.Elasticsearch.AsyncSearch;
 using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.Eql;
 using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Ingest;
 using Elastic.Clients.Elasticsearch.Sql;
 using System;
 using System.Threading;
@@ -36,6 +37,8 @@ public partial class ElasticsearchClient
 
 	public virtual IndicesNamespacedClient Indices { get; private set; }
 
+	public virtual IngestNamespacedClient Ingest { get; private set; }
+
 	public virtual SqlNamespacedClient Sql { get; private set; }
 
 	private partial void SetupNamespaces()
@@ -44,6 +47,7 @@ public partial class ElasticsearchClient
 		Cluster = new ClusterNamespacedClient(this);
 		Eql = new EqlNamespacedClient(this);
 		Indices = new IndicesNamespacedClient(this);
+		Ingest = new IngestNamespacedClient(this);
 		Sql = new SqlNamespacedClient(this);
 	}
 
