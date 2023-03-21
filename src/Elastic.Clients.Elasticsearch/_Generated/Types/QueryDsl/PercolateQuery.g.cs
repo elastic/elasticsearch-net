@@ -179,6 +179,12 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 			writer.WriteNumberValue(BoostValue.Value);
 		}
 
+		if (DocumentValue is not null)
+		{
+			writer.WritePropertyName("document");
+			JsonSerializer.Serialize(writer, DocumentValue, options);
+		}
+
 		if (DocumentsValue is not null)
 		{
 			writer.WritePropertyName("documents");
@@ -347,6 +353,12 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (DocumentValue is not null)
+		{
+			writer.WritePropertyName("document");
+			JsonSerializer.Serialize(writer, DocumentValue, options);
 		}
 
 		if (DocumentsValue is not null)
