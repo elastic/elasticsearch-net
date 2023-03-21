@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ml;
 
+/// <summary>
+/// <para>Zero shot classification configuration options</para>
+/// </summary>
 public sealed partial class ZeroShotClassificationInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("classification_labels")]

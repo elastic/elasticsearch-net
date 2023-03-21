@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <summary>
+/// <para>A reference to a field with formatting instructions on how to return the value</para>
+/// </summary>
 public sealed partial class FieldAndFormat
 {
 	[JsonInclude, JsonPropertyName("field")]

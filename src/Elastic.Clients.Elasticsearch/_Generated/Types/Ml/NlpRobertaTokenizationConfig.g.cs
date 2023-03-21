@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ml;
 
+/// <summary>
+/// <para>RoBERTa tokenization configuration options</para>
+/// </summary>
 public sealed partial class NlpRobertaTokenizationConfig
 {
 	[JsonInclude, JsonPropertyName("add_prefix_space")]

@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+/// <summary>
+/// <para>Recall at K (R@k)</para>
+/// </summary>
 public sealed partial class RankEvalMetricRecall
 {
 	[JsonInclude, JsonPropertyName("k")]

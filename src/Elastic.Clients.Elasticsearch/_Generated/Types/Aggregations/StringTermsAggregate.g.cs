@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <summary>
+/// <para>Result of a `terms` aggregation when the field is a string.</para>
+/// </summary>
 public sealed partial class StringTermsAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("buckets")]

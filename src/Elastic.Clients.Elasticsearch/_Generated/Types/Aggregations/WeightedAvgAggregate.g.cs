@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <summary>
+/// <para>Weighted average aggregation result. `value` is missing if the weight was set to zero.</para>
+/// </summary>
 public sealed partial class WeightedAvgAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("meta")]

@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ml;
 
+/// <summary>
+/// <para>Fill mask inference options</para>
+/// </summary>
 public sealed partial class FillMaskInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("num_top_classes")]

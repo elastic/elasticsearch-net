@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <summary>
+/// <para>Statistics aggregation result. `min`, `max` and `avg` are missing if there were no values to process<br/>(`count` is zero).</para>
+/// </summary>
 public sealed partial class StatsAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("avg")]

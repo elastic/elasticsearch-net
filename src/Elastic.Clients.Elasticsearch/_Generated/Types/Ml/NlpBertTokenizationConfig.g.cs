@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ml;
 
+/// <summary>
+/// <para>BERT and MPNet tokenization configuration options</para>
+/// </summary>
 public sealed partial class NlpBertTokenizationConfig
 {
 	[JsonInclude, JsonPropertyName("do_lower_case")]

@@ -97,6 +97,9 @@ internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
 }
 
 [JsonConverter(typeof(ErrorCauseConverter))]
+/// <summary>
+/// <para>Cause and details about a request failure. This class defines the properties common to all error types.<br/>Additional details are also provided, that depend on the error type.</para>
+/// </summary>
 public sealed partial class ErrorCause
 {
 	public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; init; }

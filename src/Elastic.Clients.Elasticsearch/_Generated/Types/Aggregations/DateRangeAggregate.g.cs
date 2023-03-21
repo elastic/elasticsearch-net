@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <summary>
+/// <para>Result of a `date_range` aggregation. Same format as a for a `range` aggregation: `from` and `to`<br/>in `buckets` are milliseconds since the Epoch, represented as a floating point number.</para>
+/// </summary>
 public sealed partial class DateRangeAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("buckets")]

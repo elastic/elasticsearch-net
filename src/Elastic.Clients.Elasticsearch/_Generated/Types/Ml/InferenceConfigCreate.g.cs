@@ -28,6 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 
 [JsonConverter(typeof(InferenceConfigCreateConverter))]
+/// <summary>
+/// <para>Inference configuration provided when storing the model config</para>
+/// </summary>
 public sealed partial class InferenceConfigCreate
 {
 	internal InferenceConfigCreate(string variantName, object variant)

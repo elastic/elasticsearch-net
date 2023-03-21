@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ml;
 
+/// <summary>
+/// <para>Question answering inference options</para>
+/// </summary>
 public sealed partial class QuestionAnsweringInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("max_answer_length")]

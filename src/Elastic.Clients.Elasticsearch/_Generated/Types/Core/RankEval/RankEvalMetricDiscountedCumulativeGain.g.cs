@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+/// <summary>
+/// <para>Discounted cumulative gain (DCG)</para>
+/// </summary>
 public sealed partial class RankEvalMetricDiscountedCumulativeGain
 {
 	[JsonInclude, JsonPropertyName("k")]

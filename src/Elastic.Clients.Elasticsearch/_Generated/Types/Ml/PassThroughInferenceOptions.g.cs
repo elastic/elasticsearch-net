@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ml;
 
+/// <summary>
+/// <para>Pass through configuration options</para>
+/// </summary>
 public sealed partial class PassThroughInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("results_field")]

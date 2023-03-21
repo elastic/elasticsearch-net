@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <summary>
+/// <para>Result of a `terms` aggregation when the field is some kind of whole number like a integer, long, or a date.</para>
+/// </summary>
 public sealed partial class LongTermsAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("buckets")]

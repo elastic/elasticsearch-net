@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <summary>
+/// <para>Result of the `cumulative_cardinality` aggregation</para>
+/// </summary>
 public sealed partial class CumulativeCardinalityAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("meta")]

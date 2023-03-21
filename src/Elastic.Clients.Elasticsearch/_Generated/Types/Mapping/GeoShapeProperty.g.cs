@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <summary>
+/// <para>The `geo_shape` data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles<br/>and polygons.</para>
+/// </summary>
 public sealed partial class GeoShapeProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("coerce")]

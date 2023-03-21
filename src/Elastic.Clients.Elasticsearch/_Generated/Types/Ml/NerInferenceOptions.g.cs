@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ml;
 
+/// <summary>
+/// <para>Named entity recognition options</para>
+/// </summary>
 public sealed partial class NerInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("classification_labels")]

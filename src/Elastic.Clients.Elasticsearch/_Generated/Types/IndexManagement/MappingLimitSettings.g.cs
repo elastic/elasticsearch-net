@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <summary>
+/// <para>Mapping Limit Settings</para>
+/// </summary>
 public sealed partial class MappingLimitSettings
 {
 	[JsonInclude, JsonPropertyName("coerce")]

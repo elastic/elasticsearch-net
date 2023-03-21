@@ -104,6 +104,9 @@ internal sealed partial class DocumentSimulationConverter : JsonConverter<Docume
 }
 
 [JsonConverter(typeof(DocumentSimulationConverter))]
+/// <summary>
+/// <para>The simulated document, with optional metadata.</para>
+/// </summary>
 public sealed partial class DocumentSimulation
 {
 	public string Id { get; init; }

@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <summary>
+/// <para>Sum aggregation result. `value` is always present and is zero if there were no values to process.</para>
+/// </summary>
 public sealed partial class SumAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("meta")]

@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <summary>
+/// <para>Downloaded databases for the node. The field key is the node ID.</para>
+/// </summary>
 public sealed partial class GeoIpNodeDatabases
 {
 	[JsonInclude, JsonPropertyName("databases")]

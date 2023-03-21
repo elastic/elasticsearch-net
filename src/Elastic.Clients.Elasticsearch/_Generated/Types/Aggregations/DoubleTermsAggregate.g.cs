@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <summary>
+/// <para>Result of a `terms` aggregation when the field is some kind of decimal number like a float, double, or distance.</para>
+/// </summary>
 public sealed partial class DoubleTermsAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("buckets")]

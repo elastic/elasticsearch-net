@@ -28,6 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 
 [JsonConverter(typeof(TokenizationConfigConverter))]
+/// <summary>
+/// <para>Tokenization options stored in inference configuration</para>
+/// </summary>
 public sealed partial class TokenizationConfig
 {
 	internal TokenizationConfig(string variantName, object variant)

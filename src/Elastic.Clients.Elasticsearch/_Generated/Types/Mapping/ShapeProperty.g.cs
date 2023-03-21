@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <summary>
+/// <para>The `shape` data type facilitates the indexing of and searching with arbitrary `x, y` cartesian shapes such as<br/>rectangles and polygons.</para>
+/// </summary>
 public sealed partial class ShapeProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("coerce")]

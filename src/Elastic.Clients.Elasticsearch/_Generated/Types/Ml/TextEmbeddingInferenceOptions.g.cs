@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ml;
 
+/// <summary>
+/// <para>Text embedding inference options</para>
+/// </summary>
 public sealed partial class TextEmbeddingInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("results_field")]

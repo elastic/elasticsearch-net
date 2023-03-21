@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
+/// <summary>
+/// <para>Contains parameters used to limit or change the subsequent search body request.</para>
+/// </summary>
 public sealed partial class MultisearchHeader
 {
 	[JsonInclude, JsonPropertyName("allow_no_indices")]

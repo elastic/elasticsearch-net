@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+/// <summary>
+/// <para>Precision at K (P@k)</para>
+/// </summary>
 public sealed partial class RankEvalMetricPrecision
 {
 	[JsonInclude, JsonPropertyName("ignore_unlabeled")]

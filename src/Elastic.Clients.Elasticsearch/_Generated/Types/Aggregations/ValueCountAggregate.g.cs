@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <summary>
+/// <para>Value count aggregation result. `value` is always present.</para>
+/// </summary>
 public sealed partial class ValueCountAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("meta")]

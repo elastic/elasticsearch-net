@@ -27,6 +27,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+/// <summary>
+/// <para>Mean Reciprocal Rank</para>
+/// </summary>
 public sealed partial class RankEvalMetricMeanReciprocalRank
 {
 	[JsonInclude, JsonPropertyName("k")]
