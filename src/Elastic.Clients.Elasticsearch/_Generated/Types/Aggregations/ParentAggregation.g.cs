@@ -126,7 +126,7 @@ public sealed partial class ParentAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public string? Type { get; set; }
 }
 

@@ -36,8 +36,7 @@ public sealed partial class PatternTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "pattern";
 
 	[JsonInclude, JsonPropertyName("version")]

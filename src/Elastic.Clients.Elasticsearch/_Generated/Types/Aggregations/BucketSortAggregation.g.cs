@@ -164,7 +164,7 @@ public sealed partial class BucketSortAggregation : SearchAggregation
 	public int? From { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public int? Size { get; set; }
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }

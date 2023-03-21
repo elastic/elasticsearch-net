@@ -41,36 +41,91 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("catalog")]
 	public string? Catalog { get; set; }
 	[JsonInclude, JsonPropertyName("columnar")]
 	public bool? Columnar { get; set; }
 	[JsonInclude, JsonPropertyName("cursor")]
 	public string? Cursor { get; set; }
+
+	/// <summary>
+	/// <para>The maximum number of rows (or entries) to return in one response</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("fetch_size")]
 	public int? FetchSize { get; set; }
+
+	/// <summary>
+	/// <para>Optional Elasticsearch query DSL for additional filtering.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
+
+	/// <summary>
+	/// <para>SQL query to execute</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string? Query { get; set; }
+
+	/// <summary>
+	/// <para>The timeout before the request fails.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("request_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? RequestTimeout { get; set; }
+
+	/// <summary>
+	/// <para>The timeout before a pagination request fails.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("page_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? PageTimeout { get; set; }
+
+	/// <summary>
+	/// <para>Time-zone in ISO 8601 used for executing the query on the server. More information available here.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
+
+	/// <summary>
+	/// <para>Throw an exception when encountering multiple values for a field (default) or be lenient and return the first value from the list (without any guarantees of what that will be - typically the first in natural ascending order).</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field_multi_value_leniency")]
 	public bool? FieldMultiValueLeniency { get; set; }
+
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+
+	/// <summary>
+	/// <para>Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results. If the search doesn’t finish within this period, the search becomes async.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
+
+	/// <summary>
+	/// <para>Values for parameters in the query.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
+
+	/// <summary>
+	/// <para>Retention period for an async or saved synchronous search.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("keep_alive")]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
+
+	/// <summary>
+	/// <para>If true, Elasticsearch stores synchronous searches if you also specify the wait_for_completion_timeout parameter. If false, Elasticsearch only stores async searches that don’t finish before the wait_for_completion_timeout.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("keep_on_completion")]
 	public bool? KeepOnCompletion { get; set; }
+
+	/// <summary>
+	/// <para>If true, the search can run on frozen indices. Defaults to false.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index_using_frozen")]
 	public bool? IndexUsingFrozen { get; set; }
 }
@@ -108,6 +163,9 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
+	/// <summary>
+	/// <para>Optional Elasticsearch query DSL for additional filtering.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
 		FilterDescriptor = null;
@@ -132,6 +190,9 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> Catalog(string? catalog)
 	{
 		CatalogValue = catalog;
@@ -150,72 +211,108 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of rows (or entries) to return in one response</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> FetchSize(int? fetchSize)
 	{
 		FetchSizeValue = fetchSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Throw an exception when encountering multiple values for a field (default) or be lenient and return the first value from the list (without any guarantees of what that will be - typically the first in natural ascending order).</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
 	{
 		FieldMultiValueLeniencyValue = fieldMultiValueLeniency;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, the search can run on frozen indices. Defaults to false.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> IndexUsingFrozen(bool? indexUsingFrozen = true)
 	{
 		IndexUsingFrozenValue = indexUsingFrozen;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Retention period for an async or saved synchronous search.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
 	{
 		KeepAliveValue = keepAlive;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, Elasticsearch stores synchronous searches if you also specify the wait_for_completion_timeout parameter. If false, Elasticsearch only stores async searches that don’t finish before the wait_for_completion_timeout.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true)
 	{
 		KeepOnCompletionValue = keepOnCompletion;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The timeout before a pagination request fails.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
 	{
 		PageTimeoutValue = pageTimeout;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Values for parameters in the query.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>SQL query to execute</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> Query(string? query)
 	{
 		QueryValue = query;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The timeout before the request fails.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> RequestTimeout(Elastic.Clients.Elasticsearch.Duration? requestTimeout)
 	{
 		RequestTimeoutValue = requestTimeout;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 	{
 		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Time-zone in ISO 8601 used for executing the query on the server. More information available here.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> TimeZone(string? timeZone)
 	{
 		TimeZoneValue = timeZone;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results. If the search doesn’t finish within this period, the search becomes async.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
 	{
 		WaitForCompletionTimeoutValue = waitForCompletionTimeout;
@@ -368,6 +465,9 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
+	/// <summary>
+	/// <para>Optional Elasticsearch query DSL for additional filtering.</para>
+	/// </summary>
 	public QueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
 		FilterDescriptor = null;
@@ -392,6 +492,9 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.</para>
+	/// </summary>
 	public QueryRequestDescriptor Catalog(string? catalog)
 	{
 		CatalogValue = catalog;
@@ -410,72 +513,108 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of rows (or entries) to return in one response</para>
+	/// </summary>
 	public QueryRequestDescriptor FetchSize(int? fetchSize)
 	{
 		FetchSizeValue = fetchSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Throw an exception when encountering multiple values for a field (default) or be lenient and return the first value from the list (without any guarantees of what that will be - typically the first in natural ascending order).</para>
+	/// </summary>
 	public QueryRequestDescriptor FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
 	{
 		FieldMultiValueLeniencyValue = fieldMultiValueLeniency;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, the search can run on frozen indices. Defaults to false.</para>
+	/// </summary>
 	public QueryRequestDescriptor IndexUsingFrozen(bool? indexUsingFrozen = true)
 	{
 		IndexUsingFrozenValue = indexUsingFrozen;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Retention period for an async or saved synchronous search.</para>
+	/// </summary>
 	public QueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
 	{
 		KeepAliveValue = keepAlive;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, Elasticsearch stores synchronous searches if you also specify the wait_for_completion_timeout parameter. If false, Elasticsearch only stores async searches that don’t finish before the wait_for_completion_timeout.</para>
+	/// </summary>
 	public QueryRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true)
 	{
 		KeepOnCompletionValue = keepOnCompletion;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The timeout before a pagination request fails.</para>
+	/// </summary>
 	public QueryRequestDescriptor PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
 	{
 		PageTimeoutValue = pageTimeout;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Values for parameters in the query.</para>
+	/// </summary>
 	public QueryRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>SQL query to execute</para>
+	/// </summary>
 	public QueryRequestDescriptor Query(string? query)
 	{
 		QueryValue = query;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The timeout before the request fails.</para>
+	/// </summary>
 	public QueryRequestDescriptor RequestTimeout(Elastic.Clients.Elasticsearch.Duration? requestTimeout)
 	{
 		RequestTimeoutValue = requestTimeout;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
 	public QueryRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 	{
 		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Time-zone in ISO 8601 used for executing the query on the server. More information available here.</para>
+	/// </summary>
 	public QueryRequestDescriptor TimeZone(string? timeZone)
 	{
 		TimeZoneValue = timeZone;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results. If the search doesn’t finish within this period, the search becomes async.</para>
+	/// </summary>
 	public QueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
 	{
 		WaitForCompletionTimeoutValue = waitForCompletionTimeout;

@@ -34,8 +34,7 @@ public sealed partial class NoriAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("stoptags")]
 	public ICollection<string>? Stoptags { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "nori";
 
 	[JsonInclude, JsonPropertyName("user_dictionary")]

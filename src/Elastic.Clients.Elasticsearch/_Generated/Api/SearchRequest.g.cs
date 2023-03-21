@@ -578,64 +578,152 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
+
+	/// <summary>
+	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
+
+	/// <summary>
+	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ext")]
 	public IDictionary<string, object>? Ext { get; set; }
+
+	/// <summary>
+	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
+
+	/// <summary>
+	/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("track_total_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
+
+	/// <summary>
+	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("indices_boost")]
 	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
+
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns doc values for field<br/>names matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("docvalue_fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
+
+	/// <summary>
+	/// <para>Defines the approximate kNN search to run.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("knn")]
 	public Elastic.Clients.Elasticsearch.KnnQuery? Knn { get; set; }
+
+	/// <summary>
+	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_score")]
 	public double? MinScore { get; set; }
 	[JsonInclude, JsonPropertyName("post_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilter { get; set; }
 	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
+
+	/// <summary>
+	/// <para>Defines the search definition using the Query DSL.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 	[JsonInclude, JsonPropertyName("rescore"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Rescore))]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
+
+	/// <summary>
+	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("script_fields")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 	[JsonInclude, JsonPropertyName("search_after")]
 	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
+
+	/// <summary>
+	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 	[JsonInclude, JsonPropertyName("sort"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+
+	/// <summary>
+	/// <para>Indicates which source fields are returned for matching documents. These<br/>fields are returned in the hits._source property of the search response.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
+
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 	[JsonInclude, JsonPropertyName("suggest")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Suggester? Suggest { get; set; }
+
+	/// <summary>
+	/// <para>Maximum number of documents to collect for each shard. If a query reaches this<br/>limit, Elasticsearch terminates the query early. Elasticsearch collects documents<br/>before sorting. Defaults to 0, which does not terminate query execution early.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("terminate_after")]
 	public long? TerminateAfter { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the period of time to wait for a response from each shard. If no response<br/>is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout")]
 	public string? Timeout { get; set; }
+
+	/// <summary>
+	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }
+
+	/// <summary>
+	/// <para>If true, returns document version as part of a hit.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
+
+	/// <summary>
+	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
 	public bool? SeqNoPrimaryTerm { get; set; }
+
+	/// <summary>
+	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("stored_fields")]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
+
+	/// <summary>
+	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("pit")]
 	public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? Pit { get; set; }
+
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+
+	/// <summary>
+	/// <para>Stats groups to associate with the search. Each group maintains a statistics<br/>aggregation for its associated searches. You can retrieve these stats using<br/>the indices stats API.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("stats")]
 	public ICollection<string>? Stats { get; set; }
 }
@@ -812,6 +900,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns doc values for field<br/>names matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
@@ -848,6 +939,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
@@ -908,6 +1002,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines the approximate kNN search to run.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> Knn(Elastic.Clients.Elasticsearch.KnnQuery? knn)
 	{
 		KnnDescriptor = null;
@@ -956,6 +1053,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines the search definition using the Query DSL.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
@@ -1076,42 +1176,63 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates which source fields are returned for matching documents. These<br/>fields are returned in the hits._source property of the search response.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> Explain(bool? explain = true)
 	{
 		ExplainValue = explain;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> From(int? from)
 	{
 		FromValue = from;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> MinScore(double? minScore)
 	{
 		MinScoreValue = minScore;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? pit)
 	{
 		PitDescriptor = null;
@@ -1142,12 +1263,18 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 	{
 		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector)
 	{
 		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>());
@@ -1160,24 +1287,36 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
 	{
 		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Stats groups to associate with the search. Each group maintains a statistics<br/>aggregation for its associated searches. You can retrieve these stats using<br/>the indices stats API.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> Stats(ICollection<string>? stats)
 	{
 		StatsValue = stats;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 	{
 		StoredFieldsValue = storedFields;
@@ -1208,30 +1347,45 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of documents to collect for each shard. If a query reaches this<br/>limit, Elasticsearch terminates the query early. Elasticsearch collects documents<br/>before sorting. Defaults to 0, which does not terminate query execution early.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter)
 	{
 		TerminateAfterValue = terminateAfter;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the period of time to wait for a response from each shard. If no response<br/>is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> Timeout(string? timeout)
 	{
 		TimeoutValue = timeout;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> TrackScores(bool? trackScores = true)
 	{
 		TrackScoresValue = trackScores;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
 	{
 		TrackTotalHitsValue = trackTotalHits;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns document version as part of a hit.</para>
+	/// </summary>
 	public SearchRequestDescriptor<TDocument> Version(bool? version = true)
 	{
 		VersionValue = version;
@@ -1788,6 +1942,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns doc values for field<br/>names matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	public SearchRequestDescriptor DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
@@ -1824,6 +1981,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	public SearchRequestDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
@@ -1884,6 +2044,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines the approximate kNN search to run.</para>
+	/// </summary>
 	public SearchRequestDescriptor Knn(Elastic.Clients.Elasticsearch.KnnQuery? knn)
 	{
 		KnnDescriptor = null;
@@ -1932,6 +2095,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines the search definition using the Query DSL.</para>
+	/// </summary>
 	public SearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
@@ -2052,42 +2218,63 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates which source fields are returned for matching documents. These<br/>fields are returned in the hits._source property of the search response.</para>
+	/// </summary>
 	public SearchRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
 	public SearchRequestDescriptor Explain(bool? explain = true)
 	{
 		ExplainValue = explain;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// </summary>
 	public SearchRequestDescriptor Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// </summary>
 	public SearchRequestDescriptor From(int? from)
 	{
 		FromValue = from;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// </summary>
 	public SearchRequestDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// </summary>
 	public SearchRequestDescriptor MinScore(double? minScore)
 	{
 		MinScoreValue = minScore;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// </summary>
 	public SearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? pit)
 	{
 		PitDescriptor = null;
@@ -2118,12 +2305,18 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
 	public SearchRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 	{
 		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// </summary>
 	public SearchRequestDescriptor ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector)
 	{
 		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>());
@@ -2136,24 +2329,36 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// </summary>
 	public SearchRequestDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
 	{
 		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// </summary>
 	public SearchRequestDescriptor Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Stats groups to associate with the search. Each group maintains a statistics<br/>aggregation for its associated searches. You can retrieve these stats using<br/>the indices stats API.</para>
+	/// </summary>
 	public SearchRequestDescriptor Stats(ICollection<string>? stats)
 	{
 		StatsValue = stats;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
+	/// </summary>
 	public SearchRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 	{
 		StoredFieldsValue = storedFields;
@@ -2184,30 +2389,45 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of documents to collect for each shard. If a query reaches this<br/>limit, Elasticsearch terminates the query early. Elasticsearch collects documents<br/>before sorting. Defaults to 0, which does not terminate query execution early.</para>
+	/// </summary>
 	public SearchRequestDescriptor TerminateAfter(long? terminateAfter)
 	{
 		TerminateAfterValue = terminateAfter;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the period of time to wait for a response from each shard. If no response<br/>is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// </summary>
 	public SearchRequestDescriptor Timeout(string? timeout)
 	{
 		TimeoutValue = timeout;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// </summary>
 	public SearchRequestDescriptor TrackScores(bool? trackScores = true)
 	{
 		TrackScoresValue = trackScores;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
+	/// </summary>
 	public SearchRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
 	{
 		TrackTotalHitsValue = trackTotalHits;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns document version as part of a hit.</para>
+	/// </summary>
 	public SearchRequestDescriptor Version(bool? version = true)
 	{
 		VersionValue = version;

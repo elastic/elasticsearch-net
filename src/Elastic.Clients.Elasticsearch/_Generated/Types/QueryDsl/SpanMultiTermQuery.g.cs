@@ -33,6 +33,10 @@ public sealed partial class SpanMultiTermQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Should be a multi term query (one of wildcard, fuzzy, prefix, range or regexp query)</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("match")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Match { get; set; }
 }
@@ -51,6 +55,9 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 
+	/// <summary>
+	/// <para>Should be a multi term query (one of wildcard, fuzzy, prefix, range or regexp query)</para>
+	/// </summary>
 	public SpanMultiTermQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.Query match)
 	{
 		MatchDescriptor = null;
@@ -136,6 +143,9 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 
+	/// <summary>
+	/// <para>Should be a multi term query (one of wildcard, fuzzy, prefix, range or regexp query)</para>
+	/// </summary>
 	public SpanMultiTermQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.Query match)
 	{
 		MatchDescriptor = null;

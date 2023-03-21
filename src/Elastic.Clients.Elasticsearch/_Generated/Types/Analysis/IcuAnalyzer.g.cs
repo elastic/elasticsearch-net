@@ -34,8 +34,7 @@ public sealed partial class IcuAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_analyzer";
 }
 

@@ -48,8 +48,7 @@ public sealed partial class BinaryProperty : IProperty
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "binary";
 }
 

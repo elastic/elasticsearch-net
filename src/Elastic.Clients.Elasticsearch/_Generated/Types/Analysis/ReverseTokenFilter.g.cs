@@ -29,8 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class ReverseTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "reverse";
 
 	[JsonInclude, JsonPropertyName("version")]

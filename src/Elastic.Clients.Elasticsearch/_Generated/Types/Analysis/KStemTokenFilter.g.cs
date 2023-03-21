@@ -29,8 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class KStemTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kstem";
 
 	[JsonInclude, JsonPropertyName("version")]

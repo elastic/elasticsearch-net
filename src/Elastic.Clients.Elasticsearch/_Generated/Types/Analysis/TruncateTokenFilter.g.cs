@@ -32,8 +32,7 @@ public sealed partial class TruncateTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("length")]
 	public int? Length { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "truncate";
 
 	[JsonInclude, JsonPropertyName("version")]

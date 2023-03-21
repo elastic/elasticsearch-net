@@ -40,8 +40,7 @@ public sealed partial class HyphenationDecompounderTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("only_longest_match")]
 	public bool? OnlyLongestMatch { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "hyphenation_decompounder";
 
 	[JsonInclude, JsonPropertyName("version")]

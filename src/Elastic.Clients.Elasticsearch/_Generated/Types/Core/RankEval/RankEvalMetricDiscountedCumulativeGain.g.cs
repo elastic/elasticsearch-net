@@ -34,6 +34,10 @@ public sealed partial class RankEvalMetricDiscountedCumulativeGain
 {
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
+
+	/// <summary>
+	/// <para>If set to true, this metric will calculate the Normalized DCG.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("normalize")]
 	public bool? Normalize { get; set; }
 }
@@ -55,6 +59,9 @@ public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : S
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If set to true, this metric will calculate the Normalized DCG.</para>
+	/// </summary>
 	public RankEvalMetricDiscountedCumulativeGainDescriptor Normalize(bool? normalize = true)
 	{
 		NormalizeValue = normalize;

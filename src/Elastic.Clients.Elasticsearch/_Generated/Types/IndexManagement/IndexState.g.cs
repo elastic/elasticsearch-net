@@ -33,6 +33,10 @@ public sealed partial class IndexState
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 	[JsonInclude, JsonPropertyName("data_stream")]
 	public Elastic.Clients.Elasticsearch.DataStreamName? DataStream { get; set; }
+
+	/// <summary>
+	/// <para>Default settings, included when the request's `include_default` is `true`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("defaults")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Defaults { get; set; }
 	[JsonInclude, JsonPropertyName("mappings")]
@@ -61,6 +65,9 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DataStreamName? DataStreamValue { get; set; }
 
+	/// <summary>
+	/// <para>Default settings, included when the request's `include_default` is `true`.</para>
+	/// </summary>
 	public IndexStateDescriptor<TDocument> Defaults(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? defaults)
 	{
 		DefaultsDescriptor = null;
@@ -232,6 +239,9 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DataStreamName? DataStreamValue { get; set; }
 
+	/// <summary>
+	/// <para>Default settings, included when the request's `include_default` is `true`.</para>
+	/// </summary>
 	public IndexStateDescriptor Defaults(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? defaults)
 	{
 		DefaultsDescriptor = null;

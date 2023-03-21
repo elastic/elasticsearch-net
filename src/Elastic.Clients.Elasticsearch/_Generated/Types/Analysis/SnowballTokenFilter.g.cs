@@ -32,8 +32,7 @@ public sealed partial class SnowballTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("language")]
 	public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "snowball";
 
 	[JsonInclude, JsonPropertyName("version")]

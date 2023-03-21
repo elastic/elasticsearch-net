@@ -165,7 +165,7 @@ public sealed partial class VariableWidthHistogramAggregation : SearchAggregatio
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public int? InitialBuffer { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public int? ShardSize { get; set; }
 }
 

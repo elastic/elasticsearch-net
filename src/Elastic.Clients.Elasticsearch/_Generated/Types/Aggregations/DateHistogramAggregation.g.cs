@@ -312,7 +312,7 @@ public sealed partial class DateHistogramAggregation : SearchAggregation
 	public IDictionary<string, object>? Meta { get; set; }
 	public int? MinDocCount { get; set; }
 	public DateTimeOffset? Missing { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
 	[JsonConverter(typeof(AggregateOrderConverter))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }

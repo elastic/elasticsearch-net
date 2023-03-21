@@ -34,8 +34,7 @@ public sealed partial class MappingCharFilter : ICharFilter
 	[JsonInclude, JsonPropertyName("mappings_path")]
 	public string? MappingsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "mapping";
 
 	[JsonInclude, JsonPropertyName("version")]

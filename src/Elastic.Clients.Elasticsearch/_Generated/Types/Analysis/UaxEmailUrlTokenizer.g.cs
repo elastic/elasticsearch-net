@@ -32,8 +32,7 @@ public sealed partial class UaxEmailUrlTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("max_token_length")]
 	public int? MaxTokenLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "uax_url_email";
 
 	[JsonInclude, JsonPropertyName("version")]

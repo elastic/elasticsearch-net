@@ -34,8 +34,7 @@ public sealed partial class CustomNormalizer : INormalizer
 	[JsonInclude, JsonPropertyName("filter")]
 	public ICollection<string>? Filter { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "custom";
 }
 

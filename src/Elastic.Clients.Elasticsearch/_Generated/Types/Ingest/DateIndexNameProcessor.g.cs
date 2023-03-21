@@ -31,6 +31,10 @@ public sealed partial class DateIndexNameProcessor
 {
 	[JsonInclude, JsonPropertyName("date_formats")]
 	public ICollection<string> DateFormats { get; set; }
+
+	/// <summary>
+	/// <para>How to round the date when formatting the date into the index name. Valid values are:<br/>`y` (year), `M` (month), `w` (week), `d` (day), `h` (hour), `m` (minute) and `s` (second).<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("date_rounding")]
 	public string DateRounding { get; set; }
 	[JsonInclude, JsonPropertyName("description")]
@@ -123,6 +127,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How to round the date when formatting the date into the index name. Valid values are:<br/>`y` (year), `M` (month), `w` (week), `d` (day), `h` (hour), `m` (minute) and `s` (second).<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> DateRounding(string dateRounding)
 	{
 		DateRoundingValue = dateRounding;
@@ -347,6 +354,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How to round the date when formatting the date into the index name. Valid values are:<br/>`y` (year), `M` (month), `w` (week), `d` (day), `h` (hour), `m` (minute) and `s` (second).<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor DateRounding(string dateRounding)
 	{
 		DateRoundingValue = dateRounding;

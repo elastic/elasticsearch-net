@@ -32,8 +32,7 @@ public sealed partial class WhitespaceTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("max_token_length")]
 	public int? MaxTokenLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "whitespace";
 
 	[JsonInclude, JsonPropertyName("version")]

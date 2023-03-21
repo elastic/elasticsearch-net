@@ -42,8 +42,7 @@ public sealed partial class PhoneticTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("rule_type")]
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType RuleType { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "phonetic";
 
 	[JsonInclude, JsonPropertyName("version")]

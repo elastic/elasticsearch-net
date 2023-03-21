@@ -77,8 +77,16 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
 	[JsonIgnore]
 	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
+
+	/// <summary>
+	/// <para>Allows to filter indices if the provided query rewrites to match_none on every shard.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
+
+	/// <summary>
+	/// <para>Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.<br/>These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
@@ -116,6 +124,9 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	private Action<QueryDsl.QueryDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
+	/// <summary>
+	/// <para>Allows to filter indices if the provided query rewrites to match_none on every shard.</para>
+	/// </summary>
 	public FieldCapsRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
 	{
 		IndexFilterDescriptor = null;
@@ -140,6 +151,9 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.<br/>These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.</para>
+	/// </summary>
 	public FieldCapsRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 	{
 		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
@@ -208,6 +222,9 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 	private Action<QueryDsl.QueryDescriptor> IndexFilterDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 
+	/// <summary>
+	/// <para>Allows to filter indices if the provided query rewrites to match_none on every shard.</para>
+	/// </summary>
 	public FieldCapsRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
 	{
 		IndexFilterDescriptor = null;
@@ -232,6 +249,9 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.<br/>These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.</para>
+	/// </summary>
 	public FieldCapsRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 	{
 		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());

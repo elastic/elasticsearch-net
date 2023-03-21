@@ -32,8 +32,15 @@ namespace Elastic.Clients.Elasticsearch.Ml;
 /// </summary>
 public sealed partial class TextEmbeddingInferenceOptions
 {
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>The tokenization options</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
@@ -53,12 +60,18 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public TextEmbeddingInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The tokenization options</para>
+	/// </summary>
 	public TextEmbeddingInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
 	{
 		TokenizationDescriptor = null;

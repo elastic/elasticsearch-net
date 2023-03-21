@@ -38,8 +38,7 @@ public sealed partial class HunspellTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("longest_only")]
 	public bool? LongestOnly { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "hunspell";
 
 	[JsonInclude, JsonPropertyName("version")]

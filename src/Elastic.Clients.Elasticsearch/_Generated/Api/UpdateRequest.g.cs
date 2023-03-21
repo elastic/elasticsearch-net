@@ -89,19 +89,47 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	/// <summary>
+	/// <para>Set to false to disable setting 'result' in the response<br/>to 'noop' if no change to the document occurred.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("detect_noop")]
 	public bool? DetectNoop { get; set; }
+
+	/// <summary>
+	/// <para>A partial update to an existing document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("doc")]
 	[SourceConverter]
 	public TPartialDocument? Doc { get; set; }
+
+	/// <summary>
+	/// <para>Set to true to use the contents of 'doc' as the value of 'upsert'</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("doc_as_upsert")]
 	public bool? DocAsUpsert { get; set; }
+
+	/// <summary>
+	/// <para>Script to execute to update the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	/// <summary>
+	/// <para>Set to true to execute the script whether or not the document exists.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("scripted_upsert")]
 	public bool? ScriptedUpsert { get; set; }
+
+	/// <summary>
+	/// <para>Set to false to disable source retrieval. You can also specify a comma-separated<br/>list of the fields you want to retrieve.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
+
+	/// <summary>
+	/// <para>If the document does not already exist, the contents of 'upsert' are inserted as a<br/>new document. If the document exists, the 'script' is executed.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("upsert")]
 	[SourceConverter]
 	public TDocument? Upsert { get; set; }
@@ -177,42 +205,63 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	private bool? ScriptedUpsertValue { get; set; }
 	private TDocument? UpsertValue { get; set; }
 
+	/// <summary>
+	/// <para>Set to false to disable source retrieval. You can also specify a comma-separated<br/>list of the fields you want to retrieve.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to false to disable setting 'result' in the response<br/>to 'noop' if no change to the document occurred.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> DetectNoop(bool? detectNoop = true)
 	{
 		DetectNoopValue = detectNoop;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A partial update to an existing document.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument? doc)
 	{
 		DocValue = doc;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to true to use the contents of 'doc' as the value of 'upsert'</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true)
 	{
 		DocAsUpsertValue = docAsUpsert;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Script to execute to update the document.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptValue = script;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to true to execute the script whether or not the document exists.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true)
 	{
 		ScriptedUpsertValue = scriptedUpsert;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If the document does not already exist, the contents of 'upsert' are inserted as a<br/>new document. If the document exists, the 'script' is executed.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Upsert(TDocument? upsert)
 	{
 		UpsertValue = upsert;

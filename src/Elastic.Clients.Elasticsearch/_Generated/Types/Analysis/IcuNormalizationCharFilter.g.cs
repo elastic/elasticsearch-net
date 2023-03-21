@@ -34,8 +34,7 @@ public sealed partial class IcuNormalizationCharFilter : ICharFilter
 	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? Name { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_normalizer";
 
 	[JsonInclude, JsonPropertyName("version")]

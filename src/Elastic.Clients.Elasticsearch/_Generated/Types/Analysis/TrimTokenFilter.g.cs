@@ -29,8 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class TrimTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "trim";
 
 	[JsonInclude, JsonPropertyName("version")]

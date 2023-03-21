@@ -32,8 +32,7 @@ public sealed partial class PredicateTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "predicate_token_filter";
 
 	[JsonInclude, JsonPropertyName("version")]

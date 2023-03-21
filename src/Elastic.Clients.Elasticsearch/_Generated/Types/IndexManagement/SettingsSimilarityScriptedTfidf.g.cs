@@ -32,8 +32,7 @@ public sealed partial class SettingsSimilarityScriptedTfidf
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "scripted";
 }
 

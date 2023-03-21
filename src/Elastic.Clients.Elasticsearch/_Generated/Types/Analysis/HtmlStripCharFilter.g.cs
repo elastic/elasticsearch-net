@@ -29,8 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class HtmlStripCharFilter : ICharFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "html_strip";
 
 	[JsonInclude, JsonPropertyName("version")]

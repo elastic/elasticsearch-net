@@ -163,7 +163,7 @@ public sealed partial class CompositeAggregation : SearchAggregation
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? After { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public int? Size { get; set; }
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 }

@@ -48,8 +48,7 @@ public sealed partial class DenseVectorProperty : IProperty
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "dense_vector";
 }
 

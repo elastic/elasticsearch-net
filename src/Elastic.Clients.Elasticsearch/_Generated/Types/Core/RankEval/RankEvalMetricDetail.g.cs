@@ -29,12 +29,27 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
 public sealed partial class RankEvalMetricDetail
 {
+	/// <summary>
+	/// <para>The hits section shows a grouping of the search results with their supplied ratings</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("hits")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> Hits { get; init; }
+
+	/// <summary>
+	/// <para>The metric_details give additional information about the calculated quality metric (e.g. how many of the retrieved documents were relevant). The content varies for each metric but allows for better interpretation of the results</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("metric_details")]
 	public IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>> MetricDetails { get; init; }
+
+	/// <summary>
+	/// <para>The metric_score in the details section shows the contribution of this query to the global quality metric score</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("metric_score")]
 	public double MetricScore { get; init; }
+
+	/// <summary>
+	/// <para>The unrated_docs section contains an _index and _id entry for each document in the search result for this query that didn’t have a ratings value. This can be used to ask the user to supply ratings for these documents</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("unrated_docs")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> UnratedDocs { get; init; }
 }

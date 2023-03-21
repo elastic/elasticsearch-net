@@ -50,8 +50,7 @@ public sealed partial class IcuCollationTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("strength")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? Strength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_collation";
 
 	[JsonInclude, JsonPropertyName("variableTop")]

@@ -165,7 +165,7 @@ public sealed partial class StringStatsAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public FieldValue? Missing { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	public bool? ShowDistribution { get; set; }
 }

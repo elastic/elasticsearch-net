@@ -64,8 +64,7 @@ public sealed partial class DateProperty : IProperty
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "date";
 }
 

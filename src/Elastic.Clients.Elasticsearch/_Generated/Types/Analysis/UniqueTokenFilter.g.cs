@@ -32,8 +32,7 @@ public sealed partial class UniqueTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("only_on_same_position")]
 	public bool? OnlyOnSamePosition { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "unique";
 
 	[JsonInclude, JsonPropertyName("version")]

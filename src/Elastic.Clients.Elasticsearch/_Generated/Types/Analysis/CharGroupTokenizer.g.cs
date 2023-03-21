@@ -34,8 +34,7 @@ public sealed partial class CharGroupTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("tokenize_on_chars")]
 	public ICollection<string> TokenizeOnChars { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "char_group";
 
 	[JsonInclude, JsonPropertyName("version")]

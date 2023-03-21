@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class MappingLimitSettingsNestedObjects
 {
+	/// <summary>
+	/// <para>The maximum number of nested JSON objects that a single document can contain across all nested types. This limit helps<br/>to prevent out of memory errors when a document contains too many nested objects.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public int? Limit { get; set; }
 }
@@ -43,6 +46,9 @@ public sealed partial class MappingLimitSettingsNestedObjectsDescriptor : Serial
 
 	private int? LimitValue { get; set; }
 
+	/// <summary>
+	/// <para>The maximum number of nested JSON objects that a single document can contain across all nested types. This limit helps<br/>to prevent out of memory errors when a document contains too many nested objects.</para>
+	/// </summary>
 	public MappingLimitSettingsNestedObjectsDescriptor Limit(int? limit)
 	{
 		LimitValue = limit;

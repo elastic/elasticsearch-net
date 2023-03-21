@@ -36,8 +36,7 @@ public sealed partial class PatternReplaceCharFilter : ICharFilter
 	[JsonInclude, JsonPropertyName("replacement")]
 	public string? Replacement { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "pattern_replace";
 
 	[JsonInclude, JsonPropertyName("version")]

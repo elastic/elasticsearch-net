@@ -42,8 +42,7 @@ public sealed partial class ShingleTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("token_separator")]
 	public string? TokenSeparator { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "shingle";
 
 	[JsonInclude, JsonPropertyName("version")]

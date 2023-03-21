@@ -29,8 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class KuromojiReadingFormTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kuromoji_readingform";
 
 	[JsonInclude, JsonPropertyName("use_romaji")]

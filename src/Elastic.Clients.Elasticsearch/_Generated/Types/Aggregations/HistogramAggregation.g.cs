@@ -257,7 +257,7 @@ public sealed partial class HistogramAggregation : SearchAggregation
 	public IDictionary<string, object>? Meta { get; set; }
 	public int? MinDocCount { get; set; }
 	public double? Missing { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public double? Offset { get; set; }
 	[JsonConverter(typeof(AggregateOrderConverter))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }

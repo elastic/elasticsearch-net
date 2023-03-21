@@ -39,8 +39,7 @@ public sealed partial class PatternAnalyzer : IAnalyzer
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "pattern";
 
 	[JsonInclude, JsonPropertyName("version")]

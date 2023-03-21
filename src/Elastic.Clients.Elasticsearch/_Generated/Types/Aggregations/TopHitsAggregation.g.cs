@@ -368,7 +368,7 @@ public sealed partial class TopHitsAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public FieldValue? Missing { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 	public bool? SeqNoPrimaryTerm { get; set; }

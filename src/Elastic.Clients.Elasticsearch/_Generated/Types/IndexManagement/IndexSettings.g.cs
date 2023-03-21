@@ -754,6 +754,10 @@ internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettin
 public sealed partial class IndexSettings
 {
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? Analysis { get; set; }
+
+	/// <summary>
+	/// <para>Settings to define analyzers, tokenizers, token filters and character filters.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? Analyze { get; set; }
 	public string? AutoExpandReplicas { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? Blocks { get; set; }
@@ -769,10 +773,18 @@ public sealed partial class IndexSettings
 	public Union<bool?, string?>? Hidden { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight? Highlight { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Index { get; set; }
+
+	/// <summary>
+	/// <para>Configure indexing back pressure limits.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? IndexingPressure { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? IndexingSlowlog { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? Lifecycle { get; set; }
 	public bool? LoadFixedBitsetFiltersEagerly { get; set; }
+
+	/// <summary>
+	/// <para>Enable or disable dynamic mapping for an index.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? Mapping { get; set; }
 	public int? MaxDocvalueFieldsSearch { get; set; }
 	public int? MaxInnerResultWindow { get; set; }
@@ -802,9 +814,17 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? Search { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 	public int? Shards { get; set; }
+
+	/// <summary>
+	/// <para>Configure custom similarity settings to customize how search results are scored.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? Similarity { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletes { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? Sort { get; set; }
+
+	/// <summary>
+	/// <para>The store module allows you to control how index data is stored and accessed on disk.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.Storage? Store { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeries { get; set; }
 	public int? TopMetricsMaxSize { get; set; }
@@ -1021,6 +1041,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Settings to define analyzers, tokenizers, token filters and character filters.</para>
+	/// </summary>
 	public IndexSettingsDescriptor<TDocument> Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? analyze)
 	{
 		AnalyzeDescriptor = null;
@@ -1153,6 +1176,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configure indexing back pressure limits.</para>
+	/// </summary>
 	public IndexSettingsDescriptor<TDocument> IndexingPressure(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? indexingPressure)
 	{
 		IndexingPressureDescriptor = null;
@@ -1231,6 +1257,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Enable or disable dynamic mapping for an index.</para>
+	/// </summary>
 	public IndexSettingsDescriptor<TDocument> Mapping(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? mapping)
 	{
 		MappingDescriptor = null;
@@ -1507,6 +1536,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configure custom similarity settings to customize how search results are scored.</para>
+	/// </summary>
 	public IndexSettingsDescriptor<TDocument> Similarity(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? similarity)
 	{
 		SimilarityDescriptor = null;
@@ -1555,6 +1587,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The store module allows you to control how index data is stored and accessed on disk.</para>
+	/// </summary>
 	public IndexSettingsDescriptor<TDocument> Store(Elastic.Clients.Elasticsearch.IndexManagement.Storage? store)
 	{
 		StoreDescriptor = null;
@@ -2454,6 +2489,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Settings to define analyzers, tokenizers, token filters and character filters.</para>
+	/// </summary>
 	public IndexSettingsDescriptor Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? analyze)
 	{
 		AnalyzeDescriptor = null;
@@ -2586,6 +2624,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configure indexing back pressure limits.</para>
+	/// </summary>
 	public IndexSettingsDescriptor IndexingPressure(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? indexingPressure)
 	{
 		IndexingPressureDescriptor = null;
@@ -2664,6 +2705,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Enable or disable dynamic mapping for an index.</para>
+	/// </summary>
 	public IndexSettingsDescriptor Mapping(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? mapping)
 	{
 		MappingDescriptor = null;
@@ -2940,6 +2984,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configure custom similarity settings to customize how search results are scored.</para>
+	/// </summary>
 	public IndexSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? similarity)
 	{
 		SimilarityDescriptor = null;
@@ -2988,6 +3035,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The store module allows you to control how index data is stored and accessed on disk.</para>
+	/// </summary>
 	public IndexSettingsDescriptor Store(Elastic.Clients.Elasticsearch.IndexManagement.Storage? store)
 	{
 		StoreDescriptor = null;

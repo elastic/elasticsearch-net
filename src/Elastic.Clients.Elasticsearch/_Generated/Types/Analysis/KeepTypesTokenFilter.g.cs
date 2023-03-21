@@ -32,8 +32,7 @@ public sealed partial class KeepTypesTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? Mode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keep_types";
 
 	[JsonInclude, JsonPropertyName("types")]

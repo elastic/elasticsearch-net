@@ -60,8 +60,7 @@ public sealed partial class DateNanosProperty : IProperty
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "date_nanos";
 }
 

@@ -109,7 +109,7 @@ public sealed partial class GlobalAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 }
 
 public sealed partial class GlobalAggregationDescriptor<TDocument> : SerializableDescriptor<GlobalAggregationDescriptor<TDocument>>

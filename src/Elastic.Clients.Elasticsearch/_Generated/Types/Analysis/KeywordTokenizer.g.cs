@@ -32,8 +32,7 @@ public sealed partial class KeywordTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("buffer_size")]
 	public int BufferSize { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keyword";
 
 	[JsonInclude, JsonPropertyName("version")]

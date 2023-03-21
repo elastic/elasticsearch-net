@@ -29,16 +29,39 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class KnnQuery
 {
+	/// <summary>
+	/// <para>Boost value to apply to kNN scores</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>The name of the vector field to search against</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Filters for the kNN search query</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filter"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
+
+	/// <summary>
+	/// <para>The final number of nearest neighbors to return as top hits</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("k")]
 	public long k { get; set; }
+
+	/// <summary>
+	/// <para>The number of nearest neighbor candidates to consider per shard</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_candidates")]
 	public long NumCandidates { get; set; }
+
+	/// <summary>
+	/// <para>The query vector</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query_vector")]
 	public ICollection<double> QueryVector { get; set; }
 }
@@ -61,6 +84,9 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	private long NumCandidatesValue { get; set; }
 	private ICollection<double> QueryVectorValue { get; set; }
 
+	/// <summary>
+	/// <para>Filters for the kNN search query</para>
+	/// </summary>
 	public KnnQueryDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
 		FilterDescriptor = null;
@@ -97,36 +123,54 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Boost value to apply to kNN scores</para>
+	/// </summary>
 	public KnnQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the vector field to search against</para>
+	/// </summary>
 	public KnnQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the vector field to search against</para>
+	/// </summary>
 	public KnnQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The final number of nearest neighbors to return as top hits</para>
+	/// </summary>
 	public KnnQueryDescriptor<TDocument> k(long k)
 	{
 		kValue = k;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of nearest neighbor candidates to consider per shard</para>
+	/// </summary>
 	public KnnQueryDescriptor<TDocument> NumCandidates(long numCandidates)
 	{
 		NumCandidatesValue = numCandidates;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The query vector</para>
+	/// </summary>
 	public KnnQueryDescriptor<TDocument> QueryVector(ICollection<double> queryVector)
 	{
 		QueryVectorValue = queryVector;
@@ -201,6 +245,9 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	private long NumCandidatesValue { get; set; }
 	private ICollection<double> QueryVectorValue { get; set; }
 
+	/// <summary>
+	/// <para>Filters for the kNN search query</para>
+	/// </summary>
 	public KnnQueryDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
 		FilterDescriptor = null;
@@ -237,42 +284,63 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Boost value to apply to kNN scores</para>
+	/// </summary>
 	public KnnQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the vector field to search against</para>
+	/// </summary>
 	public KnnQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the vector field to search against</para>
+	/// </summary>
 	public KnnQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the vector field to search against</para>
+	/// </summary>
 	public KnnQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The final number of nearest neighbors to return as top hits</para>
+	/// </summary>
 	public KnnQueryDescriptor k(long k)
 	{
 		kValue = k;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of nearest neighbor candidates to consider per shard</para>
+	/// </summary>
 	public KnnQueryDescriptor NumCandidates(long numCandidates)
 	{
 		NumCandidatesValue = numCandidates;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The query vector</para>
+	/// </summary>
 	public KnnQueryDescriptor QueryVector(ICollection<double> queryVector)
 	{
 		QueryVectorValue = queryVector;

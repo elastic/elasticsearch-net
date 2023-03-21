@@ -32,6 +32,9 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 /// </summary>
 public sealed partial class RankEvalMetricPrecision
 {
+	/// <summary>
+	/// <para>Controls how unlabeled documents in the search results are counted. If set to true, unlabeled documents are ignored and neither count as relevant or irrelevant. Set to false (the default), they are treated as irrelevant.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_unlabeled")]
 	public bool? IgnoreUnlabeled { get; set; }
 	[JsonInclude, JsonPropertyName("k")]
@@ -52,6 +55,9 @@ public sealed partial class RankEvalMetricPrecisionDescriptor : SerializableDesc
 	private int? kValue { get; set; }
 	private int? RelevantRatingThresholdValue { get; set; }
 
+	/// <summary>
+	/// <para>Controls how unlabeled documents in the search results are counted. If set to true, unlabeled documents are ignored and neither count as relevant or irrelevant. Set to false (the default), they are treated as irrelevant.</para>
+	/// </summary>
 	public RankEvalMetricPrecisionDescriptor IgnoreUnlabeled(bool? ignoreUnlabeled = true)
 	{
 		IgnoreUnlabeledValue = ignoreUnlabeled;

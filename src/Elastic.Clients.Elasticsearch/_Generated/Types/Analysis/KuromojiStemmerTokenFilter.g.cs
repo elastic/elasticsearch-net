@@ -32,8 +32,7 @@ public sealed partial class KuromojiStemmerTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("minimum_length")]
 	public int MinimumLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kuromoji_stemmer";
 
 	[JsonInclude, JsonPropertyName("version")]

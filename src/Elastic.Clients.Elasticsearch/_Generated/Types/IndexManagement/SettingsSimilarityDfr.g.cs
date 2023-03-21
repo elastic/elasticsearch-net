@@ -36,8 +36,7 @@ public sealed partial class SettingsSimilarityDfr
 	[JsonInclude, JsonPropertyName("normalization")]
 	public Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "DFR";
 }
 

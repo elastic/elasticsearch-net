@@ -27,16 +27,39 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 
 public sealed partial class EqlGetResponse<TEvent> : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>Contains matching events and sequences. Also contains related metadata.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("hits")]
 	public Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> Hits { get; init; }
+
+	/// <summary>
+	/// <para>Identifier for the search.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public string? Id { get; init; }
+
+	/// <summary>
+	/// <para>If true, the response does not contain complete search results.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("is_partial")]
 	public bool? IsPartial { get; init; }
+
+	/// <summary>
+	/// <para>If true, the search request is still executing.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("is_running")]
 	public bool? IsRunning { get; init; }
+
+	/// <summary>
+	/// <para>If true, the request timed out before completion.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("timed_out")]
 	public bool? TimedOut { get; init; }
+
+	/// <summary>
+	/// <para>Milliseconds it took Elasticsearch to execute the request.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("took")]
 	public long? Took { get; init; }
 }

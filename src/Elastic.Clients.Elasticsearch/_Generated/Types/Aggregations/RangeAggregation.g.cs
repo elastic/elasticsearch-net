@@ -201,7 +201,7 @@ public sealed partial class RangeAggregation : SearchAggregation
 	public string? Format { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public int? Missing { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }

@@ -36,8 +36,7 @@ public sealed partial class ElisionTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("articles_path")]
 	public string? ArticlesPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "elision";
 
 	[JsonInclude, JsonPropertyName("version")]

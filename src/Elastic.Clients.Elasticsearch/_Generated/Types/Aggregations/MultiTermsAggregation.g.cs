@@ -250,7 +250,7 @@ public sealed partial class MultiTermsAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public long? MinDocCount { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	[JsonConverter(typeof(AggregateOrderConverter))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 	public long? ShardMinDocCount { get; set; }

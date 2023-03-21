@@ -39,8 +39,7 @@ public sealed partial class StopTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "stop";
 
 	[JsonInclude, JsonPropertyName("version")]

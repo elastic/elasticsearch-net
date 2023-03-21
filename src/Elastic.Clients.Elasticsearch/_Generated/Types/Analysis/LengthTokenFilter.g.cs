@@ -34,8 +34,7 @@ public sealed partial class LengthTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("min")]
 	public int? Min { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "length";
 
 	[JsonInclude, JsonPropertyName("version")]

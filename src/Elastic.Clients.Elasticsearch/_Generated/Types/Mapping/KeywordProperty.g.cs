@@ -63,11 +63,14 @@ public sealed partial class KeywordProperty : IProperty
 	public bool? SplitQueriesOnWhitespace { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keyword";
 }
 
@@ -228,6 +231,9 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public KeywordPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
 		TimeSeriesDimensionValue = timeSeriesDimension;
@@ -530,6 +536,9 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public KeywordPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
 		TimeSeriesDimensionValue = timeSeriesDimension;

@@ -29,14 +29,33 @@ namespace Elastic.Clients.Elasticsearch.Core.MGet;
 
 public sealed partial class MultiGetOperation
 {
+	/// <summary>
+	/// <para>The unique document ID.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+	/// <summary>
+	/// <para>The index that contains the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
+
+	/// <summary>
+	/// <para>If `false`, excludes all _source fields.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
+
+	/// <summary>
+	/// <para>The key for the primary shard the document resides on. Required if routing is used during indexing.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+
+	/// <summary>
+	/// <para>The stored fields you want to retrieve.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("stored_fields")]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 	[JsonInclude, JsonPropertyName("version")]
@@ -61,30 +80,45 @@ public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
+	/// <summary>
+	/// <para>The unique document ID.</para>
+	/// </summary>
 	public MultiGetOperationDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		IdValue = id;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The index that contains the document.</para>
+	/// </summary>
 	public MultiGetOperationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		IndexValue = index;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `false`, excludes all _source fields.</para>
+	/// </summary>
 	public MultiGetOperationDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The key for the primary shard the document resides on. Required if routing is used during indexing.</para>
+	/// </summary>
 	public MultiGetOperationDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
 	{
 		RoutingValue = routing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The stored fields you want to retrieve.</para>
+	/// </summary>
 	public MultiGetOperationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 	{
 		StoredFieldsValue = storedFields;

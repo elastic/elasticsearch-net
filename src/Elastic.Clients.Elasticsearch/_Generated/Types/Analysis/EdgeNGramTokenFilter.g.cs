@@ -38,8 +38,7 @@ public sealed partial class EdgeNGramTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("side")]
 	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? Side { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "edge_ngram";
 
 	[JsonInclude, JsonPropertyName("version")]

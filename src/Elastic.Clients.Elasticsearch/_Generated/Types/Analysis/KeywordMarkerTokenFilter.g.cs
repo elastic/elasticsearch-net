@@ -38,8 +38,7 @@ public sealed partial class KeywordMarkerTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("keywords_pattern")]
 	public string? KeywordsPattern { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keyword_marker";
 
 	[JsonInclude, JsonPropertyName("version")]

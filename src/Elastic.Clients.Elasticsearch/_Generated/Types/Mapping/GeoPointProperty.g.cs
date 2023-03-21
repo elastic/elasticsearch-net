@@ -54,8 +54,7 @@ public sealed partial class GeoPointProperty : IProperty
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "geo_point";
 }
 

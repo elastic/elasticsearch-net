@@ -59,6 +59,10 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+
+	/// <summary>
+	/// <para>Mapping for fields in the index. If specified, this mapping can include:<br/>- Field names<br/>- Field data types<br/>- Mapping parameters</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 	[JsonInclude, JsonPropertyName("settings")]
@@ -105,6 +109,9 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
+	/// <summary>
+	/// <para>Mapping for fields in the index. If specified, this mapping can include:<br/>- Field names<br/>- Field data types<br/>- Mapping parameters</para>
+	/// </summary>
 	public CreateIndexRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 	{
 		MappingsDescriptor = null;
@@ -240,6 +247,9 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
+	/// <summary>
+	/// <para>Mapping for fields in the index. If specified, this mapping can include:<br/>- Field names<br/>- Field data types<br/>- Mapping parameters</para>
+	/// </summary>
 	public CreateIndexRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 	{
 		MappingsDescriptor = null;

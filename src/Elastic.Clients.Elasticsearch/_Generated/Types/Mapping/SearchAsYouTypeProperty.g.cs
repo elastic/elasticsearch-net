@@ -62,8 +62,7 @@ public sealed partial class SearchAsYouTypeProperty : IProperty
 	[JsonInclude, JsonPropertyName("term_vector")]
 	public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "search_as_you_type";
 }
 

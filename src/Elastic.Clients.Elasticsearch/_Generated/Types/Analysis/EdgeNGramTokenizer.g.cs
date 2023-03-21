@@ -38,8 +38,7 @@ public sealed partial class EdgeNGramTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("token_chars")]
 	public ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "edge_ngram";
 
 	[JsonInclude, JsonPropertyName("version")]

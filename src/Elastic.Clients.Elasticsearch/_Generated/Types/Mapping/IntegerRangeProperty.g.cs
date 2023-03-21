@@ -54,8 +54,7 @@ public sealed partial class IntegerRangeProperty : IProperty
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "integer_range";
 }
 

@@ -36,8 +36,7 @@ public sealed partial class SettingsSimilarityBm25
 	[JsonInclude, JsonPropertyName("k1")]
 	public double K1 { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "BM25";
 }
 

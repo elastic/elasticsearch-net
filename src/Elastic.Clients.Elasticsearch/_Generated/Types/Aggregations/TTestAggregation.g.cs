@@ -146,7 +146,7 @@ public sealed partial class TTestAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 }
 

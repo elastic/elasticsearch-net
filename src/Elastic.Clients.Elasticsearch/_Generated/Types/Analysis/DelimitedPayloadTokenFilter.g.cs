@@ -34,8 +34,7 @@ public sealed partial class DelimitedPayloadTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("encoding")]
 	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? Encoding { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "delimited_payload";
 
 	[JsonInclude, JsonPropertyName("version")]

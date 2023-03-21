@@ -40,8 +40,7 @@ public sealed partial class PathHierarchyTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("skip")]
 	public int Skip { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "path_hierarchy";
 
 	[JsonInclude, JsonPropertyName("version")]

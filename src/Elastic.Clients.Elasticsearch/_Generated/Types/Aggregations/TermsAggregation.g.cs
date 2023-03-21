@@ -406,7 +406,7 @@ public sealed partial class TermsAggregation : SearchAggregation
 	public FieldValue? Missing { get; set; }
 	public bool? MissingBucket { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	[JsonConverter(typeof(AggregateOrderConverter))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }

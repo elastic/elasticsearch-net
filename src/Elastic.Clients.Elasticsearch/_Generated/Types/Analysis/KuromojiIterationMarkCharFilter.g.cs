@@ -34,8 +34,7 @@ public sealed partial class KuromojiIterationMarkCharFilter : ICharFilter
 	[JsonInclude, JsonPropertyName("normalize_kanji")]
 	public bool NormalizeKanji { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kuromoji_iteration_mark";
 
 	[JsonInclude, JsonPropertyName("version")]

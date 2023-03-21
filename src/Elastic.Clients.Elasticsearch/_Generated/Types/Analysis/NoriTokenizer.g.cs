@@ -34,8 +34,7 @@ public sealed partial class NoriTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("discard_punctuation")]
 	public bool? DiscardPunctuation { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "nori_tokenizer";
 
 	[JsonInclude, JsonPropertyName("user_dictionary")]

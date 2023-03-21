@@ -32,8 +32,7 @@ public sealed partial class SettingsSimilarityDfi
 	[JsonInclude, JsonPropertyName("independence_measure")]
 	public Elastic.Clients.Elasticsearch.DFIIndependenceMeasure IndependenceMeasure { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "DFI";
 }
 

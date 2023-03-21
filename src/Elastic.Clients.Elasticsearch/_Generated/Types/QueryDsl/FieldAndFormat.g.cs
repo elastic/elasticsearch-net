@@ -32,8 +32,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 /// </summary>
 public sealed partial class FieldAndFormat
 {
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Format in which the values are returned.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 	[JsonInclude, JsonPropertyName("include_unmapped")]
@@ -52,18 +59,27 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 	private string? FormatValue { get; set; }
 	private bool? IncludeUnmappedValue { get; set; }
 
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Format in which the values are returned.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
@@ -109,24 +125,36 @@ public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<Fi
 	private string? FormatValue { get; set; }
 	private bool? IncludeUnmappedValue { get; set; }
 
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Format in which the values are returned.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor Format(string? format)
 	{
 		FormatValue = format;

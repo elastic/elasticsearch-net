@@ -45,8 +45,16 @@ public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters
 
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+	/// <summary>
+	/// <para>Period to retain the search context for scrolling.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("scroll")]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get; set; }
+
+	/// <summary>
+	/// <para>Scroll ID of the search.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("scroll_id")]
 	public Elastic.Clients.Elasticsearch.ScrollId ScrollId { get; set; }
 }
@@ -70,12 +78,18 @@ public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRe
 	private Elastic.Clients.Elasticsearch.Duration? ScrollValue { get; set; }
 	private Elastic.Clients.Elasticsearch.ScrollId ScrollIdValue { get; set; }
 
+	/// <summary>
+	/// <para>Period to retain the search context for scrolling.</para>
+	/// </summary>
 	public ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll)
 	{
 		ScrollValue = scroll;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Scroll ID of the search.</para>
+	/// </summary>
 	public ScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollId scrollId)
 	{
 		ScrollIdValue = scrollId;

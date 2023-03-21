@@ -42,8 +42,7 @@ public sealed partial class SynonymTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("tokenizer")]
 	public string? Tokenizer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "synonym";
 
 	[JsonInclude, JsonPropertyName("updateable")]

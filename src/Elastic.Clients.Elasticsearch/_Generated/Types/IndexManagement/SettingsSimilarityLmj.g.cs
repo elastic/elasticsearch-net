@@ -32,8 +32,7 @@ public sealed partial class SettingsSimilarityLmj
 	[JsonInclude, JsonPropertyName("lambda")]
 	public double Lambda { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "LMJelinekMercer";
 }
 

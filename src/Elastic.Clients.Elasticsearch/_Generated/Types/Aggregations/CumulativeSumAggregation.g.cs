@@ -128,7 +128,7 @@ public sealed partial class CumulativeSumAggregation : SearchAggregation
 	public string? Format { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 }
 
 public sealed partial class CumulativeSumAggregationDescriptor : SerializableDescriptor<CumulativeSumAggregationDescriptor>

@@ -34,8 +34,7 @@ public sealed partial class FingerprintTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "fingerprint";
 
 	[JsonInclude, JsonPropertyName("version")]

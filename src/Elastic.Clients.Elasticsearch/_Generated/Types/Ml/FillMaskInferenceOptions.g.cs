@@ -32,10 +32,21 @@ namespace Elastic.Clients.Elasticsearch.Ml;
 /// </summary>
 public sealed partial class FillMaskInferenceOptions
 {
+	/// <summary>
+	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
+
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>The tokenization options to update when inferring</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
@@ -56,18 +67,27 @@ public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDes
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// </summary>
 	public FillMaskInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)
 	{
 		NumTopClassesValue = numTopClasses;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public FillMaskInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The tokenization options to update when inferring</para>
+	/// </summary>
 	public FillMaskInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
 	{
 		TokenizationDescriptor = null;

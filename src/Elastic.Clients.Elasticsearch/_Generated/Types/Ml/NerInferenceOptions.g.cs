@@ -32,10 +32,21 @@ namespace Elastic.Clients.Elasticsearch.Ml;
 /// </summary>
 public sealed partial class NerInferenceOptions
 {
+	/// <summary>
+	/// <para>The token classification labels. Must be IOB formatted tags</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("classification_labels")]
 	public ICollection<string>? ClassificationLabels { get; set; }
+
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>The tokenization options</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
@@ -56,18 +67,27 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>The token classification labels. Must be IOB formatted tags</para>
+	/// </summary>
 	public NerInferenceOptionsDescriptor ClassificationLabels(ICollection<string>? classificationLabels)
 	{
 		ClassificationLabelsValue = classificationLabels;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public NerInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The tokenization options</para>
+	/// </summary>
 	public NerInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
 	{
 		TokenizationDescriptor = null;

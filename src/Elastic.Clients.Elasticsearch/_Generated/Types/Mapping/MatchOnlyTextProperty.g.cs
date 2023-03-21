@@ -32,15 +32,25 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 /// </summary>
 public sealed partial class MatchOnlyTextProperty : IProperty
 {
+	/// <summary>
+	/// <para>Allows you to copy the values of multiple fields into a group<br/>field, which can then be queried as a single field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
+
+	/// <summary>
+	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "match_only_text";
 }
 
@@ -56,24 +66,36 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 
+	/// <summary>
+	/// <para>Allows you to copy the values of multiple fields into a group<br/>field, which can then be queried as a single field.</para>
+	/// </summary>
 	public MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
 		CopyToValue = copyTo;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
+	/// </summary>
 	public MatchOnlyTextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
 	{
 		FieldsValue = fields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
+	/// </summary>
 	public MatchOnlyTextPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
+	/// </summary>
 	public MatchOnlyTextPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
 	{
 		var descriptor = new PropertiesDescriptor<TDocument>();
@@ -82,6 +104,9 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public MatchOnlyTextPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -134,24 +159,36 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 
+	/// <summary>
+	/// <para>Allows you to copy the values of multiple fields into a group<br/>field, which can then be queried as a single field.</para>
+	/// </summary>
 	public MatchOnlyTextPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
 		CopyToValue = copyTo;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
+	/// </summary>
 	public MatchOnlyTextPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
 	{
 		FieldsValue = fields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
+	/// </summary>
 	public MatchOnlyTextPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
+	/// </summary>
 	public MatchOnlyTextPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
 	{
 		var descriptor = new PropertiesDescriptor<TDocument>();
@@ -160,6 +197,9 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public MatchOnlyTextPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());

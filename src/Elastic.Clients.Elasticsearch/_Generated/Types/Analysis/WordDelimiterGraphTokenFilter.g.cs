@@ -56,8 +56,7 @@ public sealed partial class WordDelimiterGraphTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("stem_english_possessive")]
 	public bool? StemEnglishPossessive { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "word_delimiter_graph";
 
 	[JsonInclude, JsonPropertyName("type_table")]

@@ -40,8 +40,7 @@ public sealed partial class CustomAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("tokenizer")]
 	public string Tokenizer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "custom";
 }
 

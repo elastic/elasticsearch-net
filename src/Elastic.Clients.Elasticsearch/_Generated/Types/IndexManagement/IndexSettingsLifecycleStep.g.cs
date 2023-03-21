@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class IndexSettingsLifecycleStep
 {
+	/// <summary>
+	/// <para>Time to wait for the cluster to resolve allocation issues during an ILM shrink action. Must be greater than 1h (1 hour).<br/>See Shard allocation for shrink.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("wait_time_threshold")]
 	public Elastic.Clients.Elasticsearch.Duration? WaitTimeThreshold { get; set; }
 }
@@ -43,6 +46,9 @@ public sealed partial class IndexSettingsLifecycleStepDescriptor : SerializableD
 
 	private Elastic.Clients.Elasticsearch.Duration? WaitTimeThresholdValue { get; set; }
 
+	/// <summary>
+	/// <para>Time to wait for the cluster to resolve allocation issues during an ILM shrink action. Must be greater than 1h (1 hour).<br/>See Shard allocation for shrink.</para>
+	/// </summary>
 	public IndexSettingsLifecycleStepDescriptor WaitTimeThreshold(Elastic.Clients.Elasticsearch.Duration? waitTimeThreshold)
 	{
 		WaitTimeThresholdValue = waitTimeThreshold;

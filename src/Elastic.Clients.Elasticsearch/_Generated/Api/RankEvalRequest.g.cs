@@ -65,8 +65,16 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	[JsonIgnore]
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
+
+	/// <summary>
+	/// <para>A set of typical search requests, together with their provided ratings.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("requests")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
+
+	/// <summary>
+	/// <para>Definition of the evaluation metric to calculate.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("metric")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? Metric { get; set; }
 }
@@ -104,6 +112,9 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 	private Core.RankEval.RankEvalMetricDescriptor MetricDescriptor { get; set; }
 	private Action<Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>A set of typical search requests, together with their provided ratings.</para>
+	/// </summary>
 	public RankEvalRequestDescriptor<TDocument> Requests(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests)
 	{
 		RequestsDescriptor = null;
@@ -140,6 +151,9 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Definition of the evaluation metric to calculate.</para>
+	/// </summary>
 	public RankEvalRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? metric)
 	{
 		MetricDescriptor = null;
@@ -251,6 +265,9 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 	private Core.RankEval.RankEvalMetricDescriptor MetricDescriptor { get; set; }
 	private Action<Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>A set of typical search requests, together with their provided ratings.</para>
+	/// </summary>
 	public RankEvalRequestDescriptor Requests(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests)
 	{
 		RequestsDescriptor = null;
@@ -287,6 +304,9 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Definition of the evaluation metric to calculate.</para>
+	/// </summary>
 	public RankEvalRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? metric)
 	{
 		MetricDescriptor = null;

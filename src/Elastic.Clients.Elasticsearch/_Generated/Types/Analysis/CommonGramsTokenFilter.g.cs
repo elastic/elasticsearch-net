@@ -38,8 +38,7 @@ public sealed partial class CommonGramsTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("query_mode")]
 	public bool? QueryMode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "common_grams";
 
 	[JsonInclude, JsonPropertyName("version")]

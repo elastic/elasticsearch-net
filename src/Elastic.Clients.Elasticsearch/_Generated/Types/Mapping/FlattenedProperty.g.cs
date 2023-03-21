@@ -58,8 +58,7 @@ public sealed partial class FlattenedProperty : IProperty
 	[JsonInclude, JsonPropertyName("split_queries_on_whitespace")]
 	public bool? SplitQueriesOnWhitespace { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "flattened";
 }
 

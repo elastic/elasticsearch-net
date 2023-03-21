@@ -34,8 +34,7 @@ public sealed partial class StemmerOverrideTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("rules_path")]
 	public string? RulesPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "stemmer_override";
 
 	[JsonInclude, JsonPropertyName("version")]

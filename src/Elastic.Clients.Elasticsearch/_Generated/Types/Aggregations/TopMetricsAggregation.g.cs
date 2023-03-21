@@ -202,7 +202,7 @@ public sealed partial class TopMetricsAggregation : SearchAggregation
 	public IDictionary<string, object>? Meta { get; set; }
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
 	public FieldValue? Missing { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	public int? Size { get; set; }
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }

@@ -41,8 +41,7 @@ public sealed partial class FingerprintAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "fingerprint";
 
 	[JsonInclude, JsonPropertyName("version")]

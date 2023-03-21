@@ -32,8 +32,7 @@ public sealed partial class NoriPartOfSpeechTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("stoptags")]
 	public ICollection<string>? Stoptags { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "nori_part_of_speech";
 
 	[JsonInclude, JsonPropertyName("version")]

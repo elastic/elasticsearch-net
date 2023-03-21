@@ -32,8 +32,7 @@ public sealed partial class KuromojiPartOfSpeechTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("stoptags")]
 	public ICollection<string> Stoptags { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kuromoji_part_of_speech";
 
 	[JsonInclude, JsonPropertyName("version")]

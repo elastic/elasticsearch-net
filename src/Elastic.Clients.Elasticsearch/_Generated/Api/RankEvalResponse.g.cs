@@ -27,10 +27,17 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class RankEvalResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>The details section contains one entry for every query in the original requests section, keyed by the search request id</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("details")]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> Details { get; init; }
 	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyDictionary<string, object> Failures { get; init; }
+
+	/// <summary>
+	/// <para>The overall evaluation quality calculated by the defined metric</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("metric_score")]
 	public double MetricScore { get; init; }
 }

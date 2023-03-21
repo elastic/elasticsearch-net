@@ -45,16 +45,39 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>The string to match at the start of indexed terms. If not provided, all terms in the field are considered.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>How many matching terms to return.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
+
+	/// <summary>
+	/// <para>The maximum length of time to spend collecting results. Defaults to "1s" (one second). If the timeout is exceeded the complete flag set to false in the response and the results may be partial or empty.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
+
+	/// <summary>
+	/// <para>When true the provided search string is matched against index terms without case sensitivity.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("case_insensitive")]
 	public bool? CaseInsensitive { get; set; }
+
+	/// <summary>
+	/// <para>Allows to filter an index shard if the provided query rewrites to match_none.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
+
+	/// <summary>
+	/// <para>The string after which terms in the index should be returned. Allows for a form of pagination if the last result from one request is passed as the search_after parameter for a subsequent request.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("string")]
 	public string? String { get; set; }
 	[JsonInclude, JsonPropertyName("search_after")]
@@ -99,6 +122,9 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	private string? StringValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
+	/// <summary>
+	/// <para>Allows to filter an index shard if the provided query rewrites to match_none.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
 	{
 		IndexFilterDescriptor = null;
@@ -123,18 +149,27 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>When true the provided search string is matched against index terms without case sensitivity.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The string to match at the start of indexed terms. If not provided, all terms in the field are considered.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The string to match at the start of indexed terms. If not provided, all terms in the field are considered.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -147,18 +182,27 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How many matching terms to return.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The string after which terms in the index should be returned. Allows for a form of pagination if the last result from one request is passed as the search_after parameter for a subsequent request.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> String(string? value)
 	{
 		StringValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum length of time to spend collecting results. Defaults to "1s" (one second). If the timeout is exceeded the complete flag set to false in the response and the results may be partial or empty.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 	{
 		TimeoutValue = timeout;
@@ -254,6 +298,9 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	private string? StringValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
+	/// <summary>
+	/// <para>Allows to filter an index shard if the provided query rewrites to match_none.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
 	{
 		IndexFilterDescriptor = null;
@@ -278,24 +325,36 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>When true the provided search string is matched against index terms without case sensitivity.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The string to match at the start of indexed terms. If not provided, all terms in the field are considered.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The string to match at the start of indexed terms. If not provided, all terms in the field are considered.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The string to match at the start of indexed terms. If not provided, all terms in the field are considered.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -308,18 +367,27 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How many matching terms to return.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The string after which terms in the index should be returned. Allows for a form of pagination if the last result from one request is passed as the search_after parameter for a subsequent request.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor String(string? value)
 	{
 		StringValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum length of time to spend collecting results. Defaults to "1s" (one second). If the timeout is exceeded the complete flag set to false in the response and the results may be partial or empty.</para>
+	/// </summary>
 	public TermsEnumRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 	{
 		TimeoutValue = timeout;

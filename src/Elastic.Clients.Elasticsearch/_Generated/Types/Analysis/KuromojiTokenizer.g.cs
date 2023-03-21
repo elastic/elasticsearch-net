@@ -40,8 +40,7 @@ public sealed partial class KuromojiTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("nbest_examples")]
 	public string? NbestExamples { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kuromoji_tokenizer";
 
 	[JsonInclude, JsonPropertyName("user_dictionary")]

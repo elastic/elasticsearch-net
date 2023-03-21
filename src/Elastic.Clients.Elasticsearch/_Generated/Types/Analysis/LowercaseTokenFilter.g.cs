@@ -32,8 +32,7 @@ public sealed partial class LowercaseTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("language")]
 	public string? Language { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "lowercase";
 
 	[JsonInclude, JsonPropertyName("version")]

@@ -34,8 +34,7 @@ public sealed partial class IcuTransformTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_transform";
 
 	[JsonInclude, JsonPropertyName("version")]

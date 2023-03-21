@@ -29,12 +29,27 @@ namespace Elastic.Clients.Elasticsearch.Ml;
 
 public sealed partial class ZeroShotClassificationInferenceUpdateOptions
 {
+	/// <summary>
+	/// <para>The labels to predict.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("labels")]
 	public ICollection<string> Labels { get; set; }
+
+	/// <summary>
+	/// <para>Update the configured multi label option. Indicates if more than one true label exists. Defaults to the configured value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("multi_label")]
 	public bool? MultiLabel { get; set; }
+
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>The tokenization options to update when inferring</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 
@@ -56,24 +71,36 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptionsDescript
 	private NlpTokenizationUpdateOptionsDescriptor TokenizationDescriptor { get; set; }
 	private Action<NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>The labels to predict.</para>
+	/// </summary>
 	public ZeroShotClassificationInferenceUpdateOptionsDescriptor Labels(ICollection<string> labels)
 	{
 		LabelsValue = labels;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Update the configured multi label option. Indicates if more than one true label exists. Defaults to the configured value.</para>
+	/// </summary>
 	public ZeroShotClassificationInferenceUpdateOptionsDescriptor MultiLabel(bool? multiLabel = true)
 	{
 		MultiLabelValue = multiLabel;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public ZeroShotClassificationInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The tokenization options to update when inferring</para>
+	/// </summary>
 	public ZeroShotClassificationInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? tokenization)
 	{
 		TokenizationDescriptor = null;

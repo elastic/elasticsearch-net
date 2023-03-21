@@ -32,8 +32,7 @@ public sealed partial class StandardTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("max_token_length")]
 	public int? MaxTokenLength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "standard";
 
 	[JsonInclude, JsonPropertyName("version")]

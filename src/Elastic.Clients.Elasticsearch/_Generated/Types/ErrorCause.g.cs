@@ -104,9 +104,21 @@ public sealed partial class ErrorCause
 {
 	public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; init; }
 	public IReadOnlyDictionary<string, object> Metadata { get; init; }
+
+	/// <summary>
+	/// <para>A human-readable explanation of the error, in english</para>
+	/// </summary>
 	public string? Reason { get; init; }
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? RootCause { get; init; }
+
+	/// <summary>
+	/// <para>The server stack trace. Present only if the `error_trace=true` parameter was sent with the request.</para>
+	/// </summary>
 	public string? StackTrace { get; init; }
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Suppressed { get; init; }
+
+	/// <summary>
+	/// <para>The type of error</para>
+	/// </summary>
 	public string Type { get; init; }
 }

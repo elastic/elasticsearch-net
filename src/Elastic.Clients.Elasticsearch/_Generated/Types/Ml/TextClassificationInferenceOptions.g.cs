@@ -32,12 +32,27 @@ namespace Elastic.Clients.Elasticsearch.Ml;
 /// </summary>
 public sealed partial class TextClassificationInferenceOptions
 {
+	/// <summary>
+	/// <para>Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("classification_labels")]
 	public ICollection<string>? ClassificationLabels { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
+
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>The tokenization options</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
@@ -59,24 +74,36 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels</para>
+	/// </summary>
 	public TextClassificationInferenceOptionsDescriptor ClassificationLabels(ICollection<string>? classificationLabels)
 	{
 		ClassificationLabelsValue = classificationLabels;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// </summary>
 	public TextClassificationInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)
 	{
 		NumTopClassesValue = numTopClasses;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public TextClassificationInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The tokenization options</para>
+	/// </summary>
 	public TextClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
 	{
 		TokenizationDescriptor = null;

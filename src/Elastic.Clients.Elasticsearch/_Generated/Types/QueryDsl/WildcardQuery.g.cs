@@ -150,9 +150,25 @@ public sealed partial class WildcardQuery : SearchQuery
 
 	public string? QueryName { get; set; }
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public bool? CaseInsensitive { get; set; }
+
+	/// <summary>
+	/// <para>Method used to rewrite the query</para>
+	/// </summary>
 	public string? Rewrite { get; set; }
+
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.</para>
+	/// </summary>
 	public string? Value { get; set; }
+
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.</para>
+	/// </summary>
 	public string? Wildcard { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -201,6 +217,9 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public WildcardQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
@@ -219,18 +238,27 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Method used to rewrite the query</para>
+	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Rewrite(string? rewrite)
 	{
 		RewriteValue = rewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.</para>
+	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Value(string? value)
 	{
 		ValueValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.</para>
+	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Wildcard(string? wildcard)
 	{
 		WildcardValue = wildcard;
@@ -320,6 +348,9 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public WildcardQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
@@ -344,18 +375,27 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Method used to rewrite the query</para>
+	/// </summary>
 	public WildcardQueryDescriptor Rewrite(string? rewrite)
 	{
 		RewriteValue = rewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.</para>
+	/// </summary>
 	public WildcardQueryDescriptor Value(string? value)
 	{
 		ValueValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.</para>
+	/// </summary>
 	public WildcardQueryDescriptor Wildcard(string? wildcard)
 	{
 		WildcardValue = wildcard;

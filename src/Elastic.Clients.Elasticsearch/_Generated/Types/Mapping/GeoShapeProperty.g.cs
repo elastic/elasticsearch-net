@@ -61,8 +61,7 @@ public sealed partial class GeoShapeProperty : IProperty
 	[JsonInclude, JsonPropertyName("strategy")]
 	public Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? Strategy { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "geo_shape";
 }
 

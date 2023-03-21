@@ -36,8 +36,7 @@ public sealed partial class NGramTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "ngram";
 
 	[JsonInclude, JsonPropertyName("version")]

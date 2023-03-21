@@ -34,6 +34,10 @@ public sealed partial class RankEvalMetricExpectedReciprocalRank
 {
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
+
+	/// <summary>
+	/// <para>The highest relevance grade used in the user-supplied relevance judgments.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("maximum_relevance")]
 	public int MaximumRelevance { get; set; }
 }
@@ -55,6 +59,9 @@ public sealed partial class RankEvalMetricExpectedReciprocalRankDescriptor : Ser
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The highest relevance grade used in the user-supplied relevance judgments.</para>
+	/// </summary>
 	public RankEvalMetricExpectedReciprocalRankDescriptor MaximumRelevance(int maximumRelevance)
 	{
 		MaximumRelevanceValue = maximumRelevance;

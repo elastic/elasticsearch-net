@@ -147,7 +147,7 @@ public sealed partial class MatrixStatsAggregation : SearchAggregation
 	public IDictionary<string, object>? Meta { get; set; }
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 }
 
 public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : SerializableDescriptor<MatrixStatsAggregationDescriptor<TDocument>>

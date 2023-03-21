@@ -146,7 +146,7 @@ public sealed partial class MissingAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public FieldValue? Missing { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 }
 
 public sealed partial class MissingAggregationDescriptor<TDocument> : SerializableDescriptor<MissingAggregationDescriptor<TDocument>>

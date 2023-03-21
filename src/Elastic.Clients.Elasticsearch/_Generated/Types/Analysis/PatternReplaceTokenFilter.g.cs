@@ -38,8 +38,7 @@ public sealed partial class PatternReplaceTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("replacement")]
 	public string? Replacement { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "pattern_replace";
 
 	[JsonInclude, JsonPropertyName("version")]

@@ -32,8 +32,7 @@ public sealed partial class IcuTokenizer : ITokenFilter, ITokenizer
 	[JsonInclude, JsonPropertyName("rule_files")]
 	public string RuleFiles { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_tokenizer";
 
 	[JsonInclude, JsonPropertyName("version")]

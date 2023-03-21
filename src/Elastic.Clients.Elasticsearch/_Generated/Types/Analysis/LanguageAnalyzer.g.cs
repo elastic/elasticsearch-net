@@ -39,8 +39,7 @@ public sealed partial class LanguageAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "language";
 
 	[JsonInclude, JsonPropertyName("version")]

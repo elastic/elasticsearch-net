@@ -275,7 +275,7 @@ public sealed partial class AutoDateHistogramAggregation : SearchAggregation
 	public IDictionary<string, object>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
 	public DateTimeOffset? Missing { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public string? Offset { get; set; }
 	public IDictionary<string, object>? Params { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }

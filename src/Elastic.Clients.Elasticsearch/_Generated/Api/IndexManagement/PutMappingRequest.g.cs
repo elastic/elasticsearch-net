@@ -69,26 +69,71 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	[JsonIgnore]
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
+
+	/// <summary>
+	/// <para>Controls whether dynamic date detection is enabled.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("date_detection")]
 	public bool? DateDetection { get; set; }
+
+	/// <summary>
+	/// <para>Controls whether new fields are added dynamically.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
+
+	/// <summary>
+	/// <para>If date detection is enabled then new string fields are checked<br/>against 'dynamic_date_formats' and if the value matches then<br/>a new date field is added instead of string.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("dynamic_date_formats")]
 	public ICollection<string>? DynamicDateFormats { get; set; }
+
+	/// <summary>
+	/// <para>Specify dynamic templates for the mapping.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("dynamic_templates"), SingleOrManyCollectionConverter(typeof(IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>))]
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
+
+	/// <summary>
+	/// <para>Control whether field names are enabled for the index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_field_names")]
 	public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
+
+	/// <summary>
+	/// <para>A mapping type can have custom meta data associated with it. These are<br/>not used at all by Elasticsearch, but can be used to store<br/>application-specific metadata.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>Automatically map strings into numeric data types for all fields.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("numeric_detection")]
 	public bool? NumericDetection { get; set; }
+
+	/// <summary>
+	/// <para>Mapping for a field. For new fields, this mapping can include:</para>
+	/// <para>- Field name<br/>- Field data type<br/>- Mapping parameters</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+
+	/// <summary>
+	/// <para>Enable making a routing value required on indexed documents.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_routing")]
 	public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
+
+	/// <summary>
+	/// <para>Control whether the _source field is enabled on the index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
+
+	/// <summary>
+	/// <para>Mapping of runtime fields for the index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 }
@@ -142,6 +187,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
 
+	/// <summary>
+	/// <para>Control whether field names are enabled for the index.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)
 	{
 		FieldNamesDescriptor = null;
@@ -166,12 +214,18 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A mapping type can have custom meta data associated with it. These are<br/>not used at all by Elasticsearch, but can be used to store<br/>application-specific metadata.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Enable making a routing value required on indexed documents.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing)
 	{
 		RoutingDescriptor = null;
@@ -196,6 +250,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Control whether the _source field is enabled on the index.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source)
 	{
 		SourceDescriptor = null;
@@ -220,48 +277,75 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls whether dynamic date detection is enabled.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> DateDetection(bool? dateDetection = true)
 	{
 		DateDetectionValue = dateDetection;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls whether new fields are added dynamically.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
 		DynamicValue = dynamic;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If date detection is enabled then new string fields are checked<br/>against 'dynamic_date_formats' and if the value matches then<br/>a new date field is added instead of string.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> DynamicDateFormats(ICollection<string>? dynamicDateFormats)
 	{
 		DynamicDateFormatsValue = dynamicDateFormats;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specify dynamic templates for the mapping.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Automatically map strings into numeric data types for all fields.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> NumericDetection(bool? numericDetection = true)
 	{
 		NumericDetectionValue = numericDetection;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Mapping for a field. For new fields, this mapping can include:</para>
+	/// <para>- Field name<br/>- Field data type<br/>- Mapping parameters</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 	{
 		PropertiesValue = properties;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Mapping for a field. For new fields, this mapping can include:</para>
+	/// <para>- Field name<br/>- Field data type<br/>- Mapping parameters</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Properties(Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Mapping for a field. For new fields, this mapping can include:</para>
+	/// <para>- Field name<br/>- Field data type<br/>- Mapping parameters</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Properties(Action<Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
 		var descriptor = new Mapping.PropertiesDescriptor<TDocument>();
@@ -270,6 +354,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Mapping of runtime fields for the index.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Runtime(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 	{
 		RuntimeValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
@@ -428,6 +515,9 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
 
+	/// <summary>
+	/// <para>Control whether field names are enabled for the index.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)
 	{
 		FieldNamesDescriptor = null;
@@ -452,12 +542,18 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A mapping type can have custom meta data associated with it. These are<br/>not used at all by Elasticsearch, but can be used to store<br/>application-specific metadata.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Enable making a routing value required on indexed documents.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing)
 	{
 		RoutingDescriptor = null;
@@ -482,6 +578,9 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Control whether the _source field is enabled on the index.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source)
 	{
 		SourceDescriptor = null;
@@ -506,48 +605,75 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls whether dynamic date detection is enabled.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor DateDetection(bool? dateDetection = true)
 	{
 		DateDetectionValue = dateDetection;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls whether new fields are added dynamically.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
 	{
 		DynamicValue = dynamic;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If date detection is enabled then new string fields are checked<br/>against 'dynamic_date_formats' and if the value matches then<br/>a new date field is added instead of string.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor DynamicDateFormats(ICollection<string>? dynamicDateFormats)
 	{
 		DynamicDateFormatsValue = dynamicDateFormats;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specify dynamic templates for the mapping.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Automatically map strings into numeric data types for all fields.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor NumericDetection(bool? numericDetection = true)
 	{
 		NumericDetectionValue = numericDetection;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Mapping for a field. For new fields, this mapping can include:</para>
+	/// <para>- Field name<br/>- Field data type<br/>- Mapping parameters</para>
+	/// </summary>
 	public PutMappingRequestDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 	{
 		PropertiesValue = properties;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Mapping for a field. For new fields, this mapping can include:</para>
+	/// <para>- Field name<br/>- Field data type<br/>- Mapping parameters</para>
+	/// </summary>
 	public PutMappingRequestDescriptor Properties<TDocument>(Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Mapping for a field. For new fields, this mapping can include:</para>
+	/// <para>- Field name<br/>- Field data type<br/>- Mapping parameters</para>
+	/// </summary>
 	public PutMappingRequestDescriptor Properties<TDocument>(Action<Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
 		var descriptor = new Mapping.PropertiesDescriptor<TDocument>();
@@ -556,6 +682,9 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Mapping of runtime fields for the index.</para>
+	/// </summary>
 	public PutMappingRequestDescriptor Runtime(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 	{
 		RuntimeValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());

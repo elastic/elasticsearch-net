@@ -162,7 +162,7 @@ public sealed partial class InferenceAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfig { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 }
 
 public sealed partial class InferenceAggregationDescriptor<TDocument> : SerializableDescriptor<InferenceAggregationDescriptor<TDocument>>

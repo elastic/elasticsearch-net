@@ -81,8 +81,16 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
+
+	/// <summary>
+	/// <para>The documents you want to retrieve. Required if no index is specified in the request URI.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("docs")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? Docs { get; set; }
+
+	/// <summary>
+	/// <para>The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ids")]
 	public Elastic.Clients.Elasticsearch.Ids? Ids { get; set; }
 }
@@ -122,6 +130,9 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 	private Action<Core.MGet.MultiGetOperationDescriptor>[] DocsDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Ids? IdsValue { get; set; }
 
+	/// <summary>
+	/// <para>The documents you want to retrieve. Required if no index is specified in the request URI.</para>
+	/// </summary>
 	public MultiGetRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? docs)
 	{
 		DocsDescriptor = null;
@@ -158,6 +169,9 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.</para>
+	/// </summary>
 	public MultiGetRequestDescriptor<TDocument> Ids(Elastic.Clients.Elasticsearch.Ids? ids)
 	{
 		IdsValue = ids;
@@ -243,6 +257,9 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 	private Action<Core.MGet.MultiGetOperationDescriptor>[] DocsDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Ids? IdsValue { get; set; }
 
+	/// <summary>
+	/// <para>The documents you want to retrieve. Required if no index is specified in the request URI.</para>
+	/// </summary>
 	public MultiGetRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? docs)
 	{
 		DocsDescriptor = null;
@@ -279,6 +296,9 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.</para>
+	/// </summary>
 	public MultiGetRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Ids? ids)
 	{
 		IdsValue = ids;

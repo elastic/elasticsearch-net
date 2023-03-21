@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.Ml;
 
 public sealed partial class NerInferenceUpdateOptions
 {
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>The tokenization options to update when inferring</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 
@@ -50,12 +57,18 @@ public sealed partial class NerInferenceUpdateOptionsDescriptor : SerializableDe
 	private NlpTokenizationUpdateOptionsDescriptor TokenizationDescriptor { get; set; }
 	private Action<NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public NerInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The tokenization options to update when inferring</para>
+	/// </summary>
 	public NerInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? tokenization)
 	{
 		TokenizationDescriptor = null;

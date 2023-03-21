@@ -36,8 +36,7 @@ public sealed partial class KeepWordsTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("keep_words_path")]
 	public string? KeepWordsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keep";
 
 	[JsonInclude, JsonPropertyName("version")]

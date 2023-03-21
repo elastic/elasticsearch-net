@@ -127,7 +127,7 @@ public sealed partial class AdjacencyMatrixAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	public IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filters { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 }
 
 public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : SerializableDescriptor<AdjacencyMatrixAggregationDescriptor<TDocument>>

@@ -40,6 +40,10 @@ public sealed partial class RangeBucket : AggregateDictionary
 	public double? From { get; init; }
 	[JsonInclude, JsonPropertyName("from_as_string")]
 	public string? FromAsString { get; init; }
+
+	/// <summary>
+	/// <para>The bucket key. Present if the aggregation is _not_ keyed</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("key")]
 	public string? Key { get; init; }
 	[JsonInclude, JsonPropertyName("to")]

@@ -36,8 +36,7 @@ public sealed partial class SettingsSimilarityIb
 	[JsonInclude, JsonPropertyName("normalization")]
 	public Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "IB";
 }
 

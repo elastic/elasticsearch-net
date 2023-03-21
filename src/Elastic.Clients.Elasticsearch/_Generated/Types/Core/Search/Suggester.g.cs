@@ -82,6 +82,10 @@ internal sealed partial class SuggesterConverter : JsonConverter<Suggester>
 public sealed partial class Suggester
 {
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester> Suggesters { get; set; }
+
+	/// <summary>
+	/// <para>Global suggest text, to avoid repetition when the same text is used in several suggesters</para>
+	/// </summary>
 	public string? Text { get; set; }
 }
 
@@ -102,6 +106,9 @@ public sealed partial class SuggesterDescriptor : SerializableDescriptor<Suggest
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Global suggest text, to avoid repetition when the same text is used in several suggesters</para>
+	/// </summary>
 	public SuggesterDescriptor Text(string? text)
 	{
 		TextValue = text;

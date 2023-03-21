@@ -29,14 +29,33 @@ namespace Elastic.Clients.Elasticsearch.Ml;
 
 public sealed partial class ClassificationInferenceOptions
 {
+	/// <summary>
+	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the type of the predicted field to write. Acceptable values are: string, number, boolean. When boolean is provided 1.0 is transformed to true and 0.0 to false.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("prediction_field_type")]
 	public string? PredictionFieldType { get; set; }
+
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the field to which the top classes are written. Defaults to top_classes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("top_classes_results_field")]
 	public string? TopClassesResultsField { get; set; }
 }
@@ -55,30 +74,45 @@ public sealed partial class ClassificationInferenceOptionsDescriptor : Serializa
 	private string? ResultsFieldValue { get; set; }
 	private string? TopClassesResultsFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// </summary>
 	public ClassificationInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)
 	{
 		NumTopClassesValue = numTopClasses;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// </summary>
 	public ClassificationInferenceOptionsDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
 	{
 		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the type of the predicted field to write. Acceptable values are: string, number, boolean. When boolean is provided 1.0 is transformed to true and 0.0 to false.</para>
+	/// </summary>
 	public ClassificationInferenceOptionsDescriptor PredictionFieldType(string? predictionFieldType)
 	{
 		PredictionFieldTypeValue = predictionFieldType;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public ClassificationInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the field to which the top classes are written. Defaults to top_classes.</para>
+	/// </summary>
 	public ClassificationInferenceOptionsDescriptor TopClassesResultsField(string? topClassesResultsField)
 	{
 		TopClassesResultsFieldValue = topClassesResultsField;

@@ -74,8 +74,7 @@ public sealed partial class TextProperty : IProperty
 	[JsonInclude, JsonPropertyName("term_vector")]
 	public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "text";
 }
 

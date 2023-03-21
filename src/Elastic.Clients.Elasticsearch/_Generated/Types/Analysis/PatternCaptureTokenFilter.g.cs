@@ -34,8 +34,7 @@ public sealed partial class PatternCaptureTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "pattern_capture";
 
 	[JsonInclude, JsonPropertyName("version")]

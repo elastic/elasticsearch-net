@@ -59,11 +59,14 @@ public sealed partial class IpProperty : IProperty
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "ip";
 }
 
@@ -210,6 +213,9 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public IpPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
 		TimeSeriesDimensionValue = timeSeriesDimension;
@@ -484,6 +490,9 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public IpPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
 		TimeSeriesDimensionValue = timeSeriesDimension;

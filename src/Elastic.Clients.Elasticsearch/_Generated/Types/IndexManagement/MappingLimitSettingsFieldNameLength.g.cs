@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class MappingLimitSettingsFieldNameLength
 {
+	/// <summary>
+	/// <para>Setting for the maximum length of a field name. This setting isn’t really something that addresses mappings explosion but<br/>might still be useful if you want to limit the field length. It usually shouldn’t be necessary to set this setting. The<br/>default is okay unless a user starts to add a huge number of fields with really long names. Default is `Long.MAX_VALUE` (no limit).</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public long? Limit { get; set; }
 }
@@ -43,6 +46,9 @@ public sealed partial class MappingLimitSettingsFieldNameLengthDescriptor : Seri
 
 	private long? LimitValue { get; set; }
 
+	/// <summary>
+	/// <para>Setting for the maximum length of a field name. This setting isn’t really something that addresses mappings explosion but<br/>might still be useful if you want to limit the field length. It usually shouldn’t be necessary to set this setting. The<br/>default is okay unless a user starts to add a huge number of fields with really long names. Default is `Long.MAX_VALUE` (no limit).</para>
+	/// </summary>
 	public MappingLimitSettingsFieldNameLengthDescriptor Limit(long? limit)
 	{
 		LimitValue = limit;

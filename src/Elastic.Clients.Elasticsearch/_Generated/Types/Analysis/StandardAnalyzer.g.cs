@@ -35,8 +35,7 @@ public sealed partial class StandardAnalyzer : IAnalyzer
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "standard";
 }
 

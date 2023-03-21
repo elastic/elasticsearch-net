@@ -33,6 +33,10 @@ public sealed partial class HitsMetadata<T>
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Hit<T>> Hits { get; init; }
 	[JsonInclude, JsonPropertyName("max_score")]
 	public double? MaxScore { get; init; }
+
+	/// <summary>
+	/// <para>Total hit count information, present only if `track_total_hits` wasn't `false` in the search request.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TotalHits? Total { get; init; }
 }

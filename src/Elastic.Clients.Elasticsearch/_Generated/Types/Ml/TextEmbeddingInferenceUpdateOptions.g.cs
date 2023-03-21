@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Ml;
 
 public sealed partial class TextEmbeddingInferenceUpdateOptions
 {
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 	[JsonInclude, JsonPropertyName("tokenization")]
@@ -50,6 +53,9 @@ public sealed partial class TextEmbeddingInferenceUpdateOptionsDescriptor : Seri
 	private NlpTokenizationUpdateOptionsDescriptor TokenizationDescriptor { get; set; }
 	private Action<NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public TextEmbeddingInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)
 	{
 		ResultsFieldValue = resultsField;

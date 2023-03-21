@@ -27,16 +27,39 @@ namespace Elastic.Clients.Elasticsearch.Sql;
 
 public sealed partial class GetAsyncStatusResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>HTTP status code for the search. The API only returns this property for completed searches.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("completion_status")]
 	public int? CompletionStatus { get; init; }
+
+	/// <summary>
+	/// <para>Timestamp, in milliseconds since the Unix epoch, when Elasticsearch will delete<br/>the search and its results, even if the search is still running.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("expiration_time_in_millis")]
 	public long ExpirationTimeInMillis { get; init; }
+
+	/// <summary>
+	/// <para>Identifier for the search.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
+
+	/// <summary>
+	/// <para>If `true`, the response does not contain complete search results. If `is_partial`<br/>is `true` and `is_running` is `true`, the search is still running. If `is_partial`<br/>is `true` but `is_running` is `false`, the results are partial due to a failure or<br/>timeout.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("is_partial")]
 	public bool IsPartial { get; init; }
+
+	/// <summary>
+	/// <para>If `true`, the search is still running. If `false`, the search has finished.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("is_running")]
 	public bool IsRunning { get; init; }
+
+	/// <summary>
+	/// <para>Timestamp, in milliseconds since the Unix epoch, when the search started.<br/>The API only returns this property for running searches.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("start_time_in_millis")]
 	public long StartTimeInMillis { get; init; }
 }

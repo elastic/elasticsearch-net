@@ -32,8 +32,7 @@ public sealed partial class SettingsSimilarityLmd
 	[JsonInclude, JsonPropertyName("mu")]
 	public int Mu { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "LMDirichlet";
 }
 

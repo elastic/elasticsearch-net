@@ -31,12 +31,20 @@ public sealed partial class TemplateConfig
 {
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
+
+	/// <summary>
+	/// <para>ID of the search template to use. If no source is specified,<br/>this parameter is required.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
+
+	/// <summary>
+	/// <para>An inline search template. Supports the same parameters as the search API's<br/>request body. Also supports Mustache variables. If no id is specified, this<br/>parameter is required.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 }
@@ -61,6 +69,9 @@ public sealed partial class TemplateConfigDescriptor : SerializableDescriptor<Te
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>ID of the search template to use. If no source is specified,<br/>this parameter is required.</para>
+	/// </summary>
 	public TemplateConfigDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		IdValue = id;
@@ -79,6 +90,9 @@ public sealed partial class TemplateConfigDescriptor : SerializableDescriptor<Te
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An inline search template. Supports the same parameters as the search API's<br/>request body. Also supports Mustache variables. If no id is specified, this<br/>parameter is required.</para>
+	/// </summary>
 	public TemplateConfigDescriptor Source(string? source)
 	{
 		SourceValue = source;

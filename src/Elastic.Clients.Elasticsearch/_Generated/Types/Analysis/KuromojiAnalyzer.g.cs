@@ -32,8 +32,7 @@ public sealed partial class KuromojiAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kuromoji";
 
 	[JsonInclude, JsonPropertyName("user_dictionary")]

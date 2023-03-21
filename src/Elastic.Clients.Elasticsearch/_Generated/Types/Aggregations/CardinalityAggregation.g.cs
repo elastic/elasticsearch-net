@@ -202,7 +202,7 @@ public sealed partial class CardinalityAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public FieldValue? Missing { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public int? PrecisionThreshold { get; set; }
 	public bool? Rehash { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }

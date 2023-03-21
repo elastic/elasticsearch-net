@@ -44,8 +44,7 @@ public sealed partial class JoinProperty : IProperty
 	[JsonInclude, JsonPropertyName("relations")]
 	public IDictionary<string, ICollection<string>>? Relations { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "join";
 }
 

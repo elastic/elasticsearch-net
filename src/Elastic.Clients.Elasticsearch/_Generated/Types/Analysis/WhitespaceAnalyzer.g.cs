@@ -29,8 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class WhitespaceAnalyzer : IAnalyzer
 {
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "whitespace";
 
 	[JsonInclude, JsonPropertyName("version")]

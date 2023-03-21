@@ -33,6 +33,10 @@ public sealed partial class WrapperQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>A base64 encoded query. The binary data format can be any of JSON, YAML, CBOR or SMILE encodings</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
 
@@ -63,6 +67,9 @@ public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<Wrap
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A base64 encoded query. The binary data format can be any of JSON, YAML, CBOR or SMILE encodings</para>
+	/// </summary>
 	public WrapperQueryDescriptor Query(string query)
 	{
 		QueryValue = query;

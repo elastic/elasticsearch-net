@@ -201,7 +201,7 @@ public sealed partial class DateRangeAggregation : SearchAggregation
 	public string? Format { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public FieldValue? Missing { get; set; }
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
 	public string? TimeZone { get; set; }
 }
